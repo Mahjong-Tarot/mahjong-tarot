@@ -1,17 +1,18 @@
 ---
 name: retrospective
-description: Facilitate a lightweight sprint retrospective for the Mahjong Tarot team, synthesise themes from responses, and log action items with owners to the monthly report. Use this skill when someone says "facilitate retro", "let's do a retrospective", "sprint review", or at the end of each sprint boundary. Designed for a small async team — no video call required.
+description: Scheduled sprint-boundary workflow. Runs at each sprint boundary. Emails Dave and Yon the Start/Stop/Continue questions, collects responses within 48 hours, synthesises themes, generates action items, appends the retro block to the monthly report, and creates GitHub tasks for each action item.
+trigger: Each sprint boundary (scheduled)
 ---
 
-# Retrospective Skill
+# Retrospective Workflow
 
 ## Purpose
 
-A retrospective is the team's chance to improve its own process. For a small async team, this doesn't need a scheduled meeting — it needs honest, structured reflection and committed action items that actually get followed up. This skill makes that happen.
+A retrospective is the team's chance to improve its own process. For a small async team, this doesn't need a scheduled meeting — it needs honest, structured reflection and committed action items that actually get followed up.
 
 ## Format: Start / Stop / Continue
 
-Keep it simple. Three questions:
+Three questions:
 
 1. **Start**: What should we start doing that we're not doing now?
 2. **Stop**: What should we stop doing because it's slowing us down or adding no value?
@@ -21,7 +22,7 @@ Keep it simple. Three questions:
 
 ### 1. Prompt Dave and Yon
 
-Send each person a Gmail with the three questions and a 48-hour deadline to respond. Keep the message short:
+Send each person a Gmail with the three questions and a 48-hour deadline to respond:
 
 ```
 Subject: Sprint Retro — quick async input needed
@@ -60,7 +61,7 @@ Limit to 3–5 action items maximum. A long list gets ignored. A short list gets
 
 ### 5. Append to monthly report
 
-Add the retrospective block to `reports/YYYY-MM.md`:
+Add the retrospective block to `agents/project manager/output/reports/YYYY-MM.md`:
 
 ```markdown
 ---

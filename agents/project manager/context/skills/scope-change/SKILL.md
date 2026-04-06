@@ -54,7 +54,7 @@ Make a clear recommendation. Don't present all three as equally valid — the PM
 
 ### 4. Log the decision
 
-Append to `context/decisions.md`:
+Append to `agents/project manager/output/decisions/decisions.md`:
 
 ```markdown
 ## Scope Change Decision — YYYY-MM-DD

@@ -1,13 +1,13 @@
 ---
 name: daily-checkin
-description: Help a human team member (Dave or Yon) structure and write their daily check-in MD file. Use this skill when someone says "help me write my check-in", "I need to do my standup", "fill in my check-in", or "structure my daily update". Guides the human through what they're working on and any blockers, then writes the correctly formatted file to standup/<name>.md.
+description: Help a human team member (Dave or Yon) structure and write their daily check-in MD file. Use this skill when someone says "help me write my check-in", "I need to do my standup", "fill in my check-in", or "structure my daily update". Guides the human through what they're working on and any blockers, then writes the correctly formatted file to standup/[name].md.
 ---
 
 # Daily Check-in Skill
 
 ## Purpose
 
-Guide a human through their daily check-in and write the result to their `standup/<name>.md` file in the correct format, ready for the PM agent to pick up.
+Guide a human through their daily check-in and write the result to their `standup/[name].md` file in the correct format, ready for the PM agent to pick up.
 
 This skill is human-facing — it asks questions conversationally, structures the answers, and handles the file write. The human should not need to know the file format.
 
@@ -62,7 +62,7 @@ If yes, fold it into Today's focus. If no, move on.
 
 ### 5. Write the check-in file
 
-Using today's date (`YYYY-MM-DD`), write the following to `standup/<name>.md`, **replacing** any previous content:
+Using today's date (`YYYY-MM-DD`), write the following to `standup/[name].md`, **replacing** any previous content:
 
 ```markdown
 date: YYYY-MM-DD
@@ -87,7 +87,7 @@ Rules:
 
 After writing the file, tell the person:
 
-> *"Your check-in is saved to `standup/<name>.md`. The PM will pick it up during the morning cycle. You're all set."*
+> *"Your check-in is saved to `standup/[name].md`. The PM will pick it up during the morning cycle. You're all set."*
 
 If it is already past 10:00 AM, add:
 
@@ -108,7 +108,7 @@ If it is already past 10:00 AM, add:
 
 | Situation | Action |
 |-----------|--------|
-| Person is not Dave or Yon | Write to `standup/<name>.md` using their provided name; note that the PM may not recognise it |
+| Person is not Dave or Yon | Write to `standup/[name].md` using their provided name; note that the PM may not recognise it |
 | No focus items given | Ask once more; if still nothing, write "No focus items provided" and flag it |
 | Check-in already exists for today | Overwrite it — the new entry is the canonical one |
 | Person wants to add more later | Tell them to re-run this skill and the file will be updated |

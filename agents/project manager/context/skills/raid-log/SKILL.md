@@ -1,6 +1,6 @@
 ---
 name: raid-log
-description: Create, update, and review the RAID log (Risks, Assumptions, Issues, Dependencies) stored in context/RAID.md. Use this skill when someone says "log this risk", "update the RAID log", "add an issue", "track this dependency", or during weekly RAID review. Also use proactively when the daily standup or blocker triage surfaces something that should be formally tracked.
+description: Create, update, and review the RAID log (Risks, Assumptions, Issues, Dependencies) stored in agents/project manager/output/raid/RAID.md. Use this skill when someone says "log this risk", "update the RAID log", "add an issue", "track this dependency", or during weekly RAID review. Also use proactively when the daily standup or blocker triage surfaces something that should be formally tracked.
 ---
 
 # RAID Log Skill
@@ -22,7 +22,7 @@ The key distinction: a **Risk** is what might happen. An **Issue** is what is ha
 
 ## File location
 
-All entries live in `context/RAID.md`. Create this file if it doesn't exist.
+All entries live in `agents/project manager/output/raid/RAID.md`. Create this file if it doesn't exist.
 
 ## Entry format
 
@@ -39,7 +39,7 @@ Description | Probability: H/M/L | Impact: H/M/L | Owner | Mitigation | Status: 
 
 ### Adding a new entry
 
-When the user describes something to log, classify it (R/A/I/D), ask for any missing fields, then append to `context/RAID.md`:
+When the user describes something to log, classify it (R/A/I/D), ask for any missing fields, then append to `agents/project manager/output/raid/RAID.md`:
 
 ```markdown
 ## RAID Log
@@ -71,7 +71,7 @@ Never delete old entries — mark them `Status: Closed` instead. Closed entries 
 
 Triggered every Friday alongside the status report. Steps:
 
-1. Read all open entries in `context/RAID.md`
+1. Read all open entries in `agents/project manager/output/raid/RAID.md`
 2. For each open Risk: has probability or impact changed?
 3. For each open Issue: is it still active? Has it escalated?
 4. For each open Dependency: has it been resolved?

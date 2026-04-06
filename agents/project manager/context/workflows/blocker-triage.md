@@ -1,13 +1,14 @@
 ---
 name: blocker-triage
-description: Scan GitHub Projects for blocked or stalled tasks, rank them by severity and age, and draft escalations for anything unresolved for more than 48 hours. Use this skill when someone asks "what are our blockers?", "what's stuck?", "triage blockers", or during the midday check-in. Also runs automatically if the morning standup flags any blockers.
+description: Automated triage workflow. Triggered automatically when the daily stand-up flags blockers, or runs on the midday check schedule. Scans GitHub Projects for blocked or stalled tasks, ranks by severity and age, drafts escalations for anything >48 hours unresolved, and writes a triage report to output/triage/.
+trigger: Auto-triggered by daily-standup when blockers are flagged; also midday scheduled check
 ---
 
-# Blocker Triage Skill
+# Blocker Triage Workflow
 
 ## Purpose
 
-Surface everything that's stuck before it quietly kills a deadline. A blocker that's been sitting for two days without action is a project risk — this skill finds those early and gets the right person moving.
+Surface everything that's stuck before it quietly kills a deadline. A blocker that's been sitting for two days without action is a project risk — this workflow finds those early and gets the right person moving.
 
 ## Step-by-step
 
@@ -55,24 +56,24 @@ Action needed: [Specific ask — a decision, a conversation, an unblock]
 
 These can be sent via Gmail or logged as a comment on the GitHub task.
 
-### 5. Output summary
+### 5. Write triage report
 
-Present a triage table:
+Write the triage report to `agents/project manager/output/triage/triage-YYYY-MM-DD.md`:
 
-```
-BLOCKER TRIAGE — YYYY-MM-DD
+```markdown
+# Blocker Triage — YYYY-MM-DD
 
-🔴 CRITICAL (>48h or high impact)
+## 🔴 CRITICAL (>48h or high impact)
 - [Task] | Owner: [Name] | Age: X days | [escalation drafted]
 
-🟡 WATCH (recent, medium impact)
+## 🟡 WATCH (recent, medium impact)
 - [Task] | Owner: [Name] | Age: X days | Monitor
 
-🟢 CLEAR
+## 🟢 CLEAR
 No blockers meeting escalation threshold.
 ```
 
-Then ask: "Should I send the escalation notes to the relevant owners via Gmail, or log them as GitHub comments?"
+Then send escalation notes via Gmail for any CRITICAL items, or log as GitHub comments if Gmail is unavailable.
 
 ## What counts as a blocker
 

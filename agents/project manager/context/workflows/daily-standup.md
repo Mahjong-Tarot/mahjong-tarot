@@ -1,9 +1,10 @@
 ---
 name: daily-standup
-description: Run the daily async stand-up cycle for the Mahjong Tarot team. Triggers on the morning schedule or when manually invoked. Reads Dave and Yon's check-in MD files, verifies freshness, pings missing members if past the 10 AM deadline, summarises all inputs, and appends the day's entry to the monthly report. Also assigns tasks in GitHub Projects for both humans and AI agents. Use this skill every morning at 9 AM, or any time someone says "run standup", "collect check-ins", or "do the morning cycle".
+description: Scheduled morning workflow. Runs at 7 AM Mon–Fri. Reads Dave and Yon's check-in MD files, verifies freshness, pings missing members if past the 10 AM deadline, summarises all inputs, appends the day's entry to the monthly report, and assigns tasks in GitHub Projects for both humans and AI agents.
+trigger: Daily 7:00 AM Mon–Fri (scheduled)
 ---
 
-# Daily Stand-up Skill
+# Daily Stand-up Workflow
 
 ## Purpose
 
@@ -13,15 +14,16 @@ Run the complete async stand-up cycle: collect human check-ins, enforce the 10 A
 
 | File | Path | Notes |
 |------|------|-------|
-| Dave's check-in | `standup/dave.md` | Must have today's date on line 1 |
-| Yon's check-in | `standup/jan.md` | Must have today's date on line 1 |
-| Monthly report | `reports/YYYY-MM.md` | Append today's block |
+| Dave's check-in | `standup/dave.md` | Must have today's date on line 1 — human-written input |
+| Yon's check-in | `standup/yon.md` | Must have today's date on line 1 — human-written input |
+| Monthly report | `agents/project manager/output/reports/YYYY-MM.md` | Append today's block |
+| Alert fallback | `agents/project manager/output/alerts/alert-YYYY-MM-DD.md` | Write when Gmail unavailable |
 
 ## Step-by-step
 
 ### 1. Read both check-in files
 
-Read `standup/dave.md` and `standup/jan.md`. For each file, check line 1 for the datestamp:
+Read `standup/dave.md` and `standup/yon.md`. For each file, check line 1 for the datestamp:
 
 ```
 date: YYYY-MM-DD
@@ -51,7 +53,7 @@ Think about dependencies — if Dave is blocked waiting on Yon, flag it. If an a
 
 ### 4. Append to the monthly report
 
-Open `reports/YYYY-MM.md` and append a new daily block using this format:
+Open `agents/project manager/output/reports/YYYY-MM.md` and append a new daily block using this format:
 
 ```markdown
 ---
@@ -91,7 +93,7 @@ After appending the report and creating tasks, output a brief summary:
 - Who checked in ✅ / who was missing ❌
 - Number of tasks created for humans and agents
 - Any blockers flagged
-- Link or path to today's entry in the monthly report
+- Path to today's entry: `agents/project manager/output/reports/YYYY-MM.md`
 
 ## Check-in file format (expected)
 

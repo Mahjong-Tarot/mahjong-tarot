@@ -1,13 +1,14 @@
 ---
 name: release-monitor
-description: Check deployment status via Vercel MCP, summarise what shipped and when, flag any failed deployments, and log release activity to the monthly report. Use this skill when someone asks "check deployment status", "what shipped?", "any releases today?", "deployment monitor", or during the weekly status report to populate the deployment frequency metric (DORA). Vercel MCP is already connected.
+description: Runs as part of the Friday weekly status report workflow, and on any scheduled daily check. Uses Vercel MCP to list recent deployments, classify status, fetch build logs for failures, and append a deployment summary to the monthly report. Also notifies Dave immediately via Gmail on any ERROR deployment.
+trigger: Daily (as part of stand-up) and Friday 4 PM (as part of weekly status report)
 ---
 
-# Release Monitor Skill
+# Release Monitor Workflow
 
 ## Purpose
 
-Keep the team informed about what's actually running in production. Deployment frequency is a DORA metric that reflects team health — shipping often means fast feedback. This skill surfaces that data without anyone needing to check the Vercel dashboard manually.
+Keep the team informed about what's actually running in production. Deployment frequency is a DORA metric that reflects team health — shipping often means fast feedback. This workflow surfaces that data automatically without anyone needing to check the Vercel dashboard manually.
 
 ## Tools used
 
@@ -66,7 +67,7 @@ DEPLOYMENT STATUS — YYYY-MM-DD [HH:MM]
 
 ### 5. Log to monthly report (weekly cadence only)
 
-When running as part of the Friday status report, append a `#### Deployments` sub-block under the weekly status entry in `reports/YYYY-MM.md`:
+When running as part of the Friday status report, append a `#### Deployments` sub-block under the weekly status entry in `agents/project manager/output/reports/YYYY-MM.md`:
 
 ```markdown
 #### Deployments this week

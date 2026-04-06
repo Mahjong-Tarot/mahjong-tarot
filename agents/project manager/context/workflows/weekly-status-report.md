@@ -1,9 +1,10 @@
 ---
-name: status-report
-description: Generate the weekly RAG (Red/Amber/Green) status report for the Mahjong Tarot project and append it to the monthly report file. Use this every Friday at 4 PM, or whenever someone says "generate status report", "what's our status", "weekly report", or "how are we tracking". Pulls data from GitHub Projects, recent daily entries in the monthly report, and the RAID log to produce a structured, honest snapshot of where the project stands.
+name: weekly-status-report
+description: Scheduled Friday workflow. Runs at 4 PM every Friday. Pulls data from the monthly report, GitHub Projects, the RAID log, and Vercel to produce a structured RAG (Red/Amber/Green) status report and appends it to the monthly report file.
+trigger: Friday 4:00 PM (scheduled)
 ---
 
-# Status Report Skill
+# Weekly Status Report Workflow
 
 ## Purpose
 
@@ -13,14 +14,14 @@ Produce a structured weekly status report that tells the team and any stakeholde
 
 Before writing the report, gather current state from:
 
-1. **`reports/YYYY-MM.md`** — Read this week's daily stand-up entries (Mon–Fri) to understand what was worked on and what blockers appeared.
+1. **`agents/project manager/output/reports/YYYY-MM.md`** — Read this week's daily stand-up entries (Mon–Fri) to understand what was worked on and what blockers appeared.
 2. **GitHub Projects** — Run `gh project list` and `gh project item-list <number>` to get task status (open, in progress, done, blocked).
-3. **`context/RAID.md`** — Check for any open risks or issues logged this week.
+3. **`agents/project manager/output/raid/RAID.md`** — Check for any open risks or issues logged this week.
 4. **Vercel MCP** — List recent deployments to report on release activity.
 
 ## Report format
 
-Append the following block to `reports/YYYY-MM.md` under a `### Weekly Status — YYYY-MM-DD` heading:
+Append the following block to `agents/project manager/output/reports/YYYY-MM.md` under a `### Weekly Status — YYYY-MM-DD` heading:
 
 ```markdown
 ### Weekly Status — YYYY-MM-DD

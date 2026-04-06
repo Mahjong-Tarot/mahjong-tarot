@@ -2,15 +2,15 @@
 
 /* ─── Design Tokens ───────────────────────────────────────────────────── */
 :root {
-  --midnight-indigo: #1B1F3B;
-  --mystic-fire:     #C0392B;
-  --mystic-fire-dark:#A93226;
-  --celestial-gold:  #C9A84C;
-  --warm-cream:      #FAF8F4;
-  --black:           #0D0D0D;
-  --soft-lavender:   #C8B8D8;
-  --light-stone:     #EDEBE5;
-  --mid-gray:        #888880;
+  --midnight-indigo:   #0A053D;
+  --mystic-fire:       #FF2A04;
+  --mystic-fire-dark:  #D42203;
+  --celestial-gold:    #F4C76E;
+  --moonlit-lavender:  #A89BFF;
+  --warm-cream:        #FFFFFF;
+  --black:             #0D0D0D;
+  --light-stone:       #F0EFF8;
+  --mid-gray:          #888880;
 
   --space-xs:  4px;
   --space-sm:  8px;

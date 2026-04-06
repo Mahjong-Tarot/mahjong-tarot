@@ -22,27 +22,29 @@ export default function Home() {
 
       <main>
         {/* ── Hero ── */}
-        <section className={styles.hero}>
-          <div className={styles.heroImage}>
-            <Image
-              src="/images/hero.webp"
-              alt="Bill Hajdu — The Mahjong Tarot"
-              fill
-              priority
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-            />
-            <div className={styles.heroOverlay} />
-          </div>
-          <div className={`container ${styles.heroContent}`}>
-            <span className="overline">Ancient Cards · Modern Insight</span>
-            <h1>See What the<br />Tiles Reveal</h1>
-            <p className={styles.heroLead}>
-              35 years of divination practice. Mahjong tiles, Chinese astrology,
-              and tarot — woven into readings that illuminate your path.
-            </p>
-            <div className={styles.heroCtas}>
-              <Link href="/readings" className="btn-primary">Book a Reading</Link>
-              <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
+        <section className="section-dark">
+          <div className={`container ${styles.heroInner}`}>
+            <div className={styles.heroContent}>
+              <span className="overline">Ancient Cards · Modern Insight</span>
+              <h1>See What the<br />Tiles Reveal</h1>
+              <p className={styles.heroLead}>
+                35 years of divination practice. Mahjong tiles, Chinese astrology,
+                and tarot — woven into readings that illuminate your path.
+              </p>
+              <div className={styles.heroCtas}>
+                <Link href="/readings" className="btn-primary">Book a Reading</Link>
+                <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
+              </div>
+            </div>
+            <div className={styles.heroImage}>
+              <Image
+                src="/images/hero.webp"
+                alt="Bill Hajdu — The Mahjong Tarot"
+                fill
+                priority
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+              />
+              <div className={styles.heroOverlay} />
             </div>
           </div>
         </section>

@@ -9,9 +9,9 @@ export default function Readings() {
   return (
     <>
       <Head>
-        <title>Personal Readings — The Mahjong Tarot</title>
+        <title>Personal Readings — Mahjong Tarot</title>
         <meta name="description" content="Book a Mahjong Tarot reading with Bill Hajdu. One-Tile Insight (10–15 min), Three-Tile Spread (20–30 min), or The Mahjong Mirror Session (45–60 min). Conducted online." />
-        <meta property="og:title" content="Personal Readings — The Mahjong Tarot" />
+        <meta property="og:title" content="Personal Readings — Mahjong Tarot" />
         <meta property="og:description" content="A divination experience using the symbolic language of Mahjong tiles to illuminate your path." />
         <meta property="og:image" content="https://mahjong-tarot.com/images/readings-hero.webp" />
         <meta name="twitter:card" content="summary_large_image" />

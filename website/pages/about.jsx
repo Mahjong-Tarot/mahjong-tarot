@@ -9,9 +9,9 @@ export default function About() {
   return (
     <>
       <Head>
-        <title>About Bill Hajdu — The Mahjong Tarot</title>
+        <title>About Bill Hajdu — Mahjong Tarot</title>
         <meta name="description" content="Meet Bill Hajdu — The Firepig. 35+ years of divination practice combining Chinese astrology, Mahjong tile readings, and tarot. Former Air Force Interrogator and lifelong student of ancient wisdom." />
-        <meta property="og:title" content="About Bill Hajdu — The Mahjong Tarot" />
+        <meta property="og:title" content="About Bill Hajdu — Mahjong Tarot" />
         <meta property="og:description" content="35+ years of divination practice. Ancient wisdom, modern clarity." />
         <meta property="og:image" content="https://mahjong-tarot.com/images/about-portrait.webp" />
         <meta name="twitter:card" content="summary_large_image" />

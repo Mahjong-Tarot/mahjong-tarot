@@ -9,7 +9,7 @@ export default function BloodMoonSignal() {
   return (
     <>
       <Head>
-        <title>A Once-in-a-Generation Blood Moon Signal — The Mahjong Tarot</title>
+        <title>A Once-in-a-Generation Blood Moon Signal — Mahjong Tarot</title>
         <meta name="description" content="On March 14, a blood moon rose during the first lunar month of the Chinese New Year — colliding with the Fire Snake, the most volatile year in the Chinese Zodiac." />
         <meta property="og:title" content="A Once-in-a-Generation Blood Moon Signal" />
         <meta property="og:description" content="A blood moon rises in the most volatile year of the Chinese Zodiac." />

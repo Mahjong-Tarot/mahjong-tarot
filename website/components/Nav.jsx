@@ -13,7 +13,7 @@ export default function Nav() {
     <nav className={styles.nav}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo}>
-          The Mahjong Tarot
+          Mahjong Tarot
         </Link>
 
         <ul className={styles.links}>
@@ -39,9 +39,6 @@ export default function Nav() {
           </li>
         </ul>
 
-        <Link href="/readings" className="btn-primary">
-          Book a Reading
-        </Link>
       </div>
     </nav>
   );

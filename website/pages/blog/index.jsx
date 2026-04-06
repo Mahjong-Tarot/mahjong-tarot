@@ -86,9 +86,9 @@ export default function BlogIndex() {
   return (
     <>
       <Head>
-        <title>Blog — The Mahjong Tarot</title>
+        <title>Blog — Mahjong Tarot</title>
         <meta name="description" content="Insights on Mahjong readings, tarot, Chinese astrology, and divination practice from Bill Hajdu — The Firepig." />
-        <meta property="og:title" content="Blog — The Mahjong Tarot" />
+        <meta property="og:title" content="Blog — Mahjong Tarot" />
         <meta property="og:description" content="Insights on Mahjong, tarot, and Chinese astrology from Bill Hajdu." />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://mahjong-tarot.com/blog" />

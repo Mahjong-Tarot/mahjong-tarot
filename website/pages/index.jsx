@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>The Mahjong Tarot — Bill Hajdu</title>
+        <title>Mahjong Tarot — Bill Hajdu</title>
         <meta name="description" content="35+ years of divination practice. Mahjong tile readings, Chinese astrology, and tarot with Bill Hajdu — The Firepig. Explore The Mahjong Mirror." />
-        <meta property="og:title" content="The Mahjong Tarot — Bill Hajdu" />
+        <meta property="og:title" content="Mahjong Tarot — Bill Hajdu" />
         <meta property="og:description" content="Ancient wisdom, modern clarity. Mahjong tile readings and tarot with Bill Hajdu." />
         <meta property="og:image" content="https://mahjong-tarot.com/images/gallery-3.webp" />
         <meta name="twitter:card" content="summary_large_image" />

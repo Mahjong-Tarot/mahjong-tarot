@@ -9,7 +9,7 @@ export default function MahjongTarotVsTarot() {
   return (
     <>
       <Head>
-        <title>Mah Jong Tarot vs Tarot: Similarities and Differences — The Mahjong Tarot</title>
+        <title>Mah Jong Tarot vs Tarot: Similarities and Differences — Mahjong Tarot</title>
         <meta name="description" content="Exploring the similarities and differences between Mah Jong Tarot and traditional Tarot — two powerful divination systems with distinct visual languages." />
         <meta property="og:title" content="Mah Jong Tarot vs Tarot: Similarities and Differences" />
         <meta property="og:description" content="Two divination systems, two visual languages. How do they compare?" />

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <h3>The Mahjong Tarot</h3>
+            <h3>Mahjong Tarot</h3>
             <p>
               Ancient wisdom, modern clarity. Bill Hajdu brings 35+ years of
               divination practice together through Mahjong tiles, Chinese
@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>© {new Date().getFullYear()} The Mahjong Tarot · Bill Hajdu · All rights reserved</p>
+          <p>© {new Date().getFullYear()} Mahjong Tarot · Bill Hajdu · All rights reserved</p>
           <p>Ancient Cards. Modern Insight.</p>
         </div>
       </div>

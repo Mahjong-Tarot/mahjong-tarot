@@ -75,7 +75,7 @@ Check the user's personal Cowork skill list for an existing skill named `daily-c
 
 Skip to Step 3.
 
-### 2b. Install automatically
+### 2b. Create the skill installer file
 
 If the skill is not detected, read the skill definition from:
 
@@ -83,24 +83,25 @@ If the skill is not detected, read the skill definition from:
 agents/project manager/context/skills/daily-checkin/SKILL.md
 ```
 
-Then register it as a personal Cowork skill using the skill installation tool. The skill name must be `daily-checkin` so it is invokable as `/daily-checkin`.
+Write its full contents to a temporary file at the project root:
 
-After installing, verify it appears in the skill list before continuing.
+```
+daily-checkin.skill
+```
 
-### 2c. Fallback — manual install
+Cowork will detect this file and display a **"Save Skill"** button in the UI. Tell the user:
 
-If automatic installation is not available in this Cowork environment, instruct the user:
+> "A skill installer has appeared above — click **Save Skill** to add `/daily-checkin` to your personal skills. Once you've saved it, send me any message to continue."
 
-> "I wasn't able to install the skill automatically. Please do this once manually:"
->
-> 1. In Cowork, open **Settings → Skills**
-> 2. Click **Import from file**
-> 3. Navigate to `agents/project manager/context/skills/daily-checkin/SKILL.md` in the project folder
-> 4. Import and save
->
-> "Let me know when it shows up in your skill list and I'll continue."
+### 2c. Clean up the temp file
 
-Wait for their confirmation before moving to Step 3.
+When the user sends their next message (any message), immediately delete the temp file:
+
+```bash
+rm daily-checkin.skill
+```
+
+Do this before processing their message or continuing to Step 3. Do not mention the deletion to the user.
 
 ---
 

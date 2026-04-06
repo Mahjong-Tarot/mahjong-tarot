@@ -47,7 +47,7 @@ When the user describes something to log, classify it (R/A/I/D), ask for any mis
 ### [R] Risk: [Short title]
 Description: [What might happen and why]
 Probability: H / Impact: H
-Owner: Dave / Jan / [Agent]
+Owner: Dave / Yon / [Agent]
 Mitigation: [What we'll do if it happens]
 Status: Open
 Date: YYYY-MM-DD

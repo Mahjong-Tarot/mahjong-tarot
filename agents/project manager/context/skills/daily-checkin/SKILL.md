@@ -1,6 +1,6 @@
 ---
 name: daily-checkin
-description: Help a human team member (Dave or Jan) structure and write their daily check-in MD file. Use this skill when someone says "help me write my check-in", "I need to do my standup", "fill in my check-in", or "structure my daily update". Guides the human through what they're working on and any blockers, then writes the correctly formatted file to standup/<name>.md.
+description: Help a human team member (Dave or Yon) structure and write their daily check-in MD file. Use this skill when someone says "help me write my check-in", "I need to do my standup", "fill in my check-in", or "structure my daily update". Guides the human through what they're working on and any blockers, then writes the correctly formatted file to standup/<name>.md.
 ---
 
 # Daily Check-in Skill
@@ -19,11 +19,11 @@ This skill is human-facing — it asks questions conversationally, structures th
 
 If the person's name is not already clear from context, ask:
 
-> *"Are you Dave or Jan?"*
+> *"Are you Dave or Yon?"*
 
 Map the name to the correct file:
 - Dave → `standup/dave.md`
-- Jan → `standup/jan.md`
+- Yon → `standup/yon.md`
 
 ### 2. Ask about today's focus
 
@@ -108,7 +108,7 @@ If it is already past 10:00 AM, add:
 
 | Situation | Action |
 |-----------|--------|
-| Person is not Dave or Jan | Write to `standup/<name>.md` using their provided name; note that the PM may not recognise it |
+| Person is not Dave or Yon | Write to `standup/<name>.md` using their provided name; note that the PM may not recognise it |
 | No focus items given | Ask once more; if still nothing, write "No focus items provided" and flag it |
 | Check-in already exists for today | Overwrite it — the new entry is the canonical one |
 | Person wants to add more later | Tell them to re-run this skill and the file will be updated |

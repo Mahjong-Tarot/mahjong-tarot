@@ -19,7 +19,7 @@ Keep it simple. Three questions:
 
 ## Step-by-step
 
-### 1. Prompt Dave and Jan
+### 1. Prompt Dave and Yon
 
 Send each person a Gmail with the three questions and a 48-hour deadline to respond. Keep the message short:
 
@@ -45,15 +45,15 @@ Responses come back via email or directly as a check-in update. Once both are re
 
 ### 3. Synthesise themes
 
-Read all responses and identify recurring themes across Dave and Jan's answers. Group similar points together. Name each theme clearly. Don't list every individual bullet — find the pattern underneath.
+Read all responses and identify recurring themes across Dave and Yon's answers. Group similar points together. Name each theme clearly. Don't list every individual bullet — find the pattern underneath.
 
-For example, if Dave says "more frequent PR reviews" and Jan says "review bottleneck is slowing us down", the theme is: *Code review process is a bottleneck.*
+For example, if Dave says "more frequent PR reviews" and Yon says "review bottleneck is slowing us down", the theme is: *Code review process is a bottleneck.*
 
 ### 4. Generate action items
 
 For each meaningful theme, define one concrete action item:
 - **What**: a specific, doable change (not "improve communication")
-- **Who**: one named owner (Dave or PM or Jan — not "the team")
+- **Who**: one named owner (Dave or PM or Yon — not "the team")
 - **When**: a deadline or "by next retro"
 
 Limit to 3–5 action items maximum. A long list gets ignored. A short list gets done.
@@ -78,7 +78,7 @@ Add the retrospective block to `reports/YYYY-MM.md`:
 **Action items**
 | Action | Owner | Due |
 |--------|-------|-----|
-| [Specific change] | Dave / Jan / PM | YYYY-MM-DD |
+| [Specific change] | Dave / Yon / PM | YYYY-MM-DD |
 | ... | ... | ... |
 
 ```
@@ -97,6 +97,6 @@ At the next retro, read the previous retro's action items before prompting for n
 
 ## Edge cases
 
-- **Only one person responds**: Run the retro with what you have. Note that Jan/Dave did not respond. Carry their non-response as an open action item.
+- **Only one person responds**: Run the retro with what you have. Note that Yon/Dave did not respond. Carry their non-response as an open action item.
 - **Nothing to stop**: That's fine — don't force it. A retro with only "continue" items is a healthy sprint.
 - **Too many action items surfaced**: Prioritise by asking: "Which one change would have the biggest positive impact?" Take that one first.

@@ -22,7 +22,7 @@ export default function Home() {
 
       <main>
         {/* ── Hero ── */}
-        <section className="section-dark">
+        <section className={`section-dark ${styles.heroSection}`}>
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroContent}>
               <span className="overline">Ancient Cards · Modern Insight</span>
@@ -44,7 +44,6 @@ export default function Home() {
                 priority
                 style={{ objectFit: 'cover', objectPosition: 'center top' }}
               />
-              <div className={styles.heroOverlay} />
             </div>
           </div>
         </section>

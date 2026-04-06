@@ -1,38 +1,54 @@
 /* ── Hero ── */
+.heroSection { padding: 0; }
+
 .heroInner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-4xl);
-  align-items: center;
-  min-height: 480px;
-  padding: var(--space-3xl) 0;
+  gap: 0;
+  align-items: stretch;
 }
+
 .heroContent {
-  border-left: 4px solid var(--mystic-fire);
-  padding-left: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-2xl) var(--space-2xl) var(--space-2xl) 0;
+  border-right: 1px solid rgba(244, 199, 110, 0.2);
 }
-.heroContent h1 { color: var(--warm-cream); margin-bottom: var(--space-lg); margin-top: var(--space-lg); }
-.heroLead {
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 1.7;
+
+.heroContent::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--celestial-gold);
+  margin-bottom: var(--space-md);
+}
+
+.heroContent h1 {
+  font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--warm-cream);
-  opacity: 0.9;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
+
+.heroLead {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--warm-cream);
+  opacity: 0.72;
+  margin-bottom: var(--space-lg);
+  max-width: 400px;
+}
+
 .heroCtas { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
 .heroImage {
   position: relative;
-  height: 460px;
+  min-height: 280px;
   overflow: hidden;
-  border-radius: 4px;
-}
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to left, transparent 60%, var(--midnight-indigo) 100%);
-  opacity: 0.2;
-  z-index: 1;
 }
 
 /* ── Intro ── */
@@ -127,9 +143,10 @@
 }
 
 @media (max-width: 768px) {
-  .heroInner    { grid-template-columns: 1fr; padding: var(--space-2xl) 0; }
-  .heroImage    { height: 280px; }
-  .intro        { grid-template-columns: 1fr; }
-  .introImage   { display: none; }
-  .readingsGrid { grid-template-columns: 1fr; }
+  .heroInner        { grid-template-columns: 1fr; }
+  .heroContent      { padding: var(--space-xl) 0; border-right: none; border-bottom: 1px solid rgba(244,199,110,0.2); }
+  .heroImage        { min-height: 220px; }
+  .intro            { grid-template-columns: 1fr; }
+  .introImage       { display: none; }
+  .readingsGrid     { grid-template-columns: 1fr; }
 }

@@ -7,7 +7,7 @@ description: Assess the impact of a proposed scope change on schedule, capacity,
 
 ## Purpose
 
-Every scope change has a cost — in time, in focus, or in something else that doesn't get done. This skill makes that cost visible so Dave and Jan can make an informed decision rather than casually absorbing new work until the sprint collapses.
+Every scope change has a cost — in time, in focus, or in something else that doesn't get done. This skill makes that cost visible so Dave and Yon can make an informed decision rather than casually absorbing new work until the sprint collapses.
 
 ## Step-by-step
 
@@ -17,7 +17,7 @@ Ask (or extract from the user's message) the following:
 
 - **What**: What is being added, changed, or removed?
 - **Why**: What is the business or user reason for this change?
-- **Who requested it**: Dave, Jan, or external stakeholder?
+- **Who requested it**: Dave, Yon, or external stakeholder?
 - **Urgency**: Must-have now, nice-to-have, or future consideration?
 
 ### 2. Assess impact on current sprint
@@ -33,7 +33,7 @@ For the proposed change, estimate:
 | Dimension | Assessment |
 |-----------|------------|
 | **Effort** | Small (<1 day) / Medium (1–3 days) / Large (>3 days) |
-| **Who is affected** | Dave / Jan / AI agents / all |
+| **Who is affected** | Dave / Yon / AI agents / all |
 | **What gets displaced** | Which current task(s) would slip or be dropped to fit this in? |
 | **Dependencies introduced** | Does this change require something else to be done first? |
 | **Quality risk** | Does adding this mid-sprint increase the chance of bugs or incomplete work? |
@@ -54,7 +54,7 @@ Make a clear recommendation. Don't present all three as equally valid — the PM
 
 ### 4. Log the decision
 
-Append to `context/decisions.md`:
+Append to `agents/project manager/output/decisions/decisions.md`:
 
 ```markdown
 ## Scope Change Decision — YYYY-MM-DD
@@ -64,7 +64,7 @@ Append to `context/decisions.md`:
 **Recommendation**: Accept now / Accept next sprint / Reject
 **Rationale**: [Why this recommendation]
 **Trade-off**: [What gets displaced or delayed if accepted]
-**Decision**: [Pending Dave/Jan confirmation / Approved / Rejected]
+**Decision**: [Pending Dave/Yon confirmation / Approved / Rejected]
 **Date**: YYYY-MM-DD
 ```
 

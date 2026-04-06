@@ -1,36 +1,34 @@
-# OS Files
+# Dependencies
+node_modules/
+website/node_modules/
+
+# Next.js build output
+website/.next/
+website/out/
+
+# Environment variables
+.env
+.env.*local
+.env.local
+
+# OS files
 .DS_Store
 .DS_Store?
+Thumbs.db
+Desktop.ini
 ._*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db
 
-# IDE & Editor
+# Editor / IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.sublime-project
-.sublime-workspace
-
-# Dependencies
-node_modules/
-venv/
-env/
-.env
-.env.local
-.env.*.local
-
-# Build & Dist
-dist/
-build/
-*.egg-info/
-*.pyc
-__pycache__/
-.pytest_cache/
+*.sublime-project
+*.sublime-workspace
 
 # Logs
 logs/
@@ -38,14 +36,51 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# Vercel
+website/.vercel/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+.pytest_cache/
 
 # Temporary files
 *.tmp
 *.temp
+*.bak
+*.orig
 .cache/
 
-# OS-specific
+# Binary / compiled
 *.exe
 *.dll
 *.so
 *.dylib
+
+# Source images (optimised WebP copies live in website/public/images/)
+content/Images/
+
+# Source PDF
+content/*.pdf
+
+# Agent output staging area
+agents/web-developer/output/
+
+# Legacy HTML files (replaced by Next.js)
+website/*.html
+website/blog/*.html
+
+# Claude local settings
+.claude/settings.local.json
+
+# npm lockfile (managed per-directory)
+website/package-lock.json

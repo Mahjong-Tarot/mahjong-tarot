@@ -114,13 +114,13 @@ flowchart TD
 
   %% ─── MORNING ─────────────────────────────────────────────────────────────
   MORNING(["🌅  Morning Trigger"])
-  MORNING --> REMIND_AM["📣  PM notifies Dave & Jan\n'Update your Git status, then\nsubmit your check-in before 10 AM'"]
+  MORNING --> REMIND_AM["📣  PM notifies Dave & Yon\n'Update your Git status, then\nsubmit your check-in before 10 AM'"]
 
   %% ─── ASYNC CHECK-IN ──────────────────────────────────────────────────────
   subgraph CHECKIN ["  📝  Async Stand-up Collection (before 10:00 AM)  "]
     direction TB
     DAVE_FLOW["👤  Dave says\n'Update my check-in'\n+ what I'm doing today"]
-    JAN_FLOW["👤  Jan says\n'Update my check-in'\n+ what I'm doing today"]
+    JAN_FLOW["👤  Yon says\n'Update my check-in'\n+ what I'm doing today"]
 
     DAVE_MD[("📄  dave-checkin.md")]
     JAN_MD[("📄  jan-checkin.md")]
@@ -139,17 +139,17 @@ flowchart TD
   PING --> CHECKIN
 
   %% ─── PM SUMMARIZE & PLAN ─────────────────────────────────────────────────
-  SUMMARIZE["🧠  PM summarizes inputs\n& plans the day\n• Assign tasks to Dave & Jan\n• Assign tasks to AI agents"]
+  SUMMARIZE["🧠  PM summarizes inputs\n& plans the day\n• Assign tasks to Dave & Yon\n• Assign tasks to AI agents"]
 
   SUMMARIZE --> GDOC["📄  Append daily stand-up entry\nto Google Doc — Shared Drive\n(long-running document)"]
   SUMMARIZE --> GITHUB["✅  Create tasks\nin GitHub Projects"]
 
   %% ─── TASK EXECUTION ──────────────────────────────────────────────────────
   GITHUB --> AI_WORK["⚡  AI Agents\nexecute their tasks"]
-  GITHUB --> HUMAN_WORK["🙋  Dave & Jan\nwork on their tasks"]
+  GITHUB --> HUMAN_WORK["🙋  Dave & Yon\nwork on their tasks"]
 
   AI_WORK    --> PM_AGENTS["🤖  PM monitors &\nmanages AI agents"]
-  HUMAN_WORK --> PM_HUMANS["🔍  PM checks in with\nDave & Jan during the day"]
+  HUMAN_WORK --> PM_HUMANS["🔍  PM checks in with\nDave & Yon during the day"]
 
   %% ─── ACCOUNTABILITY LOOP ─────────────────────────────────────────────────
   PM_HUMANS --> GIT_CHECK{"GitHub task\nstatus updated?"}
@@ -160,8 +160,8 @@ flowchart TD
   PM_AGENTS --> EOD_GATE(["🌆  End of Day"])
 
   %% ─── END OF DAY ──────────────────────────────────────────────────────────
-  EOD_GATE --> REMIND_EOD["📣  PM notifies Dave & Jan\n'Update your Git status\nbefore tomorrow's stand-up'"]
-  REMIND_EOD --> EOD_UPDATE["👤  Dave & Jan\nupdate Git status"]
+  EOD_GATE --> REMIND_EOD["📣  PM notifies Dave & Yon\n'Update your Git status\nbefore tomorrow's stand-up'"]
+  REMIND_EOD --> EOD_UPDATE["👤  Dave & Yon\nupdate Git status"]
   EOD_UPDATE --> NEXT(["🔁  Next Day →"])
   NEXT --> MORNING
 

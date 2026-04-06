@@ -65,18 +65,42 @@ Tell them:
 
 ---
 
-## Step 2 — Import the daily check-in skill into Cowork
+## Step 2 — Install the daily check-in skill
 
-Tell the user to import the daily check-in skill into their **personal** Cowork skills so they can use it from any project:
+### 2a. Check if the skill is already installed
 
-1. In Cowork, open **Settings → Skills**
-2. Click **Import from file**
-3. Navigate to `agents/project manager/context/skills/daily-checkin/SKILL.md` in the project folder
-4. Import and save
+Check the user's personal Cowork skill list for an existing skill named `daily-checkin`. If it is already present, tell the user:
 
-Once imported, the skill will be available as `/daily-checkin` in any Cowork session.
+> "`/daily-checkin` is already installed — skipping."
 
-Confirm with the user that the skill appears in their personal skill list before continuing.
+Skip to Step 3.
+
+### 2b. Install automatically
+
+If the skill is not detected, read the skill definition from:
+
+```
+agents/project manager/context/skills/daily-checkin/SKILL.md
+```
+
+Then register it as a personal Cowork skill using the skill installation tool. The skill name must be `daily-checkin` so it is invokable as `/daily-checkin`.
+
+After installing, verify it appears in the skill list before continuing.
+
+### 2c. Fallback — manual install
+
+If automatic installation is not available in this Cowork environment, instruct the user:
+
+> "I wasn't able to install the skill automatically. Please do this once manually:"
+>
+> 1. In Cowork, open **Settings → Skills**
+> 2. Click **Import from file**
+> 3. Navigate to `agents/project manager/context/skills/daily-checkin/SKILL.md` in the project folder
+> 4. Import and save
+>
+> "Let me know when it shows up in your skill list and I'll continue."
+
+Wait for their confirmation before moving to Step 3.
 
 ---
 

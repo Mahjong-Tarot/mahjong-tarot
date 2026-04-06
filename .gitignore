@@ -9,12 +9,17 @@ website/out/
 # Environment variables
 .env
 .env.*local
+.env.local
 
 # OS files
 .DS_Store
+.DS_Store?
 Thumbs.db
 Desktop.ini
 ._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 
 # Editor / IDE
 .vscode/
@@ -26,6 +31,8 @@ Desktop.ini
 *.sublime-workspace
 
 # Logs
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -43,11 +50,21 @@ dist/
 build/
 .venv/
 venv/
+env/
+.pytest_cache/
 
 # Temporary files
 *.tmp
+*.temp
 *.bak
 *.orig
+.cache/
+
+# Binary / compiled
+*.exe
+*.dll
+*.so
+*.dylib
 
 # Source images (optimised WebP copies live in website/public/images/)
 content/Images/
@@ -61,6 +78,10 @@ agents/web-developer/output/
 # Legacy HTML files (replaced by Next.js)
 website/*.html
 website/blog/*.html
+
+# Claude local settings
 .claude/settings.local.json
+
+# npm lockfile & package (managed per-directory)
 website/package-lock.json
 website/package.json

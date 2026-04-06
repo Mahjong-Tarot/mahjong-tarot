@@ -1,0 +1,88 @@
+---
+name: blocker-triage
+description: Scan GitHub Projects for blocked or stalled tasks, rank them by severity and age, and draft escalations for anything unresolved for more than 48 hours. Use this skill when someone asks "what are our blockers?", "what's stuck?", "triage blockers", or during the midday check-in. Also runs automatically if the morning standup flags any blockers.
+---
+
+# Blocker Triage Skill
+
+## Purpose
+
+Surface everything that's stuck before it quietly kills a deadline. A blocker that's been sitting for two days without action is a project risk — this skill finds those early and gets the right person moving.
+
+## Step-by-step
+
+### 1. Pull all open tasks from GitHub Projects
+
+```bash
+gh project item-list <project-number> --owner <owner> --format json
+```
+
+Filter for tasks with status: `blocked`, `in progress` (stalled), or any label indicating a dependency or wait state.
+
+Also check for tasks that have been `in progress` for more than 2 days without a status update — these are likely stalled even if not explicitly labelled blocked.
+
+### 2. Classify each blocker
+
+For each blocked or stalled task, determine:
+
+| Field | What to find |
+|-------|-------------|
+| **Task** | Title and GitHub link |
+| **Owner** | Who is assigned |
+| **Age** | How many days since status last changed |
+| **Type** | Internal (can be resolved within the team) vs. External (waiting on something outside) |
+| **Severity** | H / M / L — based on impact on other tasks or milestones |
+
+### 3. Rank by priority
+
+Sort blockers using this logic:
+1. **Age > 48h** → immediate escalation regardless of severity
+2. **High severity** → surface first even if recent
+3. **External dependency** → flag separately since resolution path is different
+4. **Low severity + recent** → monitor, no action yet
+
+### 4. Draft escalations for critical blockers
+
+For any blocker that is >48h old or HIGH severity, draft a concise escalation note:
+
+```
+🔴 BLOCKER: [Task title]
+Owner: [Name]
+Blocked for: [X days]
+Impact: [What can't proceed until this is resolved]
+Action needed: [Specific ask — a decision, a conversation, an unblock]
+```
+
+These can be sent via Gmail or logged as a comment on the GitHub task.
+
+### 5. Output summary
+
+Present a triage table:
+
+```
+BLOCKER TRIAGE — YYYY-MM-DD
+
+🔴 CRITICAL (>48h or high impact)
+- [Task] | Owner: [Name] | Age: X days | [escalation drafted]
+
+🟡 WATCH (recent, medium impact)
+- [Task] | Owner: [Name] | Age: X days | Monitor
+
+🟢 CLEAR
+No blockers meeting escalation threshold.
+```
+
+Then ask: "Should I send the escalation notes to the relevant owners via Gmail, or log them as GitHub comments?"
+
+## What counts as a blocker
+
+- A task explicitly marked `blocked` in GitHub Projects
+- A task `in progress` with no update in 48+ hours
+- A task waiting on an external dependency (design, external API, third party)
+- A task where the acceptance criteria are unclear and work can't proceed
+
+## What does NOT count as a blocker
+
+- A task that's simply not started yet (that's backlog management, not a blocker)
+- A task in review (review is progress)
+- A completed task

@@ -1,0 +1,128 @@
+/* ── Hero ── */
+.hero {
+  position: relative;
+  height: 90vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+}
+.heroImage { position: absolute; inset: 0; }
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(27,31,59,0.85) 0%, rgba(27,31,59,0.4) 60%, transparent 100%);
+}
+.heroContent {
+  position: relative;
+  z-index: 1;
+  color: var(--warm-cream);
+  padding-bottom: var(--space-4xl);
+  max-width: 720px;
+}
+.heroContent h1 { color: var(--warm-cream); margin-bottom: var(--space-lg); }
+.heroLead {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(250,248,244,0.9);
+  margin-bottom: var(--space-xl);
+  max-width: 560px;
+}
+.heroCtas { display: flex; gap: var(--space-md); flex-wrap: wrap; }
+
+/* ── Intro ── */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+.introText h2 { margin-bottom: var(--space-lg); }
+.introText p  { margin-bottom: var(--space-lg); color: var(--black); }
+.introImage   { overflow: hidden; }
+
+/* ── Section header ── */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+.sectionHeader h2 { margin-bottom: var(--space-lg); }
+
+/* ── Readings grid ── */
+.readingsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+.readingsGrid .card h3,
+.readingsGrid .card-dark h3 { margin: var(--space-md) 0; }
+.readingsGrid .card p,
+.readingsGrid .card-dark p  { margin-bottom: var(--space-lg); }
+.readingsCta { text-align: center; margin-top: var(--space-2xl); }
+
+/* ── Book section ── */
+.bookSection { }
+.bookInner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+.bookText h2     { color: var(--warm-cream); margin-bottom: var(--space-sm); }
+.bookSubtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--celestial-gold);
+  margin-bottom: var(--space-lg);
+}
+.bookText p      { color: rgba(250,248,244,0.85); margin-bottom: var(--space-xl); }
+.bookCover       { flex-shrink: 0; }
+
+/* ── Gallery ── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-xl);
+}
+.galleryItem {
+  position: relative;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+}
+.galleryItem img { transition: transform 400ms ease-out; }
+.galleryItem:hover img { transform: scale(1.04); }
+
+/* ── Testimonials ── */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+.testimonial {
+  font-size: 18px;
+  border-left-width: 3px;
+}
+.testimonial p    { margin-bottom: var(--space-md); }
+.testimonial footer {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  color: var(--mid-gray);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .readingsGrid { grid-template-columns: 1fr 1fr; }
+  .testimonials { grid-template-columns: 1fr; }
+  .bookInner    { grid-template-columns: 1fr; }
+  .bookCover    { display: none; }
+  .gallery      { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .intro        { grid-template-columns: 1fr; }
+  .introImage   { display: none; }
+  .readingsGrid { grid-template-columns: 1fr; }
+}

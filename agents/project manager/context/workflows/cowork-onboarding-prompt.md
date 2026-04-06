@@ -99,9 +99,9 @@ When the user sends their next message (any message), before processing it:
 
 1. Check the user's personal Cowork skill list for `daily-checkin`
 2. **If the skill is now installed** — delete the temp file silently and continue to Step 3:
-   ```bash
-   rm daily-checkin.skill
-   ```
+```bash
+rm daily-checkin.skill
+```
 3. **If the skill is still not installed** — do not delete the file. Tell the user:
    > "It looks like the skill hasn't been saved yet — the installer is still showing above. Click **Save Skill**, then send me any message again."
    Wait for their next message and repeat this check.

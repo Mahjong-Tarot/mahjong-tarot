@@ -1,35 +1,26 @@
 /* ── Hero ── */
 .heroSection {
-  position: relative;
-  min-height: 88vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 86vh;
+  padding: 0;
+}
+
+.heroLeft {
+  background-color: var(--midnight-indigo);
   display: flex;
   align-items: center;
-  padding: 0;
-  overflow: hidden;
+  justify-content: flex-end;
+  padding: var(--space-4xl) var(--space-2xl) var(--space-4xl) var(--outer-margin);
 }
 
-.heroBg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.heroText {
+  max-width: 480px;
+  width: 100%;
 }
 
-.heroOverlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(27, 31, 59, 0.66);
-  z-index: 1;
-}
-
-.heroContent {
-  position: relative;
-  z-index: 2;
-  padding-top: var(--space-4xl);
-  padding-bottom: var(--space-4xl);
-}
-
-.heroContent h1 {
-  font-size: clamp(40px, 5vw, 64px);
+.heroText h1 {
+  font-size: clamp(36px, 3.6vw, 56px);
   line-height: 1.05;
   letter-spacing: -0.03em;
   color: var(--warm-cream);
@@ -37,19 +28,23 @@
 }
 
 .heroLead {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 300;
   line-height: 1.7;
   color: var(--warm-cream);
   opacity: 0.82;
   margin-bottom: var(--space-xl);
-  max-width: 480px;
 }
 
 .heroCtas {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
+}
+
+.heroRight {
+  position: relative;
+  overflow: hidden;
 }
 
 /* ── Readings grid ── */
@@ -147,7 +142,9 @@
 }
 
 @media (max-width: 768px) {
-  .heroSection  { min-height: 75vh; }
+  .heroSection  { grid-template-columns: 1fr; min-height: auto; }
+  .heroLeft     { justify-content: flex-start; padding: var(--space-2xl) var(--outer-margin); }
+  .heroRight    { min-height: 300px; }
   .intro        { grid-template-columns: 1fr; }
   .introImage   { display: none; }
   .readingsGrid { grid-template-columns: 1fr; }

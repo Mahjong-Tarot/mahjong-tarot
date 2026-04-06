@@ -24,7 +24,21 @@ export default function Home() {
 
         {/* ── Hero ── */}
         <section className={styles.heroSection}>
-          <div className={styles.heroBg}>
+          <div className={styles.heroLeft}>
+            <div className={styles.heroText}>
+              <span className="overline">Ancient Wisdom · Modern Clarity</span>
+              <h1>See What the<br />Tiles Reveal</h1>
+              <p className={styles.heroLead}>
+                35 years of divination practice. Mahjong tiles, Chinese astrology,
+                and tarot — woven into readings that illuminate your path.
+              </p>
+              <div className={styles.heroCtas}>
+                <Link href="/readings" className="btn-ghost">Explore Readings</Link>
+                <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
+              </div>
+            </div>
+          </div>
+          <div className={styles.heroRight}>
             <Image
               src="/images/gallery-3.webp"
               alt="Bill Hajdu conducting a Mahjong Tarot reading"
@@ -32,19 +46,6 @@ export default function Home() {
               priority
               style={{ objectFit: 'cover', objectPosition: 'center top' }}
             />
-            <div className={styles.heroOverlay} />
-          </div>
-          <div className={`container ${styles.heroContent}`}>
-            <span className="overline">Ancient Wisdom · Modern Clarity</span>
-            <h1>See What the<br />Tiles Reveal</h1>
-            <p className={styles.heroLead}>
-              35 years of divination practice. Mahjong tiles, Chinese astrology,
-              and tarot — woven into readings that illuminate your path.
-            </p>
-            <div className={styles.heroCtas}>
-              <Link href="/readings" className="btn-ghost">Explore Readings</Link>
-              <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
-            </div>
           </div>
         </section>
 

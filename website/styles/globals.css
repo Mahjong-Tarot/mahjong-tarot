@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+/* ─── Design Tokens ───────────────────────────────────────────────────── */
+:root {
+  --midnight-indigo: #1B1F3B;
+  --mystic-fire:     #C0392B;
+  --mystic-fire-dark:#A93226;
+  --celestial-gold:  #C9A84C;
+  --warm-cream:      #FAF8F4;
+  --black:           #0D0D0D;
+  --soft-lavender:   #C8B8D8;
+  --light-stone:     #EDEBE5;
+  --mid-gray:        #888880;
+
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 128px;
+
+  --max-width:    1200px;
+  --outer-margin: 80px;
+
+  --transition: 200ms ease-out;
+}
+
+/* ─── Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+img, video { max-width: 100%; display: block; }
+ul, ol { list-style: none; }
+
+/* ─── Base ────────────────────────────────────────────────────────────── */
+body {
+  background-color: var(--warm-cream);
+  color: var(--black);
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+/* ─── Typography ──────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--midnight-indigo);
+}
+h1 { font-size: 56px;  font-weight: 700; line-height: 1.1;  letter-spacing: -0.02em; }
+h2 { font-size: 40px;  font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+h3 { font-size: 28px;  font-weight: 400; line-height: 1.3; }
+h4 { font-size: 22px;  font-weight: 700; line-height: 1.35; }
+
+p { margin-bottom: 1.25em; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--midnight-indigo);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+a:hover { color: var(--mystic-fire); }
+
+strong { font-weight: 600; }
+em     { font-style: italic; }
+
+blockquote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 28px;
+  line-height: 1.4;
+  color: var(--midnight-indigo);
+  border-left: 3px solid var(--celestial-gold);
+  padding-left: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+/* ─── Overline ────────────────────────────────────────────────────────── */
+.overline {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mystic-fire);
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+/* ─── Layout ──────────────────────────────────────────────────────────── */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--outer-margin);
+}
+
+section { padding: var(--space-3xl) 0; }
+
+.section-dark {
+  background-color: var(--midnight-indigo);
+  color: var(--warm-cream);
+}
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 { color: var(--warm-cream); }
+
+.section-stone { background-color: var(--light-stone); }
+
+/* ─── Buttons ─────────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--mystic-fire);
+  color: var(--warm-cream) !important;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+.btn-primary:hover { background-color: var(--mystic-fire-dark); color: var(--warm-cream) !important; }
+
+.btn-secondary {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--midnight-indigo) !important;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 30px;
+  border: 2px solid var(--midnight-indigo);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-secondary:hover { background-color: var(--midnight-indigo); color: var(--warm-cream) !important; }
+
+.btn-ghost {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--warm-cream) !important;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 30px;
+  border: 2px solid var(--warm-cream);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-ghost:hover { background-color: var(--warm-cream); color: var(--midnight-indigo) !important; }
+
+/* ─── Dividers ────────────────────────────────────────────────────────── */
+.divider-gold {
+  width: 80px;
+  height: 2px;
+  background-color: var(--celestial-gold);
+  margin: var(--space-xl) 0;
+}
+.divider-gold.centered { margin-left: auto; margin-right: auto; }
+
+/* ─── Post meta ───────────────────────────────────────────────────────── */
+.post-meta {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: var(--mid-gray);
+  line-height: 1.6;
+}
+
+.post-category {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mystic-fire);
+  margin-bottom: var(--space-sm);
+}
+
+/* ─── Cards ───────────────────────────────────────────────────────────── */
+.card {
+  background-color: var(--light-stone);
+  padding: var(--space-xl);
+  border-radius: 0;
+}
+
+.card-dark {
+  background-color: var(--midnight-indigo);
+  color: var(--warm-cream);
+  padding: var(--space-xl);
+  border-radius: 0;
+}
+.card-dark h2, .card-dark h3 { color: var(--warm-cream); }
+
+/* ─── Figure / Images ─────────────────────────────────────────────────── */
+figure { margin: var(--space-xl) 0; }
+figcaption {
+  font-size: 13px;
+  color: var(--mid-gray);
+  margin-top: var(--space-sm);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ─── Focus ───────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--celestial-gold);
+  outline-offset: 2px;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  :root { --outer-margin: 40px; }
+  h1 { font-size: 44px; }
+  h2 { font-size: 32px; }
+}
+
+@media (max-width: 640px) {
+  :root { --outer-margin: 20px; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 22px; }
+  blockquote { font-size: 22px; }
+}

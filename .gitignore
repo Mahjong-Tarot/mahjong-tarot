@@ -82,6 +82,5 @@ website/blog/*.html
 # Claude local settings
 .claude/settings.local.json
 
-# npm lockfile & package (managed per-directory)
+# npm lockfile (managed per-directory)
 website/package-lock.json
-website/package.json

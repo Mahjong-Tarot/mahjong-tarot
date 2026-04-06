@@ -95,13 +95,18 @@ Cowork will detect this file and display a **"Save Skill"** button in the UI. Te
 
 ### 2c. Clean up the temp file
 
-When the user sends their next message (any message), immediately delete the temp file:
+When the user sends their next message (any message), before processing it:
 
-```bash
-rm daily-checkin.skill
-```
+1. Check the user's personal Cowork skill list for `daily-checkin`
+2. **If the skill is now installed** — delete the temp file silently and continue to Step 3:
+   ```bash
+   rm daily-checkin.skill
+   ```
+3. **If the skill is still not installed** — do not delete the file. Tell the user:
+   > "It looks like the skill hasn't been saved yet — the installer is still showing above. Click **Save Skill**, then send me any message again."
+   Wait for their next message and repeat this check.
 
-Do this before processing their message or continuing to Step 3. Do not mention the deletion to the user.
+Do not mention the deletion to the user once it succeeds.
 
 ---
 

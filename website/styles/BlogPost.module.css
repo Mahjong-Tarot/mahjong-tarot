@@ -61,9 +61,84 @@
 }
 .cta a { margin: 0 var(--space-sm); }
 
+/* ── Post Navigation ── */
+.postNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  padding-top: var(--space-3xl);
+  margin-top: var(--space-3xl);
+  border-top: 1px solid var(--light-stone);
+}
+
+.navPrev,
+.navNext {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--midnight-indigo);
+  max-width: 280px;
+  line-height: 1.5;
+}
+.navPrev:hover, .navNext:hover { color: var(--mystic-fire); }
+.navNext { text-align: right; margin-left: auto; }
+
+/* ── Sign Cards ── */
+.signGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin: var(--space-2xl) 0;
+}
+
+.signCard {
+  background-color: var(--light-stone);
+  padding: var(--space-lg);
+}
+
+.signCard h4 {
+  font-size: 18px;
+  margin: 0 0 var(--space-sm);
+}
+
+.signBadge {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  margin-bottom: var(--space-md);
+}
+
+.badgeExceptional { background-color: var(--celestial-gold); color: var(--midnight-indigo); }
+.badgeFavorable   { background-color: var(--midnight-indigo); color: var(--warm-cream); }
+.badgeNeutral     { background-color: var(--mid-gray); color: var(--warm-cream); }
+.badgeMixed       { background-color: var(--mid-gray); color: var(--warm-cream); }
+.badgeChallenging { background-color: var(--mystic-fire); color: var(--warm-cream); }
+.badgeHighRisk    { background-color: var(--mystic-fire-dark); color: var(--warm-cream); }
+
+.signCard p {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .signGrid  { grid-template-columns: repeat(2, 1fr); }
+  .postNav   { flex-direction: column; }
+  .navNext   { text-align: left; margin-left: 0; }
+}
+
 @media (max-width: 640px) {
   .body p { font-size: 17px; }
   .body h2 { font-size: 28px; }
   .body blockquote { font-size: 20px; }
   .hero { padding: 0 var(--outer-margin); }
+  .signGrid { grid-template-columns: 1fr; }
 }

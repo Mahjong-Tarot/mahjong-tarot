@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Manager Workflow</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      padding: 40px 32px;
+      min-height: 100vh;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 15px;
+      color: #94a3b8;
+    }
+
+    .legend {
+      max-width: 1200px;
+      margin: 0 auto 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1.5px solid;
+      flex-shrink: 0;
+    }
+
+    .diagram-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #1e2130;
+      border: 1px solid #2d3348;
+      border-radius: 16px;
+      padding: 40px 24px;
+      overflow-x: auto;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🤖 Project Manager — Daily Workflow</h1>
+  <p>Async stand-up via MD check-in → deadline enforcement → task creation → accountability loop</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#1a3a2c;border-color:#22c55e"></div> Human action</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#2d2060;border-color:#8b5cf6"></div> PM / AI decision</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#3a2a10;border-color:#f59e0b"></div> Document / data store</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#1e2a3a;border-color:#38bdf8"></div> GitHub Projects</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#2a1a3a;border-color:#a78bfa"></div> AI agent execution</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#3a1a1a;border-color:#ef4444"></div> Reminder / nudge</div>
+</div>
+
+<div class="diagram-wrapper">
+  <div class="mermaid">
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "primaryColor": "#2d3a5e",
+    "primaryTextColor": "#e2e8f0",
+    "primaryBorderColor": "#4a5a8a",
+    "lineColor": "#6b7db3",
+    "secondaryColor": "#1e2130",
+    "tertiaryColor": "#1a2035",
+    "background": "#1e2130",
+    "nodeBorder": "#4a5a8a",
+    "clusterBkg": "#1a2540",
+    "titleColor": "#f8fafc",
+    "edgeLabelBackground": "#1e2130",
+    "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "fontSize": "14px"
+  }
+}}%%
+flowchart TD
+
+  %% ─── MORNING ─────────────────────────────────────────────────────────────
+  MORNING(["🌅  Morning Trigger"])
+  MORNING --> REMIND_AM["📣  PM notifies Dave & Jan\n'Update your Git status, then\nsubmit your check-in before 10 AM'"]
+
+  %% ─── ASYNC CHECK-IN ──────────────────────────────────────────────────────
+  subgraph CHECKIN ["  📝  Async Stand-up Collection (before 10:00 AM)  "]
+    direction TB
+    DAVE_FLOW["👤  Dave says\n'Update my check-in'\n+ what I'm doing today"]
+    JAN_FLOW["👤  Jan says\n'Update my check-in'\n+ what I'm doing today"]
+
+    DAVE_MD[("📄  dave-checkin.md")]
+    JAN_MD[("📄  jan-checkin.md")]
+
+    DAVE_FLOW --> DAVE_MD
+    JAN_FLOW  --> JAN_MD
+  end
+
+  REMIND_AM --> CHECKIN
+
+  %% ─── DEADLINE GATE ───────────────────────────────────────────────────────
+  CHECKIN --> DEADLINE{"⏰  10:00 AM\nboth check-ins in?"}
+
+  DEADLINE -- "✅  Yes" --> SUMMARIZE
+  DEADLINE -- "❌  Missing\ncheck-in(s)" --> PING["📣  PM pings missing person(s)\nevery 5 minutes\nuntil received"]
+  PING --> CHECKIN
+
+  %% ─── PM SUMMARIZE & PLAN ─────────────────────────────────────────────────
+  SUMMARIZE["🧠  PM summarizes inputs\n& plans the day\n• Assign tasks to Dave & Jan\n• Assign tasks to AI agents"]
+
+  SUMMARIZE --> GDOC["📄  Append daily stand-up entry\nto Google Doc — Shared Drive\n(long-running document)"]
+  SUMMARIZE --> GITHUB["✅  Create tasks\nin GitHub Projects"]
+
+  %% ─── TASK EXECUTION ──────────────────────────────────────────────────────
+  GITHUB --> AI_WORK["⚡  AI Agents\nexecute their tasks"]
+  GITHUB --> HUMAN_WORK["🙋  Dave & Jan\nwork on their tasks"]
+
+  AI_WORK    --> PM_AGENTS["🤖  PM monitors &\nmanages AI agents"]
+  HUMAN_WORK --> PM_HUMANS["🔍  PM checks in with\nDave & Jan during the day"]
+
+  %% ─── ACCOUNTABILITY LOOP ─────────────────────────────────────────────────
+  PM_HUMANS --> GIT_CHECK{"GitHub task\nstatus updated?"}
+  GIT_CHECK -- "❌  Not yet" --> NUDGE["📣  PM nudges:\n'Update your task status'"]
+  NUDGE --> GIT_CHECK
+  GIT_CHECK -- "✅  Updated" --> EOD_GATE
+
+  PM_AGENTS --> EOD_GATE(["🌆  End of Day"])
+
+  %% ─── END OF DAY ──────────────────────────────────────────────────────────
+  EOD_GATE --> REMIND_EOD["📣  PM notifies Dave & Jan\n'Update your Git status\nbefore tomorrow's stand-up'"]
+  REMIND_EOD --> EOD_UPDATE["👤  Dave & Jan\nupdate Git status"]
+  EOD_UPDATE --> NEXT(["🔁  Next Day →"])
+  NEXT --> MORNING
+
+  %% ─── NODE STYLES ─────────────────────────────────────────────────────────
+  classDef trigger  fill:#1a3a5c,stroke:#3b82f6,stroke-width:2px,color:#93c5fd
+  classDef pm       fill:#2d2060,stroke:#8b5cf6,stroke-width:1.5px,color:#c4b5fd
+  classDef human    fill:#1a3a2c,stroke:#22c55e,stroke-width:1.5px,color:#86efac
+  classDef doc      fill:#3a2a10,stroke:#f59e0b,stroke-width:1.5px,color:#fcd34d
+  classDef github   fill:#1e2a3a,stroke:#38bdf8,stroke-width:1.5px,color:#7dd3fc
+  classDef agent    fill:#2a1a3a,stroke:#a78bfa,stroke-width:1.5px,color:#ddd6fe
+  classDef warn     fill:#3a1a1a,stroke:#ef4444,stroke-width:1.5px,color:#fca5a5
+  classDef gate     fill:#252535,stroke:#94a3b8,stroke-width:1.5px,color:#e2e8f0
+
+  class MORNING,EOD_GATE,NEXT trigger
+  class SUMMARIZE,PM_AGENTS,PM_HUMANS pm
+  class DAVE_FLOW,JAN_FLOW,HUMAN_WORK,EOD_UPDATE human
+  class DAVE_MD,JAN_MD,GDOC doc
+  class GITHUB github
+  class AI_WORK agent
+  class REMIND_AM,REMIND_EOD,NUDGE,PING warn
+  class DEADLINE,GIT_CHECK gate
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    securityLevel: 'loose',
+    flowchart: {
+      curve: 'basis',
+      padding: 20,
+      nodeSpacing: 55,
+      rankSpacing: 65
+    }
+  });
+</script>
+
+</body>
+</html>

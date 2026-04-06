@@ -43,7 +43,7 @@ Append the following block to `reports/YYYY-MM.md` under a `### Weekly Status �
 | ...  | H/M/L      | H/M/L  | ...        |
 
 🔔 **DECISIONS NEEDED**
-[Any items requiring Dave or Jan to decide, with deadline if known.]
+[Any items requiring Dave or Yon to decide, with deadline if known.]
 
 📊 **METRICS THIS WEEK**
 - Tasks completed: X
@@ -67,4 +67,4 @@ If nothing is red this week, that's great — say so clearly rather than inventi
 After appending the report, confirm:
 - Path and heading where it was written
 - Overall RAG colour for the week (the dominant status)
-- Any items flagged RED that need immediate Dave/Jan attention
+- Any items flagged RED that need immediate Dave/Yon attention

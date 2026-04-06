@@ -1,6 +1,6 @@
 ---
 name: daily-standup
-description: Run the daily async stand-up cycle for the Mahjong Tarot team. Triggers on the morning schedule or when manually invoked. Reads Dave and Jan's check-in MD files, verifies freshness, pings missing members if past the 10 AM deadline, summarises all inputs, and appends the day's entry to the monthly report. Also assigns tasks in GitHub Projects for both humans and AI agents. Use this skill every morning at 9 AM, or any time someone says "run standup", "collect check-ins", or "do the morning cycle".
+description: Run the daily async stand-up cycle for the Mahjong Tarot team. Triggers on the morning schedule or when manually invoked. Reads Dave and Yon's check-in MD files, verifies freshness, pings missing members if past the 10 AM deadline, summarises all inputs, and appends the day's entry to the monthly report. Also assigns tasks in GitHub Projects for both humans and AI agents. Use this skill every morning at 9 AM, or any time someone says "run standup", "collect check-ins", or "do the morning cycle".
 ---
 
 # Daily Stand-up Skill
@@ -14,7 +14,7 @@ Run the complete async stand-up cycle: collect human check-ins, enforce the 10 A
 | File | Path | Notes |
 |------|------|-------|
 | Dave's check-in | `standup/dave.md` | Must have today's date on line 1 |
-| Jan's check-in | `standup/jan.md` | Must have today's date on line 1 |
+| Yon's check-in | `standup/jan.md` | Must have today's date on line 1 |
 | Monthly report | `reports/YYYY-MM.md` | Append today's block |
 
 ## Step-by-step
@@ -44,10 +44,10 @@ If **both check-ins are fresh**, continue immediately.
 ### 3. Summarise and plan
 
 Read both check-ins fully. Then decide:
-- **Human tasks**: what Dave and Jan will own today
+- **Human tasks**: what Dave and Yon will own today
 - **Agent tasks**: what AI agents will execute today
 
-Think about dependencies — if Dave is blocked waiting on Jan, flag it. If an agent task unblocks a human task, sequence them accordingly.
+Think about dependencies — if Dave is blocked waiting on Yon, flag it. If an agent task unblocks a human task, sequence them accordingly.
 
 ### 4. Append to the monthly report
 
@@ -61,8 +61,8 @@ Open `reports/YYYY-MM.md` and append a new daily block using this format:
 ### Dave
 [paste or summarise Dave's focus and blockers]
 
-### Jan
-[paste or summarise Jan's focus and blockers]
+### Yon
+[paste or summarise Yon's focus and blockers]
 
 ### Agent: [AgentName]
 - [Task assigned]

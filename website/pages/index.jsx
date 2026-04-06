@@ -10,10 +10,10 @@ export default function Home() {
     <>
       <Head>
         <title>The Mahjong Tarot — Bill Hajdu</title>
-        <meta name="description" content="35+ years of divination practice. Mahjong tile readings, Chinese astrology, and tarot with Bill Hajdu — The Firepig. Book a personal reading or explore The Mahjong Mirror." />
+        <meta name="description" content="35+ years of divination practice. Mahjong tile readings, Chinese astrology, and tarot with Bill Hajdu — The Firepig. Explore The Mahjong Mirror." />
         <meta property="og:title" content="The Mahjong Tarot — Bill Hajdu" />
-        <meta property="og:description" content="Ancient wisdom, modern clarity. Personal readings with Bill Hajdu." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/hero.webp" />
+        <meta property="og:description" content="Ancient wisdom, modern clarity. Mahjong tile readings and tarot with Bill Hajdu." />
+        <meta property="og:image" content="https://mahjong-tarot.com/images/gallery-3.webp" />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://mahjong-tarot.com/" />
       </Head>
@@ -21,62 +21,29 @@ export default function Home() {
       <Nav />
 
       <main>
-        {/* ── Hero ── */}
-        <section className={`section-dark ${styles.heroSection}`}>
-          <div className={`container ${styles.heroInner}`}>
-            <div className={styles.heroContent}>
-              <span className="overline">Ancient Cards · Modern Insight</span>
-              <h1>See What the<br />Tiles Reveal</h1>
-              <p className={styles.heroLead}>
-                35 years of divination practice. Mahjong tiles, Chinese astrology,
-                and tarot — woven into readings that illuminate your path.
-              </p>
-              <div className={styles.heroCtas}>
-                <Link href="/readings" className="btn-primary">Book a Reading</Link>
-                <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
-              </div>
-            </div>
-            <div className={styles.heroImage}>
-              <Image
-                src="/images/hero.webp"
-                alt="Bill Hajdu — The Mahjong Tarot"
-                fill
-                priority
-                style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              />
-            </div>
-          </div>
-        </section>
 
-        {/* ── Intro ── */}
-        <section>
-          <div className={`container ${styles.intro}`}>
-            <div className={styles.introText}>
-              <span className="overline">Meet the Firepig</span>
-              <h2>Bill Hajdu</h2>
-              <div className="divider-gold" />
-              <p>
-                Bill Hajdu's journey reflects the power of blending diverse
-                experiences, sharp analysis, and genuine empathy into the art
-                of fortune telling. With over 35 years of practice, he has
-                developed an approach that unites keen intellect, deep respect
-                for tradition, and a heartfelt desire to help others.
-              </p>
-              <p>
-                Whether using Four Pillars astrology, Mahjong cards, or face
-                readings, he draws on his broad education and life experience
-                to provide insights that resonate.
-              </p>
-              <Link href="/about" className="btn-secondary">About Bill</Link>
-            </div>
-            <div className={styles.introImage}>
-              <Image
-                src="/images/about-portrait.webp"
-                alt="Bill Hajdu with Mahjong tiles"
-                width={520}
-                height={620}
-                style={{ objectFit: 'cover' }}
-              />
+        {/* ── Hero ── */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroBg}>
+            <Image
+              src="/images/gallery-3.webp"
+              alt="Bill Hajdu conducting a Mahjong Tarot reading"
+              fill
+              priority
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            />
+            <div className={styles.heroOverlay} />
+          </div>
+          <div className={`container ${styles.heroContent}`}>
+            <span className="overline">Ancient Wisdom · Modern Clarity</span>
+            <h1>See What the<br />Tiles Reveal</h1>
+            <p className={styles.heroLead}>
+              35 years of divination practice. Mahjong tiles, Chinese astrology,
+              and tarot — woven into readings that illuminate your path.
+            </p>
+            <div className={styles.heroCtas}>
+              <Link href="/readings" className="btn-ghost">Explore Readings</Link>
+              <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
             </div>
           </div>
         </section>
@@ -90,7 +57,7 @@ export default function Home() {
               <div className="divider-gold centered" />
             </div>
             <div className={styles.readingsGrid}>
-              <div className="card">
+              <div className={`card ${styles.readingCard}`}>
                 <span className="overline">10–15 minutes</span>
                 <h3>One-Tile Insight</h3>
                 <p>
@@ -100,7 +67,7 @@ export default function Home() {
                 </p>
                 <Link href="/readings#one-tile" className="btn-secondary">Learn more</Link>
               </div>
-              <div className="card">
+              <div className={`card ${styles.readingCard}`}>
                 <span className="overline">20–30 minutes</span>
                 <h3>Three-Tile Spread</h3>
                 <p>
@@ -110,7 +77,7 @@ export default function Home() {
                 </p>
                 <Link href="/readings#three-tile" className="btn-secondary">Learn more</Link>
               </div>
-              <div className="card card-dark">
+              <div className={`card-dark ${styles.readingCard}`}>
                 <span className="overline" style={{ color: 'var(--celestial-gold)' }}>45–60 minutes</span>
                 <h3>The Mahjong Mirror Session</h3>
                 <p>
@@ -121,8 +88,33 @@ export default function Home() {
                 <Link href="/readings#mirror-session" className="btn-ghost">Learn more</Link>
               </div>
             </div>
-            <div className={styles.readingsCta}>
-              <Link href="/readings" className="btn-primary">Book a Reading</Link>
+          </div>
+        </section>
+
+        {/* ── About ── */}
+        <section>
+          <div className={`container ${styles.intro}`}>
+            <div className={styles.introText}>
+              <span className="overline">Meet the Firepig</span>
+              <h2>Bill Hajdu</h2>
+              <div className="divider-gold" />
+              <p>
+                With over 35 years of practice, Bill Hajdu has developed an
+                approach that unites Four Pillars astrology, Mahjong tile
+                readings, and tarot into a single, coherent system. His readings
+                draw on keen intellect, deep respect for tradition, and a
+                genuine desire to help others find clarity.
+              </p>
+              <Link href="/about" className="btn-secondary">About Bill</Link>
+            </div>
+            <div className={styles.introImage}>
+              <Image
+                src="/images/gallery-2.webp"
+                alt="Mahjong tiles arranged around a tarot card"
+                width={580}
+                height={435}
+                style={{ objectFit: 'cover' }}
+              />
             </div>
           </div>
         </section>
@@ -163,13 +155,18 @@ export default function Home() {
             </div>
             <div className={styles.gallery}>
               {[
-                { src: '/images/gallery-1.webp', alt: 'Bill with a client during a reading' },
-                { src: '/images/gallery-2.webp', alt: 'Mahjong tiles laid out for a reading' },
-                { src: '/images/gallery-3.webp', alt: 'Client choosing tiles' },
-                { src: '/images/gallery-4.webp', alt: 'Bill reading the cards' },
+                { src: '/images/gallery-2.webp',      alt: 'Mahjong tiles arranged around The Star tarot card',        pos: 'center center' },
+                { src: '/images/gallery-3.webp',      alt: 'Bill Hajdu conducting a reading at an ornate table',       pos: 'center top'    },
+                { src: '/images/gallery-4.webp',      alt: 'A client delighted by her reading',                        pos: 'center top'    },
+                { src: '/images/readings-hero.webp',  alt: 'Bill reading tiles with a group of clients',               pos: 'center top'    },
               ].map((img) => (
                 <div key={img.src} className={styles.galleryItem}>
-                  <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} />
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    style={{ objectFit: 'cover', objectPosition: img.pos }}
+                  />
                 </div>
               ))}
             </div>
@@ -198,6 +195,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />

@@ -192,6 +192,7 @@ Full skill instructions live in `agents/project manager/context/skills/`. Each s
 
 | Skill | Folder | Trigger | Tools Used |
 |-------|--------|---------|------------|
+| **Daily Check-in** | `context/skills/daily-checkin/` | "Help me write my check-in" / "I need to do my standup" | File tools |
 | **Daily Stand-up** | `context/skills/daily-standup/` | Scheduled 9 AM | File tools, git, Gmail / alert fallback |
 | **Blocker Triage** | `context/skills/blocker-triage/` | "What are our blockers?" | git, File tools |
 | **Status Report** | `context/skills/status-report/` | "Generate status report" / Friday schedule | File tools, git, Vercel MCP |

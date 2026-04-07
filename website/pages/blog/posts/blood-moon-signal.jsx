@@ -1,5 +1,10 @@
-// Redirects to the updated post
-export async function getServerSideProps() {
-  return { redirect: { destination: '/blog/posts/blood-moon-rising-in-the-year-of-the-fire-horse', permanent: true } };
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+export default function Redirect() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace('/blog/posts/blood-moon-rising-in-the-year-of-the-fire-horse');
+  }, [router]);
+  return null;
 }
-export default function Redirect() { return null; }

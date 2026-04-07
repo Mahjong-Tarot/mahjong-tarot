@@ -1,5 +1,10 @@
-// Redirects to the blog index
-export async function getServerSideProps() {
-  return { redirect: { destination: '/blog', permanent: true } };
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+export default function Redirect() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace('/blog');
+  }, [router]);
+  return null;
 }
-export default function Redirect() { return null; }

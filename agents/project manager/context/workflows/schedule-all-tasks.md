@@ -7,14 +7,16 @@ Create the following scheduled triggers. For each one, use the exact cron expres
 ## Triggers to create
 
 ### 1. Morning stand-up reminder
+- **Name (canonical — use exactly)**: `PM Standup Morning`
 - **Schedule**: `0 7 * * 1-5` (Mon–Fri at 7:00 AM)
 - **Prompt**: `Run the daily stand-up workflow from agents/project manager/context/workflows/daily-standup.md. It is now 7 AM — send the morning check-in reminder to Dave and Yon. Use Gmail if available; otherwise write agents/project manager/output/alerts/alert-YYYY-MM-DD.md as the fallback.`
-- **Description**: Morning stand-up reminder — Mon to Fri 7 AM
+- **Description**: `PM Standup Morning`
 
 ### 2. Stand-up deadline check
+- **Name (canonical — use exactly)**: `PM Standup Deadline`
 - **Schedule**: `0 10 * * 1-5` (Mon–Fri at 10:00 AM)
-- **Prompt**: `Run the daily stand-up workflow from agents/project manager/context/workflows/daily-standup.md. It is now 10 AM — the stand-up deadline. Check standup/dave.md and standup/yon.md for today's date header. For any missing check-in, start the ping loop (email via Gmail every 5 minutes, or append to agents/project manager/output/alerts/alert-YYYY-MM-DD.md as fallback). Once both check-ins are confirmed fresh, summarise and append today's block to agents/project manager/output/reports/YYYY-MM.md.`
-- **Description**: Stand-up deadline check and consolidation — Mon to Fri 10 AM
+- **Prompt**: `Run the daily stand-up workflow from agents/project manager/context/workflows/daily-standup.md. It is now 10 AM — the stand-up deadline. Check standup/dave.md and standup/yon.md for the previous working day's date (yesterday; treat Friday as yesterday on Mondays). For any missing check-in, start the ping loop (email via Gmail every 5 minutes, or append to agents/project manager/output/alerts/alert-YYYY-MM-DD.md as fallback). Once both check-ins are confirmed fresh, summarise and append the block to agents/project manager/output/reports/YYYY-MM.md.`
+- **Description**: `PM Standup Deadline`
 
 ### 3. End-of-day reminder
 - **Schedule**: `0 17 * * 1-5` (Mon–Fri at 5:00 PM)

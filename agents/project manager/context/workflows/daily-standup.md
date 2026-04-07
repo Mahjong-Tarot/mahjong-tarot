@@ -29,7 +29,9 @@ Read `standup/dave.md` and `standup/yon.md`. For each file, check line 1 for the
 date: YYYY-MM-DD
 ```
 
-A check-in is **fresh** if the date matches today. A check-in is **stale or missing** if the date is wrong or the file is empty.
+A check-in is **fresh** if the date matches **yesterday** (the previous working day). A check-in is **stale or missing** if the date is not the previous working day's date, or the file is empty.
+
+> **Note:** Stand-ups run at 7 AM, so check-ins are always written the evening before. Monday morning stand-ups treat Friday as the previous working day.
 
 ### 2. Handle missing check-ins
 

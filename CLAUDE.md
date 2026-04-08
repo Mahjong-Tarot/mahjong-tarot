@@ -169,11 +169,23 @@ Locate the approved draft in `content/` (a `.md` file). Read the file in full. I
 
 Read `context/web-style-guide.md`. Do not build any components without doing this first. Also read `context/web-dev-guide.md` if it exists — it may contain React component patterns and snippets to reuse.
 
-### Step 3 — Optimise images
+### Step 3 — Generate or optimise images
+
+**Option A — Generate a new hero image with Nano Banana (preferred for blog posts):**
+
+Invoke the `generate-image` skill from `.claude/skills/generate-image/SKILL.md`. This skill:
+1. Uses the Writer agent's image style selection (from the content workflow Phase 2.2)
+2. Constructs a brand-aligned prompt using the Mahjong Tarot colour palette and zodiac visual language
+3. Opens Google Gemini via Claude in Chrome browser automation
+4. Generates the image using Nano Banana 2
+5. Downloads and optimises to WebP (1200×630, quality 82)
+6. Saves to `website/public/images/blog/<slug>.webp` and archives the original PNG to `content/topics/<slug>/`
+
+**Option B — Optimise an existing source image:**
 
 For each source image referenced in the draft:
 
-1. Locate the source file in `content/Images/`
+1. Locate the source file in `content/Images/` or `content/topics/<slug>/`
 2. Convert to WebP using Python + Pillow:
 
 ```python

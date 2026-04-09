@@ -37,6 +37,11 @@ export default function Nav() {
               Blog
             </Link>
           </li>
+          <li>
+            <Link href="/contact" className={isActive('/contact') ? styles.active : ''}>
+              Contact
+            </Link>
+          </li>
         </ul>
 
       </div>

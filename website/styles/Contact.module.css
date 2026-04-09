@@ -1,0 +1,7 @@
+.pageHeader { padding: var(--space-4xl) 0 var(--space-3xl); }
+.pageHeader h1 { color: var(--warm-cream); margin-top: var(--space-lg); max-width: 700px; }
+.headerLead { font-size: 20px; font-weight: 300; color: rgba(250,248,244,0.85); max-width: 600px; margin-top: var(--space-lg); }
+
+.formSection { padding: var(--space-3xl) 0; }
+.formSection h2 { text-align: center; margin-bottom: var(--space-sm); }
+.formIntro { text-align: center; color: var(--mid-gray); max-width: 480px; margin: 0 auto var(--space-xl); }

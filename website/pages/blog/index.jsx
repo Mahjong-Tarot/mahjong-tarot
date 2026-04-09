@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
+import NewsletterSignup from '../../components/NewsletterSignup';
 import styles from '../../styles/Blog.module.css';
 
 const CATEGORIES = [
@@ -132,6 +133,13 @@ export default function BlogIndex() {
                 ))}
               </div>
             )}
+          </div>
+        </section>
+
+        {/* ── Newsletter ── */}
+        <section className="section-stone">
+          <div className="container">
+            <NewsletterSignup source="blog" variant="light" />
           </div>
         </section>
       </main>

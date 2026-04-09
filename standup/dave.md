@@ -1,11 +1,10 @@
-date: 2026-04-06
+date: 2026-04-08
 name: Dave
 
 ## Today's focus
-- Add three blog posts to the website
-- Complete the writer agent
-- Hook up the designer agent from writer to Nano Banana
-- Hook up the web developer agent to publish content
+- Focus on the hybrid approach to Claude Code
+- Hook up a contact form to Supabase
+- Coordinate with Yon on the writer and designer agents — ensure proper integration with NanoBanana
 
 ## Blockers
 None

@@ -17,6 +17,7 @@ export default function Contact() {
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus('submitting');
+    if (!supabase) { setStatus('error'); return; }
 
     const { error } = await supabase.rpc('submit_contact', {
       p_name: fields.name,

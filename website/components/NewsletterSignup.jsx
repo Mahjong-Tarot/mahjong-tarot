@@ -17,6 +17,7 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
     if (!email) return;
 
     setStatus('submitting');
+    if (!supabase) { setStatus('error'); return; }
     const { error } = await supabase.rpc('submit_newsletter', {
       p_email: email,
       p_chinese_sign: sign || null,

@@ -27,6 +27,7 @@ export default function Readings() {
     e.preventDefault();
     setBookingStatus('submitting');
 
+    if (!supabase) { setBookingStatus('error'); return; }
     const { error } = await supabase.rpc('submit_booking', {
       p_name: fields.name,
       p_email: fields.email,

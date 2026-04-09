@@ -266,6 +266,18 @@ export default function Readings() {
           </div>
         </section>
 
+        {/* ── Mid-page CTA ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Don't Wait — The Tiles Are Ready</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book Your Reading Today</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+              Sessions are conducted online with flexible scheduling. Bill follows up personally within 24 hours.
+            </p>
+            <Link href="#book" className="btn-primary">Book a Reading</Link>
+          </div>
+        </section>
+
         {/* ── FAQ ── */}
         <section className="section-stone">
           <div className="container">

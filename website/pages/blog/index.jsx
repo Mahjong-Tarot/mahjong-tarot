@@ -95,6 +95,19 @@ export default function BlogIndex() {
           </div>
         </section>
 
+        {/* ── Featured Banner ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Featured</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>2026 Is a Fire Horse Year — The Rarest in the Zodiac</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 540, margin: '0 auto var(--space-xl)' }}>
+              Once every 60 years. Discover what the Fire Horse means for your love life, luck, and future.
+            </p>
+            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
+            <Link href="/blog/posts/love-in-the-fire-horse-year" className="btn-ghost">Read the Latest</Link>
+          </div>
+        </section>
+
         {/* ── Post Grid ── */}
         <section>
           <div className="container">

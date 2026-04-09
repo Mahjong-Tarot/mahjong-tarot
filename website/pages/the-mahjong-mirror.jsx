@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import NewsletterSignup from '../components/NewsletterSignup';
 import styles from '../styles/MahjongMirror.module.css';
 
 export default function TheMahjongMirror() {
@@ -198,12 +199,10 @@ export default function TheMahjongMirror() {
             <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Begin Your Journey Through the Tiles</span>
             <h2>Start Exploring the Wisdom<br />Hidden Inside the Mahjong Mirror</h2>
             <p>
-              Preorder your copy today and be among the first to experience this
-              new divination system.
+              Sign up below to be notified when the book is available —
+              and get early access to Fire Horse year insights.
             </p>
-            <Link href="mailto:bill@mahjong-tarot.com?subject=Mahjong Mirror Preorder" className="btn-primary">
-              Preorder the Book
-            </Link>
+            <NewsletterSignup source="mahjong-mirror" variant="dark" />
           </div>
         </section>
       </main>

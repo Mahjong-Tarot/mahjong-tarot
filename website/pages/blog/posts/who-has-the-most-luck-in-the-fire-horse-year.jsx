@@ -155,6 +155,19 @@ export default function WhoHasTheMostLuck() {
 
           </div>
         </div>
+
+        {/* ── Post CTA ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Wondering Where You Stand?</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Get a Personal Reading from Bill</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+              Find out what the tiles reveal about your luck, timing, and next move.
+            </p>
+            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
+            <Link href="/blog" className="btn-ghost">More Articles</Link>
+          </div>
+        </section>
       </main>
 
       <Footer />

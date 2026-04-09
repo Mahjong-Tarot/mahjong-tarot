@@ -33,8 +33,8 @@ export default function Home() {
                 and tarot — woven into readings that illuminate your path.
               </p>
               <div className={styles.heroCtas}>
+                <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
                 <Link href="/readings" className="btn-ghost">Explore Readings</Link>
-                <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
               </div>
             </div>
           </div>

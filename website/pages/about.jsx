@@ -80,6 +80,18 @@ export default function About() {
           </div>
         </section>
 
+        {/* ── Mid-page CTA ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Experience It Yourself</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Ready for a Reading with Bill?</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+              35+ years of practice. Sessions conducted online with flexible scheduling.
+            </p>
+            <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+          </div>
+        </section>
+
         {/* ── Extended Bio ── */}
         <section className="section-stone">
           <div className={`container ${styles.extended}`}>

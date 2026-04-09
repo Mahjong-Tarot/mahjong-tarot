@@ -204,6 +204,19 @@ export default function LoveInTheFireHorseYear() {
 
           </div>
         </div>
+
+        {/* ── Post CTA ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>What Does Love Look Like for Your Sign?</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book a Relationship Reading</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+              Get personal insight into what the Fire Horse year means for your love life.
+            </p>
+            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
+            <Link href="/blog" className="btn-ghost">More Articles</Link>
+          </div>
+        </section>
       </main>
 
       <Footer />

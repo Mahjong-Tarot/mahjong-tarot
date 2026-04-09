@@ -111,6 +111,19 @@ export default function BloodMoonRising() {
 
           </div>
         </div>
+
+        {/* ── Post CTA ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>What Do the Tiles Say About Your Year?</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book a Personal Reading with Bill</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+              Get clarity on how the Fire Horse year affects you personally.
+            </p>
+            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
+            <Link href="/blog" className="btn-ghost">More Articles</Link>
+          </div>
+        </section>
       </main>
 
       <Footer />

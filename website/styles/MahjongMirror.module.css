@@ -1,4 +1,4 @@
-.hero { padding: var(--space-4xl) 0; }
+.hero { padding: var(--space-2xl) 0; }
 .heroInner { display: grid; grid-template-columns: 1fr auto; gap: var(--space-4xl); align-items: center; }
 .heroText h1 { color: var(--warm-cream); margin: var(--space-lg) 0; font-size: 52px; }
 .heroText h1 em { font-style: italic; color: var(--celestial-gold); }

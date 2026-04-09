@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -57,6 +58,11 @@ export default function Contact() {
               Have a question about readings, the book, or a speaking engagement?
               We&rsquo;d love to hear from you.
             </p>
+            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+              <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
+            </div>
           </div>
         </section>
 

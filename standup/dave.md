@@ -1,10 +1,13 @@
-date: 2026-04-09
+date: 2026-04-10
 name: Dave
 
 ## Today's focus
-- Set up the Supabase database and build out contact forms so visitors can inquire through the site
-- Clarify scope of the Claude Code migration — get the PM agent's schedule working first and foremost
-- Confirm the PM scheduled triggers (standup, EOD, weekly RAG) are registered and firing correctly
+1. Set up Telegram integration for the site
+2. Build out the CRM — admin tools to monitor incoming visitors and inquiries
+3. Set up Resend for email based on Claude's recommendations
+
+## Notes
+- Preparing for tomorrow's off-site working session (4-hour crank session)
 
 ## Blockers
 None

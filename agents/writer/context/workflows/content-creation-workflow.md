@@ -256,82 +256,71 @@ Once approved, move to Phase 8.
 
 ---
 
-## Phase 8: Image Generation (Nano Banana 2 by Google Gemini)
+## Phase 8: Image Generation (Nano Banana 2 via Browser Automation)
 
 > **Image model:** Nano Banana 2 — Google's Gemini image generation model
-> **API:** Google Gemini API (`gemini-3.1-flash-image-preview`)
-> **Auth:** Requires `GEMINI_API_KEY` environment variable
+> **Method:** Browser automation via Claude in Chrome (no API key required)
+> **Skill:** `generate-image` — see `agents/writer/context/skills/generate-image/SKILL.md`
 
 ### Step 8.1: Create Image Prompt
-Using the confirmed image style and the blog topic, craft a natural language image prompt and present it for approval before calling the API.
+Using the confirmed image style (from Phase 2.2) and the blog topic, craft a natural language image prompt and present it for approval before generating.
 
 **Prompt construction guidelines:**
-* Lead with the image style (e.g., "Cinematic Elemental Drama:")
+* Lead with the image style (e.g., "Elemental Drama style:")
 * Name the primary subject clearly (zodiac animal, element, symbolic scene)
-* Specify mood, lighting, and color palette aligned with brand tokens (`--navy`, `--crimson`, `--gold`)
+* Specify mood, lighting, and color palette aligned with brand tokens:
+  - Midnight Indigo: `#1B1F3B` — backgrounds, shadow areas
+  - Mystic Fire: `#C0392B` — fire elements, energy accents
+  - Celestial Gold: `#C9A84C` — light, highlights, celestial glow
+  - Warm Cream: `#FAF8F4` — mist, ethereal light
 * Include composition direction (foreground/background, focal point)
-* End with exclusions — what NOT to include (Western astrology symbols, generic stock photography, text overlays)
+* End with exclusions — what NOT to include (Western astrology symbols, generic stock photography, text overlays, rounded shapes)
 * Always 16:9 aspect ratio for blog hero images
 
-**Example prompt format:**
+**Zodiac visual language:**
+* Fire signs: warm amber, orange flames, dynamic motion
+* Water signs: deep teal, moonlight, fluid forms
+* Earth signs: rich brown, stone, grounded and still
+* Metal signs: silver, sharp geometry, clean lines
+* Wood signs: jade green, organic growth, branching forms
+
+**Example prompt:**
 ```
-Celestial & Mystical style: A luminous Chinese dragon coiling through a deep
-navy starfield, scales glinting gold and crimson, surrounded by softly glowing
-zodiac constellations. Dramatic top-down lighting, cinematic depth of field.
-Color palette: deep navy #0A053D, gold #F4C76E, crimson #FF2A04.
-Exclude: Western zodiac symbols, text, watermarks, anime style.
+Elemental Drama style: A powerful horse galloping through a sea of crimson
+and gold fire, mane blazing with celestial energy, sharp geometric sparks
+trailing behind. Deep navy-black background (#1B1F3B) with dramatic
+top-lighting in gold (#C9A84C) and crimson (#C0392B). Cinematic depth of
+field, horse fills the center-right of the frame, flames sweep left to right.
+Aspect ratio: 16:9. Exclude: Western zodiac symbols, text, watermarks,
+anime style, rounded shapes, soft pastel colors.
 ```
 
 Agent action:
 * Write the prompt
 * Present it and ask: "Should I send this to Nano Banana to generate the image?"
-* Wait for confirmation before calling the API
+* Wait for confirmation before generating
 
-### Step 8.2: Generate Image via Nano Banana 2 API
+### Step 8.2: Generate Image via Browser Automation
 
-Once human confirms, call the Nano Banana 2 API:
+Once human confirms, invoke the `generate-image` skill which handles:
 
-**Endpoint:**
-```
-POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent
-```
+1. **Open Gemini** — Navigate to `https://gemini.google.com/app` in Claude in Chrome
+2. **Enter the prompt** — Type the approved prompt into Gemini's chat input
+3. **Wait for generation** — Nano Banana generates the image (10–30 seconds)
+4. **Download the image** — Save the generated image (with user permission)
+5. **Optimize to WebP** — Resize to 1200×630, convert to WebP at quality 82, save to `website/public/images/blog/[slug].webp`
+6. **Archive the original** — Save the PNG to `content/topics/[topic-slug]/[slug]-hero.png`
 
-**Headers:**
-```
-Content-Type: application/json
-x-goog-api-key: $GEMINI_API_KEY
-```
+**If Gemini requires sign-in:** Stop and ask the user to log into their Google account in the browser, then resume.
 
-**Request body:**
-```json
-{
-  "contents": [{
-    "parts": [
-      {"text": "[Your constructed image prompt here]"}
-    ]
-  }],
-  "generationConfig": {
-    "responseModalities": ["TEXT", "IMAGE"],
-    "imageConfig": {
-      "aspectRatio": "16:9",
-      "imageSize": "2K"
-    }
-  }
-}
-```
+**If generation fails:** Screenshot the error, simplify the prompt (remove hex codes, simplify description), retry once. If still failing, report to user.
 
-**Response handling:**
-* The response contains base64-encoded image data in `candidates[0].content.parts[].inlineData.data`
-* Decode the base64 data and save as PNG to: `content/topics/[topic-slug]/[image-name].png`
-* Use a descriptive filename (e.g., `fire-horse-love-hero.png`)
-
-**Alternative model:** Use `gemini-3-pro-image-preview` (Nano Banana Pro) for higher quality on premium posts — slower but higher resolution up to 4K.
+**If the image has unwanted text/watermarks:** Regenerate with stronger exclusion: "Absolutely no text, words, letters, or watermarks anywhere in the image."
 
 Agent action:
-* Call the Nano Banana 2 API with the approved prompt
-* Decode the base64 response and save the PNG to the post folder
-* Confirm: "Image generated and saved to `content/topics/[topic-slug]/[image-name].png`"
-* If API call fails, report the error code and suggest: check GEMINI_API_KEY, retry with simplified prompt, or use Nano Banana Pro model
+* Run the `generate-image` skill with the approved prompt
+* Confirm: "Image generated and saved to both `content/topics/[topic-slug]/` and `website/public/images/blog/`"
+* If user is not satisfied, adjust the prompt and regenerate
 * Move to Phase 9
 
 ---

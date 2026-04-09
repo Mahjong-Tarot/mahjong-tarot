@@ -2,7 +2,7 @@
 .heroSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 86vh;
+  min-height: 56vh;
   padding: 0;
 }
 

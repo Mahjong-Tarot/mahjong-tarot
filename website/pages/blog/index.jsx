@@ -75,6 +75,11 @@ export default function BlogIndex() {
               Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
               hidden inside ancient symbols.
             </p>
+            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+              <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
+            </div>
           </div>
         </section>
 

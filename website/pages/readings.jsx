@@ -71,6 +71,11 @@ export default function Readings() {
               to illuminate your path, clarify your choices, and connect you with
               deeper intuition.
             </p>
+            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+              <Link href="#book" className="btn-primary">Book a Reading</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
+            </div>
           </div>
         </section>
 

@@ -73,7 +73,6 @@ export default function TheMahjongMirror() {
               <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
                 <Link href="#preorder" className="btn-primary">Preorder the Book</Link>
                 <Link href="/readings#book" className="btn-ghost">Book a Reading</Link>
-                <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
               </div>
             </div>
             <div className={styles.heroCover}>

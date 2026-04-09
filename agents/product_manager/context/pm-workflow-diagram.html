@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Manager Agent — Workflow Diagram</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f4f5f7;
+      color: #1a1a2e;
+      padding: 40px 24px 80px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 48px;
+    }
+
+    /* ── MASTER FLOW ── */
+    .master-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 56px;
+    }
+
+    .master-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 110px;
+    }
+
+    .master-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .master-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #374151;
+      line-height: 1.3;
+    }
+
+    .master-arrow {
+      font-size: 1.3rem;
+      color: #9ca3af;
+      margin: 0 4px;
+      margin-bottom: 26px;
+      flex-shrink: 0;
+    }
+
+    /* color palette for master steps */
+    .ms-1 { background: #fee2e2; color: #dc2626; }
+    .ms-2 { background: #fef3c7; color: #d97706; }
+    .ms-3 { background: #dbeafe; color: #2563eb; }
+    .ms-4 { background: #d1fae5; color: #059669; }
+    .ms-5 { background: #ede9fe; color: #7c3aed; }
+    .ms-6 { background: #fce7f3; color: #db2777; }
+
+    /* ── DIVIDER ── */
+    .section-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 20px;
+    }
+
+    /* ── WORKFLOW CARDS ── */
+    .workflows-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 48px;
+    }
+
+    .wf-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .wf-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    .wf-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .wf-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .wf-title-block { flex: 1; }
+    .wf-number { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; }
+    .wf-title { font-size: 0.95rem; font-weight: 700; color: #111; line-height: 1.3; }
+
+    .wf-chevron {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      transition: transform 0.25s;
+    }
+    .wf-card.open .wf-chevron { transform: rotate(90deg); }
+
+    .wf-meta {
+      padding: 0 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .wf-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: #6b7280;
+    }
+
+    .wf-steps {
+      display: none;
+      padding: 0 20px 20px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .wf-card.open .wf-steps { display: block; }
+
+    .step-row {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f9fafb;
+    }
+    .step-row:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.65rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text { font-size: 0.82rem; color: #374151; line-height: 1.5; }
+    .step-text strong { color: #111; }
+    .step-text ul { margin-top: 4px; padding-left: 14px; }
+    .step-text li { margin-bottom: 2px; }
+
+    /* ── COLORS per workflow ── */
+    .wf-1 .wf-icon  { background: #fee2e2; color: #dc2626; }
+    .wf-1 .wf-number{ color: #dc2626; }
+    .wf-1 .step-num { background: #fee2e2; color: #dc2626; }
+
+    .wf-2 .wf-icon  { background: #fef3c7; color: #d97706; }
+    .wf-2 .wf-number{ color: #d97706; }
+    .wf-2 .step-num { background: #fef3c7; color: #d97706; }
+
+    .wf-3 .wf-icon  { background: #dbeafe; color: #2563eb; }
+    .wf-3 .wf-number{ color: #2563eb; }
+    .wf-3 .step-num { background: #dbeafe; color: #2563eb; }
+
+    .wf-4 .wf-icon  { background: #d1fae5; color: #059669; }
+    .wf-4 .wf-number{ color: #059669; }
+    .wf-4 .step-num { background: #d1fae5; color: #059669; }
+
+    .wf-5 .wf-icon  { background: #ede9fe; color: #7c3aed; }
+    .wf-5 .wf-number{ color: #7c3aed; }
+    .wf-5 .step-num { background: #ede9fe; color: #7c3aed; }
+
+    /* ── GOLDEN RULES ── */
+    .rules-section {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .rule-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 4px solid;
+    }
+
+    .rule-card.red   { border-color: #dc2626; }
+    .rule-card.amber { border-color: #d97706; }
+    .rule-card.green { border-color: #059669; }
+    .rule-card.purple{ border-color: #7c3aed; }
+
+    .rule-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .rule-body { font-size: 0.8rem; color: #4b5563; line-height: 1.55; }
+
+    /* focus group gate */
+    .focus-gate {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .focus-gate-header {
+      background: #7c3aed;
+      color: #fff;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .focus-gate-body {
+      display: flex;
+      gap: 0;
+    }
+
+    .gate-branch {
+      flex: 1;
+      padding: 18px 20px;
+    }
+
+    .gate-branch + .gate-branch {
+      border-left: 1px solid #f3f4f6;
+    }
+
+    .gate-icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .gate-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+    .gate-text { font-size: 0.8rem; color: #4b5563; line-height: 1.5; }
+
+    .positive .gate-label { color: #059669; }
+    .critical .gate-label { color: #dc2626; }
+  </style>
+</head>
+<body>
+
+  <h1>Product Manager Agent</h1>
+  <p class="subtitle">Workflow Reference — Templated, Human-Guided</p>
+
+  <!-- MASTER FLOW -->
+  <div class="master-flow">
+    <div class="master-step">
+      <div class="master-icon ms-1">💡</div>
+      <div class="master-label">Human<br>Input</div>
+    </div>
+    <div class="master-arrow">›</div>
+
+    <div class="master-step">
+      <div class="master-icon ms-2">❓</div>
+      <div class="master-label">"What is the<br>problem?"</div>
+    </div>
+    <div class="master-arrow">›</div>
+
+    <div class="master-step">
+      <div class="master-icon ms-3">🧭</div>
+      <div class="master-label">Choose<br>Workflow</div>
+    </div>
+    <div class="master-arrow">›</div>
+
+    <div class="master-step">
+      <div class="master-icon ms-4">⚙️</div>
+      <div class="master-label">Execute &amp;<br>Deliver</div>
+    </div>
+    <div class="master-arrow">›</div>
+
+    <div class="master-step">
+      <div class="master-icon ms-5">🧪</div>
+      <div class="master-label">Focus<br>Group</div>
+    </div>
+    <div class="master-arrow">›</div>
+
+    <div class="master-step">
+      <div class="master-icon ms-6">✅</div>
+      <div class="master-label">Proceed or<br>Revise</div>
+    </div>
+  </div>
+
+  <!-- FOCUS GROUP GATE -->
+  <p class="section-label">Focus Group Gate</p>
+  <div class="focus-gate">
+    <div class="focus-gate-header">
+      🧪 Always run the solution through a focused group before finalizing
+    </div>
+    <div class="focus-gate-body">
+      <div class="gate-branch positive">
+        <div class="gate-icon">👍</div>
+        <div class="gate-label">Positive Response</div>
+        <div class="gate-text">Proceed to implementation planning with human sign-off.</div>
+      </div>
+      <div class="gate-branch critical">
+        <div class="gate-icon">🚨</div>
+        <div class="gate-label">Heavy Criticism</div>
+        <div class="gate-text">Do NOT proceed. Revisit problem definition, recheck assumptions, address core concerns, then re-test.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW CARDS -->
+  <p class="section-label" style="margin-bottom:20px;">The 5 Workflows — click to expand</p>
+  <div class="workflows-grid">
+
+    <!-- W1 -->
+    <div class="wf-card wf-1 open">
+      <div class="wf-header" onclick="toggle(this)">
+        <div class="wf-icon">📋</div>
+        <div class="wf-title-block">
+          <div class="wf-number">Workflow 1</div>
+          <div class="wf-title">Idea → Epic / User Story</div>
+        </div>
+        <span class="wf-chevron">›</span>
+      </div>
+      <div class="wf-meta">
+        <span class="wf-badge">⚡ Trigger: Human brings an idea or feature request</span>
+        <span class="wf-badge">📦 Output: New epic + user stories, or additions to existing</span>
+      </div>
+      <div class="wf-steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Clarify the Idea</strong>
+            <ul>
+              <li>🔑 <strong>"What is the problem we are trying to solve?"</strong> — must be answered before anything else</li>
+              <li>"Who is experiencing this problem?"</li>
+              <li>"Why does this matter now?"</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Search for Existing Work</strong> — epic already exists? Add stories. New? Create epic.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Define Problem Statement</strong> — user + problem + context in 2–3 sentences</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Create Epic</strong> — title, description, 2–3 success criteria</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Break into User Stories</strong> — "As a [user], I want [X] so that [Y]", 3–5 stories</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">6</div>
+          <div class="step-text"><strong>Present to Human</strong> — wait for feedback before finalizing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W2 -->
+    <div class="wf-card wf-2">
+      <div class="wf-header" onclick="toggle(this)">
+        <div class="wf-icon">🔍</div>
+        <div class="wf-title-block">
+          <div class="wf-number">Workflow 2</div>
+          <div class="wf-title">Competitive Analysis</div>
+        </div>
+        <span class="wf-chevron">›</span>
+      </div>
+      <div class="wf-meta">
+        <span class="wf-badge">⚡ Trigger: "How do competitors handle Y?"</span>
+        <span class="wf-badge">📦 Output: Landscape doc with gaps &amp; differentiation angles</span>
+      </div>
+      <div class="wf-steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Define Scope</strong> — which competitors, which aspects, what we're trying to learn</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Research Phase</strong> — 3–5 competitors: features, positioning, pricing, strengths/weaknesses</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Analysis Phase</strong> — common patterns, gaps, underserved needs</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Synthesize Insights</strong> — 1-page summary, 2–3 differentiation angles</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Present to Human</strong> — "What angles resonate most?"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W3 -->
+    <div class="wf-card wf-3">
+      <div class="wf-header" onclick="toggle(this)">
+        <div class="wf-icon">👤</div>
+        <div class="wf-title-block">
+          <div class="wf-number">Workflow 3</div>
+          <div class="wf-title">Build User Persona</div>
+        </div>
+        <span class="wf-chevron">›</span>
+      </div>
+      <div class="wf-meta">
+        <span class="wf-badge">⚡ Trigger: David has basic persona info and wants it fully developed</span>
+        <span class="wf-badge">📦 Output: Fully fledged persona doc, ready for next PM phase</span>
+      </div>
+      <div class="wf-steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Acknowledge Baseline</strong> — accept what David already knows; don't re-ask for info already given</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Propose Harvard Frameworks</strong> — let David choose:
+            <ul>
+              <li><strong>A — Jobs-to-Be-Done (JTBD):</strong> what the user is trying to accomplish</li>
+              <li><strong>B — Empathy Map:</strong> thinks, feels, says, does</li>
+              <li><strong>C — User Journey + Pain/Gain:</strong> friction &amp; delight across the experience</li>
+              <li><strong>D — Outcome-Driven Innovation:</strong> measurable outcomes the user wants</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Interview David</strong> — max <strong>2–3 questions only</strong>. Identify the most critical gaps first; each question should do heavy lifting. Synthesize answers directly into the framework.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Synthesize Persona</strong> — name, role, framework dimensions, 2 use case scenarios, key insight summary</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Present to David</strong> — "Does this fully capture the person we're building for?" Finalize before moving on.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W4 -->
+    <div class="wf-card wf-4">
+      <div class="wf-header" onclick="toggle(this)">
+        <div class="wf-icon">📄</div>
+        <div class="wf-title-block">
+          <div class="wf-number">Workflow 4</div>
+          <div class="wf-title">Craft Vision Report <span style="font-weight:400;font-size:0.78rem;color:#6b7280;">(.md)</span></div>
+        </div>
+        <span class="wf-chevron">›</span>
+      </div>
+      <div class="wf-meta">
+        <span class="wf-badge">⚡ Trigger: David or Yon asks to define the end vision for a feature</span>
+        <span class="wf-badge">📦 Output: Markdown vision report — versioned, composable, exec-ready</span>
+        <span class="wf-badge">👥 Audience: David &amp; Yon</span>
+      </div>
+      <div class="wf-steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Clarify the Vision</strong> — outcomes for users, behavior change, differentiators</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Write Vision Report (.md)</strong>
+            <ul>
+              <li>Headline — one sentence, benefit-first</li>
+              <li>The Problem — who, what, why now</li>
+              <li>The Solution — what we're building and why</li>
+              <li>What Changes for the User</li>
+              <li>Why This Matters to the Business</li>
+              <li>Customer Voice (hypothetical quote)</li>
+              <li>Success Looks Like — 2–3 measurable outcomes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Extract Requirements</strong> — turn benefit claims into testable success metrics</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Present to David &amp; Yon</strong> — each revision saved as a new dated file (e.g. <code>vision-report-v2.md</code>) to preserve history</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- W5 -->
+    <div class="wf-card wf-5">
+      <div class="wf-header" onclick="toggle(this)">
+        <div class="wf-icon">🧩</div>
+        <div class="wf-title-block">
+          <div class="wf-number">Workflow 5</div>
+          <div class="wf-title">Solution Options &amp; Recommend</div>
+        </div>
+        <span class="wf-chevron">›</span>
+      </div>
+      <div class="wf-meta">
+        <span class="wf-badge">⚡ Trigger: "How should we approach this?"</span>
+        <span class="wf-badge">📦 Output: 3 options with pros/cons, comparison matrix, recommendation</span>
+      </div>
+      <div class="wf-steps">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Recap the Problem</strong> — restate problem, users, success criteria; confirm still valid</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Develop 3 Options</strong> — for each: how it works, pros, cons, effort estimate, risk level</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Evaluate Against Criteria</strong> — 3–4 decision criteria, comparison matrix</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Recommend Path Forward</strong> — best option + what would need to be true to choose differently</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Present to Human</strong> — "Which direction should we take?"</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GOLDEN RULES -->
+  <div class="rules-section">
+    <p class="section-label" style="margin-bottom:16px;">General Guidelines</p>
+    <div class="rules-grid">
+
+      <div class="rule-card red">
+        <div class="rule-title">🔑 Problem First, Always</div>
+        <div class="rule-body">The very first question in every workflow must be: <strong>"What is the problem we are trying to solve?"</strong> Do not proceed until the answer is clear and agreed upon.</div>
+      </div>
+
+      <div class="rule-card purple">
+        <div class="rule-title">🧪 Focus Group Gate</div>
+        <div class="rule-body">Every solution goes through a focused group. Heavy criticism = stop and revise thoroughly. Do not skip or fast-track this step.</div>
+      </div>
+
+      <div class="rule-card amber">
+        <div class="rule-title">⚙️ Templated Execution</div>
+        <div class="rule-body">Always use structured frameworks. Never free-form. Document your reasoning so humans can see the thinking behind each decision.</div>
+      </div>
+
+      <div class="rule-card green">
+        <div class="rule-title">🤝 Human-Guided, Not Autonomous</div>
+        <div class="rule-body">Wait for human approval between major steps. Never make implementation decisions on your own. Your role is to inform — not replace — human judgment.</div>
+      </div>
+
+      <div class="rule-card" style="border-color:#0891b2;">
+        <div class="rule-title" style="color:#0891b2;">🖥️ Always Deliver a Visual</div>
+        <div class="rule-body">Text documents alone are not enough. Every feature or solution concept must include a <strong>wireframe</strong> or <strong>HTML demo</strong>. Prefer an HTML demo when the idea involves interactions or flows — it communicates intent far more clearly to David and Yon.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggle(header) {
+      const card = header.closest('.wf-card');
+      card.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>

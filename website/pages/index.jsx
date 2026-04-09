@@ -35,7 +35,6 @@ export default function Home() {
               <div className={styles.heroCtas}>
                 <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
                 <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
-                <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
               </div>
             </div>
           </div>

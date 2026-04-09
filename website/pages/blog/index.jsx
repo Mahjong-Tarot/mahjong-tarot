@@ -76,15 +76,43 @@ export default function BlogIndex() {
               hidden inside ancient symbols.
             </p>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-              <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
-              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
               <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
             </div>
           </div>
         </section>
 
+        {/* ── Featured ── */}
+        <section className={`section-stone ${styles.featured}`}>
+          <div className="container">
+            <span className="overline">Featured</span>
+            <div className={styles.featuredInner}>
+              <Link href="/blog/posts/love-in-the-fire-horse-year" className={styles.featuredImage}>
+                <Image
+                  src="/images/blog/love-in-the-fire-horse-year.webp"
+                  alt="Love in the Year of the Fire Horse"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </Link>
+              <div className={styles.featuredText}>
+                <span className="post-category">Year of the Fire Horse</span>
+                <h2 className={styles.featuredTitle}>
+                  <Link href="/blog/posts/love-in-the-fire-horse-year">
+                    Love in the Year of the Fire Horse: What 2026 Means for Your Relationships
+                  </Link>
+                </h2>
+                <p className={styles.featuredExcerpt}>
+                  This is the one year in 60 where your partner is most likely to cheat and most likely to propose. The Fire Horse doesn't do anything halfway.
+                </p>
+                <Link href="/blog/posts/love-in-the-fire-horse-year" className="btn-secondary">Read the Article</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── Filter ── */}
-        <section className={`section-stone ${styles.filterSection}`}>
+        <section className={styles.filterSection}>
           <div className="container">
             <div className={styles.filters}>
               {CATEGORIES.map((cat) => (
@@ -97,19 +125,6 @@ export default function BlogIndex() {
                 </button>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ── Featured Banner ── */}
-        <section className="section-dark">
-          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Featured</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>2026 Is a Fire Horse Year — The Rarest in the Zodiac</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 540, margin: '0 auto var(--space-xl)' }}>
-              Once every 60 years. Discover what the Fire Horse means for your love life, luck, and future.
-            </p>
-            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
-            <Link href="/blog/posts/love-in-the-fire-horse-year" className="btn-ghost">Read the Latest</Link>
           </div>
         </section>
 

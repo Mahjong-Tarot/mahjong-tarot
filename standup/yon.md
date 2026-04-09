@@ -16,4 +16,4 @@ name: Yon
 - Merge PR #14 and clean up stale branches
 
 ## Blockers
-None
+- **Source material not yet provided for "5 Chinese Zodiac Signs Facing Their Biggest Life Change in 2026"** — The draft (written by Dave's agent) contains sign-by-sign interpretations for Ox, Rabbit, Horse, Dog, and Goat that were created without official source material. Per our Source Material Policy, these cannot be published until verified. Need to locate official source files and review all interpretations before building the JSX page.

@@ -65,7 +65,7 @@ serve(async (req: Request) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: Deno.env.get("RESEND_FROM_EMAIL") || "Mahjong Tarot <notifications@resend.dev>",
+            from: Deno.env.get("RESEND_FROM_EMAIL") || "Mahjong Tarot <notifications@mahjongtarot.com>",
             to: ["firepig01@gmail.com", "dave@edge8.ai"],
             subject: emailSubject,
             html: emailHtml,

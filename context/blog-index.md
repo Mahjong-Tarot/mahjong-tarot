@@ -15,7 +15,7 @@ Source of truth for all published blog posts. Used by the writer agent (topic pl
 
 | Order | Slug | Primary Keyword | Blog Style | Category | Date Created |
 |-------|------|-----------------|------------|----------|--------------|
-| 1 | blood-moon-rising-in-the-year-of-the-fire-horse | TBD | TBD | Blood Moon | 2026-04-04 |
-| 2 | who-has-the-most-luck-in-the-fire-horse-year | TBD | TBD | Year of the Fire Horse | 2026-04-05 |
-| 3 | love-in-the-fire-horse-year | TBD | TBD | Year of the Fire Horse | 2026-04-06 |
+| 1 | blood-moon-rising-in-the-year-of-the-fire-horse | blood moon | The Story/Parable | Blood Moon | 2026-04-04 |
+| 2 | who-has-the-most-luck-in-the-fire-horse-year | luck in the horse year | The Prediction | Year of the Fire Horse | 2026-04-05 |
+| 3 | love-in-the-fire-horse-year | fire horse love | The Explainer | Year of the Fire Horse | 2026-04-06 |
 | 4 | the-danger-of-love-when-fire-runs-wild | fire horse affairs | The Explainer | Year of the Fire Horse | 2026-04-11 |

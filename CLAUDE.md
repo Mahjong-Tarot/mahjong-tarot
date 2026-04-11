@@ -14,7 +14,7 @@ The website is a **Next.js** application (Pages Router). You read source content
 
 - Read approved content drafts (`.md` files) from `content/`
 - Optimise source images to WebP and write them to `website/public/images/blog/` or `website/public/images/`
-- Use the `build-page` skill to generate React `.jsx` components, outputting to `agents/web-developer/output/`
+- Use the `build-page` skill to generate React `.jsx` components
 - Review generated components, then copy approved files to `website/`
 - Update the blog index page (`website/pages/blog/index.jsx`) with a new post card
 - Run `git add` and `git commit` with a clear commit message
@@ -35,23 +35,60 @@ The website is a **Next.js** application (Pages Router). You read source content
 ```
 mahjong-tarot/
 │
-├── content/
-│   ├── Images/                         ← Source images, organised by page/section
-│   └── *.md                            ← Approved content drafts (blog posts, pages)
-│
-├── context/                            ← Project-specific guides — read before any task
-│   ├── web-style-guide.md              ← MASTER: colours, fonts, component anatomy, blog categories, naming
-│   ├── web-dev-guide.md                ← React patterns, component snippets, naming conventions
-│   ├── publishing-guide.md             ← Image optimisation details, size targets, Pillow workflow
-│   └── publish-log.md                  ← Append one line per published post
+├── .claude/
+│   ├── agents/                        ← Claude Code agent definitions
+│   │   ├── product-manager.md
+│   │   └── project-manager.md
+│   ├── rules/
+│   │   └── global-engineering.md      ← Engineering guardrails (git, secrets, deploys)
+│   └── skills/
+│       ├── build-page/SKILL.md        ← Converts markdown → Next.js .jsx components
+│       ├── capture-learning/SKILL.md  ← Auto-appends lessons to CLAUDE.md
+│       ├── create-agent/SKILL.md      ← Scaffolds new agent roles
+│       └── generate-image/SKILL.md    ← Blog hero image generation via Nano Banana 2
 │
 ├── agents/
-│   └── web-developer/
-│       ├── context/                    ← Agent instructions (do NOT modify)
-│       |── skills/
-│       │   └── build-page/
-│       │       └── SKILL.md       ← The build-page skill
-│       └── output/                    ← Staging area: generated .jsx components live here before review
+│   ├── designer/                      ← Design agent (context)
+│   ├── product-manager/               ← Product manager agent (context, skills)
+│   ├── project-manager/               ← Project manager agent
+│   │   ├── context/                   ← Persona, workflows (standup, retro, release monitor, etc.)
+│   │   ├── skills/                    ← daily-checkin, raid-log, scope-change
+│   │   └── workflows/
+│   ├── web-developer/                 ← Web developer agent
+│   │   ├── context/                   ← Persona, style guides, file conventions
+│   │   └── skills/
+│   │       └── build-page.md          ← The build-page skill (agent copy)
+│   └── writer/                        ← Writer agent
+│       ├── context/                   ← Persona, style guide
+│       └── skills/
+│           └── write-post/            ← Blog post writing skill
+│
+├── architecture/                      ← System design docs and planning artefacts
+│   ├── admin-crm-plan.md
+│   ├── crm-design-doc.md
+│   └── *.html / *.docx               ← Org chart, workflow diagrams, build plans
+│
+├── content/
+│   ├── source-material/               ← Raw research organised by topic
+│   │   ├── chinese-astrology/
+│   │   ├── mahjong-fortune-telling/
+│   │   ├── romance/
+│   │   ├── working-images/
+│   │   └── year-of-the-fire-horse/
+│   └── topics/                        ← Blog topic bundles (each folder = one post)
+│       └── <slug>/                    ← blog.md, seo.md, social-*.md, source images
+│
+├── context/                           ← Project-specific guides — read before any task
+│   ├── blog-index.md                  ← Blog index structure reference
+│   ├── claude-md-overview.md          ← How CLAUDE.md files work across the project
+│   ├── claude-md-setup-guide.md       ← Setup guide for new CLAUDE.md configurations
+│   ├── publish-log.md                 ← Append one line per published post
+│   └── templates/
+│       └── CLAUDE.template.md         ← Template for new project CLAUDE.md files
+│
+├── standup/                           ← Daily standup logs and briefings
+│   ├── Individual/                    ← Per-person standup notes (dave.md, yon.md)
+│   └── briefings/                     ← Monthly briefing archives
 │
 ├── working_files/                     ← Git-ignored scratch space (see Working files below)
 │
@@ -59,16 +96,26 @@ mahjong-tarot/
     ├── pages/
     │   ├── index.jsx
     │   ├── about.jsx
+    │   ├── admin.jsx
+    │   ├── contact.jsx
     │   ├── readings.jsx
     │   ├── the-mahjong-mirror.jsx
+    │   ├── api/
+    │   │   └── reply.js
     │   └── blog/
     │       ├── index.jsx              ← Blog listing page — update post cards here
     │       └── posts/                 ← One .jsx file per published post
-    ├── components/
-    ├── styles/
-    └── public/
-        └── images/                    ← Optimised WebP images served statically
-            └── blog/
+    ├── components/                    ← Nav, Footer, NewsletterSignup
+    ├── lib/
+    │   └── supabase.js                ← Supabase client
+    ├── styles/                        ← CSS modules per page + globals.css
+    ├── public/
+    │   └── images/                    ← Optimised WebP images served statically
+    │       └── blog/
+    └── supabase/
+        ├── *.sql                      ← Schema and seed migrations
+        └── functions/
+            └── notify-inquiry/        ← Edge function for contact form
 ```
 
 ---
@@ -77,23 +124,21 @@ mahjong-tarot/
 
 ### Step 1 — Read the source content
 
-Locate the approved draft in `content/` (a `.md` file). Read it in full. Note the title, author, date, category tag, and any image references. See `context/web-style-guide.md` for the canonical blog category list.
+Locate the approved topic bundle in `content/topics/<slug>/` (contains `blog.md`, `seo.md`, and `social-*.md` files). Read `blog.md` in full. Note the title, author, date, category tag, and any image references. See `agents/web-developer/context/web-style-guide.md` for the canonical blog category list.
 
 ### Step 2 — Read the style guide
 
-Read `context/web-style-guide.md` and `context/web-dev-guide.md`. Do not build any components without doing this first.
+Read `agents/web-developer/context/web-style-guide.md` and `agents/web-developer/context/style-guide.md`. Do not build any components without doing this first.
 
 ### Step 3 — Generate or optimise images
 
-See `context/publishing-guide.md` for Pillow settings, size targets, and `@2x` rules.
-
 **Option A — Generate a new hero image:** Invoke the `generate-image` skill from `.claude/skills/generate-image/SKILL.md`.
 
-**Option B — Optimise an existing source image:** Use Python + Pillow as described in `context/publishing-guide.md`. Source files live in `content/Images/` or `content/topics/<slug>/`.
+**Option B — Optimise an existing source image:** Use Python + Pillow. Source files live in `content/source-material/` or `content/topics/<slug>/`.
 
 ### Step 4 — Generate React component via the build-page skill
 
-Invoke the `build-page` skill from `agents/web-developer/context/skills/build-page/SKILL.md`. Output goes to `agents/web-developer/output/<slug>.jsx`. Review before proceeding.
+Invoke the `build-page` skill from `.claude/skills/build-page/SKILL.md` (or `agents/web-developer/skills/build-page.md`). Review the generated component before proceeding.
 
 ### Step 5 — Copy to website
 
@@ -165,8 +210,8 @@ Never commit files from `working_files/` — the directory is in `.gitignore` an
 | Source draft not found | Ask Bill which file to use before proceeding |
 | Source image missing | Use a placeholder `{/* IMAGE NEEDED */}` comment, continue |
 | Style guide file missing | Stop and ask Bill — do not guess at styles |
-| Image too large after optimisation | See `context/publishing-guide.md` for fallback quality settings |
-| `build-page` output needs corrections | Edit `agents/web-developer/output/<slug>.jsx` directly, then copy to `website/` |
+| Image too large after optimisation | Reduce Pillow quality in 5% steps until under target |
+| `build-page` output needs corrections | Edit the generated `.jsx` directly, then copy to `website/` |
 
 ---
 
@@ -175,7 +220,7 @@ Never commit files from `working_files/` — the directory is in `.gitignore` an
 - [ ] Component renders without errors — no missing imports, correct JSX syntax
 - [ ] All images use `next/image` with correct `src`, `alt`, `width`, and `height`
 - [ ] `<Head>` includes `title`, `meta description`, and OG/Twitter tags
-- [ ] Category tag matches a valid blog category (see `context/web-style-guide.md`)
+- [ ] Category tag matches a valid blog category (see `agents/web-developer/context/web-style-guide.md`)
 - [ ] Post card added at the top of the blog index grid
 - [ ] No inline styles used unless unavoidable — use CSS modules or global styles
 - [ ] Read-time estimate is included in the post header

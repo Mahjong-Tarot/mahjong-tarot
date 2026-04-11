@@ -1,6 +1,6 @@
 ---
 name: generate-image
-description: Triggered when a request file contains workflow: generate. Reads the style catalogue and optional post content, constructs a Gemini prompt, presents it for user approval, generates the image via browser automation, archives the original PNG, runs the Pillow optimisation pipeline for each requested image type, and logs the result.
+description: Triggered when a request file contains workflow: generate. Constructs a Gemini prompt from built-in brand knowledge and optional post content, calls the Gemini API to generate the image, archives the original PNG, runs the Pillow optimisation pipeline for each requested image type, and logs the result.
 trigger: Per image entry with workflow: generate in a YAML request file
 ---
 
@@ -8,7 +8,7 @@ trigger: Per image entry with workflow: generate in a YAML request file
 
 ## Purpose
 
-Produce a brand-new image for a blog post or page using Google Gemini (Nano Banana 2) via browser automation. Takes the style selection from the request file, constructs a prompt aligned with The Mahjong Tarot brand, generates the image, and optimises it to WebP at the correct dimensions and file size for each requested image type. The user must confirm the prompt before generation begins.
+Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-3.0-generate-002`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
 
 ---
 
@@ -17,7 +17,6 @@ Produce a brand-new image for a blog post or page using Google Gemini (Nano Bana
 | File | Path | Notes |
 |------|------|-------|
 | Request file | `agents/web-designer/output/requests/<slug>-image-request.yaml` | Written by Web Designer agent |
-| Style catalogue | `agents/image-designer/context/styles.json` | All five brand styles with prompt hints, colours, exclusions |
 | Post content | `content/topics/<slug>/blog.md` | Optional — read for prompt context |
 | Temp raw download | `working_files/<slug>-<type>-raw.png` | Temporary — cleaned up after optimisation |
 | PNG archive | `content/topics/<slug>/<slug>-<type>-original.png` | Permanent archive of the generated image |
@@ -33,11 +32,13 @@ Produce a brand-new image for a blog post or page using Google Gemini (Nano Bana
 
 | Type | Width | Height | Aspect | Max KB | Output path |
 |------|-------|--------|--------|--------|-------------|
-| `hero` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}.webp` |
+| `hero` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}.webp` (blog) or `website/public/images/{slug}.webp` (site asset) |
 | `thumbnail` | 600 | 315 | 16:9 | 80 | `website/public/images/blog/{slug}-thumb.webp` |
 | `card` | 400 | 400 | 1:1 | 60 | `website/public/images/blog/{slug}-card.webp` |
 | `og` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}-og.webp` |
 | `social` | 1080 | 1080 | 1:1 | 150 | `website/public/images/blog/{slug}-social.webp` |
+
+**Output path rule:** If `content/topics/<slug>/blog.md` exists → output to `website/public/images/blog/`. Otherwise → `website/public/images/` (site-wide assets: homepage hero, about page, etc.).
 
 ---
 
@@ -57,59 +58,33 @@ If `type` is not in the spec table, log an error and skip this entry.
 
 ### 2. Read context
 
-Read in order:
-1. `agents/image-designer/context/styles.json` — full style catalogue
-2. `content/topics/<slug>/blog.md` (if it exists) — title, category, emotional angle, key subjects
-
-If `post_path` file is missing, skip reading it; construct the prompt from `style` and `slug` alone, and note the gap in the log.
+Read if present:
+- `content/topics/<slug>/blog.md` — title, category, emotional angle, key subjects (optional — skip if missing, note gap in log)
 
 ### 3. Construct the Gemini prompt
 
-Look up `style` from the request in `styles.json`. If the style name does not match any entry, stop and report:
+If `prompt_override` is set in the request, use that value directly — skip to Step 4.
 
-> "Style '<name>' not found in agents/image-designer/context/styles.json. Add it to the file or correct the request."
+Otherwise, use the `style` field from the request and the agent's built-in brand knowledge (see `skills/generate-image/SKILL.md` for the full style table, brand colours, and prompt template). Proceed directly to generation — no user confirmation needed.
 
-Otherwise, build the prompt using this template:
+If the `style` value does not match a recognised brand style, stop and report:
 
-```
-[style.name] style: [Primary subject — derived from post content or slug].
-[style.prompt_hints]. Colors: [style.color_emphasis joined as a list].
-[Composition — foreground/background, focal point, movement].
-Aspect ratio: 16:9 for hero/thumbnail/og; 1:1 for card/social.
-Exclude: [style.exclude].
-```
+> "Style '<name>' is not a recognised brand style. Valid styles are: Celestial & Mystical, Elemental Drama, Zodiac Portraiture, Sacred & Symbolic, Seasonal & Nature."
 
-If `prompt_override` is set in the request, use that value directly instead.
+### 4. Call the Gemini API
 
-### 4. Present the prompt for user confirmation
+Use `GEMINI_API_KEY` from the environment. See `skills/generate-image/SKILL.md` for the full Python snippet.
 
-Show the constructed (or overridden) prompt to the user and ask:
+- Model: `imagen-3.0-generate-002`
+- Aspect ratio: `16:9` for hero/thumbnail/og; `1:1` for card/social
+- Save the raw PNG to `working_files/<slug>-raw.png`
+- Archive a permanent copy to `content/topics/<slug>/<slug>-<type>-original.png`
 
-> "Should I send this to Gemini to generate the image?"
+If the API call fails, simplify the prompt and retry once. If still failing, move to `failed/` and log.
 
-Wait for explicit confirmation before proceeding. Do not open the browser until the user approves.
+### 5. Run the Pillow pipeline for each requested type
 
-### 5. Generate the image via Gemini
-
-Use browser automation:
-
-1. Create a new tab and navigate to `https://gemini.google.com/app`
-2. Take a screenshot to verify the page loaded
-3. **If Gemini requires sign-in:** Stop. Tell the user: "Gemini needs you to sign in. Please log into your Google account in the browser, then tell me to continue." Leave the request file in place; do not move it.
-4. Find the text input area, type the approved prompt, press Enter or click send
-5. Wait for generation (10–30 seconds); take a screenshot to confirm the image appeared
-6. Ask the user for permission to download: "The image has been generated. Can I download it?"
-7. Right-click the image and save it
-
-### 6. Save and archive the downloaded image
-
-Save the raw downloaded file to `working_files/<slug>-<type>-raw.png` (temporary).
-
-Also archive a permanent copy to `content/topics/<slug>/<slug>-<type>-original.png`.
-
-### 7. Run the Pillow pipeline for each requested type
-
-If the request contains multiple `generate` entries for this slug (e.g., hero + thumbnail + card), derive each type by resizing and cropping the same downloaded PNG — do not re-run Gemini.
+Derive each requested type by resizing and cropping the same raw PNG — do not re-call the API per type.
 
 For each type, run:
 
@@ -169,7 +144,7 @@ print(f"FAIL  {image_type} {size_kb:.1f}KB exceeds {max_kb}KB at q65")
 sys.exit(1)
 ```
 
-### 8. Write the run log entry
+### 6. Write the run log entry
 
 Append one row per type to `agents/image-designer/output/run-log.md`:
 
@@ -183,7 +158,7 @@ On failure:
 | YYYY-MM-DD HH:MM | <slug> | <type> | generate | — | <size_kb> KB | ❌ FAILED: over size limit after q65 |
 ```
 
-### 9. Write an error report (on failure only)
+### 7. Write an error report (on failure only)
 
 Write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md`:
 
@@ -197,7 +172,7 @@ Write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md`:
 - **Suggested fix:** [Simplify prompt / use smaller source / request lower-detail crop]
 ```
 
-### 10. Move the request file
+### 8. Move the request file
 
 Only move after all image entries in the file have been attempted:
 
@@ -210,12 +185,12 @@ Only move after all image entries in the file have been attempted:
 
 | Situation | Action |
 |-----------|--------|
-| Gemini not signed in | Stop. Tell the user to sign in. Leave request file in place — do not move it. |
-| Generation fails in Gemini | Screenshot the error. Simplify the prompt (remove hex codes, reduce specificity). Retry once. If still failing, move to `failed/` and log. |
-| Generated image contains baked-in text or watermark | Regenerate with: "Absolutely no text, words, letters, numbers, symbols, or watermarks anywhere in the image." |
-| Generated image doesn't match brand palette | Regenerate with: "Dominant colors must be deep navy (#1B1F3B) and gold (#C9A84C) with crimson accents (#C0392B) only." |
-| Multiple types from one generation | Derive all types from the same downloaded PNG — loop over each type in Step 7 using the same source. Do not re-run Gemini. |
-| `prompt_override` set | Skip Steps 2 and 3. Still present the override to the user for confirmation in Step 4. |
-| Style name not found in styles.json | Stop immediately. Report the missing style name. Do not proceed to Gemini. |
+| `GEMINI_API_KEY` not set | Stop. Tell the user to set the env var and retry. Do not move the request file. |
+| API call fails | Simplify the prompt (remove hex codes, reduce specificity), retry once. If still failing → `failed/`. |
+| Generated image has baked-in text or watermark | Retry with: "No text, letters, numbers, symbols, or watermarks anywhere in the image." |
+| Generated image doesn't match brand palette | Retry with: "Dominant colors must be deep navy (#1B1F3B) and gold (#C9A84C) with crimson accents (#C0392B) only." |
+| Multiple types requested | Derive all types from the same raw PNG in Step 5 — do not re-call the API. |
+| `prompt_override` set | Skip Steps 2 and 3. Use the override directly in Step 4. |
+| Unrecognised style name | Stop immediately. Report the valid style names. Do not call the API. |
 | `post_path` file missing | Skip reading it. Construct the prompt from `style` and `slug` alone. Note the gap in the log. |
-| Pillow not installed | Run `pip install Pillow --break-system-packages`, then retry Step 7. |
+| Pillow not installed | Run `pip install Pillow google-generativeai --break-system-packages`, then retry. |

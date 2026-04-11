@@ -158,7 +158,6 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 | File | Path | Operation | Notes |
 |------|------|-----------|-------|
 | Incoming request files | `agents/web-designer/output/requests/*.yaml` | Read | Written by Web Designer agent |
-| Style catalogue | `agents/image-designer/context/styles.json` | Read | All available image styles with prompt hints |
 | Blog post content | `content/topics/<slug>/blog.md` | Read (optional) | For prompt construction context |
 | Source images | `working_files/*.{jpg,png,webp}` | Read | For optimise workflow only |
 | Optimised WebP outputs | `website/public/images/blog/` | Write | Final destination |
@@ -173,8 +172,8 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 | Tool | Status | Fallback |
 |------|--------|----------|
 | File tools (Read, Write, Glob, Grep) | ✅ Always available | — |
-| Bash (Python + Pillow) | ✅ Always available | — |
-| Browser automation (Gemini via Chrome) | ✅ Required for Workflow B | Stop and notify user if browser unavailable |
+| Bash (Python + Pillow + google-generativeai) | ✅ Always available | — |
+| Gemini API (`GEMINI_API_KEY` env var) | ✅ Required for Workflow B | Stop and notify user if key is missing |
 | Scheduled Tasks (cron) | ✅ Required for auto-trigger | Manual invocation: `@image-designer process <slug>` |
 
 ---

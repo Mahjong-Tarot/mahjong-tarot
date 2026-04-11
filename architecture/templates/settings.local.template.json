@@ -1,0 +1,49 @@
+{
+  "_readme": [
+    "One-time install — paste this prompt to Claude Code:",
+    "",
+    "  Read architecture/templates/settings.local.template.json in this project.",
+    "  Install it as .claude/settings.local.json by:",
+    "  - replacing <personal-path> with the absolute path to this repo (run: pwd && echo $HOME)",
+    "  - replacing <home-username> with the current macOS username (from echo $HOME)",
+    "  - replacing <figma-mcp-uuid> by searching ~/.claude/settings.json and",
+    "    ~/.claude/settings.local.json for any entry matching mcp__*__use_figma",
+    "    and extracting the UUID segment.",
+    "    Only ask me for the UUID if no Figma MCP connection is found.",
+    "",
+    "These permissions are PROJECT-SPECIFIC and should NOT live in global",
+    "~/.claude/settings.json. Global should only contain universal developer",
+    "tools (shell utils, git, package managers, file R/W/E)."
+  ],
+  "permissions": {
+    "allow": [
+      "Read(/Users/<home-username>/.claude/**)",
+      "Edit(/Users/<home-username>/.claude/**)",
+      "Write(/Users/<home-username>/.claude/**)",
+
+      "mcp__plugin_telegram_telegram__reply",
+      "mcp__plugin_telegram_telegram__react",
+      "mcp__plugin_telegram_telegram__edit_message",
+      "mcp__plugin_telegram_telegram__download_attachment",
+
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot",
+
+      "Skill(schedule)",
+      "Skill(schedule:*)",
+      "Skill(telegram:access)",
+      "Skill(telegram:access:*)",
+      "Skill(telegram:configure)",
+      "Skill(telegram:configure:*)",
+
+      "Bash(crontab -l)",
+      "Bash(crontab -r)",
+
+      "mcp__<figma-mcp-uuid>__use_figma",
+
+      "Bash(mkdir -p <personal-path>/.claude/skills/create-agent)",
+      "Bash(rm <personal-path>/.claude/agents/create-agent.md)"
+    ]
+  }
+}

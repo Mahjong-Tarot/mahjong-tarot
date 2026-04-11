@@ -1,0 +1,101 @@
+{
+  "agent": "image-designer",
+  "skills": [
+    {
+      "skill": "optimise-image",
+      "test_cases": [
+        {
+          "id": "happy-path-optimise",
+          "prompt": "Process the image request at agents/web-designer/output/requests/fire-horse-2026-image-request.yaml. The request contains a thumbnail entry with workflow: optimise, source: working_files/fire-horse-raw.jpg, and filters for brightness 1.1 and contrast 1.2.",
+          "fixtures": [
+            "agents/web-designer/output/requests/fire-horse-2026-image-request.yaml",
+            "working_files/fire-horse-raw.jpg"
+          ],
+          "assertions": [
+            "Output file website/public/images/blog/fire-horse-2026-thumb.webp exists",
+            "Output file dimensions are 600x315",
+            "Output file size is under 80 KB",
+            "Run log entry appended to agents/image-designer/output/run-log.md with status ✅ OK",
+            "Request file moved to agents/web-designer/output/requests/processed/"
+          ]
+        },
+        {
+          "id": "missing-source-file",
+          "prompt": "Process the image request at agents/web-designer/output/requests/missing-source-request.yaml. The request specifies a source file that does not exist.",
+          "fixtures": [
+            "agents/web-designer/output/requests/missing-source-request.yaml"
+          ],
+          "assertions": [
+            "Agent logs an error for the missing source file",
+            "No WebP output file is written to website/",
+            "Error report written to agents/image-designer/output/errors/",
+            "Request file moved to agents/web-designer/output/requests/failed/"
+          ]
+        },
+        {
+          "id": "multiple-types-single-request",
+          "prompt": "Process a request file for slug dragon-2026 that contains three entries: hero, thumbnail, and card — all workflow: optimise from the same source image.",
+          "fixtures": [
+            "agents/web-designer/output/requests/dragon-2026-image-request.yaml",
+            "working_files/dragon-raw.jpg"
+          ],
+          "assertions": [
+            "website/public/images/blog/dragon-2026.webp exists at 1200x630",
+            "website/public/images/blog/dragon-2026-thumb.webp exists at 600x315",
+            "website/public/images/blog/dragon-2026-card.webp exists at 400x400",
+            "All three entries logged in run-log.md",
+            "Request file moved to processed/ only after all three are complete"
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "generate-image",
+      "test_cases": [
+        {
+          "id": "happy-path-generate",
+          "prompt": "Process the image request at agents/web-designer/output/requests/water-tiger-2026-image-request.yaml. The request has a hero entry with workflow: generate, style: Celestial & Mystical.",
+          "fixtures": [
+            "agents/web-designer/output/requests/water-tiger-2026-image-request.yaml",
+            "content/topics/water-tiger-2026/blog.md",
+            "context/web-style-guide.md"
+          ],
+          "assertions": [
+            "A Gemini prompt is constructed using the Celestial & Mystical style and brand colours",
+            "Prompt is presented to the user for confirmation before opening Gemini",
+            "After generation, original PNG archived to content/topics/water-tiger-2026/water-tiger-2026-hero-original.png",
+            "Output WebP written to website/public/images/blog/water-tiger-2026.webp at 1200x630",
+            "Output file size is under 200 KB",
+            "Run log entry appended with status ✅ OK",
+            "Request file moved to agents/web-designer/output/requests/processed/"
+          ]
+        },
+        {
+          "id": "prompt-override",
+          "prompt": "Process a generate request for slug jade-rabbit-2026 that includes a fully written prompt_override string instead of a style field.",
+          "fixtures": [
+            "agents/web-designer/output/requests/jade-rabbit-2026-image-request.yaml"
+          ],
+          "assertions": [
+            "Agent uses the prompt_override value directly — does not construct a new prompt",
+            "The override prompt is still presented to the user for confirmation",
+            "Output WebP is produced at the correct dimensions for the requested type"
+          ]
+        },
+        {
+          "id": "gemini-generation-failure",
+          "prompt": "Process a generate request but Gemini returns an error on the first generation attempt.",
+          "fixtures": [
+            "agents/web-designer/output/requests/fail-test-image-request.yaml"
+          ],
+          "assertions": [
+            "Agent simplifies the prompt and retries once",
+            "If second attempt also fails, request is moved to agents/web-designer/output/requests/failed/",
+            "Error report written to agents/image-designer/output/errors/",
+            "No partial WebP is written to website/"
+          ]
+        }
+      ]
+    }
+  ]
+}

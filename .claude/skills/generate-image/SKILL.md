@@ -1,6 +1,6 @@
 ---
 name: generate-image
-description: "Generates blog hero images and site artwork for The Mahjong Tarot website using the Gemini API (imagen-3.0-generate-002). MUST be used whenever: creating a hero image for a blog post, generating artwork for a page, the user says 'generate image', 'create image', 'make the hero image', 'nano banana', or any request involving AI image generation for the site."
+description: "Generates blog hero images and site artwork for The Mahjong Tarot website using the Gemini API (imagen-4.0-generate-001). MUST be used whenever: creating a hero image for a blog post, generating artwork for a page, the user says 'generate image', 'create image', 'make the hero image', 'nano banana', or any request involving AI image generation for the site."
 ---
 
 # Generate Image — Gemini API

@@ -30,7 +30,7 @@ You do not make creative decisions. Style, mood, palette, and composition are ow
 | Move processed request files to `processed/` | Prevents double-processing on the next cron run |
 | Follow the Web Designer's style — do not override it | Creative decisions belong to the Web Designer, not this agent |
 | Report every run — success or failure | Write a run log entry so the team can audit what was produced |
-| Use run-log.md as the source of truth for what has been generated | Never re-generate an image if the slug already has a ✅ OK hero entry in the run log |
+| Use INDEX.md as the source of truth for what needs generating | A row with `TO DO` in the Image column needs an image; a row with a path already set is done — do not regenerate |
 
 ---
 
@@ -117,6 +117,12 @@ Rules:
 
 **Trigger:** Thursday 2:00 AM cron, or manual `@image-designer scan-topics`
 
+1. Read `content/topics/INDEX.md`
+2. Find every row where the Image column = `TO DO`
+3. For each row: determine image type from Channel, read the row's `.md` file for context, generate via Gemini, save PNG archive + WebP to `content/topics/<slug>/`
+4. Update INDEX.md immediately after each image — replace `TO DO` with the full relative path
+5. Log every result (success or failure) to `agents/image-designer/output/run-log.md`
+
 See `agents/image-designer/workflow/scan-topics.md` for full steps.
 
 ---
@@ -167,7 +173,9 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 | File | Path | Operation | Notes |
 |------|------|-----------|-------|
 | Incoming request files | `agents/web-designer/output/requests/*.yaml` | Read | Written by Web Designer agent |
-| Blog post content | `content/topics/<slug>/blog.md` | Read (optional) | For prompt construction context |
+| Content index | `content/topics/INDEX.md` | Read + Update | Source of truth for what needs generating; write back image paths |
+| Post/social content | `content/topics/<slug>/<filename>.md` | Read (optional) | For prompt construction context |
+| Mahjong Mirror style guide | `agents/image-designer/context/mahjong-mirror-style-guide.md` | Read | Use for any Mahjong Mirror content (mirror, reading, chapter, tiles) |
 | Source images | `working_files/*.{jpg,png,webp}` | Read | For optimise workflow only |
 | Optimised WebP outputs | `content/topics/<slug>/` | Write | Final destination — named `<slug>-hero.webp` etc. |
 | Original PNG archive | `content/topics/<slug>/` | Write | Generated images only — named `<slug>-hero-original.png` |

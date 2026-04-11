@@ -8,7 +8,7 @@ trigger: Per image entry with workflow: generate in a YAML request file
 
 ## Purpose
 
-Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-3.0-generate-002`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
+Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-4.0-generate-001`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
 
 ---
 
@@ -75,7 +75,7 @@ If the `style` value does not match a recognised brand style, stop and report:
 
 Use `GEMINI_API_KEY` from the environment. See `skills/generate-image/SKILL.md` for the full Python snippet.
 
-- Model: `imagen-3.0-generate-002`
+- Model: `imagen-4.0-generate-001`
 - Aspect ratio: `16:9` for hero/thumbnail/og; `1:1` for card/social
 - Save the raw PNG to `working_files/<slug>-raw.png`
 - Archive a permanent copy to `content/topics/<slug>/<slug>-hero-original.png`

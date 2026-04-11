@@ -1,6 +1,6 @@
 ---
 name: generate-image
-description: "Generates a new blog image for The Mahjong Tarot website using the Gemini API (imagen-3.0-generate-002). Constructs a prompt from built-in brand knowledge, calls the API, saves the raw PNG, then optimises it to WebP for each requested image type."
+description: "Generates a new blog image for The Mahjong Tarot website using the Gemini API (imagen-4.0-generate-001). Constructs a prompt from built-in brand knowledge, calls the API, saves the raw PNG, then optimises it to WebP for each requested image type."
 allowed-tools: Read Write Bash Glob Grep
 ---
 
@@ -12,7 +12,22 @@ Construct a brand-aligned prompt, call the Gemini image generation API, save the
 
 ---
 
-## Brand knowledge
+## Style system selection
+
+There are two brand style systems. Choose the correct one before building the prompt.
+
+### Which system to use
+
+| Content signals | Style system |
+|----------------|--------------|
+| Mahjong Mirror, "the answer", mirror, reflection, reading, tiles, fortune, self-discovery, chapter reference | **Mahjong Mirror** — read `agents/image-designer/context/mahjong-mirror-style-guide.md` |
+| Fire Horse, Chinese astrology, zodiac animals, celestial, elemental, seasonal | **Fire Horse** — use built-in styles below |
+
+When in doubt, read the source `.md` file. If it mentions the Mahjong Mirror product or references chapters/tiles in a reading context → Mahjong Mirror system. If it's about Chinese astrology, zodiac animals, or elemental energy → Fire Horse system.
+
+---
+
+## Style System A — Fire Horse (Chinese Astrology)
 
 ### Styles
 
@@ -24,23 +39,44 @@ Construct a brand-aligned prompt, call the Gemini image generation API, save the
 | **Sacred & Symbolic** | Mahjong tiles, lotus flowers, lanterns, yin-yang, red thread of fate, Chinese brush art | flat-lay or close-up arrangement, ink wash texture, warm candlelight or lantern glow |
 | **Seasonal & Nature** | Cherry blossom, autumn gold, winter snow, summer storms — tied to the Chinese calendar | wide landscape or macro nature, soft natural light, seasonal color palette |
 
-### Brand colours
-
+### Palette
 Midnight Indigo `#1B1F3B` · Celestial Gold `#C9A84C` · Mystic Fire `#C0392B` · Warm Cream `#FAF8F4`
 
-### Exclusions (always append)
-
+### Exclusions
 > No Western zodiac symbols, text overlays, watermarks, anime style, rounded or soft shapes, or generic stock photography.
 
 ### Prompt template
-
 ```
-[Style name] style: [primary subject from post content or slug].
+[Style name] style: [primary subject].
 [Style prompt hints]. Colors: [relevant brand colours].
 [Composition — focal point, depth, movement].
-Aspect ratio: 16:9 for hero/thumbnail/og; 1:1 for card/social.
 No Western zodiac symbols, text overlays, watermarks, anime style, rounded or soft shapes, or generic stock photography.
 ```
+
+---
+
+## Style System B — Mahjong Mirror
+
+**Always read `agents/image-designer/context/mahjong-mirror-style-guide.md` in full before building a Mahjong Mirror prompt.** That file is the authoritative source for styles, palette, prompt directions, style-to-content matrix, and non-negotiables.
+
+Summary of the 8 styles (see the guide for full prompt directions):
+
+| Style | Best for |
+|-------|----------|
+| Mystical Glassmorphism | Blog heroes, landing page, "reading ready" moments |
+| Botanical Oracle | Blog headers, email, seasonal promos |
+| Illustrated Line Art | Explainers, tile breakdowns, social carousels |
+| Bold Serif Editorial | Quote graphics, thought leadership, Pinterest |
+| Warm Editorial Photography | Instagram feed, brand storytelling, testimonials |
+| Soft Gradient Abstract | App backgrounds, ambient social, story backgrounds |
+| Collage / Mixed Media Oracle | Feature launches, seasonal campaigns, Pinterest |
+| Napkin / Hand-Drawn Sketch | Building-in-public, founder story (NOT fortune content) |
+
+### Palette
+Midnight Jade `#0A1F1C` · Antique Gold `#C5A258` · Dusty Rose `#C48B8B` · Soft Sage `#A3B5A6` · Warm Ivory `#F5F0E8` · Deep Plum `#5B2245`
+
+### Non-negotiables (in addition to those in the guide)
+> No text overlays, watermarks, generic stock photography, neon/cyberpunk tones, cartoonish tiles, culturally insensitive imagery, or AI-robot imagery. Tiles must feel like real objects with weight and history.
 
 ---
 
@@ -62,9 +98,12 @@ No Western zodiac symbols, text overlays, watermarks, anime style, rounded or so
 
 ### 1. Build the prompt
 
-Read `content/topics/<slug>/blog.md` if it exists (optional context). Use the `style` from the request and the brand knowledge above to construct the prompt. If `prompt_override` is set in the request, use that directly. Proceed directly to generation — no user confirmation needed.
-
-If the style name is not in the table above, stop and report the valid options.
+1. Read the source `.md` file if it exists (optional context)
+2. Determine which style system applies (Fire Horse or Mahjong Mirror) using the selection table above
+3. If Mahjong Mirror: read `agents/image-designer/context/mahjong-mirror-style-guide.md` in full, then select the best style from the style-to-content matrix in that file
+4. If Fire Horse: use the built-in style table above
+5. If `prompt_override` is set in the request, skip steps 2–4 and use it directly
+6. Proceed directly to generation — no user confirmation needed
 
 ### 2. Call the Gemini API
 

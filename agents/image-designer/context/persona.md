@@ -183,8 +183,8 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 
 | Skill | Folder | Trigger | Output |
 |-------|--------|---------|--------|
-| `optimise-image` | `context/skills/optimise-image/SKILL.md` | `workflow: optimise` in request file | WebP image at derived output path |
-| `generate-image` | `context/skills/generate-image/SKILL.md` | `workflow: generate` in request file | WebP image at derived output path + PNG archive |
+| `optimise-image` | `skills/optimise-image/SKILL.md` | `workflow: optimise` in request file | WebP image at derived output path |
+| `generate-image` | `skills/generate-image/SKILL.md` | `workflow: generate` in request file | WebP image at derived output path + PNG archive |
 
 ---
 

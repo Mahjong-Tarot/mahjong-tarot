@@ -72,11 +72,15 @@ Present the constructed prompt to the user and ask for confirmation before proce
 
 ### 3. Generate the image via Gemini
 
-Follow Steps 3–5 of `agents/writer/context/skills/generate-image/SKILL.md`:
-- Open `https://gemini.google.com/app` in a new browser tab
-- Enter the approved prompt
-- Wait for generation (10–30 seconds)
-- Download the generated image
+Use Claude in Chrome browser automation:
+
+1. Create a new tab and navigate to `https://gemini.google.com/app`
+2. Wait for the page to load (take a screenshot to verify)
+3. **If Gemini requires sign-in:** Stop and tell the user: "Gemini needs you to sign in. Please log into your Google account in the browser, then tell me to continue." Do NOT attempt to enter credentials. Leave the request file in place for the next run.
+4. Find the text input area, type the approved prompt, and press Enter or click the send button
+5. Wait for generation (10–30 seconds); take a screenshot to verify the image appeared
+6. **If generation fails:** Screenshot the error, simplify the prompt (remove hex codes, reduce specificity), and retry once. If still failing, move request to `failed/` and log.
+7. Right-click the generated image and download it (ask user for permission first: "The image has been generated. Can I download it?")
 
 Save the raw downloaded file temporarily as `working_files/<slug>-<type>-raw.png`.
 

@@ -84,3 +84,4 @@ website/blog/*.html
 
 # npm lockfile (managed per-directory)
 website/package-lock.json
+.playwright-mcp

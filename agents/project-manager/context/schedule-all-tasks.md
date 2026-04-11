@@ -1,14 +1,13 @@
-You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the `CronCreate` tool.
+You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the `RemoteTrigger` tool.
 
 ## Trigger type rule
 
-**Always use `CronCreate` with `durable: true` and `recurring: true` — never `RemoteTrigger`.**
+**Always use `RemoteTrigger` — never `CronCreate`.**
 
-- `RemoteTrigger` creates cloud-hosted tasks tied to one person's Claude.ai account. The rest of the team cannot see or manage them.
-- `CronCreate` with `durable: true` writes to `.claude/scheduled_tasks.json` in the repo. Once committed, the whole team inherits the tasks.
-- `CronCreate` must be run from a **terminal `claude` session** (not the VS Code extension) for `durable: true` to write to disk.
+- `CronCreate` is session-local and does not persist reliably across contexts (VS Code extension limitation).
+- `RemoteTrigger` runs on Anthropic's cloud — always-on, no machine dependency, survives restarts.
 
-All times are **Asia/Saigon (UTC+7)**. `CronCreate` cron expressions are in **local time** — no UTC conversion needed.
+All times are **Asia/Saigon (UTC+7)**. `RemoteTrigger` cron expressions are in **UTC**.
 
 ---
 
@@ -23,9 +22,7 @@ standup/
         ├── YYYY-MM-DD.md          ← compiled daily stand-up
         ├── weekly-rag-YYYY-MM-DD.md   ← Friday RAG report
         ├── raid.md                ← RAID log (updated in place)
-        ├── decisions.md           ← decisions log (appended daily)
-        └── alerts/
-            └── alert-YYYY-MM-DD.md    ← notification fallback
+        └── decisions.md           ← decisions log (appended daily)
 ```
 
 ---
@@ -53,12 +50,45 @@ Notification priority: **Telegram → Lark**. If both fail, append the notificat
 
 ---
 
+## RemoteTrigger body shape
+
+```json
+{
+  "name": "TRIGGER_NAME",
+  "cron_expression": "CRON_UTC",
+  "enabled": true,
+  "job_config": {
+    "ccr": {
+      "environment_id": "env_01Ly7cgFD1z5N2xN9VtNZ42S",
+      "session_context": {
+        "model": "claude-sonnet-4-6",
+        "sources": [
+          {"git_repository": {"url": "https://github.com/Mahjong-Tarot/mahjong-tarot"}}
+        ],
+        "allowed_tools": ["Bash", "Read", "Write", "Edit", "Glob", "Grep"]
+      },
+      "events": [
+        {"data": {
+          "uuid": "<fresh lowercase v4 uuid>",
+          "session_id": "",
+          "type": "user",
+          "parent_tool_use_id": null,
+          "message": {"role": "user", "content": "PROMPT_FROM_BELOW"}
+        }}
+      ]
+    }
+  }
+}
+```
+
+---
+
 ## Triggers to create
 
 ### 1. Morning stand-up reminder
 - **Name (canonical — use exactly)**: `PM Standup Morning`
-- **Tool**: `CronCreate` · `durable: true` · `recurring: true`
-- **Schedule**: `0 7 * * 1-5` (Mon–Fri 7:00 AM local time)
+- **Tool**: `RemoteTrigger {action: "create"}`
+- **Schedule**: `0 0 * * 1-5` (Mon–Fri 7:00 AM Asia/Saigon = 00:00 UTC)
 - **Prompt**:
 
 ```
@@ -79,8 +109,8 @@ Git workflow: git pull origin main → git checkout -b pm/standup-morning/YYYY-M
 
 ### 2. Stand-up compile and distribute
 - **Name (canonical — use exactly)**: `PM Standup Compile`
-- **Tool**: `CronCreate` · `durable: true` · `recurring: true`
-- **Schedule**: `0 9 * * 1-5` (Mon–Fri 9:00 AM local time)
+- **Tool**: `RemoteTrigger {action: "create"}`
+- **Schedule**: `0 2 * * 1-5` (Mon–Fri 9:00 AM Asia/Saigon = 02:00 UTC)
 - **Prompt**:
 
 ```
@@ -105,8 +135,8 @@ Commit: git add standup/briefings/YYYY-MM/YYYY-MM-DD.md → git commit -m "pm(st
 
 ### 3. End-of-day reminder
 - **Name (canonical — use exactly)**: `PM EOD Reminder`
-- **Tool**: `CronCreate` · `durable: true` · `recurring: true`
-- **Schedule**: `0 17 * * 1-5` (Mon–Fri 5:00 PM local time)
+- **Tool**: `RemoteTrigger {action: "create"}`
+- **Schedule**: `0 10 * * 1-5` (Mon–Fri 5:00 PM Asia/Saigon = 10:00 UTC)
 - **Prompt**:
 
 ```
@@ -120,15 +150,15 @@ Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (c
 
 Review standup/briefings/YYYY-MM/raid.md and confirm the blocker list is current (create if missing).
 
-Commit: git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md <any alert file> → git commit -m "pm(eod): YYYY-MM-DD" → git push origin pm/eod/YYYY-MM-DD → gh pr create --title "pm(eod): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
+Commit: git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md → git commit -m "pm(eod): YYYY-MM-DD" → git push origin pm/eod/YYYY-MM-DD → gh pr create --title "pm(eod): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```
 
 ---
 
 ### 4. Weekly RAG status report
 - **Name (canonical — use exactly)**: `PM Weekly RAG Report`
-- **Tool**: `CronCreate` · `durable: true` · `recurring: true`
-- **Schedule**: `0 16 * * 5` (Friday 4:00 PM local time)
+- **Tool**: `RemoteTrigger {action: "create"}`
+- **Schedule**: `0 9 * * 5` (Friday 4:00 PM Asia/Saigon = 09:00 UTC)
 - **Prompt**:
 
 ```
@@ -175,13 +205,11 @@ Commit: git add standup/briefings/YYYY-MM/retro-YYYY-MM-DD.md → git commit -m 
 
 ## After creating all triggers
 
-All tasks are stored in `.claude/scheduled_tasks.json`. Commit this file to the repo so the whole team inherits the schedule.
+List all active triggers and report back:
 
-Note: durable recurring tasks auto-expire after 7 days and must be re-registered. Run this file's prompts in a terminal `claude` session to renew them.
-
-| Trigger name | CronCreate cron (local time) | Local time (Asia/Saigon) | Status | Job ID |
-|---|---|---|---|---|
-| PM Standup Morning | `0 7 * * 1-5` | Mon–Fri 7:00 AM | | |
-| PM Standup Compile | `0 9 * * 1-5` | Mon–Fri 9:00 AM | | |
-| PM EOD Reminder | `0 17 * * 1-5` | Mon–Fri 5:00 PM | | |
-| PM Weekly RAG Report | `0 16 * * 5` | Friday 4:00 PM | | |
+| Trigger name | Cron (UTC) | Local time (Asia/Saigon) | Status | Next run | Trigger ID |
+|---|---|---|---|---|---|
+| PM Standup Morning | `0 0 * * 1-5` | Mon–Fri 7:00 AM | | | |
+| PM Standup Compile | `0 2 * * 1-5` | Mon–Fri 9:00 AM | | | |
+| PM EOD Reminder | `0 10 * * 1-5` | Mon–Fri 5:00 PM | | | |
+| PM Weekly RAG Report | `0 9 * * 5` | Friday 4:00 PM | | | |

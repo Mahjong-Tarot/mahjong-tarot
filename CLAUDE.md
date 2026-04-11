@@ -68,6 +68,12 @@ Mahjong and Tarot · Tarot · Mahjong Readings · Year of the Snake · Year of t
 8. Tell Bill to run `git push origin main` from his terminal
 9. Append a row to `context/publish-log.md`
 
+## Working files
+
+- Any media file (image, video, PDF, etc.) that is **not yet referenced** in any file under `content/` or in HTML, or that is **not in `.webp` format**, must be stored under `working_files/` at the repo root.
+- `working_files/` is git-ignored — it will never be committed and will not bloat the repository.
+- Once a file in `working_files/` is optimised to `.webp` and referenced in a content draft, move it through the normal publishing workflow (`website/public/images/`).
+
 ## Git notes
 
 - Branch `web-developer-agent` is the active development branch; PRs merge into `main`

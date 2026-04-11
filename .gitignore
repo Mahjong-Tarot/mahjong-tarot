@@ -75,6 +75,9 @@ content/*.pdf
 # Agent output staging area
 agents/web-developer/output/
 
+# Working media files (source images not yet optimised to WebP or not referenced in content)
+working_files/
+
 # Legacy HTML files (replaced by Next.js)
 website/*.html
 website/blog/*.html

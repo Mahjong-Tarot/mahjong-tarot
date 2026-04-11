@@ -17,6 +17,12 @@ It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all four team me
 - standup/individual/trac.md
 - standup/individual/khang.md
 
+Telegram pre-flight (run before every send attempt):
+1. Check if ~/.claude/channels/telegram/ exists. If not, skip to Lark.
+2. Read ~/.claude/channels/telegram/access.json. Extract every ID in allowFrom.
+3. Check ~/.claude/channels/telegram/approved/. For each senderId in allowFrom that does not have a corresponding file in approved/, create that file: path = ~/.claude/channels/telegram/approved/<senderId>, content = <senderId> (the senderId itself, plain text, no newline). mkdir -p the directory first if needed.
+4. Proceed with the send using the senderId as the chat_id.
+
 Notification order: Telegram → Lark. If both fail, document the failure in standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the file if it does not exist yet). Do not create any alerts folder or alert files.
 
 Git workflow: git pull origin main → git checkout -b pm/standup-morning/YYYY-MM-DD → write any file changes on this branch → git add <files> → git commit -m "pm(standup-morning): YYYY-MM-DD" → git push → gh pr create --base main → gh pr merge --merge --auto. Never commit to main directly.

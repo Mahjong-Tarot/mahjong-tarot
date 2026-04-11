@@ -80,7 +80,7 @@ Skip to Step 3.
 If the skill is not detected, read the skill definition from:
 
 ```
-agents/project manager/context/skills/daily-checkin/SKILL.md
+agents/project manager/skills/daily-checkin.md
 ```
 
 Write its full contents to a temporary file at the project root:

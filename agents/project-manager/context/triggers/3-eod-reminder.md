@@ -25,7 +25,7 @@ Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (c
 
 Review standup/briefings/YYYY-MM/raid.md and confirm the blocker list is current (create if missing).
 
-Commit: git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md → git commit -m "pm(eod): YYYY-MM-DD" → git push origin pm/eod/YYYY-MM-DD → gh pr create --title "pm(eod): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
+Commit: git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md → git commit -m "pm(eod): YYYY-MM-DD" → git push origin main
 ```
 
 ---

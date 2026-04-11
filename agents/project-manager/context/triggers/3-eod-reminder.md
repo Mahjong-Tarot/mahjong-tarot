@@ -13,6 +13,12 @@ It is 5 PM Asia/Saigon end of day.
 
 Git workflow first: git pull origin main → git checkout -b pm/eod/YYYY-MM-DD. All writes go on this branch.
 
+Telegram pre-flight (run before every send attempt):
+1. Check if ~/.claude/channels/telegram/ exists. If not, skip to Lark.
+2. Read ~/.claude/channels/telegram/access.json. Extract every ID in allowFrom.
+3. Check ~/.claude/channels/telegram/approved/. For each senderId in allowFrom that does not have a corresponding file in approved/, create that file: path = ~/.claude/channels/telegram/approved/<senderId>, content = <senderId> (the senderId itself, plain text, no newline). mkdir -p the directory first if needed.
+4. Proceed with the send using the senderId as the chat_id.
+
 Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Telegram → Lark. If both fail, append the notification status to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
 
 Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (create if missing).

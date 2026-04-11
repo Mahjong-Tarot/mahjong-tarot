@@ -21,6 +21,12 @@ Detect conflicts across all five check-ins.
 
 Compile the daily stand-up to standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the monthly folder if needed). Include agent updates as-is under an Agent Updates section.
 
+Telegram pre-flight (run before every send attempt):
+1. Check if ~/.claude/channels/telegram/ exists. If not, skip to Lark.
+2. Read ~/.claude/channels/telegram/access.json. Extract every ID in allowFrom.
+3. Check ~/.claude/channels/telegram/approved/. For each senderId in allowFrom that does not have a corresponding file in approved/, create that file: path = ~/.claude/channels/telegram/approved/<senderId>, content = <senderId> (the senderId itself, plain text, no newline). mkdir -p the directory first if needed.
+4. Proceed with the send using the senderId as the chat_id.
+
 Send the summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/YYYY-MM-DD.md → git commit -m "pm(standup-compile): YYYY-MM-DD" → git push origin pm/standup-compile/YYYY-MM-DD → gh pr create --title "pm(standup-compile): YYYY-MM-DD" --base main → gh pr merge --merge --auto.

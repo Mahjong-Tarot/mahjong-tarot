@@ -215,15 +215,13 @@ Automated, scheduled processes. Instructions live in `agents/project manager/con
 
 ## Skills
 
-Human-triggered, interactive. Instructions live in `agents/project manager/context/skills/`. Each skill has its own subfolder with a `SKILL.md`.
+Human-triggered, interactive. Instructions live in `agents/project manager/skills/`.
 
-| Skill | Folder | Trigger |
-|-------|--------|---------|
-| **Daily Check-in** | `context/skills/daily-checkin/` | "Help me write my check-in" / "I need to do my standup" |
-| **RAID Log Update** | `context/skills/raid-log/` | "Log this risk" / "Update RAID" |
-| **Scope Change Assessment** | `context/skills/scope-change/` | "Assess this change" / "Can we fit this in?" |
-
-Eval test cases: `context/skills/evals/evals.json`
+| Skill | File | Trigger |
+|-------|------|---------|
+| **Daily Check-in** | `skills/daily-checkin.md` | "Help me write my check-in" / "I need to do my standup" |
+| **RAID Log Update** | `skills/raid-log.md` | "Log this risk" / "Update RAID" |
+| **Scope Change Assessment** | `skills/scope-change.md` | "Assess this change" / "Can we fit this in?" |
 
 ---
 

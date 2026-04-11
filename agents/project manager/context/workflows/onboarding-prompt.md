@@ -72,9 +72,7 @@ In Claude Code, skills defined as SKILL.md files in this project are automatical
 Verify the following skill files exist:
 
 ```
-agents/project manager/context/skills/daily-checkin/SKILL.md
-agents/project manager/context/skills/raid-log/SKILL.md
-agents/project manager/context/skills/scope-change/SKILL.md
+agents/project manager/skills/daily-checkin.md
 ```
 
 If all three exist, tell the user:

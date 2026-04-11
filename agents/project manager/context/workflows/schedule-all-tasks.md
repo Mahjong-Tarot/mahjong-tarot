@@ -1,4 +1,4 @@
-You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Cowork using the `/schedule` skill.
+You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the schedule system (CronCreate tool or `/schedule` skill).
 
 Create the following scheduled triggers. For each one, use the exact cron expression, prompt, and description specified below.
 

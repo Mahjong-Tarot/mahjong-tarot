@@ -1,0 +1,141 @@
+{
+  "agent": "product-manager",
+  "skills": [
+    {
+      "skill": "idea-to-epic",
+      "test_cases": [
+        {
+          "id": "happy-path",
+          "prompt": "We should let users save their favourite tile readings so they can come back to them later.",
+          "fixtures": [],
+          "assertions": [
+            "Agent asks 'What is the problem we are trying to solve?' before writing anything",
+            "Agent checks agents/product_manager/output/epics/ for an existing epic before creating a new one",
+            "Output file written to agents/product_manager/output/epics/ as a .md file",
+            "Epic contains a problem statement, description, and at least 2 success criteria",
+            "At least 3 user stories in 'As a [user], I want [X] so that [Y]' format are included"
+          ]
+        },
+        {
+          "id": "vague-idea",
+          "prompt": "We should make the readings better.",
+          "fixtures": [],
+          "assertions": [
+            "Agent does not write an epic immediately",
+            "Agent asks a clarifying question about who is affected and what 'better' means",
+            "Agent does not proceed until the problem is more clearly defined"
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "competitive-analysis",
+      "test_cases": [
+        {
+          "id": "happy-path",
+          "prompt": "How do competitors in the tarot and divination space handle online readings and booking?",
+          "fixtures": [],
+          "assertions": [
+            "Agent uses web search to research at least 3 competitors",
+            "Output file written to agents/product_manager/output/competitive/ as a .md file",
+            "Document includes strengths and weaknesses for each competitor",
+            "Document includes at least 2 differentiation angles",
+            "Agent presents findings and asks which angles resonate most"
+          ]
+        },
+        {
+          "id": "web-search-unavailable",
+          "prompt": "Analyze competitors for online tarot booking platforms.",
+          "fixtures": [],
+          "assertions": [
+            "Agent notes web search limitation if unavailable",
+            "Agent produces analysis from available context rather than refusing",
+            "Gaps in research are flagged explicitly in the output"
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "build-persona",
+      "test_cases": [
+        {
+          "id": "happy-path",
+          "prompt": "David: I want to build out a persona for our typical reading client. She's a woman in her 40s, interested in spiritual guidance, comes to Bill once or twice a year.",
+          "fixtures": [],
+          "assertions": [
+            "Agent does not re-ask for information already provided (age, gender, frequency)",
+            "Agent presents all 4 Harvard framework options and asks David to choose",
+            "Agent asks no more than 3 questions to fill gaps",
+            "Output file written to agents/product_manager/output/personas/ as a .md file",
+            "Persona includes at least 2 use case scenarios and a key insight summary"
+          ]
+        },
+        {
+          "id": "minimal-baseline",
+          "prompt": "Build a persona for our book buyers.",
+          "fixtures": [],
+          "assertions": [
+            "Agent asks one scoping question before proposing frameworks",
+            "Agent does not skip the framework selection step",
+            "Agent produces a complete persona despite thin starting information"
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "vision-report",
+      "test_cases": [
+        {
+          "id": "happy-path",
+          "prompt": "Write a vision report for the online reading booking feature.",
+          "fixtures": [],
+          "assertions": [
+            "Agent asks at least one clarifying question about user outcomes before writing",
+            "Agent checks agents/product_manager/output/vision-reports/ for existing versions",
+            "Output file written as agents/product_manager/output/vision-reports/online-reading-booking-v1.md",
+            "Document contains all 7 required sections including Customer Voice and Success Looks Like",
+            "Requirements extraction table is included at the end of the document"
+          ]
+        },
+        {
+          "id": "revision-request",
+          "prompt": "Update the vision report for online booking — the headline needs to be stronger.",
+          "fixtures": ["agents/product_manager/output/vision-reports/online-reading-booking-v1.md"],
+          "assertions": [
+            "Agent creates a new v2 file rather than overwriting v1",
+            "Agent does not delete or modify the existing v1 file",
+            "New file is saved as online-reading-booking-v2.md"
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "solution-options",
+      "test_cases": [
+        {
+          "id": "happy-path",
+          "prompt": "How should we approach adding a booking system to the site?",
+          "fixtures": [],
+          "assertions": [
+            "Agent recaps the problem statement before generating options",
+            "Agent produces exactly 3 solution options",
+            "Each option includes pros, cons, effort estimate, and risk level",
+            "A comparison matrix is included",
+            "An HTML visual is written to agents/product_manager/output/visuals/",
+            "Agent asks 'Which direction should we take?' and waits for response"
+          ]
+        },
+        {
+          "id": "problem-undefined",
+          "prompt": "What are our options for the new feature?",
+          "fixtures": [],
+          "assertions": [
+            "Agent does not generate options immediately",
+            "Agent asks for the problem statement or routes to idea-to-epic first",
+            "No output files are written until the problem is defined"
+          ]
+        }
+      ]
+    }
+  ]
+}

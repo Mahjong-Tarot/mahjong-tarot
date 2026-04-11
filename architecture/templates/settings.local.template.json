@@ -2,7 +2,7 @@
   "_readme": [
     "One-time install — paste this prompt to Claude Code:",
     "",
-    "  Read context/templates/settings.local.template.json in this project.",
+    "  Read architecture/templates/settings.local.template.json in this project.",
     "  Install it as .claude/settings.local.json by:",
     "  - replacing <personal-path> with the absolute path to this repo (run: pwd && echo $HOME)",
     "  - replacing <home-username> with the current macOS username (from echo $HOME)",

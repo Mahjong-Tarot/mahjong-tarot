@@ -91,3 +91,4 @@ website/package-lock.json
 .playwright-mcp
 .next/
 docs/*
+scheduled_tasks.lock

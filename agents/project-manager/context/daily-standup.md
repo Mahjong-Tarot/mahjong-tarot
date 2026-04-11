@@ -1,119 +1,176 @@
 ---
 name: daily-standup
-description: Scheduled morning workflow. Runs at 7 AM Mon–Fri. Reads Dave and Yon's check-in MD files, verifies freshness, pings missing members if past the 10 AM deadline, summarises all inputs, appends the day's entry to the monthly report, and assigns tasks in GitHub Projects for both humans and AI agents.
-trigger: Daily 7:00 AM Mon–Fri (scheduled)
+description: Two-phase scheduled workflow. Phase 1 runs at 7 AM Mon–Fri (morning reminder). Phase 2 runs at 9 AM Mon–Fri (compile and distribute). Reads dave.md, yon.md, and agents.md from standup/individual/, detects conflicts, compiles the daily stand-up file, and sends a summary to the team Telegram channel.
+trigger: Phase 1 — Daily 7:00 AM Mon–Fri (UTC 00:00). Phase 2 — Daily 9:00 AM Mon–Fri (UTC 02:00).
 ---
 
 # Daily Stand-up Workflow
 
 ## Purpose
 
-Run the complete async stand-up cycle: collect human check-ins, enforce the 10 AM deadline, summarise the day, assign tasks, and log everything to the monthly report. This is the PM's most important daily action — it sets the direction for the whole team.
+Two-phase async stand-up cycle:
+
+- **Phase 1 (7 AM)**: Send morning reminder to Dave and Yon to submit their check-ins before 9 AM.
+- **Phase 2 (9 AM)**: Read all three check-in files, detect conflicts, compile the daily stand-up, and push a summary to Telegram.
 
 ## File locations
 
 | File | Path | Notes |
 |------|------|-------|
-| Dave's check-in | `standup/dave.md` | Must have today's date on line 1 — human-written input |
-| Yon's check-in | `standup/yon.md` | Must have today's date on line 1 — human-written input |
-| Monthly report | `agents/project manager/output/reports/YYYY-MM.md` | Append today's block |
-| Alert fallback | `agents/project manager/output/alerts/alert-YYYY-MM-DD.md` | Write when Gmail unavailable |
+| Dave's check-in | `standup/individual/dave.md` | Written the evening before; date must match yesterday |
+| Yon's check-in | `standup/individual/yon.md` | Written the evening before; date must match yesterday |
+| Trac's check-in | `standup/individual/trac.md` | Written the evening before; date must match yesterday |
+| Khang's check-in | `standup/individual/khang.md` | Written the evening before; date must match yesterday |
+| Agent updates | `standup/individual/agents.md` | Combined agent daily update; included as-is |
+| Daily compiled output | `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md` | Created fresh each day |
+| Alert fallback | `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md` | Written when Gmail unavailable |
 
-## Step-by-step
-
-### 1. Read both check-in files
-
-Read `standup/dave.md` and `standup/yon.md`. For each file, check line 1 for the datestamp:
-
-```
-date: YYYY-MM-DD
-```
-
-A check-in is **fresh** if the date matches **yesterday** (the previous working day). A check-in is **stale or missing** if the date is not the previous working day's date, or the file is empty.
-
-> **Note:** Stand-ups run at 7 AM, so check-ins are always written the evening before. Monday morning stand-ups treat Friday as the previous working day.
-
-### 2. Handle missing check-ins
-
-If it is **before 10:00 AM** and one or both check-ins are missing:
-- Note who is missing and wait. The scheduled ping task will nudge them.
-
-If it is **10:00 AM or later** and check-ins are still missing:
-- Send a Gmail reminder to the missing person: *"Stand-up deadline passed — please submit your check-in now."*
-- Re-check every 5 minutes until received (via the scheduled ping task).
-- Once all check-ins are in, continue to step 3.
-
-If **both check-ins are fresh**, continue immediately.
-
-### 3. Summarise and plan
-
-Read both check-ins fully. Then decide:
-- **Human tasks**: what Dave and Yon will own today
-- **Agent tasks**: what AI agents will execute today
-
-Think about dependencies — if Dave is blocked waiting on Yon, flag it. If an agent task unblocks a human task, sequence them accordingly.
-
-### 4. Append to the monthly report
-
-Open `agents/project manager/output/reports/YYYY-MM.md` and append a new daily block using this format:
-
-```markdown
 ---
 
-## YYYY-MM-DD
+## Phase 1 — Morning Reminder (7:00 AM)
+
+Send a reminder to Dave and Yon:
+
+> *"Good morning! Please submit your check-in to `standup/individual/<name>.md` before 9 AM so it's included in today's stand-up."*
+
+- **Primary channel**: Gmail (dave@edge8.co + Yon, Trac, and Khang's emails when confirmed).
+- **Fallback**: Write `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md`.
+
+---
+
+## Phase 2 — Compile & Distribute (9:00 AM)
+
+### Step 1: Read check-in files
+
+Read all files in `standup/individual/`:
+- `dave.md`
+- `yon.md`
+- `trac.md`
+- `khang.md`
+- `agents.md`
+
+**Freshness rule:** A check-in is fresh if its `date:` field matches the **previous working day** (yesterday; treat Friday as yesterday on Mondays).
+
+For human files, extract focus items, blockers, and notes. For `agents.md`, include the content as-is — no decomposition needed.
+
+If a file is missing or stale, mark it as absent in the compiled output and continue.
+
+### Step 2: Detect conflicts
+
+Scan all focus items across all three files. Flag a conflict when two or more parties are working on the same area (same page, component, file, topic, or Supabase table/function).
+
+### Step 3: Compile the daily file
+
+Create the monthly folder if it doesn't exist. Write the compiled file to `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md`:
+
+```markdown
+# Daily Stand-Up — <Day, Month DD YYYY>
+_Compiled at 09:00 AM_
+
+---
+
+## ⚠️ Conflicts & Sync Alerts
+<!-- Insert conflict warnings here, or write "None today." -->
+
+---
+
+## Human Check-Ins
 
 ### Dave
-[paste or summarise Dave's focus and blockers]
+**Focus today:**
+- <item>
+
+**Blockers:** <blocker or None>
+
+**Notes:** <notes or —>
 
 ### Yon
-[paste or summarise Yon's focus and blockers]
+...
 
-### Agent: [AgentName]
-- [Task assigned]
-- [Task assigned]
+### <Name> — No check-in received
 
+---
+
+## Agent Updates
+<!-- Copy each agent's section from standup/individual/agents.md as-is, or write "No agent update received." if missing/stale -->
+
+---
+
+_End of stand-up. Ping the PM agent in Telegram for changes or updates throughout the day._
 ```
 
-Keep each entry factual and concise — this document will be read back by AI later for querying, so clarity beats polish.
+### Step 4: Send Telegram summary
 
-### 5. Create GitHub tasks
+```
+📋 *Stand-Up — <Day DD Mon YYYY>*
 
-For each task identified in step 3, create a GitHub Projects task using the `gh` CLI:
+⚠️ *Conflicts:* <count, or "None">
 
-```bash
-gh project item-create <project-number> --owner <owner> --title "<task title>" --body "<acceptance criteria>"
+👥 *Team focus:*
+• Dave: <first 1–2 focus items, or "No check-in">
+• Yon: <first 1–2 focus items, or "No check-in">
+
+🤖 *Agent updates:* <one-line summary, or "None received">
+
+🔗 Full stand-up saved to standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md
+
+_Ping @PM-agent for any changes or updates today._
 ```
 
-Every task must have:
-- A clear title (action verb + subject)
-- Acceptance criteria in the body (what does "done" look like?)
-- Assignee if known
+If Telegram delivery fails, log the error at the bottom of the compiled file. Do not retry.
 
-### 6. Confirm completion
+---
 
-After appending the report and creating tasks, output a brief summary:
-- Who checked in ✅ / who was missing ❌
-- Number of tasks created for humans and agents
-- Any blockers flagged
-- Path to today's entry: `agents/project manager/output/reports/YYYY-MM.md`
+## Check-in file formats
 
-## Check-in file format (expected)
-
+### Human (`standup/individual/<name>.md`)
 ```
 date: YYYY-MM-DD
-name: Dave
+name: <Name>
 
 ## Today's focus
 - ...
 
+## Notes
+- (optional)
+
 ## Blockers
-None / [description]
+None
 ```
 
-If a check-in is present but not in this format, do your best to extract intent rather than rejecting it.
+### Agent (`standup/individual/agents.md`)
+
+One file, one section per agent. Each agent reads its own section to know what to do today.
+
+```
+date: YYYY-MM-DD
+
+---
+
+## <agent-name>
+
+**Completed:**
+- <what was done>
+
+**Next:**
+- <what to do today>
+
+**Blockers:**
+None
+
+---
+
+## <agent-name>
+...
+```
+
+---
 
 ## Edge cases
 
-- **Both check-ins are stale from yesterday**: Treat as missing and start the ping loop.
-- **Agent has no tasks today**: Still include the agent block in the report with "No tasks assigned."
-- **GitHub Projects CLI unavailable**: Log tasks as a bullet list at the end of today's report block instead, and note they need manual creation.
+| Situation | Action |
+|-----------|--------|
+| Check-in date is stale | Mark as absent; continue |
+| Monthly folder does not exist | Create it before writing |
+| Telegram send fails | Log error in compiled file footer; do not retry |
+| Both humans absent | Still compile; note absences prominently |

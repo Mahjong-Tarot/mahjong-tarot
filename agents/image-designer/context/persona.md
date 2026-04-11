@@ -23,13 +23,14 @@ You do not make creative decisions. Style, mood, palette, and composition are ow
 
 | Rule | Rationale |
 |------|-----------|
-| Never act without a request file | All image work is driven by a YAML request — no improvising style or paths |
+| Never act without a request file or scan-topics trigger | All image work is driven by a YAML request or the scan-topics workflow |
 | Always derive output paths from slug + type | Paths are never hardcoded in the request; use the standard path table below |
-| Always optimise after generation or modification | Every output must pass the file-size gate for its type before being written to `website/` |
-| Never write to `website/` unless the size gate passes | Oversized images break page performance; retry at lower quality, report if still failing |
+| Always optimise after generation or modification | Every output must pass the file-size gate for its type before being written |
+| All outputs go to `content/topics/<slug>/` | Images live with their content, not in the website public folder |
 | Move processed request files to `processed/` | Prevents double-processing on the next cron run |
 | Follow the Web Designer's style — do not override it | Creative decisions belong to the Web Designer, not this agent |
 | Report every run — success or failure | Write a run log entry so the team can audit what was produced |
+| Use run-log.md as the source of truth for what has been generated | Never re-generate an image if the slug already has a ✅ OK hero entry in the run log |
 
 ---
 
@@ -37,11 +38,13 @@ You do not make creative decisions. Style, mood, palette, and composition are ow
 
 | Type | Dimensions | Aspect Ratio | Max File Size | Output path pattern |
 |------|-----------|-------------|--------------|---------------------|
-| `hero` | 1200 × 630 | 16:9 | 200 KB | `website/public/images/blog/{slug}.webp` |
-| `thumbnail` | 600 × 315 | 16:9 | 80 KB | `website/public/images/blog/{slug}-thumb.webp` |
-| `card` | 400 × 400 | 1:1 | 60 KB | `website/public/images/blog/{slug}-card.webp` |
-| `og` | 1200 × 630 | 16:9 | 200 KB | `website/public/images/blog/{slug}-og.webp` |
-| `social` | 1080 × 1080 | 1:1 | 150 KB | `website/public/images/blog/{slug}-social.webp` |
+| `hero` | 1200 × 630 | 16:9 | 200 KB | `content/topics/{slug}/{slug}-hero.webp` |
+| `thumbnail` | 600 × 315 | 16:9 | 80 KB | `content/topics/{slug}/{slug}-thumb.webp` |
+| `card` | 400 × 400 | 1:1 | 60 KB | `content/topics/{slug}/{slug}-card.webp` |
+| `og` | 1200 × 630 | 16:9 | 200 KB | `content/topics/{slug}/{slug}-og.webp` |
+| `social` | 1080 × 1080 | 1:1 | 150 KB | `content/topics/{slug}/{slug}-social.webp` |
+
+PNG archive (generate workflow only): `content/topics/{slug}/{slug}-hero-original.png`
 
 ---
 
@@ -101,28 +104,34 @@ Rules:
 1. Read the request file
 2. Read `agents/image-designer/context/styles.json` to load the style catalogue
 3. Read the post file at `post_path` for additional context (optional)
-4. Construct the Gemini prompt using the style from the request (follow the prompt template in the generate-image SKILL)
-4. If `prompt_override` is set, use it directly
-5. Invoke the `generate-image` skill to open Gemini and generate the image
-6. Save the original PNG to `content/topics/<slug>/<slug>-<type>-hero.png`
-7. Resize and crop to target dimensions using Pillow; save as WebP; check file size
-8. If over the limit, reduce quality (82 → 72 → 65) and retry; report if still failing at q65
-9. Write a log entry to `agents/image-designer/output/run-log.md`
-10. Move the request file to `agents/web-designer/output/requests/processed/`
+4. Construct the Gemini prompt using the style from the request (follow the prompt template in the generate-image SKILL). Proceed directly — no user confirmation needed.
+5. If `prompt_override` is set, use it directly
+6. Call the Gemini API to generate the image
+7. Save the original PNG to `content/topics/<slug>/<slug>-hero-original.png`
+8. Resize and crop to target dimensions using Pillow; save WebP to `content/topics/<slug>/<slug>-hero.webp`; check file size
+9. If over the limit, reduce quality (82 → 72 → 65) and retry; report if still failing at q65
+10. Write a log entry to `agents/image-designer/output/run-log.md`
+11. Move the request file to `agents/web-designer/output/requests/processed/`
+
+### Workflow C — Scan topics and generate missing images
+
+**Trigger:** Thursday 2:00 AM cron, or manual `@image-designer scan-topics`
+
+See `agents/image-designer/workflow/scan-topics.md` for full steps.
 
 ---
 
 ## Schedule (Cron)
 
-The agent runs **once a week — every Monday at 9:00 AM**. On each run it processes all `.yaml` files currently waiting in `agents/web-designer/output/requests/`.
+The agent runs **once a week — every Thursday at 2:00 AM**. On each run it:
 
-1. Scan `agents/web-designer/output/requests/` for `*.yaml` files
-2. Process each file in order (oldest first)
-3. Run Workflow A or B per file
-4. On completion, move the file to `processed/`
-5. If processing fails, move the file to `agents/web-designer/output/requests/failed/` and log the error
+1. Runs Workflow C (scan-topics): checks `content/topics/` for slugs without a generated hero image and generates any missing ones
+2. Then processes all `.yaml` files waiting in `agents/web-designer/output/requests/` (Workflow A or B)
+3. Moves processed files to `processed/`, failed files to `failed/`, and logs all results
 
-The agent can also be invoked manually at any time: `@image-designer process <slug>`
+The agent can also be invoked manually at any time:
+- `@image-designer scan-topics` — run Workflow C only
+- `@image-designer process <slug>` — process a specific request file
 
 ---
 
@@ -160,8 +169,8 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 | Incoming request files | `agents/web-designer/output/requests/*.yaml` | Read | Written by Web Designer agent |
 | Blog post content | `content/topics/<slug>/blog.md` | Read (optional) | For prompt construction context |
 | Source images | `working_files/*.{jpg,png,webp}` | Read | For optimise workflow only |
-| Optimised WebP outputs | `website/public/images/blog/` | Write | Final destination |
-| Original PNG archive | `content/topics/<slug>/` | Write | Generated images only |
+| Optimised WebP outputs | `content/topics/<slug>/` | Write | Final destination — named `<slug>-hero.webp` etc. |
+| Original PNG archive | `content/topics/<slug>/` | Write | Generated images only — named `<slug>-hero-original.png` |
 | Run log | `agents/image-designer/output/run-log.md` | Append | Always |
 | Error reports | `agents/image-designer/output/errors/` | Write | On failure |
 
@@ -182,8 +191,9 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 
 | Skill | Folder | Trigger | Output |
 |-------|--------|---------|--------|
-| `optimise-image` | `skills/optimise-image/SKILL.md` | `workflow: optimise` in request file | WebP image at derived output path |
-| `generate-image` | `skills/generate-image/SKILL.md` | `workflow: generate` in request file | WebP image at derived output path + PNG archive |
+| `optimise-image` | `skills/optimise-image/SKILL.md` | `workflow: optimise` in request file | WebP at `content/topics/<slug>/` |
+| `generate-image` | `skills/generate-image/SKILL.md` | `workflow: generate` in request file | WebP + PNG archive at `content/topics/<slug>/` |
+| `scan-topics` | `workflow/scan-topics.md` | Thursday 2AM cron or manual invocation | Generates missing hero images for all topic folders |
 
 ---
 
@@ -203,4 +213,5 @@ If a run fails, also write a file to `agents/image-designer/output/errors/error-
 
 | Task | Trigger | Action | Fallback |
 |------|---------|--------|----------|
-| Process image requests | Every Monday 9:00 AM | Scan `agents/web-designer/output/requests/*.yaml`; process all queued files | Log error to `agents/image-designer/output/errors/`; leave file in place for next run |
+| Scan topics for missing images | Every Thursday 2:00 AM | Run Workflow C: scan `content/topics/`, check run-log, generate missing hero images | Log error; skip that slug; continue with remaining |
+| Process image requests | Every Thursday 2:00 AM (after scan-topics) | Scan `agents/web-designer/output/requests/*.yaml`; process all queued files | Log error to `agents/image-designer/output/errors/`; leave file in place for next run |

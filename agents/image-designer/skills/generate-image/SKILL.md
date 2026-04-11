@@ -48,13 +48,13 @@ No Western zodiac symbols, text overlays, watermarks, anime style, rounded or so
 
 | Type | Width | Height | Max KB | Output path |
 |------|-------|--------|--------|-------------|
-| hero | 1200 | 630 | 200 | `website/public/images/blog/{slug}.webp` (blog post) or `website/public/images/{slug}.webp` (site asset) |
-| thumbnail | 600 | 315 | 80 | `website/public/images/blog/{slug}-thumb.webp` |
-| card | 400 | 400 | 60 | `website/public/images/blog/{slug}-card.webp` |
-| og | 1200 | 630 | 200 | `website/public/images/blog/{slug}-og.webp` |
-| social | 1080 | 1080 | 150 | `website/public/images/blog/{slug}-social.webp` |
+| hero | 1200 | 630 | 200 | `content/topics/{slug}/{slug}-hero.webp` |
+| thumbnail | 600 | 315 | 80 | `content/topics/{slug}/{slug}-thumb.webp` |
+| card | 400 | 400 | 60 | `content/topics/{slug}/{slug}-card.webp` |
+| og | 1200 | 630 | 200 | `content/topics/{slug}/{slug}-og.webp` |
+| social | 1080 | 1080 | 150 | `content/topics/{slug}/{slug}-social.webp` |
 
-**Output path rule:** If `content/topics/<slug>/blog.md` exists, output to `website/public/images/blog/`. Otherwise output to `website/public/images/` (site-wide assets such as homepage hero, about page, etc.).
+**Output path rule:** All outputs go to `content/topics/<slug>/` — this is the single canonical location for all topic images.
 
 ---
 
@@ -116,11 +116,11 @@ SPECS = {
     "social":    (1080, 1080, 150),
 }
 PATH_PATTERNS = {
-    "hero":      "website/public/images/blog/{slug}.webp",
-    "thumbnail": "website/public/images/blog/{slug}-thumb.webp",
-    "card":      "website/public/images/blog/{slug}-card.webp",
-    "og":        "website/public/images/blog/{slug}-og.webp",
-    "social":    "website/public/images/blog/{slug}-social.webp",
+    "hero":      "content/topics/{slug}/{slug}-hero.webp",
+    "thumbnail": "content/topics/{slug}/{slug}-thumb.webp",
+    "card":      "content/topics/{slug}/{slug}-card.webp",
+    "og":        "content/topics/{slug}/{slug}-og.webp",
+    "social":    "content/topics/{slug}/{slug}-social.webp",
 }
 
 target_w, target_h, max_kb = SPECS[image_type]

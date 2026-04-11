@@ -1,6 +1,6 @@
 ---
 name: optimise-image
-description: Triggered when a request file contains workflow: optimise. Reads a source image from working_files/, applies colour grading, crops, resizes to the target image type dimensions, enforces the file-size gate, writes the final WebP to website/public/images/blog/, and logs the result.
+description: Triggered when a request file contains workflow: optimise. Reads a source image from working_files/, applies colour grading, crops, resizes to the target image type dimensions, enforces the file-size gate, writes the final WebP to content/topics/{slug}/, and logs the result.
 trigger: Per image entry with workflow: optimise in a YAML request file
 ---
 
@@ -8,7 +8,7 @@ trigger: Per image entry with workflow: optimise in a YAML request file
 
 ## Purpose
 
-Transform an existing source image into a brand-ready WebP for the website. Takes a raw JPEG, PNG, or WebP from `working_files/`, applies Pillow colour adjustments, crops to the correct aspect ratio, resizes to exact target dimensions, and enforces the per-type file-size limit. The output is a production-ready WebP written directly to `website/public/images/blog/`.
+Transform an existing source image into a brand-ready WebP for the website. Takes a raw JPEG, PNG, or WebP from `working_files/`, applies Pillow colour adjustments, crops to the correct aspect ratio, resizes to exact target dimensions, and enforces the per-type file-size limit. The output is a production-ready WebP written directly to `content/topics/{slug}/`.
 
 ---
 
@@ -18,7 +18,7 @@ Transform an existing source image into a brand-ready WebP for the website. Take
 |------|------|-------|
 | Request file | `agents/web-designer/output/requests/<slug>-image-request.yaml` | Written by Web Designer agent |
 | Source image | Path specified in `source` field of the request | Usually `working_files/<filename>` |
-| WebP output | `website/public/images/blog/` (derived by type) | Final destination |
+| WebP output | `content/topics/{slug}/` (derived by type) | Final destination |
 | Run log | `agents/image-designer/output/run-log.md` | Append one row per image |
 | Error report | `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md` | Write on failure |
 | Processed requests | `agents/web-designer/output/requests/processed/` | Move here on full success |
@@ -30,11 +30,11 @@ Transform an existing source image into a brand-ready WebP for the website. Take
 
 | Type | Width | Height | Aspect | Max KB | Output path |
 |------|-------|--------|--------|--------|-------------|
-| `hero` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}.webp` |
-| `thumbnail` | 600 | 315 | 16:9 | 80 | `website/public/images/blog/{slug}-thumb.webp` |
-| `card` | 400 | 400 | 1:1 | 60 | `website/public/images/blog/{slug}-card.webp` |
-| `og` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}-og.webp` |
-| `social` | 1080 | 1080 | 1:1 | 150 | `website/public/images/blog/{slug}-social.webp` |
+| `hero` | 1200 | 630 | 16:9 | 200 | `content/topics/{slug}/{slug}-hero.webp` |
+| `thumbnail` | 600 | 315 | 16:9 | 80 | `content/topics/{slug}/{slug}-thumb.webp` |
+| `card` | 400 | 400 | 1:1 | 60 | `content/topics/{slug}/{slug}-card.webp` |
+| `og` | 1200 | 630 | 16:9 | 200 | `content/topics/{slug}/{slug}-og.webp` |
+| `social` | 1080 | 1080 | 1:1 | 150 | `content/topics/{slug}/{slug}-social.webp` |
 
 ---
 
@@ -83,11 +83,11 @@ SPECS = {
     "social":    (1080, 1080, 150),
 }
 PATH_PATTERNS = {
-    "hero":      "website/public/images/blog/{slug}.webp",
-    "thumbnail": "website/public/images/blog/{slug}-thumb.webp",
-    "card":      "website/public/images/blog/{slug}-card.webp",
-    "og":        "website/public/images/blog/{slug}-og.webp",
-    "social":    "website/public/images/blog/{slug}-social.webp",
+    "hero":      "content/topics/{slug}/{slug}-hero.webp",
+    "thumbnail": "content/topics/{slug}/{slug}-thumb.webp",
+    "card":      "content/topics/{slug}/{slug}-card.webp",
+    "og":        "content/topics/{slug}/{slug}-og.webp",
+    "social":    "content/topics/{slug}/{slug}-social.webp",
 }
 
 target_w, target_h, max_kb = SPECS[image_type]

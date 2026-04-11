@@ -8,7 +8,7 @@ allowed-tools: Read Write Bash Glob Grep
 
 ## Purpose
 
-Takes a source image from `working_files/` (or any path specified in the request), applies Pillow transformations (colour grade, crop, resize), converts to WebP, enforces the file-size limit for the image type, and writes the final file to `website/public/images/blog/`.
+Takes a source image from `working_files/` (or any path specified in the request), applies Pillow transformations (colour grade, crop, resize), converts to WebP, enforces the file-size limit for the image type, and writes the final file to `content/topics/<slug>/`.
 
 ---
 
@@ -26,11 +26,11 @@ Takes a source image from `working_files/` (or any path specified in the request
 
 | Type | Path |
 |------|------|
-| hero | `website/public/images/blog/{slug}.webp` |
-| thumbnail | `website/public/images/blog/{slug}-thumb.webp` |
-| card | `website/public/images/blog/{slug}-card.webp` |
-| og | `website/public/images/blog/{slug}-og.webp` |
-| social | `website/public/images/blog/{slug}-social.webp` |
+| hero | `content/topics/{slug}/{slug}-hero.webp` |
+| thumbnail | `content/topics/{slug}/{slug}-thumb.webp` |
+| card | `content/topics/{slug}/{slug}-card.webp` |
+| og | `content/topics/{slug}/{slug}-og.webp` |
+| social | `content/topics/{slug}/{slug}-social.webp` |
 
 ---
 
@@ -74,11 +74,11 @@ SPECS = {
     "social":    (1080, 1080, 150),
 }
 PATH_PATTERNS = {
-    "hero":      "website/public/images/blog/{slug}.webp",
-    "thumbnail": "website/public/images/blog/{slug}-thumb.webp",
-    "card":      "website/public/images/blog/{slug}-card.webp",
-    "og":        "website/public/images/blog/{slug}-og.webp",
-    "social":    "website/public/images/blog/{slug}-social.webp",
+    "hero":      "content/topics/{slug}/{slug}-hero.webp",
+    "thumbnail": "content/topics/{slug}/{slug}-thumb.webp",
+    "card":      "content/topics/{slug}/{slug}-card.webp",
+    "og":        "content/topics/{slug}/{slug}-og.webp",
+    "social":    "content/topics/{slug}/{slug}-social.webp",
 }
 
 target_w, target_h, max_kb = SPECS[image_type]
@@ -137,7 +137,7 @@ sys.exit(1)
 ### 3. Check the result
 
 - **Exit 0** — image passed the size gate. Record the output path, type, and final KB for the log entry.
-- **Exit 1** — image failed after three quality passes. Log the failure, do not write to `website/`. Move the request file to `agents/web-designer/output/requests/failed/`.
+- **Exit 1** — image failed after three quality passes. Log the failure. Move the request file to `agents/web-designer/output/requests/failed/`.
 
 ### 4. Write the run log entry
 

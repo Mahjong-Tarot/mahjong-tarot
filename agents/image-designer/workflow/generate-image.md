@@ -19,8 +19,8 @@ Produce a brand-new image for a blog post or page by calling the Gemini image ge
 | Request file | `agents/web-designer/output/requests/<slug>-image-request.yaml` | Written by Web Designer agent |
 | Post content | `content/topics/<slug>/blog.md` | Optional — read for prompt context |
 | Temp raw download | `working_files/<slug>-<type>-raw.png` | Temporary — cleaned up after optimisation |
-| PNG archive | `content/topics/<slug>/<slug>-<type>-original.png` | Permanent archive of the generated image |
-| WebP output | `website/public/images/blog/` (derived by type) | Final destination |
+| PNG archive | `content/topics/<slug>/<slug>-hero-original.png` | Permanent archive of the generated image |
+| WebP output | `content/topics/<slug>/` (derived by type — see path table) | Final destination |
 | Run log | `agents/image-designer/output/run-log.md` | Append one row per image type |
 | Error report | `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md` | Write on failure |
 | Processed requests | `agents/web-designer/output/requests/processed/` | Move here on full success |
@@ -32,13 +32,13 @@ Produce a brand-new image for a blog post or page by calling the Gemini image ge
 
 | Type | Width | Height | Aspect | Max KB | Output path |
 |------|-------|--------|--------|--------|-------------|
-| `hero` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}.webp` (blog) or `website/public/images/{slug}.webp` (site asset) |
-| `thumbnail` | 600 | 315 | 16:9 | 80 | `website/public/images/blog/{slug}-thumb.webp` |
-| `card` | 400 | 400 | 1:1 | 60 | `website/public/images/blog/{slug}-card.webp` |
-| `og` | 1200 | 630 | 16:9 | 200 | `website/public/images/blog/{slug}-og.webp` |
-| `social` | 1080 | 1080 | 1:1 | 150 | `website/public/images/blog/{slug}-social.webp` |
+| `hero` | 1200 | 630 | 16:9 | 200 | `content/topics/{slug}/{slug}-hero.webp` |
+| `thumbnail` | 600 | 315 | 16:9 | 80 | `content/topics/{slug}/{slug}-thumb.webp` |
+| `card` | 400 | 400 | 1:1 | 60 | `content/topics/{slug}/{slug}-card.webp` |
+| `og` | 1200 | 630 | 16:9 | 200 | `content/topics/{slug}/{slug}-og.webp` |
+| `social` | 1080 | 1080 | 1:1 | 150 | `content/topics/{slug}/{slug}-social.webp` |
 
-**Output path rule:** If `content/topics/<slug>/blog.md` exists → output to `website/public/images/blog/`. Otherwise → `website/public/images/` (site-wide assets: homepage hero, about page, etc.).
+**Output path rule:** All outputs go to `content/topics/<slug>/` — this is the single canonical location for all topic images.
 
 ---
 
@@ -78,7 +78,7 @@ Use `GEMINI_API_KEY` from the environment. See `skills/generate-image/SKILL.md` 
 - Model: `imagen-3.0-generate-002`
 - Aspect ratio: `16:9` for hero/thumbnail/og; `1:1` for card/social
 - Save the raw PNG to `working_files/<slug>-raw.png`
-- Archive a permanent copy to `content/topics/<slug>/<slug>-<type>-original.png`
+- Archive a permanent copy to `content/topics/<slug>/<slug>-hero-original.png`
 
 If the API call fails, simplify the prompt and retry once. If still failing, move to `failed/` and log.
 
@@ -104,11 +104,11 @@ SPECS = {
     "social":    (1080, 1080, 150),
 }
 PATH_PATTERNS = {
-    "hero":      "website/public/images/blog/{slug}.webp",
-    "thumbnail": "website/public/images/blog/{slug}-thumb.webp",
-    "card":      "website/public/images/blog/{slug}-card.webp",
-    "og":        "website/public/images/blog/{slug}-og.webp",
-    "social":    "website/public/images/blog/{slug}-social.webp",
+    "hero":      "content/topics/{slug}/{slug}-hero.webp",
+    "thumbnail": "content/topics/{slug}/{slug}-thumb.webp",
+    "card":      "content/topics/{slug}/{slug}-card.webp",
+    "og":        "content/topics/{slug}/{slug}-og.webp",
+    "social":    "content/topics/{slug}/{slug}-social.webp",
 }
 
 target_w, target_h, max_kb = SPECS[image_type]

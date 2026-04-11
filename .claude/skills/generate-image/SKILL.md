@@ -99,11 +99,7 @@ import os, sys
 
 source_path  = f"working_files/{SLUG}-raw.png"
 target_w, target_h, max_kb = 1200, 630, 200
-# Use blog/ subfolder for blog post images; root images/ for site-wide assets
-# (hero pages, about, etc. — anything without a content/topics/<slug>/blog.md file)
-import os as _os
-_is_blog = _os.path.exists(f"content/topics/{SLUG}/blog.md")
-output_path  = f"website/public/images/{'blog/' if _is_blog else ''}{SLUG}.webp"
+output_path  = f"content/topics/{SLUG}/{SLUG}-hero.webp"
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
 img = Image.open(source_path).convert("RGB")
@@ -136,7 +132,7 @@ sys.exit(1)
 
 ```
 Original PNG:  content/topics/<slug>/<slug>-hero-original.png
-WebP output:   website/public/images/blog/<slug>.webp
+WebP output:   content/topics/<slug>/<slug>-hero.webp
 Dimensions:    1200×630
 File size:     X KB
 Style used:    [style name]

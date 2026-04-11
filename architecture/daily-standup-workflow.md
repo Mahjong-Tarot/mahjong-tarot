@@ -13,7 +13,7 @@ This workflow collects individual check-ins from humans and agents, cross-refere
 
 ## Phase 1 — Gather
 
-**Source:** `standup/Individual/` folder — one file per team member, named `<member-name>.md` (e.g. `dave.md`, `yon.md`).
+**Source:** `standup/individual/` folder — one file per team member, named `<member-name>.md` (e.g. `dave.md`, `yon.md`).
 
 **Check-in file format (expected structure):**
 
@@ -33,7 +33,7 @@ name: <Member Name>
 ```
 
 **Gather rules:**
-- Read every `.md` file in `standup/Individual/` at run time.
+- Read every `.md` file in `standup/individual/` at run time.
 - Check the `date:` field in each file. If a file's date is not today's date, treat the member as **absent** — include a note in the compiled output that no check-in was received.
 - Do not error out on a missing or stale file — log the absence and continue.
 
@@ -50,7 +50,7 @@ From each current check-in, extract:
 
 ### 2b — Pull agent standing tasks
 
-**Source:** `standup/agents.md` — a single config file that lists each agent and its recurring daily responsibilities.
+**Source:** `standup/individual/agents.md` — a single config file that lists each agent and its recurring daily responsibilities.
 
 **Expected `agents.md` format:**
 
@@ -186,8 +186,8 @@ _Ping @PM-agent for any changes or updates today._
 
 | Situation | Action |
 |---|---|
-| `standup/Individual/<name>.md` date is stale | Mark member as absent; continue |
-| `standup/agents.md` missing | Skip agent section; insert warning in compiled file |
+| `standup/individual/<name>.md` date is stale | Mark member as absent; continue |
+| `standup/individual/agents.md` missing | Skip agent section; insert warning in compiled file |
 | `@<agent>` mention references unknown agent | Flag as unresolved in compiled output |
 | Monthly folder does not exist | Create it before writing the compiled file |
 | Telegram send fails | Log error in compiled file footer; do not retry |
@@ -199,7 +199,8 @@ _Ping @PM-agent for any changes or updates today._
 
 | Path | Purpose |
 |---|---|
-| `standup/Individual/<name>.md` | Each team member's daily check-in |
-| `standup/agents.md` | Agent roster and standing daily tasks |
-| `standup/<YYYY-MM>/<YYYY-MM-DD>.md` | Compiled daily stand-up output |
+| `standup/individual/<name>.md` | Each team member's daily check-in |
+| `standup/individual/agents.md` | Agent roster and standing daily tasks |
 | `standup/briefings/` | Monthly briefing archives (separate workflow) |
+| `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md` | Compiled daily stand-up output |
+

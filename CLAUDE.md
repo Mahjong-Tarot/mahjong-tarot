@@ -48,9 +48,9 @@ mahjong-tarot/
 ├── agents/
 │   └── web-developer/
 │       ├── context/                    ← Agent instructions (do NOT modify)
-│       │   └── skills/
-│       │       └── build-page/
-│       │           └── SKILL.md       ← The build-page skill
+│       |── skills/
+│       │   └── build-page/
+│       │       └── SKILL.md       ← The build-page skill
 │       └── output/                    ← Staging area: generated .jsx components live here before review
 │
 ├── working_files/                     ← Git-ignored scratch space (see Working files below)

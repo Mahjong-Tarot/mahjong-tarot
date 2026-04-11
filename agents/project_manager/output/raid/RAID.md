@@ -1,7 +1,7 @@
 # RAID Log — Mahjong Tarot Project
 
 > **RAID** = Risks · Assumptions · Issues · Dependencies  
-> Last updated: 2026-04-08 (EOD automated update)
+> Last updated: 2026-04-11 (EOD automated update)
 
 ---
 
@@ -9,8 +9,8 @@
 
 | ID | Issue | Owner | Status | Raised | Notes |
 |----|-------|-------|--------|--------|-------|
-| I-01 | Dave missing standups for 2026-04-07 and 2026-04-08 | Dave | Open | 2026-04-08 | EOD alert sent via alert-2026-04-08.md; Dave's last check-in was 2026-04-06 |
-| I-02 | Yon missing standup for 2026-04-08 | Yon | Open | 2026-04-08 | Yon filed 2026-04-07 check-in but not today's; EOD alert sent |
+| I-01 | Dave missing standups from 2026-04-07 through 2026-04-11 | Dave | Open | 2026-04-08 | EOD alerts sent via alert-2026-04-08.md and alert-2026-04-11.md; Dave's last check-in was 2026-04-06 |
+| I-02 | Yon missing standups from 2026-04-08 through 2026-04-11 | Yon | Open | 2026-04-08 | Yon filed 2026-04-07 check-in but none since; EOD alerts sent |
 | I-03 | Gmail MCP unavailable — email alerts not deliverable | Trac | Open | 2026-04-07 | Workaround: file-based alerts in `agents/project manager/output/alerts/`. Resolve when Gmail MCP is connected |
 
 ---

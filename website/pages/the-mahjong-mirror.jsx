@@ -1,11 +1,50 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { supabase } from '../lib/supabase';
 import styles from '../styles/MahjongMirror.module.css';
+import form from '../styles/Forms.module.css';
 
 export default function TheMahjongMirror() {
+  const [fields, setFields] = useState({
+    name: '', email: '', phone: '', address: '', format: '', message: '',
+  });
+  const [status, setStatus] = useState('idle');
+
+  function update(e) {
+    setFields({ ...fields, [e.target.name]: e.target.value });
+  }
+
+  async function handlePreorder(e) {
+    e.preventDefault();
+    setStatus('submitting');
+
+    if (!supabase) { setStatus('error'); return; }
+
+    const parts = [];
+    if (fields.format) parts.push(`Preferred format: ${fields.format}`);
+    if (fields.address) parts.push(`Address: ${fields.address}`);
+    if (fields.message) parts.push(fields.message);
+    const fullMessage = parts.join('\n\n') || 'Interested in preordering The Mahjong Mirror.';
+
+    const { error } = await supabase.rpc('submit_contact', {
+      p_name: fields.name,
+      p_email: fields.email,
+      p_phone: fields.phone || null,
+      p_subject: 'Mahjong Mirror Preorder',
+      p_message: fullMessage,
+    });
+
+    if (error) {
+      console.error('Preorder error:', error);
+      setStatus('error');
+    } else {
+      setStatus('success');
+    }
+  }
   return (
     <>
       <Head>
@@ -31,7 +70,10 @@ export default function TheMahjongMirror() {
                 A modern divination system inspired by ancient Mahjong symbolism —
                 guiding you toward clarity, intuition, and deeper self-discovery.
               </p>
-              <Link href="#preorder" className="btn-primary">Preorder the Book</Link>
+              <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+                <Link href="#preorder" className="btn-primary">Preorder the Book</Link>
+                <Link href="/readings#book" className="btn-ghost">Book a Reading</Link>
+              </div>
             </div>
             <div className={styles.heroCover}>
               <Image
@@ -196,16 +238,113 @@ export default function TheMahjongMirror() {
         <section id="preorder" className="section-dark">
           <div className={`container ${styles.preorder}`}>
             <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Begin Your Journey Through the Tiles</span>
-            <h2>Start Exploring the Wisdom<br />Hidden Inside the Mahjong Mirror</h2>
+            <h2>Join the Waiting List for<br />The Mahjong Mirror</h2>
             <p>
-              Preorder your copy today and be among the first to experience this
-              new divination system.
+              Be among the first to receive your copy. Fill out the form below
+              and Bill will follow up with you directly.
             </p>
-            <Link href="mailto:bill@mahjong-tarot.com?subject=Mahjong Mirror Preorder" className="btn-primary">
-              Preorder the Book
-            </Link>
+
+            {status === 'success' ? (
+              <p className={form.successMsgLight}>
+                You're on the list! Bill will be in touch when the book is ready.
+              </p>
+            ) : (
+              <form className={form.bookingForm} onSubmit={handlePreorder}>
+                <div className={form.bookingRow}>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="pre-name">Name *</label>
+                    <input
+                      id="pre-name"
+                      name="name"
+                      type="text"
+                      className={form.inputDark}
+                      value={fields.name}
+                      onChange={update}
+                      required
+                    />
+                  </div>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="pre-email">Email *</label>
+                    <input
+                      id="pre-email"
+                      name="email"
+                      type="email"
+                      className={form.inputDark}
+                      value={fields.email}
+                      onChange={update}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className={form.bookingRow}>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="pre-phone">Phone</label>
+                    <input
+                      id="pre-phone"
+                      name="phone"
+                      type="tel"
+                      className={form.inputDark}
+                      value={fields.phone}
+                      onChange={update}
+                    />
+                  </div>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="pre-format">Preferred Format</label>
+                    <select
+                      id="pre-format"
+                      name="format"
+                      className={form.select}
+                      value={fields.format}
+                      onChange={update}
+                    >
+                      <option value="">Select (optional)</option>
+                      <option value="Digital">Digital</option>
+                      <option value="Hard Copy">Hard Copy</option>
+                      <option value="Both">Both</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className={form.formGroup}>
+                  <label className={form.labelLight} htmlFor="pre-address">Mailing Address</label>
+                  <textarea
+                    id="pre-address"
+                    name="address"
+                    className={form.textareaDark}
+                    placeholder="Required for hard copy orders"
+                    rows={2}
+                    value={fields.address}
+                    onChange={update}
+                  />
+                </div>
+
+                <div className={form.formGroup}>
+                  <label className={form.labelLight} htmlFor="pre-message">Message</label>
+                  <textarea
+                    id="pre-message"
+                    name="message"
+                    className={form.textareaDark}
+                    placeholder="Any questions about the book?"
+                    value={fields.message}
+                    onChange={update}
+                  />
+                </div>
+
+                <div className={form.bookingSubmit}>
+                  <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
+                    {status === 'submitting' ? 'Sending…' : 'Preorder the Book'}
+                  </button>
+                </div>
+
+                {status === 'error' && (
+                  <p className={form.errorText}>Something went wrong. Please try again.</p>
+                )}
+              </form>
+            )}
           </div>
         </section>
+
       </main>
 
       <Footer />

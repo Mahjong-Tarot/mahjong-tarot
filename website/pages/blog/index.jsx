@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
+import NewsletterSignup from '../../components/NewsletterSignup';
 import styles from '../../styles/Blog.module.css';
 
 const CATEGORIES = [
@@ -74,11 +75,44 @@ export default function BlogIndex() {
               Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
               hidden inside ancient symbols.
             </p>
+            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
+              <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Featured ── */}
+        <section className={`section-stone ${styles.featured}`}>
+          <div className="container">
+            <span className="overline">Featured</span>
+            <div className={styles.featuredInner}>
+              <Link href="/blog/posts/love-in-the-fire-horse-year" className={styles.featuredImage}>
+                <Image
+                  src="/images/blog/love-in-the-fire-horse-year.webp"
+                  alt="Love in the Year of the Fire Horse"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </Link>
+              <div className={styles.featuredText}>
+                <span className="post-category">Year of the Fire Horse</span>
+                <h2 className={styles.featuredTitle}>
+                  <Link href="/blog/posts/love-in-the-fire-horse-year">
+                    Love in the Year of the Fire Horse: What 2026 Means for Your Relationships
+                  </Link>
+                </h2>
+                <p className={styles.featuredExcerpt}>
+                  This is the one year in 60 where your partner is most likely to cheat and most likely to propose. The Fire Horse doesn't do anything halfway.
+                </p>
+                <Link href="/blog/posts/love-in-the-fire-horse-year" className="btn-secondary">Read the Article</Link>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* ── Filter ── */}
-        <section className={`section-stone ${styles.filterSection}`}>
+        <section className={styles.filterSection}>
           <div className="container">
             <div className={styles.filters}>
               {CATEGORIES.map((cat) => (
@@ -132,6 +166,13 @@ export default function BlogIndex() {
                 ))}
               </div>
             )}
+          </div>
+        </section>
+
+        {/* ── Newsletter ── */}
+        <section className="section-stone">
+          <div className="container">
+            <NewsletterSignup source="blog" variant="light" />
           </div>
         </section>
       </main>

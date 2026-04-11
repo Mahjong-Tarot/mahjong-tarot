@@ -1,11 +1,51 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { supabase } from '../lib/supabase';
 import styles from '../styles/Readings.module.css';
+import form from '../styles/Forms.module.css';
+
+const CHINESE_SIGNS = [
+  'Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake',
+  'Horse', 'Goat', 'Monkey', 'Rooster', 'Dog', 'Pig',
+];
 
 export default function Readings() {
+  const [fields, setFields] = useState({
+    name: '', email: '', phone: '', sign: '', birthday: '', message: '',
+  });
+  const [bookingStatus, setBookingStatus] = useState('idle');
+
+  function update(e) {
+    setFields({ ...fields, [e.target.name]: e.target.value });
+  }
+
+  async function handleBooking(e) {
+    e.preventDefault();
+    setBookingStatus('submitting');
+
+    if (!supabase) { setBookingStatus('error'); return; }
+    const { error } = await supabase.rpc('submit_booking', {
+      p_name: fields.name,
+      p_email: fields.email,
+      p_reading_type_slug: 'mahjong-mirror-session',
+      p_phone: fields.phone || null,
+      p_chinese_sign: fields.sign || null,
+      p_birthday: fields.birthday || null,
+      p_message: fields.message || null,
+    });
+
+    if (error) {
+      console.error('Booking error:', error);
+      setBookingStatus('error');
+    } else {
+      setBookingStatus('success');
+    }
+  }
+
   return (
     <>
       <Head>
@@ -31,6 +71,10 @@ export default function Readings() {
               to illuminate your path, clarify your choices, and connect you with
               deeper intuition.
             </p>
+            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+              <Link href="#book" className="btn-primary">Book a Reading</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+            </div>
           </div>
         </section>
 
@@ -226,6 +270,18 @@ export default function Readings() {
           </div>
         </section>
 
+        {/* ── Mid-page CTA ── */}
+        <section className="section-dark">
+          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Don't Wait — The Tiles Are Ready</span>
+            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book Your Reading Today</h2>
+            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+              Sessions are conducted online with flexible scheduling. Bill follows up personally within 24 hours.
+            </p>
+            <Link href="#book" className="btn-primary">Book a Reading</Link>
+          </div>
+        </section>
+
         {/* ── FAQ ── */}
         <section className="section-stone">
           <div className="container">
@@ -251,17 +307,113 @@ export default function Readings() {
           </div>
         </section>
 
-        {/* ── Book CTA ── */}
+        {/* ── Book a Reading ── */}
         <section id="book" className="section-dark">
           <div className={`container ${styles.bookCta}`}>
             <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Begin Your Journey</span>
             <h2>Ready to See What the Tiles Reveal?</h2>
             <p>
-              Choose the reading type that resonates with your current journey.
-              All sessions are conducted online, with flexible scheduling and
-              clear follow-up notes.
+              Fill out the form below to request a Mahjong Mirror Session.
+              Bill will follow up to confirm your reading.
             </p>
-            <Link href="mailto:bill@mahjong-tarot.com" className="btn-primary">Book a Reading</Link>
+
+            {bookingStatus === 'success' ? (
+              <p className={form.successMsgLight}>
+                Thank you! Bill will be in touch soon to schedule your session.
+              </p>
+            ) : (
+              <form className={form.bookingForm} onSubmit={handleBooking}>
+                <div className={form.bookingRow}>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="book-name">Name *</label>
+                    <input
+                      id="book-name"
+                      name="name"
+                      type="text"
+                      className={form.inputDark}
+                      value={fields.name}
+                      onChange={update}
+                      required
+                    />
+                  </div>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="book-email">Email *</label>
+                    <input
+                      id="book-email"
+                      name="email"
+                      type="email"
+                      className={form.inputDark}
+                      value={fields.email}
+                      onChange={update}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className={form.bookingRow}>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="book-phone">Phone</label>
+                    <input
+                      id="book-phone"
+                      name="phone"
+                      type="tel"
+                      className={form.inputDark}
+                      value={fields.phone}
+                      onChange={update}
+                    />
+                  </div>
+                  <div className={form.formGroup}>
+                    <label className={form.labelLight} htmlFor="book-sign">Chinese Sign</label>
+                    <select
+                      id="book-sign"
+                      name="sign"
+                      className={form.select}
+                      value={fields.sign}
+                      onChange={update}
+                    >
+                      <option value="">Select (optional)</option>
+                      {CHINESE_SIGNS.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className={form.formGroup}>
+                  <label className={form.labelLight} htmlFor="book-birthday">Birthday</label>
+                  <input
+                    id="book-birthday"
+                    name="birthday"
+                    type="date"
+                    className={form.inputDark}
+                    value={fields.birthday}
+                    onChange={update}
+                  />
+                </div>
+
+                <div className={form.formGroup}>
+                  <label className={form.labelLight} htmlFor="book-message">Message</label>
+                  <textarea
+                    id="book-message"
+                    name="message"
+                    className={form.textareaDark}
+                    placeholder="What would you like guidance on?"
+                    value={fields.message}
+                    onChange={update}
+                  />
+                </div>
+
+                <div className={form.bookingSubmit}>
+                  <button type="submit" className="btn-primary" disabled={bookingStatus === 'submitting'}>
+                    {bookingStatus === 'submitting' ? 'Sending…' : 'Request a Reading'}
+                  </button>
+                </div>
+
+                {bookingStatus === 'error' && (
+                  <p className={form.errorText}>Something went wrong. Please try again.</p>
+                )}
+              </form>
+            )}
           </div>
         </section>
       </main>

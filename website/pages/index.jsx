@@ -33,8 +33,8 @@ export default function Home() {
                 and tarot — woven into readings that illuminate your path.
               </p>
               <div className={styles.heroCtas}>
-                <Link href="/readings" className="btn-ghost">Explore Readings</Link>
-                <Link href="/the-mahjong-mirror" className="btn-ghost">The Mahjong Mirror</Link>
+                <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+                <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
               </div>
             </div>
           </div>
@@ -57,37 +57,21 @@ export default function Home() {
               <h2>Receive Guidance Through<br />a Mahjong Tarot Reading</h2>
               <div className="divider-gold centered" />
             </div>
-            <div className={styles.readingsGrid}>
-              <div className={`card ${styles.readingCard}`}>
-                <span className="overline">10–15 minutes</span>
-                <h3>One-Tile Insight</h3>
-                <p>
-                  A simple yet powerful message drawn from a single tile. Ideal
-                  for yes/no questions, emotional check-ins, or moments when
-                  you need one clear truth.
-                </p>
-                <Link href="/readings#one-tile" className="btn-secondary">Learn more</Link>
-              </div>
-              <div className={`card ${styles.readingCard}`}>
-                <span className="overline">20–30 minutes</span>
-                <h3>Three-Tile Spread</h3>
-                <p>
-                  Past Influence · Present Energy · Near Future Direction.
-                  A balanced, focused perspective that brings clarity to
-                  decisions and life transitions.
-                </p>
-                <Link href="/readings#three-tile" className="btn-secondary">Learn more</Link>
-              </div>
-              <div className={`card-dark ${styles.readingCard}`}>
-                <span className="overline" style={{ color: 'var(--celestial-gold)' }}>45–60 minutes</span>
-                <h3>The Mahjong Mirror Session</h3>
-                <p>
-                  A deep, intuitive reading revealing hidden influences, current
-                  challenges, energetic strengths, possible outcomes, and key
-                  lessons.
-                </p>
-                <Link href="/readings#mirror-session" className="btn-ghost">Learn more</Link>
-              </div>
+            <div className={`card-dark ${styles.readingCard}`} style={{ maxWidth: 640, margin: '0 auto' }}>
+              <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Live Online · 45–60 minutes</span>
+              <h3>The Mahjong Mirror Session</h3>
+              <p>
+                A deep, intuitive reading that looks into your emotional,
+                spiritual, and practical life — revealing hidden influences,
+                current challenges, energetic strengths, possible outcomes,
+                and key lessons. Ideal for relationship dynamics, life purpose
+                exploration, long-term planning, or periods of uncertainty.
+              </p>
+              <p>
+                Conducted live online with Bill. No prior knowledge of Mahjong
+                required — just an open mind and a question worth asking.
+              </p>
+              <Link href="/readings#book" className="btn-primary">Book a Session</Link>
             </div>
           </div>
         </section>

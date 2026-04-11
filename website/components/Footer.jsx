@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NewsletterSignup from './NewsletterSignup';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -13,6 +14,7 @@ export default function Footer() {
               divination practice together through Mahjong tiles, Chinese
               astrology, and tarot.
             </p>
+            <NewsletterSignup source="footer" variant="dark" />
           </div>
 
           <div>
@@ -23,6 +25,7 @@ export default function Footer() {
               <li><Link href="/readings">Readings</Link></li>
               <li><Link href="/the-mahjong-mirror">The Mahjong Mirror</Link></li>
               <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
             </ul>
           </div>
 

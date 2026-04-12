@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
+import useSpamGuard from '../lib/useSpamGuard';
 import styles from '../styles/Readings.module.css';
 import form from '../styles/Forms.module.css';
 
@@ -18,6 +19,7 @@ export default function Readings() {
     name: '', email: '', phone: '', sign: '', birthday: '', message: '',
   });
   const [bookingStatus, setBookingStatus] = useState('idle');
+  const { checkSpam, SpamField } = useSpamGuard();
 
   function update(e) {
     setFields({ ...fields, [e.target.name]: e.target.value });
@@ -25,6 +27,7 @@ export default function Readings() {
 
   async function handleBooking(e) {
     e.preventDefault();
+    if (checkSpam()) { setBookingStatus('success'); return; }
     setBookingStatus('submitting');
 
     if (!supabase) { setBookingStatus('error'); return; }
@@ -323,6 +326,7 @@ export default function Readings() {
               </p>
             ) : (
               <form className={form.bookingForm} onSubmit={handleBooking}>
+                <SpamField />
                 <div className={form.bookingRow}>
                   <div className={form.formGroup}>
                     <label className={form.labelLight} htmlFor="book-name">Name *</label>

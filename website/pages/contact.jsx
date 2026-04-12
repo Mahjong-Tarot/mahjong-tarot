@@ -4,12 +4,14 @@ import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
+import useSpamGuard from '../lib/useSpamGuard';
 import styles from '../styles/Contact.module.css';
 import form from '../styles/Forms.module.css';
 
 export default function Contact() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [status, setStatus] = useState('idle');
+  const { checkSpam, SpamField } = useSpamGuard();
 
   function update(e) {
     setFields({ ...fields, [e.target.name]: e.target.value });
@@ -17,6 +19,7 @@ export default function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (checkSpam()) { setStatus('success'); return; } // silent reject
     setStatus('submitting');
     if (!supabase) { setStatus('error'); return; }
 
@@ -78,6 +81,7 @@ export default function Contact() {
               </p>
             ) : (
               <form className={form.contactForm} onSubmit={handleSubmit}>
+                <SpamField />
                 <div className={form.contactRow}>
                   <div className={form.formGroup}>
                     <label className={form.label} htmlFor="name">Name *</label>

@@ -227,3 +227,20 @@ Never commit files from `working_files/` — the directory is in `.gitignore` an
 - [ ] Publish log entry appended to `context/publish-log.md`
 
 ---
+
+*Instructions version: 2.0 — Updated to Next.js (Pages Router). Update this file whenever the workflow changes.*
+
+# Cross-Tool Context Bridge
+
+This project uses a shared context system between Cowork and Claude Code.
+
+**At the start of every session**, read the bridge file for context from other tools:
+- Read `~/Documents/Claude/shared-context/BRIDGE.md` for current project state
+- Check `~/Documents/Claude/shared-context/blockers/` for pending work
+- Check `~/Documents/Claude/shared-context/handoffs/` for the latest handoff note (most recent by filename)
+
+**At the end of every session**, update the bridge:
+- Update `~/Documents/Claude/shared-context/BRIDGE.md` with what you did and current state
+- Write a handoff note to `~/Documents/Claude/shared-context/handoffs/` named `YYYY-MM-DDTHH-MM_cc-to-cowork.md`
+- Delete any blocker files in `blockers/` that you resolved
+- If something needs Cowork (browser testing, document creation, research), add a blocker file

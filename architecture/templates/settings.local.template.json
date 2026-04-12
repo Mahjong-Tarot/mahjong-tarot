@@ -1,0 +1,97 @@
+{
+  "_readme": [
+    "One-time install — paste this prompt to Claude Code:",
+    "",
+    "  Check architecture/templates/settings.local.template.json and follow the install prompt in _readme.",
+    "",
+    "Install steps (Claude Code will do these automatically from the prompt above):",
+    "  - replace <personal-path>  with the absolute path to this repo (run: pwd && echo $HOME)",
+    "  - replace <home-username>  with your macOS username (from echo $HOME)",
+    "  - replace <figma-mcp-uuid> by searching ~/.claude/settings.json and",
+    "    ~/.claude/settings.local.json for any entry matching mcp__*__use_figma",
+    "    and extracting the UUID segment. Only ask if no Figma MCP connection is found.",
+    "",
+    "DESIGN INTENT: This file is fully self-contained. It does NOT assume anything in",
+    "the global ~/.claude/settings.json. File access is scoped to this project folder",
+    "and ~/.claude/ only — Claude Code cannot read or write anywhere else on your disk.",
+    "Safe to use even if you keep your global settings at defaults.",
+    "",
+    "WARNING: If you followed a setup guide that wrote a global ~/.claude/settings.json",
+    "with bare 'Read', 'Write', or 'Edit' (no path restriction), those global entries",
+    "override this file's path-scoped access — Claude Code will be able to access your",
+    "entire disk regardless. To enforce project-scoped access, remove the bare Read/Write/Edit",
+    "entries from ~/.claude/settings.json, or skip that step in the setup guide entirely."
+  ],
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read(<personal-path>/**)",
+      "Edit(<personal-path>/**)",
+      "Write(<personal-path>/**)",
+      "Glob(<personal-path>/**)",
+      "Grep(<personal-path>/**)",
+
+      "Read(/Users/<home-username>/.claude/**)",
+      "Edit(/Users/<home-username>/.claude/**)",
+      "Write(/Users/<home-username>/.claude/**)",
+
+      "Bash(git:*)",
+      "Bash(gh:*)",
+
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(rm:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(date:*)",
+      "Bash(jq:*)",
+      "Bash(curl:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(cut:*)",
+      "Bash(sort:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(diff:*)",
+      "Bash(which:*)",
+      "Bash(pwd:*)",
+
+      "Bash(crontab -l)",
+      "Bash(crontab -r)",
+
+      "mcp__plugin_telegram_telegram__reply",
+      "mcp__plugin_telegram_telegram__react",
+      "mcp__plugin_telegram_telegram__edit_message",
+      "mcp__plugin_telegram_telegram__download_attachment",
+
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot",
+
+      "Skill(schedule)",
+      "Skill(schedule:*)",
+      "Skill(telegram:access)",
+      "Skill(telegram:access:*)",
+      "Skill(telegram:configure)",
+      "Skill(telegram:configure:*)",
+
+      "WebSearch",
+
+      "mcp__<figma-mcp-uuid>__use_figma",
+
+      "Bash(mkdir -p <personal-path>/.claude/skills/create-agent)",
+      "Bash(rm <personal-path>/.claude/agents/create-agent.md)"
+    ]
+  }
+}

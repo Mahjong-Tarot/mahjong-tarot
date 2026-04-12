@@ -87,8 +87,8 @@ mahjong-tarot/
 │       └── CLAUDE.template.md         ← Template for new project CLAUDE.md files
 │
 ├── standup/                           ← Daily standup logs and briefings
-│   ├── Individual/                    ← Per-person standup notes (dave.md, yon.md)
-│   └── briefings/                     ← Monthly briefing archives
+│   ├── individual/                    ← Per-person check-ins (dave.md, yon.md, trac.md, khang.md, agents.md)
+│   └── briefings/                     ← Compiled daily stand-ups (YYYY-MM/YYYY-MM-DD.md)
 │
 ├── working_files/                     ← Git-ignored scratch space (see Working files below)
 │

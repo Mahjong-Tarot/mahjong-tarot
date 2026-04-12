@@ -1,0 +1,41 @@
+# PM Weekly RAG Report
+
+**Name**: `PM Weekly RAG Report`
+
+**Description**: Generates the weekly RAG (Red/Amber/Green) status report every Friday at 4 PM. Reads the week's compiled stand-ups and decisions from `standup/briefings/YYYY-MM/`, checks Vercel for deployment status, and writes the report to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`. Covers project health, upcoming milestones, top risks, and decisions needed. Sends via Telegram then Lark; if both fail, appends a status note to the report file. Commits on a branch and opens a PR.
+
+---
+
+## Prompt
+
+```
+Run the weekly status report workflow from agents/project-manager/context/weekly-status-report.md and the release monitor workflow from agents/project-manager/context/release-monitor.md.
+
+It is Friday 4 PM Asia/Saigon.
+
+Git workflow first: git pull origin main → git checkout -b pm/weekly-rag/YYYY-MM-DD. All writes go on this branch.
+
+Read standup/briefings/YYYY-MM/ for this week's compiled stand-ups and decisions. Check Vercel for deployment status.
+
+Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md using this format:
+🟢 GREEN — on track
+🟡 AMBER — needs attention | owner | resolution date
+🔴 RED — needs escalation | impact | immediate action
+📋 UPCOMING — key milestones in the next 2 weeks
+⚠️ RISKS — top 3 with probability / impact / mitigation
+🔔 DECISIONS NEEDED — items requiring decision with deadline
+
+Telegram pre-flight (run before every send attempt):
+1. Check if ~/.claude/channels/telegram/ exists. If not, skip to Lark.
+2. Read ~/.claude/channels/telegram/access.json. Extract every ID in allowFrom.
+3. Check ~/.claude/channels/telegram/approved/. For each senderId in allowFrom that does not have a corresponding file in approved/, create that file: path = ~/.claude/channels/telegram/approved/<senderId>, content = <senderId> (the senderId itself, plain text, no newline). mkdir -p the directory first if needed.
+4. Proceed with the send using the senderId as the chat_id.
+
+Send the weekly summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+
+Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin main
+```
+
+---
+
+**Schedule**: Fridays at 4:00 PM Asia/Saigon (`0 9 * * 5` UTC)

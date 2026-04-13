@@ -97,18 +97,17 @@ export default function LoveInTheFireHorseYear() {
       <main className={styles.article}>
 
         <header className={styles.header}>
-          <div className="container">
-            <nav className={styles.breadcrumb}>
-              <Link href="/blog">Blog</Link> <span>/</span> <span>Romance</span>
-            </nav>
-            <span className="post-category">Romance</span>
-            <h1>Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign</h1>
-            <p className="post-meta">April 6, 2026 · Bill Hajdu · 8 min read</p>
-          </div>
+          <nav className={styles.breadcrumb}>
+            <Link href="/blog">Blog</Link> <span>/</span> <span>Romance</span>
+          </nav>
+          <span className={styles.categoryPill}>Romance</span>
+          <h1>Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign</h1>
+          <p className={styles.postMeta}>April 6, 2026 · Bill Hajdu · 8 min read</p>
         </header>
 
-        <div className="container">
-          <div className={styles.body}>
+        <div className={styles.headerDivider}><hr /></div>
+
+        <div className={styles.body}>
 
             <blockquote>
               This is the one year in 60 where your partner is most likely to cheat and most likely to propose.
@@ -116,7 +115,7 @@ export default function LoveInTheFireHorseYear() {
 
             <p>I've been reading fortunes for over 30 years. More than 20,000 card readings. I've sat across from people going through divorces, people falling in love for the first time at 50, people who stayed in the wrong relationship for a decade because they were afraid to look honestly at what the cards were telling them.</p>
 
-            <p>And every time a Fire Horse year comes around — which is only once every 60 years — I brace myself. Because what I see in the readings changes. The stakes get higher. The emotions run hotter. The outcomes swing harder in both directions.</p>
+            <p>And every time a <a href="https://en.wikipedia.org/wiki/Fire_Horse" target="_blank" rel="noopener noreferrer">Fire Horse year</a> comes around - which is only once every 60 years - I brace myself. Because what I see in the readings changes. The stakes get higher. The emotions run hotter. The outcomes swing harder in both directions.</p>
 
             <p>We are in a Fire Horse year right now. 2026. And this one is faster, wilder, and harder to control than anything I've seen.</p>
 
@@ -184,7 +183,7 @@ export default function LoveInTheFireHorseYear() {
 
             <p>I've been reading fortunes since before most of you were on the internet. I called 2007 before it happened. I'm telling you now: the Fire Horse year does to love what 2007 did to markets. It takes what's already there, amplifies it, and forces the question.</p>
 
-            <p>The people who came out well weren't the ones who ignored the signals. They were the ones who saw both the risk and the opportunity — and positioned accordingly.</p>
+            <p>The people who came out well weren't the ones who ignored the signals. They were the ones who <Link href="/blog/posts/who-has-the-most-luck-in-the-fire-horse-year">saw both the risk and the opportunity</Link> - and positioned accordingly.</p>
 
             <nav className={styles.postNav}>
               <Link href="/blog/posts/who-has-the-most-luck-in-the-fire-horse-year" className={styles.navPrev}>
@@ -195,21 +194,18 @@ export default function LoveInTheFireHorseYear() {
               </Link>
             </nav>
 
-          </div>
         </div>
 
         {/* ── Post CTA ── */}
-        <section className="section-dark">
-          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>What Does Love Look Like for Your Sign?</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book a Relationship Reading</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
-              Get personal insight into what the Fire Horse year means for your love life.
-            </p>
-            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
-            <Link href="/blog" className="btn-ghost">More Articles</Link>
-          </div>
-        </section>
+        <div className={styles.ctaSection}>
+          <span className={styles.ctaOverline}>What Does Love Look Like for Your Sign?</span>
+          <h2>Book a Relationship Reading</h2>
+          <p>
+            Get personal insight into what the Fire Horse year means for your love life.
+          </p>
+          <Link href="/readings#book" className="btn-primary" style={{ marginRight: 16 }}>Book a Reading</Link>
+          <Link href="/blog" className="btn-secondary">More Articles</Link>
+        </div>
       </main>
 
       <Footer />

@@ -22,18 +22,17 @@ export default function WhoHasTheMostLuck() {
       <main className={styles.article}>
 
         <header className={styles.header}>
-          <div className="container">
-            <nav className={styles.breadcrumb}>
-              <Link href="/blog">Blog</Link> <span>/</span> <span>Year of the Fire Horse</span>
-            </nav>
-            <span className="post-category">Year of the Fire Horse</span>
-            <h1>Who Has the Most Luck in 2026 — Fire Horse Year? (And Why That's the Wrong Question)</h1>
-            <p className="post-meta">April 5, 2026 · Bill Hajdu · 5 min read</p>
-          </div>
+          <nav className={styles.breadcrumb}>
+            <Link href="/blog">Blog</Link> <span>/</span> <span>Year of the Fire Horse</span>
+          </nav>
+          <span className={styles.categoryPill}>Year of the Fire Horse</span>
+          <h1>Who Has the Most Luck in 2026 — Fire Horse Year? (And Why That's the Wrong Question)</h1>
+          <p className={styles.postMeta}>April 5, 2026 · Bill Hajdu · 5 min read</p>
         </header>
 
-        <div className="container">
-          <div className={styles.body}>
+        <div className={styles.headerDivider}><hr /></div>
+
+        <div className={styles.body}>
 
             <p>People keep asking me: "Who has the most luck in 2026?"</p>
 
@@ -45,7 +44,7 @@ export default function WhoHasTheMostLuck() {
 
             <h2>Who Has the Best Alignment in 2026?</h2>
 
-            <p>From a Chinese astrology perspective, people born in the year of the Tiger, Dog, and Sheep have the best luck in 2026 in terms of opportunities. These three form what we call a "Trinity" with the Horse. They're naturally aligned with this year's energy.</p>
+            <p>From a <a href="https://en.wikipedia.org/wiki/Chinese_zodiac" target="_blank" rel="noopener noreferrer">Chinese astrology</a> perspective, people born in the year of the Tiger, Dog, and Sheep have the best luck in 2026 in terms of opportunities. These three form what we call a "Trinity" with the Horse. They're naturally aligned with this year's energy.</p>
 
             <p>But here's where it gets more nuanced.</p>
 
@@ -123,7 +122,7 @@ export default function WhoHasTheMostLuck() {
 
             <p>Even in a year that's not aligned with your birth sign, there are still windows of opportunity. You just have to be more deliberate about finding them. And honestly? Some of the most successful people I know made their breakthroughs in years that were challenging for their sign — because they had to be more intentional. They couldn't coast.</p>
 
-            <p>Fire Horse year is intense. It's volatile. That creates chaos. And chaos creates openings.</p>
+            <p><Link href="/blog/posts/blood-moon-rising-in-the-year-of-the-fire-horse">Fire Horse year is intense</Link>. It's volatile. That creates chaos. And chaos creates openings.</p>
 
             <p>If you're alert, if you're ready, if you're willing to move when the moment comes — you can create luck in any year.</p>
 
@@ -133,7 +132,7 @@ export default function WhoHasTheMostLuck() {
 
             <p>Chinese astrology tells you when conditions are favorable. It tells you when to lean in and when to be cautious. But it doesn't do the work for you. The Horse is yang energy. It rewards boldness. It punishes hesitation. Fire Horse year is running.</p>
 
-            <p>The question is: are you riding it, or watching it pass by?</p>
+            <p>The question is: are you riding it, or watching it pass by? <Link href="/readings#book">Book a reading</Link> to find out where the openings are in your chart.</p>
 
             <nav className={styles.postNav}>
               <Link href="/blog/posts/blood-moon-rising-in-the-year-of-the-fire-horse" className={styles.navPrev}>
@@ -144,21 +143,18 @@ export default function WhoHasTheMostLuck() {
               </Link>
             </nav>
 
-          </div>
         </div>
 
         {/* ── Post CTA ── */}
-        <section className="section-dark">
-          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Wondering Where You Stand?</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Get a Personal Reading from Bill</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
-              Find out what the tiles reveal about your luck, timing, and next move.
-            </p>
-            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
-            <Link href="/blog" className="btn-ghost">More Articles</Link>
-          </div>
-        </section>
+        <div className={styles.ctaSection}>
+          <span className={styles.ctaOverline}>Wondering Where You Stand?</span>
+          <h2>Get a Personal Reading from Bill</h2>
+          <p>
+            Find out what the tiles reveal about your luck, timing, and next move.
+          </p>
+          <Link href="/readings#book" className="btn-primary" style={{ marginRight: 16 }}>Book a Reading</Link>
+          <Link href="/blog" className="btn-secondary">More Articles</Link>
+        </div>
       </main>
 
       <Footer />

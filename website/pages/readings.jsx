@@ -65,9 +65,9 @@ export default function Readings() {
 
       <main>
         {/* ── Page Header ── */}
-        <section className={`section-dark ${styles.pageHeader}`}>
+        <section className={styles.pageHeader}>
           <div className="container">
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Personal Sessions</span>
+            <span className="overline">Personal Sessions</span>
             <h1>Receive Guidance Through<br />a Mahjong Tarot Reading</h1>
             <p className={styles.headerLead}>
               A divination experience using the symbolic language of Mahjong tiles
@@ -76,7 +76,7 @@ export default function Readings() {
             </p>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
               <Link href="#book" className="btn-primary">Book a Reading</Link>
-              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
             </div>
           </div>
         </section>
@@ -156,7 +156,7 @@ export default function Readings() {
 
               <div id="mirror-session" className={`${styles.readingCard} ${styles.readingCardFeatured}`}>
                 <div className={styles.readingMeta}>
-                  <span className="overline" style={{ color: 'var(--celestial-gold)' }}>45–60 minutes</span>
+                  <span className="overline" style={{ color: 'var(--celestial-gold)' }}>45--60 minutes</span>
                   <span className={styles.readingLabelLight}>Deep Insight Reading</span>
                 </div>
                 <h3>The Mahjong Mirror Session</h3>
@@ -274,11 +274,11 @@ export default function Readings() {
         </section>
 
         {/* ── Mid-page CTA ── */}
-        <section className="section-dark">
+        <section className="section-stone">
           <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Don't Wait — The Tiles Are Ready</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book Your Reading Today</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+            <span className="overline">Don't Wait -- The Tiles Are Ready</span>
+            <h2 style={{ margin: 'var(--space-md) 0' }}>Book Your Reading Today</h2>
+            <p style={{ maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
               Sessions are conducted online with flexible scheduling. Bill follows up personally within 24 hours.
             </p>
             <Link href="#book" className="btn-primary">Book a Reading</Link>
@@ -311,9 +311,9 @@ export default function Readings() {
         </section>
 
         {/* ── Book a Reading ── */}
-        <section id="book" className="section-dark">
+        <section id="book" className="section-stone">
           <div className={`container ${styles.bookCta}`}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Begin Your Journey</span>
+            <span className="overline">Begin Your Journey</span>
             <h2>Ready to See What the Tiles Reveal?</h2>
             <p>
               Fill out the form below to request a Mahjong Mirror Session.
@@ -321,7 +321,7 @@ export default function Readings() {
             </p>
 
             {bookingStatus === 'success' ? (
-              <p className={form.successMsgLight}>
+              <p className={form.successMsg}>
                 Thank you! Bill will be in touch soon to schedule your session.
               </p>
             ) : (
@@ -329,24 +329,24 @@ export default function Readings() {
                 <SpamField />
                 <div className={form.bookingRow}>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="book-name">Name *</label>
+                    <label className={form.label} htmlFor="book-name">Name *</label>
                     <input
                       id="book-name"
                       name="name"
                       type="text"
-                      className={form.inputDark}
+                      className={form.input}
                       value={fields.name}
                       onChange={update}
                       required
                     />
                   </div>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="book-email">Email *</label>
+                    <label className={form.label} htmlFor="book-email">Email *</label>
                     <input
                       id="book-email"
                       name="email"
                       type="email"
-                      className={form.inputDark}
+                      className={form.input}
                       value={fields.email}
                       onChange={update}
                       required
@@ -356,18 +356,18 @@ export default function Readings() {
 
                 <div className={form.bookingRow}>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="book-phone">Phone</label>
+                    <label className={form.label} htmlFor="book-phone">Phone</label>
                     <input
                       id="book-phone"
                       name="phone"
                       type="tel"
-                      className={form.inputDark}
+                      className={form.input}
                       value={fields.phone}
                       onChange={update}
                     />
                   </div>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="book-sign">Chinese Sign</label>
+                    <label className={form.label} htmlFor="book-sign">Chinese Sign</label>
                     <select
                       id="book-sign"
                       name="sign"
@@ -384,23 +384,23 @@ export default function Readings() {
                 </div>
 
                 <div className={form.formGroup}>
-                  <label className={form.labelLight} htmlFor="book-birthday">Birthday</label>
+                  <label className={form.label} htmlFor="book-birthday">Birthday</label>
                   <input
                     id="book-birthday"
                     name="birthday"
                     type="date"
-                    className={form.inputDark}
+                    className={form.input}
                     value={fields.birthday}
                     onChange={update}
                   />
                 </div>
 
                 <div className={form.formGroup}>
-                  <label className={form.labelLight} htmlFor="book-message">Message</label>
+                  <label className={form.label} htmlFor="book-message">Message</label>
                   <textarea
                     id="book-message"
                     name="message"
-                    className={form.textareaDark}
+                    className={form.textarea}
                     placeholder="What would you like guidance on?"
                     value={fields.message}
                     onChange={update}

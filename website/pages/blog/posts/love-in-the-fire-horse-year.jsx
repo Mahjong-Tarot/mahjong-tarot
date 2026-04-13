@@ -99,9 +99,9 @@ export default function LoveInTheFireHorseYear() {
         <header className={styles.header}>
           <div className="container">
             <nav className={styles.breadcrumb}>
-              <Link href="/blog">Blog</Link> <span>/</span> <span>Year of the Fire Horse</span>
+              <Link href="/blog">Blog</Link> <span>/</span> <span>Romance</span>
             </nav>
-            <span className="post-category">Year of the Fire Horse</span>
+            <span className="post-category">Romance</span>
             <h1>Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign</h1>
             <p className="post-meta">April 6, 2026 · Bill Hajdu · 8 min read</p>
           </div>

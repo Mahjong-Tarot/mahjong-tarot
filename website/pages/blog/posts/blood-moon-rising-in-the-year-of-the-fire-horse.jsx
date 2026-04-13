@@ -24,9 +24,9 @@ export default function BloodMoonRising() {
         <header className={styles.header}>
           <div className="container">
             <nav className={styles.breadcrumb}>
-              <Link href="/blog">Blog</Link> <span>/</span> <span>Blood Moon</span>
+              <Link href="/blog">Blog</Link> <span>/</span> <span>Chinese Astrology</span>
             </nav>
-            <span className="post-category">Blood Moon</span>
+            <span className="post-category">Chinese Astrology</span>
             <h1>A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac</h1>
             <p className="post-meta">April 4, 2026 · Bill Hajdu · 5 min read</p>
           </div>

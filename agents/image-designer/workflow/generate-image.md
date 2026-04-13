@@ -8,7 +8,7 @@ trigger: Per image entry with workflow: generate in a YAML request file
 
 ## Purpose
 
-Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-4.0-generate-001`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
+Produce a brand-new image for a blog post or page by calling the Gemini API (`gemini-3.1-flash-image-preview` via `generate_content`). The agent constructs the prompt from its built-in brand knowledge, optionally passes a source image for reference, calls the API, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
 
 ---
 
@@ -99,12 +99,48 @@ Any `style` hint passed in the request is advisory only — the agent uses its o
 
 Use `GEMINI_API_KEY` from the environment. See `skills/generate-image/SKILL.md` for the full Python snippet.
 
-- Model: `imagen-4.0-generate-001`
-- Two separate API calls: one with `aspect_ratio="16:9"` (hero/thumbnail/og), one with `aspect_ratio="1:1"` (card/social) — each using its own distinct prompt from Step 3c
+- Model: `gemini-3.1-flash-image-preview` via `generate_content`
+- Two separate API calls: one for 16:9 (hero/thumbnail/og), one for 1:1 (card/social) — each using its own distinct prompt from Step 3c
+- If `resolve-source` found a source image, pass it as a second element in `contents` for both calls
 - Save raw PNGs to `working_files/<slug>-16x9-raw.png` and `working_files/<slug>-1x1-raw.png`
 - Archive permanent copies to `content/topics/<slug>/<slug>-hero-original.png` and `content/topics/<slug>/<slug>-social-original.png`
 
-If the API call fails, simplify the prompt and retry once. If still failing, move to `failed/` and log.
+```python
+from google import genai
+from PIL import Image
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+# contents: [prompt] for text-only, [prompt, image] if source image available
+source_path = "<source_path or None>"  # set by resolve-source, or None
+contents_16x9 = [PROMPT_16x9]
+contents_1x1  = [PROMPT_1x1]
+if source_path:
+    source_img = Image.open(source_path)
+    contents_16x9.append(source_img)
+    contents_1x1.append(source_img)
+
+for aspect, contents, raw_path in [
+    ("16x9", contents_16x9, f"working_files/{SLUG}-16x9-raw.png"),
+    ("1x1",  contents_1x1,  f"working_files/{SLUG}-1x1-raw.png"),
+]:
+    response = client.models.generate_content(
+        model="gemini-3.1-flash-image-preview",
+        contents=contents,
+    )
+    os.makedirs("working_files", exist_ok=True)
+    for part in response.parts:
+        if part.inline_data is not None:
+            img = part.as_image()
+            img.save(raw_path)
+            print(f"Saved {aspect} raw PNG → {raw_path}")
+            break
+```
+
+If the API call fails, shorten the prompt and retry once. If still failing, log and skip.
 
 ### 5. Run the Pillow pipeline for each requested type
 

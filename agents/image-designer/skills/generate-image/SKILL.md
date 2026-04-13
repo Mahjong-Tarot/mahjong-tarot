@@ -1,6 +1,6 @@
 ---
 name: generate-image
-description: "Generates a new blog image for The Mahjong Tarot website using the Gemini API (imagen-3.0-generate-002). Constructs a prompt from built-in brand knowledge, calls the API, saves the raw PNG, then optimises it to WebP for each requested image type."
+description: "Generates a new blog image for The Mahjong Tarot website using the Gemini API (gemini-3.1-flash-image-preview via generate_content). Constructs a prompt from built-in brand knowledge, optionally passes a source image for reference, calls the API, saves the raw PNG, then optimises it to WebP for each requested image type."
 allowed-tools: Read Write Bash Glob Grep
 ---
 
@@ -120,27 +120,31 @@ Always run using the `mahjong-tarot` conda environment: `/opt/anaconda3/envs/mah
 
 ```python
 from google import genai
-from google.genai import types
+from PIL import Image
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-response = client.models.generate_images(
-    model="imagen-4.0-generate-001",
-    prompt=PROMPT,
-    config=types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="16:9",  # use "1:1" for card/social types
-    ),
-)
+# contents: [prompt] for text-only, [prompt, image] if source image available
+source_path = None  # set to working_files/<file> if resolve-source found a match
+contents = [PROMPT]
+if source_path:
+    contents.append(Image.open(source_path))
 
 raw_path = f"working_files/{SLUG}-raw.png"
 os.makedirs("working_files", exist_ok=True)
-with open(raw_path, "wb") as f:
-    f.write(response.generated_images[0].image.image_bytes)
-print(f"Saved raw PNG → {raw_path}")
+
+response = client.models.generate_content(
+    model="gemini-3.1-flash-image-preview",
+    contents=contents,
+)
+for part in response.parts:
+    if part.inline_data is not None:
+        part.as_image().save(raw_path)
+        print(f"Saved raw PNG → {raw_path}")
+        break
 ```
 
 Also archive a permanent copy to `content/topics/<slug>/<slug>-<type>-original.png`.

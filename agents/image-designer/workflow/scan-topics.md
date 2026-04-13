@@ -88,27 +88,31 @@ Use `GEMINI_API_KEY` from `.env`. Always run via `/opt/anaconda3/envs/mahjong-ta
 
 ```python
 from google import genai
-from google.genai import types
+from PIL import Image
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-response = client.models.generate_images(
-    model="imagen-4.0-generate-001",
-    prompt=PROMPT,
-    config=types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="16:9",
-    ),
-)
+# contents: [prompt] for text-only, [prompt, image] if resolve-source found a match
+source_path = None  # set by resolve-source step if a working_files/ image was matched
+contents = [PROMPT]
+if source_path:
+    contents.append(Image.open(source_path))
 
 raw_path = f"working_files/{SLUG}-raw.png"
 os.makedirs("working_files", exist_ok=True)
-with open(raw_path, "wb") as f:
-    f.write(response.generated_images[0].image.image_bytes)
-print(f"Saved raw → {raw_path}")
+
+response = client.models.generate_content(
+    model="gemini-3.1-flash-image-preview",
+    contents=contents,
+)
+for part in response.parts:
+    if part.inline_data is not None:
+        part.as_image().save(raw_path)
+        print(f"Saved raw → {raw_path}")
+        break
 ```
 
 If the API call fails, simplify the prompt (remove hex codes, reduce specificity) and retry once. If still failing, log the error and move on to the next slug — do not halt the entire run.

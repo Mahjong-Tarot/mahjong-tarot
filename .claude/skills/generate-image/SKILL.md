@@ -1,6 +1,6 @@
 ---
 name: generate-image
-description: "Generates blog hero images and site artwork for The Mahjong Tarot website using the Gemini API (imagen-4.0-generate-001). MUST be used whenever: creating a hero image for a blog post, generating artwork for a page, the user says 'generate image', 'create image', 'make the hero image', 'nano banana', or any request involving AI image generation for the site."
+description: "Generates blog hero images and site artwork for The Mahjong Tarot website using the Gemini API (gemini-3.1-flash-image-preview via generate_content). MUST be used whenever: creating a hero image for a blog post, generating artwork for a page, the user says 'generate image', 'create image', 'make the hero image', 'nano banana', or any request involving AI image generation for the site."
 ---
 
 # Generate Image — Gemini API
@@ -109,27 +109,31 @@ Requires `GEMINI_API_KEY` set in `.env`. Always run using the `mahjong-tarot` co
 
 ```python
 from google import genai
-from google.genai import types
+from PIL import Image
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-response = client.models.generate_images(
-    model="imagen-4.0-generate-001",
-    prompt=PROMPT,
-    config=types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="16:9",  # use "1:1" for card/social types
-    ),
-)
+# contents: [prompt] for text-only, [prompt, image] if a source image is available
+source_path = None  # set to working_files/<file> if resolve-source found a match
+contents = [PROMPT]
+if source_path:
+    contents.append(Image.open(source_path))
 
 raw_path = f"working_files/{SLUG}-raw.png"
 os.makedirs("working_files", exist_ok=True)
-with open(raw_path, "wb") as f:
-    f.write(response.generated_images[0].image.image_bytes)
-print(f"Saved raw PNG → {raw_path}")
+
+response = client.models.generate_content(
+    model="gemini-3.1-flash-image-preview",
+    contents=contents,
+)
+for part in response.parts:
+    if part.inline_data is not None:
+        part.as_image().save(raw_path)
+        print(f"Saved raw PNG → {raw_path}")
+        break
 ```
 
 Archive a permanent copy to `content/topics/<slug>/<slug>-hero-original.png`.

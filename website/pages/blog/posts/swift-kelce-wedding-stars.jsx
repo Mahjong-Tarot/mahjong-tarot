@@ -44,9 +44,9 @@ export default function SwiftKelceWeddingStars() {
         <header className={styles.header}>
           <div className="container">
             <nav className={styles.breadcrumb}>
-              <Link href="/blog">Blog</Link> <span>/</span> <span>Year of the Fire Horse</span>
+              <Link href="/blog">Blog</Link> <span>/</span> <span>Romance</span>
             </nav>
-            <span className="post-category">Year of the Fire Horse</span>
+            <span className="post-category">Romance</span>
             <h1>What the Stars Actually Say About the Swift-Kelce Wedding</h1>
             <p className="post-meta">Apr 13, 2026 · Bill Hajdu · 6 min read</p>
           </div>

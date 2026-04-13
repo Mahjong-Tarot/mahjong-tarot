@@ -9,12 +9,10 @@ import styles from '../../styles/Blog.module.css';
 
 const CATEGORIES = [
   'All Posts',
-  'Mahjong and Tarot',
-  'Tarot',
-  'Mahjong Readings',
-  'Year of the Snake',
+  'Romance',
   'Year of the Fire Horse',
-  'Blood Moon',
+  'Mahjong Reading',
+  'Chinese Astrology',
 ];
 
 const POSTS = [
@@ -23,7 +21,7 @@ const POSTS = [
     slug: 'swift-kelce-wedding-stars',
     title: 'What the Stars Actually Say About the Swift-Kelce Wedding',
     excerpt: 'Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements - not just the signs - the charts tell a completely different story.',
-    category: 'Year of the Fire Horse',
+    category: 'Romance',
     date: 'Apr 13, 2026',
     readTime: '6 min read',
   },
@@ -31,7 +29,7 @@ const POSTS = [
     slug: 'love-in-the-fire-horse-year',
     title: 'Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign',
     excerpt: 'This is the one year in 60 where your partner is most likely to cheat and most likely to propose. Record proposals. Record divorces. The Fire Horse doesn\'t do anything halfway.',
-    category: 'Year of the Fire Horse',
+    category: 'Romance',
     date: 'Apr 6, 2026',
     readTime: '8 min read',
   },
@@ -47,7 +45,7 @@ const POSTS = [
     slug: 'blood-moon-rising-in-the-year-of-the-fire-horse',
     title: 'A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac',
     excerpt: 'A blood moon in the first lunar month has only happened twice in the last hundred years. The last time was 2007. This time it\'s amplified by the Fire Horse.',
-    category: 'Blood Moon',
+    category: 'Chinese Astrology',
     date: 'Apr 4, 2026',
     readTime: '5 min read',
   },
@@ -104,7 +102,7 @@ export default function BlogIndex() {
                 />
               </Link>
               <div className={styles.featuredText}>
-                <span className="post-category">Year of the Fire Horse</span>
+                <span className="post-category">Romance</span>
                 <h2 className={styles.featuredTitle}>
                   <Link href="/blog/posts/swift-kelce-wedding-stars">
                     What the Stars Actually Say About the Swift-Kelce Wedding

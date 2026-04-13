@@ -9,66 +9,83 @@
 
 ---
 
-## 1. Create the two missing agents
+## 1. Create the Social Media Manager agent
 
-The entire auto-publishing pipeline depends on these — neither exists yet.
-
-### Social Media Manager (highest priority)
+**Responsibility split:**
+- **Writer** — produces all written content: blog posts, social captions, email copy, TikTok slide text
+- **Social Media Manager** — owns the calendar, scheduling, distribution via Postiz, and analytics. Never writes content. Picks up after the writer is done.
 
 - [ ] Create `.claude/agents/social-media-manager.md` (agent definition with `mcp__postiz__*` tools listed)
 - [ ] Create `agents/social-media-manager/context/persona.md`
-- [ ] Create skill: `agents/social-media-manager/skills/write-social-post/SKILL.md`
-- [ ] Create skill: `agents/social-media-manager/skills/tiktok-carousel/SKILL.md` (6-slide, always `type: draft`, fires Telegram after)
+- [ ] Create skill: `agents/social-media-manager/skills/content-calendar/SKILL.md`
 - [ ] Create skill: `agents/social-media-manager/skills/weekly-schedule/SKILL.md`
-- [ ] Create skill: `agents/social-media-manager/skills/weekly-analytics/SKILL.md`
 - [ ] Create skill: `agents/social-media-manager/skills/distribution-checklist/SKILL.md`
-
-### Marketing Manager
-
-- [ ] Create `.claude/agents/marketing-manager.md`
-- [ ] Create `agents/marketing-manager/context/persona.md`
-- [ ] Create skill: `agents/marketing-manager/skills/content-calendar/SKILL.md`
-- [ ] Create skill: `agents/marketing-manager/skills/campaign-brief/SKILL.md`
-- [ ] Create skill: `agents/marketing-manager/skills/performance-review/SKILL.md`
+- [ ] Create skill: `agents/social-media-manager/skills/weekly-analytics/SKILL.md`
+- [ ] Create skill: `agents/social-media-manager/skills/performance-review/SKILL.md`
 
 **Prompt to run:**
 
 ```
-Read CLAUDE.md and the existing agent definitions in .claude/agents/ and agents/*/context/persona.md
-to understand the project conventions and persona format.
+Read CLAUDE.md and the existing agent definitions in .claude/agents/ and
+agents/*/context/persona.md to understand the project conventions and persona format.
+Also read agents/writer/context/persona.md to understand what the writer already owns.
 
-Then create the following two agents in full:
+Create the Social Media Manager agent for The Mahjong Tarot. This agent owns the
+calendar, scheduling, and distribution pipeline — it never writes content. The writer
+agent produces all copy (blog posts, social captions, TikTok slide text, email copy).
+The Social Media Manager picks up finished content and gets it published via Postiz.
 
-1. Social Media Manager
-   - .claude/agents/social-media-manager.md — agent definition file. Tools must include
-     Read, Write, Glob, Grep, Bash, and all mcp__postiz__* tools. Include hard rules:
-     always call integrationList first; always call integrationSchema before a new post type;
-     TikTok must always use type "draft", never "schedule" or "now"; after any TikTok draft,
-     send a Telegram message: "Draft ready for [topic] — open TikTok app → Drafts → add
-     trending music → go live at [time]."
-   - agents/social-media-manager/context/persona.md — full persona following the same
-     structure as agents/project-manager/context/persona.md
-   - agents/social-media-manager/skills/write-social-post/SKILL.md
-   - agents/social-media-manager/skills/tiktok-carousel/SKILL.md
-     (6 slides: hook + 4 content + CTA; always type "draft"; fires Telegram after)
-   - agents/social-media-manager/skills/weekly-schedule/SKILL.md
-   - agents/social-media-manager/skills/weekly-analytics/SKILL.md
-   - agents/social-media-manager/skills/distribution-checklist/SKILL.md
+Files to create:
 
-2. Marketing Manager
-   - .claude/agents/marketing-manager.md — agent definition. Tools: Read, Write, Glob,
-     Grep, Bash, WebSearch.
-   - agents/marketing-manager/context/persona.md — full persona
-   - agents/marketing-manager/skills/content-calendar/SKILL.md
-   - agents/marketing-manager/skills/campaign-brief/SKILL.md
-   - agents/marketing-manager/skills/performance-review/SKILL.md
+1. .claude/agents/social-media-manager.md
+   Tools: Read, Write, Glob, Grep, Bash, and all mcp__postiz__* tools.
+   Hard rules:
+   - Never write content — if copy is missing, trigger the writer agent first
+   - Always call integrationList first to confirm channel IDs
+   - Always call integrationSchema before the first post of a new type on any platform
+   - TikTok must always use type "draft" — never "schedule" or "now"
+   - After any TikTok draft, send Telegram: "Draft ready for [topic] — open TikTok
+     app → Drafts → add trending music → go live at [time]"
+   - Email campaigns always require human approval before sending
+   Trigger phrases: "schedule this post", "distribute this content", "what's posting
+   this week", "generate the content calendar", "weekly analytics", "review performance"
 
-Use The Mahjong Tarot's brand (Bill Hajdu, mahjong symbolism / Chinese astrology /
-tarot readings) throughout. Do not use placeholders — write real content tailored to
-this project.
+2. agents/social-media-manager/context/persona.md
+   Full persona using the same structure as agents/project-manager/context/persona.md.
+   This agent owns: content calendar, Postiz scheduling, TikTok drafts, approval
+   routing, weekly analytics, and performance reporting.
+
+3. agents/social-media-manager/skills/content-calendar/SKILL.md
+   Generate a 4-week content calendar based on content pillars (Mahjong symbolism,
+   Chinese astrology, tarot readings, relationships, personal growth) and what the
+   writer has already produced in content/topics/. Output to resources/content-calendar.md.
+
+4. agents/social-media-manager/skills/weekly-schedule/SKILL.md
+   Read this week's entries from the content calendar, check that writer output exists
+   in content/topics/<slug>/ for each, then call Postiz tools per platform:
+   - TikTok: schedulePostTool with type "draft"
+   - All other auto-post platforms: schedulePostTool with type "schedule"
+   - Draft-only platforms: schedulePostTool with type "draft", then send Telegram for approval
+   Send a Telegram summary of what was scheduled.
+
+5. agents/social-media-manager/skills/distribution-checklist/SKILL.md
+   Pre-publish quality gate. Checks: writer output exists, captions are present for all
+   platforms, images are optimised WebP, no placeholder text remains. Run before any
+   Postiz call.
+
+6. agents/social-media-manager/skills/weekly-analytics/SKILL.md
+   Call Postiz analytics tools, format into a Telegram report: top post, total
+   impressions, follower change, one recommendation for next week.
+
+7. agents/social-media-manager/skills/performance-review/SKILL.md
+   Compile a weekly/monthly performance summary across all platforms. Write to
+   standup/briefings/ as a performance report.
+
+Do not use placeholders — write real content tailored to The Mahjong Tarot.
 ```
 
-**Verify:** Check that all files exist and personas read as coherent agents for this project.
+**Verify:** All files exist. Read the persona and confirm it contains no content-writing
+responsibilities. Confirm the "never write content" hard rule is present in the agent definition.
 
 ---
 
@@ -167,8 +184,12 @@ Then create these five resource files with real, specific content for this proje
 
 ## 4. Add missing writer skills
 
-- [ ] Create `agents/writer/skills/write-social/SKILL.md`
-- [ ] Create `agents/writer/skills/write-email/SKILL.md`
+The writer produces all content — blog posts, social captions, TikTok slide text, and
+email copy. These two skills extend the writer to cover the full content pipeline that
+the Social Media Manager then schedules.
+
+- [ ] Create `agents/writer/skills/write-social/SKILL.md` (platform captions + TikTok slide text from a finished blog post)
+- [ ] Create `agents/writer/skills/write-email/SKILL.md` (newsletter / campaign email)
 
 **Prompt to run:**
 
@@ -176,27 +197,32 @@ Then create these five resource files with real, specific content for this proje
 Read agents/writer/context/persona.md and agents/writer/skills/write-post/SKILL.md
 to understand the writer agent's conventions and SKILL.md format.
 
-Then create two new skills:
+The writer owns ALL content — including social captions and email copy. These skills
+extend the writer so the Social Media Manager only has to schedule, never write.
+
+Create two new skills:
 
 1. agents/writer/skills/write-social/SKILL.md
    - Purpose: generate platform-specific social captions from a finished blog post
-   - Steps: read the blog post, read resources/brand-voice.md, write captions for
-     Instagram, Facebook, LinkedIn, and X — each with appropriate length, tone,
+   - Steps: read content/topics/<slug>/blog.md, read resources/brand-voice.md, then
+     write captions for Instagram, Facebook, LinkedIn, X, and TikTok slide text
+     (6 slides: hook + 4 content slides + CTA) — each with appropriate length, tone,
      hashtags, and CTA for the platform
-   - Output: a social-captions.md file saved to content/topics/<slug>/
+   - Output: social-captions.md saved to content/topics/<slug>/
    - Edge cases: post too long for platform limits, no clear hook in the source post
 
 2. agents/writer/skills/write-email/SKILL.md
    - Purpose: write a newsletter edition or campaign email from a blog post or brief
-   - Steps: read source content, read brand voice, write subject line + preview text +
-     body (intro, main content, CTA, sign-off)
+   - Steps: read source content, read resources/brand-voice.md, write subject line +
+     preview text + body (intro, main content, CTA, sign-off in Bill's voice)
    - Output: email.md saved to content/topics/<slug>/
-   - Edge cases: no source post exists yet (start from a brief), subscriber list not specified
+   - Edge cases: no source post yet (start from a topic brief), subscriber list not specified
 
 Both skills must follow the same frontmatter format as write-post/SKILL.md.
 ```
 
-**Verify:** Read both files and confirm they follow the SKILL.md format with numbered steps, file paths, and edge cases.
+**Verify:** Read both files and confirm they follow the SKILL.md format with numbered steps,
+file paths, and edge cases. Confirm TikTok slide text is included in write-social.
 
 ---
 
@@ -238,23 +264,32 @@ Once all the above is done, run these in sequence and verify each output before 
 **Prompt to run:**
 
 ```
-Run a full end-to-end autopublishing test using the existing content in content/topics/.
-If no topic exists, use this brief: write a short blog post about what the Dragon tile
-means in Mahjong fortune-telling and how it connects to personal power.
+Run a full end-to-end autopublishing test. Use this brief: write a short blog post
+about what the Dragon tile means in Mahjong fortune-telling and how it connects to
+personal power.
 
-Steps:
-1. @writer — write the post using the write-post skill. Save output to content/topics/dragon-tile-meaning/
-2. @web-developer — publish the post: generate the JSX component, update the blog index,
-   stage and commit (do not push — output the git push command for the user to run)
-3. @social-media-manager — run the distribution-checklist skill, then distribute:
-   - Instagram: schedule via Postiz
-   - TikTok: create a draft via Postiz, send Telegram notification
+Steps — run in order, stop and report any errors before continuing:
 
-After each step, report what was created and where. Stop and flag any errors before continuing.
+1. @writer — write the blog post using the write-post skill.
+   Output: content/topics/dragon-tile-meaning/blog.md
+
+2. @writer — write social captions using the write-social skill.
+   Output: content/topics/dragon-tile-meaning/social-captions.md
+   (must include Instagram, Facebook, LinkedIn, X, and TikTok 6-slide text)
+
+3. @web-developer — publish the post: generate the JSX component, update the blog
+   index, stage and commit. Do not push — output the git push command for the user.
+
+4. @social-media-manager — run the distribution-checklist skill, then distribute:
+   - Instagram: schedule via Postiz (type "schedule")
+   - TikTok: create a draft via Postiz (type "draft"), send Telegram notification
+
+After each step report what was created and where.
 ```
 
 **Verify:**
-- `content/topics/dragon-tile-meaning/` contains blog.md and social-captions.md
+- `content/topics/dragon-tile-meaning/blog.md` exists
+- `content/topics/dragon-tile-meaning/social-captions.md` exists with all platform captions
 - `website/pages/blog/posts/dragon-tile-meaning.jsx` exists
 - Blog index updated with the new card at the top
 - Postiz shows a scheduled Instagram post and a TikTok draft

@@ -85,10 +85,11 @@ Themes can draw from:
 - Source material in `content/source-material/`
 - Quora answers, reader questions, or real reading stories
 
-### 2. Build the Monthly Calendar
+### 2. Update the Content Calendar
 
-Create a file named `content-calendar-YYYY-MM.md` with:
+There is ONE content calendar file: `content/content-calendar/content-calendar.md`. Never create separate monthly files — update this single file in place by adding new weeks at the bottom.
 
+Each week needs:
 - A row for every publish date
 - The channel for each row
 - A short hook describing the content

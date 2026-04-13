@@ -7,19 +7,38 @@
 .header h1 {
   color: var(--warm-cream);
   margin: var(--space-lg) 0 var(--space-md);
-  max-width: 760px;
+  max-width: 720px;
 }
 .header .post-meta { color: rgba(250,248,244,0.6); }
 
-.hero {
+/* ── Breadcrumb ── */
+.breadcrumb {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+.breadcrumb a {
+  color: var(--celestial-gold);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+.breadcrumb span {
+  color: rgba(250,248,244,0.4);
+  margin: 0 6px;
+}
+.breadcrumb span:last-child {
+  color: rgba(250,248,244,0.6);
   margin: 0;
-  max-width: 960px;
-  margin: calc(-1 * var(--space-xl)) auto var(--space-3xl);
-  padding: 0 var(--outer-margin);
 }
 
 .body {
-  max-width: 760px;
+  max-width: 720px;
+  padding-top: var(--space-3xl);
 }
 .body p {
   font-size: 19px;

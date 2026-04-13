@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import Nav from '../../../components/Nav';
 import Footer from '../../../components/Footer';
@@ -24,22 +23,14 @@ export default function BloodMoonRising() {
 
         <header className={styles.header}>
           <div className="container">
+            <nav className={styles.breadcrumb}>
+              <Link href="/blog">Blog</Link> <span>/</span> <span>Blood Moon</span>
+            </nav>
             <span className="post-category">Blood Moon</span>
             <h1>A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac</h1>
             <p className="post-meta">April 4, 2026 · Bill Hajdu · 5 min read</p>
           </div>
         </header>
-
-        <figure className={styles.hero}>
-          <Image
-            src="/images/blog/blood-moon-rising-in-the-year-of-the-fire-horse.webp"
-            alt="Blood moon rising over the horizon"
-            width={960}
-            height={524}
-            style={{ objectFit: 'cover', width: '100%' }}
-            priority
-          />
-        </figure>
 
         <div className="container">
           <div className={styles.body}>

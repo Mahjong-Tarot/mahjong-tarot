@@ -215,15 +215,15 @@ export default function SwiftKelceWeddingStars() {
         </div>
 
         {/* ── Post CTA ── */}
-        <section className="section-dark">
+        <section className="section-stone">
           <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>What Do the Stars Say About Your Match?</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book a Compatibility Reading with Bill</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+            <span className="overline">What Do the Stars Say About Your Match?</span>
+            <h2 style={{ margin: 'var(--space-md) 0' }}>Book a Compatibility Reading with Bill</h2>
+            <p style={{ color: 'var(--mid-gray)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
               Get personal insight into what Chinese astrology reveals about your relationship.
             </p>
             <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
-            <Link href="/blog" className="btn-ghost">More Articles</Link>
+            <Link href="/blog" className="btn-secondary">More Articles</Link>
           </div>
         </section>
       </main>

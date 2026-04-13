@@ -1,15 +1,18 @@
 .article { padding-bottom: var(--space-3xl); }
 
+/* ── Header — warm cream background, navy text ── */
 .header {
-  background-color: var(--midnight-indigo);
-  padding: var(--space-2xl) 0 var(--space-xl);
+  background-color: var(--warm-cream);
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  border-bottom: 1px solid var(--light-stone);
 }
 .header h1 {
-  color: var(--warm-cream);
-  margin: var(--space-lg) 0 var(--space-md);
+  color: var(--midnight-indigo);
+  margin: var(--space-md) 0 var(--space-md);
   max-width: 720px;
+  font-size: 48px;
+  line-height: 1.15;
 }
-.header .post-meta { color: rgba(250,248,244,0.6); }
 
 /* ── Breadcrumb ── */
 .breadcrumb {
@@ -18,7 +21,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 .breadcrumb a {
   color: var(--celestial-gold);
@@ -28,27 +31,30 @@
   text-decoration: underline;
 }
 .breadcrumb span {
-  color: rgba(250,248,244,0.4);
+  color: var(--mid-gray);
   margin: 0 6px;
 }
 .breadcrumb span:last-child {
-  color: rgba(250,248,244,0.6);
+  color: var(--midnight-indigo);
   margin: 0;
 }
 
+/* ── Body ── */
 .body {
   max-width: 720px;
-  padding-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
 }
 .body p {
   font-size: 19px;
-  line-height: 1.8;
+  line-height: 1.85;
   margin-bottom: var(--space-xl);
+  color: #3a3a3a;
 }
 .body h2 {
-  font-size: 32px;
+  font-size: 30px;
   margin-top: var(--space-3xl);
   margin-bottom: var(--space-lg);
+  color: var(--midnight-indigo);
 }
 .body h3 {
   margin-top: var(--space-2xl);
@@ -63,7 +69,7 @@
 }
 
 .footer {
-  max-width: 760px;
+  max-width: 720px;
   margin-top: var(--space-3xl);
 }
 
@@ -86,7 +92,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-xl);
-  padding-top: var(--space-3xl);
+  padding-top: var(--space-2xl);
   margin-top: var(--space-3xl);
   border-top: 1px solid var(--light-stone);
 }
@@ -115,8 +121,9 @@
 }
 
 .signCard {
-  background-color: var(--light-stone);
+  background-color: white;
   padding: var(--space-lg);
+  border: 1px solid var(--light-stone);
 }
 
 .signCard h4 {
@@ -137,8 +144,8 @@
 
 .badgeExceptional { background-color: var(--celestial-gold); color: var(--midnight-indigo); }
 .badgeFavorable   { background-color: var(--midnight-indigo); color: var(--warm-cream); }
-.badgeNeutral     { background-color: var(--mid-gray); color: var(--warm-cream); }
-.badgeMixed       { background-color: var(--mid-gray); color: var(--warm-cream); }
+.badgeNeutral     { background-color: var(--light-stone); color: var(--midnight-indigo); }
+.badgeMixed       { background-color: var(--light-stone); color: var(--midnight-indigo); }
 .badgeChallenging { background-color: var(--mystic-fire); color: var(--warm-cream); }
 .badgeHighRisk    { background-color: var(--mystic-fire-dark); color: var(--warm-cream); }
 
@@ -148,10 +155,11 @@
   margin-bottom: 0;
 }
 
-/* ── Risk Cards ── */
+/* ── Risk Cards — white cards with soft border ── */
 .riskCard {
-  background-color: var(--light-stone);
-  padding: var(--space-xl);
+  background-color: white;
+  border: 1px solid var(--light-stone);
+  padding: var(--space-xl) var(--space-xl) var(--space-xl);
   margin: var(--space-xl) 0;
 }
 .riskCard h3 {
@@ -163,6 +171,7 @@
   font-size: 17px;
   line-height: 1.75;
   margin-bottom: 0;
+  color: #3a3a3a;
 }
 .riskLabel {
   display: inline-block;
@@ -171,34 +180,35 @@
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 3px 8px;
+  padding: 4px 10px;
   margin-bottom: var(--space-md);
-  background-color: var(--mystic-fire);
-  color: var(--warm-cream);
+  background-color: #FDF0EF;
+  color: var(--mystic-fire);
 }
 
-/* ── Pivot / Callout Banner ── */
+/* ── Pivot / Callout Banner — soft lavender tint instead of heavy navy ── */
 .pivotBanner {
-  background-color: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background-color: #F3EFF8;
+  color: var(--midnight-indigo);
   padding: var(--space-2xl);
-  margin: var(--space-3xl) calc(-1 * var(--space-xl));
+  margin: var(--space-3xl) 0;
   text-align: center;
+  border-left: 3px solid var(--soft-lavender);
 }
 .pivotBanner h2 {
-  color: var(--celestial-gold);
-  font-size: 28px;
+  color: var(--midnight-indigo);
+  font-size: 26px;
   margin: 0 0 var(--space-md);
 }
 .pivotBanner p {
-  color: rgba(250,248,244,0.85);
+  color: #3a3a3a;
   font-size: 18px;
   max-width: 560px;
   margin: 0 auto;
   line-height: 1.7;
 }
 
-/* ── Inline Figure ── */
+/* ── Inline Figure — soft rounded corners ── */
 .inlineFigure {
   margin: var(--space-2xl) 0;
 }
@@ -206,20 +216,22 @@
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 4px;
 }
 .inlineFigure figcaption {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 13px;
-  color: rgba(0,0,0,0.5);
+  color: var(--mid-gray);
   text-align: center;
   margin-top: var(--space-sm);
   letter-spacing: 0.02em;
 }
 
-/* ── Prediction Box ── */
+/* ── Prediction Box — gold accent instead of heavy navy ── */
 .predictionBox {
-  background-color: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background-color: #FAF6EC;
+  border: 1px solid var(--celestial-gold);
+  color: var(--midnight-indigo);
   padding: var(--space-2xl);
   margin: var(--space-2xl) 0;
   text-align: center;
@@ -238,15 +250,16 @@
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   line-height: 1.5;
-  color: var(--warm-cream);
+  color: var(--midnight-indigo);
   margin: 0;
 }
 
-/* ── Pull Quote ── */
+/* ── Pull Quote — gold border, warm feel ── */
 .pullQuote {
   border-left: 3px solid var(--celestial-gold);
   padding: var(--space-md) var(--space-xl);
   margin: var(--space-2xl) 0;
+  background-color: #FDFCFA;
 }
 .pullQuote p {
   font-family: 'Playfair Display', serif;
@@ -278,7 +291,7 @@
   color: inherit;
   display: block;
 }
-.relatedCard:hover h3 { color: var(--mystic-fire); }
+.relatedCard:hover h3 { color: var(--celestial-gold); }
 .relatedCardImage {
   position: relative;
   width: 100%;
@@ -286,6 +299,7 @@
   overflow: hidden;
   margin-bottom: var(--space-md);
   background-color: var(--light-stone);
+  border-radius: 4px;
 }
 .relatedCard h3 {
   font-size: 17px;
@@ -296,19 +310,20 @@
 .relatedCard span {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 13px;
-  color: rgba(0,0,0,0.5);
+  color: var(--mid-gray);
 }
 
 @media (max-width: 768px) {
   .signGrid  { grid-template-columns: repeat(2, 1fr); }
+  .relatedGrid { grid-template-columns: 1fr; }
   .postNav   { flex-direction: column; }
   .navNext   { text-align: left; margin-left: 0; }
 }
 
 @media (max-width: 640px) {
+  .header h1 { font-size: 36px; }
   .body p { font-size: 17px; }
-  .body h2 { font-size: 28px; }
+  .body h2 { font-size: 26px; }
   .body blockquote { font-size: 20px; }
-  .hero { padding: 0 var(--outer-margin); }
   .signGrid { grid-template-columns: 1fr; }
 }

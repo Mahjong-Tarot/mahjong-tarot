@@ -1,32 +1,19 @@
 You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the `RemoteTrigger` tool.
 
-## Step 0 — Inject environment variables
+> **IMPORTANT — run this from the main Claude Code session only.** Do not invoke via `@project-manager` or any subagent. `RemoteTrigger` requires the user's OAuth token which is only available in the main session. Running via a subagent will produce a 401 error.
 
-Before registering any triggers, add the required notification env vars to all three Claude Code settings files. The vars must exist in all three so they are available in remote executions (RemoteTriggers), local interactive sessions, and project-scoped local overrides.
+## Step 0 — Load secrets for trigger creation
 
-### Files to update
+**Why this step exists**: RemoteTrigger sessions run in Anthropic's cloud with no access to local files or env vars. The only secure way to pass secrets is to embed them directly in the trigger prompt at creation time — they are stored on Anthropic's servers, never in git. The source files in `agents/project-manager/context/triggers/` use `$LARK_WEBHOOK_URL` etc. as placeholders; this step substitutes the real values before calling `RemoteTrigger {action: "create"}`.
 
-| File | Scope |
-|---|---|
-| `~/.claude/remote-settings.json` | Remote trigger executions (CCR) — **required for RemoteTriggers to work** |
-| `~/.claude/settings.json` | Global local sessions |
-| `.claude/settings.local.json` | Project-local override (gitignored — safe for secrets) |
+### Load the values
 
-### How to add the vars
-
-Run the following Python script. It sources all four values automatically — no user input needed:
-
-1. **`LARK_WEBHOOK_URL`** and **`RESEND_API_KEY`** — read from `.env.local`, then `.env` in the project root (whichever has the key first)
-2. **`RESEND_FROM`** — hardcoded to `onboarding@resend.dev` (testing mode)
-3. **`RESEND_TO`** — read from `agents/project-manager/context/persona.md`, Team table, `Email` column (comma-separated)
-
-If a key is missing from both `.env` files, stop and report which key is missing before writing anything.
+Run this Python script to read secrets from local `.env` files and build the substitution map. Do not proceed if any key is missing.
 
 ```bash
 python3 - <<'PYEOF'
-import json, os, re, sys
+import os, re, sys
 
-# --- 1. Read .env files (project root) ---
 def parse_env_file(path):
     vals = {}
     try:
@@ -36,8 +23,7 @@ def parse_env_file(path):
                 if not line or line.startswith("#") or "=" not in line:
                     continue
                 k, _, v = line.partition("=")
-                v = v.strip().strip('"').strip("'")
-                vals[k.strip()] = v
+                vals[k.strip()] = v.strip().strip('"').strip("'")
     except FileNotFoundError:
         pass
     return vals
@@ -49,58 +35,37 @@ env.update(parse_env_file(".env.local"))  # .env.local takes precedence
 missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
 if missing:
     print(f"ERROR: missing from .env / .env.local: {missing}")
-    print("Add them to .env.local and re-run.")
     sys.exit(1)
 
-# --- 2. Read RESEND_TO from persona.md Team table ---
+# Read team emails from persona.md
 with open("agents/project-manager/context/persona.md") as f:
     text = f.read()
+emails = list(dict.fromkeys(
+    e for e in re.findall(r'[\w.+-]+@[\w.-]+\.[a-z]{2,}', text)
+    if "example" not in e
+))
 
-emails = re.findall(r'[\w.+-]+@[\w.-]+\.[a-z]{2,}', text)
-# Deduplicate preserving order, skip example/placeholder addresses
-seen = set()
-team_emails = []
-for e in emails:
-    if e not in seen and "example" not in e:
-        seen.add(e)
-        team_emails.append(e)
-
-resend_to = ",".join(team_emails)
-
-# --- 3. Build env block ---
-new_env = {
-    "LARK_WEBHOOK_URL": env["LARK_WEBHOOK_URL"],
-    "RESEND_API_KEY":   env["RESEND_API_KEY"],
-    "RESEND_FROM":      "onboarding@resend.dev",
-    "RESEND_TO":        resend_to,
-}
-
-# --- 4. Merge into all three settings files ---
-files = [
-    os.path.expanduser("~/.claude/remote-settings.json"),
-    os.path.expanduser("~/.claude/settings.json"),
-    ".claude/settings.local.json",
-]
-
-for path in files:
-    try:
-        with open(path) as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        data = {}
-    data.setdefault("env", {})
-    data["env"].update(new_env)
-    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(data, f, indent=2)
-    print(f"Updated {path}")
-
-print(f"\nRESEND_TO set to: {resend_to}")
-print("Done. All three settings files updated.")
+print("LARK_WEBHOOK_URL=" + env["LARK_WEBHOOK_URL"])
+print("RESEND_API_KEY="   + env["RESEND_API_KEY"])
+print("RESEND_FROM=onboarding@resend.dev")
+print("RESEND_TO="        + ",".join(emails))
 PYEOF
 ```
 
-Once all three files are updated, proceed to register the triggers below.
+### Substitution rule (apply to ALL trigger prompts before creating)
+
+Before calling `RemoteTrigger {action: "create"}` for each trigger, take the prompt text from the trigger's source file and replace every occurrence of these placeholders with the real values read above:
+
+| Placeholder | Replace with |
+|---|---|
+| `$LARK_WEBHOOK_URL` | actual webhook URL |
+| `$RESEND_API_KEY` | actual API key |
+| `$RESEND_FROM` | `onboarding@resend.dev` |
+| `$RESEND_TO` | comma-separated team emails |
+
+The substituted prompt goes into `events[0].data.message.content` in the `RemoteTrigger` body. The source files in git keep the `$PLACEHOLDER` syntax unchanged.
+
+Once you have the substitution map, proceed to create the triggers below.
 
 ---
 

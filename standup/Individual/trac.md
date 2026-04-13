@@ -1,14 +1,16 @@
-date: 2026-04-11
+date: 2026-04-14
 name: Trac
 
 ## Today's focus
-- Update project manager skills, persona, and workflows based on Dave's updated standup workflow
-- Fix standup folder structure consolidation issues introduced during Claude generation
-- Generate setup prompts for the team (trigger setup, daily-checkin skill update)
+- Testing Project Manager agent notifications via Lark Group Webhook and email using Resend.
+- Finalize the setup guideline for the infinite leverage framework.
+- Generate and test the infinite leverage framework with the agent generating skill.
+- Share the guidelines and test with designers.
 
 ## Notes
-- Workflow spec came from Dave; some Claude-generated content had incorrect standup folder references that needed manual correction
-- Three reusable prompts now live in docs/prompts/ for team onboarding: PM setup, daily-checkin skill update, and trigger registration
+- RemoteTriggers disabled — Anthropic cloud cannot reach Lark webhook or Resend CLI; all 4 PM triggers to be set up as local cron jobs
+- All 4 trigger prompts standardised: env vars (`LARK_WEBHOOK_URL`, `RESEND_API_KEY`, `RESEND_FROM`) loaded from `.env.local`; team roster read from `persona.md`
+- `RESEND_FROM` must be added to `.env.local`; domain verification required in Resend before emails deliver
 
 ## Blockers
 None

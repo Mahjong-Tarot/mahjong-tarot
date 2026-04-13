@@ -36,7 +36,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -49,7 +49,7 @@ emails = list(dict.fromkeys(
 
 LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
 RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = "onboarding@resend.dev"
+RESEND_FROM      = env["RESEND_FROM"]
 RESEND_TO        = ",".join(emails)
 ```
 
@@ -57,7 +57,10 @@ Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_
 
 ## Step 1 — Git workflow
 
-git pull origin main → git checkout -b pm/eod/YYYY-MM-DD. All writes go on this branch.
+git pull origin main
+git checkout -b pm/eod/YYYY-MM-DD
+
+All writes go on this branch.
 
 ## Step 2 — Send end-of-day reminder
 
@@ -72,7 +75,8 @@ Notification (send both — not fallback):
      --from "$RESEND_FROM" \
      --to "$RESEND_TO" \
      --subject "Check-In Reminder — Tonight for YYYY-MM-DD" \
-     --html-file /tmp/eod-reminder-email.html
+     --html-file /tmp/eod-reminder-email.html \
+     --quiet
    Full pattern in pm-notification-guide.md.
 3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
 
@@ -84,7 +88,11 @@ Review standup/briefings/YYYY-MM/raid.md and confirm the blocker list is current
 
 ## Step 4 — Commit
 
-git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md → git commit -m "pm(eod): YYYY-MM-DD" → git push origin pm/eod/YYYY-MM-DD → gh pr create --base main → gh pr merge --merge --auto.
+git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md
+git commit -m "pm(eod): YYYY-MM-DD"
+git push origin pm/eod/YYYY-MM-DD
+gh pr create --title "pm(eod): YYYY-MM-DD" --base main --body "EOD decisions and RAID update YYYY-MM-DD"
+gh pr merge --merge --auto
 ```
 
 ---

@@ -52,7 +52,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -65,7 +65,7 @@ emails = list(dict.fromkeys(
 
 LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
 RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = "onboarding@resend.dev"
+RESEND_FROM      = env["RESEND_FROM"]
 RESEND_TO        = ",".join(emails)
 ```
 
@@ -218,7 +218,13 @@ Notification (send both — not fallback):
 2. Resend CLI (always — install if missing: `npm install -g resend`).
    - Substitute all `{{PLACEHOLDER}}` values in a copy of agents/project-manager/context/template/emails/2-standup-compile.html
    - Write substituted file to /tmp/standup-compile-email.html
-   - Run: RESEND_API_KEY=$RESEND_API_KEY resend emails send --from "$RESEND_FROM" --to "$RESEND_TO" --subject "Stand-Up Summary — YYYY-MM-DD" --html-file /tmp/standup-compile-email.html --quiet
+   - Run:
+   RESEND_API_KEY=$RESEND_API_KEY resend emails send \
+     --from "$RESEND_FROM" \
+     --to "$RESEND_TO" \
+     --subject "Stand-Up Summary — YYYY-MM-DD" \
+     --html-file /tmp/standup-compile-email.html \
+     --quiet
 3. If BOTH fail: append failure status inline at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
 ## Step 8 — Git commit

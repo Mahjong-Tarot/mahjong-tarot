@@ -10,7 +10,7 @@ Notification pattern for every trigger: **Lark + Resend (both always) → inline
 
 Never create alerts folders or alert files. Document failures inline.
 
-> **Testing mode**: `RESEND_FROM` is set to `onboarding@resend.dev`. Resend will only deliver to the email registered on the Resend account. Switch to `pm@edge8.ai` once `edge8.ai` is verified as a sending domain in Resend.
+> **Sender**: `RESEND_FROM` is read from `.env.local`. Requires the domain to be a verified sending domain in Resend.
 
 ---
 

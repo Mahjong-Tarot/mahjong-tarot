@@ -1,20 +1,16 @@
-date: 2026-04-11
+date: 2026-04-13
 
 ---
 
 ## project-manager
 
 **Completed:**
-- Updated persona, daily-standup context, and workflow files to align with Dave's standup spec
-- Fixed standup folder structure (standup/individual/, standup/briefings/)
-- Updated daily-checkin skill in both .claude/skills/ and agents/project-manager/skills/
-- Registered and tested all 4 remote triggers (Morning, Compile, EOD, Weekly RAG)
-- Generated setup prompts in docs/prompts/ for team onboarding
+- Ran pm(standup-morning) workflow for 2026-04-13 (commit 87df940 by trac.nguyen@talentedge.ai)
+- Sent morning reminder to team (Lark + Resend)
 
 **Next:**
-- Monitor Monday's first live trigger run (7 AM and 9 AM Asia/Saigon)
-- Compile today's test standup briefing to standup/briefings/2026-04/2026-04-11.md
-- Flag any Gmail connection gaps in the morning reminder fallback
+- Compile stand-up briefing at 9:00 AM Asia/Saigon (Phase 2)
+- Flag any check-in gaps before compile deadline
 
 **Blockers:**
 None
@@ -24,10 +20,16 @@ None
 ## web-developer
 
 **Completed:**
-- (not active today)
+- Published "What the Stars Actually Say About the Swift-Kelce Wedding" blog post (commit f934abe)
+- Redesigned post layout and replaced images (commit 107777b)
+- Added rich formatting and navy OG images for Swift-Kelce post (commit 1303cad)
+- Fixed blog post categories across all posts and index (commit b145f43)
+- Added multi-category support per post (commit 52a86f8)
+- Replaced Swift-Kelce OG image with bright yin-yang variant (commit 35fba5c)
+- Added two new blog posts and consolidated content calendar (commit f356c61)
 
 **Next:**
-- Pick up approved content from content/topics/ when humans sign off (Wednesday rhythm)
+- Pick up next approved content from content/topics/ when humans sign off
 
 **Blockers:**
 None
@@ -37,23 +39,40 @@ None
 ## writer
 
 **Completed:**
-- (not active today — Dave scaffolding the agent)
+- Writer agent review completed — skill gaps and SM handoff contract identified (commits 6001ac0, 3062165 by trac.nguyen@talentedge.ai)
+- Social Media Manager agent spec refactored to enforce writer/distributor separation (commit e827781)
 
 **Next:**
-- Await writer agent setup from Dave before first Friday run
+- Resolve identified skill execution gaps from review
+- Implement SM handoff contract
 
 **Blockers:**
-Writer agent not yet set up — Dave working on it today
+Writer agent skill gaps documented — awaiting fixes before next scheduled run
 
 ---
 
 ## product-manager
 
 **Completed:**
-- (not active today)
+- No activity on 2026-04-12
 
 **Next:**
 - Stand by for feature prioritisation requests
+
+**Blockers:**
+None
+
+---
+
+## architecture / planning
+
+**Completed:**
+- Auto-publishing stack, CCR strategy, and client bootstrap prompt added (commit 1d9f1ad by trac.nguyen@talentedge.ai)
+- Autopublishing implementation checklist with step-by-step Claude Code prompts added (commit 4844afc)
+- Project-manager agent expanded with team roster and multi-phase standup workflow (commit 592e6c1)
+
+**Next:**
+- Review auto-publishing checklist with Dave for implementation sign-off
 
 **Blockers:**
 None

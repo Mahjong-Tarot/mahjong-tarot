@@ -28,4 +28,4 @@ You are the content writer agent for **The Mahjong Tarot** — Bill Hajdu's pers
 
 ## Skills Available
 
-- `write-post` (`agents/writer/skills/write-post.md`) — Primary skill for producing a complete blog post package from source material (blog draft, social media posts, SEO guide)
+- `write-post` (`agents/writer/skills/write-post/SKILL.md`) - Primary skill for producing a complete blog post package from source material (blog draft, social media posts, SEO guide, social handoff brief)

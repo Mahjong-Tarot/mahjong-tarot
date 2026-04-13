@@ -20,6 +20,14 @@ const CATEGORIES = [
 const POSTS = [
   /* ── Add new posts at the TOP of this array ── */
   {
+    slug: 'swift-kelce-wedding-stars',
+    title: 'What the Stars Actually Say About the Swift-Kelce Wedding',
+    excerpt: 'Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements - not just the signs - the charts tell a completely different story.',
+    category: 'Year of the Fire Horse',
+    date: 'Apr 13, 2026',
+    readTime: '6 min read',
+  },
+  {
     slug: 'love-in-the-fire-horse-year',
     title: 'Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign',
     excerpt: 'This is the one year in 60 where your partner is most likely to cheat and most likely to propose. Record proposals. Record divorces. The Fire Horse doesn\'t do anything halfway.',
@@ -87,10 +95,10 @@ export default function BlogIndex() {
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
-              <Link href="/blog/posts/love-in-the-fire-horse-year" className={styles.featuredImage}>
+              <Link href="/blog/posts/swift-kelce-wedding-stars" className={styles.featuredImage}>
                 <Image
-                  src="/images/blog/love-in-the-fire-horse-year.webp"
-                  alt="Love in the Year of the Fire Horse"
+                  src="/images/blog/swift-kelce-wedding-stars.webp"
+                  alt="What the Stars Actually Say About the Swift-Kelce Wedding"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
@@ -98,14 +106,14 @@ export default function BlogIndex() {
               <div className={styles.featuredText}>
                 <span className="post-category">Year of the Fire Horse</span>
                 <h2 className={styles.featuredTitle}>
-                  <Link href="/blog/posts/love-in-the-fire-horse-year">
-                    Love in the Year of the Fire Horse: What 2026 Means for Your Relationships
+                  <Link href="/blog/posts/swift-kelce-wedding-stars">
+                    What the Stars Actually Say About the Swift-Kelce Wedding
                   </Link>
                 </h2>
                 <p className={styles.featuredExcerpt}>
-                  This is the one year in 60 where your partner is most likely to cheat and most likely to propose. The Fire Horse doesn't do anything halfway.
+                  Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements, the charts tell a completely different story.
                 </p>
-                <Link href="/blog/posts/love-in-the-fire-horse-year" className="btn-secondary">Read the Article</Link>
+                <Link href="/blog/posts/swift-kelce-wedding-stars" className="btn-secondary">Read the Article</Link>
               </div>
             </div>
           </div>

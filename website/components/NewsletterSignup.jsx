@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import useSpamGuard from '../lib/useSpamGuard';
 import styles from '../styles/Forms.module.css';
 
 const CHINESE_SIGNS = [
@@ -11,10 +12,12 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
   const [email, setEmail] = useState('');
   const [sign, setSign] = useState('');
   const [status, setStatus] = useState('idle');
+  const { checkSpam, SpamField } = useSpamGuard();
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!email) return;
+    if (checkSpam()) { setStatus('success'); return; }
 
     setStatus('submitting');
     if (!supabase) { setStatus('error'); return; }
@@ -50,6 +53,7 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
         <h2>Stay Connected</h2>
         <p>Get insights on Mahjong, tarot, and Chinese astrology delivered to your inbox.</p>
         <form onSubmit={handleSubmit}>
+          <SpamField />
           <div className={styles.blogNewsletterInputs}>
             <input
               type="email"
@@ -84,6 +88,7 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
     <div className={styles.newsletter}>
       <p className={styles.newsletterTitle}>Newsletter</p>
       <form onSubmit={handleSubmit}>
+        <SpamField />
         <div className={styles.newsletterRow}>
           <input
             type="email"

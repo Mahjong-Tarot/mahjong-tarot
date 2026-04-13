@@ -1,6 +1,13 @@
-You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the RemoteTrigger tool or `/schedule` skill.
+You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the `RemoteTrigger` tool.
 
-All times are **Asia/Saigon (UTC+7)**. Cron expressions are in **UTC**.
+## Trigger type rule
+
+**Always use `RemoteTrigger` — never `CronCreate`.**
+
+- `CronCreate` is session-local and does not persist reliably across contexts (VS Code extension limitation).
+- `RemoteTrigger` runs on Anthropic's cloud — always-on, no machine dependency, survives restarts.
+
+All times are **Asia/Saigon (UTC+7)**. `RemoteTrigger` cron expressions are in **UTC**.
 
 ---
 
@@ -15,9 +22,7 @@ standup/
         ├── YYYY-MM-DD.md          ← compiled daily stand-up
         ├── weekly-rag-YYYY-MM-DD.md   ← Friday RAG report
         ├── raid.md                ← RAID log (updated in place)
-        ├── decisions.md           ← decisions log (appended daily)
-        └── alerts/
-            └── alert-YYYY-MM-DD.md    ← notification fallback
+        └── decisions.md           ← decisions log (appended daily)
 ```
 
 ---
@@ -41,7 +46,40 @@ Never write directly to main.
 
 ## Communication rule
 
-Notification priority: **Telegram → Lark → fallback file** (`standup/briefings/YYYY-MM/alerts/alert-YYYY-MM-DD.md`).
+Notification priority: **Telegram → Lark**. If both fail, append the notification status inline to the relevant daily file. Do not create any alerts folder or alert files.
+
+---
+
+## RemoteTrigger body shape
+
+```json
+{
+  "name": "TRIGGER_NAME",
+  "cron_expression": "CRON_UTC",
+  "enabled": true,
+  "job_config": {
+    "ccr": {
+      "environment_id": "env_01Ly7cgFD1z5N2xN9VtNZ42S",
+      "session_context": {
+        "model": "claude-sonnet-4-6",
+        "sources": [
+          {"git_repository": {"url": "https://github.com/Mahjong-Tarot/mahjong-tarot"}}
+        ],
+        "allowed_tools": ["Bash", "Read", "Write", "Edit", "Glob", "Grep"]
+      },
+      "events": [
+        {"data": {
+          "uuid": "<fresh lowercase v4 uuid>",
+          "session_id": "",
+          "type": "user",
+          "parent_tool_use_id": null,
+          "message": {"role": "user", "content": "PROMPT_FROM_BELOW"}
+        }}
+      ]
+    }
+  }
+}
+```
 
 ---
 
@@ -49,6 +87,7 @@ Notification priority: **Telegram → Lark → fallback file** (`standup/briefin
 
 ### 1. Morning stand-up reminder
 - **Name (canonical — use exactly)**: `PM Standup Morning`
+- **Tool**: `RemoteTrigger {action: "create"}`
 - **Schedule**: `0 0 * * 1-5` (Mon–Fri 7:00 AM Asia/Saigon = 00:00 UTC)
 - **Prompt**:
 
@@ -61,15 +100,16 @@ It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all four team me
 - standup/individual/trac.md
 - standup/individual/khang.md
 
-Notification order: Telegram → Lark → write fallback to standup/briefings/YYYY-MM/alerts/alert-YYYY-MM-DD.md.
+Notification order: Telegram → Lark. If both fail, document the failure in standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the file if it does not exist yet). Do not create any alerts folder or alert files.
 
-Git workflow: git pull origin main → git checkout -b pm/standup-morning/YYYY-MM-DD → write any fallback alert on this branch → git add <files> → git commit -m "pm(standup-morning): YYYY-MM-DD" → git push → gh pr create --base main → gh pr merge --merge --auto. Never commit to main directly.
+Git workflow: git pull origin main → git checkout -b pm/standup-morning/YYYY-MM-DD → write any file changes on this branch → git add <files> → git commit -m "pm(standup-morning): YYYY-MM-DD" → git push → gh pr create --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```
 
 ---
 
 ### 2. Stand-up compile and distribute
 - **Name (canonical — use exactly)**: `PM Standup Compile`
+- **Tool**: `RemoteTrigger {action: "create"}`
 - **Schedule**: `0 2 * * 1-5` (Mon–Fri 9:00 AM Asia/Saigon = 02:00 UTC)
 - **Prompt**:
 
@@ -86,7 +126,7 @@ Detect conflicts across all five check-ins.
 
 Compile the daily stand-up to standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the monthly folder if needed). Include agent updates as-is under an Agent Updates section.
 
-Send the summary: Telegram → Lark → log error at the bottom of the compiled file if both fail.
+Send the summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/YYYY-MM-DD.md → git commit -m "pm(standup-compile): YYYY-MM-DD" → git push origin pm/standup-compile/YYYY-MM-DD → gh pr create --title "pm(standup-compile): YYYY-MM-DD" --base main → gh pr merge --merge --auto.
 ```
@@ -95,6 +135,7 @@ Commit: git add standup/briefings/YYYY-MM/YYYY-MM-DD.md → git commit -m "pm(st
 
 ### 3. End-of-day reminder
 - **Name (canonical — use exactly)**: `PM EOD Reminder`
+- **Tool**: `RemoteTrigger {action: "create"}`
 - **Schedule**: `0 10 * * 1-5` (Mon–Fri 5:00 PM Asia/Saigon = 10:00 UTC)
 - **Prompt**:
 
@@ -103,19 +144,20 @@ It is 5 PM Asia/Saigon end of day.
 
 Git workflow first: git pull origin main → git checkout -b pm/eod/YYYY-MM-DD. All writes go on this branch.
 
-Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Telegram → Lark → write standup/briefings/YYYY-MM/alerts/alert-YYYY-MM-DD.md.
+Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Telegram → Lark. If both fail, append the notification status to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
 
 Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (create if missing).
 
 Review standup/briefings/YYYY-MM/raid.md and confirm the blocker list is current (create if missing).
 
-Commit: git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md <any alert file> → git commit -m "pm(eod): YYYY-MM-DD" → git push origin pm/eod/YYYY-MM-DD → gh pr create --title "pm(eod): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
+Commit: git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md → git commit -m "pm(eod): YYYY-MM-DD" → git push origin pm/eod/YYYY-MM-DD → gh pr create --title "pm(eod): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```
 
 ---
 
 ### 4. Weekly RAG status report
 - **Name (canonical — use exactly)**: `PM Weekly RAG Report`
+- **Tool**: `RemoteTrigger {action: "create"}`
 - **Schedule**: `0 9 * * 5` (Friday 4:00 PM Asia/Saigon = 09:00 UTC)
 - **Prompt**:
 
@@ -136,7 +178,7 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 ⚠️ RISKS — top 3 with probability / impact / mitigation
 🔔 DECISIONS NEEDED — items requiring decision with deadline
 
-Send the weekly summary: Telegram → Lark → write standup/briefings/YYYY-MM/alerts/alert-YYYY-MM-DD.md as fallback.
+Send the weekly summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin pm/weekly-rag/YYYY-MM-DD → gh pr create --title "pm(weekly-rag): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```
@@ -162,6 +204,8 @@ Commit: git add standup/briefings/YYYY-MM/retro-YYYY-MM-DD.md → git commit -m 
 ---
 
 ## After creating all triggers
+
+List all active triggers and report back:
 
 | Trigger name | Cron (UTC) | Local time (Asia/Saigon) | Status | Next run | Trigger ID |
 |---|---|---|---|---|---|

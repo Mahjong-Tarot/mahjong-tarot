@@ -121,7 +121,7 @@ A well-structured project CLAUDE.md has five sections:
 
 ### How to set it up
 
-**Step 1.** Copy the template from `context/templates/CLAUDE.template.md` to your new project root.
+**Step 1.** Copy the template from `architecture/templates/CLAUDE.template.md` to your new project root.
 
 **Step 2.** Replace every `<PLACEHOLDER>` using the reference table at the bottom of the template.
 
@@ -284,7 +284,7 @@ You never need to remember to do this — it is triggered by your approval signa
 
 ## Quick-Start Checklist for a New Project
 
-- [ ] Copy `context/templates/CLAUDE.template.md` to new project root as `CLAUDE.md`
+- [ ] Copy `architecture/templates/CLAUDE.template.md` to new project root as `CLAUDE.md`
 - [ ] Replace all `<PLACEHOLDERS>` in CLAUDE.md
 - [ ] Create `context/web-style-guide.md`, `context/web-dev-guide.md`, `context/publishing-guide.md`
 - [ ] Create `design/system/`, `design/features/`, `design/agents/`, `design/archive/`

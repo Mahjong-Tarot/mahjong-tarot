@@ -32,7 +32,7 @@ env = {}
 env.update(parse_env_file(".env"))
 env.update(parse_env_file(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     print(f"ERROR: missing from .env / .env.local: {missing}")
     sys.exit(1)
@@ -47,7 +47,7 @@ emails = list(dict.fromkeys(
 
 print("LARK_WEBHOOK_URL=" + env["LARK_WEBHOOK_URL"])
 print("RESEND_API_KEY="   + env["RESEND_API_KEY"])
-print("RESEND_FROM=onboarding@resend.dev")
+print("RESEND_FROM="      + env["RESEND_FROM"])
 print("RESEND_TO="        + ",".join(emails))
 PYEOF
 ```
@@ -60,7 +60,7 @@ Before calling `RemoteTrigger {action: "create"}` for each trigger, take the pro
 |---|---|
 | `$LARK_WEBHOOK_URL` | actual webhook URL |
 | `$RESEND_API_KEY` | actual API key |
-| `$RESEND_FROM` | `onboarding@resend.dev` |
+| `$RESEND_FROM` | value from `.env.local` |
 | `$RESEND_TO` | comma-separated team emails |
 
 The substituted prompt goes into `events[0].data.message.content` in the `RemoteTrigger` body. The source files in git keep the `$PLACEHOLDER` syntax unchanged.
@@ -123,7 +123,7 @@ Send **both** Lark and Resend on every trigger — not as a fallback chain. Only
 
 Full patterns and HTML templates: `agents/project-manager/context/pm-notification-guide.md`
 
-> **Testing mode**: `RESEND_FROM` = `onboarding@resend.dev`. Emails will only deliver to the Resend account owner's email. Switch to `pm@edge8.ai` once `edge8.ai` is verified as a sending domain in Resend.
+> **Testing mode**: `RESEND_FROM` = `mahjong-pm@davehajdu.com`. Emails will only deliver to the Resend account owner's email. Switch to `pm@edge8.ai` once `edge8.ai` is verified as a sending domain in Resend.
 
 Full notification patterns and HTML email templates: `agents/project-manager/context/pm-notification-guide.md`
 

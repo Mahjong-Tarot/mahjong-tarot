@@ -38,7 +38,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -51,7 +51,7 @@ emails = list(dict.fromkeys(
 
 LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
 RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = "onboarding@resend.dev"
+RESEND_FROM      = env["RESEND_FROM"]
 RESEND_TO        = ",".join(emails)
 ```
 
@@ -59,7 +59,12 @@ Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_
 
 ## Step 1 — Git workflow
 
-git pull origin main → git checkout -b pm/weekly-rag/YYYY-MM-DD. All writes go on this branch.
+git pull origin main
+git checkout -b pm/weekly-rag/YYYY-MM-DD
+
+All writes go on this branch.
+
+## Step 2 — Generate the RAG report
 
 Read standup/briefings/YYYY-MM/ for this week's compiled stand-ups and decisions. Check Vercel for deployment status.
 
@@ -71,16 +76,29 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 ⚠️ RISKS — top 3 with probability / impact / mitigation
 🔔 DECISIONS NEEDED — items requiring decision with deadline
 
-Read agents/project-manager/context/pm-notification-guide.md for the full notification pattern, Lark message text, and HTML email template (Template 4 — Weekly RAG Report).
+## Step 3 — Send notification
+
+Read agents/project-manager/context/pm-notification-guide.md for the Lark message text and HTML email template (Template 4 — Weekly RAG Report).
 
 Notification (send both — not fallback):
 1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "Weekly RAG report" message from pm-notification-guide.md, substituting YYYY-MM-DD and copying the RAG status lines from the report.
 2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, write to `/tmp/weekly-rag-email.html`, then send:
-   RESEND_API_KEY=$RESEND_API_KEY resend emails send --from "$RESEND_FROM" --to "$RESEND_TO" --subject "Weekly Status Report — Week of YYYY-MM-DD" --html-file /tmp/weekly-rag-email.html
+   RESEND_API_KEY=$RESEND_API_KEY resend emails send \
+     --from "$RESEND_FROM" \
+     --to "$RESEND_TO" \
+     --subject "Weekly Status Report — Week of YYYY-MM-DD" \
+     --html-file /tmp/weekly-rag-email.html \
+     --quiet
    Full pattern in pm-notification-guide.md.
 3. If BOTH fail: append failure status inline at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
-Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin pm/weekly-rag/YYYY-MM-DD → gh pr create --base main → gh pr merge --merge --auto.
+## Step 4 — Commit
+
+git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md
+git commit -m "pm(weekly-rag): YYYY-MM-DD"
+git push origin pm/weekly-rag/YYYY-MM-DD
+gh pr create --title "pm(weekly-rag): YYYY-MM-DD" --base main --body "Weekly RAG report YYYY-MM-DD"
+gh pr merge --merge --auto
 ```
 
 ---

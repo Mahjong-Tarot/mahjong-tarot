@@ -54,7 +54,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -67,7 +67,7 @@ emails = list(dict.fromkeys(
 
 LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
 RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = "onboarding@resend.dev"
+RESEND_FROM      = env["RESEND_FROM"]
 RESEND_TO        = ",".join(emails)
 ```
 
@@ -135,31 +135,18 @@ Format per section:
 
 ## Step 4 — Send morning reminder to human team members
 
-Read agents/project-manager/context/pm-notification-guide.md for the full notification pattern.
-
-Send reminder to: Dave (dave@edge8.co) — and any other confirmed addresses from agents/project-manager/context/persona.md.
-
-Lark message (use "Morning reminder" format from pm-notification-guide.md):
-```
-🌅 Daily Stand-Up Reminder — YYYY-MM-DD
-
-Please submit your check-in to standup/individual/<name>.md before 9:00 AM today.
-
-Files:
-• standup/individual/dave.md
-• standup/individual/yon.md
-• standup/individual/trac.md
-• standup/individual/khang.md
-
-The PM agent compiles the stand-up at 9 AM.
-```
+Read agents/project-manager/context/pm-notification-guide.md for the Lark message text and HTML email template (Template 1 — Morning Reminder).
 
 Notification (send both — not fallback):
-1. Lark webhook: POST to $LARK_WEBHOOK_URL.
-2. Resend CLI (always — install if missing: `npm install -g resend`).
-   - Template: agents/project-manager/context/template/emails/1-standup-morning.html
-   - Subject: "Daily Stand-Up Reminder — YYYY-MM-DD"
-   - To: $RESEND_TO (loaded from persona.md in Step 0)
+1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "Morning reminder" message from pm-notification-guide.md, substituting YYYY-MM-DD with today's date.
+2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute `{{DATE}}` in a copy of `agents/project-manager/context/template/emails/1-standup-morning.html`, write to `/tmp/standup-morning-email.html`, then send:
+   RESEND_API_KEY=$RESEND_API_KEY resend emails send \
+     --from "$RESEND_FROM" \
+     --to "$RESEND_TO" \
+     --subject "Daily Stand-Up Reminder — YYYY-MM-DD" \
+     --html-file /tmp/standup-morning-email.html \
+     --quiet
+   Full pattern in pm-notification-guide.md.
 3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
 ## Step 5 — Git commit

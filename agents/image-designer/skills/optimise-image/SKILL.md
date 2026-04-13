@@ -36,17 +36,15 @@ Takes a source image from `working_files/` (or any path specified in the request
 
 ## Steps
 
-### 1. Read the request file
+### 1. Identify the inputs
 
-Read the YAML at `agents/web-designer/output/requests/<slug>-image-request.yaml`.
+The caller provides:
+- `slug` — used to derive output paths
+- `type` — look up target dimensions and size limit from the spec table
+- `source` — path to the source image file (usually `working_files/<filename>`)
+- `filters` (optional) — `brightness`, `contrast`, `saturation`, `crop`
 
-Extract for each image entry where `workflow: optimise`:
-- `slug` (top-level)
-- `type` → look up target dimensions and size limit
-- `source` → path to the source image file
-- `filters` (optional) → `brightness`, `contrast`, `saturation`, `crop`
-
-Verify the source file exists. If it does not, log an error and skip this image entry.
+Verify the source file exists. If it does not, log an error and stop.
 
 ### 2. Run the Pillow pipeline
 
@@ -137,7 +135,7 @@ sys.exit(1)
 ### 3. Check the result
 
 - **Exit 0** — image passed the size gate. Record the output path, type, and final KB for the log entry.
-- **Exit 1** — image failed after three quality passes. Log the failure. Move the request file to `agents/web-designer/output/requests/failed/`.
+- **Exit 1** — image failed after three quality passes. Log the failure and report to the caller.
 
 ### 4. Write the run log entry
 
@@ -157,19 +155,11 @@ Also write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.m
 ```markdown
 # Error: <slug> / <type>
 
-- **Request file:** agents/web-designer/output/requests/<slug>-image-request.yaml
 - **Failure step:** Step 2 — size gate
 - **Source:** <source_path>
 - **Final size:** <size_kb> KB (limit: <max_kb> KB)
 - **Suggested fix:** Use a smaller source image, or request a lower-detail crop.
 ```
-
-### 5. Move the request file
-
-On success: move to `agents/web-designer/output/requests/processed/`
-On failure: move to `agents/web-designer/output/requests/failed/`
-
-If the request file contains multiple images, only move it once all entries have been attempted.
 
 ---
 

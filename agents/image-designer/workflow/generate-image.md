@@ -16,15 +16,12 @@ Produce a brand-new image for a blog post or page by calling the Gemini image ge
 
 | File | Path | Notes |
 |------|------|-------|
-| Request file | `agents/web-designer/output/requests/<slug>-image-request.yaml` | Written by Web Designer agent |
 | Post content | `content/topics/<slug>/blog.md` | Optional — read for prompt context |
-| Temp raw download | `working_files/<slug>-<type>-raw.png` | Temporary — cleaned up after optimisation |
+| Temp raw PNG | `working_files/<slug>-<type>-raw.png` | Temporary — cleaned up after optimisation |
 | PNG archive | `content/topics/<slug>/<slug>-hero-original.png` | Permanent archive of the generated image |
 | WebP output | `content/topics/<slug>/` (derived by type — see path table) | Final destination |
 | Run log | `agents/image-designer/output/run-log.md` | Append one row per image type |
 | Error report | `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md` | Write on failure |
-| Processed requests | `agents/web-designer/output/requests/processed/` | Move here on full success |
-| Failed requests | `agents/web-designer/output/requests/failed/` | Move here on failure |
 
 ---
 
@@ -46,12 +43,12 @@ Produce a brand-new image for a blog post or page by calling the Gemini image ge
 
 ### 1. Read the request file
 
-Read the YAML at `agents/web-designer/output/requests/<slug>-image-request.yaml`.
+The caller provides a `slug` and one or more image entries (type, workflow, style/source). Read `content/topics/<slug>/blog.md` if it exists for additional context.
 
 For each image entry where `workflow: generate`, extract:
 - `slug` (top-level) — used to derive output paths and archive paths
 - `type` — look up target dimensions and size limit from the spec table above
-- `style` — must match a name in `agents/image-designer/context/styles.json`
+- `style` — optional hint only; agent uses its own judgment (see Step 3)
 - `prompt_override` — if set and non-null, skip Steps 2 and 3; use this prompt directly
 
 If `type` is not in the spec table, log an error and skip this entry.
@@ -65,11 +62,36 @@ Read if present:
 
 If `prompt_override` is set in the request, use that value directly — skip to Step 4.
 
-Otherwise, use the `style` field from the request and the agent's built-in brand knowledge (see `skills/generate-image/SKILL.md` for the full style table, brand colours, and prompt template). Proceed directly to generation — no user confirmation needed.
+Otherwise, follow the two-path approach in `skills/generate-image/SKILL.md`:
 
-If the `style` value does not match a recognised brand style, stop and report:
+**Step 3a — Check the run log for duplicates**
 
-> "Style '<name>' is not a recognised brand style. Valid styles are: Celestial & Mystical, Elemental Drama, Zodiac Portraiture, Sacred & Symbolic, Seasonal & Nature."
+Read `agents/image-designer/output/run-log.md`. Scan the last 20 Prompt entries. Note any objects, surfaces, or lighting setups already used. Your new prompt must not reuse them.
+
+**Step 3b — Decide: is the post about a known real-world subject (person, team, brand, cultural event)?**
+
+- **Yes → Path A:** Use your training knowledge. List 2–3 specific, concrete, visually recognisable objects associated with that subject — not their personality, not their theme, actual *things* that exist in the world. Build the prompt from those objects in a specific scene or arrangement.
+- **No → Path B:** Read `content/topics/<slug>/blog.md`. Extract the most specific concrete nouns from the post text — physical objects, places, things actually named. Use those. If the post has no concrete objects, construct a physical metaphor from the core tension (e.g. a cracked object, two incompatible items placed together).
+
+**Step 3c — Build two prompts: one for 16:9, one for 1:1**
+
+The 16:9 and 1:1 API calls must use **different compositions**, not the same scene cropped:
+- **16:9 prompt:** Wide or medium shot — scene, environment, arrangement of objects with context
+- **1:1 prompt:** Close-up or detail shot of one or two of the same objects — tighter framing, different angle or surface
+
+**Step 3d — Self-check both prompts**
+
+Does either prompt contain abstract words like: tension, energy, forces, power, emotion, opposing, mystical, celestial, dramatic? If yes — replace them with specific physical objects or scene details.
+
+Prompt structure for both:
+```
+[Scene or arrangement of specific concrete objects].
+[Lighting and surface details — specific, not generic].
+Colors: [brand colours in plain English — never hex codes].
+No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
+```
+
+Any `style` hint passed in the request is advisory only — the agent uses its own judgment. Do not error on unrecognised style names.
 
 ### 4. Call the Gemini API
 
@@ -150,12 +172,12 @@ Append one row per type to `agents/image-designer/output/run-log.md`:
 
 On success:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | generate | <output_path> | <size_kb> KB | ✅ OK |
+| YYYY-MM-DD HH:MM | <slug> | <type> | generate | <output_path> | <size_kb> KB | ✅ OK | <prompt text> |
 ```
 
 On failure:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | generate | — | <size_kb> KB | ❌ FAILED: over size limit after q65 |
+| YYYY-MM-DD HH:MM | <slug> | <type> | generate | — | <size_kb> KB | ❌ FAILED: over size limit after q65 | <prompt text> |
 ```
 
 ### 7. Write an error report (on failure only)
@@ -165,19 +187,11 @@ Write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md`:
 ```markdown
 # Error: <slug> / <type>
 
-- **Request file:** agents/web-designer/output/requests/<slug>-image-request.yaml
-- **Failure step:** [Step 5 — Gemini generation | Step 7 — size gate]
+- **Failure step:** [Step 4 — Gemini generation | Step 5 — size gate]
 - **Prompt used:** <prompt text>
 - **Final size:** <size_kb> KB (limit: <max_kb> KB)
 - **Suggested fix:** [Simplify prompt / use smaller source / request lower-detail crop]
 ```
-
-### 8. Move the request file
-
-Only move after all image entries in the file have been attempted:
-
-- **All entries succeeded** → move to `agents/web-designer/output/requests/processed/`
-- **Any entry failed** → move to `agents/web-designer/output/requests/failed/`
 
 ---
 
@@ -188,9 +202,9 @@ Only move after all image entries in the file have been attempted:
 | `GEMINI_API_KEY` not set | Stop. Tell the user to set the env var and retry. Do not move the request file. |
 | API call fails | Simplify the prompt (remove hex codes, reduce specificity), retry once. If still failing → `failed/`. |
 | Generated image has baked-in text or watermark | Retry with: "No text, letters, numbers, symbols, or watermarks anywhere in the image." |
-| Generated image doesn't match brand palette | Retry with: "Dominant colors must be deep navy (#1B1F3B) and gold (#C9A84C) with crimson accents (#C0392B) only." |
+| Generated image doesn't match brand palette | Retry with: "Dominant colors must be deep midnight navy and warm antique gold with deep crimson accents only." (plain English — no hex codes) |
 | Multiple types requested | Derive all types from the same raw PNG in Step 5 — do not re-call the API. |
 | `prompt_override` set | Skip Steps 2 and 3. Use the override directly in Step 4. |
-| Unrecognised style name | Stop immediately. Report the valid style names. Do not call the API. |
+| Style hint unrecognised | Ignore it. Construct the prompt from blog content using the creative variety rules. |
 | `post_path` file missing | Skip reading it. Construct the prompt from `style` and `slug` alone. Note the gap in the log. |
 | Pillow not installed | Run `pip install Pillow google-generativeai --break-system-packages`, then retry. |

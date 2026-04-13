@@ -1,61 +1,96 @@
 ---
 name: generate-image
-description: "Generates blog hero images and site artwork for The Mahjong Tarot website using the Gemini API (imagen-3.0-generate-002). MUST be used whenever: creating a hero image for a blog post, generating artwork for a page, the user says 'generate image', 'create image', 'make the hero image', 'nano banana', or any request involving AI image generation for the site."
+description: "Generates blog hero images and site artwork for The Mahjong Tarot website using the Gemini API (imagen-4.0-generate-001). MUST be used whenever: creating a hero image for a blog post, generating artwork for a page, the user says 'generate image', 'create image', 'make the hero image', 'nano banana', or any request involving AI image generation for the site."
 ---
 
 # Generate Image — Gemini API
 
-Generates blog hero images and site artwork by calling the Gemini image generation API. Reads post content for context, constructs a brand-aligned prompt, calls the API, and optimises the output to WebP.
+Generates specific, concrete hero images for blog posts. Specificity is everything — abstract concepts produce generic images. Every prompt must be built from real, nameable objects and details.
 
 ---
 
 ## Inputs
 
-- **A blog post slug or topic** — skill reads the post content and crafts the prompt
-- **A complete prompt** — used directly (still presented for confirmation)
-- **A general request** — e.g., "generate the hero image for the fire horse post"
+- **A blog post slug** — skill reads the post content and follows the two-path approach below
+- **A prompt override** — used directly, no prompt construction needed
+- **A general request** — e.g., "generate the hero image for the Taylor Swift post"
 
 ---
 
-## Brand styles
+## Two-path prompt construction
 
-| Style | Visual direction | Best for | Prompt hints |
-|-------|-----------------|----------|--------------|
-| **Celestial & Mystical** | Deep cosmos, moonlit skies, glowing zodiac constellations, starfields with Chinese symbols | Forecasts, yearly/monthly readings, fate and destiny | deep space atmosphere, soft moonlight, glowing constellation lines, ethereal mist |
-| **Elemental Drama** | Fire, water, earth, metal, wood with cinematic intensity | Elemental sign posts, seasonal energy, transformation | cinematic depth of field, dramatic top-lighting, dynamic motion, sharp geometric sparks |
-| **Zodiac Portraiture** | The 12 animals rendered with beauty, character, and symbolic power | Sign-specific posts, compatibility, personality deep dives | dignified animal portrait, symbolic accessories, rich textural detail |
-| **Sacred & Symbolic** | Mahjong tiles, lotus flowers, lanterns, yin-yang, red thread of fate, Chinese brush art | Origin stories, cultural context, spiritual guidance | ink wash texture, warm candlelight or lantern glow, reverent composition |
-| **Seasonal & Nature** | Cherry blossom, autumn gold, winter snow, summer storms — tied to the Chinese calendar | Seasonal forecasts, holiday-tied posts | wide landscape or macro nature, soft natural light, seasonal color palette |
+### Path A — Known subject (use when the post is about a real person, brand, team, cultural moment, or recognisable object)
 
-## Brand colours
+1. Identify what you already know about the subject from your training data
+2. List 2–3 **specific, concrete, visually recognisable objects** associated with that subject — not their personality, not their theme, actual *things*
+3. Build the prompt from those objects in a specific scene or arrangement
 
-Midnight Indigo `#1B1F3B` · Celestial Gold `#C9A84C` · Mystic Fire `#C0392B` · Warm Cream `#FAF8F4`
+Examples:
+| Subject | Concrete objects to use |
+|---------|------------------------|
+| Taylor Swift | Friendship bracelets, a 1989 cassette, a tour setlist, red lipstick, a sequined costume |
+| Travis Kelce | Kansas City Chiefs jersey, a football, a locker room, a touchdown spike |
+| Chinese New Year | Red envelope, firecracker string, lion dance costume, tangerine tree |
+| Year of the Snake | Coiled jade sculpture, shed snakeskin, a bamboo garden |
 
-## Exclusions (always append)
+### Path B — Unknown or abstract subject (use when the post is about a concept, forecast, or lesser-known topic)
 
-> No Western zodiac symbols, text overlays, watermarks, anime style, rounded or soft shapes, or generic stock photography.
+1. Read `content/topics/<slug>/blog.md`
+2. Extract the **most specific concrete nouns** from the post itself — objects, places, physical things mentioned in the text
+3. Do not use the theme or emotional angle — use the actual things named in the post
+4. If the post has no concrete objects, use the most specific physical metaphor you can construct for the core tension
 
-## Prompt template
+**The rule for both paths:** No abstract concepts in the prompt. "Opposing forces" → bad. "A jade bracelet and a football helmet on a silk cloth" → good.
+
+---
+
+## Prompt structure
 
 ```
-[Style name] style: [primary subject].
-[Style prompt hints]. Colors: [relevant brand colours].
-[Composition — focal point, depth, movement].
-Aspect ratio: 16:9.
-No Western zodiac symbols, text overlays, watermarks, anime style, rounded or soft shapes, or generic stock photography.
+[Scene or arrangement of specific concrete objects].
+[Lighting and surface details — specific, not generic].
+Colors: [brand colours in plain English].
+No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
 ```
+
+Brand colours (plain English only — never hex codes): deep midnight navy · warm antique gold · deep crimson · soft cream
+
+Example — Taylor Swift + Travis Kelce wedding post:
+> Photorealistic flat lay of a stack of friendship bracelets, a Kansas City Chiefs pennant, and a single white peony on dark velvet, soft warm candlelight from the left, deep navy background with gold accents. No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
+
+Example — abstract Fire Horse forecast post:
+> Photorealistic close-up of a burning red candle dripping onto a cracked antique compass, the needle spinning, dark wooden surface, dramatic side lighting in deep crimson and gold. No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
+
+---
+
+## Channel → image type mapping
+
+| Channel | Image type | Aspect ratio | Dimensions | Max KB |
+|---------|-----------|-------------|------------|--------|
+| Website | `hero` | 16:9 | 1200×630 | 200 |
+| Facebook EN | `og` | 16:9 | 1200×630 | 200 |
+| Facebook VN | `og` | 16:9 | 1200×630 | 200 |
+| Instagram | `social` | 1:1 | 1080×1080 | 150 |
+| LinkedIn | `og` | 16:9 | 1200×630 | 200 |
+| X | `og` | 16:9 | 1200×630 | 200 |
+
+Facebook EN and Facebook VN share the same `og` image — generate once, apply to both.
+
+Use `aspect_ratio="1:1"` for `social`; `"16:9"` for everything else.
 
 ---
 
 ## Steps
 
-### 1. Determine what is needed
+### 1. Determine the subject
 
-Read `content/topics/<slug>/blog.md` if it exists. Extract title, category, emotional angle, key visual subjects. If no content file exists, work from the slug and any context the user provided.
+Read `content/topics/<slug>/blog.md`. Decide: is this post about a known real-world subject (person, team, brand, event) or an abstract/unknown topic? Choose Path A or Path B accordingly.
 
-### 2. Construct the prompt
+If no content file exists, ask the user for the subject and key concrete details before proceeding.
 
-Select the most appropriate style from the table above based on the post content. Build the prompt using the template and proceed directly to generation — no confirmation needed.
+### 2. Build the prompt
+
+Apply the two-path approach above. Build using the prompt structure. Check: does the prompt contain any abstract words (tension, energy, forces, power, emotion, opposing)? If yes, replace them with specific physical objects or details.
 
 ### 3. Call the Gemini API
 
@@ -89,7 +124,7 @@ print(f"Saved raw PNG → {raw_path}")
 
 Archive a permanent copy to `content/topics/<slug>/<slug>-hero-original.png`.
 
-If the API call fails, simplify the prompt (remove hex codes, reduce specificity) and retry once.
+If the API call fails, shorten the prompt and retry once.
 
 ### 4. Optimise to WebP
 
@@ -135,11 +170,11 @@ Original PNG:  content/topics/<slug>/<slug>-hero-original.png
 WebP output:   content/topics/<slug>/<slug>-hero.webp
 Dimensions:    1200×630
 File size:     X KB
-Style used:    [style name]
+Path used:     A (known subject) / B (abstract)
 Prompt used:   [prompt text]
 ```
 
-If the user is not satisfied, ask what to change and re-run from Step 2.
+If the user is not satisfied, ask what specific objects or details to change and re-run from Step 2.
 
 ---
 
@@ -148,8 +183,9 @@ If the user is not satisfied, ask what to change and re-run from Step 2.
 | Situation | Action |
 |-----------|--------|
 | `GEMINI_API_KEY` not set | Stop. Tell the user to add it to `.env` and retry. |
-| API call fails | Simplify prompt, retry once. Report if still failing. |
-| Image has baked-in text or watermark | Retry with: "No text, letters, numbers, symbols, or watermarks anywhere in the image." |
-| Image doesn't match brand palette | Retry with: "Dominant colors must be deep navy (#1B1F3B) and gold (#C9A84C) with crimson accents (#C0392B) only." |
-| packages missing | Run `/opt/anaconda3/envs/mahjong-tarot/bin/pip install google-genai python-dotenv Pillow` |
-| User wants variations | Re-run Step 3 with a slightly adjusted prompt (different angle, focal point, or lighting). |
+| API call fails | Shorten the prompt, retry once. Report if still failing. |
+| Image is generic / could be for any post | Prompt was too abstract. Identify more specific concrete objects and retry from Step 2. |
+| Unwanted text or watermark in image | Retry adding: "No text, letters, numbers, symbols, or watermarks anywhere in the image." |
+| Image doesn't match brand palette | Retry adding: "Dominant colors must be deep midnight navy and warm antique gold with deep crimson accents only." |
+| Packages missing | Run `/opt/anaconda3/envs/mahjong-tarot/bin/pip install google-genai python-dotenv Pillow` |
+| User wants a variation | Change the specific objects or scene arrangement and re-run Step 3. |

@@ -1,4 +1,6 @@
-# Content Calendar — April 2026
+# Content Calendar — 2026
+
+Single source of truth for all scheduled content. Updated in place — never create separate monthly files.
 
 ---
 
@@ -13,6 +15,14 @@
 **Chapter/tile focus:** Chapter 1 (Central Theme), Chapter 4 (What Do I Really Want)
 **Publishes:** Wednesday (blog + social), Thursday (social)
 
+### Topic: taylor-swift-travis-kelce-wedding
+**Angle:** Myth Buster — celebrity compatibility deep dive
+**Publishes:** Monday Apr 14 (blog + social)
+
+### Topic: your-love-life-in-the-fire-horse-year
+**Angle:** Sign-by-Sign Breakdown — all 12 signs
+**Publishes:** Tuesday Apr 15 (blog + social)
+
 ### Topic: fire-horse-travel-challenge
 **Angle:** Weekly challenge
 **Publishes:** Friday (social only)
@@ -23,13 +33,14 @@
 | Apr 13 | Mon | Facebook EN | Did you know the Chinese traveling star is literally the Horse? This year it's on fire. Here's what that means for you. |
 | Apr 13 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
 | Apr 13 | Mon | Instagram | The traveling star only catches fire once every 60 years. This is that year. |
-| Apr 14 | Tue | Facebook EN | Thanh didn't wait — Vietnam, Paris, Montreal. The Horse rewards movement, not planning. Where are you going? |
+| Apr 14 | Tue | Blog | **"Two Snakes Can't Make It Work — Right?"** — Taylor Swift and Travis Kelce wedding analysis through Chinese astrology. Signs say no, elements say maybe, full chart says yes. |
+| Apr 14 | Tue | Facebook EN | Taylor Swift and Travis Kelce are both Earth Fire Snakes. Any Chinese astrology expert would tell you two snakes is a bad match. But when you look at the elements — a very different picture emerges. |
 | Apr 14 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 14 | Tue | Instagram | The Fire Horse doesn't care about distance. It cares about movement. A day trip counts. |
-| Apr 15 | Wed | Blog | **"How to Know If a Big Trip Will Change Your Life — Before You Go"** — The Mahjong Mirror's Central Theme angle applied to travel decisions. Are you running toward something or away from it? The first angle tells you before you pack. |
-| Apr 15 | Wed | Facebook EN | Every trip is a decision. The Mahjong Mirror asks: what's your central theme? Escape? Growth? Reconnection? The answer changes everything. |
+| Apr 14 | Tue | Instagram | Two snakes. Double fire. A wedding in the Fire Horse year. Sounds like a disaster — until you look at the elements. |
+| Apr 15 | Wed | Blog | **"Your Love Life in the Fire Horse Year — What Every Sign Needs to Know"** — Sign-by-sign love guidance for all 12 animals. The Fire Horse is not a romantic year for most people. A few signs will thrive; most will face real challenges. |
+| Apr 15 | Wed | Facebook EN | The Fire Horse year hits every sign's love life differently. Some will thrive. Most will face real challenges. Find your sign. |
 | Apr 15 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 15 | Wed | Instagram | Before you book the flight — ask yourself one question. What are you really looking for? |
+| Apr 15 | Wed | Instagram | Your sign. Your love life. The Fire Horse year. Find out what's coming — and what to do about it. |
 | Apr 16 | Thu | Facebook EN | The first angle of the Mahjong Mirror: your central theme. Applied to travel, it reveals whether a trip will change your life or just change your scenery. |
 | Apr 16 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
 | Apr 16 | Thu | Instagram | A trip without intention is a vacation. A trip with intention is a turning point. The mirror shows you which one you're planning. |
@@ -89,7 +100,7 @@
 
 ### Topic: fire-horse-love-challenge
 **Angle:** Weekly challenge
-**Publishes:** Friday (social only)
+**Publishes:** Friday (social only — publishes May 1)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
@@ -107,3 +118,6 @@
 | Apr 30 | Thu | Facebook EN | There's no shortcut to analyzing love. It's more than saying two signs are compatible. The Mahjong Mirror looks at the full picture — elements, balance, what's really driving the relationship underneath. |
 | Apr 30 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
 | Apr 30 | Thu | Instagram | Love is more than a sign match. It's balance. The Mahjong Mirror shows you the full picture — not just the part that feels good. |
+| May 1 | Fri | Facebook EN | **Weekend challenge:** Look at your relationship from a new angle. Not "do I love them?" — you know that. Ask: "do we balance each other?" Where one is strong, is the other at least present? That's what lasting looks like. |
+| May 1 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| May 1 | Fri | Instagram | One question this weekend: Do we balance each other? Not complete each other. Balance. That's the difference between heat and lasting. |

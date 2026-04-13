@@ -1,5 +1,109 @@
 You are the Project Manager agent for the Mahjong Tarot project. Your task is to register all required scheduled triggers in Claude Code using the `RemoteTrigger` tool.
 
+## Step 0 — Inject environment variables
+
+Before registering any triggers, add the required notification env vars to all three Claude Code settings files. The vars must exist in all three so they are available in remote executions (RemoteTriggers), local interactive sessions, and project-scoped local overrides.
+
+### Files to update
+
+| File | Scope |
+|---|---|
+| `~/.claude/remote-settings.json` | Remote trigger executions (CCR) — **required for RemoteTriggers to work** |
+| `~/.claude/settings.json` | Global local sessions |
+| `.claude/settings.local.json` | Project-local override (gitignored — safe for secrets) |
+
+### How to add the vars
+
+Run the following Python script. It sources all four values automatically — no user input needed:
+
+1. **`LARK_WEBHOOK_URL`** and **`RESEND_API_KEY`** — read from `.env.local`, then `.env` in the project root (whichever has the key first)
+2. **`RESEND_FROM`** — hardcoded to `onboarding@resend.dev` (testing mode)
+3. **`RESEND_TO`** — read from `agents/project-manager/context/persona.md`, Team table, `Email` column (comma-separated)
+
+If a key is missing from both `.env` files, stop and report which key is missing before writing anything.
+
+```bash
+python3 - <<'PYEOF'
+import json, os, re, sys
+
+# --- 1. Read .env files (project root) ---
+def parse_env_file(path):
+    vals = {}
+    try:
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, _, v = line.partition("=")
+                v = v.strip().strip('"').strip("'")
+                vals[k.strip()] = v
+    except FileNotFoundError:
+        pass
+    return vals
+
+env = {}
+env.update(parse_env_file(".env"))
+env.update(parse_env_file(".env.local"))  # .env.local takes precedence
+
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+if missing:
+    print(f"ERROR: missing from .env / .env.local: {missing}")
+    print("Add them to .env.local and re-run.")
+    sys.exit(1)
+
+# --- 2. Read RESEND_TO from persona.md Team table ---
+with open("agents/project-manager/context/persona.md") as f:
+    text = f.read()
+
+emails = re.findall(r'[\w.+-]+@[\w.-]+\.[a-z]{2,}', text)
+# Deduplicate preserving order, skip example/placeholder addresses
+seen = set()
+team_emails = []
+for e in emails:
+    if e not in seen and "example" not in e:
+        seen.add(e)
+        team_emails.append(e)
+
+resend_to = ",".join(team_emails)
+
+# --- 3. Build env block ---
+new_env = {
+    "LARK_WEBHOOK_URL": env["LARK_WEBHOOK_URL"],
+    "RESEND_API_KEY":   env["RESEND_API_KEY"],
+    "RESEND_FROM":      "onboarding@resend.dev",
+    "RESEND_TO":        resend_to,
+}
+
+# --- 4. Merge into all three settings files ---
+files = [
+    os.path.expanduser("~/.claude/remote-settings.json"),
+    os.path.expanduser("~/.claude/settings.json"),
+    ".claude/settings.local.json",
+]
+
+for path in files:
+    try:
+        with open(path) as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        data = {}
+    data.setdefault("env", {})
+    data["env"].update(new_env)
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"Updated {path}")
+
+print(f"\nRESEND_TO set to: {resend_to}")
+print("Done. All three settings files updated.")
+PYEOF
+```
+
+Once all three files are updated, proceed to register the triggers below.
+
+---
+
 ## Trigger type rule
 
 **Always use `RemoteTrigger` — never `CronCreate`.**
@@ -46,7 +150,17 @@ Never write directly to main.
 
 ## Communication rule
 
-Notification priority: **Telegram → Lark**. If both fail, append the notification status inline to the relevant daily file. Do not create any alerts folder or alert files.
+Send **both** Lark and Resend on every trigger — not as a fallback chain. Only fall back to inline log if both fail.
+
+- **Lark**: `curl POST $LARK_WEBHOOK_URL` with `msg_type: text`
+- **Resend**: Resend CLI (`resend emails send --html-file`) using `$RESEND_API_KEY`, `$RESEND_FROM`, `$RESEND_TO`
+- **Inline log**: append failure status to the relevant daily file in `standup/briefings/YYYY-MM/` only when both Lark and Resend fail
+
+Full patterns and HTML templates: `agents/project-manager/context/pm-notification-guide.md`
+
+> **Testing mode**: `RESEND_FROM` = `onboarding@resend.dev`. Emails will only deliver to the Resend account owner's email. Switch to `pm@edge8.ai` once `edge8.ai` is verified as a sending domain in Resend.
+
+Full notification patterns and HTML email templates: `agents/project-manager/context/pm-notification-guide.md`
 
 ---
 
@@ -100,7 +214,7 @@ It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all four team me
 - standup/individual/trac.md
 - standup/individual/khang.md
 
-Notification order: Telegram → Lark. If both fail, document the failure in standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the file if it does not exist yet). Do not create any alerts folder or alert files.
+Notification order: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 1 from agents/project-manager/context/pm-notification-guide.md) → inline log to standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Git workflow: git pull origin main → git checkout -b pm/standup-morning/YYYY-MM-DD → write any file changes on this branch → git add <files> → git commit -m "pm(standup-morning): YYYY-MM-DD" → git push → gh pr create --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```
@@ -126,7 +240,7 @@ Detect conflicts across all five check-ins.
 
 Compile the daily stand-up to standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the monthly folder if needed). Include agent updates as-is under an Agent Updates section.
 
-Send the summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+Send the summary: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 2 from agents/project-manager/context/pm-notification-guide.md) → inline log at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/YYYY-MM-DD.md → git commit -m "pm(standup-compile): YYYY-MM-DD" → git push origin pm/standup-compile/YYYY-MM-DD → gh pr create --title "pm(standup-compile): YYYY-MM-DD" --base main → gh pr merge --merge --auto.
 ```
@@ -144,7 +258,7 @@ It is 5 PM Asia/Saigon end of day.
 
 Git workflow first: git pull origin main → git checkout -b pm/eod/YYYY-MM-DD. All writes go on this branch.
 
-Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Telegram → Lark. If both fail, append the notification status to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
+Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 3 from agents/project-manager/context/pm-notification-guide.md) → inline log appended to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
 
 Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (create if missing).
 
@@ -178,7 +292,7 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 ⚠️ RISKS — top 3 with probability / impact / mitigation
 🔔 DECISIONS NEEDED — items requiring decision with deadline
 
-Send the weekly summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+Send the weekly summary: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 4 from agents/project-manager/context/pm-notification-guide.md) → inline log at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin pm/weekly-rag/YYYY-MM-DD → gh pr create --title "pm(weekly-rag): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```

@@ -1,84 +1,344 @@
-.article { padding-bottom: var(--space-3xl); }
+/* ══════════════════════════════════════════════════════════════════════
+   Blog Post Template — Warm Editorial Design
+   Inspired by mindbodygreen, Sakara, theSkimm
+   Palette: white/cream dominant, navy text, gold + lavender accents
+   ══════════════════════════════════════════════════════════════════════ */
 
+.article {
+  padding-bottom: 0;
+  background-color: white;
+}
+
+/* ── Header ── */
 .header {
-  background-color: var(--midnight-indigo);
+  background-color: white;
   padding: var(--space-2xl) 0 var(--space-xl);
+  max-width: 720px;
+  margin: 0 auto;
+  padding-left: var(--outer-margin);
+  padding-right: var(--outer-margin);
 }
 .header h1 {
-  color: var(--warm-cream);
-  margin: var(--space-lg) 0 var(--space-md);
-  max-width: 720px;
+  color: var(--midnight-indigo);
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: var(--space-sm) 0 var(--space-lg);
 }
-.header .post-meta { color: rgba(250,248,244,0.6); }
+.header .postMeta {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: var(--mid-gray);
+  line-height: 1.6;
+}
 
 /* ── Breadcrumb ── */
 .breadcrumb {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-md);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
 }
 .breadcrumb a {
-  color: var(--celestial-gold);
+  color: var(--mystic-fire);
   text-decoration: none;
+  font-weight: 600;
 }
 .breadcrumb a:hover {
   text-decoration: underline;
 }
 .breadcrumb span {
-  color: rgba(250,248,244,0.4);
-  margin: 0 6px;
+  color: var(--mid-gray);
+  margin: 0 8px;
 }
 .breadcrumb span:last-child {
-  color: rgba(250,248,244,0.6);
+  color: #555;
   margin: 0;
 }
 
+/* ── Category pill ── */
+.categoryPill {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mystic-fire);
+  background-color: #FEF2F1;
+  padding: 4px 12px;
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Divider below header ── */
+.headerDivider {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--outer-margin);
+}
+.headerDivider hr {
+  border: none;
+  height: 1px;
+  background-color: #ebe8e2;
+}
+
+/* ── Body ── */
 .body {
   max-width: 720px;
-  padding-top: var(--space-3xl);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--outer-margin) var(--space-3xl);
 }
 .body p {
-  font-size: 19px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 18px;
   line-height: 1.8;
-  margin-bottom: var(--space-xl);
+  margin-bottom: 28px;
+  color: #333;
 }
 .body h2 {
-  font-size: 32px;
-  margin-top: var(--space-3xl);
-  margin-bottom: var(--space-lg);
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 56px;
+  margin-bottom: 20px;
+  color: var(--midnight-indigo);
 }
 .body h3 {
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-md);
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  color: var(--midnight-indigo);
 }
 .body blockquote {
-  margin: var(--space-2xl) 0;
-  font-size: 24px;
-}
-.body figure {
-  margin: var(--space-2xl) 0;
-}
-
-.footer {
-  max-width: 760px;
-  margin-top: var(--space-3xl);
-}
-
-.cta {
-  text-align: center;
-  padding: var(--space-2xl) 0;
-}
-.cta p {
-  font-size: 20px;
+  margin: 40px 0;
+  font-size: 22px;
   font-family: 'Playfair Display', serif;
   font-style: italic;
+  line-height: 1.5;
   color: var(--midnight-indigo);
-  margin-bottom: var(--space-xl);
+  border-left: 3px solid var(--celestial-gold);
+  padding-left: 24px;
 }
-.cta a { margin: 0 var(--space-sm); }
+.body figure {
+  margin: 40px 0;
+}
+.body strong {
+  font-weight: 600;
+  color: var(--midnight-indigo);
+}
+
+/* ── Risk Cards ── */
+.riskCard {
+  background-color: #fafaf8;
+  border: 1px solid #ebe8e2;
+  padding: 28px 28px 24px;
+  margin: 28px 0;
+}
+.riskCard h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--midnight-indigo);
+}
+.riskCard p {
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 0;
+  color: #444;
+}
+.riskLabel {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+  background-color: #FEF2F1;
+  color: #c0392b;
+}
+
+/* ── Pivot Banner ── */
+.pivotBanner {
+  background-color: #FEF7F6;
+  padding: 40px 36px;
+  margin: 56px 0;
+  text-align: center;
+  border-top: 3px solid var(--mystic-fire);
+}
+.pivotBanner h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--midnight-indigo);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+.pivotBanner p {
+  font-family: 'Source Sans 3', sans-serif;
+  color: #444;
+  font-size: 17px;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* ── Inline Figure — full width ── */
+.inlineFigure {
+  margin: 40px 0;
+}
+.inlineFigure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.inlineFigure figcaption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: var(--mid-gray);
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ── Image Pair — side by side in a frame ── */
+.imagePair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 48px 0;
+  background-color: #ebe8e2;
+  border: 1px solid #ebe8e2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.imagePair img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.imagePairCaption {
+  grid-column: 1 / -1;
+  background-color: #fafaf8;
+  padding: 12px 16px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: var(--mid-gray);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Inline Figure — small centered ── */
+.inlineSmall {
+  margin: 40px auto;
+  max-width: 380px;
+  text-align: center;
+}
+.inlineSmall img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+.inlineSmall figcaption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: var(--mid-gray);
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ── Prediction Box ── */
+.predictionBox {
+  background-color: #FAF6EC;
+  border-top: 3px solid var(--celestial-gold);
+  padding: 40px 36px;
+  margin: 40px 0;
+  text-align: center;
+}
+.predictionBox .predictionLabel {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--celestial-gold);
+  margin-bottom: 12px;
+}
+.predictionBox p {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--midnight-indigo);
+  margin: 0;
+}
+
+/* ── Pull Quote ── */
+.pullQuote {
+  border-left: 3px solid var(--mystic-fire);
+  padding: 8px 24px;
+  margin: 40px 0;
+}
+.pullQuote p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--midnight-indigo);
+  margin: 0;
+}
+
+/* ── FAQ ── */
+.faqItem {
+  border-bottom: 1px solid #ebe8e2;
+  padding: 16px 0;
+  cursor: pointer;
+}
+.faqItem:first-of-type {
+  border-top: 1px solid #ebe8e2;
+}
+.faqQuestion {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--midnight-indigo);
+  margin: 0;
+  line-height: 1.4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faqIcon {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--mid-gray);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+.faqIconOpen {
+  transform: rotate(45deg);
+}
+.faqAnswer {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  margin: 12px 0 4px;
+  padding-right: 38px;
+}
 
 /* ── Post Navigation ── */
 .postNav {
@@ -86,9 +346,9 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-xl);
-  padding-top: var(--space-3xl);
-  margin-top: var(--space-3xl);
-  border-top: 1px solid var(--light-stone);
+  padding-top: 32px;
+  margin-top: 56px;
+  border-top: 1px solid #ebe8e2;
 }
 
 .navPrev,
@@ -103,25 +363,108 @@
   max-width: 280px;
   line-height: 1.5;
 }
-.navPrev:hover, .navNext:hover { color: var(--mystic-fire); }
+.navPrev:hover, .navNext:hover { color: var(--celestial-gold); }
 .navNext { text-align: right; margin-left: auto; }
+
+/* ── Related Articles ── */
+.relatedSection {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px var(--outer-margin) 0;
+  border-top: 1px solid #ebe8e2;
+}
+.relatedSection h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  color: var(--midnight-indigo);
+}
+.relatedGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.relatedCard {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.relatedCard:hover h3 { color: var(--celestial-gold); }
+.relatedCardImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background-color: #f5f3ef;
+  border-radius: 6px;
+}
+.relatedCard h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0 0 4px;
+  color: var(--midnight-indigo);
+  transition: color 0.2s;
+}
+.relatedCard span {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: var(--mid-gray);
+}
+
+/* ── CTA Section ── */
+.ctaSection {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px var(--outer-margin);
+  text-align: center;
+}
+.ctaSection .ctaOverline {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--celestial-gold);
+  display: block;
+  margin-bottom: 8px;
+}
+.ctaSection h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--midnight-indigo);
+  margin: 0 0 12px;
+}
+.ctaSection p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+  color: var(--mid-gray);
+  max-width: 440px;
+  margin: 0 auto 24px;
+  line-height: 1.65;
+}
 
 /* ── Sign Cards ── */
 .signGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
-  margin: var(--space-2xl) 0;
+  gap: 16px;
+  margin: 40px 0;
 }
 
 .signCard {
-  background-color: var(--light-stone);
-  padding: var(--space-lg);
+  background-color: #fafaf8;
+  border: 1px solid #ebe8e2;
+  padding: 20px;
 }
 
 .signCard h4 {
   font-size: 18px;
-  margin: 0 0 var(--space-sm);
+  margin: 0 0 6px;
 }
 
 .signBadge {
@@ -132,183 +475,43 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 3px 8px;
-  margin-bottom: var(--space-md);
+  margin-bottom: 12px;
 }
 
-.badgeExceptional { background-color: var(--celestial-gold); color: var(--midnight-indigo); }
+.badgeExceptional { background-color: #FAF6EC; color: #a08930; }
 .badgeFavorable   { background-color: var(--midnight-indigo); color: var(--warm-cream); }
-.badgeNeutral     { background-color: var(--mid-gray); color: var(--warm-cream); }
-.badgeMixed       { background-color: var(--mid-gray); color: var(--warm-cream); }
-.badgeChallenging { background-color: var(--mystic-fire); color: var(--warm-cream); }
-.badgeHighRisk    { background-color: var(--mystic-fire-dark); color: var(--warm-cream); }
+.badgeNeutral     { background-color: #f0ede8; color: #555; }
+.badgeMixed       { background-color: #f0ede8; color: #555; }
+.badgeChallenging { background-color: #FEF2F1; color: #c0392b; }
+.badgeHighRisk    { background-color: #FEF2F1; color: #a93226; }
 
 .signCard p {
   font-size: 15px;
   line-height: 1.65;
   margin-bottom: 0;
+  color: #444;
 }
 
-/* ── Risk Cards ── */
-.riskCard {
-  background-color: var(--light-stone);
-  padding: var(--space-xl);
-  margin: var(--space-xl) 0;
-}
-.riskCard h3 {
-  font-size: 22px;
-  margin: 0 0 var(--space-md);
-  color: var(--midnight-indigo);
-}
-.riskCard p {
-  font-size: 17px;
-  line-height: 1.75;
-  margin-bottom: 0;
-}
-.riskLabel {
-  display: inline-block;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  margin-bottom: var(--space-md);
-  background-color: var(--mystic-fire);
-  color: var(--warm-cream);
-}
-
-/* ── Pivot / Callout Banner ── */
-.pivotBanner {
-  background-color: var(--midnight-indigo);
-  color: var(--warm-cream);
-  padding: var(--space-2xl);
-  margin: var(--space-3xl) calc(-1 * var(--space-xl));
-  text-align: center;
-}
-.pivotBanner h2 {
-  color: var(--celestial-gold);
-  font-size: 28px;
-  margin: 0 0 var(--space-md);
-}
-.pivotBanner p {
-  color: rgba(250,248,244,0.85);
-  font-size: 18px;
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-/* ── Inline Figure ── */
-.inlineFigure {
-  margin: var(--space-2xl) 0;
-}
-.inlineFigure img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.inlineFigure figcaption {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
-  color: rgba(0,0,0,0.5);
-  text-align: center;
-  margin-top: var(--space-sm);
-  letter-spacing: 0.02em;
-}
-
-/* ── Prediction Box ── */
-.predictionBox {
-  background-color: var(--midnight-indigo);
-  color: var(--warm-cream);
-  padding: var(--space-2xl);
-  margin: var(--space-2xl) 0;
-  text-align: center;
-}
-.predictionBox .predictionLabel {
-  display: inline-block;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--celestial-gold);
-  margin-bottom: var(--space-md);
-}
-.predictionBox p {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  line-height: 1.5;
-  color: var(--warm-cream);
-  margin: 0;
-}
-
-/* ── Pull Quote ── */
-.pullQuote {
-  border-left: 3px solid var(--celestial-gold);
-  padding: var(--space-md) var(--space-xl);
-  margin: var(--space-2xl) 0;
-}
-.pullQuote p {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 22px;
-  line-height: 1.6;
-  color: var(--midnight-indigo);
-  margin: 0;
-}
-
-/* ── Related Articles ── */
-.relatedSection {
-  max-width: 720px;
-  margin-top: var(--space-3xl);
-  padding-top: var(--space-3xl);
-  border-top: 1px solid var(--light-stone);
-}
-.relatedSection h2 {
-  font-size: 24px;
-  margin: 0 0 var(--space-xl);
-}
-.relatedGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
-}
-.relatedCard {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-.relatedCard:hover h3 { color: var(--mystic-fire); }
-.relatedCardImage {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  margin-bottom: var(--space-md);
-  background-color: var(--light-stone);
-}
-.relatedCard h3 {
-  font-size: 17px;
-  line-height: 1.4;
-  margin: 0 0 var(--space-xs);
-  transition: color 0.2s;
-}
-.relatedCard span {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
-  color: rgba(0,0,0,0.5);
-}
-
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .signGrid  { grid-template-columns: repeat(2, 1fr); }
-  .postNav   { flex-direction: column; }
-  .navNext   { text-align: left; margin-left: 0; }
+  .header { padding-left: 24px; padding-right: 24px; }
+  .body { padding-left: 24px; padding-right: 24px; }
+  .headerDivider { padding: 0 24px; }
+  .relatedSection { padding-left: 24px; padding-right: 24px; }
+  .ctaSection { padding-left: 24px; padding-right: 24px; }
+  .signGrid { grid-template-columns: repeat(2, 1fr); }
+  .relatedGrid { grid-template-columns: 1fr; }
+  .postNav { flex-direction: column; }
+  .navNext { text-align: left; margin-left: 0; }
 }
 
 @media (max-width: 640px) {
+  .header h1 { font-size: 32px; }
   .body p { font-size: 17px; }
-  .body h2 { font-size: 28px; }
-  .body blockquote { font-size: 20px; }
-  .hero { padding: 0 var(--outer-margin); }
+  .body h2 { font-size: 24px; }
+  .body blockquote { font-size: 19px; }
   .signGrid { grid-template-columns: 1fr; }
+  .pivotBanner { padding: 28px 20px; }
+  .predictionBox { padding: 28px 20px; }
+  .pullQuote p { font-size: 19px; }
 }

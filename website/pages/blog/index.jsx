@@ -73,9 +73,9 @@ export default function BlogIndex() {
 
       <main>
         {/* ── Page Header ── */}
-        <section className={`section-dark ${styles.pageHeader}`}>
+        <section className={styles.pageHeader}>
           <div className="container">
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Writing & Insight</span>
+            <span className="overline">Writing & Insight</span>
             <h1>The Blog</h1>
             <p className={styles.headerLead}>
               Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
@@ -83,7 +83,7 @@ export default function BlogIndex() {
             </p>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
               <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
-              <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
+              <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
             </div>
           </div>
         </section>

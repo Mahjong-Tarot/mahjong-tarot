@@ -29,6 +29,50 @@ Run the daily stand-up Phase 1 workflow from agents/project-manager/context/dail
 
 It is now 7 AM Asia/Saigon. Today's date is YYYY-MM-DD. Yesterday's date (last working day) is YYYY-MM-DD-PREV.
 
+## Step 0 — Load credentials and team roster
+
+Run this Python snippet to load secrets and team emails before doing anything else. Stop and report if any key is missing.
+
+```python
+import os, re
+
+def parse_env(path):
+    vals = {}
+    try:
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, _, v = line.partition("=")
+                vals[k.strip()] = v.strip().strip('"').strip("'")
+    except FileNotFoundError:
+        pass
+    return vals
+
+env = {}
+env.update(parse_env(".env"))
+env.update(parse_env(".env.local"))  # .env.local takes precedence
+
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY") if not env.get(k)]
+if missing:
+    raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
+
+with open("agents/project-manager/context/persona.md") as f:
+    text = f.read()
+emails = list(dict.fromkeys(
+    e for e in re.findall(r'[\w.+-]+@[\w.-]+\.[a-z]{2,}', text)
+    if "example" not in e
+))
+
+LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
+RESEND_API_KEY   = env["RESEND_API_KEY"]
+RESEND_FROM      = "onboarding@resend.dev"
+RESEND_TO        = ",".join(emails)
+```
+
+Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_URL, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+
 ## Step 1 — Git workflow
 
 git pull origin main
@@ -115,7 +159,7 @@ Notification (send both — not fallback):
 2. Resend CLI (always — install if missing: `npm install -g resend`).
    - Template: agents/project-manager/context/template/emails/1-standup-morning.html
    - Subject: "Daily Stand-Up Reminder — YYYY-MM-DD"
-   - To: dave@edge8.ai yon@edge8.ai trac.nguyen@edge8.ai khang.h.nguyen@edge8.ai
+   - To: $RESEND_TO (loaded from persona.md in Step 0)
 3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
 ## Step 5 — Git commit

@@ -17,32 +17,22 @@ Generates blog hero images and site artwork by calling the Gemini image generati
 
 ---
 
-## Brand styles
+## Brand knowledge
 
-| Style | Visual direction | Best for | Prompt hints |
-|-------|-----------------|----------|--------------|
-| **Celestial & Mystical** | Deep cosmos, moonlit skies, glowing zodiac constellations, starfields with Chinese symbols | Forecasts, yearly/monthly readings, fate and destiny | deep space atmosphere, soft moonlight, glowing constellation lines, ethereal mist |
-| **Elemental Drama** | Fire, water, earth, metal, wood with cinematic intensity | Elemental sign posts, seasonal energy, transformation | cinematic depth of field, dramatic top-lighting, dynamic motion, sharp geometric sparks |
-| **Zodiac Portraiture** | The 12 animals rendered with beauty, character, and symbolic power | Sign-specific posts, compatibility, personality deep dives | dignified animal portrait, symbolic accessories, rich textural detail |
-| **Sacred & Symbolic** | Mahjong tiles, lotus flowers, lanterns, yin-yang, red thread of fate, Chinese brush art | Origin stories, cultural context, spiritual guidance | ink wash texture, warm candlelight or lantern glow, reverent composition |
-| **Seasonal & Nature** | Cherry blossom, autumn gold, winter snow, summer storms — tied to the Chinese calendar | Seasonal forecasts, holiday-tied posts | wide landscape or macro nature, soft natural light, seasonal color palette |
-
-## Brand colours
-
-Midnight Indigo `#1B1F3B` · Celestial Gold `#C9A84C` · Mystic Fire `#C0392B` · Warm Cream `#FAF8F4`
-
-## Exclusions (always append)
-
-> No Western zodiac symbols, text overlays, watermarks, anime style, rounded or soft shapes, or generic stock photography.
+Read `agents/image-designer/context/mahjong-mirror-style-guide.md` before constructing any prompt. It contains:
+- 8 brand styles with visual direction, use cases, mood, and prompt direction
+- Core colour palette (6 tokens with hex values)
+- Style-to-content matrix — use this to pick the right style if none is specified
+- Non-negotiables (what to never include)
 
 ## Prompt template
 
 ```
 [Style name] style: [primary subject].
-[Style prompt hints]. Colors: [relevant brand colours].
+[Style prompt direction from style guide]. Colors: [relevant palette tokens].
 [Composition — focal point, depth, movement].
 Aspect ratio: 16:9.
-No Western zodiac symbols, text overlays, watermarks, anime style, rounded or soft shapes, or generic stock photography.
+[Non-negotiables from style guide].
 ```
 
 ---

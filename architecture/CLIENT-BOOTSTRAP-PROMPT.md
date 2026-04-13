@@ -5,7 +5,7 @@
 > Estimated time: 45–90 minutes (most of that is you answering questions and completing manual steps).
 >
 > **RECOMMENDED MODEL:** Claude Opus 4.6 (`claude-opus-4-6`) — this is a complex, multi-phase setup
-> task. Do not run it on Haiku or Sonnet; the reasoning quality matters for generating coherent agent personas.
+> task. Do not run it on Haiku; the reasoning quality matters for generating coherent agent personas.
 
 ---
 
@@ -218,6 +218,123 @@ This will take a few minutes — I'll tell you when each section is complete.
 
 Then create the following complete file structure. Every file must use the actual
 answers from the interview — no placeholders like [INSERT NAME HERE].
+
+### 4.0 — Global Claude Code Config (`~/.claude/CLAUDE.md`)
+
+This is a one-time machine-level setup. Write (or append) the following rules to
+`~/.claude/CLAUDE.md`. These apply to **every Claude Code session** on this machine,
+not just this project.
+
+Check first: if `~/.claude/CLAUDE.md` already exists, append only the sections that
+are not already present. Never overwrite existing content.
+
+```markdown
+## [GLOBAL] Git discipline
+
+- Before any file work, run this sequence to keep the working branch up-to-date and avoid conflicts:
+  1. `git status` — if there are uncommitted changes or merge conflicts, stop and report before proceeding.
+  2. Note the current branch name, then: `git checkout main && git pull origin main`
+  3. Switch back: `git checkout <working-branch>`
+  4. Merge main into the working branch: `git merge main`
+  5. If merge conflicts arise, stop and report them to the user before proceeding.
+- Never force-push (`--force` or `--force-with-lease`) to any branch.
+- Never skip hooks with `--no-verify`.
+- Never amend a commit that has already been pushed to a remote.
+- Never use `git add .` or `git add -A` — stage files explicitly by name to avoid committing unintended files (secrets, binaries, generated output).
+- Never create a commit unless explicitly instructed by the user.
+
+## [GLOBAL] Branch and PR discipline
+
+- Never push directly to `main` or `master`. All changes must go through a pull request.
+- Never merge a PR while CI checks are failing.
+- Confirm the correct base branch before opening a PR — wrong base = wrong diff.
+
+## [GLOBAL] Deployment discipline
+
+- Never deploy using `vercel deploy`, `vercel --prod`, or any direct CLI deploy command.
+- All deployments must flow through `git push` → CI/CD pipeline only.
+- Never manually promote a deployment unless explicitly instructed and no CI pipeline exists.
+- Never modify environment variables in the Vercel dashboard without recording the change in the repo's env documentation.
+- Vercel MCP and Vercel CLI are permitted for read-only operations only (deployment status, build logs, runtime logs). Any write action must go through CI/CD or requires explicit user confirmation.
+
+## [GLOBAL] Secrets and credentials
+
+- Never commit `.env` files, API keys, tokens, passwords, or credentials of any kind.
+- Never include secrets in code, comments, log statements, or commit messages.
+- If a secret is found in staged files, remove it and warn the user before doing anything else.
+
+## [GLOBAL] Destructive operations
+
+- Always confirm with the user before: `rm -rf`, `git reset --hard`, `git branch -D`, dropping database tables, or overwriting uncommitted work.
+- Investigate unknown files, branches, or lock files before deleting — they may be in-progress work.
+- Do not use destructive commands as shortcuts to bypass errors. Diagnose the root cause first.
+
+## [GLOBAL] Code quality gates
+
+- Never skip a failing test to ship faster. Fix it or escalate.
+- Never disable or bypass a linter, type-checker, or CI step without explicit instruction.
+- Do not ship code with known security vulnerabilities (OWASP top 10: injection, XSS, broken auth, etc.).
+
+## [GLOBAL] Continuous improvement — CLAUDE.md updates
+
+When a solution is explicitly approved by the user OR confirmed working, Claude must
+proactively invoke the `/capture-learning` skill without waiting to be asked.
+
+Guard conditions — only invoke if all are true:
+1. A concrete problem was encountered (not exploration or planning)
+2. A solution was applied and confirmed working
+3. The user explicitly approved the outcome
+```
+
+After writing, confirm: `~/.claude/CLAUDE.md — global rules written.`
+
+---
+
+### 4.0b — CLI Tools Setup
+
+Check for and install the required CLI tools via Bash. These are needed for the
+publishing workflow, deployments, and database management.
+
+```bash
+# Check what's already installed
+which gh supabase vercel 2>/dev/null || true
+```
+
+For each missing CLI, install it:
+
+```bash
+# GitHub CLI (repo management, PR creation)
+brew install gh
+
+# Supabase CLI (database migrations, local dev)
+brew install supabase/tap/supabase
+
+# Vercel CLI (read-only: deployment status, logs)
+npm install -g vercel
+```
+
+After installing, add the **Supabase MCP** to `.claude/settings.local.json` so Claude
+Code agents can query the database directly. Read the existing file and merge in:
+
+```json
+"supabase": {
+  "command": "npx",
+  "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "SUPABASE_ACCESS_TOKEN_PLACEHOLDER"]
+}
+```
+
+Use the literal string `SUPABASE_ACCESS_TOKEN_PLACEHOLDER` — the user will replace
+this after creating their Supabase project. Add a note in `context/postiz-setup.md`
+(or a new `context/supabase-setup.md`) with this one step:
+> Supabase personal access token: https://supabase.com/dashboard/account/tokens
+> Replace SUPABASE_ACCESS_TOKEN_PLACEHOLDER in .claude/settings.local.json
+
+If the machine is not macOS (no brew), output the equivalent install commands for
+the detected platform (apt/npm) and note them in a `context/cli-setup.md` file.
+
+Confirm: `CLI tools checked. GitHub CLI, Supabase CLI, Vercel CLI, Supabase MCP — done.`
+
+---
 
 ### 4.1 — Root Project Files
 
@@ -619,24 +736,27 @@ STEP 7 — Telegram Bot (team notifications)                    ⏱ ~5 min
 □ Note your chat ID: ________________
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 8 — Claude Desktop Schedules                             ⏱ ~15 min
+STEP 8 — Claude Desktop Schedules (Telegram reminders only)   ⏱ ~10 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-IMPORTANT: These are the ONLY automated tasks that require Claude Desktop.
-They cannot be set up remotely — you must do this on your computer.
+NOTE: Most automated tasks (standup compile, content calendar, social drafts,
+weekly reports) are already scheduled in Anthropic's cloud — you don't need to
+do anything for those. They run 24/7 without your laptop being on.
 
-Read the file: agents/project-manager/context/schedule-all-tasks.md
-It contains copy-paste commands for your timezone.
+These two tasks MUST run on your computer because they send Telegram messages
+via your local Claude Code Telegram plugin.
 
-Schedules to create:
+Read the file: agents/project-manager/context/schedule-desktop-tasks.md
+It contains the exact copy-paste commands for your timezone.
 
 □ Daily standup morning reminder  → Mon-Fri {7am your timezone}
-□ Daily standup compile           → Mon-Fri {9am your timezone}
-□ EOD reminder                    → Mon-Fri {5pm your timezone}
-□ Weekly strategy review          → {your day/time from Q21}
-□ Content calendar generation     → First Monday of month, 9am
-□ Weekly social media drafts      → {day before your main publish day}
-□ Weekly performance review       → Friday {4pm your timezone}
+  Open Claude Desktop → type the command from schedule-desktop-tasks.md
+
+□ EOD check-in reminder           → Mon-Fri {5pm your timezone}
+  Open Claude Desktop → type the command from schedule-desktop-tasks.md
+
+IMPORTANT: These only fire when Claude Desktop is open and your laptop is on.
+If you close your laptop, the reminder won't send that day — that's expected.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 STEP 9 — Custom Domain (optional)                             ⏱ ~15 min
@@ -738,12 +858,38 @@ If any postiz tool returns an error mentioning the API key, output:
 
 ## PHASE 7b — SCHEDULE FILE GENERATION
 
-Create `agents/project-manager/context/schedule-all-tasks.md`.
+### The two scheduling systems
 
-This file must contain:
-- The exact CLI commands to create each scheduled task in Claude Desktop
-- Adapted to the user's timezone (from Q21)
-- Copy-paste ready format
+There are two different ways to schedule automated tasks. Use the right one for each task:
+
+| System | When to use | Requires |
+|---|---|---|
+| **Claude Desktop CronCreate** | Task sends Telegram messages (Project Manager reminders, notifications) | Laptop on + Claude Desktop open |
+| **RemoteTrigger (CCR)** | Task does file work only (read/write/commit, Postiz API via Bash) | Nothing — runs in Anthropic cloud 24/7 |
+
+**Rule:** If the task calls the Telegram MCP → Claude Desktop.
+If the task only reads/writes files or calls Postiz via Bash → RemoteTrigger.
+
+---
+
+### 7b.1 — Tasks for Claude Desktop (Telegram-dependent)
+
+Create `agents/project-manager/context/schedule-desktop-tasks.md`.
+
+This file must contain copy-paste CronCreate commands for:
+
+```
+# Daily standup morning reminder — sends Telegram prompt to team
+# Runs: Mon-Fri {7am user timezone → converted to UTC}
+/schedule morning standup reminder
+
+# EOD check-in reminder — sends Telegram prompt to team
+# Runs: Mon-Fri {5pm user timezone → converted to UTC}
+/schedule EOD reminder
+```
+
+For each task, include the exact UTC cron expression and the prompt the agent will run.
+Format must be copy-paste ready for the user to enter in Claude Desktop.
 
 Also create `agents/project-manager/context/workflows/daily-standup.md` with:
 - Phase 1: Morning reminder (what the agent sends, to whom, format)
@@ -753,20 +899,61 @@ Also create `agents/project-manager/context/workflows/daily-standup.md` with:
 
 ---
 
-## PHASE 8 — VERIFICATION
+### 7b.2 — Tasks for RemoteTrigger (file-only, cloud-scheduled)
 
-After the user says "setup complete", run verification:
+**Claude Code will schedule these automatically in Phase 8 using the `/schedule` skill.**
+Do not put these in the manual checklist — the user does not need to touch them.
 
+Create `agents/project-manager/context/schedule-remote-tasks.md` with the following
+tasks and their prompts (used as CCR session prompts). Claude Code will use this file
+as input when running `/schedule` in Phase 8.
+
+Tasks to schedule via RemoteTrigger:
+
+| Task | Cron (UTC) | Local time | Agent prompt |
+|---|---|---|---|
+| Daily standup compile | `0 2 * * 1-5` | 9am Mon-Fri | Read standup/individual/*.md, compile briefing, commit to standup/briefings/YYYY-MM/YYYY-MM-DD.md |
+| Content calendar draft | `0 2 1 * *` | 9am 1st of month | Read resources/, generate next month's content calendar draft, commit to content/calendar/ |
+| Weekly social drafts | `0 2 * * 5` | 9am Friday | Read content/approved/, call Postiz REST API (key in context/postiz-config.yml) for each file, move to content/published/ |
+| Weekly performance report | `0 9 * * 5` | 4pm Friday | Read standup/briefings/, generate RAG status report, commit to standup/briefings/YYYY-MM/weekly-rag.md |
+
+Adapt all cron times to the user's timezone (Q21) before writing the file.
+
+---
+
+## PHASE 8 — VERIFICATION + REMOTE SCHEDULE SETUP
+
+After the user says "setup complete", run the following in order:
+
+### 8.1 — File verification
 1. Check that all 7 `.claude/agents/*.md` files exist
 2. Check that all 7 `agents/*/context/persona.md` files exist
 3. Check that `resources/brand-voice.md`, `resources/audience-personas.md`, and
    `resources/content-calendar.md` all exist and contain real content (not blank)
 4. Check that `context/postiz-setup.md` exists
 5. Check that `.claude/settings.local.json` includes the postiz MCP entry with a URL
+   and the supabase MCP entry
+
+### 8.2 — RemoteTrigger setup (run automatically — user does not need to do this)
+
+Read `agents/project-manager/context/schedule-remote-tasks.md` and use the `/schedule`
+skill to create each RemoteTrigger in Anthropic's cloud. These run 24/7 without the
+user's laptop.
+
+For each task in the file:
+- Use the cron expression (already converted to UTC)
+- Use the agent prompt from the table
+- Set the git repo to the user's GitHub repo URL (from Q19)
+- Confirm each trigger was created successfully
+
+Output a confirmation line per trigger:
+`✅ RemoteTrigger created: [task name] — next run: [human-readable time]`
+
+### 8.3 — Functional tests
 6. Run the first test standup: read the Project Manager persona and simulate a
    morning standup message
 7. Run a publishing dry-run: ask the Social Media Manager to list connected platforms
-   (it will call postiz_list_platforms — this confirms the MCP is wired correctly)
+   (it will call integrationList via Postiz MCP — confirms the MCP is wired correctly)
 
 Then output the final summary:
 

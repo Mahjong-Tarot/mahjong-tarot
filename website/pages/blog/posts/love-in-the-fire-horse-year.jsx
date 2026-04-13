@@ -199,7 +199,9 @@ export default function LoveInTheFireHorseYear() {
               <Link href="/blog/posts/who-has-the-most-luck-in-the-fire-horse-year" className={styles.navPrev}>
                 ← Who Has the Most Luck in the Fire Horse Year?
               </Link>
-              <span />
+              <Link href="/blog/posts/swift-kelce-wedding-stars" className={styles.navNext}>
+                What the Stars Actually Say About the Swift-Kelce Wedding →
+              </Link>
             </nav>
 
           </div>

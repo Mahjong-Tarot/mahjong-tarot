@@ -56,7 +56,15 @@ Colors: [brand colours in plain English].
 No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
 ```
 
-**Brand colours (plain English only — never hex codes):** deep midnight navy · warm antique gold · deep crimson · soft cream
+**Tone — alternate between dark and light across posts. Do not default to dark every time.**
+
+| Tone | Background | Accents | When to use |
+|------|-----------|---------|-------------|
+| Dark | Deep midnight navy | Warm antique gold, deep crimson | Drama, danger, mystery, night energy |
+| Light | Soft cream or warm white | Antique gold details, navy or crimson accents | Joy, celebration, clarity, daytime energy |
+| Mixed | One dark element + one light | Contrast within the frame | Tension between opposites, transition |
+
+Check the run log: if the last 2–3 images used dark backgrounds, use light or mixed this time. Vary deliberately. Plain English only — never hex codes.
 
 **Self-check before generating:** Does the prompt contain abstract words like: tension, energy, forces, power, emotion, opposing, mystical, celestial, dramatic? If yes — replace them with specific physical objects or details.
 
@@ -68,9 +76,13 @@ Example — abstract Fire Horse forecast:
 
 ---
 
-### Brand colours (plain English in prompts — no hex codes)
+### Tone and brand colours (plain English in prompts — no hex codes)
 
-Deep midnight navy · warm antique gold · deep crimson · soft cream
+Alternate between dark and light treatments — do not default to dark every time.
+
+- **Dark:** deep midnight navy background · warm antique gold · deep crimson
+- **Light:** soft cream or warm white background · antique gold · navy or crimson accents
+- **Mixed:** one dark element + one light element in the same frame
 
 ### Exclusions (always append)
 

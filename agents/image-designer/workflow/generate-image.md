@@ -8,7 +8,7 @@ trigger: Per image entry with workflow: generate in a YAML request file
 
 ## Purpose
 
-Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-3.0-generate-002`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
+Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-4.0-generate-001`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
 
 ---
 
@@ -64,9 +64,11 @@ If `prompt_override` is set in the request, use that value directly — skip to 
 
 Otherwise, follow the two-path approach in `skills/generate-image/SKILL.md`:
 
-**Step 3a — Check the run log for duplicates**
+**Step 3a — Check the run log for duplicates and tone**
 
-Read `agents/image-designer/output/run-log.md`. Scan the last 20 Prompt entries. Note any objects, surfaces, or lighting setups already used. Your new prompt must not reuse them.
+Read `agents/image-designer/output/run-log.md`. Scan the last 20 Prompt entries. Note:
+1. Any objects, surfaces, or lighting setups already used — do not reuse them
+2. The background tone of recent images (dark / light / mixed) — if the last 2–3 images used dark backgrounds, use light or mixed this time. Vary deliberately.
 
 **Step 3b — Decide: is the post about a known real-world subject (person, team, brand, cultural event)?**
 
@@ -97,16 +99,18 @@ Any `style` hint passed in the request is advisory only — the agent uses its o
 
 Use `GEMINI_API_KEY` from the environment. See `skills/generate-image/SKILL.md` for the full Python snippet.
 
-- Model: `imagen-3.0-generate-002`
-- Aspect ratio: `16:9` for hero/thumbnail/og; `1:1` for card/social
-- Save the raw PNG to `working_files/<slug>-raw.png`
-- Archive a permanent copy to `content/topics/<slug>/<slug>-hero-original.png`
+- Model: `imagen-4.0-generate-001`
+- Two separate API calls: one with `aspect_ratio="16:9"` (hero/thumbnail/og), one with `aspect_ratio="1:1"` (card/social) — each using its own distinct prompt from Step 3c
+- Save raw PNGs to `working_files/<slug>-16x9-raw.png` and `working_files/<slug>-1x1-raw.png`
+- Archive permanent copies to `content/topics/<slug>/<slug>-hero-original.png` and `content/topics/<slug>/<slug>-social-original.png`
 
 If the API call fails, simplify the prompt and retry once. If still failing, move to `failed/` and log.
 
 ### 5. Run the Pillow pipeline for each requested type
 
-Derive each requested type by resizing and cropping the same raw PNG — do not re-call the API per type.
+Derive each requested type from the correct raw PNG — do not re-call the API per type:
+- `hero`, `thumbnail`, `og` → use `working_files/<slug>-16x9-raw.png`
+- `card`, `social` → use `working_files/<slug>-1x1-raw.png`
 
 For each type, run:
 
@@ -114,7 +118,9 @@ For each type, run:
 from PIL import Image
 import os, sys
 
-source_path  = "working_files/<slug>-<type>-raw.png"
+# Use 16x9 raw for hero/thumbnail/og, 1x1 raw for card/social
+aspect = "16x9" if image_type in ("hero", "thumbnail", "og") else "1x1"
+source_path  = f"working_files/{slug}-{aspect}-raw.png"
 slug         = "<slug>"
 image_type   = "<type>"
 
@@ -206,5 +212,5 @@ Write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md`:
 | Multiple types requested | Derive all types from the same raw PNG in Step 5 — do not re-call the API. |
 | `prompt_override` set | Skip Steps 2 and 3. Use the override directly in Step 4. |
 | Style hint unrecognised | Ignore it. Construct the prompt from blog content using the creative variety rules. |
-| `post_path` file missing | Skip reading it. Construct the prompt from `style` and `slug` alone. Note the gap in the log. |
+| `blog.md` missing | Skip reading it. Construct the prompt from the slug name alone (hyphens → spaces). Note the gap in the log. |
 | Pillow not installed | Run `pip install Pillow google-generativeai --break-system-packages`, then retry. |

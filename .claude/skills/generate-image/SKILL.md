@@ -53,7 +53,17 @@ Colors: [brand colours in plain English].
 No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
 ```
 
-Brand colours (plain English only — never hex codes): deep midnight navy · warm antique gold · deep crimson · soft cream
+**Tone — alternate between dark and light across posts. Do not default to dark every time.**
+
+| Tone | Background | Accents | When to use |
+|------|-----------|---------|-------------|
+| Dark | Deep midnight navy | Warm antique gold, deep crimson | Drama, danger, mystery, night energy |
+| Light | Soft cream or warm white | Antique gold details, navy or crimson accents | Joy, celebration, clarity, daytime energy |
+| Mixed | One dark element + one light | Contrast within the frame | Tension between opposites, transition |
+
+Check the run log before generating: if the last 2–3 images used dark backgrounds, use light or mixed this time.
+
+Plain English only — never hex codes.
 
 Example — Taylor Swift + Travis Kelce wedding post:
 > Photorealistic flat lay of a stack of friendship bracelets, a Kansas City Chiefs pennant, and a single white peony on dark velvet, soft warm candlelight from the left, deep navy background with gold accents. No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.

@@ -146,17 +146,17 @@ Append one row to `agents/image-designer/output/run-log.md`:
 
 On success:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | <output_path> | <size_kb> KB | ✅ OK |
+| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | <output_path> | <size_kb> KB | ✅ OK | optimised from <source_path> |
 ```
 
 On failure:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | <size_kb> KB | ❌ FAILED: over size limit after q65 |
+| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | <size_kb> KB | ❌ FAILED: over size limit after q65 | optimised from <source_path> |
 ```
 
 If the source file was missing, use:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | — | ❌ FAILED: source file not found |
+| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | — | ❌ FAILED: source file not found | <source_path> |
 ```
 
 ### 6. Write an error report (on failure only)

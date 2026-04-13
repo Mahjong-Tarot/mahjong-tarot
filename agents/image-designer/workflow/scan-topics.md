@@ -58,58 +58,61 @@ print("Needs generation:", missing)
 
 ---
 
-## Step 3 — Generate missing images
+## Step 3 — Resolve source and produce images
 
 For each slug in `missing`:
 
-### 3a. Read context (optional)
+### 3a. Run resolve-source
 
-Read `content/topics/<slug>/blog.md` if it exists — extract the title and any emotional angle or key visual subjects to inform the prompt. If `blog.md` does not exist, use the slug itself to construct the prompt (convert hyphens to spaces, title-case).
+Follow `workflow/resolve-source.md` for this slug exactly:
 
-### 3b. Select a style
+1. List **all** image files in `working_files/` regardless of filename
+2. Read the post subject from `content/topics/<slug>/blog.md` (or use the slug if missing)
+3. Use filename inference to judge whether any available image is topically related to this post
+4. **If a suitable image is found:** set it as `source`, route to `workflow/optimise-image.md` — skip Steps 3b and 3c entirely
+5. **If no suitable image is found:** proceed to Step 3b
 
-Choose the most appropriate brand style based on the blog content or slug name:
+### 3b. Construct the prompt (generate path only)
 
-| Slug contains… | Default style |
-|----------------|--------------|
-| fire, horse, dragon, tiger, metal, water, wood, earth | Elemental Drama |
-| moon, star, celestial, cosmos, fate, destiny, year | Celestial & Mystical |
-| rat, ox, rabbit, snake, sheep, monkey, rooster, dog, pig | Zodiac Portraiture |
-| mahjong, tile, lantern, lotus, mirror, fortune | Sacred & Symbolic |
-| spring, summer, autumn, winter, blossom, season | Seasonal & Nature |
-| (no match) | Celestial & Mystical |
+Follow `workflow/generate-image.md` Steps 3a–3d:
 
-### 3c. Construct the Gemini prompt
+1. Read the run log — note objects/surfaces/lighting already used and the tone (dark/light) of recent images
+2. Read `content/topics/<slug>/blog.md` if it exists
+3. Decide Path A (known real-world subject) or Path B (abstract/unknown)
+4. Build two prompts — one for 16:9 (wide scene), one for 1:1 (close-up detail)
+5. Self-check: replace any abstract words with specific physical objects
 
-Use the brand prompt template from `agents/image-designer/skills/generate-image/SKILL.md`. Proceed directly to generation — no user confirmation needed.
-
-### 3d. Call the Gemini API
+### 3c. Call the Gemini API (generate path only)
 
 Use `GEMINI_API_KEY` from `.env`. Always run via `/opt/anaconda3/envs/mahjong-tarot/bin/python`.
 
 ```python
 from google import genai
-from google.genai import types
+from PIL import Image
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
-response = client.models.generate_images(
-    model="imagen-4.0-generate-001",
-    prompt=PROMPT,
-    config=types.GenerateImagesConfig(
-        number_of_images=1,
-        aspect_ratio="16:9",
-    ),
-)
+# contents: [prompt] for text-only, [prompt, image] if resolve-source found a match
+source_path = None  # set by resolve-source step if a working_files/ image was matched
+contents = [PROMPT]
+if source_path:
+    contents.append(Image.open(source_path))
 
 raw_path = f"working_files/{SLUG}-raw.png"
 os.makedirs("working_files", exist_ok=True)
-with open(raw_path, "wb") as f:
-    f.write(response.generated_images[0].image.image_bytes)
-print(f"Saved raw → {raw_path}")
+
+response = client.models.generate_content(
+    model="gemini-3.1-flash-image-preview",
+    contents=contents,
+)
+for part in response.parts:
+    if part.inline_data is not None:
+        part.as_image().save(raw_path)
+        print(f"Saved raw → {raw_path}")
+        break
 ```
 
 If the API call fails, simplify the prompt (remove hex codes, reduce specificity) and retry once. If still failing, log the error and move on to the next slug — do not halt the entire run.
@@ -170,12 +173,12 @@ Append one row per slug to `agents/image-designer/output/run-log.md`:
 
 On success:
 ```
-| YYYY-MM-DD HH:MM | <slug> | hero | scan-topics | content/topics/<slug>/<slug>-hero.webp | <size_kb> KB | ✅ OK |
+| YYYY-MM-DD HH:MM | <slug> | hero | scan-topics | content/topics/<slug>/<slug>-hero.webp | <size_kb> KB | ✅ OK | <prompt text or "optimised from <source>"> |
 ```
 
 On failure:
 ```
-| YYYY-MM-DD HH:MM | <slug> | hero | scan-topics | — | — | ❌ FAILED: <reason> |
+| YYYY-MM-DD HH:MM | <slug> | hero | scan-topics | — | — | ❌ FAILED: <reason> | <prompt text or source> |
 ```
 
 ---

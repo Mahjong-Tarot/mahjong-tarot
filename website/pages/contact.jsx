@@ -4,12 +4,14 @@ import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
+import useSpamGuard from '../lib/useSpamGuard';
 import styles from '../styles/Contact.module.css';
 import form from '../styles/Forms.module.css';
 
 export default function Contact() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [status, setStatus] = useState('idle');
+  const { checkSpam, SpamField } = useSpamGuard();
 
   function update(e) {
     setFields({ ...fields, [e.target.name]: e.target.value });
@@ -17,6 +19,7 @@ export default function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (checkSpam()) { setStatus('success'); return; } // silent reject
     setStatus('submitting');
     if (!supabase) { setStatus('error'); return; }
 
@@ -50,9 +53,9 @@ export default function Contact() {
       <Nav />
 
       <main>
-        <section className={`section-dark ${styles.pageHeader}`}>
+        <section className={styles.pageHeader}>
           <div className="container">
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Get in Touch</span>
+            <span className="overline">Get in Touch</span>
             <h1>Contact Us</h1>
             <p className={styles.headerLead}>
               Have a question about readings, the book, or a speaking engagement?
@@ -60,7 +63,7 @@ export default function Contact() {
             </p>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
               <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
-              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
             </div>
           </div>
         </section>
@@ -78,6 +81,7 @@ export default function Contact() {
               </p>
             ) : (
               <form className={form.contactForm} onSubmit={handleSubmit}>
+                <SpamField />
                 <div className={form.contactRow}>
                   <div className={form.formGroup}>
                     <label className={form.label} htmlFor="name">Name *</label>

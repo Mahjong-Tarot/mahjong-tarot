@@ -139,7 +139,7 @@ The CTA should feel like the logical next step, not an ad bolted onto the end.
 
 ## Part 5: The Ten Blog Styles
 
-Each style is a distinct structural and tonal template. The `write-post` skill (in `agents/writer/context/write-post.md`) handles style selection, rotation, and output — refer to that skill for the execution workflow.
+Each style is a distinct structural and tonal template. The `write-post` skill (in `agents/writer/skills/write-post/SKILL.md`) handles style selection, rotation, and output — refer to that skill for the execution workflow.
 
 ### 1. The Provocation
 

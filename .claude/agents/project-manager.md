@@ -52,7 +52,7 @@ Full schedule config: `agents/project-manager/context/schedule-all-tasks.md`
 
 - Never leave a task without scope, owner, and deadline defined
 - All output goes to `standup/briefings/YYYY-MM/` — never to `agents/project-manager/output/`
-- Notifications: Telegram → Lark. If both fail, append status inline to the relevant daily file. No alerts folder.
+- Notifications: **Lark webhook → Resend email → inline log**. If both fail, append inline to the relevant daily file. No alerts folder or alert files. Templates: `agents/project-manager/context/notifications.md`
 - Never write directly to main — always branch → commit → PR → merge
 - Blockers unresolved >48 hours → escalate immediately
 - Every risk entry must include probability + impact + mitigation

@@ -2,7 +2,7 @@
 
 **Name**: `PM Weekly RAG Report`
 
-**Description**: Generates the weekly RAG (Red/Amber/Green) status report every Friday at 4 PM. Reads the week's compiled stand-ups and decisions from `standup/briefings/YYYY-MM/`, checks Vercel for deployment status, and writes the report to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`. Covers project health, upcoming milestones, top risks, and decisions needed. Sends via Telegram then Lark; if both fail, appends a status note to the report file. Commits on a branch and opens a PR.
+**Description**: Generates the weekly RAG (Red/Amber/Green) status report every Friday at 4 PM. Reads the week's compiled stand-ups and decisions from `standup/briefings/YYYY-MM/`, checks Vercel for deployment status, and writes the report to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`. Covers project health, upcoming milestones, top risks, and decisions needed. Sends via Lark webhook then Resend email; if both fail, appends a status note inline to the report file. Commits on a branch and opens a PR.
 
 ---
 
@@ -25,15 +25,14 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 ⚠️ RISKS — top 3 with probability / impact / mitigation
 🔔 DECISIONS NEEDED — items requiring decision with deadline
 
-Telegram pre-flight (run before every send attempt):
-1. Check if ~/.claude/channels/telegram/ exists. If not, skip to Lark.
-2. Read ~/.claude/channels/telegram/access.json. Extract every ID in allowFrom.
-3. Check ~/.claude/channels/telegram/approved/. For each senderId in allowFrom that does not have a corresponding file in approved/, create that file: path = ~/.claude/channels/telegram/approved/<senderId>, content = <senderId> (the senderId itself, plain text, no newline). mkdir -p the directory first if needed.
-4. Proceed with the send using the senderId as the chat_id.
+Read agents/project-manager/context/pm-notification-guide.md for the full notification pattern, Lark message text, and HTML email template (Template 4 — Weekly RAG Report).
 
-Send the weekly summary: Telegram → Lark. If both fail, append the notification status at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+Notification (send both — not fallback):
+1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "Weekly RAG report" message from pm-notification-guide.md, substituting YYYY-MM-DD and copying the RAG status lines from the report.
+2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, write to `/tmp/weekly-rag-email.html`, then send with `--html-file /tmp/weekly-rag-email.html`. Subject: "Weekly Status Report — Week of YYYY-MM-DD". Full pattern in pm-notification-guide.md.
+3. If BOTH fail: append failure status inline at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
-Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin main
+Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin pm/weekly-rag/YYYY-MM-DD → gh pr create --base main → gh pr merge --merge --auto.
 ```
 
 ---

@@ -33,8 +33,9 @@ Send a reminder to Dave and Yon:
 
 > *"Good morning! Please submit your check-in to `standup/individual/<name>.md` before 9 AM so it's included in today's stand-up."*
 
-- **Primary channel**: Gmail (dave@edge8.co + Yon, Trac, and Khang's emails when confirmed).
-- **Fallback**: Write `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md`.
+- **Channel 1**: Lark webhook (`$LARK_WEBHOOK_URL`) — "Morning reminder" message from `notifications.md`
+- **Channel 2**: Resend email (`$RESEND_API_KEY`) — Template 1 from `notifications.md`
+- **Fallback**: Append failure status inline to `standup/briefings/YYYY-MM/YYYY-MM-DD.md`. No alerts folder.
 
 ---
 
@@ -99,25 +100,13 @@ _Compiled at 09:00 AM_
 _End of stand-up. Ping the PM agent in Telegram for changes or updates throughout the day._
 ```
 
-### Step 4: Send Telegram summary
+### Step 4: Send summary notification
 
-```
-📋 *Stand-Up — <Day DD Mon YYYY>*
+Use the notification pattern from `agents/project-manager/context/pm-notification-guide.md`:
 
-⚠️ *Conflicts:* <count, or "None">
-
-👥 *Team focus:*
-• Dave: <first 1–2 focus items, or "No check-in">
-• Yon: <first 1–2 focus items, or "No check-in">
-
-🤖 *Agent updates:* <one-line summary, or "None received">
-
-🔗 Full stand-up saved to standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md
-
-_Ping @PM-agent for any changes or updates today._
-```
-
-If Telegram delivery fails, log the error at the bottom of the compiled file. Do not retry.
+1. **Lark webhook** — send the "Standup compiled" Lark message, filling in date, conflict count, team focus items, and agent updates one-liner.
+2. **If Lark fails** — send via Resend using Template 2 (Standup Compiled), filling in all `{{PLACEHOLDER}}` values with compiled content.
+3. **If both fail** — append failure status inline at the bottom of `standup/briefings/YYYY-MM/YYYY-MM-DD.md`. No alerts folder or alert files.
 
 ---
 

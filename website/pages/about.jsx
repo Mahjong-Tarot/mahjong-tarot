@@ -22,13 +22,13 @@ export default function About() {
 
       <main>
         {/* ── Page Header ── */}
-        <section className={`section-dark ${styles.pageHeader}`}>
+        <section className={styles.pageHeader}>
           <div className="container">
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Meet the Firepig</span>
+            <span className="overline">Meet the Firepig</span>
             <h1>Bill Hajdu</h1>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
               <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
-              <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+              <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
             </div>
           </div>
         </section>
@@ -85,11 +85,11 @@ export default function About() {
         </section>
 
         {/* ── Mid-page CTA ── */}
-        <section className="section-dark">
+        <section className="section-stone">
           <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Experience It Yourself</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Ready for a Reading with Bill?</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+            <span className="overline">Experience It Yourself</span>
+            <h2 style={{ margin: 'var(--space-md) 0' }}>Ready for a Reading with Bill?</h2>
+            <p style={{ maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
               35+ years of practice. Sessions conducted online with flexible scheduling.
             </p>
             <Link href="/readings#book" className="btn-primary">Book a Reading</Link>

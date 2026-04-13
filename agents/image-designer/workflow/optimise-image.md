@@ -16,13 +16,10 @@ Transform an existing source image into a brand-ready WebP for the website. Take
 
 | File | Path | Notes |
 |------|------|-------|
-| Request file | `agents/web-designer/output/requests/<slug>-image-request.yaml` | Written by Web Designer agent |
-| Source image | Path specified in `source` field of the request | Usually `working_files/<filename>` |
+| Source image | `working_files/<filename>` | Provided by the caller |
 | WebP output | `content/topics/{slug}/` (derived by type) | Final destination |
 | Run log | `agents/image-designer/output/run-log.md` | Append one row per image |
 | Error report | `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md` | Write on failure |
-| Processed requests | `agents/web-designer/output/requests/processed/` | Move here on full success |
-| Failed requests | `agents/web-designer/output/requests/failed/` | Move here on failure |
 
 ---
 
@@ -42,7 +39,7 @@ Transform an existing source image into a brand-ready WebP for the website. Take
 
 ### 1. Read the request file
 
-Read the YAML at `agents/web-designer/output/requests/<slug>-image-request.yaml`.
+The caller provides a `slug`, `type`, `source` path, and optional `filters`.
 
 For each image entry where `workflow: optimise`, extract:
 - `slug` (top-level) — used to derive output paths
@@ -149,17 +146,17 @@ Append one row to `agents/image-designer/output/run-log.md`:
 
 On success:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | <output_path> | <size_kb> KB | ✅ OK |
+| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | <output_path> | <size_kb> KB | ✅ OK | optimised from <source_path> |
 ```
 
 On failure:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | <size_kb> KB | ❌ FAILED: over size limit after q65 |
+| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | <size_kb> KB | ❌ FAILED: over size limit after q65 | optimised from <source_path> |
 ```
 
 If the source file was missing, use:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | — | ❌ FAILED: source file not found |
+| YYYY-MM-DD HH:MM | <slug> | <type> | optimise | — | — | ❌ FAILED: source file not found | <source_path> |
 ```
 
 ### 6. Write an error report (on failure only)
@@ -169,19 +166,11 @@ Write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md`:
 ```markdown
 # Error: <slug> / <type>
 
-- **Request file:** agents/web-designer/output/requests/<slug>-image-request.yaml
-- **Failure step:** [Step 2 — source not found | Step 3 — size gate]
+- **Failure step:** [Step 1 — source not found | Step 3 — size gate]
 - **Source:** <source_path>
 - **Final size:** <size_kb> KB (limit: <max_kb> KB)
 - **Suggested fix:** [Use a smaller or lower-detail source image, or request a lower-detail crop.]
 ```
-
-### 7. Move the request file
-
-Only move after all image entries in the file have been attempted:
-
-- **All entries succeeded** → move to `agents/web-designer/output/requests/processed/`
-- **Any entry failed** → move to `agents/web-designer/output/requests/failed/`
 
 ---
 

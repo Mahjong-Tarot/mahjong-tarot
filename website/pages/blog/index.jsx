@@ -9,21 +9,27 @@ import styles from '../../styles/Blog.module.css';
 
 const CATEGORIES = [
   'All Posts',
-  'Mahjong and Tarot',
-  'Tarot',
-  'Mahjong Readings',
-  'Year of the Snake',
+  'Romance',
   'Year of the Fire Horse',
-  'Blood Moon',
+  'Mahjong Reading',
+  'Chinese Astrology',
 ];
 
 const POSTS = [
   /* ── Add new posts at the TOP of this array ── */
   {
+    slug: 'swift-kelce-wedding-stars',
+    title: 'What the Stars Actually Say About the Swift-Kelce Wedding',
+    excerpt: 'Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements - not just the signs - the charts tell a completely different story.',
+    categories: ['Romance', 'Chinese Astrology'],
+    date: 'Apr 13, 2026',
+    readTime: '6 min read',
+  },
+  {
     slug: 'love-in-the-fire-horse-year',
     title: 'Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign',
     excerpt: 'This is the one year in 60 where your partner is most likely to cheat and most likely to propose. Record proposals. Record divorces. The Fire Horse doesn\'t do anything halfway.',
-    category: 'Year of the Fire Horse',
+    categories: ['Romance', 'Year of the Fire Horse'],
     date: 'Apr 6, 2026',
     readTime: '8 min read',
   },
@@ -31,7 +37,7 @@ const POSTS = [
     slug: 'who-has-the-most-luck-in-the-fire-horse-year',
     title: 'Who Has the Most Luck in 2026 — Fire Horse Year? (And Why That\'s the Wrong Question)',
     excerpt: 'Tiger, Dog, and Sheep have the best alignment. But luck is not something that happens to you. It\'s something you create — and the Fire Horse rewards boldness.',
-    category: 'Year of the Fire Horse',
+    categories: ['Year of the Fire Horse', 'Chinese Astrology'],
     date: 'Apr 5, 2026',
     readTime: '5 min read',
   },
@@ -39,7 +45,7 @@ const POSTS = [
     slug: 'blood-moon-rising-in-the-year-of-the-fire-horse',
     title: 'A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac',
     excerpt: 'A blood moon in the first lunar month has only happened twice in the last hundred years. The last time was 2007. This time it\'s amplified by the Fire Horse.',
-    category: 'Blood Moon',
+    categories: ['Chinese Astrology', 'Year of the Fire Horse'],
     date: 'Apr 4, 2026',
     readTime: '5 min read',
   },
@@ -50,7 +56,7 @@ export default function BlogIndex() {
 
   const filtered = active === 'All Posts'
     ? POSTS
-    : POSTS.filter((p) => p.category === active);
+    : POSTS.filter((p) => p.categories.includes(active));
 
   return (
     <>
@@ -67,9 +73,9 @@ export default function BlogIndex() {
 
       <main>
         {/* ── Page Header ── */}
-        <section className={`section-dark ${styles.pageHeader}`}>
+        <section className={styles.pageHeader}>
           <div className="container">
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Writing & Insight</span>
+            <span className="overline">Writing & Insight</span>
             <h1>The Blog</h1>
             <p className={styles.headerLead}>
               Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
@@ -77,7 +83,7 @@ export default function BlogIndex() {
             </p>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
               <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
-              <Link href="#newsletter" className="btn-ghost">Get Daily Fortune</Link>
+              <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
             </div>
           </div>
         </section>
@@ -87,25 +93,25 @@ export default function BlogIndex() {
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
-              <Link href="/blog/posts/love-in-the-fire-horse-year" className={styles.featuredImage}>
+              <Link href="/blog/posts/swift-kelce-wedding-stars" className={styles.featuredImage}>
                 <Image
-                  src="/images/blog/love-in-the-fire-horse-year.webp"
-                  alt="Love in the Year of the Fire Horse"
+                  src="/images/blog/swift-kelce-wedding-stars.webp"
+                  alt="What the Stars Actually Say About the Swift-Kelce Wedding"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
               </Link>
               <div className={styles.featuredText}>
-                <span className="post-category">Year of the Fire Horse</span>
+                <span className="post-category">Romance</span>
                 <h2 className={styles.featuredTitle}>
-                  <Link href="/blog/posts/love-in-the-fire-horse-year">
-                    Love in the Year of the Fire Horse: What 2026 Means for Your Relationships
+                  <Link href="/blog/posts/swift-kelce-wedding-stars">
+                    What the Stars Actually Say About the Swift-Kelce Wedding
                   </Link>
                 </h2>
                 <p className={styles.featuredExcerpt}>
-                  This is the one year in 60 where your partner is most likely to cheat and most likely to propose. The Fire Horse doesn't do anything halfway.
+                  Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements, the charts tell a completely different story.
                 </p>
-                <Link href="/blog/posts/love-in-the-fire-horse-year" className="btn-secondary">Read the Article</Link>
+                <Link href="/blog/posts/swift-kelce-wedding-stars" className="btn-secondary">Read the Article</Link>
               </div>
             </div>
           </div>
@@ -150,7 +156,7 @@ export default function BlogIndex() {
                       </div>
                     </Link>
                     <div className={styles.cardBody}>
-                      <span className="post-category">{post.category}</span>
+                      <span className="post-category">{post.categories[0]}</span>
                       <h2 className={styles.cardTitle}>
                         <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
                       </h2>

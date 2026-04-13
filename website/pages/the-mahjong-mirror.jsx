@@ -61,10 +61,10 @@ export default function TheMahjongMirror() {
 
       <main>
         {/* ── Hero ── */}
-        <section className={`section-dark ${styles.hero}`}>
+        <section className={styles.hero}>
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroText}>
-              <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Now Available</span>
+              <span className="overline">Now Available</span>
               <h1>Unlock Your Destiny<br />Through the<br /><em>Mahjong Mirror</em></h1>
               <p className={styles.heroLead}>
                 A modern divination system inspired by ancient Mahjong symbolism —
@@ -72,7 +72,7 @@ export default function TheMahjongMirror() {
               </p>
               <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
                 <Link href="#preorder" className="btn-primary">Preorder the Book</Link>
-                <Link href="/readings#book" className="btn-ghost">Book a Reading</Link>
+                <Link href="/readings#book" className="btn-secondary">Book a Reading</Link>
               </div>
             </div>
             <div className={styles.heroCover}>
@@ -164,9 +164,9 @@ export default function TheMahjongMirror() {
         </section>
 
         {/* ── Why It Matters ── */}
-        <section className="section-dark">
+        <section>
           <div className={`container ${styles.why}`}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Why This System Matters</span>
+            <span className="overline">Why This System Matters</span>
             <blockquote className={styles.whyQuote}>
               The Mahjong Mirror blends cultural symbolism, intuitive reading,
               and personal insight into one harmonious system — offering depth
@@ -235,9 +235,9 @@ export default function TheMahjongMirror() {
         </section>
 
         {/* ── Preorder CTA ── */}
-        <section id="preorder" className="section-dark">
+        <section id="preorder" className="section-stone">
           <div className={`container ${styles.preorder}`}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Begin Your Journey Through the Tiles</span>
+            <span className="overline">Begin Your Journey Through the Tiles</span>
             <h2>Join the Waiting List for<br />The Mahjong Mirror</h2>
             <p>
               Be among the first to receive your copy. Fill out the form below
@@ -245,31 +245,31 @@ export default function TheMahjongMirror() {
             </p>
 
             {status === 'success' ? (
-              <p className={form.successMsgLight}>
+              <p className={form.successMsg}>
                 You're on the list! Bill will be in touch when the book is ready.
               </p>
             ) : (
               <form className={form.bookingForm} onSubmit={handlePreorder}>
                 <div className={form.bookingRow}>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="pre-name">Name *</label>
+                    <label className={form.label} htmlFor="pre-name">Name *</label>
                     <input
                       id="pre-name"
                       name="name"
                       type="text"
-                      className={form.inputDark}
+                      className={form.input}
                       value={fields.name}
                       onChange={update}
                       required
                     />
                   </div>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="pre-email">Email *</label>
+                    <label className={form.label} htmlFor="pre-email">Email *</label>
                     <input
                       id="pre-email"
                       name="email"
                       type="email"
-                      className={form.inputDark}
+                      className={form.input}
                       value={fields.email}
                       onChange={update}
                       required
@@ -279,18 +279,18 @@ export default function TheMahjongMirror() {
 
                 <div className={form.bookingRow}>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="pre-phone">Phone</label>
+                    <label className={form.label} htmlFor="pre-phone">Phone</label>
                     <input
                       id="pre-phone"
                       name="phone"
                       type="tel"
-                      className={form.inputDark}
+                      className={form.input}
                       value={fields.phone}
                       onChange={update}
                     />
                   </div>
                   <div className={form.formGroup}>
-                    <label className={form.labelLight} htmlFor="pre-format">Preferred Format</label>
+                    <label className={form.label} htmlFor="pre-format">Preferred Format</label>
                     <select
                       id="pre-format"
                       name="format"
@@ -307,11 +307,11 @@ export default function TheMahjongMirror() {
                 </div>
 
                 <div className={form.formGroup}>
-                  <label className={form.labelLight} htmlFor="pre-address">Mailing Address</label>
+                  <label className={form.label} htmlFor="pre-address">Mailing Address</label>
                   <textarea
                     id="pre-address"
                     name="address"
-                    className={form.textareaDark}
+                    className={form.textarea}
                     placeholder="Required for hard copy orders"
                     rows={2}
                     value={fields.address}
@@ -320,11 +320,11 @@ export default function TheMahjongMirror() {
                 </div>
 
                 <div className={form.formGroup}>
-                  <label className={form.labelLight} htmlFor="pre-message">Message</label>
+                  <label className={form.label} htmlFor="pre-message">Message</label>
                   <textarea
                     id="pre-message"
                     name="message"
-                    className={form.textareaDark}
+                    className={form.textarea}
                     placeholder="Any questions about the book?"
                     value={fields.message}
                     onChange={update}

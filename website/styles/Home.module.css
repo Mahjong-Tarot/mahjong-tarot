@@ -1,13 +1,19 @@
+/* ══════════════════════════════════════════════════════════════════════
+   Home Page — Warm Editorial Design
+   White/cream dominant, navy text, red + gold accents
+   ══════════════════════════════════════════════════════════════════════ */
+
 /* ── Hero ── */
 .heroSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 56vh;
   padding: 0;
+  background-color: white;
 }
 
 .heroLeft {
-  background-color: var(--midnight-indigo);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -19,20 +25,23 @@
   width: 100%;
 }
 
+.heroText .overline {
+  color: var(--mystic-fire);
+}
+
 .heroText h1 {
-  font-size: clamp(36px, 3.6vw, 56px);
-  line-height: 1.05;
+  font-size: clamp(36px, 3.6vw, 52px);
+  line-height: 1.1;
   letter-spacing: -0.03em;
-  color: var(--warm-cream);
+  color: var(--midnight-indigo);
   margin: var(--space-md) 0 var(--space-lg);
 }
 
 .heroLead {
-  font-size: 19px;
-  font-weight: 300;
-  line-height: 1.7;
-  color: var(--warm-cream);
-  opacity: 0.82;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #555;
   margin-bottom: var(--space-xl);
 }
 
@@ -47,13 +56,20 @@
   overflow: hidden;
 }
 
-/* ── Readings grid ── */
+/* ── Section Headers ── */
 .sectionHeader {
   text-align: center;
   margin-bottom: var(--space-2xl);
 }
-.sectionHeader h2 { margin-bottom: var(--space-lg); }
+.sectionHeader h2 {
+  margin-bottom: var(--space-md);
+  color: var(--midnight-indigo);
+}
+.sectionHeader .overline {
+  color: var(--mystic-fire);
+}
 
+/* ── Readings ── */
 .readingsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -61,13 +77,24 @@
   align-items: stretch;
 }
 
-/* Bottom-align the button inside every reading card */
 .readingCard {
   display: flex;
   flex-direction: column;
+  background-color: white;
+  border: 1px solid #ebe8e2;
+  padding: var(--space-xl);
 }
-.readingCard h3 { margin: var(--space-md) 0; }
-.readingCard p  { margin-bottom: var(--space-lg); flex: 1; }
+.readingCard h3 {
+  margin: var(--space-md) 0;
+  color: var(--midnight-indigo);
+}
+.readingCard p {
+  margin-bottom: var(--space-lg);
+  flex: 1;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.7;
+}
 .readingCard > a:last-child { margin-top: auto; align-self: flex-start; }
 
 /* ── About / Intro ── */
@@ -77,18 +104,35 @@
   gap: var(--space-4xl);
   align-items: center;
 }
-.introText h2   { margin-bottom: var(--space-lg); }
-.introText p    { margin-bottom: var(--space-lg); color: var(--black); }
-.introImage     { overflow: hidden; }
+.introText h2 {
+  margin-bottom: var(--space-lg);
+  color: var(--midnight-indigo);
+}
+.introText p {
+  margin-bottom: var(--space-lg);
+  color: #444;
+  font-size: 17px;
+  line-height: 1.75;
+}
+.introImage {
+  overflow: hidden;
+  border-radius: 6px;
+}
 
-/* ── Book section ── */
+/* ── Book section — keep dark for contrast ── */
+.bookSection {
+  background-color: var(--midnight-indigo);
+}
 .bookInner {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--space-4xl);
   align-items: center;
 }
-.bookText h2       { color: var(--warm-cream); margin-bottom: var(--space-sm); }
+.bookText h2 {
+  color: var(--warm-cream);
+  margin-bottom: var(--space-sm);
+}
 .bookSubtitle {
   font-family: 'Playfair Display', serif;
   font-style: italic;
@@ -96,20 +140,26 @@
   color: var(--celestial-gold);
   margin-bottom: var(--space-lg);
 }
-.bookText p        { color: var(--warm-cream); opacity: 0.85; margin-bottom: var(--space-xl); }
-.bookCover         { flex-shrink: 0; }
+.bookText p {
+  color: rgba(250,248,244,0.8);
+  margin-bottom: var(--space-xl);
+  font-size: 17px;
+  line-height: 1.75;
+}
+.bookCover { flex-shrink: 0; }
 
 /* ── Gallery ── */
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-sm);
+  gap: 8px;
   margin-top: var(--space-xl);
 }
 .galleryItem {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  border-radius: 6px;
 }
 .galleryItem img { transition: transform 400ms ease-out; }
 .galleryItem:hover img { transform: scale(1.04); }
@@ -121,10 +171,15 @@
   gap: var(--space-xl);
 }
 .testimonial {
-  font-size: 18px;
+  font-size: 17px;
   padding-left: var(--space-lg);
+  border-left: 2px solid var(--mystic-fire);
+  font-style: italic;
 }
-.testimonial p      { margin-bottom: var(--space-md); }
+.testimonial p {
+  margin-bottom: var(--space-md);
+  color: #333;
+}
 .testimonial footer {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 13px;
@@ -143,7 +198,7 @@
 
 @media (max-width: 768px) {
   .heroSection  { grid-template-columns: 1fr; min-height: auto; }
-  .heroLeft     { justify-content: flex-start; padding: var(--space-2xl) var(--outer-margin); }
+  .heroLeft     { justify-content: flex-start; padding: var(--space-2xl) 24px; }
   .heroRight    { min-height: 300px; }
   .intro        { grid-template-columns: 1fr; }
   .introImage   { display: none; }

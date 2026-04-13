@@ -8,7 +8,7 @@ trigger: Per image entry with workflow: generate in a YAML request file
 
 ## Purpose
 
-Produce a brand-new image for a blog post or page by calling the Gemini image generation API (`imagen-3.0-generate-002`). The agent constructs the prompt from its built-in brand knowledge, calls the API with `GEMINI_API_KEY`, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
+Produce a brand-new image for a blog post or page by calling the Gemini API (`gemini-3.1-flash-image-preview` via `generate_content`). The agent constructs the prompt from its built-in brand knowledge, optionally passes a source image for reference, calls the API, saves the raw PNG, then optimises to WebP at the correct dimensions and file size for each requested image type.
 
 ---
 
@@ -16,15 +16,12 @@ Produce a brand-new image for a blog post or page by calling the Gemini image ge
 
 | File | Path | Notes |
 |------|------|-------|
-| Request file | `agents/web-designer/output/requests/<slug>-image-request.yaml` | Written by Web Designer agent |
 | Post content | `content/topics/<slug>/blog.md` | Optional — read for prompt context |
-| Temp raw download | `working_files/<slug>-<type>-raw.png` | Temporary — cleaned up after optimisation |
+| Temp raw PNG | `working_files/<slug>-<type>-raw.png` | Temporary — cleaned up after optimisation |
 | PNG archive | `content/topics/<slug>/<slug>-hero-original.png` | Permanent archive of the generated image |
 | WebP output | `content/topics/<slug>/` (derived by type — see path table) | Final destination |
 | Run log | `agents/image-designer/output/run-log.md` | Append one row per image type |
 | Error report | `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md` | Write on failure |
-| Processed requests | `agents/web-designer/output/requests/processed/` | Move here on full success |
-| Failed requests | `agents/web-designer/output/requests/failed/` | Move here on failure |
 
 ---
 
@@ -46,12 +43,12 @@ Produce a brand-new image for a blog post or page by calling the Gemini image ge
 
 ### 1. Read the request file
 
-Read the YAML at `agents/web-designer/output/requests/<slug>-image-request.yaml`.
+The caller provides a `slug` and one or more image entries (type, workflow, style/source). Read `content/topics/<slug>/blog.md` if it exists for additional context.
 
 For each image entry where `workflow: generate`, extract:
 - `slug` (top-level) — used to derive output paths and archive paths
 - `type` — look up target dimensions and size limit from the spec table above
-- `style` — must match a name in `agents/image-designer/context/styles.json`
+- `style` — optional hint only; agent uses its own judgment (see Step 3)
 - `prompt_override` — if set and non-null, skip Steps 2 and 3; use this prompt directly
 
 If `type` is not in the spec table, log an error and skip this entry.
@@ -65,26 +62,91 @@ Read if present:
 
 If `prompt_override` is set in the request, use that value directly — skip to Step 4.
 
-Otherwise, use the `style` field from the request and the agent's built-in brand knowledge (see `skills/generate-image/SKILL.md` for the full style table, brand colours, and prompt template). Proceed directly to generation — no user confirmation needed.
+Otherwise, follow the two-path approach in `skills/generate-image/SKILL.md`:
 
-If the `style` value does not match a recognised brand style, stop and report:
+**Step 3a — Check the run log for duplicates and tone**
 
-> "Style '<name>' is not a recognised brand style. Valid styles are: Celestial & Mystical, Elemental Drama, Zodiac Portraiture, Sacred & Symbolic, Seasonal & Nature."
+Read `agents/image-designer/output/run-log.md`. Scan the last 20 Prompt entries. Note:
+1. Any objects, surfaces, or lighting setups already used — do not reuse them
+2. The background tone of recent images (dark / light / mixed) — if the last 2–3 images used dark backgrounds, use light or mixed this time. Vary deliberately.
+
+**Step 3b — Decide: is the post about a known real-world subject (person, team, brand, cultural event)?**
+
+- **Yes → Path A:** Use your training knowledge. List 2–3 specific, concrete, visually recognisable objects associated with that subject — not their personality, not their theme, actual *things* that exist in the world. Build the prompt from those objects in a specific scene or arrangement.
+- **No → Path B:** Read `content/topics/<slug>/blog.md`. Extract the most specific concrete nouns from the post text — physical objects, places, things actually named. Use those. If the post has no concrete objects, construct a physical metaphor from the core tension (e.g. a cracked object, two incompatible items placed together).
+
+**Step 3c — Build two prompts: one for 16:9, one for 1:1**
+
+The 16:9 and 1:1 API calls must use **different compositions**, not the same scene cropped:
+- **16:9 prompt:** Wide or medium shot — scene, environment, arrangement of objects with context
+- **1:1 prompt:** Close-up or detail shot of one or two of the same objects — tighter framing, different angle or surface
+
+**Step 3d — Self-check both prompts**
+
+Does either prompt contain abstract words like: tension, energy, forces, power, emotion, opposing, mystical, celestial, dramatic? If yes — replace them with specific physical objects or scene details.
+
+Prompt structure for both:
+```
+[Scene or arrangement of specific concrete objects].
+[Lighting and surface details — specific, not generic].
+Colors: [brand colours in plain English — never hex codes].
+No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
+```
+
+Any `style` hint passed in the request is advisory only — the agent uses its own judgment. Do not error on unrecognised style names.
 
 ### 4. Call the Gemini API
 
 Use `GEMINI_API_KEY` from the environment. See `skills/generate-image/SKILL.md` for the full Python snippet.
 
-- Model: `imagen-3.0-generate-002`
-- Aspect ratio: `16:9` for hero/thumbnail/og; `1:1` for card/social
-- Save the raw PNG to `working_files/<slug>-raw.png`
-- Archive a permanent copy to `content/topics/<slug>/<slug>-hero-original.png`
+- Model: `gemini-3.1-flash-image-preview` via `generate_content`
+- Two separate API calls: one for 16:9 (hero/thumbnail/og), one for 1:1 (card/social) — each using its own distinct prompt from Step 3c
+- If `resolve-source` found a source image, pass it as a second element in `contents` for both calls
+- Save raw PNGs to `working_files/<slug>-16x9-raw.png` and `working_files/<slug>-1x1-raw.png`
+- Archive permanent copies to `content/topics/<slug>/<slug>-hero-original.png` and `content/topics/<slug>/<slug>-social-original.png`
 
-If the API call fails, simplify the prompt and retry once. If still failing, move to `failed/` and log.
+```python
+from google import genai
+from PIL import Image
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+# contents: [prompt] for text-only, [prompt, image] if source image available
+source_path = "<source_path or None>"  # set by resolve-source, or None
+contents_16x9 = [PROMPT_16x9]
+contents_1x1  = [PROMPT_1x1]
+if source_path:
+    source_img = Image.open(source_path)
+    contents_16x9.append(source_img)
+    contents_1x1.append(source_img)
+
+for aspect, contents, raw_path in [
+    ("16x9", contents_16x9, f"working_files/{SLUG}-16x9-raw.png"),
+    ("1x1",  contents_1x1,  f"working_files/{SLUG}-1x1-raw.png"),
+]:
+    response = client.models.generate_content(
+        model="gemini-3.1-flash-image-preview",
+        contents=contents,
+    )
+    os.makedirs("working_files", exist_ok=True)
+    for part in response.parts:
+        if part.inline_data is not None:
+            img = part.as_image()
+            img.save(raw_path)
+            print(f"Saved {aspect} raw PNG → {raw_path}")
+            break
+```
+
+If the API call fails, shorten the prompt and retry once. If still failing, log and skip.
 
 ### 5. Run the Pillow pipeline for each requested type
 
-Derive each requested type by resizing and cropping the same raw PNG — do not re-call the API per type.
+Derive each requested type from the correct raw PNG — do not re-call the API per type:
+- `hero`, `thumbnail`, `og` → use `working_files/<slug>-16x9-raw.png`
+- `card`, `social` → use `working_files/<slug>-1x1-raw.png`
 
 For each type, run:
 
@@ -92,7 +154,9 @@ For each type, run:
 from PIL import Image
 import os, sys
 
-source_path  = "working_files/<slug>-<type>-raw.png"
+# Use 16x9 raw for hero/thumbnail/og, 1x1 raw for card/social
+aspect = "16x9" if image_type in ("hero", "thumbnail", "og") else "1x1"
+source_path  = f"working_files/{slug}-{aspect}-raw.png"
 slug         = "<slug>"
 image_type   = "<type>"
 
@@ -150,12 +214,12 @@ Append one row per type to `agents/image-designer/output/run-log.md`:
 
 On success:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | generate | <output_path> | <size_kb> KB | ✅ OK |
+| YYYY-MM-DD HH:MM | <slug> | <type> | generate | <output_path> | <size_kb> KB | ✅ OK | <prompt text> |
 ```
 
 On failure:
 ```
-| YYYY-MM-DD HH:MM | <slug> | <type> | generate | — | <size_kb> KB | ❌ FAILED: over size limit after q65 |
+| YYYY-MM-DD HH:MM | <slug> | <type> | generate | — | <size_kb> KB | ❌ FAILED: over size limit after q65 | <prompt text> |
 ```
 
 ### 7. Write an error report (on failure only)
@@ -165,19 +229,11 @@ Write `agents/image-designer/output/errors/error-YYYY-MM-DD-<slug>-<type>.md`:
 ```markdown
 # Error: <slug> / <type>
 
-- **Request file:** agents/web-designer/output/requests/<slug>-image-request.yaml
-- **Failure step:** [Step 5 — Gemini generation | Step 7 — size gate]
+- **Failure step:** [Step 4 — Gemini generation | Step 5 — size gate]
 - **Prompt used:** <prompt text>
 - **Final size:** <size_kb> KB (limit: <max_kb> KB)
 - **Suggested fix:** [Simplify prompt / use smaller source / request lower-detail crop]
 ```
-
-### 8. Move the request file
-
-Only move after all image entries in the file have been attempted:
-
-- **All entries succeeded** → move to `agents/web-designer/output/requests/processed/`
-- **Any entry failed** → move to `agents/web-designer/output/requests/failed/`
 
 ---
 
@@ -188,9 +244,9 @@ Only move after all image entries in the file have been attempted:
 | `GEMINI_API_KEY` not set | Stop. Tell the user to set the env var and retry. Do not move the request file. |
 | API call fails | Simplify the prompt (remove hex codes, reduce specificity), retry once. If still failing → `failed/`. |
 | Generated image has baked-in text or watermark | Retry with: "No text, letters, numbers, symbols, or watermarks anywhere in the image." |
-| Generated image doesn't match brand palette | Retry with: "Dominant colors must be deep navy (#1B1F3B) and gold (#C9A84C) with crimson accents (#C0392B) only." |
+| Generated image doesn't match brand palette | Retry with: "Dominant colors must be deep midnight navy and warm antique gold with deep crimson accents only." (plain English — no hex codes) |
 | Multiple types requested | Derive all types from the same raw PNG in Step 5 — do not re-call the API. |
 | `prompt_override` set | Skip Steps 2 and 3. Use the override directly in Step 4. |
-| Unrecognised style name | Stop immediately. Report the valid style names. Do not call the API. |
-| `post_path` file missing | Skip reading it. Construct the prompt from `style` and `slug` alone. Note the gap in the log. |
+| Style hint unrecognised | Ignore it. Construct the prompt from blog content using the creative variety rules. |
+| `blog.md` missing | Skip reading it. Construct the prompt from the slug name alone (hyphens → spaces). Note the gap in the log. |
 | Pillow not installed | Run `pip install Pillow google-generativeai --break-system-packages`, then retry. |

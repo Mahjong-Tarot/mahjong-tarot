@@ -34,7 +34,7 @@ export default function Home() {
               </p>
               <div className={styles.heroCtas}>
                 <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
-                <Link href="/the-mahjong-mirror#preorder" className="btn-ghost">Preorder the Book</Link>
+                <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
               </div>
             </div>
           </div>
@@ -50,26 +50,25 @@ export default function Home() {
         </section>
 
         {/* ── Readings ── */}
-        <section className="section-stone">
+        <section>
           <div className="container">
             <div className={styles.sectionHeader}>
               <span className="overline">Personal Sessions</span>
               <h2>Receive Guidance Through<br />a Mahjong Tarot Reading</h2>
-              <div className="divider-gold centered" />
             </div>
-            <div className={`card-dark ${styles.readingCard}`} style={{ maxWidth: 640, margin: '0 auto' }}>
-              <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Live Online · 45–60 minutes</span>
+            <div className={styles.readingCard} style={{ maxWidth: 640, margin: '0 auto' }}>
+              <span className="overline">Live Online · 45-60 minutes</span>
               <h3>The Mahjong Mirror Session</h3>
               <p>
                 A deep, intuitive reading that looks into your emotional,
-                spiritual, and practical life — revealing hidden influences,
+                spiritual, and practical life - revealing hidden influences,
                 current challenges, energetic strengths, possible outcomes,
                 and key lessons. Ideal for relationship dynamics, life purpose
                 exploration, long-term planning, or periods of uncertainty.
               </p>
               <p>
                 Conducted live online with Bill. No prior knowledge of Mahjong
-                required — just an open mind and a question worth asking.
+                required - just an open mind and a question worth asking.
               </p>
               <Link href="/readings#book" className="btn-primary">Book a Session</Link>
             </div>
@@ -159,7 +158,7 @@ export default function Home() {
         </section>
 
         {/* ── Testimonials ── */}
-        <section className="section-stone">
+        <section>
           <div className="container">
             <div className={styles.sectionHeader}>
               <span className="overline">What Clients Say</span>

@@ -2,7 +2,7 @@
 
 ## What This Agent Is
 
-The Image Designer is an autonomous production agent for **The Mahjong Tarot** website. It owns all image work — no other agent or human manually produces or optimises images. Its sole input is a structured YAML request file; its sole output is a set of optimised WebP images written to `website/public/images/blog/`.
+The Image Designer is an autonomous production agent for **The Mahjong Tarot** website. It owns all image work — no other agent or human manually produces or optimises images. Its sole input is a structured YAML request file; its sole output is a set of optimised WebP images written to `content/topics/<slug>/`.
 
 It does not make creative decisions. Style, mood, palette, and composition are specified by the upstream agent (or human) in the request file. The Image Designer executes, optimises, logs, and reports.
 
@@ -27,17 +27,16 @@ Takes a source image (JPEG, PNG, or WebP) from `working_files/` and transforms i
 - Crops to the correct aspect ratio (center / top / bottom anchor)
 - Resizes to exact pixel dimensions for the requested image type
 - Enforces a per-type file-size limit; retries at lower quality (q82 → q72 → q65) if over
-- Writes the final WebP to `website/public/images/blog/`
+- Writes the final WebP to `content/topics/<slug>/`
 
 ### 2. Generate a new image via AI (Workflow B)
 
-Constructs a Gemini prompt from the request's style selection, generates the image via browser automation, and runs the same optimisation pipeline.
+Constructs a brand-aligned Gemini prompt, calls the Gemini API (`imagen-4.0-generate-001`), and runs the same optimisation pipeline.
 
-- Reads the style catalogue (`context/styles.json`) to build the prompt — visual direction, brand colours, exclusions
+- Selects the correct style system (Fire Horse or Mahjong Mirror) based on post content
+- Reads `agents/image-designer/context/mahjong-mirror-style-guide.md` for Mahjong Mirror content
 - Uses a `prompt_override` directly if supplied in the request
-- Presents the prompt to the user for confirmation before opening Gemini
-- Opens `https://gemini.google.com/app` via browser automation, submits the prompt, waits for generation
-- Downloads the generated PNG; archives it to `content/topics/<slug>/`
+- Calls the Gemini API with `GEMINI_API_KEY`; archives the raw PNG to `content/topics/<slug>/`
 - Runs the full Pillow pipeline (crop → resize → WebP → size gate)
 
 ### 3. Multi-type output from a single request
@@ -47,8 +46,8 @@ A single request file can specify multiple image types (hero, thumbnail, card, o
 ### 4. Error handling and recovery
 
 - Missing source file → logs error, skips that entry, continues with remaining entries
-- Size gate failure after q65 → logs failure, does not write to `website/`, moves request to `failed/`
-- Gemini sign-in required → stops, notifies user, leaves request in place for next run
+- Size gate failure after q65 → logs failure, moves request to `failed/`
+- Gemini API key missing → stops, notifies user, leaves request in place for next run
 - Gemini generation fails → simplifies prompt, retries once; if still failing, moves to `failed/`
 - Unknown image type → logs error, skips entry
 
@@ -58,8 +57,8 @@ After every image (success or failure), appends a row to `output/run-log.md`. On
 
 ### 6. Request lifecycle management
 
-- Successfully processed request files → moved to `agents/web-designer/output/requests/processed/`
-- Failed request files → moved to `agents/web-designer/output/requests/failed/`
+- All results logged to `agents/image-designer/output/run-log.md`
+- Failures written to `agents/image-designer/output/errors/`
 - Request files are only moved once all image entries in the file have been attempted
 
 ---
@@ -81,7 +80,7 @@ After every image (success or failure), appends a row to `output/run-log.md`. On
 | Skill | File | Purpose |
 |-------|------|---------|
 | `optimise-image` | `skills/optimise-image/SKILL.md` | Full Pillow pipeline for existing source images |
-| `generate-image` | `skills/generate-image/SKILL.md` | Prompt construction, Gemini browser automation, Pillow pipeline |
+| `generate-image` | `skills/generate-image/SKILL.md` | Prompt construction, Gemini API call, Pillow pipeline |
 
 ---
 

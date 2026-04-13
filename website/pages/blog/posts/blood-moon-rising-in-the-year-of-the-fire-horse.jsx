@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import Nav from '../../../components/Nav';
 import Footer from '../../../components/Footer';
@@ -23,30 +22,21 @@ export default function BloodMoonRising() {
       <main className={styles.article}>
 
         <header className={styles.header}>
-          <div className="container">
-            <span className="post-category">Blood Moon</span>
-            <h1>A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac</h1>
-            <p className="post-meta">April 4, 2026 · Bill Hajdu · 5 min read</p>
-          </div>
+          <nav className={styles.breadcrumb}>
+            <Link href="/blog">Blog</Link> <span>/</span> <span>Chinese Astrology</span>
+          </nav>
+          <span className={styles.categoryPill}>Chinese Astrology</span>
+          <h1>A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac</h1>
+          <p className={styles.postMeta}>April 4, 2026 · Bill Hajdu · 5 min read</p>
         </header>
 
-        <figure className={styles.hero}>
-          <Image
-            src="/images/blog/blood-moon-rising-in-the-year-of-the-fire-horse.webp"
-            alt="Blood moon rising over the horizon"
-            width={960}
-            height={524}
-            style={{ objectFit: 'cover', width: '100%' }}
-            priority
-          />
-        </figure>
+        <div className={styles.headerDivider}><hr /></div>
 
-        <div className="container">
-          <div className={styles.body}>
+        <div className={styles.body}>
 
             <p>On March 3rd, a blood moon rises during the first lunar month of the Chinese New Year. That alone would be significant. It's only happened twice in the last hundred years. The last time was 2007 — a year that delivered record market highs, a technological revolution, and the beginning of a global financial crisis, all at once.</p>
 
-            <p>But 2026 adds a layer that 2007 didn't have. This is a Fire Horse year. Fire years amplify everything. The highs go higher. The lows go lower. And the Fire Horse is the fastest, wildest animal in the cycle. The rarest signal in the Chinese calendar just got amplified by the most intense year in the zodiac.</p>
+            <p>But 2026 adds a layer that 2007 didn't have. This is a <a href="https://en.wikipedia.org/wiki/Fire_Horse" target="_blank" rel="noopener noreferrer">Fire Horse year</a>. Fire years amplify everything. The highs go higher. The lows go lower. And the Fire Horse is the fastest, wildest animal in the cycle. The rarest signal in the Chinese calendar just got amplified by the most intense year in the zodiac.</p>
 
             <p>I'm the Firepig. I was born in the Fire Pig year of 1947, and I've been studying Chinese astrology for decades. When 2007 came around, I called it "my year" and predicted extremes in every direction. I was right.</p>
 
@@ -98,7 +88,7 @@ export default function BloodMoonRising() {
 
             <p>You don't have to be a student of Chinese astrology to use this information. Think of it as a framework for how to approach a year that's already showing signs of being anything but average.</p>
 
-            <p>Volatile years reward people who pay attention. They reward preparation. They punish passivity and complacency. The people who thrived in 2007 weren't the ones who ignored the signals. They were the ones who saw both the risk and the opportunity and positioned accordingly.</p>
+            <p><Link href="/blog/posts/who-has-the-most-luck-in-the-fire-horse-year">Volatile years reward people who pay attention</Link>. They reward preparation. They punish passivity and complacency. The people who thrived in 2007 weren't the ones who ignored the signals. They were the ones who saw both the risk and the opportunity and positioned accordingly.</p>
 
             <p>If you're running a business, leading a team, or making big decisions this year, watch for the contradictions. When everything looks great on the surface but the underlying systems feel shaky — that's your signal. When disruption is everywhere, that's where the openings are.</p>
 
@@ -109,21 +99,18 @@ export default function BloodMoonRising() {
               </Link>
             </nav>
 
-          </div>
         </div>
 
         {/* ── Post CTA ── */}
-        <section className="section-dark">
-          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
-            <span className="overline" style={{ color: 'var(--celestial-gold)' }}>What Do the Tiles Say About Your Year?</span>
-            <h2 style={{ color: 'var(--warm-cream)', margin: 'var(--space-md) 0' }}>Book a Personal Reading with Bill</h2>
-            <p style={{ color: 'rgba(250,248,244,0.8)', maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
-              Get clarity on how the Fire Horse year affects you personally.
-            </p>
-            <Link href="/readings#book" className="btn-primary" style={{ marginRight: 'var(--space-md)' }}>Book a Reading</Link>
-            <Link href="/blog" className="btn-ghost">More Articles</Link>
-          </div>
-        </section>
+        <div className={styles.ctaSection}>
+          <span className={styles.ctaOverline}>What Do the Tiles Say About Your Year?</span>
+          <h2>Book a Personal Reading with Bill</h2>
+          <p>
+            Get clarity on how the Fire Horse year affects you personally.
+          </p>
+          <Link href="/readings#book" className="btn-primary" style={{ marginRight: 16 }}>Book a Reading</Link>
+          <Link href="/blog" className="btn-secondary">More Articles</Link>
+        </div>
       </main>
 
       <Footer />

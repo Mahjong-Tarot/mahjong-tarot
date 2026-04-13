@@ -1,4 +1,4 @@
-.pageHeader { padding: var(--space-2xl) 0 var(--space-xl); }
+.pageHeader { padding: var(--space-2xl) 0 var(--space-xl); background-color: white; }
 .pageHeader h1 { margin-top: var(--space-lg); }
 
 .bioLayout {
@@ -32,8 +32,8 @@
 }
 
 .cta { text-align: center; }
-.cta h2 { color: var(--warm-cream); margin: var(--space-lg) 0; }
-.cta p  { color: rgba(250,248,244,0.8); font-size: 19px; margin-bottom: var(--space-xl); }
+.cta h2 { margin: var(--space-lg) 0; }
+.cta p  { color: var(--mid-gray); font-size: 19px; margin-bottom: var(--space-xl); }
 .ctaBtns { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; }
 
 @media (max-width: 768px) {

@@ -112,6 +112,40 @@ serve(async (req: Request) => {
       }
     }
 
+    // ── Send Lark Message (Labs channel) ───────────────────
+
+    const larkWebhookUrl = Deno.env.get("LARK_LABS_WEBHOOK_URL");
+
+    if (larkWebhookUrl) {
+      const typeEmoji = inquiryType === "booking" ? "📅" : inquiryType === "contact" ? "💬" : "📧";
+      const larkText = [
+        `${typeEmoji} New ${inquiryType} inquiry — Mahjong Tarot`,
+        ``,
+        `Name: ${name}`,
+        `Email: ${email}`,
+        phone !== "—" ? `Phone: ${phone}` : null,
+        subject !== "—" ? `Subject: ${subject}` : null,
+        readingType ? `Reading: ${readingType}` : null,
+        `Source: ${source}`,
+        message !== "—" ? `\n${message}` : null,
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      try {
+        await fetch(larkWebhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            msg_type: "text",
+            content: { text: larkText },
+          }),
+        });
+      } catch (larkErr) {
+        console.error("Lark send error:", larkErr);
+      }
+    }
+
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },

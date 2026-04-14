@@ -28,6 +28,7 @@ Before anything else, create a working directory and output this to the user:
 Welcome. I'm going to set up your automated AI marketing team.
 
 Here's what will happen:
+  Phase 0    — I check your computer has the tools it needs (git, GitHub CLI, etc.)
   Phase 1-3  — I interview you (about 30 questions across 3 groups)
   Phase 4    — I generate all your agent files, workflows, and resources
   Phase 5    — I scaffold your marketing website (Next.js, optional)
@@ -55,6 +56,223 @@ Let's begin.
 Ask: "Are you ready to start? (type 'yes' to continue)"
 
 Wait for confirmation.
+
+---
+
+## PHASE 0.5 — DEVELOPER ENVIRONMENT SETUP
+
+**Run this immediately after the user types 'yes'. Do not skip or defer.**
+
+Many users are not developers. Before doing anything else, ensure git, GitHub CLI (`gh`),
+Supabase CLI, Vercel CLI, and Node.js are installed and authenticated. These are the
+foundational tools — nothing else in this setup works without them.
+
+### Detect the operating system
+
+```bash
+uname -s 2>/dev/null || echo "windows"
+```
+
+---
+
+### macOS path
+
+**Step 1 — Check for Homebrew**
+
+```bash
+which brew
+```
+
+If Homebrew is NOT installed, output to the user and wait for confirmation:
+
+```
+Homebrew is not installed on your Mac. Homebrew is a free tool that makes installing
+developer software simple — you only need to do this once.
+
+Please open Terminal (press Cmd+Space, type "Terminal", press Enter) and run this command:
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+It will ask for your Mac password. Type it (you won't see it appear) and press Enter.
+This takes about 2–5 minutes. When the terminal says it's done, type "done" here to continue.
+```
+
+Wait for "done". Then activate Homebrew in the current session:
+```bash
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+**Step 2 — Install git, GitHub CLI, Supabase CLI**
+
+```bash
+which git      || brew install git
+which gh       || brew install gh
+which supabase || brew install supabase/tap/supabase
+```
+
+**Step 3 — Install Node.js and Vercel CLI**
+
+```bash
+which node || brew install node
+which vercel || npm install -g vercel
+```
+
+**Step 4 — Authenticate GitHub CLI**
+
+```bash
+gh auth status 2>/dev/null
+```
+
+If not authenticated, output:
+
+```
+Next I need you to log in to GitHub.
+A browser window will open — log in (or create a free account at github.com first).
+Come back here and type "done" when the browser step is complete.
+```
+
+Run:
+```bash
+gh auth login --web --git-protocol https
+```
+
+Wait for "done". Verify:
+```bash
+gh auth status
+```
+
+If it fails, output: "Please run `gh auth login` directly in your terminal and follow the prompts, then type 'retry'." Wait for retry.
+
+---
+
+### Windows path
+
+**Step 1 — Check for winget**
+
+```powershell
+winget --version
+```
+
+If missing, output:
+
+```
+Your Windows version doesn't have winget (the Windows package manager).
+Please update Windows: Start → Settings → Windows Update → Check for updates.
+Type "done" when complete.
+```
+
+Wait for "done".
+
+**Step 2 — Install git**
+
+```powershell
+winget install --id Git.Git -e --source winget --accept-source-agreements --accept-package-agreements
+```
+
+Output:
+
+```
+Git was installed. IMPORTANT: You must close this terminal and open a new one
+before continuing so Windows can find the git command.
+
+Open a new terminal (search "cmd" or "PowerShell" in the Start menu), then type "done".
+```
+
+Wait for "done".
+
+**Step 3 — Install GitHub CLI**
+
+```powershell
+winget install --id GitHub.cli -e --source winget --accept-source-agreements --accept-package-agreements
+```
+
+Output:
+
+```
+GitHub CLI installed. Close this terminal, open a new one, then type "done".
+```
+
+Wait for "done".
+
+**Step 4 — Install Node.js**
+
+```powershell
+winget install --id OpenJS.NodeJS.LTS -e --source winget --accept-source-agreements --accept-package-agreements
+```
+
+**Step 5 — Verify everything is accessible**
+
+```bash
+git --version && gh --version && node --version
+```
+
+If any command fails:
+
+```
+One of the tools isn't found yet. Close ALL terminal windows, open a fresh one, and run:
+
+  git --version
+  gh --version
+  node --version
+
+Tell me which one shows an error and I'll help you fix it before we continue.
+```
+
+Do not proceed until all three succeed.
+
+**Step 6 — Install Vercel CLI and Supabase CLI**
+
+```bash
+npm install -g vercel
+npm install -g supabase
+```
+
+**Step 7 — Authenticate GitHub CLI**
+
+```bash
+gh auth status 2>/dev/null
+```
+
+If not authenticated:
+
+```
+A browser window will open — log in to GitHub (create a free account at github.com if needed).
+Type "done" when the browser step is complete.
+```
+
+```bash
+gh auth login --web --git-protocol https
+```
+
+Verify: `gh auth status`
+
+---
+
+### All platforms — configure git identity
+
+Ask:
+
+```
+Two quick questions before we start the interview:
+
+A. What name should appear on your commits? (e.g. "Jane Smith" — this is visible on GitHub)
+B. What email address should appear on your commits? (use the same email as your GitHub account)
+```
+
+Wait for answers, then run:
+```bash
+git config --global user.name "THEIR_ANSWER_A"
+git config --global user.email "THEIR_ANSWER_B"
+```
+
+Save a note to `context/cli-setup-notes.md`:
+- OS detected
+- Which tools were already installed vs freshly installed
+- Reminder: replace `SUPABASE_ACCESS_TOKEN_PLACEHOLDER` and `POSTIZ_API_KEY_PLACEHOLDER`
+  in `.claude/settings.local.json` after completing the manual setup checklist
+
+Confirm: `Environment ready. git, GitHub CLI, Supabase CLI, Vercel CLI — all installed and authenticated. Starting the interview now.`
 
 ---
 
@@ -290,49 +508,237 @@ After writing, confirm: `~/.claude/CLAUDE.md — global rules written.`
 
 ---
 
-### 4.0b — CLI Tools Setup
+### 4.0b — Developer Environment Setup
 
-Check for and install the required CLI tools via Bash. These are needed for the
-publishing workflow, deployments, and database management.
+**Run this before generating any project files. Do not skip.**
+
+Many users are not developers. Ensure git, GitHub CLI (`gh`), Supabase CLI, and
+Vercel CLI are installed and authenticated before any git or deploy commands are used.
+
+#### Detect the operating system
 
 ```bash
-# Check what's already installed
-which gh supabase vercel 2>/dev/null || true
+uname -s 2>/dev/null || echo "windows"
 ```
 
-For each missing CLI, install it:
+Act on the result:
+
+---
+
+#### macOS path
+
+**Step 1 — Check for Homebrew**
 
 ```bash
-# GitHub CLI (repo management, PR creation)
-brew install gh
+which brew
+```
 
-# Supabase CLI (database migrations, local dev)
-brew install supabase/tap/supabase
+If Homebrew is NOT installed, output this to the user and wait for confirmation:
 
-# Vercel CLI (read-only: deployment status, logs)
+```
+Homebrew is not installed on your Mac. Homebrew is a free tool that makes installing
+developer software simple.
+
+Please open Terminal (Cmd+Space → "Terminal" → Enter) and run:
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+It will ask for your Mac password. Type it (you won't see it appear) and press Enter.
+This takes 2–5 minutes. When it's done, type "done" here to continue.
+```
+
+Wait for "done". Then activate Homebrew in the current session:
+```bash
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+**Step 2 — Install git, GitHub CLI, Supabase CLI**
+
+```bash
+which git  || brew install git
+which gh   || brew install gh
+which supabase || brew install supabase/tap/supabase
+```
+
+**Step 3 — Install Vercel CLI**
+
+```bash
+which vercel || npm install -g vercel
+```
+
+(If `npm` is not found: `brew install node` first, then retry.)
+
+**Step 4 — Authenticate GitHub CLI**
+
+```bash
+gh auth status 2>/dev/null
+```
+
+If not authenticated, output:
+
+```
+A browser window will open — log in to GitHub (or create a free account at github.com first).
+Come back here and type "done" when the browser step is complete.
+```
+
+Run:
+```bash
+gh auth login --web --git-protocol https
+```
+
+Wait for "done", then verify: `gh auth status`
+
+If it fails: "Please run `gh auth login` in your terminal directly and follow the prompts, then type 'retry'."
+
+---
+
+#### Windows path
+
+**Step 1 — Check for winget**
+
+```powershell
+winget --version
+```
+
+If missing, output:
+
+```
+Your Windows version doesn't have winget. Please update Windows:
+Start → Settings → Windows Update → Check for updates.
+Type "done" when updated.
+```
+
+Wait for confirmation.
+
+**Step 2 — Install git**
+
+```powershell
+winget install --id Git.Git -e --source winget --accept-source-agreements --accept-package-agreements
+```
+
+Output:
+
+```
+Git was installed. You MUST close this terminal and open a new one before continuing.
+Open a new terminal (search "cmd" or "PowerShell" in Start), then type "done".
+```
+
+Wait for "done".
+
+**Step 3 — Install GitHub CLI**
+
+```powershell
+winget install --id GitHub.cli -e --source winget --accept-source-agreements --accept-package-agreements
+```
+
+Output:
+
+```
+GitHub CLI installed. Close this terminal, open a new one, then type "done".
+```
+
+Wait for "done".
+
+**Step 4 — Install Node.js (needed for Vercel CLI)**
+
+```powershell
+winget install --id OpenJS.NodeJS.LTS -e --source winget --accept-source-agreements --accept-package-agreements
+```
+
+**Step 5 — Verify everything is accessible**
+
+```bash
+git --version && gh --version && node --version
+```
+
+If any command fails, output:
+
+```
+One of the tools isn't found. Close ALL terminal windows, open a fresh one, and run:
+
+  git --version
+  gh --version
+  node --version
+
+Tell me which one shows an error and I'll help fix it.
+```
+
+Do not proceed until all three succeed.
+
+**Step 6 — Install Vercel CLI and Supabase CLI**
+
+```bash
 npm install -g vercel
+npm install -g supabase
 ```
 
-After installing, add the **Supabase MCP** to `.claude/settings.local.json` so Claude
-Code agents can query the database directly. Read the existing file and merge in:
+**Step 7 — Authenticate GitHub CLI**
+
+```bash
+gh auth status 2>/dev/null
+```
+
+If not authenticated:
+
+```
+A browser window will open — log in to GitHub (create a free account at github.com if needed).
+Type "done" when the browser step is complete.
+```
+
+```bash
+gh auth login --web --git-protocol https
+```
+
+Verify: `gh auth status`
+
+---
+
+#### All platforms — configure git identity
+
+Ask:
+
+```
+Two quick questions before we generate your files:
+
+A. What name should appear on your commits? (e.g. "Jane Smith" — visible on GitHub)
+B. What email address? (use the same email as your GitHub account)
+```
+
+Wait for answers, then:
+```bash
+git config --global user.name "THEIR_ANSWER_A"
+git config --global user.email "THEIR_ANSWER_B"
+```
+
+---
+
+#### After tools are confirmed — add MCPs to Claude settings
+
+Read `.claude/settings.local.json` (create it if it doesn't exist) and merge in:
 
 ```json
-"supabase": {
-  "command": "npx",
-  "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "SUPABASE_ACCESS_TOKEN_PLACEHOLDER"]
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "SUPABASE_ACCESS_TOKEN_PLACEHOLDER"]
+    },
+    "postiz": {
+      "url": "https://api.postiz.com/mcp/POSTIZ_API_KEY_PLACEHOLDER"
+    }
+  }
 }
 ```
 
-Use the literal string `SUPABASE_ACCESS_TOKEN_PLACEHOLDER` — the user will replace
-this after creating their Supabase project. Add a note in `context/postiz-setup.md`
-(or a new `context/supabase-setup.md`) with this one step:
-> Supabase personal access token: https://supabase.com/dashboard/account/tokens
-> Replace SUPABASE_ACCESS_TOKEN_PLACEHOLDER in .claude/settings.local.json
+The user will replace both placeholder values after completing the manual setup checklist.
 
-If the machine is not macOS (no brew), output the equivalent install commands for
-the detected platform (apt/npm) and note them in a `context/cli-setup.md` file.
+Create `context/cli-setup-notes.md` with:
+- Which OS was detected
+- Which tools were already installed vs freshly installed
+- Placeholder replacement instructions for Supabase and Postiz keys
 
-Confirm: `CLI tools checked. GitHub CLI, Supabase CLI, Vercel CLI, Supabase MCP — done.`
+Confirm: `Environment ready. git, GitHub CLI, Supabase CLI, Vercel CLI all installed and authenticated.`
 
 ---
 

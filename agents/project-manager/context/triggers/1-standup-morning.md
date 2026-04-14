@@ -1,8 +1,24 @@
 # PM Standup Morning
 
 **Name**: `PM Standup Morning`
+**Schedule**: Weekdays at 7:00 AM Asia/Saigon (`0 0 * * 1-5` UTC)
 
-**Description**: Sends a morning check-in reminder to all four team members (Dave, Yon, Trac, Khang) at 7 AM, asking them to submit their standup files to `standup/individual/` before the 9 AM compile deadline. Attempts Telegram first, then Lark. If both fail, logs the failure in that day's briefing file. Creates a git branch, commits any file changes, and opens a PR — never writes directly to main.
+**Description**: At 7 AM, checks GitHub for all commits and merged PRs since yesterday 7 AM to build the agent activity picture. Updates `standup/individual/agents.md` with what each agent completed. Then sends a morning check-in reminder to all four human team members. Tries Lark webhook first, then Resend CLI. If both fail, logs inline. Never writes directly to main.
+
+---
+
+## Team email addresses
+
+Always read `agents/project-manager/context/persona.md` for the current team roster. Known addresses at time of writing:
+
+| Name  | Email            | Status    |
+|-------|------------------|-----------|
+| Dave  | dave@edge8.ai          | confirmed |
+| Yon   | yon@edge8.ai           | confirmed |
+| Trac  | trac.nguyen@edge8.ai   | confirmed |
+| Khang | khang@edge8.ai         | confirmed |
+
+Source of truth: `agents/project-manager/context/persona.md`. Always read that file for the current roster — do not hardcode here.
 
 ---
 
@@ -11,23 +27,133 @@
 ```
 Run the daily stand-up Phase 1 workflow from agents/project-manager/context/daily-standup.md.
 
-It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all four team members — Dave, Yon, Trac, and Khang — asking them to submit their check-in files in standup/individual/ before 9 AM:
-- standup/individual/dave.md
-- standup/individual/yon.md
-- standup/individual/trac.md
-- standup/individual/khang.md
+It is now 7 AM Asia/Saigon. Today's date is YYYY-MM-DD. Yesterday's date (last working day) is YYYY-MM-DD-PREV.
 
-Telegram pre-flight (run before every send attempt):
-1. Check if ~/.claude/channels/telegram/ exists. If not, skip to Lark.
-2. Read ~/.claude/channels/telegram/access.json. Extract every ID in allowFrom.
-3. Check ~/.claude/channels/telegram/approved/. For each senderId in allowFrom that does not have a corresponding file in approved/, create that file: path = ~/.claude/channels/telegram/approved/<senderId>, content = <senderId> (the senderId itself, plain text, no newline). mkdir -p the directory first if needed.
-4. Proceed with the send using the senderId as the chat_id.
+## Step 0 — Load credentials and team roster
 
-Notification order: Telegram → Lark. If both fail, document the failure in standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the file if it does not exist yet). Do not create any alerts folder or alert files.
+Run this Python snippet to load secrets and team emails before doing anything else. Stop and report if any key is missing.
 
-Git workflow: pull from main, and once finished, commit and push directly to main.
+```python
+import os, re
+
+def parse_env(path):
+    vals = {}
+    try:
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, _, v = line.partition("=")
+                vals[k.strip()] = v.strip().strip('"').strip("'")
+    except FileNotFoundError:
+        pass
+    return vals
+
+env = {}
+env.update(parse_env(".env"))
+env.update(parse_env(".env.local"))  # .env.local takes precedence
+
+missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+if missing:
+    raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
+
+with open("agents/project-manager/context/persona.md") as f:
+    text = f.read()
+emails = list(dict.fromkeys(
+    e for e in re.findall(r'[\w.+-]+@[\w.-]+\.[a-z]{2,}', text)
+    if "example" not in e
+))
+
+LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
+RESEND_API_KEY   = env["RESEND_API_KEY"]
+RESEND_FROM      = env["RESEND_FROM"]
+RESEND_TO        = ",".join(emails)
 ```
 
----
+Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_URL, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
 
-**Schedule**: Weekdays at 7:00 AM Asia/Saigon (`0 0 * * 1-5` UTC)
+## Step 1 — Git workflow
+
+git pull origin main
+git checkout -b pm/standup-morning/YYYY-MM-DD
+
+All writes go on this branch.
+
+## Step 2 — Check GitHub for agent activity since yesterday 7 AM
+
+Run the following to gather agent-attributed work. "Agent work" means commits or PRs whose author is a bot/automation account or whose commit message matches conventional agent prefixes (pm/, writer:, web-developer:, build-page:, generate-image:, product-manager:, etc.).
+
+```bash
+# Merged PRs since yesterday 7 AM
+gh pr list \
+  --state merged \
+  --search "merged:>YYYY-MM-DD-PREVT00:00:00" \
+  --json number,title,author,mergedAt,body \
+  --limit 50
+
+# Commits since yesterday 7 AM UTC (adjust for Asia/Saigon offset -7h)
+git log \
+  --since="YYYY-MM-DD-PREV 00:00" \
+  --until="YYYY-MM-DD 00:00" \
+  --format="%h %ae %s" \
+  --all
+```
+
+From the results, group by agent type:
+- `pm(...)` → Project Manager agent
+- `writer:` / `write-post:` → Writer agent
+- `web-developer:` / `build-page:` → Web Developer agent
+- `generate-image:` / `image-designer:` → Image Designer agent
+- `product-manager:` → Product Manager agent
+- Any other bot/automation commit not by a known human → list under "Other agents"
+
+For each agent, extract:
+- **Completed**: what PRs/commits were merged/pushed
+- **Next**: infer from open PRs or branch names if available (run `gh pr list --state open --json title,author,headRefName`)
+- **Blockers**: flag any open PR that has been open >24h with no activity, or any failed CI check
+
+## Step 3 — Update standup/individual/agents.md
+
+Read the current `standup/individual/agents.md`. For each agent section found in Step 2, replace the **Completed**, **Next**, and **Blockers** content. Update the `date:` field at the top to YYYY-MM-DD. Keep the file structure intact — do not remove sections for agents that had no activity (write "No activity" instead).
+
+If an agent type from Step 2 has no section in agents.md yet, append a new section at the bottom.
+
+Format per section:
+```
+## [agent-name]
+
+**Completed:**
+- [PR #N: title — merged at HH:MM] or [commit abc1234: message]
+
+**Next:**
+- [inferred from open PRs/branches, or "No open work detected"]
+
+**Blockers:**
+[None | description]
+```
+
+## Step 4 — Send morning reminder to human team members
+
+Read agents/project-manager/context/pm-notification-guide.md for the Lark message text and HTML email template (Template 1 — Morning Reminder).
+
+Notification (send both — not fallback):
+1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "Morning reminder" message from pm-notification-guide.md, substituting YYYY-MM-DD with today's date.
+2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute `{{DATE}}` in a copy of `agents/project-manager/context/template/emails/1-standup-morning.html`, write to `/tmp/standup-morning-email.html`, then send:
+   RESEND_API_KEY=$RESEND_API_KEY resend emails send \
+     --from "$RESEND_FROM" \
+     --to "$RESEND_TO" \
+     --subject "Daily Stand-Up Reminder — YYYY-MM-DD" \
+     --html-file /tmp/standup-morning-email.html \
+     --quiet
+   Full pattern in pm-notification-guide.md.
+3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
+
+## Step 5 — Git commit
+
+git add standup/individual/agents.md standup/briefings/YYYY-MM/YYYY-MM-DD.md
+git commit -m "pm(standup-morning): YYYY-MM-DD"
+git push origin pm/standup-morning/YYYY-MM-DD
+gh pr create --title "pm(standup-morning): YYYY-MM-DD" --base main --body "Agent activity update + morning reminder YYYY-MM-DD"
+gh pr merge --merge --auto
+```

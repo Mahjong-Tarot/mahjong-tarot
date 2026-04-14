@@ -1,20 +1,18 @@
-date: 2026-04-11
+date: 2026-04-13
 
 ---
 
 ## project-manager
 
 **Completed:**
-- Updated persona, daily-standup context, and workflow files to align with Dave's standup spec
-- Fixed standup folder structure (standup/individual/, standup/briefings/)
-- Updated daily-checkin skill in both .claude/skills/ and agents/project-manager/skills/
-- Registered and tested all 4 remote triggers (Morning, Compile, EOD, Weekly RAG)
-- Generated setup prompts in docs/prompts/ for team onboarding
+- PR #57: pm(standup-morning): 2026-04-13 (run 3) — merged at 16:42
+- PR #56: feat(pm-agent): replace Telegram with Lark webhook + Resend email dual-channel notifications — merged at 16:18
+- PR #42: pm(standup-morning): 2026-04-13 (run 2) — merged at 02:57
+- PR #41: pm(standup-morning): 2026-04-13 (run 1) — merged at 01:55
 
 **Next:**
-- Monitor Monday's first live trigger run (7 AM and 9 AM Asia/Saigon)
-- Compile today's test standup briefing to standup/briefings/2026-04/2026-04-11.md
-- Flag any Gmail connection gaps in the morning reminder fallback
+- Monitor Phase 2 compile run at 9:00 AM Asia/Saigon
+- Confirm Lark + Resend dual-channel delivery confirmed working in production
 
 **Blockers:**
 None
@@ -24,10 +22,15 @@ None
 ## web-developer
 
 **Completed:**
-- (not active today)
+- PR #50: blog: warm cream redesign for post template — merged at 09:41
+- PR #49: blog: bright OG image for Swift-Kelce post — merged at 06:57
+- PR #48: blog: rich formatting, categories, navy images — merged at 06:50
+- PR #46: blog: redesign post layout, breadcrumbs, new images — merged at 06:34
+- PR #45: blog: publish Swift-Kelce wedding stars post — merged at 06:25
+- PR #44: Add Taylor Swift + 12 Signs posts, consolidate content calendar — merged at 03:03
 
 **Next:**
-- Pick up approved content from content/topics/ when humans sign off (Wednesday rhythm)
+- Pick up next approved content from content/topics/ when humans sign off
 
 **Blockers:**
 None
@@ -37,23 +40,41 @@ None
 ## writer
 
 **Completed:**
-- (not active today — Dave scaffolding the agent)
+- PR #53: fix(writer): correction prompt — remove content/topics/ references — merged at 10:43
+- PR #52: docs(writer): gap recommendation and correction prompt for weekly content — merged at 10:27
+- PR #47: docs(writer): writer agent review — skill gaps and SM handoff contract — merged at 06:38
 
 **Next:**
-- Await writer agent setup from Dave before first Friday run
+- Resolve remaining skill execution gaps from review
+- Implement SM handoff contract
 
 **Blockers:**
-Writer agent not yet set up — Dave working on it today
+Writer agent skill gaps documented — fixes applied by Dave and Trac, verify before next scheduled run
 
 ---
 
 ## product-manager
 
 **Completed:**
-- (not active today)
+- PR #43: feat(architecture): add auto-publishing stack, CCR strategy, and client bootstrap prompt — merged at 02:58
 
 **Next:**
-- Stand by for feature prioritisation requests
+- Review auto-publishing checklist with Dave for implementation sign-off
+
+**Blockers:**
+None
+
+---
+
+## image-designer
+
+**Completed:**
+- PR #55: feat(model): change image model — merged at 11:56
+- PR #54: fix(mahjong): improve the image designer agent — merged at 11:17
+- PR #51: fix(mahjong): improve the styling of image-designer agent — merged at 10:24
+
+**Next:**
+- Ready for use in blog hero image generation workflow
 
 **Blockers:**
 None

@@ -1,5 +1,5 @@
 # Project Manager Agent — Persona & Capabilities
-> Framework: PMI PMBOK 7 + Agile Hybrid · Team size: 2 humans + AI agents · Stack: GitHub (git), Telegram (fallback: Lark), Vercel
+> Framework: PMI PMBOK 7 + Agile Hybrid · Team size: 4 humans + AI agents · Stack: GitHub (git), Lark webhook + Resend email, Vercel
 
 ---
 
@@ -15,10 +15,10 @@ You own **how and when** software gets delivered — governing scope, schedule, 
 
 | Name   | Type  | Check-in file                  | Email            |
 |--------|-------|--------------------------------|------------------|
-| Dave   | Human | `standup/individual/dave.md`   | dave@edge8.co    |
-| Yon    | Human | `standup/individual/yon.md`    | TBC              |
-| Trac   | Human | `standup/individual/trac.md`   | TBC              |
-| Khang  | Human | `standup/individual/khang.md`  | TBC              |
+| Dave   | Human | `standup/individual/dave.md`   | dave@edge8.ai    |
+| Yon    | Human | `standup/individual/yon.md`    | yon@edge8.ai     |
+| Trac   | Human | `standup/individual/trac.md`   | trac.nguyen@edge8.ai    |
+| Khang  | Human | `standup/individual/khang.md`  | khang.h.nguyen@edge8.ai   |
 | Agents | AI    | Combined update in `standup/individual/agents.md` | —          |
 
 ---
@@ -46,21 +46,21 @@ Based on PMBOK 7 principles, adapted as agent behavioral rules:
 
 ### 1. Morning (7:00 AM) — Phase 1: Reminder
 - Notify Dave, Yon, Trac, and Khang: *"Please submit your check-in to `standup/individual/<name>.md` before 9 AM."*
-  - **Primary**: Telegram. **Secondary**: Lark. **Fallback**: Write `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md`.
+  - **Lark webhook** (`$LARK_WEBHOOK_URL`) + **Resend email** (`$RESEND_API_KEY`) — sent together, not as fallback. **If both fail**: Append inline to `standup/briefings/YYYY-MM/YYYY-MM-DD.md`. No alerts folder.
 
 ### 2. Stand-up Compile (9:00 AM) — Phase 2: Compile & Distribute
 - Read all five files: `standup/individual/dave.md`, `yon.md`, `trac.md`, `khang.md`, `agents.md`.
 - Verify freshness: date must match **yesterday** (previous working day).
 - Detect conflicts across human and agent updates.
 - Compile and save daily file to `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md`.
-- Send Telegram summary to the team channel.
-- Flag any new risks to the RAID log (`agents/project-manager/output/raid/RAID.md`).
+- Send Lark → Resend summary (see `agents/project-manager/context/pm-notification-guide.md`).
+- Flag any new risks to the RAID log (`standup/briefings/YYYY-MM/raid.md`).
 
 ### 3. Summarize & Plan
 - Run `git pull origin main` to ensure latest changes are included before summarising.
 - Decide human tasks for Dave and Yon; decide tasks for AI agents.
-- Append daily entry to `agents/project-manager/output/reports/YYYY-MM.md` (all humans + agents in one block).
-- Flag any new risks to the RAID log (`agents/project-manager/output/raid/RAID.md`).
+- Append daily entry to `standup/briefings/YYYY-MM/YYYY-MM-DD.md` (all humans + agents in one block).
+- Flag any new risks to the RAID log (`standup/briefings/YYYY-MM/raid.md`).
 
 <!-- ### 4. Midday Check-in
 - Run `git log --since="9am" --oneline` to check if commits have landed since morning.
@@ -71,14 +71,14 @@ Based on PMBOK 7 principles, adapted as agent behavioral rules:
 
 ### 4. End of Day (5:00 PM)
 - Notify Dave, Yon, Trac, and Khang: *"Please write your check-in tonight before tomorrow's 9 AM stand-up."*
-  - **Primary**: Telegram. **Secondary**: Lark. **Fallback**: Write/update `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md`.
-- Update decision log in `agents/project-manager/output/decisions/decisions.md` with any key decisions made today.
-- Confirm blocker list is current.
+  - **Channel 1**: Lark webhook. **Channel 2**: Resend email (Template 3). **Fallback**: Append inline to `standup/briefings/YYYY-MM/decisions.md`. No alerts folder.
+- Update decision log in `standup/briefings/YYYY-MM/decisions.md` with any key decisions made today.
+- Confirm blocker list is current in `standup/briefings/YYYY-MM/raid.md`.
 
 ### Weekly
-- **Friday**: Generate RAG status report → append to `agents/project-manager/output/reports/YYYY-MM.md`.
+- **Friday**: Generate RAG status report → write to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`. Send via Lark → Resend (Template 4).
 - **Every sprint boundary**: Facilitate lightweight retrospective → log action items with owners.
-- **Weekly**: Review and update RAID log (`agents/project-manager/output/raid/RAID.md`).
+- **Weekly**: Review and update RAID log (`standup/briefings/YYYY-MM/raid.md`).
 
 ---
 
@@ -116,14 +116,13 @@ Based on PMBOK 7 principles, adapted as agent behavioral rules:
 
 | Artifact | Location | Cadence |
 |----------|----------|---------|
-| Daily stand-up compiled file | `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md` | Daily write |
-| Monthly PM activity log | `agents/project-manager/output/reports/YYYY-MM.md` | Daily append |
-| RAID log | `agents/project-manager/output/raid/RAID.md` | Weekly review |
-| Decision log | `agents/project-manager/output/decisions/decisions.md` | As decisions are made |
-| Weekly RAG status report | `agents/project-manager/output/reports/YYYY-MM.md` | Friday append |
-| Retrospective notes | `agents/project-manager/output/reports/YYYY-MM.md` | Each sprint boundary |
-| Blocker triage reports | `agents/project-manager/output/triage/triage-YYYY-MM-DD.md` | On demand / as flagged |
-| Alert fallbacks | `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md` | When Telegram (fallback: Lark) unavailable |
+| Daily stand-up compiled file | `standup/briefings/YYYY-MM/YYYY-MM-DD.md` | Daily write |
+| RAID log | `standup/briefings/YYYY-MM/raid.md` | Weekly review |
+| Decision log | `standup/briefings/YYYY-MM/decisions.md` | As decisions are made |
+| Weekly RAG status report | `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md` | Friday write |
+| Retrospective notes | `standup/briefings/YYYY-MM/retro-YYYY-MM-DD.md` | Each sprint boundary |
+| Blocker triage reports | `standup/briefings/YYYY-MM/YYYY-MM-DD.md` | Inline in daily file |
+| Notification failures | Inline at bottom of the relevant daily file | When Lark + Resend both unavailable |
 
 ### RAID Log Entry Format
 ```
@@ -159,15 +158,16 @@ name: [Name]
 | Yon's daily check-in | `standup/individual/yon.md` | Read |
 | Agent daily updates | `standup/individual/agents.md` | Read (combined, included as-is) |
 
-### Outputs (written by PM agent — all under `agents/project-manager/output/`)
+### Outputs (written by PM agent — all under `standup/briefings/YYYY-MM/`)
 
 | Purpose | Path | Operation |
 |---------|------|-----------|
-| Monthly stand-up log / RAG reports / retros | `agents/project-manager/output/reports/YYYY-MM.md` | Append |
-| Blocker triage reports | `agents/project-manager/output/triage/triage-YYYY-MM-DD.md` | Write |
-| RAID log | `agents/project-manager/output/raid/RAID.md` | Read / Update |
-| Decision log | `agents/project-manager/output/decisions/decisions.md` | Append |
-| Alert / fallback notification | `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md` | Write (when Telegram (fallback: Lark) unavailable) |
+| Daily compiled stand-up | `standup/briefings/YYYY-MM/YYYY-MM-DD.md` | Write |
+| RAID log | `standup/briefings/YYYY-MM/raid.md` | Read / Update |
+| Decision log | `standup/briefings/YYYY-MM/decisions.md` | Append |
+| Weekly RAG report | `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md` | Write |
+| Retrospective | `standup/briefings/YYYY-MM/retro-YYYY-MM-DD.md` | Write |
+| Notification failure log | Inline at bottom of relevant daily file | Append (when Lark + Resend both unavailable) |
 
 ### Reference
 
@@ -189,11 +189,14 @@ name: [Name]
 | **Vercel MCP** | Monitor deployment status, track release history, measure deployment frequency (DORA) |
 | **Agent SDK** | Spawn and manage AI sub-agents |
 
-### ❌ Needs connection
+### ✅ Notification channels
 
-| MCP | Purpose | Fallback if unavailable |
-|-----|---------|------------------------|
-| **Telegram (fallback: Lark)** | Morning reminders, midday nudges, EOD reminders, 5-min ping loop | Write `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md` |
+| Channel | Tool | Env vars needed | Fallback |
+|---------|------|-----------------|---------|
+| **Lark webhook** | `curl POST` | `LARK_WEBHOOK_URL` | Try Resend |
+| **Resend email** | `python3` + stdlib | `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_TO` | Inline log |
+
+Full patterns and HTML templates: `agents/project-manager/context/pm-notification-guide.md`
 
 ### ⚠️ Open decision
 
@@ -248,7 +251,7 @@ All times are Asia/Saigon (UTC+7). Cron expressions are in UTC.
 
 | Task | Local Time | Cron (UTC) | Action |
 |------|-----------|------------|--------|
-| Morning reminder | Daily 7:00 AM Mon–Fri | `0 0 * * 1-5` | Telegram (fallback: Lark) to Dave and Yon → fallback: write `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md` |
-| Stand-up compile | Daily 9:00 AM Mon–Fri | `0 2 * * 1-5` | Read `standup/individual/`, compile `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md`, post to Telegram |
-| EOD reminder | Daily 5:00 PM Mon–Fri | `0 10 * * 1-5` | Telegram (fallback: Lark) to Dave and Yon → fallback: update `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md` |
-| Weekly RAG report | Friday 4:00 PM | `0 9 * * 5` | `git pull origin main`, generate RAG report, append to monthly MD |
+| Morning reminder | Daily 7:00 AM Mon–Fri | `0 0 * * 1-5` | Lark → Resend (Template 1) → inline log. Trigger: `agents/project-manager/triggers/standup-morning.md` |
+| Stand-up compile | Daily 9:00 AM Mon–Fri | `0 2 * * 1-5` | Read `standup/individual/`, compile briefing, Lark → Resend (Template 2) → inline. Trigger: `agents/project-manager/triggers/standup-compile.md` |
+| EOD reminder | Daily 5:00 PM Mon–Fri | `0 10 * * 1-5` | Lark → Resend (Template 3) → inline log. Trigger: `agents/project-manager/triggers/eod-reminder.md` |
+| Weekly RAG report | Friday 4:00 PM | `0 9 * * 5` | Generate RAG report, Lark → Resend (Template 4) → inline. Trigger: `agents/project-manager/triggers/weekly-rag.md` |

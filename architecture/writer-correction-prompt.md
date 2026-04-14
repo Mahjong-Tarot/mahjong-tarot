@@ -15,22 +15,16 @@ Before touching any file, read it in full first.
 
 ## Context (read these files before making any changes)
 
-1. Read `content/content-calendar/content-calendar.md` — this is the source of truth 
-   for weekly output structure. Note the file naming pattern used in the table rows 
-   (day + channel + language) and the two blog angles (Fire Horse vs Mahjong Mirror).
+1. Read `content/content-calendar/content-calendar.md` — source of truth for weekly 
+   output structure. This is the only file you need to understand the output pattern.
 
-2. Read `content/topics/INDEX.md` — this is a correctly produced example of what the 
-   writer agent should generate each week. Use it as the format reference for the 
-   INDEX.md generation step.
-
-3. Read `content/topics/fire-horse-will-blow-up-your-career/` — look at the actual 
-   file names produced. These are the canonical file naming examples.
-
-4. Read `agents/writer/skills/write-post/SKILL.md` — note the broken step sequence 
+2. Read `agents/writer/skills/write-post/SKILL.md` — note the broken step sequence 
    (Step 3 missing, Step 4 inside Step 5 code block, Step 5 appears twice).
 
-5. Read `architecture/writer-workflow.md` — note the wrong file naming convention 
+3. Read `architecture/writer-workflow.md` — note the wrong file naming convention 
    and the missing Vietnamese and INDEX.md steps.
+
+Do NOT read anything under `content/topics/` — those files will be deleted.
 
 ---
 
@@ -141,9 +135,9 @@ Insert a new step (before "Produce the Completion Report"):
 
 > **Step N: Generate the Weekly INDEX.md**
 >
-> After all topic folders are complete for the week, update `content/topics/INDEX.md`.
+> After all topic folders are complete for the week, create or update `content/topics/INDEX.md`.
 >
-> For each week, add a section following the exact format in the existing INDEX.md:
+> For each week, write a section using this exact format:
 > - Week heading with theme (e.g. `## Week of April 13 — Travel`)
 > - One sub-section per topic with: angle, publish days, file table (File | Type | Day | 
 >   Channel | Image | Published), blog hook, primary/secondary CTA

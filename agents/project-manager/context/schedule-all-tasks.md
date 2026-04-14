@@ -180,11 +180,10 @@ Full notification patterns and HTML email templates: `agents/project-manager/con
 ```
 Run the daily stand-up Phase 1 workflow from agents/project-manager/context/daily-standup.md.
 
-It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all four team members — Dave, Yon, Trac, and Khang — asking them to submit their check-in files in standup/individual/ before 9 AM:
+It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all three team members — Dave, Yon, and Trac — asking them to submit their check-in files in standup/individual/ before 9 AM:
 - standup/individual/dave.md
 - standup/individual/yon.md
 - standup/individual/trac.md
-- standup/individual/khang.md
 
 Notification order: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 1 from agents/project-manager/context/pm-notification-guide.md) → inline log to standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
@@ -206,7 +205,7 @@ It is now 9 AM Asia/Saigon — the stand-up compile deadline.
 
 Git workflow first: git pull origin main → git checkout -b pm/standup-compile/YYYY-MM-DD. All writes go on this branch.
 
-Read all five files in standup/individual/: dave.md, yon.md, trac.md, khang.md, and agents.md. Check freshness on the four human files (date must match the previous working day — yesterday; treat Friday as yesterday on Mondays).
+Read all four files in standup/individual/: dave.md, yon.md, trac.md, and agents.md. Check freshness on the three human files (date must match the previous working day — yesterday; treat Friday as yesterday on Mondays).
 
 Detect conflicts across all five check-ins.
 
@@ -230,7 +229,7 @@ It is 5 PM Asia/Saigon end of day.
 
 Git workflow first: git pull origin main → git checkout -b pm/eod/YYYY-MM-DD. All writes go on this branch.
 
-Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 3 from agents/project-manager/context/pm-notification-guide.md) → inline log appended to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
+Send a reminder to Dave, Yon, and Trac to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up. Notification order: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 3 from agents/project-manager/context/pm-notification-guide.md) → inline log appended to standup/briefings/YYYY-MM/decisions.md. Do not create any alerts folder or alert files.
 
 Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (create if missing).
 
@@ -280,7 +279,7 @@ Run the retrospective workflow from agents/project-manager/context/retrospective
 
 Git workflow first: git pull origin main → git checkout -b pm/retro/YYYY-MM-DD.
 
-Send Start/Stop/Continue questions to Dave, Yon, Trac, and Khang via Telegram → Lark → fallback file. Give a 48-hour response deadline.
+Send Start/Stop/Continue questions to Dave, Yon, and Trac via Lark CLI → Resend email → fallback file. Give a 48-hour response deadline.
 
 Once all responses are received (or 48h passes), synthesise themes and generate action items. Write the retro report to standup/briefings/YYYY-MM/retro-YYYY-MM-DD.md. Create GitHub issues for each action item.
 

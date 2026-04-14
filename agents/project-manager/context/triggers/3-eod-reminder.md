@@ -2,7 +2,7 @@
 
 **Name**: `PM EOD Reminder`
 
-**Description**: Sends an end-of-day reminder to Dave, Yon, Trac, and Khang at 5 PM to write their check-in tonight, ready for tomorrow's 9 AM compile. Also appends any key decisions made today to `decisions.md` and reviews the RAID log for currency. Notification via Lark webhook then Resend email; if both fail, appends a status note inline to `decisions.md`. Commits changes on a branch and opens a PR.
+**Description**: Sends an end-of-day reminder to Dave, Yon, and Trac at 5 PM to write their check-in tonight, ready for tomorrow's 9 AM compile. Also appends any key decisions made today to `decisions.md` and reviews the RAID log for currency. Notification via Lark CLI and Resend (both always); if both fail, appends a status note inline to `decisions.md`. Commits changes on a branch and opens a PR.
 
 ---
 
@@ -36,7 +36,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -47,13 +47,13 @@ emails = list(dict.fromkeys(
     if "example" not in e
 ))
 
-LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
-RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = env["RESEND_FROM"]
-RESEND_TO        = ",".join(emails)
+LARK_CHAT_ID   = env["LARK_CHAT_ID"]
+RESEND_API_KEY = env["RESEND_API_KEY"]
+RESEND_FROM    = env["RESEND_FROM"]
+RESEND_TO      = ",".join(emails)
 ```
 
-Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_URL, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+Use these four values throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
 
 ## Step 1 — Git workflow
 
@@ -66,10 +66,13 @@ All writes go on this branch.
 
 Read agents/project-manager/context/pm-notification-guide.md for the full notification pattern, Lark message text, and HTML email template (Template 3 — End-of-Day Reminder).
 
-Send a reminder to Dave, Yon, Trac, and Khang to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up.
+Send a reminder to Dave, Yon, and Trac to write their check-in to standup/individual/<name>.md tonight, ready for tomorrow's 9 AM stand-up.
 
 Notification (send both — not fallback):
-1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "EOD reminder" message from pm-notification-guide.md, substituting YYYY-MM-DD with today's date.
+1. Lark CLI (always — bot identity, "Labs" group chat):
+   lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
+     --text $'🌙 End-of-Day Reminder — YYYY-MM-DD\n\nPlease write your check-in to standup/individual/<name>.md tonight.\nThe PM agent compiles the stand-up tomorrow at 9 AM.\n\nFiles:\n• standup/individual/dave.md\n• standup/individual/yon.md\n• standup/individual/trac.md'
+   LARK_EXIT=$?
 2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute `{{DATE}}` and `{{TOMORROW}}` in a copy of `agents/project-manager/context/template/emails/3-eod-reminder.html`, write to `/tmp/eod-reminder-email.html`, then send:
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \

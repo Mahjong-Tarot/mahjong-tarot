@@ -3,7 +3,7 @@
 **Name**: `PM Standup Morning`
 **Schedule**: Weekdays at 7:00 AM Asia/Saigon (`0 0 * * 1-5` UTC)
 
-**Description**: At 7 AM, checks GitHub for all commits and merged PRs since yesterday 7 AM to build the agent activity picture. Updates `standup/individual/agents.md` with what each agent completed. Then sends a morning check-in reminder to all four human team members. Tries Lark webhook first, then Resend CLI. If both fail, logs inline. Never writes directly to main.
+**Description**: At 7 AM, checks GitHub for all commits and merged PRs since yesterday 7 AM to build the agent activity picture. Updates `standup/individual/agents.md` with what each agent completed. Then sends a morning check-in reminder to all four human team members via Lark CLI and Resend (both always). If both fail, logs inline. Never writes directly to main.
 
 ---
 
@@ -16,7 +16,7 @@ Always read `agents/project-manager/context/persona.md` for the current team ros
 | Dave  | dave@edge8.ai          | confirmed |
 | Yon   | yon@edge8.ai           | confirmed |
 | Trac  | trac.nguyen@edge8.ai   | confirmed |
-| Khang | khang@edge8.ai         | confirmed |
+
 
 Source of truth: `agents/project-manager/context/persona.md`. Always read that file for the current roster — do not hardcode here.
 
@@ -54,7 +54,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -65,13 +65,13 @@ emails = list(dict.fromkeys(
     if "example" not in e
 ))
 
-LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
-RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = env["RESEND_FROM"]
-RESEND_TO        = ",".join(emails)
+LARK_CHAT_ID   = env["LARK_CHAT_ID"]
+RESEND_API_KEY = env["RESEND_API_KEY"]
+RESEND_FROM    = env["RESEND_FROM"]
+RESEND_TO      = ",".join(emails)
 ```
 
-Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_URL, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+Use these four values throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
 
 ## Step 1 — Git workflow
 
@@ -138,7 +138,10 @@ Format per section:
 Read agents/project-manager/context/pm-notification-guide.md for the Lark message text and HTML email template (Template 1 — Morning Reminder).
 
 Notification (send both — not fallback):
-1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "Morning reminder" message from pm-notification-guide.md, substituting YYYY-MM-DD with today's date.
+1. Lark CLI (always — bot identity, "Labs" group chat):
+   lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
+     --text $'🌅 Daily Stand-Up Reminder — YYYY-MM-DD\n\nPlease submit your check-in to standup/individual/<name>.md before 9:00 AM today.\n\nFiles:\n• standup/individual/dave.md\n• standup/individual/yon.md\n• standup/individual/trac.md\n\nThe PM agent compiles the stand-up at 9 AM.'
+   LARK_EXIT=$?
 2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute `{{DATE}}` in a copy of `agents/project-manager/context/template/emails/1-standup-morning.html`, write to `/tmp/standup-morning-email.html`, then send:
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \

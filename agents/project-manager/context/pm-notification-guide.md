@@ -18,27 +18,31 @@ Never create alerts folders or alert files. Document failures inline.
 
 | Variable | Description | Example |
 |---|---|---|
-| `LARK_WEBHOOK_URL` | Lark incoming webhook URL | `https://open.larksuite.com/open-apis/bot/v2/hook/xxx` |
+| `LARK_CHAT_ID` | Lark group chat ID (oc_xxx format) | `oc_e5fe68740864439744b3fb0f31f81040` |
 | `RESEND_API_KEY` | Resend API key | `re_xxxxxxxxxxxx` |
-| `RESEND_FROM` | Verified sender address (Resend) | `pm@edge8.co` |
-| `RESEND_TO` | Comma-separated recipients | `dave@edge8.ai,yon@edge8.ai,trac.nguyen@edge8.ai,khang@edge8.ai` |
+| `RESEND_FROM` | Verified sender address (Resend) | `mahjong-pm@davehajdu.com` |
+| `RESEND_TO` | Comma-separated recipients | `dave@edge8.ai,yon@edge8.ai,trac.nguyen@edge8.ai` |
 
-Set these in Claude Code: `Settings → Environment Variables`.
+Set these in `~/.claude/settings.json` under `env`.
 
 ---
 
-## Channel 1 — Lark Webhook
+## Channel 1 — Lark CLI
 
-Simple `curl` POST. Capture the HTTP status to determine if fallback is needed.
+Use `lark-cli im +messages-send` with bot identity. The message content depends on the trigger:
+
+- **Reminders** (morning, EOD): use `--text` with `$'...'` to preserve exact line breaks
+- **Reports** (standup compiled, weekly RAG): use `--markdown` so headings and bullets render in Lark
 
 ```bash
-LARK_STATUS=$(curl -s -o /tmp/lark_resp.json -w "%{http_code}" \
-  -X POST "$LARK_WEBHOOK_URL" \
-  -H "Content-Type: application/json" \
-  -d "{\"msg_type\":\"text\",\"content\":{\"text\":\"LARK_MESSAGE_HERE\"}}")
-```
+# Reminder (plain text, exact formatting)
+lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text $'MESSAGE_HERE'
+LARK_EXIT=$?
 
-If `$LARK_STATUS` is not `200`, proceed to Channel 2.
+# Report summary (markdown rendering)
+lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'SUMMARY_HERE'
+LARK_EXIT=$?
+```
 
 ---
 
@@ -55,17 +59,16 @@ fi
 # Convert comma-separated RESEND_TO to space-separated for CLI
 TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ')
 
-RESEND_STATUS=$(resend emails send \
+RESEND_API_KEY=$RESEND_API_KEY resend emails send \
   --from "$RESEND_FROM" \
   --to $TO_ARGS \
   --subject "SUBJECT_HERE" \
   --html-file "TEMPLATE_FILE_HERE" \
-  --quiet && echo "ok" || echo "failed")
+  --quiet
+RESEND_EXIT=$?
 ```
 
 Replace `SUBJECT_HERE` with the trigger subject and `TEMPLATE_FILE_HERE` with the path to the relevant template under `agents/project-manager/context/template/emails/`.
-
-`RESEND_API_KEY` is read automatically from the environment — no explicit flag needed.
 
 ---
 
@@ -76,8 +79,8 @@ If both Lark and Resend fail, append this block to the bottom of `standup/briefi
 ```
 ---
 **Notification failure — YYYY-MM-DD HH:MM**
-Lark: [HTTP status or error]
-Resend: [HTTP status or error]
+Lark CLI: exited $LARK_EXIT
+Resend: exited $RESEND_EXIT
 Action: Team must check this file manually.
 ```
 
@@ -95,7 +98,7 @@ Files:
 • standup/individual/dave.md
 • standup/individual/yon.md
 • standup/individual/trac.md
-• standup/individual/khang.md
+
 
 The PM agent compiles the stand-up at 9 AM.
 ```
@@ -110,7 +113,7 @@ The PM agent compiles the stand-up at 9 AM.
 • Dave: <first 1–2 items or "No check-in">
 • Yon: <first 1–2 items or "No check-in">
 • Trac: <first 1–2 items or "No check-in">
-• Khang: <first 1–2 items or "No check-in">
+
 
 🤖 Agents: <one-line or "None received">
 
@@ -127,7 +130,7 @@ Files:
 • standup/individual/dave.md
 • standup/individual/yon.md
 • standup/individual/trac.md
-• standup/individual/khang.md
+
 ```
 
 ### Weekly RAG report
@@ -157,7 +160,7 @@ Placeholders: `{{DATE}}`
 
 Subject: `Stand-Up Summary — YYYY-MM-DD`
 File: `agents/project-manager/context/template/emails/2-standup-compile.html`
-Placeholders: `{{DAY}}`, `{{DATE}}`, `{{CONFLICTS_OR_NONE}}`, `{{DAVE_FOCUS}}`, `{{DAVE_BLOCKERS}}`, `{{YON_FOCUS}}`, `{{YON_BLOCKERS}}`, `{{TRAC_FOCUS}}`, `{{TRAC_BLOCKERS}}`, `{{KHANG_FOCUS}}`, `{{KHANG_BLOCKERS}}`, `{{AGENT_UPDATES}}`, `{{YYYY-MM}}`, `{{YYYY-MM-DD}}`
+Placeholders: `{{DAY}}`, `{{DATE}}`, `{{CONFLICTS_OR_NONE}}`, `{{DAVE_FOCUS}}`, `{{DAVE_BLOCKERS}}`, `{{YON_FOCUS}}`, `{{YON_BLOCKERS}}`, `{{TRAC_FOCUS}}`, `{{TRAC_BLOCKERS}}`, `{{AGENT_UPDATES}}`, `{{STANDUP_CONTENT}}`, `{{YYYY-MM}}`, `{{YYYY-MM-DD}}`
 
 ---
 

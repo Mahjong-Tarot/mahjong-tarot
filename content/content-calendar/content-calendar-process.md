@@ -16,13 +16,13 @@ Each week follows a five-day publishing cycle across three channels.
 | Tuesday | Social only | **Continues Monday's topic.** Deepens the hook, adds a new angle or personal story. |
 | Wednesday | Blog + Social | **Mahjong Mirror — the answer.** Directly responds to Monday's topic. Shows how the decision-making framework, the tiles, and the book address the problem Monday raised. |
 | Thursday | Social only | **Continues Wednesday's topic.** Reinforces the Mahjong Mirror angle, builds toward the weekend challenge. |
-| Friday | Social only | **Weekly challenge — positive and actionable.** Ties Monday and Wednesday together. Prompts the audience to do something constructive over the weekend. Uplifting, empowering tone. |
+| Friday | Blog + Social | **Feel Good Friday — positive and actionable.** Ties Monday and Wednesday together. Prompts the audience to do something constructive over the weekend. Uplifting, empowering tone. |
 
 ## Channels
 
 | Channel | Notes |
 |---------|-------|
-| **Blog** | Published on the website. Monday and Wednesday only. |
+| **Blog** | Published on the website. Monday, Wednesday, and Friday. |
 | **Facebook EN** | English-language Facebook page. Every day Mon–Fri. |
 | **Facebook VN** | Vietnamese translation of the English Facebook post. Every day Mon–Fri. Human-reviewed for accuracy. |
 | **Instagram** | Single account. Every day Mon–Fri. |
@@ -54,12 +54,14 @@ content/topics/[topic-slug]/
 ├── thu-facebook-en.md          # Thursday social
 ├── thu-facebook-vn.md
 ├── thu-instagram.md
-├── fri-facebook-en.md          # Friday social (challenge)
+├── blog-feel-good-friday.md    # Friday blog
+├── seo-feel-good-friday.md     # SEO for Friday blog
+├── fri-facebook-en.md          # Friday social
 ├── fri-facebook-vn.md
 ├── fri-instagram.md
 ```
 
-Not every topic will have all files. A Fire Horse topic won't have `blog-mahjong-mirror.md`. A Friday challenge topic won't have a blog at all. The topic folder contains only the deliverables the content calendar assigns to it.
+Not every topic will have all files. A Fire Horse topic won't have `blog-mahjong-mirror.md`. The topic folder contains only the deliverables the content calendar assigns to it.
 
 ## File Naming Convention
 
@@ -100,26 +102,39 @@ The calendar is the single source of truth the writer agent checks on Friday.
 
 For each week's themes, ensure relevant source material is placed in `content/source-material/` under the appropriate subject folder. The writer agent pulls from these when producing content.
 
-### 4. Writer Agent Runs on Friday
+### 4. Writer Agent Runs on Tuesday
 
-Every Friday, the writer agent:
+Every Tuesday, the writer agent:
 
-1. Reads the content calendar for the following week
+1. Reads the content calendar for the following week (Monday through Friday)
 2. Pulls source material for each topic
 3. Creates topic folders and writes all deliverables
 4. Produces a completion report
-5. Sends a Telegram notification to the team
 
-### 5. Human Review (Sat–Tue)
+### 5. Image Designer Runs After Writing
 
-Humans review all content, with special attention to:
+Once a topic is marked `STATUS: WRITTEN`, the image designer agent can be invoked (`@image-designer`). It:
+
+1. Reads the content calendar and finds all WRITTEN topics
+2. Plans unique images for every content file (excluding SEO) — writes prompts to `content/topics/<slug>/image-prompts.md`
+3. Generates all images in parallel using the Gemini API
+4. Saves images to `content/topics/<slug>/` — one unique image per content file
+5. Updates the content calendar status from `WRITTEN` → `DESIGNED`
+
+**Weekly target:** 18 unique images (3 topics × ~6 content files each). Every image is visually distinct — no duplicates, no sharing between posts.
+
+The image designer never publishes. Images sit in the topic folder for human review.
+
+### 6. Human Review (Wed–Sat)
+
+Humans review all content and images, with special attention to:
 
 - Vietnamese translations for accuracy
 - Blog tone and voice (must sound like Bill / the Firepig)
 - Factual accuracy on astrology concepts
 - Friday challenge tone (must be positive and actionable, not preachy)
 
-### 6. Web Developer Publishes (Wednesday)
+### 7. Web Developer Publishes (Wednesday)
 
 The web developer picks up approved content on Wednesday and publishes according to the calendar schedule.
 
@@ -143,3 +158,7 @@ Every Monday blog should end with:
 Every Wednesday blog should end with:
 - **Primary:** Link to `/the-mahjong-mirror` for the book (since Wednesday is the Mahjong Mirror angle)
 - **Secondary:** Link to `/readings`
+
+Every Friday blog should end with:
+- **Primary:** Soft CTA — a weekend challenge or reflective prompt
+- **Secondary:** Link to `/readings` or `/the-mahjong-mirror` (whichever ties more naturally to the week's theme)

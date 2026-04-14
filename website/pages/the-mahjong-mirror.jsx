@@ -64,7 +64,7 @@ export default function TheMahjongMirror() {
         <section className={styles.hero}>
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroText}>
-              <span className="overline">Now Available</span>
+              <span className="overline">Coming Soon</span>
               <h1>Unlock Your Destiny<br />Through the<br /><em>Mahjong Mirror</em></h1>
               <p className={styles.heroLead}>
                 A modern divination system inspired by ancient Mahjong symbolism —

@@ -118,10 +118,10 @@ export default function Home() {
             </div>
             <div className={styles.introImage}>
               <Image
-                src="/images/gallery-2.webp"
-                alt="Mahjong tiles arranged around a tarot card"
+                src="/images/about-portrait.webp"
+                alt="Bill Hajdu — divination practitioner and author"
                 width={580}
-                height={435}
+                height={720}
                 style={{ objectFit: 'cover' }}
               />
             </div>
@@ -132,7 +132,7 @@ export default function Home() {
         <section className={`section-dark ${styles.bookSection}`}>
           <div className={`container ${styles.bookInner}`}>
             <div className={styles.bookText}>
-              <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Now Available</span>
+              <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Coming Soon</span>
               <h2>The Mahjong Mirror</h2>
               <p className={styles.bookSubtitle}>Your Path to Wiser Decisions</p>
               <div className="divider-gold" />
@@ -155,29 +155,99 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Gallery ── */}
+        {/* ── Card Gallery ── */}
         <section>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <span className="overline">In Practice</span>
-              <h2>The Tiles at Work</h2>
+              <span className="overline">The Deck</span>
+              <h2>Meet the Cards</h2>
+              <p className={styles.sectionLead}>
+                Forty-two hand-illustrated cards drawn from the ancient Mahjong tradition —
+                each one a symbol, a story, and a doorway into clearer decisions.
+              </p>
             </div>
-            <div className={styles.gallery}>
+            <div className={styles.cardGallery}>
               {[
-                { src: '/images/gallery-2.webp',      alt: 'Mahjong tiles arranged around The Star tarot card',        pos: 'center center' },
-                { src: '/images/gallery-3.webp',      alt: 'Bill Hajdu conducting a reading at an ornate table',       pos: 'center top'    },
-                { src: '/images/gallery-4.webp',      alt: 'A client delighted by her reading',                        pos: 'center top'    },
-                { src: '/images/readings-hero.webp',  alt: 'Bill reading tiles with a group of clients',               pos: 'center top'    },
-              ].map((img) => (
-                <div key={img.src} className={styles.galleryItem}>
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    style={{ objectFit: 'cover', objectPosition: img.pos }}
-                  />
-                </div>
+                { src: '/images/cards/dragon.webp',  name: 'Dragon',  meaning: 'Power · Transformation' },
+                { src: '/images/cards/phoenix.webp', name: 'Phoenix', meaning: 'Renewal · Rising' },
+                { src: '/images/cards/pearl.webp',   name: 'Pearl',   meaning: 'Hidden wisdom' },
+                { src: '/images/cards/lotus.webp',   name: 'Lotus',   meaning: 'Purity · Growth' },
+                { src: '/images/cards/tiger.webp',   name: 'Tiger',   meaning: 'Courage · Instinct' },
+                { src: '/images/cards/peacock.webp', name: 'Peacock', meaning: 'Beauty · Pride' },
+              ].map((card) => (
+                <figure key={card.src} className={styles.cardItem}>
+                  <div className={styles.cardImageWrap}>
+                    <Image
+                      src={card.src}
+                      alt={`${card.name} — Mahjong Mirror card`}
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                  <figcaption>
+                    <span className={styles.cardName}>{card.name}</span>
+                    <span className={styles.cardMeaning}>{card.meaning}</span>
+                  </figcaption>
+                </figure>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Latest Blog Posts ── */}
+        <section className="section-stone">
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <span className="overline">Writing & Insight</span>
+              <h2>From the Journal</h2>
+            </div>
+            <div className={styles.blogGrid}>
+              {[
+                {
+                  slug: 'swift-kelce-wedding-stars',
+                  title: 'What the Stars Actually Say About the Swift-Kelce Wedding',
+                  category: 'Romance',
+                  date: 'Apr 13, 2026',
+                  readTime: '6 min read',
+                },
+                {
+                  slug: 'love-in-the-fire-horse-year',
+                  title: 'Love in the Year of the Fire Horse: What 2026 Means for Your Relationships',
+                  category: 'Romance',
+                  date: 'Apr 6, 2026',
+                  readTime: '8 min read',
+                },
+                {
+                  slug: 'who-has-the-most-luck-in-the-fire-horse-year',
+                  title: 'Who Has the Most Luck in 2026 — Fire Horse Year?',
+                  category: 'Year of the Fire Horse',
+                  date: 'Apr 5, 2026',
+                  readTime: '5 min read',
+                },
+              ].map((post) => (
+                <article key={post.slug} className={styles.blogCard}>
+                  <Link href={`/blog/posts/${post.slug}`} className={styles.blogImageLink}>
+                    <div className={styles.blogImage}>
+                      <Image
+                        src={`/images/blog/${post.slug}.webp`}
+                        alt={post.title}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  </Link>
+                  <div className={styles.blogBody}>
+                    <span className="post-category">{post.category}</span>
+                    <h3 className={styles.blogTitle}>
+                      <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
+                    </h3>
+                    <span className="post-meta">{post.date} · {post.readTime}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 'var(--space-2xl)' }}>
+              <Link href="/blog" className="btn-secondary">Read the Blog</Link>
             </div>
           </div>
         </section>

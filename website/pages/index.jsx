@@ -24,21 +24,46 @@ export default function Home() {
 
         {/* ── Hero ── */}
         <section className={styles.heroSection}>
-          <div className={styles.heroLeft}>
-            <div className={styles.heroText}>
-              <span className="overline">Ancient Wisdom · Modern Clarity</span>
-              <h1>See What the<br />Tiles Reveal</h1>
-              <p className={styles.heroLead}>
-                35 years of divination practice. Mahjong tiles, Chinese astrology,
-                and tarot — woven into readings that illuminate your path.
-              </p>
-              <div className={styles.heroCtas}>
-                <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
-                <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
-              </div>
+          <div className={styles.heroGrid} aria-hidden="true" />
+          <div className={styles.heroGlow} aria-hidden="true" />
+          <div className={`container ${styles.heroInner}`}>
+            <span className={styles.heroBadge}>
+              <span className={styles.heroBadgeDot} />
+              Ancient Wisdom · Modern Clarity
+            </span>
+            <h1 className={styles.heroHeadline}>
+              See what the tiles
+              <br />
+              <em>reveal</em>.
+            </h1>
+            <p className={styles.heroLead}>
+              35 years of divination practice. Mahjong tiles, Chinese astrology,
+              and tarot — woven into readings that illuminate your path.
+            </p>
+            <div className={styles.heroCtas}>
+              <Link href="/readings#book" className={styles.heroPrimary}>
+                Book a Reading <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/the-mahjong-mirror#preorder" className={styles.heroGhost}>
+                Preorder the Book
+              </Link>
             </div>
+            <dl className={styles.heroStats}>
+              <div>
+                <dt>35+</dt>
+                <dd>Years of practice</dd>
+              </div>
+              <div>
+                <dt>3</dt>
+                <dd>Divination traditions</dd>
+              </div>
+              <div>
+                <dt>1-on-1</dt>
+                <dd>Live online readings</dd>
+              </div>
+            </dl>
           </div>
-          <div className={styles.heroRight}>
+          <div className={styles.heroImageFade}>
             <Image
               src="/images/gallery-3.webp"
               alt="Bill Hajdu conducting a Mahjong Tarot reading"

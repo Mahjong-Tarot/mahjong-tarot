@@ -149,11 +149,18 @@ Notification (send both — not fallback):
    Full pattern in pm-notification-guide.md.
 3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
-## Step 5 — Git commit
+## Step 5 — Git commit and branch cleanup
+
+AGENT_BRANCH="pm/standup-morning/YYYY-MM-DD"
 
 git add standup/individual/agents.md standup/briefings/YYYY-MM/YYYY-MM-DD.md
 git commit -m "pm(standup-morning): YYYY-MM-DD"
-git push origin pm/standup-morning/YYYY-MM-DD
+git push origin "$AGENT_BRANCH"
 gh pr create --title "pm(standup-morning): YYYY-MM-DD" --base main --body "Agent activity update + morning reminder YYYY-MM-DD"
-gh pr merge --merge --auto
+gh pr merge --merge --auto --delete-branch
+
+# Clean up local agent branch — only if it matches pm/* (never touch user branches)
+git checkout main
+git pull origin main
+git branch -d "$AGENT_BRANCH" 2>/dev/null || true
 ```

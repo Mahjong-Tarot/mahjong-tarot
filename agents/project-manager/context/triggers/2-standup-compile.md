@@ -191,47 +191,77 @@ _Compiled at 09:00 AM Asia/Saigon_
 _End of stand-up._
 ```
 
-## Step 7 — Send notification
+## Step 7 — Send summary to Lark, full report via Resend
 
-Read agents/project-manager/context/pm-notification-guide.md for the full notification pattern.
+Notification (send both — not fallback):
 
-Build the Lark message substituting actual values:
+### 1. Lark webhook — structured priority summary
+
+POST to $LARK_WEBHOOK_URL with `msg_type: text`. Build the message from the compiled briefing using this structure — omit any section that has no content:
+
 ```
 📋 Stand-Up — DAY DD Mon YYYY
 
-⚠️ Conflicts: <count or "None">
-🔍 Mismatches: <count or "None">
+⚠️ ALERTS
+• [Each conflict or sync clash — one line each, e.g. "Dave + Yon both touching auth middleware"]
+• [Each mismatch flag — include PR # if relevant, e.g. "Trac: PR #42 merged — not in check-in"]
+(Omit section if none)
 
-👥 Team focus:
-• Dave: <first 1–2 focus items or "No check-in"> [⚠️ mismatch if applicable]
+🔴 HIGH PRIORITY
+• [Any task or blocker flagged as urgent, overdue, or escalation-worthy — one line each with owner]
+(Omit section if none)
+
+👥 HUMAN STATUS
+• Dave: [first focus item] [🔴/⚠️ if mismatch] — PR #N if relevant
 • Yon: ...
 • Trac: ...
-• Khang: ...
+• Khang: [No check-in] if absent
 
-🤖 Agents: <one-line summary>
+🤖 AGENT TODO
+• project-manager: [next action]
+• writer: [next action]
+• web-developer: [next action]
+• image-designer: [next action]
+(Include only agents with active work; skip if "No activity")
 
-📁 Full file: standup/briefings/YYYY-MM/YYYY-MM-DD.md
+📁 Full report: standup/briefings/YYYY-MM/YYYY-MM-DD.md
 ```
 
-Notification (send both — not fallback):
-1. Lark webhook: POST to $LARK_WEBHOOK_URL.
-2. Resend CLI (always — install if missing: `npm install -g resend`).
-   - Substitute all `{{PLACEHOLDER}}` values in a copy of agents/project-manager/context/template/emails/2-standup-compile.html
-   - Write substituted file to /tmp/standup-compile-email.html
-   - Run:
+Rules:
+- Every PR reference must include the PR number (e.g. PR #42) and a 3–5 word title
+- High priority = any task with a deadline today or tomorrow, any blocker >24h unresolved, or any negative mismatch
+- Keep each line under 80 characters
+- Do not include notes or raw check-in text — distil to one actionable phrase per item
+
+### 2. Resend CLI — full report
+
+Send the complete compiled briefing content:
+- Read standup/briefings/YYYY-MM/YYYY-MM-DD.md in full
+- Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/2-standup-compile.html`, injecting the full content into `{{STANDUP_CONTENT}}`
+- Write to /tmp/standup-compile-email.html, then run:
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \
      --to "$RESEND_TO" \
-     --subject "Stand-Up Summary — YYYY-MM-DD" \
+     --subject "Daily Stand-Up — YYYY-MM-DD" \
      --html-file /tmp/standup-compile-email.html \
      --quiet
-3. If BOTH fail: append failure status inline at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
-## Step 8 — Git commit
+### 3. If BOTH fail
+
+Append failure status inline at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
+
+## Step 8 — Git commit and branch cleanup
+
+AGENT_BRANCH="pm/standup-compile/YYYY-MM-DD"
 
 git add standup/briefings/YYYY-MM/YYYY-MM-DD.md
 git commit -m "pm(standup-compile): YYYY-MM-DD"
-git push origin pm/standup-compile/YYYY-MM-DD
+git push origin "$AGENT_BRANCH"
 gh pr create --title "pm(standup-compile): YYYY-MM-DD" --base main --body "Daily stand-up compiled YYYY-MM-DD"
-gh pr merge --merge --auto
+gh pr merge --merge --auto --delete-branch
+
+# Clean up local agent branch — only if it matches pm/* (never touch user branches)
+git checkout main
+git pull origin main
+git branch -d "$AGENT_BRANCH" 2>/dev/null || true
 ```

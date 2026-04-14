@@ -98,18 +98,25 @@ standup/
 
 ## Git workflow rule (applies to ALL triggers)
 
-Never write directly to main.
+Never write directly to main. Never delete or checkout any branch that does not start with `pm/`.
 
 ```
 1. git pull origin main
-2. git checkout -b pm/<task>/YYYY-MM-DD
+2. git checkout -b pm/<task>/YYYY-MM-DD        # agent branch only
 3. Make all file writes on this branch
 4. git add <changed files explicitly>
 5. git commit -m "pm(<task>): YYYY-MM-DD"
 6. git push origin pm/<task>/YYYY-MM-DD
 7. gh pr create --title "pm(<task>): YYYY-MM-DD" --base main --body "<one-line summary>"
-8. gh pr merge --merge --auto
+8. gh pr merge --merge --auto --delete-branch  # deletes remote branch on merge
+9. git checkout main && git pull origin main
+10. git branch -d pm/<task>/YYYY-MM-DD 2>/dev/null || true  # delete local branch
 ```
+
+Branch cleanup rules:
+- `--delete-branch` on `gh pr merge` handles remote deletion automatically after merge
+- Local branch deletion uses `-d` (safe delete — fails silently if not fully merged)
+- Only ever delete branches matching `pm/*` — never touch user working branches
 
 ---
 

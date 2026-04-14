@@ -4,7 +4,7 @@ You are the Project Manager agent for the Mahjong Tarot project. Your task is to
 
 ## Step 0 — Load secrets for trigger creation
 
-**Why this step exists**: RemoteTrigger sessions run in Anthropic's cloud with no access to local files or env vars. The only secure way to pass secrets is to embed them directly in the trigger prompt at creation time — they are stored on Anthropic's servers, never in git. The source files in `agents/project-manager/context/triggers/` use `$LARK_WEBHOOK_URL` etc. as placeholders; this step substitutes the real values before calling `RemoteTrigger {action: "create"}`.
+**Why this step exists**: RemoteTrigger sessions run in Anthropic's cloud with no access to local files or env vars. The only secure way to pass secrets is to embed them directly in the trigger prompt at creation time — they are stored on Anthropic's servers, never in git. The source files in `agents/project-manager/context/triggers/` use `$LARK_CHAT_ID` etc. as placeholders; this step substitutes the real values before calling `RemoteTrigger {action: "create"}`.
 
 ### Load the values
 
@@ -32,7 +32,7 @@ env = {}
 env.update(parse_env_file(".env"))
 env.update(parse_env_file(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     print(f"ERROR: missing from .env / .env.local: {missing}")
     sys.exit(1)
@@ -45,7 +45,7 @@ emails = list(dict.fromkeys(
     if "example" not in e
 ))
 
-print("LARK_WEBHOOK_URL=" + env["LARK_WEBHOOK_URL"])
+print("LARK_CHAT_ID=" + env["LARK_CHAT_ID"])
 print("RESEND_API_KEY="   + env["RESEND_API_KEY"])
 print("RESEND_FROM="      + env["RESEND_FROM"])
 print("RESEND_TO="        + ",".join(emails))
@@ -58,7 +58,7 @@ Before calling `RemoteTrigger {action: "create"}` for each trigger, take the pro
 
 | Placeholder | Replace with |
 |---|---|
-| `$LARK_WEBHOOK_URL` | actual webhook URL |
+| `$LARK_CHAT_ID` | actual webhook URL |
 | `$RESEND_API_KEY` | actual API key |
 | `$RESEND_FROM` | value from `.env.local` |
 | `$RESEND_TO` | comma-separated team emails |
@@ -124,8 +124,8 @@ Branch cleanup rules:
 
 Send **both** Lark and Resend on every trigger — not as a fallback chain. Only fall back to inline log if both fail.
 
-- **Lark**: `curl POST $LARK_WEBHOOK_URL` with `msg_type: text`
-- **Resend**: Resend CLI (`resend emails send --html-file`) using `$RESEND_API_KEY`, `$RESEND_FROM`, `$RESEND_TO`
+- **Lark**: `lark-cli im +messages-send --as bot --chat-id $LARK_CHAT_ID` — use `--text` for reminders, `--markdown` for report summaries
+- **Resend**: Resend CLI (`resend emails send --html-file`) using `$RESEND_API_KEY`, `$RESEND_FROM`, `$RESEND_TO` — always HTML, never raw markdown
 - **Inline log**: append failure status to the relevant daily file in `standup/briefings/YYYY-MM/` only when both Lark and Resend fail
 
 Full patterns and HTML templates: `agents/project-manager/context/pm-notification-guide.md`
@@ -185,7 +185,7 @@ It is now 7 AM Asia/Saigon. Send a morning check-in reminder to all three team m
 - standup/individual/yon.md
 - standup/individual/trac.md
 
-Notification order: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 1 from agents/project-manager/context/pm-notification-guide.md) → inline log to standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+Notification order: Lark webhook ($LARK_CHAT_ID) → Resend email ($RESEND_API_KEY, Template 1 from agents/project-manager/context/pm-notification-guide.md) → inline log to standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Git workflow: git pull origin main → git checkout -b pm/standup-morning/YYYY-MM-DD → write any file changes on this branch → git add <files> → git commit -m "pm(standup-morning): YYYY-MM-DD" → git push → gh pr create --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```
@@ -211,7 +211,7 @@ Detect conflicts across all five check-ins.
 
 Compile the daily stand-up to standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the monthly folder if needed). Include agent updates as-is under an Agent Updates section.
 
-Send the summary: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 2 from agents/project-manager/context/pm-notification-guide.md) → inline log at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+Send the summary: Lark webhook ($LARK_CHAT_ID) → Resend email ($RESEND_API_KEY, Template 2 from agents/project-manager/context/pm-notification-guide.md) → inline log at the bottom of standup/briefings/YYYY-MM/YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/YYYY-MM-DD.md → git commit -m "pm(standup-compile): YYYY-MM-DD" → git push origin pm/standup-compile/YYYY-MM-DD → gh pr create --title "pm(standup-compile): YYYY-MM-DD" --base main → gh pr merge --merge --auto.
 ```
@@ -263,7 +263,7 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 ⚠️ RISKS — top 3 with probability / impact / mitigation
 🔔 DECISIONS NEEDED — items requiring decision with deadline
 
-Send the weekly summary: Lark webhook ($LARK_WEBHOOK_URL) → Resend email ($RESEND_API_KEY, Template 4 from agents/project-manager/context/pm-notification-guide.md) → inline log at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+Send the weekly summary: Lark webhook ($LARK_CHAT_ID) → Resend email ($RESEND_API_KEY, Template 4 from agents/project-manager/context/pm-notification-guide.md) → inline log at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
 Commit: git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md → git commit -m "pm(weekly-rag): YYYY-MM-DD" → git push origin pm/weekly-rag/YYYY-MM-DD → gh pr create --title "pm(weekly-rag): YYYY-MM-DD" --base main → gh pr merge --merge --auto. Never commit to main directly.
 ```

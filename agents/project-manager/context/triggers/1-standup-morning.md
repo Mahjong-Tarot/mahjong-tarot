@@ -17,7 +17,6 @@ Always read `agents/project-manager/context/persona.md` for the current team ros
 | Yon   | yon@edge8.ai           | confirmed |
 | Trac  | trac.nguyen@edge8.ai   | confirmed |
 
-
 Source of truth: `agents/project-manager/context/persona.md`. Always read that file for the current roster — do not hardcode here.
 
 ---

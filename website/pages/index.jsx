@@ -1,22 +1,39 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
+import { POSTS } from '../lib/posts';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
+  const jsonLd = graph([
+    ORGANIZATION,
+    WEBSITE,
+    PERSON_BILL,
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.mahjongtarot.com/#home',
+      url: 'https://www.mahjongtarot.com/',
+      name: 'Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu',
+      isPartOf: { '@id': 'https://www.mahjongtarot.com/#website' },
+      about: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+      primaryImageOfPage: 'https://www.mahjongtarot.com/images/gallery-3.webp',
+    },
+  ]);
+
+  const featuredPosts = POSTS.slice(0, 3);
+
   return (
     <>
-      <Head>
-        <title>Mahjong Tarot — Bill Hajdu</title>
-        <meta name="description" content="35+ years of divination practice. Mahjong tile readings, Chinese astrology, and tarot with Bill Hajdu — The Firepig. Explore The Mahjong Mirror." />
-        <meta property="og:title" content="Mahjong Tarot — Bill Hajdu" />
-        <meta property="og:description" content="Ancient wisdom, modern clarity. Mahjong tile readings and tarot with Bill Hajdu." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/gallery-3.webp" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/" />
-      </Head>
+      <SEO
+        title="Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu — The Firepig"
+        description="Live 1-on-1 Mahjong tile readings, Four Pillars Chinese astrology, and tarot with Bill Hajdu — 35+ years of divination practice. Book a reading or explore The Mahjong Mirror."
+        path="/"
+        image="/images/gallery-3.webp"
+        jsonLd={jsonLd}
+      />
 
       <Nav />
 
@@ -105,7 +122,7 @@ export default function Home() {
           <div className={`container ${styles.intro}`}>
             <div className={styles.introText}>
               <span className="overline">Meet the Firepig</span>
-              <h2>Bill Hajdu</h2>
+              <h2>Bill Hajdu — Mahjong Tarot Reader &amp; Chinese Astrologer</h2>
               <div className="divider-gold" />
               <p>
                 With over 35 years of practice, Bill Hajdu has developed an
@@ -168,28 +185,33 @@ export default function Home() {
             </div>
             <div className={styles.cardGallery}>
               {[
-                { src: '/images/cards/dragon.webp',  name: 'Dragon',  meaning: 'Power · Transformation' },
-                { src: '/images/cards/phoenix.webp', name: 'Phoenix', meaning: 'Renewal · Rising' },
-                { src: '/images/cards/pearl.webp',   name: 'Pearl',   meaning: 'Hidden wisdom' },
-                { src: '/images/cards/lotus.webp',   name: 'Lotus',   meaning: 'Purity · Growth' },
-                { src: '/images/cards/tiger.webp',   name: 'Tiger',   meaning: 'Courage · Instinct' },
-                { src: '/images/cards/peacock.webp', name: 'Peacock', meaning: 'Beauty · Pride' },
+                { slug: 'dragon',  name: 'Dragon',  meaning: 'Power · Transformation' },
+                { slug: 'phoenix', name: 'Phoenix', meaning: 'Renewal · Rising' },
+                { slug: 'pearl',   name: 'Pearl',   meaning: 'Hidden wisdom' },
+                { slug: 'lotus',   name: 'Lotus',   meaning: 'Purity · Growth' },
+                { slug: 'tiger',   name: 'Tiger',   meaning: 'Courage · Instinct' },
+                { slug: 'peacock', name: 'Peacock', meaning: 'Beauty · Pride' },
               ].map((card) => (
-                <figure key={card.src} className={styles.cardItem}>
-                  <div className={styles.cardImageWrap}>
-                    <Image
-                      src={card.src}
-                      alt={`${card.name} — Mahjong Mirror card`}
-                      fill
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </div>
-                  <figcaption>
-                    <span className={styles.cardName}>{card.name}</span>
-                    <span className={styles.cardMeaning}>{card.meaning}</span>
-                  </figcaption>
-                </figure>
+                <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.cardItem} style={{ textDecoration: 'none' }}>
+                  <figure style={{ margin: 0 }}>
+                    <div className={styles.cardImageWrap}>
+                      <Image
+                        src={`/images/cards/${card.slug}.webp`}
+                        alt={`${card.name} — Mahjong Mirror card`}
+                        fill
+                        style={{ objectFit: 'contain' }}
+                      />
+                    </div>
+                    <figcaption>
+                      <span className={styles.cardName}>{card.name}</span>
+                      <span className={styles.cardMeaning}>{card.meaning}</span>
+                    </figcaption>
+                  </figure>
+                </Link>
               ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 'var(--space-xl)' }}>
+              <Link href="/cards" className="btn-secondary">See All 42 Cards</Link>
             </div>
           </div>
         </section>
@@ -202,29 +224,7 @@ export default function Home() {
               <h2>From the Journal</h2>
             </div>
             <div className={styles.blogGrid}>
-              {[
-                {
-                  slug: 'swift-kelce-wedding-stars',
-                  title: 'What the Stars Actually Say About the Swift-Kelce Wedding',
-                  category: 'Romance',
-                  date: 'Apr 13, 2026',
-                  readTime: '6 min read',
-                },
-                {
-                  slug: 'love-in-the-fire-horse-year',
-                  title: 'Love in the Year of the Fire Horse: What 2026 Means for Your Relationships',
-                  category: 'Romance',
-                  date: 'Apr 6, 2026',
-                  readTime: '8 min read',
-                },
-                {
-                  slug: 'who-has-the-most-luck-in-the-fire-horse-year',
-                  title: 'Who Has the Most Luck in 2026 — Fire Horse Year?',
-                  category: 'Year of the Fire Horse',
-                  date: 'Apr 5, 2026',
-                  readTime: '5 min read',
-                },
-              ].map((post) => (
+              {featuredPosts.map((post) => (
                 <article key={post.slug} className={styles.blogCard}>
                   <Link href={`/blog/posts/${post.slug}`} className={styles.blogImageLink}>
                     <div className={styles.blogImage}>
@@ -237,7 +237,7 @@ export default function Home() {
                     </div>
                   </Link>
                   <div className={styles.blogBody}>
-                    <span className="post-category">{post.category}</span>
+                    <span className="post-category">{post.categories[0]}</span>
                     <h3 className={styles.blogTitle}>
                       <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
                     </h3>

@@ -20,7 +20,7 @@ Two-phase async stand-up cycle:
 | Dave's check-in | `standup/individual/dave.md` | Written the evening before; date must match yesterday |
 | Yon's check-in | `standup/individual/yon.md` | Written the evening before; date must match yesterday |
 | Trac's check-in | `standup/individual/trac.md` | Written the evening before; date must match yesterday |
-| Khang's check-in | `standup/individual/khang.md` | Written the evening before; date must match yesterday |
+
 | Agent updates | `standup/individual/agents.md` | Combined agent daily update; included as-is |
 | Daily compiled output | `standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md` | Created fresh each day |
 | Notification failure log | Inline at bottom of daily briefing file | Written only when both Lark and Resend fail |
@@ -44,8 +44,10 @@ Notification (send both — not fallback):
 
 ### Step 1: Read check-in files
 
-Read all five files in `standup/individual/`:
-- `dave.md`, `yon.md`, `trac.md`, `khang.md`
+Read all files in `standup/individual/`:
+- `dave.md`
+- `yon.md`
+- `trac.md`
 - `agents.md`
 
 **Freshness rule:** A check-in is fresh if its `date:` field matches the **previous working day** (yesterday; treat Friday as yesterday on Mondays).

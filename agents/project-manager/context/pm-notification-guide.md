@@ -18,10 +18,10 @@ Never create alerts folders or alert files. Document failures inline.
 
 | Variable | Description | Example |
 |---|---|---|
-| `LARK_CHAT_ID` | Lark group chat ID (oc_xxx format) | `oc_xxxxxxxxxxxxxxxxxx` |
+| `LARK_CHAT_ID` | Lark group chat ID (oc_xxx format) | `oc_XXXXXXXXXXXXXX` |
 | `RESEND_API_KEY` | Resend API key | `re_xxxxxxxxxxxx` |
 | `RESEND_FROM` | Verified sender address (Resend) | `mahjong-pm@davehajdu.com` |
-| `RESEND_TO` | Comma-separated recipients | `dave@edge8.ai,yon@edge8.ai,trac.nguyen@edge8.ai,khang.h.nguyen@edge8.ai` |
+| `RESEND_TO` | Comma-separated recipients | `dave@edge8.ai,yon@edge8.ai,trac.nguyen@edge8.ai` |
 
 Set these in `~/.claude/settings.json` under `env`.
 
@@ -83,8 +83,8 @@ Only used if **both** Lark CLI and Resend fail. Append to the bottom of the rele
 ```
 ---
 **Notification failure — YYYY-MM-DD HH:MM**
-Lark CLI: [exit code or error]
-Resend: [exit code or error]
+Lark CLI: exited $LARK_EXIT
+Resend: exited $RESEND_EXIT
 Action: Team must check this file manually.
 ```
 
@@ -108,15 +108,52 @@ RESEND_API_KEY=$RESEND_API_KEY resend emails send \
   --quiet
 RESEND_EXIT=$?
 
-# 3. Only if BOTH failed — append inline to daily file
-if [ $LARK_EXIT -ne 0 ] && [ $RESEND_EXIT -ne 0 ]; then
-  echo "
----
-**Notification failure — $(date '+%Y-%m-%d %H:%M')**
-Lark CLI: exited $LARK_EXIT
-Resend: exited $RESEND_EXIT
-Action: Team must check this file manually." >> "standup/briefings/$(date '+%Y-%m')/$(date '+%Y-%m-%d').md"
-fi
+Files:
+• standup/individual/dave.md
+• standup/individual/yon.md
+• standup/individual/trac.md
+
+
+The PM agent compiles the stand-up at 9 AM.
+```
+
+### Standup compiled
+```
+📋 Stand-Up — Day DD Mon YYYY
+
+⚠️ Conflicts: <count or "None">
+
+👥 Team focus:
+• Dave: <first 1–2 items or "No check-in">
+• Yon: <first 1–2 items or "No check-in">
+• Trac: <first 1–2 items or "No check-in">
+
+
+🤖 Agents: <one-line or "None received">
+
+📁 Full file: standup/briefings/YYYY-MM/YYYY-MM-DD.md
+```
+
+### EOD reminder
+```
+🌙 End of Day — YYYY-MM-DD
+
+Please write your check-in tonight so it's ready for tomorrow's 9:00 AM stand-up.
+
+Files:
+• standup/individual/dave.md
+• standup/individual/yon.md
+• standup/individual/trac.md
+
+```
+
+### Weekly RAG report
+```
+📊 Weekly Status Report — Week of DD Mon YYYY
+
+<RAG status block — copy the emoji status lines from the weekly-rag file>
+
+📁 Full report: standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md
 ```
 
 ---
@@ -137,7 +174,7 @@ Placeholders: `{{DATE}}`
 
 Subject: `Daily Stand-Up — YYYY-MM-DD`
 File: `agents/project-manager/context/template/emails/2-standup-compile.html`
-Placeholders: `{{DAY}}`, `{{DATE}}`, `{{CONFLICTS_OR_NONE}}`, `{{DAVE_FOCUS}}`, `{{DAVE_BLOCKERS}}`, `{{YON_FOCUS}}`, `{{YON_BLOCKERS}}`, `{{TRAC_FOCUS}}`, `{{TRAC_BLOCKERS}}`, `{{KHANG_FOCUS}}`, `{{KHANG_BLOCKERS}}`, `{{AGENT_UPDATES}}`, `{{STANDUP_CONTENT}}`, `{{YYYY-MM}}`, `{{YYYY-MM-DD}}`
+Placeholders: `{{DAY}}`, `{{DATE}}`, `{{CONFLICTS_OR_NONE}}`, `{{DAVE_FOCUS}}`, `{{DAVE_BLOCKERS}}`, `{{YON_FOCUS}}`, `{{YON_BLOCKERS}}`, `{{TRAC_FOCUS}}`, `{{TRAC_BLOCKERS}}`, `{{AGENT_UPDATES}}`, `{{STANDUP_CONTENT}}`, `{{YYYY-MM}}`, `{{YYYY-MM-DD}}`
 
 ---
 

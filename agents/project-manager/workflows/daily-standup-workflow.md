@@ -4,7 +4,7 @@
 **Trigger:** Two-phase daily schedule (Mon–Fri)
 - Phase 1: 7:00 AM Asia/Saigon (UTC 00:00) — morning reminder
 - Phase 2: 9:00 AM Asia/Saigon (UTC 02:00) — compile and distribute
-**Purpose:** Compile individual check-ins, detect conflicts, and distribute the daily stand-up to the team via Telegram.
+**Purpose:** Compile individual check-ins, detect conflicts, and distribute the daily stand-up to the team via Lark CLI and Resend email.
 
 ---
 
@@ -29,10 +29,12 @@ standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md
 
 ## Phase 1 — Morning Reminder (7:00 AM)
 
-Send a reminder to Dave and Yon to submit their check-ins before 9 AM.
+Send a reminder to Dave, Yon, and Trac to submit their check-ins before 9 AM.
 
-- **Primary**: Gmail to dave@edge8.co (and Yon, Trac, Khang emails when confirmed)
-- **Fallback**: Write `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md`
+Notification (send both — not fallback):
+- **Lark CLI**: `lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text $'...'` — morning reminder text
+- **Resend email**: HTML Template 1 — `agents/project-manager/context/template/emails/1-standup-morning.html`
+- **Inline log**: Append to `standup/briefings/YYYY-MM/YYYY-MM-DD.md` only if **both** fail
 
 ---
 
@@ -44,7 +46,6 @@ Read all files in `standup/individual/`:
 - `dave.md`
 - `yon.md`
 - `trac.md`
-- `khang.md`
 - `agents.md`
 
 **Freshness rule:** A check-in is fresh if its `date:` field matches the **previous working day** (yesterday; treat Friday as yesterday on Mondays). Check-ins are written the evening before.
@@ -62,7 +63,7 @@ If a file is missing, empty, or stale → mark that member as **absent** in the 
 
 ### Step 2: Detect Conflicts
 
-Scan all focus items across `dave.md`, `yon.md`, and `agents.md`. Flag a conflict when two or more parties are working on the same area (same page, component, file, topic, or Supabase table/function).
+Scan all focus items across all four files (`dave.md`, `yon.md`, `trac.md`, `agents.md`). Flag a conflict when two or more parties are working on the same area (same page, component, file, topic, or Supabase table/function).
 
 **Conflict output format:**
 
@@ -116,33 +117,29 @@ _Compiled at 09:00 AM_
 
 ---
 
-_End of stand-up. Ping the PM agent in Telegram for changes or updates throughout the day._
+_End of stand-up._
 ```
 
 ---
 
-### Step 4: Push to Telegram
+### Step 4: Send notification
 
-Send a summary to the team Telegram channel:
+Notification (send both — not fallback):
 
-```
-📋 *Stand-Up — <Day DD Mon YYYY>*
+1. **Lark CLI** — structured priority summary via `--markdown`:
+   ```bash
+   lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
+   LARK_EXIT=$?
+   ```
+   Full summary format: see `agents/project-manager/context/triggers/2-standup-compile.md` Step 7.
 
-⚠️ *Conflicts:* <count, or "None">
-<If conflicts exist, list each one as a bullet>
+2. **Resend email** — full compiled briefing as HTML:
+   - Substitute `{{PLACEHOLDER}}` values in `agents/project-manager/context/template/emails/2-standup-compile.html`
+   - Inject full briefing into `{{STANDUP_CONTENT}}`; write to `/tmp/standup-compile-email.html`
+   - `RESEND_API_KEY=$RESEND_API_KEY resend emails send --from "$RESEND_FROM" --to "$RESEND_TO" --subject "Daily Stand-Up — YYYY-MM-DD" --html-file /tmp/standup-compile-email.html --quiet`
+   - `RESEND_EXIT=$?`
 
-👥 *Team focus:*
-• Dave: <first 1–2 focus items, or "No check-in">
-• Yon: <first 1–2 focus items, or "No check-in">
-
-🤖 *Agent updates:* <one-line summary, or "None received">
-
-🔗 Full stand-up saved to standup/briefings/<YYYY-MM>/<YYYY-MM-DD>.md
-
-_Ping @PM-agent for any changes or updates today._
-```
-
-If Telegram delivery fails → log the error at the bottom of the compiled file. Do not retry.
+3. **Inline log** — only if **both** fail: append to bottom of `standup/briefings/YYYY-MM/YYYY-MM-DD.md`. No alerts folder.
 
 ---
 
@@ -199,5 +196,6 @@ None
 |---|---|
 | Any `standup/individual/*.md` date is stale | Mark as absent; continue |
 | Monthly folder does not exist | Create it before writing the compiled file |
-| Telegram send fails | Log error in compiled file footer; do not retry |
+| Lark CLI fails | Continue to Resend; log inline only if Resend also fails |
+| Resend fails | Continue; log inline only if Lark also failed |
 | Both humans absent | Still compile; note absences prominently |

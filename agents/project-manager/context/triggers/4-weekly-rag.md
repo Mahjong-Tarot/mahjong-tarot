@@ -2,7 +2,7 @@
 
 **Name**: `PM Weekly RAG Report`
 
-**Description**: Generates the weekly RAG (Red/Amber/Green) status report every Friday at 4 PM. Reads the week's compiled stand-ups and decisions from `standup/briefings/YYYY-MM/`, checks Vercel for deployment status, and writes the report to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`. Covers project health, upcoming milestones, top risks, and decisions needed. Sends via Lark webhook then Resend email; if both fail, appends a status note inline to the report file. Commits on a branch and opens a PR.
+**Description**: Generates the weekly RAG (Red/Amber/Green) status report every Friday at 4 PM. Reads the week's compiled stand-ups and decisions from `standup/briefings/YYYY-MM/`, checks Vercel for deployment status, and writes the report to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`. Covers project health, upcoming milestones, top risks, and decisions needed. Sends via Lark CLI and Resend (both always); if both fail, appends a status note inline to the report file. Commits on a branch and opens a PR.
 
 ---
 
@@ -38,7 +38,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -49,13 +49,13 @@ emails = list(dict.fromkeys(
     if "example" not in e
 ))
 
-LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
-RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = env["RESEND_FROM"]
-RESEND_TO        = ",".join(emails)
+LARK_CHAT_ID   = env["LARK_CHAT_ID"]
+RESEND_API_KEY = env["RESEND_API_KEY"]
+RESEND_FROM    = env["RESEND_FROM"]
+RESEND_TO      = ",".join(emails)
 ```
 
-Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_URL, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+Use these four values throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
 
 ## Step 1 — Git workflow
 
@@ -80,9 +80,16 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 
 Notification (send both — not fallback):
 
-### 1. Lark webhook — structured priority summary
+### 1. Lark CLI — structured priority summary
 
-POST to $LARK_WEBHOOK_URL with `msg_type: text`. Build the message from the RAG report using this structure — omit any section that has no content:
+Build the message from the RAG report using the structure below — omit any section with no content. Then send with:
+
+```bash
+lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
+LARK_EXIT=$?
+```
+
+Message structure:
 
 ```
 📊 Weekly Status — Week of YYYY-MM-DD

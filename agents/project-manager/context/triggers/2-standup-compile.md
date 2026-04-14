@@ -14,7 +14,7 @@
 | Dave  | dave@edge8.ai          | TBC             | standup/individual/dave.md     |
 | Yon   | yon@edge8.ai           | TBC             | standup/individual/yon.md      |
 | Trac  | trac.nguyen@edge8.ai   | TracNg99        | standup/individual/trac.md     |
-| Khang | khang@edge8.ai         | TBC             | standup/individual/khang.md    |
+
 
 Source of truth: `agents/project-manager/context/persona.md`. Update GitHub usernames there when confirmed.
 
@@ -52,7 +52,7 @@ env = {}
 env.update(parse_env(".env"))
 env.update(parse_env(".env.local"))  # .env.local takes precedence
 
-missing = [k for k in ("LARK_WEBHOOK_URL", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
 
@@ -63,13 +63,13 @@ emails = list(dict.fromkeys(
     if "example" not in e
 ))
 
-LARK_WEBHOOK_URL = env["LARK_WEBHOOK_URL"]
-RESEND_API_KEY   = env["RESEND_API_KEY"]
-RESEND_FROM      = env["RESEND_FROM"]
-RESEND_TO        = ",".join(emails)
+LARK_CHAT_ID   = env["LARK_CHAT_ID"]
+RESEND_API_KEY = env["RESEND_API_KEY"]
+RESEND_FROM    = env["RESEND_FROM"]
+RESEND_TO      = ",".join(emails)
 ```
 
-Use these four values throughout the rest of this prompt wherever $LARK_WEBHOOK_URL, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+Use these four values throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
 
 ## Step 1 — Git workflow
 
@@ -81,7 +81,7 @@ All writes go on this branch.
 ## Step 2 — Read check-in files
 
 Read all five files in standup/individual/:
-- dave.md, yon.md, trac.md, khang.md (human check-ins)
+- dave.md, yon.md, trac.md (human check-ins)
 - agents.md (agent updates — already populated by the 7 AM trigger)
 
 Freshness rule: a human check-in is fresh if its `date:` field matches YYYY-MM-DD-PREV (treat Friday as yesterday on Mondays). Mark stale files as absent — do not discard, note the absence explicitly.
@@ -112,7 +112,6 @@ Build a per-person activity summary:
 - **Dave**: [list of commits/PRs, or "No git activity detected"]
 - **Yon**: ...
 - **Trac**: ...
-- **Khang**: ...
 
 ## Step 4 — Mismatch analysis
 
@@ -163,9 +162,6 @@ _Compiled at 09:00 AM Asia/Saigon_
 ### Trac
 [same structure]
 
-### Khang
-[same structure]
-
 ---
 
 ## 👥 Human Check-Ins
@@ -178,7 +174,7 @@ _Compiled at 09:00 AM Asia/Saigon_
 
 **Notes:** [notes or —]
 
-### Yon / Trac / Khang
+### Yon / Trac
 [same structure — or "No check-in received (file stale or missing)"]
 
 ---
@@ -195,9 +191,16 @@ _End of stand-up._
 
 Notification (send both — not fallback):
 
-### 1. Lark webhook — structured priority summary
+### 1. Lark CLI — structured priority summary
 
-POST to $LARK_WEBHOOK_URL with `msg_type: text`. Build the message from the compiled briefing using this structure — omit any section that has no content:
+Build the message from the compiled briefing using the structure below — omit any section with no content. Then send with:
+
+```bash
+lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
+LARK_EXIT=$?
+```
+
+Message structure:
 
 ```
 📋 Stand-Up — DAY DD Mon YYYY
@@ -215,7 +218,6 @@ POST to $LARK_WEBHOOK_URL with `msg_type: text`. Build the message from the comp
 • Dave: [first focus item] [🔴/⚠️ if mismatch] — PR #N if relevant
 • Yon: ...
 • Trac: ...
-• Khang: [No check-in] if absent
 
 🤖 AGENT TODO
 • project-manager: [next action]

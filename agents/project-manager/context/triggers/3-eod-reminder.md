@@ -86,13 +86,20 @@ Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (c
 
 Review standup/briefings/YYYY-MM/raid.md and confirm the blocker list is current (create if missing).
 
-## Step 4 — Commit
+## Step 4 — Commit and branch cleanup
+
+AGENT_BRANCH="pm/eod/YYYY-MM-DD"
 
 git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md
 git commit -m "pm(eod): YYYY-MM-DD"
-git push origin pm/eod/YYYY-MM-DD
+git push origin "$AGENT_BRANCH"
 gh pr create --title "pm(eod): YYYY-MM-DD" --base main --body "EOD decisions and RAID update YYYY-MM-DD"
-gh pr merge --merge --auto
+gh pr merge --merge --auto --delete-branch
+
+# Clean up local agent branch — only if it matches pm/* (never touch user branches)
+git checkout main
+git pull origin main
+git branch -d "$AGENT_BRANCH" 2>/dev/null || true
 ```
 
 ---

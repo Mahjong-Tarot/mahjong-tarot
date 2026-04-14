@@ -76,29 +76,83 @@ Write the weekly RAG report to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.m
 ⚠️ RISKS — top 3 with probability / impact / mitigation
 🔔 DECISIONS NEEDED — items requiring decision with deadline
 
-## Step 3 — Send notification
-
-Read agents/project-manager/context/pm-notification-guide.md for the Lark message text and HTML email template (Template 4 — Weekly RAG Report).
+## Step 3 — Send summary to Lark, full report via Resend
 
 Notification (send both — not fallback):
-1. Lark webhook: POST to $LARK_WEBHOOK_URL with the "Weekly RAG report" message from pm-notification-guide.md, substituting YYYY-MM-DD and copying the RAG status lines from the report.
-2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, write to `/tmp/weekly-rag-email.html`, then send:
+
+### 1. Lark webhook — structured priority summary
+
+POST to $LARK_WEBHOOK_URL with `msg_type: text`. Build the message from the RAG report using this structure — omit any section that has no content:
+
+```
+📊 Weekly Status — Week of YYYY-MM-DD
+
+🔴 RED — ESCALATION NEEDED
+• [Each red item — impact + immediate action required, one line each]
+(Omit section if none)
+
+🟡 AMBER — NEEDS ATTENTION
+• [Each amber item — owner + resolution date, one line each]
+(Omit section if none)
+
+🟢 GREEN
+• [Each green item — one line each]
+(Omit section if none)
+
+🔔 DECISIONS NEEDED
+• [Each open decision — deadline + who decides, one line each]
+(Omit section if none)
+
+⚠️ TOP RISKS
+• [Top 3 risks — probability / impact / mitigation, one line each]
+
+🤖 AGENT TODO (this week)
+• project-manager: [priority next action]
+• writer: [priority next action]
+• web-developer: [priority next action]
+• image-designer: [priority next action]
+(Include only agents with active work)
+
+📁 Full report: standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md
+```
+
+Rules:
+- RED items must always be first and include immediate action required
+- Every decision must include a deadline date
+- Keep each line under 80 characters
+- Do not include full risk tables or milestone lists — distil to one actionable phrase per item
+
+### 2. Resend CLI — full report
+
+Send the complete RAG report content:
+- Read standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md in full
+- Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, injecting the full content into `{{RAG_CONTENT}}`
+- Write to /tmp/weekly-rag-email.html, then run:
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \
      --to "$RESEND_TO" \
      --subject "Weekly Status Report — Week of YYYY-MM-DD" \
      --html-file /tmp/weekly-rag-email.html \
      --quiet
-   Full pattern in pm-notification-guide.md.
-3. If BOTH fail: append failure status inline at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
 
-## Step 4 — Commit
+### 3. If BOTH fail
+
+Append failure status inline at the bottom of standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. Do not create any alerts folder or alert files.
+
+## Step 4 — Commit and branch cleanup
+
+AGENT_BRANCH="pm/weekly-rag/YYYY-MM-DD"
 
 git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md
 git commit -m "pm(weekly-rag): YYYY-MM-DD"
-git push origin pm/weekly-rag/YYYY-MM-DD
+git push origin "$AGENT_BRANCH"
 gh pr create --title "pm(weekly-rag): YYYY-MM-DD" --base main --body "Weekly RAG report YYYY-MM-DD"
-gh pr merge --merge --auto
+gh pr merge --merge --auto --delete-branch
+
+# Clean up local agent branch — only if it matches pm/* (never touch user branches)
+git checkout main
+git pull origin main
+git branch -d "$AGENT_BRANCH" 2>/dev/null || true
 ```
 
 ---

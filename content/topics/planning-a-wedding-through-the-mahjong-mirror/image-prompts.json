@@ -1,0 +1,86 @@
+{
+  "topic": "Wedding planning with intention — using the Mahjong Mirror framework to uncover the Central Theme driving a couple's choices and clarify what they truly want from the marriage, before a single vendor is booked.",
+  "phrases": [
+    "Plan the marriage, not just the wedding.",
+    "Know what it's actually about.",
+    "The foundation holds. The party fades.",
+    "Tend the garden.",
+    "What do you really want?",
+    "Build something neither of you could build alone."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A garden path — one half meticulously tended, the other yielding to beautiful overgrowth. The tension between curated wedding perfection and the honest work of building a marriage.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A narrow path winds through an old walled garden at late afternoon golden hour. One side of the path is immaculately tended — trimmed hedges, pale stone pavers, ivory and sage green plants in full bloom. The other side gradually yields to beautiful overgrowth — vines curling over stone, moss between the cracks, soft light filtering through tangled branches. The atmosphere is warm and contemplative, not ominous. Antique gold light rakes across the scene. No people visible. Color palette: antique gold, warm ivory, soft sage, deep green shadow. Film quality, slightly textured. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "wed-facebook-en",
+      "concept": "A woman sitting alone, mid-journaling — writing her honest answer to the Central Theme question. Wedding planning materials pushed aside, untouched.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Cinematic editorial photograph of a woman sitting alone at a rustic wooden table near a large window in warm morning light. She is turned away from camera, seen in three-quarter profile, writing in an open journal with focused calm. Her handwriting fills the page. On the far edge of the table, slightly out of focus, a folded wedding brochure and a dusty rose ribbon swatch sit untouched and pushed aside. The room is soft and still — warm ivory walls, light flooding in from the left. She wears simple, unhurried clothing. The mood is private, deliberate, honest. Film grain aesthetic. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-vn.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "wed-facebook-vn",
+      "concept": "A text-based image — warm aged parchment with gold texture, designed to carry the phrase in post-production.",
+      "image_style": "TEXT",
+      "text": "Plan the marriage, not just the wedding.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Warm aged parchment texture fills the frame — deep cream with faint gold filigree veining along the edges, subtle and refined. The center of the image is clear and uncluttered, a soft ivory field that would hold typography cleanly. The right edge fades into a deeper antique gold. Small, barely visible brushstroke marks give the surface texture and depth without competing for attention. The overall feel is wise, grounded, and intimate — like a letter kept for decades. No text rendered in the image itself. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "wed-instagram",
+      "concept": "A still life featuring the Ducks suit card — mandarin ducks symbolize devoted partnership. The one card reference in this topic, Wednesday-eligible.",
+      "image_style": "SCENE",
+      "card": "Ducks (Suit card)",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A single Mahjong Mirror card — the Ducks suit card, depicting a pair of mandarin ducks in classical Chinese illustration style, printed on aged cream card stock with a thin antique gold border — rests on a piece of soft natural linen. Beside it, a single white camellia blossom, slightly opened. A slender gold ring lies nearby, catching warm diffused light. The composition is minimal and deliberate — three objects, nothing more. Light comes from one side, casting gentle shadows. Colors: ivory, antique gold, soft sage, warm white. The mood is tender and intentional, not decorative. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "thu-facebook-en",
+      "concept": "Two people sitting across from each other — one has just shared something honest, the other is listening without speaking. The moment of vulnerability.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Cinematic editorial photograph of two people — a woman and a man — sitting across from each other at a worn wooden table in a spare, quiet room. Each has a single piece of paper and a pen. The woman has leaned back slightly, eyes cast downward in thought. The man holds his paper, not yet speaking. Neither faces the camera — the woman is seen in three-quarter profile, the man from behind. The moment is suspended — tender and unresolved, the pause of honest listening. Warm afternoon light comes through a window off-frame. No wedding décor. Just two people in a quiet room being honest. Cinematic film still quality, warm ivory and soft sage tones. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-vn.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "thu-facebook-vn",
+      "concept": "Hands in gardening gloves holding a seedling — 'Tend the garden' as metaphor for marriage as ongoing cultivation.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up of a pair of hands in slightly worn fabric gardening gloves holding a small seedling — roots exposed, soil still clinging — over a patch of dark, prepared earth. The seedling's leaves are pale green, delicate, newly emerged. The hands hold it carefully, with intention but not ceremony. Light is soft and diffused — intimate and even. The earth below is dark and rich. Color palette: deep soil brown, soft sage green, warm ivory for the gloves. No face visible. No other elements in frame. The image is about potential, careful beginnings, and quiet tending. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "planning-a-wedding-through-the-mahjong-mirror",
+      "content_type": "thu-instagram",
+      "concept": "A split-tone background — warm antique gold plaster vs cool pale ivory — suggesting the gap between what a wedding performs and what a marriage requires.",
+      "image_style": "TEXT",
+      "text": "What do you really want?",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square composition split vertically down the center. The left half is a softly lit wall surface in warm antique gold — the texture of old plaster, faintly imperfect, slightly worn. The right half is a cooler, cleaner surface in pale ivory with the faintest sage undertone — almost bare, almost empty. The split is clean but not harsh — the two fields bleed very slightly into each other at the center seam. No objects, no people, no text rendered in the image. The composition should feel like a question waiting to be answered — stripped of ornament, honest in its simplicity. Square aspect ratio 1:1. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

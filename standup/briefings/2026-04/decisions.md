@@ -9,3 +9,4 @@
 | 2026-04-13 | PM agent standup workflow re-run × 3 — branch pm(standup-morning):2026-04-13 merged at 16:42 UTC | PM Agent | Confirmed via agents.md |
 | 2026-04-14 | EOD reminder delivered via Lark (HTTP 200); Resend blocked — unverified domain testing constraint (known) | PM Agent | No fallback log required; Lark delivery confirmed |
 | 2026-04-14 | EOD 5 PM reminder sent — both Lark (HTTP 200) and Resend email (id: af83ffe8) delivered successfully | PM Agent | Resend now confirmed working with User-Agent header; team notified for 2026-04-15 stand-up |
+| 2026-04-14 | EOD reminder (17:00 run) delivered via Gmail drafts to Dave + Yon — Lark/Resend env vars absent in this session; Gmail MCP used as interim channel | PM Agent | Manual send required from Trac's inbox; env vars should be confirmed in Claude Code settings for future runs |

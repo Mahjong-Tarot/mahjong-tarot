@@ -1,22 +1,36 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb } from '../lib/schema';
 import styles from '../styles/About.module.css';
 
 export default function About() {
+  const jsonLd = graph([
+    ORGANIZATION,
+    WEBSITE,
+    PERSON_BILL,
+    breadcrumb([
+      { name: 'Home', url: '/' },
+      { name: 'About Bill Hajdu', url: '/about' },
+    ]),
+    {
+      '@type': 'AboutPage',
+      url: 'https://www.mahjongtarot.com/about',
+      mainEntity: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+    },
+  ]);
+
   return (
     <>
-      <Head>
-        <title>About Bill Hajdu — Mahjong Tarot</title>
-        <meta name="description" content="Meet Bill Hajdu — The Firepig. 35+ years of divination practice combining Chinese astrology, Mahjong tile readings, and tarot. Former Air Force Interrogator and lifelong student of ancient wisdom." />
-        <meta property="og:title" content="About Bill Hajdu — Mahjong Tarot" />
-        <meta property="og:description" content="35+ years of divination practice. Ancient wisdom, modern clarity." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/about-portrait.webp" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/about" />
-      </Head>
+      <SEO
+        title="Bill Hajdu — Mahjong Tarot Reader & Chinese Astrologer (The Firepig) | About"
+        description="Bill Hajdu — The Firepig — has 35+ years of divination practice combining Chinese Mahjong tile readings, Four Pillars astrology, and tarot. Former U.S. Air Force Interrogator and author of The Mahjong Mirror."
+        path="/about"
+        image="/images/about-portrait.webp"
+        jsonLd={jsonLd}
+      />
 
       <Nav />
 
@@ -25,7 +39,7 @@ export default function About() {
         <section className={styles.pageHeader}>
           <div className="container">
             <span className="overline">Meet the Firepig</span>
-            <h1>Bill Hajdu</h1>
+            <h1>Bill Hajdu — Mahjong Tarot Reader &amp; Chinese Astrologer</h1>
             <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
               <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
               <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>

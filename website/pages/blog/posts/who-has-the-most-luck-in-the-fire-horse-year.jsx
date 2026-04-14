@@ -12,9 +12,9 @@ export default function WhoHasTheMostLuck() {
         <meta name="description" content="Tiger, Dog, and Sheep have the best alignment in the Fire Horse year — but luck isn't something that happens to you. It's something you create." />
         <meta property="og:title" content="Who Has the Most Luck in 2026 — Fire Horse Year?" />
         <meta property="og:description" content="People keep asking me: who has the most luck in 2026? I'll answer that question. But first, I need to tell you why it's the wrong question to ask." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/blog/who-has-the-most-luck-in-the-fire-horse-year.webp" />
+        <meta property="og:image" content="https://mahjongtarot.com/images/blog/who-has-the-most-luck-in-the-fire-horse-year.webp" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/blog/posts/who-has-the-most-luck-in-the-fire-horse-year" />
+        <link rel="canonical" href="https://mahjongtarot.com/blog/posts/who-has-the-most-luck-in-the-fire-horse-year" />
       </Head>
 
       <Nav />

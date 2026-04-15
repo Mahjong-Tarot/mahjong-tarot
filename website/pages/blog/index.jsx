@@ -78,25 +78,25 @@ export default function BlogIndex() {
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
-              <Link href="/blog/posts/swift-kelce-wedding-stars" className={styles.featuredImage}>
+              <Link href="/blog/posts/your-love-life-in-the-fire-horse-year" className={styles.featuredImage}>
                 <Image
-                  src="/images/blog/swift-kelce-wedding-stars.webp"
-                  alt="What the Stars Actually Say About the Swift-Kelce Wedding"
+                  src="/images/blog/your-love-life-in-the-fire-horse-year.webp"
+                  alt="Your Love Life in the Fire Horse Year — sign-by-sign relationship guide for 2026"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
               </Link>
               <div className={styles.featuredText}>
-                <span className="post-category">Romance</span>
+                <span className="post-category">Year of the Fire Horse</span>
                 <h2 className={styles.featuredTitle}>
-                  <Link href="/blog/posts/swift-kelce-wedding-stars">
-                    What the Stars Actually Say About the Swift-Kelce Wedding
+                  <Link href="/blog/posts/your-love-life-in-the-fire-horse-year">
+                    Your Love Life in the Fire Horse Year: What Every Sign Needs to Know
                   </Link>
                 </h2>
                 <p className={styles.featuredExcerpt}>
-                  Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements, the charts tell a completely different story.
+                  The Fire Horse doesn&rsquo;t care how solid you think your relationship is. Here&rsquo;s what it actually means for your sign &mdash; and what to do about it.
                 </p>
-                <Link href="/blog/posts/swift-kelce-wedding-stars" className="btn-secondary">Read the Article</Link>
+                <Link href="/blog/posts/your-love-life-in-the-fire-horse-year" className="btn-secondary">Read the Article</Link>
               </div>
             </div>
           </div>

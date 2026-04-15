@@ -88,7 +88,9 @@ Build the message from the RAG report using the structure below — omit any sec
 
 ```bash
 # --as bot uses tenant_access_token — no OAuth or user login required
-lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
+# Lark fallback: if lark-cli not installed globally, use npx
+LARK_CMD=lark-cli; command -v lark-cli &>/dev/null || LARK_CMD="npx lark-cli"
+$LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
 LARK_EXIT=$?
 ```
 
@@ -136,14 +138,40 @@ Rules:
 
 Send the complete RAG report content:
 - Read standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md in full
-- Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, injecting the full content into `{{RAG_CONTENT}}`
+- Convert the markdown content to HTML using Python before injecting (raw markdown must not appear in the email):
+   ```python
+   # Convert markdown → HTML for email injection
+   try:
+       import markdown as md_lib
+       rag_html = md_lib.markdown(raw_content, extensions=['nl2br', 'tables'])
+   except ImportError:
+       import subprocess
+       subprocess.run(['pip', 'install', 'markdown'], capture_output=True)
+       import markdown as md_lib
+       rag_html = md_lib.markdown(raw_content, extensions=['nl2br', 'tables'])
+   ```
+- Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, injecting `rag_html` (the HTML string, not raw markdown) into `{{RAG_CONTENT}}`
 - Write to /tmp/weekly-rag-email.html, then run:
+   if ! command -v resend &>/dev/null; then npm install -g resend; fi
+   TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ')
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \
-     --to "$RESEND_TO" \
+     --to $TO_ARGS \
      --subject "Weekly Status Report — Week of YYYY-MM-DD" \
      --html-file /tmp/weekly-rag-email.html \
      --quiet
+   RESEND_EXIT=$?
+   # Fallback: if CLI fails, send via Resend API directly using cURL
+   if [ $RESEND_EXIT -ne 0 ]; then
+     python3 -c "
+import json,subprocess,sys
+html=open('/tmp/weekly-rag-email.html').read()
+payload=json.dumps({'from':'$RESEND_FROM','to':'$RESEND_TO'.split(','),'subject':'Weekly Status Report — Week of YYYY-MM-DD','html':html})
+r=subprocess.run(['curl','-s','-o','/dev/null','-w','%{http_code}','-X','POST','https://api.resend.com/emails','-H','Authorization: Bearer $RESEND_API_KEY','-H','Content-Type: application/json','--data',payload],capture_output=True,text=True)
+sys.exit(0 if r.stdout.strip().startswith('2') else 1)
+"
+     RESEND_EXIT=$?
+   fi
 
 ### 3. If BOTH fail
 

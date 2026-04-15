@@ -3,7 +3,7 @@
 **Name**: `PM Standup Compile`
 **Schedule**: Weekdays at 9:00 AM Asia/Saigon (`0 2 * * 1-5` UTC)
 
-**Description**: At 9 AM, reads all five check-in files and pulls GitHub commits/PRs for each human member since yesterday 7 AM. Pairs reported work against actual git activity, flags mismatches (positive or negative). Compiles the full daily briefing including a Git Activity section. Sends summary via Lark → Resend CLI. Commits on a branch and opens a PR.
+**Description**: At 9 AM, reads all four check-in files and pulls GitHub commits/PRs for each human member since yesterday 7 AM. Pairs reported work against actual git activity, flags mismatches (positive or negative). Compiles the full daily briefing including a Git Activity section. Sends summary via Lark CLI and Resend (both always). Commits on a branch and opens a PR.
 
 ---
 
@@ -50,7 +50,9 @@ def parse_env(path):
 
 env = {}
 env.update(parse_env(".env"))
-env.update(parse_env(".env.local"))  # .env.local takes precedence
+env.update(parse_env(".env.development"))
+env.update(parse_env(".env.production"))
+env.update(parse_env(".env.local"))  # .env.local takes highest precedence
 
 missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
@@ -80,7 +82,7 @@ All writes go on this branch.
 
 ## Step 2 — Read check-in files
 
-Read all five files in standup/individual/:
+Read all four files in standup/individual/:
 - dave.md, yon.md, trac.md (human check-ins)
 - agents.md (agent updates — already populated by the 7 AM trigger)
 
@@ -196,6 +198,7 @@ Notification (send both — not fallback):
 Build the message from the compiled briefing using the structure below — omit any section with no content. Then send with:
 
 ```bash
+# --as bot uses tenant_access_token — no OAuth or user login required
 lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
 LARK_EXIT=$?
 ```

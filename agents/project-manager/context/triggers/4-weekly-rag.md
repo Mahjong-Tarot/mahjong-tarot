@@ -36,7 +36,9 @@ def parse_env(path):
 
 env = {}
 env.update(parse_env(".env"))
-env.update(parse_env(".env.local"))  # .env.local takes precedence
+env.update(parse_env(".env.development"))
+env.update(parse_env(".env.production"))
+env.update(parse_env(".env.local"))  # .env.local takes highest precedence
 
 missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
@@ -85,6 +87,7 @@ Notification (send both — not fallback):
 Build the message from the RAG report using the structure below — omit any section with no content. Then send with:
 
 ```bash
+# --as bot uses tenant_access_token — no OAuth or user login required
 lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
 LARK_EXIT=$?
 ```

@@ -34,11 +34,13 @@ def parse_env(path):
 
 env = {}
 env.update(parse_env(".env"))
-env.update(parse_env(".env.local"))  # .env.local takes precedence
+env.update(parse_env(".env.development"))
+env.update(parse_env(".env.production"))
+env.update(parse_env(".env.local"))  # .env.local takes highest precedence
 
 missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
 if missing:
-    raise SystemExit(f"ERROR: missing from .env / .env.local: {missing}")
+    raise SystemExit(f"ERROR: missing from env files (.env / .env.development / .env.production / .env.local): {missing}")
 
 with open("agents/project-manager/context/persona.md") as f:
     text = f.read()
@@ -70,8 +72,9 @@ Send a reminder to Dave, Yon, and Trac to write their check-in to standup/indivi
 
 Notification (send both — not fallback):
 1. Lark CLI (always — bot identity, "Labs" group chat):
+   # --as bot uses tenant_access_token — no OAuth or user login required
    lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
-     --text $'🌙 End-of-Day Reminder — YYYY-MM-DD\n\nPlease write your check-in to standup/individual/<name>.md tonight.\nThe PM agent compiles the stand-up tomorrow at 9 AM.\n\nFiles:\n• standup/individual/dave.md\n• standup/individual/yon.md\n• standup/individual/trac.md'
+     --text $'🌙 End-of-Day Reminder — YYYY-MM-DD\n\nPlease write your check-in tonight. The PM agent compiles tomorrow at 9 AM.\n\nYour check-in file:\n• Dave  → standup/individual/dave.md\n• Yon   → standup/individual/yon.md\n• Trac  → standup/individual/trac.md'
    LARK_EXIT=$?
 2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute `{{DATE}}` and `{{TOMORROW}}` in a copy of `agents/project-manager/context/template/emails/3-eod-reminder.html`, write to `/tmp/eod-reminder-email.html`, then send:
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
@@ -85,16 +88,46 @@ Notification (send both — not fallback):
 
 ## Step 3 — Update decision and RAID logs
 
-Append any key decisions made today to standup/briefings/YYYY-MM/decisions.md (create if missing).
+### decisions.md
 
-Review standup/briefings/YYYY-MM/raid.md and confirm the blocker list is current (create if missing).
+Read today's compiled stand-up at standup/briefings/YYYY-MM/YYYY-MM-DD.md (if it exists).
+Look for evidence of explicit decisions — things that changed scope, schedule, architecture, or were deliberately agreed. Sources to check:
+- Merged PR descriptions from today's git log
+- Entries marked "Decision:" or "Agreed:" in the briefing file
+- Commit messages that signal a deliberate choice (e.g. "decided to...", "switching to...", "removing...")
+
+If you find key decisions, append them to standup/briefings/YYYY-MM/decisions.md using this exact format:
+```
+## YYYY-MM-DD
+- [Decision text]
+```
+
+If you find NO key decisions, do NOT write anything to decisions.md. Do NOT invent decisions.
+Create decisions.md (with just the header) only if it does not exist and you have something to write.
+
+### raid.md
+
+Read standup/briefings/YYYY-MM/raid.md (if it exists).
+Check if any listed blockers were resolved today (look for merged PRs or commits that close them).
+Mark resolved items as `RESOLVED — YYYY-MM-DD`. Do NOT add new blockers here — those come from the morning compile.
+If raid.md does not exist, create it with an empty table:
+```
+# RAID Log — YYYY-MM
+| Type | Item | Owner | Status |
+|------|------|-------|--------|
+```
+
+IMPORTANT: Do not invent decisions or blockers. Only write what is directly evidenced by files you read.
 
 ## Step 4 — Commit and branch cleanup
 
 AGENT_BRANCH="pm/eod/YYYY-MM-DD"
 
-git add standup/briefings/YYYY-MM/decisions.md standup/briefings/YYYY-MM/raid.md
-git commit -m "pm(eod): YYYY-MM-DD"
+# Only add files that were actually written — skip silently if not created
+git add standup/briefings/YYYY-MM/decisions.md 2>/dev/null || true
+git add standup/briefings/YYYY-MM/raid.md 2>/dev/null || true
+# Only commit if there are staged changes; skip commit if nothing was written
+git diff --cached --quiet && echo "Nothing to commit — skipping" || git commit -m "pm(eod): YYYY-MM-DD"
 git push origin "$AGENT_BRANCH"
 gh pr create --title "pm(eod): YYYY-MM-DD" --base main --body "EOD decisions and RAID update YYYY-MM-DD"
 gh pr merge --merge --auto --delete-branch

@@ -67,7 +67,7 @@ DEPLOYMENT STATUS — YYYY-MM-DD [HH:MM]
 
 ### 5. Log to monthly report (weekly cadence only)
 
-When running as part of the Friday status report, append a `#### Deployments` sub-block under the weekly status entry in `agents/project manager/output/reports/YYYY-MM.md`:
+When running as part of the Friday status report, append a `#### Deployments` sub-block under the weekly RAG report in `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md`:
 
 ```markdown
 #### Deployments this week

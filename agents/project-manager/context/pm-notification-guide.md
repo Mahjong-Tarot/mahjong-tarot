@@ -207,11 +207,21 @@ Placeholders: `{{DAY}}`, `{{DATE}}`, `{{CONFLICTS_OR_NONE}}`, `{{DAVE_FOCUS}}`, 
 
 ---
 
-### Template 3 — End-of-Day Reminder
+### Template 3a — End-of-Day Reminder (pending people only)
 
 Subject: `Check-In Reminder — Tonight for YYYY-MM-DD`
 File: `agents/project-manager/context/template/emails/3-eod-reminder.html`
 Placeholders: `{{DATE}}`, `{{TOMORROW}}`
+Recipients: people whose check-in `date:` does **not** match today
+
+---
+
+### Template 3b — End-of-Day Acknowledgment (submitted people only)
+
+Subject: `You're all set — Check-In Received for YYYY-MM-DD`
+File: `agents/project-manager/context/template/emails/3b-eod-submitted.html`
+Placeholders: `{{DATE}}`, `{{TOMORROW}}`
+Recipients: people whose check-in `date:` matches today exactly
 
 ---
 

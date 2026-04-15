@@ -5,8 +5,9 @@
 | ID | Risk | Likelihood | Impact | Owner | Status |
 |----|------|-----------|--------|-------|--------|
 | R-01 | Resend domain not verified — email notifications only reach account owner | Low | Medium | Trac | Mitigated — Resend confirmed delivering to full team as of 2026-04-14 EOD; verify edge8.ai domain for production |
-| R-02 | Individual check-ins (dave.md, yon.md, trac.md, khang.md) last updated 2026-04-11 — stale for 3 days | Medium | Medium | Dave/Yon/Trac/Khang | Open — EOD reminder sent 2026-04-14 |
+| R-02 | Individual check-ins stale — Yon last updated 2026-04-11 (4 days stale); Khang not tracked in current workflow | Medium | Medium | Yon | Open — EOD Git-status reminder sent to Dave/Yon 2026-04-15 17:00; Dave and Trac filed 2026-04-15, Yon still pending |
 | R-03 | Automation environment occasionally has network unreachable errors (seen 2026-04-13) | Low | Low | Trac | Monitoring — Lark succeeded 2026-04-14, network stable |
+| R-04 | Gmail MCP in scheduled-task environment exposes no send capability (only create_draft) — limits channel options for triggers that specify Gmail | Low | Low | Trac | Open — documented 2026-04-15; Lark + Resend remain primary channels for team notifications |
 
 ## Assumptions
 
@@ -21,7 +22,8 @@
 | ID | Issue | Priority | Owner | Status |
 |----|-------|---------|-------|--------|
 | I-01 | Resend email limited to account owner in testing mode | Medium | Trac | Resolved — full team delivery confirmed 2026-04-14; domain verification still recommended for production |
-| I-02 | Check-in files not updated since 2026-04-11 | Medium | All | Open — EOD reminder re-sent 2026-04-14 17:00 via Lark + email |
+| I-02 | Check-in files stale — Yon still on 2026-04-11 | Medium | Yon | Open — Dave/Trac refreshed 2026-04-15; Git-status reminder sent to Yon 2026-04-15 17:00 |
+| I-03 | Designer agent tiles-and-candles prompt regression (flagged 2026-04-14) | High | Dave | Resolved 2026-04-15 — designer agent confirmed functional in production |
 
 ## Dependencies
 

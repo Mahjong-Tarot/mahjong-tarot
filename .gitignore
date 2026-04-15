@@ -92,3 +92,4 @@ website/package-lock.json
 .next/
 docs/*
 scheduled_tasks.lock
+node-compile-cache/*

@@ -2,16 +2,13 @@ date: 2026-04-15
 name: Trac
 
 ## Today's focus
-- Refine, validate, and finalize the complete-infinite-leverage-blueprint bootstrap setup prompt
-- Figure out Claude Code channels to receive messages from Lark (two-way communication)
+- Refine client bootstrap prompt for non-tech users (infinite leverage blueprint)
+- Fix triggers prompt and align PM-related MD files for accurate PM agent messaging
 
 ## Notes
-- Single Lark app serves as mediator bot for all agent-to-human notifications
-- One-shot setup prompts documented at https://edge8company.sg.larksuite.com/wiki/WX7rwqpAaitcyLkLyx7lqBedg5y
-- Lark Auth scope reference: https://edge8company.sg.larksuite.com/docx/Y1AFdbiiOokq3LxicWRl84ergoe
-- Claude Code CLI permission guide for smooth scheduled task execution: https://edge8company.sg.larksuite.com/wiki/LGRKw5RJviqncnkJDbmldwtag6g
+- Bootstrap prompt has two parts:
+  1. Prerequisites/manual setup — runs in Claude chat to guide clients through initial config (pre-Git install)
+  2. Automated setup — runs in Claude Code after Git is installed, handles remaining steps up to workflow creation for each agent; some steps require user permission
 
 ## Blockers
-- Messages are one-way only (Claude Code → Lark group); no reply path back from Lark to Claude Code
-- RemoteTrigger cannot access Lark CLI, Resend CLI, or their APIs — scheduled notifications must run locally
-- Local triggers must still be configured manually; cannot be set up by prompting Claude Code
+- Cannot fully test clean setup yet — needs fresh accounts on both Mac and Windows machines; testing expected tonight, results to be reported tomorrow

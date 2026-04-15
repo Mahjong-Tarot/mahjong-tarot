@@ -1,11 +1,28 @@
 # Automated Marketing Team — One-Click Bootstrap
 
-> **HOW TO USE:** Paste the entire contents of this file into a new Claude Code session.
-> Claude Code will interview you, then generate your complete AI marketing team setup.
-> Estimated time: 45–90 minutes (most of that is you answering questions and completing manual steps).
+> **PREREQUISITE:** Claude Desktop with a Pro plan is required. Claude Code is included.
+>
+> **HOW TO USE — TWO PHASES:**
+>
+> **Phase A — Claude Desktop Cowork (do this first, ~15 min):**
+> 1. Open Claude Desktop → switch to Cowork mode
+> 2. Paste this file into Cowork
+> 3. Cowork will install git, GitHub CLI, and your accounts via computer use
+> 4. You will need to log in to GitHub in your browser (one manual step)
+> 5. When Cowork says "ready for Claude Code", proceed to Phase B
+>
+> **Phase B — Claude Code (after Phase A completes):**
+> Open Claude Code → paste this file → it detects environment is ready and starts the interview.
+> **First milestone: website live on Vercel — ~45–60 minutes** (interview + scaffold + deploy).
+> Agent file generation happens after, taking 2–4 hours across 1–2 more sessions.
+> If a session ends mid-way, start a new session and say "resume bootstrap from Phase X".
 >
 > **RECOMMENDED MODEL:** Claude Opus 4.6 (`claude-opus-4-6`) — this is a complex, multi-phase setup
 > task. Do not run it on Haiku; the reasoning quality matters for generating coherent agent personas.
+>
+> **COST NOTE — Postiz social publishing:** The free Postiz tier does not include API access.
+> Auto-publishing requires the Postiz Standard plan (~$19/month cloud) or a self-hosted instance.
+> If you only want drafts to review manually, you can skip Postiz entirely and the rest still works.
 
 ---
 
@@ -28,23 +45,30 @@ Before anything else, create a working directory and output this to the user:
 Welcome. I'm going to set up your automated AI marketing team.
 
 Here's what will happen:
-  Phase 0    — I check your computer has the tools it needs (git, GitHub CLI, etc.)
-  Phase 1-3  — I interview you (about 30 questions across 3 groups)
-  Phase 4    — I generate all your agent files, workflows, and resources
-  Phase 5    — I scaffold your marketing website (Next.js, optional)
-  Phase 6    — I give you a manual checklist (accounts, API keys, schedules)
-  Phase 7    — I generate schedule files and the auto-publishing MCP server
-  Phase 8    — We run your first standup and verify everything works
+  Phase 0    — I set up your developer tools (git, GitHub CLI) — ~10 min first time
+  Phase 1-3  — I interview you (~30 questions across 3 groups)
+  Phase 4    — I scaffold your website and deploy it to Vercel [~30 min → live site]
+  Phase 5    — I generate your agent files, workflows, and resources [longest phase]
+  Phase 6    — Remaining account setup (Supabase, email, Telegram)
+  Phase 7    — Auto-publishing config (Postiz MCP — optional)
+  Phase 7b   — I generate your schedule files (run via Claude Desktop)
+  Phase 8    — Verification
 
-AUTO-PUBLISHING: Your Social Media Manager will automatically:
+  If this session ends before we finish, start a new session and say:
+  "Resume bootstrap from Phase [number]" — I'll pick up where we left off.
+
+AUTO-PUBLISHING NOTE: Social auto-publishing requires a paid Postiz plan (~$19/month).
+  You can skip this and still get everything else — agents, website, standup, blog publishing.
+
+AUTO-PUBLISHING (if using Postiz):
   • Draft TikTok carousels (6 slides) — you add trending music before going live
   • Schedule Instagram, Facebook, LinkedIn posts for optimal times
   • Notify you via Telegram when drafts are ready and when content goes live
   • Report weekly analytics every Monday morning
 
 There are things I CANNOT do automatically — you will need to:
-  • Create accounts on GitHub, Vercel, Supabase, Postiz, and your email platform
-  • Connect your social media accounts inside Postiz
+  • Create accounts on GitHub, Vercel, Supabase (and optionally Postiz)
+  • Connect your social media accounts inside Postiz (if using it)
   • Set up your Telegram bot (for team notifications)
   • Configure scheduled tasks in Claude Desktop
   • Approve content before it publishes (always your call)
@@ -55,224 +79,127 @@ Let's begin.
 
 Ask: "Are you ready to start? (type 'yes' to continue)"
 
-Wait for confirmation.
+Wait for confirmation, then immediately run the environment check below.
 
 ---
 
-## PHASE 0.5 — DEVELOPER ENVIRONMENT SETUP
+## PHASE 0 PART 2 — ENVIRONMENT SETUP
 
-**Run this immediately after the user types 'yes'. Do not skip or defer.**
-
-Many users are not developers. Before doing anything else, ensure git, GitHub CLI (`gh`),
-Supabase CLI, Vercel CLI, and Node.js are installed and authenticated. These are the
-foundational tools — nothing else in this setup works without them.
-
-### Detect the operating system
-
-```bash
-uname -s 2>/dev/null || echo "windows"
-```
+**Detect which platform you are running on first**, then follow the correct path.
 
 ---
 
-### macOS path
+### PATH A — Running in Claude Desktop Cowork (computer use available)
 
-**Step 1 — Check for Homebrew**
+Use computer use to install everything. Open the user's terminal and run:
 
+**macOS — open Terminal.app via computer use and run:**
 ```bash
-which brew
-```
-
-If Homebrew is NOT installed, output to the user and wait for confirmation:
-
-```
-Homebrew is not installed on your Mac. Homebrew is a free tool that makes installing
-developer software simple — you only need to do this once.
-
-Please open Terminal (press Cmd+Space, type "Terminal", press Enter) and run this command:
-
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-It will ask for your Mac password. Type it (you won't see it appear) and press Enter.
-This takes about 2–5 minutes. When the terminal says it's done, type "done" here to continue.
-```
-
-Wait for "done". Then activate Homebrew in the current session:
-```bash
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-```
-
-**Step 2 — Install git, GitHub CLI, Supabase CLI**
-
-```bash
+# Install Homebrew if missing
+which brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Activate (Apple Silicon)
+eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || eval "$(/usr/local/bin/brew shellenv)"
+# Install tools
 which git      || brew install git
 which gh       || brew install gh
+which node     || brew install node
+which vercel   || npm install -g vercel
 which supabase || brew install supabase/tap/supabase
-```
-
-**Step 3 — Install Node.js and Vercel CLI**
-
-```bash
-which node || brew install node
-which vercel || npm install -g vercel
-```
-
-**Step 4 — Authenticate GitHub CLI**
-
-```bash
-gh auth status 2>/dev/null
-```
-
-If not authenticated, output:
-
-```
-Next I need you to log in to GitHub.
-A browser window will open — log in (or create a free account at github.com first).
-Come back here and type "done" when the browser step is complete.
-```
-
-Run:
-```bash
-gh auth login --web --git-protocol https
-```
-
-Wait for "done". Verify:
-```bash
-gh auth status
-```
-
-If it fails, output: "Please run `gh auth login` directly in your terminal and follow the prompts, then type 'retry'." Wait for retry.
-
----
-
-### Windows path
-
-**Step 1 — Check for winget**
-
-```powershell
-winget --version
-```
-
-If missing, output:
-
-```
-Your Windows version doesn't have winget (the Windows package manager).
-Please update Windows: Start → Settings → Windows Update → Check for updates.
-Type "done" when complete.
-```
-
-Wait for "done".
-
-**Step 2 — Install git**
-
-```powershell
-winget install --id Git.Git -e --source winget --accept-source-agreements --accept-package-agreements
-```
-
-Output:
-
-```
-Git was installed. IMPORTANT: You must close this terminal and open a new one
-before continuing so Windows can find the git command.
-
-Open a new terminal (search "cmd" or "PowerShell" in the Start menu), then type "done".
-```
-
-Wait for "done".
-
-**Step 3 — Install GitHub CLI**
-
-```powershell
-winget install --id GitHub.cli -e --source winget --accept-source-agreements --accept-package-agreements
-```
-
-Output:
-
-```
-GitHub CLI installed. Close this terminal, open a new one, then type "done".
-```
-
-Wait for "done".
-
-**Step 4 — Install Node.js**
-
-```powershell
-winget install --id OpenJS.NodeJS.LTS -e --source winget --accept-source-agreements --accept-package-agreements
-```
-
-**Step 5 — Verify everything is accessible**
-
-```bash
+# Verify
 git --version && gh --version && node --version
 ```
 
-If any command fails:
+> Note: If Homebrew prompts for a Mac password, pause computer use and ask the user
+> to type their password in the terminal, then resume.
 
-```
-One of the tools isn't found yet. Close ALL terminal windows, open a fresh one, and run:
-
-  git --version
-  gh --version
-  node --version
-
-Tell me which one shows an error and I'll help you fix it before we continue.
-```
-
-Do not proceed until all three succeed.
-
-**Step 6 — Install Vercel CLI and Supabase CLI**
-
-```bash
+**Windows — open PowerShell as Administrator via computer use and run:**
+```powershell
+# Install tools
+winget install --id Git.Git            -e --accept-source-agreements --accept-package-agreements
+winget install --id GitHub.cli         -e --accept-source-agreements --accept-package-agreements
+winget install --id OpenJS.NodeJS.LTS  -e --accept-source-agreements --accept-package-agreements
+winget install --id Supabase.CLI       -e --accept-source-agreements --accept-package-agreements
+# If Supabase.CLI not found: https://github.com/supabase/cli/releases/latest
+# Refresh PATH in current session
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 npm install -g vercel
-npm install -g supabase
+# Verify
+git --version; gh --version; node --version
 ```
 
-**Step 7 — Authenticate GitHub CLI**
-
-```bash
-gh auth status 2>/dev/null
-```
-
-If not authenticated:
-
-```
-A browser window will open — log in to GitHub (create a free account at github.com if needed).
-Type "done" when the browser step is complete.
-```
-
+After installation, trigger GitHub login — **this step always requires the user**:
 ```bash
 gh auth login --web --git-protocol https
 ```
 
-Verify: `gh auth status`
+Output to user:
+```
+A browser window will open for GitHub login. Please log in or create a free account.
+Come back here and tell me "done" when the browser step is complete.
+```
+
+Wait for "done". Verify: `gh auth status`
+
+Confirm: `✅ Environment ready. All tools installed and GitHub authenticated.`
+
+Output: `You can now open Claude Code and paste this bootstrap file to continue.`
+
+**Stop here** — Phase B continues in Claude Code.
 
 ---
 
-### All platforms — configure git identity
+### PATH B — Running in Claude Code (Phase A already complete)
 
-Ask:
-
-```
-Two quick questions before we start the interview:
-
-A. What name should appear on your commits? (e.g. "Jane Smith" — this is visible on GitHub)
-B. What email address should appear on your commits? (use the same email as your GitHub account)
+Check whether Phase A was completed:
+```bash
+git --version 2>/dev/null && gh auth status 2>/dev/null && echo "READY" || echo "NOT_READY"
 ```
 
-Wait for answers, then run:
+**If NOT_READY**, output:
+```
+⚠️  git or GitHub CLI is missing or not authenticated.
+
+Please complete Phase A first:
+1. Open Claude Desktop → Cowork mode
+2. Paste this bootstrap file
+3. Cowork will install the required tools
+4. Then return here
+
+If you do not have Claude Desktop, ask Claude.ai to generate setup instructions
+for your operating system (Mac or Windows), run them in your terminal, then return here.
+```
+
+Stop.
+
+**If READY**, install the remaining tools Claude Code can handle:
+
+**macOS:**
+```bash
+eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || true
+which node     || brew install node
+which vercel   || npm install -g vercel
+which supabase || brew install supabase/tap/supabase
+```
+
+**Windows:**
+```powershell
+where.exe vercel   >$null 2>&1 || npm install -g vercel
+where.exe supabase >$null 2>&1 || winget install --id Supabase.CLI -e --accept-source-agreements
+```
+
+Configure git identity:
+```
+Two quick questions:
+A. Name for your commits? (e.g. "Jane Smith" — visible on GitHub)
+B. Email? (same as your GitHub account)
+```
+
 ```bash
 git config --global user.name "THEIR_ANSWER_A"
 git config --global user.email "THEIR_ANSWER_B"
 ```
 
-Save a note to `context/cli-setup-notes.md`:
-- OS detected
-- Which tools were already installed vs freshly installed
-- Reminder: replace `SUPABASE_ACCESS_TOKEN_PLACEHOLDER` and `POSTIZ_API_KEY_PLACEHOLDER`
-  in `.claude/settings.local.json` after completing the manual setup checklist
-
-Confirm: `Environment ready. git, GitHub CLI, Supabase CLI, Vercel CLI — all installed and authenticated. Starting the interview now.`
+Confirm: `✅ Environment ready. Proceeding to interview.`
 
 ---
 
@@ -425,297 +352,119 @@ Wait for all answers before proceeding.
 
 ---
 
-## PHASE 4 — GENERATE ALL FILES
+## PHASE 4 — WEBSITE SCAFFOLD + DEPLOY
 
-After collecting all answers, announce:
+**Goal: your website is live on Vercel before we generate any agent files.**
+This phase takes 20–30 minutes. Agent files come after (Phase 5).
+
+Announce:
+```
+Interview complete. Before generating your AI team files, I'm going to scaffold
+your website and get it live on Vercel. This is the fastest path to something real.
+
+Estimated time to a live website: ~30 minutes from now.
+```
+
+### 4A — Scaffold the website
+
+If the user said they have an existing website (Q27), skip scaffolding and note:
+"Existing website detected — skipping scaffold. Web Developer agent will work with your current platform."
+Move directly to Phase 5.
+
+If building fresh, check if a `website/` directory exists. If not, create it. Then run:
+```bash
+cd website && npx create-next-app@latest . --pages --no-typescript --no-tailwind --no-app --no-src-dir --yes
+```
+
+Create these files, fully written with real copy from the interview — no placeholder text:
+
+- `pages/index.jsx` — Homepage: hero, value proposition, CTA (newsletter / booking / shop — per Q7)
+- `pages/about.jsx` — About the business owner
+- `pages/contact.jsx` — Contact form stub (wired to `/api/contact`)
+- `pages/api/contact.js` — API stub: logs to console, returns 200 (Supabase wired later)
+- `pages/blog/index.jsx` — Blog listing (empty state: "Posts coming soon")
+- `components/Nav.jsx` — Navigation with business name + page links
+- `components/Footer.jsx` — Footer with social links, copyright
+- `components/NewsletterSignup.jsx` — Email signup form (wired later)
+- `styles/globals.css` — CSS variables for brand colors (Q28), typography
+- `website/.env.local.example` — template with NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
+- `website/supabase/001_initial_schema.sql` — contact_submissions and newsletter_subscribers tables
+
+Each page must: import Nav and Footer, include `<Head>` with title + meta description, use brand voice from Q8, use CSS variables (not inline styles), and reference brand colors from Q28.
+
+### 4B — Create GitHub repo and deploy to Vercel
+
+Run these commands to create the repo and push automatically:
+
+```bash
+gh repo create {business-name-kebab-case}-marketing --private --source=. --remote=origin --push
+```
+
+Then output this to the user — they need to complete Vercel in their browser:
 
 ```
-I have everything I need. Generating your complete marketing team setup now.
-This will take a few minutes — I'll tell you when each section is complete.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR REPO IS LIVE ON GITHUB. NOW DEPLOY TO VERCEL:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to: https://vercel.com/new
+2. Click "Import Git Repository" → select {repo-name}
+3. Set Root Directory to: website/
+4. Click Deploy (skip env vars for now — add them after Supabase is set up)
+
+Your site will be live in ~2 minutes. Come back and paste your Vercel URL.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-Then create the following complete file structure. Every file must use the actual
-answers from the interview — no placeholders like [INSERT NAME HERE].
+Wait for the user to paste their Vercel URL. Then confirm:
 
-### 4.0 — Global Claude Code Config (`~/.claude/CLAUDE.md`)
-
-This is a one-time machine-level setup. Write (or append) the following rules to
-`~/.claude/CLAUDE.md`. These apply to **every Claude Code session** on this machine,
-not just this project.
-
-Check first: if `~/.claude/CLAUDE.md` already exists, append only the sections that
-are not already present. Never overwrite existing content.
-
-```markdown
-## [GLOBAL] Git discipline
-
-- Before any file work, run this sequence to keep the working branch up-to-date and avoid conflicts:
-  1. `git status` — if there are uncommitted changes or merge conflicts, stop and report before proceeding.
-  2. Note the current branch name, then: `git checkout main && git pull origin main`
-  3. Switch back: `git checkout <working-branch>`
-  4. Merge main into the working branch: `git merge main`
-  5. If merge conflicts arise, stop and report them to the user before proceeding.
-- Never force-push (`--force` or `--force-with-lease`) to any branch.
-- Never skip hooks with `--no-verify`.
-- Never amend a commit that has already been pushed to a remote.
-- Never use `git add .` or `git add -A` — stage files explicitly by name to avoid committing unintended files (secrets, binaries, generated output).
-- Never create a commit unless explicitly instructed by the user.
-
-## [GLOBAL] Branch and PR discipline
-
-- Never push directly to `main` or `master`. All changes must go through a pull request.
-- Never merge a PR while CI checks are failing.
-- Confirm the correct base branch before opening a PR — wrong base = wrong diff.
-
-## [GLOBAL] Deployment discipline
-
-- Never deploy using `vercel deploy`, `vercel --prod`, or any direct CLI deploy command.
-- All deployments must flow through `git push` → CI/CD pipeline only.
-- Never manually promote a deployment unless explicitly instructed and no CI pipeline exists.
-- Never modify environment variables in the Vercel dashboard without recording the change in the repo's env documentation.
-- Vercel MCP and Vercel CLI are permitted for read-only operations only (deployment status, build logs, runtime logs). Any write action must go through CI/CD or requires explicit user confirmation.
-
-## [GLOBAL] Secrets and credentials
-
-- Never commit `.env` files, API keys, tokens, passwords, or credentials of any kind.
-- Never include secrets in code, comments, log statements, or commit messages.
-- If a secret is found in staged files, remove it and warn the user before doing anything else.
-
-## [GLOBAL] Destructive operations
-
-- Always confirm with the user before: `rm -rf`, `git reset --hard`, `git branch -D`, dropping database tables, or overwriting uncommitted work.
-- Investigate unknown files, branches, or lock files before deleting — they may be in-progress work.
-- Do not use destructive commands as shortcuts to bypass errors. Diagnose the root cause first.
-
-## [GLOBAL] Code quality gates
-
-- Never skip a failing test to ship faster. Fix it or escalate.
-- Never disable or bypass a linter, type-checker, or CI step without explicit instruction.
-- Do not ship code with known security vulnerabilities (OWASP top 10: injection, XSS, broken auth, etc.).
-
-## [GLOBAL] Continuous improvement — CLAUDE.md updates
-
-When a solution is explicitly approved by the user OR confirmed working, Claude must
-proactively invoke the `/capture-learning` skill without waiting to be asked.
-
-Guard conditions — only invoke if all are true:
-1. A concrete problem was encountered (not exploration or planning)
-2. A solution was applied and confirmed working
-3. The user explicitly approved the outcome
 ```
+✅ Website live at: [their URL]
+
+Now I'll generate your AI marketing team files. This is the longer phase.
+I'll check in at each checkpoint. You can pause and resume any time by saying
+"Resume bootstrap from checkpoint [5A/5B/5C/5D/5E]"
+```
+
+---
+
+## PHASE 5 — GENERATE AGENT FILES
+
+After the website is confirmed live, create the following files. Every file must use
+actual answers from the interview — no placeholders like [INSERT NAME HERE].
+
+Announce `✅ CHECKPOINT 5A complete` after finishing section 5.2.
+Announce `✅ CHECKPOINT 5B complete` after finishing section 5.3.
+Announce `✅ CHECKPOINT 5C complete` after finishing section 5.4.
+Announce `✅ CHECKPOINT 5D complete` after finishing section 5.5.
+Announce `✅ CHECKPOINT 5E complete` after finishing section 5.6.
+
+### 5.0 — Global Claude Code Config (`~/.claude/CLAUDE.md`)
+
+This is a one-time machine-level setup. Write (or append) to `~/.claude/CLAUDE.md`.
+These rules apply to every Claude Code session on this machine.
+
+Check first: if the file exists, append only missing sections. Never overwrite existing content.
+
+Generate the full rules file from these principles — write them out in detail:
+- **Git:** `git status` before any work; never force-push; stage files by name only; never commit without explicit instruction
+- **Branches:** never push directly to main; all changes via PR; confirm base branch first
+- **Deployment:** never deploy via CLI; all deploys through `git push` → CI/CD only; Vercel CLI is read-only (status, logs only)
+- **Secrets:** never commit `.env`, API keys, or credentials; if found in staged files, remove and warn immediately
+- **Destructive ops:** confirm before `rm -rf`, `git reset --hard`, dropping tables, or overwriting uncommitted work
+- **Quality:** never skip failing tests; never disable linters; no known security vulnerabilities (OWASP top 10)
+- **Learning:** when a solution is confirmed working, invoke the `/capture-learning` skill (only if: real problem encountered + solution applied + user approved)
 
 After writing, confirm: `~/.claude/CLAUDE.md — global rules written.`
 
 ---
 
-### 4.0b — Developer Environment Setup
+### 5.0b — MCP Configuration
 
-**Run this before generating any project files. Do not skip.**
+Developer tools were installed in Phase 0. This step only adds the MCP server entries
+so Claude agents can query Supabase and Postiz directly.
 
-Many users are not developers. Ensure git, GitHub CLI (`gh`), Supabase CLI, and
-Vercel CLI are installed and authenticated before any git or deploy commands are used.
-
-#### Detect the operating system
-
-```bash
-uname -s 2>/dev/null || echo "windows"
-```
-
-Act on the result:
-
----
-
-#### macOS path
-
-**Step 1 — Check for Homebrew**
-
-```bash
-which brew
-```
-
-If Homebrew is NOT installed, output this to the user and wait for confirmation:
-
-```
-Homebrew is not installed on your Mac. Homebrew is a free tool that makes installing
-developer software simple.
-
-Please open Terminal (Cmd+Space → "Terminal" → Enter) and run:
-
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-It will ask for your Mac password. Type it (you won't see it appear) and press Enter.
-This takes 2–5 minutes. When it's done, type "done" here to continue.
-```
-
-Wait for "done". Then activate Homebrew in the current session:
-```bash
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-```
-
-**Step 2 — Install git, GitHub CLI, Supabase CLI**
-
-```bash
-which git  || brew install git
-which gh   || brew install gh
-which supabase || brew install supabase/tap/supabase
-```
-
-**Step 3 — Install Vercel CLI**
-
-```bash
-which vercel || npm install -g vercel
-```
-
-(If `npm` is not found: `brew install node` first, then retry.)
-
-**Step 4 — Authenticate GitHub CLI**
-
-```bash
-gh auth status 2>/dev/null
-```
-
-If not authenticated, output:
-
-```
-A browser window will open — log in to GitHub (or create a free account at github.com first).
-Come back here and type "done" when the browser step is complete.
-```
-
-Run:
-```bash
-gh auth login --web --git-protocol https
-```
-
-Wait for "done", then verify: `gh auth status`
-
-If it fails: "Please run `gh auth login` in your terminal directly and follow the prompts, then type 'retry'."
-
----
-
-#### Windows path
-
-**Step 1 — Check for winget**
-
-```powershell
-winget --version
-```
-
-If missing, output:
-
-```
-Your Windows version doesn't have winget. Please update Windows:
-Start → Settings → Windows Update → Check for updates.
-Type "done" when updated.
-```
-
-Wait for confirmation.
-
-**Step 2 — Install git**
-
-```powershell
-winget install --id Git.Git -e --source winget --accept-source-agreements --accept-package-agreements
-```
-
-Output:
-
-```
-Git was installed. You MUST close this terminal and open a new one before continuing.
-Open a new terminal (search "cmd" or "PowerShell" in Start), then type "done".
-```
-
-Wait for "done".
-
-**Step 3 — Install GitHub CLI**
-
-```powershell
-winget install --id GitHub.cli -e --source winget --accept-source-agreements --accept-package-agreements
-```
-
-Output:
-
-```
-GitHub CLI installed. Close this terminal, open a new one, then type "done".
-```
-
-Wait for "done".
-
-**Step 4 — Install Node.js (needed for Vercel CLI)**
-
-```powershell
-winget install --id OpenJS.NodeJS.LTS -e --source winget --accept-source-agreements --accept-package-agreements
-```
-
-**Step 5 — Verify everything is accessible**
-
-```bash
-git --version && gh --version && node --version
-```
-
-If any command fails, output:
-
-```
-One of the tools isn't found. Close ALL terminal windows, open a fresh one, and run:
-
-  git --version
-  gh --version
-  node --version
-
-Tell me which one shows an error and I'll help fix it.
-```
-
-Do not proceed until all three succeed.
-
-**Step 6 — Install Vercel CLI and Supabase CLI**
-
-```bash
-npm install -g vercel
-npm install -g supabase
-```
-
-**Step 7 — Authenticate GitHub CLI**
-
-```bash
-gh auth status 2>/dev/null
-```
-
-If not authenticated:
-
-```
-A browser window will open — log in to GitHub (create a free account at github.com if needed).
-Type "done" when the browser step is complete.
-```
-
-```bash
-gh auth login --web --git-protocol https
-```
-
-Verify: `gh auth status`
-
----
-
-#### All platforms — configure git identity
-
-Ask:
-
-```
-Two quick questions before we generate your files:
-
-A. What name should appear on your commits? (e.g. "Jane Smith" — visible on GitHub)
-B. What email address? (use the same email as your GitHub account)
-```
-
-Wait for answers, then:
-```bash
-git config --global user.name "THEIR_ANSWER_A"
-git config --global user.email "THEIR_ANSWER_B"
-```
-
----
-
-#### After tools are confirmed — add MCPs to Claude settings
-
-Read `.claude/settings.local.json` (create it if it doesn't exist) and merge in:
+Read `.claude/settings.local.json` (create if missing) and merge — do not overwrite existing keys:
 
 ```json
 {
@@ -731,18 +480,14 @@ Read `.claude/settings.local.json` (create it if it doesn't exist) and merge in:
 }
 ```
 
-The user will replace both placeholder values after completing the manual setup checklist.
+Both placeholders are replaced by the user in Phase 6 after they create their accounts.
+If the user chose to skip Postiz, omit the postiz entry entirely.
 
-Create `context/cli-setup-notes.md` with:
-- Which OS was detected
-- Which tools were already installed vs freshly installed
-- Placeholder replacement instructions for Supabase and Postiz keys
-
-Confirm: `Environment ready. git, GitHub CLI, Supabase CLI, Vercel CLI all installed and authenticated.`
+Confirm: `MCP config written to .claude/settings.local.json`
 
 ---
 
-### 4.1 — Root Project Files
+### 5.1 — Root Project Files
 
 Create `CLAUDE.md` — the master project instructions file.
 
@@ -791,7 +536,7 @@ Create `.claude/rules/global-engineering.md` with these exact non-negotiable rul
 - When a solution is confirmed working, invoke the /capture-learning skill
 ```
 
-### 4.2 — Claude Code Agent Definitions (`.claude/agents/`)
+### 5.2 — Claude Code Agent Definitions (`.claude/agents/`)
 
 Create one `.md` file per agent in `.claude/agents/`. Use the project-manager agent
 from this repo as the format template. Each file needs:
@@ -861,7 +606,7 @@ from this repo as the format template. Each file needs:
   - Platforms set to "draft" → call postiz_create_draft, send Telegram for approval
   - DEFAULT for new clients: all platforms draft until explicitly changed
 
-### 4.3 — Agent Full Personas (`agents/`)
+### 5.3 — Agent Full Personas (`agents/`)
 
 For each of the 7 agents, create the full persona at `agents/<name>/context/persona.md`.
 
@@ -880,7 +625,7 @@ Each persona must include these sections (use the agent-creation-guideline at
 10. KPIs — metrics tracked
 11. Scheduled Tasks — triggers, times, actions, fallbacks
 
-### 4.4 — Skills
+### 5.4 — Skills
 
 For each agent, create at minimum the following skill files at
 `agents/<name>/context/skills/<skill-name>/SKILL.md`:
@@ -931,7 +676,7 @@ Each SKILL.md must contain:
 - Output format: exact structure of what the skill produces
 - Edge cases: at least 2 named failure modes and how to handle them
 
-### 4.5 — Resources & Context Files
+### 5.5 — Resources & Context Files
 
 Create `resources/brand-voice.md`:
 - Business name and tagline
@@ -983,7 +728,7 @@ welcoming them to the system.
 
 Create `standup/briefings/` directory with a `README.md` noting the folder structure.
 
-### 4.6 — Content Folder
+### 5.6 — Content Folder
 
 Create `content/topics/` directory structure with a sample topic folder:
 ```
@@ -999,179 +744,116 @@ based on content pillar 1 from their answers, framed for their ICP.
 
 ---
 
-## PHASE 5 — WEBSITE SCAFFOLD (CONDITIONAL)
+## PHASE 6 — REMAINING ACCOUNT SETUP
 
-Ask: "Do you want me to scaffold your marketing website now? (yes/skip)"
-
-**If YES:**
-
-Check if a `website/` directory exists. If not, create it.
-
-Run:
-```bash
-cd website && npx create-next-app@latest . --pages --no-typescript --no-tailwind --no-app --no-src-dir --yes
-```
-
-Then create these page stubs, fully customized with the business name, brand voice,
-and ICP from the interview:
-
-- `pages/index.jsx` — Homepage with hero, value proposition, CTA to newsletter/contact
-- `pages/about.jsx` — About the business owner
-- `pages/contact.jsx` — Contact form (stub, wired to Supabase later)
-- `pages/blog/index.jsx` — Blog listing page
-- `components/Nav.jsx` — Navigation with business name and main links
-- `components/Footer.jsx` — Footer with social links, copyright
-- `components/NewsletterSignup.jsx` — Email signup (ready to wire to email platform)
-- `styles/globals.css` — Brand colors as CSS variables (from Q28)
-
-Create `website/supabase/001_initial_schema.sql` with tables:
-- `contact_submissions` (id, name, email, message, created_at)
-- `newsletter_subscribers` (id, email, source, status, created_at)
-
-**If SKIP:**
-
-Note this in the final summary. The Web Developer agent will need this before the
-first publish run.
-
----
-
-## PHASE 6 — MANUAL INTEGRATION CHECKLIST
-
-Generate this checklist and save it to `context/manual-setup-checklist.md`.
-Also print it to the user.
+GitHub and Vercel are already done (Phase 4). This checklist covers the remaining
+services. Generate it and save to `context/manual-setup-checklist.md`. Also print it.
 
 ```
-MANUAL SETUP — COMPLETE THESE STEPS YOURSELF
+REMAINING SETUP — COMPLETE THESE STEPS YOURSELF
 (Claude Code cannot create accounts or store credentials for you)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 1 — GitHub Repository                                    ⏱ ~5 min
+STEP 1 — Supabase project (database)                          ⏱ ~10 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-□ Create a private GitHub repo: https://github.com/new
-  Name:    {business-name-kebab-case}-marketing
-  Private: YES (this repo contains your business strategy)
-  Do NOT initialize with README
-
-□ In your terminal, run:
-  git init
-  git add CLAUDE.md .claude/ agents/ context/ resources/ content/ standup/
-  git commit -m "initial: automated marketing team setup"
-  git remote add origin https://github.com/{your-github-username}/{repo-name}.git
-  git push -u origin main
-
-□ If you're adding the website:
-  git add website/
-  git commit -m "feat: website scaffold"
-  git push
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 2 — Vercel (website hosting)                             ⏱ ~10 min
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-□ Sign up at https://vercel.com (GitHub login recommended)
-□ Click "Add New Project" → Import from GitHub → select your repo
-□ Set Root Directory to: website/
-□ Add these environment variables (you'll get the values in Step 3):
-    NEXT_PUBLIC_SUPABASE_URL     = (from Supabase)
-    NEXT_PUBLIC_SUPABASE_ANON_KEY = (from Supabase)
-□ Click Deploy
-□ Note your Vercel URL: ___________________________
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 3 — Supabase (database for website)                      ⏱ ~10 min
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-□ Sign up at https://supabase.com
+□ Sign up at https://supabase.com (free)
 □ Create a new project, name it: {business-name}-marketing
 □ Go to Project Settings → API → copy:
-    Project URL   → save as NEXT_PUBLIC_SUPABASE_URL in Vercel
-    Anon key      → save as NEXT_PUBLIC_SUPABASE_ANON_KEY in Vercel
-□ Go to SQL Editor → paste the contents of website/supabase/001_initial_schema.sql → Run
-□ Verify: go to Table Editor — you should see contact_submissions and newsletter_subscribers
+    Project URL   → this is NEXT_PUBLIC_SUPABASE_URL
+    Anon key      → this is NEXT_PUBLIC_SUPABASE_ANON_KEY
+□ Go to SQL Editor → paste website/supabase/001_initial_schema.sql → Run
+□ Table Editor should now show: contact_submissions + newsletter_subscribers
+□ In Vercel → your project → Settings → Environment Variables → add both values above
+□ Redeploy: Vercel → Deployments → Redeploy latest
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 4 — Postiz (social media auto-publishing)                ⏱ ~15 min
+STEP 2 — Supabase MCP token (for Claude agents)               ⏱ ~2 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-□ Sign up at https://postiz.com (free tier available; paid plan needed for API access)
+□ Go to: https://supabase.com/dashboard/account/tokens
+□ Create a new token, name it: {business-name}-claude
+□ Open .claude/settings.local.json
+□ Replace SUPABASE_ACCESS_TOKEN_PLACEHOLDER with the token
+□ Save and restart Claude Code
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 3 — Postiz (social auto-publishing — optional)           ⏱ ~15 min
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SKIP THIS STEP if you chose not to use Postiz (paid plan required for API access).
+
+□ Sign up at https://postiz.com (Standard plan ~$19/month for API)
 □ Connect your social accounts: Settings → Channels → connect each platform
-    (Instagram, TikTok, Facebook, LinkedIn, X — whatever you use)
 □ Get your API key: Settings → Developers → Public API → Generate key
-□ Open .claude/settings.local.json → find "POSTIZ_API_KEY_PLACEHOLDER"
-    Replace it with your actual key
-    Result: "url": "https://api.postiz.com/mcp/sk-your-actual-key"
-□ Restart Claude Code
+□ Open .claude/settings.local.json → replace POSTIZ_API_KEY_PLACEHOLDER with your key
+□ Save and restart Claude Code
 □ Verify: @social-media-manager list my connected platforms
-    (You should see each connected channel listed)
 
 IMPORTANT — TikTok:
 □ TikTok requires a Business or Creator account for API access
-□ All TikTok posts are created as SELF_ONLY drafts — you open the TikTok app
-  → Drafts → add trending music → publish manually
+□ All TikTok posts are SELF_ONLY drafts — open TikTok app → Drafts → add music → publish
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 6 — Email Platform                                       ⏱ ~10 min
+STEP 4 — Email Platform                                       ⏱ ~10 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 □ {IF BREVO} Sign up at https://brevo.com (free up to 300 emails/day)
   → Account → SMTP & API → API Keys → Create
   → Add to Vercel env vars as: EMAIL_API_KEY
-  → Create your first list: name it "Newsletter"
-  → Note the list ID: _____________
+  → Create your first list: name it "Newsletter" → note the list ID: ________
 
 □ {IF OTHER PLATFORM} Add your API key to Vercel env vars as: EMAIL_API_KEY
-  Note your subscriber list ID: ____________________
+  Note your subscriber list ID: ________
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 7 — Telegram Bot (team notifications)                    ⏱ ~5 min
+STEP 5 — Telegram Bot (notifications)                         ⏱ ~5 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 {INCLUDE ONLY IF user answered YES to Q20}
 
-□ Open Telegram → search for @BotFather → tap Start
+□ Open Telegram → search @BotFather → tap Start
 □ Send: /newbot
 □ Name your bot: {BusinessName}MarketingBot
-□ Username: {businessname}marketing_bot  (must end in _bot)
+□ Username: {businessname}marketing_bot (must end in _bot)
 □ Copy the token BotFather gives you
-□ Add the Telegram plugin to Claude Code:
-  → In Claude Desktop: Settings → Claude Code → Plugins
-  → Enable: telegram@claude-plugins-official
-  → Paste your bot token when prompted
-□ Send your bot a message to activate it
-□ Note your chat ID: ________________
+□ In Claude Desktop: Settings → Claude Code → Plugins → telegram@claude-plugins-official
+□ Paste your bot token when prompted
+□ Send your bot a message to activate it. Note your chat ID: ________
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 8 — Claude Desktop Schedules (Telegram reminders only)   ⏱ ~10 min
+STEP 6 — Claude Code Local Schedules                          ⏱ ~10 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Most automated tasks (standup compile, content calendar, social drafts,
-weekly reports) are already scheduled in Anthropic's cloud — you don't need to
-do anything for those. They run 24/7 without your laptop being on.
+ALL scheduled tasks run as local Claude Code schedules on your machine.
+Read agents/project-manager/context/schedule-desktop-tasks.md for the exact commands.
 
-These two tasks MUST run on your computer because they send Telegram messages
-via your local Claude Code Telegram plugin.
+□ Daily standup morning reminder → Mon-Fri {7am your timezone}
+  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
 
-Read the file: agents/project-manager/context/schedule-desktop-tasks.md
-It contains the exact copy-paste commands for your timezone.
+□ Daily standup compile → Mon-Fri {9am your timezone}
+  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
 
-□ Daily standup morning reminder  → Mon-Fri {7am your timezone}
-  Open Claude Desktop → type the command from schedule-desktop-tasks.md
+□ EOD check-in reminder → Mon-Fri {5pm your timezone}
+  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
 
-□ EOD check-in reminder           → Mon-Fri {5pm your timezone}
-  Open Claude Desktop → type the command from schedule-desktop-tasks.md
+□ Weekly content calendar → 1st of each month {9am your timezone}
+  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
 
-IMPORTANT: These only fire when Claude Desktop is open and your laptop is on.
-If you close your laptop, the reminder won't send that day — that's expected.
+□ Weekly performance report → Friday {4pm your timezone}
+  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
+
+IMPORTANT: Schedules only fire when Claude Desktop is open and your laptop is on.
+Close the laptop → reminder doesn't fire that day. That's expected.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 9 — Custom Domain (optional)                             ⏱ ~15 min
+STEP 7 — Custom Domain (optional)                             ⏱ ~15 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 □ In Vercel → your project → Settings → Domains
 □ Add: {user's domain from Q4}
-□ Follow Vercel's DNS instructions (update at your domain registrar)
-□ Wait 5-30 minutes for DNS to propagate
+□ Follow Vercel's DNS instructions at your domain registrar
+□ Wait 5–30 minutes for DNS to propagate
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 WHEN DONE: Come back and tell me "setup complete"
@@ -1180,10 +862,11 @@ WHEN DONE: Come back and tell me "setup complete"
 
 ---
 
-## PHASE 7 — AUTO-PUBLISHING VIA COMPOSIO MCP
+## PHASE 7 — AUTO-PUBLISHING VIA POSTIZ MCP
 
-No custom MCP server to build. Composio provides Postiz and TikTok as ready-made
-hosted MCP servers — just configure and authenticate.
+**Skip this phase entirely if the user chose not to use Postiz.**
+
+No custom MCP server to build. Postiz hosts their own MCP server — just configure it.
 
 ### What Postiz MCP provides (8 tools, all platforms, one config)
 
@@ -1264,70 +947,45 @@ If any postiz tool returns an error mentioning the API key, output:
 
 ## PHASE 7b — SCHEDULE FILE GENERATION
 
-### The two scheduling systems
-
-There are two different ways to schedule automated tasks. Use the right one for each task:
-
-| System | When to use | Requires |
-|---|---|---|
-| **Claude Desktop CronCreate** | Task sends Telegram messages (Project Manager reminders, notifications) | Laptop on + Claude Desktop open |
-| **RemoteTrigger (CCR)** | Task does file work only (read/write/commit, Postiz API via Bash) | Nothing — runs in Anthropic cloud 24/7 |
-
-**Rule:** If the task calls the Telegram MCP → Claude Desktop.
-If the task only reads/writes files or calls Postiz via Bash → RemoteTrigger.
-
----
-
-### 7b.1 — Tasks for Claude Desktop (Telegram-dependent)
+All scheduled tasks use **Claude Code local schedules** (CronCreate via Claude Desktop).
+There is no remote or cloud scheduling — everything runs on the user's machine.
 
 Create `agents/project-manager/context/schedule-desktop-tasks.md`.
 
-This file must contain copy-paste CronCreate commands for:
+This file must contain copy-paste `/schedule` commands for ALL tasks below.
+For each task: include the exact cron expression (converted to the user's timezone from Q21),
+the agent prompt, and a one-line plain-language description.
+
+Format each entry as:
 
 ```
-# Daily standup morning reminder — sends Telegram prompt to team
-# Runs: Mon-Fri {7am user timezone → converted to UTC}
-/schedule morning standup reminder
-
-# EOD check-in reminder — sends Telegram prompt to team
-# Runs: Mon-Fri {5pm user timezone → converted to UTC}
-/schedule EOD reminder
+# [Task name]
+# Schedule: [human-readable] → Mon-Fri {time} {timezone}
+# Command to paste into Claude Desktop:
+/schedule "[agent prompt]" --cron "[cron expression]"
 ```
 
-For each task, include the exact UTC cron expression and the prompt the agent will run.
-Format must be copy-paste ready for the user to enter in Claude Desktop.
+Tasks to include:
+
+| Task | When | Agent prompt |
+|---|---|---|
+| Morning standup reminder | Mon-Fri 7am | Remind Dave, Yon, and Trac to write their standup check-in to standup/individual/<name>.md |
+| Standup compile | Mon-Fri 9am | Read standup/individual/*.md, compile today's briefing, write to standup/briefings/YYYY-MM/YYYY-MM-DD.md |
+| EOD check-in reminder | Mon-Fri 5pm | Send end-of-day reminder: write tonight's standup check-in for tomorrow's 9am compile |
+| Content calendar | 1st of month 9am | Read resources/content-calendar.md and resources/brand-voice.md, generate next month's content calendar draft, write to content/calendar/YYYY-MM.md |
+| Weekly performance report | Friday 4pm | Read standup/briefings/ for this week, generate RAG status report, write to standup/briefings/YYYY-MM/weekly-rag.md |
+
+Adapt all times to the user's timezone (Q21). Convert to their local time — do not use UTC.
 
 Also create `agents/project-manager/context/workflows/daily-standup.md` with:
 - Phase 1: Morning reminder (what the agent sends, to whom, format)
-- Phase 2: Compile standup (what it reads, how it summarizes, where it writes)
+- Phase 2: Compile (what it reads, how it summarizes, where it writes)
 - Phase 3: Distribution (who gets the compiled brief, via which channel)
 - Fallback for each phase (what happens if a team member hasn't checked in)
 
 ---
 
-### 7b.2 — Tasks for RemoteTrigger (file-only, cloud-scheduled)
-
-**Claude Code will schedule these automatically in Phase 8 using the `/schedule` skill.**
-Do not put these in the manual checklist — the user does not need to touch them.
-
-Create `agents/project-manager/context/schedule-remote-tasks.md` with the following
-tasks and their prompts (used as CCR session prompts). Claude Code will use this file
-as input when running `/schedule` in Phase 8.
-
-Tasks to schedule via RemoteTrigger:
-
-| Task | Cron (UTC) | Local time | Agent prompt |
-|---|---|---|---|
-| Daily standup compile | `0 2 * * 1-5` | 9am Mon-Fri | Read standup/individual/*.md, compile briefing, commit to standup/briefings/YYYY-MM/YYYY-MM-DD.md |
-| Content calendar draft | `0 2 1 * *` | 9am 1st of month | Read resources/, generate next month's content calendar draft, commit to content/calendar/ |
-| Weekly social drafts | `0 2 * * 5` | 9am Friday | Read content/approved/, call Postiz REST API (key in context/postiz-config.yml) for each file, move to content/published/ |
-| Weekly performance report | `0 9 * * 5` | 4pm Friday | Read standup/briefings/, generate RAG status report, commit to standup/briefings/YYYY-MM/weekly-rag.md |
-
-Adapt all cron times to the user's timezone (Q21) before writing the file.
-
----
-
-## PHASE 8 — VERIFICATION + REMOTE SCHEDULE SETUP
+## PHASE 8 — VERIFICATION
 
 After the user says "setup complete", run the following in order:
 
@@ -1336,24 +994,26 @@ After the user says "setup complete", run the following in order:
 2. Check that all 7 `agents/*/context/persona.md` files exist
 3. Check that `resources/brand-voice.md`, `resources/audience-personas.md`, and
    `resources/content-calendar.md` all exist and contain real content (not blank)
-4. Check that `context/postiz-setup.md` exists
-5. Check that `.claude/settings.local.json` includes the postiz MCP entry with a URL
-   and the supabase MCP entry
+4. Check that `agents/project-manager/context/schedule-desktop-tasks.md` exists and
+   contains all 5 scheduled tasks with real cron expressions and agent prompts
+5. If Postiz is enabled: check `.claude/settings.local.json` includes the postiz MCP entry
 
-### 8.2 — RemoteTrigger setup (run automatically — user does not need to do this)
+### 8.2 — Schedule confirmation
 
-Read `agents/project-manager/context/schedule-remote-tasks.md` and use the `/schedule`
-skill to create each RemoteTrigger in Anthropic's cloud. These run 24/7 without the
-user's laptop.
+Output to the user:
+```
+Your schedules are in: agents/project-manager/context/schedule-desktop-tasks.md
 
-For each task in the file:
-- Use the cron expression (already converted to UTC)
-- Use the agent prompt from the table
-- Set the git repo to the user's GitHub repo URL (from Q19)
-- Confirm each trigger was created successfully
+To activate them, open Claude Desktop and paste each /schedule command from that file.
+All schedules run locally — they only fire when Claude Desktop is open on your laptop.
 
-Output a confirmation line per trigger:
-`✅ RemoteTrigger created: [task name] — next run: [human-readable time]`
+Tasks to activate:
+  □ Morning standup reminder   Mon-Fri {7am timezone}
+  □ Standup compile            Mon-Fri {9am timezone}
+  □ EOD check-in reminder      Mon-Fri {5pm timezone}
+  □ Monthly content calendar   1st of month {9am timezone}
+  □ Weekly performance report  Friday {4pm timezone}
+```
 
 ### 8.3 — Functional tests
 6. Run the first test standup: read the Project Manager persona and simulate a

@@ -1,16 +1,14 @@
-date: 2026-04-14
+date: 2026-04-15
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #62: chore(standup): update trac.md for 2026-04-14 — merged at 22:12
-- PR #61: feat(pm-agent): migrate RESEND_FROM from hardcoded test value to .env.local variable — merged at 22:01
-- PR #59: pm(eod): 2026-04-14 — merged at 17:31
-- PR #58: pm(standup-morning): 2026-04-13 — merged at 17:05
-- PR #57: pm(standup-morning): 2026-04-13 (run 3) — merged at 16:42
-- PR #56: feat(pm-agent): replace Telegram with Lark webhook + Resend email dual-channel notifications — merged at 16:18
+- PR #68: Trac/workflows n processes — merged at 15:07
+- PR #66: pm(standup-compile): 2026-04-14 — merged at 02:21
+- PM agent notifications (Lark + Resend) operational across all agent triggers
+- Branch cleanup automated on all PM workflow PRs
 
 **Next:**
 - Monitor Phase 2 compile run at 9:00 AM Asia/Saigon
@@ -24,10 +22,14 @@ None
 ## web-developer
 
 **Completed:**
-- No new web-developer PRs merged since 2026-04-13 00:00
+- PR #72: SEO + AI search audit: fix canonical, add schema, robots, llms, 42 card pages — merged at 16:56
+- PR #71: Home: real mahjong cards, Bill portrait, latest blog posts; book → Coming Soon — merged at 16:41
+- PR #70: Modern home hero + left-aligned footer newsletter — merged at 16:01
+- PR #69: Lark webhook notifications for all inquiry forms (contact, readings, preorder) — merged at 15:07
 
 **Next:**
-- Pick up next approved content from content/topics/ when humans sign off
+- Monitor home hero and card system performance in production
+- Process next approved content from content/topics/ queue
 
 **Blockers:**
 None

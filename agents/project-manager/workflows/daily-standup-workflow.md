@@ -136,7 +136,7 @@ Notification (send both — not fallback):
 2. **Resend email** — full compiled briefing as HTML:
    - Substitute `{{PLACEHOLDER}}` values in `agents/project-manager/context/template/emails/2-standup-compile.html`
    - Inject full briefing into `{{STANDUP_CONTENT}}`; write to `/tmp/standup-compile-email.html`
-   - `RESEND_API_KEY=$RESEND_API_KEY resend emails send --from "$RESEND_FROM" --to "$RESEND_TO" --subject "Daily Stand-Up — YYYY-MM-DD" --html-file /tmp/standup-compile-email.html --quiet`
+   - `TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ') && RESEND_API_KEY=$RESEND_API_KEY resend emails send --from "$RESEND_FROM" --to $TO_ARGS --subject "Daily Stand-Up — YYYY-MM-DD" --html-file /tmp/standup-compile-email.html --quiet`
    - `RESEND_EXIT=$?`
 
 3. **Inline log** — only if **both** fail: append to bottom of `standup/briefings/YYYY-MM/YYYY-MM-DD.md`. No alerts folder.

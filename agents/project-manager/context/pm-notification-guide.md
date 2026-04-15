@@ -29,22 +29,39 @@ Set these in `~/.claude/settings.json` under `env`.
 
 ## Channel 1 — Lark CLI
 
+### Identity decision
+
+| Situation | Identity flag | Auth required |
+|---|---|---|
+| PM agent sends notifications, reminders, reports | `--as bot` | ❌ None — uses pre-configured `tenant_access_token` |
+| User asks Claude to act as them / assume their role | `--as user` | ✅ OAuth login required |
+| User asks Claude to edit/delete a message on their behalf | `--as user` | ✅ OAuth login required |
+| Accessing contacts/data the bot can't reach | `--as user` | ✅ OAuth login required |
+
+**Default is `--as bot`** for all PM operations. Only switch to `--as user` when the user explicitly asks Claude to act as them or perform an action under their identity.
+
+### Message format
+
 Use `lark-cli im +messages-send` with bot identity. The message content depends on the trigger:
 
 - **Reminders** (morning, EOD): use `--text` with `$'...'` to preserve exact line breaks
 - **Reports** (standup compiled, weekly RAG): use `--markdown` so headings and bullets render in Lark
 
 ```bash
+# Use npx as fallback if lark-cli not installed globally
+LARK_CMD=lark-cli; command -v lark-cli &>/dev/null || LARK_CMD="npx lark-cli"
+
 # Reminder (plain text, exact formatting)
-lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text $'MESSAGE_HERE'
+$LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text $'MESSAGE_HERE'
 
 # Report summary (markdown rendering)
-lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'SUMMARY_HERE'
+$LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'SUMMARY_HERE'
 ```
 
-Capture exit code to determine if fallback is needed:
+Capture exit code. Always set `LARK_CMD` first:
 ```bash
-lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text $'...'
+LARK_CMD=lark-cli; command -v lark-cli &>/dev/null || LARK_CMD="npx lark-cli"
+$LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text $'...'
 LARK_EXIT=$?
 ```
 
@@ -70,9 +87,21 @@ RESEND_API_KEY=$RESEND_API_KEY resend emails send \
   --html-file "TEMPLATE_FILE_HERE" \
   --quiet
 RESEND_EXIT=$?
+
+# Fallback: if CLI fails or is unavailable, send via Resend API directly using cURL
+if [ $RESEND_EXIT -ne 0 ]; then
+  python3 -c "
+import json,subprocess,sys
+html=open('TEMPLATE_FILE_HERE').read()
+payload=json.dumps({'from':'$RESEND_FROM','to':'$RESEND_TO'.split(','),'subject':'SUBJECT_HERE','html':html})
+r=subprocess.run(['curl','-s','-o','/dev/null','-w','%{http_code}','-X','POST','https://api.resend.com/emails','-H','Authorization: Bearer $RESEND_API_KEY','-H','Content-Type: application/json','--data',payload],capture_output=True,text=True)
+sys.exit(0 if r.stdout.strip().startswith('2') else 1)
+"
+  RESEND_EXIT=$?
+fi
 ```
 
-Replace `SUBJECT_HERE` with the trigger subject and `TEMPLATE_FILE_HERE` with the path to the relevant HTML template under `agents/project-manager/context/template/emails/`.
+Replace `SUBJECT_HERE` with the trigger subject and `TEMPLATE_FILE_HERE` with the `/tmp/` path of the rendered HTML file.
 
 ---
 

@@ -240,6 +240,20 @@ This project uses a shared context system between Cowork and Claude Code.
 - Check `~/Documents/Claude/shared-context/handoffs/` for the latest handoff note (most recent by filename)
 
 **At the end of every session**, update the bridge:
+
+## PM Agent Rules
+
+These rules apply whenever running or debugging PM agent trigger prompts:
+
+**Lark CLI identity**: Default to `--as bot` (tenant_access_token, no OAuth) for all PM notifications. Only use `--as user` (requires OAuth login) when the user explicitly asks Claude to act as them, make edits on their behalf, or perform an action under their identity. If you see a bot auth error, check lark-cli's stored credentials — do not initiate OAuth.
+
+**Environment variables**: Always check `.env`, `.env.development`, `.env.production`, and `.env.local` (in that order, later takes precedence) before concluding a value is missing. Never stop at just `.env` and `.env.local`.
+
+**Email templates**: HTML email templates for PM notifications live at `agents/project-manager/context/template/emails/`. Always substitute placeholders in those files. Do not create new templates or inline HTML email content.
+
+**Context lookup**: When a trigger prompt references an external source (persona.md, daily-standup.md, pm-notification-guide.md, etc.), read it before concluding the information isn't available. Check every listed source.
+
+---
 - Update `~/Documents/Claude/shared-context/BRIDGE.md` with what you did and current state
 - Write a handoff note to `~/Documents/Claude/shared-context/handoffs/` named `YYYY-MM-DDTHH-MM_cc-to-cowork.md`
 - Delete any blocker files in `blockers/` that you resolved

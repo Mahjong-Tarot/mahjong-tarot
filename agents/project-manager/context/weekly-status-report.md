@@ -14,14 +14,14 @@ Produce a structured weekly status report that tells the team and any stakeholde
 
 Before writing the report, gather current state from:
 
-1. **`agents/project manager/output/reports/YYYY-MM.md`** — Read this week's daily stand-up entries (Mon–Fri) to understand what was worked on and what blockers appeared.
+1. **`standup/briefings/YYYY-MM/`** — Read this week's daily compiled stand-ups (`YYYY-MM-DD.md` files Mon–Fri) to understand what was worked on and what blockers appeared.
 2. **GitHub Projects** — Run `gh project list` and `gh project item-list <number>` to get task status (open, in progress, done, blocked).
-3. **`agents/project manager/output/raid/RAID.md`** — Check for any open risks or issues logged this week.
+3. **`standup/briefings/YYYY-MM/raid.md`** — Check for any open risks or issues logged this week.
 4. **Vercel MCP** — List recent deployments to report on release activity.
 
 ## Report format
 
-Append the following block to `agents/project manager/output/reports/YYYY-MM.md` under a `### Weekly Status — YYYY-MM-DD` heading:
+Write the report to `standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md` (create the monthly folder if needed):
 
 ```markdown
 ### Weekly Status — YYYY-MM-DD

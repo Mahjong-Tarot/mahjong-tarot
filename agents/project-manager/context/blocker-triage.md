@@ -1,6 +1,6 @@
 ---
 name: blocker-triage
-description: Automated triage workflow. Triggered automatically when the daily stand-up flags blockers, or runs on the midday check schedule. Scans GitHub Projects for blocked or stalled tasks, ranks by severity and age, drafts escalations for anything >48 hours unresolved, and writes a triage report to output/triage/.
+description: Automated triage workflow. Triggered automatically when the daily stand-up flags blockers, or runs on the midday check schedule. Scans GitHub Projects for blocked or stalled tasks, ranks by severity and age, drafts escalations for anything >48 hours unresolved, and writes a triage report to standup/briefings/YYYY-MM/.
 trigger: Auto-triggered by daily-standup when blockers are flagged; also midday scheduled check
 ---
 
@@ -58,7 +58,7 @@ These can be sent via Gmail or logged as a comment on the GitHub task.
 
 ### 5. Write triage report
 
-Write the triage report to `agents/project manager/output/triage/triage-YYYY-MM-DD.md`:
+Write the triage report to `standup/briefings/YYYY-MM/triage-YYYY-MM-DD.md` (create the monthly folder if needed):
 
 ```markdown
 # Blocker Triage — YYYY-MM-DD

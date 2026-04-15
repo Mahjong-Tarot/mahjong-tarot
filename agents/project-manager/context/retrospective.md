@@ -61,7 +61,7 @@ Limit to 3–5 action items maximum. A long list gets ignored. A short list gets
 
 ### 5. Append to monthly report
 
-Add the retrospective block to `agents/project manager/output/reports/YYYY-MM.md`:
+Write to `standup/briefings/YYYY-MM/retrospective-YYYY-MM-DD.md` (create the monthly folder if needed):
 
 ```markdown
 ---

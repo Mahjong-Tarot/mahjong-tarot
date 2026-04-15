@@ -66,17 +66,31 @@ Send a reminder to Dave, Yon, and Trac to write their check-in tonight, ready fo
 Notification (send both — not fallback):
 1. Lark CLI (always — bot identity, "Labs" group chat):
    # --as bot uses tenant_access_token — no OAuth or user login required
-   lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
+   # Lark fallback: if lark-cli not installed globally, use npx
+   LARK_CMD=lark-cli; command -v lark-cli &>/dev/null || LARK_CMD="npx lark-cli"
+   $LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
      --text $'🌙 End-of-Day Reminder — YYYY-MM-DD\n\nPlease write your check-in tonight. The PM agent compiles tomorrow at 9 AM.\n\nYour check-in file:\n• Dave  → standup/individual/dave.md\n• Yon   → standup/individual/yon.md\n• Trac  → standup/individual/trac.md'
    LARK_EXIT=$?
 2. Resend CLI (always — install if missing: `npm install -g resend`). Use the HTML template at `agents/project-manager/context/template/emails/3-eod-reminder.html` — do not create or modify templates. Substitute `{{DATE}}` and `{{TOMORROW}}` then send:
+   TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ')
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \
-     --to "$RESEND_TO" \
+     --to $TO_ARGS \
      --subject "Check-In Reminder — Tonight for YYYY-MM-DD" \
      --html-file /tmp/eod-reminder-email.html \
      --quiet
    RESEND_EXIT=$?
+   # Fallback: if CLI fails, send via Resend API directly using cURL
+   if [ $RESEND_EXIT -ne 0 ]; then
+     python3 -c "
+import json,subprocess,sys
+html=open('/tmp/eod-reminder-email.html').read()
+payload=json.dumps({'from':'$RESEND_FROM','to':'$RESEND_TO'.split(','),'subject':'Check-In Reminder — Tonight for YYYY-MM-DD','html':html})
+r=subprocess.run(['curl','-s','-o','/dev/null','-w','%{http_code}','-X','POST','https://api.resend.com/emails','-H','Authorization: Bearer $RESEND_API_KEY','-H','Content-Type: application/json','--data',payload],capture_output=True,text=True)
+sys.exit(0 if r.stdout.strip().startswith('2') else 1)
+"
+     RESEND_EXIT=$?
+   fi
 3. If BOTH fail: log the failure inline by appending to standup/briefings/YYYY-MM/YYYY-MM-DD.md (today's compiled stand-up if it exists). Do not create any new files. Do not create any alerts folder.
 
 After both sends are attempted, your work is done. Do not create branches, commits, or PRs.

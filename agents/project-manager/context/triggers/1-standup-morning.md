@@ -164,20 +164,35 @@ Use the notification pattern from agents/project-manager/context/pm-notification
 Notification (send both — not fallback):
 1. Lark CLI (always — bot identity, "Labs" group chat). Use the status lines built in Step 4 to construct the message. Replace each placeholder with the exact status string — do not leave placeholders in the sent message.
    # --as bot uses tenant_access_token — no OAuth or user login required
-   lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
+   # Lark fallback: if lark-cli not installed globally, use npx
+   LARK_CMD=lark-cli; command -v lark-cli &>/dev/null || LARK_CMD="npx lark-cli"
+   $LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" \
      --text $'🌅 Daily Stand-Up Reminder — YYYY-MM-DD\n\nCheck-in status (please update yours before 9:00 AM):\n• [STATUS_DAVE]\n• [STATUS_YON]\n• [STATUS_TRAC]\n\nThe PM agent compiles at 9 AM.'
    LARK_EXIT=$?
 
    Example of a correctly built message (do not copy literally — use real status from Step 4):
    --text $'🌅 Daily Stand-Up Reminder — 2026-04-15\n\nCheck-in status (please update yours before 9:00 AM):\n• ✅ Dave\n• 🔴 Yon — standup/individual/yon.md\n• ✅ Trac\n\nThe PM agent compiles at 9 AM.'
-2. Resend CLI (always — install if missing: `npm install -g resend`). Substitute `{{DATE}}` in a copy of `agents/project-manager/context/template/emails/1-standup-morning.html`, write to `/tmp/standup-morning-email.html`, then send:
+2. Resend CLI (always). Substitute `{{DATE}}` in a copy of `agents/project-manager/context/template/emails/1-standup-morning.html`, write to `/tmp/standup-morning-email.html`, then send:
+   if ! command -v resend &>/dev/null; then npm install -g resend; fi
+   TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ')
    RESEND_API_KEY=$RESEND_API_KEY resend emails send \
      --from "$RESEND_FROM" \
-     --to "$RESEND_TO" \
+     --to $TO_ARGS \
      --subject "Daily Stand-Up Reminder — YYYY-MM-DD" \
      --html-file /tmp/standup-morning-email.html \
      --quiet
-   Full pattern in pm-notification-guide.md.
+   RESEND_EXIT=$?
+   # Fallback: if CLI fails, send via Resend API directly using cURL
+   if [ $RESEND_EXIT -ne 0 ]; then
+     python3 -c "
+import json,subprocess,sys
+html=open('/tmp/standup-morning-email.html').read()
+payload=json.dumps({'from':'$RESEND_FROM','to':'$RESEND_TO'.split(','),'subject':'Daily Stand-Up Reminder — YYYY-MM-DD','html':html})
+r=subprocess.run(['curl','-s','-o','/dev/null','-w','%{http_code}','-X','POST','https://api.resend.com/emails','-H','Authorization: Bearer $RESEND_API_KEY','-H','Content-Type: application/json','--data',payload],capture_output=True,text=True)
+sys.exit(0 if r.stdout.strip().startswith('2') else 1)
+"
+     RESEND_EXIT=$?
+   fi
 3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
 ## Step 6 — Git commit and branch cleanup

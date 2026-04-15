@@ -1,28 +1,32 @@
 # Automated Marketing Team — One-Click Bootstrap
 
-> **PREREQUISITE:** Claude Desktop with a Pro plan is required. Claude Code is included.
+> **PREREQUISITE:** Claude Desktop with a Pro plan is required. It includes Cowork, Chat, and Code — all in the same app.
 >
-> **HOW TO USE — TWO PHASES:**
+> **HOW TO USE — EVERYTHING RUNS INSIDE CLAUDE DESKTOP:**
 >
-> **Phase A — Claude Desktop Cowork (do this first, ~15 min):**
-> 1. Open Claude Desktop → switch to Cowork mode
-> 2. Paste this file into Cowork
-> 3. Cowork will install git, GitHub CLI, and your accounts via computer use
-> 4. You will need to log in to GitHub in your browser (one manual step)
-> 5. When Cowork says "ready for Claude Code", proceed to Phase B
+> **Phase A — Start in Cowork (do this first, ~15 min):**
+> 1. Open Claude Desktop → click **Cowork** in the left sidebar
+> 2. Attach or paste this file into the Cowork chat — **any format works** (PDF, Word, or plain text). Cowork will convert it automatically before proceeding.
+> 3. Cowork uses computer use to install the developer tools and log you into GitHub
+> 4. You will need to log in to GitHub in your browser — Cowork will tell you exactly when
+> 5. When Cowork says "ready for Phase B", click **Code** in the left sidebar
 >
-> **Phase B — Claude Code (after Phase A completes):**
-> Open Claude Code → paste this file → it detects environment is ready and starts the interview.
-> **First milestone: website live on Vercel — ~45–60 minutes** (interview + scaffold + deploy).
-> Agent file generation happens after, taking 2–4 hours across 1–2 more sessions.
-> If a session ends mid-way, start a new session and say "resume bootstrap from Phase X".
+> **Phase B — Continue in Code (same app, different tab):**
+> Paste this file again into the Code chat — **any format works**, Code will convert it.
+> Code detects Phase A is complete and starts the interview.
+>
+> **After that, stay in Claude Desktop.** All phases run inside Chat, Cowork, or Code.
+> Only three things take you outside the app: setting up GitHub (browser), Vercel (browser), and Supabase (browser).
+>
+> **Realistic time to expect:**
+> - Website live on Vercel: ~60–90 minutes (Phase A + interview + scaffold + deploy)
+> - Full agent team generated: add 2–4 hours across 1–2 follow-on sessions
+> - Account setup (Supabase, Telegram, schedules): ~45 minutes, mostly in your browser
+>
+> If a session ends mid-way, start a new session in Code and say "resume bootstrap from Phase X".
 >
 > **RECOMMENDED MODEL:** Claude Opus 4.6 (`claude-opus-4-6`) — this is a complex, multi-phase setup
 > task. Do not run it on Haiku; the reasoning quality matters for generating coherent agent personas.
->
-> **COST NOTE — Postiz social publishing:** The free Postiz tier does not include API access.
-> Auto-publishing requires the Postiz Standard plan (~$19/month cloud) or a self-hosted instance.
-> If you only want drafts to review manually, you can skip Postiz entirely and the rest still works.
 
 ---
 
@@ -50,25 +54,14 @@ Here's what will happen:
   Phase 4    — I scaffold your website and deploy it to Vercel [~30 min → live site]
   Phase 5    — I generate your agent files, workflows, and resources [longest phase]
   Phase 6    — Remaining account setup (Supabase, email, Telegram)
-  Phase 7    — Auto-publishing config (Postiz MCP — optional)
-  Phase 7b   — I generate your schedule files (run via Claude Desktop)
+  Phase 7    — I generate your schedule files (run via Claude Desktop)
   Phase 8    — Verification
 
   If this session ends before we finish, start a new session and say:
   "Resume bootstrap from Phase [number]" — I'll pick up where we left off.
 
-AUTO-PUBLISHING NOTE: Social auto-publishing requires a paid Postiz plan (~$19/month).
-  You can skip this and still get everything else — agents, website, standup, blog publishing.
-
-AUTO-PUBLISHING (if using Postiz):
-  • Draft TikTok carousels (6 slides) — you add trending music before going live
-  • Schedule Instagram, Facebook, LinkedIn posts for optimal times
-  • Notify you via Telegram when drafts are ready and when content goes live
-  • Report weekly analytics every Monday morning
-
 There are things I CANNOT do automatically — you will need to:
-  • Create accounts on GitHub, Vercel, Supabase (and optionally Postiz)
-  • Connect your social media accounts inside Postiz (if using it)
+  • Create accounts on GitHub, Vercel, and Supabase
   • Set up your Telegram bot (for team notifications)
   • Configure scheduled tasks in Claude Desktop
   • Approve content before it publishes (always your call)
@@ -90,6 +83,10 @@ Wait for confirmation, then immediately run the environment check below.
 ---
 
 ### PATH A — Running in Claude Desktop Cowork (computer use available)
+
+> **What is Cowork?** It's one of the one of the three modes in Claude Desktop's left sidebar (Chat, Cowork, Code). Unlike Chat, Cowork can see and control your screen — it opens your terminal, clicks buttons, and runs commands for you. You do not need to type any commands yourself in this phase.
+>
+> **If the user attached a non-MD file** (PDF, Word doc, screenshot): extract the text content, save it as a temporary working file, then continue. Never ask the user to re-paste in a different format.
 
 Use computer use to install everything. Open the user's terminal and run:
 
@@ -148,7 +145,11 @@ Output: `You can now open Claude Code and paste this bootstrap file to continue.
 
 ---
 
-### PATH B — Running in Claude Code (Phase A already complete)
+### PATH B — Running in Claude Desktop Code tab (Phase A already complete)
+
+> **What is Code?** It's one of the one of the three modes in Claude Desktop's left sidebar (Chat, Cowork, Code). It runs commands directly on your computer. You interact with it by typing in the chat — no terminal window needed.
+>
+> **If the user attached a non-MD file** (PDF, Word doc, screenshot): extract the text content, save it as a temporary working file, then continue. Never ask the user to re-paste in a different format.
 
 Check whether Phase A was completed:
 ```bash
@@ -268,9 +269,8 @@ AUTO-PUBLISHING
      - LinkedIn   → auto-post or draft?
      - Twitter/X  → auto-post or draft?
 
-18c. For social scheduling: Postiz is the recommended tool (free open-source or $19/month cloud).
-     Do you prefer: Postiz Cloud (easiest setup) / Self-hosted Postiz (free, needs VPS) / Other tool
-     If other: which tool and does it have an API?
+18c. Which social scheduling tool do you currently use, if any?
+     (We'll discuss integration options separately.)
 ```
 
 ---
@@ -408,8 +408,14 @@ YOUR REPO IS LIVE ON GITHUB. NOW DEPLOY TO VERCEL:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. Go to: https://vercel.com/new
-2. Click "Import Git Repository" → select {repo-name}
-3. Set Root Directory to: website/
+2. Sign in or create a free account if you haven't already
+3. Click "Import Git Repository" → select {repo-name}
+
+   ⚠️  IMPORTANT — easy to miss:
+   Look for a field labelled "Root Directory" on this page.
+   Type:  website/
+   If you skip this, the deploy will fail.
+
 4. Click Deploy (skip env vars for now — add them after Supabase is set up)
 
 Your site will be live in ~2 minutes. Come back and paste your Vercel URL.
@@ -462,7 +468,7 @@ After writing, confirm: `~/.claude/CLAUDE.md — global rules written.`
 ### 5.0b — MCP Configuration
 
 Developer tools were installed in Phase 0. This step only adds the MCP server entries
-so Claude agents can query Supabase and Postiz directly.
+so Claude agents can query Supabase directly.
 
 Read `.claude/settings.local.json` (create if missing) and merge — do not overwrite existing keys:
 
@@ -472,16 +478,12 @@ Read `.claude/settings.local.json` (create if missing) and merge — do not over
     "supabase": {
       "command": "npx",
       "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "SUPABASE_ACCESS_TOKEN_PLACEHOLDER"]
-    },
-    "postiz": {
-      "url": "https://api.postiz.com/mcp/POSTIZ_API_KEY_PLACEHOLDER"
     }
   }
 }
 ```
 
-Both placeholders are replaced by the user in Phase 6 after they create their accounts.
-If the user chose to skip Postiz, omit the postiz entry entirely.
+The placeholder is replaced by the user in Phase 6 after they create their Supabase account.
 
 Confirm: `MCP config written to .claude/settings.local.json`
 
@@ -592,19 +594,14 @@ from this repo as the format template. Each file needs:
 
 **Agent 7: social-media-manager.md**
 - Purpose: distribute content across platforms — drafts, scheduling, analytics, approval routing
-- Tools: Read, Write, Glob, Grep, Bash, postiz_mcp (postiz_schedule_post, postiz_create_draft,
-  postiz_list_scheduled, postiz_get_analytics, postiz_list_platforms)
+- Tools: Read, Write, Glob, Grep, Bash
 - Schedules: Weekly draft assembly (Friday), day-of TikTok alerts, Monday analytics report
 - Triggers: "schedule this post", "write social copy", "distribute this content",
   "what's posting this week", "show me this week's scheduled posts", "weekly analytics"
-- TikTok hard rule: ALWAYS use postiz_create_draft — never postiz_schedule_post for TikTok.
-  After creating TikTok draft, send Telegram: "Draft ready for [topic]. Open TikTok app →
-  Drafts → add trending music → go live at [time]."
 - Carousel rule: TikTok posts are always 6 slides (hook + 4 content + CTA). Never fewer.
 - Approval routing (per user answers from Q18b and Q31):
-  - Platforms set to "auto-post" → call postiz_schedule_post directly
-  - Platforms set to "draft" → call postiz_create_draft, send Telegram for approval
-  - DEFAULT for new clients: all platforms draft until explicitly changed
+  - All platforms default to draft-only until the user configures a publishing integration
+  - Notify via Telegram when drafts are ready for review
 
 ### 5.3 — Agent Full Personas (`agents/`)
 
@@ -661,12 +658,12 @@ For each agent, create at minimum the following skill files at
 **Social Media Manager:**
 - `write-social-post` — platform-specific post drafts with hashtags and CTAs
 - `tiktok-carousel` — generate a 6-slide TikTok carousel (hook + 4 content slides + CTA),
-  call postiz_create_draft, send Telegram reminder with publish instructions
-- `weekly-schedule` — assemble all this week's content, call postiz tools per platform
-  (draft for TikTok, schedule_post for auto-post platforms), send Telegram summary
-- `weekly-analytics` — call postiz_get_analytics, format into a brief Telegram report:
-  top post, total impressions, follower change, one recommendation for next week
-- `distribution-checklist` — pre-publish quality gate before any postiz call
+  write draft file to `content/social/tiktok/`, send Telegram reminder with publish instructions
+- `weekly-schedule` — assemble all this week's content into draft files per platform,
+  send Telegram summary of what's ready for review
+- `weekly-analytics` — compile weekly performance notes from available data, format into
+  a brief Telegram report: top post, key metric, one recommendation for next week
+- `distribution-checklist` — pre-publish quality gate before any content goes out
 
 Each SKILL.md must contain:
 - Frontmatter: `name:` and `description:` (the description is the trigger phrase)
@@ -762,8 +759,15 @@ STEP 1 — Supabase project (database)                          ⏱ ~10 min
 □ Go to Project Settings → API → copy:
     Project URL   → this is NEXT_PUBLIC_SUPABASE_URL
     Anon key      → this is NEXT_PUBLIC_SUPABASE_ANON_KEY
-□ Go to SQL Editor → paste website/supabase/001_initial_schema.sql → Run
-□ Table Editor should now show: contact_submissions + newsletter_subscribers
+□ Run the database schema:
+    — On your computer, open your project folder
+      (on Mac: Finder → your project; on Windows: File Explorer → your project)
+    — Navigate to: website → supabase → 001_initial_schema.sql
+    — Open that file in any text editor (TextEdit, Notepad), select all, copy
+    — Back in Supabase: click "SQL Editor" in the left sidebar
+    — Paste your copied text into the editor → click "Run"
+□ Click "Table Editor" in the left sidebar — you should see two tables:
+    contact_submissions + newsletter_subscribers
 □ In Vercel → your project → Settings → Environment Variables → add both values above
 □ Redeploy: Vercel → Deployments → Redeploy latest
 
@@ -778,24 +782,7 @@ STEP 2 — Supabase MCP token (for Claude agents)               ⏱ ~2 min
 □ Save and restart Claude Code
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 3 — Postiz (social auto-publishing — optional)           ⏱ ~15 min
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-SKIP THIS STEP if you chose not to use Postiz (paid plan required for API access).
-
-□ Sign up at https://postiz.com (Standard plan ~$19/month for API)
-□ Connect your social accounts: Settings → Channels → connect each platform
-□ Get your API key: Settings → Developers → Public API → Generate key
-□ Open .claude/settings.local.json → replace POSTIZ_API_KEY_PLACEHOLDER with your key
-□ Save and restart Claude Code
-□ Verify: @social-media-manager list my connected platforms
-
-IMPORTANT — TikTok:
-□ TikTok requires a Business or Creator account for API access
-□ All TikTok posts are SELF_ONLY drafts — open TikTok app → Drafts → add music → publish
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 4 — Email Platform                                       ⏱ ~10 min
+STEP 3 — Email Platform                                       ⏱ ~10 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 □ {IF BREVO} Sign up at https://brevo.com (free up to 300 emails/day)
@@ -805,6 +792,25 @@ STEP 4 — Email Platform                                       ⏱ ~10 min
 
 □ {IF OTHER PLATFORM} Add your API key to Vercel env vars as: EMAIL_API_KEY
   Note your subscriber list ID: ________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 4 — Social Media Accounts                                ⏱ ~5 min
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your AI team drafts content but does not post automatically (unless you opted in).
+For now, make sure you can log in to each platform you want to use:
+
+□ Log in to each platform you selected in Q13
+  (Instagram / Facebook / LinkedIn / Twitter-X / TikTok / Pinterest / YouTube)
+□ Note your usernames here so the agent files reference the right handles:
+    Instagram:  _______________
+    TikTok:     _______________
+    LinkedIn:   _______________
+    Other:      _______________
+
+If you answered Q18c with a scheduling tool (Buffer, Later, Hootsuite, etc.):
+□ Log in and confirm your account is active
+□ Note your API key or connection method — the Marketing Manager agent will use this
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 STEP 5 — Telegram Bot (notifications)                         ⏱ ~5 min
@@ -822,26 +828,28 @@ STEP 5 — Telegram Bot (notifications)                         ⏱ ~5 min
 □ Send your bot a message to activate it. Note your chat ID: ________
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-STEP 6 — Claude Code Local Schedules                          ⏱ ~10 min
+STEP 6 — Claude Desktop Schedules                             ⏱ ~10 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-ALL scheduled tasks run as local Claude Code schedules on your machine.
-Read agents/project-manager/context/schedule-desktop-tasks.md for the exact commands.
+⚠️  Complete Phase 7 first — it generates the exact commands you need here.
+    Come back to this step after Phase 7 is done.
+
+The exact copy-paste commands for each schedule are in:
+  agents/project-manager/context/schedule-desktop-tasks.md
+
+To find that file on your computer:
+  Mac: Finder → your project folder → agents → project-manager → context → schedule-desktop-tasks.md
+  Windows: File Explorer → your project folder → agents → project-manager → context → schedule-desktop-tasks.md
+  Or: switch to the Code tab in Claude Desktop and type: "show me schedule-desktop-tasks.md"
+
+For each task below, copy the command from that file and paste it into the
+Claude Desktop Chat tab:
 
 □ Daily standup morning reminder → Mon-Fri {7am your timezone}
-  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
-
 □ Daily standup compile → Mon-Fri {9am your timezone}
-  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
-
 □ EOD check-in reminder → Mon-Fri {5pm your timezone}
-  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
-
-□ Weekly content calendar → 1st of each month {9am your timezone}
-  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
-
+□ Monthly content calendar → 1st of each month {9am your timezone}
 □ Weekly performance report → Friday {4pm your timezone}
-  Open Claude Desktop → paste the command from schedule-desktop-tasks.md
 
 IMPORTANT: Schedules only fire when Claude Desktop is open and your laptop is on.
 Close the laptop → reminder doesn't fire that day. That's expected.
@@ -862,90 +870,7 @@ WHEN DONE: Come back and tell me "setup complete"
 
 ---
 
-## PHASE 7 — AUTO-PUBLISHING VIA POSTIZ MCP
-
-**Skip this phase entirely if the user chose not to use Postiz.**
-
-No custom MCP server to build. Postiz hosts their own MCP server — just configure it.
-
-### What Postiz MCP provides (8 tools, all platforms, one config)
-
-Postiz hosts their own MCP server — no Composio, no npx, no custom server to build.
-Single URL-based connection. Covers TikTok, Instagram, Facebook, LinkedIn, X, and 25+ more.
-
-| Tool | Used for |
-|---|---|
-| `integrationList` | List connected accounts + get their IDs |
-| `integrationSchema` | Get platform rules before posting |
-| `schedulePostTool` | Schedule (`type: schedule`), draft (`type: draft`), or post now (`type: now`) |
-| `generateImageTool` | AI image generation (optional — Designer agent may handle this instead) |
-| `generateVideoTool` | Video generation incl. `image-text-slides` — TikTok-style carousel with TTS |
-| `triggerTool` | Platform helpers (subreddits, LinkedIn pages, Discord channels) |
-
-### Generate `.claude/settings.local.json` additions
-
-Read the existing `.claude/settings.local.json`. Merge in this single entry
-(do not overwrite existing entries):
-
-```json
-"postiz": {
-  "url": "https://api.postiz.com/mcp/POSTIZ_API_KEY_PLACEHOLDER"
-}
-```
-
-Use the literal string `POSTIZ_API_KEY_PLACEHOLDER` — the user will replace this with
-their real key after completing the Postiz setup step in the manual checklist.
-
-### Generate `context/postiz-setup.md`
-
-Create a setup reference file at `context/postiz-setup.md`:
-
-```markdown
-# Postiz MCP Setup
-
-## What this does
-The Postiz MCP server connects the Social Media Manager agent directly to your
-social media accounts via Postiz. One config entry covers all platforms:
-TikTok, Instagram, Facebook, LinkedIn, X, and 25+ more.
-
-No extra services. No npm. Just a URL with your API key.
-
-## Setup steps (one-time, ~10 minutes)
-1. Sign up at https://postiz.com (free tier available)
-2. Connect your social accounts: Settings → Channels → connect each platform
-3. Get your API key: Settings → Developers → Public API → Generate key
-4. Open .claude/settings.local.json
-5. Replace POSTIZ_API_KEY_PLACEHOLDER with your actual API key
-   Result: "url": "https://api.postiz.com/mcp/your-actual-key"
-6. Restart Claude Code
-
-## Verify
-In Claude Code: @social-media-manager list my connected platforms
-Expected: you see each connected channel with its ID.
-
-## TikTok drafts
-TikTok API cannot add music. The agent always uses type: "draft".
-You: open TikTok app → Drafts → add trending music → publish.
-
-## Self-hosted Postiz
-Change the URL to: https://your-instance.com/mcp/your-api-key
-```
-
-### Update `.claude/agents/social-media-manager.md`
-
-Ensure the Social Media Manager agent definition lists:
-- All standard tools (Read, Write, Glob, Grep, Bash)
-- `mcp__postiz__*` — all Postiz MCP tools
-
-Note in the hard rules: "Always call `integrationList` first to confirm channel IDs.
-Always call `integrationSchema` for a platform before the first post of any new type.
-For TikTok: always use `type: draft` in schedulePostTool — never `schedule` or `now`.
-If any postiz tool returns an error mentioning the API key, output:
-'Postiz API key issue — check .claude/settings.local.json and confirm the key is valid.'"
-
----
-
-## PHASE 7b — SCHEDULE FILE GENERATION
+## PHASE 7 — SCHEDULE FILE GENERATION
 
 All scheduled tasks use **Claude Code local schedules** (CronCreate via Claude Desktop).
 There is no remote or cloud scheduling — everything runs on the user's machine.
@@ -996,7 +921,6 @@ After the user says "setup complete", run the following in order:
    `resources/content-calendar.md` all exist and contain real content (not blank)
 4. Check that `agents/project-manager/context/schedule-desktop-tasks.md` exists and
    contains all 5 scheduled tasks with real cron expressions and agent prompts
-5. If Postiz is enabled: check `.claude/settings.local.json` includes the postiz MCP entry
 
 ### 8.2 — Schedule confirmation
 
@@ -1018,8 +942,8 @@ Tasks to activate:
 ### 8.3 — Functional tests
 6. Run the first test standup: read the Project Manager persona and simulate a
    morning standup message
-7. Run a publishing dry-run: ask the Social Media Manager to list connected platforms
-   (it will call integrationList via Postiz MCP — confirms the MCP is wired correctly)
+7. Run a content dry-run: ask the Social Media Manager to write a sample social post
+   for the top content pillar (confirms the agent is reading brand-voice.md correctly)
 
 Then output the final summary:
 
@@ -1038,7 +962,7 @@ Web Developer     ✅ Ready  Website, content publishing, deploys
 Designer          ✅ Ready  Images, social cards, visual assets
 Content Writer    ✅ Ready  Blog posts, social copy, emails
 Marketing Manager ✅ Ready  Campaigns, content calendar, strategy
-Social Media Mgr  ✅ Ready  Auto-publishing via Postiz, TikTok drafts, analytics
+Social Media Mgr  ✅ Ready  Draft content for all platforms, TikTok carousels, analytics
 
 YOUR FIRST ACTIONS:
 1. Run your first standup:
@@ -1068,6 +992,12 @@ only when they need a decision from you. Everything else runs itself.
 ---
 
 ## PHASE 9 — OPENCLAW PROPOSAL (OPTIONAL UPGRADE)
+
+> **Note for Claude:** OpenClaw, clawhub, and agent-media are third-party tools, not
+> Anthropic products. They may require separate accounts, pricing, and installation steps
+> that are not verified during this bootstrap. If the user opts in, present the steps
+> clearly and flag that you cannot install or test these tools on their behalf —
+> they will need to follow the OpenClaw documentation independently.
 
 After completing Phase 8 verification, present this upgrade path ONLY if the user
 confirms their core system is working. Do not mention this earlier — it adds complexity
@@ -1129,25 +1059,26 @@ Add it? (yes / skip)
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-OPENCLAW SETUP (optional upgrade)                             ⏱ ~20 min
+OPENCLAW SETUP (optional upgrade — third-party tools)         ⏱ ~20 min
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-□ Install Node.js 20+ on your VPS or local machine
-□ Install OpenClaw:
+NOTE: OpenClaw and agent-media are separate products, not part of Claude Desktop.
+You will need to follow their documentation and create accounts independently.
+Claude Code generates the config file for you; the rest requires their own setup guides.
+
+□ Install Node.js 20+ on your machine (skip if already installed)
+□ Install OpenClaw (third-party tool — see openclaw documentation for latest instructions):
     npm install -g openclaw
-□ Install the Postiz skill:
-    clawhub install nevo-david/postiz
-    export POSTIZ_API_KEY=your_postiz_api_key
-    openclaw skills list --eligible   ← should show postiz
 □ Start the daemon:
     openclaw start --daemon
     openclaw status                   ← should show "running"
 □ Test it:
     Send a message from {user's chosen chat app}:
-    "List my connected social media platforms"
-    Expected: OpenClaw replies with your Postiz channels
+    "What's on the content calendar this week?"
+    Expected: OpenClaw replies with this week's scheduled content
 
 {IF agent-media opted in}
+NOTE: agent-media is a paid third-party service — check current pricing before installing.
 □ Install agent-media skill:
     clawhub install agent-media
     npx agent-media credits           ← check your balance

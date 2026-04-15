@@ -55,24 +55,26 @@ The team roster is fixed. Use this exact table — do not derive it from persona
 | Yon  | yon@edge8.ai           | standup/individual/yon.md    |
 | Trac | trac.nguyen@edge8.ai   | standup/individual/trac.md   |
 
-## Step 1 — Check today's check-in freshness
+## Step 1 — Check tomorrow's check-in freshness
+
+The EOD reminder is for the NEXT DAY's stand-up. A check-in is considered submitted if it is already written for tomorrow's compile, meaning its `date:` field matches tomorrow's date (YYYY-MM-DD-NEXT).
 
 For each person, follow these exact steps:
 
 1. Try to read line 1 of their check-in file. If the file does not exist → mark as 🔴 Pending.
 2. If the file exists, read line 1. It must be in the format `date: YYYY-MM-DD`.
-3. Compare the date on line 1 to the value of YYYY-MM-DD provided at the top of this prompt.
+3. Compare the date on line 1 to the value of YYYY-MM-DD-NEXT provided at the top of this prompt.
    - If the dates match exactly → ✅ Submitted
    - If the dates do not match → 🔴 Pending
 
-Do NOT infer or guess. Compare the literal date strings only. Today's date is YYYY-MM-DD.
+Do NOT infer or guess. Compare the literal date strings only. Tomorrow's date is YYYY-MM-DD-NEXT.
 
 Build two lists from the results:
 
-**Submitted** (date matches today YYYY-MM-DD):
-- Example: [Dave, yon@edge8.ai] or [] if none
+**Submitted** (date matches tomorrow YYYY-MM-DD-NEXT):
+- Example: [Dave, dave@edge8.ai] or [] if none
 
-**Pending** (file missing or date does not match today):
+**Pending** (file missing or date does not match tomorrow YYYY-MM-DD-NEXT):
 - Example: [Yon, yon@edge8.ai] or [] if none
 
 ## Step 2 — Send Lark message
@@ -98,7 +100,7 @@ Check-in status:
 • 🔴 Yon — standup/individual/yon.md
 • ✅ Trac
 
-Please submit before 9 AM tomorrow. The PM compiles at 9 AM.
+I'll compile at 9 AM tomorrow — please get your check-in in before then.
 ```
 
 Send with:

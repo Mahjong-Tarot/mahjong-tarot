@@ -204,7 +204,7 @@ Full patterns and HTML templates: `agents/project-manager/context/pm-notificatio
 
 | Need | Current approach | Notes |
 |------|-----------------|-------|
-| Task tracking | Notes in `agents/project-manager/output/reports/YYYY-MM.md` daily entries | GitHub Projects not used; git activity monitored via `git log` |
+| Task tracking | Daily compiled stand-ups in `standup/briefings/YYYY-MM/YYYY-MM-DD.md` | GitHub Projects not used; git activity monitored via `git log` |
 | Stand-up trigger mechanism | Direct file edit by Dave/Yon | PM detects via datestamp check; richer trigger TBD |
 
 ---

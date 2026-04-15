@@ -87,9 +87,9 @@ export default function LoveInTheFireHorseYear() {
         <meta name="description" content="This is the one year in 60 where your partner is most likely to cheat and most likely to propose. What 2026 means for your relationships, sign by sign." />
         <meta property="og:title" content="Love in the Year of the Fire Horse: What 2026 Means for Your Relationships" />
         <meta property="og:description" content="Record proposals. Record divorces. Record passions, pointed in every direction. The Fire Horse doesn't do anything halfway." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/blog/love-in-the-fire-horse-year.webp" />
+        <meta property="og:image" content="https://mahjongtarot.com/images/blog/love-in-the-fire-horse-year.webp" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/blog/posts/love-in-the-fire-horse-year" />
+        <link rel="canonical" href="https://mahjongtarot.com/blog/posts/love-in-the-fire-horse-year" />
       </Head>
 
       <Nav />

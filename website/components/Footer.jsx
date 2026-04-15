@@ -14,7 +14,7 @@ export default function Footer() {
               divination practice together through Mahjong tiles, Chinese
               astrology, and tarot.
             </p>
-            <NewsletterSignup source="footer" variant="light" />
+            <NewsletterSignup source="footer" variant="footer" />
           </div>
 
           <div>

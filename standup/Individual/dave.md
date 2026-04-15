@@ -1,15 +1,17 @@
-date: 2026-04-14
+date: 2026-04-15
 name: Dave
 
-## Today's focus
-- Run blog images manually this morning (designer agent workaround)
-- Focus on the JSON prompt for image generation
-- Set up the human marketing team — train them on file access and workflows
+## Check-in: ✅ Green
 
-## Notes
-- Designer agent is functional in content studio but keeps generating tiles-and-candles imagery regardless of prompt; couldn't fix it even starting from scratch
-- Writer agent works fine — team isn't fully live but writer pipeline is operational
-- Not blocking on the designer issue; moving forward with manual image runs for now
+## What I got done today
+- Got the designer agent working — it's functional now
+- Ran the training program with the human marketing team — went great
+- Hit everything I said I was going to do
+
+## Tomorrow's focus
+- Traveling to Hanoi (in transit most of the day)
+- Operationalize the coaching assistant so we can use it internally to coach the team
+- Get the web developer agent running on a schedule so it produces all posts automatically by Monday
 
 ## Blockers
-None — working around the designer issue manually
+None

@@ -1,9 +1,10 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb, faqPage } from '../lib/schema';
 import { supabase } from '../lib/supabase';
 import useSpamGuard from '../lib/useSpamGuard';
 import styles from '../styles/Readings.module.css';
@@ -51,15 +52,37 @@ export default function Readings() {
 
   return (
     <>
-      <Head>
-        <title>Personal Readings — Mahjong Tarot</title>
-        <meta name="description" content="Book a Mahjong Tarot reading with Bill Hajdu. One-Tile Insight (10–15 min), Three-Tile Spread (20–30 min), or The Mahjong Mirror Session (45–60 min). Conducted online." />
-        <meta property="og:title" content="Personal Readings — Mahjong Tarot" />
-        <meta property="og:description" content="A divination experience using the symbolic language of Mahjong tiles to illuminate your path." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/readings-hero.webp" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/readings" />
-      </Head>
+      <SEO
+        title="Book a Mahjong Tarot Reading Online with Bill Hajdu | Mahjong Tarot"
+        description="Live online Mahjong Tarot readings with Bill Hajdu — One-Tile Insight (10–15 min), Three-Tile Spread (20–30 min), or Mahjong Mirror Session (45–60 min). 35+ years of divination practice."
+        path="/readings"
+        image="/images/readings-hero.webp"
+        jsonLd={graph([
+          ORGANIZATION,
+          WEBSITE,
+          PERSON_BILL,
+          breadcrumb([
+            { name: 'Home', url: '/' },
+            { name: 'Readings', url: '/readings' },
+          ]),
+          {
+            '@type': 'Service',
+            name: 'Mahjong Tarot Reading',
+            provider: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+            serviceType: 'Divination reading',
+            areaServed: 'Worldwide',
+            description:
+              'Live online 1-on-1 Mahjong tile readings combining Chinese astrology, Mahjong symbolism, and tarot. Three session lengths available.',
+            url: 'https://www.mahjongtarot.com/readings',
+          },
+          faqPage([
+            { q: 'What is a Mahjong Tarot reading?', a: 'A Mahjong Tarot reading uses 42 symbolic cards drawn from the Chinese Mahjong tradition to illuminate your current situation, hidden influences, and possible outcomes. Bill Hajdu combines them with Chinese Four Pillars astrology and tarot for a layered interpretation.' },
+            { q: 'Do I need to know Mahjong to get a reading?', a: 'No. Bill guides the entire process — you only need an open mind and a question worth asking.' },
+            { q: 'How long does a reading take?', a: 'One-Tile Insight runs 10–15 minutes, the Three-Tile Spread runs 20–30 minutes, and the Mahjong Mirror Session runs 45–60 minutes.' },
+            { q: 'Are readings done in person or online?', a: 'All readings are conducted live online over video so Bill can read for clients anywhere in the world.' },
+          ]),
+        ])}
+      />
 
       <Nav />
 
@@ -68,7 +91,7 @@ export default function Readings() {
         <section className={styles.pageHeader}>
           <div className="container">
             <span className="overline">Personal Sessions</span>
-            <h1>Receive Guidance Through<br />a Mahjong Tarot Reading</h1>
+            <h1>Mahjong Tarot Readings Online with Bill Hajdu</h1>
             <p className={styles.headerLead}>
               A divination experience using the symbolic language of Mahjong tiles
               to illuminate your path, clarify your choices, and connect you with

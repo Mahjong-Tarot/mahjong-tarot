@@ -1,8 +1,9 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import { ORGANIZATION, WEBSITE, PERSON_BILL, graph, breadcrumb } from '../lib/schema';
 import { supabase } from '../lib/supabase';
 import useSpamGuard from '../lib/useSpamGuard';
 import styles from '../styles/Contact.module.css';
@@ -41,14 +42,25 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>Contact — Mahjong Tarot</title>
-        <meta name="description" content="Get in touch with Bill Hajdu for questions about Mahjong Tarot readings, speaking engagements, or The Mahjong Mirror." />
-        <meta property="og:title" content="Contact — Mahjong Tarot" />
-        <meta property="og:description" content="Reach out to Bill Hajdu — questions, bookings, and collaborations welcome." />
-        <meta name="twitter:card" content="summary" />
-        <link rel="canonical" href="https://mahjong-tarot.com/contact" />
-      </Head>
+      <SEO
+        title="Contact Bill Hajdu — Mahjong Tarot & Chinese Astrology"
+        description="Get in touch with Bill Hajdu for questions about Mahjong Tarot readings, speaking engagements, media inquiries, or The Mahjong Mirror book."
+        path="/contact"
+        jsonLd={graph([
+          ORGANIZATION,
+          WEBSITE,
+          PERSON_BILL,
+          breadcrumb([
+            { name: 'Home', url: '/' },
+            { name: 'Contact', url: '/contact' },
+          ]),
+          {
+            '@type': 'ContactPage',
+            url: 'https://www.mahjongtarot.com/contact',
+            about: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+          },
+        ])}
+      />
 
       <Nav />
 

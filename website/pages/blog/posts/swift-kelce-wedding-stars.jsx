@@ -27,10 +27,10 @@ export default function SwiftKelceWeddingStars() {
         <meta name="description" content="Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements - not just the signs - Taylor Swift and Travis Kelce's charts tell a completely different story." />
         <meta property="og:title" content="What the Stars Actually Say About the Swift-Kelce Wedding - Mahjong Tarot" />
         <meta property="og:description" content="Two snakes in a Fire Horse year. Any astrologer would call it trouble. But the elements tell a completely different story." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/blog/swift-kelce-wedding-stars.webp" />
+        <meta property="og:image" content="https://mahjongtarot.com/images/blog/swift-kelce-wedding-stars.webp" />
         <meta property="og:site_name" content="The Mahjong Mirror" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/blog/posts/swift-kelce-wedding-stars" />
+        <link rel="canonical" href="https://mahjongtarot.com/blog/posts/swift-kelce-wedding-stars" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -41,11 +41,11 @@ export default function SwiftKelceWeddingStars() {
                 headline: 'What the Stars Actually Say About the Swift-Kelce Wedding',
                 author: { '@type': 'Person', name: 'Bill Hajdu' },
                 datePublished: '2026-04-13',
-                image: 'https://mahjong-tarot.com/images/blog/swift-kelce-wedding-stars.webp',
+                image: 'https://mahjongtarot.com/images/blog/swift-kelce-wedding-stars.webp',
                 publisher: {
                   '@type': 'Organization',
                   name: 'Mahjong Tarot',
-                  url: 'https://mahjong-tarot.com',
+                  url: 'https://mahjongtarot.com',
                 },
               },
               {

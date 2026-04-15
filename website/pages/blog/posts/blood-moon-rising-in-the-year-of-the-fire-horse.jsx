@@ -12,9 +12,9 @@ export default function BloodMoonRising() {
         <meta name="description" content="A blood moon in the first lunar month of the Chinese New Year. The last time it happened was 2007. This time it's amplified by the Fire Horse — the most volatile year in the zodiac." />
         <meta property="og:title" content="A Once-in-a-Generation Blood Moon Signal — Mahjong Tarot" />
         <meta property="og:description" content="Two times in a hundred years. The rarest signal in the Chinese calendar just landed on the most intense year in the zodiac." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/blog/blood-moon-rising-in-the-year-of-the-fire-horse.webp" />
+        <meta property="og:image" content="https://mahjongtarot.com/images/blog/blood-moon-rising-in-the-year-of-the-fire-horse.webp" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/blog/posts/blood-moon-rising-in-the-year-of-the-fire-horse" />
+        <link rel="canonical" href="https://mahjongtarot.com/blog/posts/blood-moon-rising-in-the-year-of-the-fire-horse" />
       </Head>
 
       <Nav />

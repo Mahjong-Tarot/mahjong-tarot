@@ -66,7 +66,7 @@ Based on PMBOK 7 principles, adapted as agent behavioral rules:
 - Run `git log --since="9am" --oneline` to check if commits have landed since morning.
 - If no activity and no check-in update by midday → nudge the relevant person.
   - **Primary**: Telegram (fallback: Lark) nudge.
-  - **Fallback**: Append a note to `agents/project-manager/output/alerts/alert-YYYY-MM-DD.md`.
+  - **Fallback**: Send via Lark or Resend. No alert files — alerts are messages only.
 - Remove blockers via clarification where possible; escalate if unresolved >48 hours. -->
 
 ### 4. End of Day (5:00 PM)

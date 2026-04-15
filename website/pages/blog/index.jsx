@@ -78,25 +78,25 @@ export default function BlogIndex() {
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
-              <Link href="/blog/posts/your-love-life-in-the-fire-horse-year" className={styles.featuredImage}>
+              <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className={styles.featuredImage}>
                 <Image
-                  src="/images/blog/your-love-life-in-the-fire-horse-year.webp"
-                  alt="Your Love Life in the Fire Horse Year — sign-by-sign relationship guide for 2026"
+                  src="/images/blog/planning-a-wedding-through-the-mahjong-mirror.webp"
+                  alt="The Mahjong Mirror Way to Plan a Wedding"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
               </Link>
               <div className={styles.featuredText}>
-                <span className="post-category">Year of the Fire Horse</span>
+                <span className="post-category">Romance</span>
                 <h2 className={styles.featuredTitle}>
-                  <Link href="/blog/posts/your-love-life-in-the-fire-horse-year">
-                    Your Love Life in the Fire Horse Year: What Every Sign Needs to Know
+                  <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror">
+                    The Mahjong Mirror Way to Plan a Wedding
                   </Link>
                 </h2>
                 <p className={styles.featuredExcerpt}>
-                  The Fire Horse doesn&rsquo;t care how solid you think your relationship is. Here&rsquo;s what it actually means for your sign &mdash; and what to do about it.
+                  The biggest day of your life deserves more than a color scheme. Two questions no wedding planner will ask — and a five-step framework to answer them before you book a single vendor.
                 </p>
-                <Link href="/blog/posts/your-love-life-in-the-fire-horse-year" className="btn-secondary">Read the Article</Link>
+                <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className="btn-secondary">Read the Article</Link>
               </div>
             </div>
           </div>

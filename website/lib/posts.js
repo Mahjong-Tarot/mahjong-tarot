@@ -3,6 +3,24 @@
 
 export const POSTS = [
   {
+    slug: 'planning-a-wedding-through-the-mahjong-mirror',
+    title: 'The Mahjong Mirror Way to Plan a Wedding',
+    excerpt: 'The biggest day of your life deserves more than a color scheme. The Mahjong Mirror asks two questions no wedding planner will: what does this day actually mean, and what do you really want from the marriage itself?',
+    categories: ['Romance', 'Mahjong Reading'],
+    date: 'Apr 15, 2026',
+    isoDate: '2026-04-15',
+    readTime: '6 min read',
+  },
+  {
+    slug: 'your-love-life-in-the-fire-horse-year',
+    title: 'Your Love Life in the Fire Horse Year: What Every Sign Needs to Know',
+    excerpt: 'The Fire Horse doesn\u2019t care how solid you think your relationship is. Here\u2019s what it actually means for your sign — and what to do about it.',
+    categories: ['Romance', 'Year of the Fire Horse'],
+    date: 'Apr 15, 2026',
+    isoDate: '2026-04-15',
+    readTime: '7 min read',
+  },
+  {
     slug: 'swift-kelce-wedding-stars',
     title: 'What the Stars Actually Say About the Swift-Kelce Wedding',
     excerpt: 'Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements - not just the signs - the charts tell a completely different story.',

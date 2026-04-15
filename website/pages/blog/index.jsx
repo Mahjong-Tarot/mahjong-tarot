@@ -78,10 +78,10 @@ export default function BlogIndex() {
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
-              <Link href="/blog/posts/swift-kelce-wedding-stars" className={styles.featuredImage}>
+              <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className={styles.featuredImage}>
                 <Image
-                  src="/images/blog/swift-kelce-wedding-stars.webp"
-                  alt="What the Stars Actually Say About the Swift-Kelce Wedding"
+                  src="/images/blog/planning-a-wedding-through-the-mahjong-mirror.webp"
+                  alt="The Mahjong Mirror Way to Plan a Wedding"
                   fill
                   style={{ objectFit: 'cover' }}
                 />
@@ -89,14 +89,14 @@ export default function BlogIndex() {
               <div className={styles.featuredText}>
                 <span className="post-category">Romance</span>
                 <h2 className={styles.featuredTitle}>
-                  <Link href="/blog/posts/swift-kelce-wedding-stars">
-                    What the Stars Actually Say About the Swift-Kelce Wedding
+                  <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror">
+                    The Mahjong Mirror Way to Plan a Wedding
                   </Link>
                 </h2>
                 <p className={styles.featuredExcerpt}>
-                  Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements, the charts tell a completely different story.
+                  The biggest day of your life deserves more than a color scheme. Two questions no wedding planner will ask — and a five-step framework to answer them before you book a single vendor.
                 </p>
-                <Link href="/blog/posts/swift-kelce-wedding-stars" className="btn-secondary">Read the Article</Link>
+                <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className="btn-secondary">Read the Article</Link>
               </div>
             </div>
           </div>

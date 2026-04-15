@@ -30,13 +30,12 @@ If unclear, ask:
 
 If not already clear from context, ask:
 
-> *"Who are you? (Dave, Yon, Trac, or Khang)"*
+> *"Who are you? (Dave, Yon, or Trac)"*
 
 Map to file:
 - Dave → `standup/individual/dave.md`
 - Yon → `standup/individual/yon.md`
 - Trac → `standup/individual/trac.md`
-- Khang → `standup/individual/khang.md`
 
 ### 2. Ask about today's focus
 

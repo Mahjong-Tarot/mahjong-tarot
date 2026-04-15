@@ -1,20 +1,18 @@
-date: 2026-04-11
+date: 2026-04-15
 
 ---
 
 ## project-manager
 
 **Completed:**
-- Updated persona, daily-standup context, and workflow files to align with Dave's standup spec
-- Fixed standup folder structure (standup/individual/, standup/briefings/)
-- Updated daily-checkin skill in both .claude/skills/ and agents/project-manager/skills/
-- Registered and tested all 4 remote triggers (Morning, Compile, EOD, Weekly RAG)
-- Generated setup prompts in docs/prompts/ for team onboarding
+- PR #68: Trac/workflows n processes — merged at 15:07
+- PR #66: pm(standup-compile): 2026-04-14 — merged at 02:21
+- PM agent notifications (Lark + Resend) operational across all agent triggers
+- Branch cleanup automated on all PM workflow PRs
 
 **Next:**
-- Monitor Monday's first live trigger run (7 AM and 9 AM Asia/Saigon)
-- Compile today's test standup briefing to standup/briefings/2026-04/2026-04-11.md
-- Flag any Gmail connection gaps in the morning reminder fallback
+- Monitor Phase 2 compile run at 9:00 AM Asia/Saigon
+- Confirm Lark + Resend dual-channel delivery confirmed in production with verified sender domain
 
 **Blockers:**
 None
@@ -24,10 +22,14 @@ None
 ## web-developer
 
 **Completed:**
-- (not active today)
+- PR #72: SEO + AI search audit: fix canonical, add schema, robots, llms, 42 card pages — merged at 16:56
+- PR #71: Home: real mahjong cards, Bill portrait, latest blog posts; book → Coming Soon — merged at 16:41
+- PR #70: Modern home hero + left-aligned footer newsletter — merged at 16:01
+- PR #69: Lark webhook notifications for all inquiry forms (contact, readings, preorder) — merged at 15:07
 
 **Next:**
-- Pick up approved content from content/topics/ when humans sign off (Wednesday rhythm)
+- Monitor home hero and card system performance in production
+- Process next approved content from content/topics/ queue
 
 **Blockers:**
 None
@@ -37,23 +39,37 @@ None
 ## writer
 
 **Completed:**
-- (not active today — Dave scaffolding the agent)
+- No new writer PRs merged since 2026-04-13 00:00
 
 **Next:**
-- Await writer agent setup from Dave before first Friday run
+- Resolve remaining skill execution gaps from review
+- Implement SM handoff contract
 
 **Blockers:**
-Writer agent not yet set up — Dave working on it today
+Writer agent skill gaps documented — fixes applied by Dave and Trac, verify before next scheduled run
 
 ---
 
 ## product-manager
 
 **Completed:**
-- (not active today)
+- No new product-manager PRs merged since 2026-04-13 00:00
 
 **Next:**
-- Stand by for feature prioritisation requests
+- Review auto-publishing checklist with Dave for implementation sign-off
+
+**Blockers:**
+None
+
+---
+
+## image-designer
+
+**Completed:**
+- No new image-designer PRs merged since 2026-04-13 00:00
+
+**Next:**
+- Ready for use in blog hero image generation workflow
 
 **Blockers:**
 None

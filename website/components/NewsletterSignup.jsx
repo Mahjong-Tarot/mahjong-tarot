@@ -37,19 +37,27 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
     }
   }
 
+  const isFooter = variant === 'footer';
+  const isLight = variant === 'light' || isFooter;
+
   if (status === 'success') {
+    const wrapperClass = variant === 'dark'
+      ? styles.newsletter
+      : isFooter
+        ? `${styles.blogNewsletter} ${styles.footerNewsletter}`
+        : styles.blogNewsletter;
     return (
-      <div className={variant === 'dark' ? styles.newsletter : styles.blogNewsletter}>
-        <p className={variant === 'dark' ? styles.successMsgLight : styles.successMsg}>
+      <div className={wrapperClass}>
+        <p className={variant === 'dark' || isFooter ? styles.successMsgLight : styles.successMsg}>
           You&rsquo;re in! Watch your inbox for wisdom from the tiles.
         </p>
       </div>
     );
   }
 
-  if (variant === 'light') {
+  if (isLight) {
     return (
-      <div className={styles.blogNewsletter}>
+      <div className={isFooter ? `${styles.blogNewsletter} ${styles.footerNewsletter}` : styles.blogNewsletter}>
         <h2>Stay Connected</h2>
         <p>Get insights on Mahjong, tarot, and Chinese astrology delivered to your inbox.</p>
         <form onSubmit={handleSubmit}>
@@ -71,7 +79,7 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
             className={styles.select}
             value={sign}
             onChange={(e) => setSign(e.target.value)}
-            style={{ marginTop: 'var(--space-sm)', maxWidth: 480, width: '100%', marginLeft: 'auto', marginRight: 'auto' }}
+            style={{ marginTop: 'var(--space-sm)', maxWidth: 480, width: '100%', marginLeft: isFooter ? 0 : 'auto', marginRight: isFooter ? 0 : 'auto', display: 'block' }}
           >
             <option value="">Your Chinese sign (optional)</option>
             {CHINESE_SIGNS.map((s) => (

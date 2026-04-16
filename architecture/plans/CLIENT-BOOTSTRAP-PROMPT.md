@@ -4,26 +4,26 @@
 >
 > **HOW TO USE — EVERYTHING RUNS INSIDE CLAUDE DESKTOP:**
 >
-> **Phase A — Start in Cowork (do this first, ~15 min):**
+> **Phase 0A — Start in Cowork (do this first, ~15 min):**
 > 1. Open Claude Desktop → click **Cowork** in the left sidebar
 > 2. Attach or paste this file into the Cowork chat — **any format works** (PDF, Word, or plain text). Cowork will convert it automatically before proceeding.
 > 3. Cowork uses computer use to install the developer tools and log you into GitHub
 > 4. You will need to log in to GitHub in your browser — Cowork will tell you exactly when
-> 5. When Cowork says "ready for Phase B", click **Code** in the left sidebar
+> 5. When Cowork says "ready for Phase 0B", click **Code** in the left sidebar
 >
-> **Phase B — Continue in Code (same app, different tab):**
+> **Phase 0B — Continue in Code (same app, different tab):**
 > Paste this file again into the Code chat — **any format works**, Code will convert it.
-> Code detects Phase A is complete and starts the interview.
+> Code detects Phase 0A is complete and starts the interview.
 >
 > **After that, stay in Claude Desktop.** All phases run inside Chat, Cowork, or Code.
 > Only three things take you outside the app: setting up GitHub (browser), Vercel (browser), and Supabase (browser).
 >
 > **Realistic time to expect:**
-> - Website live on Vercel: ~60–90 minutes (Phase A + interview + scaffold + deploy)
+> - Website live on Vercel: ~60–90 minutes (Phase 0A + interview + scaffold + deploy)
 > - Full agent team generated: add 2–4 hours across 1–2 follow-on sessions
 > - Account setup (Supabase, Telegram, schedules): ~45 minutes, mostly in your browser
 >
-> If a session ends mid-way, start a new session in Code and say "resume bootstrap from Phase X".
+> If a session ends mid-way, start a new session in Code and say "resume bootstrap from Phase [0A / 0B / 1–9]" or "resume from checkpoint [5.2 / 5.3 / 5.4 / 5.5 / 5.6]".
 >
 > **RECOMMENDED MODEL:** Claude Opus 4.6 (`claude-opus-4-6`) — this is a complex, multi-phase setup
 > task. Do not run it on Haiku; the reasoning quality matters for generating coherent agent personas.
@@ -41,7 +41,7 @@ all interviews. Do not guess — ask when you need information.
 
 ---
 
-## PHASE 0 — ORIENT
+## PHASE 0B — ORIENT
 
 Before anything else, create a working directory and output this to the user:
 
@@ -49,12 +49,13 @@ Before anything else, create a working directory and output this to the user:
 Welcome. I'm going to set up your automated AI marketing team.
 
 Here's what will happen:
-  Phase 0    — I set up your developer tools (git, GitHub CLI) — ~10 min first time
+  Phase 0A   — Tools installed + permissions pre-approved (done in Cowork — already complete)
+  Phase 0B   — Environment verified, you're here now
   Phase 1-3  — I interview you (~30 questions across 3 groups)
   Phase 4    — I scaffold your website and deploy it to Vercel [~30 min → live site]
   Phase 5    — I generate your agent files, workflows, and resources [longest phase]
   Phase 6    — Remaining account setup (Supabase, email, Telegram)
-  Phase 7    — I generate your schedule files (run via Claude Desktop)
+  Phase 7    — I generate your schedule files
   Phase 8    — Verification
 
   If this session ends before we finish, start a new session and say:
@@ -76,15 +77,15 @@ Wait for confirmation, then immediately run the environment check below.
 
 ---
 
-## PHASE 0 PART 2 — ENVIRONMENT SETUP
+## PHASE 0B PART 2 — ENVIRONMENT SETUP
 
 **Detect which platform you are running on first**, then follow the correct path.
 
 ---
 
-### PATH A — Running in Claude Desktop Cowork (computer use available)
+### PHASE 0A — Running in Claude Desktop Cowork (computer use available)
 
-> **What is Cowork?** It's one of the one of the three modes in Claude Desktop's left sidebar (Chat, Cowork, Code). Unlike Chat, Cowork can see and control your screen — it opens your terminal, clicks buttons, and runs commands for you. You do not need to type any commands yourself in this phase.
+> **What is Cowork?** It's one of the three modes in Claude Desktop's left sidebar (Chat, Cowork, Code). Unlike Chat, Cowork can see and control your screen — it opens your terminal, clicks buttons, and runs commands for you. You do not need to type any commands yourself in this phase.
 >
 > **If the user attached a non-MD file** (PDF, Word doc, screenshot): extract the text content, save it as a temporary working file, then continue. Never ask the user to re-paste in a different format.
 
@@ -137,21 +138,121 @@ Come back here and tell me "done" when the browser step is complete.
 
 Wait for "done". Verify: `gh auth status`
 
-Confirm: `✅ Environment ready. All tools installed and GitHub authenticated.`
+#### Pre-seed Claude Code permissions
+
+This step runs once. It writes all required command permissions to `~/.claude/settings.local.json`
+so that Claude Code never prompts the user for approval during the rest of the setup.
+
+```bash
+python3 - <<'PYEOF'
+import json, os
+
+path = os.path.expanduser("~/.claude/settings.local.json")
+home = os.path.expanduser("~")
+
+settings = {}
+if os.path.exists(path):
+    with open(path) as f:
+        try:
+            settings = json.load(f)
+        except Exception:
+            settings = {}
+
+perms = settings.setdefault("permissions", {})
+allow = perms.setdefault("allow", [])
+
+required = [
+    # Package managers & runtimes
+    "Bash(git:*)", "Bash(gh:*)", "Bash(npm:*)", "Bash(npx:*)",
+    "Bash(pnpm:*)", "Bash(yarn:*)", "Bash(bun:*)", "Bash(node:*)", "Bash(deno:*)",
+    # Python
+    "Bash(python:*)", "Bash(python3:*)", "Bash(pip:*)", "Bash(pip3:*)", "Bash(uv:*)",
+    # Other languages
+    "Bash(cargo:*)", "Bash(go:*)", "Bash(make:*)", "Bash(cmake:*)",
+    "Bash(tsc:*)", "Bash(ts-node:*)", "Bash(tsx:*)", "Bash(nx:*)",
+    "Bash(ruby:*)", "Bash(gem:*)", "Bash(bundle:*)",
+    "Bash(java:*)", "Bash(javac:*)", "Bash(mvn:*)", "Bash(gradle:*)",
+    "Bash(swift:*)", "Bash(php:*)", "Bash(composer:*)",
+    # File system
+    "Bash(ls:*)", "Bash(cat:*)", "Bash(mkdir:*)", "Bash(touch:*)",
+    "Bash(cp:*)", "Bash(mv:*)", "Bash(rm:*)", "Bash(find:*)",
+    "Bash(ln:*)", "Bash(chmod:*)", "Bash(realpath:*)",
+    "Bash(basename:*)", "Bash(dirname:*)",
+    # Text processing
+    "Bash(grep:*)", "Bash(rg:*)", "Bash(sed:*)", "Bash(awk:*)",
+    "Bash(sort:*)", "Bash(uniq:*)", "Bash(wc:*)", "Bash(head:*)",
+    "Bash(tail:*)", "Bash(tee:*)", "Bash(tr:*)", "Bash(cut:*)",
+    "Bash(jq:*)", "Bash(diff:*)", "Bash(patch:*)",
+    # Network & data transfer
+    "Bash(curl:*)", "Bash(wget:*)", "Bash(zip:*)", "Bash(unzip:*)",
+    "Bash(tar:*)", "Bash(gzip:*)", "Bash(gunzip:*)",
+    # System & shell
+    "Bash(echo:*)", "Bash(printf:*)", "Bash(export:*)", "Bash(source:*)",
+    "Bash(env:*)", "Bash(pwd:*)", "Bash(cd:*)", "Bash(date:*)",
+    "Bash(which:*)", "Bash(open:*)", "Bash(xargs:*)",
+    "Bash(true:*)", "Bash(false:*)", "Bash(test:*)",
+    "Bash(kill:*)", "Bash(pkill:*)", "Bash(killall:*)",
+    "Bash(ps:*)", "Bash(lsof:*)", "Bash(crontab -l:*)", "Bash(crontab -r:*)",
+    # macOS
+    "Bash(pbcopy:*)", "Bash(pbpaste:*)", "Bash(xcodebuild:*)", "Bash(xcrun:*)",
+    # Cloud & DevOps
+    "Bash(docker:*)", "Bash(docker-compose:*)", "Bash(kubectl:*)", "Bash(helm:*)",
+    "Bash(vercel:*)", "Bash(supabase:*)", "Bash(stripe:*)",
+    "Bash(aws:*)", "Bash(gcloud:*)", "Bash(az:*)", "Bash(flyctl:*)",
+    # Databases
+    "Bash(psql:*)", "Bash(mysql:*)", "Bash(sqlite3:*)",
+    "Bash(redis-cli:*)", "Bash(mongosh:*)",
+    # Version managers
+    "Bash(nvm:*)", "Bash(fnm:*)", "Bash(pyenv:*)", "Bash(mise:*)", "Bash(asdf:*)",
+    # MCP tools
+    "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+    "mcp__plugin_context-mode_context-mode__ctx_search",
+    "mcp__plugin_context-mode_context-mode__ctx_execute",
+    "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
+    "mcp__plugin_context-mode_context-mode__ctx_execute_file",
+    "mcp__playwright__browser_navigate",
+    "mcp__playwright__browser_snapshot",
+    "mcp__playwright__browser_take_screenshot",
+    # Skills
+    "Skill(schedule)", "Skill(schedule:*)",
+    # Claude config files
+    f"Read({home}/.claude/**)",
+    f"Edit({home}/.claude/**)",
+    f"Write({home}/.claude/**)",
+]
+
+existing = set(allow)
+added = [p for p in required if p not in existing]
+allow.extend(added)
+
+os.makedirs(os.path.dirname(path), exist_ok=True)
+with open(path, "w") as f:
+    json.dump(settings, f, indent=2)
+
+print(f"✅ Permissions written: {len(added)} new entries added to ~/.claude/settings.local.json")
+print(f"   Total allow entries: {len(allow)}")
+PYEOF
+```
+
+> **Why this matters:** Claude Code prompts for approval on every unfamiliar command.
+> Pre-seeding these permissions means the rest of the bootstrap (Phases 1–9) runs
+> without a single approval pop-up.
+
+Confirm: `✅ Environment ready. All tools installed, GitHub authenticated, and Claude Code permissions pre-approved.`
 
 Output: `You can now open Claude Code and paste this bootstrap file to continue.`
 
-**Stop here** — Phase B continues in Claude Code.
+**Stop here** — Phase 0B continues in Claude Code.
 
 ---
 
-### PATH B — Running in Claude Desktop Code tab (Phase A already complete)
+### PHASE 0B — Running in Claude Desktop Code tab (Phase 0A already complete)
 
-> **What is Code?** It's one of the one of the three modes in Claude Desktop's left sidebar (Chat, Cowork, Code). It runs commands directly on your computer. You interact with it by typing in the chat — no terminal window needed.
+> **What is Code?** It's one of the three modes in Claude Desktop's left sidebar (Chat, Cowork, Code). It runs commands directly on your computer. You interact with it by typing in the chat — no terminal window needed.
 >
 > **If the user attached a non-MD file** (PDF, Word doc, screenshot): extract the text content, save it as a temporary working file, then continue. Never ask the user to re-paste in a different format.
 
-Check whether Phase A was completed:
+Check whether Phase 0A was completed:
 ```bash
 git --version 2>/dev/null && gh auth status 2>/dev/null && echo "READY" || echo "NOT_READY"
 ```
@@ -160,7 +261,7 @@ git --version 2>/dev/null && gh auth status 2>/dev/null && echo "READY" || echo 
 ```
 ⚠️  git or GitHub CLI is missing or not authenticated.
 
-Please complete Phase A first:
+Please complete Phase 0A first:
 1. Open Claude Desktop → Cowork mode
 2. Paste this bootstrap file
 3. Cowork will install the required tools
@@ -429,7 +530,7 @@ Wait for the user to paste their Vercel URL. Then confirm:
 
 Now I'll generate your AI marketing team files. This is the longer phase.
 I'll check in at each checkpoint. You can pause and resume any time by saying
-"Resume bootstrap from checkpoint [5A/5B/5C/5D/5E]"
+"Resume bootstrap from checkpoint [5.2 / 5.3 / 5.4 / 5.5 / 5.6]"
 ```
 
 ---
@@ -439,11 +540,11 @@ I'll check in at each checkpoint. You can pause and resume any time by saying
 After the website is confirmed live, create the following files. Every file must use
 actual answers from the interview — no placeholders like [INSERT NAME HERE].
 
-Announce `✅ CHECKPOINT 5A complete` after finishing section 5.2.
-Announce `✅ CHECKPOINT 5B complete` after finishing section 5.3.
-Announce `✅ CHECKPOINT 5C complete` after finishing section 5.4.
-Announce `✅ CHECKPOINT 5D complete` after finishing section 5.5.
-Announce `✅ CHECKPOINT 5E complete` after finishing section 5.6.
+Announce `✅ CHECKPOINT 5.2 complete` after finishing section 5.2.
+Announce `✅ CHECKPOINT 5.3 complete` after finishing section 5.3.
+Announce `✅ CHECKPOINT 5.4 complete` after finishing section 5.4.
+Announce `✅ CHECKPOINT 5.5 complete` after finishing section 5.5.
+Announce `✅ CHECKPOINT 5.6 complete` after finishing section 5.6.
 
 ### 5.0 — Global Claude Code Config (`~/.claude/CLAUDE.md`)
 
@@ -903,9 +1004,9 @@ Tasks to include:
 Adapt all times to the user's timezone (Q21). Convert to their local time — do not use UTC.
 
 Also create `agents/project-manager/context/workflows/daily-standup.md` with:
-- Phase 1: Morning reminder (what the agent sends, to whom, format)
-- Phase 2: Compile (what it reads, how it summarizes, where it writes)
-- Phase 3: Distribution (who gets the compiled brief, via which channel)
+- Step 1: Morning reminder (what the agent sends, to whom, format)
+- Step 2: Compile (what it reads, how it summarizes, where it writes)
+- Step 3: Distribution (who gets the compiled brief, via which channel)
 - Fallback for each phase (what happens if a team member hasn't checked in)
 
 ---

@@ -55,7 +55,19 @@ Capture briefly if yes; skip if no.
 
 Record `None` or a brief description per blocker.
 
-### 5. Write the file
+### 5. Determine the check-in date
+
+Before writing, check the current local time and set the date accordingly:
+
+| Time of check-in | Date to use | Reason |
+|------------------|-------------|--------|
+| Before 09:00 | **Today** | Early morning = today's standup |
+| 09:00 – 16:59 | **Today** | Normal working hours |
+| 17:00 or later | **Tomorrow** | EOD/evening = prep for next day's standup |
+
+Use `date +%H:%M` (or equivalent) to get the current time if not already known from context.
+
+### 6. Write the file
 
 Write to `standup/individual/[name].md`, replacing any previous content:
 
@@ -75,15 +87,15 @@ name: [Name]
 ```
 
 Rules:
-- Line 1 must be `date: YYYY-MM-DD`
+- Line 1 must be `date: YYYY-MM-DD` — use the date determined in Step 5 above
 - Focus items must be action-oriented (verb + outcome)
 - `## Blockers` must always be present, even if "None"
 
-### 6. Confirm
+### 7. Confirm
 
 > *"Your check-in is saved to `standup/individual/[name].md`. The PM picks it up at 9 AM. You're all set."*
 
-If past 9 AM: *"The stand-up has already run today — your check-in will be in tomorrow's report."*
+If date was set to tomorrow: *"It's past 5 PM — I've dated this for tomorrow so it's ready for the 9 AM compile."*
 
 ---
 
@@ -105,7 +117,9 @@ If the agent is self-reporting, extract completed/next/blockers from what it say
 
 ### 3. Update agents.md
 
-Read `standup/individual/agents.md`. Find the section matching `## [agent-name]`. Replace the **Completed**, **Next**, and **Blockers** content for that agent only. Update the `date:` field at the top to today's date if all agents have been updated, or leave it as-is if only one section is being updated mid-day.
+Read `standup/individual/agents.md`. Find the section matching `## [agent-name]`. Replace the **Completed**, **Next**, and **Blockers** content for that agent only.
+
+For the `date:` field at the top: apply the same date rule as humans — before 09:00 use today, 17:00 or later use tomorrow. Only update it if all agents have checked in, or leave it as-is if only one section is being updated mid-day.
 
 The file structure:
 

@@ -7,7 +7,9 @@ export default function Nav() {
   const isActive = (path) =>
     path === '/blog'
       ? router.pathname.startsWith('/blog')
-      : router.pathname === path;
+      : path === '/cards'
+        ? router.pathname.startsWith('/cards')
+        : router.pathname === path;
 
   return (
     <nav className={styles.nav}>
@@ -30,6 +32,11 @@ export default function Nav() {
           <li>
             <Link href="/the-mahjong-mirror" className={isActive('/the-mahjong-mirror') ? styles.active : ''}>
               The Mahjong Mirror
+            </Link>
+          </li>
+          <li>
+            <Link href="/cards" className={isActive('/cards') ? styles.active : ''}>
+              Cards
             </Link>
           </li>
           <li>

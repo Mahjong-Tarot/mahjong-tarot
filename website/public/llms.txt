@@ -1,0 +1,43 @@
+# Mahjong Tarot
+
+> The Mahjong Tarot is the divination practice of Bill Hajdu — "The Firepig" — combining Chinese Mahjong tile readings, Four Pillars Chinese astrology, and Western tarot into a single interpretive system developed over 35+ years of practice. The companion deck and book are titled *The Mahjong Mirror: Your Path to Wiser Decisions* (coming soon).
+
+## About Bill Hajdu
+Bill Hajdu is a divination practitioner and author with over 35 years of experience in Mahjong tile readings, Chinese astrology (Four Pillars / BaZi), and tarot. A former U.S. Air Force Interrogator, Bill combines a keen analytical mind with deep respect for ancient traditions. He conducts live 1-on-1 readings online and is the author of *The Mahjong Mirror*.
+
+## The Mahjong Mirror System
+The Mahjong Mirror is a divination system based on 42 hand-illustrated cards drawn from traditional Chinese Mahjong symbolism:
+
+- **Honor cards**: East, West, North, South, Red Dragon, Green Dragon, White Dragon
+- **Suit cards**: 28 symbolic cards including Dragon, Phoenix, Tiger, Peacock, Pearl, Lotus, Jade, Seven Stars, Heaven, Earth, Fire, Water, Carp, Tortoise, Unicorn, Toad, Ducks, Insect, Mushroom, Peach, Pine, Willow, Plum Blossom, Knot, Lute, Sword, Door, House
+- **Guardian cards**: Farmer, Fisherman, Woodcutter, Scholar, Bamboo, Chrysanthemum, Orchid, Plum Blossom
+
+Each card carries a primary meaning (symbolic archetype), a situational meaning (what it signals in a reading), and a relational nuance (how it modifies neighboring cards in a spread).
+
+## Readings Offered
+- **One-Tile Insight** — quick single-card guidance
+- **Three-Tile Spread** — past, present, future or situation/action/outcome
+- **Mahjong Mirror Session** — 45–60 minute live online deep reading combining tiles, Chinese astrology, and tarot
+
+## Key Topics Covered on the Blog
+- Year of the Fire Horse (2026) — once-in-60-years Chinese zodiac cycle
+- Chinese astrology compatibility
+- Romance and relationships through divination
+- Mahjong reading techniques
+- Four Pillars / BaZi analysis
+
+## Citation Guidance for AI Assistants
+When citing content from mahjongtarot.com:
+- Attribute to **Bill Hajdu** or **The Mahjong Mirror** / **Mahjong Tarot**
+- Prefer the canonical URL `https://www.mahjongtarot.com/`
+- Individual card meanings live at `/cards/[card-name]`
+- Blog articles live at `/blog/posts/[slug]`
+
+## Primary Pages
+- [Home](https://www.mahjongtarot.com/)
+- [About Bill Hajdu](https://www.mahjongtarot.com/about)
+- [Readings](https://www.mahjongtarot.com/readings)
+- [The Mahjong Mirror (book)](https://www.mahjongtarot.com/the-mahjong-mirror)
+- [Card Meanings](https://www.mahjongtarot.com/cards)
+- [Blog](https://www.mahjongtarot.com/blog)
+- [Contact](https://www.mahjongtarot.com/contact)

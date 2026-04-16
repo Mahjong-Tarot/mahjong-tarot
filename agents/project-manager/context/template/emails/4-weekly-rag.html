@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Weekly Status Report</title>
+</head>
+<body style="margin:0;padding:0;background-color:#FAF8F4;font-family:Arial,Helvetica,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF8F4;">
+<tr><td align="center" style="padding:40px 20px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- Header -->
+  <tr><td style="background:#1B1F3B;padding:32px 40px;">
+    <p style="margin:0 0 8px;color:#C9A84C;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Weekly Status Report &middot; Friday</p>
+    <h1 style="margin:0;color:#FAF8F4;font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:700;line-height:1.2;">Project RAG Status</h1>
+    <p style="margin:8px 0 0;color:#C9A84C;font-family:Arial,sans-serif;font-size:14px;">Week of {{DATE}}</p>
+  </td></tr>
+
+  <!-- Gold rule -->
+  <tr><td style="background:#C9A84C;height:2px;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+  <!-- RAG rows -->
+  <tr><td style="background:#FAF8F4;padding:32px 40px 0;">
+
+    <!-- GREEN -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+    <tr>
+      <td width="40" style="background:#27AE60;padding:16px 0;text-align:center;vertical-align:top;">
+        <span style="color:#FAF8F4;font-family:Arial,sans-serif;font-size:18px;">&#9679;</span>
+      </td>
+      <td style="background:#EDEBE5;padding:16px 20px;vertical-align:top;">
+        <p style="margin:0 0 4px;color:#27AE60;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Green — On Track</p>
+        <p style="margin:0;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">{{GREEN_STATUS}}</p>
+      </td>
+    </tr>
+    </table>
+
+    <!-- AMBER -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+    <tr>
+      <td width="40" style="background:#E67E22;padding:16px 0;text-align:center;vertical-align:top;">
+        <span style="color:#FAF8F4;font-family:Arial,sans-serif;font-size:18px;">&#9679;</span>
+      </td>
+      <td style="background:#EDEBE5;padding:16px 20px;vertical-align:top;">
+        <p style="margin:0 0 4px;color:#E67E22;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Amber — Needs Attention</p>
+        <p style="margin:0;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">{{AMBER_STATUS}}</p>
+      </td>
+    </tr>
+    </table>
+
+    <!-- RED -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+    <tr>
+      <td width="40" style="background:#C0392B;padding:16px 0;text-align:center;vertical-align:top;">
+        <span style="color:#FAF8F4;font-family:Arial,sans-serif;font-size:18px;">&#9679;</span>
+      </td>
+      <td style="background:#EDEBE5;padding:16px 20px;vertical-align:top;">
+        <p style="margin:0 0 4px;color:#C0392B;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Red — Needs Escalation</p>
+        <p style="margin:0;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">{{RED_STATUS}}</p>
+      </td>
+    </tr>
+    </table>
+
+  </td></tr>
+
+  <!-- Risks -->
+  <tr><td style="background:#1B1F3B;padding:32px 40px;">
+    <p style="margin:0 0 16px;color:#C9A84C;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Top Risks</p>
+    <p style="margin:0;color:#FAF8F4;font-family:Arial,sans-serif;font-size:15px;line-height:1.8;">{{TOP_RISKS}}</p>
+  </td></tr>
+
+  <!-- Upcoming + Decisions -->
+  <tr><td style="background:#FAF8F4;padding:32px 40px 40px;">
+    <p style="margin:0 0 16px;color:#888880;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Upcoming — Next 2 Weeks</p>
+    <p style="margin:0 0 24px;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.8;">{{UPCOMING_MILESTONES}}</p>
+
+    <p style="margin:0 0 16px;color:#888880;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Decisions Needed</p>
+    <p style="margin:0;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.8;">{{DECISIONS_NEEDED}}</p>
+  </td></tr>
+
+  <!-- Full RAG report -->
+  <tr><td style="background:#FAF8F4;padding:32px 40px 40px;">
+    <p style="margin:0 0 12px;color:#888880;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Full RAG Report</p>
+    <div style="background:#EDEBE5;padding:20px 24px;font-family:Arial,sans-serif;font-size:14px;line-height:1.8;color:#0D0D0D;">{{RAG_CONTENT}}</div>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="border-top:1px solid #EDEBE5;padding:24px 40px;">
+    <p style="margin:0;color:#888880;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;">PM Agent &middot; The Mahjong Tarot &middot; {{DATE}} &middot; <a href="https://github.com/Mahjong-Tarot/mahjong-tarot/blob/main/standup/briefings/{{YYYY-MM}}/weekly-rag-{{YYYY-MM-DD}}.md" style="color:#1B1F3B;">View full report</a></p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

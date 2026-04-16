@@ -1,9 +1,10 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb, faqPage } from '../lib/schema';
 import { supabase } from '../lib/supabase';
 import styles from '../styles/MahjongMirror.module.css';
 import form from '../styles/Forms.module.css';
@@ -47,15 +48,38 @@ export default function TheMahjongMirror() {
   }
   return (
     <>
-      <Head>
-        <title>The Mahjong Mirror — Your Path to Wiser Decisions</title>
-        <meta name="description" content="The Mahjong Mirror by Bill Hajdu. A modern divination system inspired by ancient Mahjong symbolism — guiding you toward clarity, intuition, and deeper self-discovery." />
-        <meta property="og:title" content="The Mahjong Mirror — Your Path to Wiser Decisions" />
-        <meta property="og:description" content="A modern divination system inspired by ancient Mahjong symbolism." />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/book-cover.webp" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/the-mahjong-mirror" />
-      </Head>
+      <SEO
+        title="The Mahjong Mirror Book & Deck by Bill Hajdu — Modern Divination System"
+        description="The Mahjong Mirror by Bill Hajdu — a 42-card divination system grounded in traditional Chinese Mahjong symbolism. Book and deck coming soon. Preorder your copy."
+        path="/the-mahjong-mirror"
+        image="/images/book-cover.webp"
+        type="book"
+        jsonLd={graph([
+          ORGANIZATION,
+          WEBSITE,
+          PERSON_BILL,
+          breadcrumb([
+            { name: 'Home', url: '/' },
+            { name: 'The Mahjong Mirror', url: '/the-mahjong-mirror' },
+          ]),
+          {
+            '@type': 'Book',
+            name: 'The Mahjong Mirror: Your Path to Wiser Decisions',
+            author: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+            image: 'https://www.mahjongtarot.com/images/book-cover.webp',
+            description:
+              'A modern divination system inspired by ancient Mahjong symbolism — guiding you toward clarity, intuition, and deeper self-discovery. 42 cards, grounded in Chinese tradition.',
+            url: 'https://www.mahjongtarot.com/the-mahjong-mirror',
+            bookFormat: 'https://schema.org/Hardcover',
+            inLanguage: 'en',
+          },
+          faqPage([
+            { q: 'What is The Mahjong Mirror?', a: 'The Mahjong Mirror is a 42-card divination system created by Bill Hajdu, drawing on traditional Chinese Mahjong symbolism to support self-reflection, decision-making, and spiritual clarity.' },
+            { q: 'Do I need to know Mahjong to use it?', a: 'No. The Mahjong Mirror is designed to be used without any prior knowledge of Mahjong. Each card carries a symbolic meaning explained in the accompanying book.' },
+            { q: 'When is the book available?', a: 'The Mahjong Mirror is coming soon. Join the preorder list to be notified when it ships.' },
+          ]),
+        ])}
+      />
 
       <Nav />
 
@@ -64,7 +88,7 @@ export default function TheMahjongMirror() {
         <section className={styles.hero}>
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroText}>
-              <span className="overline">Now Available</span>
+              <span className="overline">Coming Soon</span>
               <h1>Unlock Your Destiny<br />Through the<br /><em>Mahjong Mirror</em></h1>
               <p className={styles.heroLead}>
                 A modern divination system inspired by ancient Mahjong symbolism —

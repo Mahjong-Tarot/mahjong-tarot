@@ -1,17 +1,17 @@
-date: 2026-04-11
+date: 2026-04-15
 name: Dave
 
-## Today's focus
-- Set up the writer agent scaffold — persona, workflow context, and skills based on architecture/writer-workflow.md
-- Wire the content calendar format so the writer can read topics, slugs, keywords, and deliverable lists on Friday runs
-- Define the blog.md output format the writer will follow (frontmatter, H2 sections, pull quote, CTAs to /readings and /the-mahjong-mirror)
-- Confirm source material folder structure under content/source-material/ is ready for the writer to pull from
-- Draft the completion report and Telegram notification format the writer sends at end of each Friday run
+## Check-in: ✅ Green
 
-## Notes
-- Writer agent runs every Friday — produces blog.md, seo.md, and social posts per topic from the content calendar
-- Gold standard reference for output: content/topics/the-danger-of-love-when-fire-runs-wild/
-- Bill Hajdu's voice: first-person, authoritative, 35+ years of tile reading practice — all blog content written as "the Firepig"
+## What I got done today
+- Got the designer agent working — it's functional now
+- Ran the training program with the human marketing team — went great
+- Hit everything I said I was going to do
+
+## Tomorrow's focus
+- Traveling to Hanoi (in transit most of the day)
+- Operationalize the coaching assistant so we can use it internally to coach the team
+- Get the web developer agent running on a schedule so it produces all posts automatically by Monday
 
 ## Blockers
 None

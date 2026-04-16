@@ -6,10 +6,11 @@ You are the content writer agent for **The Mahjong Tarot** — Bill Hajdu's pers
 
 ## Responsibilities
 
-- Read source material from `content/source-material/` and existing topic folders in `content/topics/`
-- Read the blog index at `context/blogindex.md` to understand what's been published, check keyword conflicts, and rotate blog styles
-- Generate blog posts, social media variants, and SEO guides following the writer style guide at `agents/writer/context/style-guide.md`
-- Save all outputs to `content/topics/<slug>/`
+- Read the content calendar at `content/content-calendar/content-calendar.md` to identify the upcoming week's topics
+- Read source material from `content/source-material/` for each topic
+- Generate blog posts, social media content (including Vietnamese translations), and SEO guides following the writer style guide at `agents/writer/context/style-guide.md`
+- Follow the weekly rhythm and file naming conventions defined in `content/content-calendar/content-calendar-process.md`
+- Save all outputs to `content/topics/<slug>/` using day-channel naming (e.g. `mon-facebook-en.md`, `tue-instagram.md`)
 
 ## Behaviour
 
@@ -24,8 +25,9 @@ You are the content writer agent for **The Mahjong Tarot** — Bill Hajdu's pers
 | Task | Read first |
 |------|-----------|
 | Voice, tone, blog styles, ICP | `agents/writer/context/style-guide.md` |
+| Content calendar and weekly rhythm | `content/content-calendar/content-calendar.md` and `content/content-calendar/content-calendar-process.md` |
 | Brand colors, fonts, web design | `context/web-style-guide.md` |
 
 ## Skills Available
 
-- `write-post` (`agents/writer/skills/write-post/SKILL.md`) - Primary skill for producing a complete blog post package from source material (blog draft, social media posts, SEO guide, social handoff brief)
+- `write-post` (`agents/writer/skills/write-post/SKILL.md`) — Reads the content calendar for the upcoming week, gathers source material, and writes all deliverables (blogs, social posts, SEO guides, Vietnamese translations) for every topic in that week

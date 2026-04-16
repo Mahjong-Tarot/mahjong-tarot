@@ -1,0 +1,84 @@
+{
+  "topic": "Taylor Swift and Travis Kelce's 2026 wedding — dismantling the myth that two Snakes marrying in a Fire Horse year is a disaster, arguing that elemental balance in the full chart matters more than animal signs alone.",
+  "phrases": [
+    "Signs say no. Elements say yes.",
+    "The spark isn't the problem.",
+    "Two thrones. One marriage.",
+    "Heat isn't the enemy of love — indifference is.",
+    "Four power signs. One direction."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "blog-fire-horse",
+      "concept": "A couple standing together at the edge of a vast space, seen from behind, looking out at something immense. Two equals. Neither leads.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Cinematic wide-angle photograph of a couple from behind — a tall man in a fitted dark navy suit and a woman in a dramatic sculptural ivory gown with a long train — standing at the edge of a rooftop terrace at dusk. They face away from the camera, looking out over a glittering city skyline. The sky transitions from deep amber and burnt orange near the horizon to near-black above. City lights begin to glow below. Their shoulders nearly touch. Neither turns toward the other — they simply stand, equal, watching the same horizon. The mood is grand, intimate, inevitable. Film still quality, shallow depth of field, warm tones. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "mon-facebook-en",
+      "concept": "A bold text-background evoking the collision of fire and power — raw, striking, designed to carry the phrase.",
+      "image_style": "TEXT",
+      "text": "Two thrones. One marriage.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Abstract painterly background for text overlay. Deep midnight jade — very dark forest green — dominates the left half of the frame, smooth and cool. The right half bleeds into molten antique gold with cracked, forge-like textures — glowing embers embedded in the surface, heat shimmer distorting the edge between the two halves. The center where the two halves meet has a subtle, luminous haze of warm amber light. No figures, no objects, no symbols, no text. The texture is rich enough to anchor bold typography in post-production. The mood: immense pressure, two forces meeting, heat that creates rather than destroys. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-vn.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "mon-facebook-vn",
+      "concept": "Two mirrors facing each other — infinite reflection — representing two people who are the same sign, seeing themselves in each other.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Cinematic still life — two ornate antique hand mirrors with aged brass frames, laid nearly face-to-face on a surface of dark polished stone. They are angled slightly open, just enough that a thin sliver of infinite recursive reflection is visible between them — a corridor of light vanishing into depth. One mirror is lit from the left by a warm, directional amber beam. The other catches cooler, diffused light from above. The surface beneath them is smooth dark stone. No tiles, no candles, no flowers. The composition is stark and deliberate, the mood cool and compelling. Macro detail on the mirror frames. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "mon-instagram",
+      "concept": "A woman reading tabloid headlines about celebrity compatibility — her expression unreadable, skeptical, confident. She knows something the headlines don't.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Editorial portrait of a woman in profile, seated in a clean minimalist interior — large window to her left, natural light washing across her. She holds a glossy magazine displaying large, dramatic headlines — the content is unreadable but clearly tabloid in format, bold and sensational. Her face is in three-quarter view, not facing the camera. Her expression is calm, slightly skeptical, a flicker of private amusement. She is well-dressed — a structured blazer, warm ivory tones. The background is spare: white wall, a thin line of a bookshelf. The mood is sharp and intelligent. Editorial photography style, clean and contemporary. No tiles, no candles, no mystical props. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "tue-facebook-en",
+      "concept": "A text-background for the phrase about heat and indifference. Warm, pressured, alive.",
+      "image_style": "TEXT",
+      "text": "Heat isn't the enemy of love — indifference is.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Abstract atmospheric background for text overlay. A gradient that moves from deep plum and midnight jade at the top — cool, deep, still — down to a warm molten amber and antique gold glow at the bottom, as if heat is rising from below the frame. The transition between the two zones is soft and organic, not geometric. The texture in the warm zone has a faint ember-glow quality — subtle, not garish. The cool upper zone is smooth and deep. No figures, no objects, no symbols, no text in the image. The surface must be clean enough to anchor a single line of bold type in post-production. The mood: restrained fire, controlled heat, something alive under the surface. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-vn.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "tue-facebook-vn",
+      "concept": "A forge scene — raw metal being shaped by heat — as a metaphor for Fire Horse energy that creates rather than destroys.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Extreme cinematic macro of hot forged metal — a surface of dark iron or steel with deep fissures of brilliant orange-white molten light cutting through cooling dark edges. The glowing seams are irregular and organic, not geometric. The metal surface surrounding them is deep charcoal, dark brown, and ash-grey. The overall color palette is near-black with controlled bursts of intense amber-orange-white. The framing is abstract — no tools, no hands, no context for scale. The image reads purely as elemental transformation: fire producing something solid, permanent. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "taylor-swift-travis-kelce-wedding",
+      "content_type": "tue-instagram",
+      "concept": "Two powerful figures — silhouettes only — standing on opposite sides of a vast luminous space, facing each other. Equal. Neither dominant.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "High-contrast cinematic photograph of two human silhouettes — one male, one female, both tall and composed — standing on opposite ends of a grand architectural corridor or stadium tunnel. Between them: a massive source of warm golden light, almost blinding, pouring through an opening at the far end. Both figures face the light and each other. They are equal in posture, equal in presence. The architecture around them is monumental — concrete, steel, or stone. The floor reflects the golden light in long horizontal streaks. The mood is immense, quiet, and charged. No faces visible — pure silhouette. Square composition, centered axis of symmetry. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

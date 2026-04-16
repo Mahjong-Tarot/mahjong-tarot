@@ -1,14 +1,14 @@
-date: 2026-04-11
+date: 2026-04-15
 name: Trac
 
 ## Today's focus
-- Update project manager skills, persona, and workflows based on Dave's updated standup workflow
-- Fix standup folder structure consolidation issues introduced during Claude generation
-- Generate setup prompts for the team (trigger setup, daily-checkin skill update)
+- Refine client bootstrap prompt for non-tech users (infinite leverage blueprint)
+- Fix triggers prompt and align PM-related MD files for accurate PM agent messaging
 
 ## Notes
-- Workflow spec came from Dave; some Claude-generated content had incorrect standup folder references that needed manual correction
-- Three reusable prompts now live in docs/prompts/ for team onboarding: PM setup, daily-checkin skill update, and trigger registration
+- Bootstrap prompt has two parts:
+  1. Prerequisites/manual setup — runs in Claude chat to guide clients through initial config (pre-Git install)
+  2. Automated setup — runs in Claude Code after Git is installed, handles remaining steps up to workflow creation for each agent; some steps require user permission
 
 ## Blockers
-None
+- Cannot fully test clean setup yet — needs fresh accounts on both Mac and Windows machines; testing expected tonight, results to be reported tomorrow

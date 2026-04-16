@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Daily Stand-Up Summary</title>
+</head>
+<body style="margin:0;padding:0;background-color:#FAF8F4;font-family:Arial,Helvetica,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF8F4;">
+<tr><td align="center" style="padding:40px 20px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- Header -->
+  <tr><td style="background:#1B1F3B;padding:32px 40px;">
+    <p style="margin:0 0 8px;color:#C9A84C;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;">Compiled &middot; 9:00 AM</p>
+    <h1 style="margin:0;color:#FAF8F4;font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:700;line-height:1.2;">Stand-Up Summary</h1>
+    <p style="margin:8px 0 0;color:#C9A84C;font-family:Arial,sans-serif;font-size:14px;">{{DAY}}, {{DATE}}</p>
+  </td></tr>
+
+  <!-- Gold rule -->
+  <tr><td style="background:#C9A84C;height:2px;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+  <!-- Conflicts block -->
+  <tr><td style="background:#FAF8F4;padding:32px 40px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+    <tr><td style="background:#1B1F3B;border-left:3px solid #C0392B;padding:16px 20px;">
+      <p style="margin:0 0 8px;color:#C0392B;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Conflicts &amp; Sync Alerts</p>
+      {{CONFLICTS_OR_NONE}}
+    </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Team check-ins -->
+  <tr><td style="background:#FAF8F4;padding:32px 40px 0;">
+    <p style="margin:0 0 16px;color:#888880;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Team Check-Ins</p>
+
+    <!-- Dave -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
+    <tr><td style="background:#EDEBE5;padding:20px 24px;">
+      <p style="margin:0 0 8px;color:#1B1F3B;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Dave</p>
+      <p style="margin:0 0 8px;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">{{DAVE_FOCUS}}</p>
+      <p style="margin:0;color:#888880;font-family:Arial,sans-serif;font-size:13px;">Blockers: {{DAVE_BLOCKERS}}</p>
+    </td></tr>
+    </table>
+
+    <!-- Yon -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
+    <tr><td style="background:#EDEBE5;padding:20px 24px;">
+      <p style="margin:0 0 8px;color:#1B1F3B;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Yon</p>
+      <p style="margin:0 0 8px;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">{{YON_FOCUS}}</p>
+      <p style="margin:0;color:#888880;font-family:Arial,sans-serif;font-size:13px;">Blockers: {{YON_BLOCKERS}}</p>
+    </td></tr>
+    </table>
+
+    <!-- Trac -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
+    <tr><td style="background:#EDEBE5;padding:20px 24px;">
+      <p style="margin:0 0 8px;color:#1B1F3B;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Trac</p>
+      <p style="margin:0 0 8px;color:#0D0D0D;font-family:Arial,sans-serif;font-size:15px;line-height:1.6;">{{TRAC_FOCUS}}</p>
+      <p style="margin:0;color:#888880;font-family:Arial,sans-serif;font-size:13px;">Blockers: {{TRAC_BLOCKERS}}</p>
+    </td></tr>
+    </table>
+
+  </td></tr>
+
+  <!-- Agent updates -->
+  <tr><td style="background:#FAF8F4;padding:24px 40px 40px;">
+    <p style="margin:0 0 12px;color:#888880;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Agent Updates</p>
+    {{AGENT_UPDATES}}
+  </td></tr>
+
+  <!-- Full compiled stand-up -->
+  <tr><td style="background:#FAF8F4;padding:0 40px 40px;">
+    <p style="margin:0 0 12px;color:#888880;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Full Stand-Up Report</p>
+    <div style="background:#EDEBE5;padding:20px 24px;font-family:Arial,sans-serif;font-size:14px;line-height:1.8;color:#0D0D0D;">{{STANDUP_CONTENT}}</div>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="border-top:1px solid #EDEBE5;padding:24px 40px;">
+    <p style="margin:0;color:#888880;font-family:Arial,sans-serif;font-size:13px;line-height:1.6;">PM Agent &middot; The Mahjong Tarot &middot; {{DATE}} &middot; <a href="https://github.com/Mahjong-Tarot/mahjong-tarot/blob/main/standup/briefings/{{YYYY-MM}}/{{YYYY-MM-DD}}.md" style="color:#1B1F3B;">View full stand-up</a></p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

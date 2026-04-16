@@ -1,18 +1,18 @@
-date: 2026-04-15
+date: 2026-04-16
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #68: Trac/workflows n processes — merged at 15:07
-- PR #66: pm(standup-compile): 2026-04-14 — merged at 02:21
-- PM agent notifications (Lark + Resend) operational across all agent triggers
-- Branch cleanup automated on all PM workflow PRs
+- PR #77: pm: EOD reminder split, bootstrap prompt refinement, and PM doc alignment — merged 2026-04-15
+- PR #75: Pm/standup morning/2026 04 15 — merged 2026-04-15
+- PR #74: pm(standup-compile): 2026-04-15 — merged 2026-04-15
+- Bootstrap Phase 0A/0B prompt refinement with checkpoint clarification
 
 **Next:**
 - Monitor Phase 2 compile run at 9:00 AM Asia/Saigon
-- Confirm Lark + Resend dual-channel delivery confirmed in production with verified sender domain
+- Verify morning reminder delivery to human team via Lark + Resend
 
 **Blockers:**
 None

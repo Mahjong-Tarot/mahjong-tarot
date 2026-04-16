@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Marketing Team — Bootstrap Overview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0F172A;
+      color: #E2E8F0;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .header h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #F8FAFC;
+    }
+    .header p {
+      margin-top: 10px;
+      color: #94A3B8;
+      font-size: 1rem;
+    }
+    .header .stats {
+      display: inline-flex;
+      gap: 32px;
+      margin-top: 24px;
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 16px 32px;
+    }
+    .stat { text-align: center; }
+    .stat .value { font-size: 1.5rem; font-weight: 700; color: #F8FAFC; }
+    .stat .label { font-size: 0.75rem; color: #64748B; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ── Phases ── */
+    .phases {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    /* connector line */
+    .phases::before {
+      content: '';
+      position: absolute;
+      left: 32px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #475569, #1E293B);
+      z-index: 0;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 8px;
+    }
+
+    /* ── Phase icon + connector ── */
+    .phase-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .phase-dot {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      border: 3px solid transparent;
+      box-shadow: 0 0 0 4px #0F172A;
+      position: relative;
+      z-index: 2;
+    }
+    .phase-connector {
+      width: 2px;
+      flex: 1;
+      min-height: 20px;
+    }
+
+    /* ── Phase card ── */
+    .phase-card {
+      border-radius: 16px;
+      border: 1px solid;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      transition: transform 0.15s;
+    }
+    .phase-card:hover { transform: translateX(4px); }
+
+    .phase-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .phase-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #F8FAFC;
+    }
+    .phase-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .phase-desc {
+      font-size: 0.9rem;
+      color: #94A3B8;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    /* Steps inside a phase */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .step {
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .step-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 4px;
+    }
+    .step-text {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      line-height: 1.4;
+    }
+
+    /* Outputs */
+    .outputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .output-tag {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      color: #94A3B8;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .output-label {
+      font-size: 0.7rem;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+      margin-top: 12px;
+    }
+
+    /* ── Dependency arrows ── */
+    .dep-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: #475569;
+      padding: 6px 0 6px 64px;
+    }
+    .dep-arrow {
+      font-size: 1rem;
+      color: #334155;
+    }
+    .dep-text {
+      font-style: italic;
+      color: #64748B;
+    }
+
+    /* ── Phase colours ── */
+    /* P0 amber */
+    .p0 .phase-dot  { background: #92400E; border-color: #F59E0B; color: #FDE68A; }
+    .p0 .phase-card { background: #1C1508; border-color: #78350F; }
+    .p0 .step-label { color: #F59E0B; }
+    .p0 .phase-connector { background: linear-gradient(#78350F, #1E293B); }
+
+    /* P1 blue */
+    .p1 .phase-dot  { background: #1E3A5F; border-color: #3B82F6; color: #BFDBFE; }
+    .p1 .phase-card { background: #0D1B2E; border-color: #1E3A5F; }
+    .p1 .step-label { color: #60A5FA; }
+    .p1 .phase-connector { background: linear-gradient(#1E3A5F, #1E293B); }
+
+    /* P2 purple */
+    .p2 .phase-dot  { background: #3B0764; border-color: #A855F7; color: #E9D5FF; }
+    .p2 .phase-card { background: #130623; border-color: #4C1D95; }
+    .p2 .step-label { color: #C084FC; }
+    .p2 .phase-connector { background: linear-gradient(#4C1D95, #1E293B); }
+
+    /* P3 green */
+    .p3 .phase-dot  { background: #064E3B; border-color: #10B981; color: #A7F3D0; }
+    .p3 .phase-card { background: #021A14; border-color: #065F46; }
+    .p3 .step-label { color: #34D399; }
+    .p3 .phase-connector { background: linear-gradient(#065F46, #1E293B); }
+
+    /* P4 teal */
+    .p4 .phase-dot  { background: #164E63; border-color: #06B6D4; color: #A5F3FC; }
+    .p4 .phase-card { background: #061B22; border-color: #155E75; }
+    .p4 .step-label { color: #22D3EE; }
+
+    /* badge colours */
+    .badge-manual   { background: #451A03; color: #FCD34D; border: 1px solid #78350F; }
+    .badge-cowork   { background: #1E1B4B; color: #A5B4FC; border: 1px solid #3730A3; }
+    .badge-code     { background: #0C4A6E; color: #7DD3FC; border: 1px solid #075985; }
+    .badge-chat     { background: #14532D; color: #86EFAC; border: 1px solid #166534; }
+    .badge-time     { background: #1E293B; color: #94A3B8; border: 1px solid #334155; }
+
+    /* ── End state ── */
+    .end-state {
+      margin-top: 32px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #052e16, #064e3b);
+      border: 1px solid #065f46;
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .end-state h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #A7F3D0;
+      margin-bottom: 8px;
+    }
+    .end-state p {
+      color: #6EE7B7;
+      font-size: 0.9rem;
+    }
+
+    .auto-tasks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .auto-task {
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid #065f46;
+    }
+    .auto-task .when {
+      font-size: 0.7rem;
+      color: #34D399;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+    .auto-task .what {
+      font-size: 0.82rem;
+      color: #D1FAE5;
+      font-weight: 600;
+    }
+    .auto-task .who {
+      font-size: 0.72rem;
+      color: #6EE7B7;
+      margin-top: 2px;
+    }
+
+    /* ── Approval note ── */
+    .approval-note {
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+      border: 1px solid #065f46;
+      font-size: 0.82rem;
+      color: #86EFAC;
+      line-height: 1.7;
+    }
+    .approval-note strong { color: #A7F3D0; }
+
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.6rem; }
+      .header .stats { gap: 20px; padding: 14px 20px; }
+      .phases::before { left: 24px; }
+      .phase { grid-template-columns: 48px 1fr; }
+      .phase-dot { width: 48px; height: 48px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>AI Marketing Team — Bootstrap</h1>
+      <p>End-to-end setup guide for non-technical business owners</p>
+      <div class="stats">
+        <div class="stat"><div class="value">5</div><div class="label">Phases</div></div>
+        <div class="stat"><div class="value">~6h</div><div class="label">Total time</div></div>
+        <div class="stat"><div class="value">~1h</div><div class="label">Your effort</div></div>
+        <div class="stat"><div class="value">7</div><div class="label">AI Agents</div></div>
+      </div>
+    </div>
+
+    <!-- Phases -->
+    <div class="phases">
+
+      <!-- P0 -->
+      <div class="phase p0">
+        <div class="phase-icon">
+          <div class="phase-dot">P0</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-title">Accounts &amp; Credentials</div>
+            <div class="phase-meta">
+              <span class="badge badge-manual">Manual</span>
+              <span class="badge badge-chat">Claude Chat</span>
+              <span class="badge badge-time">45–60 min</span>
+            </div>
+          </div>
+          <p class="phase-desc">Pure browser work. Claude Chat guides you step by step. Nothing to install — just create accounts and copy your credentials into a safe place.</p>
+          <div class="steps">
+            <div class="step"><div class="step-label">Step 1</div><div class="step-text">Claude Desktop Pro — download &amp; install</div></div>
+            <div class="step"><div class="step-label">Step 2</div><div class="step-text">GitHub — create account, note username</div></div>
+            <div class="step"><div class="step-label">Step 3</div><div class="step-text">Vercel — sign up with GitHub</div></div>
+            <div class="step"><div class="step-label">Step 4</div><div class="step-text">Supabase — new project, copy URL + anon key</div></div>
+            <div class="step"><div class="step-label">Step 5</div><div class="step-text">Email platform — Brevo recommended, get API key</div></div>
+            <div class="step"><div class="step-label">Step 6</div><div class="step-text">Telegram bot — optional, for AI team alerts</div></div>
+          </div>
+          <div class="output-label">Outputs</div>
+          <div class="outputs">
+            <span class="output-tag">All credentials noted</span>
+            <span class="output-tag">GitHub account</span>
+            <span class="output-tag">Supabase project</span>
+            <span class="output-tag">Email API key</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- dep arrow -->
+      <div class="dep-row">
+        <span class="dep-arrow">↓</span>
+        <span class="dep-text">credentials ready — P1 needs your GitHub access to push the first repo</span>
+      </div>
+
+      <!-- P1 -->
+      <div class="phase p1">
+        <div class="phase-icon">
+          <div class="phase-dot">P1</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-title">Local Machine Setup</div>
+            <div class="phase-meta">
+              <span class="badge badge-cowork">Cowork</span>
+              <span class="badge badge-code">Code</span>
+              <span class="badge badge-time">20–30 min</span>
+            </div>
+          </div>
+          <p class="phase-desc">Claude takes the wheel. Stage A uses Cowork (screen control) to install developer tools. Stage B runs in Code to scaffold your project and configure Claude itself.</p>
+          <div class="steps">
+            <div class="step"><div class="step-label">Stage A — Cowork</div><div class="step-text">Install git, node, Vercel CLI, Supabase CLI. Authenticate GitHub. Pre-seed all Claude Code permissions.</div></div>
+            <div class="step"><div class="step-label">Stage B — Code</div><div class="step-text">Create project folder + git repo. Write CLAUDE.md rules. Configure Supabase MCP. Install skills (skill-creator, agent-creator).</div></div>
+          </div>
+          <div class="output-label">Outputs</div>
+          <div class="outputs">
+            <span class="output-tag">Project repo on GitHub</span>
+            <span class="output-tag">CLAUDE.md written</span>
+            <span class="output-tag">Permissions pre-seeded</span>
+            <span class="output-tag">Skills installed</span>
+            <span class="output-tag">Supabase MCP configured</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- dep arrow -->
+      <div class="dep-row">
+        <span class="dep-arrow">↓</span>
+        <span class="dep-text">repo exists + Claude is fully configured — P2 can write files and push to GitHub</span>
+      </div>
+
+      <!-- P2 -->
+      <div class="phase p2">
+        <div class="phase-icon">
+          <div class="phase-dot">P2</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-title">Business Discovery + First Website</div>
+            <div class="phase-meta">
+              <span class="badge badge-code">Code</span>
+              <span class="badge badge-time">60–90 min</span>
+            </div>
+          </div>
+          <p class="phase-desc">A structured interview captures everything Claude needs to know about your business, brand, and audience. Then it builds and deploys your website automatically.</p>
+          <div class="steps">
+            <div class="step"><div class="step-label">Group 1</div><div class="step-text">Business identity — name, description, products, domain, location</div></div>
+            <div class="step"><div class="step-label">Group 2</div><div class="step-text">Audience &amp; market — ICP, brand voice, competitors, 12-month goal</div></div>
+            <div class="step"><div class="step-label">Group 3</div><div class="step-text">Channels &amp; capacity — platforms, email list, hours available, timezone</div></div>
+            <div class="step"><div class="step-label">Style</div><div class="step-text">Visual style + brand colours — pick from suggestions or specify your own</div></div>
+            <div class="step"><div class="step-label">Strategy</div><div class="step-text">Content pillars (3–5) + 90-day goal</div></div>
+            <div class="step"><div class="step-label">Website</div><div class="step-text">Scaffold Next.js app → push to GitHub → deploy to Vercel → wire Supabase</div></div>
+          </div>
+          <div class="output-label">Outputs</div>
+          <div class="outputs">
+            <span class="output-tag">brand-voice.md</span>
+            <span class="output-tag">design-system.md</span>
+            <span class="output-tag">web-style-guide.md</span>
+            <span class="output-tag">audience-personas.md</span>
+            <span class="output-tag">content-calendar.md</span>
+            <span class="output-tag">Live website on Vercel</span>
+            <span class="output-tag">Supabase connected</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- dep arrow -->
+      <div class="dep-row">
+        <span class="dep-arrow">↓</span>
+        <span class="dep-text">brand files exist + website live — P3 uses these to generate personalised agent personas</span>
+      </div>
+
+      <!-- P3 -->
+      <div class="phase p3">
+        <div class="phase-icon">
+          <div class="phase-dot">P3</div>
+          <div class="phase-connector"></div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-title">Agent Team Build</div>
+            <div class="phase-meta">
+              <span class="badge badge-code">Code</span>
+              <span class="badge badge-time">2–3 hours</span>
+            </div>
+          </div>
+          <p class="phase-desc">Every agent is built with a 5-step workflow: interview → workflow design → your approval → generate all files → install. Nothing is generated before you say yes.</p>
+          <div class="steps">
+            <div class="step"><div class="step-label">Template agents</div><div class="step-text"><strong style="color:#D1FAE5">Project Manager</strong> — standups, RAID log, RAG reports</div></div>
+            <div class="step"><div class="step-label">Template agents</div><div class="step-text"><strong style="color:#D1FAE5">Product Manager</strong> — strategy, roadmap, ICP research</div></div>
+            <div class="step"><div class="step-label">Template agents</div><div class="step-text"><strong style="color:#D1FAE5">Web Developer</strong> — build &amp; publish pages</div></div>
+            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Designer</strong> — hero images, social cards, brand visuals</div></div>
+            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Writer</strong> — blog posts, social copy, newsletters</div></div>
+            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Marketing Manager</strong> — campaigns, content calendar</div></div>
+            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Social Media Manager</strong> — platform drafts, TikTok, analytics</div></div>
+          </div>
+          <div class="output-label">Outputs per agent</div>
+          <div class="outputs">
+            <span class="output-tag">.claude/agents/{name}.md</span>
+            <span class="output-tag">agents/{name}/context/persona.md</span>
+            <span class="output-tag">agents/{name}/context/skills/</span>
+            <span class="output-tag">resources/seo-strategy.md</span>
+            <span class="output-tag">standup/individual/{owner}.md</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- dep arrow -->
+      <div class="dep-row">
+        <span class="dep-arrow">↓</span>
+        <span class="dep-text">all agents installed — P4 can generate personalised schedule commands for each agent's triggers</span>
+      </div>
+
+      <!-- P4 -->
+      <div class="phase p4">
+        <div class="phase-icon">
+          <div class="phase-dot">P4</div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-title">Schedules + Verification</div>
+            <div class="phase-meta">
+              <span class="badge badge-code">Code</span>
+              <span class="badge badge-chat">Chat</span>
+              <span class="badge badge-time">30–45 min</span>
+            </div>
+          </div>
+          <p class="phase-desc">Claude generates ready-to-paste schedule commands, you activate them in the Chat tab, then Claude runs end-to-end tests to confirm the whole system is working.</p>
+          <div class="steps">
+            <div class="step"><div class="step-label">Section 1 — Code</div><div class="step-text">Generate /schedule commands for all automated tasks. Write to schedule-desktop-tasks.md.</div></div>
+            <div class="step"><div class="step-label">Section 2 — Chat</div><div class="step-text">Copy each command → switch to Chat tab → paste &amp; press Enter. Confirm each schedule is active.</div></div>
+            <div class="step"><div class="step-label">Section 3 — Code</div><div class="step-text">Verification: file existence checks + 3 functional agent tests (PM standup, Writer caption, Web Dev build).</div></div>
+            <div class="step"><div class="step-label">Section 5 — Optional</div><div class="step-text">OpenClaw upgrade: WhatsApp control interface + TikTok AI video generation.</div></div>
+          </div>
+          <div class="output-label">Outputs</div>
+          <div class="outputs">
+            <span class="output-tag">schedule-desktop-tasks.md</span>
+            <span class="output-tag">5 active schedules</span>
+            <span class="output-tag">context/publish-log.md</span>
+            <span class="output-tag">Verification passed ✅</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /phases -->
+
+    <!-- End state -->
+    <div class="end-state">
+      <h2>🎉 Your AI Team is Running</h2>
+      <p>Mon–Fri, every week, automatically — without you setting a reminder.</p>
+      <div class="auto-tasks">
+        <div class="auto-task">
+          <div class="when">Mon–Fri · 7am</div>
+          <div class="what">Standup reminder</div>
+          <div class="who">Project Manager</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">Mon–Fri · 9am</div>
+          <div class="what">Daily briefing compiled</div>
+          <div class="who">Project Manager</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">Mon–Fri · 5pm</div>
+          <div class="what">EOD check-in reminder</div>
+          <div class="who">Project Manager</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">1st of month · 9am</div>
+          <div class="what">Content calendar generated</div>
+          <div class="who">Marketing Manager</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">Friday · 4pm</div>
+          <div class="what">Weekly RAG report</div>
+          <div class="who">Project Manager</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">On demand</div>
+          <div class="what">Blog posts, social drafts, web pages — triggered by you</div>
+          <div class="who">Writer · Designer · Web Dev</div>
+        </div>
+      </div>
+      <div class="approval-note">
+        <strong>Always your decision:</strong> Social posts are drafted for your review first.
+        Email campaigns require explicit approval before sending.
+        Blog posts are reviewed before the Web Developer publishes.
+        Paid spend is always your call.
+      </div>
+    </div>
+
+  </div><!-- /page -->
+</body>
+</html>

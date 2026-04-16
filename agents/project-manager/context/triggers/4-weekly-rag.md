@@ -57,7 +57,16 @@ RESEND_FROM    = env["RESEND_FROM"]
 RESEND_TO      = ",".join(emails)
 ```
 
-Use these four values throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+After running the snippet above, immediately export all four values into the current shell session — CLI tools do not inherit Python variables:
+
+```bash
+export LARK_CHAT_ID='<value-from-python>'
+export RESEND_API_KEY='<value-from-python>'
+export RESEND_FROM='<value-from-python>'
+export RESEND_TO='<value-from-python>'
+```
+
+Use these four shell variables throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
 
 ## Step 1 — Git workflow
 
@@ -87,12 +96,18 @@ Notification (send both — not fallback):
 Build the message from the RAG report using the structure below — omit any section with no content. Then send with:
 
 ```bash
+# Use lark-cli (globally installed, v1.0.12). For full syntax reference, see the lark-im skill.
 # --as bot uses tenant_access_token — no OAuth or user login required
-# Lark fallback: if lark-cli not installed globally, use npx
-LARK_CMD=lark-cli; command -v lark-cli &>/dev/null || LARK_CMD="npx lark-cli"
-$LARK_CMD im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
+lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --markdown $'<BUILT_SUMMARY>'
 LARK_EXIT=$?
 ```
+
+If LARK_EXIT is non-zero, self-diagnose and retry through each option in order until one succeeds — do not stop at the first failure:
+1. **Check auth**: run `lark-cli whoami` — if it fails or returns no identity, re-authenticate: `lark-cli auth login --as bot`; then retry the send
+2. **Check chat ID**: verify `$LARK_CHAT_ID` is set (`echo "$LARK_CHAT_ID"`) — if empty, re-export from .env before retrying
+3. **Try `--text` instead of `--markdown`**: convert the summary to plain text and retry with `--text`
+4. **Send via HTTP**: call the Lark OpenAPI directly using `curl` with a fresh `tenant_access_token` from `lark-cli auth token --as bot`
+5. Only mark Lark as failed after all four options above are exhausted
 
 Message structure:
 
@@ -152,26 +167,37 @@ Send the complete RAG report content:
    ```
 - Substitute all `{{PLACEHOLDER}}` values in a copy of `agents/project-manager/context/template/emails/4-weekly-rag.html`, injecting `rag_html` (the HTML string, not raw markdown) into `{{RAG_CONTENT}}`
 - Write to /tmp/weekly-rag-email.html, then run:
+   # Ensure key is in shell env before invoking CLI (Python variables do not auto-export)
+   if [ -z "$RESEND_API_KEY" ]; then
+     export RESEND_API_KEY=$(python3 -c "
+import re
+def penv(p):
+    v={}
+    try:
+        [v.update({k.strip():val.strip().strip('\"').strip(\"'\")}) for line in open(p) for k,_,val in [line.strip().partition('=')] if line.strip() and not line.startswith('#') and '=' in line]
+    except: pass
+    return v
+e={}; [e.update(penv(f)) for f in ['.env','.env.development','.env.production','.env.local']]
+print(e.get('RESEND_API_KEY',''))
+")
+   fi
    if ! command -v resend &>/dev/null; then npm install -g resend; fi
    TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ')
-   RESEND_API_KEY=$RESEND_API_KEY resend emails send \
+   RESEND_API_KEY="$RESEND_API_KEY" resend emails send \
      --from "$RESEND_FROM" \
      --to $TO_ARGS \
      --subject "Weekly Status Report — Week of YYYY-MM-DD" \
      --html-file /tmp/weekly-rag-email.html \
      --quiet
    RESEND_EXIT=$?
-   # Fallback: if CLI fails, send via Resend API directly using cURL
-   if [ $RESEND_EXIT -ne 0 ]; then
-     python3 -c "
-import json,subprocess,sys
-html=open('/tmp/weekly-rag-email.html').read()
-payload=json.dumps({'from':'$RESEND_FROM','to':'$RESEND_TO'.split(','),'subject':'Weekly Status Report — Week of YYYY-MM-DD','html':html})
-r=subprocess.run(['curl','-s','-o','/dev/null','-w','%{http_code}','-X','POST','https://api.resend.com/emails','-H','Authorization: Bearer $RESEND_API_KEY','-H','Content-Type: application/json','--data',payload],capture_output=True,text=True)
-sys.exit(0 if r.stdout.strip().startswith('2') else 1)
-"
-     RESEND_EXIT=$?
-   fi
+
+   If RESEND_EXIT is non-zero, self-diagnose and retry through each option in order until one succeeds — do not stop at the first failure:
+   1. **Verify the key**: run `echo "$RESEND_API_KEY" | head -c 8` — if empty, re-read from .env files using the inline Python above and `export RESEND_API_KEY=<value>`; then retry the CLI
+   2. **Reinstall CLI**: run `npm install -g resend` and retry
+   3. **cURL direct API**: POST the HTML file to `https://api.resend.com/emails` with `Authorization: Bearer $RESEND_API_KEY` header using `curl`
+   4. **Python `requests` library**: `pip install requests` if needed, then POST to `https://api.resend.com/emails` with the same payload
+   5. Only mark Resend as failed after all four options above are exhausted
+   RESEND_EXIT=$?
 
 ### 3. If BOTH fail
 

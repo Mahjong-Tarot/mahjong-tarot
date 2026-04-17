@@ -16,7 +16,12 @@ Trigger this skill when the user says things like:
 
 ## How local scheduled tasks work
 
-Claude Desktop reads `~/.claude/scheduled-tasks/` to surface tasks in its Schedule tab. Each task is a folder containing one file:
+A scheduled task requires **two steps** — writing the file alone is not enough:
+
+1. **SKILL.md** — defines the prompt the agent runs when triggered
+2. **MCP registration** — registers the cron schedule and task ID with Claude Desktop's internal scheduler via `mcp__scheduled-tasks__create_scheduled_task`
+
+Without step 2, the folder exists but the task never fires.
 
 ```
 ~/.claude/scheduled-tasks/
@@ -24,7 +29,7 @@ Claude Desktop reads `~/.claude/scheduled-tasks/` to surface tasks in its Schedu
     └── SKILL.md
 ```
 
-**The schedule (cron) is NOT stored in the file.** It is registered in Claude Desktop's internal state when the user configures it through the UI. The `SKILL.md` is the prompt the agent runs — writing it here pre-populates the task so it's ready to activate when the Schedule tab becomes available.
+The `create_scheduled_task` MCP tool writes the SKILL.md and registers the schedule in one call. You can also write the file manually first, then register separately — but both must happen.
 
 ---
 
@@ -128,23 +133,26 @@ Structure the prompt as numbered steps (`## Step 0`, `## Step 1`, etc.). Each st
    - Whether it writes files (needs git workflow) or is notifications-only
    - What notifications to send (Lark, email, both, neither)
 
-2. **Draft the SKILL.md** using the structure above. For the prompt body:
+2. **Draft the SKILL.md prompt body** using the structure above:
    - Open with time/date context
    - Step 0: credential loading (if needed)
    - Numbered steps for the task logic
    - Notification step (if needed)
    - Git commit/PR step (if writing files)
 
-3. **Create the file:**
-   ```bash
-   mkdir -p ~/.claude/scheduled-tasks/<task-name>
-   # then Write the SKILL.md
-   ```
+3. **Register the task via MCP** — call `mcp__scheduled-tasks__create_scheduled_task` with:
+   - `taskId`: kebab-case name
+   - `description`: one-line summary
+   - `prompt`: the full prompt body
+   - `cronExpression`: standard 5-field cron in **local time** (e.g. `"0 9 * * 1-5"` for weekdays at 9 AM)
+   - `notifyOnCompletion`: `true` (default)
+
+   This tool writes the SKILL.md and registers the schedule atomically. Do **not** manually `mkdir` + `Write` the file separately when using this tool — it handles both.
 
 4. **Confirm to the user:**
-   - File path created
-   - Reminder that the cron schedule must be set in Claude Desktop's Schedule tab (not in the file)
-   - If Schedule tab is not available on their platform, suggest Windows Task Scheduler as an alternative runner
+   - File path created and task registered
+   - Next scheduled run time (the MCP tool returns this)
+   - Remind them to click **Run now** once in Claude Desktop's Scheduled sidebar to pre-approve tool permissions — prevents future runs from pausing on permission prompts
 
 ---
 

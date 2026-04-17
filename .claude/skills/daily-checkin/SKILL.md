@@ -96,6 +96,54 @@ Rules:
 
 If date was set to tomorrow: *"It's past 9 AM — I've dated this for tomorrow so it's ready for the next 9 AM compile."*
 
+### 8. Offer to commit and push
+
+Run `git status` to see the full picture of modified and untracked files in the working tree.
+
+Present the results clearly, split into two groups:
+
+```
+📋 Your standup file:
+  standup/individual/[name].md
+
+📂 Other changed files (if any):
+  [list every other modified/untracked file — or "None" if clean]
+```
+
+Then ask:
+
+> *"Would you like me to commit and push:*
+> **(A) Just your standup file** — only `standup/individual/[name].md`*
+> **(B) Everything listed above** — all changed files*
+> **(C) Skip — I'll handle it myself"*
+
+**If A — standup only:**
+
+```bash
+git checkout -b standup/[name]/YYYY-MM-DD
+git add standup/individual/[name].md
+git commit -m "standup([name]): YYYY-MM-DD"
+git push origin standup/[name]/YYYY-MM-DD
+gh pr create --title "standup([name]): YYYY-MM-DD" --base main --body "Daily check-in for [Name]"
+gh pr merge --merge --auto --delete-branch
+git checkout main && git pull origin main
+git branch -d standup/[name]/YYYY-MM-DD 2>/dev/null || true
+```
+
+**If B — everything:**
+
+Show the exact file list again and ask once more before touching anything:
+
+> *"To confirm — I'll stage and commit these files:*
+> *[list every file explicitly, one per line]*
+> *Proceed? (yes / no)"*
+
+Only proceed after an explicit "yes". Stage each file by name — **never** use `git add .` or `git add -A`. Then follow the same branch → commit → push → PR → merge flow as option A, with a commit message that summarises all the changes.
+
+**If C — skip:**
+
+> *"No problem. Run `git add standup/individual/[name].md` when you're ready."*
+
 ---
 
 ## Agent Check-in Flow
@@ -118,7 +166,7 @@ If the agent is self-reporting, extract completed/next/blockers from what it say
 
 Read `standup/individual/agents.md`. Find the section matching `## [agent-name]`. Replace the **Completed**, **Next**, and **Blockers** content for that agent only.
 
-For the `date:` field at the top: apply the same date rule as humans — before 09:00 use today, 17:00 or later use tomorrow. Only update it if all agents have checked in, or leave it as-is if only one section is being updated mid-day.
+For the `date:` field at the top: apply the same date rule as humans — before 09:00 use today, 09:00 or later use tomorrow. Only update it if all agents have checked in, or leave it as-is if only one section is being updated mid-day.
 
 The file structure:
 

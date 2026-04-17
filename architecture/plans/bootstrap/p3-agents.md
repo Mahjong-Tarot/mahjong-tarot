@@ -496,6 +496,48 @@ After all agents are installed, create:
 **`standup/individual/{owner-name}.md`**:
 - Create with today's date and a welcome entry
 
+**Update `~/.claude/skills/daily-checkin/SKILL.md`** — replace the placeholder team roster with real names:
+
+The daily-checkin skill was installed in P1 B10 with `[Person 1]`, `[Person 2]`, `[Person 3]` placeholders. Now that the team is confirmed, update the skill using the names from `agents/project-manager/context/persona.md`:
+
+```python
+import os, re
+
+skill_path = os.path.expanduser("~/.claude/skills/daily-checkin/SKILL.md")
+with open(skill_path) as f:
+    content = f.read()
+
+# Replace placeholders with real names and their standup file paths
+# Derive names and slugs from the confirmed team roster
+replacements = {
+    "[Person 1]": "{Team Member 1 Name}",
+    "standup/individual/person1.md": "standup/individual/{name1-slug}.md",
+    "[Person 2]": "{Team Member 2 Name}",
+    "standup/individual/person2.md": "standup/individual/{name2-slug}.md",
+    "[Person 3]": "{Team Member 3 Name}",
+    "standup/individual/person3.md": "standup/individual/{name3-slug}.md",
+}
+for placeholder, real in replacements.items():
+    content = content.replace(placeholder, real)
+
+# Remove the setup note now that names are real
+content = re.sub(
+    r"> ⚠️ \*\*Setup note:\*\*.*?\n\n",
+    "",
+    content,
+    flags=re.DOTALL
+)
+
+with open(skill_path, "w") as f:
+    f.write(content)
+print(f"✅ daily-checkin skill updated with real team names → {skill_path}")
+```
+
+Also copy the updated skill into the project for version control:
+```bash
+cp ~/.claude/skills/daily-checkin/SKILL.md .claude/skills/daily-checkin/SKILL.md
+```
+
 ---
 
 ```
@@ -509,6 +551,8 @@ Resources written:
   resources/seo-strategy.md
   context/agent-creation-guideline.md
   standup/individual/{name}.md
+  ~/.claude/skills/daily-checkin/SKILL.md (team names updated from placeholders)
+  .claude/skills/daily-checkin/SKILL.md (project copy synced)
 
 Next: Paste the P4 file into Claude Code to activate schedules and verify the system.
 ```

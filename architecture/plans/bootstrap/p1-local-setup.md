@@ -69,8 +69,15 @@ Wait for "done". Verify: `gh auth status`
 
 ### A3 — Pre-seed Claude Code permissions
 
-Run this once. It writes all required permissions to `~/.claude/settings.local.json`
-so Claude Code never prompts for approval during the rest of the bootstrap.
+Run this once. It writes a `Bash(*)` wildcard plus MCP and file permissions to
+`~/.claude/settings.local.json` so Claude Code never prompts for shell command
+approval during the rest of the bootstrap or any scheduled agent run.
+
+`Bash(*)` is a single entry that covers every tool — full paths, chained commands
+(`&&`, `;`, pipes), inline scripts (`python3 -c "..."`), and any CLI not yet installed.
+Per-command rules accumulate debt and miss edge cases; the wildcard eliminates the
+problem entirely. `defaultMode: acceptEdits` keeps file-write prompts active while
+removing all Bash prompts.
 
 ```bash
 python3 - <<'PYEOF'
@@ -90,36 +97,9 @@ if os.path.exists(path):
 perms = settings.setdefault("permissions", {})
 allow = perms.setdefault("allow", [])
 
+# Bash(*) as first entry covers all shell commands — no per-command rules needed
 required = [
-    "Bash(git:*)", "Bash(gh:*)", "Bash(npm:*)", "Bash(npx:*)",
-    "Bash(pnpm:*)", "Bash(yarn:*)", "Bash(bun:*)", "Bash(node:*)", "Bash(deno:*)",
-    "Bash(python:*)", "Bash(python3:*)", "Bash(pip:*)", "Bash(pip3:*)", "Bash(uv:*)",
-    "Bash(cargo:*)", "Bash(go:*)", "Bash(make:*)", "Bash(cmake:*)",
-    "Bash(tsc:*)", "Bash(ts-node:*)", "Bash(tsx:*)", "Bash(nx:*)",
-    "Bash(ruby:*)", "Bash(gem:*)", "Bash(bundle:*)",
-    "Bash(java:*)", "Bash(javac:*)", "Bash(mvn:*)", "Bash(gradle:*)",
-    "Bash(swift:*)", "Bash(php:*)", "Bash(composer:*)",
-    "Bash(ls:*)", "Bash(cat:*)", "Bash(mkdir:*)", "Bash(touch:*)",
-    "Bash(cp:*)", "Bash(mv:*)", "Bash(rm:*)", "Bash(find:*)",
-    "Bash(ln:*)", "Bash(chmod:*)", "Bash(realpath:*)", "Bash(basename:*)", "Bash(dirname:*)",
-    "Bash(grep:*)", "Bash(rg:*)", "Bash(sed:*)", "Bash(awk:*)",
-    "Bash(sort:*)", "Bash(uniq:*)", "Bash(wc:*)", "Bash(head:*)",
-    "Bash(tail:*)", "Bash(tee:*)", "Bash(tr:*)", "Bash(cut:*)",
-    "Bash(jq:*)", "Bash(diff:*)", "Bash(patch:*)",
-    "Bash(curl:*)", "Bash(wget:*)", "Bash(zip:*)", "Bash(unzip:*)",
-    "Bash(tar:*)", "Bash(gzip:*)", "Bash(gunzip:*)",
-    "Bash(echo:*)", "Bash(printf:*)", "Bash(export:*)", "Bash(source:*)",
-    "Bash(env:*)", "Bash(pwd:*)", "Bash(cd:*)", "Bash(date:*)",
-    "Bash(which:*)", "Bash(open:*)", "Bash(xargs:*)",
-    "Bash(true:*)", "Bash(false:*)", "Bash(test:*)",
-    "Bash(kill:*)", "Bash(pkill:*)", "Bash(killall:*)",
-    "Bash(ps:*)", "Bash(lsof:*)",
-    "Bash(pbcopy:*)", "Bash(pbpaste:*)", "Bash(xcodebuild:*)", "Bash(xcrun:*)",
-    "Bash(docker:*)", "Bash(docker-compose:*)", "Bash(kubectl:*)", "Bash(helm:*)",
-    "Bash(vercel:*)", "Bash(supabase:*)", "Bash(stripe:*)",
-    "Bash(aws:*)", "Bash(gcloud:*)", "Bash(az:*)", "Bash(flyctl:*)",
-    "Bash(psql:*)", "Bash(mysql:*)", "Bash(sqlite3:*)", "Bash(redis-cli:*)", "Bash(mongosh:*)",
-    "Bash(nvm:*)", "Bash(fnm:*)", "Bash(pyenv:*)", "Bash(mise:*)", "Bash(asdf:*)",
+    "Bash(*)",
     "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
     "mcp__plugin_context-mode_context-mode__ctx_search",
     "mcp__plugin_context-mode_context-mode__ctx_execute",
@@ -136,15 +116,22 @@ required = [
     f"Write({home}/.claude/**)",
 ]
 
+# Bash(*) must be first — move it to the front if already present elsewhere
+allow = [p for p in allow if p != "Bash(*)"]
 existing = set(allow)
-added = [p for p in required if p not in existing]
-allow.extend(added)
+added = [p for p in required if p not in existing and p != "Bash(*)"]
+allow = ["Bash(*)", *allow, *added]
+
+perms["allow"] = allow
+perms["defaultMode"] = "acceptEdits"
 
 os.makedirs(os.path.dirname(path), exist_ok=True)
 with open(path, "w") as f:
     json.dump(settings, f, indent=2)
 
-print(f"✅ Permissions written: {len(added)} new entries → ~/.claude/settings.local.json")
+print(f"✅ Permissions written → ~/.claude/settings.local.json")
+print(f"   Bash(*) wildcard is first — no per-command prompts for the rest of bootstrap")
+print(f"   defaultMode: acceptEdits — file writes still prompt, Bash never does")
 PYEOF
 ```
 
@@ -393,7 +380,183 @@ npx skills add larksuite/cli -g -y 2>/dev/null || true
 > "Skills CLI not found. Install it with: `npm install -g @anthropic/skills-cli`
 > Then re-run B9."
 
-### B10 — Initial git commit
+### B10 — Install daily-checkin skill
+
+Write the daily-checkin skill globally so every Claude Code session can run it.
+Team member names are placeholders — P3 will replace them with the real roster.
+
+```bash
+mkdir -p ~/.claude/skills/daily-checkin
+```
+
+```python
+import os
+skill_path = os.path.expanduser("~/.claude/skills/daily-checkin/SKILL.md")
+skill_content = '''---
+name: daily-checkin
+description: Help a human team member write their daily check-in. Use when someone says "help me write my check-in", "I need to do my standup", "update my standup", or "fill in my check-in". Writes check-ins to standup/individual/[name].md.
+---
+
+# Daily Check-in Skill
+
+## Purpose
+
+Guide a human team member through their daily check-in and write the result to the correct file, ready for the PM agent to pick up at 9 AM.
+
+> ⚠️ **Setup note:** Replace [Person 1], [Person 2], [Person 3] and their file paths
+> below with your actual team member names once they are confirmed in P3.
+
+---
+
+## Human Check-in Flow
+
+### 1. Confirm the person
+
+Ask:
+
+> *"Who are you?"*
+
+Map to file (update these in P3 with real names):
+- [Person 1] → `standup/individual/person1.md`
+- [Person 2] → `standup/individual/person2.md`
+- [Person 3] → `standup/individual/person3.md`
+
+### 2. Ask about today\'s focus
+
+> *"What are you working on today?"*
+
+If the answer is vague, follow up for specifics. Collect 1–5 focus items and confirm them back before writing.
+
+### 3. Ask about notes (optional)
+
+> *"Any context worth sharing — background, decisions made, anything the team should know?"*
+
+Capture briefly if yes; skip if no.
+
+### 4. Ask about blockers
+
+> *"Any blockers stopping or slowing you down?"*
+
+Record `None` or a brief description per blocker.
+
+### 5. Determine the check-in date
+
+Before writing, check the current local time and set the date accordingly:
+
+| Time of check-in | Date to use | Reason |
+|------------------|-------------|--------|
+| Before 09:00 | **Today** | Early morning = today\'s standup |
+| 09:00 or later | **Tomorrow** | Standup has already run — prep for next day |
+
+Use `date +%H:%M` to get the current time.
+
+### 6. Write the file
+
+Write to `standup/individual/[name].md`, replacing any previous content:
+
+```
+date: YYYY-MM-DD
+name: [Name]
+
+## Today\'s focus
+- [item 1]
+- [item 2]
+
+## Notes
+- [optional — omit section if nothing to add]
+
+## Blockers
+[None | description]
+```
+
+Rules:
+- Line 1 must be `date: YYYY-MM-DD` — use the date from Step 5
+- Focus items must be action-oriented (verb + outcome)
+- `## Blockers` must always be present, even if "None"
+
+### 7. Confirm
+
+> *"Your check-in is saved to `standup/individual/[name].md`. The PM picks it up at 9 AM. You\'re all set."*
+
+If date was set to tomorrow: *"It\'s past 9 AM — I\'ve dated this for tomorrow so it\'s ready for the next 9 AM compile."*
+
+### 8. Offer to commit and push
+
+Run `git status` to see the full picture of modified and untracked files.
+
+Present the results split into two groups:
+
+```
+📋 Your standup file:
+  standup/individual/[name].md
+
+📂 Other changed files (if any):
+  [list every other modified/untracked file — or "None" if clean]
+```
+
+Then ask:
+
+> *"Would you like me to commit and push:*
+> **(A) Just your standup file** — only `standup/individual/[name].md`*
+> **(B) Everything listed above** — all changed files*
+> **(C) Skip — I\'ll handle it myself"*
+
+**If A — standup only:**
+
+```
+git checkout -b standup/[name]/YYYY-MM-DD
+git add standup/individual/[name].md
+git commit -m "standup([name]): YYYY-MM-DD"
+git push origin standup/[name]/YYYY-MM-DD
+gh pr create --title "standup([name]): YYYY-MM-DD" --base main --body "Daily check-in for [Name]"
+gh pr merge --merge --auto --delete-branch
+git checkout main && git pull origin main
+git branch -d standup/[name]/YYYY-MM-DD 2>/dev/null || true
+```
+
+**If B — everything:**
+
+Show the exact file list again and ask once more:
+
+> *"To confirm — I\'ll stage and commit these files:*
+> *[list every file explicitly, one per line]*
+> *Proceed? (yes / no)"*
+
+Only proceed after an explicit "yes". Stage each file by name — never use `git add .` or `git add -A`.
+Then follow the same branch → commit → push → PR → merge flow as option A.
+
+**If C — skip:**
+
+> *"No problem. Run `git add standup/individual/[name].md` when you\'re ready."*
+
+---
+
+## Conversational tone
+
+- Brief and direct — this should take under 2 minutes
+- If someone says "just write it based on what I told you", do it immediately
+- If someone pastes a wall of text, extract the relevant fields yourself, confirm, then write
+
+---
+
+## Edge cases
+
+| Situation | Action |
+|-----------|--------|
+| Name not in roster | Write to `standup/individual/[name].md`; note PM may not recognise it |
+| No focus items given | Ask once more; if still nothing, write "No update provided" and flag it |
+| Check-in already exists for today | Overwrite — the new entry is canonical |
+| Person wants to update later | Tell them to re-run this skill; it will overwrite |
+'''
+
+os.makedirs(os.path.dirname(skill_path), exist_ok=True)
+with open(skill_path, "w") as f:
+    f.write(skill_content)
+print(f"✅ daily-checkin skill written → {skill_path}")
+print("   Team member names are placeholders — update in P3 with real names")
+```
+
+### B11 — Initial git commit
 
 ```bash
 git add CLAUDE.md .gitignore .env.example .claude/ agents/ content/ resources/ context/ standup/ working_files/.gitkeep
@@ -407,13 +570,15 @@ git commit -m "bootstrap: P1 complete — project structure, CLAUDE.md, base con
 
 Your project is set up locally with:
   ✓ Developer tools installed (git, node, vercel, supabase CLI)
-  ✓ Claude Code permissions pre-approved (no more prompts)
   ✓ GitHub authenticated
+  ✓ Claude Code permissions pre-approved — Bash(*) wildcard, no prompts ever again
+  ✓ defaultMode set to acceptEdits — file writes still confirm, Bash never does
   ✓ Project folder structure created
   ✓ Global + local CLAUDE.md written
   ✓ Engineering rules written
   ✓ Supabase MCP configured (token needed after P2)
   ✓ Base skills installed
+  ✓ daily-checkin skill installed — team member names are placeholders, update in P3
 
 Next: Paste the P2 file into Claude Code to begin the business discovery interview.
 ```

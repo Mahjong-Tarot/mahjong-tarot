@@ -1,17 +1,20 @@
-date: 2026-04-15
+date: 2026-04-17
 name: Dave
 
-## Check-in: ✅ Green
+## Check-in: 🟡 Yellow
 
-## What I got done today
-- Got the designer agent working — it's functional now
-- Ran the training program with the human marketing team — went great
-- Hit everything I said I was going to do
+## What I got done yesterday
+- Traveling — day was too hectic to make meaningful progress
 
-## Tomorrow's focus
-- Traveling to Hanoi (in transit most of the day)
-- Operationalize the coaching assistant so we can use it internally to coach the team
-- Get the web developer agent running on a schedule so it produces all posts automatically by Monday
+## Today's focus
+- Get caught up after travel
+- Make sure this weekend is super productive
+- Help get the lead gem going
+- Prepare for James: next week rolling out Eric and AIO
+- Review James' codebase and project
+
+## Weekend plan
+- Saturday + Sunday needed to cover: lead gem, James prep, Eric rollout, AIO rollout, codebase review
 
 ## Blockers
 None

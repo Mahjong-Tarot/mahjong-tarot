@@ -147,15 +147,44 @@ Format per section:
 
 ## Step 4 — Check check-in file freshness
 
-For each person, do the following exactly:
+At 7 AM, a person's check-in can legitimately carry **either** yesterday's date (checked in after 9 AM the previous day — the skill dates it for "tomorrow") **or** today's date (checked in before 9 AM this morning). Both are valid. A stale report is one whose **content has not changed** since the last compiled briefing — not simply one with an unexpected date.
 
-1. Try to read the file. If the file does not exist → mark as 🔴 Stale.
-2. If the file exists, read line 1. It must be in the format `date: YYYY-MM-DD`.
-3. Compare the date on line 1 to the value of YYYY-MM-DD-PREV provided at the top of this prompt.
-   - If the dates match exactly → ✅ Fresh
-   - If the dates do not match → 🔴 Stale
+For each person, follow this decision tree exactly:
 
-Do NOT infer or guess. Compare the literal date strings only.
+### 4a — Read the file
+
+1. Try to read the file. If it does not exist → mark 🔴 Stale immediately. Skip to 4d.
+2. Read line 1. It must be `date: YYYY-MM-DD`.
+3. Extract `file_date` from line 1. Extract the full focus/notes/blockers body (everything below line 2).
+
+### 4b — Date check
+
+Compare `file_date` against both `YYYY-MM-DD` (today) and `YYYY-MM-DD-PREV` (yesterday):
+
+- `file_date == YYYY-MM-DD` → date is **today** — proceed to 4c (content check)
+- `file_date == YYYY-MM-DD-PREV` → date is **yesterday** — proceed to 4c (content check)
+- `file_date` is neither → date is **unexpected** — proceed to 4c (content check, but treat as a red flag going into it)
+
+Never mark stale based on date alone. The date is a signal, not the verdict.
+
+### 4c — Content check (compare against last briefing)
+
+Find the most recent compiled briefing file under `standup/briefings/`. The files are named `YYYY-MM/YYYY-MM-DD.md` — sort descending and take the first one that exists.
+
+In that briefing, locate the section for this person (look for a heading or block containing their name). Extract whatever focus/update content is recorded there.
+
+Compare it to the body of the current check-in file:
+
+- **Content differs** (new focus items, different wording, updated blockers) → ✅ Fresh — regardless of date
+- **Content is identical or nearly identical** (same bullet points, same blockers, nothing new) → 🔴 Stale
+- **No briefing exists yet** (first run, no history) → fall back to date check only:
+  - Date is today or yesterday → ✅ Fresh
+  - Date is older → 🔴 Stale
+
+If the date was unexpected (from 4b) AND content is identical → 🔴 Stale with high confidence.
+If the date was unexpected (from 4b) AND content differs → ✅ Fresh — note the date anomaly in the message.
+
+### 4d — Build status lines
 
 Files to check:
 - Dave → standup/individual/dave.md
@@ -164,6 +193,7 @@ Files to check:
 
 Build a status line for each person to use in Step 5:
 - Fresh → name only: `✅ Dave`
+- Fresh with date note → `✅ Trac (date shows YYYY-MM-DD — content is new)`
 - Stale → name + file path: `🔴 Yon — standup/individual/yon.md`
 
 ## Step 5 — Send morning reminder to human team members

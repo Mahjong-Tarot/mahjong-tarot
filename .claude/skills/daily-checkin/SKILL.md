@@ -62,8 +62,7 @@ Before writing, check the current local time and set the date accordingly:
 | Time of check-in | Date to use | Reason |
 |------------------|-------------|--------|
 | Before 09:00 | **Today** | Early morning = today's standup |
-| 09:00 – 16:59 | **Today** | Normal working hours |
-| 17:00 or later | **Tomorrow** | EOD/evening = prep for next day's standup |
+| 09:00 or later | **Tomorrow** | Standup has already run or is imminent — prep for next day |
 
 Use `date +%H:%M` (or equivalent) to get the current time if not already known from context.
 
@@ -95,7 +94,7 @@ Rules:
 
 > *"Your check-in is saved to `standup/individual/[name].md`. The PM picks it up at 9 AM. You're all set."*
 
-If date was set to tomorrow: *"It's past 5 PM — I've dated this for tomorrow so it's ready for the 9 AM compile."*
+If date was set to tomorrow: *"It's past 9 AM — I've dated this for tomorrow so it's ready for the next 9 AM compile."*
 
 ---
 

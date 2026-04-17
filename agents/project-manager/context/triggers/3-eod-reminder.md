@@ -2,7 +2,7 @@
 
 **Name**: `PM EOD Reminder`
 
-**Description**: At 5 PM, checks each person's check-in file for today's date. Sends a reminder email + 🔴 Lark status to anyone who has not yet submitted. Sends a "you're all set" email + ✅ Lark status to anyone who has already submitted. Notification via Lark CLI and Resend (both always). No files are created. No git commits. This trigger is messages and email only.
+**Description**: At 5 PM, checks each person's check-in file for freshness. Accepts both today's date and tomorrow's date as valid (pre-9 AM check-ins are dated today; post-9 AM check-ins are dated tomorrow). A report is only stale if its content matches what was already in this morning's 9 AM compiled briefing — meaning the person hasn't updated since the compile ran. Sends a reminder + 🔴 status to pending people; a "you're all set" + ✅ status to submitted people. Notification via Lark CLI and Resend (both always). No files are created. No git commits. This trigger is messages and email only.
 
 ---
 
@@ -65,26 +65,34 @@ The team roster is fixed. Use this exact table — do not derive it from persona
 | Yon  | yon@edge8.ai           | standup/individual/yon.md    |
 | Trac | trac.nguyen@edge8.ai   | standup/individual/trac.md   |
 
-## Step 1 — Check tomorrow's check-in freshness
+## Step 1 — Check check-in freshness
 
-The EOD reminder is for the NEXT DAY's stand-up. A check-in is considered submitted if it is already written for tomorrow's compile, meaning its `date:` field matches tomorrow's date (YYYY-MM-DD-NEXT).
+At 5 PM, a person's check-in can legitimately carry **either** today's date (checked in before 9 AM — the skill dates it as today) **or** tomorrow's date (checked in after 9 AM — the skill dates it for the next compile). Both are valid dates. A report is only stale if its **content matches what was already compiled in this morning's 9 AM briefing** — meaning the person has not updated since then.
 
-For each person, follow these exact steps:
+### 1a — Read today's 9 AM briefing (staleness reference)
 
-1. Try to read line 1 of their check-in file. If the file does not exist → mark as 🔴 Pending.
-2. If the file exists, read line 1. It must be in the format `date: YYYY-MM-DD`.
-3. Compare the date on line 1 to the value of YYYY-MM-DD-NEXT provided at the top of this prompt.
-   - If the dates match exactly → ✅ Submitted
-   - If the dates do not match → 🔴 Pending
+Find the briefing for today: `standup/briefings/YYYY-MM/YYYY-MM-DD.md`. Read it and extract each person's section (focus, notes, blockers). If the file does not exist, skip content comparison for everyone and fall back to date check only.
 
-Do NOT infer or guess. Compare the literal date strings only. Tomorrow's date is YYYY-MM-DD-NEXT.
+### 1b — Evaluate each person
 
-Build two lists from the results:
+For each person, follow this decision tree:
 
-**Submitted** (date matches tomorrow YYYY-MM-DD-NEXT):
+1. Try to read their check-in file. If it does not exist → 🔴 Pending. Skip to 1c.
+2. Read line 1. Extract `file_date` (format `date: YYYY-MM-DD`). Extract the full focus/notes/blockers body (everything below line 2).
+3. **Date check** — compare `file_date` to both YYYY-MM-DD (today) and YYYY-MM-DD-NEXT (tomorrow):
+   - `file_date` is today or tomorrow → proceed to step 4 (content check)
+   - `file_date` is older than today → 🔴 Pending (stale date, no further analysis needed)
+4. **Content check** — compare the body against that person's section in today's 9 AM briefing:
+   - **Content differs** from the briefing (new focus items, changed blockers, anything updated) → ✅ Submitted
+   - **Content is identical** to what was already in the morning briefing → 🔴 Pending (person has not updated since 9 AM compile)
+   - **No briefing found** (step 1a failed) → fall back to date: today or tomorrow → ✅ Submitted; older → 🔴 Pending
+
+### 1c — Build two lists
+
+**Submitted** (date is today or tomorrow, content is new since this morning's briefing):
 - Example: [Dave, dave@edge8.ai] or [] if none
 
-**Pending** (file missing or date does not match tomorrow YYYY-MM-DD-NEXT):
+**Pending** (file missing, date is stale, or content unchanged since this morning's briefing):
 - Example: [Yon, yon@edge8.ai] or [] if none
 
 ## Step 2 — Send Lark message

@@ -7,6 +7,8 @@ date: 2026-04-17
 **Completed:**
 - PR #79: pm(standup-morning): 2026-04-16 — merged at 00:55
 - PR #80: pm(standup-compile): 2026-04-16 — merged at 02:12
+- PR #83: pm(daily-checkin): add time-based date logic for evening check-ins — merged at 22:18
+- PR #84: pm(standup-morning): 2026-04-17 — merged at 00:15
 
 **Next:**
 - No open work detected

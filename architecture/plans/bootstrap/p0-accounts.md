@@ -180,6 +180,10 @@ Before moving to P1, confirm you have noted:
 ```
 ✅ P0 complete. All accounts created and credentials noted.
 
-Next: Open Claude Desktop → Cowork tab → paste the P1 file.
-Claude will install developer tools and set up your project on your computer.
+Next:
+  1. Open Claude Desktop
+  2. Switch to the Cowork tab
+  3. Click the 📎 attachment icon (bottom-left of the message box)
+  4. Select p1-local-setup.md from your files
+  5. Send it — Claude will take over from there
 ```

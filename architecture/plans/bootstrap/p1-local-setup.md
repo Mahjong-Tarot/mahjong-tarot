@@ -140,7 +140,11 @@ Confirm:
 ✅ Stage A complete.
 Tools installed, GitHub authenticated, Claude Code permissions pre-approved.
 
-Now switch to the Code tab in Claude Desktop and paste the P1 file to continue.
+Next:
+  1. Switch to the Code tab in Claude Desktop
+  2. Click the 📎 attachment icon (bottom-left of the message box)
+  3. Re-attach this same file — p1-local-setup.md
+  4. Send it — Claude Code will continue from Stage B automatically
 ```
 
 **Stop here** — Stage B continues in the Code tab.
@@ -382,17 +386,16 @@ npx skills add larksuite/cli -g -y 2>/dev/null || true
 
 ### B10 — Install daily-checkin skill
 
-Write the daily-checkin skill globally so every Claude Code session can run it.
+Create the directory and write the skill file directly.
 Team member names are placeholders — P3 will replace them with the real roster.
 
 ```bash
 mkdir -p ~/.claude/skills/daily-checkin
 ```
 
-```python
-import os
-skill_path = os.path.expanduser("~/.claude/skills/daily-checkin/SKILL.md")
-skill_content = '''---
+Write the following content to `~/.claude/skills/daily-checkin/SKILL.md`:
+
+---
 name: daily-checkin
 description: Help a human team member write their daily check-in. Use when someone says "help me write my check-in", "I need to do my standup", "update my standup", or "fill in my check-in". Writes check-ins to standup/individual/[name].md.
 ---
@@ -403,8 +406,7 @@ description: Help a human team member write their daily check-in. Use when someo
 
 Guide a human team member through their daily check-in and write the result to the correct file, ready for the PM agent to pick up at 9 AM.
 
-> ⚠️ **Setup note:** Replace [Person 1], [Person 2], [Person 3] and their file paths
-> below with your actual team member names once they are confirmed in P3.
+> Setup note: Replace [Person 1], [Person 2], [Person 3] and their file paths below with your actual team member names once they are confirmed in P3.
 
 ---
 
@@ -412,32 +414,30 @@ Guide a human team member through their daily check-in and write the result to t
 
 ### 1. Confirm the person
 
-Ask:
-
-> *"Who are you?"*
+Ask: "Who are you?"
 
 Map to file (update these in P3 with real names):
-- [Person 1] → `standup/individual/person1.md`
-- [Person 2] → `standup/individual/person2.md`
-- [Person 3] → `standup/individual/person3.md`
+- [Person 1] → standup/individual/person1.md
+- [Person 2] → standup/individual/person2.md
+- [Person 3] → standup/individual/person3.md
 
-### 2. Ask about today\'s focus
+### 2. Ask about today's focus
 
-> *"What are you working on today?"*
+Ask: "What are you working on today?"
 
-If the answer is vague, follow up for specifics. Collect 1–5 focus items and confirm them back before writing.
+If the answer is vague, follow up for specifics. Collect 1-5 focus items and confirm them back before writing.
 
 ### 3. Ask about notes (optional)
 
-> *"Any context worth sharing — background, decisions made, anything the team should know?"*
+Ask: "Any context worth sharing — background, decisions made, anything the team should know?"
 
 Capture briefly if yes; skip if no.
 
 ### 4. Ask about blockers
 
-> *"Any blockers stopping or slowing you down?"*
+Ask: "Any blockers stopping or slowing you down?"
 
-Record `None` or a brief description per blocker.
+Record None or a brief description per blocker.
 
 ### 5. Determine the check-in date
 
@@ -445,20 +445,20 @@ Before writing, check the current local time and set the date accordingly:
 
 | Time of check-in | Date to use | Reason |
 |------------------|-------------|--------|
-| Before 09:00 | **Today** | Early morning = today\'s standup |
-| 09:00 or later | **Tomorrow** | Standup has already run — prep for next day |
+| Before 09:00 | Today | Early morning = today's standup |
+| 09:00 or later | Tomorrow | Standup has already run — prep for next day |
 
 Use `date +%H:%M` to get the current time.
 
 ### 6. Write the file
 
-Write to `standup/individual/[name].md`, replacing any previous content:
+Write to standup/individual/[name].md, replacing any previous content:
 
 ```
 date: YYYY-MM-DD
 name: [Name]
 
-## Today\'s focus
+## Today's focus
 - [item 1]
 - [item 2]
 
@@ -472,13 +472,13 @@ name: [Name]
 Rules:
 - Line 1 must be `date: YYYY-MM-DD` — use the date from Step 5
 - Focus items must be action-oriented (verb + outcome)
-- `## Blockers` must always be present, even if "None"
+- Blockers section must always be present, even if None
 
 ### 7. Confirm
 
-> *"Your check-in is saved to `standup/individual/[name].md`. The PM picks it up at 9 AM. You\'re all set."*
+Say: "Your check-in is saved to standup/individual/[name].md. The PM picks it up at 9 AM. You're all set."
 
-If date was set to tomorrow: *"It\'s past 9 AM — I\'ve dated this for tomorrow so it\'s ready for the next 9 AM compile."*
+If date was set to tomorrow: "It's past 9 AM — I've dated this for tomorrow so it's ready for the next 9 AM compile."
 
 ### 8. Offer to commit and push
 
@@ -487,23 +487,20 @@ Run `git status` to see the full picture of modified and untracked files.
 Present the results split into two groups:
 
 ```
-📋 Your standup file:
+Your standup file:
   standup/individual/[name].md
 
-📂 Other changed files (if any):
+Other changed files (if any):
   [list every other modified/untracked file — or "None" if clean]
 ```
 
-Then ask:
+Then ask: "Would you like me to commit and push:
+(A) Just your standup file
+(B) Everything listed above
+(C) Skip — I'll handle it myself"
 
-> *"Would you like me to commit and push:*
-> **(A) Just your standup file** — only `standup/individual/[name].md`*
-> **(B) Everything listed above** — all changed files*
-> **(C) Skip — I\'ll handle it myself"*
-
-**If A — standup only:**
-
-```
+If A — standup only:
+```bash
 git checkout -b standup/[name]/YYYY-MM-DD
 git add standup/individual/[name].md
 git commit -m "standup([name]): YYYY-MM-DD"
@@ -514,20 +511,11 @@ git checkout main && git pull origin main
 git branch -d standup/[name]/YYYY-MM-DD 2>/dev/null || true
 ```
 
-**If B — everything:**
-
-Show the exact file list again and ask once more:
-
-> *"To confirm — I\'ll stage and commit these files:*
-> *[list every file explicitly, one per line]*
-> *Proceed? (yes / no)"*
-
-Only proceed after an explicit "yes". Stage each file by name — never use `git add .` or `git add -A`.
+If B — everything: show the exact file list again and ask once more: "To confirm — I'll stage and commit these files: [list]. Proceed? (yes / no)"
+Only proceed after an explicit yes. Stage each file by name — never use git add . or git add -A.
 Then follow the same branch → commit → push → PR → merge flow as option A.
 
-**If C — skip:**
-
-> *"No problem. Run `git add standup/individual/[name].md` when you\'re ready."*
+If C — skip: say "No problem. Run git add standup/individual/[name].md when you're ready."
 
 ---
 
@@ -543,17 +531,17 @@ Then follow the same branch → commit → push → PR → merge flow as option 
 
 | Situation | Action |
 |-----------|--------|
-| Name not in roster | Write to `standup/individual/[name].md`; note PM may not recognise it |
+| Name not in roster | Write to standup/individual/[name].md; note PM may not recognise it |
 | No focus items given | Ask once more; if still nothing, write "No update provided" and flag it |
 | Check-in already exists for today | Overwrite — the new entry is canonical |
 | Person wants to update later | Tell them to re-run this skill; it will overwrite |
-'''
 
-os.makedirs(os.path.dirname(skill_path), exist_ok=True)
-with open(skill_path, "w") as f:
-    f.write(skill_content)
-print(f"✅ daily-checkin skill written → {skill_path}")
-print("   Team member names are placeholders — update in P3 with real names")
+---
+(end of skill file)
+
+```bash
+echo "✅ daily-checkin skill written → ~/.claude/skills/daily-checkin/SKILL.md"
+echo "   Team member names are placeholders — update in P3 with real names"
 ```
 
 ### B11 — Initial git commit

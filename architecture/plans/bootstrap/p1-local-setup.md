@@ -643,5 +643,5 @@ Your project is set up locally with:
 Next:
   1. Click the 📎 attachment icon (bottom-left of the message box)
   2. Select p2-discovery.md from your files
-  3. Send it — Claude will begin the business discovery interview
+  3. Send it — Claude will scaffold your website and install your core AI team
 ```

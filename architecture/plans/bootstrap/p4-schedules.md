@@ -1,143 +1,150 @@
-# P4 — Schedules & Verification
-> **Prerequisites:** P3 complete. All agents installed.
-> **Where:** Claude Desktop — Code tab (generate), then Chat tab (activate schedules).
+# P4 — Extended Team Schedules + Verification
+> **Prerequisites:** P3 complete. All selected agents installed and personalised.
+> **Where:** Claude Desktop — Code tab (generate files), then Chat tab (activate schedules).
 > **Time:** ~30–45 minutes
-> **Done when:** All schedules active, verification tests passed, system confirmed working.
+> **Done when:** Extended agent schedules active, all verification tests passed, system confirmed ready.
+
+> **Note:** The Project Manager's 4 core schedules (standup reminder, compile, EOD reminder,
+> weekly RAG) were auto-registered in P2. This phase handles schedules for any extended
+> agents added in P3 (Product Manager, Marketing Manager, Social Media Manager) plus
+> a full system verification run.
 
 ---
 
 ## INSTRUCTIONS FOR CLAUDE CODE
 
-This is the final phase. Run sections in order.
+Run sections in order. Skip Section 1 if no extended agents were added in P3.
 
-**How to communicate with the user throughout P4:**
-- Before generating schedule files, explain in one sentence what a schedule does.
+**How to communicate throughout P4:**
+- Check which agents were installed in P3 before generating anything.
 - Before asking the user to activate schedules, explain the Chat tab vs. Code tab difference.
 - After each verification test, confirm what passed before continuing.
-- Never run checks in silence — always narrate what you're testing and why.
+- Never run checks in silence — narrate what you're testing and why.
 
 ---
 
-## SECTION 1 — Generate Schedule Files
+## SECTION 1 — Extended Agent Schedules
 
-Before starting, say:
-```
-I'm going to set up automatic schedules for your AI team.
-A schedule is like setting an alarm — you tell Claude "run this task every Monday at 9am"
-and it fires automatically as long as Claude Desktop is open.
-Your agents will check in, compile standups, and generate content reports
-without you having to ask.
-I'll generate all the schedule commands first, then walk you through activating them one by one.
+Before starting, check which agents were installed in P3:
+```bash
+ls .claude/agents/
 ```
 
-Create `agents/project-manager/context/schedule-desktop-tasks.md`.
+If ONLY the 4 core agents exist (project-manager, writer, designer, web-developer):
+```
+No extended agents were added in P3 — skipping schedule generation.
+Your Project Manager schedules are already active from P2.
+Proceeding directly to verification.
+```
+Skip to Section 2.
 
-This file contains ready-to-paste `/schedule` commands for every automated task.
-Use the timezone from P2 Q19. Convert all times to the user's local timezone — never UTC.
+---
+
+If extended agents exist, generate schedule entries for each:
+
+Create (or append to) `agents/project-manager/context/schedule-desktop-tasks.md`.
+Use the timezone confirmed in P2. Convert all times to local timezone — never UTC.
 
 Format each entry as:
 ```
 # [Task name]
-# Runs: [human-readable — e.g. "Mon-Fri at 7am Bangkok time"]
-# Cron: [cron expression in user's local timezone]
-# Paste this command into the Claude Desktop Chat tab:
+# Runs: [human-readable — e.g. "Monday at 9am Bangkok time"]
+# Cron: [cron expression in local timezone]
+# Paste this command into the Claude Desktop CHAT tab:
 /schedule "[full agent prompt]" --cron "[cron expression]"
-```
-
-Generate entries for ALL of these tasks:
-
-| Task | Default time | Agent prompt |
-|------|-------------|-------------|
-| Morning standup reminder | Mon-Fri 7am | Read standup/individual/*.md, check if today's entry exists for each team member, send a friendly reminder to anyone who hasn't checked in yet. Format: "@{name} — standup time! Add your check-in to standup/individual/{name}.md" |
-| Standup compile | Mon-Fri 9am | Read all standup/individual/*.md entries for today. Compile a daily briefing in this format: Date, each team member's Yesterday/Today/Blockers, any shared blockers or risks. Write to standup/briefings/YYYY-MM/YYYY-MM-DD.md. If anyone hasn't checked in, note "Not received" — do not fabricate. |
-| EOD check-in reminder | Mon-Fri 5pm | Send an end-of-day reminder: "Day wrap-up time. Add your check-in for tomorrow's standup to standup/individual/{name}.md. What did you finish today? What's first tomorrow? Any blockers?" |
-| Monthly content calendar | 1st of month 9am | Read resources/content-calendar.md and resources/brand-voice.md. Generate next month's content calendar — one post idea per active platform per week, tied to the content pillars. Write to content/calendar/YYYY-MM.md. Flag any pillar gaps or seasonal opportunities. |
-| Weekly performance report | Friday 4pm | Read all standup/briefings/ entries from this week. Generate a RAG status report: overall status (Red/Amber/Green), key wins, risks, decisions needed. Write to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md. |
-
-**If additional agents were installed in P3**, add their scheduled tasks here too:
-- Designer: weekly image generation reminder (Monday before publish days)
-- Social Media Manager: weekly draft assembly (Friday), Monday analytics reminder
-- Marketing Manager: monthly calendar review (last Friday of month)
-
-Also create `agents/project-manager/context/workflows/daily-standup.md`:
-```markdown
-# Daily Standup Workflow
-
-## Step 1: Morning Reminder ({7am Q19 timezone})
-- Read standup/individual/*.md
-- Check for today's entries (date heading = today)
-- Send reminder to any team member missing today's entry
-- Format: friendly, not nagging — one reminder per person per day
-
-## Step 2: Compile Briefing ({9am Q19 timezone})
-- Read all standup/individual/*.md entries for today
-- For each team member: extract Yesterday / Today / Blockers
-- Note any shared blockers or recurring risks
-- Write compiled briefing to standup/briefings/YYYY-MM/YYYY-MM-DD.md
-- If check-in missing: write "Not received — {name}"
-
-## Step 3: Distribution
-- If Telegram is configured: send briefing summary (3–5 lines max)
-- If no Telegram: briefing is in standup/briefings/ for async review
-
-## Fallbacks
-- If no check-ins by 9am: compile with all "Not received", note in briefing
-- If briefings folder missing: create it, then write
-- If Telegram fails: log error in briefing footer, continue
 ```
 
 ---
 
-## SECTION 2 — Activate Schedules
+**If Product Manager was installed**, add these scheduled tasks:
 
-Before outputting the checklist, say:
+**Weekly OKR check (Monday 9am)**
 ```
-The schedule commands are ready. Now you need to activate them in the Claude Desktop Chat tab.
-(Chat is a different tab from Code — it's the conversation view on the left sidebar.)
-Each /schedule command you paste registers one automatic task with Claude Desktop.
-You only need to do this once — the schedules persist until you delete them.
+/schedule "Read standup/briefings/ from last week. Check if any OKR key results in context/okrs/ moved. Read agents/product-manager/context/persona.md for North Star metric. Flag if the North Star metric is trending down for 2+ consecutive weeks — note as Amber status for this week's RAG report. Write any observation to context/product-notes/YYYY-MM-DD.md." --cron "0 9 * * 1"
 ```
 
-Output this checklist to the user. They must complete this in the Claude Desktop Chat tab.
+**Monthly competitive analysis (1st of month 9am)**
+```
+/schedule "Read agents/product-manager/context/persona.md for the competitor list. Use WebSearch to research each competitor: check for new features, pricing changes, or content from the last 30 days. Update context/competitive-analysis.md — update the competitor table, feature comparison, and strategic insights. Add 'Last updated: {date}' at the top. Flag any competitor move that affects our Now/Next/Later roadmap." --cron "0 9 1 * *"
+```
+
+**Quarterly OKR review (first Monday of quarter 9am)**
+```
+/schedule "Read context/okrs/ for the current quarter. Score each Key Result against target. Determine if Objective was achieved. Draft next quarter's OKRs aligned to resources/content-calendar.md 90-day goal. Refresh context/product-roadmap.md — re-score RICE for items in Now/Next/Later. Write a 1-page vision report to context/vision-reports/YYYY-MM.md: where we are, where we're going, what we learned." --cron "0 9 * * 1#1"
+```
+
+---
+
+**If Marketing Manager was installed**, add:
+
+**Monthly content calendar (last Friday of month 4pm)**
+```
+/schedule "Read resources/content-calendar.md and resources/brand-voice.md. Review this month's content performance — check standup/briefings/ for content mentions and completion. Generate next month's content calendar in content/content-calendar/YYYY-MM.md: one post idea per active platform per week, tied to the content pillars. Flag any pillar gaps or seasonal opportunities." --cron "0 16 * * 5L"
+```
+
+**Weekly performance summary (Friday 3pm)**
+```
+/schedule "Read all standup/briefings/ from this week. Check resources/content-calendar.md against what was actually produced. Write a marketing performance summary to standup/briefings/YYYY-MM/marketing-YYYY-MM-DD.md: content published vs. planned, any metrics mentioned, blockers, next week priorities." --cron "0 15 * * 5"
+```
+
+---
+
+**If Social Media Manager was installed**, add:
+
+**Weekly draft batch (Friday 2pm)**
+```
+/schedule "Read resources/brand-voice.md and resources/content-calendar.md for this week's planned posts. For each platform in the active platforms list, draft the week's posts. Write each draft to content/social/YYYY-MM-DD-{platform}.md. Include: caption text, hashtags, image prompt for Designer. Note which posts are auto-post approved vs. draft-only per the posting rules in agents/social-media-manager/context/persona.md." --cron "0 14 * * 5"
+```
+
+**Monday analytics reminder (Monday 8am)**
+```
+/schedule "Send reminder: 'Monday morning — check your social analytics before the week starts. Log any notable numbers (reach, engagement, clicks) in standup/individual/agents.md under social-media-manager. This helps the Product Manager track the North Star metric.'" --cron "0 8 * * 1"
+```
+
+---
+
+## SECTION 2 — Activate Extended Schedules
+
+If extended agent schedules were generated in Section 1, output this to the user:
+
+```
+The schedule commands for your extended team are ready. Now you need to activate
+them in the Claude Desktop Chat tab (the conversation view — different from the Code tab).
+Paste each /schedule command there to register it. You only need to do this once.
+```
+
+Output this checklist to the user. Complete in the Claude Desktop Chat tab.
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ACTIVATE YOUR SCHEDULES
+ACTIVATE EXTENDED TEAM SCHEDULES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Your schedule commands are in:
   agents/project-manager/context/schedule-desktop-tasks.md
 
-How to find that file:
-  → In Claude Code: type "show me schedule-desktop-tasks.md"
-  → In Finder/Explorer: {project-folder} → agents → project-manager → context
+How to activate:
+  1. Open that file (in Code or Finder)
+  2. Copy each /schedule command
+  3. Switch to Claude Desktop CHAT tab
+  4. Paste and press Enter — one command at a time
 
-For each task below:
-1. Copy the /schedule command from the file
-2. Switch to the Claude Desktop CHAT tab
-3. Paste the command and press Enter
-
-□ Morning standup reminder   Mon-Fri {7am your timezone}
-□ Standup compile            Mon-Fri {9am your timezone}
-□ EOD check-in reminder      Mon-Fri {5pm your timezone}
-□ Monthly content calendar   1st of month {9am your timezone}
-□ Weekly performance report  Friday {4pm your timezone}
-{any additional agent schedules from P3}
+{list only the tasks that were generated for installed agents}
 
 ⚠️  Schedules only fire when Claude Desktop is open and your laptop is on.
-    If the laptop is closed → that reminder doesn't fire that day. That's expected.
+    If the laptop is closed when a schedule fires, that run is skipped. That's expected.
 
-Come back and say "schedules activated" when all are set up.
+Come back and say "schedules activated" when done.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-Wait for "schedules activated".
+Wait for "schedules activated" (or user confirms there are no extended agents to schedule).
 
 ---
 
 ## SECTION 3 — Verification
 
-Run these checks after the user confirms schedules are active.
+Run these checks after schedules are confirmed.
 
 ### 3.1 — File Verification
 
@@ -151,17 +158,20 @@ for d in agents/*/; do
   [ -f "$p" ] && echo "EXISTS: $p" || echo "MISSING: $p"
 done
 
-# Resources
-for f in resources/brand-voice.md resources/design-system.md resources/web-style-guide.md resources/audience-personas.md resources/content-calendar.md; do
+# Resources (should all exist after P3)
+for f in resources/brand-voice.md resources/design-system.md resources/web-style-guide.md resources/audience-personas.md resources/content-calendar.md resources/seo-strategy.md; do
   [ -f "$f" ] && echo "EXISTS: $f" || echo "MISSING: $f"
 done
 
-# Schedule file
+# Schedule file (only if extended agents were installed)
 [ -f "agents/project-manager/context/schedule-desktop-tasks.md" ] && \
-  echo "EXISTS: schedule-desktop-tasks.md" || echo "MISSING: schedule-desktop-tasks.md"
+  echo "EXISTS: schedule-desktop-tasks.md" || echo "(no extended schedules — expected if core team only)"
+
+# Publish log
+[ -f "context/publish-log.md" ] && echo "EXISTS: context/publish-log.md" || echo "MISSING: context/publish-log.md"
 ```
 
-If any file is MISSING: regenerate it before continuing.
+If any required file is MISSING: regenerate it before continuing.
 
 ### 3.2 — Functional Tests
 
@@ -171,8 +181,7 @@ Simulate a morning standup message from the Project Manager.
 Read agents/project-manager/context/persona.md and produce
 the standup reminder message it would send today.
 ```
-
-Confirm the output references real names (not placeholders) and uses the correct timezone.
+Confirm: output references real team names (not {placeholders}) and correct timezone.
 
 **Test 2 — Writer content dry-run:**
 ```
@@ -180,16 +189,21 @@ Ask the Writer agent to draft a 3-sentence social media caption
 for the top content pillar from resources/content-calendar.md.
 Confirm it reads resources/brand-voice.md first.
 ```
-
-Confirm the output matches the brand voice and tone from Q8.
+Confirm: output matches the brand voice and tone from Q8.
 
 **Test 3 — Web Developer build-page dry-run:**
 ```
-Ask the Web Developer to describe what it would do if given a brief at
+Ask the Web Developer to describe what it would do if given a blog brief at
 content/topics/sample-first-post/brief.md — without actually building anything.
 ```
+Confirm: it references the correct paths and web-style-guide.md.
 
-Confirm it references the correct paths and style guide.
+**Test 4 — Designer image prompt dry-run:**
+```
+Ask the Designer to write an image prompt for a blog hero image on the first
+content pillar from resources/content-calendar.md.
+```
+Confirm: prompt includes style, mood, colors, and composition from resources/design-system.md.
 
 ---
 
@@ -204,30 +218,29 @@ YOUR AI MARKETING TEAM IS READY
 
 {Business Name} — AI team status:
 
-Agent                  Status    Role
-─────────────────────  ──────    ────────────────────────────────
-Project Manager        ✅ Ready  Daily standups, RAID log, delivery
-Product Manager        ✅ Ready  Strategy, roadmap, ICP research
-Web Developer          ✅ Ready  Website, publishing, deploys
-{Designer if built}    ✅ Ready  Images, social cards, visual assets
-{Writer if built}      ✅ Ready  Blog posts, social copy, emails
-{Marketing Mgr if}     ✅ Ready  Campaigns, content calendar
-{Social Media if}      ✅ Ready  Platform drafts, TikTok, analytics
+Agent                     Status    Schedules
+─────────────────────     ──────    ────────────────────────────────
+Project Manager           ✅ Ready  7am reminder · 9am compile · 5pm EOD · Fri 4pm RAG
+Writer                    ✅ Ready  On-demand
+Designer                  ✅ Ready  On-demand
+Web Developer             ✅ Ready  On-demand
+{Product Manager if}      ✅ Ready  Mon OKR check · Monthly competitive · Quarterly review
+{Marketing Manager if}    ✅ Ready  Weekly performance · Monthly calendar
+{Social Manager if}       ✅ Ready  Fri draft batch · Mon analytics reminder
 
 Website: {Vercel URL}
 Repository: {GitHub URL}
 
 YOUR FIRST ACTIONS:
 1. Write your first standup:
-   "help me write my standup" or "@project-manager standup time"
+   "help me write my standup" or start a conversation with @project-manager
 
-2. Generate your first content calendar:
-   "@marketing-manager generate this month's content calendar"
+2. Generate your first content:
+   "@writer write a post about {content pillar 1}"
 
-3. Write your first blog post:
-   "@writer write a post about {content pillar 1 from Q25}"
+3. Check the PM schedule fired (tomorrow at 9am you'll get your first briefing)
 
-4. Confirm schedules are active in Claude Desktop Chat
+4. Confirm all scheduled tasks in Claude Desktop → Scheduled sidebar
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ALWAYS YOUR DECISION:
@@ -237,8 +250,9 @@ ALWAYS YOUR DECISION:
 • Paid spend (ads, tools) → always your call
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Your team runs Monday–Friday, checks in daily, and escalates
-only when they need a decision from you. Everything else runs itself.
+Your team runs Monday–Friday in the background.
+To interact with any agent, just open Claude Desktop and say what you need.
+Your team will take it from there.
 ```
 
 ---
@@ -287,24 +301,9 @@ Note: "OpenClaw can be added later — see architecture/openclaw-proposal.md if 
 ```
 ✅ P4 complete. Bootstrap finished.
 
-Append to context/publish-log.md:
+Append header row to context/publish-log.md if not already present:
 
-| Date | Title | File | Category | Platform |
-|------|-------|------|----------|----------|
-(header only — entries added per published post)
-```
-
-After appending, say:
-```
-That's everything. Your AI marketing team is set up, your website is live,
-and your schedules are running.
-
-From here, your AI team works Monday–Friday in the background.
-To interact with any agent, just open Claude Desktop and say what you need —
-for example:
-  • "help me write my standup"
-  • "write a post about [your topic]"
-  • "what's our project status?"
-
-Your team will take it from there.
+| Date | Title | File | Category |
+|------|-------|------|----------|
+(entries added per published post)
 ```

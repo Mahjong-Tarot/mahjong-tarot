@@ -486,15 +486,18 @@ stage with git, and hand the owner a single `git push` command to run.
 
 ## Folder structure
 {project-name}/
-├── .claude/agents/          ← Claude Code agent definitions
-├── .claude/rules/           ← Engineering guardrails
-├── agents/                  ← Agent personas, skills, workflows
-├── content/topics/          ← Blog topic bundles (one folder per post)
-├── resources/               ← brand-voice.md, design-system.md, etc.
-├── context/                 ← Publish log, templates
-├── standup/                 ← Daily standups and briefings
-├── working_files/           ← Git-ignored scratch space
-└── website/                 ← Next.js project root
+├── .claude/agents/             ← Claude Code agent definitions
+├── .claude/rules/              ← Engineering guardrails
+├── .claude/skills/             ← Project-local skill definitions
+├── agents/                     ← Agent personas, skills, workflows
+├── content/topics/             ← Blog topic bundles (one folder per post)
+├── content/source-material/    ← Raw research and source content by topic
+├── content/content-calendar/   ← Monthly editorial calendars
+├── resources/                  ← brand-voice.md, design-system.md, etc.
+├── context/                    ← Publish log, templates
+├── standup/                    ← Daily standups and briefings
+├── working_files/              ← Git-ignored scratch space
+└── website/                    ← Next.js project root
 
 ## Publishing workflow
 1. Read content/topics/{slug}/blog.md

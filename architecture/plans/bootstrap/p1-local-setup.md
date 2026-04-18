@@ -307,7 +307,9 @@ the business context is known — for now write a minimal placeholder:
 - Project root: ~/{project-name}/
 - Website: website/ (Next.js, Pages Router)
 - Agents: .claude/agents/ and agents/
-- Content: content/
+- Content topics: content/topics/ (one folder per post)
+- Source material: content/source-material/
+- Content calendar: content/content-calendar/
 - Resources: resources/
 - Standups: standup/
 
@@ -320,9 +322,11 @@ Bootstrap in progress — P1 complete, proceeding to P2.
 ```bash
 mkdir -p .claude/agents
 mkdir -p .claude/rules
+mkdir -p .claude/skills
 mkdir -p agents
 mkdir -p content/topics
-mkdir -p content/social
+mkdir -p content/source-material
+mkdir -p content/content-calendar
 mkdir -p resources
 mkdir -p context/templates
 mkdir -p standup/individual

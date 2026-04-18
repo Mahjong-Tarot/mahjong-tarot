@@ -491,6 +491,7 @@ stage with git, and hand the owner a single `git push` command to run.
 ├── .claude/skills/             ← Project-local skill definitions
 ├── agents/                     ← Agent personas, skills, workflows
 ├── content/topics/             ← Blog topic bundles (one folder per post)
+├── content/social/             ← Standalone social media content and drafts
 ├── content/source-material/    ← Raw research and source content by topic
 ├── content/content-calendar/   ← Monthly editorial calendars
 ├── resources/                  ← brand-voice.md, design-system.md, etc.

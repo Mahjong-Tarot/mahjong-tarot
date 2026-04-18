@@ -325,6 +325,7 @@ mkdir -p .claude/rules
 mkdir -p .claude/skills
 mkdir -p agents
 mkdir -p content/topics
+mkdir -p content/social
 mkdir -p content/source-material
 mkdir -p content/content-calendar
 mkdir -p resources

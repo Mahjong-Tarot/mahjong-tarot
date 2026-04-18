@@ -17,6 +17,12 @@ Rules:
 - If an answer is unclear, ask one clarifying question — do not guess.
 - Use ACTUAL answers in every generated file — no placeholders like [BUSINESS NAME].
 
+**How to communicate with the user throughout P2:**
+- Before every section, say in one plain-English sentence what you are about to do and why.
+- When a new tool or concept is introduced (Next.js, GitHub, Vercel, Supabase), explain it in one sentence before using it.
+- After each major step completes, confirm it worked before moving on.
+- Never run a block of commands in silence — always narrate.
+
 ---
 
 ## SECTION 1 — Business Identity Interview
@@ -341,9 +347,18 @@ Estimated time: ~30 minutes.
 
 ### 5A — Create Next.js app
 
+Say:
+```
+I'm going to create your website using Next.js — a modern framework for building
+fast, professional websites with React. It's the same technology used by companies
+like Nike and Netflix. This command scaffolds the base structure in about 60 seconds.
+```
+
 ```bash
 cd website && npx create-next-app@latest . --pages --no-typescript --no-tailwind --no-app --no-src-dir --yes
 ```
+
+After: `✅ Website scaffold created.`
 
 Create these files, fully written with real copy from the interview — no placeholder text:
 
@@ -364,9 +379,18 @@ use brand voice from Q8, use CSS variables only (no inline styles).
 
 ### 5B — Push to GitHub and deploy to Vercel
 
+Say:
+```
+Now I'll push your website code to GitHub (your online backup and version history),
+then connect it to Vercel — the hosting platform that publishes your site to the internet.
+Every time your AI team makes a change, Vercel will automatically redeploy your site.
+```
+
 ```bash
 gh repo create {business-name-kebab-case}-marketing --private --source=. --remote=origin --push
 ```
+
+After: `✅ Code is on GitHub. Now let's connect Vercel to publish your site live.`
 
 Output to user:
 ```
@@ -392,6 +416,14 @@ Come back and paste your Vercel URL when it's done.
 Wait for the user to paste their Vercel URL. Then:
 
 ### 5C — Wire Supabase to Vercel
+
+Say:
+```
+Last step: I'll connect your database to your website.
+Supabase is your database — it stores contact form submissions, newsletter signups,
+and any data your website collects. Right now the website and database don't know
+about each other. The steps below introduce them.
+```
 
 Output to user:
 ```
@@ -500,5 +532,8 @@ stage with git, and hand the owner a single `git push` command to run.
 
 Agent team selected for P3: {list the agents chosen in Section 4}
 
-Next: Paste the P3 file into Claude Code to build your agent team.
+Next:
+  1. Click the 📎 attachment icon (bottom-left of the message box)
+  2. Select p3-agents.md from your files
+  3. Send it — Claude will build your agent team
 ```

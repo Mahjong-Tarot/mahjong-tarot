@@ -2,14 +2,14 @@
 
 **Name**: `PM EOD Reminder`
 
-**Description**: At 5 PM, checks each person's check-in file for freshness. Accepts both today's date and tomorrow's date as valid (pre-9 AM check-ins are dated today; post-9 AM check-ins are dated tomorrow). A report is only stale if its content matches what was already in this morning's 9 AM compiled briefing — meaning the person hasn't updated since the compile ran. Sends a reminder + 🔴 status to pending people; a "you're all set" + ✅ status to submitted people. Notification via Lark CLI and Resend (both always). No files are created. No git commits. This trigger is messages and email only.
+**Description**: At 5 PM, checks each person's check-in file for freshness. Accepts both today's date and the next compile day's date as valid (Monday on Fridays, otherwise tomorrow) (pre-9 AM check-ins are dated today; post-9 AM check-ins are dated tomorrow). A report is only stale if its content matches what was already in this morning's 9 AM compiled briefing — meaning the person hasn't updated since the compile ran. Sends a reminder + 🔴 status to pending people; a "you're all set" + ✅ status to submitted people. Notification via Lark CLI and Resend (both always). No files are created. No git commits. This trigger is messages and email only.
 
 ---
 
 ## Prompt
 
 ```
-It is 5 PM Asia/Saigon end of day. Today's date is YYYY-MM-DD. Tomorrow's date is YYYY-MM-DD-NEXT.
+It is 5 PM Asia/Saigon end of day. Today's date is YYYY-MM-DD.
 
 ## Step 0 — Load credentials and team roster
 
@@ -47,6 +47,23 @@ RESEND_API_KEY = env["RESEND_API_KEY"]
 RESEND_FROM    = env["RESEND_FROM"]
 ```
 
+Also run this snippet immediately after to derive the next compile day. On Fridays the compile happens Monday, not Saturday:
+
+```python
+from datetime import date, timedelta
+_today = date.fromisoformat("YYYY-MM-DD")
+if _today.weekday() == 4:          # Friday → skip weekend
+    _compile = _today + timedelta(days=3)
+    COMPILE_DAY       = _compile.isoformat()   # Monday's date
+    COMPILE_DAY_LABEL = "Monday"
+else:
+    _compile = _today + timedelta(days=1)
+    COMPILE_DAY       = _compile.isoformat()   # tomorrow's date
+    COMPILE_DAY_LABEL = "tomorrow"
+```
+
+Use `COMPILE_DAY` (the date string) and `COMPILE_DAY_LABEL` ("tomorrow" or "Monday") throughout the rest of this prompt. Never use YYYY-MM-DD-NEXT — it does not account for weekends.
+
 After running the snippet above, immediately export all three values into the current shell session — CLI tools do not inherit Python variables:
 
 ```bash
@@ -67,7 +84,7 @@ The team roster is fixed. Use this exact table — do not derive it from persona
 
 ## Step 1 — Check check-in freshness
 
-At 5 PM, a person's check-in can legitimately carry **either** today's date (checked in before 9 AM — the skill dates it as today) **or** tomorrow's date (checked in after 9 AM — the skill dates it for the next compile). Both are valid dates. A report is only stale if its **content matches what was already compiled in this morning's 9 AM briefing** — meaning the person has not updated since then.
+At 5 PM, a person's check-in can legitimately carry **either** today's date (checked in before 9 AM — the skill dates it as today) **or** the next compile day's date (`COMPILE_DAY` — checked in after 9 AM for the next compile). On Fridays, `COMPILE_DAY` is Monday's date, not Saturday. Both today and `COMPILE_DAY` are valid dates. A report is only stale if its **content matches what was already compiled in this morning's 9 AM briefing** — meaning the person has not updated since then.
 
 ### 1a — Read today's 9 AM briefing (staleness reference)
 
@@ -79,17 +96,17 @@ For each person, follow this decision tree:
 
 1. Try to read their check-in file. If it does not exist → 🔴 Pending. Skip to 1c.
 2. Read line 1. Extract `file_date` (format `date: YYYY-MM-DD`). Extract the full focus/notes/blockers body (everything below line 2).
-3. **Date check** — compare `file_date` to both YYYY-MM-DD (today) and YYYY-MM-DD-NEXT (tomorrow):
-   - `file_date` is today or tomorrow → proceed to step 4 (content check)
+3. **Date check** — compare `file_date` to both YYYY-MM-DD (today) and `COMPILE_DAY` (next compile day — Monday if today is Friday, otherwise tomorrow):
+   - `file_date` matches today or `COMPILE_DAY` → proceed to step 4 (content check)
    - `file_date` is older than today → 🔴 Pending (stale date, no further analysis needed)
 4. **Content check** — compare the body against that person's section in today's 9 AM briefing:
    - **Content differs** from the briefing (new focus items, changed blockers, anything updated) → ✅ Submitted
    - **Content is identical** to what was already in the morning briefing → 🔴 Pending (person has not updated since 9 AM compile)
-   - **No briefing found** (step 1a failed) → fall back to date: today or tomorrow → ✅ Submitted; older → 🔴 Pending
+   - **No briefing found** (step 1a failed) → fall back to date: today or `COMPILE_DAY` → ✅ Submitted; older → 🔴 Pending
 
 ### 1c — Build two lists
 
-**Submitted** (date is today or tomorrow, content is new since this morning's briefing):
+**Submitted** (date is today or `COMPILE_DAY`, content is new since this morning's briefing):
 - Example: [Dave, dave@edge8.ai] or [] if none
 
 **Pending** (file missing, date is stale, or content unchanged since this morning's briefing):
@@ -118,7 +135,7 @@ Check-in status:
 • 🔴 Yon — standup/individual/yon.md
 • ✅ Trac
 
-I'll compile at 9 AM tomorrow — please get your check-in in before then.
+I'll compile at 9 AM COMPILE_DAY_LABEL — please get your check-in in before then.
 ```
 
 Send with:
@@ -145,7 +162,7 @@ Skip this step entirely if the Pending list from Step 1 is empty.
 
 If there are pending people:
 - Read `agents/project-manager/context/template/emails/3-eod-reminder.html`
-- Substitute `{{DATE}}` with YYYY-MM-DD and `{{TOMORROW}}` with YYYY-MM-DD-NEXT
+- Substitute `{{DATE}}` with YYYY-MM-DD and `{{TOMORROW}}` with `COMPILE_DAY` (Monday's date if today is Friday, otherwise tomorrow's date)
 - Write the substituted HTML to `/tmp/eod-reminder-email.html`
 - Build the recipient list from pending emails only (comma-to-space conversion):
   PENDING_TO="<pending email 1> <pending email 2> ..."  # space-separated, from Step 1 Pending list
@@ -187,7 +204,7 @@ Skip this step entirely if the Submitted list from Step 1 is empty.
 
 If there are submitted people:
 - Read `agents/project-manager/context/template/emails/3b-eod-submitted.html`
-- Substitute `{{DATE}}` with YYYY-MM-DD and `{{TOMORROW}}` with YYYY-MM-DD-NEXT
+- Substitute `{{DATE}}` with YYYY-MM-DD and `{{TOMORROW}}` with `COMPILE_DAY` (Monday's date if today is Friday, otherwise tomorrow's date)
 - Write the substituted HTML to `/tmp/eod-submitted-email.html`
 - Build the recipient list from submitted emails only (comma-to-space conversion):
   SUBMITTED_TO="<submitted email 1> <submitted email 2> ..."  # space-separated, from Step 1 Submitted list

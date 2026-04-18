@@ -10,9 +10,25 @@
 
 This is the final phase. Run sections in order.
 
+**How to communicate with the user throughout P4:**
+- Before generating schedule files, explain in one sentence what a schedule does.
+- Before asking the user to activate schedules, explain the Chat tab vs. Code tab difference.
+- After each verification test, confirm what passed before continuing.
+- Never run checks in silence — always narrate what you're testing and why.
+
 ---
 
 ## SECTION 1 — Generate Schedule Files
+
+Before starting, say:
+```
+I'm going to set up automatic schedules for your AI team.
+A schedule is like setting an alarm — you tell Claude "run this task every Monday at 9am"
+and it fires automatically as long as Claude Desktop is open.
+Your agents will check in, compile standups, and generate content reports
+without you having to ask.
+I'll generate all the schedule commands first, then walk you through activating them one by one.
+```
 
 Create `agents/project-manager/context/schedule-desktop-tasks.md`.
 
@@ -73,6 +89,14 @@ Also create `agents/project-manager/context/workflows/daily-standup.md`:
 ---
 
 ## SECTION 2 — Activate Schedules
+
+Before outputting the checklist, say:
+```
+The schedule commands are ready. Now you need to activate them in the Claude Desktop Chat tab.
+(Chat is a different tab from Code — it's the conversation view on the left sidebar.)
+Each /schedule command you paste registers one automatic task with Claude Desktop.
+You only need to do this once — the schedules persist until you delete them.
+```
 
 Output this checklist to the user. They must complete this in the Claude Desktop Chat tab.
 
@@ -268,4 +292,19 @@ Append to context/publish-log.md:
 | Date | Title | File | Category | Platform |
 |------|-------|------|----------|----------|
 (header only — entries added per published post)
+```
+
+After appending, say:
+```
+That's everything. Your AI marketing team is set up, your website is live,
+and your schedules are running.
+
+From here, your AI team works Monday–Friday in the background.
+To interact with any agent, just open Claude Desktop and say what you need —
+for example:
+  • "help me write my standup"
+  • "write a post about [your topic]"
+  • "what's our project status?"
+
+Your team will take it from there.
 ```

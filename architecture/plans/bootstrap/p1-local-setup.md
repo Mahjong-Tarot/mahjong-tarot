@@ -16,6 +16,12 @@ Detect which stage you are in:
 - If computer use is available → run Stage A
 - If `git --version` works and permissions are pre-seeded → run Stage B
 
+**How to communicate with the user throughout P1:**
+- Before every step, say in one plain-English sentence what you are about to do and why.
+- When a tool is installed for the first time, introduce it with a one-sentence explanation: what it is and what role it plays in the project.
+- After each major step completes, confirm it worked before moving on.
+- Never run a block of commands in silence — always narrate.
+
 ---
 
 ## STAGE A — Cowork: Install Tools & Pre-Seed Permissions
@@ -27,6 +33,21 @@ Detect which stage you are in:
 > save as a temp working file, then continue. Never ask to re-paste.
 
 ### A1 — Install developer tools
+
+Before running anything, say:
+```
+I'm going to install the developer tools your project needs.
+Each one takes about 30 seconds. I'll tell you what each one does as I go.
+
+• Homebrew — an installer for Mac developer tools (like an App Store for code tools)
+• git — tracks every change to your project files, like a version history you can rewind
+• gh — lets me push your code to GitHub automatically, without you typing passwords
+• node — runs the JavaScript code your website is built on
+• vercel — deploys your website to the internet with one command
+• supabase CLI — lets me connect to your database from your computer
+
+Starting now — your Mac may ask for your password once during this process. That's normal.
+```
 
 **macOS — open Terminal.app via computer use and run:**
 ```bash
@@ -41,6 +62,11 @@ git --version && gh --version && node --version
 ```
 
 > If Homebrew asks for a Mac password, pause and ask the user to type it, then resume.
+
+After this completes, say:
+```
+All developer tools are installed. ✅
+```
 
 **Windows — open PowerShell as Administrator via computer use and run:**
 ```powershell
@@ -169,9 +195,15 @@ Stop.
 
 ### B2 — Configure git identity
 
+Say:
+```
+First, I'll link your name and email to your code changes.
+Every time you save work to GitHub, your name appears on it — like signing a document.
+```
+
 Ask:
 ```
-Two quick questions before we set up your project:
+Two quick questions:
 
 A. Your name for git commits (e.g. "Jane Smith" — this shows on GitHub)
 B. Your email address (same as your GitHub account)
@@ -182,7 +214,16 @@ git config --global user.name  "ANSWER_A"
 git config --global user.email "ANSWER_B"
 ```
 
+After: `✅ Git identity set — your name and email will appear on every commit.`
+
 ### B3 — Create project directory and initialise repo
+
+Say:
+```
+Now I'll create your project folder and turn it into a git repository.
+A repository (or "repo") is just a folder that tracks every change ever made to it —
+like a timeline you can rewind. Everything for your business lives inside this one folder.
+```
 
 Ask: "What would you like to name your project folder? (e.g. `acme-marketing`)"
 
@@ -347,6 +388,15 @@ EOF
 
 ### B8 — Configure Supabase MCP
 
+Say:
+```
+I'm going to connect Claude to your database using something called MCP
+(Model Context Protocol). MCP is a standard way for Claude to talk directly
+to external tools — in this case, your Supabase database. Once it's configured,
+Claude can read and write database records without you having to copy-paste anything.
+I'll add a placeholder token for now — you'll fill in the real one after P2.
+```
+
 Read `.claude/settings.local.json` and merge — do not overwrite existing keys:
 
 ```json
@@ -371,6 +421,14 @@ Replace it after P2 once your Supabase project is active:
 ```
 
 ### B9 — Install base skills
+
+Say:
+```
+Now I'll install "skills" — reusable instruction sets that teach Claude how to
+do specific tasks. Think of them like recipes: instead of re-explaining a process
+every time, Claude reads the skill file and follows it. Your AI team will use
+skills for things like writing check-ins, building web pages, and posting content.
+```
 
 ```bash
 # skill-creator — Anthropic official skill for creating new skills
@@ -546,10 +604,19 @@ echo "   Team member names are placeholders — update in P3 with real names"
 
 ### B11 — Initial git commit
 
+Say:
+```
+Almost done. I'm going to save a snapshot of everything we've just built.
+This is your first git commit — a saved checkpoint you can always come back to.
+It records the folder structure, your config files, and the base skills we installed.
+```
+
 ```bash
 git add CLAUDE.md .gitignore .env.example .claude/ agents/ content/ resources/ context/ standup/ working_files/.gitkeep
 git commit -m "bootstrap: P1 complete — project structure, CLAUDE.md, base config"
 ```
+
+After: `✅ First checkpoint saved. Your project has its foundation.`
 
 ---
 
@@ -568,5 +635,8 @@ Your project is set up locally with:
   ✓ Base skills installed
   ✓ daily-checkin skill installed — team member names are placeholders, update in P3
 
-Next: Paste the P2 file into Claude Code to begin the business discovery interview.
+Next:
+  1. Click the 📎 attachment icon (bottom-left of the message box)
+  2. Select p2-discovery.md from your files
+  3. Send it — Claude will begin the business discovery interview
 ```

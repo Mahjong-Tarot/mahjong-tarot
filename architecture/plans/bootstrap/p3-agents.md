@@ -8,6 +8,23 @@
 
 ## INSTRUCTIONS FOR CLAUDE CODE
 
+**How to communicate with the user throughout P3:**
+- Before building each agent, say in one sentence what that agent does and why it matters.
+- When introducing a new concept (agent definition, persona, skill, MCP), explain it in one sentence.
+- After each agent is installed, confirm it's working before moving to the next.
+- Never install a block of files in silence — always narrate what you're creating and why.
+
+Before starting, say:
+```
+In this phase, I'm building your AI team — a set of specialised agents, each with a
+clear role. An agent is a version of Claude that has been given a specific job description,
+a set of skills, and a set of rules. Each one lives in a file that Claude reads at the
+start of every conversation.
+
+I'll build each agent in order, show you a summary before generating any files,
+and ask for your approval before anything is written.
+```
+
 Build each agent in order using the **agent-creator workflow**:
 
 ```
@@ -554,5 +571,8 @@ Resources written:
   ~/.claude/skills/daily-checkin/SKILL.md (team names updated from placeholders)
   .claude/skills/daily-checkin/SKILL.md (project copy synced)
 
-Next: Paste the P4 file into Claude Code to activate schedules and verify the system.
+Next:
+  1. Click the 📎 attachment icon (bottom-left of the message box)
+  2. Select p4-schedules.md from your files
+  3. Send it — Claude will activate schedules and verify the system
 ```

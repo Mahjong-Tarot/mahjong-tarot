@@ -419,7 +419,7 @@
       <!-- dep arrow -->
       <div class="dep-row">
         <span class="dep-arrow">↓</span>
-        <span class="dep-text">repo exists + Claude is fully configured — P2 can write files and push to GitHub</span>
+        <span class="dep-text">repo exists + Claude fully configured — P2 scaffolds website and installs the core agent team</span>
       </div>
 
       <!-- P2 -->
@@ -430,30 +430,27 @@
         </div>
         <div class="phase-card">
           <div class="phase-header">
-            <div class="phase-title">Business Discovery + First Website</div>
+            <div class="phase-title">Website Infrastructure + Core Agent Setup</div>
             <div class="phase-meta">
               <span class="badge badge-code">Code</span>
-              <span class="badge badge-time">60–90 min</span>
+              <span class="badge badge-time">45–60 min</span>
             </div>
           </div>
-          <p class="phase-desc">A structured interview captures everything Claude needs to know about your business, brand, and audience. Then it builds and deploys your website automatically.</p>
+          <p class="phase-desc">No interview. Claude scaffolds your website with placeholder content, installs all 4 core agents from a proven template, and auto-registers the PM's daily/weekly schedules. Your team is running before you've answered a single business question.</p>
           <div class="steps">
-            <div class="step"><div class="step-label">Group 1</div><div class="step-text">Business identity — name, description, products, domain, location</div></div>
-            <div class="step"><div class="step-label">Group 2</div><div class="step-text">Audience &amp; market — ICP, brand voice, competitors, 12-month goal</div></div>
-            <div class="step"><div class="step-label">Group 3</div><div class="step-text">Channels &amp; capacity — platforms, email list, hours available, timezone</div></div>
-            <div class="step"><div class="step-label">Style</div><div class="step-text">Visual style + brand colours — pick from suggestions or specify your own</div></div>
-            <div class="step"><div class="step-label">Strategy</div><div class="step-text">Content pillars (3–5) + 90-day goal</div></div>
-            <div class="step"><div class="step-label">Website</div><div class="step-text">Scaffold Next.js app → push to GitHub → deploy to Vercel → wire Supabase</div></div>
+            <div class="step"><div class="step-label">2 questions</div><div class="step-text">Project name + timezone. That's all Claude needs to begin.</div></div>
+            <div class="step"><div class="step-label">Website</div><div class="step-text">Scaffold Next.js → push to GitHub → deploy to Vercel → wire Supabase. Placeholder content throughout.</div></div>
+            <div class="step"><div class="step-label">Core agents ×4</div><div class="step-text"><strong style="color:#E9D5FF">Project Manager · Writer · Designer · Web Developer</strong> installed from template.</div></div>
+            <div class="step"><div class="step-label">PM schedules</div><div class="step-text">4 tasks auto-registered via MCP: 7am reminder, 9am compile, 5pm EOD, Friday RAG report.</div></div>
           </div>
           <div class="output-label">Outputs</div>
           <div class="outputs">
-            <span class="output-tag">brand-voice.md</span>
-            <span class="output-tag">design-system.md</span>
-            <span class="output-tag">web-style-guide.md</span>
-            <span class="output-tag">audience-personas.md</span>
-            <span class="output-tag">content-calendar.md</span>
             <span class="output-tag">Live website on Vercel</span>
             <span class="output-tag">Supabase connected</span>
+            <span class="output-tag">4 agents installed</span>
+            <span class="output-tag">4 PM schedules active</span>
+            <span class="output-tag">.claude/agents/*.md</span>
+            <span class="output-tag">agents/*/context/persona.md</span>
           </div>
         </div>
       </div>
@@ -461,7 +458,7 @@
       <!-- dep arrow -->
       <div class="dep-row">
         <span class="dep-arrow">↓</span>
-        <span class="dep-text">brand files exist + website live — P3 uses these to generate personalised agent personas</span>
+        <span class="dep-text">website live + team installed — P3 learns about your business and fills in the placeholders</span>
       </div>
 
       <!-- P3 -->
@@ -472,29 +469,30 @@
         </div>
         <div class="phase-card">
           <div class="phase-header">
-            <div class="phase-title">Agent Team Build</div>
+            <div class="phase-title">Business Discovery + Agent Customisation</div>
             <div class="phase-meta">
               <span class="badge badge-code">Code</span>
-              <span class="badge badge-time">2–3 hours</span>
+              <span class="badge badge-time">90–120 min</span>
             </div>
           </div>
-          <p class="phase-desc">Every agent is built with a 5-step workflow: interview → workflow design → your approval → generate all files → install. Nothing is generated before you say yes.</p>
+          <p class="phase-desc">Claude presents your installed team, then interviews you about your business. Your answers generate brand files, update the website with real copy, and personalise every agent. Optionally extend the team with specialist agents.</p>
           <div class="steps">
-            <div class="step"><div class="step-label">Template agents</div><div class="step-text"><strong style="color:#D1FAE5">Project Manager</strong> — standups, RAID log, RAG reports</div></div>
-            <div class="step"><div class="step-label">Template agents</div><div class="step-text"><strong style="color:#D1FAE5">Product Manager</strong> — strategy, roadmap, ICP research</div></div>
-            <div class="step"><div class="step-label">Template agents</div><div class="step-text"><strong style="color:#D1FAE5">Web Developer</strong> — build &amp; publish pages</div></div>
-            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Designer</strong> — hero images, social cards, brand visuals</div></div>
-            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Writer</strong> — blog posts, social copy, newsletters</div></div>
-            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Marketing Manager</strong> — campaigns, content calendar</div></div>
-            <div class="step"><div class="step-label">Full workflow</div><div class="step-text"><strong style="color:#D1FAE5">Social Media Manager</strong> — platform drafts, TikTok, analytics</div></div>
+            <div class="step"><div class="step-label">Team intro</div><div class="step-text">Claude shows what's installed and what each agent does before asking anything.</div></div>
+            <div class="step"><div class="step-label">Interview (3 groups)</div><div class="step-text">Business identity, audience &amp; market, channels &amp; capacity. Then visual style + content pillars.</div></div>
+            <div class="step"><div class="step-label">Brand files</div><div class="step-text">brand-voice.md, design-system.md, web-style-guide.md, audience-personas.md, content-calendar.md, seo-strategy.md</div></div>
+            <div class="step"><div class="step-label">Personalise agents</div><div class="step-text">All 4 core agent personas updated with real names, timezone, brand voice, categories, colours.</div></div>
+            <div class="step"><div class="step-label">Extend (optional)</div><div class="step-text"><strong style="color:#D1FAE5">Product Manager · Marketing Manager · Social Media Manager</strong> — each via full interview → approval → generate workflow.</div></div>
           </div>
-          <div class="output-label">Outputs per agent</div>
+          <div class="output-label">Outputs</div>
           <div class="outputs">
-            <span class="output-tag">.claude/agents/{name}.md</span>
-            <span class="output-tag">agents/{name}/context/persona.md</span>
-            <span class="output-tag">agents/{name}/context/skills/</span>
-            <span class="output-tag">resources/seo-strategy.md</span>
-            <span class="output-tag">standup/individual/{owner}.md</span>
+            <span class="output-tag">brand-voice.md</span>
+            <span class="output-tag">design-system.md</span>
+            <span class="output-tag">web-style-guide.md</span>
+            <span class="output-tag">audience-personas.md</span>
+            <span class="output-tag">content-calendar.md</span>
+            <span class="output-tag">seo-strategy.md</span>
+            <span class="output-tag">Website pages — real content</span>
+            <span class="output-tag">Agents personalised</span>
           </div>
         </div>
       </div>
@@ -502,7 +500,7 @@
       <!-- dep arrow -->
       <div class="dep-row">
         <span class="dep-arrow">↓</span>
-        <span class="dep-text">all agents installed — P4 can generate personalised schedule commands for each agent's triggers</span>
+        <span class="dep-text">agents personalised — P4 activates schedules for any extended agents and verifies the full system</span>
       </div>
 
       <!-- P4 -->
@@ -512,24 +510,23 @@
         </div>
         <div class="phase-card">
           <div class="phase-header">
-            <div class="phase-title">Schedules + Verification</div>
+            <div class="phase-title">Extended Team Schedules + Verification</div>
             <div class="phase-meta">
               <span class="badge badge-code">Code</span>
               <span class="badge badge-chat">Chat</span>
               <span class="badge badge-time">30–45 min</span>
             </div>
           </div>
-          <p class="phase-desc">Claude generates ready-to-paste schedule commands, you activate them in the Chat tab, then Claude runs end-to-end tests to confirm the whole system is working.</p>
+          <p class="phase-desc">PM schedules are already active from P2. This phase handles schedules for any specialist agents added in P3, then runs four end-to-end verification tests to confirm the whole system is working.</p>
           <div class="steps">
-            <div class="step"><div class="step-label">Section 1 — Code</div><div class="step-text">Generate /schedule commands for all automated tasks. Write to schedule-desktop-tasks.md.</div></div>
-            <div class="step"><div class="step-label">Section 2 — Chat</div><div class="step-text">Copy each command → switch to Chat tab → paste &amp; press Enter. Confirm each schedule is active.</div></div>
-            <div class="step"><div class="step-label">Section 3 — Code</div><div class="step-text">Verification: file existence checks + 3 functional agent tests (PM standup, Writer caption, Web Dev build).</div></div>
+            <div class="step"><div class="step-label">Section 1 — Code</div><div class="step-text">Generate /schedule commands for extended agents (Product Manager, Marketing Manager, Social Media Manager — if installed).</div></div>
+            <div class="step"><div class="step-label">Section 2 — Chat</div><div class="step-text">Paste each command into the Chat tab to activate. Skip entirely if only core agents were installed.</div></div>
+            <div class="step"><div class="step-label">Section 3 — Code</div><div class="step-text">4 verification tests: file checks, PM standup dry-run, Writer caption, Web Dev build-page, Designer prompt.</div></div>
             <div class="step"><div class="step-label">Section 5 — Optional</div><div class="step-text">OpenClaw upgrade: WhatsApp control interface + TikTok AI video generation.</div></div>
           </div>
           <div class="output-label">Outputs</div>
           <div class="outputs">
-            <span class="output-tag">schedule-desktop-tasks.md</span>
-            <span class="output-tag">5 active schedules</span>
+            <span class="output-tag">Extended agent schedules (if applicable)</span>
             <span class="output-tag">context/publish-log.md</span>
             <span class="output-tag">Verification passed ✅</span>
           </div>
@@ -561,7 +558,7 @@
         <div class="auto-task">
           <div class="when">1st of month · 9am</div>
           <div class="what">Content calendar generated</div>
-          <div class="who">Marketing Manager</div>
+          <div class="who">Marketing Manager (if installed)</div>
         </div>
         <div class="auto-task">
           <div class="when">Friday · 4pm</div>

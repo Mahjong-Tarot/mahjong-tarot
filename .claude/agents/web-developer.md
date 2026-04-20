@@ -70,6 +70,25 @@ Add the new post card at the **top** of the grid in `website/pages/blog/index.js
 
 Writer → Designer → **Web Developer**
 
+## Final step — notify social media manager
+
+After updating `context/publish-log.md`, invoke the notify-social-media skill:
+
+```
+Skill: .claude/skills/notify-social-media/SKILL.md
+Inputs:
+  SLUG        = <the published slug>
+  BLOG_TYPE   = <fire-horse | mahjong-mirror | feel-good-friday>
+  POST_TITLE  = <title from blog front matter>
+  POST_DATE   = <date from blog front matter>
+```
+
+The skill sends Hien Dang (RESEND_TO_SOCIAL_MEDIA) the live URL, social caption files, image-prompts.json, and hero images — as attachments if small enough, or as Supabase storage links if not.
+
+Run this for every slug published in the current session.
+
+---
+
 ## Hard rules
 
 - Never write to `content/` or any `agents/` folder — your domain is `website/` only

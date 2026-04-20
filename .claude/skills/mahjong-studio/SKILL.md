@@ -81,7 +81,15 @@ This mode is fully autonomous. It discovers all incomplete weeks and runs each o
 
 ### A1. Discover incomplete weeks
 
-Read `content/content-calendar/content-calendar.md`. For each week listed, check its three slugs:
+**Cutoff rule — determine the latest week eligible for processing:**
+
+Check today's day of the week:
+- **Monday** → cutoff is the week *before* the current week (i.e., weeks whose Monday date is strictly before today).
+- **Tuesday–Sunday** → cutoff is the *current* week (i.e., weeks whose Monday date is ≤ today).
+
+Only process weeks that fall on or before the cutoff. Weeks dated in the future are skipped silently.
+
+Read `content/content-calendar/content-calendar.md`. For each week listed whose Monday date is within the cutoff, check its three slugs:
 
 A week is **complete** when all three slugs have a corresponding `.jsx` file under `website/pages/blog/posts/`.
 A week is **incomplete** if any slug is missing its `.jsx` file.
@@ -99,7 +107,8 @@ Notify:
 
 ```bash
 LARK_MSG="🚀 Mahjong Studio starting — all-missing mode
-Incomplete weeks: <N>
+Cutoff: <week of YYYY-MM-DD> (today is <day>)
+Incomplete weeks in scope: <N>
 Processing oldest-first. Will notify at each milestone."
 ```
 
@@ -149,7 +158,6 @@ For each slug in the week (fire-horse → mahjong-mirror → feel-good-friday):
    - Prompt: from the `## blog-<type>.md` section of `image-prompts.md`
    - Aspect: `16:9`
    - Raw PNG → `working_files/<slug>-blog-<type>-raw.png`
-   - Archive → `content/topics/<slug>/<slug>-blog-<type>-original.png`
    - WebP → `content/topics/<slug>/<slug>-blog-<type>.webp`
 
 4. **Promote image to website**:

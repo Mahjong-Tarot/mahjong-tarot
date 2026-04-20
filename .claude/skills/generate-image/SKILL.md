@@ -132,8 +132,6 @@ for part in response.parts:
         break
 ```
 
-Archive a permanent copy: `content/topics/<slug>/<slug>-<channel>-original.png`
-
 If the API call fails, shorten the prompt and retry once.
 
 ---

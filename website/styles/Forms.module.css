@@ -210,11 +210,11 @@
 .footerNewsletter h2 {
   font-size: 20px;
   margin-bottom: var(--space-xs);
-  color: var(--warm-cream);
+  color: var(--midnight-indigo);
 }
 
 .footerNewsletter p {
-  color: rgba(250, 248, 244, 0.7);
+  color: var(--mid-gray);
   margin-bottom: var(--space-md);
 }
 
@@ -223,20 +223,7 @@
   max-width: 480px;
 }
 
-.footerNewsletter .input {
-  background-color: rgba(250, 248, 244, 0.08);
-  border-color: rgba(250, 248, 244, 0.3);
-  color: var(--warm-cream);
-}
-
-.footerNewsletter .input::placeholder {
-  color: rgba(250, 248, 244, 0.4);
-}
-
 .footerNewsletter .select {
-  background-color: rgba(250, 248, 244, 0.08);
-  border-color: rgba(250, 248, 244, 0.3);
-  color: var(--warm-cream);
   margin-left: 0 !important;
   margin-right: 0 !important;
 }

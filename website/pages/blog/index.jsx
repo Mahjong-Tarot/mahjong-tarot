@@ -10,165 +10,165 @@ import { POSTS } from '../../lib/posts';
 import styles from '../../styles/Blog.module.css';
 
 const CATEGORIES = [
-  'All Posts',
-  'Romance',
-  'Year of the Fire Horse',
-  'Mahjong Reading',
-  'Chinese Astrology',
+ 'All Posts',
+ 'Romance',
+ 'Year of the Fire Horse',
+ 'Mahjong Reading',
+ 'Chinese Astrology',
 ];
 
 export default function BlogIndex() {
-  const [active, setActive] = useState('All Posts');
+ const [active, setActive] = useState('All Posts');
 
-  const filtered = active === 'All Posts'
-    ? POSTS
-    : POSTS.filter((p) => p.categories.includes(active));
+ const filtered = active === 'All Posts'
+ ? POSTS
+ : POSTS.filter((p) => p.categories.includes(active));
 
-  return (
-    <>
-      <SEO
-        title="Mahjong Tarot Blog — Chinese Astrology, Fire Horse Year & Divination Insights"
-        description="Insights on Mahjong readings, tarot, Chinese Four Pillars astrology, and the Year of the Fire Horse from Bill Hajdu — The Firepig."
-        path="/blog"
-        jsonLd={graph([
-          ORGANIZATION,
-          WEBSITE,
-          PERSON_BILL,
-          breadcrumb([
-            { name: 'Home', url: '/' },
-            { name: 'Blog', url: '/blog' },
-          ]),
-          {
-            '@type': 'Blog',
-            url: 'https://www.mahjongtarot.com/blog',
-            name: 'Mahjong Tarot Blog',
-            author: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
-            blogPost: POSTS.slice(0, 10).map((p) => ({
-              '@type': 'BlogPosting',
-              headline: p.title,
-              datePublished: p.isoDate,
-              url: `https://www.mahjongtarot.com/blog/posts/${p.slug}`,
-              author: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
-            })),
-          },
-        ])}
-      />
+ return (
+ <>
+ <SEO
+ title="Mahjong Tarot Blog, Chinese Astrology, Fire Horse Year & Divination Insights"
+ description="Insights on Mahjong readings, tarot, Chinese Four Pillars astrology, and the Year of the Fire Horse from Bill Hajdu, The Firepig."
+ path="/blog"
+ jsonLd={graph([
+ ORGANIZATION,
+ WEBSITE,
+ PERSON_BILL,
+ breadcrumb([
+ { name: 'Home', url: '/' },
+ { name: 'Blog', url: '/blog' },
+ ]),
+ {
+ '@type': 'Blog',
+ url: 'https://www.mahjongtarot.com/blog',
+ name: 'Mahjong Tarot Blog',
+ author: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+ blogPost: POSTS.slice(0, 10).map((p) => ({
+ '@type': 'BlogPosting',
+ headline: p.title,
+ datePublished: p.isoDate,
+ url: `https://www.mahjongtarot.com/blog/posts/${p.slug}`,
+ author: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+ })),
+ },
+ ])}
+ />
 
-      <Nav />
+ <Nav />
 
-      <main>
-        {/* ── Page Header ── */}
-        <section className={styles.pageHeader}>
-          <div className="container">
-            <span className="overline">Writing & Insight</span>
-            <h1>The Blog</h1>
-            <p className={styles.headerLead}>
-              Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
-              hidden inside ancient symbols.
-            </p>
-            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-              <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
-              <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
-            </div>
-          </div>
-        </section>
+ <main>
+ {/* ── Page Header ── */}
+ <section className={styles.pageHeader}>
+ <div className="container">
+ <span className="overline">Writing & Insight</span>
+ <h1>The Blog</h1>
+ <p className={styles.headerLead}>
+ Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
+ hidden inside ancient symbols.
+ </p>
+ <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+ <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
+ <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
+ </div>
+ </div>
+ </section>
 
-        {/* ── Featured ── */}
-        <section className={`section-stone ${styles.featured}`}>
-          <div className="container">
-            <span className="overline">Featured</span>
-            <div className={styles.featuredInner}>
-              <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className={styles.featuredImage}>
-                <Image
-                  src="/images/blog/planning-a-wedding-through-the-mahjong-mirror.webp"
-                  alt="The Mahjong Mirror Way to Plan a Wedding"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                />
-              </Link>
-              <div className={styles.featuredText}>
-                <span className="post-category">Romance</span>
-                <h2 className={styles.featuredTitle}>
-                  <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror">
-                    The Mahjong Mirror Way to Plan a Wedding
-                  </Link>
-                </h2>
-                <p className={styles.featuredExcerpt}>
-                  The biggest day of your life deserves more than a color scheme. Two questions no wedding planner will ask — and a five-step framework to answer them before you book a single vendor.
-                </p>
-                <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className="btn-secondary">Read the Article</Link>
-              </div>
-            </div>
-          </div>
-        </section>
+ {/* ── Featured ── */}
+ <section className={`section-stone ${styles.featured}`}>
+ <div className="container">
+ <span className="overline">Featured</span>
+ <div className={styles.featuredInner}>
+ <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className={styles.featuredImage}>
+ <Image
+ src="/images/blog/planning-a-wedding-through-the-mahjong-mirror.webp"
+ alt="The Mahjong Mirror Way to Plan a Wedding"
+ fill
+ style={{ objectFit: 'cover' }}
+ />
+ </Link>
+ <div className={styles.featuredText}>
+ <span className="post-category">Romance</span>
+ <h2 className={styles.featuredTitle}>
+ <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror">
+ The Mahjong Mirror Way to Plan a Wedding
+ </Link>
+ </h2>
+ <p className={styles.featuredExcerpt}>
+ The biggest day of your life deserves more than a color scheme. Two questions no wedding planner will ask, and a five-step framework to answer them before you book a single vendor.
+ </p>
+ <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className="btn-secondary">Read the Article</Link>
+ </div>
+ </div>
+ </div>
+ </section>
 
-        {/* ── Filter ── */}
-        <section className={styles.filterSection}>
-          <div className="container">
-            <div className={styles.filters}>
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat}
-                  className={`${styles.filterBtn} ${active === cat ? styles.filterActive : ''}`}
-                  onClick={() => setActive(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
+ {/* ── Filter ── */}
+ <section className={styles.filterSection}>
+ <div className="container">
+ <div className={styles.filters}>
+ {CATEGORIES.map((cat) => (
+ <button
+ key={cat}
+ className={`${styles.filterBtn} ${active === cat ? styles.filterActive : ''}`}
+ onClick={() => setActive(cat)}
+ >
+ {cat}
+ </button>
+ ))}
+ </div>
+ </div>
+ </section>
 
-        {/* ── Post Grid ── */}
-        <section>
-          <div className="container">
-            {filtered.length === 0 ? (
-              <div className={styles.empty}>
-                <p>No posts yet in this category. Check back soon.</p>
-              </div>
-            ) : (
-              <div className={styles.grid}>
-                {filtered.map((post) => (
-                  <article key={post.slug} className={styles.card}>
-                    <Link href={`/blog/posts/${post.slug}`} className={styles.cardImageLink}>
-                      <div className={styles.cardImage}>
-                        <Image
-                          src={`/images/blog/${post.slug}.webp`}
-                          alt={post.title}
-                          fill
-                          style={{ objectFit: 'cover' }}
-                        />
-                      </div>
-                    </Link>
-                    <div className={styles.cardBody}>
-                      <span className="post-category">{post.categories[0]}</span>
-                      <h2 className={styles.cardTitle}>
-                        <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
-                      </h2>
-                      <p className={styles.cardExcerpt}>{post.excerpt}</p>
-                      <div className={styles.cardMeta}>
-                        <span className="post-meta">{post.date} · {post.readTime}</span>
-                        <Link href={`/blog/posts/${post.slug}`} className={styles.readMore}>
-                          Read more →
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
+ {/* ── Post Grid ── */}
+ <section>
+ <div className="container">
+ {filtered.length === 0 ? (
+ <div className={styles.empty}>
+ <p>No posts yet in this category. Check back soon.</p>
+ </div>
+ ) : (
+ <div className={styles.grid}>
+ {filtered.map((post) => (
+ <article key={post.slug} className={styles.card}>
+ <Link href={`/blog/posts/${post.slug}`} className={styles.cardImageLink}>
+ <div className={styles.cardImage}>
+ <Image
+ src={`/images/blog/${post.slug}.webp`}
+ alt={post.title}
+ fill
+ style={{ objectFit: 'cover' }}
+ />
+ </div>
+ </Link>
+ <div className={styles.cardBody}>
+ <span className="post-category">{post.categories[0]}</span>
+ <h2 className={styles.cardTitle}>
+ <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
+ </h2>
+ <p className={styles.cardExcerpt}>{post.excerpt}</p>
+ <div className={styles.cardMeta}>
+ <span className="post-meta">{post.date} · {post.readTime}</span>
+ <Link href={`/blog/posts/${post.slug}`} className={styles.readMore}>
+ Read more →
+ </Link>
+ </div>
+ </div>
+ </article>
+ ))}
+ </div>
+ )}
+ </div>
+ </section>
 
-        {/* ── Newsletter ── */}
-        <section className="section-stone">
-          <div className="container">
-            <NewsletterSignup source="blog" variant="light" />
-          </div>
-        </section>
-      </main>
+ {/* ── Newsletter ── */}
+ <section className="section-stone">
+ <div className="container">
+ <NewsletterSignup source="blog" variant="light" />
+ </div>
+ </section>
+ </main>
 
-      <Footer />
-    </>
-  );
+ <Footer />
+ </>
+ );
 }

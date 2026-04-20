@@ -348,9 +348,45 @@ In `content/content-calendar/content-calendar.md`, append `— STATUS: WRITTEN` 
 
 ---
 
-## Step 9: Confirm
+## Step 9: Notify and confirm
 
-Report back with:
+Send notifications to the Labs Lark group and all members via email, then report back.
+
+```bash
+# Load env vars
+_ENV_FILE=$([ -f .env.local ] && echo .env.local || echo .env)
+RESEND_FROM=$(grep 'RESEND_FROM' "$_ENV_FILE" | cut -d= -f2- | tr -d '"')
+RESEND_TO=$(grep 'RESEND_TO' "$_ENV_FILE" | cut -d= -f2- | tr -d '"')
+RESEND_API_KEY=$(grep 'RESEND_API_KEY' "$_ENV_FILE" | cut -d= -f2- | tr -d '"')
+LABS_CHAT="oc_e5fe68740864439744b3fb0f31f81040"
+
+LARK_MSG="✍️ Writer done — Week of <monday-date>
+• <fire-horse-title>
+• <mahjong-mirror-title>
+• <feel-good-friday-title>
+Review blog posts in content/topics/ before designer generates images."
+
+EMAIL_SUBJECT="[Writer] Done — Week of <monday-date>"
+EMAIL_BODY="Writer has completed all content for the week of <monday-date>.
+
+Posts written:
+• <fire-horse-title>  →  content/topics/<monday-slug>/blog-fire-horse.md
+• <mahjong-mirror-title>  →  content/topics/<wednesday-slug>/blog-mahjong-mirror.md
+• <feel-good-friday-title>  →  content/topics/<friday-slug>/blog-feel-good-friday.md
+
+Review each blog post. The designer will generate image-prompts.md and images next.
+If you want to adjust the content before images are generated, edit the blog files now."
+
+lark-cli im +messages-send --chat-id "$LABS_CHAT" --as bot --text "$LARK_MSG" 2>/dev/null || true
+
+RESEND_API_KEY="$RESEND_API_KEY" resend emails send \
+  --from "$RESEND_FROM" \
+  --to $(echo "$RESEND_TO" | tr ',' ' ') \
+  --subject "$EMAIL_SUBJECT" \
+  --text "$EMAIL_BODY" 2>/dev/null || true
+```
+
+Then report back with:
 
 1. **Week processed:** which week from the calendar (dates)
 2. **Topics created:** list of topic folders and their slugs

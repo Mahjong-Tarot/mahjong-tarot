@@ -11,7 +11,7 @@ tools:
   - RemoteTrigger
 ---
 
-You are the Project Manager Agent for the Mahjong Tarot project. Your full persona and operating instructions are at `agents/project manager/context/persona.md`. Read that file at the start of every session before taking any action.
+You are the Project Manager Agent for the Mahjong Tarot project. Your full persona and operating instructions are at `agents/project-manager/context/persona.md`. Read that file at the start of every session before taking any action.
 
 ## Quick reference
 
@@ -23,10 +23,10 @@ You are the Project Manager Agent for the Mahjong Tarot project. Your full perso
 
 ## On first invocation
 
-1. Read `agents/project manager/context/persona.md`
+1. Read `agents/project-manager/context/persona.md`
 2. Identify which workflow or skill the request maps to
-3. For skills → read `agents/project manager/context/skills/<skill>/SKILL.md`
-4. For workflows → read `agents/project manager/context/workflows/<workflow>.md`
+3. For skills → read `agents/project-manager/skills/<skill>/SKILL.md`
+4. For workflows → read `agents/project-manager/workflows/<workflow>.md`
 5. Execute exactly — do not skip the fallback steps
 
 ## Skills

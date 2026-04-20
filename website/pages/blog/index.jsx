@@ -20,9 +20,11 @@ const CATEGORIES = [
 export default function BlogIndex() {
  const [active, setActive] = useState('All Posts');
 
+ const featured = POSTS[0];
+ const rest = POSTS.slice(1);
  const filtered = active === 'All Posts'
- ? POSTS
- : POSTS.filter((p) => p.categories.includes(active));
+ ? rest
+ : rest.filter((p) => p.categories.includes(active));
 
  return (
  <>
@@ -78,25 +80,25 @@ export default function BlogIndex() {
  <div className="container">
  <span className="overline">Featured</span>
  <div className={styles.featuredInner}>
- <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className={styles.featuredImage}>
+ <Link href={`/blog/posts/${featured.slug}`} className={styles.featuredImage}>
  <Image
- src="/images/blog/planning-a-wedding-through-the-mahjong-mirror.webp"
- alt="The Mahjong Mirror Way to Plan a Wedding"
+ src={`/images/blog/${featured.slug}.webp`}
+ alt={featured.title}
  fill
  style={{ objectFit: 'cover' }}
  />
  </Link>
  <div className={styles.featuredText}>
- <span className="post-category">Romance</span>
+ <span className="post-category">{featured.categories[0]}</span>
  <h2 className={styles.featuredTitle}>
- <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror">
- The Mahjong Mirror Way to Plan a Wedding
+ <Link href={`/blog/posts/${featured.slug}`}>
+ {featured.title}
  </Link>
  </h2>
  <p className={styles.featuredExcerpt}>
- The biggest day of your life deserves more than a color scheme. Two questions no wedding planner will ask, and a five-step framework to answer them before you book a single vendor.
+ {featured.excerpt}
  </p>
- <Link href="/blog/posts/planning-a-wedding-through-the-mahjong-mirror" className="btn-secondary">Read the Article</Link>
+ <Link href={`/blog/posts/${featured.slug}`} className="btn-secondary">Read the Article</Link>
  </div>
  </div>
  </div>

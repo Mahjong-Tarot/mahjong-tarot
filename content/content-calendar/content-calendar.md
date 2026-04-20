@@ -40,41 +40,40 @@ Publishes: Friday (blog + social)
 
 ---
 
-## Week of April 20 — Travel
+## Week of April 20 — Money
 
-**Topic: the-horse-is-the-traveling-star** — STATUS: PLANNED
+**Topic: money-in-the-year-of-the-fire-horse** — STATUS: PLANNED
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: how-to-know-if-a-trip-will-change-your-life** — STATUS: PLANNED
-Angle: Mahjong Mirror — the answer (ties back to traveling star)
-Chapter/tile focus: Chapter 1 (Central Theme), Chapter 4 (What Do I Really Want)
+**Topic: how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk** — STATUS: PLANNED
+Angle: Mahjong Mirror — the answer ties back to finding ways to make money in the volatile Fire Horse Year.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-the-horse-rewards-movement** — STATUS: PLANNED
+**Topic: feel-good-friday-the-horse-rewards-risk-takers** — STATUS: PLANNED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| Apr 20 | Mon | Blog | "The Horse Is the Traveling Star — and It's on Fire" — In Purple Star Astrology, the traveling star is Ma — the Horse. This year it's doubled with fire. The best travel year in the 60-year cycle. If you're not moving, you're fighting the strongest travel energy you'll see in your lifetime. |
-| Apr 20 | Mon | Facebook EN | Did you know the Chinese traveling star is literally the Horse? This year it's on fire. Here's what that means for you. |
+| Apr 20 | Mon | Blog | "The Horse Is the Traveling Star — and It Carries Gold" — In Purple Star Astrology, the Fire Horse year is the most volatile wealth cycle in 60 years. The energy doesn't reward caution. It rewards movement, boldness, and financial decisions most people are too afraid to make. |
+| Apr 20 | Mon | Facebook EN | Did you know the Chinese astrology cycle has one year that breaks the rules on wealth? This is it. The Fire Horse doesn't reward the careful. Here's what that means for your money. |
 | Apr 20 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 20 | Mon | Instagram | The traveling star only catches fire once every 60 years. This is that year. |
-| Apr 21 | Tue | Facebook EN | Most people plan trips around budget and PTO. Chinese astrology says there's a third factor: timing. The Fire Horse year is the strongest travel window in six decades. |
+| Apr 20 | Mon | Instagram | The Fire Horse year only comes once every 60 years. It doesn't reward caution. It rewards the ones who move. |
+| Apr 21 | Tue | Facebook EN | Most people make financial decisions based on markets and spreadsheets. Chinese astrology says there's a third factor: timing. The Fire Horse year is the strongest wealth window in six decades. |
 | Apr 21 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 21 | Tue | Instagram | Budget. PTO. Timing. Two of those you control. The third one just caught fire. |
-| Apr 22 | Wed | Blog | "How to Know If a Trip Will Change Your Life" — The Mahjong Mirror's four angles applied to travel. The First Angle — your central theme — reveals whether a trip will change your life or just change your scenery. |
-| Apr 22 | Wed | Facebook EN | The first angle of the Mahjong Mirror: your central theme. Applied to travel, it reveals whether a trip will change your life or just change your scenery. |
+| Apr 21 | Tue | Instagram | Markets. Spreadsheets. Timing. Two of those you can calculate. The third one just caught fire. |
+| Apr 22 | Wed | Blog | "How to Know If This Is the Year for You to Take a Financial Risk" — The Mahjong Mirror's four angles applied to money. The First Angle — your central theme — reveals whether a financial move will change your life or just change your account balance. |
+| Apr 22 | Wed | Facebook EN | The first angle of the Mahjong Mirror: your central theme. Applied to money, it reveals whether a financial risk will change your life or just your account balance. |
 | Apr 22 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 22 | Wed | Instagram | A trip without intention is a vacation. A trip with intention is a turning point. The mirror shows you which one you're planning. |
-| Apr 23 | Thu | Facebook EN | You don't need a card reading to use the Mahjong Mirror framework. That's the whole point of the book. Four angles of reflection you can apply to any travel decision, starting now. |
+| Apr 22 | Wed | Instagram | A financial move without clarity is a gamble. A financial move with clarity is a strategy. The mirror shows you which one you're making. |
+| Apr 23 | Thu | Facebook EN | You don't need a card reading to use the Mahjong Mirror framework. That's the whole point of the book. Four angles of reflection you can apply to any financial decision, starting right now. |
 | Apr 23 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 23 | Thu | Instagram | The Mahjong Mirror isn't fortune telling. It's a decision-making framework. And your next trip needs it. |
-| Apr 24 | Fri | Blog | "Feel Good Friday: The Trip You've Been Putting Off Is the One You Need Most" — The Horse doesn't care about distance. It cares about movement. The trip you keep postponing? That's the one the Fire Horse year is asking you to take. Not next year. Now. |
-| Apr 24 | Fri | Facebook EN | Feel Good Friday: The trip you've been putting off? That's the one. The Horse doesn't care about distance — it cares about movement. Where have you been meaning to go? |
+| Apr 23 | Thu | Instagram | The Mahjong Mirror isn't fortune telling. It's a decision-making framework. And your next financial move needs it. |
+| Apr 24 | Fri | Blog | "Feel Good Friday: The Wealth You've Been Circling Around Is Closer Than You Think" — The Horse doesn't reward the ones who wait for certainty. It rewards the ones who move with intention. The financial decision you keep postponing? That's the one this year is asking you to make. Not next year. Now. |
+| Apr 24 | Fri | Facebook EN | Feel Good Friday: The wealth you want isn't waiting for the perfect moment. The Fire Horse rewards the ones who decide. What financial move have you been putting off? |
 | Apr 24 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
-| Apr 24 | Fri | Instagram | Feel Good Friday: Stop planning. Start moving. The Fire Horse rewards the ones who go. |
+| Apr 24 | Fri | Instagram | Feel Good Friday: Stop calculating. Start deciding. The Fire Horse rewards the ones who move toward money with intention. |
 
 ---
 

@@ -4,7 +4,7 @@
 export const POSTS = [
  {
  slug: 'money-in-the-year-of-the-fire-horse',
- title: "The Horse Is the Traveling Star — and It Carries Gold",
+ title: "The Horse Is the Traveling Star, and It Carries Gold",
  excerpt: "The Fire Horse year is the most volatile wealth window in 60 years. The energy doesn't reward caution. It rewards movement, boldness, and the financial decisions most people are too afraid to make.",
  categories: ['Year of the Fire Horse', 'Chinese Astrology'],
  date: 'Apr 20, 2026',

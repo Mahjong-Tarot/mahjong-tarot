@@ -21,3 +21,4 @@ Source of truth for all published blog posts. Used by the writer agent (topic pl
 | 4 | the-danger-of-love-when-fire-runs-wild | fire horse affairs | The Explainer | Year of the Fire Horse | 2026-04-11 |
 | 5 | taylor-swift-travis-kelce-wedding | taylor swift travis kelce chinese astrology | The Myth Buster | Year of the Fire Horse | 2026-04-14 |
 | 6 | your-love-life-in-the-fire-horse-year | fire horse year love horoscope | The Sign-by-Sign Breakdown | Year of the Fire Horse | 2026-04-15 |
+| 7 | money-in-the-year-of-the-fire-horse | fire horse year money | The Provocation | Year of the Fire Horse | 2026-04-20 |

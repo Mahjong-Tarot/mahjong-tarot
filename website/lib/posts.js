@@ -3,6 +3,24 @@
 
 export const POSTS = [
  {
+ slug: 'money-in-the-year-of-the-fire-horse',
+ title: "The Horse Is the Traveling Star — and It Carries Gold",
+ excerpt: "The Fire Horse year is the most volatile wealth window in 60 years. The energy doesn't reward caution. It rewards movement, boldness, and the financial decisions most people are too afraid to make.",
+ categories: ['Year of the Fire Horse', 'Chinese Astrology'],
+ date: 'Apr 20, 2026',
+ isoDate: '2026-04-20',
+ readTime: '6 min read',
+ },
+ {
+ slug: 'feel-good-friday-love-starts-with-knowing-yourself',
+ title: "Feel Good Friday: The Best Relationship You'll Ever Have Starts in the Mirror",
+ excerpt: "Before you can be the right partner, you have to know who you are. The Mahjong Mirror's Second Angle shows you where real love actually begins.",
+ categories: ['Romance', 'Mahjong Reading'],
+ date: 'Apr 17, 2026',
+ isoDate: '2026-04-17',
+ readTime: '6 min read',
+ },
+ {
  slug: 'planning-a-wedding-through-the-mahjong-mirror',
  title: 'The Mahjong Mirror Way to Plan a Wedding',
  excerpt: 'The biggest day of your life deserves more than a color scheme. The Mahjong Mirror asks two questions no wedding planner will: what does this day actually mean, and what do you really want from the marriage itself?',

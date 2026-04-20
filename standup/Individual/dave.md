@@ -1,20 +1,14 @@
-date: 2026-04-17
+date: 2026-04-20
 name: Dave
 
-## Check-in: 🟡 Yellow
-
-## What I got done yesterday
-- Traveling — day was too hectic to make meaningful progress
-
 ## Today's focus
-- Get caught up after travel
-- Make sure this weekend is super productive
-- Help get the lead gem going
-- Prepare for James: next week rolling out Eric and AIO
-- Review James' codebase and project
+- Get the marketing team running properly for Mahjong Tarot
+- Complete outreach
+- Consolidate ownership — move everything to Dave's machine as the hub
 
-## Weekend plan
-- Saturday + Sunday needed to cover: lead gem, James prep, Eric rollout, AIO rollout, codebase review
+## Notes
+- AI officer signup pages (retreat + ongoing coaching/membership) shipped today
+- ~2 days left before the 14-day mark — need to break the stall
 
 ## Blockers
-None
+- Stalled and unclear why we can't get clean execution. Plan: centralise everything on Dave's computer so others are supplementary

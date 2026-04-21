@@ -68,9 +68,9 @@ Format each entry as:
 /schedule "Read agents/product-manager/context/persona.md for the competitor list. Use WebSearch to research each competitor: check for new features, pricing changes, or content from the last 30 days. Update context/competitive-analysis.md — update the competitor table, feature comparison, and strategic insights. Add 'Last updated: {date}' at the top. Flag any competitor move that affects our Now/Next/Later roadmap." --cron "0 9 1 * *"
 ```
 
-**Quarterly OKR review (first Monday of quarter 9am)**
+**Quarterly OKR review (1st of January, April, July, October — 9am)**
 ```
-/schedule "Read context/okrs/ for the current quarter. Score each Key Result against target. Determine if Objective was achieved. Draft next quarter's OKRs aligned to resources/content-calendar.md 90-day goal. Refresh context/product-roadmap.md — re-score RICE for items in Now/Next/Later. Write a 1-page vision report to context/vision-reports/YYYY-MM.md: where we are, where we're going, what we learned." --cron "0 9 * * 1#1"
+/schedule "Read context/okrs/ for the current quarter. Score each Key Result against target. Determine if Objective was achieved. Draft next quarter's OKRs aligned to resources/content-calendar.md 90-day goal. Refresh context/product-roadmap.md — re-score RICE for items in Now/Next/Later. Write a 1-page vision report to context/vision-reports/YYYY-MM.md: where we are, where we're going, what we learned." --cron "0 9 1 1,4,7,10 *"
 ```
 
 ---
@@ -146,6 +146,23 @@ Wait for "schedules activated" (or user confirms there are no extended agents to
 
 Run these checks after schedules are confirmed.
 
+### 3.0 — Confirm PM Schedules from P2 Are Active
+
+```bash
+# Check if P2 MCP registration succeeded or fell back to the manual file
+if [ -f "agents/project-manager/context/schedule-desktop-tasks.md" ]; then
+  echo "⚠️  schedule-desktop-tasks.md exists — P2 MCP registration may have failed."
+  echo "    Check if PM schedules are active in Claude Desktop → Scheduled tab."
+  echo "    If not active, paste the /schedule commands from the file into the Chat tab before continuing."
+else
+  echo "✅ No fallback file found — PM schedules were registered via MCP in P2."
+fi
+```
+
+If the fallback file exists and PM schedules are not yet active, pause here and guide the user to activate them before running verification tests.
+
+---
+
 ### 3.1 — File Verification
 
 ```bash
@@ -194,9 +211,10 @@ Confirm: output matches the brand voice and tone from Q8.
 **Test 3 — Web Developer build-page dry-run:**
 ```
 Ask the Web Developer to describe what it would do if given a blog brief at
-content/topics/sample-first-post/brief.md — without actually building anything.
+content/topics/my-first-post/brief.md — without actually building anything.
+(The file does not need to exist — you're testing the agent's process knowledge.)
 ```
-Confirm: it references the correct paths and web-style-guide.md.
+Confirm: it references `website/pages/blog/posts/my-first-post.jsx` as output and cites `web-style-guide.md`.
 
 **Test 4 — Designer image prompt dry-run:**
 ```
@@ -290,7 +308,7 @@ Add it? (yes / skip)
 
 **If YES:** Ask which chat app they prefer (WhatsApp / Telegram / Slack / Discord),
 generate `openclaw.json` adapted to their content calendar and timezone,
-create `content/approved/.gitkeep` and `content/published/.gitkeep`,
+create `content/approved/` and `content/published/` folders with `.gitkeep` files,
 and output the third-party setup instructions from the OpenClaw docs.
 
 **If SKIP:** Confirm the core system is complete.

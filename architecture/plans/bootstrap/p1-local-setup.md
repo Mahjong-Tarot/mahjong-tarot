@@ -105,6 +105,34 @@ Per-command rules accumulate debt and miss edge cases; the wildcard eliminates t
 problem entirely. `defaultMode: acceptEdits` keeps file-write prompts active while
 removing all Bash prompts.
 
+Before running, output this notice to the user:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  🔐  ONE-TIME PERMISSION SETUP                                   │
+│                                                                  │
+│  To run your bootstrap and keep your AI team working smoothly,  │
+│  I need to pre-approve a set of commands and tools so Claude    │
+│  never interrupts you mid-task asking "is it OK to do this?"    │
+│                                                                  │
+│  What I'm about to allow:                                       │
+│  • All shell commands (git, npm, python, file operations, etc.) │
+│  • File read, write, and edit operations                        │
+│  • Web browsing (for URL crawling and documentation lookups)    │
+│  • Database tools (Supabase)                                    │
+│  • All Claude skills (build-page, generate-image, etc.)        │
+│                                                                  │
+│  These are written to ~/.claude/settings.local.json             │
+│  on YOUR machine only — nothing is sent anywhere.               │
+│                                                                  │
+│  This is the standard setup for running an AI team.             │
+│  Without it, you'll get constant approval popups every          │
+│  time Claude runs a command.                                     │
+└─────────────────────────────────────────────────────────────────┘
+
+Writing permissions now — this takes about 2 seconds.
+```
+
 ```bash
 python3 - <<'PYEOF'
 import json, os
@@ -123,20 +151,37 @@ if os.path.exists(path):
 perms = settings.setdefault("permissions", {})
 allow = perms.setdefault("allow", [])
 
-# Bash(*) as first entry covers all shell commands — no per-command rules needed
 required = [
+    # Shell — wildcard, no per-command prompts ever
     "Bash(*)",
+    # Built-in tools
+    "WebFetch",
+    # Skills — wildcard covers all registered skills
+    "Skill(*)",
+    # Context-mode MCP
     "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
     "mcp__plugin_context-mode_context-mode__ctx_search",
     "mcp__plugin_context-mode_context-mode__ctx_execute",
     "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
     "mcp__plugin_context-mode_context-mode__ctx_execute_file",
+    # Playwright MCP
     "mcp__playwright__browser_navigate",
     "mcp__playwright__browser_snapshot",
     "mcp__playwright__browser_take_screenshot",
-    "Skill(schedule)", "Skill(schedule:*)",
-    "Skill(create-agent)", "Skill(create-agent:*)",
-    "Skill(skill-creator)", "Skill(skill-creator:*)",
+    "mcp__playwright__browser_click",
+    "mcp__playwright__browser_fill_form",
+    "mcp__playwright__browser_evaluate",
+    # Supabase MCP
+    "mcp__plugin_supabase_supabase__authenticate",
+    "mcp__plugin_supabase_supabase__complete_authentication",
+    "mcp__supabase__authenticate",
+    "mcp__supabase__complete_authentication",
+    # Telegram MCP
+    "mcp__plugin_telegram_telegram__reply",
+    "mcp__plugin_telegram_telegram__react",
+    "mcp__plugin_telegram_telegram__edit_message",
+    "mcp__plugin_telegram_telegram__download_attachment",
+    # File access (scoped to ~/.claude/)
     f"Read({home}/.claude/**)",
     f"Edit({home}/.claude/**)",
     f"Write({home}/.claude/**)",
@@ -156,8 +201,15 @@ with open(path, "w") as f:
     json.dump(settings, f, indent=2)
 
 print(f"✅ Permissions written → ~/.claude/settings.local.json")
-print(f"   Bash(*) wildcard is first — no per-command prompts for the rest of bootstrap")
-print(f"   defaultMode: acceptEdits — file writes still prompt, Bash never does")
+print(f"   Pre-approved:")
+print(f"   • Bash(*)          — all shell commands, zero prompts from here on")
+print(f"   • WebFetch         — URL fetching and web browsing")
+print(f"   • Skill(*)         — all Claude skills")
+print(f"   • Supabase MCP     — database tools")
+print(f"   • Playwright MCP   — browser automation")
+print(f"   • Telegram MCP     — notifications")
+print(f"   • File access      — ~/.claude/** (read, write, edit)")
+print(f"   defaultMode: acceptEdits — Claude can edit files and run Bash freely.")
 PYEOF
 ```
 
@@ -239,6 +291,8 @@ cat > .gitignore << 'EOF'
 .env
 .env.local
 .env.*.local
+.claude/settings.local.json
+settings.local.json
 node_modules/
 .next/
 working_files/
@@ -381,6 +435,9 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 
+# Gemini API (Designer agent — image generation)
+GEMINI_API_KEY=
+
 # Email platform
 EMAIL_API_KEY=
 EMAIL_LIST_ID=
@@ -399,30 +456,40 @@ I'm going to connect Claude to your database using something called MCP
 (Model Context Protocol). MCP is a standard way for Claude to talk directly
 to external tools — in this case, your Supabase database. Once it's configured,
 Claude can read and write database records without you having to copy-paste anything.
-I'll add a placeholder token for now — you'll fill in the real one after P2.
 ```
 
-Read `.claude/settings.local.json` and merge — do not overwrite existing keys:
+Ask:
+```
+You created a Supabase personal access token in P0 Step 4. Please paste it here.
+(It looks like a long string of letters and numbers — starts with "sbp_...")
+```
 
-```json
-{
-  "mcpServers": {
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "SUPABASE_ACCESS_TOKEN_PLACEHOLDER"]
-    }
-  }
+Wait for the token. Then read `.claude/settings.local.json` and merge — do not overwrite existing keys:
+
+```python
+import json, os, sys
+
+token = sys.argv[1]  # passed from user answer
+path = os.path.expanduser("~/.claude/settings.local.json")
+settings = {}
+if os.path.exists(path):
+    with open(path) as f:
+        try: settings = json.load(f)
+        except: settings = {}
+
+settings.setdefault("mcpServers", {})["supabase"] = {
+    "command": "npx",
+    "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", token]
 }
+with open(path, "w") as f:
+    json.dump(settings, f, indent=2)
+print("✅ Supabase MCP configured")
 ```
 
 Output:
 ```
-⚠️  SUPABASE_ACCESS_TOKEN_PLACEHOLDER is in .claude/settings.local.json.
-Replace it after P2 once your Supabase project is active:
-  1. Go to: https://supabase.com/dashboard/account/tokens
-  2. Create a token named: {project-name}-claude
-  3. Open .claude/settings.local.json and replace the placeholder
-  4. Restart Claude Code
+✅ Supabase MCP configured — Claude can now read and write your database directly.
+   Restart Claude Code once to activate the connection.
 ```
 
 ### B9 — Install base skills
@@ -435,17 +502,56 @@ every time, Claude reads the skill file and follows it. Your AI team will use
 skills for things like writing check-ins, building web pages, and posting content.
 ```
 
-```bash
-# skill-creator — Anthropic official skill for creating new skills
-npx skills add anthropic/skill-creator -g -y 2>/dev/null || echo "skill-creator: check anthropic skills registry"
+**Step 1 — skill-creator (part of Claude Desktop)**
 
-# agent-creator — custom skill for generating full agent packages
-npx skills add larksuite/cli -g -y 2>/dev/null || true
+`skill-creator` ships with Claude Desktop. Try to invoke it:
+
+```bash
+claude skills list 2>/dev/null | grep -i skill-creator && echo "FOUND" || echo "NOT_FOUND"
 ```
 
-> If `npx skills` is not available, output:
-> "Skills CLI not found. Install it with: `npm install -g @anthropic/skills-cli`
-> Then re-run B9."
+If FOUND:
+```
+✅ skill-creator is available — Claude can create new skills on demand.
+```
+
+If NOT_FOUND — write the skill directly as a fallback:
+```bash
+mkdir -p ~/.claude/skills/skill-creator
+```
+
+Write to `~/.claude/skills/skill-creator/SKILL.md`:
+```markdown
+---
+name: skill-creator
+description: Create a new reusable skill file. Use when asked to "create a skill", "write a skill for X", or "add a skill that does Y". Writes SKILL.md to ~/.claude/skills/{name}/ or .claude/skills/{name}/.
+---
+
+## Steps
+1. Confirm the skill name and trigger phrase with the user
+2. Write SKILL.md with: frontmatter (name, description, trigger), purpose, steps, edge cases
+3. Save to ~/.claude/skills/{name}/SKILL.md (global) or .claude/skills/{name}/SKILL.md (project)
+4. Confirm: "✅ Skill '{name}' created at {path}"
+```
+
+**Step 2 — Lark / Feishu CLI (optional)**
+
+Ask:
+```
+Does your team use Lark or Feishu for internal messaging?
+(yes / no — skip this if unsure)
+```
+
+If YES:
+```bash
+npm install -g @larksuite/lark-cli 2>/dev/null || brew install larksuite/tap/lark-cli 2>/dev/null || echo "Lark CLI: install manually from https://open.larksuite.com/document"
+lark-cli --version 2>/dev/null && echo "✅ Lark CLI installed" || echo "⚠️  Lark CLI install failed — PM notifications will fall back to Telegram/email"
+```
+
+If NO or no answer:
+```
+Skipping Lark CLI — PM agent will use Telegram or email for notifications.
+```
 
 ### B10 — Install daily-checkin skill
 
@@ -617,7 +723,7 @@ It records the folder structure, your config files, and the base skills we insta
 ```
 
 ```bash
-git add CLAUDE.md .gitignore .env.example .claude/ agents/ content/ resources/ context/ standup/ working_files/.gitkeep
+git add CLAUDE.md .gitignore .env.example .claude/ agents/ content/ resources/ context/ standup/
 git commit -m "bootstrap: P1 complete — project structure, CLAUDE.md, base config"
 ```
 

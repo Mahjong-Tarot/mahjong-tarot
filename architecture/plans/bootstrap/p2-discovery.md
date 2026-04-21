@@ -39,11 +39,172 @@ QUICK SETUP (2 questions before I begin)
    This sets when your agent schedules fire each day.
 ```
 
-Wait for answers. Then proceed immediately — no further questions needed at this stage.
+Wait for answers. Then proceed immediately to Section 1B.
+
+---
+
+## SECTION 1B — Brand Intake
+
+Before building the website, ask the client to share their brand context.
+This generates the resource files that all 4 agents will reference from day one.
+
+Say:
+
+```
+Before I build your website, I need to understand your project.
+
+Tell me:
+1. What is this project about — what do you do, and for whom?
+2. What's your goal for this website — sell, educate, build community, something else?
+3. Who is your ideal reader or customer — describe them in a sentence or two?
+
+Then, do you have any reference materials I should use?
+
+   (a) 🌐 Share your current website URL — I'll read it and extract your brand style automatically
+   (b) 📎 Attach documents — brand guide, style guide, existing content, any PDFs or Word docs
+   (c) 💬 Just tell me — I'll create a professional starting package based on what you've shared
+
+You can also combine: share a URL AND attach extra documents if you have them.
+```
+
+Wait for the response, then follow the appropriate path below.
+
+---
+
+### Path A — Client provides a URL
+
+1. Crawl these pages (if they exist): Homepage, About/Our Story, Blog (first 3 posts), Contact/Services
+2. For each page extract:
+   - **Colours:** CSS variables, hex/rgb values, inline background colors
+   - **Typography:** font-family, font-weight, heading sizes
+   - **Voice & tone:** paragraph copy analysis — formal/casual, first/third person, CTA language
+   - **Navigation labels:** what topics/sections the site prioritises
+   - **Audience signals:** who the copy addresses, pain points mentioned
+3. Present a confirmation block:
+   ```
+   Here's what I found on your site. Confirm or correct anything:
+
+   ── Brand ──────────────────────────────────────
+   Name:         {inferred}
+   Tagline:      {inferred or "not found"}
+
+   ── Colours ────────────────────────────────────
+   Primary:      {hex}
+   Secondary:    {hex}
+   Background:   {hex}
+   Text:         {hex}
+
+   ── Typography ─────────────────────────────────
+   Headings:     {font-family}
+   Body:         {font-family}
+
+   ── Voice & Tone ───────────────────────────────
+   Style:        {e.g. "warm, conversational, first-person"}
+   Avoids:       {e.g. "jargon, overly formal language"}
+
+   ── Audience ───────────────────────────────────
+   Primary:      {inferred from copy}
+   Secondary:    {inferred or "not identified"}
+
+   ── Content focus ──────────────────────────────
+   Topics:       {top 3–5 inferred from navigation + blog}
+
+   Reply with corrections, or say "looks good" to continue.
+   ```
+4. On confirmation → write resource files (see §Resource Files below)
+5. Save any logo/images found during crawl → `content/source-material/brand/`
+
+---
+
+### Path B — Client attaches documents
+
+1. Extract full text from each attached file (PDF → text extraction, Word → body text)
+2. Apply the same inference checklist as Path A
+3. Present the same confirmation block
+4. On confirmation → write resource files
+
+---
+
+### Path C — No references / "I don't know" / vague response
+
+Use the default package immediately — no confirmation step needed:
+
+**brand-voice.md defaults:**
+- Tone: professional, warm, conversational
+- Person: first-person (match what the client said in the intake answers)
+- Sentence length: short-to-medium, readable at 8th-grade level
+- CTA style: soft invitations, not hard sells
+- Avoid: passive voice, excessive jargon, generic filler phrases
+
+**design-system.md defaults:**
+- Primary: `#1a1a2e` (deep navy)
+- Accent: `#e8c547` (warm gold)
+- Surface: `#ffffff`
+- Text: `#1a1a2e`
+- Typography: Georgia / system-ui stack
+- Visual style: illustrated or photographic, strong composition, no stock-photo clichés
+
+**web-style-guide.md defaults:**
+- Structure: strong hook intro, subheadings every 250–350 words, one pull quote, 3–5 internal links, CTA at end
+- Post length: 1,000–1,500 words standard, 2,000+ for pillar content
+- Category tags: News, Advice, Story, Deep Dive, Guide
+
+**audience-personas.md defaults:**
+- Persona 1: Curious Beginner — wants to understand, low prior knowledge, skims before reading
+- Persona 2: Engaged Practitioner — already interested, wants depth and actionable insight
+
+Tell the client:
+```
+I've created a professional starting package based on what you've told me.
+Everything can be refined in P3 when we do the full discovery interview.
+Continuing to build your website now.
+```
+
+---
+
+### Resource Files
+
+Write all four files before proceeding to Section 2:
+
+| File | Path |
+|------|------|
+| Brand voice | `resources/brand-voice.md` |
+| Design system | `resources/design-system.md` |
+| Web style guide | `resources/web-style-guide.md` |
+| Audience personas | `resources/audience-personas.md` |
+
+After writing, confirm:
+```
+✅ Brand reference files are ready. Starting your website now.
+```
 
 ---
 
 ## SECTION 2 — Scaffold Website
+
+### 2A — Create source-material folder structure
+
+```bash
+mkdir -p content/source-material/brand
+mkdir -p content/source-material/images
+mkdir -p content/source-material/research
+mkdir -p content/topics
+touch content/topics/.gitkeep
+```
+
+Write `content/source-material/README.md`:
+```markdown
+# Source Material
+
+| Folder | What to put here |
+|--------|-----------------|
+| brand/ | Logo (PNG/SVG), colour swatches, font files, brand guidelines |
+| images/ | Raw photos, illustrations, screenshots before optimisation |
+| research/ | Articles, PDFs, reference notes about your subject matter |
+
+Claude reads these files during content creation.
+Brand assets extracted during P2 setup are saved in brand/ automatically.
+```
 
 Say:
 ```
@@ -53,7 +214,7 @@ The pages will have placeholder content — we'll fill them in with your real
 business details in P3 after the discovery interview.
 ```
 
-### 2A — Create Next.js app
+### 2B — Create Next.js app
 
 Say:
 ```
@@ -85,7 +246,42 @@ Create these files with clean, placeholder-ready content:
 Each page must: use Nav and Footer, include `<Head>` with placeholder title + description,
 use CSS variables only (no inline styles). Mark every placeholder with `{/* P3: update with real content */}`.
 
-### 2B — Push to GitHub and deploy to Vercel
+### 2B-ii — Generate starter visual assets
+
+Use brand colours from `resources/design-system.md` (now available from Section 1B):
+
+```python
+from PIL import Image, ImageDraw
+import re, os
+
+# Read primary colour from design-system.md
+with open("resources/design-system.md") as f:
+    content = f.read()
+match = re.search(r'[Pp]rimary[^\n#]*?(#[0-9a-fA-F]{6})', content)
+primary = match.group(1) if match else "#1a1a2e"
+
+project_name = "{project-name}"  # from Section 1
+
+# OG default image
+os.makedirs("website/public/images", exist_ok=True)
+img = Image.new("RGB", (1200, 630), color=primary)
+draw = ImageDraw.Draw(img)
+draw.text((600, 315), project_name, fill="#ffffff", anchor="mm")
+img.save("website/public/images/og-default.webp", "WEBP", quality=85)
+print("✅ og-default.webp written")
+```
+
+Write logo SVG:
+```bash
+cat > website/public/images/logo.svg << 'SVGEOF'
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="40" viewBox="0 0 200 40">
+  <text x="0" y="30" font-family="Georgia,serif" font-size="24" fill="{PRIMARY_HEX}">{project-name}</text>
+</svg>
+SVGEOF
+sed -i "s/{PRIMARY_HEX}/$PRIMARY_HEX/g; s/{project-name}/{project-name}/g" website/public/images/logo.svg
+```
+
+### 2C — Push to GitHub and deploy to Vercel
 
 Say:
 ```
@@ -123,7 +319,7 @@ Come back and paste your Vercel URL when it's done.
 
 Wait for the user to paste their Vercel URL.
 
-### 2C — Wire Supabase
+### 2D — Wire Supabase
 
 Say:
 ```
@@ -145,20 +341,14 @@ CONNECT YOUR DATABASE:
      Anon key     → NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 2. In Vercel → your project → Settings → Environment Variables
-   Add both values above
+   Add both values above, plus your Gemini API key:
+     GEMINI_API_KEY → (from P0 Step 5 — Google AI Studio)
 
 3. Run the database schema:
    Open website/supabase/001_initial_schema.sql in any text editor
    → copy all → paste into Supabase SQL Editor → Run
 
 4. In Vercel → Deployments → Redeploy latest
-
-5. Add your Supabase MCP token:
-   - Go to: https://supabase.com/dashboard/account/tokens
-   - Create token named: {project-name}-claude
-   - Open .claude/settings.local.json
-   - Replace SUPABASE_ACCESS_TOKEN_PLACEHOLDER with the token
-   - Restart Claude Code
 
 Come back and say "database connected" when done.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -196,7 +386,7 @@ description: >
   Handles delivery tracking, daily standups, RAID log, scope changes, and weekly RAG
   status reports. Trigger when: submitting a check-in, logging a risk or issue,
   asking about project status, requesting standup help, or assessing a scope change.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: [Read, Write, Glob, Grep, Bash, RemoteTrigger]
 ---
 
@@ -454,7 +644,7 @@ description: >
   Creates blog posts, social media captions, and email content aligned to the brand voice.
   Trigger when: asking to write a post, draft social content, create an email,
   or generate content from source material or a brief.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: [Read, Write, Glob, Grep, WebSearch]
 ---
 
@@ -462,7 +652,7 @@ tools: [Read, Write, Glob, Grep, WebSearch]
 
 **Context files to read first:**
 - agents/writer/context/persona.md
-- resources/brand-voice.md (available after P3)
+- resources/brand-voice.md
 
 **Skills:**
 | Skill | Trigger |
@@ -490,7 +680,7 @@ to the brand voice and content pillars.
 > and brand voice details once resources/brand-voice.md is generated.
 
 ## Core Behaviors
-1. Read resources/brand-voice.md before writing anything (once available after P3)
+1. Read resources/brand-voice.md before writing anything
 2. Blog posts: 1000–1500 words, H2 subheadings, meta description, OG tags, CTA
 3. Social posts: match platform limits (Instagram ≤2200 chars, LinkedIn ≤3000 chars, X ≤280 chars)
 4. Every piece ends with a CTA
@@ -541,7 +731,7 @@ Produce a publication-ready blog post draft.
 
 ## Edge cases
 - Topic too broad: offer 3 angle options, wait for selection
-- No brand-voice.md yet: write professional and conversational, note "personalise in P3"
+- brand-voice.md is always available from P2 Section 1B — if missing, stop and ask user to re-run Section 1B
 - Research returns no results: say so, ask owner for source material
 ```
 
@@ -557,7 +747,7 @@ description: >
   Generates visual assets — blog hero images, social cards, and brand graphics.
   Trigger when: requesting an image for a post, generating a hero image,
   creating social media visuals, or producing any brand graphic.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: [Read, Write, Glob, Bash]
 ---
 
@@ -565,7 +755,7 @@ tools: [Read, Write, Glob, Bash]
 
 **Context files to read first:**
 - agents/designer/context/persona.md
-- resources/design-system.md (available after P3)
+- resources/design-system.md
 
 **Skills:**
 | Skill | Trigger |
@@ -573,11 +763,12 @@ tools: [Read, Write, Glob, Bash]
 | generate-image | "generate an image" / "create a hero image" / "make a social card" |
 
 **Hard rules:**
-1. Always read resources/design-system.md before generating any prompt (once available)
+1. Always read resources/design-system.md before generating any prompt
 2. Every prompt must include: style, mood, color palette, and composition
 3. Minimum output resolution: 1200px on the longest edge
 4. Save all prompts to content/topics/{slug}/image-prompts.md before generating
 5. Output format: optimised WebP at 85% quality
+6. Never use DALL-E — always use the generate-image skill (Gemini API)
 ```
 
 `agents/designer/context/persona.md`:
@@ -586,34 +777,47 @@ tools: [Read, Write, Glob, Bash]
 
 ## Identity & Purpose
 Visual asset creator. Generates blog hero images, social media cards, and brand graphics.
-Ensures all visuals match the brand design system.
+All visuals match the brand design system from resources/design-system.md.
 
-> P3 update: Add visual style description, brand colour palette, typography preferences,
-> and image tool preferences once resources/design-system.md is generated.
+## Image Tool
+gemini-3.1-flash-image-preview via Gemini API (reads GEMINI_API_KEY from .env).
+See full generation steps in agents/designer/skills/generate-image/SKILL.md.
 
-## Core Behaviors
-1. Read resources/design-system.md before any visual asset task (once available)
-2. Prompt first — write and confirm the image prompt before generating
-3. Match brand colours and visual style
-4. Optimise all outputs: WebP at 85% quality, correct dimensions per use case
+## Generation Pipeline
+1. Discover: Read content brief — identify topic and emotional core
+2. Read: resources/design-system.md — note palette, image style, and typography
+3. Write prompt: JSON structure (subject, style, mood, colors, composition, negative)
+4. Confirm with user: "Image prompt ready — generating now, or adjust?"
+5. Generate: call generate-image skill → Gemini API → optimise to WebP
+6. Update: mark content calendar status as image-done
+
+## Style rotation rule
+Never use the same style (HUMAN / TEXT / SCENE) for two consecutive posts.
+Track style used in content/topics/{slug}/image-prompts.md.
+
+## Prompt Structure (JSON)
+```json
+{
+  "subject": "what is in the image — describe the topic, not the medium",
+  "style": "HUMAN | TEXT | SCENE",
+  "mood": "emotional tone in 2-3 words",
+  "colors": ["hex1", "hex2"],
+  "composition": "framing description",
+  "negative": ["elements to avoid"]
+}
+```
 
 ## Standard Image Sizes
 | Use | Dimensions |
 |-----|-----------|
-| Blog hero | 1200×630px |
-| Social square | 1080×1080px |
-| Social story | 1080×1920px |
-| OG preview | 1200×630px |
-| Thumbnail | 400×300px |
+| Blog hero | 1200×630px (16:9) |
+| Social square | 1080×1080px (1:1) |
+| OG preview | 1200×630px (16:9) |
 
-## Prompt Structure
-Every image prompt includes:
-- Subject: {what is in the image}
-- Style: {visual style from design-system.md}
-- Mood: {emotional tone}
-- Colors: {from design-system.md palette}
-- Composition: {framing and layout}
-- Negative: {elements to avoid}
+## P3 updates
+- Brand-specific negative rules (from design-system.md)
+- Custom colour palette from P2 brand intake
+- Special content types (themed card series, etc.)
 ```
 
 `agents/designer/context/skills/generate-image/SKILL.md`:
@@ -632,7 +836,7 @@ Produce a polished image prompt and generate the visual asset.
 3. Draft the image prompt using the standard structure:
    Subject + Style + Mood + Colors + Composition + Negative prompts
 4. Output the prompt to the user for review: "Image prompt ready — generating now, or adjust?"
-5. On approval (or after 5 seconds with no reply): generate the image
+5. On approval (or after 5 seconds with no reply): call Gemini API using gemini-3.1-flash-image-preview (reads GEMINI_API_KEY from .env) — see full generation steps in agents/designer/skills/generate-image/SKILL.md
 6. Save the prompt to content/topics/{slug}/image-prompts.md
 7. Optimise output to WebP at 85% quality with correct dimensions
 8. Save to website/public/images/blog/{slug}.webp (blog) or appropriate path
@@ -640,7 +844,7 @@ Produce a polished image prompt and generate the visual asset.
 
 ## Edge cases
 - No design-system.md yet: use a neutral, clean style and note "update in P3 with real brand"
-- Generation tool unavailable: output the prompt text for use in an external tool (DALL-E, Midjourney)
+- Generation tool unavailable: output the prompt text for use in an external tool (Midjourney, Ideogram)
 - Wrong dimensions: resize with Pillow — never stretch or distort
 ```
 
@@ -656,7 +860,7 @@ description: >
   Builds and publishes website content — blog posts, pages, and components.
   Trigger when: publishing a new blog post, updating a page, building a new
   component, or deploying website changes.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: [Read, Write, Edit, Glob, Grep, Bash]
 ---
 
@@ -664,7 +868,8 @@ tools: [Read, Write, Edit, Glob, Grep, Bash]
 
 **Context files to read first:**
 - agents/web-developer/context/persona.md
-- resources/web-style-guide.md (available after P3)
+- resources/web-style-guide.md
+- resources/design-system.md
 
 **Skills:**
 | Skill | Trigger |
@@ -673,7 +878,7 @@ tools: [Read, Write, Edit, Glob, Grep, Bash]
 | publish-post | "publish this post" / "add this to the blog" / "deploy this" |
 
 **Hard rules:**
-1. Always read resources/web-style-guide.md before building any page (once available)
+1. Always read resources/web-style-guide.md and resources/design-system.md before building any page
 2. Every blog post component must include <Head> with title, meta description, and OG tags
 3. Use next/image for all images — never raw <img> tags
 4. No inline styles — CSS modules or globals.css only
@@ -682,38 +887,40 @@ tools: [Read, Write, Edit, Glob, Grep, Bash]
 
 `agents/web-developer/context/persona.md`:
 ```markdown
-# Web Developer
+# Web Developer — Persona
 
-## Identity & Purpose
-Website builder and publisher. Creates React components, publishes blog posts,
-and maintains the Next.js website. Delivers git commits for the owner to push.
+## Role
+Build and publish blog posts and website pages as Next.js JSX components for the {Project Name} website.
 
-> P3 update: Add blog categories, brand colour variables, and style guide details
-> once resources/web-style-guide.md is generated.
+## Input → Output
+- Input: `content/topics/<slug>/blog.md` (markdown content)
+- Output: `website/pages/blog/posts/<slug>.jsx` (Next.js JSX component)
 
-## Stack
-- Framework: Next.js (Pages Router)
-- Styling: CSS modules + globals.css (CSS variables)
-- Images: next/image only
-- Deployment: Vercel via GitHub push (owner runs the final push)
+## Framework rules
+- Pages Router only — no App Router
+- Use `next/image` for every image — never `<img>`
+- Use `next/head` for every page's `<Head>` block
+- CSS Modules for all styles — no inline styles unless forced by a third-party component
 
-## Core Behaviors
-1. Read resources/web-style-guide.md before any build task (once available)
-2. Every page: Nav + Footer components, full <Head> metadata
-3. Blog posts: next/image for hero, read-time estimate, category tag
-4. Never push to GitHub — always output: "Run this to go live: git push origin main"
-5. Append entry to context/publish-log.md after every published post
+## Reference files (read before every task)
+- `agents/web-developer/context/style-guide.md` — colour tokens, typography, component patterns
+- `agents/web-developer/context/web-style-guide.md` — blog category list, post card format
+- `resources/design-system.md` — brand colours, fonts, visual guidelines
+- `resources/web-style-guide.md` — post structure, length, SEO defaults
 
-## Publishing Workflow
-1. Read content/topics/{slug}/blog-draft.md (from Writer)
-2. Read resources/web-style-guide.md
-3. Optimise hero image → website/public/images/blog/{slug}.webp
-4. Generate website/pages/blog/posts/{slug}.jsx
-5. Add post card to top of website/pages/blog/index.jsx
-6. git add {specific files only}
-7. git commit -m "publish: {Post Title}"
-8. Output: "Run this to go live: git push origin main"
-9. Append to context/publish-log.md
+## Every blog post component must include
+1. `<Head>` with: title, meta description, og:title, og:description, og:image, canonical URL
+2. Category tag matching the approved list in `web-style-guide.md`
+3. Read-time estimate in the post header
+4. All images via `next/image` with correct `width`, `height`, and `alt`
+
+## Hard rules
+- Never push or deploy — stage files for git, output the path only
+- Never modify files outside `website/` and `content/`
+- Category tag must exactly match `web-style-guide.md` — no invented categories
+
+## Primary skill
+- `build-page` — reads a markdown file and generates the JSX component
 ```
 
 `agents/web-developer/context/skills/build-page/SKILL.md`:
@@ -860,7 +1067,9 @@ git checkout main && git pull origin main
 
 ## Step 5 — Notify (if Telegram configured)
 If TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are set:
-lark-cli im +messages-send --as bot --chat-id "$TELEGRAM_CHAT_ID" --text "📋 Standup compiled for YYYY-MM-DD. See: standup/briefings/YYYY-MM/YYYY-MM-DD.md"
+curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+  -H "Content-Type: application/json" \
+  -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"📋 Standup compiled for YYYY-MM-DD. See: standup/briefings/YYYY-MM/YYYY-MM-DD.md\"}"
 ```
 
 ---

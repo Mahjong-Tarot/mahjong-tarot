@@ -768,7 +768,6 @@ tools: [Read, Write, Glob, Bash]
 3. Minimum output resolution: 1200px on the longest edge
 4. Save all prompts to content/topics/{slug}/image-prompts.md before generating
 5. Output format: optimised WebP at 85% quality
-6. Never use DALL-E — always use the generate-image skill (Gemini API)
 ```
 
 `agents/designer/context/persona.md`:

@@ -332,7 +332,64 @@ content/topics/<friday-slug>/
 
 ---
 
-## Step 7: Update the Topic Index
+## Step 7: Write `image-prompts.json` for every topic
+
+You own the creative brief for images — not the designer. You've just written every word of the blog and social posts, so you know the emotional core, the specific phrases, and the scenes better than anyone. Write one image prompt per content file (skip `seo-*.md`) and save them as `content/topics/<folder>/image-prompts.json`.
+
+### 7a. Read the designer's style guide
+
+Read `agents/designer/context/style-guide.md` in full. It defines:
+- Brand palette (plain English color names to cite in prompts)
+- Image style categories (HUMAN / TEXT / SCENE) — mix styles, never repeat within one topic
+- Non-negotiables (no text *in* images, no generic stock, women don't face camera directly)
+
+### 7b. Extract the visual brief from your own writing
+
+For each topic, write down (in your head or scratch):
+- **What the post is actually about** — the real-world topic (weddings, career change, finances) — not "mahjong"
+- **3–5 short phrases** from your blog that are card-worthy text lines (punchy, quotable, perfect English). These get used as the `text` field for TEXT-style images. Examples: "Know yourself first." / "Balance over heat."
+- **3–4 scenes of real people doing the topic** — a bride fixing her veil, a woman at a cafe opening a financial app, a man staring at his email inbox. These feed HUMAN-style prompts.
+
+### 7c. Assign a style to each file and write the prompt
+
+For each content file in the topic, pick ONE `image_style` (HUMAN / TEXT / SCENE) such that no two files in the same topic share a style. Aspect ratios:
+- `blog-*` and `*-facebook-*` → 16:9 (1200×630)
+- `*-instagram*` → 1:1 (1080×1080)
+
+**Mahjong Mirror cards — Wednesday only.** The Mahjong Mirror deck lives in `agents/designer/context/mahjong-cards/` (Guardian, Honor, Suit categories). You may reference a card ONLY in `wed-*.md` files, and only when the blog naturally references it. Never force cards into Monday/Tuesday/Thursday/Friday imagery.
+
+**Every prompt must end with:** `No watermarks or Western zodiac imagery anywhere in the image.`
+
+### 7d. Save the JSON
+
+Save to `content/topics/<folder>/image-prompts.json` with this structure:
+
+```json
+{
+  "topic": "<what the post is actually about — one sentence>",
+  "phrases": ["<phrase 1>", "<phrase 2>", "..."],
+  "images": [
+    {
+      "file": "<content-file.md>",
+      "slug": "<url-slug from the blog frontmatter>",
+      "content_type": "<filename without .md>",
+      "concept": "<what this image shows and why>",
+      "image_style": "HUMAN | TEXT | SCENE",
+      "text": "<exact phrase — only for TEXT style, omit otherwise>",
+      "card": "<card name and category — only for Wednesday card references, omit otherwise>",
+      "aspect_ratio": "16:9 | 1:1",
+      "dimensions": "1200x630 | 1080x1080",
+      "prompt": "<full prompt>"
+    }
+  ]
+}
+```
+
+The designer will read this file, validate it, and call the Gemini API to generate images. The designer will NOT rewrite your prompts — they're yours.
+
+---
+
+## Step 8: Update the Topic Index
 
 Add a row for each blog post to the SEO table in `content/topics/INDEX.md`. Group by week. Each row contains:
 
@@ -344,17 +401,17 @@ Pull these values directly from the SEO guide files you wrote in earlier steps.
 
 ---
 
-## Step 8: Update the Content Calendar Status
+## Step 9: Update the Content Calendar Status
 
 In `content/content-calendar/content-calendar.md`, append `— STATUS: WRITTEN` to each topic line for the week you just processed. For example:
 
 ```
-**Topic: some-topic-slug** — STATUS: WRITTEN
+**Topic: some-topic-folder** — STATUS: WRITTEN
 ```
 
 ---
 
-## Step 9: Notify and confirm
+## Step 10: Notify and confirm
 
 Send notifications to the Labs Lark group and all members via email, then report back.
 
@@ -370,7 +427,7 @@ LARK_MSG="✍️ Writer done — Week of <monday-date>
 • <fire-horse-title>
 • <mahjong-mirror-title>
 • <feel-good-friday-title>
-Review blog posts in content/topics/ before designer generates images."
+Review blog posts and image-prompts.json in content/topics/ before designer generates images."
 
 EMAIL_SUBJECT="[Writer] Done — Week of <monday-date>"
 EMAIL_BODY="Writer has completed all content for the week of <monday-date>.
@@ -380,8 +437,8 @@ Posts written:
 • <mahjong-mirror-title>  →  content/topics/<wednesday-slug>/blog-mahjong-mirror.md
 • <feel-good-friday-title>  →  content/topics/<friday-slug>/blog-feel-good-friday.md
 
-Review each blog post. The designer will generate image-prompts.md and images next.
-If you want to adjust the content before images are generated, edit the blog files now."
+Review each blog post and each image-prompts.json. The designer will generate images from those prompts next.
+If you want to adjust the content or prompts before images are generated, edit the files now."
 
 lark-cli im +messages-send --chat-id "$LABS_CHAT" --as bot --text "$LARK_MSG" 2>/dev/null || true
 

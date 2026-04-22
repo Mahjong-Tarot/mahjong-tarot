@@ -131,17 +131,18 @@ Every Tuesday, the writer agent:
 
 ### 5. Image Designer Runs After Writing
 
-Once a topic is marked `STATUS: WRITTEN`, the image designer agent can be invoked (`@image-designer`). It:
+The writer has already authored `image-prompts.json` for every topic (as the final step of writing). The designer's job is generation, not authorship. Once a topic is marked `STATUS: WRITTEN`, the designer:
 
 1. Reads the content calendar and finds all WRITTEN topics
-2. Plans unique images for every content file (excluding SEO) — writes prompts to `content/topics/<slug>/image-prompts.md`
-3. Generates all images in parallel using the Gemini API
-4. Saves images to `content/topics/<slug>/` — one unique image per content file
-5. Updates the content calendar status from `WRITTEN` → `DESIGNED`
+2. Loads `content/topics/<folder>/image-prompts.json` for each — if missing, stops and flags that the writer must be rerun
+3. Validates prompts against `agents/designer/context/style-guide.md` (field structure, aspect ratios, style mix, style-guide compliance) and patches structural issues in place
+4. Generates all images in parallel using the Gemini API from the writer's prompts
+5. Saves images to `content/topics/<folder>/` — one unique image per content file
+6. Updates the content calendar status from `WRITTEN` → `DESIGNED`
 
 **Weekly target:** 18 unique images (3 topics × ~6 content files each). Every image is visually distinct — no duplicates, no sharing between posts.
 
-The image designer never publishes. Images sit in the topic folder for human review.
+The designer never publishes and never rewrites creative prompts. Images sit in the topic folder for human review.
 
 ### 6. Human Review (Wed–Sat)
 

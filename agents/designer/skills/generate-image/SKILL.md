@@ -60,7 +60,7 @@ Read `content/topics/<folder>/image-prompts.json`. If the file does not exist, S
 Read `agents/designer/context/style-guide.md` as reference, then scan each entry:
 
 - Every entry has `image_style` (HUMAN / TEXT / SCENE), `aspect_ratio`, `dimensions`, `prompt`
-- Styles are mixed within the topic — flag if 3+ entries share a style
+- Styles are mixed within the topic — flag if 3+ entries share a style (does not apply to the FGF card pair described below)
 - Aspect ratios match the file type:
 
 | Content type | Aspect | Target dimensions | Max KB |
@@ -68,10 +68,12 @@ Read `agents/designer/context/style-guide.md` as reference, then scan each entry
 | `blog-*` | 16:9 | 1200×630 | 200 |
 | `*-facebook-*` | 16:9 | 1200×630 | 200 |
 | `*-instagram` | 1:1 | 1080×1080 | 150 |
+| `card` / `card-vn` | 1:1 | 1080×1080 | 150 |
 
 - Facebook EN and Facebook VN share one image — expect one prompt covering both
 - Every `prompt` ends with `No watermarks or Western zodiac imagery anywhere in the image.` — append it to any prompt that's missing it
-- `card` field appears only on `wed-*.md` entries — flag violations
+- **Feel Good Friday affirmation cards.** Every folder matching `YYYY-MM-DD-feel-good-<topic>` MUST include two TEXT-style entries with `content_type: card` (English) and `content_type: card-vn` (Vietnamese). Both use the Journal Page style (antique inked calligraphy on aged cream paper). Output filenames: `<url-slug>-card.png` and `<url-slug>-card-vn.png`. If either is missing from a FGF folder, STOP and flag — do not fabricate the prompt yourself. This is distinct from the Mahjong Mirror `card` field (a reference to a specific deck tile on Wednesday posts), which is a different concept: the Wednesday field is literally spelled `"card": "<card name>"` inside an entry, not `content_type: card`.
+- Mahjong Mirror deck `card` *field* appears only on `wed-*.md` entries — flag violations (still applies to Wednesday entries only; unrelated to FGF card content_type above)
 
 ### 2c. Patch or flag
 

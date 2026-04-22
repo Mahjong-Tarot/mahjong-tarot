@@ -322,13 +322,15 @@ content/topics/<wednesday-slug>/
 
 **Friday topic folder (Feel Good Friday):**
 ```
-content/topics/<friday-slug>/
+content/topics/<friday-folder>/
 ├── blog-feel-good-friday.md
 ├── seo-feel-good-friday.md
 ├── fri-facebook-en.md
 ├── fri-facebook-vn.md
 └── fri-instagram.md
 ```
+
+The designer will produce images for all files above PLUS two affirmation cards required by Step 7d: `<url-slug>-card.png` (English) and `<url-slug>-card-vn.png` (Vietnamese). Include the `card` and `card-vn` entries in `image-prompts.json`.
 
 ---
 
@@ -360,7 +362,33 @@ For each content file in the topic, pick ONE `image_style` (HUMAN / TEXT / SCENE
 
 **Every prompt must end with:** `No watermarks or Western zodiac imagery anywhere in the image.`
 
-### 7d. Save the JSON
+### 7d. Feel Good Friday — ALWAYS add two affirmation cards
+
+Every Feel Good Friday topic (folder `YYYY-MM-DD-feel-good-<topic>`) gets TWO extra TEXT-style entries in `image-prompts.json`, in addition to the normal blog/social image prompts:
+
+1. **English affirmation card**
+   - `file`: `card` (logical name; the designer outputs `<url-slug>-card.png`)
+   - `content_type`: `card`
+   - `image_style`: `TEXT`
+   - `aspect_ratio`: `1:1`, `dimensions`: `1080x1080`
+   - `text`: pick ONE phrase from the topic's `phrases` array — the most quotable, emotionally decisive line. 6–12 words max. Must end with a period or period-then-period (fragment is fine).
+
+2. **Vietnamese affirmation card**
+   - `file`: `card-vn`
+   - `content_type`: `card-vn`
+   - `image_style`: `TEXT`
+   - `aspect_ratio`: `1:1`, `dimensions`: `1080x1080`
+   - `text`: a NATURAL Vietnamese translation of the English affirmation (not word-for-word — adapt idioms so it lands as a card). Preserve diacritics (ă, â, ê, ô, ơ, ư, đ, and tone marks) exactly.
+
+**Style — always Journal Page.** Both cards use the same antique-inked-calligraphy-on-aged-paper template. Paste the full template below into the `prompt` field, substituting the exact phrase into the quoted text and adjusting only the opening sentence to describe the phrase briefly if needed.
+
+```
+A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture — subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: "<EXACT AFFIRMATION HERE>". Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant — modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image.
+```
+
+The two card entries are REQUIRED for every Feel Good Friday topic. Monday and Wednesday topics do not get card entries.
+
+### 7e. Save the JSON
 
 Save to `content/topics/<folder>/image-prompts.json` with this structure:
 

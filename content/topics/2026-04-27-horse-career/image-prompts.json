@@ -1,36 +1,62 @@
 {
-  "slug": "fire-horse-will-blow-up-your-career",
-  "topic": "Fire Horse Career — Shock and Awe",
+  "topic": "The Fire Horse year will disrupt careers whether you choose to act or not — the only question is which direction. Historical pattern from 1906 and 1966: the proactive thrive, the passive get burned.",
+  "phrases": [
+    "Passive is not a defense.",
+    "Which direction do you want it to go?",
+    "The year accelerates everything.",
+    "Autopilot gets torched."
+  ],
   "images": [
     {
-      "file": "blog-fire-horse",
-      "format": "1200x630",
-      "use": "Blog hero image",
-      "prompt": "A powerful horse in motion, captured in dynamic low-angle photography or dramatic digital illustration. Deep amber, red, and gold tones. The horse moves through the frame with intense forward energy — mane flying, hooves striking. The background suggests historical layering: faint silhouettes of city skylines from different eras. Mood is epic, transformative, slightly ominous but ultimately powerful. No text overlay. Cinematic composition."
+      "file": "blog-fire-horse.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "blog-fire-horse",
+      "concept": "An image representing the volatile force of disruption in a career landscape — a busy intersection in a major city photographed from above at dusk, with motion blur on the traffic. The city grid is both ordered and chaotic. People below are tiny but clearly in motion. The scale contrast — vast city system versus individual human movement — captures the historical and systemic disruption the post describes.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A bird's-eye-view photograph of a major city intersection at dusk, shot from directly above. Traffic moves in all directions, creating light trails from motion blur — amber headlights and red taillights streak across dark asphalt. The city grid extends to the edges of the frame. A few pedestrians are visible as small figures on the crosswalks. The mood is kinetic, vast, unstoppable. Deep indigo sky at the edges of the frame. Warm amber and red light trails. The scale makes the individual figures feel both small and significant. No text, no faces clearly visible. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "mon-facebook-en",
-      "format": "1200x630",
-      "use": "Monday Facebook EN",
-      "prompt": "Abstract visualization of career dimensions — seven glowing pathways or threads converging at a central point, set against a deep navy or dark red background. The threads pulse with warm amber and gold light. One thread burns brighter than the others. No people, no text. Evokes the idea of multiple career dimensions being illuminated simultaneously. Sophisticated, not cartoonish."
+      "file": "mon-facebook-en.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "mon-facebook-en",
+      "concept": "A bold text-background image for the phrase 'Autopilot gets torched.' — a dramatic, atmospheric background suggesting the disruption of comfortable stasis, designed to carry the text overlay in post-production.",
+      "image_style": "TEXT",
+      "text": "Autopilot gets torched.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "An abstract atmospheric background in deep plum and midnight jade, with streaks of warm amber and deep red moving diagonally across the frame — like heat distortion or a long-exposure blaze photographed from a distance. The texture is painterly and cinematic. The palette is dark with bursts of warm amber-orange. No text, no people, no symbols, no fire shapes, no literal flames. The mood is disruption, acceleration, transformation. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "mon-instagram",
-      "format": "1080x1080",
-      "use": "Monday Instagram",
-      "prompt": "Close-up of flames photographed from above — deep reds, golds, and amber, with the center of the flame brightest. Long-exposure or artistic blurring gives a sense of motion and power. Abstract but recognizable as fire. Square format. No text, no people. The image should feel like energy in motion — transformative rather than destructive."
+      "file": "mon-instagram.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "mon-instagram",
+      "concept": "A close-up of a man from behind, in a crowded professional environment — a hallway or open-plan office — walking toward a bright doorway at the end. Everyone else is static; he is the one in motion. The contrast between movement and stasis is the visual thesis of the post.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A man in professional clothing seen from behind, walking briskly down a corridor or open-plan office space. At the far end, a bright doorway or large window floods the frame with warm amber light. Other figures in the background are stationary, blurred — suggesting they are paused or static. He is the one moving. The motion blur is subtle but present on him. Square format. The palette is: dark neutral tones in the foreground, warm amber glow at the end. The mood is forward momentum — one person chosen to move while others wait. No faces visible. No text. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "tue-facebook-en",
-      "format": "1200x630",
-      "use": "Tuesday Facebook EN",
-      "prompt": "A person sits at a desk in an office environment, photographed from behind, looking slightly uncomfortable or uncertain. The lighting around them is flat and artificial (fluorescent, gray-beige walls) — the visual language of 'fine' and 'comfortable autopilot.' Through the window behind them, dramatic warm sunlight is visible — the world outside is moving. Contrast between stillness inside and movement outside. No faces visible. No text."
+      "file": "tue-facebook-en.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "tue-facebook-en",
+      "concept": "Two contrasting environments side by side: a stagnant, artificially lit office cubicle on the left and an energetic outdoor scene with open sky and movement on the right. The split frame captures passive versus active — the comfortable trap versus the volatile opportunity.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A split-composition image. The left half shows a corporate office interior — flat fluorescent light, gray partition walls, a still desk chair. The colors are muted, cool, institutional. The right half shows an outdoor scene in warm golden hour light — an open urban street or plaza with people moving in the distance, dynamic energy. The divide between the two halves is sharp and architectural, like a wall or doorframe. The contrast is sharp: static vs. kinetic, artificial vs. natural, trapped vs. open. No text, no readable faces. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "tue-instagram",
-      "format": "1080x1080",
-      "use": "Tuesday Instagram",
-      "prompt": "A horse in full gallop, shot from the side at low angle. Motion blur on the legs and mane. Warm reddish-gold tones with dust or fire energy around the hooves. The background is slightly abstract — suggests open terrain or historical transition. Square crop. No text, no people. The horse should feel unstoppable — pure forward momentum."
+      "file": "tue-instagram.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "tue-instagram",
+      "concept": "An old newspaper front page from 1966 — period typography, dramatic headline, photo of a crowd or city street in motion. The image evokes the historical disruption the post documents without being literal.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A crumpled, aged newspaper spread on a worn surface, photographed at a slight angle with warm amber side-lighting. The newspaper is period-appropriate — mid-1960s broadsheet format with bold column rules and photographic halftones. The front page image shows a crowd in a city street, mid-movement — a moment of visible energy and change. No readable text or real headlines — the typography is impressionistic, not legible. The paper is yellowed and textured. Square format. The mood is historical weight, the record of transformation. Warm sepia and amber tones. No watermarks or Western zodiac imagery anywhere in the image."
     }
   ]
 }

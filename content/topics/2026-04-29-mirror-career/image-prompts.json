@@ -1,36 +1,63 @@
 {
-  "slug": "the-decision-framework-for-career-crossroads",
-  "topic": "Mahjong Mirror Career Decision Framework",
+  "topic": "Applying the four-angle Mahjong Mirror framework to career decisions at a crossroads — especially the Third Angle: naming what really opposes you, and finding the resolution within the obstacle.",
+  "phrases": [
+    "Name the opposition before it names you.",
+    "The breakthrough hides in the third angle.",
+    "What is this really about?",
+    "The fog lifts when you look harder."
+  ],
   "images": [
     {
-      "file": "blog-mahjong-mirror",
-      "format": "1200x630",
-      "use": "Blog hero image",
-      "prompt": "A Mahjong tile spread laid out on a dark wood table in the classic reading formation — four positions arranged around a central tile. The West position tiles are slightly illuminated differently from the others, drawing the eye. A notebook with handwritten notes partially visible at the edge. Warm, low candlelight. Contemplative, decisive atmosphere. No people. No text overlay. The image should evoke the moment of examining a career decision from multiple angles."
+      "file": "blog-mahjong-mirror.md",
+      "slug": "the-decision-framework-for-career-crossroads",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A woman at a literal crossroads moment — standing at a fork in a path in an urban or architectural setting, seen from behind. Two directions open before her. She is still, considering. The composition captures the weight of a genuine choice: not panic, not paralysis — deliberation.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman in her late 30s stands at the junction of two hallways or paths in a modern architectural space, seen from directly behind. Both directions lead to warm, amber-lit spaces — neither dark, neither wrong, simply different. Her posture is still, upright, one hand touching the wall at her side. She is considering, not panicking. The space has clean architecture — concrete, warm light, depth. Her clothing is dark and professional. Cinematic depth of field. The two paths stretch symmetrically into the background. No text, no face visible. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "wed-facebook-en",
-      "format": "1200x630",
-      "use": "Wednesday Facebook EN",
-      "prompt": "Four small mirrors arranged at different angles on a dark surface, each reflecting a slightly different source of warm light. The arrangement suggests looking at the same subject from four different directions simultaneously. Abstract but meaningful. Deep navy or charcoal background. Warm amber and gold reflections. No text, no people. Mood: clarity, depth, multiple perspectives."
+      "file": "wed-facebook-en.md",
+      "slug": "the-decision-framework-for-career-crossroads",
+      "content_type": "wed-facebook-en",
+      "concept": "A card from the Mahjong Mirror deck — the Sword suit card, representing what stands between you and your goal and the clarity to cut through it. The Third Angle of the framework is about naming the opposition, and the Sword card carries that meaning directly.",
+      "image_style": "SCENE",
+      "card": "Sword (Suit card)",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A single ornate playing card resting on a dark polished surface, slightly angled. The card is illustrated in an antique East Asian style — it depicts a single elegant sword oriented vertically, rendered in antique gold and silver ink on aged parchment-toned card stock. The card catches warm directional light from one side, giving it depth and texture. The background is very dark midnight jade. The composition is wide, minimal, with the card off-center. No legible characters or text on the card. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "wed-instagram",
-      "format": "1080x1080",
-      "use": "Wednesday Instagram",
-      "prompt": "Overhead view of four Mahjong tiles arranged in cardinal directions (North, South, East, West) on a dark lacquered surface. A compass rose or subtle directional lines suggest the four angles of a mirror. Warm side-lighting. Square format. The image should feel architectural and intentional — a decision framework made visual. No text, no people."
+      "file": "wed-instagram.md",
+      "slug": "the-decision-framework-for-career-crossroads",
+      "content_type": "wed-instagram",
+      "concept": "A bold text-background image for the phrase 'Name the opposition before it names you.' — a textured background with dramatic directional contrast, designed to carry the text overlay in post-production.",
+      "image_style": "TEXT",
+      "text": "Name the opposition before it names you.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A richly textured square background in deep midnight jade, with a strong diagonal shaft of warm amber light cutting from upper-left to lower-right across the frame — like a sword of light through darkness. The texture is rough and organic, like aged stone or bark. The light shaft is crisp and directional, not diffuse. The contrast between the dark field and the light shaft is dramatic. No text, no people, no symbols. Square format. The mood is clarity cutting through obscurity. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "thu-facebook-en",
-      "format": "1200x630",
-      "use": "Thursday Facebook EN",
-      "prompt": "An open book with handwritten notes on the adjacent notebook page. The book pages are open but text is not legible — impressionistic. A warm desk lamp illuminates the scene. Coffee cup in the background, slightly out of focus. Mood: engaged self-study, the work of clarity. No faces, no text overlay. The image should suggest someone doing the work of examining their own situation."
+      "file": "thu-facebook-en.md",
+      "slug": "the-decision-framework-for-career-crossroads",
+      "content_type": "thu-facebook-en",
+      "concept": "An object still life representing the act of honest self-examination — a mirror lying flat on a desk, reflecting the ceiling or a window above. Beside the mirror, a single piece of paper with a pen resting on it, as if a question has just been written. The mirror shows the reader herself.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A small handheld mirror lies flat on a warm wooden desk, its reflective surface facing up. In the mirror's reflection, a window or warm ceiling light is visible — abstract, luminous. Beside the mirror, a single sheet of cream paper with a pen resting diagonally across it. The paper is blank or has a single handwritten line — not legible. Warm directional morning light from one side. The scene is minimal and intimate. The mood is honest self-examination — quiet, serious, purposeful. Antique gold, warm ivory, and wood-brown tones. No text, no people. No watermarks or Western zodiac imagery anywhere in the image."
     },
     {
-      "file": "thu-instagram",
-      "format": "1080x1080",
-      "use": "Thursday Instagram",
-      "prompt": "Close-up of an open book, warm reading light from one side. The book pages are slightly blurred — the content is impressionistic, not legible. A hand rests near the page, suggesting active engagement with the material. Square format. Warm, amber, intellectual mood. No text overlay. The image should feel like deep reading and reflection."
+      "file": "thu-instagram.md",
+      "slug": "the-decision-framework-for-career-crossroads",
+      "content_type": "thu-instagram",
+      "concept": "A close-up of two hands on a table — one palm open and flat, the other drawing a simple diagram or map with a pen. The act of planning, of mapping a path. The hands are not anxious — they are engaged. Warm, intimate, focused.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Close-up overhead shot of two feminine hands on a warm wooden surface. One hand is flat, palm down, fingers relaxed. The other holds a pen and is drawing — a simple diagram on a piece of cream paper, impressionistic and not legible. The lines suggest a map, a framework, a plan. Warm natural window light from the left. Square composition, centered on the hands and the paper. The mood is engaged, clear-headed, purposeful. Warm ivory, skin tones, and wood tones. No text, no faces. No watermarks or Western zodiac imagery anywhere in the image."
     }
   ]
 }

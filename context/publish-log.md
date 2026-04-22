@@ -1,5 +1,6 @@
 | Date | Title | File | Category |
 |------|-------|------|----------|
+| 2026-04-22 | How to Know If This Is the Year for You to Take a Financial Risk | how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk.jsx | Year of the Fire Horse |
 | 2026-04-20 | Feel Good Friday: The Best Relationship You'll Ever Have Starts in the Mirror | feel-good-friday-love-starts-with-knowing-yourself.jsx | Mahjong and Tarot |
 | 2026-04-20 | The Horse Is the Traveling Star — and It Carries Gold | money-in-the-year-of-the-fire-horse.jsx | Year of the Fire Horse |
 | 2026-04-07 | Home page redesign — new hero, colour fix, square gallery, remove booking CTAs | index.jsx + Home.module.css + globals.css | Site-wide |

@@ -1,0 +1,24 @@
+{
+  "slug": "feel-good-friday-the-horse-rewards-risk-takers",
+  "topic": "Feel Good Friday — The Horse Rewards Risk-Takers",
+  "images": [
+    {
+      "file": "blog-feel-good-friday",
+      "format": "1200x630",
+      "use": "Blog hero image",
+      "prompt": "A woman sits at a bright desk near a large window, warm morning light pouring in. She is writing in an open journal, pen in hand, her posture relaxed and confident rather than anxious. A small stack of papers and a coffee cup are on the desk. The mood is forward-looking, warm, resolved — a moment of decision and clarity. No Mahjong tiles in this image. No text overlay. Natural, documentary style photography aesthetic."
+    },
+    {
+      "file": "fri-facebook-en",
+      "format": "1200x630",
+      "use": "Friday Facebook EN",
+      "prompt": "A journal lies open on a wooden table, sunlight streaming across the pages. A pen rests on the page as though just set down. The words on the page are not legible — impressionistic. A small plant or flower in the background suggests growth and new beginnings. Warm palette: cream, amber, soft green. Optimistic, bright, intentional. No people. No text overlay."
+    },
+    {
+      "file": "fri-instagram",
+      "format": "1080x1080",
+      "use": "Friday Instagram",
+      "prompt": "Close-up of a hand writing in a journal, warm window light behind it. The pen is mid-stroke on a blank-ish page. The hand looks purposeful, not hesitant. Soft focus background showing natural light and a window frame. Square composition. Warm, golden-hour tone. The mood is decisive and peaceful simultaneously. No text overlay. Aspirational but grounded."
+    }
+  ]
+}

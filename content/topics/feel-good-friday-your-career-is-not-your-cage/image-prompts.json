@@ -1,0 +1,24 @@
+{
+  "slug": "feel-good-friday-your-career-is-not-your-cage",
+  "topic": "Feel Good Friday — Your Career Is Not Your Cage",
+  "images": [
+    {
+      "file": "blog-feel-good-friday",
+      "format": "1200x630",
+      "use": "Blog hero image",
+      "prompt": "A woman sits at a bright desk near a large window, early morning light streaming in. She has a journal open and is writing — her posture is open and forward-leaning, not hunched or anxious. The room has a warm, lived-in quality: a plant, a coffee mug, soft light. The sense is of someone in the moment of naming something important. Documentary photography style. No faces visible or face turned away from camera. No text overlay. Warm palette."
+    },
+    {
+      "file": "fri-facebook-en",
+      "format": "1200x630",
+      "use": "Friday Facebook EN",
+      "prompt": "An open birdcage sits on a windowsill — the door is open, and warm morning light pours through the window behind it. The cage is empty, beautiful, old, and ornate, but clearly not confining anything. Outside the window, warm golden light and open sky are visible. The image should feel liberating rather than sad or ominous. No people, no text. Warm, hopeful mood."
+    },
+    {
+      "file": "fri-instagram",
+      "format": "1080x1080",
+      "use": "Friday Instagram",
+      "prompt": "Close-up of a hand writing in a journal, warm morning light spilling across the page. The pen is mid-stroke. The page is partially filled with handwriting — not legible, impressionistic. The scene suggests something significant being written down. Square format. Warm amber and cream tones. The mood is purposeful, intimate, and forward-moving. No text overlay beyond the handwriting impression."
+    }
+  ]
+}

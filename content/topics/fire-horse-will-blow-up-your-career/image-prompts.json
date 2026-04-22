@@ -1,0 +1,36 @@
+{
+  "slug": "fire-horse-will-blow-up-your-career",
+  "topic": "Fire Horse Career — Shock and Awe",
+  "images": [
+    {
+      "file": "blog-fire-horse",
+      "format": "1200x630",
+      "use": "Blog hero image",
+      "prompt": "A powerful horse in motion, captured in dynamic low-angle photography or dramatic digital illustration. Deep amber, red, and gold tones. The horse moves through the frame with intense forward energy — mane flying, hooves striking. The background suggests historical layering: faint silhouettes of city skylines from different eras. Mood is epic, transformative, slightly ominous but ultimately powerful. No text overlay. Cinematic composition."
+    },
+    {
+      "file": "mon-facebook-en",
+      "format": "1200x630",
+      "use": "Monday Facebook EN",
+      "prompt": "Abstract visualization of career dimensions — seven glowing pathways or threads converging at a central point, set against a deep navy or dark red background. The threads pulse with warm amber and gold light. One thread burns brighter than the others. No people, no text. Evokes the idea of multiple career dimensions being illuminated simultaneously. Sophisticated, not cartoonish."
+    },
+    {
+      "file": "mon-instagram",
+      "format": "1080x1080",
+      "use": "Monday Instagram",
+      "prompt": "Close-up of flames photographed from above — deep reds, golds, and amber, with the center of the flame brightest. Long-exposure or artistic blurring gives a sense of motion and power. Abstract but recognizable as fire. Square format. No text, no people. The image should feel like energy in motion — transformative rather than destructive."
+    },
+    {
+      "file": "tue-facebook-en",
+      "format": "1200x630",
+      "use": "Tuesday Facebook EN",
+      "prompt": "A person sits at a desk in an office environment, photographed from behind, looking slightly uncomfortable or uncertain. The lighting around them is flat and artificial (fluorescent, gray-beige walls) — the visual language of 'fine' and 'comfortable autopilot.' Through the window behind them, dramatic warm sunlight is visible — the world outside is moving. Contrast between stillness inside and movement outside. No faces visible. No text."
+    },
+    {
+      "file": "tue-instagram",
+      "format": "1080x1080",
+      "use": "Tuesday Instagram",
+      "prompt": "A horse in full gallop, shot from the side at low angle. Motion blur on the legs and mane. Warm reddish-gold tones with dust or fire energy around the hooves. The background is slightly abstract — suggests open terrain or historical transition. Square crop. No text, no people. The horse should feel unstoppable — pure forward momentum."
+    }
+  ]
+}

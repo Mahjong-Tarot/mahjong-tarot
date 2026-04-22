@@ -42,15 +42,15 @@ Publishes: Friday (blog + social)
 
 ## Week of April 20 — Money
 
-**Topic: money-in-the-year-of-the-fire-horse** — STATUS: PLANNED
+**Topic: money-in-the-year-of-the-fire-horse** — STATUS: WRITTEN
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk** — STATUS: PLANNED
+**Topic: how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer ties back to finding ways to make money in the volatile Fire Horse Year.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-the-horse-rewards-risk-takers** — STATUS: PLANNED
+**Topic: feel-good-friday-the-horse-rewards-risk-takers** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
@@ -79,16 +79,16 @@ Publishes: Friday (blog + social)
 
 ## Week of April 27 — Career
 
-**Topic: fire-horse-will-blow-up-your-career** — STATUS: PLANNED
+**Topic: fire-horse-will-blow-up-your-career** — STATUS: WRITTEN
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: the-decision-framework-for-career-crossroads** — STATUS: PLANNED
+**Topic: the-decision-framework-for-career-crossroads** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer (ties back to career blow-up)
 Chapter/tile focus: Chapter 1 (Central Theme), Chapter 6 (The Opposition), Chapter 7 (Finding Solutions)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-your-career-is-not-your-cage** — STATUS: PLANNED
+**Topic: feel-good-friday-your-career-is-not-your-cage** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 

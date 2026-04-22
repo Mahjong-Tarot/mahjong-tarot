@@ -1,0 +1,36 @@
+{
+  "slug": "the-decision-framework-for-career-crossroads",
+  "topic": "Mahjong Mirror Career Decision Framework",
+  "images": [
+    {
+      "file": "blog-mahjong-mirror",
+      "format": "1200x630",
+      "use": "Blog hero image",
+      "prompt": "A Mahjong tile spread laid out on a dark wood table in the classic reading formation — four positions arranged around a central tile. The West position tiles are slightly illuminated differently from the others, drawing the eye. A notebook with handwritten notes partially visible at the edge. Warm, low candlelight. Contemplative, decisive atmosphere. No people. No text overlay. The image should evoke the moment of examining a career decision from multiple angles."
+    },
+    {
+      "file": "wed-facebook-en",
+      "format": "1200x630",
+      "use": "Wednesday Facebook EN",
+      "prompt": "Four small mirrors arranged at different angles on a dark surface, each reflecting a slightly different source of warm light. The arrangement suggests looking at the same subject from four different directions simultaneously. Abstract but meaningful. Deep navy or charcoal background. Warm amber and gold reflections. No text, no people. Mood: clarity, depth, multiple perspectives."
+    },
+    {
+      "file": "wed-instagram",
+      "format": "1080x1080",
+      "use": "Wednesday Instagram",
+      "prompt": "Overhead view of four Mahjong tiles arranged in cardinal directions (North, South, East, West) on a dark lacquered surface. A compass rose or subtle directional lines suggest the four angles of a mirror. Warm side-lighting. Square format. The image should feel architectural and intentional — a decision framework made visual. No text, no people."
+    },
+    {
+      "file": "thu-facebook-en",
+      "format": "1200x630",
+      "use": "Thursday Facebook EN",
+      "prompt": "An open book with handwritten notes on the adjacent notebook page. The book pages are open but text is not legible — impressionistic. A warm desk lamp illuminates the scene. Coffee cup in the background, slightly out of focus. Mood: engaged self-study, the work of clarity. No faces, no text overlay. The image should suggest someone doing the work of examining their own situation."
+    },
+    {
+      "file": "thu-instagram",
+      "format": "1080x1080",
+      "use": "Thursday Instagram",
+      "prompt": "Close-up of an open book, warm reading light from one side. The book pages are slightly blurred — the content is impressionistic, not legible. A hand rests near the page, suggesting active engagement with the material. Square format. Warm, amber, intellectual mood. No text overlay. The image should feel like deep reading and reflection."
+    }
+  ]
+}

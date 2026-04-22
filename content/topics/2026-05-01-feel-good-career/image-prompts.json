@@ -1,0 +1,42 @@
+{
+  "topic": "Career frustration in the Fire Horse year is not a curse — it is a navigational signal pointing toward what you actually want. The amplifier, not the problem.",
+  "phrases": [
+    "Frustration has a direction.",
+    "Your career is not your cage.",
+    "What I actually want is...",
+    "The container was too small."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-your-career-is-not-your-cage",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A woman in a meeting or office context, seen from the side — her face turned slightly away, looking toward a window with bright outdoor light. She is physically present in the room but mentally reaching toward something else. The tension between where she is and where she wants to be is the image.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman in her mid-30s sits at a conference table or modern desk, photographed from the side. She is turned slightly toward a large window to her right, her face in three-quarter profile, not directly toward camera. Warm outdoor light floods through the window, lighting her face with golden afternoon sun. The room behind her is in cooler, flatter light. Her expression is thoughtful, not unhappy — attentive to something she hasn't yet named. The composition contrasts the warm window light with the institutional interior. Documentary photography style. Soft natural tones. No text, no watermarks. No Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-your-career-is-not-your-cage",
+      "content_type": "fri-facebook-en",
+      "concept": "An open ornate birdcage with the door swung wide — but instead of being on a shelf or table, it sits on an outdoor window ledge with a wide open sky and rooftops visible in the background. The cage is beautiful, old, and empty. Freedom is not tragic — it is the point.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "An ornate antique birdcage with its door open wide, sitting on a stone window ledge. The door is fully open, swinging outward. Through and behind the cage, a wide open sky is visible — pale blue and warm at the horizon, with distant rooftops and open air. The cage is beautiful: dark wrought iron with decorative scrollwork, aged and dignified. A few small feathers rest inside or near the base. The mood is liberating, not sad — the cage is empty because something has already left, not because nothing arrived. Warm morning light from one side. No people, no text. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-your-career-is-not-your-cage",
+      "content_type": "fri-instagram",
+      "concept": "A bold text-background image for the phrase 'Frustration has a direction.' — a warm, energetic background suggesting motion with a clear vector, as if something has broken through and is pointing somewhere specific. Designed to carry the text overlay in post-production.",
+      "image_style": "TEXT",
+      "text": "Frustration has a direction.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An abstract square background with a strong directional energy — warm amber and dusty rose tones arranged in sweeping diagonal strokes, like brushwork or the wake of movement. The left side of the frame is slightly darker, the right side catches warm amber light as if illuminated from beyond the frame edge. The texture is painterly, organic, layered. No sharp objects, no symbols, no text, no people. The mood is directed energy — frustration converted to forward motion. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

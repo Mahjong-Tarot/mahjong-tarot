@@ -1,12 +1,12 @@
 ---
 name: generate-image
-description: Generates blog hero and social channel images for The Mahjong Tarot. Phase 1 — writes image-prompts.md by reading the topic content and applying the designer's style guide. Phase 2 — calls the Gemini API to generate images from those prompts. The designer owns both phases. The writer does not produce image prompts.
-trigger: Called by mahjong-studio pipeline, OR autonomously by Claude Code Routine when unimaged slugs are found.
+description: Generates blog hero and social channel images for The Mahjong Tarot. Loads the writer's pre-authored `image-prompts.json`, validates it against the designer's style guide, patches structural issues, and calls the Gemini API. The designer does NOT rewrite creative prompts — the writer owns that brief.
+trigger: Called by mahjong-studio pipeline, OR autonomously by Claude Code Routine when unimaged slugs with complete `image-prompts.json` are found.
 ---
 
 # Generate Image — Designer Skill
 
-Two-phase skill. The designer reads content, decides the visual concept, writes prompts, then generates images. Prompt quality is a creative act — it belongs here, not in the writer.
+Generation-focused skill. The writer authors image prompts as part of writing the content (they know the emotional core best). The designer loads those prompts, validates structure, and calls the image API reliably.
 
 Uses `gemini-3.1-flash-image-preview` via `generate_content`. Supports source image conditioning from `working_files/`.
 
@@ -47,42 +47,21 @@ If none found, stop and log: `No unimaged slugs found.`
 
 ---
 
-## Step 2 — Write image prompts
+## Step 2 — Load and validate the writer's prompts
 
-This step produces `image-prompts.md` and `image-prompts.json`. Run before any generation.
+The writer authored `content/topics/<folder>/image-prompts.json` as the final step of writing. You do NOT rewrite it — you load, validate, and pass the prompts to Gemini.
 
-### 2a. Read the style guide
+### 2a. Load the JSON
 
-Read `agents/designer/context/style-guide.md` in full. Pay attention to:
-- **Brand palette** — use plain English color names from this palette in every prompt
-- **Image prompt guidelines** — no repetitive motifs, vary medium and subject, stretch beyond the obvious first idea
-- **Style inspiration categories** — use these as a menu to choose from, or combine/invent
-- **Non-negotiables** — no text in images, no generic stock, women never face camera directly
+Read `content/topics/<folder>/image-prompts.json`. If the file does not exist, STOP and report to the human — the writer must be rerun. Do not fabricate prompts.
 
-### 2b. Read the topic content
+### 2b. Validate against the style guide
 
-List all files in `content/topics/<slug>/`. Read:
-- The blog markdown (`blog-fire-horse.md`, `blog-mahjong-mirror.md`, or `blog-feel-good-friday.md`)
-- Every social file (`mon-facebook-en.md`, `mon-instagram.md`, etc.)
+Read `agents/designer/context/style-guide.md` as reference, then scan each entry:
 
-For each file, identify:
-- The **emotional core** — what does the reader feel, fear, or want?
-- The **most specific concrete nouns** in the text — objects, places, physical things
-- The **tone** — provocative (Fire Horse), educational (Mahjong Mirror), or warm/uplifting (Feel Good Friday)?
-
-### 2c. Design a visual concept per file
-
-For each content file, decide:
-- **Image style** — pick from the style guide (e.g., The Oracle Portrait, Hands of the Reader, Nature as Metaphor, Object Still Life) or invent a style if none fits
-- **Subject and composition** — specific scene that captures the emotional core without illustrating it literally
-- **Tone** — dark / light / mixed. Check `agents/image-designer/output/run-log.md` — if the last 2–3 images used the same tone, use a different one
-
-Rules:
-- No two files in the same week should use the same hero motif (tiles, flames, candles, etc.)
-- Facebook and blog images for the same day can share a style family but must have distinct compositions
-- Instagram images are 1:1 — compositions must read well as a square without cropping
-
-Channel → aspect ratio mapping:
+- Every entry has `image_style` (HUMAN / TEXT / SCENE), `aspect_ratio`, `dimensions`, `prompt`
+- Styles are mixed within the topic — flag if 3+ entries share a style
+- Aspect ratios match the file type:
 
 | Content type | Aspect | Target dimensions | Max KB |
 |---|---|---|---|
@@ -90,99 +69,18 @@ Channel → aspect ratio mapping:
 | `*-facebook-*` | 16:9 | 1200×630 | 200 |
 | `*-instagram` | 1:1 | 1080×1080 | 150 |
 
-Facebook EN and Facebook VN share one image — write one prompt, apply to both.
+- Facebook EN and Facebook VN share one image — expect one prompt covering both
+- Every `prompt` ends with `No watermarks or Western zodiac imagery anywhere in the image.` — append it to any prompt that's missing it
+- `card` field appears only on `wed-*.md` entries — flag violations
 
-### 2d. Write image-prompts.md
+### 2c. Patch or flag
 
-Save to `content/topics/<slug>/image-prompts.md`.
+- **Structural fixes** (missing tail sentence, obvious aspect ratio typo) — patch the JSON in place, note the patch in your final report
+- **Creative concerns** (concept feels off, wrong tone) — do NOT rewrite. Generate what the writer asked for and flag the concern to the human
 
-```markdown
-# Image Prompts — <Post Title>
+### 2d. Continue to generation
 
-**Topic:** <one sentence on the core idea>
-
-**Phrases:** *(key lines from the post for post-production text overlays)*
-- "<phrase 1>"
-- "<phrase 2>"
-
----
-
-## <content-filename>.md
-
-**Concept:** <what the image shows and why it works for this content>
-**Image Style:** <style name, e.g., HUMAN — The Oracle Portrait>
-**Aspect:** <16:9 (1200x630) or 1:1 (1080x1080)>
-
-Prompt: <full Gemini prompt — concrete objects, scene, lighting, surface, colors in plain English. Ends with: No watermarks or Western zodiac imagery anywhere in the image.>
-
----
-```
-
-Repeat the `## <filename>` block for every content file in the folder.
-
-### 2e. Write image-prompts.json
-
-Save to `content/topics/<slug>/image-prompts.json`.
-
-```json
-{
-  "slug": "<slug>",
-  "files": [
-    {
-      "content_type": "<content-filename-without-.md>",
-      "aspect_ratio": "16:9",
-      "prompt": "<full prompt text>"
-    }
-  ]
-}
-```
-
-### 2f. Notify and pause (pipeline mode) / notify and continue (autonomous mode)
-
-Send notifications regardless of mode, then handle the pause.
-
-```bash
-_ENV_FILE=$([ -f .env.local ] && echo .env.local || echo .env)
-RESEND_FROM=$(grep 'RESEND_FROM' "$_ENV_FILE" | cut -d= -f2- | tr -d '"')
-RESEND_TO=$(grep 'RESEND_TO' "$_ENV_FILE" | cut -d= -f2- | tr -d '"')
-RESEND_API_KEY=$(grep 'RESEND_API_KEY' "$_ENV_FILE" | cut -d= -f2- | tr -d '"')
-LABS_CHAT="oc_e5fe68740864439744b3fb0f31f81040"
-
-LARK_MSG="🎨 Image prompts ready — <slug>
-$(grep '^## ' content/topics/<slug>/image-prompts.md | sed 's/## /• /' | head -6)
-Review content/topics/<slug>/image-prompts.md before images are generated."
-
-EMAIL_SUBJECT="[Designer] Image prompts ready — <slug>"
-EMAIL_BODY="Designer has written image prompts for <slug>.
-
-Prompts written for:
-$(grep '^## ' content/topics/<slug>/image-prompts.md | sed 's/## /• /')
-
-Review content/topics/<slug>/image-prompts.md.
-Edit any prompt in the file, then reply to continue with image generation."
-
-lark-cli im +messages-send --chat-id "$LABS_CHAT" --as bot --text "$LARK_MSG" 2>/dev/null || true
-
-RESEND_API_KEY="$RESEND_API_KEY" resend emails send \
-  --from "$RESEND_FROM" \
-  --to $(echo "$RESEND_TO" | tr ',' ' ') \
-  --subject "$EMAIL_SUBJECT" \
-  --text "$EMAIL_BODY" 2>/dev/null || true
-```
-
-**Pipeline mode** — pause after notifying:
-```
-IMAGE PROMPTS WRITTEN ✓  (Labs + email notified)
-
-  • blog-<type>       (16:9) — <style>: <one-line concept>
-  • mon-facebook-en   (16:9) — <style>: <one-line concept>
-  • mon-instagram     (1:1)  — <style>: <one-line concept>
-
-Review content/topics/<slug>/image-prompts.md.
-"approved" to generate, "regenerate: <file>" to rewrite a specific prompt.
-```
-
-**Autonomous mode** — continue directly to Step 3.
+No notification step here — the writer already notified the humans that prompts are ready for review. Proceed directly to Step 3.
 
 ---
 

@@ -5,11 +5,17 @@ description: Every weekday at 9 AM, dispatches the Web Developer subagent to bui
 
 It is 9 AM. Today's date is YYYY-MM-DD.
 
-## Step 1 — Check if there is anything to publish
+## Step 1 — Check if there is anything to publish TODAY
 
-A slug is ready when `content/topics/<slug>/blog-*.md` exists, `website/public/images/blog/<slug>.webp` exists, and `website/pages/blog/posts/<slug>.jsx` does NOT exist.
+You only publish posts that are **due today**. Today is YYYY-MM-DD.
 
-If no ready slugs exist, send a skip notification and stop — do not create a branch:
+A slug is ready when ALL of these are true:
+1. `content/topics/<folder>/blog-*.md` exists (folder format: `YYYY-MM-DD-<type>-<topic>`)
+2. The blog markdown's frontmatter `date:` equals **today's date** (YYYY-MM-DD). If it's tomorrow, Friday, next Monday — skip it. Never pull future-dated posts forward.
+3. The hero image exists — either at `website/public/images/blog/<url-slug>.webp` (already promoted) or inside the topic folder (you'll promote it)
+4. `website/pages/blog/posts/<url-slug>.jsx` does NOT exist (where `<url-slug>` is the frontmatter `slug:` field, not the folder name)
+
+If no slugs meet ALL four criteria for today, send a skip notification and stop — do not create a branch:
 
 ```bash
 lark-cli im +messages-send \
@@ -34,8 +40,8 @@ Never work on main or on any branch whose name starts with a person's name (dave
 ```
 Agent({
   subagent_type: "Web Developer",
-  description: "Build and publish ready posts",
-  prompt: "Build pages for all posts that are ready to publish — those with a blog-*.md and a promoted hero image in website/public/images/blog/ but no JSX page yet. Today is YYYY-MM-DD. You are already on branch web-dev/publish-YYYY-MM-DD — do not create or switch branches."
+  description: "Build and publish today's posts",
+  prompt: "Today is YYYY-MM-DD. Build and publish ONLY the posts whose blog frontmatter date equals today. Do NOT build future-dated posts. A post is in scope when: (1) content/topics/<folder>/blog-*.md exists, (2) frontmatter date equals today, (3) a hero image is available (promote from topic folder if needed), (4) website/pages/blog/posts/<url-slug>.jsx does not exist. The url-slug comes from the blog frontmatter slug field — not the folder name. You are already on branch web-dev/publish-YYYY-MM-DD — do not create or switch branches."
 })
 ```
 

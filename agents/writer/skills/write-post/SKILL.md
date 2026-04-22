@@ -362,9 +362,9 @@ For each content file in the topic, pick ONE `image_style` (HUMAN / TEXT / SCENE
 
 **Every prompt must end with:** `No watermarks or Western zodiac imagery anywhere in the image.`
 
-### 7d. Feel Good Friday — ALWAYS add two affirmation cards
+### 7d. Feel Good Friday — ALWAYS add two affirmation card PROMPTS
 
-Every Feel Good Friday topic (folder `YYYY-MM-DD-feel-good-<topic>`) gets TWO extra TEXT-style entries in `image-prompts.json`, in addition to the normal blog/social image prompts:
+You write the *prompts* here, nothing else — the designer will call Gemini later to turn each prompt into the actual PNG. Every Feel Good Friday topic (folder `YYYY-MM-DD-feel-good-<topic>`) gets TWO extra TEXT-style entries in `image-prompts.json`, in addition to the normal blog/social image prompts:
 
 1. **English affirmation card**
    - `file`: `card` (logical name; the designer outputs `<url-slug>-card.png`)

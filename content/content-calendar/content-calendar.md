@@ -4,16 +4,16 @@
 
 ## Week of April 13 — Celebrity Spotlight: Taylor Swift & Travis Kelce
 
-**Topic: taylor-swift-travis-kelce-wedding** — STATUS: WRITTEN
+**Topic: 2026-04-13-horse-wedding** — STATUS: WRITTEN
 Angle: Myth Buster — celebrity compatibility deep dive
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: planning-a-wedding-through-the-mahjong-mirror** — STATUS: WRITTEN
+**Topic: 2026-04-15-mirror-wedding** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer (ties back to wedding analysis)
 Chapter/tile focus: Chapter 1 (Central Theme), Chapter 4 (What Do I Really Want)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-love-starts-with-knowing-yourself** — STATUS: WRITTEN
+**Topic: 2026-04-17-feel-good-love** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
@@ -42,15 +42,15 @@ Publishes: Friday (blog + social)
 
 ## Week of April 20 — Money
 
-**Topic: money-in-the-year-of-the-fire-horse** — STATUS: WRITTEN
+**Topic: 2026-04-20-horse-money** — STATUS: WRITTEN
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk** — STATUS: WRITTEN
+**Topic: 2026-04-22-mirror-money** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer ties back to finding ways to make money in the volatile Fire Horse Year.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-the-horse-rewards-risk-takers** — STATUS: WRITTEN
+**Topic: 2026-04-24-feel-good-money** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
@@ -79,16 +79,16 @@ Publishes: Friday (blog + social)
 
 ## Week of April 27 — Career
 
-**Topic: fire-horse-will-blow-up-your-career** — STATUS: WRITTEN
+**Topic: 2026-04-27-horse-career** — STATUS: WRITTEN
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: the-decision-framework-for-career-crossroads** — STATUS: WRITTEN
+**Topic: 2026-04-29-mirror-career** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer (ties back to career blow-up)
 Chapter/tile focus: Chapter 1 (Central Theme), Chapter 6 (The Opposition), Chapter 7 (Finding Solutions)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-your-career-is-not-your-cage** — STATUS: WRITTEN
+**Topic: 2026-05-01-feel-good-career** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 

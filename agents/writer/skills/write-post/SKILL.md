@@ -35,7 +35,8 @@ Each week has three topics:
 | Friday | Social only | **Feel Good Friday — positive challenge** |
 
 Note for each topic:
-- The **slug** (topic folder name) from the calendar
+- The **folder slug** from the calendar — format is `<YYYY-MM-DD>-<type>-<topic>` where type is `horse` / `mirror` / `feel-good` and date is the publish date (see `content/content-calendar/content-calendar-process.md` → Folder Naming Convention for the full rule)
+- The **slug** — the semantic URL slug for the published post (different from the folder slug). You decide this and write it to each blog markdown's frontmatter as `slug:`. Keep it descriptive for SEO (e.g. `how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk`)
 - The **angle** (Fire Horse, Mahjong Mirror, or Feel Good Friday)
 - The **hooks** for each day and channel
 - Any **chapter/tile focus** noted in the calendar
@@ -62,7 +63,7 @@ Every social post that links to a blog post must use the full URL. The blog URL 
 https://www.mahjong-tarot.com/blog/posts/<slug>
 ```
 
-Where `<slug>` is the topic slug from the content calendar. Use this URL in all Facebook CTAs and as the `[blog link]` placeholder in all social files. For Instagram, use "Link in bio" as the CTA (Instagram doesn't support clickable links in captions).
+Where `<slug>` is the semantic URL slug you defined in the blog markdown's frontmatter (NOT the folder name). Folder names follow `<YYYY-MM-DD>-<type>-<topic>` for organization; URL slugs stay descriptive for SEO. Use this URL in all Facebook CTAs and as the `[blog link]` placeholder in all social files. For Instagram, use "Link in bio" as the CTA (Instagram doesn't support clickable links in captions).
 
 **Monday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<monday-slug>`
 **Wednesday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<wednesday-slug>`
@@ -279,12 +280,17 @@ Same SEO guide format as Steps 3c and 4c, for the Friday blog.
 ### 6a. Create one folder per topic
 
 ```
-content/topics/<monday-slug>/
-content/topics/<wednesday-slug>/
-content/topics/<friday-slug>/
+content/topics/<YYYY-MM-DD>-horse-<topic>/      # Monday Fire Horse post
+content/topics/<YYYY-MM-DD>-mirror-<topic>/     # Wednesday Mahjong Mirror post
+content/topics/<YYYY-MM-DD>-feel-good-<topic>/  # Friday Feel Good Friday post
 ```
 
-The slugs come from the content calendar.
+Folder name = publish date + angle type + short topic keyword. See `content/content-calendar/content-calendar-process.md` → Folder Naming Convention.
+
+**Examples:**
+- `content/topics/2026-04-20-horse-money/`
+- `content/topics/2026-04-22-mirror-money/`
+- `content/topics/2026-04-24-feel-good-money/`
 
 ### 6b. Save files to the correct folders
 

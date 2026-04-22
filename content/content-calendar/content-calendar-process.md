@@ -32,12 +32,30 @@ Each week follows a five-day publishing cycle across three channels.
 - Monday and Wednesday are a **matched pair**. Wednesday's Mahjong Mirror post must directly tie back to Monday's Fire Horse post. Monday raises the problem; Wednesday provides the path forward.
 - Friday's challenge ties the **whole week** together. It should feel like a natural conclusion to the Mon–Wed arc.
 - Each week can have **one or more topics**. A typical week has three: a Fire Horse topic (Mon/Tue), a Mahjong Mirror topic (Wed/Thu), and a Friday challenge topic (Fri).
-- Each topic gets its own folder under `content/topics/[topic-slug]/`.
+- Each topic gets its own folder under `content/topics/<YYYY-MM-DD>-<type>-<topic>/`.
+
+## Folder Naming Convention
+
+**Format:** `<YYYY-MM-DD>-<type>-<topic>`
+
+- `YYYY-MM-DD` — the blog post's publish date (zero-padded, sortable)
+- `type` — one of:
+  - `horse` — Fire Horse shock & awe (Monday posts)
+  - `mirror` — Mahjong Mirror answer (Wednesday posts)
+  - `feel-good` — Feel Good Friday (Friday posts)
+- `topic` — short topic keyword in kebab-case (`money`, `career`, `love`, `wedding`, etc.)
+
+**Examples:**
+- `2026-04-20-horse-money` — Apr 20 Monday Fire Horse post about money
+- `2026-04-22-mirror-money` — Apr 22 Wednesday Mahjong Mirror post about money
+- `2026-04-24-feel-good-money` — Apr 24 Friday Feel Good Friday post about money
+
+**URL slug is separate.** The folder name is an organizational convention — the *published blog URL* at `/blog/posts/<url-slug>` uses a semantic slug declared in the blog markdown's frontmatter (`url-slug:` field). The web-developer reads that field when building the JSX page. This keeps URLs descriptive for SEO while folders stay date-sortable.
 
 ## Topic Folder Convention
 
 ```
-content/topics/[topic-slug]/
+content/topics/<YYYY-MM-DD>-<type>-<topic>/
 ├── blog-fire-horse.md          # Monday blog (if applicable)
 ├── blog-mahjong-mirror.md      # Wednesday blog (if applicable)
 ├── seo-fire-horse.md           # SEO for Monday blog

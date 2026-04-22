@@ -1,0 +1,17 @@
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | blog-fire-horse | 83 | ✅ |
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | mon-facebook-en | 121 | ✅ |
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | mon-facebook-vn | 66 | ✅ |
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | mon-instagram | 78 | ✅ |
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | tue-facebook-en | 7 | ✅ |
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | tue-facebook-vn | 121 | ✅ |
+| 2026-04-23 01:00 | taylor-swift-travis-kelce-wedding | gemini-3.1-flash-image-preview | generate-image | tue-instagram | 106 | ✅ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | blog-mahjong-mirror | 199 | ✅ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | wed-facebook-en | 76 | ✅ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | wed-facebook-vn | 55 | ✅ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | wed-instagram | 147 | ✅ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | thu-instagram | 42 | ✅ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | thu-facebook-en | — | ❌ |
+| 2026-04-23 01:00 | planning-a-wedding-through-the-mahjong-mirror | gemini-3.1-flash-image-preview | generate-image | thu-facebook-vn | — | ❌ |
+| 2026-04-23 01:00 | feel-good-friday-love-starts-with-knowing-yourself | gemini-3.1-flash-image-preview | generate-image | fri-facebook-en | 50 | ✅ |
+| 2026-04-23 01:00 | feel-good-friday-love-starts-with-knowing-yourself | gemini-3.1-flash-image-preview | generate-image | fri-facebook-vn | 16 | ✅ |
+| 2026-04-23 01:00 | feel-good-friday-love-starts-with-knowing-yourself | gemini-3.1-flash-image-preview | generate-image | fri-instagram | 132 | ✅ |

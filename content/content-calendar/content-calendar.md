@@ -4,7 +4,7 @@
 
 ## Week of April 13 — Celebrity Spotlight: Taylor Swift & Travis Kelce
 
-**Topic: 2026-04-13-horse-wedding** — STATUS: WRITTEN
+**Topic: 2026-04-13-horse-wedding** — STATUS: DESIGNED
 Angle: Myth Buster — celebrity compatibility deep dive
 Publishes: Monday (blog + social), Tuesday (social)
 
@@ -13,7 +13,7 @@ Angle: Mahjong Mirror — the answer (ties back to wedding analysis)
 Chapter/tile focus: Chapter 1 (Central Theme), Chapter 4 (What Do I Really Want)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-04-17-feel-good-love** — STATUS: WRITTEN
+**Topic: 2026-04-17-feel-good-love** — STATUS: DESIGNED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 

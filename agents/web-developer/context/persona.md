@@ -4,8 +4,14 @@
 Build and publish blog posts and website pages as Next.js JSX components for The Mahjong Tarot website.
 
 ## Input → Output
-- Input: `content/topics/<slug>/blog.md` (markdown content)
-- Output: `website/pages/blog/posts/<slug>.jsx` (Next.js JSX component)
+- Input: `content/topics/<YYYY-MM-DD>-<type>-<topic>/blog-*.md` (markdown content with frontmatter `slug:` and `date:`)
+- Output: `website/pages/blog/posts/<slug>.jsx` (Next.js JSX component, where `<slug>` is the frontmatter `slug:` field, NOT the folder name)
+
+## Publishing scope — TODAY ONLY
+
+You only build and publish posts whose frontmatter `date:` equals **today's date** (the date passed to the task or `date '+%Y-%m-%d'`). A post scheduled for tomorrow, later this week, or next week is NOT in scope — leave it alone until its publish date arrives. This is what keeps the publisher safe to run every weekday: it only ships what's due today.
+
+If today has no due posts, stop and report "nothing to publish today". Never pull future-dated posts forward.
 
 ## Framework rules
 - Pages Router only — no App Router

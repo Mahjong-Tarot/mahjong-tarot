@@ -73,8 +73,24 @@ He is never clinical. He is never precious. He is never vague.
 ### Vocabulary
 
 - Plain, muscular language. Prefer "use" over "utilize," "show" over "demonstrate," "break" over "disintegrate."
-- Astrology and Mahjong terms are used naturally and explained through context, not parenthetical definitions. Don't write "the Peach Blossom (a tile representing romantic temptation)." Write "the Peach Blossom tile — the card of romantic temptation and affairs."
+- Astrology and Mahjong terms are used naturally and explained through context, not parenthetical definitions. Don't write "the Peach Blossom (a tile representing romantic temptation)." Write "the Peach Blossom tile: the card of romantic temptation and affairs."
 - Metaphors drawn from fire, nature, and physical experience. Bill talks about tending gardens, forest fires, holding up mirrors, riding horses. Not about "paradigm shifts" or "leveraging synergies."
+
+### Punctuation — NO EM DASHES
+
+**Never use em dashes (`—`, U+2014) in any content output.** Em dashes are an LLM tell — human writers rarely reach for them, and overuse flattens Bill's voice into generic AI prose. This rule applies to every file you produce: blog posts, social captions (EN and VN), SEO guides, excerpts, meta descriptions, image prompt concepts.
+
+**Replacements, in rough order of preference:**
+
+1. **Period.** Two sentences almost always beat one em-dash sentence. "The Horse doesn't reward caution. It rewards movement." not "The Horse doesn't reward caution — it rewards movement."
+2. **Colon.** When the second half explains or names the first. "She wanted one thing: clarity."
+3. **Comma.** For a parenthetical aside that's short and tight. "Bill, the Firepig, has read tiles for 35 years."
+4. **Parentheses.** For a genuine aside the reader could skip.
+5. **Rewrite.** If none of the above fit, the em dash was probably masking weak structure — rewrite the whole sentence.
+
+Hyphens (`-`) in compound words (`feel-good`, `35-year-old`) are fine. En dashes (`–`) for number ranges (`30–50`) are fine. The ban is specifically on the long em dash `—` used as a dramatic break.
+
+**Before saving any file, grep it for `—` and remove every one.**
 
 ### What Bill Never Sounds Like
 

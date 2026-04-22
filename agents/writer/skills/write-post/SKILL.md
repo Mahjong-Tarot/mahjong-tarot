@@ -389,7 +389,24 @@ The designer will read this file, validate it, and call the Gemini API to genera
 
 ---
 
-## Step 8: Update the Topic Index
+## Step 8: Em dash sweep (MANDATORY)
+
+Before moving on, scan every file you wrote in this run for em dashes (`—`, U+2014). This is a hard rule from the writer style guide — em dashes are banned in Bill's voice.
+
+```bash
+# From repo root. Lists every file + line that still has an em dash.
+grep -rn "—" content/topics/<each-folder-you-wrote>/ || echo "clean"
+```
+
+For every hit, rewrite the sentence using a period, colon, comma, parentheses, or a full rewrite (see the writer style guide, Part 3, "Punctuation — NO EM DASHES"). Do NOT simply replace `—` with `-` or `,` blindly: pick the punctuation that actually fits the sentence, and rewrite if none do.
+
+Re-run the grep after edits. Only proceed to Step 9 when every folder returns `clean`.
+
+This sweep applies to: `blog-*.md`, `seo-*.md`, every social file (EN and VN), and `image-prompts.json` (the `concept` and `prompt` fields). VN translations in particular tend to carry em dashes over from English — strip them.
+
+---
+
+## Step 9: Update the Topic Index
 
 Add a row for each blog post to the SEO table in `content/topics/INDEX.md`. Group by week. Each row contains:
 
@@ -401,7 +418,7 @@ Pull these values directly from the SEO guide files you wrote in earlier steps.
 
 ---
 
-## Step 9: Update the Content Calendar Status
+## Step 10: Update the Content Calendar Status
 
 In `content/content-calendar/content-calendar.md`, append `— STATUS: WRITTEN` to each topic line for the week you just processed. For example:
 
@@ -411,7 +428,7 @@ In `content/content-calendar/content-calendar.md`, append `— STATUS: WRITTEN` 
 
 ---
 
-## Step 10: Notify and confirm
+## Step 11: Notify and confirm
 
 Send notifications to the Labs Lark group and all members via email, then report back.
 

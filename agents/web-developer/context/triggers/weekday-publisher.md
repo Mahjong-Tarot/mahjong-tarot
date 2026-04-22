@@ -24,9 +24,24 @@ lark-cli im +messages-send \
   --text "🌐 Publisher (YYYY-MM-DD) — nothing ready to publish." 2>/dev/null || true
 ```
 
+## Step 1b — Em dash quality gate
+
+Before creating a branch, grep the source blog markdown for em dashes. Em dashes are banned in published content:
+
+```bash
+for f in <list of today's ready blog-*.md files>; do
+  if grep -l "—" "$f"; then
+    echo "BLOCKED: em dash found in $f"
+    # Stop — notify and exit, do NOT create a branch or publish
+  fi
+done
+```
+
+If any ready post has an em dash, stop the run and notify Lark/email: "Publisher blocked on YYYY-MM-DD — em dashes in <file paths>. Rerun writer's Step 8 sweep." Do not silently strip them. Do not create a branch.
+
 ## Step 2 — Create a dedicated branch
 
-Only if ready slugs were found:
+Only if ready slugs were found AND the em dash gate passed:
 
 ```bash
 git pull origin main

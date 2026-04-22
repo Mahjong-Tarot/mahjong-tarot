@@ -1,12 +1,12 @@
-date: 2026-04-21
+date: 2026-04-22
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #98: pm(standup-morning): 2026-04-20 — merged at 00:09 UTC
-- PR #99: pm(standup-compile): 2026-04-20 — merged at 02:11 UTC
+- PR #108: pm(standup-morning): 2026-04-21 — merged at 00:08 UTC
+- PR #110: pm(standup-compile): 2026-04-21 — merged at 02:00 UTC
 
 **Next:**
 - No open work detected
@@ -19,7 +19,7 @@ None
 ## web-developer
 
 **Completed:**
-- PR #103: publish: 2 posts — Feel Good Friday (Apr 13 week), Money in the Fire Horse Year (Apr 20) — merged at 06:51 UTC
+- No activity
 
 **Next:**
 - Monitor published posts in production
@@ -33,7 +33,7 @@ None
 ## writer
 
 **Completed:**
-- PR #105: feat(writer-skill): add step to update content calendar status PLANNED→WRITTEN — merged at 09:40 UTC
+- No activity
 
 **Next:**
 - Resolve remaining skill execution gaps from review

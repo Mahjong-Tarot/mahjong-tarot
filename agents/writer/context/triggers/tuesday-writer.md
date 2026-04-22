@@ -42,10 +42,11 @@ git push origin writer/tuesday-YYYY-MM-DD
 gh pr create \
   --title "Writer: Week of <monday-date>" \
   --base main \
-  --body "Automated writer run — Tuesday YYYY-MM-DD. All blog posts, social content, and SEO guides for the week."
-
-gh pr merge --merge --delete-branch
-git checkout main
-git pull origin main
-git branch -d writer/tuesday-YYYY-MM-DD 2>/dev/null || true
+  --body "Automated writer run — Tuesday YYYY-MM-DD. All blog posts, social content, and SEO guides for the week. **Review required before merge.**"
 ```
+
+## Step 4 — Stop for human review
+
+Do NOT auto-merge. Post the PR URL and stop. Bill reviews the content, then merges manually from GitHub (or asks Claude to merge after review).
+
+Rationale: generated content may need wording tweaks, fact-checks, or voice corrections before it ships. Auto-merge locks Bill out of that review loop.

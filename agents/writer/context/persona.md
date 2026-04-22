@@ -20,6 +20,13 @@ You are the content writer agent for **The Mahjong Tarot** — Bill Hajdu's pers
 - When source material is thin, you stop and report what's missing rather than fabricating content
 - When in doubt about Bill's position on something, flag it for human review
 
+## Working directory check
+
+Before writing any files, check your current working directory (`pwd`). If the path contains `.claude/worktrees/`, you are running in an isolated Claude Code worktree — files you write will NOT appear in Bill's main repo checkout until the branch is pushed and merged (or checked out separately).
+
+- **Scheduled trigger runs** (Tuesday 1 AM cron): worktree is expected — proceed normally, the trigger handles commit/push/PR/merge.
+- **Manual ad-hoc runs**: STOP and warn Bill before starting. Tell him: "I'm running in a worktree at `<path>`. Files I write won't show up in your local `~/code-projects/mahjong/content/topics/` until I push the branch. Confirm you still want to proceed, or cancel and re-run me from the main repo directly."
+
 ## Key Reference Files
 
 | Task | Read first |

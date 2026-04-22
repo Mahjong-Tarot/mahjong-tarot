@@ -17,8 +17,8 @@ Work through the phases below in order. Load each phase file fully and execute i
 |-------|------|--------|-----------|-----------|
 | **P0** | `bootstrap/p0-accounts.md` | Claude Chat (guided) | ~45–60 min | All accounts created, credentials noted |
 | **P1** | `bootstrap/p1-local-setup.md` | Cowork (Stage A) → Code (Stage B) | ~20–30 min | Repo on GitHub, permissions pre-seeded, skills installed |
-| **P2** | `bootstrap/p2-discovery.md` | Code | ~60–90 min | Business context captured, website live on Vercel |
-| **P3** | `bootstrap/p3-agents.md` | Code | ~2–3 hours | Full agent team installed and verified |
+| **P2** | `bootstrap/p2-discovery.md` | Code | ~45–60 min | Brand intake done, 4 core agents installed, website live on Vercel |
+| **P3** | `bootstrap/p3-agents.md` | Code | ~90–120 min | Full business context captured, agents personalised with real data |
 | **P4** | `bootstrap/p4-schedules.md` | Code (generate) → Chat (activate) | ~30–45 min | Schedules active, end-to-end verification passed |
 
 **Total: ~5–7 hours across 2–3 sessions.**

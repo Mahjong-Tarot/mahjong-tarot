@@ -383,11 +383,11 @@ Now that the business context is known, replace the placeholder content in websi
 
 Update these files using REAL copy derived from the interview — no [placeholder] tokens:
 
-- `pages/index.jsx` — Real hero headline, value proposition, and CTA (from Q2, Q7, Q11)
-- `pages/about.jsx` — Real about page (from Q2 and Q6)
-- `components/Nav.jsx` — Real business name
-- `components/Footer.jsx` — Real social links (from Q13), copyright
-- `styles/globals.css` — Replace placeholder CSS variables with brand colours (Q23/Q24)
+- `website/pages/index.jsx` — Real hero headline, value proposition, and CTA (from Q2, Q7, Q11)
+- `website/pages/about.jsx` — Real about page (from Q2 and Q6)
+- `website/components/Nav.jsx` — Real business name
+- `website/components/Footer.jsx` — Real social links (from Q13), copyright
+- `website/styles/globals.css` — Replace placeholder CSS variables with brand colours (Q23/Q24)
 
 After: `✅ Website pages updated with real business content.`
 
@@ -478,7 +478,7 @@ Read the current persona.md for each agent. Remove all `{placeholder}` tokens an
 - Replace style with Q23 visual style description
 - Add brand colour palette from Q23/Q24 (hex codes)
 - Add typography preferences derived from visual style
-- Add "image tool: {Q32 preference or DALL-E as default}"
+- Add "image tool: gemini-4.1-flash-preview via Gemini API (Nano Banana 2 — see generate-image skill)"
 
 **Web Developer** — update `agents/web-developer/context/persona.md`:
 - Add approved blog categories from resources/web-style-guide.md
@@ -494,24 +494,37 @@ After all 4 updates: `✅ All 4 agents personalised with real business context.`
 The daily-checkin skill was installed in P1 with placeholder team names.
 Now that the team is confirmed, update it:
 
+Build the team roster from Q6 (owner) and Q22 (other team members). For each person,
+create a name slug: lowercase, spaces → hyphens (e.g. "Alex Chen" → "alex-chen").
+
 ```python
 import os, re
+
+# Roster built from interview answers — fill these from Q6 and Q22
+# Format: [("Display Name", "file-slug"), ...]
+team = [
+    ("{Owner Name from Q6}", "{owner-slug}"),
+    # Add one entry per additional person from Q22:
+    # ("{Person Name}", "{name-slug}"),
+]
 
 skill_path = os.path.expanduser("~/.claude/skills/daily-checkin/SKILL.md")
 with open(skill_path) as f:
     content = f.read()
 
-# Replace placeholders with real names and their standup file paths
-replacements = {
-    "[Person 1]": "{Team Member 1 Name from Q6/Q22}",
-    "standup/individual/person1.md": "standup/individual/{name1-slug}.md",
-    "[Person 2]": "{Team Member 2 Name}",
-    "standup/individual/person2.md": "standup/individual/{name2-slug}.md",
-    "[Person 3]": "{Team Member 3 Name}",
-    "standup/individual/person3.md": "standup/individual/{name3-slug}.md",
-}
-for placeholder, real in replacements.items():
-    content = content.replace(placeholder, real)
+# Build the roster section dynamically from team list
+roster_lines = "\n".join(
+    f"- {name} → standup/individual/{slug}.md"
+    for name, slug in team
+)
+
+# Replace the placeholder roster block
+content = re.sub(
+    r"Map to file \(update these in P3 with real names\):.*?(?=\n### |\Z)",
+    f"Map to file:\n{roster_lines}\n\n",
+    content,
+    flags=re.DOTALL
+)
 
 # Remove the setup note now that names are real
 content = re.sub(
@@ -524,6 +537,7 @@ content = re.sub(
 with open(skill_path, "w") as f:
     f.write(content)
 print(f"✅ daily-checkin skill updated → {skill_path}")
+print(f"   Team roster: {[name for name, _ in team]}")
 ```
 
 Copy the updated skill into the project for version control:
@@ -547,8 +561,45 @@ name: {owner name}
 None" > standup/individual/{owner-slug}.md
 ```
 
-Also create `context/agent-creation-guideline.md` documenting the 5-step workflow
-(Interview → Workflow → Review → Generate → Install) for any future agents added after bootstrap.
+Also create `context/agent-creation-guideline.md`:
+
+```markdown
+# Agent Creation Guideline
+
+Use this 5-step workflow whenever a new AI agent is added to the team after bootstrap.
+Never generate an agent without completing the Review step and getting explicit approval.
+
+## The 5-Step Workflow
+
+### Step 1 — Interview
+Ask targeted questions about this agent's specific domain.
+Minimum: purpose, audience, decision authority, output format, cadence, escalation path.
+
+### Step 2 — Design Workflow
+Draft the agent's operating pattern:
+- Daily / weekly / on-demand triggers
+- What it reads (input files, resource files)
+- What it writes (output files, paths)
+- What it never does (hard rules)
+
+### Step 3 — Review (REQUIRED — never skip)
+Present the plan to the owner. Show:
+- Purpose and SOPs to be applied
+- Skill set and trigger phrases
+- Hard rules
+Ask: "Approve? (yes / adjust + what to change)"
+Do NOT generate any files until you have an explicit approval.
+
+### Step 4 — Generate
+Write in this order:
+1. `.claude/agents/{name}.md` — YAML frontmatter (name, description, model, tools) + quick reference
+2. `agents/{name}/context/persona.md` — full persona (11 standard sections)
+3. `agents/{name}/context/skills/` — one SKILL.md per skill
+
+### Step 5 — Install
+Confirm trigger phrases work. Show the owner how to invoke the agent.
+Update CLAUDE.md agents table with the new agent.
+```
 
 ---
 
@@ -643,7 +694,7 @@ description: >
   Handles product strategy, roadmap, RICE prioritisation, OKR tracking, ICP research,
   and competitive analysis for {Business Name}. Trigger when: proposing a new feature,
   asking about product strategy, requesting a vision report, or doing competitive research.
-model: claude-sonnet-4-5
+model: claude-sonnet-4-6
 tools: [Read, Write, Glob, Grep, Bash, WebSearch]
 ---
 
@@ -709,7 +760,35 @@ MARKETING MANAGER SETUP
    (daily brief / weekly report / monthly only / only when something's wrong)
 ```
 
-**Step 2 — Design workflow.** **Step 3 — Review.** **Step 4 — Generate.** **Step 5 — Install.**
+**Step 2 — Design workflow.** Derive from interview: reporting cadence from Q5, primary metric from Q2, channel mix from P3 Q13, budget from Q3.
+
+**Step 3 — Review — output this to the user:**
+```
+MARKETING MANAGER — Review before generating
+
+Purpose: Campaign planning, content calendar, performance reporting
+
+Primary metric: {Q2 answer}
+Channels: {Q13 from main interview}
+Budget: {Q3 — paid / organic}
+Reporting cadence: {Q5 answer}
+Strategy review: {P3 Q19 day/time}
+
+Skill set:
+  campaign-plan        — plan content campaigns
+  performance-report   — weekly/monthly analytics
+  content-calendar-update — fill next month's calendar
+
+Trigger phrases:
+  "plan a campaign" / "update the content calendar" / "performance report"
+  "what should we focus on this month" / "review this month's content"
+
+Approve? (yes / adjust + what to change)
+```
+
+Wait for approval. Then:
+
+**Step 4 — Generate.** **Step 5 — Install.**
 
 Generate full agent package: `.claude/agents/marketing-manager.md`,
 `agents/marketing-manager/context/persona.md` (11 sections), and skill files for:
@@ -742,7 +821,36 @@ Platforms from earlier: {Q13}
    (Telegram / email / just check the content folder)
 ```
 
-**Step 2 — Design workflow.** **Step 3 — Review.** **Step 4 — Generate.** **Step 5 — Install.**
+**Step 2 — Design workflow.** Derive from interview: post frequency from Q3, platform priority from Q1, posting mode from P3 Q18b.
+
+**Step 3 — Review — output this to the user:**
+```
+SOCIAL MEDIA MANAGER — Review before generating
+
+Purpose: Platform-specific post drafts, hashtag strategy, weekly batch drafts
+
+Priority platform: {Q1 answer}
+Posting frequency: {Q3 — posts per week per platform}
+Post approval mode: draft-only (all platforms pending Q18b settings)
+TikTok: always draft — you add trending music before going live
+Notification when drafts ready: {Q6 answer}
+
+Skill set:
+  draft-post         — create platform-specific drafts
+  tiktok-carousel    — 6-slide structure (hook + 4 content + CTA)
+  weekly-draft-run   — batch the week's posts on Friday
+
+Trigger phrases:
+  "draft posts for this week" / "write a caption for [topic]"
+  "create a TikTok carousel" / "batch this week's social"
+  "hashtags for [topic]"
+
+Approve? (yes / adjust + what to change)
+```
+
+Wait for approval. Then:
+
+**Step 4 — Generate.** **Step 5 — Install.**
 
 Generate full agent package: `.claude/agents/social-media-manager.md`,
 `agents/social-media-manager/context/persona.md` (11 sections), and skill files for:
@@ -762,7 +870,7 @@ Create `context/publish-log.md` with header row (entries added per published pos
 
 Commit everything:
 ```bash
-git add .
+git add resources/ agents/ .claude/agents/ website/pages/ website/components/ website/styles/ CLAUDE.md context/ standup/ .claude/skills/
 git commit -m "bootstrap(p3): business discovery + agent personalisation"
 ```
 

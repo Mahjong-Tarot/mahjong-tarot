@@ -49,24 +49,27 @@ Claude installs developer tools and scaffolds your project on your laptop.
 
 ---
 
-### P2 — Discovery + First Website (Claude + You, ~60–90 min)
-A structured interview captures your business, then Claude builds and deploys your website.
-- 22-question interview (business identity, audience, platforms, visual style)
-- Generates: `brand-voice.md`, `design-system.md`, `web-style-guide.md`, audience personas, content calendar framework
-- Scaffolds full Next.js website (homepage, about, blog, contact)
+### P2 — Website Infrastructure + Core Agent Setup (Claude + You, ~45–60 min)
+Claude asks 2 setup questions, runs a brand intake, scaffolds your website, and installs the 4 core agents.
+- **Brand intake:** share a URL, attach documents, or say "create a starting package" — Claude generates all resource files immediately
+- Generates: `brand-voice.md`, `design-system.md`, `web-style-guide.md`, audience personas
+- Scaffolds full Next.js website (homepage, about, blog, contact) using your real brand colours
 - Deploys to Vercel, wires Supabase database
+- Installs 4 core agents: Project Manager, Writer, Designer, Web Developer — each referencing real brand files from day one
+- Auto-registers PM schedules (standup reminder, compile, EOD, weekly RAG)
 
-**Output:** Live website. All brand and style files written. Vercel URL.
+**Output:** Live website. Brand resource files written. 4 agents installed. PM schedules active.
 
 ---
 
-### P3 — Agent Team (Claude, ~2–3 hours)
-Claude builds each AI agent using a 5-step workflow: interview → workflow design → your approval → generate files → install.
-- **Template agents** (minimal setup): Project Manager, Product Manager, Web Developer
-- **Full workflow agents** (interview required): Designer, Writer, Marketing Manager, Social Media Manager
-- Each agent gets: a persona file, skill files, and a `.claude/agents/` definition
+### P3 — Business Discovery + Agent Customisation (Claude, ~90–120 min)
+A full discovery interview captures your business in depth, then Claude personalises each agent.
+- 26-question interview (business identity, audience, channels, visual style, content strategy)
+- Updates all 4 core agents with real business context — removes all placeholders
+- Updates website pages with real copy (hero, about, nav, footer, CSS variables)
+- Optionally adds specialist agents: Product Manager, Marketing Manager, Social Media Manager — each built via the 5-step workflow (interview → design → review → generate → install)
 
-**Output:** Full agent team installed. Every agent has a persona, skills, and trigger phrases.
+**Output:** Agents personalised with real data. Full resource file set. Website with real content.
 
 ---
 
@@ -102,19 +105,19 @@ flowchart TD
         P1A --> P1B
     end
 
-    subgraph P2["P2 — Discovery + Website  (~60–90 min)  🤖 Claude Code"]
-        P2A["Business interview\n22 questions across 3 groups"]
-        P2B["Generate brand files\nbrand-voice · design-system\nweb-style-guide · personas\ncontent-calendar"]
-        P2C["Scaffold Next.js website\nHomepage · About · Blog · Contact"]
-        P2D["Deploy to Vercel\nWire Supabase database"]
+    subgraph P2["P2 — Website + Core Agents  (~45–60 min)  🤖 Claude Code"]
+        P2A["Brand intake\nURL crawl / docs / default package\n→ write brand resource files"]
+        P2B["Scaffold Next.js website\nHomepage · About · Blog · Contact\nusing real brand colours"]
+        P2C["Install 4 core agents\nPM · Writer · Designer · Web Dev\nwith real resource references"]
+        P2D["Deploy to Vercel · Wire Supabase\nAuto-register PM schedules via MCP"]
         P2A --> P2B --> P2C --> P2D
     end
 
-    subgraph P3["P3 — Agent Team  (~2–3 hours)  🤖 Claude Code"]
-        P3A["Template agents\nProject Manager\nProduct Manager\nWeb Developer"]
-        P3B["Full workflow agents\nInterview → Workflow → Approval\n→ Generate → Install"]
-        P3C["Designer · Writer\nMarketing Manager\nSocial Media Manager"]
-        P3D["Generate supporting resources\nSEO strategy · Agent guideline\nStandup log"]
+    subgraph P3["P3 — Discovery + Customisation  (~90–120 min)  🤖 Claude Code"]
+        P3A["26-question discovery interview\nbusiness · audience · channels\nvisual style · content strategy"]
+        P3B["Personalise 4 core agents\nreplace placeholders with real data\nupdate website pages with real copy"]
+        P3C["Optional extended agents\nProduct Manager · Marketing Manager\nSocial Media Manager"]
+        P3D["5-step workflow per extended agent\nInterview → Design → Review → Generate → Install"]
         P3A --> P3B --> P3C --> P3D
     end
 
@@ -150,7 +153,7 @@ flowchart TD
 | Morning standup reminder | Mon–Fri 7am | Project Manager |
 | Compile daily briefing | Mon–Fri 9am | Project Manager |
 | EOD check-in reminder | Mon–Fri 5pm | Project Manager |
-| Monthly content calendar | 1st of month 9am | Marketing Manager |
+| Monthly content calendar | 1st of month 9am | Marketing Manager (if installed) |
 | Weekly RAG report | Friday 4pm | Project Manager |
 
 Everything else is on-demand — you trigger agents by typing phrases like "help me write my standup" or "@writer write a post about X".

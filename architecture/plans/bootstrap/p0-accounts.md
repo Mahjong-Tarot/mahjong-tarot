@@ -20,7 +20,8 @@ At the end of each section, confirm what was completed before moving to the next
 Let's get your AI workspace ready.
 ```
 
-□ Download Claude Desktop from: https://claude.ai/download
+□ Download the **latest version** of Claude Desktop from: https://claude.ai/download
+  (Always install the latest — older versions may be missing required features)
 □ Open Claude Desktop → sign in with your Anthropic account
 □ Confirm you have a **Pro plan** (required for Cowork and Code tabs)
   → If not: claude.ai/upgrade
@@ -79,11 +80,34 @@ newsletter signups, and any data your website collects.
   - Project URL: ________________________________________________
   - Anon/Public key: ____________________________________________
 
-**Keep these — you'll paste them into Vercel in P2.**
+**Also create a personal access token for Claude:**
+□ Go to: **https://supabase.com/dashboard/account/tokens**
+□ Click "Generate new token"
+□ Name it: `{your-business-name}-claude`
+□ Copy the token immediately — it only shows once: __________________
+
+**Keep all three — the URL, anon key, and personal token — you'll need them in P2.**
 
 ---
 
-## STEP 5 — Email Platform                                    ⏱ ~10 min
+## STEP 5 — Google AI Studio (image generation)               ⏱ ~5 min
+
+```
+Your Designer agent generates blog and social images using Google's Gemini API.
+You need a free API key to enable this.
+```
+
+□ Go to: https://aistudio.google.com/apikey
+  (Sign in with your Google account — it's free to create a key)
+□ Click "Create API key"
+□ Select "Create API key in new project" (or pick an existing project)
+□ Copy the API key immediately: ________________________________
+
+**Keep this safe — you'll add it to your project's .env file in P1.**
+
+---
+
+## STEP 6 — Email Platform                                    ⏱ ~10 min
 
 ```
 Your AI team writes newsletters and campaigns. This platform sends them.
@@ -105,7 +129,7 @@ Brevo is recommended — free up to 300 emails/day.
 
 ---
 
-## STEP 6 — Telegram Bot (optional — for AI team notifications) ⏱ ~5 min
+## STEP 7 — Telegram Bot (optional — for AI team notifications) ⏱ ~5 min
 
 ```
 Your AI team can send you daily updates and draft-ready alerts via Telegram.
@@ -125,7 +149,7 @@ Do you want Telegram notifications? **Yes / No**
 
 ---
 
-## STEP 7 — Social Media Accounts                             ⏱ ~5 min
+## STEP 8 — Social Media Accounts                             ⏱ ~5 min
 
 ```
 Your AI team drafts content for your platforms. Let's confirm which ones
@@ -148,7 +172,7 @@ For each platform you plan to use, confirm you can log in:
 
 ---
 
-## STEP 8 — Domain Name (optional)                            ⏱ ~15 min
+## STEP 9 — Domain Name (optional)                            ⏱ ~15 min
 
 ```
 You can start with a free Vercel subdomain (yoursite.vercel.app) and add
@@ -161,7 +185,7 @@ a custom domain later. If you already own a domain, note it here.
 
 ---
 
-## STEP 9 — Credentials Summary
+## STEP 10 — Credentials Summary
 
 Before moving to P1, confirm you have noted:
 
@@ -170,6 +194,8 @@ Before moving to P1, confirm you have noted:
 | GitHub username | □ |
 | Supabase Project URL | □ |
 | Supabase Anon Key | □ |
+| Supabase Personal Access Token | □ |
+| Google Gemini API key | □ |
 | Email platform API key | □ |
 | Email subscriber list ID | □ |
 | Telegram bot token (if using) | □ |

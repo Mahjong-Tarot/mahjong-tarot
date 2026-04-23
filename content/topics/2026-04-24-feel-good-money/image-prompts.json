@@ -1,0 +1,42 @@
+{
+  "topic": "Committing to a financial decision you have already prepared for — readiness is a fact, certainty is a feeling, and the Fire Horse rewards those who decide with intention.",
+  "phrases": [
+    "Readiness is a fact. Certainty is a feeling.",
+    "You are more ready than you think.",
+    "The window is open.",
+    "Decide."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-the-horse-rewards-risk-takers",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A woman mid-stride down a sunlit street, walking purposefully toward something out of frame. Seen from behind or in profile, never facing camera. The street is warm with morning light. Her posture is forward-leaning, confident. The feeling is momentum — a decision already made, a person already in motion.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman in her late 30s walking purposefully down a wide sunlit street, photographed from behind at a slight angle. She carries a leather bag over one shoulder. Morning sun comes from ahead of her, lighting the street in warm gold. Her stride is long and confident — not rushing, but moving with clear direction. The street has character: warm stone or brick, trees with light coming through. She wears a solid-color top, earthy tones. Cinematic documentary style. The feeling is momentum — a person who has made up her mind. Warm golden tones, natural light. No text, no watermarks. No Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-the-horse-rewards-risk-takers",
+      "content_type": "fri-facebook-en",
+      "concept": "A bold text-background image for the phrase 'Readiness is a fact. Certainty is a feeling.' — a warm, textured background that suggests forward movement and energy, designed to carry the text overlay in post-production.",
+      "image_style": "TEXT",
+      "text": "Readiness is a fact. Certainty is a feeling.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "An abstract background with the visual energy of light breaking through cloud cover — warm gold and amber tones cutting through a soft ivory-grey sky. The light source is off-center left, creating a directional sweep across the frame. The texture is atmospheric and painterly, with no hard edges. The overall palette is warm: antique gold, pale ivory, warm amber. No text, no people, no symbols. Horizontal format. The mood is breakthrough — something opening. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-the-horse-rewards-risk-takers",
+      "content_type": "fri-instagram",
+      "concept": "A close-up editorial portrait — a woman's hand flat on a table, palm down, as if completing a decisive action. A single key rests on the table beside the hand. The key suggests access, entry, a door that can now be opened. Warm natural light. The gesture is final, committed, not tentative.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An overhead close-up of a woman's hand resting flat on a warm wooden table, palm down, fingers relaxed. A single old brass key lies beside the hand on the table. Natural warm window light from one side casts soft shadows. The wood grain of the table is beautiful and textured. The composition is minimal — hand and key are the only subjects, centered. Square format. The mood is decisive and calm — an action completed. Warm ivory and antique gold tones. No text, no people beyond the hand. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

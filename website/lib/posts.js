@@ -3,6 +3,15 @@
 
 export const POSTS = [
  {
+ slug: 'how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk',
+ title: 'How to Know If This Is the Year for You to Take a Financial Risk',
+ excerpt: "The Fire Horse rewards movement — but not every move. Before you act, the Mahjong Mirror asks four questions that reveal whether a financial risk will change your life or just your account balance.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Apr 22, 2026',
+ isoDate: '2026-04-22',
+ readTime: '7 min read',
+ },
+ {
  slug: 'money-in-the-year-of-the-fire-horse',
  title: "The Horse Is the Traveling Star, and It Carries Gold",
  excerpt: "The Fire Horse year is the most volatile wealth window in 60 years. The energy doesn't reward caution. It rewards movement, boldness, and the financial decisions most people are too afraid to make.",

@@ -1,12 +1,12 @@
-date: 2026-04-22
+date: 2026-04-23
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #108: pm(standup-morning): 2026-04-21 — merged at 00:08 UTC
-- PR #110: pm(standup-compile): 2026-04-21 — merged at 02:00 UTC
+- PR #112: pm(standup-morning): 2026-04-22 — merged at 00:07 UTC
+- PR #114: pm(standup-compile): 2026-04-22 — merged at 02:00 UTC
 
 **Next:**
 - No open work detected
@@ -33,14 +33,14 @@ None
 ## writer
 
 **Completed:**
-- No activity
+- PR #116: writer: Apr 20 Money catch-up + Apr 27 Career (5 posts) — merged at 07:17 UTC
+- PR #117: fgf: writer adds English + Vietnamese card PROMPTS (Journal Page); designer renders — merged at 07:50 UTC
 
 **Next:**
-- Resolve remaining skill execution gaps from review
-- Implement SM handoff contract
+- No open work detected
 
 **Blockers:**
-Writer agent skill gaps documented — fixes applied by Dave and Trac, verify before next scheduled run
+None
 
 ---
 
@@ -60,10 +60,10 @@ None
 ## image-designer
 
 **Completed:**
-- No activity
+- PR #118: Designer: Hero images — 2026-04-23 — merged at 19:11 UTC
 
 **Next:**
-- Ready for use in blog hero image generation workflow
+- No open work detected
 
 **Blockers:**
 None

@@ -262,6 +262,54 @@ Do this for every topic slug written in this session.
 
 ---
 
+## Step 10: Draft the Weekly Email
+
+After all posts for the week are written, draft a single email that ties them together and links to each.
+
+### Format
+
+Save the draft as `/emails/drafts/YYYY-MM-DD.md` where the date is the Monday of the publish week.
+
+```markdown
+Subject: [Compelling subject line — one sentence, no more than 60 characters]
+
+[Short intro — 1–2 sentences connecting the week's theme across all three posts]
+
+**[Post 1 title]**
+[2–3 sentence blurb that teases the post without giving it all away]
+Read more → https://mahjong-tarot.com/blog/posts/[slug]
+
+**[Post 2 title]**
+[2–3 sentence blurb]
+Read more → https://mahjong-tarot.com/blog/posts/[slug]
+
+**[Post 3 title]**
+[2–3 sentence blurb]
+Read more → https://mahjong-tarot.com/blog/posts/[slug]
+
+[Closing line — warm, personal, in Bill's voice]
+
+[CTA — one link to /readings or /the-mahjong-mirror depending on the week's theme]
+
+— Bill
+```
+
+### Rules
+
+- Total body copy: ~300 words (excluding subject line)
+- Slugs come from the posts written this session — use the exact slugs from Step 2, don't invent them
+- Subject line must work as a standalone hook — not "This week on the blog"
+- Tone: Bill's voice, warm and direct, as if writing to a friend on the list
+- The intro should name the week's unifying theme (e.g. money, career, love) without being generic
+
+### Create the folder if needed
+
+```bash
+mkdir -p emails/drafts
+```
+
+---
+
 ## Step 9: Confirm
 
 Report back with:
@@ -276,4 +324,5 @@ Report back with:
 8. **Blog index updated:** the row added
 9. **Content calendar updated:** which topic lines changed from PLANNED → WRITTEN
 10. **Source material used:** which files from `content/source-material/` and `content/topics/` were read
-11. **Anything flagged:** missing source material, thin content areas, or decisions that need human review
+11. **Weekly email draft:** path to the saved draft file and subject line used
+12. **Anything flagged:** missing source material, thin content areas, or decisions that need human review

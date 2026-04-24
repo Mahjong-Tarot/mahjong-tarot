@@ -16,7 +16,7 @@ First, output this to the user:
 
 Then output this agenda:
 ```
-P1 — Local Machine Setup (~20 min)
+P1 — Local Machine Setup (~30 min)
 Here's what I'm setting up:
 
   1. Developer tools (gh, node, vercel CLI, supabase CLI)
@@ -26,25 +26,30 @@ Here's what I'm setting up:
   5. Folder structure + architecture docs
   6. CLAUDE.md files (global + project)
   7. Environment variable template
-  8. Supabase MCP connection
-  9. Install skills (create-local-task, daily-checkin, skill-creator)
- 10. Initial commit
+  8. Write Supabase credentials to .env
+  9. Supabase MCP connection
+ 10. Install skills (create-local-task, daily-checkin, skill-creator)
+ 11. Initial commit
+ 12. GitHub repo creation + Vercel import
 
-I'll ask you 4 questions, then run everything automatically.
+I'll ask you 6 questions, then run everything automatically.
 ```
 
-Then ask these four questions in one message:
+Then ask these questions in one message:
 
 ```
-Four quick questions before I start:
+A few quick questions before I start:
 
 1. Your project folder name (e.g. "acme-marketing" — no spaces)
 2. Your name and email for git (e.g. "Jane Smith" / jane@example.com)
-3. Your Supabase personal access token from P0 Step 4 (starts with "sbp_...")
-4. Did you set up Lark in P0 Step 6? (yes / no)
+3. Your Supabase Project URL from P0 Step 4 (looks like https://xxxx.supabase.co)
+4. Your Supabase anon key from P0 Step 4 (long JWT string)
+5. Your Supabase service role key from P0 Step 4 (different long JWT string)
+6. Your Supabase personal access token from P0 Step 4 (starts with "sbp_...")
+7. Did you set up Lark in P0 Step 6? (yes / no)
 ```
 
-Wait for all three answers. Then run every step below without stopping or asking anything further.
+Wait for all answers. Then run every step below without stopping or asking anything further.
 
 ---
 
@@ -368,12 +373,30 @@ EOF
 
 ---
 
-## STEP 12 — Supabase MCP
+## STEP 12 — Write Supabase credentials to .env
+
+Using the values from answers 3, 4, and 5:
+
+```bash
+cat > .env << ENVEOF
+NEXT_PUBLIC_SUPABASE_URL={supabase-project-url}
+NEXT_PUBLIC_SUPABASE_ANON_KEY={supabase-anon-key}
+SUPABASE_SERVICE_ROLE_KEY={supabase-service-role-key}
+GEMINI_API_KEY=
+RESEND_API_KEY=
+LARK_BOT_TOKEN=
+LARK_CHAT_ID=
+ENVEOF
+```
+
+---
+
+## STEP 13 — Supabase MCP
 
 ```bash
 python3 - <<PYEOF
 import json, os
-token = "{supabase token from answer}"
+token = "{supabase personal access token from answer 6}"
 path = os.path.expanduser("~/.claude/settings.local.json")
 settings = {}
 if os.path.exists(path):
@@ -392,7 +415,7 @@ PYEOF
 
 ---
 
-## STEP 13 — Install skills
+## STEP 14 — Install skills
 
 **create-local-task:**
 ```bash
@@ -468,11 +491,63 @@ If no: skip.
 
 ---
 
-## STEP 14 — Initial commit
+## STEP 15 — Initial commit
 
 ```bash
 git add CLAUDE.md .gitignore .env.example .claude/ agents/ architecture/ content/ resources/ context/ standup/
 git commit -m "bootstrap: P1 complete — structure, config, skills"
+```
+
+---
+
+---
+
+## STEP 16 — GitHub repo + Vercel import
+
+### 16a — Create GitHub repository
+
+Check if the user already has a GitHub repo for this project:
+
+```bash
+gh repo view 2>/dev/null && echo "REPO_EXISTS" || echo "NO_REPO"
+```
+
+If `NO_REPO`: create it and push the initial commit:
+
+```bash
+gh repo create {project-name} --private --source=. --push
+```
+
+If `REPO_EXISTS`: just push:
+
+```bash
+git push -u origin main
+```
+
+### 16b — Import into Vercel
+
+Output this to the user and **wait for their confirmation before continuing**:
+
+```
+▲  VERCEL IMPORT
+
+Now let's connect your project to Vercel for automatic deployments.
+
+1. Go to https://vercel.com/new
+2. Under "Import Git Repository", find {project-name} and click Import
+3. On the Configure Project screen:
+   - Framework Preset: Next.js (auto-detected)
+   - Root Directory: click Edit → type "website" → click Continue
+4. Under Environment Variables, add all three:
+   - NEXT_PUBLIC_SUPABASE_URL  → (your Supabase project URL)
+   - NEXT_PUBLIC_SUPABASE_ANON_KEY  → (your anon key)
+   - SUPABASE_SERVICE_ROLE_KEY  → (your service role key)
+5. Click Deploy
+
+Vercel will build the project. The first deploy may take 1–2 minutes.
+Once it shows "Congratulations!", copy the deployment URL — you'll need it.
+
+Reply "done" (and optionally the deployment URL) when it's live.
 ```
 
 ---

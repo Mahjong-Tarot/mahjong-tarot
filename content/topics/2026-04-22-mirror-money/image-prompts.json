@@ -1,0 +1,63 @@
+{
+  "topic": "Using the four-angle Mahjong Mirror framework to decide whether to take a financial risk this year — movement with clarity versus movement from impulse.",
+  "phrases": [
+    "Movement with clarity is a strategy.",
+    "Know what you are actually deciding.",
+    "The right question changes the answer.",
+    "Four angles, one clear picture."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A woman at a crossroads moment — standing at a window overlooking a city at dusk, one hand resting on the glass. She is seen from behind, in profile. The cityscape below suggests financial activity and opportunity. She is deciding. Not anxious — deliberate. The posture carries the weight of a significant choice made with clarity.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman in her 40s seen from behind, standing at a tall floor-to-ceiling window in a modern but warm interior space. One hand rests flat on the glass. Outside, a city at dusk — warm amber streetlights and the blue-hour sky. Her silhouette is lit from the window light. She wears a dark blazer. The pose is still, deliberate, contemplative — not anxious. The mood is the moment before a significant decision, heavy with clarity rather than doubt. Cinematic depth of field. Warm amber and deep blue tones. No text, no watermarks. No Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk",
+      "content_type": "wed-facebook-en",
+      "concept": "A card from the Mahjong Mirror deck — the Pearl suit card, representing wealth and hidden value. Held in a woman's hand against a dark background, the card's artwork illuminated from one side. The Pearl card connects to the financial theme and the discovery of what is truly valuable in a decision.",
+      "image_style": "SCENE",
+      "card": "Pearl (Suit card)",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A single ornate playing card held between two feminine fingers against a deep midnight jade background. The card is illustrated in an antique East Asian style — it depicts a luminous pearl resting in a dark sea, rendered in antique gold and ivory ink on aged parchment-toned card stock. The card is slightly angled, catching warm side-lighting that gives it dimension and weight. The fingers are elegant, relaxed. The composition is minimal and intimate — the card fills most of the frame. The background is very dark, almost black. No text visible on the card, no legible characters. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk",
+      "content_type": "wed-instagram",
+      "concept": "A bold text-background image for the affirmation 'Movement with clarity is a strategy.' — a deep, richly textured background in midnight jade with subtle gold filigree that evokes decisiveness and precision, designed to carry the text overlay in post-production.",
+      "image_style": "TEXT",
+      "text": "Movement with clarity is a strategy.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A richly textured abstract background in deep midnight jade green, with subtle antique gold geometric patterns dissolving at the edges — like an aged architectural document or a detail from an old East Asian map. The center of the composition is slightly lighter and clear, with darker, more textured borders. The texture feels handmade, deliberate, and dignified. No text anywhere. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk",
+      "content_type": "thu-facebook-en",
+      "concept": "A still-life object image representing the weight of a financial decision — a vintage balance scale on a worn desk, one side holding a single coin, the other side empty. The scale is slightly tipped. Morning light from a window. Not anxious or dramatic — the quiet mathematics of a considered choice.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A vintage brass balance scale sits on an aged wooden desk. One pan holds a single antique coin; the other is empty, slightly higher. Early morning light streams in from the left, casting long soft shadows across the desk surface. The scale's metal is warm brass, dulled with age. The desk has the character of a scholar's workspace — a few papers at the edge, out of focus. The mood is quiet, analytical, purposeful. The composition is wide and cinematic with the scale as the central subject. Warm ivory and antique gold tones. No text, no people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk",
+      "content_type": "thu-instagram",
+      "concept": "An abstract visual metaphor for clarity through complexity — light refracted through a prism or crystal onto a dark surface, breaking into a spectrum of distinct, ordered paths. The idea of multiple angles producing a clear picture.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A single clear glass prism sits on a dark slate surface. A narrow beam of warm amber light enters from one side and refracts into four distinct bands of golden and soft light spreading across the surface. The prism is sharp and precisely rendered. The background is very dark. The light bands are warm — amber, gold, pale ivory. Square composition. Minimal, scientific, beautiful. No text, no people. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

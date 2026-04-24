@@ -35,7 +35,8 @@ Each week has three topics:
 | Friday | Social only | **Feel Good Friday — positive challenge** |
 
 Note for each topic:
-- The **slug** (topic folder name) from the calendar
+- The **folder slug** from the calendar — format is `<YYYY-MM-DD>-<type>-<topic>` where type is `horse` / `mirror` / `feel-good` and date is the publish date (see `content/content-calendar/content-calendar-process.md` → Folder Naming Convention for the full rule)
+- The **slug** — the semantic URL slug for the published post (different from the folder slug). You decide this and write it to each blog markdown's frontmatter as `slug:`. Keep it descriptive for SEO (e.g. `how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk`)
 - The **angle** (Fire Horse, Mahjong Mirror, or Feel Good Friday)
 - The **hooks** for each day and channel
 - Any **chapter/tile focus** noted in the calendar
@@ -62,7 +63,7 @@ Every social post that links to a blog post must use the full URL. The blog URL 
 https://www.mahjong-tarot.com/blog/posts/<slug>
 ```
 
-Where `<slug>` is the topic slug from the content calendar. Use this URL in all Facebook CTAs and as the `[blog link]` placeholder in all social files. For Instagram, use "Link in bio" as the CTA (Instagram doesn't support clickable links in captions).
+Where `<slug>` is the semantic URL slug you defined in the blog markdown's frontmatter (NOT the folder name). Folder names follow `<YYYY-MM-DD>-<type>-<topic>` for organization; URL slugs stay descriptive for SEO. Use this URL in all Facebook CTAs and as the `[blog link]` placeholder in all social files. For Instagram, use "Link in bio" as the CTA (Instagram doesn't support clickable links in captions).
 
 **Monday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<monday-slug>`
 **Wednesday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<wednesday-slug>`
@@ -279,12 +280,17 @@ Same SEO guide format as Steps 3c and 4c, for the Friday blog.
 ### 6a. Create one folder per topic
 
 ```
-content/topics/<monday-slug>/
-content/topics/<wednesday-slug>/
-content/topics/<friday-slug>/
+content/topics/<YYYY-MM-DD>-horse-<topic>/      # Monday Fire Horse post
+content/topics/<YYYY-MM-DD>-mirror-<topic>/     # Wednesday Mahjong Mirror post
+content/topics/<YYYY-MM-DD>-feel-good-<topic>/  # Friday Feel Good Friday post
 ```
 
-The slugs come from the content calendar.
+Folder name = publish date + angle type + short topic keyword. See `content/content-calendar/content-calendar-process.md` → Folder Naming Convention.
+
+**Examples:**
+- `content/topics/2026-04-20-horse-money/`
+- `content/topics/2026-04-22-mirror-money/`
+- `content/topics/2026-04-24-feel-good-money/`
 
 ### 6b. Save files to the correct folders
 
@@ -316,7 +322,7 @@ content/topics/<wednesday-slug>/
 
 **Friday topic folder (Feel Good Friday):**
 ```
-content/topics/<friday-slug>/
+content/topics/<friday-folder>/
 ├── blog-feel-good-friday.md
 ├── seo-feel-good-friday.md
 ├── fri-facebook-en.md
@@ -324,9 +330,111 @@ content/topics/<friday-slug>/
 └── fri-instagram.md
 ```
 
+The designer will produce images for all files above PLUS two affirmation cards required by Step 7d: `<url-slug>-card.png` (English) and `<url-slug>-card-vn.png` (Vietnamese). Include the `card` and `card-vn` entries in `image-prompts.json`.
+
 ---
 
-## Step 7: Update the Topic Index
+## Step 7: Write `image-prompts.json` for every topic
+
+You own the creative brief for images — not the designer. You've just written every word of the blog and social posts, so you know the emotional core, the specific phrases, and the scenes better than anyone. Write one image prompt per content file (skip `seo-*.md`) and save them as `content/topics/<folder>/image-prompts.json`.
+
+### 7a. Read the designer's style guide
+
+Read `agents/designer/context/style-guide.md` in full. It defines:
+- Brand palette (plain English color names to cite in prompts)
+- Image style categories (HUMAN / TEXT / SCENE) — mix styles, never repeat within one topic
+- Non-negotiables (no text *in* images, no generic stock, women don't face camera directly)
+
+### 7b. Extract the visual brief from your own writing
+
+For each topic, write down (in your head or scratch):
+- **What the post is actually about** — the real-world topic (weddings, career change, finances) — not "mahjong"
+- **3–5 short phrases** from your blog that are card-worthy text lines (punchy, quotable, perfect English). These get used as the `text` field for TEXT-style images. Examples: "Know yourself first." / "Balance over heat."
+- **3–4 scenes of real people doing the topic** — a bride fixing her veil, a woman at a cafe opening a financial app, a man staring at his email inbox. These feed HUMAN-style prompts.
+
+### 7c. Assign a style to each file and write the prompt
+
+For each content file in the topic, pick ONE `image_style` (HUMAN / TEXT / SCENE) such that no two files in the same topic share a style. Aspect ratios:
+- `blog-*` and `*-facebook-*` → 16:9 (1200×630)
+- `*-instagram*` → 1:1 (1080×1080)
+
+**Mahjong Mirror cards — Wednesday only.** The Mahjong Mirror deck lives in `agents/designer/context/mahjong-cards/` (Guardian, Honor, Suit categories). You may reference a card ONLY in `wed-*.md` files, and only when the blog naturally references it. Never force cards into Monday/Tuesday/Thursday/Friday imagery.
+
+**Every prompt must end with:** `No watermarks or Western zodiac imagery anywhere in the image.`
+
+### 7d. Feel Good Friday — ALWAYS add two affirmation card PROMPTS
+
+You write the *prompts* here, nothing else — the designer will call Gemini later to turn each prompt into the actual PNG. Every Feel Good Friday topic (folder `YYYY-MM-DD-feel-good-<topic>`) gets TWO extra TEXT-style entries in `image-prompts.json`, in addition to the normal blog/social image prompts:
+
+1. **English affirmation card**
+   - `file`: `card` (logical name; the designer outputs `<url-slug>-card.png`)
+   - `content_type`: `card`
+   - `image_style`: `TEXT`
+   - `aspect_ratio`: `1:1`, `dimensions`: `1080x1080`
+   - `text`: pick ONE phrase from the topic's `phrases` array — the most quotable, emotionally decisive line. 6–12 words max. Must end with a period or period-then-period (fragment is fine).
+
+2. **Vietnamese affirmation card**
+   - `file`: `card-vn`
+   - `content_type`: `card-vn`
+   - `image_style`: `TEXT`
+   - `aspect_ratio`: `1:1`, `dimensions`: `1080x1080`
+   - `text`: a NATURAL Vietnamese translation of the English affirmation (not word-for-word — adapt idioms so it lands as a card). Preserve diacritics (ă, â, ê, ô, ơ, ư, đ, and tone marks) exactly.
+
+**Style — always Journal Page.** Both cards use the same antique-inked-calligraphy-on-aged-paper template. Paste the full template below into the `prompt` field, substituting the exact phrase into the quoted text and adjusting only the opening sentence to describe the phrase briefly if needed.
+
+```
+A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture — subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: "<EXACT AFFIRMATION HERE>". Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant — modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image.
+```
+
+The two card entries are REQUIRED for every Feel Good Friday topic. Monday and Wednesday topics do not get card entries.
+
+### 7e. Save the JSON
+
+Save to `content/topics/<folder>/image-prompts.json` with this structure:
+
+```json
+{
+  "topic": "<what the post is actually about — one sentence>",
+  "phrases": ["<phrase 1>", "<phrase 2>", "..."],
+  "images": [
+    {
+      "file": "<content-file.md>",
+      "slug": "<url-slug from the blog frontmatter>",
+      "content_type": "<filename without .md>",
+      "concept": "<what this image shows and why>",
+      "image_style": "HUMAN | TEXT | SCENE",
+      "text": "<exact phrase — only for TEXT style, omit otherwise>",
+      "card": "<card name and category — only for Wednesday card references, omit otherwise>",
+      "aspect_ratio": "16:9 | 1:1",
+      "dimensions": "1200x630 | 1080x1080",
+      "prompt": "<full prompt>"
+    }
+  ]
+}
+```
+
+The designer will read this file, validate it, and call the Gemini API to generate images. The designer will NOT rewrite your prompts — they're yours.
+
+---
+
+## Step 8: Em dash sweep (MANDATORY)
+
+Before moving on, scan every file you wrote in this run for em dashes (`—`, U+2014). This is a hard rule from the writer style guide — em dashes are banned in Bill's voice.
+
+```bash
+# From repo root. Lists every file + line that still has an em dash.
+grep -rn "—" content/topics/<each-folder-you-wrote>/ || echo "clean"
+```
+
+For every hit, rewrite the sentence using a period, colon, comma, parentheses, or a full rewrite (see the writer style guide, Part 3, "Punctuation — NO EM DASHES"). Do NOT simply replace `—` with `-` or `,` blindly: pick the punctuation that actually fits the sentence, and rewrite if none do.
+
+Re-run the grep after edits. Only proceed to Step 9 when every folder returns `clean`.
+
+This sweep applies to: `blog-*.md`, `seo-*.md`, every social file (EN and VN), and `image-prompts.json` (the `concept` and `prompt` fields). VN translations in particular tend to carry em dashes over from English — strip them.
+
+---
+
+## Step 9: Update the Topic Index
 
 Add a row for each blog post to the SEO table in `content/topics/INDEX.md`. Group by week. Each row contains:
 
@@ -338,17 +446,17 @@ Pull these values directly from the SEO guide files you wrote in earlier steps.
 
 ---
 
-## Step 8: Update the Content Calendar Status
+## Step 10: Update the Content Calendar Status
 
 In `content/content-calendar/content-calendar.md`, append `— STATUS: WRITTEN` to each topic line for the week you just processed. For example:
 
 ```
-**Topic: some-topic-slug** — STATUS: WRITTEN
+**Topic: some-topic-folder** — STATUS: WRITTEN
 ```
 
 ---
 
-## Step 9: Notify and confirm
+## Step 11: Notify and confirm
 
 Send notifications to the Labs Lark group and all members via email, then report back.
 
@@ -364,7 +472,7 @@ LARK_MSG="✍️ Writer done — Week of <monday-date>
 • <fire-horse-title>
 • <mahjong-mirror-title>
 • <feel-good-friday-title>
-Review blog posts in content/topics/ before designer generates images."
+Review blog posts and image-prompts.json in content/topics/ before designer generates images."
 
 EMAIL_SUBJECT="[Writer] Done — Week of <monday-date>"
 EMAIL_BODY="Writer has completed all content for the week of <monday-date>.
@@ -374,8 +482,8 @@ Posts written:
 • <mahjong-mirror-title>  →  content/topics/<wednesday-slug>/blog-mahjong-mirror.md
 • <feel-good-friday-title>  →  content/topics/<friday-slug>/blog-feel-good-friday.md
 
-Review each blog post. The designer will generate image-prompts.md and images next.
-If you want to adjust the content before images are generated, edit the blog files now."
+Review each blog post and each image-prompts.json. The designer will generate images from those prompts next.
+If you want to adjust the content or prompts before images are generated, edit the files now."
 
 lark-cli im +messages-send --chat-id "$LABS_CHAT" --as bot --text "$LARK_MSG" 2>/dev/null || true
 

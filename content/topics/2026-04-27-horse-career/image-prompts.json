@@ -1,0 +1,62 @@
+{
+  "topic": "The Fire Horse year will disrupt careers whether you choose to act or not — the only question is which direction. Historical pattern from 1906 and 1966: the proactive thrive, the passive get burned.",
+  "phrases": [
+    "Passive is not a defense.",
+    "Which direction do you want it to go?",
+    "The year accelerates everything.",
+    "Autopilot gets torched."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "blog-fire-horse",
+      "concept": "An image representing the volatile force of disruption in a career landscape — a busy intersection in a major city photographed from above at dusk, with motion blur on the traffic. The city grid is both ordered and chaotic. People below are tiny but clearly in motion. The scale contrast — vast city system versus individual human movement — captures the historical and systemic disruption the post describes.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A bird's-eye-view photograph of a major city intersection at dusk, shot from directly above. Traffic moves in all directions, creating light trails from motion blur — amber headlights and red taillights streak across dark asphalt. The city grid extends to the edges of the frame. A few pedestrians are visible as small figures on the crosswalks. The mood is kinetic, vast, unstoppable. Deep indigo sky at the edges of the frame. Warm amber and red light trails. The scale makes the individual figures feel both small and significant. No text, no faces clearly visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "mon-facebook-en",
+      "concept": "A bold text-background image for the phrase 'Autopilot gets torched.' — a dramatic, atmospheric background suggesting the disruption of comfortable stasis, designed to carry the text overlay in post-production.",
+      "image_style": "TEXT",
+      "text": "Autopilot gets torched.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "An abstract atmospheric background in deep plum and midnight jade, with streaks of warm amber and deep red moving diagonally across the frame — like heat distortion or a long-exposure blaze photographed from a distance. The texture is painterly and cinematic. The palette is dark with bursts of warm amber-orange. No text, no people, no symbols, no fire shapes, no literal flames. The mood is disruption, acceleration, transformation. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "mon-instagram",
+      "concept": "A close-up of a man from behind, in a crowded professional environment — a hallway or open-plan office — walking toward a bright doorway at the end. Everyone else is static; he is the one in motion. The contrast between movement and stasis is the visual thesis of the post.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A man in professional clothing seen from behind, walking briskly down a corridor or open-plan office space. At the far end, a bright doorway or large window floods the frame with warm amber light. Other figures in the background are stationary, blurred — suggesting they are paused or static. He is the one moving. The motion blur is subtle but present on him. Square format. The palette is: dark neutral tones in the foreground, warm amber glow at the end. The mood is forward momentum — one person chosen to move while others wait. No faces visible. No text. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "tue-facebook-en",
+      "concept": "Two contrasting environments side by side: a stagnant, artificially lit office cubicle on the left and an energetic outdoor scene with open sky and movement on the right. The split frame captures passive versus active — the comfortable trap versus the volatile opportunity.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A split-composition image. The left half shows a corporate office interior — flat fluorescent light, gray partition walls, a still desk chair. The colors are muted, cool, institutional. The right half shows an outdoor scene in warm golden hour light — an open urban street or plaza with people moving in the distance, dynamic energy. The divide between the two halves is sharp and architectural, like a wall or doorframe. The contrast is sharp: static vs. kinetic, artificial vs. natural, trapped vs. open. No text, no readable faces. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "fire-horse-will-blow-up-your-career",
+      "content_type": "tue-instagram",
+      "concept": "An old newspaper front page from 1966 — period typography, dramatic headline, photo of a crowd or city street in motion. The image evokes the historical disruption the post documents without being literal.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A crumpled, aged newspaper spread on a worn surface, photographed at a slight angle with warm amber side-lighting. The newspaper is period-appropriate — mid-1960s broadsheet format with bold column rules and photographic halftones. The front page image shows a crowd in a city street, mid-movement — a moment of visible energy and change. No readable text or real headlines — the typography is impressionistic, not legible. The paper is yellowed and textured. Square format. The mood is historical weight, the record of transformation. Warm sepia and amber tones. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

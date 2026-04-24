@@ -1,1049 +1,670 @@
-# P2 — Website Infrastructure + Core Agent Setup
-> **Prerequisites:** P1 complete. Project folder exists, Claude Code running.
+# P2 — Website + AI Team Setup
+> **Prerequisites:** P1 complete.
 > **Where:** Claude Desktop — Code tab.
-> **Time:** ~45–60 minutes
-> **Done when:** Website live on Vercel, 4 core agents installed, PM schedules active.
+> **Done when:** Website live, agents installed, schedules running.
 
 ---
 
 ## INSTRUCTIONS FOR CLAUDE CODE
 
-This phase sets up the technical foundation and installs the core AI team from a proven
-template. No business interview yet — that happens in P3.
+At the start of this phase, output:
+```
+⚠️  Do not try to open or read any files during this process.
+    It's highly technical — you don't need to understand it.
+    Just answer when I ask you something. Everything else is automatic.
+```
 
-Rules:
-- Ask only the minimum needed to create the repo and configure schedule times
-- Install all 4 core agents from templates — no customisation questions
-- Use `{placeholder}` tokens for any business-specific values
-- Narrate every step — never run commands in silence
+Then output this agenda:
+```
+P2 — Website + AI Team Setup (~60–90 min)
+Here's what I'm building:
 
-**How to communicate with the user throughout P2:**
-- Before every section, say in one plain-English sentence what you are about to do and why.
-- When a new tool or concept is introduced, explain it in one sentence before using it.
-- After each major step completes, confirm it worked before moving on.
+  1. Brand inference — read your website, docs, or description
+  2. Write brand resources — voice, design system, style guide, audience
+  3. Website scaffold — Next.js + Tailwind + shadcn + your brand colours
+  4. Deploy — GitHub repo, Vercel, Supabase tables
+  5. Install core agents — Project Manager, Writer, Designer, Web Developer
+  6. Register PM schedules — standup reminders, daily briefing, weekly RAG
+  7. Optional agents — Product Manager, Marketing Manager, Social Media Manager
+  8. Verify everything works
+  9. Final summary with your live site URL and first actions
+
+I'll ask a few questions, then run everything. You'll only need to step in once
+to click Deploy in Vercel.
+```
+
+Then ask these questions in one message:
+
+```
+A few quick questions before I start:
+
+1. What is your business/project name?
+2. What timezone are you in? (e.g. Bangkok, Sydney, London, New York)
+3. Share anything about your brand — pick one:
+   (a) Paste your website URL
+   (b) Attach a brand guide, style doc, or any document
+   (c) Just describe your business in a sentence or two
+   (d) Nothing — I'll create a default package
+```
+
+Wait for all answers. Then run everything below without stopping.
 
 ---
 
-## SECTION 1 — Minimal Setup Info
+## SECTION 1 — Brand Inference
 
-Ask in a single message:
+Based on the answer to question 3:
+
+**Path A — URL provided:**
+Use WebFetch to crawl: homepage, about, blog (first 3 posts), contact.
+Extract: primary/secondary/background hex colours, font families, heading/body fonts, voice tone (formal/casual, first/third person), content topics from navigation, audience signals from copy.
+
+**Path B — Documents attached:**
+Extract the same fields from the attached files.
+
+**Path A+B — both:**
+Combine both sources; URL takes priority for visual properties, documents take priority for voice/tone.
+
+**Path D — nothing provided:**
+Use defaults:
+- Primary: `#1a1a2e` · Accent: `#e8c547` · Surface: `#ffffff` · Text: `#1a1a2e`
+- Font: Georgia / system-ui
+- Tone: professional, warm, conversational, first-person
+- Audience: general / curious beginners + engaged practitioners
+
+Write the four resource files. Then output a summary of what was inferred:
 
 ```
-QUICK SETUP (2 questions before I begin)
+Brand inferred:
+  Primary colour: {hex}
+  Accent colour:  {hex}
+  Fonts:          {heading} / {body}
+  Tone:           {tone summary}
+  Audience:       {audience summary}
 
-1. What is your project/business name?
-   (used for your repo and folder — e.g. "acme-marketing")
-
-2. What is your timezone?
-   (e.g. "Bangkok" / "Singapore" / "Sydney" / "London" / "New York")
-   This sets when your agent schedules fire each day.
+Reply "yes" to continue, or correct anything.
 ```
 
-Wait for answers. Then proceed immediately — no further questions needed at this stage.
+Wait for confirmation before proceeding.
+
+`resources/brand-voice.md` — tone, person, vocabulary, CTA style, words to avoid
+`resources/design-system.md` — colour palette (hex), typography, image style, spacing
+`resources/web-style-guide.md` — post structure, length, categories (News / Advice / Story / Deep Dive / Guide), SEO defaults
+`resources/audience-personas.md` — 2 personas derived from inference (or defaults)
+
+Also save any logo or images found during URL crawl → `content/source-material/brand/`
 
 ---
 
-## SECTION 2 — Scaffold Website
+## SECTION 2 — Website Scaffold
 
-Say:
-```
-I'm going to create your website skeleton now.
-It will be live on Vercel within 30 minutes.
-The pages will have placeholder content — we'll fill them in with your real
-business details in P3 after the discovery interview.
-```
-
-### 2A — Create Next.js app
-
-Say:
-```
-I'm creating your website using Next.js — the same framework used by Nike,
-Netflix, and TikTok. It handles fast loading, SEO, and server-side rendering
-automatically. This command scaffolds the base structure in about 60 seconds.
+```bash
+mkdir -p content/source-material/brand content/source-material/images content/source-material/research
+mkdir -p content/topics
+touch content/topics/.gitkeep
 ```
 
 ```bash
-cd website && npx create-next-app@latest . --pages --no-typescript --no-tailwind --no-app --no-src-dir --yes
-```
-
-After: `✅ Website scaffold created.`
-
-Create these files with clean, placeholder-ready content:
-
-- `pages/index.jsx` — Homepage: placeholder hero + "[Business Name]" tokens, value proposition stub, CTA
-- `pages/about.jsx` — About page with "[Business Name]" placeholder
-- `pages/contact.jsx` — Contact form stub → `/api/contact`
-- `pages/api/contact.js` — API stub: logs to console, returns 200
-- `pages/blog/index.jsx` — Blog listing (empty state: "Posts coming soon")
-- `components/Nav.jsx` — "[Business Name]" + page links (Blog, About, Contact)
-- `components/Footer.jsx` — Placeholder social links, copyright year auto-filled
-- `components/NewsletterSignup.jsx` — Email signup stub
-- `styles/globals.css` — CSS variables (neutral defaults: `--color-primary: #1a1a2e`, `--color-accent: #f59e0b`, white background, clean sans-serif)
-- `website/.env.local.example` — NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
-- `website/supabase/001_initial_schema.sql` — contact_submissions and newsletter_subscribers tables
-
-Each page must: use Nav and Footer, include `<Head>` with placeholder title + description,
-use CSS variables only (no inline styles). Mark every placeholder with `{/* P3: update with real content */}`.
-
-### 2B — Push to GitHub and deploy to Vercel
-
-Say:
-```
-Now I'll push your website code to GitHub (your version history and backup),
-then connect it to Vercel — the hosting service that puts your site on the internet.
-Every time you or your agents push a change, Vercel automatically redeploys your site.
+cd website
+npx create-next-app@latest . --yes
 ```
 
 ```bash
-gh repo create {project-name}-marketing --private --source=. --remote=origin --push
+cd website
+npx shadcn@latest init --defaults
+npx shadcn@latest add button card input label textarea
 ```
 
-After: `✅ Code is on GitHub.`
+Inject brand colours into `website/app/globals.css` — append after the shadcn `:root` block:
+
+```python
+import re, os
+with open("resources/design-system.md") as f: content = f.read()
+def extract(label):
+    m = re.search(rf'{label}[^\n#]*(#[0-9a-fA-F]{{6}})', content, re.IGNORECASE)
+    return m.group(1) if m else None
+primary = extract("primary") or "#1a1a2e"
+accent  = extract("accent")  or "#e8c547"
+surface = extract("surface|background") or "#ffffff"
+text    = extract("text|foreground") or "#1a1a2e"
+brand_css = f"""
+/* Brand — injected by bootstrap */
+:root {{
+  --brand-primary: {primary};
+  --brand-accent:  {accent};
+  --brand-surface: {surface};
+  --brand-text:    {text};
+}}
+"""
+with open("website/app/globals.css", "a") as f: f.write(brand_css)
+print("✅ Brand colours injected.")
+```
+
+Create these files using inferred brand values:
+
+`website/app/layout.tsx` — root layout wrapping Nav + Footer around `{children}`
+`website/components/Nav.tsx` — nav with business name and links: Home, About, Blog, Contact
+`website/components/Footer.tsx` — footer with business name and current year
+`website/app/page.tsx` — hero section with business name, tagline, CTA to /blog
+`website/app/about/page.tsx` — about page stub
+`website/app/contact/page.tsx` — contact form with Supabase client (use client directive)
+`website/app/blog/page.tsx` — blog listing page (empty grid, ready for posts)
+
+`website/.env.local.example`:
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+`website/supabase/001_initial_schema.sql`:
+```sql
+create table if not exists contact_submissions (
+  id uuid primary key default gen_random_uuid(),
+  name text, email text, message text,
+  created_at timestamptz default now()
+);
+create table if not exists newsletter_subscribers (
+  id uuid primary key default gen_random_uuid(),
+  email text unique not null,
+  created_at timestamptz default now()
+);
+```
+
+---
+
+## SECTION 3 — Deploy to Vercel + Connect Supabase
+
+```bash
+cd website
+git add -A
+git commit -m "bootstrap: website scaffold"
+gh repo create {project-name}-marketing --private --source=.. --remote=origin --push
+```
 
 Output to user:
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-CONNECT VERCEL TO GO LIVE:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ACTION REQUIRED — takes 3 minutes:
 
-1. Go to: https://vercel.com/new
-2. Click "Import Git Repository" → select {repo-name}
+1. Go to https://vercel.com/new
+2. Import {project-name}-marketing
+3. Set Root Directory to: website
+4. Click Deploy
 
-   ⚠️  IMPORTANT — easy to miss:
-   Find the "Root Directory" field on this page.
-   Type: website/
-   If you skip this, the deploy will fail.
+5. Go to your Supabase project → Project Settings → API
+   Copy Project URL and Anon Key
+6. In Vercel → Settings → Environment Variables, add:
+   NEXT_PUBLIC_SUPABASE_URL = {your project URL}
+   NEXT_PUBLIC_SUPABASE_ANON_KEY = {your anon key}
+   GEMINI_API_KEY = {your key from P0 Step 5}
 
-3. Click Deploy (skip env vars for now)
+7. In Supabase → SQL Editor → paste contents of
+   website/supabase/001_initial_schema.sql → Run
 
-Your site will be live in ~2 minutes.
-Come back and paste your Vercel URL when it's done.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
+8. In Vercel → Deployments → Redeploy latest
 
-Wait for the user to paste their Vercel URL.
-
-### 2C — Wire Supabase
-
-Say:
-```
-Last step for the website: I'll connect your database.
-Supabase stores contact form submissions, newsletter signups, and any data your
-site collects. Right now the website and database don't know each other —
-these steps introduce them.
-```
-
-Output to user:
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-CONNECT YOUR DATABASE:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-1. Open your Supabase project (from P0)
-   → Project Settings → API → copy:
-     Project URL  → NEXT_PUBLIC_SUPABASE_URL
-     Anon key     → NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-2. In Vercel → your project → Settings → Environment Variables
-   Add both values above
-
-3. Run the database schema:
-   Open website/supabase/001_initial_schema.sql in any text editor
-   → copy all → paste into Supabase SQL Editor → Run
-
-4. In Vercel → Deployments → Redeploy latest
-
-5. Add your Supabase MCP token:
-   - Go to: https://supabase.com/dashboard/account/tokens
-   - Create token named: {project-name}-claude
-   - Open .claude/settings.local.json
-   - Replace SUPABASE_ACCESS_TOKEN_PLACEHOLDER with the token
-   - Restart Claude Code
-
-Come back and say "database connected" when done.
+Come back and say "deployed" when done.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-Wait for "database connected".
+Wait for "deployed". Ask for the Vercel URL and note it.
 
 ---
 
-## SECTION 3 — Install Core Agent Templates
+## SECTION 4 — Install Core Agents
 
-Say:
-```
-Your website is live. Now I'll install your core AI team.
-These 4 agents come pre-configured from a proven template — Project Manager,
-Writer, Designer, and Web Developer. Each has a job description, professional
-operating standards, and skills built in.
-We'll personalise them with your actual business details in P3.
-```
-
-Install each agent in order. For each:
-- Say: "Installing [Agent Name] — [one sentence on what they do]."
-- Write the files using the templates below.
-- Confirm: "✅ [Agent Name] installed."
+Create all files below. Fill `{PROJECT_NAME}`, `{TIMEZONE}`, and brand values from inferred resources — no placeholders left in the output.
 
 ---
 
-### AGENT 1 — Project Manager
+### Agent 1 — Project Manager
 
 `.claude/agents/project-manager.md`:
 ```markdown
 ---
 name: project-manager
 description: >
-  Handles delivery tracking, daily standups, RAID log, scope changes, and weekly RAG
-  status reports. Trigger when: submitting a check-in, logging a risk or issue,
-  asking about project status, requesting standup help, or assessing a scope change.
-model: claude-sonnet-4-5
-tools: [Read, Write, Glob, Grep, Bash, RemoteTrigger]
+  Runs daily standups, compiles briefings, tracks blockers, and sends team notifications.
+  Trigger: "help me write my standup", "what's our status", "compile today's briefing".
+model: claude-sonnet-4-6
+tools: [Read, Write, Glob, Grep, Bash]
 ---
-
-# Project Manager — Quick Reference
-
-**Context files to read first:**
-- agents/project-manager/context/persona.md
-
-**Skills:**
-| Skill | Trigger |
-|-------|---------|
-| daily-checkin | "help me write my standup" / "standup time" |
-| raid-log | "log this risk" / "log this issue" / "log this dependency" |
-| scope-change | "assess this change" / "should we add this?" / "scope change" |
-| weekly-rag | "weekly status" / "RAG report" / "how are we tracking" |
-
-**Hard rules:**
-1. Never compile a standup brief before the deadline — missing check-ins noted as "Not received", never fabricated
-2. RAID log is append-only — never delete entries, only update Status field
-3. Scope changes require a formal change request and explicit owner approval — never absorb silently
-4. Any RED status item triggers immediate escalation — do not wait for the weekly report
-5. RAG thresholds: Red = blocker with no clear resolution path; Amber = risk being managed; Green = on track
+Read agents/project-manager/context/persona.md before every task.
 ```
 
 `agents/project-manager/context/persona.md`:
 ```markdown
 # Project Manager
 
-## Identity & Purpose
-Delivery owner. Runs daily standups, maintains the RAID log, monitors scope changes,
-and produces weekly RAG status reports.
-Follows PMBOK project management standards and Agile/Scrum standup practices.
+## Identity
+You are the project manager for {PROJECT_NAME}. You run daily standups, compile briefings, track blockers, and keep the team moving.
 
-> P3 update: Replace {Owner Name}, {Timezone}, and {Team Members} with real values after discovery.
+## Team roster
+(Populated in onboarding — check standup/individual/ for current members)
 
-## Team
-| Name | Type | Role |
-|------|------|------|
-| {Owner Name} | Human | Business owner / decision authority |
-| Project Manager | AI Agent | Delivery |
+## Daily routines
+- 7am: Send standup reminder
+- 9am: Read standup/individual/*.md → compile → write to standup/briefings/YYYY-MM/YYYY-MM-DD.md
+- 5pm: Send EOD check-in reminder
+- Friday 4pm: Write weekly RAG report to standup/briefings/YYYY-MM/week-YYYY-MM-DD-rag.md
 
-## Decision Authority
-- Project Manager decides: format, cadence, how to present information
-- Owner decides: scope changes, budget, priorities, any RED escalation
-- Escalation contact: {Owner Name}
+## Timezone
+{TIMEZONE}
 
-## Core Behaviors
-1. Standup: collect → compile → distribute (never skip collect phase)
-2. RAID log: append-only — every new entry gets a unique ID (RAID-NNN)
-3. Scope changes: assess first, present options, wait for explicit decision
-4. RAG: assessed against plan, not against feelings
-5. Missing check-in at compile time: note "Not received — {name}", never fabricate
+## Notifications
+Send via Lark if LARK_BOT_TOKEN and LARK_CHAT_ID are set in .env:
+`lark-cli im +messages-send --as bot --chat-id "$LARK_CHAT_ID" --text "$MSG"`
+Fall back to Resend (RESEND_API_KEY) if Lark is not configured.
 
-## Daily & Weekly Workflow
-
-**7am {Timezone} Mon-Fri — Morning reminder**
-Read standup/individual/*.md. Check if today's entry exists for each team member.
-Send a single reminder to anyone who has not checked in.
-Format: "{Name} — standup time! Add your check-in to standup/individual/{slug}.md"
-Never send more than one reminder per person per day.
-
-**9am {Timezone} Mon-Fri — Compile briefing**
-Read all standup/individual/*.md. Compile into the standard briefing format.
-Write to standup/briefings/YYYY-MM/YYYY-MM-DD.md. Missing entries → "Not received".
-
-**5pm {Timezone} Mon-Fri — EOD reminder**
-Send: "End of day — please add tonight's check-in for tomorrow's 9am compile."
-
-**Friday 4pm {Timezone} — Weekly RAG report**
-Read all standup/briefings/ from this week. Read context/raid-log.md for open items.
-Generate the RAG report. Write to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md.
-
-## Output Formats
-
-### Daily Standup Briefing
-```
-# Daily Standup — YYYY-MM-DD
-
-## Team Check-ins
-| Person | Yesterday | Today | Blockers |
-|--------|-----------|-------|---------|
-| {name} | {answer} | {answer} | None / {blocker} |
-
-## Shared Blockers
-{any cross-person dependencies or blockers — "None" if clean}
+## Hard rules
+- Never send anything externally without reading the relevant standup files first
+- RAG status: 🟢 Green = on track, 🟡 Amber = at risk, 🔴 Red = blocked
 ```
 
-### RAID Log Schema
-File: `context/raid-log.md` — append-only markdown table. Never delete a row.
-
-| ID | Category | Title | Detail | Probability | Impact | Score | Response | Owner | Action | Status | Raised | Updated |
-|----|----------|-------|--------|-------------|--------|-------|----------|-------|--------|--------|--------|---------|
-
-- **ID**: RAID-001, RAID-002, … (sequential, never reused)
-- **Category**: Risk | Assumption | Issue | Dependency
-- **Score**: HH=Critical, HM/MH=High, MM/HL/LH=Medium, ML/LM/LL=Low
-- **Status**: Open | Monitoring | Resolved | Closed
-
-### Weekly RAG Status Report
-```
-# Weekly Status Report — Week of YYYY-MM-DD
-
-**Overall Status:** 🟢 Green / 🟡 Amber / 🔴 Red
-
-## Executive Summary
-{2–3 sentences: what was accomplished, overall health, key risk if any}
-
-## Progress vs Plan
-| Milestone | Planned | Actual | Status |
-|-----------|---------|--------|--------|
-
-## Open RAID Items
-{Open/Monitoring rows from context/raid-log.md — or "None"}
-
-## Decisions Needed
-| Decision | Owner | By When |
-
-## Next Week Plan
-1. {top priority}
-```
-
-### Scope Change Request
-```
-# Change Request — CR-{NNN}
-
-**Date:** YYYY-MM-DD  **Requested by:** {name}  **Priority:** Critical | High | Medium | Low
-
-## Description
-## Business Case
-## Impact Assessment
-| Dimension | Current | With Change | Delta |
-|-----------|---------|-------------|-------|
-| Timeline | | | |
-| Scope | | | |
-| Effort | | | |
-| Risk | | | |
-
-## Options
-**A — Accept:** ...  **B — Reject:** ...  **C — Defer:** ...
-
-## Recommendation
-## Decision
-[ ] Accepted  [ ] Rejected  [ ] Deferred
-**Decided by:** {owner}  **Date:** {date}
-```
-
-## Canonical Artifacts
-| Artifact | Path | Cadence |
-|----------|------|---------|
-| Daily briefing | standup/briefings/YYYY-MM/YYYY-MM-DD.md | Daily Mon-Fri |
-| Weekly RAG | standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md | Friday |
-| RAID log | context/raid-log.md | Append on event |
-| Change requests | context/change-requests/CR-NNN.md | On event |
-```
-
-Also create these 3 skill files for the Project Manager:
-
-`agents/project-manager/context/skills/raid-log/SKILL.md`:
+`agents/project-manager/context/standup-compile.md`:
 ```markdown
----
-name: raid-log
-description: Log a new Risk, Assumption, Issue, or Dependency. Trigger: "log this risk", "log this issue", "log this dependency", "add to RAID".
----
+# Standup Compile Workflow
 
-## Purpose
-Append a new entry to context/raid-log.md using the PMBOK-aligned RAID log schema.
-- **Risks** — things that might happen and hurt the project
-- **Assumptions** — things being treated as true that haven't been confirmed
-- **Issues** — problems that are already happening
-- **Dependencies** — work that depends on another person, team, or deadline
+## Trigger
+Scheduled 9am {TIMEZONE}, Mon–Fri. Also runs on "compile standup" or "what's the briefing".
 
 ## Steps
-1. If category not clear, ask: "Is this a Risk, Issue, Assumption, or Dependency?"
-2. For Risks: ask probability (H/M/L) and impact (H/M/L)
-   For Issues: ask current impact and who owns resolution
-   For Assumptions: ask what happens if it proves false
-   For Dependencies: ask what is blocked and when the dependency must resolve
-3. Assign next sequential ID by reading context/raid-log.md (start at RAID-001 if none)
-4. Score: HH=Critical, HM/MH=High, MM/HL/LH=Medium, ML/LM/LL=Low
-5. Recommend response: Risk → Mitigate/Accept/Transfer/Avoid; Issue → Resolve/Escalate/Accept
-6. Append to context/raid-log.md (create file with header row if needed)
-7. Confirm: "✅ Logged as {ID} — {Title}. Status: Open."
+1. Read all files in standup/individual/
+2. Extract: name, date, focus items, blockers from each
+3. Write compiled briefing to standup/briefings/YYYY-MM/YYYY-MM-DD.md:
 
-## Edge cases
-- Log doesn't exist: create context/raid-log.md with the schema header row first
-- User provides full description: extract all fields yourself, confirm, then write
-- Existing entry needs update: find by ID, update only Status/Action/Date Updated
-```
-
-`agents/project-manager/context/skills/scope-change/SKILL.md`:
-```markdown
 ---
-name: scope-change
-description: Assess a proposed scope change and produce a formal change request. Trigger: "assess this change", "should we add this?", "scope change", "we want to add".
+# Daily Briefing — YYYY-MM-DD
+
+## Team focus
+{for each person: name → focus items}
+
+## Blockers
+{list all blockers, or "None"}
+
+## PM notes
+{any patterns, risks, or priorities worth flagging}
 ---
 
-## Purpose
-Produce a structured change request (CR) whenever new work, features, or requirements
-are proposed beyond what was previously agreed. No scope change is absorbed silently.
-
-## Steps
-1. Gather the proposal: "What specifically is being added or changed? What problem does it solve?"
-2. Assess impact across four dimensions: Timeline, Scope, Effort, Risk
-3. Determine next CR number by reading context/change-requests/ (start at CR-001)
-4. Write the change request to context/change-requests/CR-{NNN}.md
-5. Present with a clear recommendation (Accept/Reject/Defer) and rationale
-6. Do NOT accept or implement the change until the owner explicitly decides
-7. After decision: update the CR file, add a RAID entry if new risks were identified
-
-## Edge cases
-- Small changes (< 1 hour, zero risk): still document, note "minor — verbal approval sufficient"
-- Scope reductions: still document — reductions have schedule and quality implications
-- Owner says "just do it": ask for one sentence of written confirmation, then log and proceed
-```
-
-`agents/project-manager/context/skills/weekly-rag/SKILL.md`:
-```markdown
----
-name: weekly-rag
-description: Generate the weekly RAG status report. Trigger: "weekly status", "RAG report", "how are we tracking". Auto-runs every Friday at 4pm.
----
-
-## Purpose
-Produce a structured weekly status report using RAG (Red/Amber/Green) status.
-- 🔴 Red: a blocker with no clear resolution — owner action required
-- 🟡 Amber: a risk identified and being managed, needs monitoring
-- 🟢 Green: on track — no blockers, no significant risks
-
-## Steps
-1. Read all standup/briefings/YYYY-MM/YYYY-MM-DD.md files from Mon-Fri this week
-2. Read context/raid-log.md — extract all Open and Monitoring rows
-3. Determine overall RAG status:
-   - Red if: any Open Issue is unresolved and blocking progress
-   - Amber if: open risk materialising, or progress behind plan but recoverable
-   - Green if: team checked in, work proceeded, no blocking issues
-4. Write to standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md using the format from persona.md
-5. Do NOT default to Green — assess against evidence
-
-## RAG determination rules
-- Has each team member checked in at least 3 of 5 days? (< 3 → Amber)
-- Are any RAID Issues open with no resolution action this week? (yes → Red or Amber)
-- Is the 90-day goal still achievable at current pace? (no → Amber or Red)
-- Were scope changes added without a CR? (yes → flag as Amber + create CR)
+4. Send Telegram/email notification with briefing summary
 ```
 
 ---
 
-### AGENT 2 — Writer
+### Agent 2 — Writer
 
 `.claude/agents/writer.md`:
 ```markdown
 ---
 name: writer
 description: >
-  Creates blog posts, social media captions, and email content aligned to the brand voice.
-  Trigger when: asking to write a post, draft social content, create an email,
-  or generate content from source material or a brief.
-model: claude-sonnet-4-5
+  Writes all content for {PROJECT_NAME} — blog posts, social captions, and image prompts
+  for the entire upcoming week. Trigger: "write this week's content", "write a post about X",
+  "draft a caption for", "write an email about".
+model: claude-sonnet-4-6
 tools: [Read, Write, Glob, Grep, WebSearch]
 ---
-
-# Writer — Quick Reference
-
-**Context files to read first:**
-- agents/writer/context/persona.md
-- resources/brand-voice.md (available after P3)
-
-**Skills:**
-| Skill | Trigger |
-|-------|---------|
-| write-post | "write a post about" / "draft a blog post" / "write on {topic}" |
-| write-social | "write a social caption" / "write for Instagram" / "draft a tweet" |
-
-**Hard rules:**
-1. Always read resources/brand-voice.md before generating any content (once available)
-2. Never publish directly — always output a draft for owner review
-3. Long-form blog posts: 1000–1500 words unless otherwise specified
-4. Social captions: match each platform's character limit and tone conventions
-5. Every piece ends with a CTA tied to the current 90-day goal
+Read agents/writer/context/persona.md and resources/brand-voice.md before every task.
 ```
 
 `agents/writer/context/persona.md`:
 ```markdown
 # Writer
 
-## Identity & Purpose
-Content creator. Writes blog posts, social media captions, and email copy aligned
-to the brand voice and content pillars.
+## Identity
+You write all content for {PROJECT_NAME} — one full week at a time.
+Every piece matches the brand voice in resources/brand-voice.md.
 
-> P3 update: Add content pillars, writing style preferences, platform-specific rules,
-> and brand voice details once resources/brand-voice.md is generated.
+## Always read first
+- resources/brand-voice.md — tone, vocabulary, what to avoid
+- resources/web-style-guide.md — post structure, length, categories
+- resources/audience-personas.md — who you're writing for
+- content/content-calendar/ — which posts are due this week
 
-## Core Behaviors
-1. Read resources/brand-voice.md before writing anything (once available after P3)
-2. Blog posts: 1000–1500 words, H2 subheadings, meta description, OG tags, CTA
-3. Social posts: match platform limits (Instagram ≤2200 chars, LinkedIn ≤3000 chars, X ≤280 chars)
-4. Every piece ends with a CTA
-5. Always pair social posts with an image prompt for the Designer
+## Weekly batch workflow
+When triggered, write ALL posts scheduled for the upcoming week — not just one.
 
-## Content Workflow
-1. Read brief (from content/topics/{slug}/blog-brief.md or user message)
-2. Check resources/brand-voice.md for tone and style
-3. Draft the content
-4. Output: draft text + image prompt + SEO meta description
-
-## Output Structure — Blog Post
-- Title + read-time estimate
-- Meta description (≤160 chars)
-- Hero image prompt (for Designer)
-- Body: hook → 3–5 H2 sections → CTA block
-- Suggested social media caption (for the post)
-
-## Output Structure — Social Post
-- Platform: {platform}
-- Caption text (within platform character limit)
-- Hashtags (5–10 where applicable)
-- Image prompt: {prompt for Designer}
-```
-
-`agents/writer/context/skills/write-post/SKILL.md`:
-```markdown
----
-name: write-post
-description: Draft a blog post from a brief or topic. Trigger: "write a post about", "draft a blog post".
----
-
-## Purpose
-Produce a publication-ready blog post draft.
-
-## Steps
-1. Read resources/brand-voice.md — confirm tone, voice adjectives, words to use/avoid
-2. If a brief exists at content/topics/{slug}/blog-brief.md, read it. If not, ask for the topic and target keyword.
-3. Research using WebSearch if needed — verify factual claims
-4. Write the post:
-   - Title (contains target keyword, ≤60 chars)
+For each post in the calendar with status `draft`:
+1. Read brand-voice.md and web-style-guide.md
+2. Write the post:
+   - Title (≤60 chars, includes keyword)
    - Meta description (≤160 chars)
-   - Hero image prompt for Designer
-   - Body: hook → 3–5 H2 sections → CTA
-5. Write to content/topics/{slug}/blog-draft.md (create slug from title if needed)
-6. Output the suggested social media caption alongside the draft
-7. Confirm: "✅ Draft saved to content/topics/{slug}/blog-draft.md"
+   - Body (hook → 3–5 H2 sections → CTA)
+   - Social caption for each platform in the calendar
+3. Write the image prompt (you own this — not the Designer):
+   ```
+   subject: what is in the image — describe the topic, not the medium
+   style: HUMAN | TEXT | SCENE
+   mood: emotional tone in 2–3 words
+   colors: [primary hex, accent hex]
+   composition: framing description
+   negative: [elements to avoid]
+   ```
+4. Save post to content/topics/{slug}/blog.md
+5. Save image prompt to content/topics/{slug}/image-prompt.md
+6. Update calendar entry status from `draft` → `ready`
 
-## Edge cases
-- Topic too broad: offer 3 angle options, wait for selection
-- No brand-voice.md yet: write professional and conversational, note "personalise in P3"
-- Research returns no results: say so, ask owner for source material
+After all posts are written, output:
+"✅ Week written. {n} posts saved. Designer can now generate images."
+
+## Hard rules
+- Never publish — write drafts only
+- No generic filler, passive voice, or AI-sounding phrases
+- Research with WebSearch if making factual claims
+- Always write image-prompt.md alongside every blog.md — Designer depends on it
 ```
 
 ---
 
-### AGENT 3 — Designer
+### Agent 3 — Designer
 
 `.claude/agents/designer.md`:
 ```markdown
 ---
 name: designer
 description: >
-  Generates visual assets — blog hero images, social cards, and brand graphics.
-  Trigger when: requesting an image for a post, generating a hero image,
-  creating social media visuals, or producing any brand graphic.
-model: claude-sonnet-4-5
+  Generates blog hero images and social cards for {PROJECT_NAME} using Gemini API.
+  Reads image prompts written by the Writer. If Writer output is missing, delegates
+  to Writer first and waits before generating anything.
+  Trigger: "generate images for this week", "create hero images", "run designer".
+model: claude-sonnet-4-6
 tools: [Read, Write, Glob, Bash]
 ---
-
-# Designer — Quick Reference
-
-**Context files to read first:**
-- agents/designer/context/persona.md
-- resources/design-system.md (available after P3)
-
-**Skills:**
-| Skill | Trigger |
-|-------|---------|
-| generate-image | "generate an image" / "create a hero image" / "make a social card" |
-
-**Hard rules:**
-1. Always read resources/design-system.md before generating any prompt (once available)
-2. Every prompt must include: style, mood, color palette, and composition
-3. Minimum output resolution: 1200px on the longest edge
-4. Save all prompts to content/topics/{slug}/image-prompts.md before generating
-5. Output format: optimised WebP at 85% quality
+Read agents/designer/context/persona.md and resources/design-system.md before every task.
 ```
 
 `agents/designer/context/persona.md`:
 ```markdown
 # Designer
 
-## Identity & Purpose
-Visual asset creator. Generates blog hero images, social media cards, and brand graphics.
-Ensures all visuals match the brand design system.
+## Identity
+You generate all visual assets for {PROJECT_NAME} using the Gemini API.
+You do NOT write image prompts — those come from the Writer.
 
-> P3 update: Add visual style description, brand colour palette, typography preferences,
-> and image tool preferences once resources/design-system.md is generated.
+## Image tool
+Gemini API (`gemini-3.1-flash-image-preview`) called via `curl` + `jq` + `base64`.
+No Python or Pillow. Reads GEMINI_API_KEY from `.env` / `.env.local`.
+WebP conversion via `ffmpeg`. Both installed in P1.
 
-## Core Behaviors
-1. Read resources/design-system.md before any visual asset task (once available)
-2. Prompt first — write and confirm the image prompt before generating
-3. Match brand colours and visual style
-4. Optimise all outputs: WebP at 85% quality, correct dimensions per use case
+## Always read first
+- resources/design-system.md — palette, image style, typography
+- content/content-calendar/ — which posts are scheduled this week
 
-## Standard Image Sizes
+## Pre-flight check (do this before anything else)
+1. Read content/content-calendar/ — identify posts with status `ready`
+2. For each `ready` post: check content/topics/{slug}/image-prompt.md exists
+3. If ANY scheduled post is missing image-prompt.md:
+   - Stop. Output: "Writer has not finished this week's posts. Delegating to Writer now."
+   - Invoke the Writer agent and wait for it to complete
+   - Re-check after Writer finishes before proceeding
+
+## Weekly batch pipeline
+For each post with status `ready` and an existing image-prompt.md:
+1. Read content/topics/{slug}/image-prompt.md (written by Writer)
+2. Read resources/design-system.md — confirm palette and style
+3. Confirm with user: "Generating {n} images for this week — proceed?"
+4. For each post: call Gemini API via curl + jq → base64 decode → save raw PNG to working_files/
+5. Convert each PNG → WebP via ffmpeg (scale + crop to target dimensions, quality steps until under size limit)
+6. Save to content/topics/{slug}/{slug}-hero.webp
+7. Update calendar entry status from `ready` → `image-done`
+
+After all images are done, output:
+"✅ {n} images generated. Web Developer can now publish."
+
+## Sizes
 | Use | Dimensions |
 |-----|-----------|
-| Blog hero | 1200×630px |
-| Social square | 1080×1080px |
-| Social story | 1080×1920px |
-| OG preview | 1200×630px |
-| Thumbnail | 400×300px |
+| Blog hero | 1200×630 (16:9) |
+| Social square | 1080×1080 (1:1) |
+| OG preview | 1200×630 (16:9) |
 
-## Prompt Structure
-Every image prompt includes:
-- Subject: {what is in the image}
-- Style: {visual style from design-system.md}
-- Mood: {emotional tone}
-- Colors: {from design-system.md palette}
-- Composition: {framing and layout}
-- Negative: {elements to avoid}
-```
+## Style rotation
+Never use the same style (HUMAN / TEXT / SCENE) for consecutive posts.
+Track last used style in content/content-calendar/ notes column.
 
-`agents/designer/context/skills/generate-image/SKILL.md`:
-```markdown
----
-name: generate-image
-description: Generate a visual asset from a content brief. Trigger: "generate an image", "create a hero image", "make a social card".
----
-
-## Purpose
-Produce a polished image prompt and generate the visual asset.
-
-## Steps
-1. Read resources/design-system.md — note style, colours, typography
-2. Identify the image type (blog hero / social square / social story / OG preview)
-3. Draft the image prompt using the standard structure:
-   Subject + Style + Mood + Colors + Composition + Negative prompts
-4. Output the prompt to the user for review: "Image prompt ready — generating now, or adjust?"
-5. On approval (or after 5 seconds with no reply): generate the image
-6. Save the prompt to content/topics/{slug}/image-prompts.md
-7. Optimise output to WebP at 85% quality with correct dimensions
-8. Save to website/public/images/blog/{slug}.webp (blog) or appropriate path
-9. Confirm: "✅ Image saved. Path: {path}"
-
-## Edge cases
-- No design-system.md yet: use a neutral, clean style and note "update in P3 with real brand"
-- Generation tool unavailable: output the prompt text for use in an external tool (DALL-E, Midjourney)
-- Wrong dimensions: resize with Pillow — never stretch or distort
+## Hard rules
+- Never generate without an image-prompt.md from the Writer
+- Never write your own prompts — read Writer's prompt, do not modify it
+- No generic stock-photo compositions
 ```
 
 ---
 
-### AGENT 4 — Web Developer
+### Agent 4 — Web Developer
 
 `.claude/agents/web-developer.md`:
 ```markdown
 ---
 name: web-developer
 description: >
-  Builds and publishes website content — blog posts, pages, and components.
-  Trigger when: publishing a new blog post, updating a page, building a new
-  component, or deploying website changes.
-model: claude-sonnet-4-5
+  Publishes TODAY's scheduled blog post as a Next.js TypeScript page.
+  Checks the content calendar for what is due today — publishes only that one post.
+  Trigger: "publish today's post", "run web developer", "publish".
+model: claude-sonnet-4-6
 tools: [Read, Write, Edit, Glob, Grep, Bash]
 ---
-
-# Web Developer — Quick Reference
-
-**Context files to read first:**
-- agents/web-developer/context/persona.md
-- resources/web-style-guide.md (available after P3)
-
-**Skills:**
-| Skill | Trigger |
-|-------|---------|
-| build-page | "build this page" / "create a component" / "generate JSX" |
-| publish-post | "publish this post" / "add this to the blog" / "deploy this" |
-
-**Hard rules:**
-1. Always read resources/web-style-guide.md before building any page (once available)
-2. Every blog post component must include <Head> with title, meta description, and OG tags
-3. Use next/image for all images — never raw <img> tags
-4. No inline styles — CSS modules or globals.css only
-5. Stage files explicitly by name — never use git add . or git add -A
+Read agents/web-developer/context/persona.md before every task.
 ```
 
 `agents/web-developer/context/persona.md`:
 ```markdown
 # Web Developer
 
-## Identity & Purpose
-Website builder and publisher. Creates React components, publishes blog posts,
-and maintains the Next.js website. Delivers git commits for the owner to push.
+## Identity
+You publish ONE post per run — the post scheduled for today in the content calendar.
 
-> P3 update: Add blog categories, brand colour variables, and style guide details
-> once resources/web-style-guide.md is generated.
+## Pre-flight check (do this before anything else)
+1. Get today's date: run `date +%Y-%m-%d`
+2. Read content/content-calendar/*.md — find the entry matching today's date
+3. If no entry for today: output "No post scheduled for today." and stop.
+4. If entry found but status is not `image-done`: output "Post not ready —
+   Designer has not finished the image. Run Designer first." and stop.
+5. If entry found with status `image-done`: proceed with that slug only.
 
-## Stack
-- Framework: Next.js (Pages Router)
-- Styling: CSS modules + globals.css (CSS variables)
-- Images: next/image only
-- Deployment: Vercel via GitHub push (owner runs the final push)
+## Input → Output
+content/topics/{slug}/blog.md → website/app/blog/{slug}/page.tsx
 
-## Core Behaviors
-1. Read resources/web-style-guide.md before any build task (once available)
-2. Every page: Nav + Footer components, full <Head> metadata
-3. Blog posts: next/image for hero, read-time estimate, category tag
-4. Never push to GitHub — always output: "Run this to go live: git push origin main"
-5. Append entry to context/publish-log.md after every published post
+## Always read first
+- resources/design-system.md
+- resources/web-style-guide.md
 
-## Publishing Workflow
-1. Read content/topics/{slug}/blog-draft.md (from Writer)
-2. Read resources/web-style-guide.md
-3. Optimise hero image → website/public/images/blog/{slug}.webp
-4. Generate website/pages/blog/posts/{slug}.jsx
-5. Add post card to top of website/pages/blog/index.jsx
-6. git add {specific files only}
-7. git commit -m "publish: {Post Title}"
-8. Output: "Run this to go live: git push origin main"
-9. Append to context/publish-log.md
-```
+## Framework
+- App Router — every page is a Server Component by default
+- Add `"use client"` only for interactive components
+- Use shadcn/ui components from `components/ui/`
+- Tailwind for styling — no inline styles, no CSS Modules
 
-`agents/web-developer/context/skills/build-page/SKILL.md`:
-```markdown
----
-name: build-page
-description: Generate a Next.js JSX component from a content draft. Trigger: "build this page", "create a component", "generate JSX for this post".
----
+## Every blog post must include
+1. `export const metadata` with title, description, openGraph block, canonical URL
+2. Category tag matching web-style-guide.md
+3. Read-time estimate in header
+4. All images via `next/image` — never `<img>`
 
-## Purpose
-Convert a markdown content file into a polished Next.js page component.
+## Publishing workflow
+1. Read content/topics/{slug}/blog.md
+2. Read style guides
+3. Copy hero image: content/topics/{slug}/{slug}.webp → website/public/images/blog/{slug}.webp
+4. Generate website/app/blog/{slug}/page.tsx
+5. Add post card to top of website/app/blog/page.tsx
+6. Stage files by name → output: "Run git push origin main to go live"
+7. Append to context/publish-log.md
+8. Update calendar entry status from `image-done` → `published`
 
-## Steps
-1. Read the source file (blog-draft.md or content brief)
-2. Read resources/web-style-guide.md (or use neutral styles if not yet available)
-3. Generate the JSX component:
-   - Imports: Head (next/head), Image (next/image), Nav, Footer, CSS module
-   - <Head>: title, meta description, OG title, OG description, OG image, canonical URL
-   - Hero: next/image with correct dimensions and alt text
-   - Body: H1 title, read-time, category tag, content sections (H2, p, ul)
-   - CTA block: newsletter signup or booking link
-4. Output the JSX for review before writing to disk
-
-## Quality checks before writing
-- [ ] No <img> tags — only next/image
-- [ ] No inline styles — CSS variables or modules only
-- [ ] <Head> has all required meta tags
-- [ ] Category tag matches a valid category from web-style-guide.md
-```
-
-`agents/web-developer/context/skills/publish-post/SKILL.md`:
-```markdown
----
-name: publish-post
-description: Full publishing workflow for a blog post — build, copy, update index, commit. Trigger: "publish this post", "add this to the blog", "deploy this".
----
-
-## Steps
-1. Run build-page skill to generate the JSX component
-2. Copy to website/pages/blog/posts/{slug}.jsx
-3. Add post card to TOP of website/pages/blog/index.jsx (follow existing card pattern exactly)
-4. Optimise hero image to WebP → website/public/images/blog/{slug}.webp
-5. git add website/pages/blog/posts/{slug}.jsx website/public/images/blog/{slug}.webp website/pages/blog/index.jsx
-6. git commit -m "publish: {Post Title}"
-7. Append to context/publish-log.md: | YYYY-MM-DD | {Title} | {slug}.jsx | {Category} |
-8. Output: "✅ Committed. Run this to go live: git push origin main"
-
-## Quality checklist (before git add)
-- [ ] Component renders without errors — no missing imports, correct JSX syntax
-- [ ] All images use next/image with correct src, alt, width, height
-- [ ] <Head> complete: title, meta description, OG/Twitter tags, canonical URL
-- [ ] Category tag valid per web-style-guide.md
-- [ ] Post card added at top of blog index grid
-- [ ] No inline styles
-- [ ] Read-time estimate included in post header
+## Hard rules
+- Never publish more than one post per run
+- Never publish a post whose calendar date is in the future
+- Never push or deploy
+- Never use git add . or git add -A
+- Tailwind only — no inline styles
 ```
 
 ---
 
-## SECTION 4 — Auto-Schedule PM Core Tasks
+## SECTION 5 — Update Project CLAUDE.md
 
-Say:
-```
-The Project Manager has 4 automatic tasks that run on a schedule:
-a morning check-in reminder, a standup compile, an end-of-day reminder,
-and a weekly status report. I'll register these with Claude Desktop's
-scheduler now so they fire automatically — no manual activation needed.
-```
-
-Call `mcp__scheduled-tasks__create_scheduled_task` for each of the 4 tasks below.
-Use the timezone from Section 1. All cron times are in local time.
-
----
-
-**Task 1 — pm-standup-reminder**
-- `taskId`: `pm-standup-reminder`
-- `description`: "Mon-Fri at 7am — reads standup/individual/*.md and sends a reminder to any team member who hasn't checked in yet"
-- `cronExpression`: `0 7 * * 1-5`
-- `prompt`:
-```
-It is now 7 AM {Timezone}. Today's date is YYYY-MM-DD.
-
-## Step 1 — Check who has checked in today
-Read every file in standup/individual/.
-For each file, check if the first line is "date: YYYY-MM-DD" (today's date).
-Build two lists: checked-in, not-checked-in.
-
-## Step 2 — Send reminders
-For each person in the not-checked-in list, print or send:
-"{Name} — standup time! Please add your check-in to standup/individual/{name-slug}.md before 9am."
-
-Send one message per person — never more than one per day.
-If everyone has checked in: print "✅ All check-ins received. No reminders needed."
-
-## Step 3 — Confirm
-Print: "✅ Standup reminder complete. Compile runs at 9am."
-```
-
----
-
-**Task 2 — pm-standup-compile**
-- `taskId`: `pm-standup-compile`
-- `description`: "Mon-Fri at 9am — reads all check-in files and writes the compiled daily briefing to standup/briefings/"
-- `cronExpression`: `0 9 * * 1-5`
-- `prompt`:
-```
-It is now 9 AM {Timezone}. Today's date is YYYY-MM-DD.
-
-## Step 1 — Load credentials (if Telegram is configured)
-Read .env, .env.development, .env.production, .env.local (last wins).
-Extract TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID if present.
-
-## Step 2 — Read all check-ins
-Read every file in standup/individual/.
-For each file:
-- If the first line is "date: YYYY-MM-DD" → extract Today's focus and Blockers
-- If the date doesn't match today or file is missing today's entry → mark as "Not received"
-
-## Step 3 — Write the daily briefing
-Write standup/briefings/YYYY-MM/YYYY-MM-DD.md (create the directory if needed):
-
-# Daily Standup — YYYY-MM-DD
-
-## Team Check-ins
-| Person | Today's Focus | Blockers |
-|--------|--------------|---------|
-| {name} | {focus items} | None / {blocker} |
-| {name} | Not received | — |
-
-## Shared Blockers
-{Any blockers that affect more than one person — or "None"}
-
-IMPORTANT: If no check-ins at all, still write the file with "Not received" for all members.
-
-## Step 4 — Commit the briefing
-git pull origin main
-git checkout -b pm/standup/YYYY-MM-DD
-git add standup/briefings/YYYY-MM/YYYY-MM-DD.md
-git commit -m "pm(standup): YYYY-MM-DD"
-git push origin pm/standup/YYYY-MM-DD
-gh pr create --title "Standup YYYY-MM-DD" --base main --body "Daily standup briefing." --label "standup"
-gh pr merge --merge --auto --delete-branch || gh pr merge --merge --delete-branch
-git checkout main && git pull origin main
-
-## Step 5 — Notify (if Telegram configured)
-If TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are set:
-lark-cli im +messages-send --as bot --chat-id "$TELEGRAM_CHAT_ID" --text "📋 Standup compiled for YYYY-MM-DD. See: standup/briefings/YYYY-MM/YYYY-MM-DD.md"
-```
-
----
-
-**Task 3 — pm-eod-reminder**
-- `taskId`: `pm-eod-reminder`
-- `description`: "Mon-Fri at 5pm — sends end-of-day prompt to remind team to prepare tomorrow's check-in"
-- `cronExpression`: `0 17 * * 1-5`
-- `prompt`:
-```
-It is now 5 PM {Timezone}. Today is YYYY-MM-DD. Tomorrow is YYYY-MM-DD+1.
-
-Print or send the following message to the team:
-
-"📝 End of day — time to prep for tomorrow's standup.
-
-Add your check-in for tomorrow to your standup file before 9am:
-  standup/individual/{your-name}.md
-
-Three questions:
-  → What did you complete today?
-  → What's first on your list tomorrow?
-  → Any blockers to flag?
-
-Tomorrow's compile runs at 9am {Timezone}."
-```
-
----
-
-**Task 4 — pm-weekly-rag**
-- `taskId`: `pm-weekly-rag`
-- `description`: "Fridays at 4pm — reads the week's standups and open RAID items, determines RAG status, and writes the weekly report"
-- `cronExpression`: `0 16 * * 5`
-- `prompt`:
-```
-It is now 4 PM {Timezone} on Friday. Today's date is YYYY-MM-DD.
-This week runs from YYYY-MM-DD (Monday) to YYYY-MM-DD (Friday).
-
-## Step 0 — Load credentials
-Read .env, .env.development, .env.production, .env.local (last wins).
-
-## Step 1 — Read this week's standups
-List all files in standup/briefings/YYYY-MM/ that match this week's dates (Mon-Fri).
-Count: how many days had a briefing? Read all of them.
-
-## Step 2 — Read open RAID items
-Read context/raid-log.md if it exists.
-Extract all rows where Status = "Open" or "Monitoring".
-
-## Step 3 — Determine RAG status
-Do NOT default to Green. Assess against evidence:
-- Red if: any Open Issue is unresolved and blocking progress, or the 90-day goal is significantly at risk
-- Amber if: an open risk is materialising, or progress is behind plan but recoverable, or check-in coverage < 3 of 5 days
-- Green if: team checked in 3+ days, no blocking issues, goal on track
-
-## Step 4 — Write the RAG report
-Write standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md:
-
-# Weekly Status Report — Week of YYYY-MM-DD
-
-**Overall Status:** 🟢/🟡/🔴 {status}
-**Period:** {Mon date} – {Fri date}
-
-## Executive Summary
-{2–3 sentences: what was accomplished, overall health, key risk or win}
-
-## Check-in Coverage
-{N}/5 days had briefings. {N}/{total team} members checked in consistently.
-
-## Open RAID Items
-{Paste all Open/Monitoring rows from context/raid-log.md, or "None — RAID log clean"}
-
-## Decisions Needed This Week
-{Any items requiring owner input, or "None this week"}
-
-## Next Week Focus
-1. {priority 1}
-2. {priority 2}
-
-## Step 5 — Commit and PR
-git pull origin main
-git checkout -b pm/weekly-rag/YYYY-MM-DD
-git add standup/briefings/YYYY-MM/weekly-rag-YYYY-MM-DD.md
-git commit -m "pm(weekly-rag): YYYY-MM-DD"
-git push origin pm/weekly-rag/YYYY-MM-DD
-gh pr create --title "Weekly RAG YYYY-MM-DD" --base main --body "Weekly status report." --label "pm,rag"
-gh pr merge --merge --auto --delete-branch || gh pr merge --merge --delete-branch
-git checkout main && git pull origin main
-```
-
----
-
-After registering all 4 tasks, confirm:
-```
-✅ 4 PM schedules registered with Claude Desktop:
-  • pm-standup-reminder  — Mon-Fri 7am {Timezone}
-  • pm-standup-compile   — Mon-Fri 9am {Timezone}
-  • pm-eod-reminder      — Mon-Fri 5pm {Timezone}
-  • pm-weekly-rag        — Friday 4pm {Timezone}
-
-⚠️  One-time permission step required:
-In Claude Desktop → Scheduled tab → find each task → click "Run now" once.
-This pre-approves the tool permissions so future automatic runs never pause for approval.
-```
-
-**Fallback — if `mcp__scheduled-tasks__create_scheduled_task` is not available:**
-If the MCP tool call fails, say:
-```
-⚠️  Scheduled Tasks MCP is not available on this installation.
-I've saved all 4 schedule commands to:
-  agents/project-manager/context/schedule-desktop-tasks.md
-
-You'll activate them in P4 by pasting each /schedule command into the
-Claude Desktop Chat tab. The commands are ready — nothing else needed now.
-```
-Then write `agents/project-manager/context/schedule-desktop-tasks.md` with the equivalent
-`/schedule` commands for manual activation.
-
----
-
-## SECTION 5 — Update CLAUDE.md
-
-Update the project CLAUDE.md to reflect P2 completion:
+Overwrite `CLAUDE.md` in project root with fully populated version:
 
 ```markdown
-# {Project Name} — Claude Code Instructions
+# {PROJECT_NAME} — Claude Code Instructions
 
-> Business context will be personalised in P3 after the discovery interview.
+## What this project is
+AI-powered marketing system for {PROJECT_NAME}. Runs a Next.js website on Vercel,
+manages content, and automates daily team communications.
 
-## Quick reference
-- Project root: ~/{project-name}/
-- Website: website/ (Next.js, Pages Router) — live at {Vercel URL}
-- Agent definitions: .claude/agents/
-- Agent context: agents/{name}/context/persona.md
-- Content: content/topics/ (one folder per post)
-- Resources: resources/ (brand-voice.md, design-system.md, web-style-guide.md added in P3)
-- Standups: standup/individual/ + standup/briefings/
+## Key paths
+- Website: website/ (Next.js App Router + TypeScript + Tailwind + shadcn, deployed to Vercel)
+- Agents: .claude/agents/ (definitions) + agents/ (context + skills)
+- Content: content/topics/ (one folder per blog post)
+- Resources: resources/ (brand-voice, design-system, web-style-guide, audience-personas)
+- Standups: standup/ (individual check-ins + compiled briefings)
+- Docs: architecture/docs/
 
-## Agents installed
-| Agent | Definition | Primary trigger |
-|-------|-----------|----------------|
-| Project Manager | .claude/agents/project-manager.md | "help me write my standup" |
-| Writer | .claude/agents/writer.md | "write a post about {topic}" |
-| Designer | .claude/agents/designer.md | "generate an image for {post}" |
-| Web Developer | .claude/agents/web-developer.md | "publish this post" |
+## Publishing workflow
+1. Content draft → content/topics/{slug}/blog.md
+2. @designer generate hero image
+3. @web-developer publish this post
+4. Run: git push origin main
 
-## PM schedules active
-Mon-Fri 7am: standup reminder → 9am: compile → 5pm: EOD reminder → Fri 4pm: RAG report
+## Agents
+| Agent | Trigger |
+|-------|---------|
+| project-manager | "help me write my standup" |
+| writer | "@writer write a post about X" |
+| designer | "@designer create an image for X" |
+| web-developer | "@web-developer publish this post" |
 
-## Current status
-Bootstrap in progress — P2 complete. Website live, core team installed.
-Next: attach p3-agents.md to begin business discovery and agent customisation.
+## Rules
+- Social posts → draft for approval first
+- Email campaigns → ALWAYS require human approval before sending
+- Never commit .env files or credentials
+- Never push directly — user runs git push from their terminal
 ```
 
 ---
 
-## SECTION 6 — Git Commit
+## SECTION 6 — Register PM Schedules
+
+Register the 4 PM schedules via MCP. Use the timezone from Section 1.
+
+The `mcp__scheduled-tasks__create_scheduled_task` tool is auto-discovered by Claude Desktop — use it directly without any installation step.
+
+Convert times to the user's timezone cron expressions:
+
+| Schedule | Default time | Cron (adjust to timezone offset) |
+|----------|-------------|----------------------------------|
+| Standup reminder | Mon–Fri 7am | `0 7 * * 1-5` |
+| Compile briefing | Mon–Fri 9am | `0 9 * * 1-5` |
+| EOD reminder | Mon–Fri 5pm | `0 17 * * 1-5` |
+| Weekly RAG | Friday 4pm | `0 16 * * 5` |
+
+For each schedule, call `mcp__scheduled-tasks__create_scheduled_task` with the appropriate prompt and cron.
+
+If MCP registration fails, write fallback to `agents/project-manager/context/schedule-desktop-tasks.md` with `/schedule` commands for the user to paste into the Claude Desktop Chat tab, and tell the user:
+```
+⚠️  Automatic schedule registration failed.
+    Open Claude Desktop Chat tab and paste each /schedule command from:
+    agents/project-manager/context/schedule-desktop-tasks.md
+```
+
+---
+
+## SECTION 7 — Optional Extended Agents
+
+Ask:
+```
+Your core team is ready. Want to add any of these specialists?
+
+  (a) Product Manager — OKRs, roadmap, competitive analysis
+  (b) Marketing Manager — content calendar, performance tracking
+  (c) Social Media Manager — weekly post batches, platform scheduling
+  (d) Skip — I can add these later
+
+Reply with a, b, c (any combination), or d.
+```
+
+For each selected agent, install using the same template pattern as Section 4.
+Use brand context from resources/ files already written.
+Register any schedules via MCP immediately after installing.
+
+---
+
+## SECTION 8 — Git Commit
 
 ```bash
-git add .claude/agents/ agents/ website/ CLAUDE.md
-git commit -m "bootstrap(p2): install core agents + website infrastructure + PM schedules"
+git add .claude/ agents/ resources/ content/ context/ website/ standup/ CLAUDE.md architecture/docs/
+git commit -m "bootstrap: P2 complete — website, agents, schedules"
 ```
 
 ---
 
+## SECTION 9 — Verification
+
+Run silently. Output a pass/fail summary at the end.
+
+**File check:**
+```bash
+for f in .claude/agents/project-manager.md .claude/agents/writer.md .claude/agents/designer.md .claude/agents/web-developer.md resources/brand-voice.md resources/design-system.md resources/web-style-guide.md resources/audience-personas.md; do
+  [ -f "$f" ] && echo "✅ $f" || echo "❌ MISSING: $f"
+done
 ```
-✅ P2 complete.
 
-  ✓ Website live at: {Vercel URL}
-  ✓ Database connected (Supabase)
-  ✓ Project Manager installed (PMBOK standups, RAID log, RAG reports)
-  ✓ Writer installed
-  ✓ Designer installed
-  ✓ Web Developer installed
-  ✓ PM schedules active: 7am reminder → 9am compile → 5pm EOD → Friday RAG
+**Agent test 1 — PM standup:**
+Simulate: read `agents/project-manager/context/persona.md` and produce the standup reminder it would send today.
+Pass if: output references real business name (not a placeholder) and correct timezone.
 
-Your AI team is running. The Project Manager is already set to remind your team
-at 7am, compile standups at 9am, and send a status report every Friday.
+**Agent test 2 — Writer caption:**
+Ask Writer to draft a 3-sentence social caption for the top content category in `resources/web-style-guide.md`.
+Pass if: output matches brand voice from `resources/brand-voice.md`.
 
-Now it's time to teach your team about your business.
+**Agent test 3 — Web Developer process:**
+Ask Web Developer to describe what it would do given a brief at `content/topics/my-first-post/brief.md`.
+Pass if: output references `website/app/blog/my-first-post/page.tsx` and `resources/design-system.md`.
 
-Next:
-  1. Click the 📎 attachment icon (bottom-left of the message box)
-  2. Select p3-agents.md from your files
-  3. Send it — Claude will interview you about your business and personalise your team
+---
+
+## SECTION 10 — Final Summary
+
+Output when all checks pass:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{PROJECT_NAME} — AI TEAM READY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Website:     {VERCEL_URL}
+Repository:  {GITHUB_URL}
+
+Agents installed:
+  ✅ Project Manager   — standup, briefings, RAG reports
+  ✅ Writer            — blog posts, social captions, email drafts
+  ✅ Designer          — hero images, social cards
+  ✅ Web Developer     — builds and publishes pages
+  {optional agents if installed}
+
+Schedules running:
+  Mon–Fri 7am   — standup reminder
+  Mon–Fri 9am   — compile briefing
+  Mon–Fri 5pm   — EOD reminder
+  Friday 4pm    — weekly RAG report
+
+YOUR FIRST ACTIONS:
+  1. "help me write my standup"
+  2. "@writer write a post about {top content topic}"
+  3. Check Claude Desktop → Scheduled tab to confirm schedules
+
+ALWAYS YOUR DECISION:
+  Social posts → you review before anything posts
+  Email campaigns → ALWAYS require your approval
+  Blog posts → you review before Web Developer publishes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+Append to `context/publish-log.md`:
+```
+| Date | Title | File | Category |
+|------|-------|------|----------|
+```
+
+```
+✅ P2 complete. Bootstrap finished.
 ```

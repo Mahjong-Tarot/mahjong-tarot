@@ -114,8 +114,14 @@ cat ~/bloom-and-thread/.claude/settings.local.json | python3 -c "
 import sys, json
 s = json.load(sys.stdin)
 perms = s.get('permissions', {}).get('allow', [])
+required = {'Bash(*)', 'WebFetch', 'Skill(*)'}
+present = set(perms)
+missing = required - present
 print(f'Permissions pre-seeded: {len(perms)} entries')
-print('PASS' if len(perms) > 100 else 'FAIL — too few permissions')
+if missing:
+    print(f'FAIL — missing required entries: {missing}')
+else:
+    print('PASS — Bash(*), WebFetch, and Skill(*) all present')
 "
 ```
 
@@ -139,30 +145,43 @@ print('PASS' if len(perms) > 100 else 'FAIL — too few permissions')
 
 ---
 
-## P2 — Business Discovery + First Website
+## P2 — Website Infrastructure + Core Agent Setup
 
-**Mode:** Code · **Pass time:** ~60–90 min
+**Mode:** Code · **Pass time:** ~45–60 min
 
-### Interview
+### Section 1 — Setup questions
 
 - [ ] **3.1** In Code tab, paste `bootstrap/p2-discovery.md`
-- [ ] **3.2** Claude sends Group 1 questions — answer using the test business persona above
-- [ ] **3.3** Claude sends Group 2 questions — answer using persona
-- [ ] **3.4** Claude sends Group 3 questions — answer using persona
-- [ ] **3.5** For visual style (Q23): type "suggest" — verify Claude generates 3 options based on your brand voice
-- [ ] **3.6** For brand colours (Q24): type the exact hex values from the persona table
-- [ ] **3.7** Claude sends content strategy questions (Q25–Q26) — answer using persona
-- [ ] **3.8** Agent selection: choose all 7 agents for a full test
+- [ ] **3.2** Claude asks 2 questions: project name and timezone
+  - Answer: `bloom-and-thread` / `AEST`
 
-### Resource file verification
+### Section 1B — Brand intake (test all 3 paths across separate test runs)
 
-After interview, before website scaffold:
+**Path A — URL (primary test):**
+- [ ] **3.3a** Claude asks brand intake questions and invites URL/docs/nothing
+- [ ] **3.4a** Provide a real business URL (use bloomandthread.com or any live site)
+- [ ] **3.5a** Claude crawls and presents structured confirmation block with inferred colours, typography, tone
+- [ ] **3.6a** Confirm — verify resource files are written immediately after
 
-- [ ] **3.9** `resources/brand-voice.md` exists and mentions "warm", "grounded", "tactile"
-- [ ] **3.10** `resources/design-system.md` contains `#8B6F5E`, `#D4C5B2`, `#4A6741`
-- [ ] **3.11** `resources/web-style-guide.md` contains "Slow making" as a blog category
-- [ ] **3.12** `resources/audience-personas.md` describes the ICP from Q7
-- [ ] **3.13** `resources/content-calendar.md` contains all 5 content pillars
+**Path B — Document (secondary test):**
+- [ ] **3.3b** Attach a brand guide PDF or paste brand description text
+- [ ] **3.4b** Claude extracts and presents confirmation block
+- [ ] **3.5b** Confirm — verify resource files written
+
+**Path C — Nothing (fallback test):**
+- [ ] **3.3c** Say "I don't have any references yet"
+- [ ] **3.4c** Claude writes resource files immediately using default package
+- [ ] **3.5c** Confirm message says "I've created a professional starting package"
+
+### Resource file verification (all paths)
+
+After brand intake, before website scaffold:
+
+- [ ] **3.9** `resources/brand-voice.md` exists with tone, vocabulary, CTA style
+- [ ] **3.10** `resources/design-system.md` contains colour palette (hex codes)
+- [ ] **3.11** `resources/web-style-guide.md` contains post structure and blog categories
+- [ ] **3.12** `resources/audience-personas.md` has at least 2 personas
+- [ ] **3.13** For Path A/B: brand colours match what was found on the URL or in the document
 
 ### Website scaffold
 
@@ -196,35 +215,42 @@ After interview, before website scaffold:
 
 ---
 
-## P3 — Agent Team Build
+## P3 — Business Discovery + Agent Customisation
 
-**Mode:** Code · **Pass time:** ~2–3 hours (can split across sessions)
+**Mode:** Code · **Pass time:** ~90–120 min (can split across sessions)
 
-### Template agents (Project Manager, Product Manager, Web Developer)
+### Discovery interview
 
-For each, Claude should:
-1. Show a review block (schedule, team, trigger phrases)
-2. Wait for your "yes"
-3. Generate files
-4. Confirm installation with a `✅` summary
+- [ ] **4.1** In Code tab, paste `bootstrap/p3-agents.md`
+- [ ] **4.2** Claude presents the installed 4-agent team box diagram
+- [ ] **4.3** Claude sends Group 1 interview questions — answer using test persona
+- [ ] **4.4** Claude sends Group 2 questions — answer using persona
+- [ ] **4.5** Claude sends Group 3 questions — answer using persona
+- [ ] **4.6** For visual style (Q23): type "suggest" — verify Claude generates 3 options
+- [ ] **4.7** For brand colours (Q24): use `#8B6F5E`, `#D4C5B2`, `#4A6741` from test persona
+- [ ] **4.8** Claude sends content strategy questions (Q25–Q26) — answer using persona
 
-- [ ] **4.1** Project Manager approved and installed
-  - Review shows: AEST times (7am, 9am, 5pm, 4pm Friday)
-  - Review shows team member: Alex Chen
-  - Files created: `.claude/agents/project-manager.md` + `agents/project-manager/context/persona.md`
-- [ ] **4.2** Product Manager approved and installed
-- [ ] **4.3** Web Developer approved and installed
-  - Review references `bloom-and-thread-marketing` repo
-  - Review references `resources/web-style-guide.md`
+### Resource files generated in P3
 
-### Full workflow agents
+- [ ] **4.9** `resources/content-calendar.md` contains all 5 content pillars from Q25
+- [ ] **4.10** `resources/seo-strategy.md` exists with Bloom & Thread keywords
 
-For each, Claude must run the interview before generating anything:
+### Core agent personalisation
 
-- [ ] **4.4** Designer — answer: blog hero images + social cards, Ideogram preferred, weekly content
-- [ ] **4.5** Writer — answer: long-form blog (1000–1500 words), suggest topics OK, conversational + poetic style
-- [ ] **4.6** Marketing Manager — answer: monthly calendar, email subscribers is primary metric, no paid ads
-- [ ] **4.7** Social Media Manager — answer: Instagram priority, educational + behind-scenes, 3 posts/week Instagram, draft-only
+- [ ] **4.11** Project Manager persona updated: "Alex Chen" appears, AEST timezone confirmed
+- [ ] **4.12** Writer persona updated: content pillars from Q25 present
+- [ ] **4.13** Designer persona updated: visual style from Q23, hex codes from Q24
+- [ ] **4.14** Web Developer persona updated: CSS variables, blog categories from web-style-guide
+
+### Extended agents (test all 3 for a full test)
+
+For each, Claude must run interview → show review → wait for approval → generate:
+
+- [ ] **4.15** Product Manager: Review shown → approved → files generated
+- [ ] **4.16** Marketing Manager: Interview answered → Review shown → approved → files generated
+  - Answer: monthly calendar, email subscribers is primary metric, no paid ads
+- [ ] **4.17** Social Media Manager: Interview answered → Review shown → approved → files generated
+  - Answer: Instagram priority, educational + behind-scenes, 3 posts/week, draft-only
 
 ### Pass criteria for each agent
 
@@ -271,12 +297,15 @@ done
 
 - [ ] **5.5** Switch to Claude Desktop Chat tab
 - [ ] **5.6** For each task, copy the `/schedule` command and paste it — confirm Claude acknowledges each one
-- [ ] **5.7** All 5 schedules activated:
+- [ ] **5.7** All 4 PM schedules already active from P2 — verify in Scheduled tab:
   - [ ] Morning standup reminder — Mon-Fri 7am AEST
   - [ ] Compile briefing — Mon-Fri 9am AEST
   - [ ] EOD reminder — Mon-Fri 5pm AEST
-  - [ ] Monthly content calendar — 1st of month 9am AEST
   - [ ] Weekly RAG — Friday 4pm AEST
+- [ ] **5.8** Extended agent schedules (only if those agents were installed in P3):
+  - [ ] Product Manager: Weekly OKR check · Monthly competitive · Quarterly review
+  - [ ] Marketing Manager: Monthly content calendar · Weekly performance summary
+  - [ ] Social Media Manager: Friday draft batch · Monday analytics reminder
 - [ ] **5.8** Tell Claude "schedules activated" → switch back to Code tab
 
 ### Verification

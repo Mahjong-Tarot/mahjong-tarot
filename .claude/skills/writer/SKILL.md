@@ -240,7 +240,29 @@ Use the Order, slug, keyword, style, and category determined in Step 2. Date is 
 
 ---
 
-## Step 8: Confirm
+## Step 8: Update the Content Calendar Status
+
+In `content/content-calendar/content-calendar.md`, find the topic line(s) you just wrote content for and change their status from `STATUS: PLANNED` to `STATUS: WRITTEN`.
+
+Use the Edit tool — do not overwrite or recreate the file.
+
+**Before:**
+```
+**Topic: some-topic-slug** — STATUS: PLANNED
+```
+
+**After:**
+```
+**Topic: some-topic-slug** — STATUS: WRITTEN
+```
+
+If the topic line did not have a status tag at all, append `— STATUS: WRITTEN` to it.
+
+Do this for every topic slug written in this session.
+
+---
+
+## Step 9: Confirm
 
 Report back with:
 
@@ -252,5 +274,6 @@ Report back with:
 6. **Social media files:** list of files created
 7. **SEO guide:** primary keyword and meta title
 8. **Blog index updated:** the row added
-9. **Source material used:** which files from `content/source-material/` and `content/topics/` were read
-10. **Anything flagged:** missing source material, thin content areas, or decisions that need human review
+9. **Content calendar updated:** which topic lines changed from PLANNED → WRITTEN
+10. **Source material used:** which files from `content/source-material/` and `content/topics/` were read
+11. **Anything flagged:** missing source material, thin content areas, or decisions that need human review

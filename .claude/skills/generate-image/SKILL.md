@@ -1,12 +1,13 @@
 ---
 name: generate-image
-description: Generates blog hero and social channel images for The Mahjong Tarot using Gemini (gemini-3.1-flash-image-preview). Single canonical image generation skill. Works in both pipeline mode (called by mahjong-studio) and autonomous mode (called by Claude Code Routine). Always runs resolve-source first.
+description: Generates blog hero and social channel images using Gemini (gemini-3.1-flash-image-preview). Reads image prompts written by the Writer from content/topics/<slug>/image-prompts.md — does not write its own prompts. Works in pipeline mode (called by mahjong-studio) and autonomous mode. Uses curl + jq + base64 for generation and ffmpeg for WebP optimisation. No Python or Pillow required.
 trigger: Called by mahjong-studio pipeline, OR autonomously by Claude Code Routine when unimaged slugs are found.
 ---
 
 # Generate Image — Designer Skill
 
-Uses `gemini-3.1-flash-image-preview` via `generate_content`. Supports source image conditioning from `working_files/`.
+Reads prompts from the Writer's `image-prompts.md`. Calls Gemini via `curl` + `jq` + `base64`.
+Converts raw PNG → WebP via `ffmpeg`. No Python or Pillow required.
 
 ---
 
@@ -31,9 +32,10 @@ for slug in sorted(os.listdir(topics_dir)):
     slug_dir = os.path.join(topics_dir, slug)
     if not os.path.isdir(slug_dir):
         continue
-    has_blog = os.path.exists(os.path.join(slug_dir, "blog.md"))
-    has_hero = bool(glob.glob(os.path.join(slug_dir, "*-hero.webp")))
-    if has_blog and not has_hero:
+    has_blog  = bool(glob.glob(os.path.join(slug_dir, "blog*.md")))
+    has_hero  = bool(glob.glob(os.path.join(slug_dir, "*-hero.webp")))
+    has_prompt = os.path.exists(os.path.join(slug_dir, "image-prompts.md"))
+    if has_blog and has_prompt and not has_hero:
         slugs_needing_images.append(slug)
 
 for s in slugs_needing_images:
@@ -41,145 +43,125 @@ for s in slugs_needing_images:
 ```
 
 If none found, stop and log: `No unimaged slugs found.`
+If slugs are found but `image-prompts.md` is missing for any of them, stop and output:
+`Writer has not finished prompts for: <slug list>. Run Writer first.`
 
 ---
 
 ## Step 2 — Resolve source
 
-Run `agents/image-designer/workflow/resolve-source.md` for each slug.
+Check `working_files/` for a file whose name contains the slug or a recognisable excerpt of the topic title.
 
-- Match found → set `source_path = "working_files/<filename>"`
-- No match → set `source_path = None`
+- Match found → set `SOURCE_PATH="working_files/<filename>"`
+- No match → set `SOURCE_PATH=""`
 
 ---
 
-## Step 3 — Build prompt
+## Step 3 — Read image prompts
 
-Read `content/topics/<slug>/blog.md`. Apply two-path prompt construction:
+Read `content/topics/<slug>/image-prompts.md` — written by the Writer. Do not modify it.
 
-**Path A — Known real-world subject** (real person, brand, team, cultural event):
-1. List 2–3 specific, visually concrete objects associated with the subject
-2. Build prompt from those objects in a specific scene or arrangement
+Extract `PROMPT` and `RATIO` (Aspect field) for each `## <channel>` block.
 
-**Path B — Concept or unknown topic:**
-1. Extract the most specific concrete nouns from the post text
-2. No abstract words — replace with physical objects or details
+Channel → dimensions mapping:
 
-**Prompt structure:**
-```
-[Scene or arrangement of specific concrete objects].
-[Lighting and surface details — specific, not generic].
-Colors: [plain English color names only — no hex codes].
-No text, letters, numbers, symbols, watermarks, or Western zodiac imagery anywhere in the image.
-```
-
-**Tone — alternate dark / light across posts:**
-
-| Tone | Background | Accents |
-|------|-----------|---------|
-| Dark | Deep midnight navy | Warm antique gold, deep crimson |
-| Light | Soft cream or warm white | Antique gold, navy or crimson accents |
-| Mixed | One dark + one light element | Contrast within the frame |
-
-Check `agents/image-designer/output/run-log.md` — if last 2–3 images used dark, use light or mixed.
-
-Build one prompt per channel using the aspect ratio mapping:
-
-| Channel | Aspect ratio | Target dimensions | Max KB |
-|---------|-------------|------------------|--------|
-| hero (website) | 16:9 | 1200×630 | 200 |
+| Channel | Aspect | Target dimensions | Max KB |
+|---------|--------|------------------|--------|
+| blog hero | 16:9 | 1200×630 | 200 |
 | og (Facebook EN, Facebook VN, LinkedIn, X) | 16:9 | 1200×630 | 200 |
 | social (Instagram) | 1:1 | 1080×1080 | 150 |
 
-Facebook EN and Facebook VN share one `og` image — generate once.
+Facebook EN and Facebook VN share one `og` image — generate once, copy for both.
 
 ---
 
 ## Step 4 — Generate
 
-Run using: `/opt/anaconda3/envs/mahjong-tarot/bin/python`
+Uses `curl` + `jq` + `base64` — no Python or SDK required.
 
-```python
-from google import genai
-from PIL import Image
-from dotenv import load_dotenv
-import os
+Read `GEMINI_API_KEY` from `.env.local` (checked first) then `.env`:
 
-load_dotenv()
-client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-
-SLUG = "<slug>"
-CHANNEL = "<channel>"       # hero, og, social
-PROMPT = "<constructed prompt>"
-RAW_PATH = f"working_files/{SLUG}-{CHANNEL}-raw.png"
-
-source_path = None          # set to "working_files/<file>" if resolve-source matched
-
-contents = [PROMPT]
-if source_path:
-    contents.append(Image.open(source_path))
-
-os.makedirs("working_files", exist_ok=True)
-
-response = client.models.generate_content(
-    model="gemini-3.1-flash-image-preview",
-    contents=contents,
-)
-for part in response.parts:
-    if part.inline_data is not None:
-        part.as_image().save(RAW_PATH)
-        print(f"Saved raw PNG → {RAW_PATH}")
-        break
+```bash
+GEMINI_API_KEY=$(grep -h 'GEMINI_API_KEY' .env.local .env 2>/dev/null | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'")
+SLUG="<slug>"
+CHANNEL="<channel>"   # e.g., blog-hero, og, social
+RAW_PATH="working_files/${SLUG}-${CHANNEL}-raw.png"
+mkdir -p working_files
 ```
 
-If the API call fails, shorten the prompt and retry once.
+**Without source image:**
+
+```bash
+PAYLOAD=$(jq -n --arg prompt "$PROMPT" '{
+  contents: [{ parts: [{ text: $prompt }] }],
+  generationConfig: { responseModalities: ["IMAGE"] }
+}')
+
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key=${GEMINI_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d "$PAYLOAD" \
+  | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' \
+  | base64 --decode > "$RAW_PATH"
+```
+
+**With source image** (when Step 2 found a match at `$SOURCE_PATH`):
+
+```bash
+SOURCE_B64=$(base64 -i "$SOURCE_PATH")
+PAYLOAD=$(jq -n --arg prompt "$PROMPT" --arg img "$SOURCE_B64" '{
+  contents: [{ parts: [{ text: $prompt }, { inlineData: { mimeType: "image/png", data: $img } }] }],
+  generationConfig: { responseModalities: ["IMAGE"] }
+}')
+
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key=${GEMINI_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d "$PAYLOAD" \
+  | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' \
+  | base64 --decode > "$RAW_PATH"
+```
+
+Check that `$RAW_PATH` is non-empty after the call. If empty, the API returned an error —
+run the curl again with `| jq .` to see the error, shorten the prompt, and retry once.
+
+Archive a permanent copy:
+```bash
+cp "$RAW_PATH" "content/topics/${SLUG}/${SLUG}-${CHANNEL}-original.png"
+```
 
 ---
 
 ## Step 5 — Optimise to WebP
 
-```python
-from PIL import Image
-import os, sys
+Uses `ffmpeg` — no Python or Pillow required.
 
-SLUG = "<slug>"
-CHANNEL = "<channel>"
-SOURCE = f"working_files/{SLUG}-{CHANNEL}-raw.png"
+```bash
+# RATIO is "16:9" or "1:1" — read from image-prompts.md Aspect field
+if [ "$RATIO" = "1:1" ]; then
+  W=1080; H=1080; MAX_KB=150
+else
+  W=1200; H=630;  MAX_KB=200
+fi
 
-specs = {
-    "hero": (1200, 630, 200),
-    "og":   (1200, 630, 200),
-    "social": (1080, 1080, 150),
-}
-target_w, target_h, max_kb = specs[CHANNEL]
-output_path = f"content/topics/{SLUG}/{SLUG}-{CHANNEL}.webp"
-os.makedirs(os.path.dirname(output_path), exist_ok=True)
+SOURCE="working_files/${SLUG}-${CHANNEL}-raw.png"
+OUTPUT="content/topics/${SLUG}/${SLUG}-${CHANNEL}.webp"
+mkdir -p "$(dirname "$OUTPUT")"
 
-img = Image.open(SOURCE).convert("RGB")
-img_ratio = img.width / img.height
-target_ratio = target_w / target_h
+for Q in 82 72 65; do
+  ffmpeg -y -i "$SOURCE" \
+    -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}" \
+    -q:v $Q "$OUTPUT" 2>/dev/null
+  SIZE_KB=$(du -k "$OUTPUT" | cut -f1)
+  if [ "$SIZE_KB" -le "$MAX_KB" ]; then
+    echo "PASS  ${SIZE_KB} KB → $OUTPUT"
+    break
+  fi
+done
 
-if img_ratio > target_ratio:
-    new_w = int(img.height * target_ratio)
-    new_h = img.height
-else:
-    new_w = img.width
-    new_h = int(img.width / target_ratio)
-
-left = (img.width  - new_w) // 2
-top  = (img.height - new_h) // 2
-img  = img.crop((left, top, left + new_w, top + new_h))
-img  = img.resize((target_w, target_h), Image.LANCZOS)
-
-for quality in [82, 72, 65]:
-    img.save(output_path, "webp", quality=quality)
-    size_kb = os.path.getsize(output_path) / 1024
-    if size_kb <= max_kb:
-        print(f"PASS  {size_kb:.1f} KB → {output_path}")
-        sys.exit(0)
-
-print(f"FAIL  {size_kb:.1f} KB exceeds {max_kb} KB at q65")
-sys.exit(1)
+if [ "$SIZE_KB" -gt "$MAX_KB" ]; then
+  echo "WARN  ${SIZE_KB} KB exceeds ${MAX_KB} KB at q65 — using as-is"
+fi
 ```
 
 ---
@@ -199,7 +181,9 @@ Append to `agents/image-designer/output/run-log.md`:
 | Situation | Action |
 |---|---|
 | `GEMINI_API_KEY` not set | Stop. Ask user (pipeline) or log and halt (autonomous). |
-| API call fails | Shorten the prompt, retry once. Log `❌` if still failing. |
-| Image is too generic | Prompt is too abstract — replace abstract words with specific objects, retry Step 4. |
-| Unwanted text or watermark | Add "No text, letters, numbers, symbols, or watermarks anywhere in the image." Retry. |
-| Packages missing | `/opt/anaconda3/envs/mahjong-tarot/bin/pip install google-genai python-dotenv Pillow` |
+| `image-prompts.md` missing | Stop. Output: "Writer has not finished prompts for \<slug\>. Run Writer first." |
+| API call returns empty file | Run curl again with `\| jq .` to see error. Shorten prompt and retry once. Log `❌` if still failing. |
+| Image is too generic | Prompt is too abstract — ask Writer to revise the prompt in `image-prompts.md`, then retry Step 4. |
+| Unwanted text or watermark | Ask Writer to add "No text, letters, numbers, symbols, or watermarks anywhere in the image." to the prompt. Retry. |
+| `jq` not found | `brew install jq` |
+| `ffmpeg` not found | `brew install ffmpeg` |

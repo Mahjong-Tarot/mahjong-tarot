@@ -1,189 +1,215 @@
-# P0 — Manual Account & Tool Setup
-> **Who runs this:** You, the business owner — no AI tools required yet.
-> **Where:** Your browser and your computer. Claude Chat can assist if you need guidance.
-> **Time:** ~45–60 minutes
-> **Done when:** Every checkbox is ticked and credentials are noted.
+# P0 — Account Setup
+> **Who:** You. In your browser and terminal.
+> **Time:** ~45 min
+> **Done when:** Every checkbox is ticked.
 
 ---
 
 ## INSTRUCTIONS FOR CLAUDE CHAT
 
-You are a setup guide. Walk the user through each step below in order.
-Do not skip steps. If the user already has an account, tick it off and move on.
-At the end of each section, confirm what was completed before moving to the next.
+At the start of this phase, tell the user:
+
+```
+⚠️  Heads up: do not try to open or read any files during this process.
+    It's highly technical — you don't need to understand it.
+    Just follow the steps below and answer when I ask you something.
+```
+
+Then immediately output this agenda:
+
+```
+P0 — Account Setup (~45 min)
+Here's what we're setting up today:
+
+  1. Claude Desktop
+  2. GitHub account
+  3. Vercel account
+  4. Supabase project + API keys
+  5. Google Gemini API key
+  6. Communication app (Lark — optional)
+  7. Social media logins
+  8. Domain (optional)
+  9. Email platform (Resend or managed email)
+ 10. Homebrew + git
+
+I'll walk you through each one. If you already have something, we'll skip it.
+Let's go.
+```
+
+Walk the user through each step in order. Do not explain what things are. If they already have an account, skip that step.
 
 ---
 
-## STEP 1 — Claude Desktop                                     ⏱ ~5 min
+## STEP 1 — Claude Desktop
 
-```
-Let's get your AI workspace ready.
-```
-
-□ Download Claude Desktop from: https://claude.ai/download
-□ Open Claude Desktop → sign in with your Anthropic account
-□ Confirm you have a **Pro plan** (required for Cowork and Code tabs)
-  → If not: claude.ai/upgrade
-□ Check you can see three tabs in the left sidebar: **Chat**, **Cowork**, **Code**
+□ Go to https://claude.ai/download — download and install the latest version.
+□ Sign in with your Anthropic account.
+□ If you don't have Pro: go to https://claude.ai/upgrade and upgrade now.
+□ Confirm you see Chat and Code tabs in the left sidebar.
 
 ---
 
-## STEP 2 — GitHub (code repository)                          ⏱ ~5 min
+## STEP 2 — GitHub
 
-```
-GitHub stores your entire marketing system — website code, agent files, content.
-It's free and your AI team uses it for every change.
-```
-
-□ Go to: https://github.com/signup
-  (skip if you already have an account)
-□ Choose a username (this will be part of your repo URL)
-□ Verify your email address
-□ Note your GitHub username: ________________________________
-
-**Do NOT create a repository yet** — Claude Code will do that in P1.
+□ Go to https://github.com/signup — create a free account. Skip if you have one.
+□ Verify your email — check your inbox and click the verification link now before continuing.
+□ Write down your username: ________________________________
+□ Do NOT create a repository.
 
 ---
 
-## STEP 3 — Vercel (website hosting)                          ⏱ ~5 min
+## STEP 3 — Vercel
 
-```
-Vercel hosts your website. It deploys automatically every time your AI team
-pushes an update — no manual uploads needed.
-```
-
-□ Go to: https://vercel.com/signup
-  (free — use "Continue with GitHub" for the easiest setup)
-□ Authorise Vercel to access your GitHub account when prompted
-□ Note your Vercel team/username: ________________________________
-
-**Do NOT create a project yet** — Claude Code will scaffold and connect it in P2.
+□ Go to https://vercel.com/signup
+□ Click "Continue with GitHub" — approve the access request.
+□ Write down your Vercel username: ________________________________
+□ Do NOT create a project.
 
 ---
 
-## STEP 4 — Supabase (database)                               ⏱ ~10 min
+## STEP 4 — Supabase
 
-```
-Supabase is your database — it stores contact form submissions,
-newsletter signups, and any data your website collects.
-```
-
-□ Go to: https://supabase.com (free tier is sufficient to start)
-□ Create an account → Create a new organisation
+□ Go to https://supabase.com — create a free account.
+□ Create a new organisation.
 □ Create a new project:
   - Name: `{your-business-name}-marketing`
-  - Region: pick the one closest to your customers
-  - Note your database password somewhere safe: ________________
-□ Once the project is ready, go to:
-  **Project Settings → API** and copy:
-  - Project URL: ________________________________________________
-  - Anon/Public key: ____________________________________________
-
-**Keep these — you'll paste them into Vercel in P2.**
-
----
-
-## STEP 5 — Email Platform                                    ⏱ ~10 min
-
-```
-Your AI team writes newsletters and campaigns. This platform sends them.
-Brevo is recommended — free up to 300 emails/day.
-```
-
-**If using Brevo (recommended):**
-□ Sign up at: https://brevo.com
-□ Go to: Account → SMTP & API → API Keys → Create a new key
-□ Name it: `{business-name}-marketing`
-□ Copy the API key: ____________________________________________
-□ Create a contact list: name it "Newsletter"
-□ Note the List ID (shown in the list settings): ________________
-
-**If using another platform (Mailchimp, ConvertKit, etc.):**
-□ Log in and locate your API key
-□ Note the API key: ____________________________________________
-□ Note your main subscriber list ID: ___________________________
+  - Region: pick the closest to your customers
+  - Write down your database password: ________________________
+□ Wait for the project to finish setting up (takes ~1 min).
+□ Go to **Project Settings → API**. Copy and write down:
+  - Project URL: ____________________________________________
+  - Anon/Public key: ________________________________________
+□ Go to https://supabase.com/dashboard/account/tokens
+□ Click "Generate new token" — name it `{your-business-name}-claude`.
+□ Copy it immediately — it only shows once: __________________
+  ⚠️  Open a notes app and paste that token right now before closing this page. It cannot be recovered.
 
 ---
 
-## STEP 6 — Telegram Bot (optional — for AI team notifications) ⏱ ~5 min
+## STEP 5 — Google AI Studio
 
-```
-Your AI team can send you daily updates and draft-ready alerts via Telegram.
-Skip this if you prefer not to use Telegram.
-```
-
-Do you want Telegram notifications? **Yes / No**
-
-**If YES:**
-□ Open Telegram → search `@BotFather` → tap Start
-□ Send: `/newbot`
-□ Name your bot: `{BusinessName}MarketingBot`
-□ Username: `{businessname}marketing_bot` (must end in `_bot`)
-□ Copy the token BotFather gives you: _________________________
-□ Send your bot a message (any text) to activate it
-□ Note your Telegram username: ________________________________
+□ Go to https://aistudio.google.com/apikey — sign in with Google.
+□ Click "Create API key" → "Create API key in new project".
+□ Copy the key immediately: ________________________________
 
 ---
 
-## STEP 7 — Social Media Accounts                             ⏱ ~5 min
+## STEP 6 — Communication App
 
-```
-Your AI team drafts content for your platforms. Let's confirm which ones
-you have access to.
-```
+Ask the user: "Does your team use Lark / Feishu for notifications? (yes / no)"
 
-For each platform you plan to use, confirm you can log in:
+**Lark / Feishu:**
+□ Go to https://open.larksuite.com/app (Feishu: https://open.feishu.cn/app)
+□ Create a Custom App — name it `{business-name}-notifications`
+□ Go to Credentials & Basic Info — copy App ID and App Secret
+□ Go to Add Capabilities → Messenger → enable Send Message
+□ Go to Security Settings → add your workspace domain
+□ Publish the app → Install to workspace
+□ Open the Lark chat where you want notifications → right-click → Copy Chat ID
+□ Write down — App ID: ________________  App Secret: ________________  Chat ID: ________________
+
+Note: Lark is one-way. Claude sends messages to Lark but cannot receive replies without a custom integration.
+
+**No / skip:**
+□ Continue to Step 7. Email-only notifications will be set up in Step 9.
+
+---
+
+## STEP 7 — Social Media
+
+For each platform you plan to post on, confirm you can log in:
 
 □ Instagram — username: ______________________________________
 □ TikTok — username: _________________________________________
 □ LinkedIn — profile URL: ____________________________________
 □ Twitter/X — username: ______________________________________
 □ Facebook Page — page name: _________________________________
-□ YouTube Channel — channel name: ____________________________
-□ Other: _______________________ username: ___________________
-
-**Social scheduling tool** (Buffer, Later, Hootsuite, etc.):
-□ Name: _________________________ Account active: Yes / No
-□ API key (if available): ______________________________________
+□ YouTube — channel name: ____________________________________
 
 ---
 
-## STEP 8 — Domain Name (optional)                            ⏱ ~15 min
-
-```
-You can start with a free Vercel subdomain (yoursite.vercel.app) and add
-a custom domain later. If you already own a domain, note it here.
-```
+## STEP 8 — Domain (optional)
 
 □ Already have a domain: ______________________________________
 □ Want to buy one: go to namecheap.com or domains.google.com
-□ No domain yet — will use Vercel subdomain for now ✓
+□ No domain — using Vercel subdomain for now ✓
 
 ---
 
-## STEP 9 — Credentials Summary
+## STEP 9 — Email Platform
 
-Before moving to P1, confirm you have noted:
+Ask the user: "Does your domain run on Google Workspace, Outlook 365, or another managed email service? (yes / no)"
+
+**Google Workspace or managed email:**
+□ Log in to your admin console.
+□ Create a notification-only inbox — e.g. `notifications@{yourdomain.com}`
+□ Write down the address: ____________________________________________
+□ Skip Resend — this inbox is your sender address.
+
+**No managed email — use Resend:**
+□ Go to https://resend.com — sign up with your GitHub account.
+□ Go to Domains → Add Domain — enter your domain (or use `onboarding@resend.dev` to start without a domain).
+□ If adding your domain: paste the DNS records shown into your registrar → wait for verification (usually minutes, up to 24h).
+□ Go to API Keys → Create API Key — name it `{business-name}-notifications`.
+□ Copy the key immediately: ________________________________________________
+
+---
+
+## STEP 10 — Developer Prerequisites
+
+Open **Terminal** (Mac: search "Terminal" in Spotlight. Windows: skip to the Windows note below).
+
+**Install Homebrew — paste this and press Enter:**
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+When it asks for your password — type it and press Enter. You won't see the characters — that's normal.
+
+**Install git — paste this and press Enter:**
+```
+brew install git
+```
+⚠️  During the Homebrew install, a popup may appear saying "Install Developer Tools" — click Install and wait for it to finish before Homebrew continues. This is normal and takes 5–10 minutes.
+
+**If Homebrew fails with "not currently available from the Software Update server":**
+```
+sw_vers -productVersion
+```
+Note your macOS version (15.x = Sequoia, 14.x = Sonoma, 13.x = Ventura), then:
+1. Go to https://developer.apple.com/downloads — sign in with your Apple ID (free, no paid account needed)
+2. Search: `Command Line Tools for Xcode`
+3. Download the version that matches your macOS (Sequoia → Xcode 16, Sonoma → Xcode 15, Ventura → Xcode 14)
+4. Open the .dmg → run the .pkg installer → wait for it to complete
+5. Re-run the Homebrew install command
+
+**Confirm it worked — paste this:**
+```
+git --version
+```
+You should see `git version 2.x.x`. ✅
+
+**Windows:** Download and install git from https://git-scm.com/download/win — run the installer with all default settings.
+
+---
+
+## Credentials Summary
+
+Confirm you have all of these before moving on:
 
 | Item | Have it? |
 |------|----------|
 | GitHub username | □ |
 | Supabase Project URL | □ |
 | Supabase Anon Key | □ |
-| Email platform API key | □ |
-| Email subscriber list ID | □ |
-| Telegram bot token (if using) | □ |
-| Domain name (if applicable) | □ |
+| Supabase Personal Access Token | □ |
+| Google Gemini API key | □ |
+| Resend API key (or managed notification email address) | □ |
+| Lark App ID + App Secret + Chat ID (if using Lark) | □ |
 
 ---
 
 ```
-✅ P0 complete. All accounts created and credentials noted.
+✅ P0 complete.
 
-Next:
-  1. Open Claude Desktop
-  2. Switch to the Cowork tab
-  3. Click the 📎 attachment icon (bottom-left of the message box)
-  4. Select p1-local-setup.md from your files
-  5. Send it — Claude will take over from there
+Open Claude Desktop → switch to the Code tab → attach p1-local-setup.md → send it.
 ```

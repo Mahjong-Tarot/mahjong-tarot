@@ -30,10 +30,12 @@ website/              ← Next.js project root (do NOT write here directly — c
 
 ## Input: Reading Content
 
-- Source files are `.md` files inside `content/`
-- Each `.md` file has YAML front matter with `title`, `slug`, `output`, `hero_image`, and image notes
+- Source files are `.md` files inside `content/topics/<YYYY-MM-DD>-<type>-<topic>/`
+- Each blog `.md` file has YAML front matter with `title`, `slug`, `hero_image`, and image notes
+- The **folder name** is date-prefixed for organization (`2026-04-20-horse-money`). Do NOT use it as the URL slug
+- The **URL slug** comes from the `slug:` front-matter field (e.g. `money-in-the-year-of-the-fire-horse`) — that's what the JSX filename and the live `/blog/posts/<slug>` URL use
 - Read the full file — front matter and body — before generating anything
-- Source images are in `content/Images/` — see the image notes table in each `.md` file
+- Source images are in the same topic folder — see the image notes table in each `.md` file
 
 ## Output: Writing Components
 

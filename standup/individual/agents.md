@@ -1,12 +1,12 @@
-date: 2026-04-23
+date: 2026-04-24
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #112: pm(standup-morning): 2026-04-22 — merged at 00:07 UTC
-- PR #114: pm(standup-compile): 2026-04-22 — merged at 02:00 UTC
+- PR #119: pm(standup-morning): 2026-04-23 — merged at 00:06 UTC
+- PR #120: pm(standup-compile): 2026-04-23 — merged at 01:59 UTC
 
 **Next:**
 - No open work detected
@@ -33,8 +33,7 @@ None
 ## writer
 
 **Completed:**
-- PR #116: writer: Apr 20 Money catch-up + Apr 27 Career (5 posts) — merged at 07:17 UTC
-- PR #117: fgf: writer adds English + Vietnamese card PROMPTS (Journal Page); designer renders — merged at 07:50 UTC
+- No activity
 
 **Next:**
 - No open work detected
@@ -60,7 +59,7 @@ None
 ## image-designer
 
 **Completed:**
-- PR #118: Designer: Hero images — 2026-04-23 — merged at 19:11 UTC
+- PR #118: designer(thursday-2026-04-23): hero images for horse-wedding, mirror-wedding, feel-good-love — merged at 19:11 UTC
 
 **Next:**
 - No open work detected

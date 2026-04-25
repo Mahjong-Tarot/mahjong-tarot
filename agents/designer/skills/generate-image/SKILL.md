@@ -34,16 +34,25 @@ for slug in sorted(os.listdir(topics_dir)):
     if not os.path.isdir(slug_dir):
         continue
     # Blog files are named blog-*.md, not blog.md
-    has_blog = bool(glob.glob(os.path.join(slug_dir, "blog-*.md")))
-    has_hero = bool(glob.glob(os.path.join(slug_dir, "*-hero.webp")))
+    has_blog   = bool(glob.glob(os.path.join(slug_dir, "blog-*.md")))
+    has_hero   = bool(glob.glob(os.path.join(slug_dir, "*-hero.webp")))
+    has_prompt = os.path.exists(os.path.join(slug_dir, "image-prompts.json"))
     if has_blog and not has_hero:
-        slugs_needing_images.append(slug)
+        slugs_needing_images.append((slug, has_prompt))
 
-for s in slugs_needing_images:
+missing_prompts = [s for s, ok in slugs_needing_images if not ok]
+if missing_prompts:
+    print("Writer has not finished prompts for:", ", ".join(missing_prompts))
+    print("Run Writer first.")
+    raise SystemExit(1)
+
+for s, _ in slugs_needing_images:
     print(s)
 ```
 
 If none found, stop and log: `No unimaged slugs found.`
+If slugs are found but `image-prompts.json` is missing for any of them, stop and output:
+`Writer has not finished prompts for: <slug list>. Run Writer first.`
 
 ---
 
@@ -97,9 +106,9 @@ Check `working_files/` for a file whose name contains the slug or a recognisable
 
 ## Step 4 — Generate
 
-For each entry in `image-prompts.md`, run the generation call. Run one file at a time — do not batch.
+For each entry in `image-prompts.json`, run the generation call. Run one file at a time — do not batch.
 
-Read `PROMPT` and `RATIO` from the relevant `## <file>.md` section of `image-prompts.md`.
+Read `prompt` and `aspect_ratio` from the relevant entry in `image-prompts.json`.
 
 Uses `curl` + `jq` + `base64` — no Python or SDK required.
 

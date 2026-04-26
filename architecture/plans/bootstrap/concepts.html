@@ -251,14 +251,12 @@
       <div class="pts c3" style="margin-bottom:20px">
         <div class="pt"><div class="pt-lbl">What it is</div><div class="pt-txt">A fully automated AI team that writes content, manages your project, and publishes your website — working Monday–Friday without you setting reminders.</div></div>
         <div class="pt"><div class="pt-lbl">What you do</div><div class="pt-txt">About 1 hour of browser work (accounts + approvals). Claude handles everything else — installing tools, building the site, generating agents.</div></div>
-        <div class="pt"><div class="pt-lbl">What you get</div><div class="pt-txt">A live website, 7 AI specialists, and a fully automated daily/weekly workflow — all set up in roughly 6 hours total.</div></div>
+        <div class="pt"><div class="pt-lbl">What you get</div><div class="pt-txt">A live website, 4 AI specialists, and a fully automated daily/weekly workflow — all set up in roughly 3 hours total.</div></div>
       </div>
       <div class="phase-row">
         <div class="ph" style="background:#1C1508;border-color:#78350F;color:#FDE68A">P0 · Accounts</div>
         <div class="ph" style="background:#0D1B2E;border-color:#1E3A5F;color:#BFDBFE">P1 · Machine Setup</div>
-        <div class="ph" style="background:#130623;border-color:#4C1D95;color:#E9D5FF">P2 · Core Setup</div>
-        <div class="ph" style="background:#021A14;border-color:#065F46;color:#A7F3D0">P3 · Discovery</div>
-        <div class="ph" style="background:#061B22;border-color:#155E75;color:#A5F3FC">P4 · Full Team</div>
+        <div class="ph" style="background:#130623;border-color:#4C1D95;color:#E9D5FF">P2 · Website + Agents + Schedules</div>
       </div>
     </div>
   </div>
@@ -393,16 +391,16 @@
     <div class="slide-inner">
       <span class="cat">Your Communications</span>
       <span class="s-icon">📣</span>
-      <h2 class="s-title">Email + Telegram</h2>
-      <p class="s-tag"><strong>Your broadcast system and your team's group chat.</strong> Your AI team writes and schedules everything — you approve before anything goes out.</p>
+      <h2 class="s-title">Email + Lark</h2>
+      <p class="s-tag"><strong>Your broadcast system and your team's notification channel.</strong> Your AI team writes and schedules everything — you approve before anything goes out.</p>
       <div class="pts c2" style="margin-bottom:12px">
         <div class="pt">
-          <div class="pt-lbl">📧 Email platform (Brevo)</div>
-          <div class="pt-txt">Your AI Writer drafts newsletters and campaigns. Brevo delivers them to your subscriber list. Free up to 300 emails/day. You always approve before sending — this is non-negotiable.</div>
+          <div class="pt-lbl">📧 Email platform (Resend)</div>
+          <div class="pt-txt">Your AI Project Manager sends daily briefings and weekly RAG reports via Resend. You always approve email campaigns before sending — this is non-negotiable.</div>
         </div>
         <div class="pt">
-          <div class="pt-lbl">📱 Telegram bot (optional)</div>
-          <div class="pt-txt">Your AI Project Manager sends daily standup summaries, blocker alerts, and weekly reports to a private Telegram group. Think of it as your AI team's Slack channel.</div>
+          <div class="pt-lbl">💬 Lark (optional)</div>
+          <div class="pt-txt">Your AI Project Manager sends standup reminders, daily summaries, and weekly reports to a Lark group chat. One-way channel — Claude sends to Lark via Lark CLI.</div>
         </div>
       </div>
       <div class="callout">
@@ -631,19 +629,20 @@
       <div class="pts c2" style="margin-bottom:12px">
         <div class="pt">
           <div class="pt-lbl">How it works</div>
-          <div class="pt-txt">The Project Manager's 4 core schedules are <strong>auto-registered in P2</strong> — no manual steps. Extended agent schedules (added in P3) are activated by pasting a <code style="font-size:0.82em;background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px">/schedule</code> command into Claude Desktop Chat. Once registered, tasks fire automatically while your laptop is on.</div>
+          <div class="pt-txt">All 7 schedules are <strong>auto-registered in P2</strong> using RemoteTrigger — cloud-hosted on Anthropic's servers. Tasks fire even when your laptop is closed or Claude Desktop is not running.</div>
         </div>
         <div class="pt">
-          <div class="pt-lbl">One important rule</div>
-          <div class="pt-txt">Schedules only run when Claude Desktop is open and your laptop is on. If you close the lid at 6:50am, the 7am reminder doesn't fire that day. That's expected — not a bug.</div>
+          <div class="pt-lbl">Always-on</div>
+          <div class="pt-txt">RemoteTrigger runs in the cloud — no machine dependency. Your 7am standup reminder fires whether or not you're at your desk. No more missed standups because the laptop was asleep.</div>
         </div>
       </div>
       <div class="auto-grid">
         <div class="auto-card"><div class="auto-when">Mon–Fri · 7am</div><div class="auto-what">Standup reminder</div><div class="auto-who">Project Manager</div></div>
-        <div class="auto-card"><div class="auto-when">Mon–Fri · 9am</div><div class="auto-what">Daily briefing</div><div class="auto-who">Project Manager</div></div>
+        <div class="auto-card"><div class="auto-when">Mon–Fri · 9am</div><div class="auto-what">Daily briefing + publish check</div><div class="auto-who">PM + Web Developer</div></div>
         <div class="auto-card"><div class="auto-when">Mon–Fri · 5pm</div><div class="auto-what">EOD check-in</div><div class="auto-who">Project Manager</div></div>
+        <div class="auto-card"><div class="auto-when">Tuesday · 8am</div><div class="auto-what">Write next week's posts</div><div class="auto-who">Writer</div></div>
+        <div class="auto-card"><div class="auto-when">Thursday · 8am</div><div class="auto-what">Generate hero images</div><div class="auto-who">Designer</div></div>
         <div class="auto-card"><div class="auto-when">Friday · 4pm</div><div class="auto-what">Weekly RAG report</div><div class="auto-who">Project Manager</div></div>
-        <div class="auto-card"><div class="auto-when">1st of month</div><div class="auto-what">Content calendar</div><div class="auto-who">Marketing Manager (optional)</div></div>
       </div>
     </div>
   </div>
@@ -718,41 +717,29 @@
     <div class="slide-inner">
       <span class="cat">The Journey</span>
       <span class="s-icon">🚀</span>
-      <h2 class="s-title">The 5 Bootstrap Phases</h2>
-      <p class="s-tag">From zero to a live website with a full AI team — broken into five phases you run in order, each building on the last.</p>
-      <div class="phase-cards">
+      <h2 class="s-title">The 3 Bootstrap Phases</h2>
+      <p class="s-tag">From zero to a live website with a full AI team — three phases you run in order, each building on the last.</p>
+      <div class="phase-cards" style="grid-template-columns: repeat(3, 1fr)">
         <div class="ph-card" style="background:#1C1508;border-color:#78350F">
           <div class="ph-num" style="color:#F59E0B">P0 · 45–60 min</div>
           <div class="ph-name">Accounts &amp; Credentials</div>
           <div class="ph-who">You · in your browser</div>
-          <div class="ph-out" style="color:#FCD34D">Create accounts, copy API keys, note credentials. Claude Chat guides each step.</div>
+          <div class="ph-out" style="color:#FCD34D">Create accounts, copy API keys, install Homebrew + git. Claude Chat guides each step.</div>
         </div>
         <div class="ph-card" style="background:#0D1B2E;border-color:#1E3A5F">
           <div class="ph-num" style="color:#60A5FA">P1 · 20–30 min</div>
           <div class="ph-name">Machine Setup</div>
-          <div class="ph-who">Claude Cowork + Code</div>
-          <div class="ph-out" style="color:#BFDBFE">Install tools, create project, configure permissions, install skills. You watch.</div>
+          <div class="ph-who">Claude Code</div>
+          <div class="ph-out" style="color:#BFDBFE">Install dev tools, create project repo, configure Claude permissions and Supabase MCP, install skills. You answer 4 questions.</div>
         </div>
         <div class="ph-card" style="background:#130623;border-color:#4C1D95">
           <div class="ph-num" style="color:#C084FC">P2 · 45–60 min</div>
-          <div class="ph-name">Website + Core Team</div>
+          <div class="ph-name">Website + Agents + Schedules</div>
           <div class="ph-who">Claude Code</div>
-          <div class="ph-out" style="color:#E9D5FF">Website live on Vercel. 4 core agents installed from template. PM schedules auto-registered. No interview yet.</div>
-        </div>
-        <div class="ph-card" style="background:#021A14;border-color:#065F46">
-          <div class="ph-num" style="color:#34D399">P3 · 90–120 min</div>
-          <div class="ph-name">Discovery + Customisation</div>
-          <div class="ph-who">Claude Code</div>
-          <div class="ph-out" style="color:#A7F3D0">Interview (you answer) → brand files written → all 4 agents personalised. Optionally add specialist agents.</div>
-        </div>
-        <div class="ph-card" style="background:#061B22;border-color:#155E75">
-          <div class="ph-num" style="color:#22D3EE">P4 · 30–45 min</div>
-          <div class="ph-name">Extended Team + Go Live</div>
-          <div class="ph-who">Claude Code + Chat</div>
-          <div class="ph-out" style="color:#A5F3FC">Schedules for any specialist agents added in P3, then full system verification tests.</div>
+          <div class="ph-out" style="color:#E9D5FF">Website live on Vercel. 4 core agents installed. 7 cloud-hosted schedules auto-registered. You click Deploy once.</div>
         </div>
       </div>
-      <div class="tech-note" style="margin-top:14px">Total: ~6 hours · Your effort: ~1 hour · Everything else is Claude · See index.html for the full phase detail</div>
+      <div class="tech-note" style="margin-top:14px">Total: ~3 hours · Your effort: ~1 hour · Everything else is Claude · See index.html for the full phase detail</div>
     </div>
   </div>
 

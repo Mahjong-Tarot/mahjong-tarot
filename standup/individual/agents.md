@@ -1,12 +1,12 @@
-date: 2026-04-22
+date: 2026-04-24
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #108: pm(standup-morning): 2026-04-21 — merged at 00:08 UTC
-- PR #110: pm(standup-compile): 2026-04-21 — merged at 02:00 UTC
+- PR #119: pm(standup-morning): 2026-04-23 — merged at 00:06 UTC
+- PR #120: pm(standup-compile): 2026-04-23 — merged at 01:59 UTC
 
 **Next:**
 - No open work detected
@@ -36,11 +36,10 @@ None
 - No activity
 
 **Next:**
-- Resolve remaining skill execution gaps from review
-- Implement SM handoff contract
+- No open work detected
 
 **Blockers:**
-Writer agent skill gaps documented — fixes applied by Dave and Trac, verify before next scheduled run
+None
 
 ---
 
@@ -60,10 +59,10 @@ None
 ## image-designer
 
 **Completed:**
-- No activity
+- PR #118: designer(thursday-2026-04-23): hero images for horse-wedding, mirror-wedding, feel-good-love — merged at 19:11 UTC
 
 **Next:**
-- Ready for use in blog hero image generation workflow
+- No open work detected
 
 **Blockers:**
 None

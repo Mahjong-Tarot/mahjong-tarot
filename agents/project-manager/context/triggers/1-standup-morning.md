@@ -3,7 +3,7 @@
 **Name**: `PM Standup Morning`
 **Schedule**: Weekdays at 7:00 AM Asia/Saigon (`0 0 * * 1-5` UTC)
 
-**Description**: At 7 AM, checks GitHub for all commits and merged PRs since yesterday 7 AM to build the agent activity picture. Updates `standup/individual/agents.md` with what each agent completed. Checks the freshness of each human check-in file and includes ✅/🔴 status per person in the Lark message. Sends a morning reminder to Dave, Yon, and Trac via Lark CLI and Resend (both always). If both fail, logs inline. Never writes directly to main.
+**Description**: Sends a morning reminder via Lark CLI only. At 7 AM, checks GitHub for all commits and merged PRs since yesterday 7 AM to build the agent activity picture. Updates `standup/individual/agents.md` with what each agent completed. Checks the freshness of each human check-in file and includes ✅/🔴 status per person in the Lark message. If Lark fails, logs inline. Never writes directly to main.
 
 ---
 
@@ -55,33 +55,20 @@ env.update(parse_env(".env.development"))
 env.update(parse_env(".env.production"))
 env.update(parse_env(".env.local"))  # .env.local takes highest precedence
 
-missing = [k for k in ("LARK_CHAT_ID", "RESEND_API_KEY", "RESEND_FROM") if not env.get(k)]
+missing = [k for k in ("LARK_CHAT_ID",) if not env.get(k)]
 if missing:
     raise SystemExit(f"ERROR: missing from env files (.env / .env.development / .env.production / .env.local): {missing}")
 
-with open("agents/project-manager/context/persona.md") as f:
-    text = f.read()
-emails = list(dict.fromkeys(
-    e for e in re.findall(r'[\w.+-]+@[\w.-]+\.[a-z]{2,}', text)
-    if "example" not in e
-))
-
-LARK_CHAT_ID   = env["LARK_CHAT_ID"]
-RESEND_API_KEY = env["RESEND_API_KEY"]
-RESEND_FROM    = env["RESEND_FROM"]
-RESEND_TO      = ",".join(emails)
+LARK_CHAT_ID = env["LARK_CHAT_ID"]
 ```
 
-After running the snippet above, immediately export all four values into the current shell session — CLI tools do not inherit Python variables:
+After running the snippet above, immediately export the value into the current shell session — CLI tools do not inherit Python variables:
 
 ```bash
 export LARK_CHAT_ID='<value-from-python>'
-export RESEND_API_KEY='<value-from-python>'
-export RESEND_FROM='<value-from-python>'
-export RESEND_TO='<value-from-python>'
 ```
 
-Use these four shell variables throughout the rest of this prompt wherever $LARK_CHAT_ID, $RESEND_API_KEY, $RESEND_FROM, or $RESEND_TO appear.
+Use `$LARK_CHAT_ID` throughout the rest of this prompt.
 
 ## Step 1 — Git workflow
 
@@ -198,9 +185,9 @@ Build a status line for each person to use in Step 5:
 
 ## Step 5 — Send morning reminder to human team members
 
-Use the notification pattern from agents/project-manager/context/pm-notification-guide.md. Always use the HTML email template at `agents/project-manager/context/template/emails/1-standup-morning.html` — do not create or modify templates.
+Use the notification pattern from agents/project-manager/context/pm-notification-guide.md.
 
-Notification (send both — not fallback):
+Notification:
 1. Lark CLI (always — bot identity, "Labs" group chat). Use the status lines built in Step 4 to construct the message. Replace each placeholder with the exact status string — do not leave placeholders in the sent message.
    # Use lark-cli (globally installed, v1.0.12). For full syntax reference, see the lark-im skill.
    # --as bot uses tenant_access_token — no OAuth or user login required
@@ -217,39 +204,7 @@ Notification (send both — not fallback):
 
    Example of a correctly built message (do not copy literally — use real status from Step 4):
    --text $'🌅 Daily Stand-Up Reminder — 2026-04-15\n\nCheck-in status (please update yours before 9:00 AM):\n• ✅ Dave\n• 🔴 Yon — standup/individual/yon.md\n• ✅ Trac\n\nThe PM agent compiles at 9 AM.'
-2. Resend CLI (always). Substitute `{{DATE}}` in a copy of `agents/project-manager/context/template/emails/1-standup-morning.html`, write to `/tmp/standup-morning-email.html`, then send:
-   # Ensure key is in shell env before invoking CLI (Python variables do not auto-export)
-   if [ -z "$RESEND_API_KEY" ]; then
-     export RESEND_API_KEY=$(python3 -c "
-import re
-def penv(p):
-    v={}
-    try:
-        [v.update({k.strip():val.strip().strip('\"').strip(\"'\")}) for line in open(p) for k,_,val in [line.strip().partition('=')] if line.strip() and not line.startswith('#') and '=' in line]
-    except: pass
-    return v
-e={}; [e.update(penv(f)) for f in ['.env','.env.development','.env.production','.env.local']]
-print(e.get('RESEND_API_KEY',''))
-")
-   fi
-   if ! command -v resend &>/dev/null; then npm install -g resend; fi
-   TO_ARGS=$(echo "$RESEND_TO" | tr ',' ' ')
-   RESEND_API_KEY="$RESEND_API_KEY" resend emails send \
-     --from "$RESEND_FROM" \
-     --to $TO_ARGS \
-     --subject "Daily Stand-Up Reminder — YYYY-MM-DD" \
-     --html-file /tmp/standup-morning-email.html \
-     --quiet
-   RESEND_EXIT=$?
-
-   If RESEND_EXIT is non-zero, self-diagnose and retry through each option in order until one succeeds — do not stop at the first failure:
-   1. **Verify the key**: run `echo "$RESEND_API_KEY" | head -c 8` — if empty, re-read from .env files using the inline Python above and `export RESEND_API_KEY=<value>`; then retry the CLI
-   2. **Reinstall CLI**: run `npm install -g resend` and retry
-   3. **cURL direct API**: POST the HTML file to `https://api.resend.com/emails` with `Authorization: Bearer $RESEND_API_KEY` header using `curl`
-   4. **Python `requests` library**: `pip install requests` if needed, then POST to `https://api.resend.com/emails` with the same payload
-   5. Only mark Resend as failed after all four options above are exhausted
-   RESEND_EXIT=$?
-3. If BOTH fail: append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
+2. If Lark fails (LARK_EXIT is non-zero after all retries): append failure status inline to standup/briefings/YYYY-MM/YYYY-MM-DD.md. No alerts folder.
 
 ## Step 6 — Git commit and branch cleanup
 

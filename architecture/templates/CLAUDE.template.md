@@ -12,7 +12,7 @@ You are the website production and publishing system for **<PROJECT_NAME>** — 
 
 Your job is to take approved content from `content/`, optimise images, build polished React components that conform to the site style guide, update the content index, stage everything with git, and hand `<APPROVER>` a single `git push` command to run from their own terminal. The live site is hosted at **<GITHUB_REPO_URL>**.
 
-The website is a **Next.js** application (Pages Router). Source content is read from `content/` and finished components are written to `website/`. All React component generation is handled by the **web-developer agent** in `agents/web-developer/`.
+The website is a **Next.js** application (App Router, TypeScript, Tailwind, shadcn). Source content is read from `content/` and finished components are written to `website/`. All React component generation is handled by the **web-developer agent** in `agents/web-developer/`.
 
 ---
 
@@ -20,7 +20,7 @@ The website is a **Next.js** application (Pages Router). Source content is read 
 
 - Read approved content drafts (`.md` files) from `content/`
 - Optimise source images to WebP and write them to `website/public/images/`
-- Use the `build-page` skill to generate React `.jsx` components, outputting to `agents/web-developer/output/`
+- Use the `build-page` skill to generate React `.tsx` components, outputting to `agents/web-developer/output/`
 - Review generated components, then copy approved files to `website/`
 - Update the content index page with a new entry card
 - Run `git add` and `git commit` with a clear commit message
@@ -95,15 +95,16 @@ The website is a **Next.js** application (Pages Router). Source content is read 
 ├── working_files/                     ← Git-ignored scratch space (see Working files below)
 │
 └── website/                           ← Next.js project root
-    ├── pages/
-    │   ├── index.jsx                  ← Home page
-    │   ├── about.jsx                  ← Owner/about page
-    │   ├── <page-slug>.jsx            ← Additional top-level pages
-    │   └── blog/
-    │       ├── index.jsx              ← Content listing page — update entry cards here
-    │       └── posts/                 ← One .jsx file per published post
-    ├── components/                    ← Shared React components
-    ├── styles/                        ← Global CSS and CSS modules
+    ├── app/
+    │   ├── page.tsx                   ← Home page
+    │   ├── about/page.tsx             ← Owner/about page
+    │   ├── <page-slug>/page.tsx       ← Additional top-level pages
+    │   ├── blog/
+    │   │   ├── page.tsx               ← Content listing page — update entry cards here
+    │   │   └── [slug]/page.tsx        ← Dynamic blog post route
+    │   ├── layout.tsx                 ← Root layout (nav, footer, fonts)
+    │   └── globals.css                ← Global styles + Tailwind + brand tokens
+    ├── components/                    ← Shared React components (shadcn + custom)
     └── public/
         └── images/                    ← Optimised WebP images served statically
             └── blog/
@@ -148,7 +149,7 @@ See `context/publishing-guide.md` for Pillow settings, size targets, and `@2x` r
 
 **Option A — Generate a new hero image:** Invoke the `generate-image` skill from `.claude/skills/generate-image/SKILL.md`.
 
-**Option B — Optimise an existing source image:** Use Python + Pillow as described in `context/publishing-guide.md`. Source files live in `content/Images/` or `content/topics/<slug>/`.
+**Option B — Optimise an existing source image:** Use `ffmpeg` to scale and convert to WebP. Source files live in `content/Images/` or `content/topics/<slug>/`.
 
 ### Step 4 — Generate React component via the build-page skill
 
@@ -157,21 +158,21 @@ Invoke the `build-page` skill from `agents/web-developer/context/skills/build-pa
 ### Step 5 — Copy to website
 
 Copy the approved component:
-- Blog post → `website/pages/blog/posts/<slug>.jsx`
-- Other page → `website/pages/<slug>.jsx`
+- Blog post → `website/app/blog/<slug>/page.tsx`
+- Other page → `website/app/<slug>/page.tsx`
 
 Each post component must include `<Head>` (title, meta description, OG/Twitter tags, canonical URL) and use `next/image` for all images.
 
 ### Step 6 — Update the content index
 
-Add a new entry card at the top of `website/pages/blog/index.jsx`. Follow the existing card pattern exactly. Do not change any other cards.
+Add a new entry card at the top of `website/app/blog/page.tsx`. Follow the existing card pattern exactly. Do not change any other cards.
 
 ### Step 7 — Git stage and commit
 
 ```bash
-git add website/pages/blog/posts/<slug>.jsx \
+git add website/app/blog/<slug>/page.tsx \
         website/public/images/blog/<slug>.webp \
-        website/pages/blog/index.jsx
+        website/app/blog/page.tsx
 git commit -m "publish: <Post title>"
 ```
 
@@ -255,4 +256,4 @@ Never commit files from `working_files/` — the directory must stay in `.gitign
 | `<path-to-repo>` | Local path on approver's machine |
 | `<page-slug>.jsx` | Add or remove top-level pages to match the site |
 
-<!-- Template version: 1.0 — Based on Mahjong Tarot project CLAUDE.md v3.0 -->
+<!-- Template version: 2.0 — Updated for Next.js App Router + TypeScript + Tailwind + shadcn -->

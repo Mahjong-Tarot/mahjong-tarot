@@ -234,22 +234,9 @@
     .p2 .phase-dot  { background: #3B0764; border-color: #A855F7; color: #E9D5FF; }
     .p2 .phase-card { background: #130623; border-color: #4C1D95; }
     .p2 .step-label { color: #C084FC; }
-    .p2 .phase-connector { background: linear-gradient(#4C1D95, #1E293B); }
-
-    /* P3 green */
-    .p3 .phase-dot  { background: #064E3B; border-color: #10B981; color: #A7F3D0; }
-    .p3 .phase-card { background: #021A14; border-color: #065F46; }
-    .p3 .step-label { color: #34D399; }
-    .p3 .phase-connector { background: linear-gradient(#065F46, #1E293B); }
-
-    /* P4 teal */
-    .p4 .phase-dot  { background: #164E63; border-color: #06B6D4; color: #A5F3FC; }
-    .p4 .phase-card { background: #061B22; border-color: #155E75; }
-    .p4 .step-label { color: #22D3EE; }
 
     /* badge colours */
     .badge-manual   { background: #451A03; color: #FCD34D; border: 1px solid #78350F; }
-    .badge-cowork   { background: #1E1B4B; color: #A5B4FC; border: 1px solid #3730A3; }
     .badge-code     { background: #0C4A6E; color: #7DD3FC; border: 1px solid #075985; }
     .badge-chat     { background: #14532D; color: #86EFAC; border: 1px solid #166534; }
     .badge-time     { background: #1E293B; color: #94A3B8; border: 1px solid #334155; }
@@ -335,10 +322,10 @@
       <h1>AI Marketing Team — Bootstrap</h1>
       <p>End-to-end setup guide for non-technical business owners</p>
       <div class="stats">
-        <div class="stat"><div class="value">5</div><div class="label">Phases</div></div>
-        <div class="stat"><div class="value">~6h</div><div class="label">Total time</div></div>
+        <div class="stat"><div class="value">3</div><div class="label">Phases</div></div>
+        <div class="stat"><div class="value">~3h</div><div class="label">Total time</div></div>
         <div class="stat"><div class="value">~1h</div><div class="label">Your effort</div></div>
-        <div class="stat"><div class="value">7</div><div class="label">AI Agents</div></div>
+        <div class="stat"><div class="value">4</div><div class="label">AI Agents</div></div>
       </div>
     </div>
 
@@ -360,21 +347,25 @@
               <span class="badge badge-time">45–60 min</span>
             </div>
           </div>
-          <p class="phase-desc">Pure browser work. Claude Chat guides you step by step. Nothing to install — just create accounts and copy your credentials into a safe place.</p>
+          <p class="phase-desc">Pure browser work. Claude Chat guides you step by step. Nothing to install — just create accounts, copy credentials, and install Homebrew + git.</p>
           <div class="steps">
             <div class="step"><div class="step-label">Step 1</div><div class="step-text">Claude Desktop Pro — download &amp; install</div></div>
-            <div class="step"><div class="step-label">Step 2</div><div class="step-text">GitHub — create account, note username</div></div>
+            <div class="step"><div class="step-label">Step 2</div><div class="step-text">GitHub — create account, verify email</div></div>
             <div class="step"><div class="step-label">Step 3</div><div class="step-text">Vercel — sign up with GitHub</div></div>
-            <div class="step"><div class="step-label">Step 4</div><div class="step-text">Supabase — new project, copy URL + anon key</div></div>
-            <div class="step"><div class="step-label">Step 5</div><div class="step-text">Email platform — Brevo recommended, get API key</div></div>
-            <div class="step"><div class="step-label">Step 6</div><div class="step-text">Telegram bot — optional, for AI team alerts</div></div>
+            <div class="step"><div class="step-label">Step 4</div><div class="step-text">Supabase — new project, copy URL + anon key + PAT</div></div>
+            <div class="step"><div class="step-label">Step 5</div><div class="step-text">Google AI Studio — generate Gemini API key</div></div>
+            <div class="step"><div class="step-label">Step 6</div><div class="step-text">Lark — optional, for AI team notifications</div></div>
+            <div class="step"><div class="step-label">Step 7</div><div class="step-text">Resend — email API key for PM notifications</div></div>
+            <div class="step"><div class="step-label">Step 8</div><div class="step-text">Homebrew + git — install in Terminal</div></div>
           </div>
           <div class="output-label">Outputs</div>
           <div class="outputs">
             <span class="output-tag">All credentials noted</span>
             <span class="output-tag">GitHub account</span>
             <span class="output-tag">Supabase project</span>
-            <span class="output-tag">Email API key</span>
+            <span class="output-tag">Gemini API key</span>
+            <span class="output-tag">Resend API key</span>
+            <span class="output-tag">Homebrew + git installed</span>
           </div>
         </div>
       </div>
@@ -382,7 +373,7 @@
       <!-- dep arrow -->
       <div class="dep-row">
         <span class="dep-arrow">↓</span>
-        <span class="dep-text">credentials ready — P1 needs your GitHub access to push the first repo</span>
+        <span class="dep-text">credentials ready + Homebrew installed — P1 scaffolds the repo and configures Claude</span>
       </div>
 
       <!-- P1 -->
@@ -395,19 +386,20 @@
           <div class="phase-header">
             <div class="phase-title">Local Machine Setup</div>
             <div class="phase-meta">
-              <span class="badge badge-cowork">Cowork</span>
               <span class="badge badge-code">Code</span>
               <span class="badge badge-time">20–30 min</span>
             </div>
           </div>
-          <p class="phase-desc">Claude takes the wheel. Stage A uses Cowork (screen control) to install developer tools. Stage B runs in Code to scaffold your project and configure Claude itself.</p>
+          <p class="phase-desc">Claude Code takes the wheel. Installs developer tools, creates the project repo, configures Claude permissions, and installs skills. You answer 4 questions upfront — then watch.</p>
           <div class="steps">
-            <div class="step"><div class="step-label">Stage A — Cowork</div><div class="step-text">Install git, node, Vercel CLI, Supabase CLI. Authenticate GitHub. Pre-seed all Claude Code permissions.</div></div>
-            <div class="step"><div class="step-label">Stage B — Code</div><div class="step-text">Create project folder + git repo. Write CLAUDE.md rules. Configure Supabase MCP. Install skills (skill-creator, agent-creator).</div></div>
+            <div class="step"><div class="step-label">4 questions</div><div class="step-text">Project name, git identity, Supabase PAT, Lark setup? Everything else is automatic.</div></div>
+            <div class="step"><div class="step-label">Dev tools</div><div class="step-text">gh, node, vercel CLI, supabase CLI, jq, ffmpeg — installed via Homebrew.</div></div>
+            <div class="step"><div class="step-label">Repo + config</div><div class="step-text">Create project folder, git init, CLAUDE.md, Supabase MCP, permissions pre-seeded.</div></div>
+            <div class="step"><div class="step-label">Skills</div><div class="step-text">create-local-task, daily-checkin, skill-creator installed globally.</div></div>
           </div>
           <div class="output-label">Outputs</div>
           <div class="outputs">
-            <span class="output-tag">Project repo on GitHub</span>
+            <span class="output-tag">Project repo initialised</span>
             <span class="output-tag">CLAUDE.md written</span>
             <span class="output-tag">Permissions pre-seeded</span>
             <span class="output-tag">Skills installed</span>
@@ -419,116 +411,37 @@
       <!-- dep arrow -->
       <div class="dep-row">
         <span class="dep-arrow">↓</span>
-        <span class="dep-text">repo exists + Claude fully configured — P2 scaffolds website and installs the core agent team</span>
+        <span class="dep-text">repo exists + Claude fully configured — P2 builds the website, installs agents, and registers all schedules</span>
       </div>
 
       <!-- P2 -->
       <div class="phase p2">
         <div class="phase-icon">
           <div class="phase-dot">P2</div>
-          <div class="phase-connector"></div>
         </div>
         <div class="phase-card">
           <div class="phase-header">
-            <div class="phase-title">Website Infrastructure + Core Agent Setup</div>
+            <div class="phase-title">Website + Agents + Schedules</div>
             <div class="phase-meta">
               <span class="badge badge-code">Code</span>
               <span class="badge badge-time">45–60 min</span>
             </div>
           </div>
-          <p class="phase-desc">No interview. Claude scaffolds your website with placeholder content, installs all 4 core agents from a proven template, and auto-registers the PM's daily/weekly schedules. Your team is running before you've answered a single business question.</p>
+          <p class="phase-desc">Claude scaffolds the website, installs all 4 core agents, registers 7 cloud-hosted schedules, and deploys to Vercel. You step in once to click Deploy — everything else is automatic.</p>
           <div class="steps">
-            <div class="step"><div class="step-label">2 questions</div><div class="step-text">Project name + timezone. That's all Claude needs to begin.</div></div>
-            <div class="step"><div class="step-label">Website</div><div class="step-text">Scaffold Next.js → push to GitHub → deploy to Vercel → wire Supabase. Placeholder content throughout.</div></div>
-            <div class="step"><div class="step-label">Core agents ×4</div><div class="step-text"><strong style="color:#E9D5FF">Project Manager · Writer · Designer · Web Developer</strong> installed from template.</div></div>
-            <div class="step"><div class="step-label">PM schedules</div><div class="step-text">4 tasks auto-registered via MCP: 7am reminder, 9am compile, 5pm EOD, Friday RAG report.</div></div>
+            <div class="step"><div class="step-label">Brand confirmation</div><div class="step-text">Claude infers brand colours + tone from your resources — you confirm before any file is written.</div></div>
+            <div class="step"><div class="step-label">Website</div><div class="step-text">Next.js App Router + TypeScript + Tailwind + shadcn → GitHub → Vercel. You click Deploy once.</div></div>
+            <div class="step"><div class="step-label">Core agents ×4</div><div class="step-text"><strong style="color:#E9D5FF">Project Manager · Writer · Designer · Web Developer</strong> — personas, skills, and trigger files installed.</div></div>
+            <div class="step"><div class="step-label">7 schedules</div><div class="step-text">4 PM schedules + Writer (Tue) + Designer (Thu) + Publisher (weekdays) — all cloud-hosted via RemoteTrigger. Always-on.</div></div>
           </div>
           <div class="output-label">Outputs</div>
           <div class="outputs">
             <span class="output-tag">Live website on Vercel</span>
             <span class="output-tag">Supabase connected</span>
             <span class="output-tag">4 agents installed</span>
-            <span class="output-tag">4 PM schedules active</span>
+            <span class="output-tag">7 schedules active</span>
             <span class="output-tag">.claude/agents/*.md</span>
             <span class="output-tag">agents/*/context/persona.md</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- dep arrow -->
-      <div class="dep-row">
-        <span class="dep-arrow">↓</span>
-        <span class="dep-text">website live + team installed — P3 learns about your business and fills in the placeholders</span>
-      </div>
-
-      <!-- P3 -->
-      <div class="phase p3">
-        <div class="phase-icon">
-          <div class="phase-dot">P3</div>
-          <div class="phase-connector"></div>
-        </div>
-        <div class="phase-card">
-          <div class="phase-header">
-            <div class="phase-title">Business Discovery + Agent Customisation</div>
-            <div class="phase-meta">
-              <span class="badge badge-code">Code</span>
-              <span class="badge badge-time">90–120 min</span>
-            </div>
-          </div>
-          <p class="phase-desc">Claude presents your installed team, then interviews you about your business. Your answers generate brand files, update the website with real copy, and personalise every agent. Optionally extend the team with specialist agents.</p>
-          <div class="steps">
-            <div class="step"><div class="step-label">Team intro</div><div class="step-text">Claude shows what's installed and what each agent does before asking anything.</div></div>
-            <div class="step"><div class="step-label">Interview (3 groups)</div><div class="step-text">Business identity, audience &amp; market, channels &amp; capacity. Then visual style + content pillars.</div></div>
-            <div class="step"><div class="step-label">Brand files</div><div class="step-text">brand-voice.md, design-system.md, web-style-guide.md, audience-personas.md, content-calendar.md, seo-strategy.md</div></div>
-            <div class="step"><div class="step-label">Personalise agents</div><div class="step-text">All 4 core agent personas updated with real names, timezone, brand voice, categories, colours.</div></div>
-            <div class="step"><div class="step-label">Extend (optional)</div><div class="step-text"><strong style="color:#D1FAE5">Product Manager · Marketing Manager · Social Media Manager</strong> — each via full interview → approval → generate workflow.</div></div>
-          </div>
-          <div class="output-label">Outputs</div>
-          <div class="outputs">
-            <span class="output-tag">brand-voice.md</span>
-            <span class="output-tag">design-system.md</span>
-            <span class="output-tag">web-style-guide.md</span>
-            <span class="output-tag">audience-personas.md</span>
-            <span class="output-tag">content-calendar.md</span>
-            <span class="output-tag">seo-strategy.md</span>
-            <span class="output-tag">Website pages — real content</span>
-            <span class="output-tag">Agents personalised</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- dep arrow -->
-      <div class="dep-row">
-        <span class="dep-arrow">↓</span>
-        <span class="dep-text">agents personalised — P4 activates schedules for any extended agents and verifies the full system</span>
-      </div>
-
-      <!-- P4 -->
-      <div class="phase p4">
-        <div class="phase-icon">
-          <div class="phase-dot">P4</div>
-        </div>
-        <div class="phase-card">
-          <div class="phase-header">
-            <div class="phase-title">Extended Team Schedules + Verification</div>
-            <div class="phase-meta">
-              <span class="badge badge-code">Code</span>
-              <span class="badge badge-chat">Chat</span>
-              <span class="badge badge-time">30–45 min</span>
-            </div>
-          </div>
-          <p class="phase-desc">PM schedules are already active from P2. This phase handles schedules for any specialist agents added in P3, then runs four end-to-end verification tests to confirm the whole system is working.</p>
-          <div class="steps">
-            <div class="step"><div class="step-label">Section 1 — Code</div><div class="step-text">Generate /schedule commands for extended agents (Product Manager, Marketing Manager, Social Media Manager — if installed).</div></div>
-            <div class="step"><div class="step-label">Section 2 — Chat</div><div class="step-text">Paste each command into the Chat tab to activate. Skip entirely if only core agents were installed.</div></div>
-            <div class="step"><div class="step-label">Section 3 — Code</div><div class="step-text">4 verification tests: file checks, PM standup dry-run, Writer caption, Web Dev build-page, Designer prompt.</div></div>
-            <div class="step"><div class="step-label">Section 5 — Optional</div><div class="step-text">OpenClaw upgrade: WhatsApp control interface + TikTok AI video generation.</div></div>
-          </div>
-          <div class="output-label">Outputs</div>
-          <div class="outputs">
-            <span class="output-tag">Extended agent schedules (if applicable)</span>
-            <span class="output-tag">context/publish-log.md</span>
-            <span class="output-tag">Verification passed ✅</span>
           </div>
         </div>
       </div>
@@ -538,7 +451,7 @@
     <!-- End state -->
     <div class="end-state">
       <h2>🎉 Your AI Team is Running</h2>
-      <p>Mon–Fri, every week, automatically — without you setting a reminder.</p>
+      <p>Mon–Fri, every week, automatically — cloud-hosted, no machine dependency.</p>
       <div class="auto-tasks">
         <div class="auto-task">
           <div class="when">Mon–Fri · 7am</div>
@@ -556,25 +469,30 @@
           <div class="who">Project Manager</div>
         </div>
         <div class="auto-task">
-          <div class="when">1st of month · 9am</div>
-          <div class="what">Content calendar generated</div>
-          <div class="who">Marketing Manager (if installed)</div>
+          <div class="when">Tuesday · 8am</div>
+          <div class="what">Write next week's posts</div>
+          <div class="who">Writer</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">Thursday · 8am</div>
+          <div class="what">Generate hero images</div>
+          <div class="who">Designer</div>
+        </div>
+        <div class="auto-task">
+          <div class="when">Weekdays · 9am</div>
+          <div class="what">Publish today's post</div>
+          <div class="who">Web Developer</div>
         </div>
         <div class="auto-task">
           <div class="when">Friday · 4pm</div>
           <div class="what">Weekly RAG report</div>
           <div class="who">Project Manager</div>
         </div>
-        <div class="auto-task">
-          <div class="when">On demand</div>
-          <div class="what">Blog posts, social drafts, web pages — triggered by you</div>
-          <div class="who">Writer · Designer · Web Dev</div>
-        </div>
       </div>
       <div class="approval-note">
-        <strong>Always your decision:</strong> Social posts are drafted for your review first.
+        <strong>Always your decision:</strong> Writer's PR requires your review before merge.
         Email campaigns require explicit approval before sending.
-        Blog posts are reviewed before the Web Developer publishes.
+        Social posts are drafted for review — never auto-published.
         Paid spend is always your call.
       </div>
     </div>

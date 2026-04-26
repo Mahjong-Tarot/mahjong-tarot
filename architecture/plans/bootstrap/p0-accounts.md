@@ -79,6 +79,7 @@ Walk the user through each step in order. Do not explain what things are. If the
 □ Go to **Project Settings → API**. Copy and write down:
   - Project URL: ____________________________________________
   - Anon/Public key: ________________________________________
+  - Service role key (secret — keep this private): ___________
 □ Go to https://supabase.com/dashboard/account/tokens
 □ Click "Generate new token" — name it `{your-business-name}-claude`.
 □ Copy it immediately — it only shows once: __________________
@@ -201,6 +202,7 @@ Confirm you have all of these before moving on:
 | GitHub username | □ |
 | Supabase Project URL | □ |
 | Supabase Anon Key | □ |
+| Supabase Service Role Key | □ |
 | Supabase Personal Access Token | □ |
 | Google Gemini API key | □ |
 | Resend API key (or managed notification email address) | □ |

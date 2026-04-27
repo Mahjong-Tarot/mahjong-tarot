@@ -84,6 +84,19 @@
   list-style: none;
   margin: 0;
   padding: 4px 0;
+  transform-origin: top center;
+  animation: suggestionsIn 140ms ease-out both;
+}
+
+@keyframes suggestionsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scaleY(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
 }
 
 .suggestionBtn {
@@ -156,8 +169,26 @@
 
 .row {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  animation: rowIn 220ms ease-out forwards;
 }
 .row:last-child { border-bottom: none; }
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suggestions { animation: none; }
+  .row { animation: none; opacity: 1; }
+}
 
 .rowLink {
   display: flex;

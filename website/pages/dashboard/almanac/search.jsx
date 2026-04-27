@@ -245,8 +245,12 @@ export default function AlmanacSearch() {
                   <div className={styles.loading}>Searching…</div>
                 ) : (
                   <ul className={styles.results}>
-                    {results.map((r) => (
-                      <li key={r.date} className={styles.row}>
+                    {results.map((r, idx) => (
+                      <li
+                        key={r.date}
+                        className={styles.row}
+                        style={{ animationDelay: `${Math.min(idx, 12) * 25}ms` }}
+                      >
                         <Link href={`/dashboard/almanac/${r.date}`} className={styles.rowLink}>
                           <div className={styles.rowMain}>
                             <div className={styles.rowDate}>{formatHumanDate(r.date)}</div>

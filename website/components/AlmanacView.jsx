@@ -43,6 +43,12 @@ export default function AlmanacView({ date, almanac, today }) {
 
   return (
     <div className={styles.container}>
+      <Link href="/dashboard/almanac/search" className={styles.searchCta}>
+        <span className={styles.searchCtaIcon} aria-hidden>🔍</span>
+        <span className={styles.searchCtaLabel}>Find a Good Day To…</span>
+        <span className={styles.searchCtaArrow} aria-hidden>›</span>
+      </Link>
+
       <div className={styles.dateStrip}>
         {canGoBack ? (
           <Link href={`/dashboard/almanac/${prevDate}`} className={styles.navArrow} aria-label="Previous day">‹</Link>
@@ -144,7 +150,6 @@ export default function AlmanacView({ date, almanac, today }) {
 
       <div className={styles.calendarLink}>
         <Link href={`/dashboard/almanac/calendar/${date.slice(0, 7)}`}>View Monthly Calendar →</Link>
-        <Link href="/dashboard/almanac/search">Find a Good Day →</Link>
       </div>
     </div>
   );

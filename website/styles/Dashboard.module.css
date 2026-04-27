@@ -1,0 +1,275 @@
+.todayHero {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1rem;
+  border: 1px solid #e5e2dc;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fff 0%, #faf8f4 100%);
+}
+
+@media (max-width: 600px) {
+  .todayHero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.todayDate {
+  flex-shrink: 0;
+  min-width: 220px;
+}
+
+.todayLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.todayPillar {
+  margin: 0.4rem 0 0 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  color: #1a1a2e;
+}
+
+.todayPillarEn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #888;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.todayEnergy {
+  flex: 1;
+  border-left: 1px solid #e5e2dc;
+  padding-left: 2rem;
+}
+
+@media (max-width: 600px) {
+  .todayEnergy {
+    border-left: none;
+    border-top: 1px solid #e5e2dc;
+    padding: 1rem 0 0 0;
+  }
+}
+
+.todayHeadline {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.25rem;
+  color: var(--celestial-gold);
+}
+
+.todayLine {
+  margin: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .twoCol { grid-template-columns: 1fr; }
+}
+
+.card {
+  padding: 1.25rem;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+}
+
+.cardSubtitle {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+}
+
+.bigRating {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: #1a1a2e;
+}
+
+.bigRating span {
+  font-size: 1rem;
+  color: #888;
+  margin-left: 0.2rem;
+}
+
+.cardBody {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #333;
+  margin: 0 0 0.75rem 0;
+}
+
+.bdayList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bdayList li a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0ede8;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bdayList li:last-child a {
+  border-bottom: none;
+}
+
+.bdayMeta {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.bdayDays {
+  margin-left: auto;
+  color: var(--celestial-gold);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.section {
+  margin-top: 2.5rem;
+}
+
+.gridList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gridList li a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition);
+}
+
+.gridList li a:hover {
+  border-color: #888;
+}
+
+.gridName {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.gridName small {
+  color: #888;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.gridSign {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.gridRating {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.recentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.recentList li a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  background: white;
+  text-decoration: none;
+  color: inherit;
+  flex-wrap: wrap;
+}
+
+.recentList li a:hover {
+  border-color: #888;
+}
+
+.recentRating {
+  margin-left: auto;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.recentDate {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.cardLink {
+  margin-top: auto;
+  font-size: 0.875rem;
+  color: var(--midnight-indigo);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cardLink:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,64 @@
+{
+  "topic": "Healthy, balanced love in the Fire Horse year. Five signs your relationship has what it takes to last, and a weekend challenge to strengthen the weakest area.",
+  "phrases": [
+    "Balance over heat.",
+    "The love that lasts keeps showing up.",
+    "Choose your person again today.",
+    "Presence over perfection.",
+    "Tend the garden."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-balance-is-the-real-love-story",
+      "content_type": "blog-feel-good-friday",
+      "concept": "Two hands (one woman's, one man's) intertwined loosely on a warm wooden table surface, natural morning light falling across them from one side. No faces visible. The image is about the quiet, ordinary act of choosing to be close. The everyday intimacy that outlasts the initial spark.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up of two hands loosely intertwined resting on a warm weathered wooden table. Natural morning light from the left side, creating a soft golden glow across the fingers. One hand is slightly larger, one slightly smaller, a quiet asymmetry suggesting two different people. No jewelry, no watches, just skin and light. The wooden table is simple and warm-toned. The mood is tender, unhurried, and real. No faces. No dramatic gesture. Just two people staying close. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-balance-is-the-real-love-story",
+      "content_type": "fri-facebook-en",
+      "concept": "A small potted plant (single green stem, well-tended) sitting on a warm wooden windowsill with morning light coming through. The plant is alive and cared-for but not dramatic. About the daily small act of tending something living. Evokes 'tend the garden' without being literal about it.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A single small potted plant on a warm wooden windowsill. The plant is a slim green stem with a few healthy leaves, modest, well-tended, alive. Morning light pours through the window behind it, backlit so the leaves glow slightly. The window is slightly out of focus, creating a warm blurred background of sky and light. Soft sage green, warm ivory, and antique gold tones. The mood is quiet care and optimism, something tended and growing. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-balance-is-the-real-love-story",
+      "content_type": "fri-instagram",
+      "concept": "A woman's hands cradling a small potted plant on a windowsill. A tender, deliberate act of care. The plant is small and alive. The hands cup it without crushing it. Morning light. The image translates 'tend the garden' into a warm, actionable moment.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. A woman's hands gently cupping a small terracotta pot holding a single green plant. The hands are warm-toned, relaxed, cradling not gripping. Morning light from behind the window illuminates the edges of the leaves and her fingers. Wooden sill beneath, soft sage green leaves, warm ivory and antique gold light. The background is gently out of focus. The mood is intentional, tender, optimistic. No face visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-balance-is-the-real-love-story",
+      "content_type": "card",
+      "concept": "English affirmation card. The phrase 'Balance over heat. Presence over perfection.' rendered in hand-inked calligraphy on aged parchment. Warm, intimate, Journal Page style.",
+      "image_style": "TEXT",
+      "text": "Balance over heat. Presence over perfection.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture — subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Balance over heat. Presence over perfection.\". Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant — modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-balance-is-the-real-love-story",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card. The phrase 'Can bang hon nhiet. Hien dien hon hoan hao.' rendered in hand-inked calligraphy on aged parchment. Same Journal Page style as the English card.",
+      "image_style": "TEXT",
+      "text": "Cân bằng hơn nhiệt. Hiện diện hơn hoàn hảo.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture — subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Cân bằng hơn nhiệt. Hiện diện hơn hoàn hảo.\". Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant — modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

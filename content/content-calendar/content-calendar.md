@@ -4,16 +4,16 @@
 
 ## Week of April 13 — Celebrity Spotlight: Taylor Swift & Travis Kelce
 
-**Topic: 2026-04-13-horse-wedding** — STATUS: DESIGNED
+**Topic: 2026-04-13-horse-wedding** — STATUS: PUBLISHED
 Angle: Myth Buster — celebrity compatibility deep dive
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-04-15-mirror-wedding** — STATUS: WRITTEN
+**Topic: 2026-04-15-mirror-wedding** — STATUS: PUBLISHED
 Angle: Mahjong Mirror — the answer (ties back to wedding analysis)
 Chapter/tile focus: Chapter 1 (Central Theme), Chapter 4 (What Do I Really Want)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-04-17-feel-good-love** — STATUS: DESIGNED
+**Topic: 2026-04-17-feel-good-love** — STATUS: PUBLISHED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
@@ -42,11 +42,11 @@ Publishes: Friday (blog + social)
 
 ## Week of April 20 — Money
 
-**Topic: 2026-04-20-horse-money** — STATUS: WRITTEN
+**Topic: 2026-04-20-horse-money** — STATUS: PUBLISHED
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-04-22-mirror-money** — STATUS: DESIGNED
+**Topic: 2026-04-22-mirror-money** — STATUS: PUBLISHED
 Angle: Mahjong Mirror — the answer ties back to finding ways to make money in the volatile Fire Horse Year.
 Publishes: Wednesday (blog + social), Thursday (social)
 
@@ -117,16 +117,16 @@ Publishes: Friday (blog + social)
 
 ## Week of May 4 — Love & Compatibility
 
-**Topic: opposites-attract-is-a-lie** — STATUS: PLANNED
+**Topic: 2026-05-04-horse-love** — STATUS: WRITTEN
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: what-the-mirror-shows-about-love** — STATUS: PLANNED
+**Topic: 2026-05-06-mirror-love** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer (ties back to compatibility myth)
 Chapter/tile focus: Chapter 2 (Who Am I), Appendix — Love and Money cards
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: feel-good-friday-balance-is-the-real-love-story** — STATUS: PLANNED
+**Topic: 2026-05-08-feel-good-love** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social — publishes May 8)
 
@@ -150,3 +150,4 @@ Publishes: Friday (blog + social — publishes May 8)
 | May 8 | Fri | Facebook EN | Feel Good Friday: The real love story isn't the spark. It's the balance. Where one is strong, the other is present. That's not settling — that's lasting. |
 | May 8 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | May 8 | Fri | Instagram | Feel Good Friday: Balance over heat. Presence over perfection. That's the love the Fire Horse year is asking you to build. |
+

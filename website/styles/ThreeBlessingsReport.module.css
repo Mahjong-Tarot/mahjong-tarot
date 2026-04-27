@@ -1,0 +1,165 @@
+.triangle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.10), transparent 70%),
+    var(--light-stone);
+  border-radius: 16px;
+}
+
+.tileCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.ornament {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--celestial-gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.position {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--midnight-indigo);
+  font-weight: 600;
+}
+
+.positionLabel {
+  font-size: 0.85rem;
+  color: var(--mid-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.tileImage {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--warm-cream);
+  box-shadow: 0 8px 22px rgba(27, 31, 59, 0.18);
+  margin-bottom: var(--space-sm);
+}
+
+.cardName {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--midnight-indigo);
+  margin: 0;
+}
+
+.cardShort {
+  font-size: 0.85rem;
+  color: var(--mid-gray);
+  margin: 0;
+}
+
+.report {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.section {
+  padding: var(--space-lg) 0;
+  border-top: 1px solid rgba(27, 31, 59, 0.1);
+}
+
+.sectionHeader {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+}
+
+.sectionOrnament {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: var(--celestial-gold);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--midnight-indigo);
+  margin: 0 0 4px;
+}
+
+.sectionSource {
+  font-size: 0.85rem;
+  color: var(--mid-gray);
+  margin: 0;
+}
+
+.bodyPara {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--midnight-indigo);
+  margin: 0 0 var(--space-md);
+}
+
+.personalLine {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--midnight-indigo);
+  margin: 0 0 var(--space-md);
+  padding-left: var(--space-md);
+  border-left: 3px solid var(--celestial-gold);
+  font-style: italic;
+}
+
+.quote {
+  margin: var(--space-md) 0 0;
+  padding: var(--space-md);
+  background: var(--warm-cream);
+  border-radius: 8px;
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--midnight-indigo);
+  font-style: italic;
+}
+
+.legend {
+  margin-top: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--midnight-indigo);
+  color: var(--warm-cream);
+  border-radius: 12px;
+}
+
+.legend .sectionTitle {
+  color: var(--warm-cream);
+  margin-bottom: var(--space-md);
+}
+
+.legend p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 0 var(--space-md);
+  color: rgba(250, 248, 244, 0.9);
+}
+
+.legend p:last-child { margin-bottom: 0; }
+
+@media (max-width: 720px) {
+  .triangle {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  .ornament { font-size: 1.8rem; }
+  .cardName { font-size: 1.2rem; }
+  .sectionTitle { font-size: 1.3rem; }
+  .sectionOrnament { font-size: 2rem; }
+}

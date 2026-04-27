@@ -228,6 +228,14 @@ Never commit files from `working_files/` — the directory is in `.gitignore` an
 
 ---
 
+## Supabase migrations
+
+- When generating large seed migrations (e.g. `public.almanac_days`), split into per-lunar-year files of ~540–590 KB / ~350–385 rows each. The Supabase SQL Editor errors out around 1 MB with "Query is too large to be run via the SQL Editor — connect to your database directly".
+<!-- Rationale: confirmed 2026-04-27 — a 2.8 MB monolithic seed and 1.1 MB chunked seeds both failed; ~543 KB chunks (matching the proven 008_seed_almanac.sql at 354 rows) succeeded. -->
+- Generation tooling lives in `architecture/readings/daily-horoscopes/encoding/`. Use `generate_almanac.py` to produce JSON, then bucket per-lunar-year and emit numbered `.sql` files into `website/supabase/`.
+
+---
+
 *Instructions version: 2.0 — Updated to Next.js (Pages Router). Update this file whenever the workflow changes.*
 
 # Cross-Tool Context Bridge

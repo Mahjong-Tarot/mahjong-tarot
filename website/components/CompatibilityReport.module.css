@@ -11,7 +11,7 @@
   padding: 1.5rem;
   border: 1px solid #e5e2dc;
   border-radius: 12px;
-  background: linear-gradient(180deg, #ffffff 0%, #faf8f4 100%);
+  background: linear-gradient(180deg, #ffffff 0%, var(--paper-pure) 100%);
 }
 
 @media (max-width: 600px) {
@@ -31,7 +31,7 @@
 }
 
 .dialNum {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Fraunces', serif;
   font-size: 36px;
   font-weight: 700;
   fill: #1a1a2e;
@@ -57,7 +57,7 @@
 
 .matchTitle {
   margin: 0 0 0.25rem 0;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Fraunces', serif;
   font-size: 1.75rem;
 }
 
@@ -115,7 +115,7 @@
   background: none;
   border: none;
   padding: 0.6rem 1rem;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   color: #666;

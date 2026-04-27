@@ -1,17 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;600&display=swap');
+/* ══════════════════════════════════════════════════════════════════════
+   MAHJONG TAROT — Design System v1.0
+   Cool white + slate ink + Fire red as the brand stamp.
+   Editorial restraint: a printed book's voice on a website.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ─── Design Tokens ───────────────────────────────────────────────────── */
 :root {
-  --midnight-indigo:   #1B1F3B;
-  --mystic-fire:       #C0392B;
-  --mystic-fire-dark:  #A93226;
-  --celestial-gold:    #C9A84C;
-  --soft-lavender:     #C8B8D8;
-  --warm-cream:        #FAF8F4;
-  --black:             #0D0D0D;
-  --light-stone:       #EDEBE5;
-  --mid-gray:          #888880;
+  /* Neutrals — cool white + slate ink */
+  --paper:        #FAFAFB;       /* page background, cool white */
+  --paper-pure:   #FFFFFF;       /* card surfaces */
+  --ink:          #14161B;       /* near-black, slate-leaning */
+  --ink-2:        #2A2D35;       /* body text */
+  --ink-3:        #50545E;       /* secondary text */
+  --ink-4:        #8A8E98;       /* tertiary, captions */
+  --rule:         #E4E5EA;       /* hairlines */
+  --rule-2:       #EFEFF2;       /* softer fills */
 
+  /* Fire red scale (anchored at #E63329) */
+  --fire-50:      #FFF4F2;
+  --fire-100:     #FFE2DD;
+  --fire-200:     #FFB8AE;
+  --fire-300:     #FF8B7C;
+  --fire-400:     #F45A47;
+  --fire-500:     #E63329;       /* CHOSEN BRAND */
+  --fire-600:     #C8261C;       /* hover */
+  --fire-700:     #9E1B14;       /* pressed */
+  --fire-800:     #75130E;
+  --fire-900:     #4A0A07;
+
+  /* Secondary accent — restrained gold for ritual moments */
+  --gold:         #B8893A;
+  --gold-soft:    #EBD9B0;
+
+  /* Legacy token remap — keeps existing modules working */
+  --midnight-indigo:   var(--ink);
+  --mystic-fire:       var(--fire-500);
+  --mystic-fire-dark:  var(--fire-600);
+  --celestial-gold:    var(--gold);
+  --soft-lavender:     var(--gold-soft);
+  --warm-cream:        var(--paper);
+  --black:             var(--ink);
+  --light-stone:       var(--rule-2);
+  --mid-gray:          var(--ink-4);
+
+  /* Type families */
+  --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans:  'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Spacing scale (legacy + design-system aliases) */
   --space-xs:  4px;
   --space-sm:  8px;
   --space-md:  16px;
@@ -21,72 +60,108 @@
   --space-3xl: 96px;
   --space-4xl: 128px;
 
-  --max-width:    1200px;
+  --d-1: 8px;
+  --d-2: 12px;
+  --d-3: 16px;
+  --d-4: 24px;
+  --d-5: 32px;
+  --d-6: 48px;
+  --d-7: 64px;
+  --d-8: 96px;
+
+  /* Radii */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   12px;
+  --r-pill: 999px;
+
+  --max-width:    1240px;
   --outer-margin: 80px;
 
-  --transition: 200ms ease-out;
+  --transition: 160ms ease;
 }
 
 /* ─── Reset ───────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 17px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; text-rendering: optimizeLegibility; }
 img, video { max-width: 100%; display: block; }
 ul, ol { list-style: none; }
 
 /* ─── Base ────────────────────────────────────────────────────────────── */
 body {
-  background-color: var(--warm-cream);
-  color: var(--black);
-  font-family: 'Source Sans 3', sans-serif;
+  background-color: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--sans);
   font-weight: 400;
-  line-height: 1.75;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* ─── Typography ──────────────────────────────────────────────────────── */
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
-  color: var(--midnight-indigo);
+  font-family: var(--serif);
+  color: var(--ink);
+  font-weight: 400;
 }
-h1 { font-size: 56px;  font-weight: 700; line-height: 1.1;  letter-spacing: -0.02em; }
-h2 { font-size: 40px;  font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
-h3 { font-size: 28px;  font-weight: 400; line-height: 1.3; }
-h4 { font-size: 22px;  font-weight: 700; line-height: 1.35; }
+h1 { font-size: 56px; font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; }
+h2 { font-size: 40px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+h3 { font-size: 26px; font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
+h4 { font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.005em; }
 
-p { margin-bottom: 1.25em; }
+p { margin-bottom: 1.25em; color: var(--ink-2); }
 p:last-child { margin-bottom: 0; }
 
 a {
-  color: var(--midnight-indigo);
-  text-decoration: underline;
-  font-weight: 600;
+  color: var(--fire-600);
+  text-decoration: none;
+  font-weight: 500;
   transition: color var(--transition);
 }
-a:hover { color: var(--mystic-fire); }
+a:hover { color: var(--fire-700); }
 
-strong { font-weight: 600; }
-em     { font-style: italic; }
-
-blockquote {
-  font-family: 'Playfair Display', serif;
+strong { font-weight: 600; color: var(--ink); }
+em     {
+  font-family: var(--serif);
   font-style: italic;
-  font-size: 28px;
-  line-height: 1.4;
-  color: var(--midnight-indigo);
-  border-left: 3px solid var(--celestial-gold);
-  padding-left: var(--space-lg);
-  margin: var(--space-xl) 0;
+  font-weight: 400;
+  color: var(--fire-600);
 }
 
-/* ─── Overline ────────────────────────────────────────────────────────── */
+/* The signature gesture: italic Fraunces in fire red — used in headlines.
+   Plain prose <em> inside body text inherits the same rule and looks right. */
+
+blockquote {
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ink);
+  border-left: 2px solid var(--fire-500);
+  padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+  margin: var(--space-xl) 0;
+  letter-spacing: -0.005em;
+}
+
+/* ─── Overline / eyebrow / mono labels ─────────────────────────────────── */
 .overline {
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
+  font-family: var(--mono);
+  font-weight: 500;
   font-size: 11px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--mystic-fire);
+  color: var(--fire-600);
   display: block;
   margin-bottom: var(--space-md);
+}
+
+.label-mono {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
 }
 
 /* ─── Layout ──────────────────────────────────────────────────────────── */
@@ -105,126 +180,195 @@ blockquote {
 section { padding: var(--space-3xl) 0; }
 
 .section-dark {
-  background-color: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background-color: var(--ink);
+  color: var(--paper);
 }
 .section-dark h1,
 .section-dark h2,
 .section-dark h3,
-.section-dark h4 { color: var(--warm-cream); }
+.section-dark h4 { color: var(--paper); }
+.section-dark p,
+.section-dark li { color: rgba(250, 250, 251, 0.78); }
+.section-dark em { color: var(--fire-400); }
 
-.section-stone { background-color: var(--light-stone); }
+.section-stone { background-color: var(--paper-pure); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 
 /* ─── Buttons ─────────────────────────────────────────────────────────── */
 .btn-primary {
-  display: inline-block;
-  background-color: var(--mystic-fire);
-  color: white !important;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--fire-500);
+  color: #fff !important;
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 14px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.005em;
   text-decoration: none;
-  padding: 12px 28px;
-  border: none;
-  border-radius: 100px;
+  padding: 12px 22px;
+  border: 1px solid var(--fire-500);
+  border-radius: var(--r-pill);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: background-color var(--transition), border-color var(--transition), transform var(--transition);
+  line-height: 1;
+  box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 1px 2px rgba(230,51,41,.25);
 }
-.btn-primary:hover { background-color: var(--mystic-fire-dark); color: white !important; transform: translateY(-1px); }
+.btn-primary:hover { background-color: var(--fire-600); border-color: var(--fire-600); color: #fff !important; }
+.btn-primary:active { background-color: var(--fire-700); border-color: var(--fire-700); }
 
 .btn-secondary {
-  display: inline-block;
-  background-color: transparent;
-  color: var(--midnight-indigo) !important;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--ink);
+  color: #fff !important;
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 14px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.005em;
   text-decoration: none;
-  padding: 10px 26px;
-  border: 1.5px solid var(--midnight-indigo);
-  border-radius: 100px;
+  padding: 12px 22px;
+  border: 1px solid var(--ink);
+  border-radius: var(--r-pill);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: background-color var(--transition), border-color var(--transition);
+  line-height: 1;
 }
-.btn-secondary:hover { background-color: var(--midnight-indigo); color: white !important; }
+.btn-secondary:hover { background-color: var(--ink-2); border-color: var(--ink-2); color: #fff !important; }
 
 .btn-ghost {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background-color: transparent;
-  color: var(--warm-cream) !important;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
+  color: var(--ink) !important;
+  font-family: var(--sans);
+  font-weight: 500;
   font-size: 14px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.005em;
   text-decoration: none;
-  padding: 10px 26px;
-  border: 1.5px solid rgba(250,248,244,0.4);
-  border-radius: 100px;
+  padding: 12px 22px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: border-color var(--transition), color var(--transition);
+  line-height: 1;
 }
-.btn-ghost:hover { background-color: var(--warm-cream); color: var(--midnight-indigo) !important; border-color: var(--warm-cream); }
+.btn-ghost:hover { border-color: var(--ink); color: var(--ink) !important; }
+
+/* Ghost in dark sections (section-dark) */
+.section-dark .btn-ghost {
+  color: var(--paper) !important;
+  border-color: rgba(250,250,251,0.32);
+}
+.section-dark .btn-ghost:hover { color: var(--paper) !important; border-color: var(--paper); }
 
 /* ─── Dividers ────────────────────────────────────────────────────────── */
 .divider-gold {
-  width: 80px;
+  width: 48px;
   height: 2px;
-  background-color: var(--celestial-gold);
+  background-color: var(--fire-500);
   margin: var(--space-xl) 0;
+  border: 0;
 }
 .divider-gold.centered { margin-left: auto; margin-right: auto; }
 
+.divider-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--rule);
+  border: 0;
+  margin: var(--space-xl) 0;
+}
+
 /* ─── Post meta ───────────────────────────────────────────────────────── */
 .post-meta {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
-  color: var(--mid-gray);
-  line-height: 1.6;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  line-height: 1.7;
+  letter-spacing: 0.04em;
 }
 
 .post-category {
   display: inline-block;
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--mystic-fire);
+  color: var(--fire-600);
   margin-bottom: var(--space-sm);
 }
 
 /* ─── Cards ───────────────────────────────────────────────────────────── */
 .card {
-  background-color: white;
-  border: 1px solid var(--light-stone);
+  background-color: var(--paper-pure);
+  border: 1px solid var(--rule);
   padding: var(--space-xl);
-  border-radius: 0;
+  border-radius: var(--r-md);
 }
 
 .card-dark {
-  background-color: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background-color: var(--ink);
+  color: var(--paper);
   padding: var(--space-xl);
-  border-radius: 0;
+  border-radius: var(--r-md);
+  border: 1px solid var(--ink);
 }
-.card-dark h2, .card-dark h3 { color: var(--warm-cream); }
+.card-dark h2, .card-dark h3 { color: var(--paper); }
+
+/* ─── Stamps / tags ───────────────────────────────────────────────────── */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--fire-500);
+  color: var(--fire-600);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  background: transparent;
+}
+.stamp::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--fire-500);
+  border-radius: 50%;
+}
 
 /* ─── Figure / Images ─────────────────────────────────────────────────── */
 figure { margin: var(--space-xl) 0; }
 figcaption {
+  font-family: var(--sans);
   font-size: 13px;
-  color: var(--mid-gray);
+  color: var(--ink-3);
   margin-top: var(--space-sm);
-  font-style: italic;
+  font-style: normal;
   text-align: center;
 }
 
+/* ─── Forms ───────────────────────────────────────────────────────────── */
+input, select, textarea {
+  font-family: var(--sans);
+}
+input::placeholder, textarea::placeholder { color: var(--ink-4); }
+
 /* ─── Focus ───────────────────────────────────────────────────────────── */
 *:focus-visible {
-  outline: 2px solid var(--celestial-gold);
+  outline: 2px solid var(--fire-500);
   outline-offset: 2px;
+}
+
+/* ─── Selection ───────────────────────────────────────────────────────── */
+::selection {
+  background: var(--fire-100);
+  color: var(--ink);
 }
 
 /* ─── Responsive ──────────────────────────────────────────────────────── */
@@ -239,5 +383,5 @@ figcaption {
   h1 { font-size: 36px; }
   h2 { font-size: 28px; }
   h3 { font-size: 22px; }
-  blockquote { font-size: 22px; }
+  blockquote { font-size: 19px; }
 }

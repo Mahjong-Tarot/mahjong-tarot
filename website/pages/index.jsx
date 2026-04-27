@@ -42,20 +42,17 @@ export default function Home() {
  {/* ── Hero ── */}
  <section className={styles.heroSection}>
  <div className={styles.heroGrid} aria-hidden="true" />
- <div className={styles.heroGlow} aria-hidden="true" />
  <div className={`container ${styles.heroInner}`}>
+ <div>
  <span className={styles.heroBadge}>
- <span className={styles.heroBadgeDot} />
  Ancient Wisdom · Modern Clarity
  </span>
  <h1 className={styles.heroHeadline}>
- See what the tiles
- <br />
- <em>reveal</em>
+ See what the tiles <em>reveal</em>.
  </h1>
  <p className={styles.heroLead}>
  35 years of divination practice. Mahjong tiles, Chinese astrology,
- and tarot, woven into readings that illuminate your path.
+ and tarot — woven into readings that illuminate your path.
  </p>
  <div className={styles.heroCtas}>
  <Link href="/readings#book" className={styles.heroPrimary}>
@@ -80,14 +77,16 @@ export default function Home() {
  </div>
  </dl>
  </div>
- <div className={styles.heroImageFade}>
+ <div className={styles.heroPortrait}>
  <Image
  src="/images/gallery-3.webp"
  alt="Bill Hajdu conducting a Mahjong Tarot reading"
  fill
  priority
+ sizes="(max-width: 1024px) 100vw, 50vw"
  style={{ objectFit: 'cover', objectPosition: 'center top' }}
  />
+ </div>
  </div>
  </section>
 
@@ -149,7 +148,7 @@ export default function Home() {
  <section className={`section-dark ${styles.bookSection}`}>
  <div className={`container ${styles.bookInner}`}>
  <div className={styles.bookText}>
- <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Coming Soon</span>
+ <span className="overline" style={{ color: 'var(--fire-400)' }}>Coming Soon</span>
  <h2>The Mahjong Mirror</h2>
  <p className={styles.bookSubtitle}>Your Path to Wiser Decisions</p>
  <div className="divider-gold" />

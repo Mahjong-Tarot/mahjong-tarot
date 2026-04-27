@@ -84,7 +84,7 @@
 }
 
 .backPosition {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 1.5rem;
   letter-spacing: 0.05em;
   font-weight: 500;
@@ -130,7 +130,7 @@
 }
 
 .frontCardName {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 1.15rem;
   color: var(--midnight-indigo);
   margin: 0;

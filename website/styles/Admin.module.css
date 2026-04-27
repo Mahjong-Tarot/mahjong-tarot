@@ -27,7 +27,7 @@
 }
 
 .summaryCard .label {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -37,7 +37,7 @@
 }
 
 .summaryCard .value {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Fraunces', serif;
   font-size: 36px;
   font-weight: 700;
   color: var(--celestial-gold);
@@ -60,7 +60,7 @@
 }
 
 .viewBtn {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.06em;
@@ -91,7 +91,7 @@
 }
 
 .filterLabel {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -100,7 +100,7 @@
 }
 
 .filterSelect {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   background: var(--warm-cream);
   border: 1px solid var(--mid-gray);
@@ -124,7 +124,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .table th {
@@ -176,7 +176,7 @@
 
 .badge {
   display: inline-block;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.06em;
@@ -229,7 +229,7 @@
 }
 
 .loadMoreBtn {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.06em;
@@ -270,7 +270,7 @@
 }
 
 .kanbanHeader {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -403,7 +403,7 @@
 /* ─── Panel Sections ─────────────────────────────────────────────────── */
 
 .sectionTitle {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -430,7 +430,7 @@
 }
 
 .fieldLabel {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -439,7 +439,7 @@
 }
 
 .fieldInput {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   background: white;
   border: 1px solid var(--light-stone);
@@ -493,7 +493,7 @@
 }
 
 .btnSave {
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.06em;

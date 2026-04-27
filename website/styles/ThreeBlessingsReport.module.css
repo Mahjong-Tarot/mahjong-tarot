@@ -19,7 +19,7 @@
 }
 
 .ornament {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 2.2rem;
   color: var(--celestial-gold);
   line-height: 1;
@@ -51,7 +51,7 @@
 }
 
 .cardName {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 1.4rem;
   color: var(--midnight-indigo);
   margin: 0;
@@ -83,7 +83,7 @@
 }
 
 .sectionOrnament {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 2.4rem;
   color: var(--celestial-gold);
   line-height: 1;
@@ -91,7 +91,7 @@
 }
 
 .sectionTitle {
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 1.6rem;
   color: var(--midnight-indigo);
   margin: 0 0 4px;
@@ -125,7 +125,7 @@
   padding: var(--space-md);
   background: var(--warm-cream);
   border-radius: 8px;
-  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
   font-size: 1.1rem;
   color: var(--midnight-indigo);
   font-style: italic;

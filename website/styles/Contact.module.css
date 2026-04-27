@@ -1,7 +1,43 @@
-.pageHeader { padding: var(--space-2xl) 0 var(--space-xl); background-color: white; }
-.pageHeader h1 { color: var(--midnight-indigo); margin-top: var(--space-lg); max-width: 700px; }
-.headerLead { font-size: 20px; font-weight: 300; color: var(--mid-gray); max-width: 600px; margin-top: var(--space-lg); }
+.pageHeader {
+  padding: var(--space-2xl) 0 var(--space-xl);
+  background-color: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+.pageHeader h1 {
+  color: var(--ink);
+  margin-top: var(--space-md);
+  max-width: 720px;
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+.headerLead {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 56ch;
+  margin-top: var(--space-md);
+}
 
 .formSection { padding: var(--space-3xl) 0; }
-.formSection h2 { text-align: center; margin-bottom: var(--space-sm); }
-.formIntro { text-align: center; color: var(--mid-gray); max-width: 480px; margin: 0 auto var(--space-xl); }
+.formSection h2 {
+  text-align: center;
+  margin-bottom: var(--space-sm);
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.formIntro {
+  text-align: center;
+  font-family: var(--serif);
+  color: var(--ink-3);
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 56ch;
+  margin: 0 auto var(--space-xl);
+}

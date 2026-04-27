@@ -33,6 +33,7 @@ After the subagent finishes:
 git add content/topics/
 git add content/content-calendar/content-calendar.md
 git add content/topics/INDEX.md
+git add emails/drafts/
 
 git diff --cached --quiet && echo "Nothing to commit — writer produced no output" && exit 0
 

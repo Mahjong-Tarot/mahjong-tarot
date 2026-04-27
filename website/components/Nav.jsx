@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import styles from './Nav.module.css';
 
 export default function Nav() {
@@ -9,7 +10,9 @@ export default function Nav() {
       ? router.pathname.startsWith('/blog')
       : path === '/cards'
         ? router.pathname.startsWith('/cards')
-        : router.pathname === path;
+        : path === '/dashboard'
+          ? router.pathname.startsWith('/dashboard')
+          : router.pathname === path;
 
   return (
     <nav className={styles.nav}>
@@ -30,13 +33,13 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            <Link href="/the-mahjong-mirror" className={isActive('/the-mahjong-mirror') ? styles.active : ''}>
-              The Mahjong Mirror
+            <Link href="/cards" className={isActive('/cards') ? styles.active : ''}>
+              Cards
             </Link>
           </li>
           <li>
-            <Link href="/cards" className={isActive('/cards') ? styles.active : ''}>
-              Cards
+            <Link href="/the-mahjong-mirror" className={isActive('/the-mahjong-mirror') ? styles.active : ''}>
+              Book
             </Link>
           </li>
           <li>
@@ -49,6 +52,23 @@ export default function Nav() {
               Contact
             </Link>
           </li>
+          <SignedIn>
+            <li>
+              <Link href="/dashboard" className={isActive('/dashboard') ? styles.active : ''}>
+                Dashboard
+              </Link>
+            </li>
+            <li style={{ display: 'flex', alignItems: 'center' }}>
+              <UserButton afterSignOutUrl="/" />
+            </li>
+          </SignedIn>
+          <SignedOut>
+            <li>
+              <Link href="/sign-in" className={isActive('/sign-in') ? styles.active : ''}>
+                Sign in
+              </Link>
+            </li>
+          </SignedOut>
         </ul>
 
       </div>

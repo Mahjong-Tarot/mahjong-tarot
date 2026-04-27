@@ -5,11 +5,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
-<<<<<<< feat/daily-horoscopes
-import AlmanacToday from '../../components/AlmanacToday';
-=======
 import PurpleStarChart from '../../components/PurpleStarChart';
->>>>>>> main
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
@@ -21,6 +17,9 @@ export default function Dashboard() {
   const { user, loading } = useAuth();
   const [profile, setProfile] = useState(null);
   const [profileLoaded, setProfileLoaded] = useState(false);
+  const [members, setMembers] = useState([]);
+  const [readings, setReadings] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     if (!loading && !user) router.replace('/sign-in');
@@ -36,8 +35,35 @@ export default function Dashboard() {
         .eq('user_id', user.id)
         .maybeSingle();
       if (cancelled) return;
-      setProfile(data);
+      setProfile(p.data);
       setProfileLoaded(true);
+      setMembers(m.data || []);
+      setReadings(r.data || []);
+
+      if (p.data?.birthday) {
+        const res = await fetch('/api/dashboard', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user: {
+              birthday: p.data.birthday,
+              birthTime: p.data.birth_time ? p.data.birth_time.slice(0, 5) : null,
+              gender: p.data.gender || 'M',
+            },
+            members: (m.data || []).map((mem) => ({
+              id: mem.id,
+              name: mem.name,
+              relationship: mem.relationship,
+              birthday: mem.birthday,
+              birthTime: mem.birth_time ? mem.birth_time.slice(0, 5) : null,
+              gender: mem.gender || 'F',
+            })),
+          }),
+        });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled) setData(json);
+      }
     })();
     return () => { cancelled = true; };
   }, [user]);
@@ -63,8 +89,8 @@ export default function Dashboard() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <main className={`container ${styles.wrap}`}>
-        <h1 className={styles.title}>My Dashboard</h1>
+      <main className={`container ${accountStyles.wrap}`}>
+        <h1 className={accountStyles.title}>My Dashboard</h1>
 
         <section style={{ marginTop: '1.5rem' }}>
           <h2 className={styles.subTitle}>Today</h2>
@@ -72,17 +98,35 @@ export default function Dashboard() {
         </section>
 
         {profileLoaded && !profile?.birthday && (
-          <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
+          <div className={accountStyles.placeholder} style={{ marginTop: '1rem' }}>
             <p style={{ margin: 0 }}>
-              Add your birth data on your <Link href="/profile">profile</Link> to see your Four Pillars chart.
+              Add your birth data on your <Link href="/profile">profile</Link> to unlock your daily energy and chart.
             </p>
           </div>
         )}
 
-        {pillars && (
-          <section style={{ marginTop: '1.5rem' }}>
-            <h2 className={styles.subTitle}>Your Four Pillars</h2>
-            <BaziChart pillars={pillars} elements={elements} dominantElement={dominant} />
+        {/* Today's Energy */}
+        {today && (
+          <section className={styles.todayHero}>
+            <div className={styles.todayDate}>
+              <p className={styles.todayLabel}>Today · {todayLabel}</p>
+              <p className={styles.todayPillar}>
+                {today.pillars?.day?.gan}{today.pillars?.day?.zhi}
+                <span className={styles.todayPillarEn}>
+                  {today.pillars?.day?.stem?.polarity} {today.pillars?.day?.stem?.element} · {today.pillars?.day?.branch?.animal} day
+                </span>
+              </p>
+            </div>
+            {today.energy ? (
+              <div className={styles.todayEnergy}>
+                <h3 className={styles.todayHeadline}>{today.energy.headline}</h3>
+                <p className={styles.todayLine}>{today.energy.line}</p>
+              </div>
+            ) : (
+              <div className={styles.todayEnergy}>
+                <p className={accountStyles.muted}>Add a birthday to your profile to see today&apos;s energy reading.</p>
+              </div>
+            )}
           </section>
         )}
 

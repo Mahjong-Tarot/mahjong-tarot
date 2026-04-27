@@ -39,12 +39,12 @@ const SESSIONS = [
 ];
 
 const DECK = [
-  { slug: 'dragon',  rank: 'I',   glyph: '龍', name: 'Dragon'  },
-  { slug: 'phoenix', rank: 'II',  glyph: '鳳', name: 'Phoenix' },
-  { slug: 'pearl',   rank: 'III', glyph: '珠', name: 'Pearl'   },
-  { slug: 'lotus',   rank: 'IV',  glyph: '蓮', name: 'Lotus'   },
-  { slug: 'tiger',   rank: 'V',   glyph: '虎', name: 'Tiger'   },
-  { slug: 'peacock', rank: 'VI',  glyph: '雀', name: 'Peacock' },
+  { slug: 'dragon',  rank: 'I',   name: 'Dragon'  },
+  { slug: 'phoenix', rank: 'II',  name: 'Phoenix' },
+  { slug: 'pearl',   rank: 'III', name: 'Pearl'   },
+  { slug: 'lotus',   rank: 'IV',  name: 'Lotus'   },
+  { slug: 'tiger',   rank: 'V',   name: 'Tiger'   },
+  { slug: 'peacock', rank: 'VI',  name: 'Peacock' },
 ];
 
 export default function Home() {
@@ -245,7 +245,15 @@ export default function Home() {
               {DECK.map((card) => (
                 <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.deckCard}>
                   <div className={styles.deckRank}>{card.rank}</div>
-                  <div className={styles.deckGlyph}>{card.glyph}</div>
+                  <div className={styles.deckImageWrap}>
+                    <Image
+                      src={`/images/cards/${card.slug}.webp`}
+                      alt={`${card.name}, Mahjong Mirror card`}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
                   <div className={styles.deckName}>{card.name}</div>
                 </Link>
               ))}

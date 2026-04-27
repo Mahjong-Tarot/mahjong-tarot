@@ -472,7 +472,8 @@
   right: 8px;
   height: 1px;
   background: var(--ink);
-  opacity: 0.4;
+  opacity: 0.15;
+  z-index: 1;
 }
 .deckCard::before { top: 28px; }
 .deckCard::after { bottom: 28px; }
@@ -487,13 +488,8 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink);
-}
-.deckGlyph {
-  font-family: var(--serif);
-  font-size: 64px;
-  line-height: 1;
-  color: var(--fire-600);
-  font-weight: 300;
+  position: relative;
+  z-index: 2;
 }
 .deckName {
   font-family: var(--serif);
@@ -502,21 +498,21 @@
   letter-spacing: 0.04em;
   color: var(--ink);
   text-transform: uppercase;
+  position: relative;
+  z-index: 2;
 }
 
 .deckImageWrap {
-  position: absolute;
-  inset: 30px 12px;
-  z-index: 0;
+  position: relative;
+  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 4px 0;
 }
 .deckImageWrap img {
-  max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
-  display: block;
 }
 
 .deckFooter {

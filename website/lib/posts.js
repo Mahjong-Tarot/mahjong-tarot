@@ -5,7 +5,7 @@ export const POSTS = [
  {
  slug: 'how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk',
  title: 'How to Know If This Is the Year for You to Take a Financial Risk',
- excerpt: "The Fire Horse rewards movement — but not every move. Before you act, the Mahjong Mirror asks four questions that reveal whether a financial risk will change your life or just your account balance.",
+ excerpt: "The Fire Horse rewards movement, but not every move. Before you act, the Mahjong Mirror asks four questions that reveal whether a financial risk will change your life or just your account balance.",
  categories: ['Year of the Fire Horse'],
  date: 'Apr 22, 2026',
  isoDate: '2026-04-22',

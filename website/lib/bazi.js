@@ -113,9 +113,9 @@ const ELEMENT_GENERATES = { Wood: 'Fire', Fire: 'Earth', Earth: 'Metal', Metal: 
 const ELEMENT_DESTROYS  = { Wood: 'Earth', Earth: 'Water', Water: 'Fire', Fire: 'Metal', Metal: 'Wood' };
 
 const INTERACTION_COPY = {
-  aligned:    { headline: 'Aligned',           line: "Today's energy mirrors your own. Steady, familiar — a good day to settle in." },
+  aligned:    { headline: 'Aligned',           line: "Today's energy mirrors your own. Steady, familiar, a good day to settle in." },
   feeds:      { headline: 'You set the tone',  line: 'Your energy fuels the day. Lead, initiate, decide. Things you push will move.' },
-  fed_by:     { headline: 'Wind at your back', line: 'Today supports you. Let things come — accept help, take what is offered.' },
+  fed_by:     { headline: 'Wind at your back', line: 'Today supports you. Let things come, accept help, take what is offered.' },
   controls:   { headline: 'Take charge',       line: "You have the upper hand today. Push on stalled work, ask for what you want." },
   controlled: { headline: 'Move carefully',    line: "Today's energy can wear on you. Conserve, observe, save the big asks for tomorrow." },
 };

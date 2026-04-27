@@ -1,19 +1,24 @@
 /* ══════════════════════════════════════════════════════════════════════
    Home Page — Mahjong Tarot Home v1.0
-   White editorial · Fire red brand stamp · slate-ink dark moments
+   White editorial; Fire red brand stamp; slate-ink dark moments.
+   Vertical rhythm uses --d-* tokens from globals.
    ══════════════════════════════════════════════════════════════════════ */
 
-/* ── Hero — split editorial ── */
+/* The home page sets section spacing on its own sections (not the global
+   <section> default). Each section uses --d-8 (96px) padding with a
+   1px rule on top so the editorial page reads like a printed book. */
+
+/* ── Hero ── */
 .heroSection {
   background-color: var(--paper);
-  padding: var(--space-3xl) 0;
+  padding: var(--d-7) 0;
   border-bottom: 1px solid var(--rule);
 }
 
 .heroInner {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  gap: var(--space-3xl);
+  gap: var(--d-7);
   align-items: end;
 }
 
@@ -42,7 +47,7 @@
   letter-spacing: -0.04em;
   font-weight: 300;
   color: var(--ink);
-  margin: var(--space-md) 0 var(--space-lg);
+  margin: var(--d-4) 0 var(--d-4);
 }
 .heroHeadline em {
   font-style: italic;
@@ -56,7 +61,7 @@
   font-weight: 400;
   line-height: 1.45;
   color: var(--ink-3);
-  margin: 0 0 var(--space-xl);
+  margin: 0 0 var(--d-5);
   max-width: 46ch;
 }
 
@@ -64,14 +69,14 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--d-6);
 }
 
 .heroPrimary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 24px;
+  padding: 12px 20px;
   border-radius: var(--r-pill);
   background-color: var(--fire-500);
   color: #fff;
@@ -92,7 +97,7 @@
 .heroGhost {
   display: inline-flex;
   align-items: center;
-  padding: 14px 24px;
+  padding: 12px 20px;
   border-radius: var(--r-pill);
   border: 1px solid var(--rule);
   background-color: transparent;
@@ -110,10 +115,10 @@
 .heroStats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--d-5);
   border-top: 1px solid var(--ink);
-  padding-top: var(--space-md);
-  margin-top: var(--space-2xl);
+  padding-top: var(--d-4);
+  margin-top: var(--d-6);
   margin-bottom: 0;
 }
 .heroStats > div { text-align: left; }
@@ -140,7 +145,7 @@
   margin: 0;
 }
 
-/* Hero portrait — duotone red */
+/* Hero portrait, duotone red */
 .heroPortrait {
   position: relative;
   aspect-ratio: 4 / 5;
@@ -169,8 +174,8 @@
 }
 .heroPullQuote {
   position: absolute;
-  top: var(--space-lg);
-  right: var(--space-lg);
+  top: var(--d-4);
+  right: var(--d-4);
   background: var(--paper-pure);
   color: var(--ink);
   padding: 14px 18px;
@@ -184,8 +189,8 @@
 .heroPullQuote b { color: var(--fire-600); font-weight: 500; }
 .heroFigureTag {
   position: absolute;
-  bottom: var(--space-md);
-  left: var(--space-md);
+  bottom: var(--d-3);
+  left: var(--d-3);
   font-family: var(--mono);
   font-size: 10px;
   color: rgba(255,255,255,0.7);
@@ -194,13 +199,19 @@
   z-index: 2;
 }
 
-/* ── Section header pattern (2-col grid: title + lede) ── */
+/* ── Section base — editorial page rhythm ── */
+.sec {
+  padding: var(--d-8) 0;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── Section header (2-col grid: eyebrow+h2 left, lede right) ── */
 .secHead {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
+  gap: var(--d-6);
   align-items: end;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--d-6);
 }
 .secHead h2 {
   font-family: var(--serif);
@@ -209,7 +220,7 @@
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--ink);
-  margin: var(--space-md) 0 0;
+  margin: var(--d-3) 0 0;
   max-width: 14ch;
 }
 .secHead h2 em {
@@ -235,15 +246,20 @@
 .session {
   background: var(--paper-pure);
   border: 1px solid var(--rule);
-  padding: var(--space-lg) var(--space-xl);
+  padding: var(--d-4) var(--d-5);
   display: grid;
   grid-template-columns: 88px 1fr auto;
-  gap: var(--space-lg);
+  gap: var(--d-4);
   align-items: center;
   transition: border-color var(--transition), transform var(--transition);
+  text-decoration: none;
+  color: inherit;
 }
 .session + .session { border-top: 0; }
-.session:hover { border-color: var(--ink); }
+.session:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
 
 .sessionMark {
   width: 88px;
@@ -254,10 +270,12 @@
   align-items: center;
   justify-content: center;
   font-family: var(--serif);
-  font-size: 40px;
+  font-size: 38px;
+  font-weight: 400;
   color: var(--ink);
   position: relative;
   flex-shrink: 0;
+  letter-spacing: -0.02em;
 }
 .sessionMark::before {
   content: '';
@@ -325,7 +343,7 @@
 }
 
 .sessionsFooter {
-  margin-top: var(--space-xl);
+  margin-top: var(--d-5);
   display: flex;
   justify-content: flex-end;
 }
@@ -346,7 +364,7 @@
 .about {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
-  gap: var(--space-3xl);
+  gap: var(--d-7);
   align-items: center;
 }
 .aboutFigure {
@@ -377,8 +395,8 @@
 }
 .aboutFigureTag {
   position: absolute;
-  bottom: var(--space-md);
-  left: var(--space-md);
+  bottom: var(--d-3);
+  left: var(--d-3);
   font-family: var(--mono);
   font-size: 10px;
   color: rgba(255,255,255,0.7);
@@ -394,7 +412,7 @@
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--ink);
-  margin: var(--space-md) 0 var(--space-lg);
+  margin: var(--d-3) 0 var(--d-4);
   max-width: 14ch;
 }
 .aboutText h2 em {
@@ -407,16 +425,16 @@
   font-size: 16px;
   line-height: 1.65;
   color: var(--ink-2);
-  margin: 0 0 var(--space-md);
+  margin: 0 0 var(--d-3);
   max-width: 52ch;
 }
 
 .aboutCred {
   display: flex;
-  gap: var(--space-2xl);
+  gap: var(--d-5);
   flex-wrap: wrap;
-  margin: var(--space-lg) 0;
-  padding-top: var(--space-md);
+  margin: var(--d-4) 0;
+  padding-top: var(--d-3);
   border-top: 1px solid var(--rule);
 }
 .aboutCredItem .credNum {
@@ -436,16 +454,17 @@
 }
 .aboutBtns {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--d-3);
   flex-wrap: wrap;
   align-items: center;
+  margin-top: var(--d-3);
 }
 
 /* ── Deck strip ── */
 .deckStrip {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: var(--space-md);
+  gap: var(--d-3);
 }
 .deckCard {
   position: relative;
@@ -516,12 +535,12 @@
 }
 
 .deckFooter {
-  margin-top: var(--space-xl);
+  margin-top: var(--d-5);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-md);
+  gap: var(--d-3);
 }
 .deckCount {
   font-family: var(--mono);
@@ -531,22 +550,21 @@
   color: var(--ink-4);
 }
 
-/* ── Book section — dark band ── */
+/* ── Book section, dark band ── */
 .bookSection {
   padding-top: 0 !important;
-  border-top: 0;
+  border-top: 0 !important;
 }
 .book {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: var(--space-3xl);
+  gap: var(--d-7);
   align-items: center;
   background: var(--ink);
   color: rgba(255,255,255,0.8);
-  padding: var(--space-3xl) var(--space-2xl);
+  padding: var(--d-7) var(--d-6);
   position: relative;
   overflow: hidden;
-  border-radius: 0;
 }
 .book::before {
   content: '';
@@ -580,7 +598,7 @@
   line-height: 1.05;
   letter-spacing: -0.025em;
   color: #fff;
-  margin: var(--space-md) 0;
+  margin: var(--d-3) 0;
   max-width: 14ch;
 }
 .book h2 em {
@@ -590,7 +608,7 @@
 }
 .book p {
   color: rgba(255,255,255,0.65);
-  margin: 0 0 var(--space-md);
+  margin: 0 0 var(--d-3);
   max-width: 50ch;
   font-size: 15.5px;
   line-height: 1.6;
@@ -605,16 +623,16 @@
 }
 .bookCtas {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--d-3);
   flex-wrap: wrap;
   align-items: center;
-  margin-top: var(--space-lg);
+  margin-top: var(--d-4);
 }
 .bookGhost {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 24px;
+  padding: 12px 20px;
   border-radius: var(--r-pill);
   border: 1px solid rgba(255,255,255,0.3);
   background-color: transparent;
@@ -641,7 +659,7 @@
   background: var(--paper-pure);
   border: 1px solid rgba(255,255,255,0.1);
   box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-  padding: var(--space-lg);
+  padding: var(--d-4);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -708,12 +726,12 @@
 .journalGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: var(--d-4);
 }
 .post {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--d-3);
   text-decoration: none;
   color: inherit;
 }
@@ -756,11 +774,11 @@
 .quotesGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
+  gap: var(--d-5);
 }
 .quote {
   border-left: 2px solid var(--fire-500);
-  padding: 4px 0 4px var(--space-lg);
+  padding: 4px 0 4px var(--d-4);
   margin: 0;
   font-style: normal;
 }
@@ -770,7 +788,7 @@
   font-weight: 400;
   line-height: 1.4;
   color: var(--ink);
-  margin: 0 0 var(--space-md);
+  margin: 0 0 var(--d-3);
   letter-spacing: -0.005em;
 }
 .quoteCite {
@@ -787,10 +805,10 @@
 .cta {
   background: var(--paper-pure);
   border: 1px solid var(--rule);
-  padding: var(--space-3xl) var(--space-2xl);
+  padding: var(--d-7) var(--d-6);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
+  gap: var(--d-6);
   align-items: center;
 }
 .cta h2 {
@@ -800,7 +818,7 @@
   line-height: 1.05;
   letter-spacing: -0.025em;
   color: var(--ink);
-  margin: var(--space-sm) 0 var(--space-md);
+  margin: var(--d-2) 0 var(--d-3);
   max-width: 14ch;
 }
 .cta h2 em {
@@ -819,25 +837,25 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .heroInner { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .heroInner { grid-template-columns: 1fr; gap: var(--d-5); }
   .heroPortrait { max-width: 540px; aspect-ratio: 4 / 3; }
-  .secHead { grid-template-columns: 1fr; gap: var(--space-md); }
-  .about { grid-template-columns: 1fr; }
+  .secHead { grid-template-columns: 1fr; gap: var(--d-3); }
+  .about { grid-template-columns: 1fr; gap: var(--d-5); }
   .aboutFigure { max-width: 540px; aspect-ratio: 4 / 3; }
-  .book { grid-template-columns: 1fr; padding: var(--space-2xl); }
+  .book { grid-template-columns: 1fr; padding: var(--d-6); gap: var(--d-5); }
   .deckStrip { grid-template-columns: repeat(3, 1fr); }
   .journalGrid { grid-template-columns: 1fr; }
   .quotesGrid { grid-template-columns: 1fr; }
-  .cta { grid-template-columns: 1fr; padding: var(--space-2xl); }
+  .cta { grid-template-columns: 1fr; padding: var(--d-6); gap: var(--d-5); }
 }
 
 @media (max-width: 768px) {
-  .session { grid-template-columns: 64px 1fr; gap: var(--space-md); padding: var(--space-md) var(--space-lg); }
+  .session { grid-template-columns: 64px 1fr; gap: var(--d-3); padding: var(--d-3) var(--d-4); }
   .sessionMark { width: 64px; height: 64px; font-size: 28px; }
-  .sessionPrice { grid-column: 1 / -1; text-align: left; padding-top: var(--space-md); border-top: 1px solid var(--rule); }
-  .heroStats { grid-template-columns: 1fr; gap: var(--space-md); }
+  .sessionPrice { grid-column: 1 / -1; text-align: left; padding-top: var(--d-3); border-top: 1px solid var(--rule); }
+  .heroStats { grid-template-columns: 1fr; gap: var(--d-3); }
   .heroStats > div:not(:last-child) {
-    padding-bottom: var(--space-md);
+    padding-bottom: var(--d-3);
     border-bottom: 1px solid var(--rule);
   }
 }

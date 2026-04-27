@@ -151,7 +151,7 @@ export default function AlmanacSearch() {
             <span className="overline">Almanac Search</span>
             <h1 style={{ marginTop: 'var(--space-xs)' }}>Find a Good Day To…</h1>
             <p className={styles.subtitle}>
-              Search auspicious dates for any activity — wedding, move, business launch, and more.
+              Search auspicious dates for any activity, wedding, move, business launch, and more.
             </p>
           </div>
 

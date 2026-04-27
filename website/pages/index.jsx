@@ -10,41 +10,41 @@ import styles from '../styles/Home.module.css';
 
 const SESSIONS = [
   {
-    mark: '壹',
+    mark: '30',
     markVariant: '',
-    title: 'One-Tile Insight',
-    desc: 'A single tile drawn around one question. Quick, focused, and surprisingly direct — good for a yes/no or a "should I?" moment.',
-    meta: ['Live online', '15 min', '1-on-1'],
-    price: '$45',
-    href: '/readings#one-tile',
+    title: 'Quick Reading',
+    desc: 'A focused reading on one topic. Clarity around a single decision or question.',
+    meta: ['Live online', '30 min', '1-on-1'],
+    price: '$39',
+    href: '/book-a-reading?duration=30',
   },
   {
-    mark: '叁',
-    markVariant: 'ink',
-    title: 'Three-Tile Spread',
-    desc: 'Past influence, present condition, and the most likely next turn. Concise, clear, and good for a single decision.',
-    meta: ['Live online', '25 min', '1-on-1'],
-    price: '$95',
-    href: '/readings#three-tile',
-  },
-  {
-    mark: '伍',
+    mark: '60',
     markVariant: 'fire',
-    title: 'The Mahjong Mirror Session',
-    desc: 'A deep, intuitive reading that looks into your emotional, spiritual, and practical life — revealing hidden influences, current challenges, and key lessons. Ideal for relationship dynamics, life purpose, or periods of uncertainty.',
-    meta: ['Live online', '45–60 min', '1-on-1'],
-    price: '$220',
-    href: '/readings#mirror-session',
+    title: 'Standard Reading',
+    desc: 'Multiple topics with time to explore: relationships, work, decisions in flux. Most popular.',
+    meta: ['Live online', '60 min', '1-on-1'],
+    price: '$59',
+    href: '/book-a-reading?duration=60',
+  },
+  {
+    mark: '90',
+    markVariant: 'ink',
+    title: 'Extended Reading',
+    desc: 'A comprehensive reading across the major areas of your life. Right for periods of uncertainty or big transitions.',
+    meta: ['Live online', '90 min', '1-on-1'],
+    price: '$99',
+    href: '/book-a-reading?duration=90',
   },
 ];
 
 const DECK = [
-  { slug: 'dragon',  rank: 'I',   name: 'Dragon'  },
+  { slug: 'peacock', rank: 'I',   name: 'Peacock' },
   { slug: 'phoenix', rank: 'II',  name: 'Phoenix' },
-  { slug: 'pearl',   rank: 'III', name: 'Pearl'   },
-  { slug: 'lotus',   rank: 'IV',  name: 'Lotus'   },
-  { slug: 'tiger',   rank: 'V',   name: 'Tiger'   },
-  { slug: 'peacock', rank: 'VI',  name: 'Peacock' },
+  { slug: 'dragon',  rank: 'III', name: 'Dragon'  },
+  { slug: 'tiger',   rank: 'IV',  name: 'Tiger'   },
+  { slug: 'lotus',   rank: 'V',   name: 'Lotus'   },
+  { slug: 'pearl',   rank: 'VI',  name: 'Pearl'   },
 ];
 
 export default function Home() {
@@ -89,10 +89,10 @@ export default function Home() {
               </h1>
               <p className={styles.heroLead}>
                 Thirty-five years of divination practice. Mahjong tiles, Chinese astrology,
-                and tarot — woven into readings that illuminate your path.
+                and tarot, woven into readings that illuminate your path.
               </p>
               <div className={styles.heroCtas}>
-                <Link href="/readings#book" className={styles.heroPrimary}>
+                <Link href="/book-a-reading" className={styles.heroPrimary}>
                   Book a Reading <span aria-hidden="true">→</span>
                 </Link>
                 <Link href="/the-mahjong-mirror#preorder" className={styles.heroGhost}>
@@ -132,23 +132,23 @@ export default function Home() {
         </section>
 
         {/* ── Sessions ── */}
-        <section>
+        <section className={styles.sec}>
           <div className="container">
             <div className={styles.secHead}>
               <div>
-                <span className={styles.heroBadge}>Personal Sessions</span>
-                <h2>Receive guidance through the <em>tiles</em>.</h2>
+                <span className={styles.heroBadge}>Book a Reading</span>
+                <h2>One reading. Three <em>lengths</em>.</h2>
               </div>
               <p className={styles.secHeadLede}>
-                Three ways to sit at the table — from a single tile drawn for one decision,
-                to a sixty-minute Mirror reading that looks across your whole life. All sessions
-                are conducted live with Bill, online.
+                Pick the length that fits your question. Thirty minutes for a single
+                decision; sixty for several topics; ninety for a full look across your
+                life. Every session is live with Bill, online.
               </p>
             </div>
 
             <div className={styles.sessionsList}>
               {SESSIONS.map((s) => (
-                <article key={s.title} className={styles.session}>
+                <Link key={s.title} href={s.href} className={styles.session}>
                   <div className={`${styles.sessionMark} ${s.markVariant === 'ink' ? styles.sessionMarkInk : ''} ${s.markVariant === 'fire' ? styles.sessionMarkFire : ''}`}>
                     {s.mark}
                   </div>
@@ -167,18 +167,18 @@ export default function Home() {
                   <div className={styles.sessionPrice}>
                     {s.price}<small>per session</small>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
 
             <div className={styles.sessionsFooter}>
-              <Link href="/readings" className={styles.btnLink}>See all reading types →</Link>
+              <Link href="/book-a-reading" className={styles.btnLink}>Start booking <span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </section>
 
         {/* ── About Bill ── */}
-        <section>
+        <section className={styles.sec}>
           <div className="container">
             <div className={styles.about}>
               <figure className={styles.aboutFigure}>
@@ -193,11 +193,11 @@ export default function Home() {
               </figure>
               <div className={styles.aboutText}>
                 <span className={styles.heroBadge}>Meet the Firepig</span>
-                <h2>Bill Hajdu — reader, <em>astrologer</em>, host.</h2>
+                <h2>Bill Hajdu, reader, <em>astrologer</em>, host.</h2>
                 <p>
                   For more than thirty-five years, Bill has worked at the intersection of
-                  Four Pillars astrology, Mahjong tile readings, and tarot — building a
-                  system where the three traditions speak to one another.
+                  Four Pillars astrology, Mahjong tile readings, and tarot. He has built
+                  a system where the three traditions speak to one another.
                 </p>
                 <p>
                   His readings draw on keen intellect, deep respect for tradition, and a
@@ -228,7 +228,7 @@ export default function Home() {
         </section>
 
         {/* ── Deck ── */}
-        <section>
+        <section className={styles.sec}>
           <div className="container">
             <div className={styles.secHead}>
               <div>
@@ -236,8 +236,8 @@ export default function Home() {
                 <h2>Meet the <em>cards</em>.</h2>
               </div>
               <p className={styles.secHeadLede}>
-                Forty-two hand-illustrated cards drawn from the ancient Mahjong tradition —
-                each a symbol, a story, and a doorway into clearer decisions.
+                Forty-two hand-illustrated cards drawn from the ancient Mahjong tradition.
+                Each a symbol, a story, and a doorway into clearer decisions.
               </p>
             </div>
 
@@ -272,7 +272,7 @@ export default function Home() {
             <div className={styles.book}>
               <div>
                 <span className={styles.bookEyebrow}>Coming Soon</span>
-                <h2>The Mahjong Mirror — your path to <em>wiser</em> decisions.</h2>
+                <h2>The Mahjong Mirror. Your path to <em>wiser</em> decisions.</h2>
                 <p>
                   A modern divination system inspired by ancient Mahjong symbolism,
                   guiding you toward clarity, intuition, and deeper self-discovery.
@@ -303,7 +303,7 @@ export default function Home() {
         </section>
 
         {/* ── Journal ── */}
-        <section>
+        <section className={styles.sec}>
           <div className="container">
             <div className={styles.secHead}>
               <div>
@@ -311,7 +311,7 @@ export default function Home() {
                 <h2>From the <em>journal</em>.</h2>
               </div>
               <p className={styles.secHeadLede}>
-                Notes on the year ahead, the tiles, and the slower kind of wisdom — published
+                Notes on the year ahead, the tiles, and the slower kind of wisdom. Published
                 whenever the timing feels right.
               </p>
             </div>
@@ -342,7 +342,7 @@ export default function Home() {
         </section>
 
         {/* ── Testimonials ── */}
-        <section>
+        <section className={styles.sec}>
           <div className="container">
             <div className={styles.secHead}>
               <div>
@@ -350,8 +350,8 @@ export default function Home() {
                 <h2>Ancient cards, <em>lasting</em> impact.</h2>
               </div>
               <p className={styles.secHeadLede}>
-                Notes from people who came with a question and left with a different one —
-                sharper, kinder, more their own.
+                Notes from people who came with a question and left with a different one.
+                Sharper, kinder, more their own.
               </p>
             </div>
             <div className={styles.quotesGrid}>
@@ -372,14 +372,14 @@ export default function Home() {
         </section>
 
         {/* ── Newsletter CTA ── */}
-        <section>
+        <section className={styles.sec}>
           <div className="container">
             <div className={styles.cta}>
               <div>
                 <span className={styles.heroBadge}>Stay Connected</span>
                 <h2>Insights for the <em>year ahead</em>, in your inbox.</h2>
                 <p>
-                  Notes on Mahjong, tarot, and Chinese astrology — sent whenever there&apos;s
+                  Notes on Mahjong, tarot, and Chinese astrology. Sent whenever there&apos;s
                   something worth saying. Never more than twice a month.
                 </p>
               </div>

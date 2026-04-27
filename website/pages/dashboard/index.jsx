@@ -230,7 +230,7 @@ export default function Dashboard() {
                         {Math.round(m.rating)}%
                       </span>
                     ) : (
-                      <span className={accountStyles.muted}>—</span>
+                      <span className={accountStyles.muted}>–</span>
                     )}
                   </Link>
                 </li>
@@ -298,11 +298,11 @@ export default function Dashboard() {
             </Link>
             <Link href="/dashboard/inner-circle" className={accountStyles.card}>
               <h2>Inner Circle</h2>
-              <p>Wife, parents, kids — keep their charts close.</p>
+              <p>Wife, parents, kids, keep their charts close.</p>
             </Link>
             <Link href="/dashboard/almanac" className={accountStyles.card}>
               <h2>Almanac</h2>
-              <p>Tong Shu day-by-day guidance — what to do and what to avoid.</p>
+              <p>Tong Shu day-by-day guidance, what to do and what to avoid.</p>
             </Link>
             <Link href="/dashboard/readings" className={accountStyles.card}>
               <h2>My Readings</h2>

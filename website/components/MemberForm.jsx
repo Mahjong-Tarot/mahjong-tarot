@@ -74,7 +74,7 @@ export default function MemberForm({ userId, initial }) {
       <label className={styles.authLabel}>
         Gender
         <select value={gender} onChange={(e) => setGender(e.target.value)} className={styles.authInput}>
-          <option value="">—</option>
+          <option value="">–</option>
           <option value="M">Male</option>
           <option value="F">Female</option>
         </select>

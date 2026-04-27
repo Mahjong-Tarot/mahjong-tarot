@@ -22,7 +22,7 @@ export default function ThreeBlessings({ reading }) {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw === 'all') setFlipped({ phuc: true, loc: true, tho: true });
     } catch (_) {
-      // localStorage unavailable — silently ignore
+      // localStorage unavailable, silently ignore
     }
   }, []);
 

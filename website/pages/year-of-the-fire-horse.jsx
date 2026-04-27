@@ -157,7 +157,7 @@ export default function YearOfTheFireHorse() {
   return (
     <>
       <SEO
-        title="Year of the Fire Horse 2026 — Personal Forecast | Mahjong Tarot"
+        title="Year of the Fire Horse 2026, Personal Forecast | Mahjong Tarot"
         description="Personalized forecast for the 2026 Year of the Fire Horse. The Fire Horse comes once every 60 years and is the most polarized year in the entire Chinese astrology cycle. See your sign, element, and Day Master reading."
         path="/year-of-the-fire-horse"
         image="/images/book-cover.webp"
@@ -180,7 +180,7 @@ export default function YearOfTheFireHorse() {
             <p className={styles.eyebrow}>Once every 60 years &middot; {overview.stem_branch}</p>
             <h1 className={styles.title}>The Year of the <em>Fire Horse</em></h1>
             <p className={styles.lead}>
-              {overview.gregorian_range.begin} &mdash; {overview.gregorian_range.end}.
+              {overview.gregorian_range.begin}, {overview.gregorian_range.end}.
               The Fire Horse is the rarest and most polarized year in the entire Chinese
               60-year cycle. <strong>Double fire.</strong> All or nothing. Some signs
               will have one of the best years of their lives. Others will face a steep
@@ -198,7 +198,7 @@ export default function YearOfTheFireHorse() {
               <h3>The Setup</h3>
               <p>
                 Bing-Wu (丙午). Yang Fire stem on a Yang Fire branch. Two fires
-                stacked together — the rarest amplifier in the 60-year cycle.
+                stacked together, the rarest amplifier in the 60-year cycle.
                 Last seen in 1966. Next in 2086.
               </p>
             </div>
@@ -214,8 +214,8 @@ export default function YearOfTheFireHorse() {
               <h3>The Method</h3>
               <p>
                 Probabilistic, not deterministic. A favorable score means the
-                deck is stacked toward good outcomes &mdash; not a guarantee. A
-                challenging score means real headwinds &mdash; not a verdict.
+                deck is stacked toward good outcomes, not a guarantee. A
+                challenging score means real headwinds, not a verdict.
               </p>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function YearOfTheFireHorse() {
           <div className={styles.sectionHeader}>
             <h2>Find Your Forecast</h2>
             <p className={styles.sectionLead}>
-              Pick your zodiac sign for the basic reading. Add your birth element for the deeper 60-sign reading. Add your birth date to unlock the Day Master overlay &mdash; the layer that real BaZi practitioners use.
+              Pick your zodiac sign for the basic reading. Add your birth element for the deeper 60-sign reading. Add your birth date to unlock the Day Master overlay, the layer that real BaZi practitioners use.
             </p>
           </div>
 
@@ -394,7 +394,7 @@ export default function YearOfTheFireHorse() {
                     return (
                       <li key={m.month}>
                         <strong>{date?.stem_branch} ({SIGN_LABEL[m.sign]} month)</strong>
-                        <span className={styles.monthDate}>{date?.begin} &mdash; {date?.end}</span>
+                        <span className={styles.monthDate}>{date?.begin}, {date?.end}</span>
                         <span className={styles.monthScore}>{m.score.toFixed(2)} &middot; {BAND_FOR(m.score).short}</span>
                       </li>
                     );
@@ -409,7 +409,7 @@ export default function YearOfTheFireHorse() {
                     return (
                       <li key={m.month}>
                         <strong>{date?.stem_branch} ({SIGN_LABEL[m.sign]} month)</strong>
-                        <span className={styles.monthDate}>{date?.begin} &mdash; {date?.end}</span>
+                        <span className={styles.monthDate}>{date?.begin}, {date?.end}</span>
                         <span className={styles.monthScore}>{m.score.toFixed(2)} &middot; {BAND_FOR(m.score).short}</span>
                       </li>
                     );
@@ -427,10 +427,10 @@ export default function YearOfTheFireHorse() {
           <div className={styles.methodInner}>
             <h2>About this forecast</h2>
             <p>
-              The scoring engine combines three layers: the structural sign-vs-Horse compatibility (12 signs), an element overlay for your birth element (60-sign view), and an optional Day Master overlay derived from your birth date (10 Heavenly Stems, 10 Gods 十神 framework). The Fire Horse year applies a volatility model on top — element relationships are amplified ×1.4 and final scores are stretched toward the extremes, mathematically encoding the &ldquo;all or nothing&rdquo; nature of double-fire years.
+              The scoring engine combines three layers: the structural sign-vs-Horse compatibility (12 signs), an element overlay for your birth element (60-sign view), and an optional Day Master overlay derived from your birth date (10 Heavenly Stems, 10 Gods 十神 framework). The Fire Horse year applies a volatility model on top, element relationships are amplified ×1.4 and final scores are stretched toward the extremes, mathematically encoding the &ldquo;all or nothing&rdquo; nature of double-fire years.
             </p>
             <p>
-              Every score is probabilistic. A 0.26 score for the Rat does not mean the year will be bad — it means the structural deck is stacked toward headwinds, and the Rats who navigate it well are the ones who recognize that and adapt. Even the worst sign has its Peak windows, and even the best sign has months where the right move is to wait.
+              Every score is probabilistic. A 0.26 score for the Rat does not mean the year will be bad, it means the structural deck is stacked toward headwinds, and the Rats who navigate it well are the ones who recognize that and adapt. Even the worst sign has its Peak windows, and even the best sign has months where the right move is to wait.
             </p>
           </div>
         </div>

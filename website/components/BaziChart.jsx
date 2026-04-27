@@ -13,7 +13,7 @@ function PillarCard({ position, pillar }) {
     return (
       <div className={styles.pillar}>
         <div className={styles.position}>{position.label}</div>
-        <div className={styles.empty}>—</div>
+        <div className={styles.empty}>–</div>
         <div className={styles.note}>(no time on file)</div>
       </div>
     );

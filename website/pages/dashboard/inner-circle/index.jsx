@@ -53,7 +53,7 @@ export default function InnerCircleList() {
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <h1 className={styles.title}>Inner circle</h1>
-            <p className={styles.lede}>Wife, partners, parents, kids — anyone whose chart you want to keep close.</p>
+            <p className={styles.lede}>Wife, partners, parents, kids, anyone whose chart you want to keep close.</p>
           </div>
           <Link href="/dashboard/inner-circle/new" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
             + Add person

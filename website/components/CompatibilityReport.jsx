@@ -89,7 +89,7 @@ export default function CompatibilityReport({ result, person1Label = 'You', pers
 
   return (
     <div className={styles.wrap}>
-      {/* Hero — rating + headline */}
+      {/* Hero, rating + headline */}
       <div className={styles.hero}>
         <RatingDial rating={rating} tier={tier} />
         <div className={styles.heroText}>

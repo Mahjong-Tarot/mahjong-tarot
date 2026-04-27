@@ -120,7 +120,7 @@ export default function ProfilePage() {
               />
             </label>
             <label className={styles.authLabel}>
-              Birth time (optional, 24h — improves accuracy)
+              Birth time (optional, 24h, improves accuracy)
               <input
                 type="time"
                 value={birthTime}
@@ -145,7 +145,7 @@ export default function ProfilePage() {
                 onChange={(e) => setGender(e.target.value)}
                 className={styles.authInput}
               >
-                <option value="">—</option>
+                <option value="">–</option>
                 <option value="M">Male</option>
                 <option value="F">Female</option>
               </select>

@@ -1,10 +1,10 @@
 // Deterministic Three Blessings reading derived from a person's birth data.
-// Position 1 — Phuc (Happiness / Divine Timing) — drawn from the Year animal sign.
-// Position 2 — Loc (Prosperity / Abundance)    — drawn from the Day stem (element + polarity).
-// Position 3 — Tho (Longevity / Legacy)        — drawn from the dominant five-element count.
+// Position 1, Phuc (Happiness / Divine Timing), drawn from the Year animal sign.
+// Position 2, Loc (Prosperity / Abundance)   , drawn from the Day stem (element + polarity).
+// Position 3, Tho (Longevity / Legacy)       , drawn from the dominant five-element count.
 //
 // The book describes the rare full-dragon pattern (Green/Red/White) as legend.
-// Our mappings deliberately do not produce the three sacred dragons themselves —
+// Our mappings deliberately do not produce the three sacred dragons themselves –
 // each person receives their personal expression of each blessing instead.
 
 import { CARDS } from './cards';
@@ -20,7 +20,7 @@ export const POSITIONS = {
     label: 'Happiness · Divine Timing',
     idealCard: 'green-dragon',
     description:
-      'The first position carries Phuc — the breath of spring, divine timing, and the conditions that say "begin now". When the Green Dragon falls here, fortune itself nods toward your path.',
+      'The first position carries Phuc, the breath of spring, divine timing, and the conditions that say "begin now". When the Green Dragon falls here, fortune itself nods toward your path.',
   },
   loc: {
     key: 'loc',
@@ -29,7 +29,7 @@ export const POSITIONS = {
     label: 'Prosperity · Abundance',
     idealCard: 'red-dragon',
     description:
-      'The middle position carries Loc — abundance, recognition, and the harvest of effort meeting opportunity. When the Red Dragon falls here, prosperity multiplies through everything you touch.',
+      'The middle position carries Loc, abundance, recognition, and the harvest of effort meeting opportunity. When the Red Dragon falls here, prosperity multiplies through everything you touch.',
   },
   tho: {
     key: 'tho',
@@ -38,7 +38,7 @@ export const POSITIONS = {
     label: 'Longevity · Legacy',
     idealCard: 'white-dragon',
     description:
-      'The final position carries Tho — endurance, wisdom, and what remains after the day is done. When the White Dragon falls here, what you build will outlast your own time.',
+      'The final position carries Tho, endurance, wisdom, and what remains after the day is done. When the White Dragon falls here, what you build will outlast your own time.',
   },
 };
 
@@ -58,7 +58,7 @@ const PHUC_BY_ANIMAL = {
 };
 
 const PHUC_LINES = {
-  Rat:     'Born under the Rat, your blessings come quietly — through quick perception, hidden openings, and the small chances others miss.',
+  Rat:     'Born under the Rat, your blessings come quietly, through quick perception, hidden openings, and the small chances others miss.',
   Ox:      'Born under the Ox, your blessings settle in slowly. They reward patience, steady labour, and the long arc of consistent effort.',
   Tiger:   'Born under the Tiger, your blessings arrive when you move first. Boldness opens the door that hesitation keeps closed.',
   Rabbit:  'Born under the Rabbit, your blessings come through grace and timing. The gentle move, made at the right moment, changes everything.',
@@ -86,16 +86,16 @@ const LOC_BY_STEM = {
 };
 
 const LOC_LINES = {
-  Wood_Yang:  'Your Yang Wood day master grows wealth like a great pine — slowly, vertically, built to last generations.',
+  Wood_Yang:  'Your Yang Wood day master grows wealth like a great pine, slowly, vertically, built to last generations.',
   Wood_Yin:   'Your Yin Wood day master cultivates prosperity through quality. Refinement and craft are your channels of abundance.',
   Fire_Yang:  'Your Yang Fire day master earns through visibility. You prosper when you let your work be seen.',
   Fire_Yin:   'Your Yin Fire day master prospers through warmth and craft. Your gift attracts those willing to pay for it well.',
-  Earth_Yang: 'Your Yang Earth day master builds wealth in foundations — property, infrastructure, the things that anchor others.',
+  Earth_Yang: 'Your Yang Earth day master builds wealth in foundations, property, infrastructure, the things that anchor others.',
   Earth_Yin:  'Your Yin Earth day master gathers prosperity quietly. Your patience compounds where others lose theirs.',
   Metal_Yang: 'Your Yang Metal day master prospers through decisiveness. The clean cut, made at the right time, is your gold.',
   Metal_Yin:  'Your Yin Metal day master earns through precision. Polish, standard, and quality are your channels of abundance.',
-  Water_Yang: 'Your Yang Water day master flows toward wealth like a river — finding the lowest path, then carving valleys.',
-  Water_Yin:  'Your Yin Water day master collects prosperity in still pools — through depth of relationship, trust, and the long return.',
+  Water_Yang: 'Your Yang Water day master flows toward wealth like a river, finding the lowest path, then carving valleys.',
+  Water_Yin:  'Your Yin Water day master collects prosperity in still pools, through depth of relationship, trust, and the long return.',
 };
 
 const THO_BY_ELEMENT = {
@@ -108,7 +108,7 @@ const THO_BY_ELEMENT = {
 };
 
 const THO_LINES = {
-  Wood:     'With Wood as your dominant element, your legacy grows. What you plant outlives you — in students, in projects, in family.',
+  Wood:     'With Wood as your dominant element, your legacy grows. What you plant outlives you, in students, in projects, in family.',
   Fire:     'With Fire as your dominant element, your legacy is your spark. The energy you light in others continues long after you step back.',
   Earth:    'With Earth as your dominant element, your legacy is the foundation you leave. People will build on what you held steady.',
   Metal:    'With Metal as your dominant element, your legacy is precision and standard. The principles you upheld will outlast the fashions you lived through.',

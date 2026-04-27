@@ -56,7 +56,7 @@ export default function SignInPage() {
           {pendingConfirmation ? (
             <p className={styles.authLede}>
               Check your inbox at <strong>{email}</strong> to confirm your account.
-              You can close this tab — once confirmed, sign in to continue.
+              You can close this tab, once confirmed, sign in to continue.
             </p>
           ) : (
             <>

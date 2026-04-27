@@ -17,10 +17,10 @@ const PALACE_MEANINGS = {
   Leisure:  { role: 'Inner Life',        blurb: 'Spiritual orientation, what brings you peace, hobbies that feed you.' },
   Property: { role: 'Home & Real Estate', blurb: 'Your home, lands, family fortune, where you put down roots.' },
   Career:   { role: 'Work & Reputation', blurb: 'Career arc, public standing, how the world sees your contribution.' },
-  Servants: { role: 'Allies & Helpers',  blurb: 'Colleagues, friends, employees — the people who carry things with you.' },
+  Servants: { role: 'Allies & Helpers',  blurb: 'Colleagues, friends, employees, the people who carry things with you.' },
   Travel:   { role: 'Movement & Change', blurb: 'Travel, relocation, the openness to new environments and opportunities.' },
   Health:   { role: 'Body & Vitality',   blurb: 'Physical health, energy levels, vulnerabilities to watch.' },
-  Wealth:   { role: 'Money',             blurb: 'How money flows in and out — earning style, spending instincts.' },
+  Wealth:   { role: 'Money',             blurb: 'How money flows in and out, earning style, spending instincts.' },
   Children: { role: 'Children & Creativity', blurb: 'Children, students, creative output, what you bring forth.' },
   Marriage: { role: 'Partnership',       blurb: 'Romantic partner, the dynamic of marriage and committed love.' },
   Siblings: { role: 'Peers',             blurb: 'Siblings, close friends, the lateral relationships of your life.' },
@@ -115,32 +115,32 @@ export default function PurpleStarReading() {
             <section style={{ marginTop: '1rem' }}>
               <p className={accountStyles.lede}>
                 The 12-palace map of your life themes, derived from your birth moment in the lunar calendar.
-                Read this as a portrait, not a prediction — the palaces show <em>where</em> your energy concentrates.
+                Read this as a portrait, not a prediction, the palaces show <em>where</em> your energy concentrates.
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginTop: '1.5rem' }}>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Soul Star</p>
                   <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
-                    {chart.soulStar || '—'}
+                    {chart.soulStar || '–'}
                   </p>
                 </div>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Body Star</p>
                   <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
-                    {chart.bodyStar || '—'}
+                    {chart.bodyStar || '–'}
                   </p>
                 </div>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Five Elements Class</p>
                   <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
-                    {chart.fiveElementsClass || '—'}
+                    {chart.fiveElementsClass || '–'}
                   </p>
                 </div>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Sign</p>
                   <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
-                    {chart.zodiac || chart.sign || '—'}
+                    {chart.zodiac || chart.sign || '–'}
                   </p>
                 </div>
               </div>
@@ -168,7 +168,7 @@ export default function PurpleStarReading() {
                       <h3 style={{ margin: '0 0 0.5rem 0' }}>Body · {bodyPalace.animal} {bodyPalace.branchHan}</h3>
                       <p className={accountStyles.muted} style={{ margin: 0 }}>{PALACE_MEANINGS.Body.blurb}</p>
                       <p style={{ marginTop: '0.75rem' }}>
-                        Lives in your <strong>{bodyPalace.name}</strong> palace — that&apos;s where destiny tends to enact itself in your life.
+                        Lives in your <strong>{bodyPalace.name}</strong> palace, that&apos;s where destiny tends to enact itself in your life.
                       </p>
                     </div>
                   )}
@@ -189,7 +189,7 @@ export default function PurpleStarReading() {
                   </p>
                   {PALACE_MEANINGS[currentDecade.name] && (
                     <p className={accountStyles.muted} style={{ marginTop: '0.5rem' }}>
-                      Theme: <strong>{PALACE_MEANINGS[currentDecade.name].role}</strong> — {PALACE_MEANINGS[currentDecade.name].blurb}
+                      Theme: <strong>{PALACE_MEANINGS[currentDecade.name].role}</strong>, {PALACE_MEANINGS[currentDecade.name].blurb}
                     </p>
                   )}
                   {currentDecade.majorStars.length > 0 && (
@@ -230,7 +230,7 @@ export default function PurpleStarReading() {
                         </p>
                       ) : (
                         <p className={accountStyles.muted} style={{ margin: 0 }}>
-                          No major stars here — read this palace from its supporting and adjacent stars.
+                          No major stars here, read this palace from its supporting and adjacent stars.
                         </p>
                       )}
                       {p.minorStars.length > 0 && (

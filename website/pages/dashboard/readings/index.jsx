@@ -20,8 +20,8 @@ const PERSONAL_READINGS = [
     key: 'purple-star',
     title: 'Purple Star (Zi Wei Dou Shu)',
     blurb: 'The 12-palace map of your life themes and seasons.',
-    href: '/dashboard',
-    available: false,
+    href: '/dashboard/readings/purple-star',
+    available: true,
   },
   {
     key: 'three-blessings',

@@ -144,6 +144,7 @@ export default function AlmanacView({ date, almanac, today }) {
 
       <div className={styles.calendarLink}>
         <Link href={`/dashboard/almanac/calendar/${date.slice(0, 7)}`}>View Monthly Calendar →</Link>
+        <Link href="/dashboard/almanac/search">Find a Good Day →</Link>
       </div>
     </div>
   );

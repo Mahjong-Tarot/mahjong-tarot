@@ -11,7 +11,7 @@ import {
   shiftMonth,
   formatMonthHuman,
   LNY_2026,
-  LNY_2027,
+  ALMANAC_RANGE_END_EXCLUSIVE,
 } from '../../../../lib/almanac';
 import styles from './AlmanacCalendar.module.css';
 
@@ -66,9 +66,9 @@ export default function AlmanacCalendar() {
   const prevMonth = shiftMonth(month, -1);
   const nextMonth = shiftMonth(month, 1);
   const lnyMonth = LNY_2026.slice(0, 7);
-  const endMonth = LNY_2027.slice(0, 7);
+  const endMonth = ALMANAC_RANGE_END_EXCLUSIVE.slice(0, 7);
   const canGoBack = prevMonth >= lnyMonth;
-  const canGoForward = nextMonth <= endMonth;
+  const canGoForward = nextMonth < endMonth;
 
   return (
     <>
@@ -108,7 +108,7 @@ export default function AlmanacCalendar() {
                 const matchDay = Array.isArray(c.summary?.match_day) && c.summary.match_day.length > 0;
                 const western = c.summary?.western_moment;
                 const isToday = c.date === today;
-                const beforeRange = c.date < LNY_2026;
+                const beforeRange = c.date < LNY_2026 || c.date >= ALMANAC_RANGE_END_EXCLUSIVE;
                 const cell = (
                   <div className={`${styles.cell} ${tone ? styles[`tone_${tone}`] : ''} ${isToday ? styles.cellToday : ''} ${beforeRange ? styles.cellOut : ''}`}>
                     <div className={styles.dayNum}>{c.day}</div>

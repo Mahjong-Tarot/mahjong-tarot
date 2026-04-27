@@ -38,6 +38,8 @@
 .preorder h2 { margin: var(--space-lg) 0; }
 .preorder p  { color: var(--mid-gray); font-size: 19px; max-width: 520px; margin: 0 auto var(--space-xl); }
 
+.formatSelect { background-color: #ffffff; }
+
 @media (max-width: 1024px) {
   .systemGrid   { grid-template-columns: repeat(2, 1fr); }
   .audienceGrid { grid-template-columns: repeat(2, 1fr); }

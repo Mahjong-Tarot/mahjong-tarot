@@ -5,10 +5,15 @@ import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
+<<<<<<< feat/daily-horoscopes
 import AlmanacToday from '../../components/AlmanacToday';
+=======
+import PurpleStarChart from '../../components/PurpleStarChart';
+>>>>>>> main
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
+import { calculatePurpleStar } from '../../lib/purpleStar';
 import styles from '../../styles/Account.module.css';
 
 export default function Dashboard() {
@@ -27,7 +32,7 @@ export default function Dashboard() {
     (async () => {
       const { data } = await supabase
         .from('profiles')
-        .select('name, birthday, birth_time, pillars')
+        .select('name, birthday, birth_time, gender, pillars')
         .eq('user_id', user.id)
         .maybeSingle();
       if (cancelled) return;
@@ -43,6 +48,13 @@ export default function Dashboard() {
     || (profile?.birthday ? calculatePillars(profile.birthday, profile.birth_time) : null);
   const elements = pillars ? tallyElements(pillars) : null;
   const dominant = elements ? dominantElement(elements) : null;
+  const purpleStar = profile?.birthday && profile?.birth_time
+    ? calculatePurpleStar({
+        birthday: profile.birthday,
+        birthTime: profile.birth_time,
+        gender: profile.gender,
+      })
+    : null;
 
   return (
     <>
@@ -72,6 +84,21 @@ export default function Dashboard() {
             <h2 className={styles.subTitle}>Your Four Pillars</h2>
             <BaziChart pillars={pillars} elements={elements} dominantElement={dominant} />
           </section>
+        )}
+
+        {purpleStar && (
+          <section style={{ marginTop: '2.5rem' }}>
+            <h2 className={styles.subTitle}>Your Purple Star Chart</h2>
+            <PurpleStarChart chart={purpleStar} name={profile?.name} />
+          </section>
+        )}
+
+        {profileLoaded && profile?.birthday && !profile?.birth_time && (
+          <div className={styles.placeholder} style={{ marginTop: '1.5rem' }}>
+            <p style={{ margin: 0 }}>
+              Add your birth time on your <Link href="/profile">profile</Link> to see your Purple Star chart.
+            </p>
+          </div>
         )}
 
         <section style={{ marginTop: '2.5rem' }}>

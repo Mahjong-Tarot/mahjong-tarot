@@ -318,7 +318,7 @@ export default function TheMahjongMirror() {
  <select
  id="pre-format"
  name="format"
- className={`${form.select} ${styles.formatSelect}`}
+ className={`${form.select} ${styles.formatSelect} ${!fields.format ? styles.formatSelectEmpty : ''}`}
  value={fields.format}
  onChange={update}
  >

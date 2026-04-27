@@ -108,3 +108,25 @@ export function dominantElement(counts) {
   const winners = Object.entries(counts).filter(([, v]) => v === max);
   return winners.length === 1 ? winners[0][0] : 'Balanced';
 }
+
+const ELEMENT_GENERATES = { Wood: 'Fire', Fire: 'Earth', Earth: 'Metal', Metal: 'Water', Water: 'Wood' };
+const ELEMENT_DESTROYS  = { Wood: 'Earth', Earth: 'Water', Water: 'Fire', Fire: 'Metal', Metal: 'Wood' };
+
+const INTERACTION_COPY = {
+  aligned:    { headline: 'Aligned',           line: "Today's energy mirrors your own. Steady, familiar — a good day to settle in." },
+  feeds:      { headline: 'You set the tone',  line: 'Your energy fuels the day. Lead, initiate, decide. Things you push will move.' },
+  fed_by:     { headline: 'Wind at your back', line: 'Today supports you. Let things come — accept help, take what is offered.' },
+  controls:   { headline: 'Take charge',       line: "You have the upper hand today. Push on stalled work, ask for what you want." },
+  controlled: { headline: 'Move carefully',    line: "Today's energy can wear on you. Conserve, observe, save the big asks for tomorrow." },
+};
+
+/** Classic five-element interaction: how does `self` element relate to `other`? */
+export function elementInteraction(self, other) {
+  if (!self || !other) return null;
+  if (self === other)                    return { kind: 'aligned',    ...INTERACTION_COPY.aligned };
+  if (ELEMENT_GENERATES[self] === other) return { kind: 'feeds',      ...INTERACTION_COPY.feeds };
+  if (ELEMENT_GENERATES[other] === self) return { kind: 'fed_by',     ...INTERACTION_COPY.fed_by };
+  if (ELEMENT_DESTROYS[self]  === other) return { kind: 'controls',   ...INTERACTION_COPY.controls };
+  if (ELEMENT_DESTROYS[other] === self)  return { kind: 'controlled', ...INTERACTION_COPY.controlled };
+  return null;
+}

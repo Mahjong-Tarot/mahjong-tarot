@@ -158,7 +158,7 @@ export default function ProfilePage() {
               <button type="submit" disabled={saving || loadingProfile} className={styles.authSubmit}>
                 {saving ? 'Saving…' : 'Save profile'}
               </button>
-              <button type="button" onClick={handleSignOut} className={styles.btnGhost}>
+              <button type="button" onClick={handleSignOut} className={styles.btnGhostLg}>
                 Sign out
               </button>
             </div>

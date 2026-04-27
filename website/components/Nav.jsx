@@ -19,9 +19,11 @@ const PUBLIC_LINKS = [
 const MEMBER_LINKS = [
   { href: '/dashboard',                  label: 'Dashboard',     match: (p) => p === '/dashboard' },
   { href: '/dashboard/readings',         label: 'My Readings',   match: (p) => p.startsWith('/dashboard/readings') },
-  { href: '/profile',                    label: 'Profile',       match: (p) => p.startsWith('/profile') },
   { href: '/dashboard/inner-circle',     label: 'Inner Circle',  match: (p) => p.startsWith('/dashboard/inner-circle') },
   { href: '/dashboard/relationships',    label: 'Relationships', match: (p) => p.startsWith('/dashboard/relationships') || p.startsWith('/dashboard/compatibility') },
+  { href: '/profile',                    label: 'Profile',       match: (p) => p.startsWith('/profile'), dropdown: [
+    { action: 'signOut',                 label: 'Sign out' },
+  ] },
 ];
 
 export default function Nav() {
@@ -56,22 +58,47 @@ export default function Nav() {
 
         {inMemberArea ? (
           <ul className={styles.links}>
-            {MEMBER_LINKS.map((l) => (
-              <li key={l.href}>
-                <Link href={l.href} className={l.match(router.pathname) ? styles.active : ''}>
-                  {l.label}
-                </Link>
-              </li>
-            ))}
+            {MEMBER_LINKS.map((l) =>
+              l.dropdown ? (
+                <li
+                  key={l.href}
+                  className={styles.dropdown}
+                  onMouseEnter={() => setOpenDropdown(l.href)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <Link href={l.href} className={l.match(router.pathname) ? styles.active : ''}>
+                    {l.label} <span className={styles.caret} aria-hidden="true">▾</span>
+                  </Link>
+                  <ul className={`${styles.dropdownMenu} ${openDropdown === l.href ? styles.dropdownOpen : ''}`}>
+                    {l.dropdown.map((d) =>
+                      d.action === 'signOut' ? (
+                        <li key="signOut">
+                          <button type="button" onClick={handleSignOut} className={styles.dropdownItemBtn}>
+                            {d.label}
+                          </button>
+                        </li>
+                      ) : (
+                        <li key={d.href}>
+                          <Link href={d.href} className={router.pathname.startsWith(d.href) ? styles.active : ''}>
+                            {d.label}
+                          </Link>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </li>
+              ) : (
+                <li key={l.href}>
+                  <Link href={l.href} className={l.match(router.pathname) ? styles.active : ''}>
+                    {l.label}
+                  </Link>
+                </li>
+              ),
+            )}
             <li>
               <Link href="/readings#book" className={styles.cta}>
-                Get a Reading
+                Book A Reading
               </Link>
-            </li>
-            <li>
-              <button type="button" onClick={handleSignOut} className={styles.signOutLink}>
-                Sign out
-              </button>
             </li>
           </ul>
         ) : (

@@ -1,0 +1,56 @@
+name: Daily Horoscope Generation
+
+# Runs at 00:05 PT daily (08:05 UTC during PST, 07:05 UTC during PDT).
+# Cron uses UTC, so we set both windows and let the script idempotently upsert.
+on:
+  schedule:
+    - cron: '5 7 * * *'    # 00:05 PDT (Mar–Nov)
+    - cron: '5 8 * * *'    # 00:05 PST (Nov–Mar)
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "Start date (YYYY-MM-DD). Defaults to today in LA."
+        required: false
+      end:
+        description: "End date (YYYY-MM-DD). Defaults to today in LA."
+        required: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install anthropic supabase pandas openpyxl
+
+      - name: Compute target date
+        id: target
+        run: |
+          if [ -n "${{ inputs.start }}" ]; then
+            echo "start=${{ inputs.start }}" >> $GITHUB_OUTPUT
+            echo "end=${{ inputs.end || inputs.start }}" >> $GITHUB_OUTPUT
+          else
+            TODAY=$(TZ='America/Los_Angeles' date +%F)
+            echo "start=$TODAY" >> $GITHUB_OUTPUT
+            echo "end=$TODAY" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate and upsert
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        working-directory: architecture/readings/daily-horoscopes/encoding
+        run: |
+          python3 backfill_supabase.py \
+            --commit \
+            --skip-existing \
+            --start ${{ steps.target.outputs.start }} \
+            --end ${{ steps.target.outputs.end }}

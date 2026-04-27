@@ -1,0 +1,63 @@
+{
+  "topic": "The Mahjong Mirror's Second Angle (Know Thyself) applied to love. Self-knowledge as the foundation of lasting relationships, versus chemistry as a misleading shortcut.",
+  "phrases": [
+    "Chemistry tells you how you feel. The mirror tells you what's there.",
+    "The mirror doesn't judge. It reflects.",
+    "Know yourself first.",
+    "Who are you in this relationship?",
+    "Balance over heat."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "what-the-mirror-shows-about-love",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A woman seated alone at a reading table, looking down at a spread of Mahjong tiles. One tile in the center is face-up, casting a warm reflection on the dark wooden surface. The focus is on the act of looking, examining, seeing clearly. The reading has just revealed something important.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman from above and behind, seated at a dark wooden table covered in a silk cloth. Mahjong tiles are arranged before her in a spread, most face-down, one tile in the center position face-up. Her hands rest near the tiles but are not touching them. Candlelight from one side creates warm amber light on the table and tiles. Her posture is one of quiet concentration. She has just seen something. The face-up tile's surface catches the light. Midnight jade walls, warm ivory cloth. Film still quality. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "what-the-mirror-shows-about-love",
+      "content_type": "wed-facebook-en",
+      "concept": "An antique hand mirror lying face-up on aged parchment, surrounded by dried rose petals and a single Mahjong tile beside it. The mirror reflects the ceiling, ordinary and real, not idealized or flattering. About honesty and clear sight in love.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Overhead flat lay on warm aged parchment. An antique hand mirror face-up, its oval glass reflecting the plain ceiling above, ordinary and not ornate. To its right, a single face-up Mahjong tile. Scattered around the edges: three dried rose petals, slightly curled. Warm morning light from the upper left. Antique gold frame on the mirror, ivory parchment, pale dusty rose petals. The reflection in the mirror is plain and real, not distorted or beautified. The mood is quiet honesty. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "what-the-mirror-shows-about-love",
+      "content_type": "wed-instagram",
+      "concept": "The Ducks Mahjong card face-up on aged parchment, flanked by two small ceramic tea bowls. Warm candlelight. The card represents lasting partnership. The reading has drawn it in the core identity position. The image communicates depth, partnership, and the intimacy of a reading.",
+      "image_style": "SCENE",
+      "card": "Ducks (Suit card) representing lasting partnership and relationship-centered identity",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square overhead shot. The Ducks Mahjong card face-up and centered on warm aged parchment, its painted ducks visible. Two small celadon ceramic bowls, one on each side, containing faint traces of tea. Warm candlelight from the lower right casts soft shadows. The card fills roughly a third of the frame; the bowls and parchment complete the composition. Antique gold, ivory, and deep teal tones. The mood is intimate and contemplative. A reading in progress. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "what-the-mirror-shows-about-love",
+      "content_type": "thu-facebook-en",
+      "concept": "A woman standing at a window, her back to the camera, face turned slightly toward the glass. One hand rests on the windowpane. Outside the window, soft unfocused light. The image captures the moment of honest self-reflection: looking at yourself in relation to another person, wondering if who you've been showing up as is who you actually are.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman standing at a large window, back to the camera, face turned slightly toward the glass. One hand rests flat on the windowpane. Through the window: soft, out-of-focus warm light suggesting late afternoon. The room behind her is dim with midnight jade walls. Her clothing is simple and warm-toned. The reflection in the glass is faint and slightly distorted, suggesting self-examination not vanity. She is alone, still, and clearly thinking. Cinematic composition. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "what-the-mirror-shows-about-love",
+      "content_type": "thu-instagram",
+      "concept": "A woman in silhouette against a luminous window. The contrast high, her form dark against warm amber-gold light streaming through. Private and contemplative. The silhouette strips identity to essence: interior truth, not exterior presentation.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A woman in silhouette standing at a window, her figure dark against strong warm amber-gold light pouring through the glass. She is facing the window, her profile barely visible at the edge. The room around her is deep shadow with midnight jade tones. The window light fills the upper two-thirds of the frame. Her posture is still and private, no performance, no gesture. The contrast is dramatic and cinematic. The mood is honest interiority. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

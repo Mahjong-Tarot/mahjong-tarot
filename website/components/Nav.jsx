@@ -6,6 +6,10 @@ import styles from './Nav.module.css';
 
 const PUBLIC_LINKS = [
   { href: '/about',              label: 'About'    },
+  { href: '/horoscopes',         label: 'Horoscopes', dropdown: [
+    { href: '/year-of-the-fire-horse', label: 'Year of the Fire Horse 2026' },
+    { href: '/horoscopes/forecast',    label: 'Monthly Forecast' },
+  ] },
   { href: '/readings',           label: 'Readings', dropdown: [{ href: '/cards', label: 'Cards' }] },
   { href: '/the-mahjong-mirror', label: 'Book'     },
   { href: '/blog',               label: 'Blog'     },
@@ -23,7 +27,7 @@ const MEMBER_LINKS = [
 export default function Nav() {
   const router = useRouter();
   const { user, signOut } = useAuth();
-  const [readingsOpen, setReadingsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const inMemberArea = !!user && (
     router.pathname.startsWith('/dashboard') || router.pathname.startsWith('/profile')
@@ -37,9 +41,11 @@ export default function Nav() {
   const isPublicActive = (path) =>
     path === '/blog'
       ? router.pathname.startsWith('/blog')
-      : path === '/readings'
-        ? router.pathname.startsWith('/readings') || router.pathname.startsWith('/cards')
-        : router.pathname === path;
+      : path === '/horoscopes'
+        ? router.pathname.startsWith('/horoscopes') || router.pathname.startsWith('/year-of-the-fire-horse')
+        : path === '/readings'
+          ? router.pathname.startsWith('/readings') || router.pathname.startsWith('/cards')
+          : router.pathname === path;
 
   return (
     <nav className={styles.nav}>
@@ -75,13 +81,13 @@ export default function Nav() {
                 <li
                   key={l.href}
                   className={styles.dropdown}
-                  onMouseEnter={() => setReadingsOpen(true)}
-                  onMouseLeave={() => setReadingsOpen(false)}
+                  onMouseEnter={() => setOpenDropdown(l.href)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
                     {l.label} <span className={styles.caret} aria-hidden="true">▾</span>
                   </Link>
-                  <ul className={`${styles.dropdownMenu} ${readingsOpen ? styles.dropdownOpen : ''}`}>
+                  <ul className={`${styles.dropdownMenu} ${openDropdown === l.href ? styles.dropdownOpen : ''}`}>
                     {l.dropdown.map((d) => (
                       <li key={d.href}>
                         <Link href={d.href} className={router.pathname.startsWith(d.href) ? styles.active : ''}>

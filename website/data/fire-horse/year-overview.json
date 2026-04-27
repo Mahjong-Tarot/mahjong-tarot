@@ -1,0 +1,169 @@
+{
+  "year_name": "Fire Horse",
+  "stem_branch": "Bing-Wu (丙午)",
+  "gregorian_range": {
+    "begin": "2026-02-17",
+    "end": "2027-02-05"
+  },
+  "days_in_year": 354,
+  "leap_month": null,
+  "year_element": "fire",
+  "year_sign": "horse",
+  "year_polarity": "Yang",
+  "cycle_position": "60-year-cycle: occurs once every 60 years (last: 1966; next: 2086)",
+  "volatility_model": {
+    "element_amplifier": 1.4,
+    "distribution_stretch_k": 1.5,
+    "score_floor": 0.05,
+    "score_cap": 0.95,
+    "rationale": "Double-fire amplifier (Bing year stem + Wu fire-fixed branch). Source: fire-horse-extremes-and-danger.md."
+  },
+  "lunar_months": [
+    {
+      "index": 1,
+      "sign": "tiger",
+      "element": "metal",
+      "stem_branch": "Geng-Yin",
+      "begin": "2026-02-17",
+      "end": "2026-03-18"
+    },
+    {
+      "index": 2,
+      "sign": "rabbit",
+      "element": "metal",
+      "stem_branch": "Xin-Mao",
+      "begin": "2026-03-19",
+      "end": "2026-04-16"
+    },
+    {
+      "index": 3,
+      "sign": "dragon",
+      "element": "water",
+      "stem_branch": "Ren-Chen",
+      "begin": "2026-04-17",
+      "end": "2026-05-16"
+    },
+    {
+      "index": 4,
+      "sign": "snake",
+      "element": "water",
+      "stem_branch": "Gui-Si",
+      "begin": "2026-05-17",
+      "end": "2026-06-14"
+    },
+    {
+      "index": 5,
+      "sign": "horse",
+      "element": "wood",
+      "stem_branch": "Jia-Wu",
+      "begin": "2026-06-15",
+      "end": "2026-07-13"
+    },
+    {
+      "index": 6,
+      "sign": "sheep",
+      "element": "wood",
+      "stem_branch": "Yi-Wei",
+      "begin": "2026-07-14",
+      "end": "2026-08-12"
+    },
+    {
+      "index": 7,
+      "sign": "monkey",
+      "element": "fire",
+      "stem_branch": "Bing-Shen",
+      "begin": "2026-08-13",
+      "end": "2026-09-10"
+    },
+    {
+      "index": 8,
+      "sign": "rooster",
+      "element": "fire",
+      "stem_branch": "Ding-You",
+      "begin": "2026-09-11",
+      "end": "2026-10-09"
+    },
+    {
+      "index": 9,
+      "sign": "dog",
+      "element": "earth",
+      "stem_branch": "Wu-Xu",
+      "begin": "2026-10-10",
+      "end": "2026-11-08"
+    },
+    {
+      "index": 10,
+      "sign": "pig",
+      "element": "earth",
+      "stem_branch": "Ji-Hai",
+      "begin": "2026-11-09",
+      "end": "2026-12-08"
+    },
+    {
+      "index": 11,
+      "sign": "rat",
+      "element": "metal",
+      "stem_branch": "Geng-Zi",
+      "begin": "2026-12-09",
+      "end": "2027-01-07"
+    },
+    {
+      "index": 12,
+      "sign": "ox",
+      "element": "metal",
+      "stem_branch": "Xin-Chou",
+      "begin": "2027-01-08",
+      "end": "2027-02-05"
+    }
+  ],
+  "core_themes": [
+    "extremes",
+    "all-or-nothing",
+    "double fire",
+    "speed and decisiveness",
+    "risk amplified",
+    "opportunity amplified",
+    "no halfway"
+  ],
+  "favored_industries": [
+    "energy",
+    "defense",
+    "fashion and design",
+    "technology and innovation",
+    "entrepreneurship and startups",
+    "sports and entertainment"
+  ],
+  "thrives": {
+    "characteristics": [
+      "bold and prepared",
+      "decisive action-takers",
+      "able to operate at speed",
+      "willing to step out of comfort zone",
+      "good self-control (avoids burnout)"
+    ],
+    "signs": [
+      "tiger",
+      "dog",
+      "sheep"
+    ]
+  },
+  "struggles": {
+    "characteristics": [
+      "timid or unprepared",
+      "overthinkers",
+      "reckless without preparation",
+      "cannot maintain focus"
+    ],
+    "signs": [
+      "rat",
+      "ox",
+      "monkey",
+      "pig"
+    ],
+    "birth_elements": [
+      "metal",
+      "water"
+    ]
+  },
+  "note_horse_month": "The 5th lunar month — Wood Horse (Jia-Wu, Jun 15 to Jul 13, 2026) — is the energetic equivalent of the entire 2014 Wood Horse year condensed into ~30 days. Expected to be the most consequential month for many signs."
+}

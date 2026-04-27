@@ -93,13 +93,13 @@
 }
 
 .badgeYes {
-  background: #fff4d4;
+  background: var(--gold-soft);
   color: #8a6d1d;
   border: 1px solid #e0c97c;
 }
 
 .badgeNo {
-  background: #f3f3f0;
+  background: var(--rule-2);
   color: #777;
   border: 1px solid #ddd;
 }

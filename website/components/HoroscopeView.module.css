@@ -55,7 +55,7 @@
   color: var(--color-text-muted, #666);
   margin-bottom: var(--space-2xl);
   padding: var(--space-sm) var(--space-md);
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
   border-radius: 8px;
 }
 .pillarStrip strong { color: var(--color-text); font-weight: 600; }
@@ -76,7 +76,7 @@
   display: flex;
   gap: 4px;
   margin-bottom: var(--space-md);
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
   border-radius: 10px;
   padding: 4px;
 }
@@ -145,7 +145,7 @@
   gap: 4px;
   padding: var(--space-md) 4px;
   border: 2px solid transparent;
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
   border-radius: 10px;
   cursor: pointer;
   font-family: inherit;
@@ -157,16 +157,16 @@
 .signLabel { font-size: 0.9rem; font-weight: 600; }
 .signScore { font-size: 0.75rem; color: var(--color-text-muted, #888); font-weight: 600; }
 
-.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, #f8f6f0 100%); }
-.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, #f8f6f0 100%); }
-.tone_neutral     { background: var(--color-surface, #f8f6f0); }
-.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, #f8f6f0 100%); }
-.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, #f8f6f0 100%); }
+.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, var(--rule-2) 100%); }
+.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, var(--rule-2) 100%); }
+.tone_neutral     { background: var(--color-surface, var(--rule-2)); }
+.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, var(--rule-2) 100%); }
+.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, var(--rule-2) 100%); }
 
 .signDetail {
   margin-top: var(--space-lg);
   padding: var(--space-lg);
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
   border-radius: 12px;
 }
 .signDetailHeader {

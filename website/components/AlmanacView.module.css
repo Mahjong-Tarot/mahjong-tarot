@@ -60,7 +60,7 @@
 }
 .navArrow {
   color: var(--color-text);
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
 }
 .navArrow:hover { background: var(--color-surface-hover, #eee); }
 .navArrowDisabled { color: #ccc; cursor: not-allowed; }
@@ -95,7 +95,7 @@
   color: var(--color-text-muted, #666);
   margin-bottom: var(--space-2xl);
   padding: var(--space-sm) var(--space-md);
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
   border-radius: 8px;
 }
 .pillarStrip strong { color: var(--color-text); font-weight: 600; }
@@ -196,7 +196,7 @@
 }
 .hourCell {
   padding: var(--space-sm) var(--space-md);
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
   border-radius: 8px;
   text-align: center;
 }
@@ -239,11 +239,11 @@
   font-size: 0.85rem;
   padding: 4px 10px;
   border-radius: 999px;
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
 }
 .activityItem.lucky   { background: #e8f5e8; color: #1e6334; }
 .activityItem.unlucky { background: #fbe9e7; color: #962d20; }
-.activityItem.normal  { background: var(--color-surface, #f8f6f0); color: var(--color-text-muted, #666); }
+.activityItem.normal  { background: var(--color-surface, var(--rule-2)); color: var(--color-text-muted, #666); }
 
 .calendarLink {
   text-align: center;
@@ -268,8 +268,8 @@
   padding: var(--space-3xl) 0;
 }
 
-.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, #fdfbf6 70%); }
-.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, #fdfbf6 70%); }
-.tone_neutral     { background: var(--color-surface, #f8f6f0); }
-.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, #fdfbf6 70%); }
-.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, #fdfbf6 70%); }
+.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, var(--paper) 70%); }
+.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, var(--paper) 70%); }
+.tone_neutral     { background: var(--color-surface, var(--rule-2)); }
+.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, var(--paper) 70%); }
+.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, var(--paper) 70%); }

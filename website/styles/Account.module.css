@@ -57,16 +57,16 @@
   padding: 2rem;
   border: 1px dashed #aaa;
   border-radius: 8px;
-  background: #fafafa;
+  background: var(--paper);
   color: #555;
 }
 
 .cardDisabled {
   display: block;
   padding: 1.5rem;
-  border: 1px solid #e6e2dc;
+  border: 1px solid var(--rule);
   border-radius: 8px;
-  background: #faf8f3;
+  background: var(--paper);
   color: #7a7670;
   cursor: default;
   position: relative;
@@ -91,7 +91,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: #e6e2dc;
+  background: var(--rule);
   color: #555;
   border-radius: 10px;
 }
@@ -249,7 +249,7 @@
 }
 
 .btnGhost:hover {
-  background: #f5f3ee;
+  background: var(--rule-2);
 }
 
 /* Same dimensions as .authSubmit so primary/secondary actions sit at equal weight */
@@ -266,7 +266,7 @@
 }
 
 .btnGhostLg:hover {
-  background: #f5f3ee;
+  background: var(--rule-2);
 }
 
 .btnDanger {

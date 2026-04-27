@@ -8,9 +8,9 @@
 
 /* ─── Design Tokens ───────────────────────────────────────────────────── */
 :root {
-  /* Neutrals — cool white + slate ink */
-  --paper:        #FAFAFB;       /* page background, cool white */
-  --paper-pure:   #FFFFFF;       /* card surfaces */
+  /* Neutrals — pure white + slate ink */
+  --paper:        #FFFFFF;       /* page background, pure white */
+  --paper-pure:   #FFFFFF;       /* card surfaces, pure white */
   --ink:          #14161B;       /* near-black, slate-leaning */
   --ink-2:        #2A2D35;       /* body text */
   --ink-3:        #50545E;       /* secondary text */

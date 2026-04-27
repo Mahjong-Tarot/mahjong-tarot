@@ -14,13 +14,13 @@
     "mao  center center xu"
     "yin  chou   zi    hai";
   gap: 0.4rem;
-  background: #f0ebe1;
+  background: var(--rule-2);
   padding: 0.4rem;
   border-radius: 8px;
 }
 
 .palace {
-  background: #fffdf7;
+  background: var(--paper);
   border: 1px solid #e0d9c8;
   border-radius: 4px;
   padding: 0.5rem 0.55rem;
@@ -147,7 +147,7 @@
 }
 
 .center {
-  background: #fffdf7;
+  background: var(--paper);
   border: 1px solid #e0d9c8;
   border-radius: 4px;
   padding: 1rem;

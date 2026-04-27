@@ -6,7 +6,7 @@
   border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.06);
   transition: transform 0.15s, box-shadow 0.15s;
-  background: var(--color-surface, #f8f6f0);
+  background: var(--color-surface, var(--rule-2));
 }
 .card:hover {
   transform: translateY(-1px);
@@ -16,7 +16,7 @@
 .skeleton {
   height: 220px;
   border-radius: 14px;
-  background: linear-gradient(90deg, #f1efe8 0%, #f7f5ee 50%, #f1efe8 100%);
+  background: linear-gradient(90deg, var(--rule-2) 0%, var(--paper) 50%, var(--rule-2) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
 }
@@ -113,8 +113,8 @@
 .foot strong { color: var(--color-text); font-weight: 600; }
 .cta { color: var(--color-accent, #c44); font-weight: 500; }
 
-.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, #fdfbf6 80%); }
-.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, #fdfbf6 80%); }
-.tone_neutral     { background: var(--color-surface, #f8f6f0); }
-.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, #fdfbf6 80%); }
-.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, #fdfbf6 80%); }
+.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, var(--paper) 80%); }
+.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, var(--paper) 80%); }
+.tone_neutral     { background: var(--color-surface, var(--rule-2)); }
+.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, var(--paper) 80%); }
+.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, var(--paper) 80%); }

@@ -1,0 +1,392 @@
+[
+  {
+    "signal_payload": {
+      "date": "2026-02-17",
+      "user_sign": null,
+      "category": "general",
+      "pillars": {
+        "year": {
+          "element": "Fire",
+          "sign": "Horse"
+        },
+        "month": {
+          "element": "Metal",
+          "sign": "Tiger"
+        },
+        "day": {
+          "element": "Water",
+          "sign": "Dog"
+        }
+      },
+      "scores": {
+        "primary": 62,
+        "sexagenary_60x12": null,
+        "matrix_12x12": null,
+        "matrix_flag": ""
+      },
+      "tone": "favorable",
+      "amplified_domains": [
+        "Leisure",
+        "Mental",
+        "Social/Style",
+        "Travel"
+      ],
+      "focus_domains": [
+        "Action",
+        "Mental",
+        "Home/Family",
+        "Health",
+        "Travel",
+        "Leisure"
+      ],
+      "amplified_in_focus": [
+        "Mental",
+        "Travel",
+        "Leisure"
+      ],
+      "matrix_keywords": {},
+      "all_domain_keywords": {},
+      "house": "House of Family - anything that has to do with loyalty, support and protection and providing for one's family are favored",
+      "voice": {},
+      "match_day": null,
+      "user_sign_relations": null,
+      "western_moment": null
+    },
+    "horoscope": "Year of the Fire Horse begins today. Across the board, energy runs hot and home-centered, family before ambition. House of Family rules, so anything tethered to where you live, who you live with, and who you'd call from a hard day gets a tailwind. Most signs ride 65/35 in their favor. Dragons and Sheep, ease off the gas."
+  },
+  {
+    "signal_payload": {
+      "date": "2026-02-17",
+      "user_sign": null,
+      "category": "love",
+      "pillars": {
+        "year": {
+          "element": "Fire",
+          "sign": "Horse"
+        },
+        "month": {
+          "element": "Metal",
+          "sign": "Tiger"
+        },
+        "day": {
+          "element": "Water",
+          "sign": "Dog"
+        }
+      },
+      "scores": {
+        "primary": 62,
+        "sexagenary_60x12": null,
+        "matrix_12x12": null,
+        "matrix_flag": ""
+      },
+      "tone": "favorable",
+      "amplified_domains": [
+        "Leisure",
+        "Mental",
+        "Social/Style",
+        "Travel"
+      ],
+      "focus_domains": [
+        "Love",
+        "Friendship",
+        "Social/Style"
+      ],
+      "amplified_in_focus": [
+        "Social/Style"
+      ],
+      "matrix_keywords": {},
+      "all_domain_keywords": {},
+      "house": "House of Family - anything that has to do with loyalty, support and protection and providing for one's family are favored",
+      "voice": {},
+      "match_day": null,
+      "user_sign_relations": null,
+      "western_moment": null
+    },
+    "horoscope": "Love today is family-shaped, not romance-shaped. The pull is toward people you've known a long time. Romance gets a softer tailwind, maybe 55/45. Long-term partnerships have the wind at their back. New connections need patience. Best move tonight: make plans with someone you'd already trust to crash on your couch."
+  },
+  {
+    "signal_payload": {
+      "date": "2026-02-17",
+      "user_sign": null,
+      "category": "money",
+      "pillars": {
+        "year": {
+          "element": "Fire",
+          "sign": "Horse"
+        },
+        "month": {
+          "element": "Metal",
+          "sign": "Tiger"
+        },
+        "day": {
+          "element": "Water",
+          "sign": "Dog"
+        }
+      },
+      "scores": {
+        "primary": 62,
+        "sexagenary_60x12": null,
+        "matrix_12x12": null,
+        "matrix_flag": ""
+      },
+      "tone": "favorable",
+      "amplified_domains": [
+        "Leisure",
+        "Mental",
+        "Social/Style",
+        "Travel"
+      ],
+      "focus_domains": [
+        "Financial",
+        "Job"
+      ],
+      "amplified_in_focus": [],
+      "matrix_keywords": {},
+      "all_domain_keywords": {},
+      "house": "House of Family - anything that has to do with loyalty, support and protection and providing for one's family are favored",
+      "voice": {},
+      "match_day": null,
+      "user_sign_relations": null,
+      "western_moment": null
+    },
+    "horoscope": "Money is in caution mode today, 40/60 against bold moves. Lunar New Year energy is good for setting intent, weak for spending. Skip the big purchase. Skip the launch. Pay a bill, balance a thing, set up the boring-but-important auto-transfer you've been meaning to. Foundation work this week. Growth work next."
+  },
+  {
+    "signal_payload": {
+      "date": "2026-02-17",
+      "user_sign": "Tiger",
+      "category": "general",
+      "pillars": {
+        "year": {
+          "element": "Fire",
+          "sign": "Horse"
+        },
+        "month": {
+          "element": "Metal",
+          "sign": "Tiger"
+        },
+        "day": {
+          "element": "Water",
+          "sign": "Dog"
+        }
+      },
+      "scores": {
+        "primary": 100,
+        "sexagenary_60x12": 100,
+        "matrix_12x12": 95,
+        "matrix_flag": ""
+      },
+      "tone": "auspicious",
+      "amplified_domains": [
+        "Leisure",
+        "Mental",
+        "Social/Style",
+        "Travel"
+      ],
+      "focus_domains": [
+        "Action",
+        "Mental",
+        "Home/Family",
+        "Health",
+        "Travel",
+        "Leisure"
+      ],
+      "amplified_in_focus": [
+        "Mental",
+        "Travel",
+        "Leisure"
+      ],
+      "matrix_keywords": {
+        "Action": "Protected* from danger, controversy, & impulsiveness* \u0096 don't take on more that you can handle -",
+        "Mental": "Tired & unfulfilled from too much responsibility -",
+        "Home/Family": "Auspicious for the physical home \u0096 stable family life* -",
+        "Health": "Injury to head, spine or limbs -",
+        "Travel": "Visit family -",
+        "Leisure": "Advocacy  *"
+      },
+      "all_domain_keywords": {
+        "Action": "Protected* from danger, controversy, & impulsiveness* \u0096 don't take on more that you can handle -",
+        "Job": "promotion* - expansion* - career prospects* \u0096 has to work hard for success -  too much responsibility \u0096 help with plans from influential people* -",
+        "Financial": "Spend on friends* and family -",
+        "Friendship": "Help from friends* \u0096 provide moral support to a friend* -",
+        "Health": "Injury to head, spine or limbs -",
+        "Home/Family": "Auspicious for the physical home \u0096 stable family life* -",
+        "Leisure": "Advocacy  *",
+        "Love": "Romance takes a back seat \u0096 don't waste time on romance as true love has yet to appear \u0096 romantically uplifting** -",
+        "Mental": "Tired & unfulfilled from too much responsibility -",
+        "Social/Style": "Active -   **",
+        "Travel": "Visit family -"
+      },
+      "house": "House of Family - anything that has to do with loyalty, support and protection and providing for one's family are favored",
+      "voice": {
+        "likes": "",
+        "dislikes": "",
+        "traits": [
+          "turbulence - wild",
+          "sit tight",
+          "follow your intuition -",
+          "extemporaneous activity -",
+          "keep an open mind -",
+          "worrying - impulsive -"
+        ]
+      },
+      "match_day": null,
+      "user_sign_relations": [
+        "ben_ming_yue"
+      ],
+      "western_moment": null
+    },
+    "horoscope": "Tiger, your month is here. The wind is fully at your back, 90/10 in your favor. Spend today with people who matter. Call a sibling. Drop in on a parent. Show up for someone whose corner you've quietly been in. If a cause has been calling you lately, this is the green light. Trust your gut, it's been right all along."
+  },
+  {
+    "signal_payload": {
+      "date": "2026-02-17",
+      "user_sign": "Rat",
+      "category": "love",
+      "pillars": {
+        "year": {
+          "element": "Fire",
+          "sign": "Horse"
+        },
+        "month": {
+          "element": "Metal",
+          "sign": "Tiger"
+        },
+        "day": {
+          "element": "Water",
+          "sign": "Dog"
+        }
+      },
+      "scores": {
+        "primary": 49,
+        "sexagenary_60x12": 49,
+        "matrix_12x12": 49,
+        "matrix_flag": "???"
+      },
+      "tone": "neutral",
+      "amplified_domains": [
+        "Leisure",
+        "Mental",
+        "Social/Style",
+        "Travel"
+      ],
+      "focus_domains": [
+        "Love",
+        "Friendship",
+        "Social/Style"
+      ],
+      "amplified_in_focus": [
+        "Social/Style"
+      ],
+      "matrix_keywords": {
+        "Love": "not auspicious*- mutual respect crucial**-",
+        "Friendship": "loneliness*- fruitless*- unfortunate*-   *",
+        "Social/Style": "Bored  *"
+      },
+      "all_domain_keywords": {
+        "Action": "growth* - expansion(size, quantity* or scope)* - disaster*-",
+        "Job": "investigate possibilities* - compromise possible**-",
+        "Financial": "Uninviting*- loss*- improving*-    *",
+        "Friendship": "loneliness*- fruitless*- unfortunate*-   *",
+        "Health": "dog bite-   *",
+        "Home/Family": "house overflowing with distant relatives, friends",
+        "Leisure": "Craft project* \u0096 interior design -",
+        "Love": "not auspicious*- mutual respect crucial**-",
+        "Mental": "peaceful-   *",
+        "Social/Style": "Bored  *",
+        "Travel": "historical places, visit your childhood home or other place you lived before and liked"
+      },
+      "house": "House of Family - anything that has to do with loyalty, support and protection and providing for one's family are favored",
+      "voice": {
+        "likes": "mental activity - dynamic - restless -",
+        "dislikes": "incompetence",
+        "traits": [
+          "new beginnings",
+          "things begun have long term consequences",
+          "do preparatory work",
+          "don't rush into things",
+          "something you've always wanted to do"
+        ]
+      },
+      "match_day": null,
+      "user_sign_relations": [
+        "year_clash"
+      ],
+      "western_moment": null
+    },
+    "horoscope": "Love runs at even odds today, 50/50, but the kind that lasts is the kind that's already in your life. Skip the dating app. Call someone you've fallen out of touch with. If you're partnered, an old story, an old photo, an old recipe could shift the mood at home in your favor."
+  },
+  {
+    "signal_payload": {
+      "date": "2026-02-17",
+      "user_sign": "Dragon",
+      "category": "money",
+      "pillars": {
+        "year": {
+          "element": "Fire",
+          "sign": "Horse"
+        },
+        "month": {
+          "element": "Metal",
+          "sign": "Tiger"
+        },
+        "day": {
+          "element": "Water",
+          "sign": "Dog"
+        }
+      },
+      "scores": {
+        "primary": 14,
+        "sexagenary_60x12": 14,
+        "matrix_12x12": 9,
+        "matrix_flag": ""
+      },
+      "tone": "challenging",
+      "amplified_domains": [
+        "Leisure",
+        "Mental",
+        "Social/Style",
+        "Travel"
+      ],
+      "focus_domains": [
+        "Financial",
+        "Job"
+      ],
+      "amplified_in_focus": [],
+      "matrix_keywords": {
+        "Financial": "Worries* - careful** - don?t loan money to friends* - loss**-",
+        "Job": "Obstacles** - conflicts*-plans go awry**-deal only with trusted associates**-"
+      },
+      "all_domain_keywords": {
+        "Action": "unexpected problems**-difficult**-",
+        "Job": "Obstacles** - conflicts*-plans go awry**-deal only with trusted associates**-",
+        "Financial": "Worries* - careful** - don?t loan money to friends* - loss**-",
+        "Friendship": "keep to self* - friends seek your advice**-",
+        "Health": "vulnerable-   *",
+        "Home/Family": "quarrels-   *",
+        "Leisure": "solo-relaxing-  *",
+        "Love": "obstacles* - tears** -",
+        "Mental": "sullen* - peevish** -",
+        "Social/Style": "backyard barbecue-",
+        "Travel": "long distance favorable - change your environment-"
+      },
+      "house": "House of Family - anything that has to do with loyalty, support and protection and providing for one's family are favored",
+      "voice": {
+        "likes": "",
+        "dislikes": "",
+        "traits": [
+          "scintillating -",
+          "think big -",
+          "risk takers favored -",
+          "discovery and adventure (even danger) -"
+        ]
+      },
+      "match_day": null,
+      "user_sign_relations": [
+        "day_clash"
+      ],
+      "western_moment": null
+    },
+    "horoscope": "Money plays defense today. The numbers are 25/75 against any new commitment, so don't sign, don't subscribe, don't buy the upgrade. The day rewards patience. If a deal feels rushed, that's the day talking, not the deal. By Friday the picture is clearer. Sit on it."
+  }
+]

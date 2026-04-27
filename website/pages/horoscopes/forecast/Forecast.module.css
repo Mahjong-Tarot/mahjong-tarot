@@ -1,0 +1,80 @@
+.container { max-width: 800px; margin: 0 auto; padding: 0 var(--space-lg); }
+
+.monthNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  font-size: 0.95rem;
+}
+.monthNav a {
+  text-decoration: none;
+  color: var(--color-text);
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.monthNav a:hover { background: var(--color-surface, #f8f6f0); }
+.todayLink { font-weight: 600; }
+
+.weekheader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #888);
+  margin-bottom: 4px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.calendar > * { aspect-ratio: 1 / 1; }
+.calendar a { text-decoration: none; color: inherit; }
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: var(--color-surface, #f8f6f0);
+  border-radius: 8px;
+  padding: 6px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.calendar a:hover .cell { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.cellToday { outline: 2px solid var(--color-accent, #c44); outline-offset: -2px; }
+.cellFuture { opacity: 0.35; cursor: default; }
+
+.dayNum { font-size: 0.9rem; font-weight: 600; }
+.score { font-size: 0.7rem; color: var(--color-text-muted, #888); font-weight: 600; }
+.flags { position: absolute; top: 4px; right: 6px; display: flex; gap: 2px; font-size: 0.6rem; }
+.matchDot { color: var(--color-accent, #c44); }
+.westernDot { color: #888; }
+
+.empty { background: transparent; }
+
+.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, #f8f6f0 100%); }
+.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, #f8f6f0 100%); }
+.tone_neutral     { background: var(--color-surface, #f8f6f0); }
+.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, #f8f6f0 100%); }
+.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, #f8f6f0 100%); }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-2xl);
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #666);
+}
+.legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }

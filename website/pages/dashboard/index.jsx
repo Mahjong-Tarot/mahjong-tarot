@@ -6,12 +6,10 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
 import PurpleStarChart from '../../components/PurpleStarChart';
-import ThreeBlessings from '../../components/ThreeBlessings';
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
 import { calculatePurpleStar } from '../../lib/purpleStar';
-import { computeThreeBlessings } from '../../lib/three-blessings';
 import styles from '../../styles/Account.module.css';
 
 export default function Dashboard() {
@@ -51,13 +49,6 @@ export default function Dashboard() {
         birthday: profile.birthday,
         birthTime: profile.birth_time,
         gender: profile.gender,
-      })
-    : null;
-  const threeBlessings = pillars
-    ? computeThreeBlessings({
-        birthday: profile?.birthday,
-        birthTime: profile?.birth_time,
-        pillars,
       })
     : null;
 
@@ -101,13 +92,6 @@ export default function Dashboard() {
           </div>
         )}
 
-        {threeBlessings && (
-          <section style={{ marginTop: '2.5rem' }}>
-            <h2 className={styles.subTitle}>Your Three Blessings</h2>
-            <ThreeBlessings reading={threeBlessings} />
-          </section>
-        )}
-
         <section style={{ marginTop: '2.5rem' }}>
           <h2 className={styles.subTitle}>Quick links</h2>
           <div className={styles.cards}>
@@ -118,10 +102,6 @@ export default function Dashboard() {
             <Link href="/dashboard/inner-circle" className={styles.card}>
               <h2>Inner Circle</h2>
               <p>Wife, parents, kids, GF — keep their charts close.</p>
-            </Link>
-            <Link href="/dashboard/three-blessings" className={styles.card}>
-              <h2>Three Blessings</h2>
-              <p>Phuc, Loc, Tho — your personal pattern of fortune.</p>
             </Link>
             <Link href="/dashboard/readings" className={styles.card}>
               <h2>My Readings</h2>

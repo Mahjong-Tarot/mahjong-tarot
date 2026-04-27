@@ -211,7 +211,14 @@
 .activityItem.unlucky { background: #fbe9e7; color: #962d20; }
 .activityItem.normal  { background: var(--color-surface, #f8f6f0); color: var(--color-text-muted, #666); }
 
-.calendarLink { text-align: center; margin-top: var(--space-2xl); }
+.calendarLink {
+  text-align: center;
+  margin-top: var(--space-2xl);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
 .calendarLink a {
   font-size: 0.95rem;
   color: var(--color-accent, #c44);

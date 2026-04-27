@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
+import AlmanacToday from '../../components/AlmanacToday';
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
@@ -53,6 +54,11 @@ export default function Dashboard() {
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>My Dashboard</h1>
 
+        <section style={{ marginTop: '1.5rem' }}>
+          <h2 className={styles.subTitle}>Today</h2>
+          <AlmanacToday />
+        </section>
+
         {profileLoaded && !profile?.birthday && (
           <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
             <p style={{ margin: 0 }}>
@@ -78,6 +84,10 @@ export default function Dashboard() {
             <Link href="/dashboard/inner-circle" className={styles.card}>
               <h2>Inner Circle</h2>
               <p>Wife, parents, kids, GF — keep their charts close.</p>
+            </Link>
+            <Link href="/dashboard/almanac" className={styles.card}>
+              <h2>Almanac</h2>
+              <p>Tong Shu day-by-day guidance — what to do and what to avoid.</p>
             </Link>
             <Link href="/dashboard/readings" className={styles.card}>
               <h2>My Readings</h2>

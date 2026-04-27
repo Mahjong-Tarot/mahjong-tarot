@@ -38,8 +38,6 @@ export default function Dashboard() {
 
   if (loading || !user) return null;
 
-  const name = profile?.name || user.email?.split('@')[0] || '';
-  const greeting = name ? `, ${name}` : '';
   const pillars = profile?.pillars
     || (profile?.birthday ? calculatePillars(profile.birthday, profile.birth_time) : null);
   const elements = pillars ? tallyElements(pillars) : null;
@@ -48,16 +46,15 @@ export default function Dashboard() {
   return (
     <>
       <Head>
-        <title>Dashboard | Mahjong Tarot</title>
+        <title>My Dashboard | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
       <main className={`container ${styles.wrap}`}>
-        <h1 className={styles.title}>Welcome{greeting}</h1>
-        <p className={styles.lede}>Your Mahjong Tarot home.</p>
+        <h1 className={styles.title}>My Dashboard</h1>
 
         {profileLoaded && !profile?.birthday && (
-          <div className={styles.placeholder}>
+          <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
             <p style={{ margin: 0 }}>
               Add your birth data on your <Link href="/profile">profile</Link> to see your Four Pillars chart.
             </p>
@@ -65,34 +62,30 @@ export default function Dashboard() {
         )}
 
         {pillars && (
-          <section style={{ marginTop: '1rem' }}>
+          <section style={{ marginTop: '1.5rem' }}>
             <h2 className={styles.subTitle}>Your Four Pillars</h2>
             <BaziChart pillars={pillars} elements={elements} dominantElement={dominant} />
           </section>
         )}
 
         <section style={{ marginTop: '2.5rem' }}>
-          <h2 className={styles.subTitle}>Tools</h2>
+          <h2 className={styles.subTitle}>Quick links</h2>
           <div className={styles.cards}>
-            <Link href="/dashboard/compatibility" className={styles.card}>
-              <h2>Compatibility</h2>
-              <p>Compare any two birth charts and see a relationship report.</p>
+            <Link href="/dashboard/relationships" className={styles.card}>
+              <h2>Relationships</h2>
+              <p>Compare any two birth charts and generate a new reading.</p>
             </Link>
             <Link href="/dashboard/inner-circle" className={styles.card}>
               <h2>Inner Circle</h2>
-              <p>Wife, parents, kids, GF — keep their charts and see how you match.</p>
+              <p>Wife, parents, kids, GF — keep their charts close.</p>
             </Link>
             <Link href="/dashboard/readings" className={styles.card}>
-              <h2>Your readings</h2>
-              <p>Review past readings Bill has shared with you.</p>
-            </Link>
-            <Link href="/firepig" className={styles.card}>
-              <h2>FirePig</h2>
-              <p>Talk to Bill&apos;s AI guide.</p>
+              <h2>My Readings</h2>
+              <p>Every saved compatibility report you&apos;ve generated.</p>
             </Link>
             <Link href="/profile" className={styles.card}>
               <h2>Profile</h2>
-              <p>Manage your account and birth data.</p>
+              <p>Update your birth data and chart.</p>
             </Link>
           </div>
         </section>

@@ -96,6 +96,12 @@ blockquote {
   padding: 0 var(--outer-margin);
 }
 
+.containerNarrow {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--outer-margin);
+}
+
 section { padding: var(--space-3xl) 0; }
 
 .section-dark {

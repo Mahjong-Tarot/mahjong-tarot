@@ -4,96 +4,116 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
 import styles from './Nav.module.css';
 
+const PUBLIC_LINKS = [
+  { href: '/about',              label: 'About'    },
+  { href: '/readings',           label: 'Readings', dropdown: [{ href: '/cards', label: 'Cards' }] },
+  { href: '/the-mahjong-mirror', label: 'Book'     },
+  { href: '/blog',               label: 'Blog'     },
+  { href: '/contact',            label: 'Contact'  },
+];
+
+const MEMBER_LINKS = [
+  { href: '/dashboard',                  label: 'Dashboard',     match: (p) => p === '/dashboard' },
+  { href: '/dashboard/readings',         label: 'My Readings',   match: (p) => p.startsWith('/dashboard/readings') },
+  { href: '/profile',                    label: 'Profile',       match: (p) => p.startsWith('/profile') },
+  { href: '/dashboard/inner-circle',     label: 'Inner Circle',  match: (p) => p.startsWith('/dashboard/inner-circle') },
+  { href: '/dashboard/relationships',    label: 'Relationships', match: (p) => p.startsWith('/dashboard/relationships') || p.startsWith('/dashboard/compatibility') },
+];
+
 export default function Nav() {
   const router = useRouter();
   const { user, signOut } = useAuth();
   const [readingsOpen, setReadingsOpen] = useState(false);
 
-  const isActive = (path) =>
-    path === '/blog'
-      ? router.pathname.startsWith('/blog')
-      : path === '/readings'
-        ? router.pathname.startsWith('/readings') || router.pathname.startsWith('/cards')
-        : path === '/dashboard'
-          ? router.pathname.startsWith('/dashboard')
-          : router.pathname === path;
+  const inMemberArea = !!user && (
+    router.pathname.startsWith('/dashboard') || router.pathname.startsWith('/profile')
+  );
 
   const handleSignOut = async () => {
     await signOut();
     router.push('/');
   };
 
+  const isPublicActive = (path) =>
+    path === '/blog'
+      ? router.pathname.startsWith('/blog')
+      : path === '/readings'
+        ? router.pathname.startsWith('/readings') || router.pathname.startsWith('/cards')
+        : router.pathname === path;
+
   return (
     <nav className={styles.nav}>
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.logo}>
+        <Link href={user ? '/dashboard' : '/'} className={styles.logo}>
           Mahjong Tarot
         </Link>
 
-        <ul className={styles.links}>
-          <li>
-            <Link href="/about" className={isActive('/about') ? styles.active : ''}>
-              About
-            </Link>
-          </li>
-          <li
-            className={styles.dropdown}
-            onMouseEnter={() => setReadingsOpen(true)}
-            onMouseLeave={() => setReadingsOpen(false)}
-          >
-            <Link
-              href="/readings"
-              className={isActive('/readings') ? styles.active : ''}
-              aria-haspopup="true"
-              aria-expanded={readingsOpen}
-            >
-              Readings <span className={styles.caret} aria-hidden="true">▾</span>
-            </Link>
-            <ul className={`${styles.dropdownMenu} ${readingsOpen ? styles.dropdownOpen : ''}`}>
-              <li>
-                <Link href="/cards" className={router.pathname.startsWith('/cards') ? styles.active : ''}>
-                  Cards
+        {inMemberArea ? (
+          <ul className={styles.links}>
+            {MEMBER_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={l.match(router.pathname) ? styles.active : ''}>
+                  {l.label}
                 </Link>
               </li>
-            </ul>
-          </li>
-          <li>
-            <Link href="/the-mahjong-mirror" className={isActive('/the-mahjong-mirror') ? styles.active : ''}>
-              Book
-            </Link>
-          </li>
-          <li>
-            <Link href="/blog" className={isActive('/blog') ? styles.active : ''}>
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className={isActive('/contact') ? styles.active : ''}>
-              Contact
-            </Link>
-          </li>
-          {user ? (
-            <>
+            ))}
+            <li>
+              <Link href="/readings#book" className={styles.cta}>
+                Get a Reading
+              </Link>
+            </li>
+            <li>
+              <button type="button" onClick={handleSignOut} className={styles.signOutLink}>
+                Sign out
+              </button>
+            </li>
+          </ul>
+        ) : (
+          <ul className={styles.links}>
+            {PUBLIC_LINKS.map((l) =>
+              l.dropdown ? (
+                <li
+                  key={l.href}
+                  className={styles.dropdown}
+                  onMouseEnter={() => setReadingsOpen(true)}
+                  onMouseLeave={() => setReadingsOpen(false)}
+                >
+                  <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
+                    {l.label} <span className={styles.caret} aria-hidden="true">▾</span>
+                  </Link>
+                  <ul className={`${styles.dropdownMenu} ${readingsOpen ? styles.dropdownOpen : ''}`}>
+                    {l.dropdown.map((d) => (
+                      <li key={d.href}>
+                        <Link href={d.href} className={router.pathname.startsWith(d.href) ? styles.active : ''}>
+                          {d.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <li key={l.href}>
+                  <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
+                    {l.label}
+                  </Link>
+                </li>
+              ),
+            )}
+            {user ? (
               <li>
-                <Link href="/dashboard" className={isActive('/dashboard') ? styles.active : ''}>
+                <Link href="/dashboard" className={styles.signInBtn}>
                   Dashboard
                 </Link>
               </li>
+            ) : (
               <li>
-                <button type="button" onClick={handleSignOut} className={styles.signInBtn}>
-                  Sign out
+                <button type="button" onClick={() => router.push('/sign-in')} className={styles.signInBtn}>
+                  Sign in
                 </button>
               </li>
-            </>
-          ) : (
-            <li>
-              <button type="button" onClick={() => router.push('/sign-in')} className={styles.signInBtn}>
-                Sign in
-              </button>
-            </li>
-          )}
-        </ul>
-
+            )}
+          </ul>
+        )}
       </div>
     </nav>
   );

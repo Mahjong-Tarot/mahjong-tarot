@@ -100,12 +100,12 @@ export default function CompatibilityPage() {
   return (
     <>
       <Head>
-        <title>Compatibility | Mahjong Tarot</title>
+        <title>Relationships | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
       <main className={`container ${styles.wrap}`}>
-        <h1 className={styles.title}>New compatibility reading</h1>
+        <h1 className={styles.title}>Relationships</h1>
         <p className={styles.lede}>
           Enter two people. We&apos;ll save the report to your dashboard with its
           own page so you can come back to it.

@@ -49,7 +49,7 @@ export default function ReadingsList() {
             <h1 className={styles.title}>Your readings</h1>
             <p className={styles.lede}>Compatibility reports you&apos;ve generated. Click any to revisit.</p>
           </div>
-          <Link href="/dashboard/compatibility" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
+          <Link href="/dashboard/relationships" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
             + New reading
           </Link>
         </div>
@@ -57,7 +57,7 @@ export default function ReadingsList() {
         {loaded && readings.length === 0 && (
           <div className={styles.placeholder} style={{ marginTop: '1.5rem' }}>
             <p style={{ margin: 0 }}>
-              No readings yet. <Link href="/dashboard/compatibility">Generate your first one</Link>.
+              No readings yet. <Link href="/dashboard/relationships">Generate your first one</Link>.
             </p>
           </div>
         )}

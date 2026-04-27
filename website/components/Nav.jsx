@@ -5,24 +5,37 @@ import { useAuth } from '../lib/auth';
 import styles from './Nav.module.css';
 
 const PUBLIC_LINKS = [
-  { href: '/about',              label: 'About'    },
-  { href: '/horoscopes',         label: 'Horoscopes', dropdown: [
-    { href: '/year-of-the-fire-horse', label: 'Year of the Fire Horse 2026' },
-    { href: '/horoscopes/forecast',    label: 'Monthly Forecast' },
-  ] },
-  { href: '/readings',           label: 'Readings', dropdown: [{ href: '/cards', label: 'Cards' }] },
-  { href: '/the-mahjong-mirror', label: 'Book'     },
-  { href: '/blog',               label: 'Blog'     },
-  { href: '/contact',            label: 'Contact'  },
+  { href: '/about',              label: 'About'   },
+  { href: '/the-mahjong-mirror', label: 'Book'    },
+  { href: '/blog',               label: 'Blog'    },
+  { href: '/contact',            label: 'Contact' },
+];
+
+const MEMBER_READINGS = [
+  { href: '/dashboard/almanac',                 label: 'Daily Almanac'   },
+  { href: '/dashboard/horoscope',               label: 'Daily Horoscope' },
+  { href: '/dashboard/readings/purple-star',    label: 'Purple Star'     },
+  { href: '/dashboard/three-blessings',         label: 'Three Blessings' },
+  { href: '/dashboard/relationships',           label: 'Compatibility'   },
 ];
 
 const MEMBER_LINKS = [
-  { href: '/dashboard',                  label: 'Dashboard',     match: (p) => p === '/dashboard' },
-  { href: '/dashboard/readings',         label: 'My Readings',   match: (p) => p.startsWith('/dashboard/readings') },
-  { href: '/dashboard/inner-circle',     label: 'Inner Circle',  match: (p) => p.startsWith('/dashboard/inner-circle') },
-  { href: '/dashboard/relationships',    label: 'Relationships', match: (p) => p.startsWith('/dashboard/relationships') || p.startsWith('/dashboard/compatibility') },
-  { href: '/profile',                    label: 'Profile',       match: (p) => p.startsWith('/profile'), dropdown: [
-    { action: 'signOut',                 label: 'Sign out' },
+  { href: '/dashboard',              label: 'Dashboard',    match: (p) => p === '/dashboard' },
+  {
+    href: '/dashboard/readings',
+    label: 'Readings',
+    match: (p) =>
+      p.startsWith('/dashboard/readings') ||
+      p.startsWith('/dashboard/almanac') ||
+      p.startsWith('/dashboard/horoscope') ||
+      p.startsWith('/dashboard/three-blessings') ||
+      p.startsWith('/dashboard/relationships') ||
+      p.startsWith('/dashboard/compatibility'),
+    dropdown: MEMBER_READINGS,
+  },
+  { href: '/dashboard/inner-circle', label: 'Inner Circle', match: (p) => p.startsWith('/dashboard/inner-circle') },
+  { href: '/profile',                label: 'Profile',      match: (p) => p.startsWith('/profile'), dropdown: [
+    { action: 'signOut', label: 'Sign out' },
   ] },
 ];
 
@@ -31,9 +44,7 @@ export default function Nav() {
   const { user, signOut } = useAuth();
   const [openDropdown, setOpenDropdown] = useState(null);
 
-  const inMemberArea = !!user && (
-    router.pathname.startsWith('/dashboard') || router.pathname.startsWith('/profile')
-  );
+  const inMemberArea = !!user;
 
   const handleSignOut = async () => {
     await signOut();
@@ -43,11 +54,7 @@ export default function Nav() {
   const isPublicActive = (path) =>
     path === '/blog'
       ? router.pathname.startsWith('/blog')
-      : path === '/horoscopes'
-        ? router.pathname.startsWith('/horoscopes') || router.pathname.startsWith('/year-of-the-fire-horse')
-        : path === '/readings'
-          ? router.pathname.startsWith('/readings') || router.pathname.startsWith('/cards')
-          : router.pathname === path;
+      : router.pathname === path;
 
   return (
     <nav className={styles.nav}>
@@ -95,11 +102,6 @@ export default function Nav() {
                 </li>
               ),
             )}
-            <li>
-              <Link href="/readings#book" className={styles.cta}>
-                Book A Reading
-              </Link>
-            </li>
           </ul>
         ) : (
           <ul className={styles.links}>
@@ -132,19 +134,11 @@ export default function Nav() {
                 </li>
               ),
             )}
-            {user ? (
-              <li>
-                <Link href="/dashboard" className={styles.signInBtn}>
-                  Dashboard
-                </Link>
-              </li>
-            ) : (
-              <li>
-                <button type="button" onClick={() => router.push('/sign-in')} className={styles.signInBtn}>
-                  Sign in
-                </button>
-              </li>
-            )}
+            <li>
+              <button type="button" onClick={() => router.push('/sign-in')} className={styles.signInBtn}>
+                Sign in
+              </button>
+            </li>
           </ul>
         )}
       </div>

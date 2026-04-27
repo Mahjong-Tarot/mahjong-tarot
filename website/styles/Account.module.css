@@ -156,3 +156,146 @@
 .authToggle:hover {
   color: #000;
 }
+
+.authSuccess {
+  color: #2c8a4a;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.subTitle {
+  margin: 0 0 1rem 0;
+  font-size: 1.125rem;
+}
+
+.muted {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .profileGrid { grid-template-columns: 1fr; }
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profileChart {
+  min-width: 0;
+}
+
+.profileActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.btnGhost {
+  background: none;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.btnGhost:hover {
+  background: #f5f3ee;
+}
+
+.btnDanger {
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.btnDanger:hover {
+  background: #962d20;
+}
+
+.compatGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .compatGrid { grid-template-columns: 1fr; }
+}
+
+.compatCard {
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  padding: 1rem;
+  background: white;
+}
+
+.compatRating {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.compatRatingNum {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+.compatRatingLabel {
+  color: #555;
+}
+
+.compatNarrative {
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.icMember {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  background: white;
+}
+
+.icMember:hover {
+  border-color: #888;
+}
+
+.icMemberInfo h3 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1.05rem;
+}
+
+.icMemberInfo span {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.icActions {
+  display: flex;
+  gap: 0.5rem;
+}

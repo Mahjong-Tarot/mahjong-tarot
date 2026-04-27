@@ -1,0 +1,94 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pillar {
+  padding: 1rem;
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.position {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin-bottom: 0.25rem;
+}
+
+.han {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  line-height: 1;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.muted {
+  color: #888;
+}
+
+.empty {
+  font-size: 1.5rem;
+  color: #aaa;
+  padding: 0.5rem 0;
+}
+
+.note {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.elementBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #faf8f4;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.elementCell {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dominant {
+  margin-left: auto;
+  color: #555;
+}

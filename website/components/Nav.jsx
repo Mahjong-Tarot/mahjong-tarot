@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from '@clerk/nextjs';
 import styles from './Nav.module.css';
 
 export default function Nav() {
@@ -64,9 +64,14 @@ export default function Nav() {
           </SignedIn>
           <SignedOut>
             <li>
-              <Link href="/sign-in" className={isActive('/sign-in') ? styles.active : ''}>
-                Sign in
-              </Link>
+              <SignInButton mode="modal">
+                <button type="button" className={styles.signInBtn}>Sign in</button>
+              </SignInButton>
+            </li>
+            <li>
+              <SignUpButton mode="modal">
+                <button type="button" className={styles.signUpBtn}>Sign up</button>
+              </SignUpButton>
             </li>
           </SignedOut>
         </ul>

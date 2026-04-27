@@ -65,6 +65,39 @@
   background-color: var(--celestial-gold);
 }
 
+.signInBtn,
+.signUpBtn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.signInBtn {
+  color: var(--midnight-indigo);
+  background: transparent;
+  border: 1px solid var(--midnight-indigo);
+}
+.signInBtn:hover {
+  background: var(--midnight-indigo);
+  color: white;
+}
+
+.signUpBtn {
+  color: white;
+  background: var(--celestial-gold);
+  border: 1px solid var(--celestial-gold);
+}
+.signUpBtn:hover {
+  background: var(--midnight-indigo);
+  border-color: var(--midnight-indigo);
+}
+
 @media (max-width: 768px) {
   .nav { height: 60px; }
   .links { display: none; }

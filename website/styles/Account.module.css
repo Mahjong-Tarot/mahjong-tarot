@@ -61,6 +61,41 @@
   color: #555;
 }
 
+.cardDisabled {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid #e6e2dc;
+  border-radius: 8px;
+  background: #faf8f3;
+  color: #7a7670;
+  cursor: default;
+  position: relative;
+}
+
+.cardDisabled h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: #7a7670;
+}
+
+.cardDisabled p {
+  margin: 0;
+  color: #7a7670;
+}
+
+.comingSoonBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #e6e2dc;
+  color: #555;
+  border-radius: 10px;
+}
+
 .authCard {
   width: 100%;
   max-width: 400px;
@@ -214,6 +249,23 @@
 }
 
 .btnGhost:hover {
+  background: #f5f3ee;
+}
+
+/* Same dimensions as .authSubmit so primary/secondary actions sit at equal weight */
+.btnGhostLg {
+  background: none;
+  color: #1a1a2e;
+  border: 1px solid #1a1a2e;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.btnGhostLg:hover {
   background: #f5f3ee;
 }
 

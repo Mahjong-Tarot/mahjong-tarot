@@ -1,0 +1,92 @@
+{
+  "Jia": {
+    "archetype": "Yang Wood Day Master in a Fire Horse Year",
+    "ten_gods": "Output (食神)",
+    "headline": "You fuel the year. Spend yourself wisely.",
+    "extended": "Yang Wood Day Masters meet the Fire Horse year as Output (食神) — Wood produces fire, same polarity. The year's energy gives you a creative outlet and a sense of generosity that radiates outward. Most Yang Wood DMs will feel productive and expressive this year, but the cost is real: you're spending yourself to feed the year's intensity. Pace matters. The Yang Wood DMs who do best treat 2026 as a year to ship work and share talents, not to accumulate quietly.",
+    "career": "A year for visible creative output. Lead a project, build something, present, perform. Don't worry about politics — the work itself will get you noticed. The risk is exhaustion from saying yes to too many things.",
+    "relationships": "You'll be generous and engaged. The risk is over-giving and resenting it later. Keep your own needs visible, not heroic.",
+    "advice": "Spend yourself on something that matters. Don't dribble it away on small things."
+  },
+  "Yi": {
+    "archetype": "Yin Wood Day Master in a Fire Horse Year",
+    "ten_gods": "Hurt Officer (伤官)",
+    "headline": "Your gifts will be seen. Your authority issues will too.",
+    "extended": "Yin Wood Day Masters meet the Fire Horse year as Hurt Officer (伤官) — Wood produces fire, opposite polarity. Talented, brilliant, and rebellious. Your gifts will be visible this year, but you'll buck against authority and structure in ways that cost you. Hurt Officer years produce both your most creative work and your most self-inflicted setbacks. The Yin Wood DMs who do well learn to express their gifts within structures rather than against them.",
+    "career": "Big year for visible creative work, but watch your relationship to authority. Disagreements with bosses can spiral. Pick your battles — most don't need to be fought.",
+    "relationships": "You'll attract attention and find it intoxicating. Ground your sense of self in real relationships, not just in being seen.",
+    "advice": "Channel rebellion into the work, not into the people who can help you."
+  },
+  "Bing": {
+    "archetype": "Yang Fire Day Master in a Fire Horse Year",
+    "ten_gods": "Friend (比肩)",
+    "headline": "The year mirrors you. Be careful what you compete for.",
+    "extended": "Yang Fire Day Masters in a Yang Fire year is the rare Friend (比肩) configuration — same element, same polarity. The year mirrors you exactly, which is both intoxicating and dangerous. Most Yang Fire DMs will feel unusually energized and confident — but you'll also encounter peers who match your intensity, leading to competition and conflict. Friend years produce big wins and big collisions. The Yang Fire DMs who navigate this well pick their competitive arenas carefully and avoid spreading energy across too many fronts.",
+    "career": "Major career energy. You'll be magnetic and visible. Watch for confrontations with peers — pick which battles are worth winning, and which to walk away from. Energy spent on rivalries doesn't compound.",
+    "relationships": "You'll be intense, even by your standards. Make sure your partner sees the warmth alongside the heat.",
+    "advice": "The year is a mirror. What you see in others is partly you."
+  },
+  "Ding": {
+    "archetype": "Yin Fire Day Master in a Fire Horse Year",
+    "ten_gods": "Rob Wealth (劫财)",
+    "headline": "Generosity has a price this year. Set boundaries early.",
+    "extended": "Yin Fire Day Masters meet the Fire Horse year as Rob Wealth (劫财) — same element, opposite polarity. The year drains your resources to feed peers and family in ways that often feel unfair. Most Yin Fire DMs will end the year having given more than they received. Rob Wealth years can be productive — generosity has long-term returns — but they require active financial discipline. Loose money habits get punished hard.",
+    "career": "Watch for partnerships and shared projects where your contribution exceeds your share. Negotiate clearly upfront. The year rewards explicit agreements, not implicit goodwill.",
+    "relationships": "You'll feel pulled to support others — friends, family, partners — at your own expense. Generosity is good; martyrdom is not.",
+    "advice": "Set financial and energetic boundaries early. They will be tested all year."
+  },
+  "Wu": {
+    "archetype": "Yang Earth Day Master in a Fire Horse Year",
+    "ten_gods": "Indirect Resource (偏印)",
+    "headline": "The year teaches you. The lessons aren't gentle.",
+    "extended": "Yang Earth Day Masters meet the Fire Horse year as Indirect Resource (偏印) — fire produces earth, same polarity. The year nourishes you, but through unconventional channels. Don't expect direct support; expect to learn through circumstances that don't look like classic 'good luck.' Yang Earth DMs in this year often experience a year of accelerated learning — sometimes through difficulty. The DMs who do well stay curious instead of resentful.",
+    "career": "A learning year. Accept stretch projects even when uncomfortable. The growth pays back over decades, not weeks.",
+    "relationships": "Unusual depth becomes available. Not romantic in the classic sense — more about discovering who really shows up for you when conditions are unstable.",
+    "advice": "Lean into the uncomfortable lessons. They are this year's gift."
+  },
+  "Ji": {
+    "archetype": "Yin Earth Day Master in a Fire Horse Year",
+    "ten_gods": "Direct Resource (正印)",
+    "headline": "The strongest possible alignment. Receive, then act.",
+    "extended": "Yin Earth Day Masters get the strongest possible alignment with a Fire Horse year — Direct Resource (正印). Fire produces earth, opposite polarity, full harmony. Most Yin Earth DMs will experience 2026 as a year of recognition, protection, and learning from teachers and mentors. Wealth, wisdom, and stability all flow toward you. This is the single best DM-year fit of all ten. The watch-out is passivity: Direct Resource years can make you complacent. The DMs who do best receive AND act.",
+    "career": "Recognition coming. Promotions, awards, mentor relationships — accept what's offered. Don't dilute the gift by chasing other things at the same time.",
+    "relationships": "Stable, supportive relationships deepen. Singles often meet partners who match their nature rather than test it.",
+    "advice": "Receive what's being offered. Then build on it."
+  },
+  "Geng": {
+    "archetype": "Yang Metal Day Master in a Fire Horse Year",
+    "ten_gods": "Seven Killings (七杀)",
+    "headline": "The forge year. The fire is the point, not the threat.",
+    "extended": "Yang Metal Day Masters get the hardest possible alignment with a Fire Horse year — Seven Killings (七杀). Fire melts metal, same polarity, no mercy. Most Yang Metal DMs will face real career pressure, conflict, or a year-defining challenge. Seven Killings is the most dangerous of the ten gods, but it's also the source of the strongest growth — Yang Metal DMs who survive a Seven Killings year often emerge fundamentally stronger. The DMs who do best treat 2026 as a forge, not as an attack.",
+    "career": "Pressure year. Don't avoid the conflict — engage it directly. The Yang Metal DMs who try to dodge end up in worse situations than the ones who confront. The forge tempers what survives.",
+    "relationships": "Tension will be sharper. Treat conflict in relationships as information, not as the end of the relationship. Most Yang Metal DMs misread Seven Killings energy as 'this person is wrong for me' when it's actually 'this is where my character is being tested.'",
+    "advice": "What doesn't kill you doesn't kill you. Step into the fire."
+  },
+  "Xin": {
+    "archetype": "Yin Metal Day Master in a Fire Horse Year",
+    "ten_gods": "Direct Officer (正官)",
+    "headline": "Pressure becomes promotion if you don't fight the structure.",
+    "extended": "Yin Metal Day Masters meet the Fire Horse year as Direct Officer (正官) — fire destroys metal, opposite polarity, productive friction. Most Yin Metal DMs will experience structured pressure that turns into career advancement. You'll feel managed, judged, evaluated — and the ones who accept the structure rather than fighting it come out ahead. Direct Officer is the 'productive' version of being controlled by the year.",
+    "career": "Career structure becomes opportunity. Promotions through formal channels, increased responsibility. Don't fight the bureaucracy; use it. The reviews and evaluations this year are stepping stones.",
+    "relationships": "You'll be sought out for steadiness and reliability. Lean into being the rock — it's your value this year.",
+    "advice": "Accept the role you're being placed in. Then exceed it."
+  },
+  "Ren": {
+    "archetype": "Yang Water Day Master in a Fire Horse Year",
+    "ten_gods": "Indirect Wealth (偏财)",
+    "headline": "Push against the year and gain from the friction.",
+    "extended": "Yang Water Day Masters meet the Fire Horse year as Indirect Wealth (偏财) — water destroys fire, same polarity. You push against the year and gain from the friction. Most Yang Water DMs will see opportunistic income and speculative wins this year, but the gains require hustle, not waiting. Indirect Wealth rewards entrepreneurs, traders, and people who move fast on opportunities. Salaried steadiness is less rewarded.",
+    "career": "Side projects and entrepreneurial moves outperform stable career advancement. Bet on yourself. The year rewards independent action over institutional progress.",
+    "relationships": "Energetic, magnetic, opportunistic — but ground your relationships in something deeper than the year's heat.",
+    "advice": "Move first. Most opportunities won't wait."
+  },
+  "Gui": {
+    "archetype": "Yin Water Day Master in a Fire Horse Year",
+    "ten_gods": "Direct Wealth (正财)",
+    "headline": "Discipline pays. Stay in the work.",
+    "extended": "Yin Water Day Masters meet the Fire Horse year as Direct Wealth (正财) — water destroys fire, opposite polarity, classical financial alignment. Most Yin Water DMs will see steady, disciplined income gains in 2026. This is the 'wealth from work' configuration — your effort directly converts to money. Yin Water DMs in salaried roles, professional services, or steady businesses do particularly well.",
+    "career": "Steady advancement. Bonuses, raises, recognition tied to your direct effort. Stay disciplined and the rewards arrive on a predictable schedule.",
+    "relationships": "Stable financial flow makes you attractive partner material. Singles meet partners interested in long-term building, not flash.",
+    "advice": "Discipline pays. Stay in the work."
+  }
+}

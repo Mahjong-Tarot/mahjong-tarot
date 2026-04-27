@@ -6,11 +6,32 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
 import PurpleStarChart from '../../components/PurpleStarChart';
+import AlmanacToday from '../../components/AlmanacToday';
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
 import { calculatePurpleStar } from '../../lib/purpleStar';
-import styles from '../../styles/Account.module.css';
+import accountStyles from '../../styles/Account.module.css';
+import styles from '../../styles/Dashboard.module.css';
+
+function ratingColor(rating) {
+  if (rating == null) return '#b0b0b0';
+  if (rating >= 80) return '#2c8a4a';
+  if (rating >= 70) return '#3a7bb8';
+  if (rating >= 60) return '#b88c4f';
+  if (rating >= 50) return '#cc7a3a';
+  return '#c0392b';
+}
+
+function daysUntilBirthday(birthday) {
+  if (!birthday) return null;
+  const [, mo, d] = birthday.split('-').map(Number);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  let next = new Date(today.getFullYear(), mo - 1, d);
+  if (next < today) next = new Date(today.getFullYear() + 1, mo - 1, d);
+  return Math.round((next - today) / (1000 * 60 * 60 * 24));
+}
 
 export default function Dashboard() {
   const router = useRouter();
@@ -29,11 +50,11 @@ export default function Dashboard() {
     if (!user || !supabase) return;
     let cancelled = false;
     (async () => {
-      const { data } = await supabase
-        .from('profiles')
-        .select('name, birthday, birth_time, gender, pillars')
-        .eq('user_id', user.id)
-        .maybeSingle();
+      const [p, m, r] = await Promise.all([
+        supabase.from('profiles').select('name, birthday, birth_time, gender, pillars').eq('user_id', user.id).maybeSingle(),
+        supabase.from('inner_circle').select('id, name, relationship, birthday, birth_time, gender').eq('user_id', user.id),
+        supabase.from('readings').select('id, slug, person1_name, person2_name, rating, created_at').eq('user_id', user.id).order('created_at', { ascending: false }).limit(3),
+      ]);
       if (cancelled) return;
       setProfile(p.data);
       setProfileLoaded(true);
@@ -70,10 +91,19 @@ export default function Dashboard() {
 
   if (loading || !user) return null;
 
-  const pillars = profile?.pillars
-    || (profile?.birthday ? calculatePillars(profile.birthday, profile.birth_time) : null);
-  const elements = pillars ? tallyElements(pillars) : null;
-  const dominant = elements ? dominantElement(elements) : null;
+  const today = data?.today;
+  const todayLabel = new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+  const upcomingBirthdays = members
+    .filter((m) => m.birthday)
+    .map((m) => ({ ...m, daysUntil: daysUntilBirthday(m.birthday) }))
+    .sort((a, b) => a.daysUntil - b.daysUntil)
+    .slice(0, 3);
+
+  const userPillars = profile?.pillars || data?.userPillars || (profile?.birthday ? calculatePillars(profile.birthday, profile.birth_time) : null);
+  const userElements = userPillars ? tallyElements(userPillars) : null;
+  const userDominant = userElements ? dominantElement(userElements) : null;
+
   const purpleStar = profile?.birthday && profile?.birth_time
     ? calculatePurpleStar({
         birthday: profile.birthday,
@@ -92,20 +122,15 @@ export default function Dashboard() {
       <main className={`container ${accountStyles.wrap}`}>
         <h1 className={accountStyles.title}>My Dashboard</h1>
 
-        <section style={{ marginTop: '1.5rem' }}>
-          <h2 className={styles.subTitle}>Today</h2>
-          <AlmanacToday />
-        </section>
-
         {profileLoaded && !profile?.birthday && (
           <div className={accountStyles.placeholder} style={{ marginTop: '1rem' }}>
             <p style={{ margin: 0 }}>
-              Add your birth data on your <Link href="/profile">profile</Link> to unlock your daily energy and chart.
+              Add your birth data on your <Link href="/profile">profile</Link> to unlock your personalized chart, daily energy, and forecast.
             </p>
           </div>
         )}
 
-        {/* Today's Energy */}
+        {/* Today's Energy hero */}
         {today && (
           <section className={styles.todayHero}>
             <div className={styles.todayDate}>
@@ -124,47 +149,166 @@ export default function Dashboard() {
               </div>
             ) : (
               <div className={styles.todayEnergy}>
-                <p className={accountStyles.muted}>Add a birthday to your profile to see today&apos;s energy reading.</p>
+                <p className={accountStyles.muted}>Add a birthday on your profile to see today&apos;s personalized energy.</p>
               </div>
             )}
           </section>
         )}
 
+        {/* Tong Shu Almanac */}
+        <section className={styles.section}>
+          <h2 className={accountStyles.subTitle}>Today in the Almanac</h2>
+          <AlmanacToday />
+        </section>
+
+        {/* Two cards: Fire Horse + Birthdays */}
+        {(data?.fireHorseForecast || profileLoaded) && (
+          <section className={styles.twoCol}>
+            <div className={styles.card}>
+              <h3 className={styles.cardTitle}>Year of the Fire Horse</h3>
+              <p className={styles.cardSubtitle}>Your year ahead</p>
+              {data?.fireHorseForecast ? (
+                <>
+                  <p className={styles.bigRating}>
+                    {Math.round(data.fireHorseForecast.rating)}<span>%</span>
+                  </p>
+                  <p className={styles.cardBody}>
+                    {(data.fireHorseForecast.narrative || '').slice(0, 240)}
+                    {(data.fireHorseForecast.narrative || '').length > 240 ? '…' : ''}
+                  </p>
+                  <Link href="/year-of-the-fire-horse" className={styles.cardLink}>
+                    Read the full year ahead →
+                  </Link>
+                </>
+              ) : (
+                <p className={accountStyles.muted}>Add your birthday on your profile to see your Fire Horse forecast.</p>
+              )}
+            </div>
+
+            <div className={styles.card}>
+              <h3 className={styles.cardTitle}>Upcoming birthdays</h3>
+              <p className={styles.cardSubtitle}>From your inner circle</p>
+              {upcomingBirthdays.length > 0 ? (
+                <ul className={styles.bdayList}>
+                  {upcomingBirthdays.map((m) => (
+                    <li key={m.id}>
+                      <Link href={`/dashboard/inner-circle/${m.id}`}>
+                        <strong>{m.name}</strong>
+                        <span className={styles.bdayMeta}>· {m.relationship}</span>
+                        <span className={styles.bdayDays}>
+                          {m.daysUntil === 0 ? 'today' : m.daysUntil === 1 ? 'tomorrow' : `in ${m.daysUntil} days`}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className={accountStyles.muted}>
+                  <Link href="/dashboard/inner-circle/new">Add to your Inner Circle</Link> to see upcoming birthdays.
+                </p>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Inner Circle compatibility grid */}
+        {data?.memberRatings?.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={accountStyles.subTitle}>Your inner circle · at a glance</h2>
+            <ul className={styles.gridList}>
+              {data.memberRatings.map((m) => (
+                <li key={m.id}>
+                  <Link href={`/dashboard/inner-circle/${m.id}`}>
+                    <span>
+                      <span className={styles.gridName}>
+                        {m.name}
+                        <small>· {m.relationship}{m.sign ? ` · ${m.sign}` : ''}</small>
+                      </span>
+                    </span>
+                    {m.rating != null ? (
+                      <span className={styles.gridRating} style={{ background: ratingColor(m.rating) }}>
+                        {Math.round(m.rating)}%
+                      </span>
+                    ) : (
+                      <span className={accountStyles.muted}>—</span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Your Four Pillars */}
+        {userPillars && (
+          <section className={styles.section}>
+            <h2 className={accountStyles.subTitle}>Your Four Pillars</h2>
+            <BaziChart pillars={userPillars} elements={userElements} dominantElement={userDominant} />
+          </section>
+        )}
+
+        {/* Purple Star Chart */}
         {purpleStar && (
-          <section style={{ marginTop: '2.5rem' }}>
-            <h2 className={styles.subTitle}>Your Purple Star Chart</h2>
+          <section className={styles.section}>
+            <h2 className={accountStyles.subTitle}>Your Purple Star Chart</h2>
             <PurpleStarChart chart={purpleStar} name={profile?.name} />
           </section>
         )}
 
         {profileLoaded && profile?.birthday && !profile?.birth_time && (
-          <div className={styles.placeholder} style={{ marginTop: '1.5rem' }}>
+          <div className={accountStyles.placeholder} style={{ marginTop: '1.5rem' }}>
             <p style={{ margin: 0 }}>
               Add your birth time on your <Link href="/profile">profile</Link> to see your Purple Star chart.
             </p>
           </div>
         )}
 
-        <section style={{ marginTop: '2.5rem' }}>
-          <h2 className={styles.subTitle}>Quick links</h2>
-          <div className={styles.cards}>
-            <Link href="/dashboard/relationships" className={styles.card}>
+        {/* Recent readings */}
+        {readings.length > 0 && (
+          <section className={styles.section}>
+            <h2 className={accountStyles.subTitle}>Recent readings</h2>
+            <ul className={styles.recentList}>
+              {readings.map((r) => (
+                <li key={r.id}>
+                  <Link href={`/dashboard/readings/${r.slug}`}>
+                    <strong>{r.person1_name || 'You'} × {r.person2_name || 'Partner'}</strong>
+                    <span className={styles.recentDate}>
+                      {new Date(r.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                    </span>
+                    {r.rating != null && (
+                      <span className={styles.recentRating}>{Math.round(r.rating)}%</span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p style={{ marginTop: '1rem' }}>
+              <Link href="/dashboard/readings" className={styles.cardLink}>View all readings →</Link>
+            </p>
+          </section>
+        )}
+
+        {/* Quick links */}
+        <section className={styles.section}>
+          <h2 className={accountStyles.subTitle}>Quick links</h2>
+          <div className={accountStyles.cards}>
+            <Link href="/dashboard/relationships" className={accountStyles.card}>
               <h2>Relationships</h2>
               <p>Compare any two birth charts and generate a new reading.</p>
             </Link>
-            <Link href="/dashboard/inner-circle" className={styles.card}>
+            <Link href="/dashboard/inner-circle" className={accountStyles.card}>
               <h2>Inner Circle</h2>
-              <p>Wife, parents, kids, GF — keep their charts close.</p>
+              <p>Wife, parents, kids — keep their charts close.</p>
             </Link>
-            <Link href="/dashboard/almanac" className={styles.card}>
+            <Link href="/dashboard/almanac" className={accountStyles.card}>
               <h2>Almanac</h2>
               <p>Tong Shu day-by-day guidance — what to do and what to avoid.</p>
             </Link>
-            <Link href="/dashboard/readings" className={styles.card}>
+            <Link href="/dashboard/readings" className={accountStyles.card}>
               <h2>My Readings</h2>
-              <p>Every saved compatibility report you&apos;ve generated.</p>
+              <p>Every saved compatibility report.</p>
             </Link>
-            <Link href="/profile" className={styles.card}>
+            <Link href="/profile" className={accountStyles.card}>
               <h2>Profile</h2>
               <p>Update your birth data and chart.</p>
             </Link>

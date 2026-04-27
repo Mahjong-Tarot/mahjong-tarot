@@ -1,0 +1,120 @@
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: var(--space-lg) var(--space-xl);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.15s, box-shadow 0.15s;
+  background: var(--color-surface, #f8f6f0);
+}
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.skeleton {
+  height: 220px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #f1efe8 0%, #f7f5ee 50%, #f1efe8 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+.dateLine { font-weight: 600; font-size: 1rem; }
+.pillarLine {
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #666);
+  margin-top: 2px;
+}
+.chinese { color: var(--color-text); margin-left: 2px; }
+.holiday {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--color-text-muted, #777);
+}
+.scoreBlock { text-align: right; }
+.scoreNumber {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.scoreNumber span { font-size: 0.85rem; color: var(--color-text-muted, #888); margin-left: 2px; }
+.toneLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #777);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.gloss {
+  margin: var(--space-sm) 0 var(--space-md);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.stripsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+.strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.stripLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #888);
+  font-weight: 600;
+  min-width: 50px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip {
+  font-size: 0.78rem;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.5);
+}
+.chipLucky   { background: #e8f5e8; color: #1e6334; }
+.chipUnlucky { background: #fbe9e7; color: #962d20; }
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #666);
+}
+.foot strong { color: var(--color-text); font-weight: 600; }
+.cta { color: var(--color-accent, #c44); font-weight: 500; }
+
+.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, #fdfbf6 80%); }
+.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, #fdfbf6 80%); }
+.tone_neutral     { background: var(--color-surface, #f8f6f0); }
+.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, #fdfbf6 80%); }
+.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, #fdfbf6 80%); }

@@ -9,7 +9,7 @@
   gap: 2rem;
   align-items: center;
   padding: 1.5rem;
-  border: 1px solid #e5e2dc;
+  border: 1px solid var(--rule);
   border-radius: 12px;
   background: linear-gradient(180deg, #ffffff 0%, var(--paper-pure) 100%);
 }
@@ -31,10 +31,10 @@
 }
 
 .dialNum {
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   font-size: 36px;
   font-weight: 700;
-  fill: #1a1a2e;
+  fill: var(--ink);
 }
 
 .dialPct {
@@ -57,7 +57,7 @@
 
 .matchTitle {
   margin: 0 0 0.25rem 0;
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   font-size: 1.75rem;
 }
 
@@ -108,14 +108,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
-  border-bottom: 1px solid #e5e2dc;
+  border-bottom: 1px solid var(--rule);
 }
 
 .tab {
   background: none;
   border: none;
   padding: 0.6rem 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-size: 0.9rem;
   font-weight: 600;
   color: #666;
@@ -126,7 +126,7 @@
 }
 
 .tab:hover:not(:disabled) {
-  color: #1a1a2e;
+  color: var(--ink);
 }
 
 .tab:disabled {
@@ -135,7 +135,7 @@
 }
 
 .tabActive {
-  color: #1a1a2e;
+  color: var(--ink);
   border-bottom-color: #b88c4f;
 }
 
@@ -153,7 +153,7 @@
 
 .sectionCard {
   padding: 1.25rem;
-  border: 1px solid #e5e2dc;
+  border: 1px solid var(--rule);
   border-radius: 8px;
   background: white;
 }

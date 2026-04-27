@@ -18,7 +18,7 @@
 
 .pillar {
   padding: 1rem;
-  border: 1px solid #e5e2dc;
+  border: 1px solid var(--rule);
   border-radius: 8px;
   background: white;
   display: flex;
@@ -35,7 +35,7 @@
 }
 
 .han {
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   font-size: 1.75rem;
   line-height: 1;
   margin: 0.25rem 0 0.5rem;

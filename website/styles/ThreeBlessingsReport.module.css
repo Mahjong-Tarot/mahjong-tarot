@@ -6,7 +6,7 @@
   padding: var(--space-lg);
   background:
     radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.10), transparent 70%),
-    var(--light-stone);
+    var(--rule-2);
   border-radius: 16px;
 }
 
@@ -19,9 +19,9 @@
 }
 
 .ornament {
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 2.2rem;
-  color: var(--celestial-gold);
+  color: var(--fire-600);
   line-height: 1;
   margin-bottom: 4px;
 }
@@ -30,13 +30,13 @@
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   font-weight: 600;
 }
 
 .positionLabel {
   font-size: 0.85rem;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   margin-bottom: var(--space-sm);
 }
 
@@ -45,21 +45,21 @@
   aspect-ratio: 3 / 4;
   border-radius: 10px;
   overflow: hidden;
-  background: var(--warm-cream);
+  background: var(--paper);
   box-shadow: 0 8px 22px rgba(27, 31, 59, 0.18);
   margin-bottom: var(--space-sm);
 }
 
 .cardName {
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 1.4rem;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   margin: 0;
 }
 
 .cardShort {
   font-size: 0.85rem;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   margin: 0;
 }
 
@@ -83,64 +83,64 @@
 }
 
 .sectionOrnament {
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 2.4rem;
-  color: var(--celestial-gold);
+  color: var(--fire-600);
   line-height: 1;
   flex-shrink: 0;
 }
 
 .sectionTitle {
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 1.6rem;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
 .sectionSource {
   font-size: 0.85rem;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   margin: 0;
 }
 
 .bodyPara {
   font-size: 1rem;
   line-height: 1.7;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   margin: 0 0 var(--space-md);
 }
 
 .personalLine {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   margin: 0 0 var(--space-md);
   padding-left: var(--space-md);
-  border-left: 3px solid var(--celestial-gold);
+  border-left: 3px solid var(--fire-600);
   font-style: italic;
 }
 
 .quote {
   margin: var(--space-md) 0 0;
   padding: var(--space-md);
-  background: var(--warm-cream);
+  background: var(--paper);
   border-radius: 8px;
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 1.1rem;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   font-style: italic;
 }
 
 .legend {
   margin-top: var(--space-md);
   padding: var(--space-lg);
-  background: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background: var(--ink);
+  color: var(--paper);
   border-radius: 12px;
 }
 
 .legend .sectionTitle {
-  color: var(--warm-cream);
+  color: var(--paper);
   margin-bottom: var(--space-md);
 }
 

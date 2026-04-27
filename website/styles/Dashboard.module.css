@@ -1,19 +1,34 @@
+/* ══════════════════════════════════════════════════════════════════════
+   Dashboard — member home, editorial restraint
+   ══════════════════════════════════════════════════════════════════════ */
+
 .todayHero {
   display: flex;
-  gap: 2rem;
-  align-items: center;
-  padding: 1.5rem 1.75rem;
-  margin-top: 1rem;
-  border: 1px solid #e5e2dc;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #fff 0%, var(--paper-pure) 100%);
+  gap: var(--space-xl);
+  align-items: stretch;
+  padding: var(--space-lg) var(--space-xl);
+  margin-top: var(--space-md);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper-pure);
+  position: relative;
+}
+.todayHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--space-xl);
+  width: 32px;
+  height: 2px;
+  background: var(--fire-500);
 }
 
 @media (max-width: 600px) {
   .todayHero {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: var(--space-md);
+    padding: var(--space-md);
   }
 }
 
@@ -24,60 +39,72 @@
 
 .todayLabel {
   margin: 0;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #888;
+  color: var(--fire-600);
 }
 
 .todayPillar {
-  margin: 0.4rem 0 0 0;
-  font-family: 'Fraunces', serif;
-  font-size: 1.75rem;
-  line-height: 1.1;
-  color: #1a1a2e;
+  margin: var(--space-sm) 0 0 0;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.015em;
 }
 
 .todayPillarEn {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: #888;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
   display: block;
-  margin-top: 0.3rem;
+  margin-top: 6px;
 }
 
 .todayEnergy {
   flex: 1;
-  border-left: 1px solid #e5e2dc;
-  padding-left: 2rem;
+  border-left: 1px solid var(--rule);
+  padding-left: var(--space-xl);
 }
 
 @media (max-width: 600px) {
   .todayEnergy {
     border-left: none;
-    border-top: 1px solid #e5e2dc;
-    padding: 1rem 0 0 0;
+    border-top: 1px solid var(--rule);
+    padding: var(--space-md) 0 0 0;
   }
 }
 
 .todayHeadline {
-  margin: 0 0 0.4rem 0;
-  font-size: 1.25rem;
-  color: var(--celestial-gold);
+  margin: 0 0 var(--space-sm);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
 .todayLine {
   margin: 0;
+  font-family: var(--sans);
+  font-size: 15px;
   line-height: 1.6;
-  color: #333;
+  color: var(--ink-2);
 }
 
 .twoCol {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
 }
 
 @media (max-width: 720px) {
@@ -85,47 +112,58 @@
 }
 
 .card {
-  padding: 1.25rem;
-  border: 1px solid #e5e2dc;
-  border-radius: 10px;
-  background: white;
+  padding: var(--space-lg);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper-pure);
   display: flex;
   flex-direction: column;
 }
 
 .cardTitle {
-  margin: 0 0 0.25rem 0;
-  font-size: 1.1rem;
+  margin: 0 0 4px;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--ink);
 }
 
 .cardSubtitle {
-  margin: 0 0 0.75rem 0;
-  font-size: 0.8rem;
+  margin: 0 0 var(--space-md);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #888;
+  letter-spacing: 0.12em;
+  color: var(--ink-4);
 }
 
 .bigRating {
-  font-family: 'Fraunces', serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  color: #1a1a2e;
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 400;
+  margin: 0 0 var(--space-sm);
+  color: var(--ink);
+  letter-spacing: -0.025em;
+  line-height: 1;
 }
 
 .bigRating span {
-  font-size: 1rem;
-  color: #888;
-  margin-left: 0.2rem;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-4);
+  margin-left: 6px;
+  font-weight: 500;
 }
 
 .cardBody {
   flex: 1;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: #333;
-  margin: 0 0 0.75rem 0;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0 0 var(--space-md);
 }
 
 .bdayList {
@@ -134,38 +172,44 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .bdayList li a {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: var(--space-sm);
   flex-wrap: wrap;
-  padding: 0.5rem 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--rule-2);
   text-decoration: none;
   color: inherit;
+  font-family: var(--sans);
+  font-size: 14px;
+  transition: color var(--transition);
 }
 
-.bdayList li:last-child a {
-  border-bottom: none;
-}
+.bdayList li:last-child a { border-bottom: none; }
+.bdayList li a:hover { color: var(--fire-600); }
 
 .bdayMeta {
-  color: #888;
-  font-size: 0.85rem;
+  font-family: var(--mono);
+  color: var(--ink-4);
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
 
 .bdayDays {
   margin-left: auto;
-  color: var(--celestial-gold);
-  font-weight: 600;
-  font-size: 0.85rem;
+  color: var(--fire-600);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .section {
-  margin-top: 2.5rem;
+  margin-top: var(--space-2xl);
 }
 
 .gridList {
@@ -174,41 +218,49 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 6px;
 }
 
 .gridList li a {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  background: white;
-  border: 1px solid #e5e2dc;
-  border-radius: 8px;
+  gap: var(--space-md);
+  padding: 12px 16px;
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
   text-decoration: none;
   color: inherit;
   transition: border-color var(--transition);
+  font-family: var(--sans);
 }
 
 .gridList li a:hover {
-  border-color: #888;
+  border-color: var(--ink);
 }
 
 .gridName {
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink);
 }
 
 .gridName small {
-  color: #888;
-  font-weight: 400;
-  margin-left: 0.5rem;
+  font-family: var(--mono);
+  color: var(--ink-4);
+  font-weight: 500;
+  margin-left: 8px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
 
 .gridSign {
-  color: #666;
-  font-size: 0.85rem;
+  font-family: var(--mono);
+  color: var(--ink-3);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .gridRating {
@@ -216,12 +268,13 @@
   align-items: center;
   justify-content: center;
   min-width: 56px;
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
-  color: white;
-  font-weight: 700;
-  font-size: 0.875rem;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  color: #fff;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
 }
 
 .recentList {
@@ -230,46 +283,59 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 6px;
 }
 
 .recentList li a {
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
-  padding: 0.6rem 0.9rem;
-  border: 1px solid #e5e2dc;
-  border-radius: 8px;
-  background: white;
+  gap: var(--space-sm);
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper-pure);
   text-decoration: none;
   color: inherit;
   flex-wrap: wrap;
+  font-family: var(--sans);
+  font-size: 14px;
+  transition: border-color var(--transition);
 }
 
 .recentList li a:hover {
-  border-color: #888;
+  border-color: var(--ink);
 }
 
 .recentRating {
   margin-left: auto;
-  color: #555;
-  font-weight: 600;
-  font-size: 0.875rem;
+  font-family: var(--mono);
+  color: var(--ink-3);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .recentDate {
-  color: #888;
-  font-size: 0.85rem;
+  font-family: var(--mono);
+  color: var(--ink-4);
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
 
 .cardLink {
   margin-top: auto;
-  font-size: 0.875rem;
-  color: var(--midnight-indigo);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fire-600);
   text-decoration: none;
-  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  align-self: flex-start;
+  padding-bottom: 1px;
+  transition: color var(--transition);
 }
 
 .cardLink:hover {
-  text-decoration: underline;
+  color: var(--fire-700);
 }

@@ -25,10 +25,10 @@
   transition: background 0.15s;
 }
 .navArrow {
-  color: var(--color-text);
+  color: var(--ink);
   background: var(--color-surface);
 }
-.navArrow:hover { background: var(--color-surface-hover, #eee); }
+.navArrow:hover { background: var(--rule-2); }
 .navArrowDisabled { color: #ccc; cursor: not-allowed; }
 
 .dateLabel { text-align: center; flex: 1; }
@@ -41,7 +41,7 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  background: var(--color-accent, #c44);
+  background: var(--fire-500);
   color: white;
   border-radius: 10px;
 }
@@ -52,19 +52,19 @@
   gap: var(--space-md);
   justify-content: center;
   font-size: 0.85rem;
-  color: var(--color-text-muted, #666);
+  color: var(--ink-4);
   margin-bottom: var(--space-2xl);
   padding: var(--space-sm) var(--space-md);
-  background: var(--color-surface, var(--rule-2));
+  background: var(--rule-2);
   border-radius: 8px;
 }
-.pillarStrip strong { color: var(--color-text); font-weight: 600; }
+.pillarStrip strong { color: var(--ink); font-weight: 600; }
 
 .sectionLabel {
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-text-muted, #888);
+  color: var(--ink-4);
   margin-bottom: var(--space-md);
   font-weight: 600;
 }
@@ -76,7 +76,7 @@
   display: flex;
   gap: 4px;
   margin-bottom: var(--space-md);
-  background: var(--color-surface, var(--rule-2));
+  background: var(--rule-2);
   border-radius: 10px;
   padding: 4px;
 }
@@ -93,19 +93,19 @@
   cursor: pointer;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--color-text-muted, #777);
+  color: var(--ink-4);
   transition: background 0.15s, color 0.15s;
 }
-.tab:hover { color: var(--color-text); }
+.tab:hover { color: var(--ink); }
 .tabActive {
   background: white;
-  color: var(--color-text);
+  color: var(--ink);
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 .tabScore {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--color-accent, #c44);
+  color: var(--fire-500);
 }
 
 .proseCard {
@@ -118,12 +118,12 @@
   margin: 0;
   font-size: 1.05rem;
   line-height: 1.7;
-  color: var(--color-text);
+  color: var(--ink);
 }
 .empty {
   margin: 0;
   font-style: italic;
-  color: var(--color-text-muted, #999);
+  color: var(--ink-4);
   text-align: center;
 }
 
@@ -145,28 +145,28 @@
   gap: 4px;
   padding: var(--space-md) 4px;
   border: 2px solid transparent;
-  background: var(--color-surface, var(--rule-2));
+  background: var(--rule-2);
   border-radius: 10px;
   cursor: pointer;
   font-family: inherit;
   transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 .signTile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.signTileActive { border-color: var(--color-accent, #c44); }
+.signTileActive { border-color: var(--fire-500); }
 
 .signLabel { font-size: 0.9rem; font-weight: 600; }
-.signScore { font-size: 0.75rem; color: var(--color-text-muted, #888); font-weight: 600; }
+.signScore { font-size: 0.75rem; color: var(--ink-4); font-weight: 600; }
 
 .tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, var(--rule-2) 100%); }
 .tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, var(--rule-2) 100%); }
-.tone_neutral     { background: var(--color-surface, var(--rule-2)); }
+.tone_neutral     { background: var(--rule-2); }
 .tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, var(--rule-2) 100%); }
 .tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, var(--rule-2) 100%); }
 
 .signDetail {
   margin-top: var(--space-lg);
   padding: var(--space-lg);
-  background: var(--color-surface, var(--rule-2));
+  background: var(--rule-2);
   border-radius: 12px;
 }
 .signDetailHeader {
@@ -181,12 +181,12 @@
   background: transparent;
   font-size: 1.5rem;
   line-height: 1;
-  color: var(--color-text-muted, #888);
+  color: var(--ink-4);
   cursor: pointer;
   padding: 4px 10px;
   border-radius: 6px;
 }
-.closeButton:hover { background: rgba(0,0,0,0.06); color: var(--color-text); }
+.closeButton:hover { background: rgba(0,0,0,0.06); color: var(--ink); }
 
 .forecastLink {
   text-align: center;
@@ -194,7 +194,7 @@
 }
 .forecastLink a {
   font-size: 0.95rem;
-  color: var(--color-accent, #c44);
+  color: var(--fire-500);
   text-decoration: none;
   font-weight: 500;
 }

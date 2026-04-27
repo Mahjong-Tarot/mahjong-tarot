@@ -136,7 +136,7 @@
 
 .branchHan,
 .stemHan {
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   color: #888;
   font-size: 0.95rem;
   line-height: 1;
@@ -160,7 +160,7 @@
 }
 
 .centerTitle {
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   font-size: 1.4rem;
   color: #6b3a8a;
   letter-spacing: 0.02em;

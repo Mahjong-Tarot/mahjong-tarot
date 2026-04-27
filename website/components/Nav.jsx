@@ -57,6 +57,14 @@ export default function Nav() {
       : router.pathname === path;
 
   return (
+    <>
+      {!inMemberArea && (
+        <div className={styles.promo}>
+          <span className={styles.promoPip} />
+          <b>Year of the Fire Horse</b> · New readings open through May
+          <span className={styles.promoPip} />
+        </div>
+      )}
     <nav className={styles.nav}>
       <div className={`container ${styles.inner}`}>
         <Link href={user ? '/dashboard' : '/'} className={styles.logo}>
@@ -143,5 +151,6 @@ export default function Nav() {
         )}
       </div>
     </nav>
+    </>
   );
 }

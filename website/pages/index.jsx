@@ -3,280 +3,386 @@ import Link from 'next/link';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import NewsletterSignup from '../components/NewsletterSignup';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
 import { POSTS } from '../lib/posts';
 import styles from '../styles/Home.module.css';
 
+const SESSIONS = [
+  {
+    mark: '壹',
+    markVariant: '',
+    title: 'One-Tile Insight',
+    desc: 'A single tile drawn around one question. Quick, focused, and surprisingly direct — good for a yes/no or a "should I?" moment.',
+    meta: ['Live online', '15 min', '1-on-1'],
+    price: '$45',
+    href: '/readings#one-tile',
+  },
+  {
+    mark: '叁',
+    markVariant: 'ink',
+    title: 'Three-Tile Spread',
+    desc: 'Past influence, present condition, and the most likely next turn. Concise, clear, and good for a single decision.',
+    meta: ['Live online', '25 min', '1-on-1'],
+    price: '$95',
+    href: '/readings#three-tile',
+  },
+  {
+    mark: '伍',
+    markVariant: 'fire',
+    title: 'The Mahjong Mirror Session',
+    desc: 'A deep, intuitive reading that looks into your emotional, spiritual, and practical life — revealing hidden influences, current challenges, and key lessons. Ideal for relationship dynamics, life purpose, or periods of uncertainty.',
+    meta: ['Live online', '45–60 min', '1-on-1'],
+    price: '$220',
+    href: '/readings#mirror-session',
+  },
+];
+
+const DECK = [
+  { slug: 'dragon',  rank: 'I',   glyph: '龍', name: 'Dragon'  },
+  { slug: 'phoenix', rank: 'II',  glyph: '鳳', name: 'Phoenix' },
+  { slug: 'pearl',   rank: 'III', glyph: '珠', name: 'Pearl'   },
+  { slug: 'lotus',   rank: 'IV',  glyph: '蓮', name: 'Lotus'   },
+  { slug: 'tiger',   rank: 'V',   glyph: '虎', name: 'Tiger'   },
+  { slug: 'peacock', rank: 'VI',  glyph: '雀', name: 'Peacock' },
+];
+
 export default function Home() {
- const jsonLd = graph([
- ORGANIZATION,
- WEBSITE,
- PERSON_BILL,
- {
- '@type': 'WebPage',
- '@id': 'https://www.mahjongtarot.com/#home',
- url: 'https://www.mahjongtarot.com/',
- name: 'Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu',
- isPartOf: { '@id': 'https://www.mahjongtarot.com/#website' },
- about: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
- primaryImageOfPage: 'https://www.mahjongtarot.com/images/gallery-3.webp',
- },
- ]);
+  const jsonLd = graph([
+    ORGANIZATION,
+    WEBSITE,
+    PERSON_BILL,
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.mahjongtarot.com/#home',
+      url: 'https://www.mahjongtarot.com/',
+      name: 'Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu',
+      isPartOf: { '@id': 'https://www.mahjongtarot.com/#website' },
+      about: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
+      primaryImageOfPage: 'https://www.mahjongtarot.com/images/gallery-3.webp',
+    },
+  ]);
 
- const featuredPosts = POSTS.slice(0, 3);
+  const featuredPosts = POSTS.slice(0, 3);
 
- return (
- <>
- <SEO
- title="Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu, The Firepig"
- description="Live 1-on-1 Mahjong tile readings, Four Pillars Chinese astrology, and tarot with Bill Hajdu, 35+ years of divination practice. Book a reading or explore The Mahjong Mirror."
- path="/"
- image="/images/gallery-3.webp"
- jsonLd={jsonLd}
- />
+  return (
+    <>
+      <SEO
+        title="Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu, The Firepig"
+        description="Live 1-on-1 Mahjong tile readings, Four Pillars Chinese astrology, and tarot with Bill Hajdu, 35+ years of divination practice. Book a reading or explore The Mahjong Mirror."
+        path="/"
+        image="/images/gallery-3.webp"
+        jsonLd={jsonLd}
+      />
 
- <Nav />
+      <Nav />
 
- <main>
+      <main>
 
- {/* ── Hero ── */}
- <section className={styles.heroSection}>
- <div className={styles.heroGrid} aria-hidden="true" />
- <div className={`container ${styles.heroInner}`}>
- <div>
- <span className={styles.heroBadge}>
- Ancient Wisdom · Modern Clarity
- </span>
- <h1 className={styles.heroHeadline}>
- See what the tiles <em>reveal</em>.
- </h1>
- <p className={styles.heroLead}>
- 35 years of divination practice. Mahjong tiles, Chinese astrology,
- and tarot — woven into readings that illuminate your path.
- </p>
- <div className={styles.heroCtas}>
- <Link href="/readings#book" className={styles.heroPrimary}>
- Book a Reading <span aria-hidden="true">→</span>
- </Link>
- <Link href="/the-mahjong-mirror#preorder" className={styles.heroGhost}>
- Preorder the Book
- </Link>
- </div>
- <dl className={styles.heroStats}>
- <div>
- <dt>35+</dt>
- <dd>Years of practice</dd>
- </div>
- <div>
- <dt>3</dt>
- <dd>Divination traditions</dd>
- </div>
- <div>
- <dt>1-on-1</dt>
- <dd>Live online readings</dd>
- </div>
- </dl>
- </div>
- <div className={styles.heroPortrait}>
- <Image
- src="/images/gallery-3.webp"
- alt="Bill Hajdu conducting a Mahjong Tarot reading"
- fill
- priority
- sizes="(max-width: 1024px) 100vw, 50vw"
- style={{ objectFit: 'cover', objectPosition: 'center top' }}
- />
- </div>
- </div>
- </section>
+        {/* ── Hero ── */}
+        <section className={styles.heroSection}>
+          <div className={`container ${styles.heroInner}`}>
+            <div>
+              <span className={styles.heroBadge}>Ancient Wisdom · Modern Clarity</span>
+              <h1 className={styles.heroHeadline}>
+                See what<br />the tiles<br /><em>reveal</em>.
+              </h1>
+              <p className={styles.heroLead}>
+                Thirty-five years of divination practice. Mahjong tiles, Chinese astrology,
+                and tarot — woven into readings that illuminate your path.
+              </p>
+              <div className={styles.heroCtas}>
+                <Link href="/readings#book" className={styles.heroPrimary}>
+                  Book a Reading <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/the-mahjong-mirror#preorder" className={styles.heroGhost}>
+                  Preorder the Book
+                </Link>
+              </div>
+              <dl className={styles.heroStats}>
+                <div>
+                  <dt><em>35</em>+</dt>
+                  <dd>Years of practice</dd>
+                </div>
+                <div>
+                  <dt>3</dt>
+                  <dd>Divination traditions</dd>
+                </div>
+                <div>
+                  <dt>1<span style={{ color: 'var(--ink-3)', fontSize: '22px' }}>-on-</span>1</dt>
+                  <dd>Live online readings</dd>
+                </div>
+              </dl>
+            </div>
+            <figure className={styles.heroPortrait}>
+              <Image
+                src="/images/gallery-3.webp"
+                alt="Bill Hajdu conducting a Mahjong Tarot reading"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+              />
+              <div className={styles.heroPullQuote}>
+                A reading is a <b>conversation</b> with what you already know but haven't said.
+              </div>
+              <div className={styles.heroFigureTag}>[ Bill Hajdu · The Firepig ]</div>
+            </figure>
+          </div>
+        </section>
 
- {/* ── Readings ── */}
- <section>
- <div className="container">
- <div className={styles.sectionHeader}>
- <span className="overline">Personal Sessions</span>
- <h2>Receive Guidance Through<br />a Mahjong Tarot Reading</h2>
- </div>
- <div className={styles.readingCard} style={{ maxWidth: 640, margin: '0 auto' }}>
- <span className="overline">Live Online · 45-60 minutes</span>
- <h3>The Mahjong Mirror Session</h3>
- <p>
- A deep, intuitive reading that looks into your emotional,
- spiritual, and practical life - revealing hidden influences,
- current challenges, energetic strengths, possible outcomes,
- and key lessons. Ideal for relationship dynamics, life purpose
- exploration, long-term planning, or periods of uncertainty.
- </p>
- <p>
- Conducted live online with Bill. No prior knowledge of Mahjong
- required - just an open mind and a question worth asking.
- </p>
- <Link href="/readings#book" className="btn-primary">Book a Session</Link>
- </div>
- </div>
- </section>
+        {/* ── Sessions ── */}
+        <section>
+          <div className="container">
+            <div className={styles.secHead}>
+              <div>
+                <span className={styles.heroBadge}>Personal Sessions</span>
+                <h2>Receive guidance through the <em>tiles</em>.</h2>
+              </div>
+              <p className={styles.secHeadLede}>
+                Three ways to sit at the table — from a single tile drawn for one decision,
+                to a sixty-minute Mirror reading that looks across your whole life. All sessions
+                are conducted live with Bill, online.
+              </p>
+            </div>
 
- {/* ── About ── */}
- <section>
- <div className={`container ${styles.intro}`}>
- <div className={styles.introText}>
- <span className="overline">Meet the Firepig</span>
- <h2>Bill Hajdu, Mahjong Tarot Reader &amp; Chinese Astrologer</h2>
- <div className="divider-gold" />
- <p>
- With over 35 years of practice, Bill Hajdu has developed an
- approach that unites Four Pillars astrology, Mahjong tile
- readings, and tarot into a single, coherent system. His readings
- draw on keen intellect, deep respect for tradition, and a
- genuine desire to help others find clarity.
- </p>
- <Link href="/about" className="btn-secondary">About Bill</Link>
- </div>
- <div className={styles.introImage}>
- <Image
- src="/images/about-portrait.webp"
- alt="Bill Hajdu, divination practitioner and author"
- width={580}
- height={720}
- style={{ objectFit: 'cover' }}
- />
- </div>
- </div>
- </section>
+            <div className={styles.sessionsList}>
+              {SESSIONS.map((s) => (
+                <article key={s.title} className={styles.session}>
+                  <div className={`${styles.sessionMark} ${s.markVariant === 'ink' ? styles.sessionMarkInk : ''} ${s.markVariant === 'fire' ? styles.sessionMarkFire : ''}`}>
+                    {s.mark}
+                  </div>
+                  <div>
+                    <h3 className={styles.sessionTitle}>{s.title}</h3>
+                    <p className={styles.sessionDesc}>{s.desc}</p>
+                    <div className={styles.sessionMeta}>
+                      {s.meta.map((m, i) => (
+                        <span key={m}>
+                          {i > 0 && <span className="dot">·</span>}
+                          {m}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles.sessionPrice}>
+                    {s.price}<small>per session</small>
+                  </div>
+                </article>
+              ))}
+            </div>
 
- {/* ── Book CTA ── */}
- <section className={`section-dark ${styles.bookSection}`}>
- <div className={`container ${styles.bookInner}`}>
- <div className={styles.bookText}>
- <span className="overline" style={{ color: 'var(--fire-400)' }}>Coming Soon</span>
- <h2>The Mahjong Mirror</h2>
- <p className={styles.bookSubtitle}>Your Path to Wiser Decisions</p>
- <div className="divider-gold" />
- <p>
- A modern divination system inspired by ancient Mahjong symbolism, 
- guiding you toward clarity, intuition, and deeper self-discovery.
- No prior knowledge of Mahjong required.
- </p>
- <Link href="/the-mahjong-mirror" className="btn-ghost">Explore the Book</Link>
- </div>
- <div className={styles.bookCover}>
- <Image
- src="/images/book-cover.webp"
- alt="The Mahjong Mirror, Your Path to Wiser Decisions by Bill Hajdu"
- width={340}
- height={460}
- style={{ objectFit: 'contain' }}
- />
- </div>
- </div>
- </section>
+            <div className={styles.sessionsFooter}>
+              <Link href="/readings" className={styles.btnLink}>See all reading types →</Link>
+            </div>
+          </div>
+        </section>
 
- {/* ── Card Gallery ── */}
- <section>
- <div className="container">
- <div className={styles.sectionHeader}>
- <span className="overline">The Deck</span>
- <h2>Meet the Cards</h2>
- <p className={styles.sectionLead}>
- Forty-two hand-illustrated cards drawn from the ancient Mahjong tradition, 
- each one a symbol, a story, and a doorway into clearer decisions.
- </p>
- </div>
- <div className={styles.cardGallery}>
- {[
- { slug: 'dragon', name: 'Dragon', meaning: 'Power · Transformation' },
- { slug: 'phoenix', name: 'Phoenix', meaning: 'Renewal · Rising' },
- { slug: 'pearl', name: 'Pearl', meaning: 'Hidden wisdom' },
- { slug: 'lotus', name: 'Lotus', meaning: 'Purity · Growth' },
- { slug: 'tiger', name: 'Tiger', meaning: 'Courage · Instinct' },
- { slug: 'peacock', name: 'Peacock', meaning: 'Beauty · Pride' },
- ].map((card) => (
- <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.cardItem} style={{ textDecoration: 'none' }}>
- <figure style={{ margin: 0 }}>
- <div className={styles.cardImageWrap}>
- <Image
- src={`/images/cards/${card.slug}.webp`}
- alt={`${card.name}, Mahjong Mirror card`}
- fill
- style={{ objectFit: 'contain' }}
- />
- </div>
- <figcaption>
- <span className={styles.cardName}>{card.name}</span>
- <span className={styles.cardMeaning}>{card.meaning}</span>
- </figcaption>
- </figure>
- </Link>
- ))}
- </div>
- <div style={{ textAlign: 'center', marginTop: 'var(--space-xl)' }}>
- <Link href="/cards" className="btn-secondary">See All 42 Cards</Link>
- </div>
- </div>
- </section>
+        {/* ── About Bill ── */}
+        <section>
+          <div className="container">
+            <div className={styles.about}>
+              <figure className={styles.aboutFigure}>
+                <Image
+                  src="/images/about-portrait.webp"
+                  alt="Bill Hajdu, divination practitioner and author"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  style={{ objectFit: 'cover' }}
+                />
+                <div className={styles.aboutFigureTag}>[ Bill at the table ]</div>
+              </figure>
+              <div className={styles.aboutText}>
+                <span className={styles.heroBadge}>Meet the Firepig</span>
+                <h2>Bill Hajdu — reader, <em>astrologer</em>, host.</h2>
+                <p>
+                  For more than thirty-five years, Bill has worked at the intersection of
+                  Four Pillars astrology, Mahjong tile readings, and tarot — building a
+                  system where the three traditions speak to one another.
+                </p>
+                <p>
+                  His readings draw on keen intellect, deep respect for tradition, and a
+                  genuine desire to help others find clarity. No prior knowledge of Mahjong
+                  is required. Just an open mind and a question worth asking.
+                </p>
+                <div className={styles.aboutCred}>
+                  <div className={styles.aboutCredItem}>
+                    <div className={styles.credNum}>35+</div>
+                    <div className={styles.credLab}>Years practicing</div>
+                  </div>
+                  <div className={styles.aboutCredItem}>
+                    <div className={styles.credNum}>2,400+</div>
+                    <div className={styles.credLab}>Sessions read</div>
+                  </div>
+                  <div className={styles.aboutCredItem}>
+                    <div className={styles.credNum}>42</div>
+                    <div className={styles.credLab}>Cards in the deck</div>
+                  </div>
+                </div>
+                <div className={styles.aboutBtns}>
+                  <Link href="/about" className={styles.heroGhost}>About Bill →</Link>
+                  <Link href="/about#approach" className={styles.btnLink}>Read his approach</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
- {/* ── Latest Blog Posts ── */}
- <section className="section-stone">
- <div className="container">
- <div className={styles.sectionHeader}>
- <span className="overline">Writing & Insight</span>
- <h2>From the Journal</h2>
- </div>
- <div className={styles.blogGrid}>
- {featuredPosts.map((post) => (
- <article key={post.slug} className={styles.blogCard}>
- <Link href={`/blog/posts/${post.slug}`} className={styles.blogImageLink}>
- <div className={styles.blogImage}>
- <Image
- src={`/images/blog/${post.slug}.webp`}
- alt={post.title}
- fill
- style={{ objectFit: 'cover' }}
- />
- </div>
- </Link>
- <div className={styles.blogBody}>
- <span className="post-category">{post.categories[0]}</span>
- <h3 className={styles.blogTitle}>
- <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
- </h3>
- <span className="post-meta">{post.date} · {post.readTime}</span>
- </div>
- </article>
- ))}
- </div>
- <div style={{ textAlign: 'center', marginTop: 'var(--space-2xl)' }}>
- <Link href="/blog" className="btn-secondary">Read the Blog</Link>
- </div>
- </div>
- </section>
+        {/* ── Deck ── */}
+        <section>
+          <div className="container">
+            <div className={styles.secHead}>
+              <div>
+                <span className={styles.heroBadge}>The Deck</span>
+                <h2>Meet the <em>cards</em>.</h2>
+              </div>
+              <p className={styles.secHeadLede}>
+                Forty-two hand-illustrated cards drawn from the ancient Mahjong tradition —
+                each a symbol, a story, and a doorway into clearer decisions.
+              </p>
+            </div>
 
- {/* ── Testimonials ── */}
- <section>
- <div className="container">
- <div className={styles.sectionHeader}>
- <span className="overline">What Clients Say</span>
- <h2>Ancient Cards, Lasting Impact</h2>
- <div className="divider-gold centered" />
- </div>
- <div className={styles.testimonials}>
- {[
- { quote: 'Beautiful, intuitive, and accurate. The tiles described exactly how I felt.', name: 'Saharan Louret', location: 'OH' },
- { quote: 'A calming, grounding experience. I left feeling lighter and clearer.', name: 'Fabian Baracca', location: 'MN' },
- { quote: 'My relationship reading was spot on. It changed how I approached our conversation.', name: 'Mouna Gonzato', location: 'NJ' },
- ].map((t) => (
- <blockquote key={t.name} className={styles.testimonial}>
- <p>"{t.quote}"</p>
- <footer>, {t.name}, {t.location}</footer>
- </blockquote>
- ))}
- </div>
- </div>
- </section>
+            <div className={styles.deckStrip}>
+              {DECK.map((card) => (
+                <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.deckCard}>
+                  <div className={styles.deckRank}>{card.rank}</div>
+                  <div className={styles.deckGlyph}>{card.glyph}</div>
+                  <div className={styles.deckName}>{card.name}</div>
+                </Link>
+              ))}
+            </div>
 
- </main>
+            <div className={styles.deckFooter}>
+              <div className={styles.deckCount}>Showing 6 of 42</div>
+              <Link href="/cards" className={styles.btnLink}>See all 42 cards →</Link>
+            </div>
+          </div>
+        </section>
 
- <Footer />
- </>
- );
+        {/* ── Book ── */}
+        <section className={styles.bookSection}>
+          <div className="container">
+            <div className={styles.book}>
+              <div>
+                <span className={styles.bookEyebrow}>Coming Soon</span>
+                <h2>The Mahjong Mirror — your path to <em>wiser</em> decisions.</h2>
+                <p>
+                  A modern divination system inspired by ancient Mahjong symbolism,
+                  guiding you toward clarity, intuition, and deeper self-discovery.
+                  No prior knowledge of Mahjong required.
+                </p>
+                <p className={styles.bookSpec}>Hardcover · 320 pp · Spring 2026</p>
+                <div className={styles.bookCtas}>
+                  <Link href="/the-mahjong-mirror#preorder" className={styles.heroPrimary}>
+                    Preorder $34
+                  </Link>
+                  <Link href="/the-mahjong-mirror" className={styles.bookGhost}>
+                    Read a chapter →
+                  </Link>
+                </div>
+              </div>
+              <div className={styles.bookCoverWrap}>
+                <div className={styles.bookCover}>
+                  <div className={styles.bookCoverGlyph}>鏡</div>
+                  <div className={styles.bookCoverEyebrow}>A Divination System</div>
+                  <h3 className={styles.bookCoverTitle}>
+                    The Mahjong<br /><em>Mirror</em>
+                  </h3>
+                  <div className={styles.bookCoverAuthor}>Bill Hajdu · 2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Journal ── */}
+        <section>
+          <div className="container">
+            <div className={styles.secHead}>
+              <div>
+                <span className={styles.heroBadge}>Writing &amp; Insight</span>
+                <h2>From the <em>journal</em>.</h2>
+              </div>
+              <p className={styles.secHeadLede}>
+                Notes on the year ahead, the tiles, and the slower kind of wisdom — published
+                whenever the timing feels right.
+              </p>
+            </div>
+
+            <div className={styles.journalGrid}>
+              {featuredPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/posts/${post.slug}`} className={styles.post}>
+                  <div className={styles.postImg}>
+                    <Image
+                      src={`/images/blog/${post.slug}.webp`}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div className={styles.postEyebrow}>{post.categories[0]}</div>
+                  <h3 className={styles.postTitle}>{post.title}</h3>
+                  <div className={styles.postMeta}>{post.date} · {post.readTime}</div>
+                </Link>
+              ))}
+            </div>
+
+            <div className={styles.sessionsFooter}>
+              <Link href="/blog" className={styles.btnLink}>Read the journal →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Testimonials ── */}
+        <section>
+          <div className="container">
+            <div className={styles.secHead}>
+              <div>
+                <span className={styles.heroBadge}>What Clients Say</span>
+                <h2>Ancient cards, <em>lasting</em> impact.</h2>
+              </div>
+              <p className={styles.secHeadLede}>
+                Notes from people who came with a question and left with a different one —
+                sharper, kinder, more their own.
+              </p>
+            </div>
+            <div className={styles.quotesGrid}>
+              {[
+                { quote: 'Beautiful, intuitive, and accurate. The tiles described exactly how I felt.', name: 'Saharan Louret', location: 'Cleveland, OH' },
+                { quote: 'A calming, grounding experience. I left feeling lighter and clearer.',         name: 'Fabian Baracca', location: 'Minneapolis, MN' },
+                { quote: 'My relationship reading was spot on. It changed how I approached our conversation.', name: 'Mouna Gonzato',  location: 'Newark, NJ' },
+              ].map((t) => (
+                <blockquote key={t.name} className={styles.quote}>
+                  <p className={styles.quoteText}>&ldquo;{t.quote}&rdquo;</p>
+                  <div className={styles.quoteCite}>
+                    <b>{t.name}</b> · {t.location}
+                  </div>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Newsletter CTA ── */}
+        <section>
+          <div className="container">
+            <div className={styles.cta}>
+              <div>
+                <span className={styles.heroBadge}>Stay Connected</span>
+                <h2>Insights for the <em>year ahead</em>, in your inbox.</h2>
+                <p>
+                  Notes on Mahjong, tarot, and Chinese astrology — sent whenever there&apos;s
+                  something worth saying. Never more than twice a month.
+                </p>
+              </div>
+              <NewsletterSignup source="home" variant="light" />
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <Footer />
+    </>
+  );
 }

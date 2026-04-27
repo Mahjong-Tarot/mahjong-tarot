@@ -6,7 +6,7 @@
 
 .lede {
   margin: 0;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   font-size: 0.95rem;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .tile:focus-visible .inner {
-  outline: 2px solid var(--celestial-gold);
+  outline: 2px solid var(--fire-600);
   outline-offset: 4px;
 }
 
@@ -61,8 +61,8 @@
 .back {
   background:
     radial-gradient(circle at 50% 30%, rgba(201, 168, 76, 0.25), transparent 60%),
-    linear-gradient(160deg, var(--midnight-indigo) 0%, #2a2f55 100%);
-  color: var(--celestial-gold);
+    linear-gradient(160deg, var(--ink) 0%, #2a2f55 100%);
+  color: var(--fire-600);
   align-items: center;
   justify-content: center;
   padding: var(--space-md);
@@ -84,7 +84,7 @@
 }
 
 .backPosition {
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 1.5rem;
   letter-spacing: 0.05em;
   font-weight: 500;
@@ -99,7 +99,7 @@
 
 .front {
   transform: rotateY(180deg);
-  background: var(--warm-cream);
+  background: var(--paper);
   border: 1px solid rgba(27, 31, 59, 0.1);
   padding: var(--space-sm);
 }
@@ -109,7 +109,7 @@
   flex: 1;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--light-stone);
+  background: var(--rule-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,19 +126,19 @@
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--celestial-gold);
+  color: var(--fire-600);
 }
 
 .frontCardName {
-  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-family: 'Cormorant Garamond', var(--serif);
   font-size: 1.15rem;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   margin: 0;
 }
 
 .frontShort {
   font-size: 0.78rem;
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .cta {
@@ -153,19 +153,19 @@
 .ctaHint {
   margin: 0;
   font-size: 0.85rem;
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .ctaLink {
-  color: var(--midnight-indigo);
+  color: var(--ink);
   text-decoration: none;
   font-weight: 600;
-  border-bottom: 1px solid var(--celestial-gold);
+  border-bottom: 1px solid var(--fire-600);
   padding-bottom: 1px;
 }
 
 .ctaLink:hover {
-  color: var(--mystic-fire);
+  color: var(--fire-500);
 }
 
 @media (max-width: 640px) {

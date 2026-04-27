@@ -6,7 +6,7 @@
 }
 
 .pageHeader h1 {
-  color: var(--warm-cream);
+  color: var(--paper);
   margin-bottom: var(--space-lg);
 }
 
@@ -27,7 +27,7 @@
 }
 
 .summaryCard .label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -37,10 +37,10 @@
 }
 
 .summaryCard .value {
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   font-size: 36px;
   font-weight: 700;
-  color: var(--celestial-gold);
+  color: var(--fire-600);
 }
 
 /* ─── Toolbar ────────────────────────────────────────────────────────── */
@@ -51,7 +51,7 @@
   justify-content: space-between;
   gap: var(--space-md);
   padding: var(--space-lg) 0;
-  border-bottom: 1px solid var(--light-stone);
+  border-bottom: 1px solid var(--rule-2);
 }
 
 .viewToggle {
@@ -60,15 +60,15 @@
 }
 
 .viewBtn {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 10px 20px;
-  border: 1px solid var(--mid-gray);
-  background: var(--warm-cream);
-  color: var(--mid-gray);
+  border: 1px solid var(--ink-4);
+  background: var(--paper);
+  color: var(--ink-4);
   cursor: pointer;
   transition: all var(--transition);
 }
@@ -79,9 +79,9 @@
 
 .viewBtnActive {
   composes: viewBtn;
-  background: var(--midnight-indigo);
-  border-color: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
 }
 
 .filterGroup {
@@ -91,19 +91,19 @@
 }
 
 .filterLabel {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .filterSelect {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-size: 15px;
-  background: var(--warm-cream);
-  border: 1px solid var(--mid-gray);
+  background: var(--paper);
+  border: 1px solid var(--ink-4);
   border-radius: 0;
   padding: 8px 36px 8px 12px;
   color: var(--black);
@@ -124,7 +124,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
 }
 
 .table th {
@@ -132,8 +132,8 @@
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--warm-cream);
-  background: var(--midnight-indigo);
+  color: var(--paper);
+  background: var(--ink);
   padding: 12px 16px;
   text-align: left;
   white-space: nowrap;
@@ -141,7 +141,7 @@
 
 .table td {
   padding: 14px 16px;
-  border-bottom: 1px solid var(--light-stone);
+  border-bottom: 1px solid var(--rule-2);
   font-size: 15px;
   vertical-align: top;
 }
@@ -152,7 +152,7 @@
 }
 
 .table tbody tr:hover {
-  background: var(--light-stone);
+  background: var(--rule-2);
 }
 
 .table tbody tr:nth-child(even) {
@@ -160,7 +160,7 @@
 }
 
 .table tbody tr:nth-child(even):hover {
-  background: var(--light-stone);
+  background: var(--rule-2);
 }
 
 .messagePreview {
@@ -168,7 +168,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   font-size: 14px;
 }
 
@@ -176,7 +176,7 @@
 
 .badge {
   display: inline-block;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.06em;
@@ -188,7 +188,7 @@
 .badgeReceived {
   composes: badge;
   background: rgba(136, 136, 128, 0.15);
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .badgeRead {
@@ -212,13 +212,13 @@
 .badgeCancelled {
   composes: badge;
   background: rgba(192, 57, 43, 0.12);
-  color: var(--mystic-fire);
+  color: var(--fire-500);
 }
 
 .typeBadge {
   composes: badge;
   background: rgba(27, 31, 59, 0.08);
-  color: var(--midnight-indigo);
+  color: var(--ink);
 }
 
 /* ─── Load More ──────────────────────────────────────────────────────── */
@@ -229,22 +229,22 @@
 }
 
 .loadMoreBtn {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 12px 32px;
-  border: 1px solid var(--midnight-indigo);
+  border: 1px solid var(--ink);
   background: transparent;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   cursor: pointer;
   transition: all var(--transition);
 }
 
 .loadMoreBtn:hover {
-  background: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 /* ─── Kanban View ────────────────────────────────────────────────────── */
@@ -258,27 +258,27 @@
 }
 
 .kanbanColumn {
-  background: var(--light-stone);
+  background: var(--rule-2);
   padding: var(--space-md);
   min-height: 300px;
 }
 
 .kanbanColumnOver {
   composes: kanbanColumn;
-  outline: 2px dashed var(--celestial-gold);
+  outline: 2px dashed var(--fire-600);
   outline-offset: -2px;
 }
 
 .kanbanHeader {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   padding-bottom: var(--space-sm);
   margin-bottom: var(--space-md);
-  border-bottom: 2px solid var(--mid-gray);
+  border-bottom: 2px solid var(--ink-4);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -287,12 +287,12 @@
 .kanbanCount {
   font-size: 13px;
   font-weight: 700;
-  color: var(--midnight-indigo);
+  color: var(--ink);
 }
 
 .kanbanCard {
-  background: var(--warm-cream);
-  border-left: 3px solid var(--mid-gray);
+  background: var(--paper);
+  border-left: 3px solid var(--ink-4);
   padding: var(--space-md);
   margin-bottom: var(--space-sm);
   cursor: grab;
@@ -307,16 +307,16 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.kanbanCardReceived  { border-left-color: var(--mid-gray); }
+.kanbanCardReceived  { border-left-color: var(--ink-4); }
 .kanbanCardRead      { border-left-color: var(--soft-lavender); }
-.kanbanCardConfirmed { border-left-color: var(--celestial-gold); }
+.kanbanCardConfirmed { border-left-color: var(--fire-600); }
 .kanbanCardCompleted { border-left-color: #27AE60; }
-.kanbanCardCancelled { border-left-color: var(--mystic-fire); }
+.kanbanCardCancelled { border-left-color: var(--fire-500); }
 
 .kanbanCardName {
   font-weight: 600;
   font-size: 15px;
-  color: var(--midnight-indigo);
+  color: var(--ink);
   margin-bottom: 4px;
 }
 
@@ -329,12 +329,12 @@
 
 .kanbanCardDate {
   font-size: 12px;
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .kanbanCardMsg {
   font-size: 13px;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -357,7 +357,7 @@
   bottom: 0;
   width: 520px;
   max-width: 100vw;
-  background: var(--warm-cream);
+  background: var(--paper);
   z-index: 901;
   overflow-y: auto;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
@@ -370,7 +370,7 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--space-lg) var(--space-xl);
-  border-bottom: 1px solid var(--light-stone);
+  border-bottom: 1px solid var(--rule-2);
 }
 
 .panelHeader h2 {
@@ -382,14 +382,14 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   line-height: 1;
   padding: 4px;
   transition: color var(--transition);
 }
 
 .panelClose:hover {
-  color: var(--midnight-indigo);
+  color: var(--ink);
 }
 
 .panelBody {
@@ -403,12 +403,12 @@
 /* ─── Panel Sections ─────────────────────────────────────────────────── */
 
 .sectionTitle {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--celestial-gold);
+  color: var(--fire-600);
   margin-bottom: var(--space-md);
 }
 
@@ -430,19 +430,19 @@
 }
 
 .fieldLabel {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .fieldInput {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-size: 15px;
   background: white;
-  border: 1px solid var(--light-stone);
+  border: 1px solid var(--rule-2);
   border-radius: 0;
   padding: 8px 12px;
   color: var(--black);
@@ -451,7 +451,7 @@
 
 .fieldInput:focus {
   outline: none;
-  border-color: var(--midnight-indigo);
+  border-color: var(--ink);
 }
 
 .fieldSelect {
@@ -471,13 +471,13 @@
 
 .fieldValueMuted {
   composes: fieldValue;
-  color: var(--mid-gray);
+  color: var(--ink-4);
   font-style: italic;
 }
 
 .messageBox {
   background: white;
-  border: 1px solid var(--light-stone);
+  border: 1px solid var(--rule-2);
   padding: var(--space-lg);
   font-size: 15px;
   line-height: 1.65;
@@ -493,14 +493,14 @@
 }
 
 .btnSave {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--sans);
   font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 10px 24px;
-  background: var(--midnight-indigo);
-  color: var(--warm-cream);
+  background: var(--ink);
+  color: var(--paper);
   border: none;
   cursor: pointer;
   transition: background var(--transition);
@@ -517,11 +517,11 @@
 
 .btnSend {
   composes: btnSave;
-  background: var(--mystic-fire);
+  background: var(--fire-500);
 }
 
 .btnSend:hover {
-  background: var(--mystic-fire-dark);
+  background: var(--fire-600);
 }
 
 /* ─── Reply Section ──────────────────────────────────────────────────── */
@@ -550,7 +550,7 @@
 
 .errorMsg {
   font-size: 14px;
-  color: var(--mystic-fire);
+  color: var(--fire-500);
   padding: var(--space-sm) 0;
 }
 
@@ -559,11 +559,11 @@
 .empty {
   text-align: center;
   padding: var(--space-3xl) var(--space-xl);
-  color: var(--mid-gray);
+  color: var(--ink-4);
 }
 
 .empty h3 {
-  color: var(--mid-gray);
+  color: var(--ink-4);
   margin-bottom: var(--space-sm);
 }
 
@@ -572,7 +572,7 @@
 .loading {
   text-align: center;
   padding: var(--space-3xl);
-  color: var(--mid-gray);
+  color: var(--ink-4);
   font-size: 17px;
 }
 

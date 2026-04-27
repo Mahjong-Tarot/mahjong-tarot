@@ -6,7 +6,7 @@
   border-radius: 14px;
   border: 1px solid rgba(0,0,0,0.06);
   transition: transform 0.15s, box-shadow 0.15s;
-  background: var(--color-surface, var(--rule-2));
+  background: var(--rule-2);
 }
 .card:hover {
   transform: translateY(-1px);
@@ -35,29 +35,29 @@
 .dateLine { font-weight: 600; font-size: 1rem; }
 .pillarLine {
   font-size: 0.9rem;
-  color: var(--color-text-muted, #666);
+  color: var(--ink-4);
   margin-top: 2px;
 }
-.chinese { color: var(--color-text); margin-left: 2px; }
+.chinese { color: var(--ink); margin-left: 2px; }
 .holiday {
   margin-top: 6px;
   font-size: 0.8rem;
   font-style: italic;
-  color: var(--color-text-muted, #777);
+  color: var(--ink-4);
 }
 .scoreBlock { text-align: right; }
 .scoreNumber {
-  font-family: 'Fraunces', serif;
+  font-family: var(--serif);
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1;
 }
-.scoreNumber span { font-size: 0.85rem; color: var(--color-text-muted, #888); margin-left: 2px; }
+.scoreNumber span { font-size: 0.85rem; color: var(--ink-4); margin-left: 2px; }
 .toneLabel {
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-text-muted, #777);
+  color: var(--ink-4);
   margin-top: 4px;
   font-weight: 600;
 }
@@ -66,7 +66,7 @@
   margin: var(--space-sm) 0 var(--space-md);
   font-size: 0.95rem;
   line-height: 1.5;
-  color: var(--color-text);
+  color: var(--ink);
 }
 
 .stripsWrap {
@@ -85,7 +85,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text-muted, #888);
+  color: var(--ink-4);
   font-weight: 600;
   min-width: 50px;
 }
@@ -97,7 +97,7 @@
   background: rgba(255,255,255,0.5);
 }
 .chipLucky   { background: #e8f5e8; color: #1e6334; }
-.chipUnlucky { background: #fbe9e7; color: #962d20; }
+.chipUnlucky { background: #fbe9e7; color: var(--fire-700); }
 
 .foot {
   display: flex;
@@ -108,13 +108,13 @@
   padding-top: var(--space-sm);
   border-top: 1px solid rgba(0,0,0,0.06);
   font-size: 0.85rem;
-  color: var(--color-text-muted, #666);
+  color: var(--ink-4);
 }
-.foot strong { color: var(--color-text); font-weight: 600; }
-.cta { color: var(--color-accent, #c44); font-weight: 500; }
+.foot strong { color: var(--ink); font-weight: 600; }
+.cta { color: var(--fire-500); font-weight: 500; }
 
 .tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, var(--paper) 80%); }
 .tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, var(--paper) 80%); }
-.tone_neutral     { background: var(--color-surface, var(--rule-2)); }
+.tone_neutral     { background: var(--rule-2); }
 .tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, var(--paper) 80%); }
 .tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, var(--paper) 80%); }

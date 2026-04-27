@@ -1,12 +1,11 @@
-date: 2026-04-24
+date: 2026-04-27
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #119: pm(standup-morning): 2026-04-23 — merged at 00:06 UTC
-- PR #120: pm(standup-compile): 2026-04-23 — merged at 01:59 UTC
+- PR #132: pm(weekly-rag): 2026-04-26 — merged at 06:01 UTC
 
 **Next:**
 - No open work detected
@@ -59,7 +58,7 @@ None
 ## image-designer
 
 **Completed:**
-- PR #118: designer(thursday-2026-04-23): hero images for horse-wedding, mirror-wedding, feel-good-love — merged at 19:11 UTC
+- No activity
 
 **Next:**
 - No open work detected

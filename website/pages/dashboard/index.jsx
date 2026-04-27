@@ -28,7 +28,7 @@ export default function Dashboard() {
     (async () => {
       const { data } = await supabase
         .from('profiles')
-        .select('name, birthday, birth_time, pillars')
+        .select('name, birthday, birth_time, gender, pillars')
         .eq('user_id', user.id)
         .maybeSingle();
       if (cancelled) return;

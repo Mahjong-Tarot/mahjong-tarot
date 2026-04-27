@@ -1,9 +1,9 @@
-date: 2026-04-24
+date: 2026-04-28
 name: Yon
 
 ## Today's focus
-- Work on Bootstrapping and Blueprint installation steps
-- Explore Mahjong Mirror outreach options
+- Configure email outreach systems for Mahjong Mirror book on MailChimp
+- Build out website features and readings
 
 ## Blockers
 None

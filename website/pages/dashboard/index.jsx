@@ -1,13 +1,24 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
+import { useAuth } from '../../lib/auth';
 import styles from '../../styles/Account.module.css';
 
 export default function Dashboard() {
-  const { user, isLoaded } = useUser();
-  const greeting = isLoaded && user?.firstName ? `, ${user.firstName}` : '';
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) router.replace('/sign-in');
+  }, [loading, user, router]);
+
+  if (loading || !user) return null;
+
+  const name = user.user_metadata?.full_name || user.email?.split('@')[0] || '';
+  const greeting = name ? `, ${name}` : '';
 
   return (
     <>

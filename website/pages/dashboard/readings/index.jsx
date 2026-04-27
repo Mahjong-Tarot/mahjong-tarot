@@ -1,10 +1,22 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
 import Footer from '../../../components/Footer';
+import { useAuth } from '../../../lib/auth';
 import styles from '../../../styles/Account.module.css';
 
 export default function MyReadings() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) router.replace('/sign-in');
+  }, [loading, user, router]);
+
+  if (loading || !user) return null;
+
   return (
     <>
       <Head>

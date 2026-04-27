@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SignedIn, SignedOut, UserButton, SignInButton, SignUpButton } from '@clerk/nextjs';
+import { useAuth } from '../lib/auth';
 import styles from './Nav.module.css';
 
 export default function Nav() {
   const router = useRouter();
+  const { user, signOut } = useAuth();
   const isActive = (path) =>
     path === '/blog'
       ? router.pathname.startsWith('/blog')
@@ -13,6 +14,11 @@ export default function Nav() {
         : path === '/dashboard'
           ? router.pathname.startsWith('/dashboard')
           : router.pathname === path;
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.push('/');
+  };
 
   return (
     <nav className={styles.nav}>
@@ -52,28 +58,33 @@ export default function Nav() {
               Contact
             </Link>
           </li>
-          <SignedIn>
-            <li>
-              <Link href="/dashboard" className={isActive('/dashboard') ? styles.active : ''}>
-                Dashboard
-              </Link>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center' }}>
-              <UserButton afterSignOutUrl="/" />
-            </li>
-          </SignedIn>
-          <SignedOut>
-            <li>
-              <SignInButton mode="modal">
-                <button type="button" className={styles.signInBtn}>Sign in</button>
-              </SignInButton>
-            </li>
-            <li>
-              <SignUpButton mode="modal">
-                <button type="button" className={styles.signUpBtn}>Sign up</button>
-              </SignUpButton>
-            </li>
-          </SignedOut>
+          {user ? (
+            <>
+              <li>
+                <Link href="/dashboard" className={isActive('/dashboard') ? styles.active : ''}>
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <button type="button" onClick={handleSignOut} className={styles.signInBtn}>
+                  Sign out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button type="button" onClick={() => router.push('/sign-in')} className={styles.signInBtn}>
+                  Sign in
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => router.push('/sign-up')} className={styles.signUpBtn}>
+                  Sign up
+                </button>
+              </li>
+            </>
+          )}
         </ul>
 
       </div>

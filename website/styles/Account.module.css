@@ -58,3 +58,86 @@
   background: #fafafa;
   color: #555;
 }
+
+.authCard {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+}
+
+.authTitle {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+.authLede {
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.authLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.authInput {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+}
+
+.authInput:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.authError {
+  color: #c0392b;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.authSubmit {
+  padding: 0.75rem 1rem;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.authSubmit:hover:not(:disabled) {
+  background: #000;
+}
+
+.authSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.authFootnote {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #555;
+  text-align: center;
+}

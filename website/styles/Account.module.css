@@ -141,3 +141,18 @@
   color: #555;
   text-align: center;
 }
+
+.authToggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1a1a2e;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.authToggle:hover {
+  color: #000;
+}

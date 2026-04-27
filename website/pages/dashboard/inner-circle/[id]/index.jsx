@@ -7,6 +7,7 @@ import Footer from '../../../../components/Footer';
 import CompatibilityReport from '../../../../components/CompatibilityReport';
 import { useAuth } from '../../../../lib/auth';
 import { supabase } from '../../../../lib/supabase';
+import { saveReading } from '../../../../lib/readings';
 import styles from '../../../../styles/Account.module.css';
 
 export default function MemberDetail() {
@@ -19,6 +20,7 @@ export default function MemberDetail() {
   const [loadingReport, setLoadingReport] = useState(false);
   const [error, setError]     = useState('');
   const [loadedMember, setLoadedMember] = useState(false);
+  const [savingReading, setSavingReading] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) router.replace('/sign-in');
@@ -73,6 +75,33 @@ export default function MemberDetail() {
 
   if (loading || !user) return null;
 
+  const handleSaveReading = async () => {
+    if (!report || !member) return;
+    setSavingReading(true);
+    try {
+      const saved = await saveReading({
+        userId: user.id,
+        person1: {
+          name: profile?.name || 'You',
+          birthday: profile?.birthday,
+          birthTime: profile?.birth_time ? profile.birth_time.slice(0, 5) : '',
+          gender: profile?.gender || 'M',
+        },
+        person2: {
+          name: member.name,
+          birthday: member.birthday,
+          birthTime: member.birth_time ? member.birth_time.slice(0, 5) : '',
+          gender: member.gender || 'F',
+        },
+        report,
+      });
+      router.push(`/dashboard/readings/${saved.slug}`);
+    } catch (e) {
+      setError(e.message);
+      setSavingReading(false);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -114,7 +143,12 @@ export default function MemberDetail() {
 
             {report && (
               <section style={{ marginTop: '1.5rem' }}>
-                <h2 className={styles.subTitle}>Your compatibility</h2>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '1rem', marginBottom: '0.75rem' }}>
+                  <h2 className={styles.subTitle} style={{ margin: 0 }}>Your compatibility</h2>
+                  <button type="button" onClick={handleSaveReading} disabled={savingReading} className={styles.authSubmit}>
+                    {savingReading ? 'Saving…' : 'Save as reading'}
+                  </button>
+                </div>
                 <CompatibilityReport
                   result={report}
                   person1Label={profile?.name || 'You'}

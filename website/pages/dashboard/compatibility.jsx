@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
-import CompatibilityReport from '../../components/CompatibilityReport';
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
+import { saveReading } from '../../lib/readings';
 import styles from '../../styles/Account.module.css';
 
 export default function CompatibilityPage() {
@@ -15,7 +15,6 @@ export default function CompatibilityPage() {
 
   const [p1, setP1] = useState({ name: 'You',     birthday: '', birthTime: '', gender: 'M' });
   const [p2, setP2] = useState({ name: 'Partner', birthday: '', birthTime: '', gender: 'F' });
-  const [result, setResult] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -57,27 +56,19 @@ export default function CompatibilityPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Calculation failed');
-      setResult(data);
+
+      const saved = await saveReading({
+        userId: user.id,
+        person1: p1,
+        person2: p2,
+        report: data,
+      });
+      router.push(`/dashboard/readings/${saved.slug}`);
     } catch (e) {
       setError(e.message);
-    } finally {
       setSubmitting(false);
     }
   };
-
-  const Field = ({ label, person, field, type = 'text', placeholder, ...rest }) => (
-    <label className={styles.authLabel}>
-      {label}
-      <input
-        type={type}
-        value={person[field] || ''}
-        onChange={(e) => (person === p1 ? setP1 : setP2)({ ...person, [field]: e.target.value })}
-        className={styles.authInput}
-        placeholder={placeholder}
-        {...rest}
-      />
-    </label>
-  );
 
   const personForm = (label, person, setter) => (
     <div className={styles.compatCard}>
@@ -85,39 +76,19 @@ export default function CompatibilityPage() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
         <label className={styles.authLabel}>
           Name
-          <input
-            type="text"
-            value={person.name}
-            onChange={(e) => setter({ ...person, name: e.target.value })}
-            className={styles.authInput}
-          />
+          <input type="text" value={person.name} onChange={(e) => setter({ ...person, name: e.target.value })} className={styles.authInput} />
         </label>
         <label className={styles.authLabel}>
           Birthday
-          <input
-            type="date"
-            value={person.birthday}
-            onChange={(e) => setter({ ...person, birthday: e.target.value })}
-            required
-            className={styles.authInput}
-          />
+          <input type="date" value={person.birthday} onChange={(e) => setter({ ...person, birthday: e.target.value })} required className={styles.authInput} />
         </label>
         <label className={styles.authLabel}>
           Birth time (optional)
-          <input
-            type="time"
-            value={person.birthTime}
-            onChange={(e) => setter({ ...person, birthTime: e.target.value })}
-            className={styles.authInput}
-          />
+          <input type="time" value={person.birthTime} onChange={(e) => setter({ ...person, birthTime: e.target.value })} className={styles.authInput} />
         </label>
         <label className={styles.authLabel}>
           Gender
-          <select
-            value={person.gender}
-            onChange={(e) => setter({ ...person, gender: e.target.value })}
-            className={styles.authInput}
-          >
+          <select value={person.gender} onChange={(e) => setter({ ...person, gender: e.target.value })} className={styles.authInput}>
             <option value="M">Male</option>
             <option value="F">Female</option>
           </select>
@@ -134,10 +105,10 @@ export default function CompatibilityPage() {
       </Head>
       <Nav />
       <main className={`container ${styles.wrap}`}>
-        <h1 className={styles.title}>Compatibility calculator</h1>
+        <h1 className={styles.title}>New compatibility reading</h1>
         <p className={styles.lede}>
-          Compare any two birth charts. Year-pillar Chinese zodiac drives the
-          rating; full Four Pillars are shown when birth time is provided.
+          Enter two people. We&apos;ll save the report to your dashboard with its
+          own page so you can come back to it.
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -150,20 +121,13 @@ export default function CompatibilityPage() {
 
           <div style={{ marginTop: '1.5rem' }}>
             <button type="submit" disabled={submitting} className={styles.authSubmit}>
-              {submitting ? 'Calculating…' : 'Calculate compatibility'}
+              {submitting ? 'Calculating & saving…' : 'Generate reading'}
             </button>
           </div>
         </form>
 
-        {result && (
-          <section style={{ marginTop: '2.5rem' }}>
-            <h2 className={styles.subTitle}>Report</h2>
-            <CompatibilityReport result={result} person1Label={p1.name} person2Label={p2.name} />
-          </section>
-        )}
-
         <p className={styles.authFootnote} style={{ marginTop: '2.5rem' }}>
-          <Link href="/dashboard">← Back to dashboard</Link>
+          <Link href="/dashboard/readings">View saved readings</Link> · <Link href="/dashboard">← Dashboard</Link>
         </p>
       </main>
       <Footer />

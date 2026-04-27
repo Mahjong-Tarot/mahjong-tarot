@@ -38,7 +38,7 @@ export default function Nav() {
             </Link>
           </li>
           <li>
-            <Link href="/readings#book">
+            <Link href="/the-mahjong-mirror" className={isActive('/the-mahjong-mirror') ? styles.active : ''}>
               Book
             </Link>
           </li>

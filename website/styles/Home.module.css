@@ -342,6 +342,112 @@
   font-weight: 400;
 }
 
+/* ── Mirror session, single card with three duration tiers ── */
+.mirrorSession {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: var(--d-3);
+  padding: var(--d-5) 0;
+  border: 0;
+  background: transparent;
+}
+.mirrorSession:hover { transform: none; }
+.mirrorBody { min-width: 0; }
+
+.livePill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fire-600);
+  border: 1px solid var(--fire-500);
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  margin-bottom: 10px;
+}
+
+.tierRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: var(--d-4);
+}
+.tier {
+  position: relative;
+  display: block;
+  padding: 18px 18px 20px;
+  border: 1px solid var(--rule);
+  background: var(--paper-pure);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+.tier:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.tierFire {
+  border-color: var(--fire-500);
+  background: linear-gradient(180deg, rgba(231,80,46,0.04), rgba(231,80,46,0.0));
+}
+.tierFire:hover { border-color: var(--fire-600); }
+
+.tierFlag {
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  background: var(--fire-500);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.tierName {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.tierFire .tierName { color: var(--fire-600); }
+
+.tierLen {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 8px;
+  line-height: 1;
+}
+
+.tierPrice {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--fire-600);
+  margin-top: 4px;
+  letter-spacing: -0.01em;
+}
+
+.tierNote {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.dot {
+  color: var(--rule);
+  margin: 0 8px;
+}
+
 .sessionsFooter {
   margin-top: var(--d-5);
   display: flex;
@@ -517,6 +623,18 @@
   letter-spacing: 0.04em;
   color: var(--ink);
   text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
+
+.deckSuit {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-top: 4px;
   position: relative;
   z-index: 2;
 }
@@ -851,8 +969,10 @@
 
 @media (max-width: 768px) {
   .session { grid-template-columns: 64px 1fr; gap: var(--d-3); padding: var(--d-3) var(--d-4); }
+  .mirrorSession { padding: var(--d-4) 0; }
   .sessionMark { width: 64px; height: 64px; font-size: 28px; }
   .sessionPrice { grid-column: 1 / -1; text-align: left; padding-top: var(--d-3); border-top: 1px solid var(--rule); }
+  .tierRow { grid-template-columns: 1fr; }
   .heroStats { grid-template-columns: 1fr; gap: var(--d-3); }
   .heroStats > div:not(:last-child) {
     padding-bottom: var(--d-3);

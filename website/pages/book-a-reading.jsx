@@ -11,10 +11,10 @@ const TIERS = [
     duration: 30,
     mark: '30',
     markVariant: '',
-    title: 'Quick Reading',
-    desc: 'A focused reading on one topic. Clarity around a single decision or question.',
+    title: 'A focused look',
+    desc: 'One question, one spread. Good for a single decision.',
     meta: ['Live online', '30 min', '1-on-1'],
-    price: 39,
+    price: 49,
     bullets: [
       'One topic, one question',
       'Live with Bill, online',
@@ -25,10 +25,10 @@ const TIERS = [
     duration: 60,
     mark: '60',
     markVariant: 'fire',
-    title: 'Standard Reading',
-    desc: 'Multiple topics with time to explore: relationships, work, decisions in flux. Most popular.',
+    title: 'The full mirror',
+    desc: 'Complete reading across all three traditions. Most chosen.',
     meta: ['Live online', '60 min', '1-on-1'],
-    price: 59,
+    price: 69,
     bullets: [
       'Up to three topics',
       'Live with Bill, online',
@@ -40,13 +40,13 @@ const TIERS = [
     duration: 90,
     mark: '90',
     markVariant: 'ink',
-    title: 'Extended Reading',
-    desc: 'A comprehensive reading across the major areas of your life. Right for periods of uncertainty or big transitions.',
+    title: 'Deep counsel',
+    desc: 'Multiple questions, full Four Pillars chart. For periods of uncertainty or big transitions.',
     meta: ['Live online', '90 min', '1-on-1'],
-    price: 99,
+    price: 129,
     bullets: [
-      'Full life-area look',
-      'Live with Bill, online',
+      'Multiple questions',
+      'Full Four Pillars chart',
       'Recording sent after the call',
     ],
   },
@@ -105,13 +105,14 @@ export default function BookAReading() {
 
           {/* Header */}
           <header className={styles.header}>
-            <span className={styles.eyebrow}>Step 1 of 4</span>
+            <span className={styles.eyebrow}>Live Reading</span>
             <h1 className={styles.title}>
-              Choose your <em>reading</em>.
+              Sit at the table with <em>Bill</em>
             </h1>
             <p className={styles.lede}>
-              One product, three lengths. Pick the one that fits your question;
-              you can always upgrade later.
+              A live, one-on-one Mahjong Mirror Session conducted online. Pick a length,
+              choose a time, and we&apos;ll send a private link an hour before. A recording
+              arrives in your inbox the next day.
             </p>
           </header>
 

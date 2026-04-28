@@ -7,7 +7,7 @@ import styles from './Nav.module.css';
 const PUBLIC_LINKS = [
   { href: '/about',              label: 'About'   },
   { href: '/the-mahjong-mirror', label: 'Book'    },
-  { href: '/blog',               label: 'Blog'    },
+  { href: '/blog',               label: 'Journal' },
   { href: '/contact',            label: 'Contact' },
 ];
 
@@ -112,42 +112,43 @@ export default function Nav() {
             )}
           </ul>
         ) : (
-          <ul className={styles.links}>
-            {PUBLIC_LINKS.map((l) =>
-              l.dropdown ? (
-                <li
-                  key={l.href}
-                  className={styles.dropdown}
-                  onMouseEnter={() => setOpenDropdown(l.href)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
-                    {l.label} <span className={styles.caret} aria-hidden="true">▾</span>
-                  </Link>
-                  <ul className={`${styles.dropdownMenu} ${openDropdown === l.href ? styles.dropdownOpen : ''}`}>
-                    {l.dropdown.map((d) => (
-                      <li key={d.href}>
-                        <Link href={d.href} className={router.pathname.startsWith(d.href) ? styles.active : ''}>
-                          {d.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li key={l.href}>
-                  <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
-                    {l.label}
-                  </Link>
-                </li>
-              ),
-            )}
-            <li>
-              <button type="button" onClick={() => router.push('/sign-in')} className={styles.signInBtn}>
-                Sign in
-              </button>
-            </li>
-          </ul>
+          <>
+            <ul className={styles.links}>
+              {PUBLIC_LINKS.map((l) =>
+                l.dropdown ? (
+                  <li
+                    key={l.href}
+                    className={styles.dropdown}
+                    onMouseEnter={() => setOpenDropdown(l.href)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
+                      {l.label} <span className={styles.caret} aria-hidden="true">▾</span>
+                    </Link>
+                    <ul className={`${styles.dropdownMenu} ${openDropdown === l.href ? styles.dropdownOpen : ''}`}>
+                      {l.dropdown.map((d) => (
+                        <li key={d.href}>
+                          <Link href={d.href} className={router.pathname.startsWith(d.href) ? styles.active : ''}>
+                            {d.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : (
+                  <li key={l.href}>
+                    <Link href={l.href} className={isPublicActive(l.href) ? styles.active : ''}>
+                      {l.label}
+                    </Link>
+                  </li>
+                ),
+              )}
+            </ul>
+            <div className={styles.navRight}>
+              <Link href="/sign-in" className={styles.navSignin}>Sign in</Link>
+              <Link href="/signup" className={styles.cta}>Get Premium Access</Link>
+            </div>
+          </>
         )}
       </div>
     </nav>

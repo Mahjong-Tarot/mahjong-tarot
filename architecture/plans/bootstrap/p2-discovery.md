@@ -500,6 +500,696 @@ content/topics/{slug}/blog.md → website/app/blog/{slug}/page.tsx
 
 ---
 
+## SECTION 4b — Install Agent Skills
+
+For each agent, ask the user the questions below, then write fully populated skill files immediately. Do not leave placeholders — use the answers plus the brand files already written in Section 1 to fill every field before saving.
+
+---
+
+### Skill 1 — Writer: write-post
+
+Ask the user:
+
+```
+A few quick questions to set up your Writer agent:
+
+1. What content types do you publish?
+   (e.g. blog posts, newsletters, social captions, video scripts — list all that apply)
+
+2. How many blog posts per week?
+
+3. What are your main content categories or topics?
+   (e.g. "Chinese astrology, tarot, relationships, money" — these become the writer's topic list)
+
+4. How long should a typical blog post be?
+   (e.g. 800–1200 words, 1500–2000 words)
+
+5. What call-to-action should every post end with?
+   (e.g. "book a reading", "buy the book", "subscribe to the newsletter")
+```
+
+Wait for answers. Then write `agents/writer/skills/write-post/SKILL.md`:
+
+```markdown
+---
+name: write-post
+description: "Writes a complete blog post package for {PROJECT_NAME} — blog draft, social captions, image prompt, and SEO guide. Invoke when the user says 'write a post about X', 'write this week's content', or gives a topic."
+---
+
+# Write Post Skill
+
+Your job is to take a topic and produce a complete, publish-ready content package in the brand voice defined in `resources/brand-voice.md`.
+
+---
+
+## Before You Start
+
+Read these files before doing anything else:
+1. `resources/brand-voice.md` — voice, tone, vocabulary, what to avoid
+2. `resources/web-style-guide.md` — post structure, categories, formatting rules
+3. `resources/audience-personas.md` — who you are writing for
+4. `content/content-calendar/content-calendar.md` — existing posts, keywords taken
+
+---
+
+## Input
+
+The user provides:
+- **Topic** — what the post is about
+- **Target publish date** — when it goes live (defaults to next available slot in the calendar)
+- **Keyword** (optional) — if not provided, choose one that doesn't conflict with existing posts
+
+---
+
+## Step 1 — Choose Slug, Keyword, and Style
+
+- Generate a kebab-case slug from the topic
+- Confirm the keyword does not conflict with any existing post in `content/content-calendar/`
+- Choose a post style from `resources/web-style-guide.md` that hasn't been used in the last 3 posts
+
+---
+
+## Step 2 — Write the Blog Post
+
+Write a full blog post following the brand voice in `resources/brand-voice.md`.
+
+Required elements:
+- **Title:** specific and compelling, ≤60 characters
+- **Category:** must match a category in `resources/web-style-guide.md`
+- **Read time:** calculate at ~250 words per minute
+- **Excerpt:** 1–2 sentence hook for the blog index card
+- **Body:** {POST_LENGTH} following the chosen style structure
+- **CTA:** every post ends with "{POST_CTA}"
+
+---
+
+## Step 3 — Write Social Captions
+
+For each platform the business publishes on (from `resources/web-style-guide.md`):
+- Derive a self-contained caption from the blog post
+- Match platform length and tone conventions
+- End with the appropriate CTA for that platform
+
+---
+
+## Step 4 — Write the Image Prompt
+
+Write `image-prompt.md` in the topic folder — the Designer reads this, do not skip it:
+
+```
+subject: [what is in the image — describe topic, not medium]
+style: [HUMAN | TEXT | SCENE]
+mood: [emotional tone in 2–3 words]
+colors: [pull from resources/design-system.md]
+composition: [framing description]
+negative: [elements to avoid]
+```
+
+---
+
+## Step 5 — Write the SEO Guide
+
+Write `seo.md` covering: target keyword, secondary keywords, meta title (≤60 chars), meta description (≤160 chars), header structure, internal link suggestions.
+
+---
+
+## Step 6 — Save All Files
+
+Create `content/topics/YYYY-MM-DD-{slug}/` and save:
+- `blog.md` — full post with frontmatter (title, slug, date, category, read_time, excerpt)
+- `social-{platform}.md` — one file per platform
+- `image-prompt.md` — for the Designer
+- `seo.md` — SEO guide
+
+---
+
+## Step 7 — Update the Content Calendar
+
+In `content/content-calendar/content-calendar.md`, add or update the entry for this topic:
+`STATUS: PLANNED` → `STATUS: WRITTEN`
+
+---
+
+## Step 8 — Confirm
+
+Report:
+- Post title and slug
+- Word count and read time
+- Category used
+- Platforms covered
+- Image prompt saved (yes/no)
+- Calendar status updated (PLANNED → WRITTEN)
+```
+
+---
+
+### Skill 2 — Writer: write-email
+
+Ask the user:
+
+```
+For the weekly email digest:
+
+1. Which email platform do you send from?
+   (e.g. MailerLite, Mailchimp, Resend, ConvertKit)
+
+2. What is the sender name and reply-to email?
+
+3. How would you describe the email's purpose in one sentence?
+   (e.g. "A weekly digest connecting that week's three blog posts for our subscriber list")
+
+4. Approximate word count target for the email body?
+   (recommended: 250–350 words)
+```
+
+Wait for answers. Then write `agents/writer/skills/write-email/SKILL.md`:
+
+```markdown
+---
+name: write-email
+description: "Drafts the weekly email connecting that week's blog posts. Run after write-post has completed all posts for the week. Saves draft to emails/drafts/YYYY-MM-DD.md."
+---
+
+# Write Email Skill
+
+Draft the weekly email that ties that week's blog posts together and links to each one.
+
+---
+
+## When to Run
+
+After all blog posts for the week are written (STATUS: WRITTEN in the content calendar). Run once per week — one email per week, not one per post.
+
+---
+
+## Input
+
+Read from `content/topics/` — find all folders whose publish date falls in the current week. Extract title, slug, and excerpt from each `blog.md`.
+
+---
+
+## Format
+
+Save to `emails/drafts/YYYY-MM-DD.md` (Monday date of the publish week):
+
+```markdown
+Subject: [Compelling subject line — ≤60 characters, works as a standalone hook]
+
+[Intro — 1–2 sentences connecting the week's theme]
+
+**[Post 1 title]**
+[2–3 sentence blurb that teases without giving it all away]
+Read more → https://[domain]/blog/posts/[slug]
+
+**[Post 2 title]**
+[2–3 sentence blurb]
+Read more → https://[domain]/blog/posts/[slug]
+
+**[Post 3 title]**
+[2–3 sentence blurb]
+Read more → https://[domain]/blog/posts/[slug]
+
+[Closing line — warm, in the brand voice from resources/brand-voice.md]
+
+[CTA — one link to the most relevant page for this week's theme]
+
+— {SENDER_NAME}
+```
+
+---
+
+## Rules
+
+- Total body: ~{EMAIL_LENGTH} words (excluding subject)
+- Tone: brand voice from `resources/brand-voice.md` — write as if to a friend on the list
+- Subject line must work standalone — not "This week on the blog"
+- Slugs come from the posts written this session — use exact slugs, never invent them
+- Platform: {EMAIL_PLATFORM} — plain markdown, the Sender agent handles rendering
+
+---
+
+## Confirm
+
+Report: draft path, subject line used, posts linked.
+```
+
+---
+
+### Skill 3 — Designer: generate-image
+
+Ask the user:
+
+```
+For image generation:
+
+1. What image styles fit your brand?
+   (e.g. "cinematic photography, dark moody tones" or "bright illustration, flat design")
+
+2. What is your primary brand color and accent color?
+   (will read from resources/design-system.md if already set)
+
+3. Any hard rules for images?
+   (e.g. "never show faces", "always include the brand color", "no text overlays")
+
+4. Blog hero image dimensions? (default: 1200×630)
+```
+
+Wait for answers. Then write `agents/designer/skills/generate-image/SKILL.md`:
+
+```markdown
+---
+name: generate-image
+description: "Generates hero images and social visuals using the Gemini API. Reads image-prompt.md written by the Writer. Never writes its own prompts."
+---
+
+# Generate Image Skill
+
+Generate all visual assets for the week using the Gemini API (`gemini-2.0-flash-preview-image-generation`).
+
+---
+
+## Before You Start
+
+Read:
+1. `resources/design-system.md` — palette, typography, brand style
+2. `content/content-calendar/content-calendar.md` — find topics with STATUS: WRITTEN
+3. For each topic: verify `content/topics/{slug}/image-prompt.md` exists
+
+If any WRITTEN topic is missing `image-prompt.md` — STOP. Tell the user to rerun the Writer for that topic first.
+
+---
+
+## Generation Pipeline
+
+For each topic with STATUS: WRITTEN and an existing `image-prompt.md`:
+
+### Step 1 — Build the prompt
+
+Read `content/topics/{slug}/image-prompt.md`. Translate the structured prompt into a single descriptive sentence for the Gemini API:
+
+- Lead with the subject
+- Include mood and style
+- Reference brand colors from `resources/design-system.md`
+- Apply style rules: {IMAGE_STYLE_RULES}
+- Hard rules: {IMAGE_HARD_RULES}
+
+### Step 2 — Generate via Gemini API
+
+```python
+import anthropic, base64, re
+from pathlib import Path
+
+client = anthropic.Anthropic()
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": [
+        {"type": "text", "text": f"Generate an image: {prompt}"}
+    ]}]
+)
+# Extract base64 image from response and save
+```
+
+Use the Gemini API directly via Python SDK (`google-generativeai`):
+
+```python
+import google.generativeai as genai
+import os, base64
+from pathlib import Path
+
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+model = genai.GenerativeModel("gemini-2.0-flash-preview-image-generation")
+response = model.generate_content(prompt)
+for part in response.candidates[0].content.parts:
+    if hasattr(part, 'inline_data'):
+        img_bytes = base64.b64decode(part.inline_data.data)
+        Path(output_path).write_bytes(img_bytes)
+```
+
+### Step 3 — Save and optimise
+
+Save to `content/topics/{slug}/{slug}-hero.webp` at target dimensions {IMAGE_DIMENSIONS}.
+Optimise: reduce quality in 5% steps until under 200 KB.
+
+### Step 4 — Update content calendar
+
+Change `STATUS: WRITTEN` → `STATUS: DESIGNED` in `content/content-calendar/content-calendar.md`.
+
+---
+
+## Hard Rules
+
+- Never generate without `image-prompt.md` from the Writer
+- Never write your own prompts — execute the Writer's prompt exactly
+- {IMAGE_HARD_RULES}
+- Never use consecutive images with the same style (HUMAN / TEXT / SCENE)
+```
+
+---
+
+### Skill 4 — Web Developer: build-page
+
+Ask the user:
+
+```
+For the web developer:
+
+1. What is your blog post URL pattern?
+   (e.g. /blog/posts/{slug} or /articles/{slug})
+
+2. Are there any required page sections beyond title, body, and CTA?
+   (e.g. author bio, related posts, newsletter signup at the bottom)
+
+3. What framework is the website built on?
+   (will be inferred from Section 2 — confirm or override)
+```
+
+Wait for answers. Then write `agents/web-developer/skills/build-page/SKILL.md`:
+
+```markdown
+---
+name: build-page
+description: "Converts an approved blog.md into a production-ready page component and publishes it to the website. Invoke with a slug or 'publish today's post'."
+---
+
+# Build Page Skill
+
+Convert an approved markdown blog post into a production-ready website page.
+
+---
+
+## Input
+
+- Slug provided by the user, OR
+- Today's date — find the matching entry in `content/content-calendar/` with STATUS: DESIGNED
+
+---
+
+## Pre-flight Checks
+
+1. Confirm `content/topics/{slug}/blog.md` exists
+2. Confirm `content/topics/{slug}/{slug}-hero.webp` exists (Designer must finish first)
+3. Confirm the post's `date:` is today or in the past — never publish future-dated posts
+4. Check source `blog.md` for em dashes (`—`) — if found, STOP and report. Do not strip silently.
+
+---
+
+## Step 1 — Read Style Guides
+
+Read before generating any code:
+- `resources/design-system.md` — colours, typography, spacing
+- `resources/web-style-guide.md` — component patterns, valid categories
+
+---
+
+## Step 2 — Generate the Page Component
+
+Build the page at `{BLOG_URL_PATTERN}`:
+
+Required elements:
+- SEO metadata: title, meta description, og:title, og:description, og:image, canonical URL
+- Category tag matching `resources/web-style-guide.md` — no invented categories
+- Read-time estimate in the post header
+- All images via the framework's image component — never raw `<img>`
+- Required sections: {REQUIRED_PAGE_SECTIONS}
+
+---
+
+## Step 3 — Promote the Hero Image
+
+Copy `content/topics/{slug}/{slug}-hero.webp` → `website/public/images/blog/{slug}.webp`
+
+---
+
+## Step 4 — Update the Blog Index
+
+Add a new post card at the top of the blog listing page. Follow the existing card pattern exactly — do not modify any existing cards.
+
+---
+
+## Step 5 — Update Records
+
+1. Append one row to `context/publish-log.md`:
+   `| YYYY-MM-DD | {title} | {slug} | {category} |`
+
+2. Update `content/content-calendar/content-calendar.md`:
+   `STATUS: DESIGNED` → `STATUS: PUBLISHED`
+
+---
+
+## Step 6 — Confirm
+
+Report: file path written, image promoted, blog index updated, publish log appended, calendar status updated.
+
+Never commit or push — hand off to the human for `git push`.
+```
+
+---
+
+### Skill 5 — Project Manager: daily-checkin
+
+Ask the user:
+
+```
+For the project manager:
+
+1. Who are the team members?
+   (name and email for each person who submits daily check-ins)
+
+2. What timezone does the team work in?
+
+3. Which notification channels do you use?
+   (e.g. Slack, Lark, email — list all)
+
+4. What time should the morning reminder go out?
+   (default: 7:00 AM in your timezone)
+
+5. What time should the stand-up be compiled?
+   (default: 9:00 AM in your timezone)
+```
+
+Wait for answers. Then write `agents/project-manager/skills/daily-checkin/SKILL.md`:
+
+```markdown
+---
+name: daily-checkin
+description: "Handles the daily stand-up cycle — morning reminder at {REMINDER_TIME} and compiled briefing at {COMPILE_TIME}. Can also accept a manual check-in from any team member."
+---
+
+# Daily Check-in Skill
+
+Two-phase daily stand-up cycle.
+
+---
+
+## Team
+
+| Name | Email | Check-in file |
+|------|-------|---------------|
+{TEAM_TABLE}
+
+Timezone: {TIMEZONE}
+
+---
+
+## Phase 1 — Morning Reminder ({REMINDER_TIME})
+
+Send a reminder to all team members via {NOTIFICATION_CHANNELS}:
+
+> "Good morning! Please submit your check-in to `standup/individual/{name}.md` before {COMPILE_TIME} so it's included in today's stand-up."
+
+---
+
+## Check-in File Format
+
+Each team member writes to `standup/individual/{name}.md`:
+
+```
+date: YYYY-MM-DD
+name: {Name}
+
+## Yesterday
+- [what was completed]
+
+## Today's focus
+- [what they plan to work on]
+
+## Blockers
+- [any blockers, or "None"]
+
+## Notes
+[optional]
+```
+
+---
+
+## Phase 2 — Compile & Distribute ({COMPILE_TIME})
+
+### Step 1 — Read all check-in files
+
+For each team member, read `standup/individual/{name}.md`.
+**Freshness rule:** a check-in is fresh if its `date:` matches the previous working day.
+If missing or stale → mark as absent, continue.
+
+### Step 2 — Detect conflicts
+
+Flag when two or more people are working on the same area (same file, feature, or topic).
+
+### Step 3 — Compile and save
+
+Write to `standup/briefings/YYYY-MM/YYYY-MM-DD.md`:
+
+```markdown
+# Daily Stand-Up — {Day, Month DD YYYY}
+_Compiled at {COMPILE_TIME} {TIMEZONE}_
+
+## ⚠️ Conflicts & Sync Alerts
+[conflicts or "None today"]
+
+## 👥 Check-Ins
+
+### {Name}
+**Status:** ✅ Submitted | 🔴 Absent
+**Focus:** [items]
+**Blockers:** [blockers or None]
+
+[repeat for each team member]
+
+_End of stand-up._
+```
+
+### Step 4 — Send via {NOTIFICATION_CHANNELS}
+
+Send the compiled briefing to the team. Log any send failures inline — no separate alerts folder.
+
+---
+
+## Manual Check-in
+
+If a team member submits a check-in mid-conversation, write it directly to their file and confirm receipt.
+```
+
+---
+
+### Skill 6 — Project Manager: raid-log
+
+Write `agents/project-manager/skills/raid-log/SKILL.md` immediately (no questions needed — fully generic):
+
+```markdown
+---
+name: raid-log
+description: "Logs a risk, assumption, issue, or dependency to the RAID log. Invoke when the user says 'log this risk', 'add to RAID', or describes a project concern."
+---
+
+# RAID Log Skill
+
+Log a new entry to the project RAID log at `standup/briefings/YYYY-MM/raid.md`.
+
+---
+
+## Input
+
+Ask the user:
+1. Type: Risk / Assumption / Issue / Dependency
+2. Description (one sentence)
+3. Probability: High / Medium / Low
+4. Impact: High / Medium / Low
+5. Owner (name)
+6. Mitigation or action
+
+---
+
+## Log Format
+
+Append to `standup/briefings/YYYY-MM/raid.md`:
+
+```
+| {TYPE} | {Description} | P:{Probability} I:{Impact} | Owner: {Owner} | {Mitigation} | Open | {YYYY-MM-DD} |
+```
+
+Create the file with a header row if it does not exist:
+
+```
+| Type | Description | P/I | Owner | Mitigation | Status | Date |
+|------|-------------|-----|-------|------------|--------|------|
+```
+
+Confirm: entry logged, file path.
+```
+
+---
+
+### Skill 7 — Project Manager: scope-change
+
+Write `agents/project-manager/skills/scope-change/SKILL.md` immediately (no questions needed):
+
+```markdown
+---
+name: scope-change
+description: "Assesses a proposed scope change — impact on timeline, effort, and risks. Invoke when the user says 'we want to add X', 'can we change Y', or 'assess this change'."
+---
+
+# Scope Change Skill
+
+Assess a proposed change and produce a structured impact summary.
+
+---
+
+## Input
+
+Ask the user:
+1. What is the proposed change? (one sentence)
+2. Why is it being requested?
+3. What is the deadline or urgency?
+
+---
+
+## Assessment
+
+Produce a structured report covering:
+
+**Change:** [what is proposed]
+**Reason:** [why]
+**Effort estimate:** Small (< 1 day) / Medium (1–3 days) / Large (> 3 days)
+**Timeline impact:** None / Delays by ~X days / Requires replanning
+**Risk introduced:** [any new risks]
+**Recommendation:** Accept / Accept with conditions / Reject
+**Conditions (if any):** [what must be true for this to be safe to accept]
+
+---
+
+## Output
+
+Save to `standup/briefings/YYYY-MM/scope-changes.md` and report inline.
+```
+
+---
+
+After all skills are written, confirm to the user:
+
+```
+✅ Skills installed:
+
+  Writer
+  ├── agents/writer/skills/write-post/SKILL.md
+  └── agents/writer/skills/write-email/SKILL.md
+
+  Designer
+  └── agents/designer/skills/generate-image/SKILL.md
+
+  Web Developer
+  └── agents/web-developer/skills/build-page/SKILL.md
+
+  Project Manager
+  ├── agents/project-manager/skills/daily-checkin/SKILL.md
+  ├── agents/project-manager/skills/raid-log/SKILL.md
+  └── agents/project-manager/skills/scope-change/SKILL.md
+
+Ready for Section 5.
+```
+
+---
+
 ## SECTION 5 — Update Project CLAUDE.md
 
 Overwrite `CLAUDE.md` in project root with fully populated version:

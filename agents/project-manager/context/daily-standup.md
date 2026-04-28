@@ -29,7 +29,7 @@ Two-phase async stand-up cycle:
 
 ## Phase 1 — Morning Reminder (7:00 AM)
 
-Send a reminder to Dave, Yon, Trac, and Khang:
+Send a reminder to Dave, Yon, and Trac:
 
 > *"Good morning! Please submit your check-in to `standup/individual/<name>.md` before 9 AM so it's included in today's stand-up."*
 

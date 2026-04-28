@@ -1,17 +1,21 @@
-date: 2026-04-27
+date: 2026-04-28
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #132: pm(weekly-rag): 2026-04-26 — merged at 06:01 UTC
+- PR #133: pm(standup-morning): 2026-04-27 — merged 2026-04-27 00:06 UTC
+- PR #134: pm(standup-compile): 2026-04-27 — merged 2026-04-27 02:30 UTC
+- PR #135: pm(standup-compile): 2026-04-27 — notification retry — merged 2026-04-27 02:38 UTC
+- PR #131: Standup: 2026-04-26 — merged 2026-04-27 07:13 UTC
+- PR #136: Standup: 2026-04-27 — merged 2026-04-27 07:12 UTC
 
 **Next:**
 - No open work detected
 
 **Blockers:**
-None
+- Lark bot auth still failing (`[10014] app secret invalid`) — flagged again this morning when attempting to send the standup reminder. LARK_CHAT_ID also missing from env files (`.env`, `.env.local`); credentials need rotating before tomorrow's automated runs.
 
 ---
 
@@ -32,7 +36,7 @@ None
 ## writer
 
 **Completed:**
-- No activity
+- PR #146: Writer: Week of 2026-05-04 — merged 2026-04-27 18:32 UTC (full blog/SEO/social bundle for May 4 / May 6 / May 8 — Love and Compatibility)
 
 **Next:**
 - No open work detected

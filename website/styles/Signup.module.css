@@ -67,14 +67,14 @@
 
 /* ── Page layout ── */
 .main {
-  padding: var(--d-7) 0 var(--d-8);
+  padding: var(--d-6) 0 var(--d-7);
   background: var(--paper);
   min-height: 70vh;
 }
 .signup {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--d-7);
+  gap: var(--d-6);
   align-items: start;
 }
 
@@ -837,8 +837,8 @@
 
 /* Trust strip */
 .trust {
-  margin-top: var(--d-7);
-  padding-top: var(--d-5);
+  margin-top: var(--d-6);
+  padding-top: var(--d-4);
   border-top: 1px solid var(--rule);
   display: grid;
   grid-template-columns: repeat(3, 1fr);

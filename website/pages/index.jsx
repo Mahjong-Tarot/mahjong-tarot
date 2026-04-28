@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import NewsletterSignup from '../components/NewsletterSignup';
+import { useAuth } from '../lib/auth';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
 import { POSTS } from '../lib/posts';
 import styles from '../styles/Home.module.css';
@@ -45,6 +48,17 @@ const DECK = [
 const stripTrailingPeriod = (s) => s.replace(/\.$/, '');
 
 export default function Home() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  // Signed-in users see the dashboard at /, not the marketing page.
+  useEffect(() => {
+    if (!loading && user) router.replace('/dashboard');
+  }, [loading, user, router]);
+
+  // Avoid a flash of the marketing site for users who are about to be redirected.
+  if (loading || user) return null;
+
   const jsonLd = graph([
     ORGANIZATION,
     WEBSITE,

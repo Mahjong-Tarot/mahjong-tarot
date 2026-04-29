@@ -1,12 +1,11 @@
-date: 2026-04-28
+date: 2026-04-29
 name: Yon
 
 ## Yesterday
-- Fixed Preferred Format select field styling on the Mahjong Mirror pre-order page (background, text color, border)
+- Configured DNS for Mahjong Tarot to send emails through MailerLite
 
 ## Today's focus
-- Configure email outreach systems for Mahjong Mirror book on MailChimp
-- Build out website features and readings
+- Onboard Alex and Tam from EO onto Claude
 
 ## Blockers
 None

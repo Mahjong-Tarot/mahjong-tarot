@@ -53,36 +53,55 @@ export async function fetchAlmanacSummariesForMonth(yearMonth) {
 }
 
 export const ACTIVITIES = [
-  { key: 'StartABusiness', label: 'Start a Business' },
-  { key: 'GetMarried', label: 'Get Married' },
-  { key: 'MoveHomes', label: 'Move Homes' },
-  { key: 'SexualActivity', label: 'Intimacy' },
-  { key: 'EatOut', label: 'Eat Out' },
-  { key: 'ConfrontYourBoss', label: 'Confront Your Boss' },
-  { key: 'AdvanceYourCareer', label: 'Advance Your Career' },
-  { key: 'Travel', label: 'Travel' },
-  { key: 'GoOnADate', label: 'Go On a Date' },
-  { key: 'CleanTheHouse', label: 'Clean the House' },
-  { key: 'WorkInTheGarden', label: 'Garden' },
-  { key: 'DoYourHair', label: 'Do Your Hair' },
-  { key: 'DoYourNails', label: 'Do Your Nails' },
-  { key: 'CheckYourHealth', label: 'Check Your Health' },
-  { key: 'EnjoyFamilyTime', label: 'Family Time' },
-  { key: 'SignAContract', label: 'Sign a Contract' },
-  { key: 'MakeDecisions', label: 'Make Decisions' },
-  { key: 'Invest', label: 'Invest' },
-  { key: 'HomeRepair', label: 'Home Repair' },
-  { key: 'GoShopping', label: 'Go Shopping' },
-  { key: 'LeaveARelationship', label: 'Leave a Relationship' },
-  { key: 'MakeAMajorPurchase', label: 'Major Purchase' },
-  { key: 'HaveYourBaby', label: 'Have Your Baby' },
-  { key: 'CookDinnerAtHome', label: 'Cook Dinner at Home' },
-  { key: 'AttendReligiousActivity', label: 'Religious Activity' },
-  { key: 'TakeLegalAction', label: 'Take Legal Action' },
-  { key: 'HaveFuneral', label: 'Hold a Funeral' },
-  { key: 'EnjoyAMovie', label: 'Enjoy a Movie' },
-  { key: 'MeetYourFriends', label: 'Meet Friends' },
+  { key: 'StartABusiness', label: 'Start a Business', slug: 'start-a-business' },
+  { key: 'GetMarried', label: 'Get Married', slug: 'get-married' },
+  { key: 'MoveHomes', label: 'Move Homes', slug: 'move-homes' },
+  { key: 'SexualActivity', label: 'Intimacy', slug: 'intimacy' },
+  { key: 'EatOut', label: 'Eat Out', slug: 'eat-out' },
+  { key: 'ConfrontYourBoss', label: 'Confront Your Boss', slug: 'confront-your-boss' },
+  { key: 'AdvanceYourCareer', label: 'Advance Your Career', slug: 'advance-your-career' },
+  { key: 'Travel', label: 'Travel', slug: 'travel' },
+  { key: 'GoOnADate', label: 'Go On a Date', slug: 'go-on-a-date' },
+  { key: 'CleanTheHouse', label: 'Clean the House', slug: 'clean-the-house' },
+  { key: 'WorkInTheGarden', label: 'Garden', slug: 'garden' },
+  { key: 'DoYourHair', label: 'Do Your Hair', slug: 'do-your-hair' },
+  { key: 'DoYourNails', label: 'Do Your Nails', slug: 'do-your-nails' },
+  { key: 'CheckYourHealth', label: 'Check Your Health', slug: 'check-your-health' },
+  { key: 'EnjoyFamilyTime', label: 'Family Time', slug: 'family-time' },
+  { key: 'SignAContract', label: 'Sign a Contract', slug: 'sign-a-contract' },
+  { key: 'MakeDecisions', label: 'Make Decisions', slug: 'make-decisions' },
+  { key: 'Invest', label: 'Invest', slug: 'invest' },
+  { key: 'HomeRepair', label: 'Home Repair', slug: 'home-repair' },
+  { key: 'GoShopping', label: 'Go Shopping', slug: 'go-shopping' },
+  { key: 'LeaveARelationship', label: 'Leave a Relationship', slug: 'leave-a-relationship' },
+  { key: 'MakeAMajorPurchase', label: 'Major Purchase', slug: 'major-purchase' },
+  { key: 'HaveYourBaby', label: 'Have Your Baby', slug: 'have-your-baby' },
+  { key: 'CookDinnerAtHome', label: 'Cook Dinner at Home', slug: 'cook-dinner-at-home' },
+  { key: 'AttendReligiousActivity', label: 'Religious Activity', slug: 'religious-activity' },
+  { key: 'TakeLegalAction', label: 'Take Legal Action', slug: 'take-legal-action' },
+  { key: 'HaveFuneral', label: 'Hold a Funeral', slug: 'hold-a-funeral' },
+  { key: 'EnjoyAMovie', label: 'Enjoy a Movie', slug: 'enjoy-a-movie' },
+  { key: 'MeetYourFriends', label: 'Meet Friends', slug: 'meet-friends' },
 ];
+
+const ACTIVITY_BY_SLUG = Object.fromEntries(ACTIVITIES.map((a) => [a.slug, a]));
+const ACTIVITY_BY_KEY = Object.fromEntries(ACTIVITIES.map((a) => [a.key, a]));
+
+export function activitySlugToKey(slug) {
+  return ACTIVITY_BY_SLUG[slug]?.key || null;
+}
+
+export function activityKeyToSlug(key) {
+  return ACTIVITY_BY_KEY[key]?.slug || null;
+}
+
+export function getActivityBySlug(slug) {
+  return ACTIVITY_BY_SLUG[slug] || null;
+}
+
+export function getActivityByKey(key) {
+  return ACTIVITY_BY_KEY[key] || null;
+}
 
 const ACTIVITY_KEYWORDS = {
   GetMarried: ['wedding', 'marriage', 'tie the knot'],

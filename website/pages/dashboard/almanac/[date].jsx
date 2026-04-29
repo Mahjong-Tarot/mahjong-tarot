@@ -56,7 +56,14 @@ export default function AlmanacDate() {
             <h1 style={{ marginTop: 'var(--space-xs)' }}>Tong Shu Almanac</h1>
           </div>
           {loaded && !notFound && (
-            <AlmanacView date={date} almanac={almanac} today={today} />
+            <AlmanacView
+              date={date}
+              almanac={almanac}
+              today={today}
+              basePath="/dashboard/almanac"
+              searchHref="/dashboard/almanac/search"
+              monthlyHref={`/dashboard/almanac/calendar/${date.slice(0, 7)}`}
+            />
           )}
           {loaded && notFound && (
             <p style={{ textAlign: 'center', fontStyle: 'italic', color: '#888' }}>

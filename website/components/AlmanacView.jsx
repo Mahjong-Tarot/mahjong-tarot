@@ -14,7 +14,7 @@ function groupActivities(activities, order, labels) {
   return groups;
 }
 
-export default function AlmanacView({ date, almanac, today }) {
+export default function AlmanacView({ date, almanac, today, basePath = '/dashboard/almanac', searchHref = '/dashboard/almanac/search', monthlyHref }) {
   if (!almanac) {
     return (
       <div className={styles.container}>
@@ -41,17 +41,24 @@ export default function AlmanacView({ date, almanac, today }) {
   const LABELS = almanac.labels || Object.fromEntries(ACTIVITY_ORDER.map((k) => [k, k]));
   const groups = groupActivities(activities, ACTIVITY_ORDER, LABELS);
 
+  const luckyCount = groups.Lucky.length;
+  const unluckyCount = groups.Unlucky.length;
+  const normalCount = groups.Normal.length;
+  const totalCount = luckyCount + unluckyCount + normalCount;
+
   return (
     <div className={styles.container}>
-      <Link href="/dashboard/almanac/search" className={styles.searchCta}>
-        <span className={styles.searchCtaIcon} aria-hidden>🔍</span>
-        <span className={styles.searchCtaLabel}>Find a Good Day To…</span>
-        <span className={styles.searchCtaArrow} aria-hidden>›</span>
-      </Link>
+      {searchHref && (
+        <Link href={searchHref} className={styles.searchCta}>
+          <span className={styles.searchCtaIcon} aria-hidden>🔍</span>
+          <span className={styles.searchCtaLabel}>Find a Good Day To…</span>
+          <span className={styles.searchCtaArrow} aria-hidden>›</span>
+        </Link>
+      )}
 
       <div className={styles.dateStrip}>
         {canGoBack ? (
-          <Link href={`/dashboard/almanac/${prevDate}`} className={styles.navArrow} aria-label="Previous day">‹</Link>
+          <Link href={`${basePath}/${prevDate}`} className={styles.navArrow} aria-label="Previous day">‹</Link>
         ) : <span className={styles.navArrowDisabled} aria-hidden>‹</span>}
         <div className={styles.dateLabel}>
           <div className={styles.dateText}>{formatHumanDate(date)}</div>
@@ -59,7 +66,7 @@ export default function AlmanacView({ date, almanac, today }) {
           {holiday && <div className={styles.holiday}>{holiday}</div>}
         </div>
         {canGoForward ? (
-          <Link href={`/dashboard/almanac/${nextDate}`} className={styles.navArrow} aria-label="Next day">›</Link>
+          <Link href={`${basePath}/${nextDate}`} className={styles.navArrow} aria-label="Next day">›</Link>
         ) : <span className={styles.navArrowDisabled} aria-hidden>›</span>}
       </div>
 
@@ -89,6 +96,24 @@ export default function AlmanacView({ date, almanac, today }) {
           <span><strong>Conflicts with:</strong> {year_conflict}</span>
           <span><strong>Lunar:</strong> month {almanac.lunar_month}, day {almanac.lunar_day}</span>
         </div>
+        <details className={styles.whyScore}>
+          <summary className={styles.whySummary}>Why this score?</summary>
+          <div className={styles.whyBody}>
+            <p>
+              The score weighs each of the {totalCount} traditional activities by today&apos;s
+              verdict — Lucky counts as 1, Normal as 0.5, Unlucky as 0. Today scored{' '}
+              <strong>{score}%</strong> with <strong>{luckyCount} Lucky</strong>,{' '}
+              <strong>{normalCount} Normal</strong>, and <strong>{unluckyCount} Unlucky</strong>.
+            </p>
+            <p>
+              The verdicts come from the 12 Day Officer cycle (today is{' '}
+              <strong>{officer.english}</strong>, <span className={styles.whyChinese}>{officer.chinese}</span>{' '}
+              <em>{officer.pinyin}</em>) crossed against the year, month, and day pillars
+              ({pillars.year.element} {pillars.year.sign} · {pillars.month.element} {pillars.month.sign} · {pillars.day.element} {pillars.day.sign}).
+              Same date, same inputs, same answer — the calculation is deterministic, not divined.
+            </p>
+          </div>
+        </details>
       </section>
 
       <section className={styles.section}>
@@ -148,9 +173,11 @@ export default function AlmanacView({ date, almanac, today }) {
         )}
       </section>
 
-      <div className={styles.calendarLink}>
-        <Link href={`/dashboard/almanac/calendar/${date.slice(0, 7)}`}>View Monthly Calendar →</Link>
-      </div>
+      {monthlyHref && (
+        <div className={styles.calendarLink}>
+          <Link href={monthlyHref}>View Monthly Calendar →</Link>
+        </div>
+      )}
     </div>
   );
 }

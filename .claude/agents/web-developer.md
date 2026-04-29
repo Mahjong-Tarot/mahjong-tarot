@@ -91,9 +91,10 @@ Run this for every slug published in the current session.
 
 ## Hard rules
 
-- Never write to `content/` or any `agents/` folder — your domain is `website/` only
+- Never write to `agents/` or any folder outside `website/` and `content/` — the one exception is updating `content/content-calendar/content-calendar.md` to mark STATUS: PUBLISHED after a post goes live
 - Never modify existing posts — only add new ones and update the blog index card list
 - Always include `<Head>` with full SEO and OG tags — no exceptions
 - Use CSS modules for all styles — no inline styles unless unavoidable
 - After writing, update `context/publish-log.md` with one new row
+- After updating the publish log, update `content/content-calendar/content-calendar.md`: change `STATUS: DESIGNED` → `STATUS: PUBLISHED` for each slug just built
 - Never commit or push — hand off to the human for `git push`

@@ -175,6 +175,45 @@
 }
 .officerMeta strong { color: var(--ink); font-weight: 600; }
 
+.whyScore {
+  margin-top: var(--space-md);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: var(--space-sm);
+}
+.whySummary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-4);
+  letter-spacing: 0.02em;
+  list-style: none;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.whySummary::-webkit-details-marker { display: none; }
+.whySummary::before {
+  content: '+';
+  display: inline-block;
+  width: 1.1em;
+  font-size: 1rem;
+  color: var(--fire-500);
+  transition: transform 0.18s ease;
+}
+.whyScore[open] .whySummary::before { content: '−'; }
+.whySummary:hover { color: var(--ink); }
+.whyBody {
+  margin-top: var(--space-sm);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink-4);
+}
+.whyBody p { margin: 0 0 var(--space-sm) 0; }
+.whyBody p:last-child { margin-bottom: 0; }
+.whyBody strong { color: var(--ink); font-weight: 600; }
+.whyChinese { color: var(--ink); }
+
 .section { margin-bottom: var(--space-2xl); }
 
 .sectionLabel {

@@ -5,11 +5,18 @@ import styles from './AlmanacToday.module.css';
 
 const TOP_LIMIT = 4;
 
-export default function AlmanacToday() {
-  const [almanac, setAlmanac] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+export default function AlmanacToday({ almanac: almanacProp, href = '/dashboard/almanac' }) {
+  // Prop semantics:
+  //   undefined → fetch on client (standalone usage)
+  //   null      → server tried and got nothing — fall back to client fetch
+  //               (the client may be authed and able to read where anon couldn't)
+  //   object    → use as-is
+  const propProvided = almanacProp !== undefined && almanacProp !== null;
+  const [almanac, setAlmanac] = useState(almanacProp || null);
+  const [loaded, setLoaded] = useState(propProvided);
 
   useEffect(() => {
+    if (propProvided) return undefined;
     let cancelled = false;
     (async () => {
       const today = todayInLA();
@@ -19,7 +26,7 @@ export default function AlmanacToday() {
       setLoaded(true);
     })();
     return () => { cancelled = true; };
-  }, []);
+  }, [propProvided]);
 
   if (!loaded) {
     return <div className={styles.skeleton} aria-hidden />;
@@ -44,7 +51,7 @@ export default function AlmanacToday() {
   const nextHour = pickNextAuspiciousHour(auspicious_hours);
 
   return (
-    <Link href="/dashboard/almanac" className={`${styles.card} ${styles[`tone_${tone}`]}`}>
+    <Link href={href} className={`${styles.card} ${styles[`tone_${tone}`]}`}>
       <div className={styles.head}>
         <div>
           <div className={styles.dateLine}>{formatHumanDate(date)}</div>

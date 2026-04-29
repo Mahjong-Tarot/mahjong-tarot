@@ -19,7 +19,28 @@
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   gap: var(--d-7);
-  align-items: end;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+}
+
+.heroAlmanacWrap {
+  position: relative;
+  display: block;
+}
+.heroAlmanacWrap > a {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: var(--d-5);
+}
+.heroAlmanacWrap > a:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
 }
 
 .heroBadge {

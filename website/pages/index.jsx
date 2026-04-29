@@ -6,9 +6,11 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import NewsletterSignup from '../components/NewsletterSignup';
+import AlmanacToday from '../components/AlmanacToday';
 import { useAuth } from '../lib/auth';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
 import { POSTS } from '../lib/posts';
+import { fetchAlmanacForDate, todayInLA } from '../lib/almanac';
 import styles from '../styles/Home.module.css';
 
 const TIERS = [
@@ -47,17 +49,16 @@ const DECK = [
 
 const stripTrailingPeriod = (s) => s.replace(/\.$/, '');
 
-export default function Home() {
+export default function Home({ todayDate, todayAlmanac }) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
-  // Signed-in users see the dashboard at /, not the marketing page.
+  // Signed-in users get the dashboard. Redirect runs client-side only — the
+  // SSR HTML is always the marketing page so the almanac is in the initial
+  // payload (SEO + above-the-fold render).
   useEffect(() => {
     if (!loading && user) router.replace('/dashboard');
   }, [loading, user, router]);
-
-  // Avoid a flash of the marketing site for users who are about to be redirected.
-  if (loading || user) return null;
 
   const jsonLd = graph([
     ORGANIZATION,
@@ -90,55 +91,32 @@ export default function Home() {
 
       <main>
 
-        {/* ── 1. Hero ── */}
+        {/* ── 1. Hero — Almanac first ── */}
         <section className={styles.heroSection}>
           <div className={`container ${styles.heroInner}`}>
             <div>
-              <span className={styles.heroBadge}>Ancient Wisdom · Modern Clarity</span>
+              <span className={styles.heroBadge}>Today · Tong Shu Almanac</span>
               <h1 className={styles.heroHeadline}>
-                See what<br />the tiles<br /><em>reveal</em>
+                Today,<br />by the<br /><em>almanac</em>
               </h1>
               <p className={styles.heroLead}>
-                Thirty-five years of divination practice. Mahjong tiles, Chinese astrology,
-                and tarot, woven into readings that illuminate your path.
+                A daily reading of the calendar from Bill Hajdu&apos;s thirty-five years of
+                practice. Day-officer, score, and the activities the system favors or
+                cautions against. Specific. Verifiable. The same answer if you check
+                tomorrow.
               </p>
               <div className={styles.heroCtas}>
-                <Link href="/book-a-reading" className={styles.heroPrimary}>
-                  Book a Live Reading <span aria-hidden="true">→</span>
+                <Link href={`/almanac/${todayDate}`} className={styles.heroPrimary}>
+                  See today&apos;s full reading <span aria-hidden="true">→</span>
                 </Link>
                 <Link href="/signup" className={styles.heroGhost}>
                   Get Premium Access
                 </Link>
               </div>
-              <dl className={styles.heroStats}>
-                <div>
-                  <dt><em>35</em>+</dt>
-                  <dd>Years of practice</dd>
-                </div>
-                <div>
-                  <dt>3</dt>
-                  <dd>Divination traditions</dd>
-                </div>
-                <div>
-                  <dt>1<span style={{ color: 'var(--ink-3)', fontSize: '22px' }}>-on-</span>1</dt>
-                  <dd>Live online readings</dd>
-                </div>
-              </dl>
             </div>
-            <figure className={styles.heroPortrait}>
-              <Image
-                src="/images/gallery-3.webp"
-                alt="Bill Hajdu conducting a Mahjong Tarot reading"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              />
-              <div className={styles.heroPullQuote}>
-                A reading is a <b>conversation</b> with what you already know but haven&apos;t said.
-              </div>
-              <div className={styles.heroFigureTag}>[ Bill Hajdu · The Firepig ]</div>
-            </figure>
+            <div className={styles.heroAlmanacWrap}>
+              <AlmanacToday almanac={todayAlmanac} href={`/almanac/${todayDate}`} />
+            </div>
           </div>
         </section>
 
@@ -414,4 +392,13 @@ export default function Home() {
       <Footer />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const todayDate = todayInLA();
+  const todayAlmanac = await fetchAlmanacForDate(todayDate);
+  return {
+    props: { todayDate, todayAlmanac: todayAlmanac || null },
+    revalidate: 300,
+  };
 }

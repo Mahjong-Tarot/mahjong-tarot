@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mahjong Tarot · Project Status</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --bg-2: #ffffff;
+    --paper: #ffffff;
+    --ink: #14161B;
+    --ink-soft: #2A2D35;
+    --ink-mute: #50545E;
+    --ink-faint: #8A8E98;
+    --line: #E4E5EA;
+    --line-soft: #EFEFF2;
+    --fire: #E63329;
+    --fire-dark: #C8261C;
+    --fire-soft: #FFE2DD;
+    --gold: #B8893A;
+    --gold-soft: #EBD9B0;
+    --indigo: #2c5a87;
+    --teal: #2a7a6e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  a { color: var(--fire-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ===== Sidebar ===== */
+  aside {
+    background: var(--bg-2);
+    border-right: 1px solid var(--line);
+    padding: 32px 24px 48px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .brand-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffd6cf, var(--fire));
+    box-shadow: 0 0 14px rgba(230, 51, 41, 0.35);
+  }
+  .brand h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-mute);
+    font-size: 15px;
+    margin: 4px 0 28px 24px;
+  }
+
+  .nav-group {
+    margin-bottom: 22px;
+  }
+  .nav-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin: 0 0 8px 12px;
+  }
+  .nav-item {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    border-left: 2px solid transparent;
+    margin-bottom: 1px;
+  }
+  .nav-item:hover {
+    background: rgba(230, 51, 41, 0.08);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-item.active {
+    background: var(--paper);
+    color: var(--fire);
+    border-left-color: var(--fire);
+    font-weight: 600;
+  }
+  .nav-item .filename {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    display: block;
+    margin-top: 1px;
+    font-weight: 400;
+  }
+  .nav-item.active .filename { color: var(--fire); opacity: 0.75; }
+
+  .toc {
+    margin: 8px 0 0 12px;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid var(--line);
+  }
+  .toc li { margin: 0; }
+  .toc a {
+    display: block;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--ink-mute);
+    text-decoration: none;
+    line-height: 1.4;
+  }
+  .toc a:hover { color: var(--fire); }
+  .toc .toc-h3 { padding-left: 22px; font-size: 11.5px; opacity: 0.85; }
+
+  .footer-note {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+
+  /* ===== Main content ===== */
+  main {
+    padding: 56px 64px 96px;
+    max-width: 880px;
+  }
+  .doc-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 8px;
+  }
+  .doc-meta {
+    color: var(--ink-mute);
+    font-size: 13px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  article {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  article h1, article h2, article h3, article h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    scroll-margin-top: 32px;
+  }
+  article h1 {
+    font-size: 38px;
+    margin: 0 0 24px;
+    letter-spacing: -0.025em;
+  }
+  article h2 {
+    font-size: 26px;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  article h3 {
+    font-size: 20px;
+    margin: 36px 0 12px;
+  }
+  article h4 {
+    font-size: 16px;
+    margin: 24px 0 8px;
+    color: var(--ink-soft);
+  }
+  article p { margin: 0 0 16px; }
+  article strong { font-weight: 600; color: var(--ink); }
+  article em { font-style: italic; }
+
+  article ul, article ol { padding-left: 24px; margin: 0 0 18px; }
+  article li { margin-bottom: 6px; }
+  article li > ul, article li > ol { margin-top: 6px; }
+
+  article blockquote {
+    border-left: 3px solid var(--gold);
+    background: var(--gold-soft);
+    padding: 14px 20px;
+    margin: 18px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    border-radius: 0 6px 6px 0;
+  }
+  article blockquote p:last-child { margin-bottom: 0; }
+
+  article hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 36px 0;
+  }
+
+  article code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.88em;
+    background: var(--bg-2);
+    border: 1px solid var(--line-soft);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--teal);
+  }
+  article pre {
+    background: #14161B;
+    color: #E4E5EA;
+    padding: 18px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 18px 0;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  article pre code {
+    background: transparent;
+    border: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  article table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 18px 0;
+    font-size: 14px;
+    background: var(--paper);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 var(--line);
+  }
+  article th, article td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  article th {
+    background: var(--fire-soft);
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  article tr:last-child td { border-bottom: none; }
+  article tr:hover td { background: var(--bg-2); }
+
+  /* Status glyphs in epic-status — keep monospace */
+  article td code, article p code { white-space: nowrap; }
+
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 100;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(20, 22, 27, 0.08);
+  }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    aside {
+      position: fixed;
+      left: -340px;
+      top: 0;
+      width: 320px;
+      z-index: 50;
+      transition: left 0.2s;
+      box-shadow: 2px 0 16px rgba(20, 22, 27, 0.12);
+    }
+    aside.open { left: 0; }
+    main { padding: 64px 24px 64px; }
+    .menu-toggle { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle">☰ Docs</button>
+
+<div class="layout">
+  <aside id="sidebar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <h1>The Mahjong Tarot</h1>
+    </div>
+    <div class="subtitle">Project Status</div>
+
+    <div class="nav-group">
+      <div class="nav-label">Current Status</div>
+      <a class="nav-item" data-doc="epic-status">Epic Status <span class="filename">epic-status.md</span></a>
+      <a class="nav-item" data-doc="timeline">Phase Timeline <span class="filename">01-product-timeline.md</span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Strategy</div>
+      <a class="nav-item" data-doc="product">Product <span class="filename">product.md</span></a>
+      <a class="nav-item" data-doc="epics">Epics <span class="filename">epics.md</span></a>
+      <a class="nav-item" data-doc="qa-plan">QA Plan <span class="filename">qa-plan.md</span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Project</div>
+      <a class="nav-item" data-doc="README">Project Index <span class="filename">docs/README.md</span></a>
+      <a class="nav-item" data-doc="overview">Product Overview <span class="filename">00-product-overview.md</span></a>
+    </div>
+
+    <div id="tocContainer"></div>
+
+    <div class="footer-note">
+      Source: <code style="background:transparent;border:none;padding:0;color:inherit;">docs/</code><br>
+      Single-file viewer · open from disk or serve locally
+    </div>
+  </aside>
+
+  <main>
+    <div class="doc-eyebrow" id="docEyebrow">Current Status</div>
+    <div class="doc-meta" id="docMeta">epic-status.md</div>
+    <article id="content"></article>
+  </main>
+</div>
+
+<!-- Embedded markdown sources. Update these blocks when the source .md files change. -->
+<script type="text/markdown" id="md-README">
+The full README is at `docs/README.md`. This dashboard surfaces the seven highest-traffic documents. Use the sidebar to switch between them, and the on-page TOC for in-document navigation.
+
+For everything not embedded here — phase docs (phase-01 through phase-06), engineering changes, feature proposals, architecture, brand, and archive — open the markdown files directly in `docs/`.
+</script>
+
+<script type="text/markdown" id="md-overview">
+# The Mahjong Tarot — Product Overview
+
+**Domain:** mahjongtarot.com
+**Stack:** Next.js (Pages Router) · React · Supabase · Vercel
+**Practitioner:** Bill Hajdu (35 years)
+**Owner:** Dave Hajdu
+**Last updated:** 2026-04-28
+
+## One-sentence why
+
+Eastern divination — Chinese astrology, the Tong Shu almanac, Mahjong as oracle — does not have a serious modern home. Bill's 35-year practice plus a digital surface that respects the reader's intelligence is the bet to become that home.
+
+## Audience
+
+She is 38, lives in a city, has done therapy and meditated through an app. Allergic to influencer-spirituality. Curious about systems older than her therapist. She uninstalled Co-Star because the push notifications were "for someone twelve years younger."
+
+She is **not** the daily-horoscope-as-meme reader, the Western-occult-Tarot practitioner, or someone seeking psychic predictions.
+
+## Job-to-be-done
+
+> A quiet, recurring ritual that gives her permission to take a beat before deciding things.
+
+The competition is not another product. It is the **absence of a practice**.
+
+## The wedge
+
+**Today's almanac + "Find a Good Day" search.**
+
+We have ~2,000 days of almanac data through Feb 2032 already in the database.
+
+## How we know it's working
+
+| Metric | Definition | Target |
+|---|---|---|
+| **D7 almanac return rate** (leading) | Of users who land on `/dashboard/almanac` in week 1, fraction who return ≥3 times in week 2 | 35% by month 3 |
+| **Paid retention at month 6** (trailing) | Of free trial users who convert to paid, fraction still paid at month 6 | 70% by Q4 2026 |
+
+We do not optimise for signups, MAU, or session length. Those are vanity for this product.
+
+## What we are explicitly not building
+
+- A horoscope-of-the-day app for general audiences
+- A predictive tool ("Will I get the job?")
+- A wellness app
+- A dating product
+- A social product
+- An open-ended AI chatbot for divination questions
+
+## Three load-bearing assumptions
+
+1. There is a real, large-enough audience for Eastern-divination-treated-seriously.
+2. The almanac is a wedge, not a niche.
+3. Bill scales as a brand without being the bottleneck.
+</script>
+
+<script type="text/markdown" id="md-timeline">
+# The Mahjong Tarot — Product Timeline
+
+**Phase in flight:** Phase 1 — Wedge
+
+## Phase summary
+
+| # | Phase | Goal | Window | Status |
+|---|---|---|---|---|
+| 1 | Wedge | Almanac on home page, D7 return ≥ 20% | May 2026 | 🔄 In flight |
+| 2 | Founder cohort | 100 paying founders @ $49.50 | May–Jul 2026 | ☐ Planned |
+| 3 | Voice engine | 90 days consistent daily content, 50/50 blind taste | May–Aug 2026 | ☐ Planned |
+| 4 | Personal layer | Pillar/chart-driven personalisation on dashboard | Aug 2026 – Q1 2027 | ☐ Planned |
+| 5 | Readings depth | Purple Star, Three Blessings, Compatibility | Q1–Q2 2027 | ☐ Planned |
+| 6 | Book + 1-on-1 | Book ships as deepening mechanism, 1-on-1 as roof | Q2–Q3 2027 | ☐ Planned |
+
+Status glyphs: 🔄 in flight · ✅ done · ⏳ partially done · ☐ planned · 🛑 paused
+
+## Why phased and not parallel
+
+Each phase tests a load-bearing assumption:
+
+1. **Phase 1 tests assumption #2** (almanac is a wedge). If D7 < 20%, stop and re-examine.
+2. **Phase 2 tests assumption #1** (audience exists at price). If paid acquisition CTR < 1.5% / conversion < 0.5%, stop.
+3. **Phase 3 tests assumption #3** (voice scales without Bill). If blind taste ≠ 50/50, stop the content engine.
+
+Phases 4–6 only make sense if 1–3 pass.
+
+## Per-phase docs
+
+Open the corresponding `phase-NN-*.md` file in `docs/product/` for the full phase brief — goal, validation gate, workstreams, exit criteria.
+</script>
+
+<script type="text/markdown" id="md-product">
+# Mahjong Tarot — Product Doc
+
+*Draft v0.1 · 2026-04-28*
+
+If you can read this whole document and not be able to tell a stranger, in one sentence, why we'd be sad if Mahjong Tarot didn't exist, then I've failed at writing it. Everything below is in service of that sentence.
+
+## 1. The thesis
+
+**Western tarot got generic. The people who already feel the pull of Eastern divination — Chinese astrology, the Tong Shu almanac, Mahjong as oracle — don't have a serious, modern home for it. We are betting that one practitioner-author with 35 years of credibility, paired with a digital surface that respects the reader's intelligence, can become that home.**
+
+That's the bet. Not "we're building an astrology app." Astrology apps are a commodity (Co-Star solved that). The bet is that there's a specific, underserved audience that wants Eastern systems, treated seriously, with a human voice in the room — and that Bill Hajdu is the person who makes that defensible.
+
+If we're wrong about this, no amount of feature work saves us.
+
+## 2. Who this is for — concretely
+
+She is 38. She lives in a city. She has done therapy and meditated through an app and dabbled in the I Ching once on a long flight. She is not a "spiritual person" in the influencer sense — she's allergic to it — but she's curious about systems older than her therapist. She got married last year and her father-in-law gave the couple a Tong Shu almanac as a wedding gift; she paged through it, laughed at how earnest it was, and quietly googled "is November 14th a good day to start a business" the next month.
+
+She tried Co-Star and uninstalled it because the push notifications were "for someone twelve years younger than me." She read Sextrology in college. She's read at least one Pico Iyer essay this year.
+
+She is not looking for predictions. She is looking for **a practice that doesn't insult her intelligence** — something that sits in the Venn diagram of *Eastern tradition*, *intellectual seriousness*, and *modern web typography*. That space is empty. That's the user.
+
+There are at least three people she is *not*. She is not the daily-horoscope-as-meme reader (Co-Star already serves them). She is not the Western-occult-Tarot card practitioner (a fully different vocabulary). She is not someone seeking psychic predictions about specific outcomes. We confuse her by trying to be any of those.
+
+## 3. The job they're hiring us for
+
+When I strip away what she says she wants, here's what she's actually buying: **a quiet, recurring ritual that gives her permission to take a beat before deciding things**. The almanac says today isn't great for signing contracts. She wasn't going to anyway. But now she has a frame.
+
+If we vanished tomorrow, what does she go back to using? She goes back to nothing — back to making decisions with the same anxious churn she did before, except now she's bookmarked one good Substack on Chinese astrology she never quite reads. The "competition" isn't another product. It's the absence of a practice. That's the gap we exist to fill.
+
+This is also why the product can't be built around predictions. If we promise outcomes, we lose the audience the moment a prediction misses. If we promise *frame*, we are useful every day.
+
+## 4. The wedge
+
+The thing that gets her through the door is not the book. It's not even Bill (yet). It's the **daily almanac and the "Find a Good Day" search**.
+
+Why this works as a wedge:
+
+1. **It's specific and deterministic.** Today, 2026-04-28, is a Balance day in the Year of the Fire Horse. That's not a horoscope. That's a fact. She can verify it. The product isn't asking her to believe; it's giving her a structured object.
+2. **It answers a real question.** "When should we get married?" "What's a good day to launch?" Real life decisions, mapped to ancient inputs. She can share the result with her partner. That's the share loop.
+3. **It compounds.** Each visit teaches her one new word in the system (the 12 Day Officers, the 5 elements, the year-conflict sign). She gets smarter inside our walls. After 30 visits she has a vocabulary nobody else has given her. That's stickiness.
+
+Today we have ~2,000 days of almanac data through Feb 2032 and a search that maps free-text ("get married") to specific lucky activities. **This is already our wedge. We just haven't recognized it as the front door yet.**
+
+The home page should lead with this, not with Bill's bio. Bill is who they meet on day 30, not day 1.
+
+## 5. The shape of the product 12 months out
+
+In April 2027, the member experience looks like this:
+
+A logged-in user lands on a single-screen dashboard. The top of the screen is **today's almanac** — date, day-officer, score, a one-paragraph reading written in a voice that is unmistakably ours (probabilistic, intelligent, no em-dashes). Below that is the **personal layer** — her own day, computed from her chart. "Your year-pillar is Wood Tiger; today's day-pillar feeds it. Tailwind day for you specifically." Below that is **one thing to ask** — a single prompt the system has noticed about her week. "You haven't done a Three Blessings reading yet this season. It's a good day for it."
+
+She comes back daily because the daily layer changes. She goes deeper because the system gradually unlocks her own chart. She tells friends because the "Find a Good Day" search produces share-able artifacts ("April 18 is the year's best day for us to elope" — one screenshot).
+
+The book ships and is a *deepening* mechanism, not the front door. Members get the digital edition free; non-members buy it and get a member trial included.
+
+The 1-on-1 reading practice is the **roof**, not the floor. By the time someone books an hour with Bill, they've spent 60 days in the system, they have vocabulary, and the conversation can start at minute one instead of minute thirty. Bill becomes more efficient per session. Sessions become higher leverage.
+
+If we have done this well, the moment someone tells a friend about Mahjong Tarot is when they say: *"I've been using this thing for three months and it's the only daily app that hasn't made me stupider."*
+
+## 6. What we are explicitly not building
+
+- A horoscope-of-the-day app for general audiences
+- A predictive tool
+- A wellness app
+- A dating product
+- A social product
+- A general AI chatbot for divination questions
+
+If a feature is being designed and it would fit in any of those products, we're drifting.
+
+## 7. What I believe but can't yet prove
+
+Three load-bearing assumptions. Each one would, if false, sink the strategy.
+
+1. **There is a real, large-enough audience for Eastern-divination-treated-seriously.** **How it dies:** we run a $2k Meta + Reddit campaign in May, get <1.5% click-through and <0.5% conversion.
+2. **The almanac is a wedge, not a niche.** **How it dies:** by month 3, the cohort that signed up for the almanac never opens any other reading.
+3. **Bill scales as a brand without being the bottleneck.** **How it dies:** content quality drops the moment Bill stops writing it himself, and members notice within two weeks.
+
+## 8. How we know it's working
+
+Two numbers.
+
+**Leading: D7 almanac return rate.** Target: 35% by month 3.
+
+**Trailing: paid retention at month 6.** Target: 70% by Q4 2026.
+
+We don't optimize for signups, MAU, or session length. Those are vanity for this product.
+
+## 9. The next 90 days (May 1 → Aug 1, 2026)
+
+Three concrete bets. End-states, not roadmaps.
+
+**Bet 1 — Wedge is provable.** By June 1: home page leads with today's almanac, almanac search hit by 500+ unique users, measurable D7 return number. *If below 20%, we stop and re-examine the thesis.*
+
+**Bet 2 — Founder cohort is real.** By July 1: 100 paying founder members ($49.50) with email addresses we can write to monthly.
+
+**Bet 3 — The voice is reproducible.** By Aug 1: 90 consecutive days of daily horoscope content. Voice doc that any contractor could write to. Bill personally writes ≤20%. Blind taste test ≥ 50/50.
+
+That's the next 90 days. Everything else is downstream of these three bets.
+
+— *DH, with Claude, 2026-04-28*
+</script>
+
+<script type="text/markdown" id="md-epics">
+# The Mahjong Tarot — Epics
+
+These are thematic bundles of work, each with a thesis, the components inside the bundle, the mechanism by which it earns its place, and the success criterion that says "this epic is done."
+
+## E1 · Daily Almanac
+
+**Thesis:** The almanac is the front door. If it does not work as a daily ritual, nothing downstream matters.
+**Success criterion:** D7 return rate ≥ 35% by month 3 of phase 1.
+
+## E2 · Find a Good Day
+
+**Thesis:** The almanac is browse-shaped. "Find a Good Day" is intent-shaped — and intent converts.
+**Success criterion:** ≥ 500 unique users hit the search by June 1, 2026; ≥ 10% of result pages shared.
+
+## E3 · Personal Pillar Layer
+
+**Thesis:** The personal layer is what someone signs up for. Without it, we are a free utility.
+**Success criterion:** ≥ 60% of paid users have completed birth-data capture by phase 4 close.
+
+## E4 · Readings Catalogue
+
+**Thesis:** Readings turn the daily ritual into *occasions*. They are what someone returns for monthly, not daily.
+**Success criterion:** ≥ 70% of paid users complete ≥ 1 personal reading within 14 days of signup.
+
+## E5 · Voice & Content Engine
+
+**Thesis:** The voice has to be reproducible by a contractor or a model and still feel like Bill.
+**Success criterion:** Bill personally writes ≤ 20% of shipped daily content for 90 days running. Blind taste ≥ 50/50.
+
+## E6 · Founder Cohort & Subscription
+
+**Thesis:** The first 100 paying members are the source of every product decision for the next 12 months.
+**Success criterion:** 100 founders converted by July 1, 2026.
+
+## E7 · Book Integration
+
+**Thesis:** The book is a deepening mechanism, not the front door.
+**Success criterion:** ≥ 30% of book buyers start a member trial; ≥ 20% convert to paid.
+
+## E8 · 1-on-1 Practice Layer
+
+**Thesis:** Bill's 1-on-1 practice is the roof, not the floor.
+**Success criterion:** Bill's session prep drops from ~30 min to ≤ 10 min; member NPS for sessions ≥ 70.
+
+## E9 · Share & Acquisition Loop
+
+**Thesis:** The share loop is "Find a Good Day" producing screenshot-able artifacts. Paid acquisition is a top-up.
+**Success criterion:** May test campaign achieves CTR ≥ 1.5% / conversion ≥ 0.5%; share loop ≥ 30% of paid signups by Q4 2026.
+
+## E10 · Member Dashboard
+
+**Thesis:** The dashboard is the surface where almanac, personal layer, and "one thing to ask" live together.
+**Success criterion:** ≥ 50% of paid members visit the dashboard ≥ 5 days/week by Q4 2026.
+
+## What we are not bundling
+
+- No "horoscope feed" epic
+- No "social" epic
+- No "wellness" epic
+- No "AI chatbot" epic
+
+If a feature would fit better in any of those, we are drifting.
+
+## How epics map to phases
+
+| Phase | Primary epics |
+|---|---|
+| 1 — Wedge | E1, E2, E10, E5 (initial voice) |
+| 2 — Founder cohort | E6, plus E1/E2 polish |
+| 3 — Voice engine | E5 (full pipeline + blind taste) |
+| 4 — Personal layer | E3, E10 (dashboard upgrade) |
+| 5 — Readings depth | E4 |
+| 6 — Book + 1-on-1 | E7, E8, E9 |
+
+Open `epics.md` for the full text of each epic with bundle and mechanism.
+</script>
+
+<script type="text/markdown" id="md-epic-status">
+# The Mahjong Tarot — Epic Status Dashboard
+
+**Last updated:** 2026-04-28
+**Phase in flight:** Phase 1 — Wedge
+
+Status glyphs: 🔄 in flight · ✅ done · ⏳ partially done · ☐ planned · 🛑 paused
+
+## At a glance
+
+| Epic | Status | % done (est) | Open bugs | Notes |
+|---|---|---|---|---|
+| E1 · Daily Almanac | ⏳ | 60% | 0 | Almanac data through Feb 2032 in DB; home page does not yet lead with it |
+| E2 · Find a Good Day | ⏳ | 40% | 0 | Search prototype exists; share-able artifact missing |
+| E3 · Personal Pillar Layer | ☐ | 5% | 0 | Birth-data capture spec drafted; pillar engine not started |
+| E4 · Readings Catalogue | ☐ | 0% | 0 | Phase 5 |
+| E5 · Voice & Content Engine | 🔄 | 50% | 0 | Writer/designer/web-developer pipeline live; voice doc not written |
+| E6 · Founder Cohort & Subscription | ☐ | 10% | 0 | Stripe wiring exists; no founder tier yet |
+| E7 · Book Integration | ☐ | 0% | 0 | Phase 6 |
+| E8 · 1-on-1 Practice Layer | ☐ | 5% | 0 | Bill's existing practice runs outside the product today |
+| E9 · Share & Acquisition Loop | ☐ | 5% | 0 | Paid test budget allocated for May 2026 |
+| E10 · Member Dashboard | ⏳ | 30% | 0 | Dashboard route exists; layout does not yet match the 12-month shape |
+
+Percent-done is an order-of-magnitude estimate. Use it to decide where attention goes, not to plan capacity.
+
+## Drilldown summary (full text in epic-status.md)
+
+### E1 · Daily Almanac — ⏳ 60%
+
+**What's done:** ~2,000 days of almanac data live in `public.almanac_days` through Feb 2032. Encoder pipeline generates per-lunar-year SQL files.
+**What's missing:** Home page does not lead with today's almanac. Reading copy not yet in our voice. "Why this score?" expandable does not exist.
+
+### E2 · Find a Good Day — ⏳ 40%
+
+**What's done:** Free-text query → activity-rule mapping prototype exists. Date scoring algorithm runs in development.
+**What's missing:** Share-able artifact. Calendar download (.ics). Result page polish.
+
+### E5 · Voice & Content Engine — 🔄 50%
+
+**What's done:** writer / designer / web-developer / mahjong-studio agent pipeline is live and shipping content.
+**What's missing:** Written voice doc. Daily horoscope content pipeline. Blind taste test rig.
+
+### E10 · Member Dashboard — ⏳ 30%
+
+**What's done:** `/dashboard` route exists with placeholder content.
+**What's missing:** Three-stack layout (almanac → personal → one-prompt). Notification rules. Streak indicator.
+
+Open `epic-status.md` for full drilldowns of every epic.
+</script>
+
+<script type="text/markdown" id="md-qa-plan">
+# The Mahjong Tarot — Forever QA Plan
+
+This is a content-first product whose value lives in the voice of the daily reading, the correctness of pillar computations, and the trustworthiness of the almanac. A bug that ships a wrong day-officer or a paragraph that breaks voice does more damage than a bug that crashes a page.
+
+## The pyramid
+
+| Tier | What it covers | Cadence | Who |
+|---|---|---|---|
+| 1 — Build & types | TypeScript, ESLint, build success | Every commit | CI |
+| 2 — Unit | Pure-function tests (pillar math, day-officer rules) | Every commit | CI |
+| 3 — Integration | Server actions, Supabase reads/writes, Stripe webhook | Every PR | CI |
+| 4 — End-to-end smoke | Playwright run of golden paths | Every PR | CI |
+| 5 — Voice review | Sample of last week's daily content vs. voice doc | Weekly | Bill (≤ 30 min) |
+| 6 — Reference-chart audit | Pillar engine outputs vs. Bill's reference set | Each release in Phase 4+ | Bill |
+| 7 — Cold reader walkthrough | Someone unfamiliar walks through a flow | Once per sprint | Founder volunteer |
+| 8 — Strategy revisit | Re-read product.md against actual usage | Quarterly | Dave + Bill |
+
+## Tier 5 — Voice review
+
+Bill reads a sample of the last week's daily content (10 paragraphs randomised across signs and dates) against the voice doc. He flags any paragraph that feels "off" with a one-word reason: *generic / hedging / em-dash / occult / overclaim*.
+
+The blind taste test rig (Phase 3 W3.3) reports the latest score in the same review.
+
+## Tier 6 — Reference-chart audit
+
+Bill maintains a reference set of ≥ 50 hand-constructed charts. Each release runs the engine against the full set and reports diffs. A release that produces > 1 unexplained diff does not ship.
+
+## Tier 8 — Strategy revisit
+
+Re-read product.md cold. Three questions:
+
+1. Is the bet still the bet?
+2. Are the two metrics still the right ones?
+3. Has the audience definition shifted?
+
+If any answer is "no" or "I'm not sure," halt all forward work for one week and re-write the strategy doc.
+
+## Quality gates
+
+Before any PR merges:
+
+- [ ] Tier 1 passes (CI)
+- [ ] Tier 2 passes (CI)
+- [ ] Tier 3 passes (CI)
+- [ ] Tier 4 passes (CI)
+- [ ] PR description names the epic + workstream the change belongs to
+- [ ] No PII in client-side state, URLs, or logs
+- [ ] No hard-coded secrets or API keys
+
+Before any release in Phase 4+:
+
+- [ ] Tier 5 latest week reviewed
+- [ ] Tier 6 reference-chart audit passes if the engine was touched
+- [ ] Tier 7 latest cold-reader walkthrough findings triaged
+
+Open `qa-plan.md` for the full text including how regression reports are filed.
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+  const docs = {
+    'epic-status': { eyebrow: 'Current Status', filename: 'epic-status.md' },
+    'timeline':    { eyebrow: 'Current Status', filename: '01-product-timeline.md' },
+    'product':     { eyebrow: 'Strategy',       filename: 'product.md' },
+    'epics':       { eyebrow: 'Strategy',       filename: 'epics.md' },
+    'qa-plan':     { eyebrow: 'Strategy',       filename: 'qa-plan.md' },
+    'README':      { eyebrow: 'Project',        filename: 'docs/README.md' },
+    'overview':    { eyebrow: 'Project',        filename: '00-product-overview.md' },
+  };
+
+  marked.setOptions({ gfm: true, breaks: false, headerIds: true, mangle: false });
+
+  const slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+  function loadDoc(key) {
+    const meta = docs[key];
+    if (!meta) return;
+    const md = document.getElementById('md-' + key).textContent;
+    const html = marked.parse(md);
+    const article = document.getElementById('content');
+    article.innerHTML = html;
+
+    article.querySelectorAll('h1, h2, h3').forEach((h) => {
+      if (!h.id) h.id = slugify(h.textContent);
+    });
+
+    document.getElementById('docEyebrow').textContent = meta.eyebrow;
+    document.getElementById('docMeta').textContent = meta.filename;
+    document.title = 'The Mahjong Tarot · ' + meta.filename;
+
+    document.querySelectorAll('.nav-item').forEach((n) => {
+      n.classList.toggle('active', n.dataset.doc === key);
+    });
+
+    buildToc(article, key);
+    window.scrollTo(0, 0);
+
+    if (location.hash !== '#' + key) {
+      history.replaceState(null, '', '#' + key);
+    }
+
+    document.getElementById('sidebar').classList.remove('open');
+  }
+
+  function buildToc(article, key) {
+    const container = document.getElementById('tocContainer');
+    container.innerHTML = '';
+    const headings = article.querySelectorAll('h2, h3');
+    if (headings.length < 2) return;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-group';
+    wrap.innerHTML = '<div class="nav-label">On this page</div>';
+    const ul = document.createElement('ul');
+    ul.className = 'toc';
+
+    headings.forEach((h) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + key + '/' + h.id;
+      a.textContent = h.textContent;
+      if (h.tagName === 'H3') a.className = 'toc-h3';
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + key + '/' + h.id);
+      });
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    wrap.appendChild(ul);
+    container.appendChild(wrap);
+  }
+
+  document.querySelectorAll('.nav-item').forEach((n) => {
+    n.addEventListener('click', (e) => {
+      e.preventDefault();
+      loadDoc(n.dataset.doc);
+    });
+  });
+
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+
+  const initialKey = (location.hash || '#epic-status').slice(1).split('/')[0];
+  loadDoc(docs[initialKey] ? initialKey : 'epic-status');
+</script>
+
+</body>
+</html>

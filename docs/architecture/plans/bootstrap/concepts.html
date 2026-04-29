@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Marketing Team — Concepts Guide</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0F172A;
+      color: #E2E8F0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* ── Deck ── */
+    .deck {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 56px;
+      opacity: 0;
+      transform: translateX(48px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .slide.active  { opacity: 1; transform: translateX(0); pointer-events: all; }
+    .slide.exiting { opacity: 0; transform: translateX(-48px); }
+
+    .slide-inner {
+      max-width: 940px;
+      width: 100%;
+    }
+
+    /* ── Category badge ── */
+    .cat {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 12px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    /* ── Slide heading ── */
+    .s-icon  { font-size: 3rem; display: block; margin-bottom: 12px; }
+    .s-title { font-size: 2.2rem; font-weight: 800; color: #F8FAFC; letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 6px; }
+    .s-tag   { font-size: 1rem; color: #94A3B8; font-style: italic; margin-bottom: 24px; line-height: 1.55; }
+    .s-tag strong { font-style: normal; color: #CBD5E1; }
+
+    /* ── Point grid ── */
+    .pts { display: grid; gap: 10px; }
+    .pts.c2 { grid-template-columns: 1fr 1fr; }
+    .pts.c3 { grid-template-columns: 1fr 1fr 1fr; }
+    .pts.c4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+    .pt {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .pt-lbl { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+    .pt-txt { font-size: 0.86rem; color: #CBD5E1; line-height: 1.5; }
+
+    /* ── Analogy callout ── */
+    .callout {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .callout-ico { font-size: 2rem; flex-shrink: 0; }
+    .callout-body .callout-title { font-size: 0.95rem; font-weight: 700; color: #F8FAFC; margin-bottom: 3px; }
+    .callout-body .callout-sub   { font-size: 0.83rem; color: #94A3B8; line-height: 1.5; }
+
+    /* ── Title slide ── */
+    .title-slide { text-align: center; }
+    .title-slide .s-title { font-size: 2.8rem; }
+    .title-slide .s-tag   { max-width: 600px; margin: 0 auto 28px; }
+
+    .phase-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .ph {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── End slide ── */
+    .auto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .auto-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(52,211,153,0.2);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .auto-when { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #34D399; margin-bottom: 3px; }
+    .auto-what { font-size: 0.86rem; color: #D1FAE5; font-weight: 600; }
+    .auto-who  { font-size: 0.72rem; color: #6EE7B7; margin-top: 2px; }
+
+    /* ── Phase summary slide ── */
+    .phase-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .ph-card {
+      border-radius: 12px;
+      border: 1px solid;
+      padding: 14px 12px;
+    }
+    .ph-card .ph-num  { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .ph-card .ph-name { font-size: 0.88rem; font-weight: 700; color: #F8FAFC; margin-bottom: 6px; line-height: 1.3; }
+    .ph-card .ph-time { font-size: 0.7rem; color: #64748B; margin-bottom: 8px; }
+    .ph-card .ph-who  { font-size: 0.7rem; color: #94A3B8; margin-bottom: 8px; font-style: italic; }
+    .ph-card .ph-out  { font-size: 0.72rem; line-height: 1.6; }
+
+    /* ── Tech note ── */
+    .tech-note { margin-top: 16px; font-size: 0.7rem; color: #334155; text-align: center; }
+
+    /* ── Colour palette ── */
+    /* Workspace: amber */
+    .c-ws .cat { background: #451A03; color: #FCD34D; }
+    .c-ws .pt { border-color: rgba(245,158,11,0.15); }
+    .c-ws .pt-lbl { color: #F59E0B; }
+    .c-ws .callout { border-color: rgba(245,158,11,0.2); }
+
+    /* Infrastructure: blue */
+    .c-infra .cat { background: #0C1F35; color: #7DD3FC; }
+    .c-infra .pt { border-color: rgba(96,165,250,0.15); }
+    .c-infra .pt-lbl { color: #60A5FA; }
+    .c-infra .callout { border-color: rgba(96,165,250,0.2); }
+
+    /* Data: purple */
+    .c-data .cat { background: #2D0A4E; color: #C084FC; }
+    .c-data .pt { border-color: rgba(168,85,247,0.15); }
+    .c-data .pt-lbl { color: #A855F7; }
+    .c-data .callout { border-color: rgba(168,85,247,0.2); }
+
+    /* Team/agents: green */
+    .c-team .cat { background: #052E0E; color: #86EFAC; }
+    .c-team .pt { border-color: rgba(52,211,153,0.15); }
+    .c-team .pt-lbl { color: #34D399; }
+    .c-team .callout { border-color: rgba(52,211,153,0.2); }
+
+    /* SOPs: rose */
+    .c-sop .cat { background: #3B0A1A; color: #FDA4AF; }
+    .c-sop .pt { border-color: rgba(251,113,133,0.15); }
+    .c-sop .pt-lbl { color: #FB7185; }
+    .c-sop .callout { border-color: rgba(251,113,133,0.2); }
+
+    /* Automation: teal */
+    .c-auto .cat { background: #062233; color: #67E8F9; }
+    .c-auto .pt { border-color: rgba(34,211,238,0.15); }
+    .c-auto .pt-lbl { color: #22D3EE; }
+    .c-auto .callout { border-color: rgba(34,211,238,0.2); }
+
+    /* ── Navigation bar ── */
+    .nav-bar {
+      background: #0A1020;
+      border-top: 1px solid #1E293B;
+      padding: 14px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      background: #1E293B;
+      border: 1px solid #334155;
+      color: #94A3B8;
+      padding: 7px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: inherit;
+      transition: background 0.15s, color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .nav-btn:hover:not(:disabled) { background: #263349; color: #F8FAFC; }
+    .nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+    .dots {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #334155;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    .dot.on { background: #60A5FA; transform: scale(1.5); }
+
+    .nav-count { font-size: 0.78rem; color: #475569; white-space: nowrap; flex-shrink: 0; }
+
+    @media (max-width: 700px) {
+      .slide { padding: 24px 20px; }
+      .s-title { font-size: 1.6rem; }
+      .pts.c2,.pts.c3,.pts.c4 { grid-template-columns: 1fr; }
+      .phase-cards { grid-template-columns: 1fr 1fr; }
+      .nav-bar { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ══ SLIDE 1: TITLE ══ -->
+  <div class="slide active c-team">
+    <div class="slide-inner title-slide">
+      <span class="s-icon">🤖</span>
+      <h1 class="s-title">Your AI Marketing Team</h1>
+      <p class="s-tag">Everything you're about to set up — explained in plain English.<br>No technical background required.</p>
+      <div class="pts c3" style="margin-bottom:20px">
+        <div class="pt"><div class="pt-lbl">What it is</div><div class="pt-txt">A fully automated AI team that writes content, manages your project, and publishes your website — working Monday–Friday without you setting reminders.</div></div>
+        <div class="pt"><div class="pt-lbl">What you do</div><div class="pt-txt">About 1 hour of browser work (accounts + approvals). Claude handles everything else — installing tools, building the site, generating agents.</div></div>
+        <div class="pt"><div class="pt-lbl">What you get</div><div class="pt-txt">A live website, 4 AI specialists, and a fully automated daily/weekly workflow — all set up in roughly 3 hours total.</div></div>
+      </div>
+      <div class="phase-row">
+        <div class="ph" style="background:#1C1508;border-color:#78350F;color:#FDE68A">P0 · Accounts</div>
+        <div class="ph" style="background:#0D1B2E;border-color:#1E3A5F;color:#BFDBFE">P1 · Machine Setup</div>
+        <div class="ph" style="background:#130623;border-color:#4C1D95;color:#E9D5FF">P2 · Website + Agents + Schedules</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 2: CLAUDE DESKTOP ══ -->
+  <div class="slide c-ws">
+    <div class="slide-inner">
+      <span class="cat">Your AI Workspace</span>
+      <span class="s-icon">🖥️</span>
+      <h2 class="s-title">Claude Desktop</h2>
+      <p class="s-tag"><strong>Think of it as your AI office suite</strong> — one app, three different work modes, each for a different type of task.</p>
+      <div class="pts c3">
+        <div class="pt">
+          <div class="pt-lbl">💬 Chat tab</div>
+          <div class="pt-txt">Your everyday AI conversation. Ask questions, get advice, trigger your AI agents. This is also where you activate your automated schedules.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">🖥️ Cowork tab</div>
+          <div class="pt-txt">Claude can see and control your screen. It opens your terminal, types commands, and clicks buttons for you. You watch — no typing required.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">⌨️ Code tab</div>
+          <div class="pt-txt">Claude works directly inside your project folder. It reads files, writes code, runs commands, and builds your website — all without browser tabs.</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <div class="callout-ico">💡</div>
+        <div class="callout-body">
+          <div class="callout-title">You need a Pro plan</div>
+          <div class="callout-sub">The free plan only gives you the Chat tab. Cowork and Code — the two tabs your AI team uses to build things — require a Claude Pro subscription (~$20/month).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 3: GITHUB ══ -->
+  <div class="slide c-infra">
+    <div class="slide-inner">
+      <span class="cat">Infrastructure</span>
+      <span class="s-icon">📦</span>
+      <h2 class="s-title">GitHub</h2>
+      <p class="s-tag"><strong>Your project's shared filing cabinet with infinite undo.</strong> Every file, every change, every version — permanently stored and retrievable.</p>
+      <div class="pts c2" style="margin-bottom:14px">
+        <div class="pt">
+          <div class="pt-lbl">What it stores</div>
+          <div class="pt-txt">Your entire project: website code, agent instruction files, brand guides, blog drafts, and config. Everything in one place, accessible from any computer.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Why it matters</div>
+          <div class="pt-txt">Every change your AI team makes is recorded with a timestamp and description. If something breaks, you can rewind to any previous state — like Command+Z that never expires.</div>
+        </div>
+      </div>
+      <div class="pts c2">
+        <div class="pt">
+          <div class="pt-lbl">How your AI uses it</div>
+          <div class="pt-txt">When the Web Developer publishes a blog post, it pushes the change to GitHub first. Vercel (your website host) sees the change and automatically updates your live site.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">What you do</div>
+          <div class="pt-txt">Create a free account. That's it. Claude handles all the git commands — pushing, pulling, branching — you never need to touch the terminal.</div>
+        </div>
+      </div>
+      <div class="tech-note">Technical name: git repository hosting · Free tier is sufficient</div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 4: VERCEL ══ -->
+  <div class="slide c-infra">
+    <div class="slide-inner">
+      <span class="cat">Infrastructure</span>
+      <span class="s-icon">🌐</span>
+      <h2 class="s-title">Vercel</h2>
+      <p class="s-tag"><strong>Your website's home address on the internet.</strong> It watches GitHub, and every time your AI team makes an update, your live site refreshes automatically.</p>
+      <div class="callout">
+        <div class="callout-ico">⚡</div>
+        <div class="callout-body">
+          <div class="callout-title">The magic: push to GitHub → website updates itself</div>
+          <div class="callout-sub">You never FTP files, log into a hosting panel, or manually upload anything. Your AI team commits to GitHub → Vercel detects the commit → your site is live in ~90 seconds.</div>
+        </div>
+      </div>
+      <div class="pts c3">
+        <div class="pt">
+          <div class="pt-lbl">What Vercel hosts</div>
+          <div class="pt-txt">Your Next.js website — all pages, the blog, the contact form, and the newsletter signup. It handles traffic, performance, and uptime automatically.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">How you connect it</div>
+          <div class="pt-txt">Sign up with GitHub (one click), import your repo, set the project root to <code style="font-size:0.8em;background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px">website/</code>, and deploy. That's the entire setup.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Your URL</div>
+          <div class="pt-txt">You start with a free <em>yoursite.vercel.app</em> URL. Connect a custom domain at any time — Vercel handles SSL certificates automatically.</div>
+        </div>
+      </div>
+      <div class="tech-note">Technical name: serverless hosting / CDN · Free tier covers most small businesses</div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 5: SUPABASE ══ -->
+  <div class="slide c-data">
+    <div class="slide-inner">
+      <span class="cat">Your Data</span>
+      <span class="s-icon">🗄️</span>
+      <h2 class="s-title">Supabase</h2>
+      <p class="s-tag"><strong>Your customer records system and backend office.</strong> Every form submission, newsletter signup, and contact inquiry is stored here — and your AI agents can read it directly.</p>
+      <div class="pts c2" style="margin-bottom:12px">
+        <div class="pt">
+          <div class="pt-lbl">What it stores</div>
+          <div class="pt-txt">Contact form submissions, newsletter signups, reading inquiries, and any other data your website collects. Stored in a proper database — not a spreadsheet.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Why it's separate from the website</div>
+          <div class="pt-txt">Your website is the front door. Supabase is the back office. Keeping them separate means your data is safe even if you change your website completely.</div>
+        </div>
+      </div>
+      <div class="pts c2">
+        <div class="pt">
+          <div class="pt-lbl">How Claude connects to it</div>
+          <div class="pt-txt">Via MCP (explained in the next slide). Once configured, Claude can query your database directly — no copy-pasting, no exports, no manual lookups.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">What you set up</div>
+          <div class="pt-txt">Create a project, copy two values (URL + API key), paste them into Vercel. Claude handles the database schema (the table structure) automatically in P2.</div>
+        </div>
+      </div>
+      <div class="tech-note">Technical name: PostgreSQL database + backend-as-a-service · Free tier: 500MB storage</div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 6: COMMUNICATIONS ══ -->
+  <div class="slide c-auto">
+    <div class="slide-inner">
+      <span class="cat">Your Communications</span>
+      <span class="s-icon">📣</span>
+      <h2 class="s-title">Email + Lark</h2>
+      <p class="s-tag"><strong>Your broadcast system and your team's notification channel.</strong> Your AI team writes and schedules everything — you approve before anything goes out.</p>
+      <div class="pts c2" style="margin-bottom:12px">
+        <div class="pt">
+          <div class="pt-lbl">📧 Email platform (Resend)</div>
+          <div class="pt-txt">Your AI Project Manager sends daily briefings and weekly RAG reports via Resend. You always approve email campaigns before sending — this is non-negotiable.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">💬 Lark (optional)</div>
+          <div class="pt-txt">Your AI Project Manager sends standup reminders, daily summaries, and weekly reports to a Lark group chat. One-way channel — Claude sends to Lark via Lark CLI.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="callout-ico">🔒</div>
+        <div class="callout-body">
+          <div class="callout-title">Email campaigns always require your approval</div>
+          <div class="callout-sub">This is hardwired into every agent's rules. No email campaign is ever sent automatically. Your AI writes it, you review it, you say go — every time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 7: BACK-OFFICE MACHINERY ══ -->
+  <div class="slide c-infra">
+    <div class="slide-inner">
+      <span class="cat">Machine Setup</span>
+      <span class="s-icon">⚙️</span>
+      <h2 class="s-title">The Back-Office Machinery</h2>
+      <p class="s-tag"><strong>The tools Claude installs on your computer so it can do its job.</strong> You never touch these directly — Claude installs and uses them for you.</p>
+      <div class="pts c4">
+        <div class="pt">
+          <div class="pt-lbl">🍺 Homebrew</div>
+          <div class="pt-txt">Mac's app store for developer tools. Every other tool on this slide is installed through Homebrew in seconds.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">🌿 git</div>
+          <div class="pt-txt">Records every file change on your computer. Works with GitHub to keep local and online copies in sync.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">🟢 Node.js</div>
+          <div class="pt-txt">The engine that runs your Next.js website locally when you're previewing changes before publishing.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">🔧 CLI tools</div>
+          <div class="pt-txt">Command-line tools for GitHub (gh), Vercel, and Supabase. Claude uses these to push code, trigger deployments, and manage your database.</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:12px">
+        <div class="callout-ico">😌</div>
+        <div class="callout-body">
+          <div class="callout-title">You don't touch any of this</div>
+          <div class="callout-sub">Claude installs all tools via its Cowork tab in P1 — it opens your terminal, runs the commands, and confirms everything worked. Your Mac may ask for your password once. That's the only thing you do.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 8: MCP ══ -->
+  <div class="slide c-data">
+    <div class="slide-inner">
+      <span class="cat">AI Infrastructure</span>
+      <span class="s-icon">🔌</span>
+      <h2 class="s-title">MCP — Claude's Universal Adapter</h2>
+      <p class="s-tag"><strong>Think of MCP like a universal power adapter.</strong> It's a standard plug that lets Claude connect to any external service — database, calendar, email — without custom code for each one.</p>
+      <div class="pts c2" style="margin-bottom:12px">
+        <div class="pt">
+          <div class="pt-lbl">Without MCP</div>
+          <div class="pt-txt">You'd have to copy data from Supabase, paste it into Claude, then copy Claude's answer back into Supabase. Every. Single. Time.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">With MCP</div>
+          <div class="pt-txt">Claude asks your database a question directly — just like a human employee logging into your CRM. No copy-pasting. Real-time data. Automatic.</div>
+        </div>
+      </div>
+      <div class="pts c3">
+        <div class="pt">
+          <div class="pt-lbl">MCP: Supabase</div>
+          <div class="pt-txt">Claude reads and writes to your customer database — contact forms, subscriber lists, booking requests.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">MCP: Context mode</div>
+          <div class="pt-txt">Keeps Claude's working memory efficient on large codebases — like a librarian who indexes books instead of reading them all upfront.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">MCP: Browser</div>
+          <div class="pt-txt">Lets Claude open a browser, take screenshots, and test your website — the way a QA tester would.</div>
+        </div>
+      </div>
+      <div class="tech-note">Technical name: Model Context Protocol — open standard by Anthropic · Configured in .claude/settings.local.json</div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 9: AI AGENTS ══ -->
+  <div class="slide c-team">
+    <div class="slide-inner">
+      <span class="cat">Your AI Team</span>
+      <span class="s-icon">👥</span>
+      <h2 class="s-title">AI Agents</h2>
+      <p class="s-tag"><strong>Think of each agent as a specialist staff member with a defined job title, responsibilities, and rules they never break.</strong> They work autonomously within their lane.</p>
+      <div class="pts c4" style="margin-bottom:12px">
+        <div class="pt"><div class="pt-lbl">📋 Project Manager</div><div class="pt-txt">Daily standups, risk tracking, weekly status reports, scope change approvals.</div></div>
+        <div class="pt"><div class="pt-lbl">📈 Product Manager</div><div class="pt-txt">Growth strategy, feature prioritisation, roadmap, quarterly OKRs, competitive research.</div></div>
+        <div class="pt"><div class="pt-lbl">💻 Web Developer</div><div class="pt-txt">Builds website pages, publishes blog posts, deploys to Vercel.</div></div>
+        <div class="pt"><div class="pt-lbl">✍️ Writer</div><div class="pt-txt">Long-form blog posts, social captions, email newsletters — all in your brand voice.</div></div>
+      </div>
+      <div class="pts c3">
+        <div class="pt"><div class="pt-lbl">🎨 Designer</div><div class="pt-txt">Hero images, social cards, visual assets — AI-generated in your visual style.</div></div>
+        <div class="pt"><div class="pt-lbl">📣 Marketing Manager</div><div class="pt-txt">Content calendar, campaigns, performance summaries.</div></div>
+        <div class="pt"><div class="pt-lbl">📱 Social Media Manager</div><div class="pt-txt">Platform-specific drafts for Instagram, TikTok, LinkedIn — ready for your review.</div></div>
+      </div>
+      <div class="tech-note">Each agent lives in a file: .claude/agents/{name}.md · Claude reads it at the start of every relevant conversation</div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 10: SKILLS ══ -->
+  <div class="slide c-team">
+    <div class="slide-inner">
+      <span class="cat">Your AI Team</span>
+      <span class="s-icon">📖</span>
+      <h2 class="s-title">Skills</h2>
+      <p class="s-tag"><strong>Your team's standard operating procedures — written down so Claude follows the exact same process every time,</strong> not whatever it feels like doing that day.</p>
+      <div class="pts c2" style="margin-bottom:14px">
+        <div class="pt">
+          <div class="pt-lbl">What a skill is</div>
+          <div class="pt-txt">A markdown file that describes a specific task step-by-step: what to ask, what to check, how to format the output, what to do if something goes wrong. Like a recipe, not a suggestion.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Why they matter</div>
+          <div class="pt-txt">Without skills, Claude improvises. With skills, every standup looks the same, every RAID entry has the right columns, every blog post follows the same structure. Consistency without micromanaging.</div>
+        </div>
+      </div>
+      <div class="pts c4">
+        <div class="pt"><div class="pt-lbl">daily-checkin</div><div class="pt-txt">Guides the team through a standup and saves the result to the right file.</div></div>
+        <div class="pt"><div class="pt-lbl">raid-log</div><div class="pt-txt">Logs risks, issues, and dependencies in the standard format with proper columns.</div></div>
+        <div class="pt"><div class="pt-lbl">scope-change</div><div class="pt-txt">Produces a formal change request with impact assessment before any decision.</div></div>
+        <div class="pt"><div class="pt-lbl">prioritise</div><div class="pt-txt">Scores any idea with RICE before adding it to the roadmap.</div></div>
+      </div>
+      <div class="tech-note">Skills live in: ~/.claude/skills/{name}/SKILL.md (global) and .claude/skills/ (project) · Invoked with /skill-name</div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 11: CLAUDE.MD ══ -->
+  <div class="slide c-team">
+    <div class="slide-inner">
+      <span class="cat">Your AI Team</span>
+      <span class="s-icon">📋</span>
+      <h2 class="s-title">CLAUDE.md</h2>
+      <p class="s-tag"><strong>Your AI employee handbook.</strong> Every time Claude opens your project, the first thing it does is read this file — it sets the rules, the tone, and the workflow for everything that follows.</p>
+      <div class="callout">
+        <div class="callout-ico">📌</div>
+        <div class="callout-body">
+          <div class="callout-title">Claude reads it before every single task</div>
+          <div class="callout-sub">If CLAUDE.md says "never auto-post to social media", Claude will never auto-post — even if you accidentally ask it to. The file overrides the conversation.</div>
+        </div>
+      </div>
+      <div class="pts c3" style="margin-top:12px">
+        <div class="pt">
+          <div class="pt-lbl">Global rules (~/.claude/CLAUDE.md)</div>
+          <div class="pt-txt">Applies to every project on your machine: git safety rules, deployment discipline, secrets handling, content approval requirements.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Project rules (CLAUDE.md)</div>
+          <div class="pt-txt">Specific to your business: your folder structure, your publishing workflow, your agent team, your brand voice reference.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Agent rules (.claude/agents/)</div>
+          <div class="pt-txt">Each agent has its own file with its specific role, the skills it uses, and the hard rules it can never break (e.g. "always get approval before sending email").</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 12: PERMISSIONS ══ -->
+  <div class="slide c-ws">
+    <div class="slide-inner">
+      <span class="cat">Your AI Workspace</span>
+      <span class="s-icon">🔑</span>
+      <h2 class="s-title">Permissions — Trusting Claude to Work</h2>
+      <p class="s-tag"><strong>By default, Claude asks for your approval before running any terminal command.</strong> During bootstrap, this creates constant interruptions. We pre-approve everything once so it never happens again.</p>
+      <div class="pts c2" style="margin-bottom:14px">
+        <div class="pt">
+          <div class="pt-lbl">What we set up</div>
+          <div class="pt-txt">A single <code style="font-size:0.82em;background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px">Bash(*)</code> permission that pre-approves all terminal commands — instead of approving each tool individually every time it's used.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">What stays protected</div>
+          <div class="pt-txt">File writes still ask for your confirmation. Claude can run commands freely, but creating or editing files still shows you a preview before saving. You keep oversight over content.</div>
+        </div>
+      </div>
+      <div class="pts c3">
+        <div class="pt"><div class="pt-lbl">Before setup</div><div class="pt-txt">Every `git push`, every `npm install`, every database command → a permission popup. Dozens per session.</div></div>
+        <div class="pt"><div class="pt-lbl">After setup</div><div class="pt-txt">Claude runs commands freely. Scheduled agents fire at 7am and 9am without waking you up for approvals.</div></div>
+        <div class="pt"><div class="pt-lbl">Where it lives</div><div class="pt-txt">~/.claude/settings.local.json — configured once in P1, applies to every project and every scheduled task forever.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 13: NEXT.JS ══ -->
+  <div class="slide c-infra">
+    <div class="slide-inner">
+      <span class="cat">Your Website</span>
+      <span class="s-icon">🌟</span>
+      <h2 class="s-title">Next.js — Your Website Framework</h2>
+      <p class="s-tag"><strong>The technology your website is built on.</strong> Like choosing Microsoft Word vs Google Docs — you don't need to know how it works, just that it's the right tool for the job.</p>
+      <div class="callout">
+        <div class="callout-ico">🏢</div>
+        <div class="callout-body">
+          <div class="callout-title">The same framework used by Nike, TikTok, and Notion</div>
+          <div class="callout-sub">Next.js is a modern web framework built on React. It's fast, SEO-friendly, and integrates natively with Vercel. Your AI Web Developer is trained on it — building and updating pages is fully automated.</div>
+        </div>
+      </div>
+      <div class="pts c3" style="margin-top:12px">
+        <div class="pt">
+          <div class="pt-lbl">What you get</div>
+          <div class="pt-txt">Scaffolded in P2 with placeholder content. After the P3 discovery interview, your real brand colours and copy replace the placeholders. Live on Vercel within 30 minutes of P2.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">How blog posts work</div>
+          <div class="pt-txt">Your Writer drafts in markdown. Your Web Developer converts it to a page component, adds SEO tags, and publishes — one command, no CMS login.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">What you don't touch</div>
+          <div class="pt-txt">You never write code, never run a build, never open the Next.js docs. Your agents handle all of it — you review the final page before it goes live.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 14: SCHEDULES ══ -->
+  <div class="slide c-auto">
+    <div class="slide-inner">
+      <span class="cat">Automation</span>
+      <span class="s-icon">⏰</span>
+      <h2 class="s-title">Schedules — Your Team's Recurring Calendar</h2>
+      <p class="s-tag"><strong>Like setting a recurring calendar event, but instead of a reminder, your AI agent actually does the work.</strong> Set it once, runs forever.</p>
+      <div class="pts c2" style="margin-bottom:12px">
+        <div class="pt">
+          <div class="pt-lbl">How it works</div>
+          <div class="pt-txt">All 7 schedules are <strong>auto-registered in P2</strong> using RemoteTrigger — cloud-hosted on Anthropic's servers. Tasks fire even when your laptop is closed or Claude Desktop is not running.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">Always-on</div>
+          <div class="pt-txt">RemoteTrigger runs in the cloud — no machine dependency. Your 7am standup reminder fires whether or not you're at your desk. No more missed standups because the laptop was asleep.</div>
+        </div>
+      </div>
+      <div class="auto-grid">
+        <div class="auto-card"><div class="auto-when">Mon–Fri · 7am</div><div class="auto-what">Standup reminder</div><div class="auto-who">Project Manager</div></div>
+        <div class="auto-card"><div class="auto-when">Mon–Fri · 9am</div><div class="auto-what">Daily briefing + publish check</div><div class="auto-who">PM + Web Developer</div></div>
+        <div class="auto-card"><div class="auto-when">Mon–Fri · 5pm</div><div class="auto-what">EOD check-in</div><div class="auto-who">Project Manager</div></div>
+        <div class="auto-card"><div class="auto-when">Tuesday · 8am</div><div class="auto-what">Write next week's posts</div><div class="auto-who">Writer</div></div>
+        <div class="auto-card"><div class="auto-when">Thursday · 8am</div><div class="auto-what">Generate hero images</div><div class="auto-who">Designer</div></div>
+        <div class="auto-card"><div class="auto-when">Friday · 4pm</div><div class="auto-what">Weekly RAG report</div><div class="auto-who">Project Manager</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 15: PM SOPS ══ -->
+  <div class="slide c-sop">
+    <div class="slide-inner">
+      <span class="cat">Project Management SOPs</span>
+      <span class="s-icon">📊</span>
+      <h2 class="s-title">How Your Project Manager Works</h2>
+      <p class="s-tag">Your PM agent follows <strong>industry-standard professional practice</strong> — the same formats used in corporate project management, applied automatically without setup from you.</p>
+      <div class="pts c3">
+        <div class="pt">
+          <div class="pt-lbl">📝 Daily Standup (Scrum)</div>
+          <div class="pt-txt">Three questions per person: <em>What did you do yesterday? What are you doing today? Any blockers?</em> Compiled into a team briefing at 9am. Missing check-ins noted as "Not received" — never fabricated.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">⚠️ RAID Log</div>
+          <div class="pt-txt"><strong>R</strong>isks · <strong>A</strong>ssumptions · <strong>I</strong>ssues · <strong>D</strong>ependencies. Every problem gets logged with: ID, probability, impact score, owner, and action. Append-only — nothing is ever deleted.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">📈 RAG Status Report</div>
+          <div class="pt-txt">Weekly health check using <span style="color:#34D399">🟢 Green</span> (on track), <span style="color:#FBBF24">🟡 Amber</span> (at risk), <span style="color:#F87171">🔴 Red</span> (blocked). Automatically generated every Friday from the week's standups and open RAID items.</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:12px">
+        <div class="callout-ico">📋</div>
+        <div class="callout-body">
+          <div class="callout-title">Scope changes always go through a formal change request</div>
+          <div class="callout-sub">Any new work, feature, or requirement gets a CR document: description, business case, impact on timeline and budget, three options (Accept/Reject/Defer). Your PM recommends. You decide.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 16: PRODUCT MANAGER SOPS ══ -->
+  <div class="slide c-sop">
+    <div class="slide-inner">
+      <span class="cat">Product Management SOPs</span>
+      <span class="s-icon">🗺️</span>
+      <h2 class="s-title">How Your Product Manager Works</h2>
+      <p class="s-tag">Your Product Manager applies the <strong>same frameworks used by product teams at growth-stage companies</strong> — adapted for a solo business owner who needs results without complexity.</p>
+      <div class="pts c2" style="margin-bottom:12px">
+        <div class="pt">
+          <div class="pt-lbl">🎯 OKRs (quarterly goals)</div>
+          <div class="pt-txt"><strong>O</strong>bjective (the qualitative goal: <em>"Become the go-to resource for X"</em>) + <strong>K</strong>ey <strong>R</strong>esults (the numbers: <em>"500 newsletter subscribers, 12 blog posts, 3 speaking opportunities"</em>). Reviewed quarterly. Never changed mid-quarter without sign-off.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">🧮 RICE Prioritisation</div>
+          <div class="pt-txt">Every feature request is scored: <strong>R</strong>each × <strong>I</strong>mpact × <strong>C</strong>onfidence ÷ <strong>E</strong>ffort. Score &gt;100 = do now. 50–100 = plan for next quarter. &lt;50 = park it. No gut-feel decisions.</div>
+        </div>
+      </div>
+      <div class="pts c3">
+        <div class="pt">
+          <div class="pt-lbl">🗓️ Now/Next/Later Roadmap</div>
+          <div class="pt-txt"><strong>Now:</strong> max 3 things this quarter. <strong>Next:</strong> planned but not started. <strong>Later:</strong> ideas with no commitment. Entries describe outcomes, not features.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">🔍 Competitive Analysis</div>
+          <div class="pt-txt">Updated monthly using live research. Feature comparison matrix + strategic insights. Flags competitor moves that affect your roadmap.</div>
+        </div>
+        <div class="pt">
+          <div class="pt-lbl">⭐ North Star Metric</div>
+          <div class="pt-txt">One number that captures the core value you deliver — derived from your 90-day goal. Everything the Product Manager does connects back to moving this number.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 17: 5 PHASES ══ -->
+  <div class="slide c-auto">
+    <div class="slide-inner">
+      <span class="cat">The Journey</span>
+      <span class="s-icon">🚀</span>
+      <h2 class="s-title">The 3 Bootstrap Phases</h2>
+      <p class="s-tag">From zero to a live website with a full AI team — three phases you run in order, each building on the last.</p>
+      <div class="phase-cards" style="grid-template-columns: repeat(3, 1fr)">
+        <div class="ph-card" style="background:#1C1508;border-color:#78350F">
+          <div class="ph-num" style="color:#F59E0B">P0 · 45–60 min</div>
+          <div class="ph-name">Accounts &amp; Credentials</div>
+          <div class="ph-who">You · in your browser</div>
+          <div class="ph-out" style="color:#FCD34D">Create accounts, copy API keys, install Homebrew + git. Claude Chat guides each step.</div>
+        </div>
+        <div class="ph-card" style="background:#0D1B2E;border-color:#1E3A5F">
+          <div class="ph-num" style="color:#60A5FA">P1 · 20–30 min</div>
+          <div class="ph-name">Machine Setup</div>
+          <div class="ph-who">Claude Code</div>
+          <div class="ph-out" style="color:#BFDBFE">Install dev tools, create project repo, configure Claude permissions and Supabase MCP, install skills. You answer 4 questions.</div>
+        </div>
+        <div class="ph-card" style="background:#130623;border-color:#4C1D95">
+          <div class="ph-num" style="color:#C084FC">P2 · 45–60 min</div>
+          <div class="ph-name">Website + Agents + Schedules</div>
+          <div class="ph-who">Claude Code</div>
+          <div class="ph-out" style="color:#E9D5FF">Website live on Vercel. 4 core agents installed. 7 cloud-hosted schedules auto-registered. You click Deploy once.</div>
+        </div>
+      </div>
+      <div class="tech-note" style="margin-top:14px">Total: ~3 hours · Your effort: ~1 hour · Everything else is Claude · See index.html for the full phase detail</div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- ── Navigation ── -->
+<nav class="nav-bar">
+  <button class="nav-btn" id="prev">&#8592; Previous</button>
+  <div class="dots" id="dots"></div>
+  <span class="nav-count" id="count">1 / 17</span>
+  <button class="nav-btn" id="next">Next &#8594;</button>
+</nav>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  const countEl = document.getElementById('count');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  let cur = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' on' : '');
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  });
+
+  function go(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add('exiting');
+    const prev = cur;
+    cur = idx;
+    slides[cur].classList.add('active');
+    setTimeout(() => slides[prev].classList.remove('exiting'), 350);
+    dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === cur));
+    countEl.textContent = (cur + 1) + ' / ' + slides.length;
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === slides.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => go(cur - 1));
+  nextBtn.addEventListener('click', () => go(cur + 1));
+  prevBtn.disabled = true;
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(cur + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(cur - 1);
+  });
+</script>
+</body>
+</html>

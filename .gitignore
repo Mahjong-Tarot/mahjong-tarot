@@ -90,7 +90,6 @@ website/blog/*.html
 website/package-lock.json
 .playwright-mcp
 .next/
-docs/*
 scheduled_tasks.lock
 node-compile-cache/*
 bootstrap/vercel-concepts/*

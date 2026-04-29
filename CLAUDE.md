@@ -19,7 +19,7 @@ The website is a **Next.js** application (Pages Router). You read source content
 - Update the blog index page (`website/pages/blog/index.jsx`) with a new post card
 - Run `git add` and `git commit` with a clear commit message
 - Output a single `git push origin main` command for Bill to paste in his terminal
-- Append an entry to the publish log at `context/publish-log.md`
+- Append an entry to the publish log at `context/general-project-agent-context/publish-log.md`
 
 ## What this project does NOT do
 
@@ -63,10 +63,16 @@ mahjong-tarot/
 │       └── skills/
 │           └── write-post/            ← Blog post writing skill
 │
-├── architecture/                      ← System design docs and planning artefacts
-│   ├── admin-crm-plan.md
-│   ├── crm-design-doc.md
-│   └── *.html / *.docx               ← Org chart, workflow diagrams, build plans
+├── docs/                              ← All project documentation — see docs/README.md
+│   ├── README.md                      ← Top-level index
+│   ├── project-status.html            ← Single-file dashboard (open in browser)
+│   ├── product/                       ← Vision, epics, epic-status, phased timeline, phase docs
+│   ├── architecture/                  ← System design — plans, workflows, readings data, templates
+│   ├── engineering/                   ← Sprint handoffs, change records, gap analyses, setup prompts
+│   ├── features/                      ← Per-feature proposals and design docs (one folder per feature)
+│   ├── qa/                            ← QA plan and regression reports
+│   ├── brand/                         ← Palette, voice, image-library pointer
+│   └── archive/                       ← Historical and superseded material
 │
 ├── content/
 │   ├── source-material/               ← Raw research organised by topic
@@ -78,13 +84,9 @@ mahjong-tarot/
 │   └── topics/                        ← Blog topic bundles (each folder = one post)
 │       └── <slug>/                    ← blog.md, seo.md, social-*.md, source images
 │
-├── context/                           ← Project-specific guides — read before any task
-│   ├── blog-index.md                  ← Blog index structure reference
-│   ├── claude-md-overview.md          ← How CLAUDE.md files work across the project
-│   ├── claude-md-setup-guide.md       ← Setup guide for new CLAUDE.md configurations
-│   ├── publish-log.md                 ← Append one line per published post
-│   └── templates/
-│       └── CLAUDE.template.md         ← Template for new project CLAUDE.md files
+├── context/                           ← Agent-specific context (not project docs — see docs/ for those)
+│   ├── general-project-agent-context/ ← Setup guides, blog-index, publish-log, skill templates
+│   └── source-material/               ← Raw research used by the writer agent
 │
 ├── standup/                           ← Daily standup logs and briefings
 │   ├── individual/                    ← Per-person check-ins (dave.md, yon.md, trac.md, khang.md, agents.md)
@@ -175,7 +177,7 @@ Tell Bill:
 
 ### Step 9 — Update the publish log
 
-Append one line to `context/publish-log.md`:
+Append one line to `context/general-project-agent-context/publish-log.md`:
 
 ```
 | YYYY-MM-DD | <Post title> | <slug>.jsx | <Category> |
@@ -224,7 +226,7 @@ Never commit files from `working_files/` — the directory is in `.gitignore` an
 - [ ] Post card added at the top of the blog index grid
 - [ ] No inline styles used unless unavoidable — use CSS modules or global styles
 - [ ] Read-time estimate is included in the post header
-- [ ] Publish log entry appended to `context/publish-log.md`
+- [ ] Publish log entry appended to `context/general-project-agent-context/publish-log.md`
 
 ---
 
@@ -232,7 +234,7 @@ Never commit files from `working_files/` — the directory is in `.gitignore` an
 
 - When generating large seed migrations (e.g. `public.almanac_days`), split into per-lunar-year files of ~540–590 KB / ~350–385 rows each. The Supabase SQL Editor errors out around 1 MB with "Query is too large to be run via the SQL Editor — connect to your database directly".
 <!-- Rationale: confirmed 2026-04-27 — a 2.8 MB monolithic seed and 1.1 MB chunked seeds both failed; ~543 KB chunks (matching the proven 008_seed_almanac.sql at 354 rows) succeeded. -->
-- Generation tooling lives in `architecture/readings/daily-horoscopes/encoding/`. Use `generate_almanac.py` to produce JSON, then bucket per-lunar-year and emit numbered `.sql` files into `website/supabase/`.
+- Generation tooling lives in `docs/architecture/readings/daily-horoscopes/encoding/`. Use `generate_almanac.py` to produce JSON, then bucket per-lunar-year and emit numbered `.sql` files into `website/supabase/`.
 
 ---
 

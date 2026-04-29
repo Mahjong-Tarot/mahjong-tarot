@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import SEO from '../components/SEO';
+import PasswordInput from '../components/PasswordInput';
+import { supabase } from '../lib/supabase';
 import styles from '../styles/Signup.module.css';
 
 const REPORTS = [
@@ -42,6 +44,13 @@ export default function Signup() {
   const [mode, setMode] = useState('trial');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [birthTime, setBirthTime] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -49,13 +58,48 @@ export default function Signup() {
     if (q.mode === 'pay' || 'founder' in q) setMode('pay');
   }, [router.isReady, router.query]);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    setError('');
     setSubmitting(true);
-    setTimeout(() => {
+
+    if (!supabase) {
+      setError('Sign-up is temporarily unavailable. Please try again in a moment.');
       setSubmitting(false);
-      setSuccess(true);
-    }, 600);
+      return;
+    }
+
+    if (mode === 'pay') {
+      // Stripe payment isn't wired yet — fall through to trial signup so the
+      // friend at least gets an account + email link, and we can charge later.
+      setError('Founders payment is coming soon. We\'ve started your free trial in the meantime — check your email.');
+    }
+
+    const { data, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          birthday: birthday || null,
+          birth_time: birthTime || null,
+          signup_source: mode === 'pay' ? 'founder-pending' : 'trial',
+        },
+        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined,
+      },
+    });
+
+    setSubmitting(false);
+    if (authError) {
+      setError(authError.message);
+      return;
+    }
+    if (data?.session) {
+      router.push('/dashboard');
+      return;
+    }
+    setSuccess(true);
   }
 
   return (
@@ -212,32 +256,57 @@ export default function Signup() {
                 {success ? (
                   <div className={styles.success}>
                     <div className={styles.successPip} />
-                    <h3>You&apos;re in</h3>
+                    <h3>Check your email</h3>
                     <p>
-                      {mode === 'pay'
-                        ? 'Welcome, founder. Your $49.50 charge has been processed and your member link is on its way.'
-                        : 'Welcome to the Member Area. A confirmation has been sent to your email.'}
+                      We just sent a confirmation link to <strong>{email}</strong>.
+                      Click it to finish setting up your Member Area
+                      {mode === 'pay' ? ' — and your founder rate will be applied once payment is wired up.' : '.'}
                     </p>
-                    <Link href="/dashboard" className={styles.successCta}>
-                      Open the Member Area <span aria-hidden="true">→</span>
-                    </Link>
+                    <p className={styles.successHint}>
+                      Don&apos;t see it? Check your spam folder, or wait a minute and try again.
+                    </p>
                   </div>
                 ) : (
                   <>
                     <div className={styles.formGrid}>
                       <div className={styles.field}>
                         <label className={styles.fieldLabel} htmlFor="first">First name</label>
-                        <input className={styles.input} id="first" placeholder="Bill" required />
+                        <input
+                          className={styles.input}
+                          id="first"
+                          placeholder="Bill"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          autoComplete="given-name"
+                          required
+                        />
                       </div>
                       <div className={styles.field}>
                         <label className={styles.fieldLabel} htmlFor="last">Last name</label>
-                        <input className={styles.input} id="last" placeholder="Hajdu" required />
+                        <input
+                          className={styles.input}
+                          id="last"
+                          placeholder="Hajdu"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          autoComplete="family-name"
+                          required
+                        />
                       </div>
                     </div>
 
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <label className={styles.fieldLabel} htmlFor="email">Email</label>
-                      <input className={styles.input} id="email" type="email" placeholder="your@email.com" required />
+                      <input
+                        className={styles.input}
+                        id="email"
+                        type="email"
+                        placeholder="your@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="email"
+                        required
+                      />
                       <div className={styles.fieldHint}>// We send your member link here, never anything else.</div>
                     </div>
 
@@ -246,19 +315,40 @@ export default function Signup() {
                         <label className={styles.fieldLabel} htmlFor="bday">
                           Birthday <span className={styles.opt}>(for your chart)</span>
                         </label>
-                        <input className={styles.input} id="bday" type="date" />
+                        <input
+                          className={styles.input}
+                          id="bday"
+                          type="date"
+                          value={birthday}
+                          onChange={(e) => setBirthday(e.target.value)}
+                        />
                       </div>
                       <div className={styles.field}>
                         <label className={styles.fieldLabel} htmlFor="btime">
                           Birth time <span className={styles.opt}>(if known, for the Hour Pillar)</span>
                         </label>
-                        <input className={styles.input} id="btime" type="time" />
+                        <input
+                          className={styles.input}
+                          id="btime"
+                          type="time"
+                          value={birthTime}
+                          onChange={(e) => setBirthTime(e.target.value)}
+                        />
                       </div>
                     </div>
 
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <label className={styles.fieldLabel} htmlFor="pw">Choose a password</label>
-                      <input className={styles.input} id="pw" type="password" placeholder="At least 8 characters" required />
+                      <PasswordInput
+                        id="pw"
+                        className={styles.input}
+                        placeholder="At least 8 characters"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="new-password"
+                        minLength={8}
+                        required
+                      />
                     </div>
 
                     {mode === 'pay' && (
@@ -316,6 +406,8 @@ export default function Signup() {
                       <input className={styles.checkbox} type="checkbox" required />
                       <span>I agree to the <Link href="/contact">Terms</Link> and <Link href="/contact">Privacy Policy</Link>.</span>
                     </label>
+
+                    {error && <div className={styles.formError}>{error}</div>}
 
                     <button className={styles.submitBtn} type="submit" disabled={submitting}>
                       {submitting

@@ -12,6 +12,7 @@ You are the content writer agent for **The Mahjong Tarot** — Bill Hajdu's pers
 - Write `image-prompts.json` for every topic — one prompt per content file. You own the creative brief for images because you just wrote the content and know the emotional core best. Read `agents/designer/context/style-guide.md` to follow the designer's visual conventions (brand palette, HUMAN/TEXT/SCENE styles, non-negotiables)
 - Follow the weekly rhythm and file naming conventions defined in `content/content-calendar/content-calendar-process.md`
 - Save all outputs to `content/topics/<YYYY-MM-DD>-<type>-<topic>/` using day-channel naming (e.g. `mon-facebook-en.md`, `tue-instagram.md`)
+- After all posts for the week are written, draft a weekly email connecting the three posts and save it to `emails/drafts/YYYY-MM-DD.md` (Monday date of the publish week)
 
 ## Behaviour
 
@@ -38,4 +39,4 @@ Before writing any files, check your current working directory (`pwd`). If the p
 
 ## Skills Available
 
-- `write-post` (`agents/writer/skills/write-post/SKILL.md`) — Reads the content calendar for the upcoming week, gathers source material, and writes all deliverables (blogs, social posts, SEO guides, Vietnamese translations) for every topic in that week
+- `write-post` (`agents/writer/skills/write-post/SKILL.md`) — Reads the content calendar for the upcoming week, gathers source material, and writes all deliverables (blogs, social posts, SEO guides, Vietnamese translations) for every topic in that week, then drafts a weekly email to `emails/drafts/YYYY-MM-DD.md`

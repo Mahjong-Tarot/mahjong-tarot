@@ -24,7 +24,7 @@ If today has no due posts, stop and report "nothing to publish today". Never pul
 - `agents/web-developer/context/style-guide.md` — colour tokens, typography, component patterns
 - `agents/web-developer/context/web-style-guide.md` — blog category list, post card format
 - `agents/web-developer/context/file-conventions.md` — slug format, file naming, folder paths
-- `resources/design-system.md` — brand colours, fonts, visual guidelines (written in P2)
+- `agents/web-developer/context/web-style-guide.md` — brand colours, fonts, visual guidelines, valid blog categories
 
 ## Every blog post component must include
 1. `<Head>` with: title, meta description, og:title, og:description, og:image, canonical URL

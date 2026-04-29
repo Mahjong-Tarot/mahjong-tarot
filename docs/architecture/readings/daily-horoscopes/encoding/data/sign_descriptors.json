@@ -1,0 +1,140 @@
+{
+  "Rat": {
+    "likes": "mental activity - dynamic - restless -",
+    "dislikes": "incompetence",
+    "traits": [
+      "new beginnings",
+      "things begun have long term consequences",
+      "do preparatory work",
+      "don't rush into things",
+      "something you've always wanted to do"
+    ]
+  },
+  "Ox": {
+    "likes": "hard work",
+    "dislikes": "emotional behavior",
+    "traits": [
+      "stable",
+      "good for contracts",
+      "spur-of-the-moment decisions not favorable",
+      "slow and steady progress",
+      "don't expect fast results",
+      "good for marriage"
+    ]
+  },
+  "Tiger": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "turbulence - wild",
+      "sit tight",
+      "follow your intuition -",
+      "extemporaneous activity -",
+      "keep an open mind -",
+      "worrying - impulsive -"
+    ]
+  },
+  "Rabbit": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "gentle - refined",
+      "progress (without pressure) - great for arts, fashion and media - good for innovation -",
+      "excellent for investments - property market good -",
+      "harmony -",
+      "those who put interests of others above self do well -",
+      "good for family affairs - marriage - babies -",
+      "sensitive - reflective -"
+    ]
+  },
+  "Dragon": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "scintillating -",
+      "think big -",
+      "risk takers favored -",
+      "discovery and adventure (even danger) -"
+    ]
+  },
+  "Snake": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "patience -",
+      "allow matters to develop at their own pace - favorable for science, fashion, media, and music -",
+      "will regret impetuosity -",
+      "intellectual activity -",
+      "scandals - affairs - sensual intrigue",
+      "introspective - wisdom"
+    ]
+  },
+  "Horse": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "sudden changes -",
+      "enterprising people do well - people with honest, independent attitude favored -",
+      "unwise to instigate major changes or make long term plans -",
+      "personal peccadilloes will be publicly, and embarrassingly, aired",
+      "well-being improves - troubling health issues may be resolved -",
+      "optimistic -",
+      "those with sense of flair should do well -"
+    ]
+  },
+  "Sheep": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "humane people will rise to positions of authority - instigate needed reform(s) - medical and scientific breakthroughs - problem solver",
+      "resourceful",
+      "domestic crises(is) resolved -",
+      "good time to renew a flagging relationship - marriage favorable - bad time to break up a romance - beguiling",
+      "compassionate - contented -",
+      "radical, new fashion trend -"
+    ]
+  },
+  "Monkey": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "unpredictable -",
+      "people more receptive to your ideas -",
+      "don't make long-term plans - chance to make quick money - equal chance to lose -",
+      "the new, unusual and, or, eccentric -",
+      "happy but erratic - nice time for flirting fun - not a time to push to advance a relationship -"
+    ]
+  },
+  "Rooster": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "excellent time for career advancement - accept challenges - disorganized people will have problems -",
+      "the unusual, unorthodox and, or, outrageous -",
+      "relationship(s) could suffer if you impose too many rules or too much order - asserting independence causes stress in the relationship -",
+      "confident - argumentative",
+      "favorable time to gain status -"
+    ]
+  },
+  "Dog": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "don't gamble - avoid risk - solid and boring investments - prudent financial planning -",
+      "safeguard security of home - property value likely to increase -",
+      "good for relationships - marriage very favorable, better chance will last -",
+      "cautious -"
+    ]
+  },
+  "Pig": {
+    "likes": "",
+    "dislikes": "",
+    "traits": [
+      "winding down -",
+      "tie up loose ends -",
+      "favorable for home improvements, buying new home -",
+      "self-indulgence - pursuit of pleasure - revolution in way you enjoy leisure -",
+      "celebratory - regretful (depends on quality of previous efforts) -"
+    ]
+  }
+}

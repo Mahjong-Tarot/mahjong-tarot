@@ -1,0 +1,182 @@
+{
+  "date": "2026-02-17",
+  "context": "Lunar New Year. Year of Fire Horse begins. Day pillar Water Dog, House of Family. 39 horoscopes (1 day-level + 12 signs) x 3 categories. Hand-written by Claude as quality demo. All probabilistic framing, no em dashes.",
+  "horoscopes": [
+    {
+      "scope": "general", "category": "general", "score": 62, "tone": "favorable",
+      "text": "Year of the Fire Horse begins today. Across the board, energy runs hot and home-centered, family before ambition. House of Family rules, so anything tethered to where you live, who you live with, and who you'd call from a hard day gets a tailwind. Most signs ride 60/40 in their favor. Dragons and Sheep, ease off the gas."
+    },
+    {
+      "scope": "general", "category": "love", "score": 62, "tone": "favorable",
+      "text": "Love today is family-shaped, not romance-shaped. The pull is toward people you've known a long time. Romance gets a softer tailwind, maybe 55/45. Long-term partnerships have the wind at their back. New connections need patience. Best move tonight: make plans with someone you'd already trust to crash on your couch."
+    },
+    {
+      "scope": "general", "category": "money", "score": 62, "tone": "favorable",
+      "text": "Money is in caution mode today, 40/60 against bold moves. Lunar New Year energy is good for setting intent, weak for spending. Skip the big purchase. Skip the launch. Pay a bill, balance a thing, set up the boring-but-important auto-transfer you've been meaning to. Foundation work this week. Growth work next."
+    },
+
+    {
+      "scope": "rat", "category": "general", "score": 49, "tone": "neutral",
+      "text": "You and Horse energy don't have an easy match this year, so the year ahead asks for a sharper plan, not a sadder one. Today the nudge is gentle, maybe 60/40 toward nostalgia. Revisit a place from your past, a childhood neighborhood, an old apartment, a town you spent time in. Bring someone who'd appreciate the story."
+    },
+    {
+      "scope": "rat", "category": "love", "score": 49, "tone": "neutral",
+      "text": "Love runs at even odds today, 50/50, but the kind that lasts is the kind that's already in your life. Skip the dating app. Call someone you've fallen out of touch with. If you're partnered, an old story, an old photo, an old recipe could shift the mood at home in your favor."
+    },
+    {
+      "scope": "rat", "category": "money", "score": 49, "tone": "neutral",
+      "text": "Money is on a wait-and-see today, 50/50 with a slight tilt toward conservative. The big year is uphill for you, so this isn't the day to be the first one in on anything. Investigate, ask questions, take notes. The compromise that opens things up next week starts with a quiet conversation today."
+    },
+
+    {
+      "scope": "ox", "category": "general", "score": 36, "tone": "cautionary",
+      "text": "Today asks for indoor energy. The numbers are 35/65 against pushing forward, so don't. Bake bread. Start a crossword. Get the soil ready for spring planting if your weather allows. Big decisions are uphill today, let them sit. Your patience pays mid-week. A quiet evening is exactly the right call."
+    },
+    {
+      "scope": "ox", "category": "love", "score": 36, "tone": "cautionary",
+      "text": "Love is uphill today, 35/65, mostly because patience is in short supply. Skip the conversation that's been brewing. Reschedule the awkward dinner. If your partner asks what's wrong, say you need a quiet night and mean it. Tomorrow you'll have softer edges. Today, protect what's good by not testing it."
+    },
+    {
+      "scope": "ox", "category": "money", "score": 36, "tone": "cautionary",
+      "text": "Money plays defense today, 35/65 against new commitments. Don't sign. Don't subscribe. Don't be the one who funds the optimistic plan over dinner. Resentment around money is one of today's hidden currents, so set boundaries gently and early. The conservative move is the right move. Hold steady."
+    },
+
+    {
+      "scope": "tiger", "category": "general", "score": 100, "tone": "auspicious",
+      "text": "Tiger, your month is here. The wind is fully at your back, 90/10 in your favor. Spend today with people who matter. Call a sibling. Drop in on a parent. Show up for someone whose corner you've quietly been in. If a cause has been calling you lately, this is the green light. Trust your gut, it's been right all along."
+    },
+    {
+      "scope": "tiger", "category": "love", "score": 100, "tone": "auspicious",
+      "text": "Family love wins today, 75/25 over romance, but both are favored. If you're partnered, do something low-key together. Cook in. Watch something old. If you're single, your charisma is unusually warm right now, so being seen at family events or with old friends puts you in the right rooms naturally. Don't try too hard."
+    },
+    {
+      "scope": "tiger", "category": "money", "score": 100, "tone": "auspicious",
+      "text": "Money tilts cautious despite your great day, call it 50/50. Lunar New Year favors intention, not spending. Set the budget. Open the savings account. Don't sign anything new today. Spend on people, not things. Your luck this week is better aimed at family and friends than at deals."
+    },
+
+    {
+      "scope": "rabbit", "category": "general", "score": 83, "tone": "auspicious",
+      "text": "What a lovely day for gentle work. The wind is with you, 80/20. Try a new recipe, something a little more involved than your weeknight standard. If you've been talking about a weekend trip with the family, today's the day to actually book it. Somewhere with water. The day favors patience and craft, so go slow."
+    },
+    {
+      "scope": "rabbit", "category": "love", "score": 83, "tone": "auspicious",
+      "text": "Love runs steady and warm today, 80/20 in your favor. Existing relationships deepen if you make space for them. New romance, if it's been brewing, can take its first solid step. The day rewards being one of the crowd more than standing out, so let things unfold rather than orchestrating them."
+    },
+    {
+      "scope": "rabbit", "category": "money", "score": 83, "tone": "auspicious",
+      "text": "Money is favorable but the day asks for one foot on the brake, 70/30 in your favor with caveats. Wrap up a project that's been hanging. Send the invoice. Get help from the supportive coworker. Big buys can wait. Small wins on overdue admin compound this week."
+    },
+
+    {
+      "scope": "dragon", "category": "general", "score": 14, "tone": "challenging",
+      "text": "Today is for laying low, not laying tracks. The numbers are 25/75 against the obvious moves. That doesn't mean lose. It means change strategy. Skip the big push at work. Take yourself somewhere, a long drive, a longer walk, anywhere you haven't been all week. A backyard fire and one good friend will move things further than any plan you've been forcing."
+    },
+    {
+      "scope": "dragon", "category": "love", "score": 14, "tone": "challenging",
+      "text": "Love is uphill today, 25/75. If something tearful is brewing, it doesn't have to spill out tonight. Keep to yourself for the morning. Friends might come asking for advice, give it gently. Avoid old wounds. The day will pass, the relationship is bigger than the hour, and tomorrow looks calmer."
+    },
+    {
+      "scope": "dragon", "category": "money", "score": 14, "tone": "challenging",
+      "text": "Money plays defense today. The numbers are 25/75 against any new commitment, so don't sign, don't subscribe, don't buy the upgrade. Don't loan money to a friend. The day rewards patience. If a deal feels rushed, that's the day talking, not the deal. By Friday the picture is clearer. Sit on it."
+    },
+
+    {
+      "scope": "snake", "category": "general", "score": 72, "tone": "favorable",
+      "text": "Letting things unfold at their own pace is your superpower today, 70/30 in your favor. Don't rush a conversation that needs time. Don't push a decision that wants to ripen. Pour a coffee, sit with the day, let people come to you. By evening, something you've been waiting on starts to make sense. Patience pays."
+    },
+    {
+      "scope": "snake", "category": "love", "score": 72, "tone": "favorable",
+      "text": "Love runs quietly favorable today, 70/30 with you, but nothing dramatic. The day suits steadiness more than fireworks. If you're partnered, a regular evening done well beats a special one done forced. If you're single, you're not missing anything by not pushing. The right move comes when you stop looking."
+    },
+    {
+      "scope": "snake", "category": "money", "score": 72, "tone": "favorable",
+      "text": "Money is in planning mode today, 70/30 in your favor. The numbers like a long view. Save for a future project. Map out what next quarter looks like financially. The day rewards thinking and philosophizing more than acting, so let yourself draft. Action lands better next week."
+    },
+
+    {
+      "scope": "horse", "category": "general", "score": 90, "tone": "auspicious",
+      "text": "Big year for you, Horse, but today, ease into it. The wind is at your back, 85/15. Get out of the house. A walk somewhere new, a drive with the windows down, a meal at the place you've been meaning to try. Your instincts are sharp this year, but so is your tendency to bolt. Move, yes. Just don't sprint into something you'll regret."
+    },
+    {
+      "scope": "horse", "category": "love", "score": 90, "tone": "auspicious",
+      "text": "Love is on your side today, 85/15. The catch this year: it's unwise to start anything you can't sustain, so go where the depth already is. If you're partnered, plan something for spring together. If you're single, the people who love you well are right there. Lean into them first."
+    },
+    {
+      "scope": "horse", "category": "money", "score": 90, "tone": "auspicious",
+      "text": "Money has a strong tailwind today, 80/20. Job-related opportunities are especially well-aspected this week. Send the email you've been putting off. Apply, pitch, follow up. The year favors enterprising people with steady plans, so use today to make the next move concrete, not to fantasize about ten of them."
+    },
+
+    {
+      "scope": "sheep", "category": "general", "score": 17, "tone": "challenging",
+      "text": "Stay close to home today. The day runs uphill, 25/75. Cook something slow. Pull a book off the shelf you've been meaning to start. If you've got dinner plans, keep them short and the conversation light, patience may be in short supply. Skip any travel you can. By tomorrow, the small thing that's been bugging you looks smaller."
+    },
+    {
+      "scope": "sheep", "category": "love", "score": 17, "tone": "challenging",
+      "text": "Love is rocky-feeling today, 25/75, but the day rewards diplomacy at any social moment. If a friend or partner has been quietly supportive, acknowledge it tonight, even with a short text. Romance proper is uphill, but appreciation lands soft. The lasting thing this week is gratitude, not grand gesture."
+    },
+    {
+      "scope": "sheep", "category": "money", "score": 17, "tone": "challenging",
+      "text": "Money is in pure defense mode today, 20/80. Debts feel heavy, investments feel iffy. Don't act on either. Pay the minimum, leave the rest where it is. Work feels overstretched, so today is not for adding new responsibilities. The financial picture isn't bad, it's tired. Rest the wallet too."
+    },
+
+    {
+      "scope": "monkey", "category": "general", "score": 80, "tone": "auspicious",
+      "text": "People are unusually receptive to what you have to say today, 75/25 in your favor. Pitch the idea you've been sitting on. Float the project. Now is not the day for big commitments, keep it light, keep it moveable. Get the conversation started, then back off. The next month will throw curveballs, the smartest move is to stay quick."
+    },
+    {
+      "scope": "monkey", "category": "love", "score": 80, "tone": "auspicious",
+      "text": "Love is good for you today but personal life takes a back seat, 60/40 with you on balance. You're the busy one, and your partner or close friends will feel it. Two-minute calls and clear plans for the weekend matter more than the depth of any one conversation today. Show up later in the week."
+    },
+    {
+      "scope": "monkey", "category": "money", "score": 80, "tone": "auspicious",
+      "text": "Money tailwinds today, 75/25 in your favor, with material gains in play. Quick wins are the move, not big bets. The year rewards your ability to read a room and pivot, so use today to scout: meetings, calls, who's hiring, who's looking. Long-term commitments can wait. Quick money loves quick feet."
+    },
+
+    {
+      "scope": "rooster", "category": "general", "score": 41, "tone": "neutral",
+      "text": "You've been running a tight ship, maybe too tight. The day reads 50/50 with a hint that the discipline is becoming a wall. Loosen the schedule. Ask less of the people around you and more of the pizza menu. Career stuff is fine, it'll be there tomorrow. Tonight is for letting one small thing be imperfect on purpose."
+    },
+    {
+      "scope": "rooster", "category": "love", "score": 41, "tone": "neutral",
+      "text": "Love is at even odds today but a friction point is sitting under the surface, so handle it head-on, gently. If something has been brewing, name it before it picks the time itself. The day favors honesty over delivery. A direct, kind ten-minute conversation tonight does more than a week of avoiding."
+    },
+    {
+      "scope": "rooster", "category": "money", "score": 41, "tone": "neutral",
+      "text": "Money is mixed today, 50/50, with a small stroke of good fortune in the mix if you're paying attention. The day-job side feels only fair, so don't read into it. The win is more likely from a refund, a found gift card, a small unexpected line item. Notice it, take it, don't spend it."
+    },
+
+    {
+      "scope": "dog", "category": "general", "score": 89, "tone": "auspicious",
+      "text": "A perfect day to nest. The wind is fully with you, 85/15. Light the fire if you have one. Queue something atmospheric, an old film, a foreign series with subtitles, anything moody. Pour something good. If you've been meaning to plan a trip somewhere wild and a little romantic, Scotland or Iceland or the coast, today's the day to start the list. Cozy is sacred."
+    },
+    {
+      "scope": "dog", "category": "love", "score": 89, "tone": "auspicious",
+      "text": "Love peaks today, 85/15 in your favor. Hang out with your oldest friends, the ones who knew you before you had it figured out. Talk about old times. If you're partnered, this is the kind of day where staying in beats going out. Loyalty wins. Show up for the people who've shown up for you."
+    },
+    {
+      "scope": "dog", "category": "money", "score": 89, "tone": "auspicious",
+      "text": "Money is strong today, 80/20, and unusually well-suited to a real purchase. If you've been thinking about a big appliance, new flooring, a piece of furniture for the long haul, the day favors the buy. Modest commercial wins peak this week. Steady, not flashy. Bill the client. Close the loop."
+    },
+
+    {
+      "scope": "pig", "category": "general", "score": 71, "tone": "favorable",
+      "text": "Tie up the small things you've been letting slide. The wind is with you, 70/30. Send the email. Make the appointment. Finish the puzzle. Then book yourself a massage if your shoulders have been carrying the week. Friends will lean on your good mood today, so plan a generous evening. You're the warmest person at the table. Be that, on purpose."
+    },
+    {
+      "scope": "pig", "category": "love", "score": 71, "tone": "favorable",
+      "text": "Love runs warm today, 70/30 in your favor, and unusually sweet. If you're partnered, make a small ceremony of dinner. If you're single, you're great company right now and people feel it. A friend may bring you something tricky to work through, listen carefully, take it lightly, and gently watch who you trust."
+    },
+    {
+      "scope": "pig", "category": "money", "score": 71, "tone": "favorable",
+      "text": "Money is favorable today, 70/30, with a possible windfall or solid investment angle in the air. Read the fine print on any joint venture, the structure matters more than the upside. Supportive coworkers help with a sticky work problem. Make hay while the sun shines, the conditions don't last forever."
+    }
+  ],
+  "audit": {
+    "total": 39,
+    "signs_mentioned_by_name": 1,
+    "em_dashes": 0,
+    "en_dashes": 0,
+    "uses_percentages": true,
+    "uses_no_em_dash": true
+  }
+}

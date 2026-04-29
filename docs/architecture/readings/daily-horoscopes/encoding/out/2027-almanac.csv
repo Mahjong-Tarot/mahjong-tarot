@@ -1,0 +1,1831 @@
+date,weekday,lunar_month,lunar_day,year_pillar,month_pillar,day_pillar,officer,year_conflict,score,tone,holiday,lucky_count,unlucky_count
+2027-02-06,Saturday,1,1,Fire Sheep,Water Tiger,Fire Dragon,Full,Dog,74,favorable,Lunar New Year,14,0
+2027-02-07,Sunday,1,2,Fire Sheep,Water Tiger,Fire Snake,Balance,Pig,47,neutral,,0,2
+2027-02-08,Monday,1,3,Fire Sheep,Water Tiger,Earth Horse,Stable,Rat,66,favorable,,13,4
+2027-02-09,Tuesday,1,4,Fire Sheep,Water Tiger,Earth Sheep,Initiate,Ox,59,neutral,Year sign meets day sign,6,1
+2027-02-10,Wednesday,1,5,Fire Sheep,Water Tiger,Metal Monkey,Break,Tiger,19,challenging,,4,22
+2027-02-11,Thursday,1,6,Fire Sheep,Water Tiger,Metal Rooster,Danger,Rabbit,17,challenging,,0,19
+2027-02-12,Friday,1,7,Fire Sheep,Water Tiger,Water Dog,Success,Dragon,81,auspicious,,20,2
+2027-02-13,Saturday,1,8,Fire Sheep,Water Tiger,Water Pig,Receive,Snake,66,favorable,,10,1
+2027-02-14,Sunday,1,9,Fire Sheep,Water Tiger,Wood Rat,Open,Horse,79,favorable,Valentine's Day,18,1
+2027-02-15,Monday,1,10,Fire Sheep,Water Tiger,Wood Ox,Close,Sheep,21,cautionary,,3,20
+2027-02-16,Tuesday,1,11,Fire Sheep,Water Tiger,Fire Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2027-02-17,Wednesday,1,12,Fire Sheep,Water Tiger,Fire Rabbit,Remove,Rooster,47,neutral,,7,9
+2027-02-18,Thursday,1,13,Fire Sheep,Water Tiger,Earth Dragon,Full,Dog,74,favorable,,14,0
+2027-02-19,Friday,1,14,Fire Sheep,Water Tiger,Earth Snake,Balance,Pig,47,neutral,,0,2
+2027-02-20,Saturday,1,15,Fire Sheep,Water Tiger,Metal Horse,Stable,Rat,66,favorable,Lantern Festival,13,4
+2027-02-21,Sunday,1,16,Fire Sheep,Water Tiger,Metal Sheep,Initiate,Ox,59,neutral,Year sign meets day sign,6,1
+2027-02-22,Monday,1,17,Fire Sheep,Water Tiger,Water Monkey,Break,Tiger,19,challenging,,4,22
+2027-02-23,Tuesday,1,18,Fire Sheep,Water Tiger,Water Rooster,Danger,Rabbit,17,challenging,,0,19
+2027-02-24,Wednesday,1,19,Fire Sheep,Water Tiger,Wood Dog,Success,Dragon,81,auspicious,,20,2
+2027-02-25,Thursday,1,20,Fire Sheep,Water Tiger,Wood Pig,Receive,Snake,66,favorable,,10,1
+2027-02-26,Friday,1,21,Fire Sheep,Water Tiger,Fire Rat,Open,Horse,79,favorable,,18,1
+2027-02-27,Saturday,1,22,Fire Sheep,Water Tiger,Fire Ox,Close,Sheep,21,cautionary,,3,20
+2027-02-28,Sunday,1,23,Fire Sheep,Water Tiger,Earth Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2027-03-01,Monday,1,24,Fire Sheep,Water Tiger,Earth Rabbit,Remove,Rooster,47,neutral,,7,9
+2027-03-02,Tuesday,1,25,Fire Sheep,Water Tiger,Metal Dragon,Full,Dog,74,favorable,,14,0
+2027-03-03,Wednesday,1,26,Fire Sheep,Water Tiger,Metal Snake,Balance,Pig,47,neutral,,0,2
+2027-03-04,Thursday,1,27,Fire Sheep,Water Tiger,Water Horse,Stable,Rat,66,favorable,,13,4
+2027-03-05,Friday,1,28,Fire Sheep,Water Tiger,Water Sheep,Initiate,Ox,59,neutral,Year sign meets day sign,6,1
+2027-03-06,Saturday,1,29,Fire Sheep,Water Tiger,Wood Monkey,Break,Tiger,19,challenging,,4,22
+2027-03-07,Sunday,1,30,Fire Sheep,Water Tiger,Wood Rooster,Danger,Rabbit,17,challenging,,0,19
+2027-03-08,Monday,2,1,Fire Sheep,Water Rabbit,Fire Dog,Danger,Dragon,17,challenging,,0,19
+2027-03-09,Tuesday,2,2,Fire Sheep,Water Rabbit,Fire Pig,Success,Snake,81,auspicious,Earth God's Birthday,20,2
+2027-03-10,Wednesday,2,3,Fire Sheep,Water Rabbit,Earth Rat,Receive,Horse,66,favorable,,10,1
+2027-03-11,Thursday,2,4,Fire Sheep,Water Rabbit,Earth Ox,Open,Sheep,79,favorable,,18,1
+2027-03-12,Friday,2,5,Fire Sheep,Water Rabbit,Metal Tiger,Close,Monkey,21,cautionary,,3,20
+2027-03-13,Saturday,2,6,Fire Sheep,Water Rabbit,Metal Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2027-03-14,Sunday,2,7,Fire Sheep,Water Rabbit,Water Dragon,Remove,Dog,47,neutral,,7,9
+2027-03-15,Monday,2,8,Fire Sheep,Water Rabbit,Water Snake,Full,Pig,74,favorable,,14,0
+2027-03-16,Tuesday,2,9,Fire Sheep,Water Rabbit,Wood Horse,Balance,Rat,47,neutral,,0,2
+2027-03-17,Wednesday,2,10,Fire Sheep,Water Rabbit,Wood Sheep,Stable,Ox,66,favorable,St. Patrick's Day. Year sign meets day sign,13,4
+2027-03-18,Thursday,2,11,Fire Sheep,Water Rabbit,Fire Monkey,Initiate,Tiger,59,neutral,,6,1
+2027-03-19,Friday,2,12,Fire Sheep,Water Rabbit,Fire Rooster,Break,Rabbit,19,challenging,,4,22
+2027-03-20,Saturday,2,13,Fire Sheep,Water Rabbit,Earth Dog,Danger,Dragon,17,challenging,,0,19
+2027-03-21,Sunday,2,14,Fire Sheep,Water Rabbit,Earth Pig,Success,Snake,81,auspicious,,20,2
+2027-03-22,Monday,2,15,Fire Sheep,Water Rabbit,Metal Rat,Receive,Horse,66,favorable,,10,1
+2027-03-23,Tuesday,2,16,Fire Sheep,Water Rabbit,Metal Ox,Open,Sheep,79,favorable,,18,1
+2027-03-24,Wednesday,2,17,Fire Sheep,Water Rabbit,Water Tiger,Close,Monkey,21,cautionary,,3,20
+2027-03-25,Thursday,2,18,Fire Sheep,Water Rabbit,Water Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2027-03-26,Friday,2,19,Fire Sheep,Water Rabbit,Wood Dragon,Remove,Dog,47,neutral,,7,9
+2027-03-27,Saturday,2,20,Fire Sheep,Water Rabbit,Wood Snake,Full,Pig,74,favorable,,14,0
+2027-03-28,Sunday,2,21,Fire Sheep,Water Rabbit,Fire Horse,Balance,Rat,47,neutral,,0,2
+2027-03-29,Monday,2,22,Fire Sheep,Water Rabbit,Fire Sheep,Stable,Ox,66,favorable,Year sign meets day sign,13,4
+2027-03-30,Tuesday,2,23,Fire Sheep,Water Rabbit,Earth Monkey,Initiate,Tiger,59,neutral,,6,1
+2027-03-31,Wednesday,2,24,Fire Sheep,Water Rabbit,Earth Rooster,Break,Rabbit,19,challenging,,4,22
+2027-04-01,Thursday,2,25,Fire Sheep,Water Rabbit,Metal Dog,Danger,Dragon,17,challenging,,0,19
+2027-04-02,Friday,2,26,Fire Sheep,Water Rabbit,Metal Pig,Success,Snake,81,auspicious,,20,2
+2027-04-03,Saturday,2,27,Fire Sheep,Water Rabbit,Water Rat,Receive,Horse,66,favorable,,10,1
+2027-04-04,Sunday,2,28,Fire Sheep,Water Rabbit,Water Ox,Open,Sheep,79,favorable,,18,1
+2027-04-05,Monday,2,29,Fire Sheep,Water Rabbit,Wood Tiger,Close,Monkey,21,cautionary,,3,20
+2027-04-06,Tuesday,3,1,Fire Sheep,Wood Dragon,Wood Rabbit,Close,Rooster,21,cautionary,,3,20
+2027-04-07,Wednesday,3,2,Fire Sheep,Wood Dragon,Fire Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2027-04-08,Thursday,3,3,Fire Sheep,Wood Dragon,Fire Snake,Remove,Pig,47,neutral,Shangsi Festival,7,9
+2027-04-09,Friday,3,4,Fire Sheep,Wood Dragon,Earth Horse,Full,Rat,74,favorable,,14,0
+2027-04-10,Saturday,3,5,Fire Sheep,Wood Dragon,Earth Sheep,Balance,Ox,47,neutral,Year sign meets day sign,0,2
+2027-04-11,Sunday,3,6,Fire Sheep,Wood Dragon,Metal Monkey,Stable,Tiger,66,favorable,,13,4
+2027-04-12,Monday,3,7,Fire Sheep,Wood Dragon,Metal Rooster,Initiate,Rabbit,59,neutral,,6,1
+2027-04-13,Tuesday,3,8,Fire Sheep,Wood Dragon,Water Dog,Break,Dragon,19,challenging,,4,22
+2027-04-14,Wednesday,3,9,Fire Sheep,Wood Dragon,Water Pig,Danger,Snake,17,challenging,,0,19
+2027-04-15,Thursday,3,10,Fire Sheep,Wood Dragon,Wood Rat,Success,Horse,81,auspicious,,20,2
+2027-04-16,Friday,3,11,Fire Sheep,Wood Dragon,Wood Ox,Receive,Sheep,66,favorable,,10,1
+2027-04-17,Saturday,3,12,Fire Sheep,Wood Dragon,Fire Tiger,Open,Monkey,79,favorable,,18,1
+2027-04-18,Sunday,3,13,Fire Sheep,Wood Dragon,Fire Rabbit,Close,Rooster,21,cautionary,,3,20
+2027-04-19,Monday,3,14,Fire Sheep,Wood Dragon,Earth Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2027-04-20,Tuesday,3,15,Fire Sheep,Wood Dragon,Earth Snake,Remove,Pig,47,neutral,,7,9
+2027-04-21,Wednesday,3,16,Fire Sheep,Wood Dragon,Metal Horse,Full,Rat,74,favorable,,14,0
+2027-04-22,Thursday,3,17,Fire Sheep,Wood Dragon,Metal Sheep,Balance,Ox,47,neutral,Year sign meets day sign,0,2
+2027-04-23,Friday,3,18,Fire Sheep,Wood Dragon,Water Monkey,Stable,Tiger,66,favorable,,13,4
+2027-04-24,Saturday,3,19,Fire Sheep,Wood Dragon,Water Rooster,Initiate,Rabbit,59,neutral,,6,1
+2027-04-25,Sunday,3,20,Fire Sheep,Wood Dragon,Wood Dog,Break,Dragon,19,challenging,,4,22
+2027-04-26,Monday,3,21,Fire Sheep,Wood Dragon,Wood Pig,Danger,Snake,17,challenging,,0,19
+2027-04-27,Tuesday,3,22,Fire Sheep,Wood Dragon,Fire Rat,Success,Horse,81,auspicious,,20,2
+2027-04-28,Wednesday,3,23,Fire Sheep,Wood Dragon,Fire Ox,Receive,Sheep,66,favorable,,10,1
+2027-04-29,Thursday,3,24,Fire Sheep,Wood Dragon,Earth Tiger,Open,Monkey,79,favorable,,18,1
+2027-04-30,Friday,3,25,Fire Sheep,Wood Dragon,Earth Rabbit,Close,Rooster,21,cautionary,,3,20
+2027-05-01,Saturday,3,26,Fire Sheep,Wood Dragon,Metal Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2027-05-02,Sunday,3,27,Fire Sheep,Wood Dragon,Metal Snake,Remove,Pig,47,neutral,,7,9
+2027-05-03,Monday,3,28,Fire Sheep,Wood Dragon,Water Horse,Full,Rat,74,favorable,,14,0
+2027-05-04,Tuesday,3,29,Fire Sheep,Wood Dragon,Water Sheep,Balance,Ox,47,neutral,Year sign meets day sign,0,2
+2027-05-05,Wednesday,3,30,Fire Sheep,Wood Dragon,Wood Monkey,Stable,Tiger,66,favorable,,13,4
+2027-05-06,Thursday,4,1,Fire Sheep,Wood Snake,Wood Rooster,Stable,Rabbit,66,favorable,,13,4
+2027-05-07,Friday,4,2,Fire Sheep,Wood Snake,Fire Dog,Initiate,Dragon,59,neutral,,6,1
+2027-05-08,Saturday,4,3,Fire Sheep,Wood Snake,Fire Pig,Break,Snake,19,challenging,,4,22
+2027-05-09,Sunday,4,4,Fire Sheep,Wood Snake,Earth Rat,Danger,Horse,17,challenging,,0,19
+2027-05-10,Monday,4,5,Fire Sheep,Wood Snake,Earth Ox,Success,Sheep,81,auspicious,,20,2
+2027-05-11,Tuesday,4,6,Fire Sheep,Wood Snake,Metal Tiger,Receive,Monkey,66,favorable,,10,1
+2027-05-12,Wednesday,4,7,Fire Sheep,Wood Snake,Metal Rabbit,Open,Rooster,79,favorable,,18,1
+2027-05-13,Thursday,4,8,Fire Sheep,Wood Snake,Water Dragon,Close,Dog,21,cautionary,Buddha's Birthday,3,20
+2027-05-14,Friday,4,9,Fire Sheep,Wood Snake,Water Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2027-05-15,Saturday,4,10,Fire Sheep,Wood Snake,Wood Horse,Remove,Rat,47,neutral,,7,9
+2027-05-16,Sunday,4,11,Fire Sheep,Wood Snake,Wood Sheep,Full,Ox,74,favorable,Year sign meets day sign,14,0
+2027-05-17,Monday,4,12,Fire Sheep,Wood Snake,Fire Monkey,Balance,Tiger,47,neutral,,0,2
+2027-05-18,Tuesday,4,13,Fire Sheep,Wood Snake,Fire Rooster,Stable,Rabbit,66,favorable,,13,4
+2027-05-19,Wednesday,4,14,Fire Sheep,Wood Snake,Earth Dog,Initiate,Dragon,59,neutral,,6,1
+2027-05-20,Thursday,4,15,Fire Sheep,Wood Snake,Earth Pig,Break,Snake,19,challenging,,4,22
+2027-05-21,Friday,4,16,Fire Sheep,Wood Snake,Metal Rat,Danger,Horse,17,challenging,,0,19
+2027-05-22,Saturday,4,17,Fire Sheep,Wood Snake,Metal Ox,Success,Sheep,81,auspicious,,20,2
+2027-05-23,Sunday,4,18,Fire Sheep,Wood Snake,Water Tiger,Receive,Monkey,66,favorable,,10,1
+2027-05-24,Monday,4,19,Fire Sheep,Wood Snake,Water Rabbit,Open,Rooster,79,favorable,,18,1
+2027-05-25,Tuesday,4,20,Fire Sheep,Wood Snake,Wood Dragon,Close,Dog,21,cautionary,,3,20
+2027-05-26,Wednesday,4,21,Fire Sheep,Wood Snake,Wood Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2027-05-27,Thursday,4,22,Fire Sheep,Wood Snake,Fire Horse,Remove,Rat,47,neutral,,7,9
+2027-05-28,Friday,4,23,Fire Sheep,Wood Snake,Fire Sheep,Full,Ox,74,favorable,Year sign meets day sign,14,0
+2027-05-29,Saturday,4,24,Fire Sheep,Wood Snake,Earth Monkey,Balance,Tiger,47,neutral,,0,2
+2027-05-30,Sunday,4,25,Fire Sheep,Wood Snake,Earth Rooster,Stable,Rabbit,66,favorable,,13,4
+2027-05-31,Monday,4,26,Fire Sheep,Wood Snake,Metal Dog,Initiate,Dragon,59,neutral,,6,1
+2027-06-01,Tuesday,4,27,Fire Sheep,Wood Snake,Metal Pig,Break,Snake,19,challenging,,4,22
+2027-06-02,Wednesday,4,28,Fire Sheep,Wood Snake,Water Rat,Danger,Horse,17,challenging,,0,19
+2027-06-03,Thursday,4,29,Fire Sheep,Wood Snake,Water Ox,Success,Sheep,81,auspicious,,20,2
+2027-06-04,Friday,4,30,Fire Sheep,Wood Snake,Wood Tiger,Receive,Monkey,66,favorable,,10,1
+2027-06-05,Saturday,5,1,Fire Sheep,Fire Horse,Wood Rabbit,Receive,Rooster,66,favorable,,10,1
+2027-06-06,Sunday,5,2,Fire Sheep,Fire Horse,Fire Dragon,Open,Dog,79,favorable,,18,1
+2027-06-07,Monday,5,3,Fire Sheep,Fire Horse,Fire Snake,Close,Pig,21,cautionary,,3,20
+2027-06-08,Tuesday,5,4,Fire Sheep,Fire Horse,Earth Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2027-06-09,Wednesday,5,5,Fire Sheep,Fire Horse,Earth Sheep,Remove,Ox,47,neutral,Dragon Boat Festival. Year sign meets day sign,7,9
+2027-06-10,Thursday,5,6,Fire Sheep,Fire Horse,Metal Monkey,Full,Tiger,74,favorable,,14,0
+2027-06-11,Friday,5,7,Fire Sheep,Fire Horse,Metal Rooster,Balance,Rabbit,47,neutral,,0,2
+2027-06-12,Saturday,5,8,Fire Sheep,Fire Horse,Water Dog,Stable,Dragon,66,favorable,,13,4
+2027-06-13,Sunday,5,9,Fire Sheep,Fire Horse,Water Pig,Initiate,Snake,59,neutral,,6,1
+2027-06-14,Monday,5,10,Fire Sheep,Fire Horse,Wood Rat,Break,Horse,19,challenging,,4,22
+2027-06-15,Tuesday,5,11,Fire Sheep,Fire Horse,Wood Ox,Danger,Sheep,17,challenging,,0,19
+2027-06-16,Wednesday,5,12,Fire Sheep,Fire Horse,Fire Tiger,Success,Monkey,81,auspicious,,20,2
+2027-06-17,Thursday,5,13,Fire Sheep,Fire Horse,Fire Rabbit,Receive,Rooster,66,favorable,,10,1
+2027-06-18,Friday,5,14,Fire Sheep,Fire Horse,Earth Dragon,Open,Dog,79,favorable,,18,1
+2027-06-19,Saturday,5,15,Fire Sheep,Fire Horse,Earth Snake,Close,Pig,21,cautionary,,3,20
+2027-06-20,Sunday,5,16,Fire Sheep,Fire Horse,Metal Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2027-06-21,Monday,5,17,Fire Sheep,Fire Horse,Metal Sheep,Remove,Ox,47,neutral,Year sign meets day sign,7,9
+2027-06-22,Tuesday,5,18,Fire Sheep,Fire Horse,Water Monkey,Full,Tiger,74,favorable,,14,0
+2027-06-23,Wednesday,5,19,Fire Sheep,Fire Horse,Water Rooster,Balance,Rabbit,47,neutral,,0,2
+2027-06-24,Thursday,5,20,Fire Sheep,Fire Horse,Wood Dog,Stable,Dragon,66,favorable,,13,4
+2027-06-25,Friday,5,21,Fire Sheep,Fire Horse,Wood Pig,Initiate,Snake,59,neutral,,6,1
+2027-06-26,Saturday,5,22,Fire Sheep,Fire Horse,Fire Rat,Break,Horse,19,challenging,,4,22
+2027-06-27,Sunday,5,23,Fire Sheep,Fire Horse,Fire Ox,Danger,Sheep,17,challenging,,0,19
+2027-06-28,Monday,5,24,Fire Sheep,Fire Horse,Earth Tiger,Success,Monkey,81,auspicious,,20,2
+2027-06-29,Tuesday,5,25,Fire Sheep,Fire Horse,Earth Rabbit,Receive,Rooster,66,favorable,,10,1
+2027-06-30,Wednesday,5,26,Fire Sheep,Fire Horse,Metal Dragon,Open,Dog,79,favorable,,18,1
+2027-07-01,Thursday,5,27,Fire Sheep,Fire Horse,Metal Snake,Close,Pig,21,cautionary,,3,20
+2027-07-02,Friday,5,28,Fire Sheep,Fire Horse,Water Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2027-07-03,Saturday,5,29,Fire Sheep,Fire Horse,Water Sheep,Remove,Ox,47,neutral,Year sign meets day sign,7,9
+2027-07-04,Sunday,6,1,Fire Sheep,Fire Sheep,Wood Monkey,Remove,Tiger,47,neutral,Independence Day (US). Year sign meets month sign,7,9
+2027-07-05,Monday,6,2,Fire Sheep,Fire Sheep,Wood Rooster,Full,Rabbit,74,favorable,Year sign meets month sign,14,0
+2027-07-06,Tuesday,6,3,Fire Sheep,Fire Sheep,Fire Dog,Balance,Dragon,47,neutral,Year sign meets month sign,0,2
+2027-07-07,Wednesday,6,4,Fire Sheep,Fire Sheep,Fire Pig,Stable,Snake,66,favorable,Year sign meets month sign,13,4
+2027-07-08,Thursday,6,5,Fire Sheep,Fire Sheep,Earth Rat,Initiate,Horse,59,neutral,Year sign meets month sign,6,1
+2027-07-09,Friday,6,6,Fire Sheep,Fire Sheep,Earth Ox,Break,Sheep,19,challenging,Year sign meets month sign,4,22
+2027-07-10,Saturday,6,7,Fire Sheep,Fire Sheep,Metal Tiger,Danger,Monkey,17,challenging,Year sign meets month sign,0,19
+2027-07-11,Sunday,6,8,Fire Sheep,Fire Sheep,Metal Rabbit,Success,Rooster,81,auspicious,Year sign meets month sign,20,2
+2027-07-12,Monday,6,9,Fire Sheep,Fire Sheep,Water Dragon,Receive,Dog,66,favorable,Year sign meets month sign,10,1
+2027-07-13,Tuesday,6,10,Fire Sheep,Fire Sheep,Water Snake,Open,Pig,79,favorable,Year sign meets month sign,18,1
+2027-07-14,Wednesday,6,11,Fire Sheep,Fire Sheep,Wood Horse,Close,Rat,21,cautionary,Year sign meets month sign,3,20
+2027-07-15,Thursday,6,12,Fire Sheep,Fire Sheep,Wood Sheep,Establish,Ox,71,favorable,Triple alignment (rare),15,3
+2027-07-16,Friday,6,13,Fire Sheep,Fire Sheep,Fire Monkey,Remove,Tiger,47,neutral,Year sign meets month sign,7,9
+2027-07-17,Saturday,6,14,Fire Sheep,Fire Sheep,Fire Rooster,Full,Rabbit,74,favorable,Year sign meets month sign,14,0
+2027-07-18,Sunday,6,15,Fire Sheep,Fire Sheep,Earth Dog,Balance,Dragon,47,neutral,Year sign meets month sign,0,2
+2027-07-19,Monday,6,16,Fire Sheep,Fire Sheep,Earth Pig,Stable,Snake,66,favorable,Year sign meets month sign,13,4
+2027-07-20,Tuesday,6,17,Fire Sheep,Fire Sheep,Metal Rat,Initiate,Horse,59,neutral,Year sign meets month sign,6,1
+2027-07-21,Wednesday,6,18,Fire Sheep,Fire Sheep,Metal Ox,Break,Sheep,19,challenging,Year sign meets month sign,4,22
+2027-07-22,Thursday,6,19,Fire Sheep,Fire Sheep,Water Tiger,Danger,Monkey,17,challenging,Year sign meets month sign,0,19
+2027-07-23,Friday,6,20,Fire Sheep,Fire Sheep,Water Rabbit,Success,Rooster,81,auspicious,Year sign meets month sign,20,2
+2027-07-24,Saturday,6,21,Fire Sheep,Fire Sheep,Wood Dragon,Receive,Dog,66,favorable,Year sign meets month sign,10,1
+2027-07-25,Sunday,6,22,Fire Sheep,Fire Sheep,Wood Snake,Open,Pig,79,favorable,Year sign meets month sign,18,1
+2027-07-26,Monday,6,23,Fire Sheep,Fire Sheep,Fire Horse,Close,Rat,21,cautionary,Year sign meets month sign,3,20
+2027-07-27,Tuesday,6,24,Fire Sheep,Fire Sheep,Fire Sheep,Establish,Ox,71,favorable,Triple alignment (rare),15,3
+2027-07-28,Wednesday,6,25,Fire Sheep,Fire Sheep,Earth Monkey,Remove,Tiger,47,neutral,Year sign meets month sign,7,9
+2027-07-29,Thursday,6,26,Fire Sheep,Fire Sheep,Earth Rooster,Full,Rabbit,74,favorable,Year sign meets month sign,14,0
+2027-07-30,Friday,6,27,Fire Sheep,Fire Sheep,Metal Dog,Balance,Dragon,47,neutral,Year sign meets month sign,0,2
+2027-07-31,Saturday,6,28,Fire Sheep,Fire Sheep,Metal Pig,Stable,Snake,66,favorable,Year sign meets month sign,13,4
+2027-08-01,Sunday,6,29,Fire Sheep,Fire Sheep,Water Rat,Initiate,Horse,59,neutral,Year sign meets month sign,6,1
+2027-08-02,Monday,7,1,Fire Sheep,Earth Monkey,Water Ox,Initiate,Sheep,59,neutral,,6,1
+2027-08-03,Tuesday,7,2,Fire Sheep,Earth Monkey,Wood Tiger,Break,Monkey,19,challenging,,4,22
+2027-08-04,Wednesday,7,3,Fire Sheep,Earth Monkey,Wood Rabbit,Danger,Rooster,17,challenging,,0,19
+2027-08-05,Thursday,7,4,Fire Sheep,Earth Monkey,Fire Dragon,Success,Dog,81,auspicious,,20,2
+2027-08-06,Friday,7,5,Fire Sheep,Earth Monkey,Fire Snake,Receive,Pig,66,favorable,,10,1
+2027-08-07,Saturday,7,6,Fire Sheep,Earth Monkey,Earth Horse,Open,Rat,79,favorable,,18,1
+2027-08-08,Sunday,7,7,Fire Sheep,Earth Monkey,Earth Sheep,Close,Ox,21,cautionary,Qixi (Chinese Valentine's). Year sign meets day sign,3,20
+2027-08-09,Monday,7,8,Fire Sheep,Earth Monkey,Metal Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2027-08-10,Tuesday,7,9,Fire Sheep,Earth Monkey,Metal Rooster,Remove,Rabbit,47,neutral,,7,9
+2027-08-11,Wednesday,7,10,Fire Sheep,Earth Monkey,Water Dog,Full,Dragon,74,favorable,,14,0
+2027-08-12,Thursday,7,11,Fire Sheep,Earth Monkey,Water Pig,Balance,Snake,47,neutral,,0,2
+2027-08-13,Friday,7,12,Fire Sheep,Earth Monkey,Wood Rat,Stable,Horse,66,favorable,,13,4
+2027-08-14,Saturday,7,13,Fire Sheep,Earth Monkey,Wood Ox,Initiate,Sheep,59,neutral,,6,1
+2027-08-15,Sunday,7,14,Fire Sheep,Earth Monkey,Fire Tiger,Break,Monkey,19,challenging,,4,22
+2027-08-16,Monday,7,15,Fire Sheep,Earth Monkey,Fire Rabbit,Danger,Rooster,17,challenging,Ghost Festival,0,19
+2027-08-17,Tuesday,7,16,Fire Sheep,Earth Monkey,Earth Dragon,Success,Dog,81,auspicious,,20,2
+2027-08-18,Wednesday,7,17,Fire Sheep,Earth Monkey,Earth Snake,Receive,Pig,66,favorable,,10,1
+2027-08-19,Thursday,7,18,Fire Sheep,Earth Monkey,Metal Horse,Open,Rat,79,favorable,,18,1
+2027-08-20,Friday,7,19,Fire Sheep,Earth Monkey,Metal Sheep,Close,Ox,21,cautionary,Year sign meets day sign,3,20
+2027-08-21,Saturday,7,20,Fire Sheep,Earth Monkey,Water Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2027-08-22,Sunday,7,21,Fire Sheep,Earth Monkey,Water Rooster,Remove,Rabbit,47,neutral,,7,9
+2027-08-23,Monday,7,22,Fire Sheep,Earth Monkey,Wood Dog,Full,Dragon,74,favorable,,14,0
+2027-08-24,Tuesday,7,23,Fire Sheep,Earth Monkey,Wood Pig,Balance,Snake,47,neutral,,0,2
+2027-08-25,Wednesday,7,24,Fire Sheep,Earth Monkey,Fire Rat,Stable,Horse,66,favorable,,13,4
+2027-08-26,Thursday,7,25,Fire Sheep,Earth Monkey,Fire Ox,Initiate,Sheep,59,neutral,,6,1
+2027-08-27,Friday,7,26,Fire Sheep,Earth Monkey,Earth Tiger,Break,Monkey,19,challenging,,4,22
+2027-08-28,Saturday,7,27,Fire Sheep,Earth Monkey,Earth Rabbit,Danger,Rooster,17,challenging,,0,19
+2027-08-29,Sunday,7,28,Fire Sheep,Earth Monkey,Metal Dragon,Success,Dog,81,auspicious,,20,2
+2027-08-30,Monday,7,29,Fire Sheep,Earth Monkey,Metal Snake,Receive,Pig,66,favorable,,10,1
+2027-08-31,Tuesday,7,30,Fire Sheep,Earth Monkey,Water Horse,Open,Rat,79,favorable,,18,1
+2027-09-01,Wednesday,8,1,Fire Sheep,Earth Rooster,Water Sheep,Open,Ox,79,favorable,Year sign meets day sign,18,1
+2027-09-02,Thursday,8,2,Fire Sheep,Earth Rooster,Wood Monkey,Close,Tiger,21,cautionary,,3,20
+2027-09-03,Friday,8,3,Fire Sheep,Earth Rooster,Wood Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2027-09-04,Saturday,8,4,Fire Sheep,Earth Rooster,Fire Dog,Remove,Dragon,47,neutral,,7,9
+2027-09-05,Sunday,8,5,Fire Sheep,Earth Rooster,Fire Pig,Full,Snake,74,favorable,,14,0
+2027-09-06,Monday,8,6,Fire Sheep,Earth Rooster,Earth Rat,Balance,Horse,47,neutral,,0,2
+2027-09-07,Tuesday,8,7,Fire Sheep,Earth Rooster,Earth Ox,Stable,Sheep,66,favorable,,13,4
+2027-09-08,Wednesday,8,8,Fire Sheep,Earth Rooster,Metal Tiger,Initiate,Monkey,59,neutral,,6,1
+2027-09-09,Thursday,8,9,Fire Sheep,Earth Rooster,Metal Rabbit,Break,Rooster,19,challenging,,4,22
+2027-09-10,Friday,8,10,Fire Sheep,Earth Rooster,Water Dragon,Danger,Dog,17,challenging,,0,19
+2027-09-11,Saturday,8,11,Fire Sheep,Earth Rooster,Water Snake,Success,Pig,81,auspicious,,20,2
+2027-09-12,Sunday,8,12,Fire Sheep,Earth Rooster,Wood Horse,Receive,Rat,66,favorable,,10,1
+2027-09-13,Monday,8,13,Fire Sheep,Earth Rooster,Wood Sheep,Open,Ox,79,favorable,Year sign meets day sign,18,1
+2027-09-14,Tuesday,8,14,Fire Sheep,Earth Rooster,Fire Monkey,Close,Tiger,21,cautionary,,3,20
+2027-09-15,Wednesday,8,15,Fire Sheep,Earth Rooster,Fire Rooster,Establish,Rabbit,71,favorable,Mid-Autumn Festival. Month sign meets day sign,15,3
+2027-09-16,Thursday,8,16,Fire Sheep,Earth Rooster,Earth Dog,Remove,Dragon,47,neutral,,7,9
+2027-09-17,Friday,8,17,Fire Sheep,Earth Rooster,Earth Pig,Full,Snake,74,favorable,,14,0
+2027-09-18,Saturday,8,18,Fire Sheep,Earth Rooster,Metal Rat,Balance,Horse,47,neutral,,0,2
+2027-09-19,Sunday,8,19,Fire Sheep,Earth Rooster,Metal Ox,Stable,Sheep,66,favorable,,13,4
+2027-09-20,Monday,8,20,Fire Sheep,Earth Rooster,Water Tiger,Initiate,Monkey,59,neutral,,6,1
+2027-09-21,Tuesday,8,21,Fire Sheep,Earth Rooster,Water Rabbit,Break,Rooster,19,challenging,,4,22
+2027-09-22,Wednesday,8,22,Fire Sheep,Earth Rooster,Wood Dragon,Danger,Dog,17,challenging,,0,19
+2027-09-23,Thursday,8,23,Fire Sheep,Earth Rooster,Wood Snake,Success,Pig,81,auspicious,,20,2
+2027-09-24,Friday,8,24,Fire Sheep,Earth Rooster,Fire Horse,Receive,Rat,66,favorable,,10,1
+2027-09-25,Saturday,8,25,Fire Sheep,Earth Rooster,Fire Sheep,Open,Ox,79,favorable,Year sign meets day sign,18,1
+2027-09-26,Sunday,8,26,Fire Sheep,Earth Rooster,Earth Monkey,Close,Tiger,21,cautionary,,3,20
+2027-09-27,Monday,8,27,Fire Sheep,Earth Rooster,Earth Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2027-09-28,Tuesday,8,28,Fire Sheep,Earth Rooster,Metal Dog,Remove,Dragon,47,neutral,,7,9
+2027-09-29,Wednesday,8,29,Fire Sheep,Earth Rooster,Metal Pig,Full,Snake,74,favorable,,14,0
+2027-09-30,Thursday,9,1,Fire Sheep,Metal Dog,Water Rat,Full,Horse,74,favorable,,14,0
+2027-10-01,Friday,9,2,Fire Sheep,Metal Dog,Water Ox,Balance,Sheep,47,neutral,,0,2
+2027-10-02,Saturday,9,3,Fire Sheep,Metal Dog,Wood Tiger,Stable,Monkey,66,favorable,,13,4
+2027-10-03,Sunday,9,4,Fire Sheep,Metal Dog,Wood Rabbit,Initiate,Rooster,59,neutral,,6,1
+2027-10-04,Monday,9,5,Fire Sheep,Metal Dog,Fire Dragon,Break,Dog,19,challenging,,4,22
+2027-10-05,Tuesday,9,6,Fire Sheep,Metal Dog,Fire Snake,Danger,Pig,17,challenging,,0,19
+2027-10-06,Wednesday,9,7,Fire Sheep,Metal Dog,Earth Horse,Success,Rat,81,auspicious,,20,2
+2027-10-07,Thursday,9,8,Fire Sheep,Metal Dog,Earth Sheep,Receive,Ox,66,favorable,Year sign meets day sign,10,1
+2027-10-08,Friday,9,9,Fire Sheep,Metal Dog,Metal Monkey,Open,Tiger,79,favorable,Double Ninth Festival,18,1
+2027-10-09,Saturday,9,10,Fire Sheep,Metal Dog,Metal Rooster,Close,Rabbit,21,cautionary,,3,20
+2027-10-10,Sunday,9,11,Fire Sheep,Metal Dog,Water Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2027-10-11,Monday,9,12,Fire Sheep,Metal Dog,Water Pig,Remove,Snake,47,neutral,,7,9
+2027-10-12,Tuesday,9,13,Fire Sheep,Metal Dog,Wood Rat,Full,Horse,74,favorable,,14,0
+2027-10-13,Wednesday,9,14,Fire Sheep,Metal Dog,Wood Ox,Balance,Sheep,47,neutral,,0,2
+2027-10-14,Thursday,9,15,Fire Sheep,Metal Dog,Fire Tiger,Stable,Monkey,66,favorable,,13,4
+2027-10-15,Friday,9,16,Fire Sheep,Metal Dog,Fire Rabbit,Initiate,Rooster,59,neutral,,6,1
+2027-10-16,Saturday,9,17,Fire Sheep,Metal Dog,Earth Dragon,Break,Dog,19,challenging,,4,22
+2027-10-17,Sunday,9,18,Fire Sheep,Metal Dog,Earth Snake,Danger,Pig,17,challenging,,0,19
+2027-10-18,Monday,9,19,Fire Sheep,Metal Dog,Metal Horse,Success,Rat,81,auspicious,,20,2
+2027-10-19,Tuesday,9,20,Fire Sheep,Metal Dog,Metal Sheep,Receive,Ox,66,favorable,Year sign meets day sign,10,1
+2027-10-20,Wednesday,9,21,Fire Sheep,Metal Dog,Water Monkey,Open,Tiger,79,favorable,,18,1
+2027-10-21,Thursday,9,22,Fire Sheep,Metal Dog,Water Rooster,Close,Rabbit,21,cautionary,,3,20
+2027-10-22,Friday,9,23,Fire Sheep,Metal Dog,Wood Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2027-10-23,Saturday,9,24,Fire Sheep,Metal Dog,Wood Pig,Remove,Snake,47,neutral,,7,9
+2027-10-24,Sunday,9,25,Fire Sheep,Metal Dog,Fire Rat,Full,Horse,74,favorable,,14,0
+2027-10-25,Monday,9,26,Fire Sheep,Metal Dog,Fire Ox,Balance,Sheep,47,neutral,,0,2
+2027-10-26,Tuesday,9,27,Fire Sheep,Metal Dog,Earth Tiger,Stable,Monkey,66,favorable,,13,4
+2027-10-27,Wednesday,9,28,Fire Sheep,Metal Dog,Earth Rabbit,Initiate,Rooster,59,neutral,,6,1
+2027-10-28,Thursday,9,29,Fire Sheep,Metal Dog,Metal Dragon,Break,Dog,19,challenging,,4,22
+2027-10-29,Friday,9,30,Fire Sheep,Metal Dog,Metal Snake,Danger,Pig,17,challenging,,0,19
+2027-10-30,Saturday,10,1,Fire Sheep,Metal Pig,Water Horse,Danger,Rat,17,challenging,,0,19
+2027-10-31,Sunday,10,2,Fire Sheep,Metal Pig,Water Sheep,Success,Ox,81,auspicious,Halloween. Year sign meets day sign,20,2
+2027-11-01,Monday,10,3,Fire Sheep,Metal Pig,Wood Monkey,Receive,Tiger,66,favorable,,10,1
+2027-11-02,Tuesday,10,4,Fire Sheep,Metal Pig,Wood Rooster,Open,Rabbit,79,favorable,,18,1
+2027-11-03,Wednesday,10,5,Fire Sheep,Metal Pig,Fire Dog,Close,Dragon,21,cautionary,,3,20
+2027-11-04,Thursday,10,6,Fire Sheep,Metal Pig,Fire Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2027-11-05,Friday,10,7,Fire Sheep,Metal Pig,Earth Rat,Remove,Horse,47,neutral,,7,9
+2027-11-06,Saturday,10,8,Fire Sheep,Metal Pig,Earth Ox,Full,Sheep,74,favorable,,14,0
+2027-11-07,Sunday,10,9,Fire Sheep,Metal Pig,Metal Tiger,Balance,Monkey,47,neutral,,0,2
+2027-11-08,Monday,10,10,Fire Sheep,Metal Pig,Metal Rabbit,Stable,Rooster,66,favorable,,13,4
+2027-11-09,Tuesday,10,11,Fire Sheep,Metal Pig,Water Dragon,Initiate,Dog,59,neutral,,6,1
+2027-11-10,Wednesday,10,12,Fire Sheep,Metal Pig,Water Snake,Break,Pig,19,challenging,,4,22
+2027-11-11,Thursday,10,13,Fire Sheep,Metal Pig,Wood Horse,Danger,Rat,17,challenging,,0,19
+2027-11-12,Friday,10,14,Fire Sheep,Metal Pig,Wood Sheep,Success,Ox,81,auspicious,Year sign meets day sign,20,2
+2027-11-13,Saturday,10,15,Fire Sheep,Metal Pig,Fire Monkey,Receive,Tiger,66,favorable,,10,1
+2027-11-14,Sunday,10,16,Fire Sheep,Metal Pig,Fire Rooster,Open,Rabbit,79,favorable,,18,1
+2027-11-15,Monday,10,17,Fire Sheep,Metal Pig,Earth Dog,Close,Dragon,21,cautionary,,3,20
+2027-11-16,Tuesday,10,18,Fire Sheep,Metal Pig,Earth Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2027-11-17,Wednesday,10,19,Fire Sheep,Metal Pig,Metal Rat,Remove,Horse,47,neutral,,7,9
+2027-11-18,Thursday,10,20,Fire Sheep,Metal Pig,Metal Ox,Full,Sheep,74,favorable,,14,0
+2027-11-19,Friday,10,21,Fire Sheep,Metal Pig,Water Tiger,Balance,Monkey,47,neutral,,0,2
+2027-11-20,Saturday,10,22,Fire Sheep,Metal Pig,Water Rabbit,Stable,Rooster,66,favorable,,13,4
+2027-11-21,Sunday,10,23,Fire Sheep,Metal Pig,Wood Dragon,Initiate,Dog,59,neutral,,6,1
+2027-11-22,Monday,10,24,Fire Sheep,Metal Pig,Wood Snake,Break,Pig,19,challenging,,4,22
+2027-11-23,Tuesday,10,25,Fire Sheep,Metal Pig,Fire Horse,Danger,Rat,17,challenging,,0,19
+2027-11-24,Wednesday,10,26,Fire Sheep,Metal Pig,Fire Sheep,Success,Ox,81,auspicious,Year sign meets day sign,20,2
+2027-11-25,Thursday,10,27,Fire Sheep,Metal Pig,Earth Monkey,Receive,Tiger,66,favorable,,10,1
+2027-11-26,Friday,10,28,Fire Sheep,Metal Pig,Earth Rooster,Open,Rabbit,79,favorable,,18,1
+2027-11-27,Saturday,10,29,Fire Sheep,Metal Pig,Metal Dog,Close,Dragon,21,cautionary,,3,20
+2027-11-28,Sunday,11,1,Fire Sheep,Water Rat,Metal Pig,Close,Snake,21,cautionary,,3,20
+2027-11-29,Monday,11,2,Fire Sheep,Water Rat,Water Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2027-11-30,Tuesday,11,3,Fire Sheep,Water Rat,Water Ox,Remove,Sheep,47,neutral,,7,9
+2027-12-01,Wednesday,11,4,Fire Sheep,Water Rat,Wood Tiger,Full,Monkey,74,favorable,,14,0
+2027-12-02,Thursday,11,5,Fire Sheep,Water Rat,Wood Rabbit,Balance,Rooster,47,neutral,,0,2
+2027-12-03,Friday,11,6,Fire Sheep,Water Rat,Fire Dragon,Stable,Dog,66,favorable,,13,4
+2027-12-04,Saturday,11,7,Fire Sheep,Water Rat,Fire Snake,Initiate,Pig,59,neutral,,6,1
+2027-12-05,Sunday,11,8,Fire Sheep,Water Rat,Earth Horse,Break,Rat,19,challenging,,4,22
+2027-12-06,Monday,11,9,Fire Sheep,Water Rat,Earth Sheep,Danger,Ox,17,challenging,Year sign meets day sign,0,19
+2027-12-07,Tuesday,11,10,Fire Sheep,Water Rat,Metal Monkey,Success,Tiger,81,auspicious,,20,2
+2027-12-08,Wednesday,11,11,Fire Sheep,Water Rat,Metal Rooster,Receive,Rabbit,66,favorable,,10,1
+2027-12-09,Thursday,11,12,Fire Sheep,Water Rat,Water Dog,Open,Dragon,79,favorable,,18,1
+2027-12-10,Friday,11,13,Fire Sheep,Water Rat,Water Pig,Close,Snake,21,cautionary,,3,20
+2027-12-11,Saturday,11,14,Fire Sheep,Water Rat,Wood Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2027-12-12,Sunday,11,15,Fire Sheep,Water Rat,Wood Ox,Remove,Sheep,47,neutral,,7,9
+2027-12-13,Monday,11,16,Fire Sheep,Water Rat,Fire Tiger,Full,Monkey,74,favorable,,14,0
+2027-12-14,Tuesday,11,17,Fire Sheep,Water Rat,Fire Rabbit,Balance,Rooster,47,neutral,,0,2
+2027-12-15,Wednesday,11,18,Fire Sheep,Water Rat,Earth Dragon,Stable,Dog,66,favorable,,13,4
+2027-12-16,Thursday,11,19,Fire Sheep,Water Rat,Earth Snake,Initiate,Pig,59,neutral,,6,1
+2027-12-17,Friday,11,20,Fire Sheep,Water Rat,Metal Horse,Break,Rat,19,challenging,,4,22
+2027-12-18,Saturday,11,21,Fire Sheep,Water Rat,Metal Sheep,Danger,Ox,17,challenging,Year sign meets day sign,0,19
+2027-12-19,Sunday,11,22,Fire Sheep,Water Rat,Water Monkey,Success,Tiger,81,auspicious,,20,2
+2027-12-20,Monday,11,23,Fire Sheep,Water Rat,Water Rooster,Receive,Rabbit,66,favorable,,10,1
+2027-12-21,Tuesday,11,24,Fire Sheep,Water Rat,Wood Dog,Open,Dragon,79,favorable,,18,1
+2027-12-22,Wednesday,11,25,Fire Sheep,Water Rat,Wood Pig,Close,Snake,21,cautionary,,3,20
+2027-12-23,Thursday,11,26,Fire Sheep,Water Rat,Fire Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2027-12-24,Friday,11,27,Fire Sheep,Water Rat,Fire Ox,Remove,Sheep,47,neutral,Christmas Eve,7,9
+2027-12-25,Saturday,11,28,Fire Sheep,Water Rat,Earth Tiger,Full,Monkey,74,favorable,Christmas Day,14,0
+2027-12-26,Sunday,11,29,Fire Sheep,Water Rat,Earth Rabbit,Balance,Rooster,47,neutral,,0,2
+2027-12-27,Monday,11,30,Fire Sheep,Water Rat,Metal Dragon,Stable,Dog,66,favorable,,13,4
+2027-12-28,Tuesday,12,1,Fire Sheep,Water Ox,Metal Snake,Stable,Pig,66,favorable,,13,4
+2027-12-29,Wednesday,12,2,Fire Sheep,Water Ox,Water Horse,Initiate,Rat,59,neutral,,6,1
+2027-12-30,Thursday,12,3,Fire Sheep,Water Ox,Water Sheep,Break,Ox,19,challenging,Year sign meets day sign,4,22
+2027-12-31,Friday,12,4,Fire Sheep,Water Ox,Wood Monkey,Danger,Tiger,17,challenging,New Year's Eve,0,19
+2028-01-01,Saturday,12,5,Fire Sheep,Water Ox,Wood Rooster,Success,Rabbit,81,auspicious,New Year's Day,20,2
+2028-01-02,Sunday,12,6,Fire Sheep,Water Ox,Fire Dog,Receive,Dragon,66,favorable,,10,1
+2028-01-03,Monday,12,7,Fire Sheep,Water Ox,Fire Pig,Open,Snake,79,favorable,,18,1
+2028-01-04,Tuesday,12,8,Fire Sheep,Water Ox,Earth Rat,Close,Horse,21,cautionary,Laba Festival,3,20
+2028-01-05,Wednesday,12,9,Fire Sheep,Water Ox,Earth Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2028-01-06,Thursday,12,10,Fire Sheep,Water Ox,Metal Tiger,Remove,Monkey,47,neutral,,7,9
+2028-01-07,Friday,12,11,Fire Sheep,Water Ox,Metal Rabbit,Full,Rooster,74,favorable,,14,0
+2028-01-08,Saturday,12,12,Fire Sheep,Water Ox,Water Dragon,Balance,Dog,47,neutral,,0,2
+2028-01-09,Sunday,12,13,Fire Sheep,Water Ox,Water Snake,Stable,Pig,66,favorable,,13,4
+2028-01-10,Monday,12,14,Fire Sheep,Water Ox,Wood Horse,Initiate,Rat,59,neutral,,6,1
+2028-01-11,Tuesday,12,15,Fire Sheep,Water Ox,Wood Sheep,Break,Ox,19,challenging,Year sign meets day sign,4,22
+2028-01-12,Wednesday,12,16,Fire Sheep,Water Ox,Fire Monkey,Danger,Tiger,17,challenging,,0,19
+2028-01-13,Thursday,12,17,Fire Sheep,Water Ox,Fire Rooster,Success,Rabbit,81,auspicious,,20,2
+2028-01-14,Friday,12,18,Fire Sheep,Water Ox,Earth Dog,Receive,Dragon,66,favorable,,10,1
+2028-01-15,Saturday,12,19,Fire Sheep,Water Ox,Earth Pig,Open,Snake,79,favorable,,18,1
+2028-01-16,Sunday,12,20,Fire Sheep,Water Ox,Metal Rat,Close,Horse,21,cautionary,,3,20
+2028-01-17,Monday,12,21,Fire Sheep,Water Ox,Metal Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2028-01-18,Tuesday,12,22,Fire Sheep,Water Ox,Water Tiger,Remove,Monkey,47,neutral,,7,9
+2028-01-19,Wednesday,12,23,Fire Sheep,Water Ox,Water Rabbit,Full,Rooster,74,favorable,Kitchen God Day,14,0
+2028-01-20,Thursday,12,24,Fire Sheep,Water Ox,Wood Dragon,Balance,Dog,47,neutral,,0,2
+2028-01-21,Friday,12,25,Fire Sheep,Water Ox,Wood Snake,Stable,Pig,66,favorable,,13,4
+2028-01-22,Saturday,12,26,Fire Sheep,Water Ox,Fire Horse,Initiate,Rat,59,neutral,,6,1
+2028-01-23,Sunday,12,27,Fire Sheep,Water Ox,Fire Sheep,Break,Ox,19,challenging,Year sign meets day sign,4,22
+2028-01-24,Monday,12,28,Fire Sheep,Water Ox,Earth Monkey,Danger,Tiger,17,challenging,,0,19
+2028-01-25,Tuesday,12,29,Fire Sheep,Water Ox,Earth Rooster,Success,Rabbit,81,auspicious,,20,2
+2028-01-26,Wednesday,1,1,Earth Monkey,Wood Tiger,Metal Dog,Success,Dragon,81,auspicious,Lunar New Year,20,2
+2028-01-27,Thursday,1,2,Earth Monkey,Wood Tiger,Metal Pig,Receive,Snake,66,favorable,,10,1
+2028-01-28,Friday,1,3,Earth Monkey,Wood Tiger,Water Rat,Open,Horse,79,favorable,,18,1
+2028-01-29,Saturday,1,4,Earth Monkey,Wood Tiger,Water Ox,Close,Sheep,21,cautionary,,3,20
+2028-01-30,Sunday,1,5,Earth Monkey,Wood Tiger,Wood Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2028-01-31,Monday,1,6,Earth Monkey,Wood Tiger,Wood Rabbit,Remove,Rooster,47,neutral,,7,9
+2028-02-01,Tuesday,1,7,Earth Monkey,Wood Tiger,Fire Dragon,Full,Dog,74,favorable,,14,0
+2028-02-02,Wednesday,1,8,Earth Monkey,Wood Tiger,Fire Snake,Balance,Pig,47,neutral,,0,2
+2028-02-03,Thursday,1,9,Earth Monkey,Wood Tiger,Earth Horse,Stable,Rat,66,favorable,,13,4
+2028-02-04,Friday,1,10,Earth Monkey,Wood Tiger,Earth Sheep,Initiate,Ox,59,neutral,,6,1
+2028-02-05,Saturday,1,11,Earth Monkey,Wood Tiger,Metal Monkey,Break,Tiger,19,challenging,Year sign meets day sign,4,22
+2028-02-06,Sunday,1,12,Earth Monkey,Wood Tiger,Metal Rooster,Danger,Rabbit,17,challenging,,0,19
+2028-02-07,Monday,1,13,Earth Monkey,Wood Tiger,Water Dog,Success,Dragon,81,auspicious,,20,2
+2028-02-08,Tuesday,1,14,Earth Monkey,Wood Tiger,Water Pig,Receive,Snake,66,favorable,,10,1
+2028-02-09,Wednesday,1,15,Earth Monkey,Wood Tiger,Wood Rat,Open,Horse,79,favorable,Lantern Festival,18,1
+2028-02-10,Thursday,1,16,Earth Monkey,Wood Tiger,Wood Ox,Close,Sheep,21,cautionary,,3,20
+2028-02-11,Friday,1,17,Earth Monkey,Wood Tiger,Fire Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2028-02-12,Saturday,1,18,Earth Monkey,Wood Tiger,Fire Rabbit,Remove,Rooster,47,neutral,,7,9
+2028-02-13,Sunday,1,19,Earth Monkey,Wood Tiger,Earth Dragon,Full,Dog,74,favorable,,14,0
+2028-02-14,Monday,1,20,Earth Monkey,Wood Tiger,Earth Snake,Balance,Pig,47,neutral,Valentine's Day,0,2
+2028-02-15,Tuesday,1,21,Earth Monkey,Wood Tiger,Metal Horse,Stable,Rat,66,favorable,,13,4
+2028-02-16,Wednesday,1,22,Earth Monkey,Wood Tiger,Metal Sheep,Initiate,Ox,59,neutral,,6,1
+2028-02-17,Thursday,1,23,Earth Monkey,Wood Tiger,Water Monkey,Break,Tiger,19,challenging,Year sign meets day sign,4,22
+2028-02-18,Friday,1,24,Earth Monkey,Wood Tiger,Water Rooster,Danger,Rabbit,17,challenging,,0,19
+2028-02-19,Saturday,1,25,Earth Monkey,Wood Tiger,Wood Dog,Success,Dragon,81,auspicious,,20,2
+2028-02-20,Sunday,1,26,Earth Monkey,Wood Tiger,Wood Pig,Receive,Snake,66,favorable,,10,1
+2028-02-21,Monday,1,27,Earth Monkey,Wood Tiger,Fire Rat,Open,Horse,79,favorable,,18,1
+2028-02-22,Tuesday,1,28,Earth Monkey,Wood Tiger,Fire Ox,Close,Sheep,21,cautionary,,3,20
+2028-02-23,Wednesday,1,29,Earth Monkey,Wood Tiger,Earth Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2028-02-24,Thursday,1,30,Earth Monkey,Wood Tiger,Earth Rabbit,Remove,Rooster,47,neutral,,7,9
+2028-02-25,Friday,2,1,Earth Monkey,Wood Rabbit,Metal Dragon,Remove,Dog,47,neutral,,7,9
+2028-02-26,Saturday,2,2,Earth Monkey,Wood Rabbit,Metal Snake,Full,Pig,74,favorable,Earth God's Birthday,14,0
+2028-02-27,Sunday,2,3,Earth Monkey,Wood Rabbit,Water Horse,Balance,Rat,47,neutral,,0,2
+2028-02-28,Monday,2,4,Earth Monkey,Wood Rabbit,Water Sheep,Stable,Ox,66,favorable,,13,4
+2028-02-29,Tuesday,2,5,Earth Monkey,Wood Rabbit,Wood Monkey,Initiate,Tiger,59,neutral,Year sign meets day sign,6,1
+2028-03-01,Wednesday,2,6,Earth Monkey,Wood Rabbit,Wood Rooster,Break,Rabbit,19,challenging,,4,22
+2028-03-02,Thursday,2,7,Earth Monkey,Wood Rabbit,Fire Dog,Danger,Dragon,17,challenging,,0,19
+2028-03-03,Friday,2,8,Earth Monkey,Wood Rabbit,Fire Pig,Success,Snake,81,auspicious,,20,2
+2028-03-04,Saturday,2,9,Earth Monkey,Wood Rabbit,Earth Rat,Receive,Horse,66,favorable,,10,1
+2028-03-05,Sunday,2,10,Earth Monkey,Wood Rabbit,Earth Ox,Open,Sheep,79,favorable,,18,1
+2028-03-06,Monday,2,11,Earth Monkey,Wood Rabbit,Metal Tiger,Close,Monkey,21,cautionary,,3,20
+2028-03-07,Tuesday,2,12,Earth Monkey,Wood Rabbit,Metal Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2028-03-08,Wednesday,2,13,Earth Monkey,Wood Rabbit,Water Dragon,Remove,Dog,47,neutral,,7,9
+2028-03-09,Thursday,2,14,Earth Monkey,Wood Rabbit,Water Snake,Full,Pig,74,favorable,,14,0
+2028-03-10,Friday,2,15,Earth Monkey,Wood Rabbit,Wood Horse,Balance,Rat,47,neutral,,0,2
+2028-03-11,Saturday,2,16,Earth Monkey,Wood Rabbit,Wood Sheep,Stable,Ox,66,favorable,,13,4
+2028-03-12,Sunday,2,17,Earth Monkey,Wood Rabbit,Fire Monkey,Initiate,Tiger,59,neutral,Year sign meets day sign,6,1
+2028-03-13,Monday,2,18,Earth Monkey,Wood Rabbit,Fire Rooster,Break,Rabbit,19,challenging,,4,22
+2028-03-14,Tuesday,2,19,Earth Monkey,Wood Rabbit,Earth Dog,Danger,Dragon,17,challenging,,0,19
+2028-03-15,Wednesday,2,20,Earth Monkey,Wood Rabbit,Earth Pig,Success,Snake,81,auspicious,,20,2
+2028-03-16,Thursday,2,21,Earth Monkey,Wood Rabbit,Metal Rat,Receive,Horse,66,favorable,,10,1
+2028-03-17,Friday,2,22,Earth Monkey,Wood Rabbit,Metal Ox,Open,Sheep,79,favorable,St. Patrick's Day,18,1
+2028-03-18,Saturday,2,23,Earth Monkey,Wood Rabbit,Water Tiger,Close,Monkey,21,cautionary,,3,20
+2028-03-19,Sunday,2,24,Earth Monkey,Wood Rabbit,Water Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2028-03-20,Monday,2,25,Earth Monkey,Wood Rabbit,Wood Dragon,Remove,Dog,47,neutral,,7,9
+2028-03-21,Tuesday,2,26,Earth Monkey,Wood Rabbit,Wood Snake,Full,Pig,74,favorable,,14,0
+2028-03-22,Wednesday,2,27,Earth Monkey,Wood Rabbit,Fire Horse,Balance,Rat,47,neutral,,0,2
+2028-03-23,Thursday,2,28,Earth Monkey,Wood Rabbit,Fire Sheep,Stable,Ox,66,favorable,,13,4
+2028-03-24,Friday,2,29,Earth Monkey,Wood Rabbit,Earth Monkey,Initiate,Tiger,59,neutral,Year sign meets day sign,6,1
+2028-03-25,Saturday,2,30,Earth Monkey,Wood Rabbit,Earth Rooster,Break,Rabbit,19,challenging,,4,22
+2028-03-26,Sunday,3,1,Earth Monkey,Fire Dragon,Metal Dog,Break,Dragon,19,challenging,,4,22
+2028-03-27,Monday,3,2,Earth Monkey,Fire Dragon,Metal Pig,Danger,Snake,17,challenging,,0,19
+2028-03-28,Tuesday,3,3,Earth Monkey,Fire Dragon,Water Rat,Success,Horse,81,auspicious,Shangsi Festival,20,2
+2028-03-29,Wednesday,3,4,Earth Monkey,Fire Dragon,Water Ox,Receive,Sheep,66,favorable,,10,1
+2028-03-30,Thursday,3,5,Earth Monkey,Fire Dragon,Wood Tiger,Open,Monkey,79,favorable,,18,1
+2028-03-31,Friday,3,6,Earth Monkey,Fire Dragon,Wood Rabbit,Close,Rooster,21,cautionary,,3,20
+2028-04-01,Saturday,3,7,Earth Monkey,Fire Dragon,Fire Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2028-04-02,Sunday,3,8,Earth Monkey,Fire Dragon,Fire Snake,Remove,Pig,47,neutral,,7,9
+2028-04-03,Monday,3,9,Earth Monkey,Fire Dragon,Earth Horse,Full,Rat,74,favorable,,14,0
+2028-04-04,Tuesday,3,10,Earth Monkey,Fire Dragon,Earth Sheep,Balance,Ox,47,neutral,,0,2
+2028-04-05,Wednesday,3,11,Earth Monkey,Fire Dragon,Metal Monkey,Stable,Tiger,66,favorable,Year sign meets day sign,13,4
+2028-04-06,Thursday,3,12,Earth Monkey,Fire Dragon,Metal Rooster,Initiate,Rabbit,59,neutral,,6,1
+2028-04-07,Friday,3,13,Earth Monkey,Fire Dragon,Water Dog,Break,Dragon,19,challenging,,4,22
+2028-04-08,Saturday,3,14,Earth Monkey,Fire Dragon,Water Pig,Danger,Snake,17,challenging,,0,19
+2028-04-09,Sunday,3,15,Earth Monkey,Fire Dragon,Wood Rat,Success,Horse,81,auspicious,,20,2
+2028-04-10,Monday,3,16,Earth Monkey,Fire Dragon,Wood Ox,Receive,Sheep,66,favorable,,10,1
+2028-04-11,Tuesday,3,17,Earth Monkey,Fire Dragon,Fire Tiger,Open,Monkey,79,favorable,,18,1
+2028-04-12,Wednesday,3,18,Earth Monkey,Fire Dragon,Fire Rabbit,Close,Rooster,21,cautionary,,3,20
+2028-04-13,Thursday,3,19,Earth Monkey,Fire Dragon,Earth Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2028-04-14,Friday,3,20,Earth Monkey,Fire Dragon,Earth Snake,Remove,Pig,47,neutral,,7,9
+2028-04-15,Saturday,3,21,Earth Monkey,Fire Dragon,Metal Horse,Full,Rat,74,favorable,,14,0
+2028-04-16,Sunday,3,22,Earth Monkey,Fire Dragon,Metal Sheep,Balance,Ox,47,neutral,,0,2
+2028-04-17,Monday,3,23,Earth Monkey,Fire Dragon,Water Monkey,Stable,Tiger,66,favorable,Year sign meets day sign,13,4
+2028-04-18,Tuesday,3,24,Earth Monkey,Fire Dragon,Water Rooster,Initiate,Rabbit,59,neutral,,6,1
+2028-04-19,Wednesday,3,25,Earth Monkey,Fire Dragon,Wood Dog,Break,Dragon,19,challenging,,4,22
+2028-04-20,Thursday,3,26,Earth Monkey,Fire Dragon,Wood Pig,Danger,Snake,17,challenging,,0,19
+2028-04-21,Friday,3,27,Earth Monkey,Fire Dragon,Fire Rat,Success,Horse,81,auspicious,,20,2
+2028-04-22,Saturday,3,28,Earth Monkey,Fire Dragon,Fire Ox,Receive,Sheep,66,favorable,,10,1
+2028-04-23,Sunday,3,29,Earth Monkey,Fire Dragon,Earth Tiger,Open,Monkey,79,favorable,,18,1
+2028-04-24,Monday,3,30,Earth Monkey,Fire Dragon,Earth Rabbit,Close,Rooster,21,cautionary,,3,20
+2028-04-25,Tuesday,4,1,Earth Monkey,Fire Snake,Metal Dragon,Close,Dog,21,cautionary,,3,20
+2028-04-26,Wednesday,4,2,Earth Monkey,Fire Snake,Metal Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2028-04-27,Thursday,4,3,Earth Monkey,Fire Snake,Water Horse,Remove,Rat,47,neutral,,7,9
+2028-04-28,Friday,4,4,Earth Monkey,Fire Snake,Water Sheep,Full,Ox,74,favorable,,14,0
+2028-04-29,Saturday,4,5,Earth Monkey,Fire Snake,Wood Monkey,Balance,Tiger,47,neutral,Year sign meets day sign,0,2
+2028-04-30,Sunday,4,6,Earth Monkey,Fire Snake,Wood Rooster,Stable,Rabbit,66,favorable,,13,4
+2028-05-01,Monday,4,7,Earth Monkey,Fire Snake,Fire Dog,Initiate,Dragon,59,neutral,,6,1
+2028-05-02,Tuesday,4,8,Earth Monkey,Fire Snake,Fire Pig,Break,Snake,19,challenging,Buddha's Birthday,4,22
+2028-05-03,Wednesday,4,9,Earth Monkey,Fire Snake,Earth Rat,Danger,Horse,17,challenging,,0,19
+2028-05-04,Thursday,4,10,Earth Monkey,Fire Snake,Earth Ox,Success,Sheep,81,auspicious,,20,2
+2028-05-05,Friday,4,11,Earth Monkey,Fire Snake,Metal Tiger,Receive,Monkey,66,favorable,,10,1
+2028-05-06,Saturday,4,12,Earth Monkey,Fire Snake,Metal Rabbit,Open,Rooster,79,favorable,,18,1
+2028-05-07,Sunday,4,13,Earth Monkey,Fire Snake,Water Dragon,Close,Dog,21,cautionary,,3,20
+2028-05-08,Monday,4,14,Earth Monkey,Fire Snake,Water Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2028-05-09,Tuesday,4,15,Earth Monkey,Fire Snake,Wood Horse,Remove,Rat,47,neutral,,7,9
+2028-05-10,Wednesday,4,16,Earth Monkey,Fire Snake,Wood Sheep,Full,Ox,74,favorable,,14,0
+2028-05-11,Thursday,4,17,Earth Monkey,Fire Snake,Fire Monkey,Balance,Tiger,47,neutral,Year sign meets day sign,0,2
+2028-05-12,Friday,4,18,Earth Monkey,Fire Snake,Fire Rooster,Stable,Rabbit,66,favorable,,13,4
+2028-05-13,Saturday,4,19,Earth Monkey,Fire Snake,Earth Dog,Initiate,Dragon,59,neutral,,6,1
+2028-05-14,Sunday,4,20,Earth Monkey,Fire Snake,Earth Pig,Break,Snake,19,challenging,,4,22
+2028-05-15,Monday,4,21,Earth Monkey,Fire Snake,Metal Rat,Danger,Horse,17,challenging,,0,19
+2028-05-16,Tuesday,4,22,Earth Monkey,Fire Snake,Metal Ox,Success,Sheep,81,auspicious,,20,2
+2028-05-17,Wednesday,4,23,Earth Monkey,Fire Snake,Water Tiger,Receive,Monkey,66,favorable,,10,1
+2028-05-18,Thursday,4,24,Earth Monkey,Fire Snake,Water Rabbit,Open,Rooster,79,favorable,,18,1
+2028-05-19,Friday,4,25,Earth Monkey,Fire Snake,Wood Dragon,Close,Dog,21,cautionary,,3,20
+2028-05-20,Saturday,4,26,Earth Monkey,Fire Snake,Wood Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2028-05-21,Sunday,4,27,Earth Monkey,Fire Snake,Fire Horse,Remove,Rat,47,neutral,,7,9
+2028-05-22,Monday,4,28,Earth Monkey,Fire Snake,Fire Sheep,Full,Ox,74,favorable,,14,0
+2028-05-23,Tuesday,4,29,Earth Monkey,Fire Snake,Earth Monkey,Balance,Tiger,47,neutral,Year sign meets day sign,0,2
+2028-05-24,Wednesday,5,1,Earth Monkey,Earth Horse,Earth Rooster,Balance,Rabbit,47,neutral,,0,2
+2028-05-25,Thursday,5,2,Earth Monkey,Earth Horse,Metal Dog,Stable,Dragon,66,favorable,,13,4
+2028-05-26,Friday,5,3,Earth Monkey,Earth Horse,Metal Pig,Initiate,Snake,59,neutral,,6,1
+2028-05-27,Saturday,5,4,Earth Monkey,Earth Horse,Water Rat,Break,Horse,19,challenging,,4,22
+2028-05-28,Sunday,5,5,Earth Monkey,Earth Horse,Water Ox,Danger,Sheep,17,challenging,Dragon Boat Festival,0,19
+2028-05-29,Monday,5,6,Earth Monkey,Earth Horse,Wood Tiger,Success,Monkey,81,auspicious,,20,2
+2028-05-30,Tuesday,5,7,Earth Monkey,Earth Horse,Wood Rabbit,Receive,Rooster,66,favorable,,10,1
+2028-05-31,Wednesday,5,8,Earth Monkey,Earth Horse,Fire Dragon,Open,Dog,79,favorable,,18,1
+2028-06-01,Thursday,5,9,Earth Monkey,Earth Horse,Fire Snake,Close,Pig,21,cautionary,,3,20
+2028-06-02,Friday,5,10,Earth Monkey,Earth Horse,Earth Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2028-06-03,Saturday,5,11,Earth Monkey,Earth Horse,Earth Sheep,Remove,Ox,47,neutral,,7,9
+2028-06-04,Sunday,5,12,Earth Monkey,Earth Horse,Metal Monkey,Full,Tiger,74,favorable,Year sign meets day sign,14,0
+2028-06-05,Monday,5,13,Earth Monkey,Earth Horse,Metal Rooster,Balance,Rabbit,47,neutral,,0,2
+2028-06-06,Tuesday,5,14,Earth Monkey,Earth Horse,Water Dog,Stable,Dragon,66,favorable,,13,4
+2028-06-07,Wednesday,5,15,Earth Monkey,Earth Horse,Water Pig,Initiate,Snake,59,neutral,,6,1
+2028-06-08,Thursday,5,16,Earth Monkey,Earth Horse,Wood Rat,Break,Horse,19,challenging,,4,22
+2028-06-09,Friday,5,17,Earth Monkey,Earth Horse,Wood Ox,Danger,Sheep,17,challenging,,0,19
+2028-06-10,Saturday,5,18,Earth Monkey,Earth Horse,Fire Tiger,Success,Monkey,81,auspicious,,20,2
+2028-06-11,Sunday,5,19,Earth Monkey,Earth Horse,Fire Rabbit,Receive,Rooster,66,favorable,,10,1
+2028-06-12,Monday,5,20,Earth Monkey,Earth Horse,Earth Dragon,Open,Dog,79,favorable,,18,1
+2028-06-13,Tuesday,5,21,Earth Monkey,Earth Horse,Earth Snake,Close,Pig,21,cautionary,,3,20
+2028-06-14,Wednesday,5,22,Earth Monkey,Earth Horse,Metal Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2028-06-15,Thursday,5,23,Earth Monkey,Earth Horse,Metal Sheep,Remove,Ox,47,neutral,,7,9
+2028-06-16,Friday,5,24,Earth Monkey,Earth Horse,Water Monkey,Full,Tiger,74,favorable,Year sign meets day sign,14,0
+2028-06-17,Saturday,5,25,Earth Monkey,Earth Horse,Water Rooster,Balance,Rabbit,47,neutral,,0,2
+2028-06-18,Sunday,5,26,Earth Monkey,Earth Horse,Wood Dog,Stable,Dragon,66,favorable,,13,4
+2028-06-19,Monday,5,27,Earth Monkey,Earth Horse,Wood Pig,Initiate,Snake,59,neutral,,6,1
+2028-06-20,Tuesday,5,28,Earth Monkey,Earth Horse,Fire Rat,Break,Horse,19,challenging,,4,22
+2028-06-21,Wednesday,5,29,Earth Monkey,Earth Horse,Fire Ox,Danger,Sheep,17,challenging,,0,19
+2028-06-22,Thursday,5,30,Earth Monkey,Earth Horse,Earth Tiger,Success,Monkey,81,auspicious,,20,2
+2028-06-23,Friday,5,1,Earth Monkey,Earth Horse,Earth Rabbit,Receive,Rooster,66,favorable,,10,1
+2028-06-24,Saturday,5,2,Earth Monkey,Earth Horse,Metal Dragon,Open,Dog,79,favorable,,18,1
+2028-06-25,Sunday,5,3,Earth Monkey,Earth Horse,Metal Snake,Close,Pig,21,cautionary,,3,20
+2028-06-26,Monday,5,4,Earth Monkey,Earth Horse,Water Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2028-06-27,Tuesday,5,5,Earth Monkey,Earth Horse,Water Sheep,Remove,Ox,47,neutral,,7,9
+2028-06-28,Wednesday,5,6,Earth Monkey,Earth Horse,Wood Monkey,Full,Tiger,74,favorable,Year sign meets day sign,14,0
+2028-06-29,Thursday,5,7,Earth Monkey,Earth Horse,Wood Rooster,Balance,Rabbit,47,neutral,,0,2
+2028-06-30,Friday,5,8,Earth Monkey,Earth Horse,Fire Dog,Stable,Dragon,66,favorable,,13,4
+2028-07-01,Saturday,5,9,Earth Monkey,Earth Horse,Fire Pig,Initiate,Snake,59,neutral,,6,1
+2028-07-02,Sunday,5,10,Earth Monkey,Earth Horse,Earth Rat,Break,Horse,19,challenging,,4,22
+2028-07-03,Monday,5,11,Earth Monkey,Earth Horse,Earth Ox,Danger,Sheep,17,challenging,,0,19
+2028-07-04,Tuesday,5,12,Earth Monkey,Earth Horse,Metal Tiger,Success,Monkey,81,auspicious,Independence Day (US),20,2
+2028-07-05,Wednesday,5,13,Earth Monkey,Earth Horse,Metal Rabbit,Receive,Rooster,66,favorable,,10,1
+2028-07-06,Thursday,5,14,Earth Monkey,Earth Horse,Water Dragon,Open,Dog,79,favorable,,18,1
+2028-07-07,Friday,5,15,Earth Monkey,Earth Horse,Water Snake,Close,Pig,21,cautionary,,3,20
+2028-07-08,Saturday,5,16,Earth Monkey,Earth Horse,Wood Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2028-07-09,Sunday,5,17,Earth Monkey,Earth Horse,Wood Sheep,Remove,Ox,47,neutral,,7,9
+2028-07-10,Monday,5,18,Earth Monkey,Earth Horse,Fire Monkey,Full,Tiger,74,favorable,Year sign meets day sign,14,0
+2028-07-11,Tuesday,5,19,Earth Monkey,Earth Horse,Fire Rooster,Balance,Rabbit,47,neutral,,0,2
+2028-07-12,Wednesday,5,20,Earth Monkey,Earth Horse,Earth Dog,Stable,Dragon,66,favorable,,13,4
+2028-07-13,Thursday,5,21,Earth Monkey,Earth Horse,Earth Pig,Initiate,Snake,59,neutral,,6,1
+2028-07-14,Friday,5,22,Earth Monkey,Earth Horse,Metal Rat,Break,Horse,19,challenging,,4,22
+2028-07-15,Saturday,5,23,Earth Monkey,Earth Horse,Metal Ox,Danger,Sheep,17,challenging,,0,19
+2028-07-16,Sunday,5,24,Earth Monkey,Earth Horse,Water Tiger,Success,Monkey,81,auspicious,,20,2
+2028-07-17,Monday,5,25,Earth Monkey,Earth Horse,Water Rabbit,Receive,Rooster,66,favorable,,10,1
+2028-07-18,Tuesday,5,26,Earth Monkey,Earth Horse,Wood Dragon,Open,Dog,79,favorable,,18,1
+2028-07-19,Wednesday,5,27,Earth Monkey,Earth Horse,Wood Snake,Close,Pig,21,cautionary,,3,20
+2028-07-20,Thursday,5,28,Earth Monkey,Earth Horse,Fire Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2028-07-21,Friday,5,29,Earth Monkey,Earth Horse,Fire Sheep,Remove,Ox,47,neutral,,7,9
+2028-07-22,Saturday,6,1,Earth Monkey,Earth Sheep,Earth Monkey,Remove,Tiger,47,neutral,Year sign meets day sign,7,9
+2028-07-23,Sunday,6,2,Earth Monkey,Earth Sheep,Earth Rooster,Full,Rabbit,74,favorable,,14,0
+2028-07-24,Monday,6,3,Earth Monkey,Earth Sheep,Metal Dog,Balance,Dragon,47,neutral,,0,2
+2028-07-25,Tuesday,6,4,Earth Monkey,Earth Sheep,Metal Pig,Stable,Snake,66,favorable,,13,4
+2028-07-26,Wednesday,6,5,Earth Monkey,Earth Sheep,Water Rat,Initiate,Horse,59,neutral,,6,1
+2028-07-27,Thursday,6,6,Earth Monkey,Earth Sheep,Water Ox,Break,Sheep,19,challenging,,4,22
+2028-07-28,Friday,6,7,Earth Monkey,Earth Sheep,Wood Tiger,Danger,Monkey,17,challenging,,0,19
+2028-07-29,Saturday,6,8,Earth Monkey,Earth Sheep,Wood Rabbit,Success,Rooster,81,auspicious,,20,2
+2028-07-30,Sunday,6,9,Earth Monkey,Earth Sheep,Fire Dragon,Receive,Dog,66,favorable,,10,1
+2028-07-31,Monday,6,10,Earth Monkey,Earth Sheep,Fire Snake,Open,Pig,79,favorable,,18,1
+2028-08-01,Tuesday,6,11,Earth Monkey,Earth Sheep,Earth Horse,Close,Rat,21,cautionary,,3,20
+2028-08-02,Wednesday,6,12,Earth Monkey,Earth Sheep,Earth Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2028-08-03,Thursday,6,13,Earth Monkey,Earth Sheep,Metal Monkey,Remove,Tiger,47,neutral,Year sign meets day sign,7,9
+2028-08-04,Friday,6,14,Earth Monkey,Earth Sheep,Metal Rooster,Full,Rabbit,74,favorable,,14,0
+2028-08-05,Saturday,6,15,Earth Monkey,Earth Sheep,Water Dog,Balance,Dragon,47,neutral,,0,2
+2028-08-06,Sunday,6,16,Earth Monkey,Earth Sheep,Water Pig,Stable,Snake,66,favorable,,13,4
+2028-08-07,Monday,6,17,Earth Monkey,Earth Sheep,Wood Rat,Initiate,Horse,59,neutral,,6,1
+2028-08-08,Tuesday,6,18,Earth Monkey,Earth Sheep,Wood Ox,Break,Sheep,19,challenging,,4,22
+2028-08-09,Wednesday,6,19,Earth Monkey,Earth Sheep,Fire Tiger,Danger,Monkey,17,challenging,,0,19
+2028-08-10,Thursday,6,20,Earth Monkey,Earth Sheep,Fire Rabbit,Success,Rooster,81,auspicious,,20,2
+2028-08-11,Friday,6,21,Earth Monkey,Earth Sheep,Earth Dragon,Receive,Dog,66,favorable,,10,1
+2028-08-12,Saturday,6,22,Earth Monkey,Earth Sheep,Earth Snake,Open,Pig,79,favorable,,18,1
+2028-08-13,Sunday,6,23,Earth Monkey,Earth Sheep,Metal Horse,Close,Rat,21,cautionary,,3,20
+2028-08-14,Monday,6,24,Earth Monkey,Earth Sheep,Metal Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2028-08-15,Tuesday,6,25,Earth Monkey,Earth Sheep,Water Monkey,Remove,Tiger,47,neutral,Year sign meets day sign,7,9
+2028-08-16,Wednesday,6,26,Earth Monkey,Earth Sheep,Water Rooster,Full,Rabbit,74,favorable,,14,0
+2028-08-17,Thursday,6,27,Earth Monkey,Earth Sheep,Wood Dog,Balance,Dragon,47,neutral,,0,2
+2028-08-18,Friday,6,28,Earth Monkey,Earth Sheep,Wood Pig,Stable,Snake,66,favorable,,13,4
+2028-08-19,Saturday,6,29,Earth Monkey,Earth Sheep,Fire Rat,Initiate,Horse,59,neutral,,6,1
+2028-08-20,Sunday,7,1,Earth Monkey,Metal Monkey,Fire Ox,Initiate,Sheep,59,neutral,Year sign meets month sign,6,1
+2028-08-21,Monday,7,2,Earth Monkey,Metal Monkey,Earth Tiger,Break,Monkey,19,challenging,Year sign meets month sign,4,22
+2028-08-22,Tuesday,7,3,Earth Monkey,Metal Monkey,Earth Rabbit,Danger,Rooster,17,challenging,Year sign meets month sign,0,19
+2028-08-23,Wednesday,7,4,Earth Monkey,Metal Monkey,Metal Dragon,Success,Dog,81,auspicious,Year sign meets month sign,20,2
+2028-08-24,Thursday,7,5,Earth Monkey,Metal Monkey,Metal Snake,Receive,Pig,66,favorable,Year sign meets month sign,10,1
+2028-08-25,Friday,7,6,Earth Monkey,Metal Monkey,Water Horse,Open,Rat,79,favorable,Year sign meets month sign,18,1
+2028-08-26,Saturday,7,7,Earth Monkey,Metal Monkey,Water Sheep,Close,Ox,21,cautionary,Qixi (Chinese Valentine's). Year sign meets month sign,3,20
+2028-08-27,Sunday,7,8,Earth Monkey,Metal Monkey,Wood Monkey,Establish,Tiger,71,favorable,Triple alignment (rare),15,3
+2028-08-28,Monday,7,9,Earth Monkey,Metal Monkey,Wood Rooster,Remove,Rabbit,47,neutral,Year sign meets month sign,7,9
+2028-08-29,Tuesday,7,10,Earth Monkey,Metal Monkey,Fire Dog,Full,Dragon,74,favorable,Year sign meets month sign,14,0
+2028-08-30,Wednesday,7,11,Earth Monkey,Metal Monkey,Fire Pig,Balance,Snake,47,neutral,Year sign meets month sign,0,2
+2028-08-31,Thursday,7,12,Earth Monkey,Metal Monkey,Earth Rat,Stable,Horse,66,favorable,Year sign meets month sign,13,4
+2028-09-01,Friday,7,13,Earth Monkey,Metal Monkey,Earth Ox,Initiate,Sheep,59,neutral,Year sign meets month sign,6,1
+2028-09-02,Saturday,7,14,Earth Monkey,Metal Monkey,Metal Tiger,Break,Monkey,19,challenging,Year sign meets month sign,4,22
+2028-09-03,Sunday,7,15,Earth Monkey,Metal Monkey,Metal Rabbit,Danger,Rooster,17,challenging,Ghost Festival. Year sign meets month sign,0,19
+2028-09-04,Monday,7,16,Earth Monkey,Metal Monkey,Water Dragon,Success,Dog,81,auspicious,Year sign meets month sign,20,2
+2028-09-05,Tuesday,7,17,Earth Monkey,Metal Monkey,Water Snake,Receive,Pig,66,favorable,Year sign meets month sign,10,1
+2028-09-06,Wednesday,7,18,Earth Monkey,Metal Monkey,Wood Horse,Open,Rat,79,favorable,Year sign meets month sign,18,1
+2028-09-07,Thursday,7,19,Earth Monkey,Metal Monkey,Wood Sheep,Close,Ox,21,cautionary,Year sign meets month sign,3,20
+2028-09-08,Friday,7,20,Earth Monkey,Metal Monkey,Fire Monkey,Establish,Tiger,71,favorable,Triple alignment (rare),15,3
+2028-09-09,Saturday,7,21,Earth Monkey,Metal Monkey,Fire Rooster,Remove,Rabbit,47,neutral,Year sign meets month sign,7,9
+2028-09-10,Sunday,7,22,Earth Monkey,Metal Monkey,Earth Dog,Full,Dragon,74,favorable,Year sign meets month sign,14,0
+2028-09-11,Monday,7,23,Earth Monkey,Metal Monkey,Earth Pig,Balance,Snake,47,neutral,Year sign meets month sign,0,2
+2028-09-12,Tuesday,7,24,Earth Monkey,Metal Monkey,Metal Rat,Stable,Horse,66,favorable,Year sign meets month sign,13,4
+2028-09-13,Wednesday,7,25,Earth Monkey,Metal Monkey,Metal Ox,Initiate,Sheep,59,neutral,Year sign meets month sign,6,1
+2028-09-14,Thursday,7,26,Earth Monkey,Metal Monkey,Water Tiger,Break,Monkey,19,challenging,Year sign meets month sign,4,22
+2028-09-15,Friday,7,27,Earth Monkey,Metal Monkey,Water Rabbit,Danger,Rooster,17,challenging,Year sign meets month sign,0,19
+2028-09-16,Saturday,7,28,Earth Monkey,Metal Monkey,Wood Dragon,Success,Dog,81,auspicious,Year sign meets month sign,20,2
+2028-09-17,Sunday,7,29,Earth Monkey,Metal Monkey,Wood Snake,Receive,Pig,66,favorable,Year sign meets month sign,10,1
+2028-09-18,Monday,7,30,Earth Monkey,Metal Monkey,Fire Horse,Open,Rat,79,favorable,Year sign meets month sign,18,1
+2028-09-19,Tuesday,8,1,Earth Monkey,Metal Rooster,Fire Sheep,Open,Ox,79,favorable,,18,1
+2028-09-20,Wednesday,8,2,Earth Monkey,Metal Rooster,Earth Monkey,Close,Tiger,21,cautionary,Year sign meets day sign,3,20
+2028-09-21,Thursday,8,3,Earth Monkey,Metal Rooster,Earth Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2028-09-22,Friday,8,4,Earth Monkey,Metal Rooster,Metal Dog,Remove,Dragon,47,neutral,,7,9
+2028-09-23,Saturday,8,5,Earth Monkey,Metal Rooster,Metal Pig,Full,Snake,74,favorable,,14,0
+2028-09-24,Sunday,8,6,Earth Monkey,Metal Rooster,Water Rat,Balance,Horse,47,neutral,,0,2
+2028-09-25,Monday,8,7,Earth Monkey,Metal Rooster,Water Ox,Stable,Sheep,66,favorable,,13,4
+2028-09-26,Tuesday,8,8,Earth Monkey,Metal Rooster,Wood Tiger,Initiate,Monkey,59,neutral,,6,1
+2028-09-27,Wednesday,8,9,Earth Monkey,Metal Rooster,Wood Rabbit,Break,Rooster,19,challenging,,4,22
+2028-09-28,Thursday,8,10,Earth Monkey,Metal Rooster,Fire Dragon,Danger,Dog,17,challenging,,0,19
+2028-09-29,Friday,8,11,Earth Monkey,Metal Rooster,Fire Snake,Success,Pig,81,auspicious,,20,2
+2028-09-30,Saturday,8,12,Earth Monkey,Metal Rooster,Earth Horse,Receive,Rat,66,favorable,,10,1
+2028-10-01,Sunday,8,13,Earth Monkey,Metal Rooster,Earth Sheep,Open,Ox,79,favorable,,18,1
+2028-10-02,Monday,8,14,Earth Monkey,Metal Rooster,Metal Monkey,Close,Tiger,21,cautionary,Year sign meets day sign,3,20
+2028-10-03,Tuesday,8,15,Earth Monkey,Metal Rooster,Metal Rooster,Establish,Rabbit,71,favorable,Mid-Autumn Festival. Month sign meets day sign,15,3
+2028-10-04,Wednesday,8,16,Earth Monkey,Metal Rooster,Water Dog,Remove,Dragon,47,neutral,,7,9
+2028-10-05,Thursday,8,17,Earth Monkey,Metal Rooster,Water Pig,Full,Snake,74,favorable,,14,0
+2028-10-06,Friday,8,18,Earth Monkey,Metal Rooster,Wood Rat,Balance,Horse,47,neutral,,0,2
+2028-10-07,Saturday,8,19,Earth Monkey,Metal Rooster,Wood Ox,Stable,Sheep,66,favorable,,13,4
+2028-10-08,Sunday,8,20,Earth Monkey,Metal Rooster,Fire Tiger,Initiate,Monkey,59,neutral,,6,1
+2028-10-09,Monday,8,21,Earth Monkey,Metal Rooster,Fire Rabbit,Break,Rooster,19,challenging,,4,22
+2028-10-10,Tuesday,8,22,Earth Monkey,Metal Rooster,Earth Dragon,Danger,Dog,17,challenging,,0,19
+2028-10-11,Wednesday,8,23,Earth Monkey,Metal Rooster,Earth Snake,Success,Pig,81,auspicious,,20,2
+2028-10-12,Thursday,8,24,Earth Monkey,Metal Rooster,Metal Horse,Receive,Rat,66,favorable,,10,1
+2028-10-13,Friday,8,25,Earth Monkey,Metal Rooster,Metal Sheep,Open,Ox,79,favorable,,18,1
+2028-10-14,Saturday,8,26,Earth Monkey,Metal Rooster,Water Monkey,Close,Tiger,21,cautionary,Year sign meets day sign,3,20
+2028-10-15,Sunday,8,27,Earth Monkey,Metal Rooster,Water Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2028-10-16,Monday,8,28,Earth Monkey,Metal Rooster,Wood Dog,Remove,Dragon,47,neutral,,7,9
+2028-10-17,Tuesday,8,29,Earth Monkey,Metal Rooster,Wood Pig,Full,Snake,74,favorable,,14,0
+2028-10-18,Wednesday,9,1,Earth Monkey,Water Dog,Fire Rat,Full,Horse,74,favorable,,14,0
+2028-10-19,Thursday,9,2,Earth Monkey,Water Dog,Fire Ox,Balance,Sheep,47,neutral,,0,2
+2028-10-20,Friday,9,3,Earth Monkey,Water Dog,Earth Tiger,Stable,Monkey,66,favorable,,13,4
+2028-10-21,Saturday,9,4,Earth Monkey,Water Dog,Earth Rabbit,Initiate,Rooster,59,neutral,,6,1
+2028-10-22,Sunday,9,5,Earth Monkey,Water Dog,Metal Dragon,Break,Dog,19,challenging,,4,22
+2028-10-23,Monday,9,6,Earth Monkey,Water Dog,Metal Snake,Danger,Pig,17,challenging,,0,19
+2028-10-24,Tuesday,9,7,Earth Monkey,Water Dog,Water Horse,Success,Rat,81,auspicious,,20,2
+2028-10-25,Wednesday,9,8,Earth Monkey,Water Dog,Water Sheep,Receive,Ox,66,favorable,,10,1
+2028-10-26,Thursday,9,9,Earth Monkey,Water Dog,Wood Monkey,Open,Tiger,79,favorable,Double Ninth Festival. Year sign meets day sign,18,1
+2028-10-27,Friday,9,10,Earth Monkey,Water Dog,Wood Rooster,Close,Rabbit,21,cautionary,,3,20
+2028-10-28,Saturday,9,11,Earth Monkey,Water Dog,Fire Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2028-10-29,Sunday,9,12,Earth Monkey,Water Dog,Fire Pig,Remove,Snake,47,neutral,,7,9
+2028-10-30,Monday,9,13,Earth Monkey,Water Dog,Earth Rat,Full,Horse,74,favorable,,14,0
+2028-10-31,Tuesday,9,14,Earth Monkey,Water Dog,Earth Ox,Balance,Sheep,47,neutral,Halloween,0,2
+2028-11-01,Wednesday,9,15,Earth Monkey,Water Dog,Metal Tiger,Stable,Monkey,66,favorable,,13,4
+2028-11-02,Thursday,9,16,Earth Monkey,Water Dog,Metal Rabbit,Initiate,Rooster,59,neutral,,6,1
+2028-11-03,Friday,9,17,Earth Monkey,Water Dog,Water Dragon,Break,Dog,19,challenging,,4,22
+2028-11-04,Saturday,9,18,Earth Monkey,Water Dog,Water Snake,Danger,Pig,17,challenging,,0,19
+2028-11-05,Sunday,9,19,Earth Monkey,Water Dog,Wood Horse,Success,Rat,81,auspicious,,20,2
+2028-11-06,Monday,9,20,Earth Monkey,Water Dog,Wood Sheep,Receive,Ox,66,favorable,,10,1
+2028-11-07,Tuesday,9,21,Earth Monkey,Water Dog,Fire Monkey,Open,Tiger,79,favorable,Year sign meets day sign,18,1
+2028-11-08,Wednesday,9,22,Earth Monkey,Water Dog,Fire Rooster,Close,Rabbit,21,cautionary,,3,20
+2028-11-09,Thursday,9,23,Earth Monkey,Water Dog,Earth Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2028-11-10,Friday,9,24,Earth Monkey,Water Dog,Earth Pig,Remove,Snake,47,neutral,,7,9
+2028-11-11,Saturday,9,25,Earth Monkey,Water Dog,Metal Rat,Full,Horse,74,favorable,,14,0
+2028-11-12,Sunday,9,26,Earth Monkey,Water Dog,Metal Ox,Balance,Sheep,47,neutral,,0,2
+2028-11-13,Monday,9,27,Earth Monkey,Water Dog,Water Tiger,Stable,Monkey,66,favorable,,13,4
+2028-11-14,Tuesday,9,28,Earth Monkey,Water Dog,Water Rabbit,Initiate,Rooster,59,neutral,,6,1
+2028-11-15,Wednesday,9,29,Earth Monkey,Water Dog,Wood Dragon,Break,Dog,19,challenging,,4,22
+2028-11-16,Thursday,10,1,Earth Monkey,Water Pig,Wood Snake,Break,Pig,19,challenging,,4,22
+2028-11-17,Friday,10,2,Earth Monkey,Water Pig,Fire Horse,Danger,Rat,17,challenging,,0,19
+2028-11-18,Saturday,10,3,Earth Monkey,Water Pig,Fire Sheep,Success,Ox,81,auspicious,,20,2
+2028-11-19,Sunday,10,4,Earth Monkey,Water Pig,Earth Monkey,Receive,Tiger,66,favorable,Year sign meets day sign,10,1
+2028-11-20,Monday,10,5,Earth Monkey,Water Pig,Earth Rooster,Open,Rabbit,79,favorable,,18,1
+2028-11-21,Tuesday,10,6,Earth Monkey,Water Pig,Metal Dog,Close,Dragon,21,cautionary,,3,20
+2028-11-22,Wednesday,10,7,Earth Monkey,Water Pig,Metal Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2028-11-23,Thursday,10,8,Earth Monkey,Water Pig,Water Rat,Remove,Horse,47,neutral,,7,9
+2028-11-24,Friday,10,9,Earth Monkey,Water Pig,Water Ox,Full,Sheep,74,favorable,,14,0
+2028-11-25,Saturday,10,10,Earth Monkey,Water Pig,Wood Tiger,Balance,Monkey,47,neutral,,0,2
+2028-11-26,Sunday,10,11,Earth Monkey,Water Pig,Wood Rabbit,Stable,Rooster,66,favorable,,13,4
+2028-11-27,Monday,10,12,Earth Monkey,Water Pig,Fire Dragon,Initiate,Dog,59,neutral,,6,1
+2028-11-28,Tuesday,10,13,Earth Monkey,Water Pig,Fire Snake,Break,Pig,19,challenging,,4,22
+2028-11-29,Wednesday,10,14,Earth Monkey,Water Pig,Earth Horse,Danger,Rat,17,challenging,,0,19
+2028-11-30,Thursday,10,15,Earth Monkey,Water Pig,Earth Sheep,Success,Ox,81,auspicious,,20,2
+2028-12-01,Friday,10,16,Earth Monkey,Water Pig,Metal Monkey,Receive,Tiger,66,favorable,Year sign meets day sign,10,1
+2028-12-02,Saturday,10,17,Earth Monkey,Water Pig,Metal Rooster,Open,Rabbit,79,favorable,,18,1
+2028-12-03,Sunday,10,18,Earth Monkey,Water Pig,Water Dog,Close,Dragon,21,cautionary,,3,20
+2028-12-04,Monday,10,19,Earth Monkey,Water Pig,Water Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2028-12-05,Tuesday,10,20,Earth Monkey,Water Pig,Wood Rat,Remove,Horse,47,neutral,,7,9
+2028-12-06,Wednesday,10,21,Earth Monkey,Water Pig,Wood Ox,Full,Sheep,74,favorable,,14,0
+2028-12-07,Thursday,10,22,Earth Monkey,Water Pig,Fire Tiger,Balance,Monkey,47,neutral,,0,2
+2028-12-08,Friday,10,23,Earth Monkey,Water Pig,Fire Rabbit,Stable,Rooster,66,favorable,,13,4
+2028-12-09,Saturday,10,24,Earth Monkey,Water Pig,Earth Dragon,Initiate,Dog,59,neutral,,6,1
+2028-12-10,Sunday,10,25,Earth Monkey,Water Pig,Earth Snake,Break,Pig,19,challenging,,4,22
+2028-12-11,Monday,10,26,Earth Monkey,Water Pig,Metal Horse,Danger,Rat,17,challenging,,0,19
+2028-12-12,Tuesday,10,27,Earth Monkey,Water Pig,Metal Sheep,Success,Ox,81,auspicious,,20,2
+2028-12-13,Wednesday,10,28,Earth Monkey,Water Pig,Water Monkey,Receive,Tiger,66,favorable,Year sign meets day sign,10,1
+2028-12-14,Thursday,10,29,Earth Monkey,Water Pig,Water Rooster,Open,Rabbit,79,favorable,,18,1
+2028-12-15,Friday,10,30,Earth Monkey,Water Pig,Wood Dog,Close,Dragon,21,cautionary,,3,20
+2028-12-16,Saturday,11,1,Earth Monkey,Wood Rat,Wood Pig,Close,Snake,21,cautionary,,3,20
+2028-12-17,Sunday,11,2,Earth Monkey,Wood Rat,Fire Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2028-12-18,Monday,11,3,Earth Monkey,Wood Rat,Fire Ox,Remove,Sheep,47,neutral,,7,9
+2028-12-19,Tuesday,11,4,Earth Monkey,Wood Rat,Earth Tiger,Full,Monkey,74,favorable,,14,0
+2028-12-20,Wednesday,11,5,Earth Monkey,Wood Rat,Earth Rabbit,Balance,Rooster,47,neutral,,0,2
+2028-12-21,Thursday,11,6,Earth Monkey,Wood Rat,Metal Dragon,Stable,Dog,66,favorable,,13,4
+2028-12-22,Friday,11,7,Earth Monkey,Wood Rat,Metal Snake,Initiate,Pig,59,neutral,,6,1
+2028-12-23,Saturday,11,8,Earth Monkey,Wood Rat,Water Horse,Break,Rat,19,challenging,,4,22
+2028-12-24,Sunday,11,9,Earth Monkey,Wood Rat,Water Sheep,Danger,Ox,17,challenging,Christmas Eve,0,19
+2028-12-25,Monday,11,10,Earth Monkey,Wood Rat,Wood Monkey,Success,Tiger,81,auspicious,Christmas Day. Year sign meets day sign,20,2
+2028-12-26,Tuesday,11,11,Earth Monkey,Wood Rat,Wood Rooster,Receive,Rabbit,66,favorable,,10,1
+2028-12-27,Wednesday,11,12,Earth Monkey,Wood Rat,Fire Dog,Open,Dragon,79,favorable,,18,1
+2028-12-28,Thursday,11,13,Earth Monkey,Wood Rat,Fire Pig,Close,Snake,21,cautionary,,3,20
+2028-12-29,Friday,11,14,Earth Monkey,Wood Rat,Earth Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2028-12-30,Saturday,11,15,Earth Monkey,Wood Rat,Earth Ox,Remove,Sheep,47,neutral,,7,9
+2028-12-31,Sunday,11,16,Earth Monkey,Wood Rat,Metal Tiger,Full,Monkey,74,favorable,New Year's Eve,14,0
+2029-01-01,Monday,11,17,Earth Monkey,Wood Rat,Metal Rabbit,Balance,Rooster,47,neutral,New Year's Day,0,2
+2029-01-02,Tuesday,11,18,Earth Monkey,Wood Rat,Water Dragon,Stable,Dog,66,favorable,,13,4
+2029-01-03,Wednesday,11,19,Earth Monkey,Wood Rat,Water Snake,Initiate,Pig,59,neutral,,6,1
+2029-01-04,Thursday,11,20,Earth Monkey,Wood Rat,Wood Horse,Break,Rat,19,challenging,,4,22
+2029-01-05,Friday,11,21,Earth Monkey,Wood Rat,Wood Sheep,Danger,Ox,17,challenging,,0,19
+2029-01-06,Saturday,11,22,Earth Monkey,Wood Rat,Fire Monkey,Success,Tiger,81,auspicious,Year sign meets day sign,20,2
+2029-01-07,Sunday,11,23,Earth Monkey,Wood Rat,Fire Rooster,Receive,Rabbit,66,favorable,,10,1
+2029-01-08,Monday,11,24,Earth Monkey,Wood Rat,Earth Dog,Open,Dragon,79,favorable,,18,1
+2029-01-09,Tuesday,11,25,Earth Monkey,Wood Rat,Earth Pig,Close,Snake,21,cautionary,,3,20
+2029-01-10,Wednesday,11,26,Earth Monkey,Wood Rat,Metal Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2029-01-11,Thursday,11,27,Earth Monkey,Wood Rat,Metal Ox,Remove,Sheep,47,neutral,,7,9
+2029-01-12,Friday,11,28,Earth Monkey,Wood Rat,Water Tiger,Full,Monkey,74,favorable,,14,0
+2029-01-13,Saturday,11,29,Earth Monkey,Wood Rat,Water Rabbit,Balance,Rooster,47,neutral,,0,2
+2029-01-14,Sunday,11,30,Earth Monkey,Wood Rat,Wood Dragon,Stable,Dog,66,favorable,,13,4
+2029-01-15,Monday,12,1,Earth Monkey,Wood Ox,Wood Snake,Stable,Pig,66,favorable,,13,4
+2029-01-16,Tuesday,12,2,Earth Monkey,Wood Ox,Fire Horse,Initiate,Rat,59,neutral,,6,1
+2029-01-17,Wednesday,12,3,Earth Monkey,Wood Ox,Fire Sheep,Break,Ox,19,challenging,,4,22
+2029-01-18,Thursday,12,4,Earth Monkey,Wood Ox,Earth Monkey,Danger,Tiger,17,challenging,Year sign meets day sign,0,19
+2029-01-19,Friday,12,5,Earth Monkey,Wood Ox,Earth Rooster,Success,Rabbit,81,auspicious,,20,2
+2029-01-20,Saturday,12,6,Earth Monkey,Wood Ox,Metal Dog,Receive,Dragon,66,favorable,,10,1
+2029-01-21,Sunday,12,7,Earth Monkey,Wood Ox,Metal Pig,Open,Snake,79,favorable,,18,1
+2029-01-22,Monday,12,8,Earth Monkey,Wood Ox,Water Rat,Close,Horse,21,cautionary,Laba Festival,3,20
+2029-01-23,Tuesday,12,9,Earth Monkey,Wood Ox,Water Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2029-01-24,Wednesday,12,10,Earth Monkey,Wood Ox,Wood Tiger,Remove,Monkey,47,neutral,,7,9
+2029-01-25,Thursday,12,11,Earth Monkey,Wood Ox,Wood Rabbit,Full,Rooster,74,favorable,,14,0
+2029-01-26,Friday,12,12,Earth Monkey,Wood Ox,Fire Dragon,Balance,Dog,47,neutral,,0,2
+2029-01-27,Saturday,12,13,Earth Monkey,Wood Ox,Fire Snake,Stable,Pig,66,favorable,,13,4
+2029-01-28,Sunday,12,14,Earth Monkey,Wood Ox,Earth Horse,Initiate,Rat,59,neutral,,6,1
+2029-01-29,Monday,12,15,Earth Monkey,Wood Ox,Earth Sheep,Break,Ox,19,challenging,,4,22
+2029-01-30,Tuesday,12,16,Earth Monkey,Wood Ox,Metal Monkey,Danger,Tiger,17,challenging,Year sign meets day sign,0,19
+2029-01-31,Wednesday,12,17,Earth Monkey,Wood Ox,Metal Rooster,Success,Rabbit,81,auspicious,,20,2
+2029-02-01,Thursday,12,18,Earth Monkey,Wood Ox,Water Dog,Receive,Dragon,66,favorable,,10,1
+2029-02-02,Friday,12,19,Earth Monkey,Wood Ox,Water Pig,Open,Snake,79,favorable,,18,1
+2029-02-03,Saturday,12,20,Earth Monkey,Wood Ox,Wood Rat,Close,Horse,21,cautionary,,3,20
+2029-02-04,Sunday,12,21,Earth Monkey,Wood Ox,Wood Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2029-02-05,Monday,12,22,Earth Monkey,Wood Ox,Fire Tiger,Remove,Monkey,47,neutral,,7,9
+2029-02-06,Tuesday,12,23,Earth Monkey,Wood Ox,Fire Rabbit,Full,Rooster,74,favorable,Kitchen God Day,14,0
+2029-02-07,Wednesday,12,24,Earth Monkey,Wood Ox,Earth Dragon,Balance,Dog,47,neutral,,0,2
+2029-02-08,Thursday,12,25,Earth Monkey,Wood Ox,Earth Snake,Stable,Pig,66,favorable,,13,4
+2029-02-09,Friday,12,26,Earth Monkey,Wood Ox,Metal Horse,Initiate,Rat,59,neutral,,6,1
+2029-02-10,Saturday,12,27,Earth Monkey,Wood Ox,Metal Sheep,Break,Ox,19,challenging,,4,22
+2029-02-11,Sunday,12,28,Earth Monkey,Wood Ox,Water Monkey,Danger,Tiger,17,challenging,Year sign meets day sign,0,19
+2029-02-12,Monday,12,29,Earth Monkey,Wood Ox,Water Rooster,Success,Rabbit,81,auspicious,,20,2
+2029-02-13,Tuesday,1,1,Earth Rooster,Fire Tiger,Wood Dog,Success,Dragon,81,auspicious,Lunar New Year,20,2
+2029-02-14,Wednesday,1,2,Earth Rooster,Fire Tiger,Wood Pig,Receive,Snake,66,favorable,Valentine's Day,10,1
+2029-02-15,Thursday,1,3,Earth Rooster,Fire Tiger,Fire Rat,Open,Horse,79,favorable,,18,1
+2029-02-16,Friday,1,4,Earth Rooster,Fire Tiger,Fire Ox,Close,Sheep,21,cautionary,,3,20
+2029-02-17,Saturday,1,5,Earth Rooster,Fire Tiger,Earth Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2029-02-18,Sunday,1,6,Earth Rooster,Fire Tiger,Earth Rabbit,Remove,Rooster,47,neutral,,7,9
+2029-02-19,Monday,1,7,Earth Rooster,Fire Tiger,Metal Dragon,Full,Dog,74,favorable,,14,0
+2029-02-20,Tuesday,1,8,Earth Rooster,Fire Tiger,Metal Snake,Balance,Pig,47,neutral,,0,2
+2029-02-21,Wednesday,1,9,Earth Rooster,Fire Tiger,Water Horse,Stable,Rat,66,favorable,,13,4
+2029-02-22,Thursday,1,10,Earth Rooster,Fire Tiger,Water Sheep,Initiate,Ox,59,neutral,,6,1
+2029-02-23,Friday,1,11,Earth Rooster,Fire Tiger,Wood Monkey,Break,Tiger,19,challenging,,4,22
+2029-02-24,Saturday,1,12,Earth Rooster,Fire Tiger,Wood Rooster,Danger,Rabbit,17,challenging,Year sign meets day sign,0,19
+2029-02-25,Sunday,1,13,Earth Rooster,Fire Tiger,Fire Dog,Success,Dragon,81,auspicious,,20,2
+2029-02-26,Monday,1,14,Earth Rooster,Fire Tiger,Fire Pig,Receive,Snake,66,favorable,,10,1
+2029-02-27,Tuesday,1,15,Earth Rooster,Fire Tiger,Earth Rat,Open,Horse,79,favorable,Lantern Festival,18,1
+2029-02-28,Wednesday,1,16,Earth Rooster,Fire Tiger,Earth Ox,Close,Sheep,21,cautionary,,3,20
+2029-03-01,Thursday,1,17,Earth Rooster,Fire Tiger,Metal Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2029-03-02,Friday,1,18,Earth Rooster,Fire Tiger,Metal Rabbit,Remove,Rooster,47,neutral,,7,9
+2029-03-03,Saturday,1,19,Earth Rooster,Fire Tiger,Water Dragon,Full,Dog,74,favorable,,14,0
+2029-03-04,Sunday,1,20,Earth Rooster,Fire Tiger,Water Snake,Balance,Pig,47,neutral,,0,2
+2029-03-05,Monday,1,21,Earth Rooster,Fire Tiger,Wood Horse,Stable,Rat,66,favorable,,13,4
+2029-03-06,Tuesday,1,22,Earth Rooster,Fire Tiger,Wood Sheep,Initiate,Ox,59,neutral,,6,1
+2029-03-07,Wednesday,1,23,Earth Rooster,Fire Tiger,Fire Monkey,Break,Tiger,19,challenging,,4,22
+2029-03-08,Thursday,1,24,Earth Rooster,Fire Tiger,Fire Rooster,Danger,Rabbit,17,challenging,Year sign meets day sign,0,19
+2029-03-09,Friday,1,25,Earth Rooster,Fire Tiger,Earth Dog,Success,Dragon,81,auspicious,,20,2
+2029-03-10,Saturday,1,26,Earth Rooster,Fire Tiger,Earth Pig,Receive,Snake,66,favorable,,10,1
+2029-03-11,Sunday,1,27,Earth Rooster,Fire Tiger,Metal Rat,Open,Horse,79,favorable,,18,1
+2029-03-12,Monday,1,28,Earth Rooster,Fire Tiger,Metal Ox,Close,Sheep,21,cautionary,,3,20
+2029-03-13,Tuesday,1,29,Earth Rooster,Fire Tiger,Water Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2029-03-14,Wednesday,1,30,Earth Rooster,Fire Tiger,Water Rabbit,Remove,Rooster,47,neutral,,7,9
+2029-03-15,Thursday,2,1,Earth Rooster,Fire Rabbit,Wood Dragon,Remove,Dog,47,neutral,,7,9
+2029-03-16,Friday,2,2,Earth Rooster,Fire Rabbit,Wood Snake,Full,Pig,74,favorable,Earth God's Birthday,14,0
+2029-03-17,Saturday,2,3,Earth Rooster,Fire Rabbit,Fire Horse,Balance,Rat,47,neutral,St. Patrick's Day,0,2
+2029-03-18,Sunday,2,4,Earth Rooster,Fire Rabbit,Fire Sheep,Stable,Ox,66,favorable,,13,4
+2029-03-19,Monday,2,5,Earth Rooster,Fire Rabbit,Earth Monkey,Initiate,Tiger,59,neutral,,6,1
+2029-03-20,Tuesday,2,6,Earth Rooster,Fire Rabbit,Earth Rooster,Break,Rabbit,19,challenging,Year sign meets day sign,4,22
+2029-03-21,Wednesday,2,7,Earth Rooster,Fire Rabbit,Metal Dog,Danger,Dragon,17,challenging,,0,19
+2029-03-22,Thursday,2,8,Earth Rooster,Fire Rabbit,Metal Pig,Success,Snake,81,auspicious,,20,2
+2029-03-23,Friday,2,9,Earth Rooster,Fire Rabbit,Water Rat,Receive,Horse,66,favorable,,10,1
+2029-03-24,Saturday,2,10,Earth Rooster,Fire Rabbit,Water Ox,Open,Sheep,79,favorable,,18,1
+2029-03-25,Sunday,2,11,Earth Rooster,Fire Rabbit,Wood Tiger,Close,Monkey,21,cautionary,,3,20
+2029-03-26,Monday,2,12,Earth Rooster,Fire Rabbit,Wood Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2029-03-27,Tuesday,2,13,Earth Rooster,Fire Rabbit,Fire Dragon,Remove,Dog,47,neutral,,7,9
+2029-03-28,Wednesday,2,14,Earth Rooster,Fire Rabbit,Fire Snake,Full,Pig,74,favorable,,14,0
+2029-03-29,Thursday,2,15,Earth Rooster,Fire Rabbit,Earth Horse,Balance,Rat,47,neutral,,0,2
+2029-03-30,Friday,2,16,Earth Rooster,Fire Rabbit,Earth Sheep,Stable,Ox,66,favorable,,13,4
+2029-03-31,Saturday,2,17,Earth Rooster,Fire Rabbit,Metal Monkey,Initiate,Tiger,59,neutral,,6,1
+2029-04-01,Sunday,2,18,Earth Rooster,Fire Rabbit,Metal Rooster,Break,Rabbit,19,challenging,Year sign meets day sign,4,22
+2029-04-02,Monday,2,19,Earth Rooster,Fire Rabbit,Water Dog,Danger,Dragon,17,challenging,,0,19
+2029-04-03,Tuesday,2,20,Earth Rooster,Fire Rabbit,Water Pig,Success,Snake,81,auspicious,,20,2
+2029-04-04,Wednesday,2,21,Earth Rooster,Fire Rabbit,Wood Rat,Receive,Horse,66,favorable,,10,1
+2029-04-05,Thursday,2,22,Earth Rooster,Fire Rabbit,Wood Ox,Open,Sheep,79,favorable,,18,1
+2029-04-06,Friday,2,23,Earth Rooster,Fire Rabbit,Fire Tiger,Close,Monkey,21,cautionary,,3,20
+2029-04-07,Saturday,2,24,Earth Rooster,Fire Rabbit,Fire Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2029-04-08,Sunday,2,25,Earth Rooster,Fire Rabbit,Earth Dragon,Remove,Dog,47,neutral,,7,9
+2029-04-09,Monday,2,26,Earth Rooster,Fire Rabbit,Earth Snake,Full,Pig,74,favorable,,14,0
+2029-04-10,Tuesday,2,27,Earth Rooster,Fire Rabbit,Metal Horse,Balance,Rat,47,neutral,,0,2
+2029-04-11,Wednesday,2,28,Earth Rooster,Fire Rabbit,Metal Sheep,Stable,Ox,66,favorable,,13,4
+2029-04-12,Thursday,2,29,Earth Rooster,Fire Rabbit,Water Monkey,Initiate,Tiger,59,neutral,,6,1
+2029-04-13,Friday,2,30,Earth Rooster,Fire Rabbit,Water Rooster,Break,Rabbit,19,challenging,Year sign meets day sign,4,22
+2029-04-14,Saturday,3,1,Earth Rooster,Earth Dragon,Wood Dog,Break,Dragon,19,challenging,,4,22
+2029-04-15,Sunday,3,2,Earth Rooster,Earth Dragon,Wood Pig,Danger,Snake,17,challenging,,0,19
+2029-04-16,Monday,3,3,Earth Rooster,Earth Dragon,Fire Rat,Success,Horse,81,auspicious,Shangsi Festival,20,2
+2029-04-17,Tuesday,3,4,Earth Rooster,Earth Dragon,Fire Ox,Receive,Sheep,66,favorable,,10,1
+2029-04-18,Wednesday,3,5,Earth Rooster,Earth Dragon,Earth Tiger,Open,Monkey,79,favorable,,18,1
+2029-04-19,Thursday,3,6,Earth Rooster,Earth Dragon,Earth Rabbit,Close,Rooster,21,cautionary,,3,20
+2029-04-20,Friday,3,7,Earth Rooster,Earth Dragon,Metal Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2029-04-21,Saturday,3,8,Earth Rooster,Earth Dragon,Metal Snake,Remove,Pig,47,neutral,,7,9
+2029-04-22,Sunday,3,9,Earth Rooster,Earth Dragon,Water Horse,Full,Rat,74,favorable,,14,0
+2029-04-23,Monday,3,10,Earth Rooster,Earth Dragon,Water Sheep,Balance,Ox,47,neutral,,0,2
+2029-04-24,Tuesday,3,11,Earth Rooster,Earth Dragon,Wood Monkey,Stable,Tiger,66,favorable,,13,4
+2029-04-25,Wednesday,3,12,Earth Rooster,Earth Dragon,Wood Rooster,Initiate,Rabbit,59,neutral,Year sign meets day sign,6,1
+2029-04-26,Thursday,3,13,Earth Rooster,Earth Dragon,Fire Dog,Break,Dragon,19,challenging,,4,22
+2029-04-27,Friday,3,14,Earth Rooster,Earth Dragon,Fire Pig,Danger,Snake,17,challenging,,0,19
+2029-04-28,Saturday,3,15,Earth Rooster,Earth Dragon,Earth Rat,Success,Horse,81,auspicious,,20,2
+2029-04-29,Sunday,3,16,Earth Rooster,Earth Dragon,Earth Ox,Receive,Sheep,66,favorable,,10,1
+2029-04-30,Monday,3,17,Earth Rooster,Earth Dragon,Metal Tiger,Open,Monkey,79,favorable,,18,1
+2029-05-01,Tuesday,3,18,Earth Rooster,Earth Dragon,Metal Rabbit,Close,Rooster,21,cautionary,,3,20
+2029-05-02,Wednesday,3,19,Earth Rooster,Earth Dragon,Water Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2029-05-03,Thursday,3,20,Earth Rooster,Earth Dragon,Water Snake,Remove,Pig,47,neutral,,7,9
+2029-05-04,Friday,3,21,Earth Rooster,Earth Dragon,Wood Horse,Full,Rat,74,favorable,,14,0
+2029-05-05,Saturday,3,22,Earth Rooster,Earth Dragon,Wood Sheep,Balance,Ox,47,neutral,,0,2
+2029-05-06,Sunday,3,23,Earth Rooster,Earth Dragon,Fire Monkey,Stable,Tiger,66,favorable,,13,4
+2029-05-07,Monday,3,24,Earth Rooster,Earth Dragon,Fire Rooster,Initiate,Rabbit,59,neutral,Year sign meets day sign,6,1
+2029-05-08,Tuesday,3,25,Earth Rooster,Earth Dragon,Earth Dog,Break,Dragon,19,challenging,,4,22
+2029-05-09,Wednesday,3,26,Earth Rooster,Earth Dragon,Earth Pig,Danger,Snake,17,challenging,,0,19
+2029-05-10,Thursday,3,27,Earth Rooster,Earth Dragon,Metal Rat,Success,Horse,81,auspicious,,20,2
+2029-05-11,Friday,3,28,Earth Rooster,Earth Dragon,Metal Ox,Receive,Sheep,66,favorable,,10,1
+2029-05-12,Saturday,3,29,Earth Rooster,Earth Dragon,Water Tiger,Open,Monkey,79,favorable,,18,1
+2029-05-13,Sunday,4,1,Earth Rooster,Earth Snake,Water Rabbit,Open,Rooster,79,favorable,,18,1
+2029-05-14,Monday,4,2,Earth Rooster,Earth Snake,Wood Dragon,Close,Dog,21,cautionary,,3,20
+2029-05-15,Tuesday,4,3,Earth Rooster,Earth Snake,Wood Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2029-05-16,Wednesday,4,4,Earth Rooster,Earth Snake,Fire Horse,Remove,Rat,47,neutral,,7,9
+2029-05-17,Thursday,4,5,Earth Rooster,Earth Snake,Fire Sheep,Full,Ox,74,favorable,,14,0
+2029-05-18,Friday,4,6,Earth Rooster,Earth Snake,Earth Monkey,Balance,Tiger,47,neutral,,0,2
+2029-05-19,Saturday,4,7,Earth Rooster,Earth Snake,Earth Rooster,Stable,Rabbit,66,favorable,Year sign meets day sign,13,4
+2029-05-20,Sunday,4,8,Earth Rooster,Earth Snake,Metal Dog,Initiate,Dragon,59,neutral,Buddha's Birthday,6,1
+2029-05-21,Monday,4,9,Earth Rooster,Earth Snake,Metal Pig,Break,Snake,19,challenging,,4,22
+2029-05-22,Tuesday,4,10,Earth Rooster,Earth Snake,Water Rat,Danger,Horse,17,challenging,,0,19
+2029-05-23,Wednesday,4,11,Earth Rooster,Earth Snake,Water Ox,Success,Sheep,81,auspicious,,20,2
+2029-05-24,Thursday,4,12,Earth Rooster,Earth Snake,Wood Tiger,Receive,Monkey,66,favorable,,10,1
+2029-05-25,Friday,4,13,Earth Rooster,Earth Snake,Wood Rabbit,Open,Rooster,79,favorable,,18,1
+2029-05-26,Saturday,4,14,Earth Rooster,Earth Snake,Fire Dragon,Close,Dog,21,cautionary,,3,20
+2029-05-27,Sunday,4,15,Earth Rooster,Earth Snake,Fire Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2029-05-28,Monday,4,16,Earth Rooster,Earth Snake,Earth Horse,Remove,Rat,47,neutral,,7,9
+2029-05-29,Tuesday,4,17,Earth Rooster,Earth Snake,Earth Sheep,Full,Ox,74,favorable,,14,0
+2029-05-30,Wednesday,4,18,Earth Rooster,Earth Snake,Metal Monkey,Balance,Tiger,47,neutral,,0,2
+2029-05-31,Thursday,4,19,Earth Rooster,Earth Snake,Metal Rooster,Stable,Rabbit,66,favorable,Year sign meets day sign,13,4
+2029-06-01,Friday,4,20,Earth Rooster,Earth Snake,Water Dog,Initiate,Dragon,59,neutral,,6,1
+2029-06-02,Saturday,4,21,Earth Rooster,Earth Snake,Water Pig,Break,Snake,19,challenging,,4,22
+2029-06-03,Sunday,4,22,Earth Rooster,Earth Snake,Wood Rat,Danger,Horse,17,challenging,,0,19
+2029-06-04,Monday,4,23,Earth Rooster,Earth Snake,Wood Ox,Success,Sheep,81,auspicious,,20,2
+2029-06-05,Tuesday,4,24,Earth Rooster,Earth Snake,Fire Tiger,Receive,Monkey,66,favorable,,10,1
+2029-06-06,Wednesday,4,25,Earth Rooster,Earth Snake,Fire Rabbit,Open,Rooster,79,favorable,,18,1
+2029-06-07,Thursday,4,26,Earth Rooster,Earth Snake,Earth Dragon,Close,Dog,21,cautionary,,3,20
+2029-06-08,Friday,4,27,Earth Rooster,Earth Snake,Earth Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2029-06-09,Saturday,4,28,Earth Rooster,Earth Snake,Metal Horse,Remove,Rat,47,neutral,,7,9
+2029-06-10,Sunday,4,29,Earth Rooster,Earth Snake,Metal Sheep,Full,Ox,74,favorable,,14,0
+2029-06-11,Monday,4,30,Earth Rooster,Earth Snake,Water Monkey,Balance,Tiger,47,neutral,,0,2
+2029-06-12,Tuesday,5,1,Earth Rooster,Metal Horse,Water Rooster,Balance,Rabbit,47,neutral,Year sign meets day sign,0,2
+2029-06-13,Wednesday,5,2,Earth Rooster,Metal Horse,Wood Dog,Stable,Dragon,66,favorable,,13,4
+2029-06-14,Thursday,5,3,Earth Rooster,Metal Horse,Wood Pig,Initiate,Snake,59,neutral,,6,1
+2029-06-15,Friday,5,4,Earth Rooster,Metal Horse,Fire Rat,Break,Horse,19,challenging,,4,22
+2029-06-16,Saturday,5,5,Earth Rooster,Metal Horse,Fire Ox,Danger,Sheep,17,challenging,Dragon Boat Festival,0,19
+2029-06-17,Sunday,5,6,Earth Rooster,Metal Horse,Earth Tiger,Success,Monkey,81,auspicious,,20,2
+2029-06-18,Monday,5,7,Earth Rooster,Metal Horse,Earth Rabbit,Receive,Rooster,66,favorable,,10,1
+2029-06-19,Tuesday,5,8,Earth Rooster,Metal Horse,Metal Dragon,Open,Dog,79,favorable,,18,1
+2029-06-20,Wednesday,5,9,Earth Rooster,Metal Horse,Metal Snake,Close,Pig,21,cautionary,,3,20
+2029-06-21,Thursday,5,10,Earth Rooster,Metal Horse,Water Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2029-06-22,Friday,5,11,Earth Rooster,Metal Horse,Water Sheep,Remove,Ox,47,neutral,,7,9
+2029-06-23,Saturday,5,12,Earth Rooster,Metal Horse,Wood Monkey,Full,Tiger,74,favorable,,14,0
+2029-06-24,Sunday,5,13,Earth Rooster,Metal Horse,Wood Rooster,Balance,Rabbit,47,neutral,Year sign meets day sign,0,2
+2029-06-25,Monday,5,14,Earth Rooster,Metal Horse,Fire Dog,Stable,Dragon,66,favorable,,13,4
+2029-06-26,Tuesday,5,15,Earth Rooster,Metal Horse,Fire Pig,Initiate,Snake,59,neutral,,6,1
+2029-06-27,Wednesday,5,16,Earth Rooster,Metal Horse,Earth Rat,Break,Horse,19,challenging,,4,22
+2029-06-28,Thursday,5,17,Earth Rooster,Metal Horse,Earth Ox,Danger,Sheep,17,challenging,,0,19
+2029-06-29,Friday,5,18,Earth Rooster,Metal Horse,Metal Tiger,Success,Monkey,81,auspicious,,20,2
+2029-06-30,Saturday,5,19,Earth Rooster,Metal Horse,Metal Rabbit,Receive,Rooster,66,favorable,,10,1
+2029-07-01,Sunday,5,20,Earth Rooster,Metal Horse,Water Dragon,Open,Dog,79,favorable,,18,1
+2029-07-02,Monday,5,21,Earth Rooster,Metal Horse,Water Snake,Close,Pig,21,cautionary,,3,20
+2029-07-03,Tuesday,5,22,Earth Rooster,Metal Horse,Wood Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2029-07-04,Wednesday,5,23,Earth Rooster,Metal Horse,Wood Sheep,Remove,Ox,47,neutral,Independence Day (US),7,9
+2029-07-05,Thursday,5,24,Earth Rooster,Metal Horse,Fire Monkey,Full,Tiger,74,favorable,,14,0
+2029-07-06,Friday,5,25,Earth Rooster,Metal Horse,Fire Rooster,Balance,Rabbit,47,neutral,Year sign meets day sign,0,2
+2029-07-07,Saturday,5,26,Earth Rooster,Metal Horse,Earth Dog,Stable,Dragon,66,favorable,,13,4
+2029-07-08,Sunday,5,27,Earth Rooster,Metal Horse,Earth Pig,Initiate,Snake,59,neutral,,6,1
+2029-07-09,Monday,5,28,Earth Rooster,Metal Horse,Metal Rat,Break,Horse,19,challenging,,4,22
+2029-07-10,Tuesday,5,29,Earth Rooster,Metal Horse,Metal Ox,Danger,Sheep,17,challenging,,0,19
+2029-07-11,Wednesday,6,1,Earth Rooster,Metal Sheep,Water Tiger,Danger,Monkey,17,challenging,,0,19
+2029-07-12,Thursday,6,2,Earth Rooster,Metal Sheep,Water Rabbit,Success,Rooster,81,auspicious,,20,2
+2029-07-13,Friday,6,3,Earth Rooster,Metal Sheep,Wood Dragon,Receive,Dog,66,favorable,,10,1
+2029-07-14,Saturday,6,4,Earth Rooster,Metal Sheep,Wood Snake,Open,Pig,79,favorable,,18,1
+2029-07-15,Sunday,6,5,Earth Rooster,Metal Sheep,Fire Horse,Close,Rat,21,cautionary,,3,20
+2029-07-16,Monday,6,6,Earth Rooster,Metal Sheep,Fire Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2029-07-17,Tuesday,6,7,Earth Rooster,Metal Sheep,Earth Monkey,Remove,Tiger,47,neutral,,7,9
+2029-07-18,Wednesday,6,8,Earth Rooster,Metal Sheep,Earth Rooster,Full,Rabbit,74,favorable,Year sign meets day sign,14,0
+2029-07-19,Thursday,6,9,Earth Rooster,Metal Sheep,Metal Dog,Balance,Dragon,47,neutral,,0,2
+2029-07-20,Friday,6,10,Earth Rooster,Metal Sheep,Metal Pig,Stable,Snake,66,favorable,,13,4
+2029-07-21,Saturday,6,11,Earth Rooster,Metal Sheep,Water Rat,Initiate,Horse,59,neutral,,6,1
+2029-07-22,Sunday,6,12,Earth Rooster,Metal Sheep,Water Ox,Break,Sheep,19,challenging,,4,22
+2029-07-23,Monday,6,13,Earth Rooster,Metal Sheep,Wood Tiger,Danger,Monkey,17,challenging,,0,19
+2029-07-24,Tuesday,6,14,Earth Rooster,Metal Sheep,Wood Rabbit,Success,Rooster,81,auspicious,,20,2
+2029-07-25,Wednesday,6,15,Earth Rooster,Metal Sheep,Fire Dragon,Receive,Dog,66,favorable,,10,1
+2029-07-26,Thursday,6,16,Earth Rooster,Metal Sheep,Fire Snake,Open,Pig,79,favorable,,18,1
+2029-07-27,Friday,6,17,Earth Rooster,Metal Sheep,Earth Horse,Close,Rat,21,cautionary,,3,20
+2029-07-28,Saturday,6,18,Earth Rooster,Metal Sheep,Earth Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2029-07-29,Sunday,6,19,Earth Rooster,Metal Sheep,Metal Monkey,Remove,Tiger,47,neutral,,7,9
+2029-07-30,Monday,6,20,Earth Rooster,Metal Sheep,Metal Rooster,Full,Rabbit,74,favorable,Year sign meets day sign,14,0
+2029-07-31,Tuesday,6,21,Earth Rooster,Metal Sheep,Water Dog,Balance,Dragon,47,neutral,,0,2
+2029-08-01,Wednesday,6,22,Earth Rooster,Metal Sheep,Water Pig,Stable,Snake,66,favorable,,13,4
+2029-08-02,Thursday,6,23,Earth Rooster,Metal Sheep,Wood Rat,Initiate,Horse,59,neutral,,6,1
+2029-08-03,Friday,6,24,Earth Rooster,Metal Sheep,Wood Ox,Break,Sheep,19,challenging,,4,22
+2029-08-04,Saturday,6,25,Earth Rooster,Metal Sheep,Fire Tiger,Danger,Monkey,17,challenging,,0,19
+2029-08-05,Sunday,6,26,Earth Rooster,Metal Sheep,Fire Rabbit,Success,Rooster,81,auspicious,,20,2
+2029-08-06,Monday,6,27,Earth Rooster,Metal Sheep,Earth Dragon,Receive,Dog,66,favorable,,10,1
+2029-08-07,Tuesday,6,28,Earth Rooster,Metal Sheep,Earth Snake,Open,Pig,79,favorable,,18,1
+2029-08-08,Wednesday,6,29,Earth Rooster,Metal Sheep,Metal Horse,Close,Rat,21,cautionary,,3,20
+2029-08-09,Thursday,6,30,Earth Rooster,Metal Sheep,Metal Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2029-08-10,Friday,7,1,Earth Rooster,Water Monkey,Water Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2029-08-11,Saturday,7,2,Earth Rooster,Water Monkey,Water Rooster,Remove,Rabbit,47,neutral,Year sign meets day sign,7,9
+2029-08-12,Sunday,7,3,Earth Rooster,Water Monkey,Wood Dog,Full,Dragon,74,favorable,,14,0
+2029-08-13,Monday,7,4,Earth Rooster,Water Monkey,Wood Pig,Balance,Snake,47,neutral,,0,2
+2029-08-14,Tuesday,7,5,Earth Rooster,Water Monkey,Fire Rat,Stable,Horse,66,favorable,,13,4
+2029-08-15,Wednesday,7,6,Earth Rooster,Water Monkey,Fire Ox,Initiate,Sheep,59,neutral,,6,1
+2029-08-16,Thursday,7,7,Earth Rooster,Water Monkey,Earth Tiger,Break,Monkey,19,challenging,Qixi (Chinese Valentine's),4,22
+2029-08-17,Friday,7,8,Earth Rooster,Water Monkey,Earth Rabbit,Danger,Rooster,17,challenging,,0,19
+2029-08-18,Saturday,7,9,Earth Rooster,Water Monkey,Metal Dragon,Success,Dog,81,auspicious,,20,2
+2029-08-19,Sunday,7,10,Earth Rooster,Water Monkey,Metal Snake,Receive,Pig,66,favorable,,10,1
+2029-08-20,Monday,7,11,Earth Rooster,Water Monkey,Water Horse,Open,Rat,79,favorable,,18,1
+2029-08-21,Tuesday,7,12,Earth Rooster,Water Monkey,Water Sheep,Close,Ox,21,cautionary,,3,20
+2029-08-22,Wednesday,7,13,Earth Rooster,Water Monkey,Wood Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2029-08-23,Thursday,7,14,Earth Rooster,Water Monkey,Wood Rooster,Remove,Rabbit,47,neutral,Year sign meets day sign,7,9
+2029-08-24,Friday,7,15,Earth Rooster,Water Monkey,Fire Dog,Full,Dragon,74,favorable,Ghost Festival,14,0
+2029-08-25,Saturday,7,16,Earth Rooster,Water Monkey,Fire Pig,Balance,Snake,47,neutral,,0,2
+2029-08-26,Sunday,7,17,Earth Rooster,Water Monkey,Earth Rat,Stable,Horse,66,favorable,,13,4
+2029-08-27,Monday,7,18,Earth Rooster,Water Monkey,Earth Ox,Initiate,Sheep,59,neutral,,6,1
+2029-08-28,Tuesday,7,19,Earth Rooster,Water Monkey,Metal Tiger,Break,Monkey,19,challenging,,4,22
+2029-08-29,Wednesday,7,20,Earth Rooster,Water Monkey,Metal Rabbit,Danger,Rooster,17,challenging,,0,19
+2029-08-30,Thursday,7,21,Earth Rooster,Water Monkey,Water Dragon,Success,Dog,81,auspicious,,20,2
+2029-08-31,Friday,7,22,Earth Rooster,Water Monkey,Water Snake,Receive,Pig,66,favorable,,10,1
+2029-09-01,Saturday,7,23,Earth Rooster,Water Monkey,Wood Horse,Open,Rat,79,favorable,,18,1
+2029-09-02,Sunday,7,24,Earth Rooster,Water Monkey,Wood Sheep,Close,Ox,21,cautionary,,3,20
+2029-09-03,Monday,7,25,Earth Rooster,Water Monkey,Fire Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2029-09-04,Tuesday,7,26,Earth Rooster,Water Monkey,Fire Rooster,Remove,Rabbit,47,neutral,Year sign meets day sign,7,9
+2029-09-05,Wednesday,7,27,Earth Rooster,Water Monkey,Earth Dog,Full,Dragon,74,favorable,,14,0
+2029-09-06,Thursday,7,28,Earth Rooster,Water Monkey,Earth Pig,Balance,Snake,47,neutral,,0,2
+2029-09-07,Friday,7,29,Earth Rooster,Water Monkey,Metal Rat,Stable,Horse,66,favorable,,13,4
+2029-09-08,Saturday,8,1,Earth Rooster,Water Rooster,Metal Ox,Stable,Sheep,66,favorable,Year sign meets month sign,13,4
+2029-09-09,Sunday,8,2,Earth Rooster,Water Rooster,Water Tiger,Initiate,Monkey,59,neutral,Year sign meets month sign,6,1
+2029-09-10,Monday,8,3,Earth Rooster,Water Rooster,Water Rabbit,Break,Rooster,19,challenging,Year sign meets month sign,4,22
+2029-09-11,Tuesday,8,4,Earth Rooster,Water Rooster,Wood Dragon,Danger,Dog,17,challenging,Year sign meets month sign,0,19
+2029-09-12,Wednesday,8,5,Earth Rooster,Water Rooster,Wood Snake,Success,Pig,81,auspicious,Year sign meets month sign,20,2
+2029-09-13,Thursday,8,6,Earth Rooster,Water Rooster,Fire Horse,Receive,Rat,66,favorable,Year sign meets month sign,10,1
+2029-09-14,Friday,8,7,Earth Rooster,Water Rooster,Fire Sheep,Open,Ox,79,favorable,Year sign meets month sign,18,1
+2029-09-15,Saturday,8,8,Earth Rooster,Water Rooster,Earth Monkey,Close,Tiger,21,cautionary,Year sign meets month sign,3,20
+2029-09-16,Sunday,8,9,Earth Rooster,Water Rooster,Earth Rooster,Establish,Rabbit,71,favorable,Triple alignment (rare),15,3
+2029-09-17,Monday,8,10,Earth Rooster,Water Rooster,Metal Dog,Remove,Dragon,47,neutral,Year sign meets month sign,7,9
+2029-09-18,Tuesday,8,11,Earth Rooster,Water Rooster,Metal Pig,Full,Snake,74,favorable,Year sign meets month sign,14,0
+2029-09-19,Wednesday,8,12,Earth Rooster,Water Rooster,Water Rat,Balance,Horse,47,neutral,Year sign meets month sign,0,2
+2029-09-20,Thursday,8,13,Earth Rooster,Water Rooster,Water Ox,Stable,Sheep,66,favorable,Year sign meets month sign,13,4
+2029-09-21,Friday,8,14,Earth Rooster,Water Rooster,Wood Tiger,Initiate,Monkey,59,neutral,Year sign meets month sign,6,1
+2029-09-22,Saturday,8,15,Earth Rooster,Water Rooster,Wood Rabbit,Break,Rooster,19,challenging,Mid-Autumn Festival. Year sign meets month sign,4,22
+2029-09-23,Sunday,8,16,Earth Rooster,Water Rooster,Fire Dragon,Danger,Dog,17,challenging,Year sign meets month sign,0,19
+2029-09-24,Monday,8,17,Earth Rooster,Water Rooster,Fire Snake,Success,Pig,81,auspicious,Year sign meets month sign,20,2
+2029-09-25,Tuesday,8,18,Earth Rooster,Water Rooster,Earth Horse,Receive,Rat,66,favorable,Year sign meets month sign,10,1
+2029-09-26,Wednesday,8,19,Earth Rooster,Water Rooster,Earth Sheep,Open,Ox,79,favorable,Year sign meets month sign,18,1
+2029-09-27,Thursday,8,20,Earth Rooster,Water Rooster,Metal Monkey,Close,Tiger,21,cautionary,Year sign meets month sign,3,20
+2029-09-28,Friday,8,21,Earth Rooster,Water Rooster,Metal Rooster,Establish,Rabbit,71,favorable,Triple alignment (rare),15,3
+2029-09-29,Saturday,8,22,Earth Rooster,Water Rooster,Water Dog,Remove,Dragon,47,neutral,Year sign meets month sign,7,9
+2029-09-30,Sunday,8,23,Earth Rooster,Water Rooster,Water Pig,Full,Snake,74,favorable,Year sign meets month sign,14,0
+2029-10-01,Monday,8,24,Earth Rooster,Water Rooster,Wood Rat,Balance,Horse,47,neutral,Year sign meets month sign,0,2
+2029-10-02,Tuesday,8,25,Earth Rooster,Water Rooster,Wood Ox,Stable,Sheep,66,favorable,Year sign meets month sign,13,4
+2029-10-03,Wednesday,8,26,Earth Rooster,Water Rooster,Fire Tiger,Initiate,Monkey,59,neutral,Year sign meets month sign,6,1
+2029-10-04,Thursday,8,27,Earth Rooster,Water Rooster,Fire Rabbit,Break,Rooster,19,challenging,Year sign meets month sign,4,22
+2029-10-05,Friday,8,28,Earth Rooster,Water Rooster,Earth Dragon,Danger,Dog,17,challenging,Year sign meets month sign,0,19
+2029-10-06,Saturday,8,29,Earth Rooster,Water Rooster,Earth Snake,Success,Pig,81,auspicious,Year sign meets month sign,20,2
+2029-10-07,Sunday,8,30,Earth Rooster,Water Rooster,Metal Horse,Receive,Rat,66,favorable,Year sign meets month sign,10,1
+2029-10-08,Monday,9,1,Earth Rooster,Wood Dog,Metal Sheep,Receive,Ox,66,favorable,,10,1
+2029-10-09,Tuesday,9,2,Earth Rooster,Wood Dog,Water Monkey,Open,Tiger,79,favorable,,18,1
+2029-10-10,Wednesday,9,3,Earth Rooster,Wood Dog,Water Rooster,Close,Rabbit,21,cautionary,Year sign meets day sign,3,20
+2029-10-11,Thursday,9,4,Earth Rooster,Wood Dog,Wood Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2029-10-12,Friday,9,5,Earth Rooster,Wood Dog,Wood Pig,Remove,Snake,47,neutral,,7,9
+2029-10-13,Saturday,9,6,Earth Rooster,Wood Dog,Fire Rat,Full,Horse,74,favorable,,14,0
+2029-10-14,Sunday,9,7,Earth Rooster,Wood Dog,Fire Ox,Balance,Sheep,47,neutral,,0,2
+2029-10-15,Monday,9,8,Earth Rooster,Wood Dog,Earth Tiger,Stable,Monkey,66,favorable,,13,4
+2029-10-16,Tuesday,9,9,Earth Rooster,Wood Dog,Earth Rabbit,Initiate,Rooster,59,neutral,Double Ninth Festival,6,1
+2029-10-17,Wednesday,9,10,Earth Rooster,Wood Dog,Metal Dragon,Break,Dog,19,challenging,,4,22
+2029-10-18,Thursday,9,11,Earth Rooster,Wood Dog,Metal Snake,Danger,Pig,17,challenging,,0,19
+2029-10-19,Friday,9,12,Earth Rooster,Wood Dog,Water Horse,Success,Rat,81,auspicious,,20,2
+2029-10-20,Saturday,9,13,Earth Rooster,Wood Dog,Water Sheep,Receive,Ox,66,favorable,,10,1
+2029-10-21,Sunday,9,14,Earth Rooster,Wood Dog,Wood Monkey,Open,Tiger,79,favorable,,18,1
+2029-10-22,Monday,9,15,Earth Rooster,Wood Dog,Wood Rooster,Close,Rabbit,21,cautionary,Year sign meets day sign,3,20
+2029-10-23,Tuesday,9,16,Earth Rooster,Wood Dog,Fire Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2029-10-24,Wednesday,9,17,Earth Rooster,Wood Dog,Fire Pig,Remove,Snake,47,neutral,,7,9
+2029-10-25,Thursday,9,18,Earth Rooster,Wood Dog,Earth Rat,Full,Horse,74,favorable,,14,0
+2029-10-26,Friday,9,19,Earth Rooster,Wood Dog,Earth Ox,Balance,Sheep,47,neutral,,0,2
+2029-10-27,Saturday,9,20,Earth Rooster,Wood Dog,Metal Tiger,Stable,Monkey,66,favorable,,13,4
+2029-10-28,Sunday,9,21,Earth Rooster,Wood Dog,Metal Rabbit,Initiate,Rooster,59,neutral,,6,1
+2029-10-29,Monday,9,22,Earth Rooster,Wood Dog,Water Dragon,Break,Dog,19,challenging,,4,22
+2029-10-30,Tuesday,9,23,Earth Rooster,Wood Dog,Water Snake,Danger,Pig,17,challenging,,0,19
+2029-10-31,Wednesday,9,24,Earth Rooster,Wood Dog,Wood Horse,Success,Rat,81,auspicious,Halloween,20,2
+2029-11-01,Thursday,9,25,Earth Rooster,Wood Dog,Wood Sheep,Receive,Ox,66,favorable,,10,1
+2029-11-02,Friday,9,26,Earth Rooster,Wood Dog,Fire Monkey,Open,Tiger,79,favorable,,18,1
+2029-11-03,Saturday,9,27,Earth Rooster,Wood Dog,Fire Rooster,Close,Rabbit,21,cautionary,Year sign meets day sign,3,20
+2029-11-04,Sunday,9,28,Earth Rooster,Wood Dog,Earth Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2029-11-05,Monday,9,29,Earth Rooster,Wood Dog,Earth Pig,Remove,Snake,47,neutral,,7,9
+2029-11-06,Tuesday,10,1,Earth Rooster,Wood Pig,Metal Rat,Remove,Horse,47,neutral,,7,9
+2029-11-07,Wednesday,10,2,Earth Rooster,Wood Pig,Metal Ox,Full,Sheep,74,favorable,,14,0
+2029-11-08,Thursday,10,3,Earth Rooster,Wood Pig,Water Tiger,Balance,Monkey,47,neutral,,0,2
+2029-11-09,Friday,10,4,Earth Rooster,Wood Pig,Water Rabbit,Stable,Rooster,66,favorable,,13,4
+2029-11-10,Saturday,10,5,Earth Rooster,Wood Pig,Wood Dragon,Initiate,Dog,59,neutral,,6,1
+2029-11-11,Sunday,10,6,Earth Rooster,Wood Pig,Wood Snake,Break,Pig,19,challenging,,4,22
+2029-11-12,Monday,10,7,Earth Rooster,Wood Pig,Fire Horse,Danger,Rat,17,challenging,,0,19
+2029-11-13,Tuesday,10,8,Earth Rooster,Wood Pig,Fire Sheep,Success,Ox,81,auspicious,,20,2
+2029-11-14,Wednesday,10,9,Earth Rooster,Wood Pig,Earth Monkey,Receive,Tiger,66,favorable,,10,1
+2029-11-15,Thursday,10,10,Earth Rooster,Wood Pig,Earth Rooster,Open,Rabbit,79,favorable,Year sign meets day sign,18,1
+2029-11-16,Friday,10,11,Earth Rooster,Wood Pig,Metal Dog,Close,Dragon,21,cautionary,,3,20
+2029-11-17,Saturday,10,12,Earth Rooster,Wood Pig,Metal Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2029-11-18,Sunday,10,13,Earth Rooster,Wood Pig,Water Rat,Remove,Horse,47,neutral,,7,9
+2029-11-19,Monday,10,14,Earth Rooster,Wood Pig,Water Ox,Full,Sheep,74,favorable,,14,0
+2029-11-20,Tuesday,10,15,Earth Rooster,Wood Pig,Wood Tiger,Balance,Monkey,47,neutral,,0,2
+2029-11-21,Wednesday,10,16,Earth Rooster,Wood Pig,Wood Rabbit,Stable,Rooster,66,favorable,,13,4
+2029-11-22,Thursday,10,17,Earth Rooster,Wood Pig,Fire Dragon,Initiate,Dog,59,neutral,,6,1
+2029-11-23,Friday,10,18,Earth Rooster,Wood Pig,Fire Snake,Break,Pig,19,challenging,,4,22
+2029-11-24,Saturday,10,19,Earth Rooster,Wood Pig,Earth Horse,Danger,Rat,17,challenging,,0,19
+2029-11-25,Sunday,10,20,Earth Rooster,Wood Pig,Earth Sheep,Success,Ox,81,auspicious,,20,2
+2029-11-26,Monday,10,21,Earth Rooster,Wood Pig,Metal Monkey,Receive,Tiger,66,favorable,,10,1
+2029-11-27,Tuesday,10,22,Earth Rooster,Wood Pig,Metal Rooster,Open,Rabbit,79,favorable,Year sign meets day sign,18,1
+2029-11-28,Wednesday,10,23,Earth Rooster,Wood Pig,Water Dog,Close,Dragon,21,cautionary,,3,20
+2029-11-29,Thursday,10,24,Earth Rooster,Wood Pig,Water Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2029-11-30,Friday,10,25,Earth Rooster,Wood Pig,Wood Rat,Remove,Horse,47,neutral,,7,9
+2029-12-01,Saturday,10,26,Earth Rooster,Wood Pig,Wood Ox,Full,Sheep,74,favorable,,14,0
+2029-12-02,Sunday,10,27,Earth Rooster,Wood Pig,Fire Tiger,Balance,Monkey,47,neutral,,0,2
+2029-12-03,Monday,10,28,Earth Rooster,Wood Pig,Fire Rabbit,Stable,Rooster,66,favorable,,13,4
+2029-12-04,Tuesday,10,29,Earth Rooster,Wood Pig,Earth Dragon,Initiate,Dog,59,neutral,,6,1
+2029-12-05,Wednesday,11,1,Earth Rooster,Fire Rat,Earth Snake,Initiate,Pig,59,neutral,,6,1
+2029-12-06,Thursday,11,2,Earth Rooster,Fire Rat,Metal Horse,Break,Rat,19,challenging,,4,22
+2029-12-07,Friday,11,3,Earth Rooster,Fire Rat,Metal Sheep,Danger,Ox,17,challenging,,0,19
+2029-12-08,Saturday,11,4,Earth Rooster,Fire Rat,Water Monkey,Success,Tiger,81,auspicious,,20,2
+2029-12-09,Sunday,11,5,Earth Rooster,Fire Rat,Water Rooster,Receive,Rabbit,66,favorable,Year sign meets day sign,10,1
+2029-12-10,Monday,11,6,Earth Rooster,Fire Rat,Wood Dog,Open,Dragon,79,favorable,,18,1
+2029-12-11,Tuesday,11,7,Earth Rooster,Fire Rat,Wood Pig,Close,Snake,21,cautionary,,3,20
+2029-12-12,Wednesday,11,8,Earth Rooster,Fire Rat,Fire Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2029-12-13,Thursday,11,9,Earth Rooster,Fire Rat,Fire Ox,Remove,Sheep,47,neutral,,7,9
+2029-12-14,Friday,11,10,Earth Rooster,Fire Rat,Earth Tiger,Full,Monkey,74,favorable,,14,0
+2029-12-15,Saturday,11,11,Earth Rooster,Fire Rat,Earth Rabbit,Balance,Rooster,47,neutral,,0,2
+2029-12-16,Sunday,11,12,Earth Rooster,Fire Rat,Metal Dragon,Stable,Dog,66,favorable,,13,4
+2029-12-17,Monday,11,13,Earth Rooster,Fire Rat,Metal Snake,Initiate,Pig,59,neutral,,6,1
+2029-12-18,Tuesday,11,14,Earth Rooster,Fire Rat,Water Horse,Break,Rat,19,challenging,,4,22
+2029-12-19,Wednesday,11,15,Earth Rooster,Fire Rat,Water Sheep,Danger,Ox,17,challenging,,0,19
+2029-12-20,Thursday,11,16,Earth Rooster,Fire Rat,Wood Monkey,Success,Tiger,81,auspicious,,20,2
+2029-12-21,Friday,11,17,Earth Rooster,Fire Rat,Wood Rooster,Receive,Rabbit,66,favorable,Year sign meets day sign,10,1
+2029-12-22,Saturday,11,18,Earth Rooster,Fire Rat,Fire Dog,Open,Dragon,79,favorable,,18,1
+2029-12-23,Sunday,11,19,Earth Rooster,Fire Rat,Fire Pig,Close,Snake,21,cautionary,,3,20
+2029-12-24,Monday,11,20,Earth Rooster,Fire Rat,Earth Rat,Establish,Horse,71,favorable,Christmas Eve. Month sign meets day sign,15,3
+2029-12-25,Tuesday,11,21,Earth Rooster,Fire Rat,Earth Ox,Remove,Sheep,47,neutral,Christmas Day,7,9
+2029-12-26,Wednesday,11,22,Earth Rooster,Fire Rat,Metal Tiger,Full,Monkey,74,favorable,,14,0
+2029-12-27,Thursday,11,23,Earth Rooster,Fire Rat,Metal Rabbit,Balance,Rooster,47,neutral,,0,2
+2029-12-28,Friday,11,24,Earth Rooster,Fire Rat,Water Dragon,Stable,Dog,66,favorable,,13,4
+2029-12-29,Saturday,11,25,Earth Rooster,Fire Rat,Water Snake,Initiate,Pig,59,neutral,,6,1
+2029-12-30,Sunday,11,26,Earth Rooster,Fire Rat,Wood Horse,Break,Rat,19,challenging,,4,22
+2029-12-31,Monday,11,27,Earth Rooster,Fire Rat,Wood Sheep,Danger,Ox,17,challenging,New Year's Eve,0,19
+2030-01-01,Tuesday,11,28,Earth Rooster,Fire Rat,Fire Monkey,Success,Tiger,81,auspicious,New Year's Day,20,2
+2030-01-02,Wednesday,11,29,Earth Rooster,Fire Rat,Fire Rooster,Receive,Rabbit,66,favorable,Year sign meets day sign,10,1
+2030-01-03,Thursday,11,30,Earth Rooster,Fire Rat,Earth Dog,Open,Dragon,79,favorable,,18,1
+2030-01-04,Friday,12,1,Earth Rooster,Fire Ox,Earth Pig,Open,Snake,79,favorable,,18,1
+2030-01-05,Saturday,12,2,Earth Rooster,Fire Ox,Metal Rat,Close,Horse,21,cautionary,,3,20
+2030-01-06,Sunday,12,3,Earth Rooster,Fire Ox,Metal Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2030-01-07,Monday,12,4,Earth Rooster,Fire Ox,Water Tiger,Remove,Monkey,47,neutral,,7,9
+2030-01-08,Tuesday,12,5,Earth Rooster,Fire Ox,Water Rabbit,Full,Rooster,74,favorable,,14,0
+2030-01-09,Wednesday,12,6,Earth Rooster,Fire Ox,Wood Dragon,Balance,Dog,47,neutral,,0,2
+2030-01-10,Thursday,12,7,Earth Rooster,Fire Ox,Wood Snake,Stable,Pig,66,favorable,,13,4
+2030-01-11,Friday,12,8,Earth Rooster,Fire Ox,Fire Horse,Initiate,Rat,59,neutral,Laba Festival,6,1
+2030-01-12,Saturday,12,9,Earth Rooster,Fire Ox,Fire Sheep,Break,Ox,19,challenging,,4,22
+2030-01-13,Sunday,12,10,Earth Rooster,Fire Ox,Earth Monkey,Danger,Tiger,17,challenging,,0,19
+2030-01-14,Monday,12,11,Earth Rooster,Fire Ox,Earth Rooster,Success,Rabbit,81,auspicious,Year sign meets day sign,20,2
+2030-01-15,Tuesday,12,12,Earth Rooster,Fire Ox,Metal Dog,Receive,Dragon,66,favorable,,10,1
+2030-01-16,Wednesday,12,13,Earth Rooster,Fire Ox,Metal Pig,Open,Snake,79,favorable,,18,1
+2030-01-17,Thursday,12,14,Earth Rooster,Fire Ox,Water Rat,Close,Horse,21,cautionary,,3,20
+2030-01-18,Friday,12,15,Earth Rooster,Fire Ox,Water Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2030-01-19,Saturday,12,16,Earth Rooster,Fire Ox,Wood Tiger,Remove,Monkey,47,neutral,,7,9
+2030-01-20,Sunday,12,17,Earth Rooster,Fire Ox,Wood Rabbit,Full,Rooster,74,favorable,,14,0
+2030-01-21,Monday,12,18,Earth Rooster,Fire Ox,Fire Dragon,Balance,Dog,47,neutral,,0,2
+2030-01-22,Tuesday,12,19,Earth Rooster,Fire Ox,Fire Snake,Stable,Pig,66,favorable,,13,4
+2030-01-23,Wednesday,12,20,Earth Rooster,Fire Ox,Earth Horse,Initiate,Rat,59,neutral,,6,1
+2030-01-24,Thursday,12,21,Earth Rooster,Fire Ox,Earth Sheep,Break,Ox,19,challenging,,4,22
+2030-01-25,Friday,12,22,Earth Rooster,Fire Ox,Metal Monkey,Danger,Tiger,17,challenging,,0,19
+2030-01-26,Saturday,12,23,Earth Rooster,Fire Ox,Metal Rooster,Success,Rabbit,81,auspicious,Kitchen God Day. Year sign meets day sign,20,2
+2030-01-27,Sunday,12,24,Earth Rooster,Fire Ox,Water Dog,Receive,Dragon,66,favorable,,10,1
+2030-01-28,Monday,12,25,Earth Rooster,Fire Ox,Water Pig,Open,Snake,79,favorable,,18,1
+2030-01-29,Tuesday,12,26,Earth Rooster,Fire Ox,Wood Rat,Close,Horse,21,cautionary,,3,20
+2030-01-30,Wednesday,12,27,Earth Rooster,Fire Ox,Wood Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2030-01-31,Thursday,12,28,Earth Rooster,Fire Ox,Fire Tiger,Remove,Monkey,47,neutral,,7,9
+2030-02-01,Friday,12,29,Earth Rooster,Fire Ox,Fire Rabbit,Full,Rooster,74,favorable,,14,0
+2030-02-02,Saturday,12,30,Earth Rooster,Fire Ox,Earth Dragon,Balance,Dog,47,neutral,,0,2
+2030-02-03,Sunday,1,1,Metal Dog,Earth Tiger,Earth Snake,Balance,Pig,47,neutral,Lunar New Year,0,2
+2030-02-04,Monday,1,2,Metal Dog,Earth Tiger,Metal Horse,Stable,Rat,66,favorable,,13,4
+2030-02-05,Tuesday,1,3,Metal Dog,Earth Tiger,Metal Sheep,Initiate,Ox,59,neutral,,6,1
+2030-02-06,Wednesday,1,4,Metal Dog,Earth Tiger,Water Monkey,Break,Tiger,19,challenging,,4,22
+2030-02-07,Thursday,1,5,Metal Dog,Earth Tiger,Water Rooster,Danger,Rabbit,17,challenging,,0,19
+2030-02-08,Friday,1,6,Metal Dog,Earth Tiger,Wood Dog,Success,Dragon,81,auspicious,Year sign meets day sign,20,2
+2030-02-09,Saturday,1,7,Metal Dog,Earth Tiger,Wood Pig,Receive,Snake,66,favorable,,10,1
+2030-02-10,Sunday,1,8,Metal Dog,Earth Tiger,Fire Rat,Open,Horse,79,favorable,,18,1
+2030-02-11,Monday,1,9,Metal Dog,Earth Tiger,Fire Ox,Close,Sheep,21,cautionary,,3,20
+2030-02-12,Tuesday,1,10,Metal Dog,Earth Tiger,Earth Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2030-02-13,Wednesday,1,11,Metal Dog,Earth Tiger,Earth Rabbit,Remove,Rooster,47,neutral,,7,9
+2030-02-14,Thursday,1,12,Metal Dog,Earth Tiger,Metal Dragon,Full,Dog,74,favorable,Valentine's Day,14,0
+2030-02-15,Friday,1,13,Metal Dog,Earth Tiger,Metal Snake,Balance,Pig,47,neutral,,0,2
+2030-02-16,Saturday,1,14,Metal Dog,Earth Tiger,Water Horse,Stable,Rat,66,favorable,,13,4
+2030-02-17,Sunday,1,15,Metal Dog,Earth Tiger,Water Sheep,Initiate,Ox,59,neutral,Lantern Festival,6,1
+2030-02-18,Monday,1,16,Metal Dog,Earth Tiger,Wood Monkey,Break,Tiger,19,challenging,,4,22
+2030-02-19,Tuesday,1,17,Metal Dog,Earth Tiger,Wood Rooster,Danger,Rabbit,17,challenging,,0,19
+2030-02-20,Wednesday,1,18,Metal Dog,Earth Tiger,Fire Dog,Success,Dragon,81,auspicious,Year sign meets day sign,20,2
+2030-02-21,Thursday,1,19,Metal Dog,Earth Tiger,Fire Pig,Receive,Snake,66,favorable,,10,1
+2030-02-22,Friday,1,20,Metal Dog,Earth Tiger,Earth Rat,Open,Horse,79,favorable,,18,1
+2030-02-23,Saturday,1,21,Metal Dog,Earth Tiger,Earth Ox,Close,Sheep,21,cautionary,,3,20
+2030-02-24,Sunday,1,22,Metal Dog,Earth Tiger,Metal Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2030-02-25,Monday,1,23,Metal Dog,Earth Tiger,Metal Rabbit,Remove,Rooster,47,neutral,,7,9
+2030-02-26,Tuesday,1,24,Metal Dog,Earth Tiger,Water Dragon,Full,Dog,74,favorable,,14,0
+2030-02-27,Wednesday,1,25,Metal Dog,Earth Tiger,Water Snake,Balance,Pig,47,neutral,,0,2
+2030-02-28,Thursday,1,26,Metal Dog,Earth Tiger,Wood Horse,Stable,Rat,66,favorable,,13,4
+2030-03-01,Friday,1,27,Metal Dog,Earth Tiger,Wood Sheep,Initiate,Ox,59,neutral,,6,1
+2030-03-02,Saturday,1,28,Metal Dog,Earth Tiger,Fire Monkey,Break,Tiger,19,challenging,,4,22
+2030-03-03,Sunday,1,29,Metal Dog,Earth Tiger,Fire Rooster,Danger,Rabbit,17,challenging,,0,19
+2030-03-04,Monday,2,1,Metal Dog,Earth Rabbit,Earth Dog,Danger,Dragon,17,challenging,Year sign meets day sign,0,19
+2030-03-05,Tuesday,2,2,Metal Dog,Earth Rabbit,Earth Pig,Success,Snake,81,auspicious,Earth God's Birthday,20,2
+2030-03-06,Wednesday,2,3,Metal Dog,Earth Rabbit,Metal Rat,Receive,Horse,66,favorable,,10,1
+2030-03-07,Thursday,2,4,Metal Dog,Earth Rabbit,Metal Ox,Open,Sheep,79,favorable,,18,1
+2030-03-08,Friday,2,5,Metal Dog,Earth Rabbit,Water Tiger,Close,Monkey,21,cautionary,,3,20
+2030-03-09,Saturday,2,6,Metal Dog,Earth Rabbit,Water Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2030-03-10,Sunday,2,7,Metal Dog,Earth Rabbit,Wood Dragon,Remove,Dog,47,neutral,,7,9
+2030-03-11,Monday,2,8,Metal Dog,Earth Rabbit,Wood Snake,Full,Pig,74,favorable,,14,0
+2030-03-12,Tuesday,2,9,Metal Dog,Earth Rabbit,Fire Horse,Balance,Rat,47,neutral,,0,2
+2030-03-13,Wednesday,2,10,Metal Dog,Earth Rabbit,Fire Sheep,Stable,Ox,66,favorable,,13,4
+2030-03-14,Thursday,2,11,Metal Dog,Earth Rabbit,Earth Monkey,Initiate,Tiger,59,neutral,,6,1
+2030-03-15,Friday,2,12,Metal Dog,Earth Rabbit,Earth Rooster,Break,Rabbit,19,challenging,,4,22
+2030-03-16,Saturday,2,13,Metal Dog,Earth Rabbit,Metal Dog,Danger,Dragon,17,challenging,Year sign meets day sign,0,19
+2030-03-17,Sunday,2,14,Metal Dog,Earth Rabbit,Metal Pig,Success,Snake,81,auspicious,St. Patrick's Day,20,2
+2030-03-18,Monday,2,15,Metal Dog,Earth Rabbit,Water Rat,Receive,Horse,66,favorable,,10,1
+2030-03-19,Tuesday,2,16,Metal Dog,Earth Rabbit,Water Ox,Open,Sheep,79,favorable,,18,1
+2030-03-20,Wednesday,2,17,Metal Dog,Earth Rabbit,Wood Tiger,Close,Monkey,21,cautionary,,3,20
+2030-03-21,Thursday,2,18,Metal Dog,Earth Rabbit,Wood Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2030-03-22,Friday,2,19,Metal Dog,Earth Rabbit,Fire Dragon,Remove,Dog,47,neutral,,7,9
+2030-03-23,Saturday,2,20,Metal Dog,Earth Rabbit,Fire Snake,Full,Pig,74,favorable,,14,0
+2030-03-24,Sunday,2,21,Metal Dog,Earth Rabbit,Earth Horse,Balance,Rat,47,neutral,,0,2
+2030-03-25,Monday,2,22,Metal Dog,Earth Rabbit,Earth Sheep,Stable,Ox,66,favorable,,13,4
+2030-03-26,Tuesday,2,23,Metal Dog,Earth Rabbit,Metal Monkey,Initiate,Tiger,59,neutral,,6,1
+2030-03-27,Wednesday,2,24,Metal Dog,Earth Rabbit,Metal Rooster,Break,Rabbit,19,challenging,,4,22
+2030-03-28,Thursday,2,25,Metal Dog,Earth Rabbit,Water Dog,Danger,Dragon,17,challenging,Year sign meets day sign,0,19
+2030-03-29,Friday,2,26,Metal Dog,Earth Rabbit,Water Pig,Success,Snake,81,auspicious,,20,2
+2030-03-30,Saturday,2,27,Metal Dog,Earth Rabbit,Wood Rat,Receive,Horse,66,favorable,,10,1
+2030-03-31,Sunday,2,28,Metal Dog,Earth Rabbit,Wood Ox,Open,Sheep,79,favorable,,18,1
+2030-04-01,Monday,2,29,Metal Dog,Earth Rabbit,Fire Tiger,Close,Monkey,21,cautionary,,3,20
+2030-04-02,Tuesday,2,30,Metal Dog,Earth Rabbit,Fire Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2030-04-03,Wednesday,3,1,Metal Dog,Metal Dragon,Earth Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2030-04-04,Thursday,3,2,Metal Dog,Metal Dragon,Earth Snake,Remove,Pig,47,neutral,,7,9
+2030-04-05,Friday,3,3,Metal Dog,Metal Dragon,Metal Horse,Full,Rat,74,favorable,Shangsi Festival,14,0
+2030-04-06,Saturday,3,4,Metal Dog,Metal Dragon,Metal Sheep,Balance,Ox,47,neutral,,0,2
+2030-04-07,Sunday,3,5,Metal Dog,Metal Dragon,Water Monkey,Stable,Tiger,66,favorable,,13,4
+2030-04-08,Monday,3,6,Metal Dog,Metal Dragon,Water Rooster,Initiate,Rabbit,59,neutral,,6,1
+2030-04-09,Tuesday,3,7,Metal Dog,Metal Dragon,Wood Dog,Break,Dragon,19,challenging,Year sign meets day sign,4,22
+2030-04-10,Wednesday,3,8,Metal Dog,Metal Dragon,Wood Pig,Danger,Snake,17,challenging,,0,19
+2030-04-11,Thursday,3,9,Metal Dog,Metal Dragon,Fire Rat,Success,Horse,81,auspicious,,20,2
+2030-04-12,Friday,3,10,Metal Dog,Metal Dragon,Fire Ox,Receive,Sheep,66,favorable,,10,1
+2030-04-13,Saturday,3,11,Metal Dog,Metal Dragon,Earth Tiger,Open,Monkey,79,favorable,,18,1
+2030-04-14,Sunday,3,12,Metal Dog,Metal Dragon,Earth Rabbit,Close,Rooster,21,cautionary,,3,20
+2030-04-15,Monday,3,13,Metal Dog,Metal Dragon,Metal Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2030-04-16,Tuesday,3,14,Metal Dog,Metal Dragon,Metal Snake,Remove,Pig,47,neutral,,7,9
+2030-04-17,Wednesday,3,15,Metal Dog,Metal Dragon,Water Horse,Full,Rat,74,favorable,,14,0
+2030-04-18,Thursday,3,16,Metal Dog,Metal Dragon,Water Sheep,Balance,Ox,47,neutral,,0,2
+2030-04-19,Friday,3,17,Metal Dog,Metal Dragon,Wood Monkey,Stable,Tiger,66,favorable,,13,4
+2030-04-20,Saturday,3,18,Metal Dog,Metal Dragon,Wood Rooster,Initiate,Rabbit,59,neutral,,6,1
+2030-04-21,Sunday,3,19,Metal Dog,Metal Dragon,Fire Dog,Break,Dragon,19,challenging,Year sign meets day sign,4,22
+2030-04-22,Monday,3,20,Metal Dog,Metal Dragon,Fire Pig,Danger,Snake,17,challenging,,0,19
+2030-04-23,Tuesday,3,21,Metal Dog,Metal Dragon,Earth Rat,Success,Horse,81,auspicious,,20,2
+2030-04-24,Wednesday,3,22,Metal Dog,Metal Dragon,Earth Ox,Receive,Sheep,66,favorable,,10,1
+2030-04-25,Thursday,3,23,Metal Dog,Metal Dragon,Metal Tiger,Open,Monkey,79,favorable,,18,1
+2030-04-26,Friday,3,24,Metal Dog,Metal Dragon,Metal Rabbit,Close,Rooster,21,cautionary,,3,20
+2030-04-27,Saturday,3,25,Metal Dog,Metal Dragon,Water Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2030-04-28,Sunday,3,26,Metal Dog,Metal Dragon,Water Snake,Remove,Pig,47,neutral,,7,9
+2030-04-29,Monday,3,27,Metal Dog,Metal Dragon,Wood Horse,Full,Rat,74,favorable,,14,0
+2030-04-30,Tuesday,3,28,Metal Dog,Metal Dragon,Wood Sheep,Balance,Ox,47,neutral,,0,2
+2030-05-01,Wednesday,3,29,Metal Dog,Metal Dragon,Fire Monkey,Stable,Tiger,66,favorable,,13,4
+2030-05-02,Thursday,4,1,Metal Dog,Metal Snake,Fire Rooster,Stable,Rabbit,66,favorable,,13,4
+2030-05-03,Friday,4,2,Metal Dog,Metal Snake,Earth Dog,Initiate,Dragon,59,neutral,Year sign meets day sign,6,1
+2030-05-04,Saturday,4,3,Metal Dog,Metal Snake,Earth Pig,Break,Snake,19,challenging,,4,22
+2030-05-05,Sunday,4,4,Metal Dog,Metal Snake,Metal Rat,Danger,Horse,17,challenging,,0,19
+2030-05-06,Monday,4,5,Metal Dog,Metal Snake,Metal Ox,Success,Sheep,81,auspicious,,20,2
+2030-05-07,Tuesday,4,6,Metal Dog,Metal Snake,Water Tiger,Receive,Monkey,66,favorable,,10,1
+2030-05-08,Wednesday,4,7,Metal Dog,Metal Snake,Water Rabbit,Open,Rooster,79,favorable,,18,1
+2030-05-09,Thursday,4,8,Metal Dog,Metal Snake,Wood Dragon,Close,Dog,21,cautionary,Buddha's Birthday,3,20
+2030-05-10,Friday,4,9,Metal Dog,Metal Snake,Wood Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2030-05-11,Saturday,4,10,Metal Dog,Metal Snake,Fire Horse,Remove,Rat,47,neutral,,7,9
+2030-05-12,Sunday,4,11,Metal Dog,Metal Snake,Fire Sheep,Full,Ox,74,favorable,,14,0
+2030-05-13,Monday,4,12,Metal Dog,Metal Snake,Earth Monkey,Balance,Tiger,47,neutral,,0,2
+2030-05-14,Tuesday,4,13,Metal Dog,Metal Snake,Earth Rooster,Stable,Rabbit,66,favorable,,13,4
+2030-05-15,Wednesday,4,14,Metal Dog,Metal Snake,Metal Dog,Initiate,Dragon,59,neutral,Year sign meets day sign,6,1
+2030-05-16,Thursday,4,15,Metal Dog,Metal Snake,Metal Pig,Break,Snake,19,challenging,,4,22
+2030-05-17,Friday,4,16,Metal Dog,Metal Snake,Water Rat,Danger,Horse,17,challenging,,0,19
+2030-05-18,Saturday,4,17,Metal Dog,Metal Snake,Water Ox,Success,Sheep,81,auspicious,,20,2
+2030-05-19,Sunday,4,18,Metal Dog,Metal Snake,Wood Tiger,Receive,Monkey,66,favorable,,10,1
+2030-05-20,Monday,4,19,Metal Dog,Metal Snake,Wood Rabbit,Open,Rooster,79,favorable,,18,1
+2030-05-21,Tuesday,4,20,Metal Dog,Metal Snake,Fire Dragon,Close,Dog,21,cautionary,,3,20
+2030-05-22,Wednesday,4,21,Metal Dog,Metal Snake,Fire Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2030-05-23,Thursday,4,22,Metal Dog,Metal Snake,Earth Horse,Remove,Rat,47,neutral,,7,9
+2030-05-24,Friday,4,23,Metal Dog,Metal Snake,Earth Sheep,Full,Ox,74,favorable,,14,0
+2030-05-25,Saturday,4,24,Metal Dog,Metal Snake,Metal Monkey,Balance,Tiger,47,neutral,,0,2
+2030-05-26,Sunday,4,25,Metal Dog,Metal Snake,Metal Rooster,Stable,Rabbit,66,favorable,,13,4
+2030-05-27,Monday,4,26,Metal Dog,Metal Snake,Water Dog,Initiate,Dragon,59,neutral,Year sign meets day sign,6,1
+2030-05-28,Tuesday,4,27,Metal Dog,Metal Snake,Water Pig,Break,Snake,19,challenging,,4,22
+2030-05-29,Wednesday,4,28,Metal Dog,Metal Snake,Wood Rat,Danger,Horse,17,challenging,,0,19
+2030-05-30,Thursday,4,29,Metal Dog,Metal Snake,Wood Ox,Success,Sheep,81,auspicious,,20,2
+2030-05-31,Friday,4,30,Metal Dog,Metal Snake,Fire Tiger,Receive,Monkey,66,favorable,,10,1
+2030-06-01,Saturday,5,1,Metal Dog,Water Horse,Fire Rabbit,Receive,Rooster,66,favorable,,10,1
+2030-06-02,Sunday,5,2,Metal Dog,Water Horse,Earth Dragon,Open,Dog,79,favorable,,18,1
+2030-06-03,Monday,5,3,Metal Dog,Water Horse,Earth Snake,Close,Pig,21,cautionary,,3,20
+2030-06-04,Tuesday,5,4,Metal Dog,Water Horse,Metal Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2030-06-05,Wednesday,5,5,Metal Dog,Water Horse,Metal Sheep,Remove,Ox,47,neutral,Dragon Boat Festival,7,9
+2030-06-06,Thursday,5,6,Metal Dog,Water Horse,Water Monkey,Full,Tiger,74,favorable,,14,0
+2030-06-07,Friday,5,7,Metal Dog,Water Horse,Water Rooster,Balance,Rabbit,47,neutral,,0,2
+2030-06-08,Saturday,5,8,Metal Dog,Water Horse,Wood Dog,Stable,Dragon,66,favorable,Year sign meets day sign,13,4
+2030-06-09,Sunday,5,9,Metal Dog,Water Horse,Wood Pig,Initiate,Snake,59,neutral,,6,1
+2030-06-10,Monday,5,10,Metal Dog,Water Horse,Fire Rat,Break,Horse,19,challenging,,4,22
+2030-06-11,Tuesday,5,11,Metal Dog,Water Horse,Fire Ox,Danger,Sheep,17,challenging,,0,19
+2030-06-12,Wednesday,5,12,Metal Dog,Water Horse,Earth Tiger,Success,Monkey,81,auspicious,,20,2
+2030-06-13,Thursday,5,13,Metal Dog,Water Horse,Earth Rabbit,Receive,Rooster,66,favorable,,10,1
+2030-06-14,Friday,5,14,Metal Dog,Water Horse,Metal Dragon,Open,Dog,79,favorable,,18,1
+2030-06-15,Saturday,5,15,Metal Dog,Water Horse,Metal Snake,Close,Pig,21,cautionary,,3,20
+2030-06-16,Sunday,5,16,Metal Dog,Water Horse,Water Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2030-06-17,Monday,5,17,Metal Dog,Water Horse,Water Sheep,Remove,Ox,47,neutral,,7,9
+2030-06-18,Tuesday,5,18,Metal Dog,Water Horse,Wood Monkey,Full,Tiger,74,favorable,,14,0
+2030-06-19,Wednesday,5,19,Metal Dog,Water Horse,Wood Rooster,Balance,Rabbit,47,neutral,,0,2
+2030-06-20,Thursday,5,20,Metal Dog,Water Horse,Fire Dog,Stable,Dragon,66,favorable,Year sign meets day sign,13,4
+2030-06-21,Friday,5,21,Metal Dog,Water Horse,Fire Pig,Initiate,Snake,59,neutral,,6,1
+2030-06-22,Saturday,5,22,Metal Dog,Water Horse,Earth Rat,Break,Horse,19,challenging,,4,22
+2030-06-23,Sunday,5,23,Metal Dog,Water Horse,Earth Ox,Danger,Sheep,17,challenging,,0,19
+2030-06-24,Monday,5,24,Metal Dog,Water Horse,Metal Tiger,Success,Monkey,81,auspicious,,20,2
+2030-06-25,Tuesday,5,25,Metal Dog,Water Horse,Metal Rabbit,Receive,Rooster,66,favorable,,10,1
+2030-06-26,Wednesday,5,26,Metal Dog,Water Horse,Water Dragon,Open,Dog,79,favorable,,18,1
+2030-06-27,Thursday,5,27,Metal Dog,Water Horse,Water Snake,Close,Pig,21,cautionary,,3,20
+2030-06-28,Friday,5,28,Metal Dog,Water Horse,Wood Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2030-06-29,Saturday,5,29,Metal Dog,Water Horse,Wood Sheep,Remove,Ox,47,neutral,,7,9
+2030-06-30,Sunday,5,30,Metal Dog,Water Horse,Fire Monkey,Full,Tiger,74,favorable,,14,0
+2030-07-01,Monday,6,1,Metal Dog,Water Sheep,Fire Rooster,Full,Rabbit,74,favorable,,14,0
+2030-07-02,Tuesday,6,2,Metal Dog,Water Sheep,Earth Dog,Balance,Dragon,47,neutral,Year sign meets day sign,0,2
+2030-07-03,Wednesday,6,3,Metal Dog,Water Sheep,Earth Pig,Stable,Snake,66,favorable,,13,4
+2030-07-04,Thursday,6,4,Metal Dog,Water Sheep,Metal Rat,Initiate,Horse,59,neutral,Independence Day (US),6,1
+2030-07-05,Friday,6,5,Metal Dog,Water Sheep,Metal Ox,Break,Sheep,19,challenging,,4,22
+2030-07-06,Saturday,6,6,Metal Dog,Water Sheep,Water Tiger,Danger,Monkey,17,challenging,,0,19
+2030-07-07,Sunday,6,7,Metal Dog,Water Sheep,Water Rabbit,Success,Rooster,81,auspicious,,20,2
+2030-07-08,Monday,6,8,Metal Dog,Water Sheep,Wood Dragon,Receive,Dog,66,favorable,,10,1
+2030-07-09,Tuesday,6,9,Metal Dog,Water Sheep,Wood Snake,Open,Pig,79,favorable,,18,1
+2030-07-10,Wednesday,6,10,Metal Dog,Water Sheep,Fire Horse,Close,Rat,21,cautionary,,3,20
+2030-07-11,Thursday,6,11,Metal Dog,Water Sheep,Fire Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2030-07-12,Friday,6,12,Metal Dog,Water Sheep,Earth Monkey,Remove,Tiger,47,neutral,,7,9
+2030-07-13,Saturday,6,13,Metal Dog,Water Sheep,Earth Rooster,Full,Rabbit,74,favorable,,14,0
+2030-07-14,Sunday,6,14,Metal Dog,Water Sheep,Metal Dog,Balance,Dragon,47,neutral,Year sign meets day sign,0,2
+2030-07-15,Monday,6,15,Metal Dog,Water Sheep,Metal Pig,Stable,Snake,66,favorable,,13,4
+2030-07-16,Tuesday,6,16,Metal Dog,Water Sheep,Water Rat,Initiate,Horse,59,neutral,,6,1
+2030-07-17,Wednesday,6,17,Metal Dog,Water Sheep,Water Ox,Break,Sheep,19,challenging,,4,22
+2030-07-18,Thursday,6,18,Metal Dog,Water Sheep,Wood Tiger,Danger,Monkey,17,challenging,,0,19
+2030-07-19,Friday,6,19,Metal Dog,Water Sheep,Wood Rabbit,Success,Rooster,81,auspicious,,20,2
+2030-07-20,Saturday,6,20,Metal Dog,Water Sheep,Fire Dragon,Receive,Dog,66,favorable,,10,1
+2030-07-21,Sunday,6,21,Metal Dog,Water Sheep,Fire Snake,Open,Pig,79,favorable,,18,1
+2030-07-22,Monday,6,22,Metal Dog,Water Sheep,Earth Horse,Close,Rat,21,cautionary,,3,20
+2030-07-23,Tuesday,6,23,Metal Dog,Water Sheep,Earth Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2030-07-24,Wednesday,6,24,Metal Dog,Water Sheep,Metal Monkey,Remove,Tiger,47,neutral,,7,9
+2030-07-25,Thursday,6,25,Metal Dog,Water Sheep,Metal Rooster,Full,Rabbit,74,favorable,,14,0
+2030-07-26,Friday,6,26,Metal Dog,Water Sheep,Water Dog,Balance,Dragon,47,neutral,Year sign meets day sign,0,2
+2030-07-27,Saturday,6,27,Metal Dog,Water Sheep,Water Pig,Stable,Snake,66,favorable,,13,4
+2030-07-28,Sunday,6,28,Metal Dog,Water Sheep,Wood Rat,Initiate,Horse,59,neutral,,6,1
+2030-07-29,Monday,6,29,Metal Dog,Water Sheep,Wood Ox,Break,Sheep,19,challenging,,4,22
+2030-07-30,Tuesday,7,1,Metal Dog,Wood Monkey,Fire Tiger,Break,Monkey,19,challenging,,4,22
+2030-07-31,Wednesday,7,2,Metal Dog,Wood Monkey,Fire Rabbit,Danger,Rooster,17,challenging,,0,19
+2030-08-01,Thursday,7,3,Metal Dog,Wood Monkey,Earth Dragon,Success,Dog,81,auspicious,,20,2
+2030-08-02,Friday,7,4,Metal Dog,Wood Monkey,Earth Snake,Receive,Pig,66,favorable,,10,1
+2030-08-03,Saturday,7,5,Metal Dog,Wood Monkey,Metal Horse,Open,Rat,79,favorable,,18,1
+2030-08-04,Sunday,7,6,Metal Dog,Wood Monkey,Metal Sheep,Close,Ox,21,cautionary,,3,20
+2030-08-05,Monday,7,7,Metal Dog,Wood Monkey,Water Monkey,Establish,Tiger,71,favorable,Qixi (Chinese Valentine's). Month sign meets day sign,15,3
+2030-08-06,Tuesday,7,8,Metal Dog,Wood Monkey,Water Rooster,Remove,Rabbit,47,neutral,,7,9
+2030-08-07,Wednesday,7,9,Metal Dog,Wood Monkey,Wood Dog,Full,Dragon,74,favorable,Year sign meets day sign,14,0
+2030-08-08,Thursday,7,10,Metal Dog,Wood Monkey,Wood Pig,Balance,Snake,47,neutral,,0,2
+2030-08-09,Friday,7,11,Metal Dog,Wood Monkey,Fire Rat,Stable,Horse,66,favorable,,13,4
+2030-08-10,Saturday,7,12,Metal Dog,Wood Monkey,Fire Ox,Initiate,Sheep,59,neutral,,6,1
+2030-08-11,Sunday,7,13,Metal Dog,Wood Monkey,Earth Tiger,Break,Monkey,19,challenging,,4,22
+2030-08-12,Monday,7,14,Metal Dog,Wood Monkey,Earth Rabbit,Danger,Rooster,17,challenging,,0,19
+2030-08-13,Tuesday,7,15,Metal Dog,Wood Monkey,Metal Dragon,Success,Dog,81,auspicious,Ghost Festival,20,2
+2030-08-14,Wednesday,7,16,Metal Dog,Wood Monkey,Metal Snake,Receive,Pig,66,favorable,,10,1
+2030-08-15,Thursday,7,17,Metal Dog,Wood Monkey,Water Horse,Open,Rat,79,favorable,,18,1
+2030-08-16,Friday,7,18,Metal Dog,Wood Monkey,Water Sheep,Close,Ox,21,cautionary,,3,20
+2030-08-17,Saturday,7,19,Metal Dog,Wood Monkey,Wood Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2030-08-18,Sunday,7,20,Metal Dog,Wood Monkey,Wood Rooster,Remove,Rabbit,47,neutral,,7,9
+2030-08-19,Monday,7,21,Metal Dog,Wood Monkey,Fire Dog,Full,Dragon,74,favorable,Year sign meets day sign,14,0
+2030-08-20,Tuesday,7,22,Metal Dog,Wood Monkey,Fire Pig,Balance,Snake,47,neutral,,0,2
+2030-08-21,Wednesday,7,23,Metal Dog,Wood Monkey,Earth Rat,Stable,Horse,66,favorable,,13,4
+2030-08-22,Thursday,7,24,Metal Dog,Wood Monkey,Earth Ox,Initiate,Sheep,59,neutral,,6,1
+2030-08-23,Friday,7,25,Metal Dog,Wood Monkey,Metal Tiger,Break,Monkey,19,challenging,,4,22
+2030-08-24,Saturday,7,26,Metal Dog,Wood Monkey,Metal Rabbit,Danger,Rooster,17,challenging,,0,19
+2030-08-25,Sunday,7,27,Metal Dog,Wood Monkey,Water Dragon,Success,Dog,81,auspicious,,20,2
+2030-08-26,Monday,7,28,Metal Dog,Wood Monkey,Water Snake,Receive,Pig,66,favorable,,10,1
+2030-08-27,Tuesday,7,29,Metal Dog,Wood Monkey,Wood Horse,Open,Rat,79,favorable,,18,1
+2030-08-28,Wednesday,7,30,Metal Dog,Wood Monkey,Wood Sheep,Close,Ox,21,cautionary,,3,20
+2030-08-29,Thursday,8,1,Metal Dog,Wood Rooster,Fire Monkey,Close,Tiger,21,cautionary,,3,20
+2030-08-30,Friday,8,2,Metal Dog,Wood Rooster,Fire Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2030-08-31,Saturday,8,3,Metal Dog,Wood Rooster,Earth Dog,Remove,Dragon,47,neutral,Year sign meets day sign,7,9
+2030-09-01,Sunday,8,4,Metal Dog,Wood Rooster,Earth Pig,Full,Snake,74,favorable,,14,0
+2030-09-02,Monday,8,5,Metal Dog,Wood Rooster,Metal Rat,Balance,Horse,47,neutral,,0,2
+2030-09-03,Tuesday,8,6,Metal Dog,Wood Rooster,Metal Ox,Stable,Sheep,66,favorable,,13,4
+2030-09-04,Wednesday,8,7,Metal Dog,Wood Rooster,Water Tiger,Initiate,Monkey,59,neutral,,6,1
+2030-09-05,Thursday,8,8,Metal Dog,Wood Rooster,Water Rabbit,Break,Rooster,19,challenging,,4,22
+2030-09-06,Friday,8,9,Metal Dog,Wood Rooster,Wood Dragon,Danger,Dog,17,challenging,,0,19
+2030-09-07,Saturday,8,10,Metal Dog,Wood Rooster,Wood Snake,Success,Pig,81,auspicious,,20,2
+2030-09-08,Sunday,8,11,Metal Dog,Wood Rooster,Fire Horse,Receive,Rat,66,favorable,,10,1
+2030-09-09,Monday,8,12,Metal Dog,Wood Rooster,Fire Sheep,Open,Ox,79,favorable,,18,1
+2030-09-10,Tuesday,8,13,Metal Dog,Wood Rooster,Earth Monkey,Close,Tiger,21,cautionary,,3,20
+2030-09-11,Wednesday,8,14,Metal Dog,Wood Rooster,Earth Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2030-09-12,Thursday,8,15,Metal Dog,Wood Rooster,Metal Dog,Remove,Dragon,47,neutral,Mid-Autumn Festival. Year sign meets day sign,7,9
+2030-09-13,Friday,8,16,Metal Dog,Wood Rooster,Metal Pig,Full,Snake,74,favorable,,14,0
+2030-09-14,Saturday,8,17,Metal Dog,Wood Rooster,Water Rat,Balance,Horse,47,neutral,,0,2
+2030-09-15,Sunday,8,18,Metal Dog,Wood Rooster,Water Ox,Stable,Sheep,66,favorable,,13,4
+2030-09-16,Monday,8,19,Metal Dog,Wood Rooster,Wood Tiger,Initiate,Monkey,59,neutral,,6,1
+2030-09-17,Tuesday,8,20,Metal Dog,Wood Rooster,Wood Rabbit,Break,Rooster,19,challenging,,4,22
+2030-09-18,Wednesday,8,21,Metal Dog,Wood Rooster,Fire Dragon,Danger,Dog,17,challenging,,0,19
+2030-09-19,Thursday,8,22,Metal Dog,Wood Rooster,Fire Snake,Success,Pig,81,auspicious,,20,2
+2030-09-20,Friday,8,23,Metal Dog,Wood Rooster,Earth Horse,Receive,Rat,66,favorable,,10,1
+2030-09-21,Saturday,8,24,Metal Dog,Wood Rooster,Earth Sheep,Open,Ox,79,favorable,,18,1
+2030-09-22,Sunday,8,25,Metal Dog,Wood Rooster,Metal Monkey,Close,Tiger,21,cautionary,,3,20
+2030-09-23,Monday,8,26,Metal Dog,Wood Rooster,Metal Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2030-09-24,Tuesday,8,27,Metal Dog,Wood Rooster,Water Dog,Remove,Dragon,47,neutral,Year sign meets day sign,7,9
+2030-09-25,Wednesday,8,28,Metal Dog,Wood Rooster,Water Pig,Full,Snake,74,favorable,,14,0
+2030-09-26,Thursday,8,29,Metal Dog,Wood Rooster,Wood Rat,Balance,Horse,47,neutral,,0,2
+2030-09-27,Friday,9,1,Metal Dog,Fire Dog,Wood Ox,Balance,Sheep,47,neutral,Year sign meets month sign,0,2
+2030-09-28,Saturday,9,2,Metal Dog,Fire Dog,Fire Tiger,Stable,Monkey,66,favorable,Year sign meets month sign,13,4
+2030-09-29,Sunday,9,3,Metal Dog,Fire Dog,Fire Rabbit,Initiate,Rooster,59,neutral,Year sign meets month sign,6,1
+2030-09-30,Monday,9,4,Metal Dog,Fire Dog,Earth Dragon,Break,Dog,19,challenging,Year sign meets month sign,4,22
+2030-10-01,Tuesday,9,5,Metal Dog,Fire Dog,Earth Snake,Danger,Pig,17,challenging,Year sign meets month sign,0,19
+2030-10-02,Wednesday,9,6,Metal Dog,Fire Dog,Metal Horse,Success,Rat,81,auspicious,Year sign meets month sign,20,2
+2030-10-03,Thursday,9,7,Metal Dog,Fire Dog,Metal Sheep,Receive,Ox,66,favorable,Year sign meets month sign,10,1
+2030-10-04,Friday,9,8,Metal Dog,Fire Dog,Water Monkey,Open,Tiger,79,favorable,Year sign meets month sign,18,1
+2030-10-05,Saturday,9,9,Metal Dog,Fire Dog,Water Rooster,Close,Rabbit,21,cautionary,Double Ninth Festival. Year sign meets month sign,3,20
+2030-10-06,Sunday,9,10,Metal Dog,Fire Dog,Wood Dog,Establish,Dragon,71,favorable,Triple alignment (rare),15,3
+2030-10-07,Monday,9,11,Metal Dog,Fire Dog,Wood Pig,Remove,Snake,47,neutral,Year sign meets month sign,7,9
+2030-10-08,Tuesday,9,12,Metal Dog,Fire Dog,Fire Rat,Full,Horse,74,favorable,Year sign meets month sign,14,0
+2030-10-09,Wednesday,9,13,Metal Dog,Fire Dog,Fire Ox,Balance,Sheep,47,neutral,Year sign meets month sign,0,2
+2030-10-10,Thursday,9,14,Metal Dog,Fire Dog,Earth Tiger,Stable,Monkey,66,favorable,Year sign meets month sign,13,4
+2030-10-11,Friday,9,15,Metal Dog,Fire Dog,Earth Rabbit,Initiate,Rooster,59,neutral,Year sign meets month sign,6,1
+2030-10-12,Saturday,9,16,Metal Dog,Fire Dog,Metal Dragon,Break,Dog,19,challenging,Year sign meets month sign,4,22
+2030-10-13,Sunday,9,17,Metal Dog,Fire Dog,Metal Snake,Danger,Pig,17,challenging,Year sign meets month sign,0,19
+2030-10-14,Monday,9,18,Metal Dog,Fire Dog,Water Horse,Success,Rat,81,auspicious,Year sign meets month sign,20,2
+2030-10-15,Tuesday,9,19,Metal Dog,Fire Dog,Water Sheep,Receive,Ox,66,favorable,Year sign meets month sign,10,1
+2030-10-16,Wednesday,9,20,Metal Dog,Fire Dog,Wood Monkey,Open,Tiger,79,favorable,Year sign meets month sign,18,1
+2030-10-17,Thursday,9,21,Metal Dog,Fire Dog,Wood Rooster,Close,Rabbit,21,cautionary,Year sign meets month sign,3,20
+2030-10-18,Friday,9,22,Metal Dog,Fire Dog,Fire Dog,Establish,Dragon,71,favorable,Triple alignment (rare),15,3
+2030-10-19,Saturday,9,23,Metal Dog,Fire Dog,Fire Pig,Remove,Snake,47,neutral,Year sign meets month sign,7,9
+2030-10-20,Sunday,9,24,Metal Dog,Fire Dog,Earth Rat,Full,Horse,74,favorable,Year sign meets month sign,14,0
+2030-10-21,Monday,9,25,Metal Dog,Fire Dog,Earth Ox,Balance,Sheep,47,neutral,Year sign meets month sign,0,2
+2030-10-22,Tuesday,9,26,Metal Dog,Fire Dog,Metal Tiger,Stable,Monkey,66,favorable,Year sign meets month sign,13,4
+2030-10-23,Wednesday,9,27,Metal Dog,Fire Dog,Metal Rabbit,Initiate,Rooster,59,neutral,Year sign meets month sign,6,1
+2030-10-24,Thursday,9,28,Metal Dog,Fire Dog,Water Dragon,Break,Dog,19,challenging,Year sign meets month sign,4,22
+2030-10-25,Friday,9,29,Metal Dog,Fire Dog,Water Snake,Danger,Pig,17,challenging,Year sign meets month sign,0,19
+2030-10-26,Saturday,9,30,Metal Dog,Fire Dog,Wood Horse,Success,Rat,81,auspicious,Year sign meets month sign,20,2
+2030-10-27,Sunday,10,1,Metal Dog,Fire Pig,Wood Sheep,Success,Ox,81,auspicious,,20,2
+2030-10-28,Monday,10,2,Metal Dog,Fire Pig,Fire Monkey,Receive,Tiger,66,favorable,,10,1
+2030-10-29,Tuesday,10,3,Metal Dog,Fire Pig,Fire Rooster,Open,Rabbit,79,favorable,,18,1
+2030-10-30,Wednesday,10,4,Metal Dog,Fire Pig,Earth Dog,Close,Dragon,21,cautionary,Year sign meets day sign,3,20
+2030-10-31,Thursday,10,5,Metal Dog,Fire Pig,Earth Pig,Establish,Snake,71,favorable,Halloween. Month sign meets day sign,15,3
+2030-11-01,Friday,10,6,Metal Dog,Fire Pig,Metal Rat,Remove,Horse,47,neutral,,7,9
+2030-11-02,Saturday,10,7,Metal Dog,Fire Pig,Metal Ox,Full,Sheep,74,favorable,,14,0
+2030-11-03,Sunday,10,8,Metal Dog,Fire Pig,Water Tiger,Balance,Monkey,47,neutral,,0,2
+2030-11-04,Monday,10,9,Metal Dog,Fire Pig,Water Rabbit,Stable,Rooster,66,favorable,,13,4
+2030-11-05,Tuesday,10,10,Metal Dog,Fire Pig,Wood Dragon,Initiate,Dog,59,neutral,,6,1
+2030-11-06,Wednesday,10,11,Metal Dog,Fire Pig,Wood Snake,Break,Pig,19,challenging,,4,22
+2030-11-07,Thursday,10,12,Metal Dog,Fire Pig,Fire Horse,Danger,Rat,17,challenging,,0,19
+2030-11-08,Friday,10,13,Metal Dog,Fire Pig,Fire Sheep,Success,Ox,81,auspicious,,20,2
+2030-11-09,Saturday,10,14,Metal Dog,Fire Pig,Earth Monkey,Receive,Tiger,66,favorable,,10,1
+2030-11-10,Sunday,10,15,Metal Dog,Fire Pig,Earth Rooster,Open,Rabbit,79,favorable,,18,1
+2030-11-11,Monday,10,16,Metal Dog,Fire Pig,Metal Dog,Close,Dragon,21,cautionary,Year sign meets day sign,3,20
+2030-11-12,Tuesday,10,17,Metal Dog,Fire Pig,Metal Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2030-11-13,Wednesday,10,18,Metal Dog,Fire Pig,Water Rat,Remove,Horse,47,neutral,,7,9
+2030-11-14,Thursday,10,19,Metal Dog,Fire Pig,Water Ox,Full,Sheep,74,favorable,,14,0
+2030-11-15,Friday,10,20,Metal Dog,Fire Pig,Wood Tiger,Balance,Monkey,47,neutral,,0,2
+2030-11-16,Saturday,10,21,Metal Dog,Fire Pig,Wood Rabbit,Stable,Rooster,66,favorable,,13,4
+2030-11-17,Sunday,10,22,Metal Dog,Fire Pig,Fire Dragon,Initiate,Dog,59,neutral,,6,1
+2030-11-18,Monday,10,23,Metal Dog,Fire Pig,Fire Snake,Break,Pig,19,challenging,,4,22
+2030-11-19,Tuesday,10,24,Metal Dog,Fire Pig,Earth Horse,Danger,Rat,17,challenging,,0,19
+2030-11-20,Wednesday,10,25,Metal Dog,Fire Pig,Earth Sheep,Success,Ox,81,auspicious,,20,2
+2030-11-21,Thursday,10,26,Metal Dog,Fire Pig,Metal Monkey,Receive,Tiger,66,favorable,,10,1
+2030-11-22,Friday,10,27,Metal Dog,Fire Pig,Metal Rooster,Open,Rabbit,79,favorable,,18,1
+2030-11-23,Saturday,10,28,Metal Dog,Fire Pig,Water Dog,Close,Dragon,21,cautionary,Year sign meets day sign,3,20
+2030-11-24,Sunday,10,29,Metal Dog,Fire Pig,Water Pig,Establish,Snake,71,favorable,Month sign meets day sign,15,3
+2030-11-25,Monday,11,1,Metal Dog,Earth Rat,Wood Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2030-11-26,Tuesday,11,2,Metal Dog,Earth Rat,Wood Ox,Remove,Sheep,47,neutral,,7,9
+2030-11-27,Wednesday,11,3,Metal Dog,Earth Rat,Fire Tiger,Full,Monkey,74,favorable,,14,0
+2030-11-28,Thursday,11,4,Metal Dog,Earth Rat,Fire Rabbit,Balance,Rooster,47,neutral,,0,2
+2030-11-29,Friday,11,5,Metal Dog,Earth Rat,Earth Dragon,Stable,Dog,66,favorable,,13,4
+2030-11-30,Saturday,11,6,Metal Dog,Earth Rat,Earth Snake,Initiate,Pig,59,neutral,,6,1
+2030-12-01,Sunday,11,7,Metal Dog,Earth Rat,Metal Horse,Break,Rat,19,challenging,,4,22
+2030-12-02,Monday,11,8,Metal Dog,Earth Rat,Metal Sheep,Danger,Ox,17,challenging,,0,19
+2030-12-03,Tuesday,11,9,Metal Dog,Earth Rat,Water Monkey,Success,Tiger,81,auspicious,,20,2
+2030-12-04,Wednesday,11,10,Metal Dog,Earth Rat,Water Rooster,Receive,Rabbit,66,favorable,,10,1
+2030-12-05,Thursday,11,11,Metal Dog,Earth Rat,Wood Dog,Open,Dragon,79,favorable,Year sign meets day sign,18,1
+2030-12-06,Friday,11,12,Metal Dog,Earth Rat,Wood Pig,Close,Snake,21,cautionary,,3,20
+2030-12-07,Saturday,11,13,Metal Dog,Earth Rat,Fire Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2030-12-08,Sunday,11,14,Metal Dog,Earth Rat,Fire Ox,Remove,Sheep,47,neutral,,7,9
+2030-12-09,Monday,11,15,Metal Dog,Earth Rat,Earth Tiger,Full,Monkey,74,favorable,,14,0
+2030-12-10,Tuesday,11,16,Metal Dog,Earth Rat,Earth Rabbit,Balance,Rooster,47,neutral,,0,2
+2030-12-11,Wednesday,11,17,Metal Dog,Earth Rat,Metal Dragon,Stable,Dog,66,favorable,,13,4
+2030-12-12,Thursday,11,18,Metal Dog,Earth Rat,Metal Snake,Initiate,Pig,59,neutral,,6,1
+2030-12-13,Friday,11,19,Metal Dog,Earth Rat,Water Horse,Break,Rat,19,challenging,,4,22
+2030-12-14,Saturday,11,20,Metal Dog,Earth Rat,Water Sheep,Danger,Ox,17,challenging,,0,19
+2030-12-15,Sunday,11,21,Metal Dog,Earth Rat,Wood Monkey,Success,Tiger,81,auspicious,,20,2
+2030-12-16,Monday,11,22,Metal Dog,Earth Rat,Wood Rooster,Receive,Rabbit,66,favorable,,10,1
+2030-12-17,Tuesday,11,23,Metal Dog,Earth Rat,Fire Dog,Open,Dragon,79,favorable,Year sign meets day sign,18,1
+2030-12-18,Wednesday,11,24,Metal Dog,Earth Rat,Fire Pig,Close,Snake,21,cautionary,,3,20
+2030-12-19,Thursday,11,25,Metal Dog,Earth Rat,Earth Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2030-12-20,Friday,11,26,Metal Dog,Earth Rat,Earth Ox,Remove,Sheep,47,neutral,,7,9
+2030-12-21,Saturday,11,27,Metal Dog,Earth Rat,Metal Tiger,Full,Monkey,74,favorable,,14,0
+2030-12-22,Sunday,11,28,Metal Dog,Earth Rat,Metal Rabbit,Balance,Rooster,47,neutral,,0,2
+2030-12-23,Monday,11,29,Metal Dog,Earth Rat,Water Dragon,Stable,Dog,66,favorable,,13,4
+2030-12-24,Tuesday,11,30,Metal Dog,Earth Rat,Water Snake,Initiate,Pig,59,neutral,Christmas Eve,6,1
+2030-12-25,Wednesday,12,1,Metal Dog,Earth Ox,Wood Horse,Initiate,Rat,59,neutral,Christmas Day,6,1
+2030-12-26,Thursday,12,2,Metal Dog,Earth Ox,Wood Sheep,Break,Ox,19,challenging,,4,22
+2030-12-27,Friday,12,3,Metal Dog,Earth Ox,Fire Monkey,Danger,Tiger,17,challenging,,0,19
+2030-12-28,Saturday,12,4,Metal Dog,Earth Ox,Fire Rooster,Success,Rabbit,81,auspicious,,20,2
+2030-12-29,Sunday,12,5,Metal Dog,Earth Ox,Earth Dog,Receive,Dragon,66,favorable,Year sign meets day sign,10,1
+2030-12-30,Monday,12,6,Metal Dog,Earth Ox,Earth Pig,Open,Snake,79,favorable,,18,1
+2030-12-31,Tuesday,12,7,Metal Dog,Earth Ox,Metal Rat,Close,Horse,21,cautionary,New Year's Eve,3,20
+2031-01-01,Wednesday,12,8,Metal Dog,Earth Ox,Metal Ox,Establish,Sheep,71,favorable,New Year's Day. Laba Festival. Month sign meets day sign,15,3
+2031-01-02,Thursday,12,9,Metal Dog,Earth Ox,Water Tiger,Remove,Monkey,47,neutral,,7,9
+2031-01-03,Friday,12,10,Metal Dog,Earth Ox,Water Rabbit,Full,Rooster,74,favorable,,14,0
+2031-01-04,Saturday,12,11,Metal Dog,Earth Ox,Wood Dragon,Balance,Dog,47,neutral,,0,2
+2031-01-05,Sunday,12,12,Metal Dog,Earth Ox,Wood Snake,Stable,Pig,66,favorable,,13,4
+2031-01-06,Monday,12,13,Metal Dog,Earth Ox,Fire Horse,Initiate,Rat,59,neutral,,6,1
+2031-01-07,Tuesday,12,14,Metal Dog,Earth Ox,Fire Sheep,Break,Ox,19,challenging,,4,22
+2031-01-08,Wednesday,12,15,Metal Dog,Earth Ox,Earth Monkey,Danger,Tiger,17,challenging,,0,19
+2031-01-09,Thursday,12,16,Metal Dog,Earth Ox,Earth Rooster,Success,Rabbit,81,auspicious,,20,2
+2031-01-10,Friday,12,17,Metal Dog,Earth Ox,Metal Dog,Receive,Dragon,66,favorable,Year sign meets day sign,10,1
+2031-01-11,Saturday,12,18,Metal Dog,Earth Ox,Metal Pig,Open,Snake,79,favorable,,18,1
+2031-01-12,Sunday,12,19,Metal Dog,Earth Ox,Water Rat,Close,Horse,21,cautionary,,3,20
+2031-01-13,Monday,12,20,Metal Dog,Earth Ox,Water Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2031-01-14,Tuesday,12,21,Metal Dog,Earth Ox,Wood Tiger,Remove,Monkey,47,neutral,,7,9
+2031-01-15,Wednesday,12,22,Metal Dog,Earth Ox,Wood Rabbit,Full,Rooster,74,favorable,,14,0
+2031-01-16,Thursday,12,23,Metal Dog,Earth Ox,Fire Dragon,Balance,Dog,47,neutral,Kitchen God Day,0,2
+2031-01-17,Friday,12,24,Metal Dog,Earth Ox,Fire Snake,Stable,Pig,66,favorable,,13,4
+2031-01-18,Saturday,12,25,Metal Dog,Earth Ox,Earth Horse,Initiate,Rat,59,neutral,,6,1
+2031-01-19,Sunday,12,26,Metal Dog,Earth Ox,Earth Sheep,Break,Ox,19,challenging,,4,22
+2031-01-20,Monday,12,27,Metal Dog,Earth Ox,Metal Monkey,Danger,Tiger,17,challenging,,0,19
+2031-01-21,Tuesday,12,28,Metal Dog,Earth Ox,Metal Rooster,Success,Rabbit,81,auspicious,,20,2
+2031-01-22,Wednesday,12,29,Metal Dog,Earth Ox,Water Dog,Receive,Dragon,66,favorable,Year sign meets day sign,10,1
+2031-01-23,Thursday,1,1,Metal Pig,Metal Tiger,Water Pig,Receive,Snake,66,favorable,Lunar New Year. Year sign meets day sign,10,1
+2031-01-24,Friday,1,2,Metal Pig,Metal Tiger,Wood Rat,Open,Horse,79,favorable,,18,1
+2031-01-25,Saturday,1,3,Metal Pig,Metal Tiger,Wood Ox,Close,Sheep,21,cautionary,,3,20
+2031-01-26,Sunday,1,4,Metal Pig,Metal Tiger,Fire Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2031-01-27,Monday,1,5,Metal Pig,Metal Tiger,Fire Rabbit,Remove,Rooster,47,neutral,,7,9
+2031-01-28,Tuesday,1,6,Metal Pig,Metal Tiger,Earth Dragon,Full,Dog,74,favorable,,14,0
+2031-01-29,Wednesday,1,7,Metal Pig,Metal Tiger,Earth Snake,Balance,Pig,47,neutral,,0,2
+2031-01-30,Thursday,1,8,Metal Pig,Metal Tiger,Metal Horse,Stable,Rat,66,favorable,,13,4
+2031-01-31,Friday,1,9,Metal Pig,Metal Tiger,Metal Sheep,Initiate,Ox,59,neutral,,6,1
+2031-02-01,Saturday,1,10,Metal Pig,Metal Tiger,Water Monkey,Break,Tiger,19,challenging,,4,22
+2031-02-02,Sunday,1,11,Metal Pig,Metal Tiger,Water Rooster,Danger,Rabbit,17,challenging,,0,19
+2031-02-03,Monday,1,12,Metal Pig,Metal Tiger,Wood Dog,Success,Dragon,81,auspicious,,20,2
+2031-02-04,Tuesday,1,13,Metal Pig,Metal Tiger,Wood Pig,Receive,Snake,66,favorable,Year sign meets day sign,10,1
+2031-02-05,Wednesday,1,14,Metal Pig,Metal Tiger,Fire Rat,Open,Horse,79,favorable,,18,1
+2031-02-06,Thursday,1,15,Metal Pig,Metal Tiger,Fire Ox,Close,Sheep,21,cautionary,Lantern Festival,3,20
+2031-02-07,Friday,1,16,Metal Pig,Metal Tiger,Earth Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2031-02-08,Saturday,1,17,Metal Pig,Metal Tiger,Earth Rabbit,Remove,Rooster,47,neutral,,7,9
+2031-02-09,Sunday,1,18,Metal Pig,Metal Tiger,Metal Dragon,Full,Dog,74,favorable,,14,0
+2031-02-10,Monday,1,19,Metal Pig,Metal Tiger,Metal Snake,Balance,Pig,47,neutral,,0,2
+2031-02-11,Tuesday,1,20,Metal Pig,Metal Tiger,Water Horse,Stable,Rat,66,favorable,,13,4
+2031-02-12,Wednesday,1,21,Metal Pig,Metal Tiger,Water Sheep,Initiate,Ox,59,neutral,,6,1
+2031-02-13,Thursday,1,22,Metal Pig,Metal Tiger,Wood Monkey,Break,Tiger,19,challenging,,4,22
+2031-02-14,Friday,1,23,Metal Pig,Metal Tiger,Wood Rooster,Danger,Rabbit,17,challenging,Valentine's Day,0,19
+2031-02-15,Saturday,1,24,Metal Pig,Metal Tiger,Fire Dog,Success,Dragon,81,auspicious,,20,2
+2031-02-16,Sunday,1,25,Metal Pig,Metal Tiger,Fire Pig,Receive,Snake,66,favorable,Year sign meets day sign,10,1
+2031-02-17,Monday,1,26,Metal Pig,Metal Tiger,Earth Rat,Open,Horse,79,favorable,,18,1
+2031-02-18,Tuesday,1,27,Metal Pig,Metal Tiger,Earth Ox,Close,Sheep,21,cautionary,,3,20
+2031-02-19,Wednesday,1,28,Metal Pig,Metal Tiger,Metal Tiger,Establish,Monkey,71,favorable,Month sign meets day sign,15,3
+2031-02-20,Thursday,1,29,Metal Pig,Metal Tiger,Metal Rabbit,Remove,Rooster,47,neutral,,7,9
+2031-02-21,Friday,2,1,Metal Pig,Metal Rabbit,Water Dragon,Remove,Dog,47,neutral,,7,9
+2031-02-22,Saturday,2,2,Metal Pig,Metal Rabbit,Water Snake,Full,Pig,74,favorable,Earth God's Birthday,14,0
+2031-02-23,Sunday,2,3,Metal Pig,Metal Rabbit,Wood Horse,Balance,Rat,47,neutral,,0,2
+2031-02-24,Monday,2,4,Metal Pig,Metal Rabbit,Wood Sheep,Stable,Ox,66,favorable,,13,4
+2031-02-25,Tuesday,2,5,Metal Pig,Metal Rabbit,Fire Monkey,Initiate,Tiger,59,neutral,,6,1
+2031-02-26,Wednesday,2,6,Metal Pig,Metal Rabbit,Fire Rooster,Break,Rabbit,19,challenging,,4,22
+2031-02-27,Thursday,2,7,Metal Pig,Metal Rabbit,Earth Dog,Danger,Dragon,17,challenging,,0,19
+2031-02-28,Friday,2,8,Metal Pig,Metal Rabbit,Earth Pig,Success,Snake,81,auspicious,Year sign meets day sign,20,2
+2031-03-01,Saturday,2,9,Metal Pig,Metal Rabbit,Metal Rat,Receive,Horse,66,favorable,,10,1
+2031-03-02,Sunday,2,10,Metal Pig,Metal Rabbit,Metal Ox,Open,Sheep,79,favorable,,18,1
+2031-03-03,Monday,2,11,Metal Pig,Metal Rabbit,Water Tiger,Close,Monkey,21,cautionary,,3,20
+2031-03-04,Tuesday,2,12,Metal Pig,Metal Rabbit,Water Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2031-03-05,Wednesday,2,13,Metal Pig,Metal Rabbit,Wood Dragon,Remove,Dog,47,neutral,,7,9
+2031-03-06,Thursday,2,14,Metal Pig,Metal Rabbit,Wood Snake,Full,Pig,74,favorable,,14,0
+2031-03-07,Friday,2,15,Metal Pig,Metal Rabbit,Fire Horse,Balance,Rat,47,neutral,,0,2
+2031-03-08,Saturday,2,16,Metal Pig,Metal Rabbit,Fire Sheep,Stable,Ox,66,favorable,,13,4
+2031-03-09,Sunday,2,17,Metal Pig,Metal Rabbit,Earth Monkey,Initiate,Tiger,59,neutral,,6,1
+2031-03-10,Monday,2,18,Metal Pig,Metal Rabbit,Earth Rooster,Break,Rabbit,19,challenging,,4,22
+2031-03-11,Tuesday,2,19,Metal Pig,Metal Rabbit,Metal Dog,Danger,Dragon,17,challenging,,0,19
+2031-03-12,Wednesday,2,20,Metal Pig,Metal Rabbit,Metal Pig,Success,Snake,81,auspicious,Year sign meets day sign,20,2
+2031-03-13,Thursday,2,21,Metal Pig,Metal Rabbit,Water Rat,Receive,Horse,66,favorable,,10,1
+2031-03-14,Friday,2,22,Metal Pig,Metal Rabbit,Water Ox,Open,Sheep,79,favorable,,18,1
+2031-03-15,Saturday,2,23,Metal Pig,Metal Rabbit,Wood Tiger,Close,Monkey,21,cautionary,,3,20
+2031-03-16,Sunday,2,24,Metal Pig,Metal Rabbit,Wood Rabbit,Establish,Rooster,71,favorable,Month sign meets day sign,15,3
+2031-03-17,Monday,2,25,Metal Pig,Metal Rabbit,Fire Dragon,Remove,Dog,47,neutral,St. Patrick's Day,7,9
+2031-03-18,Tuesday,2,26,Metal Pig,Metal Rabbit,Fire Snake,Full,Pig,74,favorable,,14,0
+2031-03-19,Wednesday,2,27,Metal Pig,Metal Rabbit,Earth Horse,Balance,Rat,47,neutral,,0,2
+2031-03-20,Thursday,2,28,Metal Pig,Metal Rabbit,Earth Sheep,Stable,Ox,66,favorable,,13,4
+2031-03-21,Friday,2,29,Metal Pig,Metal Rabbit,Metal Monkey,Initiate,Tiger,59,neutral,,6,1
+2031-03-22,Saturday,2,30,Metal Pig,Metal Rabbit,Metal Rooster,Break,Rabbit,19,challenging,,4,22
+2031-03-23,Sunday,3,1,Metal Pig,Water Dragon,Water Dog,Break,Dragon,19,challenging,,4,22
+2031-03-24,Monday,3,2,Metal Pig,Water Dragon,Water Pig,Danger,Snake,17,challenging,Year sign meets day sign,0,19
+2031-03-25,Tuesday,3,3,Metal Pig,Water Dragon,Wood Rat,Success,Horse,81,auspicious,Shangsi Festival,20,2
+2031-03-26,Wednesday,3,4,Metal Pig,Water Dragon,Wood Ox,Receive,Sheep,66,favorable,,10,1
+2031-03-27,Thursday,3,5,Metal Pig,Water Dragon,Fire Tiger,Open,Monkey,79,favorable,,18,1
+2031-03-28,Friday,3,6,Metal Pig,Water Dragon,Fire Rabbit,Close,Rooster,21,cautionary,,3,20
+2031-03-29,Saturday,3,7,Metal Pig,Water Dragon,Earth Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2031-03-30,Sunday,3,8,Metal Pig,Water Dragon,Earth Snake,Remove,Pig,47,neutral,,7,9
+2031-03-31,Monday,3,9,Metal Pig,Water Dragon,Metal Horse,Full,Rat,74,favorable,,14,0
+2031-04-01,Tuesday,3,10,Metal Pig,Water Dragon,Metal Sheep,Balance,Ox,47,neutral,,0,2
+2031-04-02,Wednesday,3,11,Metal Pig,Water Dragon,Water Monkey,Stable,Tiger,66,favorable,,13,4
+2031-04-03,Thursday,3,12,Metal Pig,Water Dragon,Water Rooster,Initiate,Rabbit,59,neutral,,6,1
+2031-04-04,Friday,3,13,Metal Pig,Water Dragon,Wood Dog,Break,Dragon,19,challenging,,4,22
+2031-04-05,Saturday,3,14,Metal Pig,Water Dragon,Wood Pig,Danger,Snake,17,challenging,Year sign meets day sign,0,19
+2031-04-06,Sunday,3,15,Metal Pig,Water Dragon,Fire Rat,Success,Horse,81,auspicious,,20,2
+2031-04-07,Monday,3,16,Metal Pig,Water Dragon,Fire Ox,Receive,Sheep,66,favorable,,10,1
+2031-04-08,Tuesday,3,17,Metal Pig,Water Dragon,Earth Tiger,Open,Monkey,79,favorable,,18,1
+2031-04-09,Wednesday,3,18,Metal Pig,Water Dragon,Earth Rabbit,Close,Rooster,21,cautionary,,3,20
+2031-04-10,Thursday,3,19,Metal Pig,Water Dragon,Metal Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2031-04-11,Friday,3,20,Metal Pig,Water Dragon,Metal Snake,Remove,Pig,47,neutral,,7,9
+2031-04-12,Saturday,3,21,Metal Pig,Water Dragon,Water Horse,Full,Rat,74,favorable,,14,0
+2031-04-13,Sunday,3,22,Metal Pig,Water Dragon,Water Sheep,Balance,Ox,47,neutral,,0,2
+2031-04-14,Monday,3,23,Metal Pig,Water Dragon,Wood Monkey,Stable,Tiger,66,favorable,,13,4
+2031-04-15,Tuesday,3,24,Metal Pig,Water Dragon,Wood Rooster,Initiate,Rabbit,59,neutral,,6,1
+2031-04-16,Wednesday,3,25,Metal Pig,Water Dragon,Fire Dog,Break,Dragon,19,challenging,,4,22
+2031-04-17,Thursday,3,26,Metal Pig,Water Dragon,Fire Pig,Danger,Snake,17,challenging,Year sign meets day sign,0,19
+2031-04-18,Friday,3,27,Metal Pig,Water Dragon,Earth Rat,Success,Horse,81,auspicious,,20,2
+2031-04-19,Saturday,3,28,Metal Pig,Water Dragon,Earth Ox,Receive,Sheep,66,favorable,,10,1
+2031-04-20,Sunday,3,29,Metal Pig,Water Dragon,Metal Tiger,Open,Monkey,79,favorable,,18,1
+2031-04-21,Monday,3,30,Metal Pig,Water Dragon,Metal Rabbit,Close,Rooster,21,cautionary,,3,20
+2031-04-22,Tuesday,3,1,Metal Pig,Water Dragon,Water Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2031-04-23,Wednesday,3,2,Metal Pig,Water Dragon,Water Snake,Remove,Pig,47,neutral,,7,9
+2031-04-24,Thursday,3,3,Metal Pig,Water Dragon,Wood Horse,Full,Rat,74,favorable,,14,0
+2031-04-25,Friday,3,4,Metal Pig,Water Dragon,Wood Sheep,Balance,Ox,47,neutral,,0,2
+2031-04-26,Saturday,3,5,Metal Pig,Water Dragon,Fire Monkey,Stable,Tiger,66,favorable,,13,4
+2031-04-27,Sunday,3,6,Metal Pig,Water Dragon,Fire Rooster,Initiate,Rabbit,59,neutral,,6,1
+2031-04-28,Monday,3,7,Metal Pig,Water Dragon,Earth Dog,Break,Dragon,19,challenging,,4,22
+2031-04-29,Tuesday,3,8,Metal Pig,Water Dragon,Earth Pig,Danger,Snake,17,challenging,Year sign meets day sign,0,19
+2031-04-30,Wednesday,3,9,Metal Pig,Water Dragon,Metal Rat,Success,Horse,81,auspicious,,20,2
+2031-05-01,Thursday,3,10,Metal Pig,Water Dragon,Metal Ox,Receive,Sheep,66,favorable,,10,1
+2031-05-02,Friday,3,11,Metal Pig,Water Dragon,Water Tiger,Open,Monkey,79,favorable,,18,1
+2031-05-03,Saturday,3,12,Metal Pig,Water Dragon,Water Rabbit,Close,Rooster,21,cautionary,,3,20
+2031-05-04,Sunday,3,13,Metal Pig,Water Dragon,Wood Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2031-05-05,Monday,3,14,Metal Pig,Water Dragon,Wood Snake,Remove,Pig,47,neutral,,7,9
+2031-05-06,Tuesday,3,15,Metal Pig,Water Dragon,Fire Horse,Full,Rat,74,favorable,,14,0
+2031-05-07,Wednesday,3,16,Metal Pig,Water Dragon,Fire Sheep,Balance,Ox,47,neutral,,0,2
+2031-05-08,Thursday,3,17,Metal Pig,Water Dragon,Earth Monkey,Stable,Tiger,66,favorable,,13,4
+2031-05-09,Friday,3,18,Metal Pig,Water Dragon,Earth Rooster,Initiate,Rabbit,59,neutral,,6,1
+2031-05-10,Saturday,3,19,Metal Pig,Water Dragon,Metal Dog,Break,Dragon,19,challenging,,4,22
+2031-05-11,Sunday,3,20,Metal Pig,Water Dragon,Metal Pig,Danger,Snake,17,challenging,Year sign meets day sign,0,19
+2031-05-12,Monday,3,21,Metal Pig,Water Dragon,Water Rat,Success,Horse,81,auspicious,,20,2
+2031-05-13,Tuesday,3,22,Metal Pig,Water Dragon,Water Ox,Receive,Sheep,66,favorable,,10,1
+2031-05-14,Wednesday,3,23,Metal Pig,Water Dragon,Wood Tiger,Open,Monkey,79,favorable,,18,1
+2031-05-15,Thursday,3,24,Metal Pig,Water Dragon,Wood Rabbit,Close,Rooster,21,cautionary,,3,20
+2031-05-16,Friday,3,25,Metal Pig,Water Dragon,Fire Dragon,Establish,Dog,71,favorable,Month sign meets day sign,15,3
+2031-05-17,Saturday,3,26,Metal Pig,Water Dragon,Fire Snake,Remove,Pig,47,neutral,,7,9
+2031-05-18,Sunday,3,27,Metal Pig,Water Dragon,Earth Horse,Full,Rat,74,favorable,,14,0
+2031-05-19,Monday,3,28,Metal Pig,Water Dragon,Earth Sheep,Balance,Ox,47,neutral,,0,2
+2031-05-20,Tuesday,3,29,Metal Pig,Water Dragon,Metal Monkey,Stable,Tiger,66,favorable,,13,4
+2031-05-21,Wednesday,4,1,Metal Pig,Water Snake,Metal Rooster,Stable,Rabbit,66,favorable,,13,4
+2031-05-22,Thursday,4,2,Metal Pig,Water Snake,Water Dog,Initiate,Dragon,59,neutral,,6,1
+2031-05-23,Friday,4,3,Metal Pig,Water Snake,Water Pig,Break,Snake,19,challenging,Year sign meets day sign,4,22
+2031-05-24,Saturday,4,4,Metal Pig,Water Snake,Wood Rat,Danger,Horse,17,challenging,,0,19
+2031-05-25,Sunday,4,5,Metal Pig,Water Snake,Wood Ox,Success,Sheep,81,auspicious,,20,2
+2031-05-26,Monday,4,6,Metal Pig,Water Snake,Fire Tiger,Receive,Monkey,66,favorable,,10,1
+2031-05-27,Tuesday,4,7,Metal Pig,Water Snake,Fire Rabbit,Open,Rooster,79,favorable,,18,1
+2031-05-28,Wednesday,4,8,Metal Pig,Water Snake,Earth Dragon,Close,Dog,21,cautionary,Buddha's Birthday,3,20
+2031-05-29,Thursday,4,9,Metal Pig,Water Snake,Earth Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2031-05-30,Friday,4,10,Metal Pig,Water Snake,Metal Horse,Remove,Rat,47,neutral,,7,9
+2031-05-31,Saturday,4,11,Metal Pig,Water Snake,Metal Sheep,Full,Ox,74,favorable,,14,0
+2031-06-01,Sunday,4,12,Metal Pig,Water Snake,Water Monkey,Balance,Tiger,47,neutral,,0,2
+2031-06-02,Monday,4,13,Metal Pig,Water Snake,Water Rooster,Stable,Rabbit,66,favorable,,13,4
+2031-06-03,Tuesday,4,14,Metal Pig,Water Snake,Wood Dog,Initiate,Dragon,59,neutral,,6,1
+2031-06-04,Wednesday,4,15,Metal Pig,Water Snake,Wood Pig,Break,Snake,19,challenging,Year sign meets day sign,4,22
+2031-06-05,Thursday,4,16,Metal Pig,Water Snake,Fire Rat,Danger,Horse,17,challenging,,0,19
+2031-06-06,Friday,4,17,Metal Pig,Water Snake,Fire Ox,Success,Sheep,81,auspicious,,20,2
+2031-06-07,Saturday,4,18,Metal Pig,Water Snake,Earth Tiger,Receive,Monkey,66,favorable,,10,1
+2031-06-08,Sunday,4,19,Metal Pig,Water Snake,Earth Rabbit,Open,Rooster,79,favorable,,18,1
+2031-06-09,Monday,4,20,Metal Pig,Water Snake,Metal Dragon,Close,Dog,21,cautionary,,3,20
+2031-06-10,Tuesday,4,21,Metal Pig,Water Snake,Metal Snake,Establish,Pig,71,favorable,Month sign meets day sign,15,3
+2031-06-11,Wednesday,4,22,Metal Pig,Water Snake,Water Horse,Remove,Rat,47,neutral,,7,9
+2031-06-12,Thursday,4,23,Metal Pig,Water Snake,Water Sheep,Full,Ox,74,favorable,,14,0
+2031-06-13,Friday,4,24,Metal Pig,Water Snake,Wood Monkey,Balance,Tiger,47,neutral,,0,2
+2031-06-14,Saturday,4,25,Metal Pig,Water Snake,Wood Rooster,Stable,Rabbit,66,favorable,,13,4
+2031-06-15,Sunday,4,26,Metal Pig,Water Snake,Fire Dog,Initiate,Dragon,59,neutral,,6,1
+2031-06-16,Monday,4,27,Metal Pig,Water Snake,Fire Pig,Break,Snake,19,challenging,Year sign meets day sign,4,22
+2031-06-17,Tuesday,4,28,Metal Pig,Water Snake,Earth Rat,Danger,Horse,17,challenging,,0,19
+2031-06-18,Wednesday,4,29,Metal Pig,Water Snake,Earth Ox,Success,Sheep,81,auspicious,,20,2
+2031-06-19,Thursday,4,30,Metal Pig,Water Snake,Metal Tiger,Receive,Monkey,66,favorable,,10,1
+2031-06-20,Friday,5,1,Metal Pig,Wood Horse,Metal Rabbit,Receive,Rooster,66,favorable,,10,1
+2031-06-21,Saturday,5,2,Metal Pig,Wood Horse,Water Dragon,Open,Dog,79,favorable,,18,1
+2031-06-22,Sunday,5,3,Metal Pig,Wood Horse,Water Snake,Close,Pig,21,cautionary,,3,20
+2031-06-23,Monday,5,4,Metal Pig,Wood Horse,Wood Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2031-06-24,Tuesday,5,5,Metal Pig,Wood Horse,Wood Sheep,Remove,Ox,47,neutral,Dragon Boat Festival,7,9
+2031-06-25,Wednesday,5,6,Metal Pig,Wood Horse,Fire Monkey,Full,Tiger,74,favorable,,14,0
+2031-06-26,Thursday,5,7,Metal Pig,Wood Horse,Fire Rooster,Balance,Rabbit,47,neutral,,0,2
+2031-06-27,Friday,5,8,Metal Pig,Wood Horse,Earth Dog,Stable,Dragon,66,favorable,,13,4
+2031-06-28,Saturday,5,9,Metal Pig,Wood Horse,Earth Pig,Initiate,Snake,59,neutral,Year sign meets day sign,6,1
+2031-06-29,Sunday,5,10,Metal Pig,Wood Horse,Metal Rat,Break,Horse,19,challenging,,4,22
+2031-06-30,Monday,5,11,Metal Pig,Wood Horse,Metal Ox,Danger,Sheep,17,challenging,,0,19
+2031-07-01,Tuesday,5,12,Metal Pig,Wood Horse,Water Tiger,Success,Monkey,81,auspicious,,20,2
+2031-07-02,Wednesday,5,13,Metal Pig,Wood Horse,Water Rabbit,Receive,Rooster,66,favorable,,10,1
+2031-07-03,Thursday,5,14,Metal Pig,Wood Horse,Wood Dragon,Open,Dog,79,favorable,,18,1
+2031-07-04,Friday,5,15,Metal Pig,Wood Horse,Wood Snake,Close,Pig,21,cautionary,Independence Day (US),3,20
+2031-07-05,Saturday,5,16,Metal Pig,Wood Horse,Fire Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2031-07-06,Sunday,5,17,Metal Pig,Wood Horse,Fire Sheep,Remove,Ox,47,neutral,,7,9
+2031-07-07,Monday,5,18,Metal Pig,Wood Horse,Earth Monkey,Full,Tiger,74,favorable,,14,0
+2031-07-08,Tuesday,5,19,Metal Pig,Wood Horse,Earth Rooster,Balance,Rabbit,47,neutral,,0,2
+2031-07-09,Wednesday,5,20,Metal Pig,Wood Horse,Metal Dog,Stable,Dragon,66,favorable,,13,4
+2031-07-10,Thursday,5,21,Metal Pig,Wood Horse,Metal Pig,Initiate,Snake,59,neutral,Year sign meets day sign,6,1
+2031-07-11,Friday,5,22,Metal Pig,Wood Horse,Water Rat,Break,Horse,19,challenging,,4,22
+2031-07-12,Saturday,5,23,Metal Pig,Wood Horse,Water Ox,Danger,Sheep,17,challenging,,0,19
+2031-07-13,Sunday,5,24,Metal Pig,Wood Horse,Wood Tiger,Success,Monkey,81,auspicious,,20,2
+2031-07-14,Monday,5,25,Metal Pig,Wood Horse,Wood Rabbit,Receive,Rooster,66,favorable,,10,1
+2031-07-15,Tuesday,5,26,Metal Pig,Wood Horse,Fire Dragon,Open,Dog,79,favorable,,18,1
+2031-07-16,Wednesday,5,27,Metal Pig,Wood Horse,Fire Snake,Close,Pig,21,cautionary,,3,20
+2031-07-17,Thursday,5,28,Metal Pig,Wood Horse,Earth Horse,Establish,Rat,71,favorable,Month sign meets day sign,15,3
+2031-07-18,Friday,5,29,Metal Pig,Wood Horse,Earth Sheep,Remove,Ox,47,neutral,,7,9
+2031-07-19,Saturday,6,1,Metal Pig,Wood Sheep,Metal Monkey,Remove,Tiger,47,neutral,,7,9
+2031-07-20,Sunday,6,2,Metal Pig,Wood Sheep,Metal Rooster,Full,Rabbit,74,favorable,,14,0
+2031-07-21,Monday,6,3,Metal Pig,Wood Sheep,Water Dog,Balance,Dragon,47,neutral,,0,2
+2031-07-22,Tuesday,6,4,Metal Pig,Wood Sheep,Water Pig,Stable,Snake,66,favorable,Year sign meets day sign,13,4
+2031-07-23,Wednesday,6,5,Metal Pig,Wood Sheep,Wood Rat,Initiate,Horse,59,neutral,,6,1
+2031-07-24,Thursday,6,6,Metal Pig,Wood Sheep,Wood Ox,Break,Sheep,19,challenging,,4,22
+2031-07-25,Friday,6,7,Metal Pig,Wood Sheep,Fire Tiger,Danger,Monkey,17,challenging,,0,19
+2031-07-26,Saturday,6,8,Metal Pig,Wood Sheep,Fire Rabbit,Success,Rooster,81,auspicious,,20,2
+2031-07-27,Sunday,6,9,Metal Pig,Wood Sheep,Earth Dragon,Receive,Dog,66,favorable,,10,1
+2031-07-28,Monday,6,10,Metal Pig,Wood Sheep,Earth Snake,Open,Pig,79,favorable,,18,1
+2031-07-29,Tuesday,6,11,Metal Pig,Wood Sheep,Metal Horse,Close,Rat,21,cautionary,,3,20
+2031-07-30,Wednesday,6,12,Metal Pig,Wood Sheep,Metal Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2031-07-31,Thursday,6,13,Metal Pig,Wood Sheep,Water Monkey,Remove,Tiger,47,neutral,,7,9
+2031-08-01,Friday,6,14,Metal Pig,Wood Sheep,Water Rooster,Full,Rabbit,74,favorable,,14,0
+2031-08-02,Saturday,6,15,Metal Pig,Wood Sheep,Wood Dog,Balance,Dragon,47,neutral,,0,2
+2031-08-03,Sunday,6,16,Metal Pig,Wood Sheep,Wood Pig,Stable,Snake,66,favorable,Year sign meets day sign,13,4
+2031-08-04,Monday,6,17,Metal Pig,Wood Sheep,Fire Rat,Initiate,Horse,59,neutral,,6,1
+2031-08-05,Tuesday,6,18,Metal Pig,Wood Sheep,Fire Ox,Break,Sheep,19,challenging,,4,22
+2031-08-06,Wednesday,6,19,Metal Pig,Wood Sheep,Earth Tiger,Danger,Monkey,17,challenging,,0,19
+2031-08-07,Thursday,6,20,Metal Pig,Wood Sheep,Earth Rabbit,Success,Rooster,81,auspicious,,20,2
+2031-08-08,Friday,6,21,Metal Pig,Wood Sheep,Metal Dragon,Receive,Dog,66,favorable,,10,1
+2031-08-09,Saturday,6,22,Metal Pig,Wood Sheep,Metal Snake,Open,Pig,79,favorable,,18,1
+2031-08-10,Sunday,6,23,Metal Pig,Wood Sheep,Water Horse,Close,Rat,21,cautionary,,3,20
+2031-08-11,Monday,6,24,Metal Pig,Wood Sheep,Water Sheep,Establish,Ox,71,favorable,Month sign meets day sign,15,3
+2031-08-12,Tuesday,6,25,Metal Pig,Wood Sheep,Wood Monkey,Remove,Tiger,47,neutral,,7,9
+2031-08-13,Wednesday,6,26,Metal Pig,Wood Sheep,Wood Rooster,Full,Rabbit,74,favorable,,14,0
+2031-08-14,Thursday,6,27,Metal Pig,Wood Sheep,Fire Dog,Balance,Dragon,47,neutral,,0,2
+2031-08-15,Friday,6,28,Metal Pig,Wood Sheep,Fire Pig,Stable,Snake,66,favorable,Year sign meets day sign,13,4
+2031-08-16,Saturday,6,29,Metal Pig,Wood Sheep,Earth Rat,Initiate,Horse,59,neutral,,6,1
+2031-08-17,Sunday,6,30,Metal Pig,Wood Sheep,Earth Ox,Break,Sheep,19,challenging,,4,22
+2031-08-18,Monday,7,1,Metal Pig,Fire Monkey,Metal Tiger,Break,Monkey,19,challenging,,4,22
+2031-08-19,Tuesday,7,2,Metal Pig,Fire Monkey,Metal Rabbit,Danger,Rooster,17,challenging,,0,19
+2031-08-20,Wednesday,7,3,Metal Pig,Fire Monkey,Water Dragon,Success,Dog,81,auspicious,,20,2
+2031-08-21,Thursday,7,4,Metal Pig,Fire Monkey,Water Snake,Receive,Pig,66,favorable,,10,1
+2031-08-22,Friday,7,5,Metal Pig,Fire Monkey,Wood Horse,Open,Rat,79,favorable,,18,1
+2031-08-23,Saturday,7,6,Metal Pig,Fire Monkey,Wood Sheep,Close,Ox,21,cautionary,,3,20
+2031-08-24,Sunday,7,7,Metal Pig,Fire Monkey,Fire Monkey,Establish,Tiger,71,favorable,Qixi (Chinese Valentine's). Month sign meets day sign,15,3
+2031-08-25,Monday,7,8,Metal Pig,Fire Monkey,Fire Rooster,Remove,Rabbit,47,neutral,,7,9
+2031-08-26,Tuesday,7,9,Metal Pig,Fire Monkey,Earth Dog,Full,Dragon,74,favorable,,14,0
+2031-08-27,Wednesday,7,10,Metal Pig,Fire Monkey,Earth Pig,Balance,Snake,47,neutral,Year sign meets day sign,0,2
+2031-08-28,Thursday,7,11,Metal Pig,Fire Monkey,Metal Rat,Stable,Horse,66,favorable,,13,4
+2031-08-29,Friday,7,12,Metal Pig,Fire Monkey,Metal Ox,Initiate,Sheep,59,neutral,,6,1
+2031-08-30,Saturday,7,13,Metal Pig,Fire Monkey,Water Tiger,Break,Monkey,19,challenging,,4,22
+2031-08-31,Sunday,7,14,Metal Pig,Fire Monkey,Water Rabbit,Danger,Rooster,17,challenging,,0,19
+2031-09-01,Monday,7,15,Metal Pig,Fire Monkey,Wood Dragon,Success,Dog,81,auspicious,Ghost Festival,20,2
+2031-09-02,Tuesday,7,16,Metal Pig,Fire Monkey,Wood Snake,Receive,Pig,66,favorable,,10,1
+2031-09-03,Wednesday,7,17,Metal Pig,Fire Monkey,Fire Horse,Open,Rat,79,favorable,,18,1
+2031-09-04,Thursday,7,18,Metal Pig,Fire Monkey,Fire Sheep,Close,Ox,21,cautionary,,3,20
+2031-09-05,Friday,7,19,Metal Pig,Fire Monkey,Earth Monkey,Establish,Tiger,71,favorable,Month sign meets day sign,15,3
+2031-09-06,Saturday,7,20,Metal Pig,Fire Monkey,Earth Rooster,Remove,Rabbit,47,neutral,,7,9
+2031-09-07,Sunday,7,21,Metal Pig,Fire Monkey,Metal Dog,Full,Dragon,74,favorable,,14,0
+2031-09-08,Monday,7,22,Metal Pig,Fire Monkey,Metal Pig,Balance,Snake,47,neutral,Year sign meets day sign,0,2
+2031-09-09,Tuesday,7,23,Metal Pig,Fire Monkey,Water Rat,Stable,Horse,66,favorable,,13,4
+2031-09-10,Wednesday,7,24,Metal Pig,Fire Monkey,Water Ox,Initiate,Sheep,59,neutral,,6,1
+2031-09-11,Thursday,7,25,Metal Pig,Fire Monkey,Wood Tiger,Break,Monkey,19,challenging,,4,22
+2031-09-12,Friday,7,26,Metal Pig,Fire Monkey,Wood Rabbit,Danger,Rooster,17,challenging,,0,19
+2031-09-13,Saturday,7,27,Metal Pig,Fire Monkey,Fire Dragon,Success,Dog,81,auspicious,,20,2
+2031-09-14,Sunday,7,28,Metal Pig,Fire Monkey,Fire Snake,Receive,Pig,66,favorable,,10,1
+2031-09-15,Monday,7,29,Metal Pig,Fire Monkey,Earth Horse,Open,Rat,79,favorable,,18,1
+2031-09-16,Tuesday,7,30,Metal Pig,Fire Monkey,Earth Sheep,Close,Ox,21,cautionary,,3,20
+2031-09-17,Wednesday,8,1,Metal Pig,Fire Rooster,Metal Monkey,Close,Tiger,21,cautionary,,3,20
+2031-09-18,Thursday,8,2,Metal Pig,Fire Rooster,Metal Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2031-09-19,Friday,8,3,Metal Pig,Fire Rooster,Water Dog,Remove,Dragon,47,neutral,,7,9
+2031-09-20,Saturday,8,4,Metal Pig,Fire Rooster,Water Pig,Full,Snake,74,favorable,Year sign meets day sign,14,0
+2031-09-21,Sunday,8,5,Metal Pig,Fire Rooster,Wood Rat,Balance,Horse,47,neutral,,0,2
+2031-09-22,Monday,8,6,Metal Pig,Fire Rooster,Wood Ox,Stable,Sheep,66,favorable,,13,4
+2031-09-23,Tuesday,8,7,Metal Pig,Fire Rooster,Fire Tiger,Initiate,Monkey,59,neutral,,6,1
+2031-09-24,Wednesday,8,8,Metal Pig,Fire Rooster,Fire Rabbit,Break,Rooster,19,challenging,,4,22
+2031-09-25,Thursday,8,9,Metal Pig,Fire Rooster,Earth Dragon,Danger,Dog,17,challenging,,0,19
+2031-09-26,Friday,8,10,Metal Pig,Fire Rooster,Earth Snake,Success,Pig,81,auspicious,,20,2
+2031-09-27,Saturday,8,11,Metal Pig,Fire Rooster,Metal Horse,Receive,Rat,66,favorable,,10,1
+2031-09-28,Sunday,8,12,Metal Pig,Fire Rooster,Metal Sheep,Open,Ox,79,favorable,,18,1
+2031-09-29,Monday,8,13,Metal Pig,Fire Rooster,Water Monkey,Close,Tiger,21,cautionary,,3,20
+2031-09-30,Tuesday,8,14,Metal Pig,Fire Rooster,Water Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2031-10-01,Wednesday,8,15,Metal Pig,Fire Rooster,Wood Dog,Remove,Dragon,47,neutral,Mid-Autumn Festival,7,9
+2031-10-02,Thursday,8,16,Metal Pig,Fire Rooster,Wood Pig,Full,Snake,74,favorable,Year sign meets day sign,14,0
+2031-10-03,Friday,8,17,Metal Pig,Fire Rooster,Fire Rat,Balance,Horse,47,neutral,,0,2
+2031-10-04,Saturday,8,18,Metal Pig,Fire Rooster,Fire Ox,Stable,Sheep,66,favorable,,13,4
+2031-10-05,Sunday,8,19,Metal Pig,Fire Rooster,Earth Tiger,Initiate,Monkey,59,neutral,,6,1
+2031-10-06,Monday,8,20,Metal Pig,Fire Rooster,Earth Rabbit,Break,Rooster,19,challenging,,4,22
+2031-10-07,Tuesday,8,21,Metal Pig,Fire Rooster,Metal Dragon,Danger,Dog,17,challenging,,0,19
+2031-10-08,Wednesday,8,22,Metal Pig,Fire Rooster,Metal Snake,Success,Pig,81,auspicious,,20,2
+2031-10-09,Thursday,8,23,Metal Pig,Fire Rooster,Water Horse,Receive,Rat,66,favorable,,10,1
+2031-10-10,Friday,8,24,Metal Pig,Fire Rooster,Water Sheep,Open,Ox,79,favorable,,18,1
+2031-10-11,Saturday,8,25,Metal Pig,Fire Rooster,Wood Monkey,Close,Tiger,21,cautionary,,3,20
+2031-10-12,Sunday,8,26,Metal Pig,Fire Rooster,Wood Rooster,Establish,Rabbit,71,favorable,Month sign meets day sign,15,3
+2031-10-13,Monday,8,27,Metal Pig,Fire Rooster,Fire Dog,Remove,Dragon,47,neutral,,7,9
+2031-10-14,Tuesday,8,28,Metal Pig,Fire Rooster,Fire Pig,Full,Snake,74,favorable,Year sign meets day sign,14,0
+2031-10-15,Wednesday,8,29,Metal Pig,Fire Rooster,Earth Rat,Balance,Horse,47,neutral,,0,2
+2031-10-16,Thursday,9,1,Metal Pig,Earth Dog,Earth Ox,Balance,Sheep,47,neutral,,0,2
+2031-10-17,Friday,9,2,Metal Pig,Earth Dog,Metal Tiger,Stable,Monkey,66,favorable,,13,4
+2031-10-18,Saturday,9,3,Metal Pig,Earth Dog,Metal Rabbit,Initiate,Rooster,59,neutral,,6,1
+2031-10-19,Sunday,9,4,Metal Pig,Earth Dog,Water Dragon,Break,Dog,19,challenging,,4,22
+2031-10-20,Monday,9,5,Metal Pig,Earth Dog,Water Snake,Danger,Pig,17,challenging,,0,19
+2031-10-21,Tuesday,9,6,Metal Pig,Earth Dog,Wood Horse,Success,Rat,81,auspicious,,20,2
+2031-10-22,Wednesday,9,7,Metal Pig,Earth Dog,Wood Sheep,Receive,Ox,66,favorable,,10,1
+2031-10-23,Thursday,9,8,Metal Pig,Earth Dog,Fire Monkey,Open,Tiger,79,favorable,,18,1
+2031-10-24,Friday,9,9,Metal Pig,Earth Dog,Fire Rooster,Close,Rabbit,21,cautionary,Double Ninth Festival,3,20
+2031-10-25,Saturday,9,10,Metal Pig,Earth Dog,Earth Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2031-10-26,Sunday,9,11,Metal Pig,Earth Dog,Earth Pig,Remove,Snake,47,neutral,Year sign meets day sign,7,9
+2031-10-27,Monday,9,12,Metal Pig,Earth Dog,Metal Rat,Full,Horse,74,favorable,,14,0
+2031-10-28,Tuesday,9,13,Metal Pig,Earth Dog,Metal Ox,Balance,Sheep,47,neutral,,0,2
+2031-10-29,Wednesday,9,14,Metal Pig,Earth Dog,Water Tiger,Stable,Monkey,66,favorable,,13,4
+2031-10-30,Thursday,9,15,Metal Pig,Earth Dog,Water Rabbit,Initiate,Rooster,59,neutral,,6,1
+2031-10-31,Friday,9,16,Metal Pig,Earth Dog,Wood Dragon,Break,Dog,19,challenging,Halloween,4,22
+2031-11-01,Saturday,9,17,Metal Pig,Earth Dog,Wood Snake,Danger,Pig,17,challenging,,0,19
+2031-11-02,Sunday,9,18,Metal Pig,Earth Dog,Fire Horse,Success,Rat,81,auspicious,,20,2
+2031-11-03,Monday,9,19,Metal Pig,Earth Dog,Fire Sheep,Receive,Ox,66,favorable,,10,1
+2031-11-04,Tuesday,9,20,Metal Pig,Earth Dog,Earth Monkey,Open,Tiger,79,favorable,,18,1
+2031-11-05,Wednesday,9,21,Metal Pig,Earth Dog,Earth Rooster,Close,Rabbit,21,cautionary,,3,20
+2031-11-06,Thursday,9,22,Metal Pig,Earth Dog,Metal Dog,Establish,Dragon,71,favorable,Month sign meets day sign,15,3
+2031-11-07,Friday,9,23,Metal Pig,Earth Dog,Metal Pig,Remove,Snake,47,neutral,Year sign meets day sign,7,9
+2031-11-08,Saturday,9,24,Metal Pig,Earth Dog,Water Rat,Full,Horse,74,favorable,,14,0
+2031-11-09,Sunday,9,25,Metal Pig,Earth Dog,Water Ox,Balance,Sheep,47,neutral,,0,2
+2031-11-10,Monday,9,26,Metal Pig,Earth Dog,Wood Tiger,Stable,Monkey,66,favorable,,13,4
+2031-11-11,Tuesday,9,27,Metal Pig,Earth Dog,Wood Rabbit,Initiate,Rooster,59,neutral,,6,1
+2031-11-12,Wednesday,9,28,Metal Pig,Earth Dog,Fire Dragon,Break,Dog,19,challenging,,4,22
+2031-11-13,Thursday,9,29,Metal Pig,Earth Dog,Fire Snake,Danger,Pig,17,challenging,,0,19
+2031-11-14,Friday,9,30,Metal Pig,Earth Dog,Earth Horse,Success,Rat,81,auspicious,,20,2
+2031-11-15,Saturday,10,1,Metal Pig,Earth Pig,Earth Sheep,Success,Ox,81,auspicious,Year sign meets month sign,20,2
+2031-11-16,Sunday,10,2,Metal Pig,Earth Pig,Metal Monkey,Receive,Tiger,66,favorable,Year sign meets month sign,10,1
+2031-11-17,Monday,10,3,Metal Pig,Earth Pig,Metal Rooster,Open,Rabbit,79,favorable,Year sign meets month sign,18,1
+2031-11-18,Tuesday,10,4,Metal Pig,Earth Pig,Water Dog,Close,Dragon,21,cautionary,Year sign meets month sign,3,20
+2031-11-19,Wednesday,10,5,Metal Pig,Earth Pig,Water Pig,Establish,Snake,71,favorable,Triple alignment (rare),15,3
+2031-11-20,Thursday,10,6,Metal Pig,Earth Pig,Wood Rat,Remove,Horse,47,neutral,Year sign meets month sign,7,9
+2031-11-21,Friday,10,7,Metal Pig,Earth Pig,Wood Ox,Full,Sheep,74,favorable,Year sign meets month sign,14,0
+2031-11-22,Saturday,10,8,Metal Pig,Earth Pig,Fire Tiger,Balance,Monkey,47,neutral,Year sign meets month sign,0,2
+2031-11-23,Sunday,10,9,Metal Pig,Earth Pig,Fire Rabbit,Stable,Rooster,66,favorable,Year sign meets month sign,13,4
+2031-11-24,Monday,10,10,Metal Pig,Earth Pig,Earth Dragon,Initiate,Dog,59,neutral,Year sign meets month sign,6,1
+2031-11-25,Tuesday,10,11,Metal Pig,Earth Pig,Earth Snake,Break,Pig,19,challenging,Year sign meets month sign,4,22
+2031-11-26,Wednesday,10,12,Metal Pig,Earth Pig,Metal Horse,Danger,Rat,17,challenging,Year sign meets month sign,0,19
+2031-11-27,Thursday,10,13,Metal Pig,Earth Pig,Metal Sheep,Success,Ox,81,auspicious,Year sign meets month sign,20,2
+2031-11-28,Friday,10,14,Metal Pig,Earth Pig,Water Monkey,Receive,Tiger,66,favorable,Year sign meets month sign,10,1
+2031-11-29,Saturday,10,15,Metal Pig,Earth Pig,Water Rooster,Open,Rabbit,79,favorable,Year sign meets month sign,18,1
+2031-11-30,Sunday,10,16,Metal Pig,Earth Pig,Wood Dog,Close,Dragon,21,cautionary,Year sign meets month sign,3,20
+2031-12-01,Monday,10,17,Metal Pig,Earth Pig,Wood Pig,Establish,Snake,71,favorable,Triple alignment (rare),15,3
+2031-12-02,Tuesday,10,18,Metal Pig,Earth Pig,Fire Rat,Remove,Horse,47,neutral,Year sign meets month sign,7,9
+2031-12-03,Wednesday,10,19,Metal Pig,Earth Pig,Fire Ox,Full,Sheep,74,favorable,Year sign meets month sign,14,0
+2031-12-04,Thursday,10,20,Metal Pig,Earth Pig,Earth Tiger,Balance,Monkey,47,neutral,Year sign meets month sign,0,2
+2031-12-05,Friday,10,21,Metal Pig,Earth Pig,Earth Rabbit,Stable,Rooster,66,favorable,Year sign meets month sign,13,4
+2031-12-06,Saturday,10,22,Metal Pig,Earth Pig,Metal Dragon,Initiate,Dog,59,neutral,Year sign meets month sign,6,1
+2031-12-07,Sunday,10,23,Metal Pig,Earth Pig,Metal Snake,Break,Pig,19,challenging,Year sign meets month sign,4,22
+2031-12-08,Monday,10,24,Metal Pig,Earth Pig,Water Horse,Danger,Rat,17,challenging,Year sign meets month sign,0,19
+2031-12-09,Tuesday,10,25,Metal Pig,Earth Pig,Water Sheep,Success,Ox,81,auspicious,Year sign meets month sign,20,2
+2031-12-10,Wednesday,10,26,Metal Pig,Earth Pig,Wood Monkey,Receive,Tiger,66,favorable,Year sign meets month sign,10,1
+2031-12-11,Thursday,10,27,Metal Pig,Earth Pig,Wood Rooster,Open,Rabbit,79,favorable,Year sign meets month sign,18,1
+2031-12-12,Friday,10,28,Metal Pig,Earth Pig,Fire Dog,Close,Dragon,21,cautionary,Year sign meets month sign,3,20
+2031-12-13,Saturday,10,29,Metal Pig,Earth Pig,Fire Pig,Establish,Snake,71,favorable,Triple alignment (rare),15,3
+2031-12-14,Sunday,11,1,Metal Pig,Metal Rat,Earth Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2031-12-15,Monday,11,2,Metal Pig,Metal Rat,Earth Ox,Remove,Sheep,47,neutral,,7,9
+2031-12-16,Tuesday,11,3,Metal Pig,Metal Rat,Metal Tiger,Full,Monkey,74,favorable,,14,0
+2031-12-17,Wednesday,11,4,Metal Pig,Metal Rat,Metal Rabbit,Balance,Rooster,47,neutral,,0,2
+2031-12-18,Thursday,11,5,Metal Pig,Metal Rat,Water Dragon,Stable,Dog,66,favorable,,13,4
+2031-12-19,Friday,11,6,Metal Pig,Metal Rat,Water Snake,Initiate,Pig,59,neutral,,6,1
+2031-12-20,Saturday,11,7,Metal Pig,Metal Rat,Wood Horse,Break,Rat,19,challenging,,4,22
+2031-12-21,Sunday,11,8,Metal Pig,Metal Rat,Wood Sheep,Danger,Ox,17,challenging,,0,19
+2031-12-22,Monday,11,9,Metal Pig,Metal Rat,Fire Monkey,Success,Tiger,81,auspicious,,20,2
+2031-12-23,Tuesday,11,10,Metal Pig,Metal Rat,Fire Rooster,Receive,Rabbit,66,favorable,,10,1
+2031-12-24,Wednesday,11,11,Metal Pig,Metal Rat,Earth Dog,Open,Dragon,79,favorable,Christmas Eve,18,1
+2031-12-25,Thursday,11,12,Metal Pig,Metal Rat,Earth Pig,Close,Snake,21,cautionary,Christmas Day. Year sign meets day sign,3,20
+2031-12-26,Friday,11,13,Metal Pig,Metal Rat,Metal Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2031-12-27,Saturday,11,14,Metal Pig,Metal Rat,Metal Ox,Remove,Sheep,47,neutral,,7,9
+2031-12-28,Sunday,11,15,Metal Pig,Metal Rat,Water Tiger,Full,Monkey,74,favorable,,14,0
+2031-12-29,Monday,11,16,Metal Pig,Metal Rat,Water Rabbit,Balance,Rooster,47,neutral,,0,2
+2031-12-30,Tuesday,11,17,Metal Pig,Metal Rat,Wood Dragon,Stable,Dog,66,favorable,,13,4
+2031-12-31,Wednesday,11,18,Metal Pig,Metal Rat,Wood Snake,Initiate,Pig,59,neutral,New Year's Eve,6,1
+2032-01-01,Thursday,11,19,Metal Pig,Metal Rat,Fire Horse,Break,Rat,19,challenging,New Year's Day,4,22
+2032-01-02,Friday,11,20,Metal Pig,Metal Rat,Fire Sheep,Danger,Ox,17,challenging,,0,19
+2032-01-03,Saturday,11,21,Metal Pig,Metal Rat,Earth Monkey,Success,Tiger,81,auspicious,,20,2
+2032-01-04,Sunday,11,22,Metal Pig,Metal Rat,Earth Rooster,Receive,Rabbit,66,favorable,,10,1
+2032-01-05,Monday,11,23,Metal Pig,Metal Rat,Metal Dog,Open,Dragon,79,favorable,,18,1
+2032-01-06,Tuesday,11,24,Metal Pig,Metal Rat,Metal Pig,Close,Snake,21,cautionary,Year sign meets day sign,3,20
+2032-01-07,Wednesday,11,25,Metal Pig,Metal Rat,Water Rat,Establish,Horse,71,favorable,Month sign meets day sign,15,3
+2032-01-08,Thursday,11,26,Metal Pig,Metal Rat,Water Ox,Remove,Sheep,47,neutral,,7,9
+2032-01-09,Friday,11,27,Metal Pig,Metal Rat,Wood Tiger,Full,Monkey,74,favorable,,14,0
+2032-01-10,Saturday,11,28,Metal Pig,Metal Rat,Wood Rabbit,Balance,Rooster,47,neutral,,0,2
+2032-01-11,Sunday,11,29,Metal Pig,Metal Rat,Fire Dragon,Stable,Dog,66,favorable,,13,4
+2032-01-12,Monday,11,30,Metal Pig,Metal Rat,Fire Snake,Initiate,Pig,59,neutral,,6,1
+2032-01-13,Tuesday,12,1,Metal Pig,Metal Ox,Earth Horse,Initiate,Rat,59,neutral,,6,1
+2032-01-14,Wednesday,12,2,Metal Pig,Metal Ox,Earth Sheep,Break,Ox,19,challenging,,4,22
+2032-01-15,Thursday,12,3,Metal Pig,Metal Ox,Metal Monkey,Danger,Tiger,17,challenging,,0,19
+2032-01-16,Friday,12,4,Metal Pig,Metal Ox,Metal Rooster,Success,Rabbit,81,auspicious,,20,2
+2032-01-17,Saturday,12,5,Metal Pig,Metal Ox,Water Dog,Receive,Dragon,66,favorable,,10,1
+2032-01-18,Sunday,12,6,Metal Pig,Metal Ox,Water Pig,Open,Snake,79,favorable,Year sign meets day sign,18,1
+2032-01-19,Monday,12,7,Metal Pig,Metal Ox,Wood Rat,Close,Horse,21,cautionary,,3,20
+2032-01-20,Tuesday,12,8,Metal Pig,Metal Ox,Wood Ox,Establish,Sheep,71,favorable,Laba Festival. Month sign meets day sign,15,3
+2032-01-21,Wednesday,12,9,Metal Pig,Metal Ox,Fire Tiger,Remove,Monkey,47,neutral,,7,9
+2032-01-22,Thursday,12,10,Metal Pig,Metal Ox,Fire Rabbit,Full,Rooster,74,favorable,,14,0
+2032-01-23,Friday,12,11,Metal Pig,Metal Ox,Earth Dragon,Balance,Dog,47,neutral,,0,2
+2032-01-24,Saturday,12,12,Metal Pig,Metal Ox,Earth Snake,Stable,Pig,66,favorable,,13,4
+2032-01-25,Sunday,12,13,Metal Pig,Metal Ox,Metal Horse,Initiate,Rat,59,neutral,,6,1
+2032-01-26,Monday,12,14,Metal Pig,Metal Ox,Metal Sheep,Break,Ox,19,challenging,,4,22
+2032-01-27,Tuesday,12,15,Metal Pig,Metal Ox,Water Monkey,Danger,Tiger,17,challenging,,0,19
+2032-01-28,Wednesday,12,16,Metal Pig,Metal Ox,Water Rooster,Success,Rabbit,81,auspicious,,20,2
+2032-01-29,Thursday,12,17,Metal Pig,Metal Ox,Wood Dog,Receive,Dragon,66,favorable,,10,1
+2032-01-30,Friday,12,18,Metal Pig,Metal Ox,Wood Pig,Open,Snake,79,favorable,Year sign meets day sign,18,1
+2032-01-31,Saturday,12,19,Metal Pig,Metal Ox,Fire Rat,Close,Horse,21,cautionary,,3,20
+2032-02-01,Sunday,12,20,Metal Pig,Metal Ox,Fire Ox,Establish,Sheep,71,favorable,Month sign meets day sign,15,3
+2032-02-02,Monday,12,21,Metal Pig,Metal Ox,Earth Tiger,Remove,Monkey,47,neutral,,7,9
+2032-02-03,Tuesday,12,22,Metal Pig,Metal Ox,Earth Rabbit,Full,Rooster,74,favorable,,14,0
+2032-02-04,Wednesday,12,23,Metal Pig,Metal Ox,Metal Dragon,Balance,Dog,47,neutral,Kitchen God Day,0,2
+2032-02-05,Thursday,12,24,Metal Pig,Metal Ox,Metal Snake,Stable,Pig,66,favorable,,13,4
+2032-02-06,Friday,12,25,Metal Pig,Metal Ox,Water Horse,Initiate,Rat,59,neutral,,6,1
+2032-02-07,Saturday,12,26,Metal Pig,Metal Ox,Water Sheep,Break,Ox,19,challenging,,4,22
+2032-02-08,Sunday,12,27,Metal Pig,Metal Ox,Wood Monkey,Danger,Tiger,17,challenging,,0,19
+2032-02-09,Monday,12,28,Metal Pig,Metal Ox,Wood Rooster,Success,Rabbit,81,auspicious,,20,2

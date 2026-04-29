@@ -1,6 +1,6 @@
 # The Mahjong Tarot — Epic Status Dashboard
 
-**Last updated:** 2026-04-28
+**Last updated:** 2026-04-29
 **Phase in flight:** Phase 1 — Wedge
 
 At-a-glance status for each epic. Update this file whenever a workstream opens, ships, or stalls.
@@ -13,8 +13,8 @@ Status glyphs: 🔄 in flight · ✅ done · ⏳ partially done · ☐ planned �
 
 | Epic | Status | % done (est) | Open bugs | Notes |
 |---|---|---|---|---|
-| [E1 · Daily Almanac](./epics.md#e1--daily-almanac) | ⏳ | 60% | 0 | Almanac data through Feb 2032 in DB; home page does not yet lead with it |
-| [E2 · Find a Good Day](./epics.md#e2--find-a-good-day) | ⏳ | 40% | 0 | Search prototype exists; share-able artifact missing |
+| [E1 · Daily Almanac](./epics.md#e1--daily-almanac) | ⏳ | 75% | 0 | Home page now leads with today's almanac (PR #158); voice review and D7 measurement still pending |
+| [E2 · Find a Good Day](./epics.md#e2--find-a-good-day) | ⏳ | 75% | 0 | Public `/find-a-good-day` pages live with explanation copy, share buttons, and analytics (PR #160); OG image and `.ics` still missing |
 | [E3 · Personal Pillar Layer](./epics.md#e3--personal-pillar-layer) | ☐ | 5% | 0 | Birth-data capture spec drafted; pillar engine not started |
 | [E4 · Readings Catalogue](./epics.md#e4--readings-catalogue) | ☐ | 0% | 0 | Phase 5 |
 | [E5 · Voice & Content Engine](./epics.md#e5--voice--content-engine) | 🔄 | 50% | 0 | Writer/designer/web-developer pipeline live; voice doc not written |
@@ -30,21 +30,21 @@ Percent-done is an order-of-magnitude estimate (closer to 0/25/50/75/100 than to
 
 ## Drilldown
 
-### E1 · Daily Almanac — ⏳ 60%
+### E1 · Daily Almanac — ⏳ 75%
 
-**What's done:** ~2,000 days of almanac data live in `public.almanac_days` through Feb 2032. Encoder pipeline (`docs/architecture/readings/daily-horoscopes/encoding/`) generates per-lunar-year SQL files. Day-officer, score, and pillar fields all populated.
+**What's done:** ~2,000 days of almanac data live in `public.almanac_days` through Feb 2032. Encoder pipeline (`docs/architecture/readings/daily-horoscopes/encoding/`) generates per-lunar-year SQL files. Day-officer, score, and pillar fields all populated. Home page now leads with today's almanac above the fold (`feat(home): lead with today's almanac (E1)` — PR #158). "Why this score?" expandable lives in `AlmanacView`.
 
-**What's missing:** Home page does not lead with today's almanac (currently leads with Bill's bio). One-paragraph reading copy is not yet in our voice. "Why this score?" expandable does not exist.
+**What's missing:** One-paragraph daily reading copy is not yet in our voice (depends on E5 voice doc). D7 return rate measurement and report card not yet wired (W1.3).
 
 **Definition of done:** Logged-out home page shows today's almanac above the fold; reading copy passes voice review; D7 return rate ≥ 35%.
 
 ---
 
-### E2 · Find a Good Day — ⏳ 40%
+### E2 · Find a Good Day — ⏳ 75%
 
-**What's done:** Free-text query → activity-rule mapping prototype exists. Date scoring algorithm runs in development.
+**What's done:** Public, indexable `/find-a-good-day` index page and `/find-a-good-day/<activity-slug>/<YYYY-MM-DD>` server-rendered result pages (ISR `revalidate: 86400`). Search UI extracted to a shared `components/AlmanacSearch.jsx` so the dashboard members view and the public marketing view share one source of truth. Result pages render a deterministic 3-to-5 sentence "why this date scores the way it does" explanation built in voice via `lib/explainScore.js`. Share affordances (Copy link, native Web Share API, X intent) plus three Vercel Analytics events feeding the wedge funnel: `e2_search_submitted`, `e2_result_viewed`, `e2_share_clicked` (PR #160).
 
-**What's missing:** Share-able artifact (OG image / screenshot card). Calendar download (.ics). Result page polish.
+**What's missing:** OG image generator for share previews (Block 4 stretch — deferred pending Vercel build budget review per `phase-01-wedge.md`). `.ics` calendar download. Free-text NLP step for prose-to-activity mapping. Pre-built top-N pages (e.g. `/find-a-good-day/get-married` redirecting to top-scoring date in the next 365 days). Filter by birth-pillar harmony (E3 dependency). Measurement of the success-criteria thresholds (≥ 500 unique users, ≥ 10% share rate) — depends on the May acquisition test.
 
 **Definition of done:** ≥ 500 unique users hit the search by 2026-06-01; ≥ 10% of result pages are shared.
 

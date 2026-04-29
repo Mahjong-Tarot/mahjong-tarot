@@ -10,6 +10,7 @@ import {
   ALMANAC_RANGE_END_EXCLUSIVE,
   getActivityByKey,
 } from '../lib/almanac';
+import { trackSearchSubmitted } from '../lib/analytics';
 import styles from './AlmanacSearch.module.css';
 
 const MONTHS = [
@@ -84,7 +85,18 @@ export default function AlmanacSearch({
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const inputRef = useRef(null);
+  const submittedRef = useRef(null);
   const today = todayInLA();
+
+  // Fire e2_search_submitted once per activity selection — covers
+  // the user-pick path AND the deep-link with initialActivityKey path
+  // without double-firing when year/month filters change.
+  useEffect(() => {
+    if (!selected) return;
+    if (submittedRef.current === selected.key) return;
+    submittedRef.current = selected.key;
+    trackSearchSubmitted({ activityKey: selected.key });
+  }, [selected]);
 
   const suggestions = useMemo(() => {
     if (!query || (selected && selected.label.toLowerCase() === query.toLowerCase())) return [];

@@ -1,0 +1,44 @@
+.shareRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: var(--space-md) auto 0;
+  max-width: 720px;
+  padding: 0 var(--space-lg);
+}
+
+.shareBtn {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: white;
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  min-height: 38px;
+}
+.shareBtn:hover {
+  background: var(--color-surface, #f5f3ed);
+  border-color: rgba(0, 0, 0, 0.25);
+}
+.shareBtn:active {
+  transform: scale(0.97);
+}
+
+.copied {
+  background: #d4edda;
+  color: #155724;
+  border-color: #b5dcc0;
+}
+.copied:hover {
+  background: #d4edda;
+  border-color: #b5dcc0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shareBtn { transition: none; }
+  .shareBtn:active { transform: none; }
+}

@@ -1,8 +1,10 @@
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Nav from '../../../components/Nav';
 import Footer from '../../../components/Footer';
 import SEO from '../../../components/SEO';
 import AlmanacView from '../../../components/AlmanacView';
+import ShareRow from '../../../components/ShareRow';
 import {
   fetchAlmanacForDate,
   isValidAlmanacDate,
@@ -11,6 +13,7 @@ import {
   getActivityBySlug,
 } from '../../../lib/almanac';
 import { explainScore } from '../../../lib/explainScore';
+import { trackResultViewed } from '../../../lib/analytics';
 
 const VERDICT_PHRASE = {
   Lucky: 'a favourable day',
@@ -27,6 +30,19 @@ export default function FindAGoodDayResult({ activity, date, almanac, today }) {
   const description = verdictPhrase
     ? `${humanDate} is ${verdictPhrase} for ${activity.label.toLowerCase()} in the Chinese almanac. Score ${almanac?.score}%, day-officer ${almanac?.officer?.english}.`
     : `Almanac reading for ${humanDate} with focus on ${activity.label.toLowerCase()}.`;
+
+  // Fire e2_result_viewed once per (activity, date) mount.
+  const viewedRef = useRef(null);
+  useEffect(() => {
+    const key = `${activity.key}|${date}`;
+    if (viewedRef.current === key) return;
+    viewedRef.current = key;
+    trackResultViewed({
+      activityKey: activity.key,
+      date,
+      score: almanac?.score,
+    });
+  }, [activity.key, date, almanac?.score]);
 
   return (
     <>
@@ -89,6 +105,14 @@ export default function FindAGoodDayResult({ activity, date, almanac, today }) {
             <p style={{ textAlign: 'center', fontStyle: 'italic', color: '#888' }}>
               No almanac record for {humanDate}.
             </p>
+          )}
+          {almanac && (
+            <ShareRow
+              path={`/find-a-good-day/${activity.slug}/${date}`}
+              title={`${humanDate} for ${activity.label} — Mahjong Tarot Almanac`}
+              activityKey={activity.key}
+              date={date}
+            />
           )}
           <div style={{ textAlign: 'center', marginTop: 'var(--space-xl)', fontSize: '0.9rem' }}>
             <Link href="/find-a-good-day">← Search for another activity</Link>

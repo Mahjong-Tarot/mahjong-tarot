@@ -349,6 +349,7 @@
       <div class="nav-label">Strategy</div>
       <a class="nav-item" data-doc="product">Product <span class="filename">product.md</span></a>
       <a class="nav-item" data-doc="epics">Epics <span class="filename">epics.md</span></a>
+      <a class="nav-item" data-doc="agents">Agents <span class="filename">agents.md</span></a>
       <a class="nav-item" data-doc="qa-plan">QA Plan <span class="filename">qa-plan.md</span></a>
     </div>
 
@@ -761,6 +762,42 @@ Before any release in Phase 4+:
 Open `qa-plan.md` for the full text including how regression reports are filed.
 </script>
 
+<script type="text/markdown" id="md-agents">
+# Agents — The Mahjong Tarot
+
+Five Claude Code agents drive content production. Each has a definition at `.claude/agents/<name>.md` and a richer persona file at `agents/<name>/context/persona.md`. The `mahjong-studio` skill chains them: writer → designer → web-developer → git commit.
+
+Status reflects code presence and observed pipeline use as of 2026-04-29.
+
+| # | Agent | Status | % | Description |
+|---|---|---|---|---|
+| 1 | **Writer** | 🔄 | 70 | Reads the content calendar, gathers source material from `content/source-material/`, produces blog posts, social variants, SEO guides, and Vietnamese translations. First stage of the `mahjong-studio` pipeline. **Gap:** voice doc not written — contractor-friendliness limited until then. |
+| 2 | **Designer** | ✅ | 85 | Generates unique hero and inline images for written content via the Gemini Python SDK. Reads the blog draft, writes prompts per content file, generates, optimises to WebP. |
+| 3 | **Web Developer** | ✅ | 90 | Builds Next.js JSX components from approved content drafts, places them in `website/pages/blog/posts/`, updates the blog index, promotes images. Final stage of the `mahjong-studio` pipeline. |
+| 4 | **Project Manager** | ✅ | 85 | Owns delivery — daily stand-ups, RAID log, blocker triage, scope-change assessment, RAG status reports, release monitoring. Skills: `daily-checkin`, `raid-log`, `scope-change`. |
+| 5 | **Product Manager** | ✅ | 75 | Executes structured PM workflows — feature ideas, competitor analysis, user personas, vision reports. Triggered by phrases like "we should build", "how do competitors handle", "write a vision report". |
+
+## Image Designer (scaffold only)
+
+`agents/image-designer/` exists with `output/` and `workflow/` subfolders but no persona file and no `.claude/agents/*.md` definition. Either a draft of the Designer agent or a planned successor — out of scope today.
+
+## Glyph legend
+
+| Glyph | Meaning |
+|---|---|
+| ✅ | Shipped — agent is wired and used in the production pipeline |
+| 🔄 | In progress — agent is wired but has known gaps |
+| 📋 | Planned — definition exists but not yet operational |
+| 🆕 | Needs planning — not defined in code |
+
+## Cross-references
+
+- Pipeline orchestrator: the `mahjong-studio` skill chains writer → designer → web-developer.
+- Per-agent personas: `agents/<name>/context/persona.md`.
+- Style guide consumed by Web Developer: `agents/web-developer/context/web-style-guide.md`.
+- Daily standup workflow: `standup/individual/` and `standup/briefings/`.
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script>
   const docs = {
@@ -768,6 +805,7 @@ Open `qa-plan.md` for the full text including how regression reports are filed.
     'timeline':    { eyebrow: 'Current Status', filename: '01-product-timeline.md' },
     'product':     { eyebrow: 'Strategy',       filename: 'product.md' },
     'epics':       { eyebrow: 'Strategy',       filename: 'epics.md' },
+    'agents':      { eyebrow: 'Strategy',       filename: 'agents.md' },
     'qa-plan':     { eyebrow: 'Strategy',       filename: 'qa-plan.md' },
     'README':      { eyebrow: 'Project',        filename: 'docs/README.md' },
     'overview':    { eyebrow: 'Project',        filename: '00-product-overview.md' },

@@ -50,7 +50,7 @@ Publishes: Monday (blog + social), Tuesday (social)
 Angle: Mahjong Mirror — the answer ties back to finding ways to make money in the volatile Fire Horse Year.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-04-24-feel-good-money** — STATUS: DESIGNED
+**Topic: 2026-04-24-feel-good-money** — STATUS: PUBLISHED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
@@ -79,16 +79,16 @@ Publishes: Friday (blog + social)
 
 ## Week of April 27 — Career
 
-**Topic: 2026-04-27-horse-career** — STATUS: DESIGNED
+**Topic: 2026-04-27-horse-career** — STATUS: PUBLISHED
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-04-29-mirror-career** — STATUS: DESIGNED
+**Topic: 2026-04-29-mirror-career** — STATUS: PUBLISHED
 Angle: Mahjong Mirror — the answer (ties back to career blow-up)
 Chapter/tile focus: Chapter 1 (Central Theme), Chapter 6 (The Opposition), Chapter 7 (Finding Solutions)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-05-01-feel-good-career** — STATUS: DESIGNED
+**Topic: 2026-05-01-feel-good-career** — STATUS: PUBLISHED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 

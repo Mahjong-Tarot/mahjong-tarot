@@ -3,6 +3,42 @@
 
 export const POSTS = [
  {
+ slug: 'feel-good-friday-your-career-is-not-your-cage',
+ title: 'Feel Good Friday: Your Career Is Not Your Cage',
+ excerpt: "If the Fire Horse year is amplifying frustration in your career, that's not a curse — it's a signal. A story from the reading table about what that signal means, and what to do with it.",
+ categories: ['Year of the Fire Horse'],
+ date: 'May 1, 2026',
+ isoDate: '2026-05-01',
+ readTime: '5 min read',
+ },
+ {
+ slug: 'the-decision-framework-for-career-crossroads',
+ title: 'The Decision Framework That Was Built for Career Crossroads',
+ excerpt: "The Mahjong Mirror's four angles applied to career decisions. Most people skip three of them. The third angle — what's really opposing you — is where the breakthrough hides.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Apr 29, 2026',
+ isoDate: '2026-04-29',
+ readTime: '8 min read',
+ },
+ {
+ slug: 'fire-horse-will-blow-up-your-career',
+ title: 'The Fire Horse Year Will Blow Up Your Career — One Way or Another',
+ excerpt: 'Every 60 years, the Fire Horse tears through careers and industries and rewrites who wins. The pattern from 1906, 1966, and now 2026 is not subtle. The ones who thrive all did the same thing.',
+ categories: ['Year of the Fire Horse'],
+ date: 'Apr 27, 2026',
+ isoDate: '2026-04-27',
+ readTime: '7 min read',
+ },
+ {
+ slug: 'feel-good-friday-the-horse-rewards-risk-takers',
+ title: "Feel Good Friday: The Wealth You've Been Circling Around Is Closer Than You Think",
+ excerpt: "The Horse doesn't reward the ones who wait for certainty. It rewards the ones who decide. The financial move you keep postponing? That's the one this year is asking you to make.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Apr 24, 2026',
+ isoDate: '2026-04-24',
+ readTime: '5 min read',
+ },
+ {
  slug: 'how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk',
  title: 'How to Know If This Is the Year for You to Take a Financial Risk',
  excerpt: "The Fire Horse rewards movement, but not every move. Before you act, the Mahjong Mirror asks four questions that reveal whether a financial risk will change your life or just your account balance.",

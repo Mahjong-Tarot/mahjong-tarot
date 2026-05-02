@@ -1,5 +1,9 @@
 | Date | Title | File | Category |
 |------|-------|------|----------|
+| 2026-05-01 | Feel Good Friday: Your Career Is Not Your Cage | feel-good-friday-your-career-is-not-your-cage.jsx | Year of the Fire Horse |
+| 2026-04-29 | The Decision Framework That Was Built for Career Crossroads | the-decision-framework-for-career-crossroads.jsx | Year of the Fire Horse |
+| 2026-04-27 | The Fire Horse Year Will Blow Up Your Career — One Way or Another | fire-horse-will-blow-up-your-career.jsx | Year of the Fire Horse |
+| 2026-04-24 | Feel Good Friday: The Wealth You've Been Circling Around Is Closer Than You Think | feel-good-friday-the-horse-rewards-risk-takers.jsx | Year of the Fire Horse |
 | 2026-04-22 | How to Know If This Is the Year for You to Take a Financial Risk | how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk.jsx | Year of the Fire Horse |
 | 2026-04-20 | Feel Good Friday: The Best Relationship You'll Ever Have Starts in the Mirror | feel-good-friday-love-starts-with-knowing-yourself.jsx | Mahjong and Tarot |
 | 2026-04-20 | The Horse Is the Traveling Star — and It Carries Gold | money-in-the-year-of-the-fire-horse.jsx | Year of the Fire Horse |

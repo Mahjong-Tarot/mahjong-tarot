@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
+import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import AlmanacView from '../../../components/AlmanacView';
 import { useAuth } from '../../../lib/auth';
@@ -41,6 +42,7 @@ export default function AlmanacToday() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
+      <MemberNav />
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>

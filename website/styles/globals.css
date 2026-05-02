@@ -34,6 +34,9 @@
   --gold:         #B8893A;
   --gold-soft:    #EBD9B0;
 
+  /* Semantic status */
+  --success:      #2A8A48;   /* positive ratings, save confirmations */
+
   /* Legacy token remap — keeps existing modules working */
   --midnight-indigo:   var(--ink);
   --mystic-fire:       var(--fire-500);

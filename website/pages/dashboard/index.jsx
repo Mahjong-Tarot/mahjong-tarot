@@ -3,10 +3,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
+import MemberNav from '../../components/MemberNav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
 import PurpleStarChart from '../../components/PurpleStarChart';
-import AlmanacToday from '../../components/AlmanacToday';
+import ProfileCompletion from '../../components/ProfileCompletion';
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
@@ -16,7 +17,7 @@ import styles from '../../styles/Dashboard.module.css';
 
 function ratingColor(rating) {
   if (rating == null) return '#b0b0b0';
-  if (rating >= 80) return '#2c8a4a';
+  if (rating >= 80) return '#2A8A48';
   if (rating >= 70) return '#3a7bb8';
   if (rating >= 60) return '#b88c4f';
   if (rating >= 50) return '#cc7a3a';
@@ -31,6 +32,12 @@ function daysUntilBirthday(birthday) {
   let next = new Date(today.getFullYear(), mo - 1, d);
   if (next < today) next = new Date(today.getFullYear() + 1, mo - 1, d);
   return Math.round((next - today) / (1000 * 60 * 60 * 24));
+}
+
+function greeting(name) {
+  const hour = new Date().getHours();
+  const time = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
+  return name ? `Good ${time}, ${name.split(' ')[0]}` : `Good ${time}`;
 }
 
 export default function Dashboard() {
@@ -92,7 +99,7 @@ export default function Dashboard() {
   if (loading || !user) return null;
 
   const today = data?.today;
-  const todayLabel = new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+  const todayLabel = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
 
   const upcomingBirthdays = members
     .filter((m) => m.birthday)
@@ -119,22 +126,23 @@ export default function Dashboard() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
+      <MemberNav />
       <main className={`container ${accountStyles.wrap}`}>
-        <h1 className={accountStyles.title}>My Dashboard</h1>
 
-        {profileLoaded && !profile?.birthday && (
-          <div className={accountStyles.placeholder} style={{ marginTop: '1rem' }}>
-            <p style={{ margin: 0 }}>
-              Add your birth data on your <Link href="/profile">profile</Link> to unlock your personalized chart, daily energy, and forecast.
-            </p>
-          </div>
-        )}
+        {/* Greeting header */}
+        <div className={styles.greeting}>
+          <h1 className={styles.greetingHeadline}>{greeting(profile?.name)}</h1>
+          <p className={styles.greetingDate}>{todayLabel}</p>
+        </div>
+
+        {/* Profile completion nudge — consolidated from scattered per-section messages */}
+        {profileLoaded && <ProfileCompletion profile={profile} />}
 
         {/* Today's Energy hero */}
         {today && (
           <section className={styles.todayHero}>
             <div className={styles.todayDate}>
-              <p className={styles.todayLabel}>Today · {todayLabel}</p>
+              <p className={styles.todayLabel}>Today's energy</p>
               <p className={styles.todayPillar}>
                 {today.pillars?.day?.gan}{today.pillars?.day?.zhi}
                 <span className={styles.todayPillarEn}>
@@ -154,12 +162,6 @@ export default function Dashboard() {
             )}
           </section>
         )}
-
-        {/* Tong Shu Almanac */}
-        <section className={styles.section}>
-          <h2 className={accountStyles.subTitle}>Today in the Almanac</h2>
-          <AlmanacToday />
-        </section>
 
         {/* Two cards: Fire Horse + Birthdays */}
         {(data?.fireHorseForecast || profileLoaded) && (
@@ -255,14 +257,6 @@ export default function Dashboard() {
           </section>
         )}
 
-        {profileLoaded && profile?.birthday && !profile?.birth_time && (
-          <div className={accountStyles.placeholder} style={{ marginTop: '1.5rem' }}>
-            <p style={{ margin: 0 }}>
-              Add your birth time on your <Link href="/profile">profile</Link> to see your Purple Star chart.
-            </p>
-          </div>
-        )}
-
         {/* Recent readings */}
         {readings.length > 0 && (
           <section className={styles.section}>
@@ -288,32 +282,19 @@ export default function Dashboard() {
           </section>
         )}
 
-        {/* Quick links */}
+        {/* Almanac link — replaces the embedded AlmanacToday widget */}
         <section className={styles.section}>
-          <h2 className={accountStyles.subTitle}>Quick links</h2>
-          <div className={accountStyles.cards}>
-            <Link href="/dashboard/relationships" className={accountStyles.card}>
-              <h2>Relationships</h2>
-              <p>Compare any two birth charts and generate a new reading.</p>
-            </Link>
-            <Link href="/dashboard/inner-circle" className={accountStyles.card}>
-              <h2>Inner Circle</h2>
-              <p>Wife, parents, kids, keep their charts close.</p>
-            </Link>
-            <Link href="/dashboard/almanac" className={accountStyles.card}>
-              <h2>Almanac</h2>
-              <p>Tong Shu day-by-day guidance, what to do and what to avoid.</p>
-            </Link>
-            <Link href="/dashboard/readings" className={accountStyles.card}>
-              <h2>My Readings</h2>
-              <p>Every saved compatibility report.</p>
-            </Link>
-            <Link href="/profile" className={accountStyles.card}>
-              <h2>Profile</h2>
-              <p>Update your birth data and chart.</p>
+          <div className={styles.almanacTeaser}>
+            <div>
+              <h3 className={styles.cardTitle}>Tong Shu Almanac</h3>
+              <p className={styles.cardSubtitle}>Daily guidance · what to do and what to avoid</p>
+            </div>
+            <Link href="/dashboard/almanac" className={styles.cardLink}>
+              View today in the almanac →
             </Link>
           </div>
         </section>
+
       </main>
       <Footer />
     </>

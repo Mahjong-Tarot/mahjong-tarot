@@ -245,7 +245,7 @@
 
 .authSuccess {
   font-family: var(--sans);
-  color: #2c8a4a;
+  color: var(--success);
   font-size: 13px;
   margin: 0;
 }

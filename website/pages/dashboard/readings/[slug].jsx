@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
+import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import CompatibilityReport from '../../../components/CompatibilityReport';
 import { useAuth } from '../../../lib/auth';
@@ -50,6 +51,7 @@ export default function ReadingPage() {
       <>
         <Head><title>Reading not found | Mahjong Tarot</title></Head>
         <Nav />
+        <MemberNav />
         <main className={`container ${styles.wrap}`}>
           <h1 className={styles.title}>Reading not found</h1>
           <p className={styles.lede}>That reading doesn&apos;t exist or isn&apos;t yours.</p>
@@ -72,6 +74,7 @@ export default function ReadingPage() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
+      <MemberNav />
       <main className={`container ${styles.wrap}`}>
         <p className={styles.authFootnote} style={{ marginBottom: '0.5rem' }}>
           <Link href="/dashboard/readings">← Saved readings</Link>

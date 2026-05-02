@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The Mahjong Tarot — Project Status</title>
+<style>
+:root {
+  --lc-primary:        #2F6F8F;
+  --lc-primary-700:    #245672;
+  --lc-primary-100:    #DDE8EE;
+  --lc-primary-50:     #EEF3F6;
+  --lc-accent:         #F28C38;
+  --lc-accent-50:      #FDF1E4;
+  --lc-plum:           #6B5B8E;
+  --lc-plum-100:       #E3DEEC;
+  --lc-teal:           #4A9A95;
+  --lc-teal-100:       #D6E9E7;
+  --lc-ink:            #2B2B2B;
+  --lc-ink-soft:       #4B4B4B;
+  --lc-grey:           #8A9AA5;
+  --lc-grey-soft:      #B9C3CB;
+  --lc-line:           #E3E8EC;
+  --lc-line-soft:      #EDF1F4;
+  --lc-bg:             #F4F7F9;
+  --lc-surface:        #FFFFFF;
+  --lc-success:        #3F8A5C;
+  --lc-success-bg:     #E6F0E8;
+  --lc-warning:        #B5742F;
+  --lc-warning-bg:     #FBE8D2;
+  --lc-danger:         #B5452F;
+  --lc-danger-bg:      #F6DDD3;
+  --lc-serif: "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --lc-sans:  ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --lc-mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--lc-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--lc-ink);
+  background: var(--lc-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============ NAV ============ */
+.ps-nav {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(244, 247, 249, 0.85);
+  backdrop-filter: saturate(1.2) blur(12px);
+  -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  border-bottom: 1px solid var(--lc-line);
+}
+.ps-nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 14px 48px;
+  display: flex; align-items: center; gap: 32px;
+}
+.ps-brand {
+  font-family: var(--lc-serif);
+  font-size: 22px;
+  color: var(--lc-primary);
+  letter-spacing: -0.01em;
+  margin-right: auto;
+}
+.ps-brand strong { font-weight: 600; }
+.ps-nav-links {
+  display: flex; gap: 28px;
+  font-size: 14px;
+  color: var(--lc-ink-soft);
+}
+.ps-nav-links a {
+  color: inherit; text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+.ps-nav-links a:hover {
+  color: var(--lc-primary);
+  border-bottom-color: var(--lc-primary);
+}
+
+/* ============ PAGE LAYOUT ============ */
+.ps-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px;
+}
+.ps-section { margin-bottom: 64px; }
+.ps-section h2 {
+  font-family: var(--lc-serif);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+  color: var(--lc-ink);
+}
+.ps-section .ps-section-meta {
+  font-size: 13px;
+  color: var(--lc-grey);
+  margin: 0 0 24px;
+}
+
+/* ============ HERO ============ */
+.ps-hero {
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-line);
+  border-radius: 16px;
+  padding: 40px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.ps-hero-headline {
+  font-family: var(--lc-serif);
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 12px;
+  color: var(--lc-primary-700);
+}
+.ps-hero-sub {
+  font-size: 15px;
+  color: var(--lc-ink-soft);
+  margin: 0;
+  line-height: 1.6;
+}
+.ps-hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.ps-hero-stat {
+  background: var(--lc-bg);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.ps-hero-stat .num {
+  font-family: var(--lc-serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--lc-primary);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.ps-hero-stat .label {
+  font-size: 12px;
+  color: var(--lc-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.ps-hero-stat.alert .num { color: var(--lc-warning); }
+.ps-hero-stat.danger .num { color: var(--lc-danger); }
+
+/* ============ ALERT BANNER ============ */
+.ps-alert {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--lc-warning-bg);
+  border: 1px solid #F1C58A;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+.ps-alert .icon {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--lc-warning);
+  color: #fff;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+.ps-alert.danger {
+  background: var(--lc-danger-bg);
+  border-color: #E8B5A6;
+}
+.ps-alert.danger .icon { background: var(--lc-danger); }
+.ps-alert a { color: var(--lc-primary); }
+
+/* ============ SUMMARY TABLE ============ */
+.ps-summary {
+  width: 100%;
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-line);
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  font-size: 14px;
+}
+.ps-summary thead th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--lc-grey);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--lc-line);
+  background: var(--lc-line-soft);
+}
+.ps-summary tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--lc-line-soft);
+  vertical-align: middle;
+}
+.ps-summary tbody tr:last-child td { border-bottom: none; }
+.ps-summary tbody tr:hover { background: var(--lc-primary-50); }
+.ps-summary .col-num { width: 36px; color: var(--lc-grey); font-variant-numeric: tabular-nums; }
+.ps-summary .col-pipeline { width: 100px; }
+.ps-summary .col-est { width: 70px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
+.ps-summary .col-deps { width: 110px; color: var(--lc-ink-soft); font-variant-numeric: tabular-nums; }
+.ps-summary .col-bugs { width: 60px; text-align: right; font-variant-numeric: tabular-nums; }
+.ps-summary .epic-link {
+  color: var(--lc-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ps-summary .epic-link:hover { text-decoration: underline; }
+
+/* ============ PIPELINE GLYPHS ============ */
+.ps-pipeline {
+  display: inline-flex;
+  gap: 4px;
+}
+.ps-stage {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--lc-grey-soft);
+  background: transparent;
+  display: inline-block;
+}
+.ps-stage.passed { background: var(--lc-primary); border-color: var(--lc-primary); }
+.ps-stage.partial {
+  background: linear-gradient(90deg, var(--lc-primary) 50%, transparent 50%);
+  border-color: var(--lc-primary);
+}
+.ps-stage.regressed {
+  background: var(--lc-danger);
+  border-color: var(--lc-danger);
+}
+
+/* ============ STATUS PILLS ============ */
+.ps-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lc-line-soft);
+  color: var(--lc-ink-soft);
+  white-space: nowrap;
+}
+.ps-pill.complete { background: var(--lc-success-bg); color: var(--lc-success); }
+.ps-pill.in-progress { background: var(--lc-primary-100); color: var(--lc-primary-700); }
+.ps-pill.building { background: var(--lc-line-soft); color: var(--lc-ink-soft); }
+.ps-pill.warning { background: var(--lc-warning-bg); color: var(--lc-warning); }
+.ps-pill.danger { background: var(--lc-danger-bg); color: var(--lc-danger); }
+
+/* ============ EPIC CARD GRID ============ */
+.ps-epic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 960px) {
+  .ps-epic-grid { grid-template-columns: 1fr; }
+  .ps-hero { grid-template-columns: 1fr; }
+  .ps-page { padding: 24px; }
+}
+
+.ps-epic {
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-line);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.ps-epic:hover {
+  border-color: var(--lc-primary-100);
+  box-shadow: 0 6px 20px rgba(47, 111, 143, 0.06);
+}
+.ps-epic header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.ps-epic-num {
+  font-family: var(--lc-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--lc-grey-soft);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  min-width: 38px;
+}
+.ps-epic-title {
+  font-family: var(--lc-serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--lc-ink);
+  margin: 0;
+  line-height: 1.2;
+}
+.ps-epic-thesis {
+  font-size: 13px;
+  color: var(--lc-ink-soft);
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+.ps-epic-status-col {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.ps-epic-pct {
+  font-family: var(--lc-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--lc-primary);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ps-epic-bar {
+  height: 6px;
+  background: var(--lc-line-soft);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.ps-epic-bar-fill {
+  height: 100%;
+  background: var(--lc-primary);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+.ps-epic-bar-fill.complete { background: var(--lc-success); }
+.ps-epic-bar-fill.regressed {
+  background: linear-gradient(90deg, var(--lc-primary) 60%, var(--lc-danger) 80%);
+}
+.ps-epic-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  font-size: 13px;
+  color: var(--lc-ink-soft);
+  padding-top: 4px;
+  border-top: 1px solid var(--lc-line-soft);
+  padding-top: 14px;
+}
+.ps-epic-meta .item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ps-epic-meta .item-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--lc-grey);
+}
+.ps-epic-meta .item-value {
+  font-weight: 500;
+  color: var(--lc-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ps-epic-meta .item-value.alert { color: var(--lc-warning); }
+.ps-epic-meta .item-value.danger { color: var(--lc-danger); }
+
+.ps-epic-bugs {
+  background: var(--lc-warning-bg);
+  border-left: 3px solid var(--lc-warning);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--lc-ink);
+  line-height: 1.45;
+}
+.ps-epic-bugs.regressed {
+  background: var(--lc-danger-bg);
+  border-left-color: var(--lc-danger);
+}
+.ps-epic-bugs strong { font-weight: 600; }
+.ps-epic-bugs a { color: var(--lc-primary); }
+.ps-epic-bugs .bug-id {
+  display: inline-block;
+  font-family: var(--lc-mono);
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.05);
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+.ps-epic-deeplink {
+  font-size: 13px;
+  color: var(--lc-primary);
+  text-decoration: none;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ps-epic-deeplink:hover { text-decoration: underline; }
+
+/* ============ BUILD LOG ============ */
+.ps-builds {
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ps-day {
+  border-bottom: 1px solid var(--lc-line-soft);
+}
+.ps-day:last-child { border-bottom: none; }
+.ps-day-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--lc-line-soft);
+  font-size: 13px;
+  color: var(--lc-ink-soft);
+  font-weight: 500;
+}
+.ps-day-header .date {
+  font-family: var(--lc-mono);
+  font-size: 13px;
+  color: var(--lc-ink);
+}
+.ps-day-header .count {
+  font-size: 12px;
+  color: var(--lc-grey);
+}
+.ps-prs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ps-pr {
+  display: flex;
+  gap: 14px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--lc-line-soft);
+  font-size: 14px;
+  align-items: baseline;
+}
+.ps-pr:last-child { border-bottom: none; }
+.ps-pr:hover { background: var(--lc-primary-50); }
+.ps-pr-num {
+  font-family: var(--lc-mono);
+  font-size: 13px;
+  color: var(--lc-grey);
+  flex-shrink: 0;
+  min-width: 50px;
+}
+.ps-pr-num a {
+  color: var(--lc-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.ps-pr-num a:hover { text-decoration: underline; }
+.ps-pr-title {
+  flex: 1;
+  color: var(--lc-ink);
+}
+.ps-pr-author {
+  font-size: 12px;
+  color: var(--lc-grey);
+  flex-shrink: 0;
+}
+
+/* ============ COMPANION DOCS ============ */
+.ps-docs-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+@media (max-width: 720px) {
+  .ps-docs-list { grid-template-columns: 1fr; }
+}
+.ps-docs-list a {
+  display: block;
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--lc-ink);
+  font-size: 14px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.ps-docs-list a:hover {
+  border-color: var(--lc-primary);
+  color: var(--lc-primary);
+}
+.ps-docs-list .filename {
+  display: block;
+  font-family: var(--lc-mono);
+  font-size: 11px;
+  color: var(--lc-grey);
+  margin-top: 4px;
+}
+
+/* ============ FOOTER ============ */
+.ps-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--lc-grey);
+  padding: 32px 0;
+  border-top: 1px solid var(--lc-line-soft);
+  margin-top: 48px;
+}
+</style>
+</head>
+<body>
+
+<nav class="ps-nav">
+  <div class="ps-nav-inner">
+    <div class="ps-brand"><strong>The Mahjong Tarot</strong> · Project Status</div>
+    <div class="ps-nav-links">
+      <a href="#summary">Summary</a>
+      <a href="#epics">Epics</a>
+      <a href="#builds">Builds</a>
+      <a href="#docs">Docs</a>
+    </div>
+  </div>
+</nav>
+
+<main class="ps-page">
+
+  <header class="ps-hero">
+    <div>
+      <h1 class="ps-hero-headline">Where the build is, today.</h1>
+      <p class="ps-hero-sub">
+        Last updated <strong>2026-05-02</strong>. Phase 1 — Wedge is in full flight. The almanac home page now leads with today's data (E1), the Find a Good Day search is live with shareable URLs and why-this-date explanations (E2), and the full redesign — editorial type system, booking funnel, member shell, and Supabase Auth — all landed in the past week. Content pipeline (E5) is producing blog posts. <strong>0 open bugs</strong> across all epics.
+      </p>
+    </div>
+    <div class="ps-hero-stats">
+      <div class="ps-hero-stat"><div class="num">10</div><div class="label">Epics</div></div>
+      <div class="ps-hero-stat"><div class="num">23%</div><div class="label">Avg estimate</div></div>
+      <div class="ps-hero-stat"><div class="num">0</div><div class="label">Open bugs</div></div>
+      <div class="ps-hero-stat"><div class="num">1</div><div class="label">Phase in flight</div></div>
+    </div>
+  </header>
+
+  <!-- ============ SUMMARY ============ -->
+  <section class="ps-section" id="summary">
+    <h2>Epic summary</h2>
+    <p class="ps-section-meta">10 epics · pipeline glyphs show stage progress (planned → feature-complete → tested → reviewed → done) · "Depends on" lists blocking epics.</p>
+    <table class="ps-summary">
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th>Epic</th>
+          <th class="col-pipeline">Pipeline</th>
+          <th class="col-est">Estimate</th>
+          <th class="col-deps">Depends on</th>
+          <th class="col-bugs">Open bugs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="col-num">E1</td><td><a class="epic-link" href="#epic-1">Daily Almanac</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage passed"></span><span class="ps-stage partial"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">60%</td><td class="col-deps">—</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E2</td><td><a class="epic-link" href="#epic-2">Find a Good Day</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage passed"></span><span class="ps-stage partial"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">40%</td><td class="col-deps">E1</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E3</td><td><a class="epic-link" href="#epic-3">Personal Pillar Layer</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">5%</td><td class="col-deps">E1</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E4</td><td><a class="epic-link" href="#epic-4">Readings Catalogue</a></td><td><span class="ps-pipeline"><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">0%</td><td class="col-deps">E3</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E5</td><td><a class="epic-link" href="#epic-5">Voice &amp; Content Engine</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage passed"></span><span class="ps-stage partial"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">50%</td><td class="col-deps">—</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E6</td><td><a class="epic-link" href="#epic-6">Founder Cohort &amp; Subscription</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">10%</td><td class="col-deps">E1, E2</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E7</td><td><a class="epic-link" href="#epic-7">Book Integration</a></td><td><span class="ps-pipeline"><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">0%</td><td class="col-deps">E6</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E8</td><td><a class="epic-link" href="#epic-8">1-on-1 Practice Layer</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">5%</td><td class="col-deps">E6</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E9</td><td><a class="epic-link" href="#epic-9">Share &amp; Acquisition Loop</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">5%</td><td class="col-deps">E2</td><td class="col-bugs">0</td></tr>
+        <tr><td class="col-num">E10</td><td><a class="epic-link" href="#epic-10">Member Dashboard</a></td><td><span class="ps-pipeline"><span class="ps-stage passed"></span><span class="ps-stage partial"></span><span class="ps-stage"></span><span class="ps-stage"></span><span class="ps-stage"></span></span></td><td class="col-est">30%</td><td class="col-deps">E1, E3</td><td class="col-bugs">0</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ EPICS ============ -->
+  <section class="ps-section" id="epics">
+    <h2>Epic detail</h2>
+    <p class="ps-section-meta">One card per epic. Pipeline dots: ● passed · ◐ partial · ○ not yet.</p>
+    <div class="ps-epic-grid">
+
+      <article class="ps-epic" id="epic-1">
+        <header>
+          <div class="ps-epic-num">E1</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Daily Almanac</h3>
+            <p class="ps-epic-thesis">The almanac is the front door. Today's date with day-officer, score, element pillar, a one-paragraph reading in Bill's voice, and a "Why this score?" expandable.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill in-progress">In progress</span>
+            <div class="ps-epic-pct">60%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed" title="Planned"></span>
+          <span class="ps-stage passed" title="Feature Complete"></span>
+          <span class="ps-stage partial" title="Partially tested"></span>
+          <span class="ps-stage" title="Reviewed"></span>
+          <span class="ps-stage" title="Done"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:60%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">~2,000 days through Feb 2032 in DB; home page leads with almanac</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">One-paragraph reading copy in voice; "Why this score?" expandable</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">D7 return rate ≥ 35% by month 3</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e1--daily-almanac--60">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-2">
+        <header>
+          <div class="ps-epic-num">E2</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Find a Good Day</h3>
+            <p class="ps-epic-thesis">Intent-shaped search: free-text query → activity rules → date scoring → shareable artifact. "April 18 is the year's best day for us to elope."</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill in-progress">In progress</span>
+            <div class="ps-epic-pct">40%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage partial"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:40%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">Public pages with shareable URLs; why-this-date explanations; analytics events</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">OG share image; .ics calendar download; result page polish</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">≥ 500 unique users by June 1, 2026; ≥ 10% of result pages shared</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e2--find-a-good-day--40">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-3">
+        <header>
+          <div class="ps-epic-num">E3</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Personal Pillar Layer</h3>
+            <p class="ps-epic-thesis">The almanac is the same for everyone. The personal layer — year/day/month pillar from birth data — is what justifies the subscription.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill building">Planned</span>
+            <div class="ps-epic-pct">5%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:5%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">Spec for birth-data capture drafted; lunar-calendar lookup table in encoder data</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">Everything user-facing; pillar computation engine; dashboard integration</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">≥ 60% of paid users complete birth-data capture by phase 4 close</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e3--personal-pillar-layer--5">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-4">
+        <header>
+          <div class="ps-epic-num">E4</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Readings Catalogue</h3>
+            <p class="ps-epic-thesis">Once a user has a chart, she returns for occasions. Purple Star, Three Blessings, Compatibility — structured artifacts she can revisit and share.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill building">Phase 5</span>
+            <div class="ps-epic-pct">0%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:0%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">Phase</span><span class="item-value">Phase 5 — Readings Depth</span></div>
+          <div class="item"><span class="item-label">Depends on</span><span class="item-value">E3 (Personal Pillar Layer)</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">≥ 70% of paid users complete ≥ 1 personal reading within 14 days of signup</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e4--readings-catalogue--0">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-5">
+        <header>
+          <div class="ps-epic-num">E5</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Voice &amp; Content Engine</h3>
+            <p class="ps-epic-thesis">Bill cannot personally write every word forever. The voice must be reproducible by a contractor or a model — and still feel like Bill.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill in-progress">In progress</span>
+            <div class="ps-epic-pct">50%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage partial"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:50%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">Writer / designer / web-developer / generate-image pipeline live; blog posts shipping</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">Written voice doc; daily horoscope copy pipeline; blind taste-test rig</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">Bill writes ≤ 20% of shipped daily content for 90 days; blind taste ≥ 50/50</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e5--voice--content-engine--50">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-6">
+        <header>
+          <div class="ps-epic-num">E6</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Founder Cohort &amp; Subscription</h3>
+            <p class="ps-epic-thesis">The first 100 paying members are not a revenue line — they are the source of every product decision for the next 12 months.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill building">Early</span>
+            <div class="ps-epic-pct">10%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:10%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">Stripe SDK and webhook scaffolding carried over; /book-a-reading funnel live</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">Founder pricing tier ($49.50); onboarding with birth data + first reading; founder email channel</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">100 founders converted by July 1, 2026; each used almanac ≥ 3× and completed ≥ 1 reading</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e6--founder-cohort--subscription--10">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-7">
+        <header>
+          <div class="ps-epic-num">E7</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Book Integration</h3>
+            <p class="ps-epic-thesis">The book is a deepening mechanism, not the front door. Members get the digital edition free; non-members buy it and get a member trial.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill building">Phase 6</span>
+            <div class="ps-epic-pct">0%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:0%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">Phase</span><span class="item-value">Phase 6 — Book &amp; Practice</span></div>
+          <div class="item"><span class="item-label">Depends on</span><span class="item-value">E6 (Founder Cohort)</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">≥ 30% of book buyers start a member trial; ≥ 20% of trials convert to paid</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e7--book-integration--0">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-8">
+        <header>
+          <div class="ps-epic-num">E8</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">1-on-1 Practice Layer</h3>
+            <p class="ps-epic-thesis">Bill's 1-on-1 practice is the roof, not the floor. By the time someone books, they've spent 60 days in the system and the conversation starts at minute one.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill building">Early</span>
+            <div class="ps-epic-pct">5%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:5%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">Bill runs practice via email &amp; Calendly outside the product; /book-a-reading funnel ships three session lengths</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">In-product booking integration; pre-session brief generation; cohort summary for Bill</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">Session prep drops from ~30 min to ≤ 10 min; session NPS ≥ 70</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e8--1-on-1-practice-layer--5">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-9">
+        <header>
+          <div class="ps-epic-num">E9</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Share &amp; Acquisition Loop</h3>
+            <p class="ps-epic-thesis">The share loop is "Find a Good Day" producing screenshot-able artifacts. Paid acquisition is a top-up, not the engine. $2k test budget allocated for May 2026.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill building">Early</span>
+            <div class="ps-epic-pct">5%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:5%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">$2k paid-acquisition test budget allocated for May 2026; share affordances added to E2 pages</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">OG image generator; branded share cards for readings; referral mechanic</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">May test: CTR ≥ 1.5% / conversion ≥ 0.5%; share loop ≥ 30% of paid signups by Q4 2026</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e9--share--acquisition-loop--5">View epic status →</a>
+      </article>
+
+      <article class="ps-epic" id="epic-10">
+        <header>
+          <div class="ps-epic-num">E10</div>
+          <div style="flex:1">
+            <h3 class="ps-epic-title">Member Dashboard</h3>
+            <p class="ps-epic-thesis">The dashboard is where almanac, personal layer, and "one thing to ask" live together. It is the daily-return surface — the place where the habit lives.</p>
+          </div>
+          <div class="ps-epic-status-col">
+            <span class="ps-pill in-progress">In progress</span>
+            <div class="ps-epic-pct">30%</div>
+          </div>
+        </header>
+        <div class="ps-pipeline">
+          <span class="ps-stage passed"></span>
+          <span class="ps-stage partial"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+          <span class="ps-stage"></span>
+        </div>
+        <div class="ps-epic-bar"><div class="ps-epic-bar-fill" style="width:30%"></div></div>
+        <div class="ps-epic-meta">
+          <div class="item"><span class="item-label">What's done</span><span class="item-value">/dashboard route with BaZi profile, Purple Star chart, Three Blessings, compatibility calculator, daily horoscope rail</span></div>
+          <div class="item"><span class="item-label">What's missing</span><span class="item-value">Three-stack layout (almanac → personal → one-prompt); notification rules; recent-readings rail; streak indicator</span></div>
+          <div class="item"><span class="item-label">Success criterion</span><span class="item-value">≥ 50% of paid members visit dashboard ≥ 5 days/week by Q4 2026</span></div>
+          <div class="item"><span class="item-label">Open bugs</span><span class="item-value">0</span></div>
+        </div>
+        <a class="ps-epic-deeplink" href="../../docs/product/epic-status.md#e10--member-dashboard--30">View epic status →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ BUILD LOG ============ -->
+  <section class="ps-section" id="builds">
+    <h2>Build log</h2>
+    <p class="ps-section-meta">Commits to <code>main</code>, grouped by date. Newest first. PM/standup commits omitted. Source: <code>git log --oneline --since="60 days ago"</code>.</p>
+    <div class="ps-builds">
+
+      <div class="ps-day">
+        <div class="ps-day-header"><span class="date">2026-04-29</span><span class="count">7 commits</span></div>
+        <ul class="ps-prs">
+          <li class="ps-pr"><span class="ps-pr-num">#160</span><span class="ps-pr-title">feat(e2): share affordances and analytics events</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(e2): add why-this-date-scores explanation to result page</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">docs(e2): add day plan for Find a Good Day workstream</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(e2): public Find a Good Day pages with shareable URLs</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">docs: add agents.md and surface in project-status dashboard</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">docs: reorganise project documentation into docs/ tree</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#158</span><span class="ps-pr-title">feat(home): lead with today's almanac (E1)</span><span class="ps-pr-author">Dave</span></li>
+        </ul>
+      </div>
+
+      <div class="ps-day">
+        <div class="ps-day-header"><span class="date">2026-04-28</span><span class="count">8 commits</span></div>
+        <ul class="ps-prs">
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">fix: improve p2 discovery</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">fix(auth): wire /signup to real Supabase + add magic link + password eye toggle</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">ui(signup): match nav height + nav-to-eyebrow rhythm to other pages</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">ui(signup): tighten whitespace to match other pages</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">ui(home): drop heavy red duotone — clean hero photo, subtle About wash</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(home): redirect signed-in users from / to /dashboard</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">redesign(home + signup): Mahjong Tarot Home iteration 2</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(booking): one card-reading product with three lengths + new /book-a-reading funnel</span><span class="ps-pr-author">Dave</span></li>
+        </ul>
+      </div>
+
+      <div class="ps-day">
+        <div class="ps-day-header"><span class="date">2026-04-27</span><span class="count">19 commits</span></div>
+        <ul class="ps-prs">
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">redesign(home + member): apply Mahjong Tarot Home design — promo bar, split hero, sessions, book band, dark footer</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">fix(redesign): pure white background — replace #FAFAFB with #FFFFFF</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">redesign: cool white + Fire red editorial system across public site</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(horoscopes): add --out-sql mode to backfill script</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">ux(almanac): prominent search CTA + suggestion/result animations</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#145</span><span class="ps-pr-title">feat(nav): lock signed-in users into member shell + add daily horoscope</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(almanac): extend data through 2032 + add activity search</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(readings): finish Purple Star (Zi Wei Dou Shu) reading</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">data(almanac): seed 354 days of Tong Shu — Year of the Fire Horse</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#144</span><span class="ps-pr-title">ux: profile dropdown + personal readings</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#142</span><span class="ps-pr-title">feat: daily horoscopes + Tong Shu almanac</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#140</span><span class="ps-pr-title">feat(dashboard): Purple Star (Zi Wei Dou Shu) chart</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(dashboard): Three Blessings reading</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#141</span><span class="ps-pr-title">feat(fire-horse): interactive 2026 forecast with year-pillar + Day Master scoring</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">nav(member): member-area nav, narrower container, dashboard polish</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(readings): persist compatibility reports as their own pages</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">compat: richer report using Chinese Love Secrets data</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">#139</span><span class="ps-pr-title">fix(mahjong-mirror): style Preferred Format select to match form fields</span><span class="ps-pr-author">Yon</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat(dashboard): BaZi profile, compatibility calculator, Inner Circle</span><span class="ps-pr-author">Dave</span></li>
+        </ul>
+      </div>
+
+      <div class="ps-day">
+        <div class="ps-day-header"><span class="date">2026-04-27 (earlier)</span><span class="count">auth &amp; redesign stack</span></div>
+        <ul class="ps-prs">
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">auth: replace Clerk with Supabase Auth</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">analytics: add @vercel/analytics</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">nav: Sign in only; Cards becomes a Readings dropdown</span><span class="ps-pr-author">Dave</span></li>
+        </ul>
+      </div>
+
+      <div class="ps-day">
+        <div class="ps-day-header"><span class="date">2026-04-26</span><span class="count">3 commits</span></div>
+        <ul class="ps-prs">
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">fix(bootstrap-html): update index.html and concepts.html to 3-phase model</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">chore(architecture): move obsolete docs to architecture/obsolete/</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">refactor(bootstrap): consolidate all agent schedules into schedule-agents.md</span><span class="ps-pr-author">Dave</span></li>
+        </ul>
+      </div>
+
+      <div class="ps-day">
+        <div class="ps-day-header"><span class="date">2026-04-25 and earlier</span><span class="count">agent &amp; pipeline work</span></div>
+        <ul class="ps-prs">
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">fix(designer): add image-prompts.json guard + fix stale .md reference in generate-image skill</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">feat: update writer agent to draft email</span><span class="ps-pr-author">Dave</span></li>
+          <li class="ps-pr"><span class="ps-pr-num">—</span><span class="ps-pr-title">refactor(bootstrap): streamline P0 account setup and migrate Designer to curl-based image generation</span><span class="ps-pr-author">Dave</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ COMPANION DOCS ============ -->
+  <section class="ps-section" id="docs">
+    <h2>Companion docs</h2>
+    <p class="ps-section-meta">Strategy, architecture, and quality docs that the dashboard reads from. All under <code>docs/</code>.</p>
+    <ul class="ps-docs-list">
+      <li><a href="../../docs/product/epic-status.md">Epic Status (full)<span class="filename">docs/product/epic-status.md</span></a></li>
+      <li><a href="../../docs/product/epics.md">Epics (strategy)<span class="filename">docs/product/epics.md</span></a></li>
+      <li><a href="../../docs/product/product.md">Product Vision<span class="filename">docs/product/product.md</span></a></li>
+      <li><a href="../../docs/product/01-product-timeline.md">Product Timeline<span class="filename">docs/product/01-product-timeline.md</span></a></li>
+      <li><a href="../../docs/product/00-product-overview.md">Product Overview<span class="filename">docs/product/00-product-overview.md</span></a></li>
+      <li><a href="../../docs/product/agents.md">Agents<span class="filename">docs/product/agents.md</span></a></li>
+      <li><a href="../../docs/product/phase-01-wedge.md">Phase 1 — Wedge<span class="filename">docs/product/phase-01-wedge.md</span></a></li>
+      <li><a href="../../docs/product/phase-02-founder-cohort.md">Phase 2 — Founder Cohort<span class="filename">docs/product/phase-02-founder-cohort.md</span></a></li>
+      <li><a href="../../docs/qa/qa-plan.md">QA Plan<span class="filename">docs/qa/qa-plan.md</span></a></li>
+    </ul>
+  </section>
+
+  <footer class="ps-footer">
+    The Mahjong Tarot · Project Status · Generated <span id="genDate">2026-05-02</span>. Source of truth: <code>docs/product/epic-status.md</code>.
+  </footer>
+
+</main>
+
+</body>
+</html>

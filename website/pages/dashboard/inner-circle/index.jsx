@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
-import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import { useAuth } from '../../../lib/auth';
 import { supabase } from '../../../lib/supabase';
@@ -50,7 +49,6 @@ export default function InnerCircleList() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <MemberNav />
       <main className={`container ${styles.wrap}`}>
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <div>

@@ -785,6 +785,13 @@
   display: flex;
   justify-content: center;
 }
+.bookCoverImg {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  transform: rotate(-2deg);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
 .bookCover {
   position: relative;
   aspect-ratio: 2 / 3;

@@ -143,14 +143,14 @@ export default function Home({ todayDate, todayAlmanac }) {
                 </div>
               </div>
               <div className={styles.bookCoverWrap}>
-                <div className={styles.bookCover}>
-                  <div className={styles.bookCoverGlyph}>鏡</div>
-                  <div className={styles.bookCoverEyebrow}>A Divination System</div>
-                  <h3 className={styles.bookCoverTitle}>
-                    The Mahjong<br /><em>Mirror</em>
-                  </h3>
-                  <div className={styles.bookCoverAuthor}>Bill Hajdu · 2026</div>
-                </div>
+                <Image
+                  src="/images/book-cover.webp"
+                  alt="The Mahjong Mirror by Bill Hajdu"
+                  width={320}
+                  height={480}
+                  className={styles.bookCoverImg}
+                  style={{ objectFit: 'contain' }}
+                />
               </div>
             </div>
           </div>

@@ -180,7 +180,7 @@ blockquote {
   padding: 0 var(--outer-margin);
 }
 
-section { padding: var(--space-3xl) 0; }
+section { padding: var(--space-2xl) 0; }
 
 .section-dark {
   background-color: var(--ink);

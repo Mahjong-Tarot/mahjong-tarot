@@ -1,0 +1,60 @@
+/* ══════════════════════════════════════════════════════════════════════
+   MemberNav — secondary horizontal tab strip for the member area
+   Sits immediately below the global Nav on all /dashboard/* and /profile pages
+   ══════════════════════════════════════════════════════════════════════ */
+
+.nav {
+  background: var(--paper-pure);
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--outer-margin);
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.inner::-webkit-scrollbar {
+  display: none;
+}
+
+.link {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  text-decoration: none;
+  padding: 13px 16px 11px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color var(--transition), border-color var(--transition);
+  display: inline-block;
+  line-height: 1;
+}
+
+.link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--rule);
+}
+
+.active {
+  color: var(--fire-600);
+  border-bottom-color: var(--fire-500);
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 0 var(--outer-margin);
+  }
+  .link {
+    padding: 12px 12px 10px;
+    font-size: 10px;
+  }
+}

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
+import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import MemberForm from '../../../components/MemberForm';
 import { useAuth } from '../../../lib/auth';
@@ -24,6 +25,7 @@ export default function NewMember() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
+      <MemberNav />
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Add to inner circle</h1>
         <p className={styles.lede}>Their chart will be saved so you can compare any time.</p>

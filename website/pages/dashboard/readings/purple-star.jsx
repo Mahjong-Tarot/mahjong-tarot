@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
+import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import PurpleStarChart from '../../../components/PurpleStarChart';
 import { useAuth } from '../../../lib/auth';
@@ -91,6 +92,7 @@ export default function PurpleStarReading() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
+      <MemberNav />
       <main className={`container ${accountStyles.wrap}`}>
         <p className={accountStyles.authFootnote} style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
           <Link href="/dashboard/readings">← Saved readings</Link>
@@ -121,25 +123,25 @@ export default function PurpleStarReading() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginTop: '1.5rem' }}>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Soul Star</p>
-                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
+                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "var(--serif)", fontSize: '1.5rem' }}>
                     {chart.soulStar || '–'}
                   </p>
                 </div>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Body Star</p>
-                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
+                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "var(--serif)", fontSize: '1.5rem' }}>
                     {chart.bodyStar || '–'}
                   </p>
                 </div>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Five Elements Class</p>
-                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
+                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "var(--serif)", fontSize: '1.5rem' }}>
                     {chart.fiveElementsClass || '–'}
                   </p>
                 </div>
                 <div className={accountStyles.compatCard}>
                   <p className={accountStyles.muted} style={{ margin: 0 }}>Sign</p>
-                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "'Playfair Display', serif", fontSize: '1.5rem' }}>
+                  <p style={{ margin: '0.3rem 0 0 0', fontFamily: "var(--serif)", fontSize: '1.5rem' }}>
                     {chart.zodiac || chart.sign || '–'}
                   </p>
                 </div>

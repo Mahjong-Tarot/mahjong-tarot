@@ -1,15 +1,16 @@
 /* ══════════════════════════════════════════════════════════════════════
-   Dashboard — member home, editorial restraint
+   Dashboard — horoscope-first layout
+   Today → Month → Year → Four Pillars → Purple Star Now → Inner Circle
    ══════════════════════════════════════════════════════════════════════ */
 
-/* ─── Greeting header ─────────────────────────────────────────────────── */
+/* ─── Greeting ─────────────────────────────────────────────────────── */
 .greeting {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
 .greetingHeadline {
@@ -34,113 +35,69 @@
 
 @media (max-width: 600px) {
   .greetingHeadline { font-size: 26px; }
-  .greeting { flex-direction: column; gap: var(--space-xs); }
+  .greeting { flex-direction: column; gap: var(--space-xs); margin-bottom: var(--space-lg); }
 }
 
-/* ─── Almanac teaser ──────────────────────────────────────────────────── */
-.almanacTeaser {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-  padding: var(--space-lg) var(--space-xl);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  background: var(--paper-pure);
-}
-
-@media (max-width: 600px) {
-  .almanacTeaser {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: var(--space-md);
-  }
-}
-
-/* ─── Today hero ──────────────────────────────────────────────────────── */
+/* ─── TODAY HERO ────────────────────────────────────────────────────── */
 .todayHero {
   display: flex;
   gap: var(--space-xl);
   align-items: stretch;
-  padding: var(--space-lg) var(--space-xl);
-  margin-top: var(--space-md);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-md);
   border: 1px solid var(--rule);
+  border-top: 3px solid var(--fire-500);
   border-radius: var(--r-md);
   background: var(--paper-pure);
-  position: relative;
-}
-.todayHero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: var(--space-xl);
-  width: 32px;
-  height: 2px;
-  background: var(--fire-500);
 }
 
-@media (max-width: 600px) {
-  .todayHero {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-md);
-    padding: var(--space-md);
-  }
-}
-
-.todayDate {
+.todayLeft {
   flex-shrink: 0;
-  min-width: 220px;
+  min-width: 160px;
 }
 
-.todayLabel {
-  margin: 0;
+.todayRight {
+  flex: 1;
+  border-left: 1px solid var(--rule);
+  padding-left: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.heroLabel {
+  margin: 0 0 var(--space-sm);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--fire-600);
 }
 
-.todayPillar {
-  margin: var(--space-sm) 0 0 0;
+.heroChinese {
+  margin: 0 0 6px;
   font-family: var(--serif);
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.15;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--ink);
-  letter-spacing: -0.015em;
 }
 
-.todayPillarEn {
+.heroSub {
+  margin: 0;
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-4);
-  display: block;
-  margin-top: 6px;
 }
 
-.todayEnergy {
-  flex: 1;
-  border-left: 1px solid var(--rule);
-  padding-left: var(--space-xl);
-}
-
-@media (max-width: 600px) {
-  .todayEnergy {
-    border-left: none;
-    border-top: 1px solid var(--rule);
-    padding: var(--space-md) 0 0 0;
-  }
-}
-
-.todayHeadline {
-  margin: 0 0 var(--space-sm);
+.heroHeadline {
+  margin: 0;
   font-family: var(--serif);
   font-size: 22px;
   font-weight: 500;
@@ -149,7 +106,7 @@
   color: var(--ink);
 }
 
-.todayLine {
+.heroLine {
   margin: 0;
   font-family: var(--sans);
   font-size: 15px;
@@ -157,19 +114,53 @@
   color: var(--ink-2);
 }
 
-.twoCol {
+.heroMuted {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-4);
+}
+
+.heroLink {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fire-600);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  align-self: flex-start;
+  transition: color var(--transition);
+}
+
+.heroLink:hover { color: var(--fire-700); }
+
+@media (max-width: 600px) {
+  .todayHero {
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-lg) var(--space-md);
+  }
+  .todayRight {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding-left: 0;
+    padding-top: var(--space-lg);
+  }
+  .heroChinese { font-size: 40px; }
+}
+
+/* ─── PERIOD ROW: This month | This year ───────────────────────────── */
+.periodRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
-  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
-@media (max-width: 720px) {
-  .twoCol { grid-template-columns: 1fr; }
-}
-
-.card {
-  padding: var(--space-lg);
+.periodCard {
+  padding: var(--space-lg) var(--space-xl);
   border: 1px solid var(--rule);
   border-radius: var(--r-md);
   background: var(--paper-pure);
@@ -177,52 +168,292 @@
   flex-direction: column;
 }
 
-.cardTitle {
+.periodLabel {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.periodChinese {
   margin: 0 0 4px;
   font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
-.cardSubtitle {
+.periodName {
   margin: 0 0 var(--space-md);
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-4);
+  color: var(--ink-3);
 }
 
-.bigRating {
+.periodTagline {
+  margin: 0;
   font-family: var(--serif);
-  font-size: 44px;
-  font-weight: 400;
-  margin: 0 0 var(--space-sm);
-  color: var(--ink);
-  letter-spacing: -0.025em;
-  line-height: 1;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.4;
 }
 
-.bigRating span {
+.periodScore {
+  margin: 0 0 4px;
+  font-family: var(--serif);
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.periodScore span {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 16px;
   color: var(--ink-4);
-  margin-left: 6px;
+  margin-left: 4px;
   font-weight: 500;
 }
 
-.cardBody {
-  flex: 1;
-  font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--ink-2);
+.periodFav {
   margin: 0 0 var(--space-md);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
 }
 
+.periodMuted {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-4);
+  line-height: 1.5;
+}
+
+.periodLink {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fire-600);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  align-self: flex-start;
+  margin-top: auto;
+  transition: color var(--transition);
+}
+
+.periodLink:hover { color: var(--fire-700); }
+
+@media (max-width: 640px) {
+  .periodRow { grid-template-columns: 1fr; }
+  .periodChinese { font-size: 36px; }
+  .periodScore { font-size: 48px; }
+  .periodCard { padding: var(--space-md); }
+}
+
+/* ─── CHART SECTIONS (Four Pillars, Purple Star, Readings) ─────────── */
+.chartSection {
+  margin-bottom: var(--space-lg);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.sectionLink {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fire-600);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.sectionLink:hover { color: var(--fire-700); }
+
+/* ─── PURPLE STAR DECADE CARD ───────────────────────────────────────── */
+.decadeCard {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  padding: var(--space-lg) var(--space-xl);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper-pure);
+}
+
+.decadeLeft { flex: 1; }
+
+.decadeRight {
+  flex-shrink: 0;
+  min-width: 200px;
+  border-left: 1px solid var(--rule);
+  padding-left: var(--space-xl);
+}
+
+.decadeLabel {
+  margin: 0 0 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.decadeName {
+  margin: 0 0 4px;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.decadeRole {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-3);
+}
+
+.decadeRange {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.decadeStarsLabel {
+  margin: 0 0 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.decadeStars {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .decadeCard { flex-direction: column; gap: var(--space-md); padding: var(--space-md); }
+  .decadeRight { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: var(--space-md); min-width: 0; width: 100%; }
+}
+
+/* ─── TWO-COL: Inner circle + Birthdays ─────────────────────────────── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.circleCol { display: flex; flex-direction: column; }
+
+@media (max-width: 640px) {
+  .twoCol { grid-template-columns: 1fr; }
+}
+
+/* ─── INNER CIRCLE GRID LIST ────────────────────────────────────────── */
+.gridList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.gridList li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 10px 14px;
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition);
+  font-family: var(--sans);
+}
+
+.gridList li a:hover { border-color: var(--ink); }
+
+.gridName {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.gridName small {
+  font-family: var(--mono);
+  color: var(--ink-4);
+  font-weight: 400;
+  margin-left: 6px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.gridRating {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  color: #fff;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+/* ─── UPCOMING BIRTHDAYS LIST ───────────────────────────────────────── */
 .bdayList {
   list-style: none;
   padding: 0;
@@ -265,82 +496,14 @@
   text-transform: uppercase;
 }
 
-.section {
-  margin-top: var(--space-2xl);
-}
-
-.gridList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.gridList li a {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--space-md);
-  padding: 12px 16px;
-  background: var(--paper-pure);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color var(--transition);
-  font-family: var(--sans);
-}
-
-.gridList li a:hover {
-  border-color: var(--ink);
-}
-
-.gridName {
-  font-weight: 500;
-  font-size: 14px;
-  color: var(--ink);
-}
-
-.gridName small {
-  font-family: var(--mono);
-  color: var(--ink-4);
-  font-weight: 500;
-  margin-left: 8px;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-}
-
-.gridSign {
-  font-family: var(--mono);
-  color: var(--ink-3);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.gridRating {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 56px;
-  padding: 4px 12px;
-  border-radius: var(--r-pill);
-  color: #fff;
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-}
-
+/* ─── RECENT READINGS LIST ──────────────────────────────────────────── */
 .recentList {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .recentList li a {
@@ -359,9 +522,7 @@
   transition: border-color var(--transition);
 }
 
-.recentList li a:hover {
-  border-color: var(--ink);
-}
+.recentList li a:hover { border-color: var(--ink); }
 
 .recentRating {
   margin-left: auto;
@@ -380,19 +541,38 @@
   letter-spacing: 0.04em;
 }
 
-.cardLink {
-  margin-top: auto;
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--fire-600);
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-  align-self: flex-start;
-  padding-bottom: 1px;
-  transition: color var(--transition);
+/* ─── ALMANAC TEASER CTA ────────────────────────────────────────────── */
+.almanacTeaser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper-pure);
+  margin-bottom: var(--space-lg);
 }
 
-.cardLink:hover {
-  color: var(--fire-700);
+.teaserTitle {
+  margin: 0 0 2px;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.teaserSub {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+}
+
+@media (max-width: 600px) {
+  .almanacTeaser { flex-direction: column; align-items: flex-start; padding: var(--space-md); }
 }

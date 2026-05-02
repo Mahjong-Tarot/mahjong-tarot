@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
-import MemberNav from '../../components/MemberNav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
 import { useAuth } from '../../lib/auth';
@@ -92,7 +91,6 @@ export default function ProfilePage() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <MemberNav />
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Your profile</h1>
         <p className={styles.lede}>

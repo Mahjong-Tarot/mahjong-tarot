@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
-import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import PurpleStarChart from '../../../components/PurpleStarChart';
 import { useAuth } from '../../../lib/auth';
@@ -92,7 +91,6 @@ export default function PurpleStarReading() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <MemberNav />
       <main className={`container ${accountStyles.wrap}`}>
         <p className={accountStyles.authFootnote} style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
           <Link href="/dashboard/readings">← Saved readings</Link>

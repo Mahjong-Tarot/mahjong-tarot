@@ -3,17 +3,22 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Nav from '../../components/Nav';
-import MemberNav from '../../components/MemberNav';
 import Footer from '../../components/Footer';
 import BaziChart from '../../components/BaziChart';
-import PurpleStarChart from '../../components/PurpleStarChart';
 import ProfileCompletion from '../../components/ProfileCompletion';
 import { useAuth } from '../../lib/auth';
 import { supabase } from '../../lib/supabase';
-import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
+import { calculatePillars, tallyElements, dominantElement, elementInteraction } from '../../lib/bazi';
 import { calculatePurpleStar } from '../../lib/purpleStar';
 import accountStyles from '../../styles/Account.module.css';
 import styles from '../../styles/Dashboard.module.css';
+
+const PALACE_ROLE = {
+  Ming: 'The Self', Body: 'How You Show Up', Parents: 'Family & Authority',
+  Leisure: 'Inner Life', Property: 'Home & Real Estate', Career: 'Work & Reputation',
+  Servants: 'Allies & Helpers', Travel: 'Movement & Change', Health: 'Body & Vitality',
+  Wealth: 'Money & Resources', Children: 'Creativity & Children', Marriage: 'Partnership', Siblings: 'Peers',
+};
 
 function ratingColor(rating) {
   if (rating == null) return '#b0b0b0';
@@ -38,6 +43,15 @@ function greeting(name) {
   const hour = new Date().getHours();
   const time = hour < 12 ? 'morning' : hour < 17 ? 'afternoon' : 'evening';
   return name ? `Good ${time}, ${name.split(' ')[0]}` : `Good ${time}`;
+}
+
+function calculateAge(birthday) {
+  if (!birthday) return null;
+  const [y, m, d] = birthday.split('-').map(Number);
+  const today = new Date();
+  let age = today.getFullYear() - y;
+  if (today.getMonth() + 1 < m || (today.getMonth() + 1 === m && today.getDate() < d)) age--;
+  return age;
 }
 
 export default function Dashboard() {
@@ -98,26 +112,47 @@ export default function Dashboard() {
 
   if (loading || !user) return null;
 
-  const today = data?.today;
-  const todayLabel = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+  // Always compute today's cosmic pillars client-side — available before API responds
+  const todayStr = new Date().toISOString().split('T')[0];
+  const cosmicPillars = calculatePillars(todayStr, '12:00');
+  const dayPillar   = data?.today?.pillars?.day   || cosmicPillars?.day;
+  const monthPillar = data?.today?.pillars?.month || cosmicPillars?.month;
+  const yearPillar  = data?.today?.pillars?.year  || cosmicPillars?.year;
 
+  const todayLabel = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  const monthLabel = new Date().toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+
+  // Personalized energies (require birthday via API)
+  const todayEnergy  = data?.today?.energy;
+  const yearForecast = data?.fireHorseForecast;
+
+  // Month elemental interaction vs user's day master
+  const userDayElement = data?.userPillars?.day?.stem?.element;
+  const monthElement   = monthPillar?.stem?.element;
+  const monthEnergy    = userDayElement && monthElement
+    ? elementInteraction(userDayElement, monthElement)
+    : null;
+
+  // Four Pillars
+  const userPillars  = profile?.pillars || data?.userPillars || (profile?.birthday ? calculatePillars(profile.birthday, profile.birth_time) : null);
+  const userElements = userPillars ? tallyElements(userPillars) : null;
+  const userDominant = userElements ? dominantElement(userElements) : null;
+
+  // Purple Star — current decade only, no full chart on dashboard
+  const purpleStar = profile?.birthday && profile?.birth_time
+    ? calculatePurpleStar({ birthday: profile.birthday, birthTime: profile.birth_time, gender: profile.gender })
+    : null;
+  const age           = profile?.birthday ? calculateAge(profile.birthday) : null;
+  const currentDecade = purpleStar
+    ? purpleStar.palaces.find((p) => p.decade && age >= p.decade[0] && age <= p.decade[1]) || null
+    : null;
+
+  // Inner Circle
   const upcomingBirthdays = members
     .filter((m) => m.birthday)
     .map((m) => ({ ...m, daysUntil: daysUntilBirthday(m.birthday) }))
     .sort((a, b) => a.daysUntil - b.daysUntil)
     .slice(0, 3);
-
-  const userPillars = profile?.pillars || data?.userPillars || (profile?.birthday ? calculatePillars(profile.birthday, profile.birth_time) : null);
-  const userElements = userPillars ? tallyElements(userPillars) : null;
-  const userDominant = userElements ? dominantElement(userElements) : null;
-
-  const purpleStar = profile?.birthday && profile?.birth_time
-    ? calculatePurpleStar({
-        birthday: profile.birthday,
-        birthTime: profile.birth_time,
-        gender: profile.gender,
-      })
-    : null;
 
   return (
     <>
@@ -126,71 +161,175 @@ export default function Dashboard() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <MemberNav />
       <main className={`container ${accountStyles.wrap}`}>
 
-        {/* Greeting header */}
+        {/* ── 1. Greeting ───────────────────────────────────────── */}
         <div className={styles.greeting}>
           <h1 className={styles.greetingHeadline}>{greeting(profile?.name)}</h1>
           <p className={styles.greetingDate}>{todayLabel}</p>
         </div>
 
-        {/* Profile completion nudge — consolidated from scattered per-section messages */}
+        {/* ── 2. Profile completion nudge ───────────────────────── */}
         {profileLoaded && <ProfileCompletion profile={profile} />}
 
-        {/* Today's Energy hero */}
-        {today && (
-          <section className={styles.todayHero}>
-            <div className={styles.todayDate}>
-              <p className={styles.todayLabel}>Today's energy</p>
-              <p className={styles.todayPillar}>
-                {today.pillars?.day?.gan}{today.pillars?.day?.zhi}
-                <span className={styles.todayPillarEn}>
-                  {today.pillars?.day?.stem?.polarity} {today.pillars?.day?.stem?.element} · {today.pillars?.day?.branch?.animal} day
-                </span>
+        {/* ── 3. TODAY HERO ─────────────────────────────────────── */}
+        {dayPillar && (
+          <div className={styles.todayHero}>
+            <div className={styles.todayLeft}>
+              <p className={styles.heroLabel}>Today</p>
+              <p className={styles.heroChinese}>{dayPillar.gan}{dayPillar.zhi}</p>
+              <p className={styles.heroSub}>
+                {dayPillar.stem?.polarity} {dayPillar.stem?.element} · {dayPillar.branch?.animal} day
               </p>
             </div>
-            {today.energy ? (
-              <div className={styles.todayEnergy}>
-                <h3 className={styles.todayHeadline}>{today.energy.headline}</h3>
-                <p className={styles.todayLine}>{today.energy.line}</p>
-              </div>
-            ) : (
-              <div className={styles.todayEnergy}>
-                <p className={accountStyles.muted}>Add a birthday on your profile to see today&apos;s personalized energy.</p>
-              </div>
-            )}
-          </section>
-        )}
-
-        {/* Two cards: Fire Horse + Birthdays */}
-        {(data?.fireHorseForecast || profileLoaded) && (
-          <section className={styles.twoCol}>
-            <div className={styles.card}>
-              <h3 className={styles.cardTitle}>Year of the Fire Horse</h3>
-              <p className={styles.cardSubtitle}>Your year ahead</p>
-              {data?.fireHorseForecast ? (
+            <div className={styles.todayRight}>
+              {todayEnergy ? (
                 <>
-                  <p className={styles.bigRating}>
-                    {Math.round(data.fireHorseForecast.rating)}<span>%</span>
-                  </p>
-                  <p className={styles.cardBody}>
-                    {(data.fireHorseForecast.narrative || '').slice(0, 240)}
-                    {(data.fireHorseForecast.narrative || '').length > 240 ? '…' : ''}
-                  </p>
-                  <Link href="/year-of-the-fire-horse" className={styles.cardLink}>
-                    Read the full year ahead →
-                  </Link>
+                  <h2 className={styles.heroHeadline}>{todayEnergy.headline}</h2>
+                  <p className={styles.heroLine}>{todayEnergy.line}</p>
                 </>
               ) : (
-                <p className={accountStyles.muted}>Add your birthday on your profile to see your Fire Horse forecast.</p>
+                <p className={styles.heroMuted}>
+                  {profileLoaded && !profile?.birthday
+                    ? <><Link href="/profile">Add your birthday</Link> for your personal energy reading.</>
+                    : ' '
+                  }
+                </p>
+              )}
+              <Link href="/dashboard/almanac" className={styles.heroLink}>
+                View today&apos;s almanac →
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* ── 4. THIS MONTH | THIS YEAR ─────────────────────────── */}
+        <div className={styles.periodRow}>
+
+          {/* Month */}
+          <div className={styles.periodCard}>
+            <p className={styles.periodLabel}>This month · {monthLabel}</p>
+            <p className={styles.periodChinese}>{monthPillar?.gan}{monthPillar?.zhi}</p>
+            <p className={styles.periodName}>
+              {monthPillar?.stem?.polarity} {monthPillar?.stem?.element} {monthPillar?.branch?.animal} Month
+            </p>
+            {monthEnergy && (
+              <p className={styles.periodTagline}>{monthEnergy.headline}</p>
+            )}
+            {!monthEnergy && profileLoaded && !profile?.birthday && (
+              <p className={styles.periodMuted}>
+                <Link href="/profile">Add your birthday</Link> for your monthly energy.
+              </p>
+            )}
+          </div>
+
+          {/* Year */}
+          <div className={styles.periodCard}>
+            <p className={styles.periodLabel}>This year · Fire Horse</p>
+            <p className={styles.periodChinese}>{yearPillar?.gan}{yearPillar?.zhi}</p>
+            <p className={styles.periodName}>
+              {yearPillar?.stem?.polarity} {yearPillar?.stem?.element} {yearPillar?.branch?.animal} Year
+            </p>
+            {yearForecast ? (
+              <>
+                <p className={styles.periodScore}>
+                  {Math.round(yearForecast.rating)}<span>%</span>
+                </p>
+                <p className={styles.periodFav}>Your year favorability</p>
+                <Link href="/year-of-the-fire-horse" className={styles.periodLink}>
+                  Full year reading →
+                </Link>
+              </>
+            ) : profileLoaded && !profile?.birthday ? (
+              <p className={styles.periodMuted}>
+                <Link href="/profile">Add your birthday</Link> to see your favorability.
+              </p>
+            ) : null}
+          </div>
+        </div>
+
+        {/* ── 5. YOUR FOUR PILLARS ──────────────────────────────── */}
+        {userPillars && (
+          <div className={styles.chartSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Your Four Pillars</h2>
+            </div>
+            <BaziChart pillars={userPillars} elements={userElements} dominantElement={userDominant} />
+          </div>
+        )}
+
+        {/* ── 6. PURPLE STAR · NOW ──────────────────────────────── */}
+        {purpleStar && currentDecade && (
+          <div className={styles.chartSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Purple Star · Now</h2>
+              <Link href="/dashboard/readings/purple-star" className={styles.sectionLink}>
+                Full chart →
+              </Link>
+            </div>
+            <div className={styles.decadeCard}>
+              <div className={styles.decadeLeft}>
+                <p className={styles.decadeLabel}>Current decade palace</p>
+                <p className={styles.decadeName}>{currentDecade.name}</p>
+                {PALACE_ROLE[currentDecade.name] && (
+                  <p className={styles.decadeRole}>{PALACE_ROLE[currentDecade.name]}</p>
+                )}
+                {currentDecade.decade && (
+                  <p className={styles.decadeRange}>
+                    Ages {currentDecade.decade[0]}–{currentDecade.decade[1]}
+                    {age != null && ` · you are ${age}`}
+                  </p>
+                )}
+              </div>
+              {currentDecade.majorStars?.length > 0 && (
+                <div className={styles.decadeRight}>
+                  <p className={styles.decadeStarsLabel}>Major stars this decade</p>
+                  <p className={styles.decadeStars}>
+                    {currentDecade.majorStars.map((s) => s.name + (s.mutagen ? ` (${s.mutagen})` : '')).join(', ')}
+                  </p>
+                </div>
               )}
             </div>
+          </div>
+        )}
 
-            <div className={styles.card}>
-              <h3 className={styles.cardTitle}>Upcoming birthdays</h3>
-              <p className={styles.cardSubtitle}>From your inner circle</p>
-              {upcomingBirthdays.length > 0 ? (
+        {/* ── 7. INNER CIRCLE + BIRTHDAYS ───────────────────────── */}
+        {(data?.memberRatings?.length > 0 || upcomingBirthdays.length > 0) && (
+          <div className={styles.twoCol}>
+
+            {data?.memberRatings?.length > 0 && (
+              <div className={styles.circleCol}>
+                <div className={styles.sectionHeader}>
+                  <h2 className={styles.sectionTitle}>Inner circle</h2>
+                  <Link href="/dashboard/inner-circle" className={styles.sectionLink}>Manage →</Link>
+                </div>
+                <ul className={styles.gridList}>
+                  {data.memberRatings.map((m) => (
+                    <li key={m.id}>
+                      <Link href={`/dashboard/inner-circle/${m.id}`}>
+                        <span className={styles.gridName}>
+                          {m.name}
+                          {m.relationship && <small>· {m.relationship}</small>}
+                        </span>
+                        {m.rating != null ? (
+                          <span className={styles.gridRating} style={{ background: ratingColor(m.rating) }}>
+                            {Math.round(m.rating)}%
+                          </span>
+                        ) : (
+                          <span className={accountStyles.muted}>–</span>
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {upcomingBirthdays.length > 0 && (
+              <div className={styles.circleCol}>
+                <h2 className={styles.sectionTitle} style={{ marginBottom: 'var(--space-md)' }}>
+                  Upcoming birthdays
+                </h2>
                 <ul className={styles.bdayList}>
                   {upcomingBirthdays.map((m) => (
                     <li key={m.id}>
@@ -204,63 +343,18 @@ export default function Dashboard() {
                     </li>
                   ))}
                 </ul>
-              ) : (
-                <p className={accountStyles.muted}>
-                  <Link href="/dashboard/inner-circle/new">Add to your Inner Circle</Link> to see upcoming birthdays.
-                </p>
-              )}
-            </div>
-          </section>
+              </div>
+            )}
+          </div>
         )}
 
-        {/* Inner Circle compatibility grid */}
-        {data?.memberRatings?.length > 0 && (
-          <section className={styles.section}>
-            <h2 className={accountStyles.subTitle}>Your inner circle · at a glance</h2>
-            <ul className={styles.gridList}>
-              {data.memberRatings.map((m) => (
-                <li key={m.id}>
-                  <Link href={`/dashboard/inner-circle/${m.id}`}>
-                    <span>
-                      <span className={styles.gridName}>
-                        {m.name}
-                        <small>· {m.relationship}{m.sign ? ` · ${m.sign}` : ''}</small>
-                      </span>
-                    </span>
-                    {m.rating != null ? (
-                      <span className={styles.gridRating} style={{ background: ratingColor(m.rating) }}>
-                        {Math.round(m.rating)}%
-                      </span>
-                    ) : (
-                      <span className={accountStyles.muted}>–</span>
-                    )}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {/* Your Four Pillars */}
-        {userPillars && (
-          <section className={styles.section}>
-            <h2 className={accountStyles.subTitle}>Your Four Pillars</h2>
-            <BaziChart pillars={userPillars} elements={userElements} dominantElement={userDominant} />
-          </section>
-        )}
-
-        {/* Purple Star Chart */}
-        {purpleStar && (
-          <section className={styles.section}>
-            <h2 className={accountStyles.subTitle}>Your Purple Star Chart</h2>
-            <PurpleStarChart chart={purpleStar} name={profile?.name} />
-          </section>
-        )}
-
-        {/* Recent readings */}
+        {/* ── 8. RECENT READINGS ────────────────────────────────── */}
         {readings.length > 0 && (
-          <section className={styles.section}>
-            <h2 className={accountStyles.subTitle}>Recent readings</h2>
+          <div className={styles.chartSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Recent readings</h2>
+              <Link href="/dashboard/readings" className={styles.sectionLink}>View all →</Link>
+            </div>
             <ul className={styles.recentList}>
               {readings.map((r) => (
                 <li key={r.id}>
@@ -276,24 +370,19 @@ export default function Dashboard() {
                 </li>
               ))}
             </ul>
-            <p style={{ marginTop: '1rem' }}>
-              <Link href="/dashboard/readings" className={styles.cardLink}>View all readings →</Link>
-            </p>
-          </section>
+          </div>
         )}
 
-        {/* Almanac link — replaces the embedded AlmanacToday widget */}
-        <section className={styles.section}>
-          <div className={styles.almanacTeaser}>
-            <div>
-              <h3 className={styles.cardTitle}>Tong Shu Almanac</h3>
-              <p className={styles.cardSubtitle}>Daily guidance · what to do and what to avoid</p>
-            </div>
-            <Link href="/dashboard/almanac" className={styles.cardLink}>
-              View today in the almanac →
-            </Link>
+        {/* ── 9. ALMANAC CTA ────────────────────────────────────── */}
+        <div className={styles.almanacTeaser}>
+          <div>
+            <h3 className={styles.teaserTitle}>Tong Shu Almanac</h3>
+            <p className={styles.teaserSub}>Daily guidance · auspicious activities and what to avoid</p>
           </div>
-        </section>
+          <Link href="/dashboard/almanac" className={styles.periodLink}>
+            View today in the almanac →
+          </Link>
+        </div>
 
       </main>
       <Footer />

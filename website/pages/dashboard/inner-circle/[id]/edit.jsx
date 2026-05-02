@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Nav from '../../../../components/Nav';
-import MemberNav from '../../../../components/MemberNav';
 import Footer from '../../../../components/Footer';
 import MemberForm from '../../../../components/MemberForm';
 import { useAuth } from '../../../../lib/auth';
@@ -46,7 +45,6 @@ export default function EditMember() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <MemberNav />
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Edit {member?.name || 'member'}</h1>
         <div style={{ marginTop: '1.5rem' }}>

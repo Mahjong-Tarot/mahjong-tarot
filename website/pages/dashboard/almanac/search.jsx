@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Nav from '../../../components/Nav';
-import MemberNav from '../../../components/MemberNav';
 import Footer from '../../../components/Footer';
 import AlmanacSearch from '../../../components/AlmanacSearch';
 import { useAuth } from '../../../lib/auth';
@@ -24,7 +23,6 @@ export default function AlmanacSearchPage() {
         <meta name="robots" content="noindex" />
       </Head>
       <Nav />
-      <MemberNav />
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>

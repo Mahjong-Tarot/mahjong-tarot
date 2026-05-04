@@ -1,6 +1,6 @@
 # The Mahjong Tarot — Epic Status Dashboard
 
-**Last updated:** 2026-04-28
+**Last updated:** 2026-05-05
 **Phase in flight:** Phase 1 — Wedge
 
 At-a-glance status for each epic. Update this file whenever a workstream opens, ships, or stalls.
@@ -17,12 +17,12 @@ Status glyphs: 🔄 in flight · ✅ done · ⏳ partially done · ☐ planned �
 | [E2 · Find a Good Day](./epics.md#e2--find-a-good-day) | ⏳ | 40% | 0 | Search prototype exists; share-able artifact missing |
 | [E3 · Personal Pillar Layer](./epics.md#e3--personal-pillar-layer) | ☐ | 5% | 0 | Birth-data capture spec drafted; pillar engine not started |
 | [E4 · Readings Catalogue](./epics.md#e4--readings-catalogue) | ☐ | 0% | 0 | Phase 5 |
-| [E5 · Voice & Content Engine](./epics.md#e5--voice--content-engine) | 🔄 | 50% | 0 | Writer/designer/web-developer pipeline live; voice doc not written |
+| [E5 · Voice & Content Engine](./epics.md#e5--voice--content-engine) | 🔄 | 60% | 0 | Pipeline shipping ~5 posts/week; voice doc + daily horoscope copy still missing |
 | [E6 · Founder Cohort & Subscription](./epics.md#e6--founder-cohort--subscription) | ☐ | 10% | 0 | Stripe wiring exists from earlier project; no founder tier yet |
 | [E7 · Book Integration](./epics.md#e7--book-integration) | ☐ | 0% | 0 | Phase 6 |
 | [E8 · 1-on-1 Practice Layer](./epics.md#e8--1-on-1-practice-layer) | ☐ | 5% | 0 | Bill's existing practice runs outside the product today |
 | [E9 · Share & Acquisition Loop](./epics.md#e9--share--acquisition-loop) | ☐ | 5% | 0 | Paid test budget allocated for May 2026 |
-| [E10 · Member Dashboard](./epics.md#e10--member-dashboard) | ⏳ | 30% | 0 | Dashboard route exists; layout does not yet match the 12-month shape |
+| [E10 · Member Dashboard](./epics.md#e10--member-dashboard) | 🔄 | 45% | 0 | Horoscope-first restructure shipped (Today → Month → Year → Pillars → Purple Star); MemberNav + design tokens unified |
 
 Percent-done is an order-of-magnitude estimate (closer to 0/25/50/75/100 than to 47%). Use it to decide where attention goes, not to plan capacity.
 
@@ -66,9 +66,9 @@ Not started. Phase 5.
 
 ---
 
-### E5 · Voice & Content Engine — 🔄 50%
+### E5 · Voice & Content Engine — 🔄 60%
 
-**What's done:** writer / designer / web-developer / mahjong-studio agent pipeline is live and shipping content. Topic bundles in `content/topics/` flow through to published blog posts.
+**What's done:** writer / designer / web-developer / mahjong-studio agent pipeline live and shipping content. Topic bundles in `content/topics/` flow through to published blog posts. Recent ships: 4-post bundle on 2026-05-02 (Feel Good Friday Wealth, Fire Horse Career, Decision Framework Career, Career Cage); "Opposites Attract" love-and-compatibility post on 2026-05-04; week-of-2026-05-11 content drafted on 2026-05-05. Generate-image skill producing hero + social images per post.
 
 **What's missing:** Written voice doc that any contractor could write to. Daily horoscope content pipeline (currently we only ship blog posts, not daily almanac copy). Blind taste test rig.
 
@@ -112,11 +112,11 @@ Not started. Phase 6.
 
 ---
 
-### E10 · Member Dashboard — ⏳ 30%
+### E10 · Member Dashboard — 🔄 45%
 
-**What's done:** `/dashboard` route exists with placeholder content.
+**What's done:** `/dashboard` restructured horoscope-first on 2026-05-02 — Today → Month → Year → Pillars → Purple Star order (#168). MemberNav + design-token consistency pass landed (#167) so the member shell matches the public-site editorial system. BaZi profile, compatibility calculator, Inner Circle, Three Blessings, and Purple Star all rendering.
 
-**What's missing:** Three-stack layout (almanac → personal → one-prompt). Notification rules. Recent-readings rail. Streak indicator.
+**What's missing:** Three-stack layout (almanac → personal → one-prompt) at the top. Notification rules. Recent-readings rail. Streak indicator.
 
 **Definition of done:** ≥ 50% of paid members visit dashboard ≥ 5 days/week by Q4 2026.
 

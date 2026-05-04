@@ -151,3 +151,41 @@ Publishes: Friday (blog + social — publishes May 8)
 | May 8 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | May 8 | Fri | Instagram | Feel Good Friday: Balance over heat. Presence over perfection. That's the love the Fire Horse year is asking you to build. |
 
+---
+
+## Week of May 11 — Love Life by Sign
+
+**Topic: 2026-05-11-horse-love-signs** — STATUS: WRITTEN
+Angle: Fire Horse — shock & awe (Sign-by-Sign Breakdown)
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-05-13-mirror-love-signs** — STATUS: WRITTEN
+Angle: Mahjong Mirror — the answer (ties back to sign-by-sign love risk)
+Chapter/tile focus: Chapter 3 (Opposition), Appendix — Love cards (Peach Blossom, Sword)
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-05-15-feel-good-love** — STATUS: WRITTEN
+Angle: Feel Good Friday — positive aspiration
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| May 11 | Mon | Blog | "Your Love Life in 2026 — What the Fire Horse Actually Means for Your Sign" — Sign-by-sign breakdown of love prospects in the Fire Horse year. Some signs will thrive. Most will face real challenges. Every reader gets their two-word headline and something actionable to do about it. |
+| May 11 | Mon | Facebook EN | Most years, your zodiac sign is background noise in your love life. This year it isn't. The Fire Horse amplifies everything — and it hits every sign differently. Here's yours. |
+| May 11 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| May 11 | Mon | Instagram | The Fire Horse doesn't treat all 12 signs the same. Find yours. Some of you are about to have the best love year in decades. Others need to hear this warning now. |
+| May 12 | Tue | Facebook EN | I've been doing this for 35 years. The Fire Horse sign-by-sign love forecast is the one I give every reader who walks in right now. It's not what most people expect. |
+| May 12 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| May 12 | Tue | Instagram | Sheep/Goat: best love year in 60 years. Monkey: the year to look in the mirror first. Two signs, two completely different stories. Find yours in the blog. |
+| May 13 | Wed | Blog | "What the Fire Horse Is Really Opposing in Your Love Life — and How to Work With It" — The Mahjong Mirror's Third Angle looks at what's blocking you. Not the surface argument, not the chemistry problem — the real opposition. The Peach Blossom in the problem position. The Sword that says cut now. The cards that show you what you're actually dealing with. |
+| May 13 | Wed | Facebook EN | The Mahjong Mirror's Third Angle is the one most people resist — it asks you to name what's actually opposing you in your love life. Not what you're fighting about. What's underneath it. |
+| May 13 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| May 13 | Wed | Instagram | The Mirror's Third Angle doesn't ask who's to blame. It asks what's really blocking the relationship from working. That's a harder question. And a more useful one. |
+| May 14 | Thu | Facebook EN | There are two tiles that show up repeatedly in Fire Horse year love readings: the Peach Blossom and the Sword. Neither one is comfortable. Both are clarifying. |
+| May 14 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| May 14 | Thu | Instagram | The Peach Blossom in the problem position. The Sword where the future should be. The Mirror doesn't soften what it shows — and that's exactly why it helps. |
+| May 15 | Fri | Blog | "Feel Good Friday: The Sheep Year Is Coming — Here's What to Build Before It Arrives" — The Fire Horse is a year of action and consequence. What you build, break, or begin now sets the conditions for the Sheep year ahead. For the signs thriving in love right now, the challenge is to make it last. For the signs struggling, the challenge is to clear the path. Either way — you're not just living through this year. You're building toward the next one. |
+| May 15 | Fri | Facebook EN | Feel Good Friday: The Fire Horse year doesn't end in silence. It ends in consequences — good or bad, depending on what you did with it. This week, your challenge: name one thing you're building in love. Not hoping for. Building. |
+| May 15 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| May 15 | Fri | Instagram | Feel Good Friday: The Sheep year follows the Horse. Calm follows fire. What are you making sure survives the transition? |
+

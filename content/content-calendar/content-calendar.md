@@ -117,16 +117,16 @@ Publishes: Friday (blog + social)
 
 ## Week of May 4 — Love & Compatibility
 
-**Topic: 2026-05-04-horse-love** — STATUS: WRITTEN
+**Topic: 2026-05-04-horse-love** — STATUS: PUBLISHED
 Angle: Fire Horse — shock & awe
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-05-06-mirror-love** — STATUS: WRITTEN
+**Topic: 2026-05-06-mirror-love** — STATUS: DESIGNED
 Angle: Mahjong Mirror — the answer (ties back to compatibility myth)
 Chapter/tile focus: Chapter 2 (Who Am I), Appendix — Love and Money cards
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-05-08-feel-good-love** — STATUS: WRITTEN
+**Topic: 2026-05-08-feel-good-love** — STATUS: DESIGNED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social — publishes May 8)
 

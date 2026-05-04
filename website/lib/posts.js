@@ -3,6 +3,15 @@
 
 export const POSTS = [
  {
+ slug: 'opposites-attract-is-a-lie-fire-horse-love-2026',
+ title: "'Opposites Attract' Is a Lie the Fire Horse Year Will Expose",
+ excerpt: "The Fire Horse doesn't care about chemistry. It cares about compatibility. And the difference, for a lot of couples right now, is everything.",
+ categories: ['Year of the Fire Horse'],
+ date: 'May 4, 2026',
+ isoDate: '2026-05-04',
+ readTime: '8 min read',
+ },
+ {
  slug: 'feel-good-friday-your-career-is-not-your-cage',
  title: 'Feel Good Friday: Your Career Is Not Your Cage',
  excerpt: "If the Fire Horse year is amplifying frustration in your career, that's not a curse — it's a signal. A story from the reading table about what that signal means, and what to do with it.",

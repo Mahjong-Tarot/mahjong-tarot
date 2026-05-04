@@ -1,11 +1,8 @@
-date: 2026-04-29
+date: 2026-05-04
 name: Yon
 
-## Yesterday
-- Configured DNS for Mahjong Tarot to send emails through MailerLite
-
 ## Today's focus
-- Onboard Alex and Tam from EO onto Claude
+- Review and implement the 2 Project Management Skills from the Every Article
 
 ## Blockers
 None

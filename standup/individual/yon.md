@@ -1,9 +1,9 @@
-date: 2026-05-05
+date: 2026-05-06
 name: Yon
 
 ## Today's focus
-- Finish series 1
-- Evaluate email provider alternatives to MailChimp (too expensive) and MailerLite (banned us pre-send)
+- Check Hien's outreach list
+- Research email providers for outreach program
 
 ## Blockers
 None

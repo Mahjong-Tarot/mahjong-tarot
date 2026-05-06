@@ -1,5 +1,6 @@
 | Date | Title | File | Category |
 |------|-------|------|----------|
+| 2026-05-11 | I Went to the Kentucky Derby to See a Fire Horse Year in Action | kentucky-derby-fire-horse-year-2026.jsx | Year of the Fire Horse |
 | 2026-05-04 | 'Opposites Attract' Is a Lie the Fire Horse Year Will Expose | opposites-attract-is-a-lie-fire-horse-love-2026.jsx | Year of the Fire Horse |
 | 2026-05-01 | Feel Good Friday: Your Career Is Not Your Cage | feel-good-friday-your-career-is-not-your-cage.jsx | Year of the Fire Horse |
 | 2026-04-29 | The Decision Framework That Was Built for Career Crossroads | the-decision-framework-for-career-crossroads.jsx | Year of the Fire Horse |

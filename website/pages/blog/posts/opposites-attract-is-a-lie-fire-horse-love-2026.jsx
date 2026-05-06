@@ -300,7 +300,9 @@ export default function OppositesAttractIsALieFireHorseLove2026() {
             <Link href="/blog/posts/feel-good-friday-your-career-is-not-your-cage" className={styles.navPrev}>
               &larr; Feel Good Friday: Your Career Is Not Your Cage
             </Link>
-            <span />
+            <Link href="/blog/posts/kentucky-derby-fire-horse-year-2026" className={styles.navNext}>
+              I Went to the Kentucky Derby to See a Fire Horse Year in Action &rarr;
+            </Link>
           </nav>
 
         </div>

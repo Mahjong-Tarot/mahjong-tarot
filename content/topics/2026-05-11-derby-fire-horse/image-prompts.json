@@ -1,0 +1,62 @@
+{
+  "topic": "Bill Hajdu at the 2026 Kentucky Derby watching Fire Horse year energy play out in real life: the patient long shot wins, the favorites burn out, a first in 152 years of history.",
+  "phrases": [
+    "The patient horse wins.",
+    "Last to first in thirty seconds.",
+    "The gun goes off. The year is already happening.",
+    "Stick with your strategy.",
+    "The crowd's pace leads to the wall."
+  ],
+  "images": [
+    {
+      "file": "blog-derby-fire-horse.md",
+      "slug": "kentucky-derby-fire-horse-year-2026",
+      "content_type": "blog-derby-fire-horse",
+      "concept": "A lone racehorse surging past a blurred field in the final stretch of a race. Shot from track level, low angle, the horse slightly in front of the frame. The field behind is out of focus and receding. Late afternoon golden light from the side. The image conveys explosive forward momentum from the back of the pack. No jockey text or signage visible.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A lone racehorse seen from track level, bursting into the lead in the final stretch of a race. The horse is powerful and forward-leaning, every muscle engaged, ears back. Behind it, several other horses are blurred and falling back. The track surface catches late-afternoon golden light from the right side, casting long shadows. The grandstand in the far background is out of focus. Antique gold and warm amber tones in the light, deep greens in the track grass border. Cinematic depth of field. The mood is electric, sudden, unstoppable. No text, no signage visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "kentucky-derby-fire-horse-year-2026",
+      "content_type": "mon-facebook-en",
+      "concept": "A woman standing at a racetrack rail from behind, watching the horses run in the distance. She is holding a racing program loosely at her side, not looking at it. The horses are small and fast in the distance. She is still. The contrast between her stillness and the motion ahead is the image's emotional core.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman seen from behind, standing at the white rail of a racetrack, both hands resting lightly on the rail. In the distance, a field of racehorses runs past in a blur of motion. She is dressed warmly, her posture relaxed and attentive. She is not looking at the program in her hand; she is watching the race. The track is wide and golden in afternoon sun. Deep green turf borders frame the dirt track. The grandstand fills the background softly out of focus. Warm amber and antique gold light. The mood is wonder and stillness against speed and chaos. No face visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "kentucky-derby-fire-horse-year-2026",
+      "content_type": "mon-instagram",
+      "concept": "Close-up overhead flat lay of a racing program, a single betting slip, and a set of women's hands holding a pair of binoculars resting on a wooden table surface. The betting slip is face down. The program is open but the hands are not looking at it. The image captures the anticipatory moment before the gun goes off.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Overhead flat lay, square composition. On a warm wooden surface: an open racing program, a small folded paper betting slip turned face-down, and a pair of compact binoculars resting in a woman's hands. The hands are relaxed, the fingers loosely curled around the binoculars. The program is open but not being read. Warm ivory and antique gold tones, morning light from the upper left. A single faint shadow falls across the betting slip. The mood is anticipation before an outcome that cannot be known. No text readable on any item. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "kentucky-derby-fire-horse-year-2026",
+      "content_type": "tue-facebook-en",
+      "concept": "A split-frame image. Left half shows several horses running hard at the front of a race, tight cluster, dust rising. Right half shows a single horse standing perfectly still in a starting gate, coiled, waiting. The contrast between motion and stillness, spent energy and held energy.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Split composition, divided down the center. Left half: a tight cluster of racehorses running hard, photographed from the side, dirt flying, motion blur on their legs, the horses pressing close together. The light is harsh and bright. Right half: a single racehorse standing absolutely still inside a starting gate, shot from the front, nostrils flared, muscles coiled, waiting. The starting gate is in shadow, the horse's coat dark and gleaming. The mood on the left is frenzy; the mood on the right is controlled readiness. Antique gold and midnight jade tones throughout. Cinematic contrast. No text or signage visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "kentucky-derby-fire-horse-year-2026",
+      "content_type": "tue-instagram",
+      "concept": "A close-up of a single starting gate door, shot from below and inside looking out. The door is still closed. Bars of light cut through the gap at the bottom. The horse behind the door is implied but not shown. The moment of pure waiting before release.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. Interior of a racehorse starting gate, shot from a low angle looking up at the closed steel door from the inside. Bars of bright track light cut through the narrow gap at the bottom of the door, casting striped shadows on the gate floor. The door is metal, worn, aged. On the other side, the track is implied by the light. The mood is coiled, contained, everything about to be released. Deep shadow tones inside the gate, antique gold and white light bleeding through the gap. No horses visible, no faces. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

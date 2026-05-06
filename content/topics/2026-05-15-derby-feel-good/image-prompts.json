@@ -1,0 +1,64 @@
+{
+  "topic": "This is the year you surprise yourself. The affirmation is not conditional. Readiness is already underway. The Fire Horse year opens doors from unexpected places, and the prepared step through first. Anchored in Ocelli and Ashley Durr at the 2026 Derby.",
+  "phrases": [
+    "This is the year you surprise yourself.",
+    "Readiness is all.",
+    "Be ready when the gate opens.",
+    "The prepared step through first.",
+    "The door opens when you least expect it."
+  ],
+  "images": [
+    {
+      "file": "blog-derby-feel-good.md",
+      "slug": "feel-good-friday-this-is-the-year-you-surprise-yourself",
+      "content_type": "blog-derby-feel-good",
+      "concept": "A woman walking forward through a sunlit gateway, back to camera, arms relaxed, stride unhurried but deliberate. The gate is already open behind her. She did not force it. She simply arrived ready, and walked through.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman seen from behind, walking forward through a wide open wooden gateway toward bright outdoor light. Her arms are relaxed at her sides, stride unhurried but purposeful. The gate has swung fully open to her left. Inside the gateway, the light shifts from cool shadow to warm antique gold ahead of her. The path beyond the gate is gently out of focus, suggesting space and possibility rather than a destination. Her posture is upright, present, forward-moving. She is not looking back. No face visible. No text or signage. The mood is arrival and movement, not hesitation. Cinematic, still, warm. Palette: midnight jade shadows, antique gold light ahead. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-this-is-the-year-you-surprise-yourself",
+      "content_type": "fri-facebook-en",
+      "concept": "A jockey's boot in the stirrup, caught in the moment just before the race begins. The horse is still. The light is sharp and clear. Everything in the image is ready and waiting for the gun to go off.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up of a jockey's boot in a stirrup, the horse motionless beneath. The leather is dark and well-worn. The boot fits perfectly, no adjustment needed. To the left edge, the metal of a starting gate is just visible, slightly out of focus. The track surface is visible below. Antique gold afternoon light falls from above-right. The mood is readiness at the threshold: everything in place, gun not yet fired, the stillness before motion. No faces, no text, no numbers. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-this-is-the-year-you-surprise-yourself",
+      "content_type": "fri-instagram",
+      "concept": "A woman's hand releasing a door handle as the door swings fully open, light flooding in from beyond. She is not pulling the door toward her. She is letting it go, because it is already open.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. Close-up of a woman's hand releasing a door handle as the door swings wide open. Through the open doorway, warm antique gold light floods in from outside. Her hand is relaxed, fingers just lifting away from the handle. The door is dark wood, heavy, well-made. The gap is wide now, not narrow. The light on the other side is bright and slightly soft. The mood is release, not effort: she prepared, the door opened, she let it. No face visible. No text or symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-this-is-the-year-you-surprise-yourself",
+      "content_type": "card",
+      "concept": "English affirmation card. The phrase 'This is the year you surprise yourself.' rendered in hand-inked calligraphy on aged parchment. Journal Page style.",
+      "image_style": "TEXT",
+      "text": "This is the year you surprise yourself.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture -- subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"This is the year you surprise yourself.\". One line, centered, confident and elegant. The lettering is modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. One tiny hand-drawn ink flourish beneath the line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-this-is-the-year-you-surprise-yourself",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card. The phrase 'Day la nam ban lam chinh minh ngac nhien.' rendered in hand-inked calligraphy on aged parchment. Journal Page style.",
+      "image_style": "TEXT",
+      "text": "Đây là năm bạn làm chính mình ngạc nhiên.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture -- subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Đây là năm bạn làm chính mình ngạc nhiên.\". One line, centered, confident and elegant. The lettering is modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

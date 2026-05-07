@@ -155,16 +155,16 @@ Publishes: Friday (blog + social — publishes May 8)
 
 ## Week of May 11 — The Kentucky Derby
 
-**Topic: 2026-05-11-derby-fire-horse** — STATUS: WRITTEN
+**Topic: 2026-05-11-derby-fire-horse** — STATUS: DESIGNED
 Angle: Fire Horse — what Bill saw at the Derby (proof in real-world spectacle)
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-05-13-derby-mirror** — STATUS: WRITTEN
+**Topic: 2026-05-13-derby-mirror** — STATUS: DESIGNED
 Angle: Mahjong Mirror — what the favorites missed (the obstacle the trainers overlooked)
 Chapter/tile focus: Mirror's "different perspectives" + obstacle-naming framework
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-05-15-derby-feel-good** — STATUS: WRITTEN
+**Topic: 2026-05-15-derby-feel-good** — STATUS: DESIGNED
 Angle: Feel Good Friday — this is the year you surprise yourself (readiness as affirmation, not condition)
 Publishes: Friday (blog + social)
 
@@ -193,16 +193,16 @@ Publishes: Friday (blog + social)
 
 ## Week of May 18 — Love Life by Sign
 
-**Topic: 2026-05-18-horse-love-signs** — STATUS: WRITTEN
+**Topic: 2026-05-18-horse-love-signs** — STATUS: DESIGNED
 Angle: Fire Horse — shock & awe (Sign-by-Sign Breakdown)
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-05-20-mirror-love-signs** — STATUS: WRITTEN
+**Topic: 2026-05-20-mirror-love-signs** — STATUS: DESIGNED
 Angle: Mahjong Mirror — the answer (ties back to sign-by-sign love risk)
 Chapter/tile focus: Chapter 3 (Opposition), Appendix — Love cards (Peach Blossom, Sword)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-05-22-feel-good-love** — STATUS: WRITTEN
+**Topic: 2026-05-22-feel-good-love** — STATUS: DESIGNED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 

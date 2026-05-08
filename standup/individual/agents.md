@@ -1,29 +1,30 @@
-date: 2026-05-07
+date: 2026-05-08
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #182: pm(standup-morning): 2026-05-06 — merged 2026-05-06 00:07 UTC
-- PR #184: pm(standup-compile): 2026-05-06 — merged 2026-05-06 02:12 UTC
+- PR #187: pm(standup-morning): 2026-05-07 — merged 2026-05-07 00:08 UTC
+- PR #190: pm(standup-compile): 2026-05-07 — merged 2026-05-07 02:10 UTC
 
 **Next:**
-- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-07`)
+- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-08`)
 - 09:00 standup-compile run later this morning
 
 **Blockers:**
-- Lark bot auth still failing (`[10014] app secret invalid`) — 8th consecutive day (28/29/30 April + 1/4/5/6/7 May). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. `lark-cli` upgrade (1.0.10 → 1.0.23) also pending.
+- Lark bot auth still failing (`[10014] app secret invalid`) — 9th consecutive day (28/29/30 April + 1/4/5/6/7/8 May). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. `lark-cli` upgrade (1.0.10 → 1.0.23+) also pending.
 
 ---
 
 ## web-developer
 
 **Completed:**
-- PR #186: `publish: Kentucky Derby 2026 — Fire Horse year story` — merged 2026-05-06 16:42 UTC. Commit `f4b6be7` `blog: publish "I Went to the Kentucky Derby to See a Fire Horse Year in Action"`. Adds `website/pages/blog/posts/kentucky-derby-fire-horse-year-2026.jsx` (+306 lines), `website/public/images/blog/kentucky-derby-fire-horse-year-2026.webp`, blog index entry, and publish-log update.
+- PR #189: `publish: What the Favorites' Trainers Missed (Mahjong Mirror)` — merged 2026-05-07 01:38 UTC. Commit `31b3e47`. Mahjong Mirror Derby post shipped via `publish/derby-mirror-2026-05-07` branch.
 
 **Next:**
-- Next eligible publishes per content calendar: 2026-05-13 (Derby Mirror) and 2026-05-15 (Derby Feel Good) — both `STATUS: WRITTEN/DESIGNED` in the topics folder.
+- Per content calendar: next scheduled publish is 2026-05-15 (Derby Feel Good) — `STATUS: WRITTEN/DESIGNED` in topics folder.
+- No open PRs.
 
 **Blockers:**
 None
@@ -33,7 +34,7 @@ None
 ## writer
 
 **Completed:**
-- PR #185: `writer(derby-week-2026-05-11): Kentucky Derby content + reschedule love-by-sign` — merged 2026-05-06 16:30 UTC. Three topic bundles created: `2026-05-11-derby-fire-horse`, `2026-05-13-derby-mirror`, `2026-05-15-derby-feel-good` (blog.md, seo.md, social variants, image-prompts.json each).
+- No activity in the 2026-05-07 00:00 UTC → 2026-05-08 00:00 UTC window.
 
 **Next:**
 - No open work detected — no open PRs.
@@ -47,7 +48,7 @@ None
 ## product-manager
 
 **Completed:**
-- No activity in the 2026-05-06 00:00 UTC → 2026-05-07 00:00 UTC window.
+- No activity in the 2026-05-07 00:00 UTC → 2026-05-08 00:00 UTC window.
 
 **Next:**
 - Review auto-publishing checklist with Dave for implementation sign-off.
@@ -60,11 +61,11 @@ None
 ## image-designer
 
 **Completed:**
-- No standalone agent commits in window. Hero asset `kentucky-derby-fire-horse-year-2026.webp` shipped bundled in web-developer PR #186 (likely generated as part of the mahjong-studio publishing pipeline rather than via a separate generate-image run).
+- PR #188: `Designer: Hero images — 2026-05-07` — merged 2026-05-07 01:33 UTC. Commit `1f7b17e` `designer(thursday-2026-05-07): hero + social images for 6 topics`. Branch `designer/thursday-2026-05-07`.
 
 **Next:**
 - No open work detected.
-- Hero/social images for upcoming `2026-05-13-derby-mirror` and `2026-05-15-derby-feel-good` topics will be needed before publish.
+- Hero/social images for upcoming `2026-05-15-derby-feel-good` topic still needed before publish.
 
 **Blockers:**
 - Repo `.env` `GEMINI_API_KEY` rejection (carry-forward from 2026-05-06): agent fell back to `/content-studio/.env`. Repo key needs rotation/refresh before next autonomous run.
@@ -75,10 +76,10 @@ None
 ## other-agents
 
 **Completed:**
-- PR #183: `standup(yon): 2026-05-06` — `yon-create` daily-standup-briefing automation, merged 2026-05-06 01:03 UTC.
+- No agent-attributed activity in window. Two `docs(status):` commits by Dave (PR #191 `consolidate project-status.html into docs/`, direct commit `8f3b0cd` `reprice Phase 1 epics`) are manual human work, not agent work.
 
 **Next:**
-- No open work detected — no open PRs across the repo as of 2026-05-07 07:00 Asia/Saigon.
+- No open work detected — no open PRs across the repo as of 2026-05-08 07:00 Asia/Saigon.
 
 **Blockers:**
 None

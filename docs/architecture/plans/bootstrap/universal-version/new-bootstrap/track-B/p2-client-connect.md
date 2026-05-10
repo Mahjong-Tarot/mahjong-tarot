@@ -81,7 +81,7 @@ Test each agent with a simple prompt:
 | `@writer what are you?` | Describes Writer role, mentions content/topics/ queue |
 | `@designer what are you?` | Describes Designer role, mentions Gemini |
 | `@web-publisher what are you?` | Describes Publisher role, mentions blog/posts/ |
-| `@email-marketer what are you?` | Describes Email Marketer role, mentions Resend |
+| `@email-marketer what are you?` | Describes Email Marketer role, mentions Brevo |
 
 All 8 should respond correctly before proceeding.
 

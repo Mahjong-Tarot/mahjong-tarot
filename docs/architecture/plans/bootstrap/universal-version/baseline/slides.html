@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is Infinite Leverage? · AI Officer Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0B1426;
+    --ink-soft: #1F2A3D;
+    --gray-1: #94A3B8;
+    --gray-2: #64748B;
+    --gray-3: #CBD5E1;
+    --rule: #E2E8F0;
+    --blue: #2563EB;
+    --blue-soft: #DBEAFE;
+    --cream: #F2EDE3;
+    --paper: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #E8EAEE;
+    color: var(--ink);
+    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    height: 100vh;
+  }
+  .stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .slide {
+    width: 100%;
+    max-width: 1600px;
+    aspect-ratio: 16 / 9;
+    background: var(--paper);
+    box-shadow: 0 12px 40px rgba(11, 20, 38, 0.08);
+    position: absolute;
+    padding: 4.5% 5.5%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide.cream { background: var(--cream); }
+  .slide.ink { background: var(--ink); color: var(--paper); }
+  .slide.ink .display, .slide.ink .display-sm, .slide.ink .display-xs { color: var(--paper); }
+  .slide.ink .meta-row { color: var(--gray-3); }
+  .slide.ink .lead, .slide.ink .quiet { color: var(--gray-3); }
+  .slide.ink .stack-list .row { border-color: rgba(255,255,255,0.15); }
+  .slide.ink .stack-list .row:last-child { border-bottom-color: rgba(255,255,255,0.15); }
+
+  /* Header / footer */
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78em;
+    letter-spacing: 0.12em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .meta-row .right { text-align: right; }
+  .footer-row { margin-top: auto; padding-top: 24px; }
+
+  /* Headings */
+  .display {
+    font-size: clamp(48px, 6.5vw, 108px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .display-sm {
+    font-size: clamp(40px, 5vw, 84px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .display-xs {
+    font-size: clamp(32px, 3.6vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .lead {
+    font-size: 1.25em;
+    color: var(--gray-2);
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+  .accent { color: var(--blue); }
+  .quiet { color: var(--gray-2); }
+
+  /* Cover */
+  .cover-mark {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+  .cover-mark .row1 {
+    font-size: clamp(64px, 9.5vw, 168px);
+    font-weight: 800;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 0.04em;
+  }
+  .cover-mark .row1 .dot {
+    width: 0.18em;
+    height: 0.18em;
+    border-radius: 50%;
+    background: var(--blue);
+    display: inline-block;
+  }
+  .cover-mark .row2 {
+    font-size: clamp(36px, 4.4vw, 72px);
+    font-weight: 500;
+    color: var(--gray-1);
+    margin-top: 0.18em;
+    letter-spacing: -0.02em;
+  }
+  .cover-tagline {
+    font-size: 1.35em;
+    color: var(--gray-2);
+    max-width: 40ch;
+    margin-top: 24px;
+  }
+
+  /* Section divider */
+  .section-divider .kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1em;
+    letter-spacing: 0.16em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .section-divider .label {
+    font-size: clamp(56px, 8vw, 140px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+  .section-divider .body {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+
+  /* Statement */
+  .statement {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .statement .display { max-width: 22ch; }
+  .statement .display-sm { max-width: 24ch; }
+
+  /* Pull quote */
+  .pull-quote {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .pull-quote .q {
+    font-size: clamp(44px, 5.6vw, 96px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    border-left: 6px solid var(--blue);
+    padding-left: 36px;
+    max-width: 22ch;
+    margin: 0;
+  }
+  .slide.ink .pull-quote .q { color: var(--paper); }
+  .pull-quote .q em { font-style: normal; color: var(--blue); }
+
+  /* Big-line dramatic */
+  .big-line {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .big-line .line {
+    font-size: clamp(72px, 10vw, 180px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    max-width: 16ch;
+  }
+  .slide.ink .big-line .line { color: var(--paper); }
+  .big-line .line .accent { color: var(--blue); }
+
+  /* Stack list (numbered rows) */
+  .stack-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .stack-list .row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+    font-size: 1.4em;
+    line-height: 1.4;
+  }
+  .stack-list .row:last-child { border-bottom: 1px solid var(--rule); }
+  .stack-list .row .num {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--blue);
+    font-size: 0.7em;
+    letter-spacing: 0.1em;
+  }
+  .stack-list .row b { font-weight: 700; }
+  .stack-list .row .quiet {
+    display: block;
+    font-size: 0.75em;
+    color: var(--gray-2);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .slide.ink .stack-list .row .quiet { color: var(--gray-3); }
+
+  /* Track header (kicker + title above stack-list) */
+  .track-head { margin-bottom: 18px; }
+  .track-head .kicker {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--blue);
+    letter-spacing: 0.14em;
+    font-size: 1em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .track-head .title {
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .track-head .sub {
+    font-size: 1.2em;
+    color: var(--gray-2);
+    margin-top: 14px;
+    max-width: 60ch;
+  }
+
+  /* Roster table */
+  .roster {
+    margin-top: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    font-size: 1em;
+  }
+  .roster .rrow {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .roster .rrow.head {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78em;
+    letter-spacing: 0.14em;
+    color: var(--gray-1);
+    text-transform: uppercase;
+    padding: 12px 0;
+  }
+  .roster .rrow .who {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 1.25em;
+    letter-spacing: -0.01em;
+  }
+  .roster .rrow .what {
+    color: var(--ink-soft);
+    line-height: 1.5;
+    font-size: 1.1em;
+  }
+  .roster-tag {
+    margin-top: 28px;
+    color: var(--gray-2);
+    font-size: 1.05em;
+    line-height: 1.5;
+    max-width: 60ch;
+  }
+
+  /* Checklist (retreat outcomes) */
+  .outcome-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .outcome-list .item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+    font-size: 1.45em;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .outcome-list .item:last-child { border-bottom: 1px solid var(--rule); }
+  .outcome-list .item .check {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--blue);
+    font-size: 1.4em;
+    line-height: 1;
+  }
+
+  /* Closer (CTA) */
+  .closer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+  }
+  .closer .cta-line {
+    font-size: clamp(56px, 7.5vw, 124px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--paper);
+    max-width: 18ch;
+    margin: 0;
+  }
+  .closer .cta-sub {
+    font-size: 1.3em;
+    color: var(--gray-3);
+    max-width: 50ch;
+  }
+  .closer .cta-url {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.4em;
+    color: var(--blue);
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+  }
+
+  /* Navigation */
+  .nav {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: rgba(11, 20, 38, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: var(--paper);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    z-index: 100;
+  }
+  .nav button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--paper);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+  }
+  .nav button:hover { background: var(--blue); }
+  .nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+  .nav .counter {
+    padding: 0 12px;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .hint {
+    position: fixed;
+    bottom: 18px;
+    right: 24px;
+    color: var(--gray-2);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 100;
+  }
+
+  /* Print */
+  @media print {
+    @page { size: 1600px 900px; margin: 0; }
+    html, body { background: #fff; height: auto; overflow: visible; }
+    .stage { display: block; padding: 0; height: auto; width: auto; }
+    .slide {
+      box-shadow: none;
+      page-break-after: always;
+      max-width: none;
+      width: 100vw;
+      height: 100vh;
+      aspect-ratio: auto;
+      position: relative;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      top: auto;
+      left: auto;
+      transform: none;
+    }
+    .slide:last-child { page-break-after: auto; }
+    .nav, .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <!-- Slide 1: Cover -->
+  <section class="slide" data-slide="1">
+    <div class="meta-row">
+      <span>AI Officer Institute</span>
+      <span class="right">Infinite Leverage Retreat</span>
+    </div>
+    <div class="cover-mark">
+      <div class="row1">Infinite Leverage<span class="dot"></span></div>
+      <div class="row2">And why it starts with you.</div>
+      <p class="cover-tagline">Dave Hajdu · Founder, AI Officer Institute</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>01 / 25</span>
+      <span class="right">ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 2: The Other 50% -->
+  <section class="slide cream" data-slide="2">
+    <div class="meta-row">
+      <span>The Premise</span>
+      <span class="right">Hook</span>
+    </div>
+    <div class="pull-quote">
+      <p class="q">Leadership used to mean leading people.<br>The other 50% just <em>showed up</em>.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>02</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 3: The Bottleneck -->
+  <section class="slide" data-slide="3">
+    <div class="meta-row">
+      <span>The Stakes</span>
+      <span class="right">Bottleneck</span>
+    </div>
+    <div class="statement">
+      <h2 class="display">If you only know the people half, you are operating with <span class="accent">half a team</span>.</h2>
+      <p class="lead" style="margin-top: 32px;">The people you lead are about to get more leverage than you have. You will be the bottleneck.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>03</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 4: Definition -->
+  <section class="slide" data-slide="4">
+    <div class="meta-row">
+      <span>Defined</span>
+      <span class="right">North Star</span>
+    </div>
+    <div class="statement">
+      <h2 class="display">Infinite Leverage</h2>
+      <p class="lead" style="margin-top: 32px; font-size: 1.5em; color: var(--ink-soft); max-width: 36ch;">A North Star, not a destination. The practice of building output capacity that scales without scaling headcount.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>04</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 5: The Largest Jump -->
+  <section class="slide" data-slide="5">
+    <div class="meta-row">
+      <span>Why Now</span>
+      <span class="right">The Jump</span>
+    </div>
+    <div class="statement">
+      <h2 class="display">AI is the largest leverage jump in human history.</h2>
+      <p class="lead" style="margin-top: 32px; font-size: 1.5em; color: var(--ink-soft); max-width: 36ch;">It gives you a PhD on tap. In every topic. For less than a coffee.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>05</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 6: The Trap (transition) -->
+  <section class="slide ink" data-slide="6">
+    <div class="meta-row">
+      <span>Pivot</span>
+      <span class="right">The Trap</span>
+    </div>
+    <div class="big-line">
+      <div class="line">But here is the <span class="accent">trap</span>.</div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>06</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 7: The Hard Truth -->
+  <section class="slide cream" data-slide="7">
+    <div class="meta-row">
+      <span>The Truth</span>
+      <span class="right">The Line</span>
+    </div>
+    <div class="pull-quote">
+      <p class="q">AI is the average of the average.<br><span style="color: var(--gray-2); font-weight: 500; font-size: 0.55em; display: block; margin-top: 28px; letter-spacing: -0.01em;">It will only be as sharp as the operator wielding it.</span></p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>07</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 8: Garbage In -->
+  <section class="slide" data-slide="8">
+    <div class="meta-row">
+      <span>Why It Matters</span>
+      <span class="right">Garbage In</span>
+    </div>
+    <div class="statement">
+      <h2 class="display-sm">If your taste is unformed, your agents inherit unformed taste.</h2>
+      <p class="lead" style="margin-top: 32px; font-size: 1.4em; color: var(--ink-soft); max-width: 36ch;">Average operator plus AI equals average output, faster.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>08</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 9: You First -->
+  <section class="slide" data-slide="9">
+    <div class="meta-row">
+      <span>Philosophy</span>
+      <span class="right">You First</span>
+    </div>
+    <div class="pull-quote">
+      <p class="q">You first. <em>Always.</em><br><span style="color: var(--gray-2); font-weight: 500; font-size: 0.55em; display: block; margin-top: 28px; letter-spacing: -0.01em;">You set the standard. The system. The taste. Your agents are a mirror.</span></p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>09</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 10: Section divider — Codified -->
+  <section class="slide cream section-divider" data-slide="10">
+    <div class="meta-row">
+      <span>Part 02</span>
+      <span class="right">From Philosophy to Framework</span>
+    </div>
+    <div class="body" style="margin-top: auto;">
+      <div class="kicker">The Other 50%, Codified</div>
+      <div class="label">18 Protocols.<br>5 Tracks.<br>One operating system.</div>
+    </div>
+    <div class="meta-row footer-row" style="margin-top: 56px;">
+      <span>10</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 11: Track 1 — Mindset -->
+  <section class="slide" data-slide="11">
+    <div class="meta-row">
+      <span>Track 01</span>
+      <span class="right">How We Think</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Track 01</div>
+      <h2 class="title">Mindset</h2>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">01</span><span><b>Humans are the orchestrator.</b><span class="quiet">The real intelligence is still you.</span></span></div>
+      <div class="row"><span class="num">02</span><span><b>The CMS is dead.</b><span class="quiet">AI is the CMS.</span></span></div>
+      <div class="row"><span class="num">03</span><span><b>The stack: Claude, GitHub, Vercel, Supabase.</b><span class="quiet">Master four tools. Ship anything.</span></span></div>
+      <div class="row"><span class="num">04</span><span><b>Agents are folders, not magic.</b><span class="quiet">Structure beats novelty.</span></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>11</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 12: Track 2 — Infrastructure -->
+  <section class="slide" data-slide="12">
+    <div class="meta-row">
+      <span>Track 02</span>
+      <span class="right">The Rails</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Track 02</div>
+      <h2 class="title">Infrastructure</h2>
+      <p class="sub">Master these three. Ship almost anything you can describe.</p>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">01</span><span><b>GitHub</b><span class="quiet">Version control.</span></span></div>
+      <div class="row"><span class="num">02</span><span><b>Vercel</b><span class="quiet">Deployment.</span></span></div>
+      <div class="row"><span class="num">03</span><span><b>Supabase</b><span class="quiet">Data.</span></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>12</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 13: Track 3 — Building -->
+  <section class="slide" data-slide="13">
+    <div class="meta-row">
+      <span>Track 03</span>
+      <span class="right">What We Ship</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Track 03</div>
+      <h2 class="title">Building</h2>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">01</span><span><b>Design systems Claude can read</b></span></div>
+      <div class="row"><span class="num">02</span><span><b>Workflows that turn intent into output</b></span></div>
+      <div class="row"><span class="num">03</span><span><b>Communications that go out automatically</b></span></div>
+      <div class="row"><span class="num">04</span><span><b>Admin tools your team uses without escalating</b></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>13</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 14: Track 4 — Team and Ops -->
+  <section class="slide" data-slide="14">
+    <div class="meta-row">
+      <span>Track 04</span>
+      <span class="right">How We Run</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Track 04</div>
+      <h2 class="title">Team and Ops</h2>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">01</span><span><b>When to bring in a human engineer to unblock you</b></span></div>
+      <div class="row"><span class="num">02</span><span><b>The roles every Infinite Leverage team has</b></span></div>
+      <div class="row"><span class="num">03</span><span><b>How to plan an epic</b></span></div>
+      <div class="row"><span class="num">04</span><span><b>How to start your day with a PM agent that already knows what you shipped yesterday</b></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>14</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 15: Track 5 — Continuity -->
+  <section class="slide" data-slide="15">
+    <div class="meta-row">
+      <span>Track 05</span>
+      <span class="right">How It Lasts</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Track 05</div>
+      <h2 class="title">Continuity</h2>
+      <p class="sub">What separates a hobby from a system. The work has to outlive you.</p>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">01</span><span><b>What AI can test on its own, and what it cannot</b></span></div>
+      <div class="row"><span class="num">02</span><span><b>How to hand off context, memory, and project state without a knowledge tax</b></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>15</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 16: Knowledge ≠ Leverage -->
+  <section class="slide cream" data-slide="16">
+    <div class="meta-row">
+      <span>Pivot</span>
+      <span class="right">Framework to Deliverable</span>
+    </div>
+    <div class="pull-quote">
+      <p class="q">Knowledge is not leverage.<br><em>Execution is.</em></p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>16</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 17: 8-Agent Team -->
+  <section class="slide ink" data-slide="17">
+    <div class="meta-row">
+      <span>The Deliverable</span>
+      <span class="right">What You Walk Out With</span>
+    </div>
+    <div class="statement">
+      <h2 class="display">Eight working AI agents.</h2>
+      <p class="lead" style="margin-top: 32px; font-size: 1.5em; color: var(--gray-3); max-width: 36ch;">On a brand-new Mac Mini. Yours to keep.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>17</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 18: Build Team — Agents 1-4 -->
+  <section class="slide" data-slide="18">
+    <div class="meta-row">
+      <span>Agents 01 to 04</span>
+      <span class="right">The Build Team</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Half One</div>
+      <h2 class="title">The Build Team</h2>
+      <p class="sub">Designs, ships, and tests product.</p>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">01</span><span><b>Product Manager</b><span class="quiet">Designs what you are building.</span></span></div>
+      <div class="row"><span class="num">02</span><span><b>Developer</b><span class="quiet">Writes code to your standards.</span></span></div>
+      <div class="row"><span class="num">03</span><span><b>QA</b><span class="quiet">Tests every change.</span></span></div>
+      <div class="row"><span class="num">04</span><span><b>DevOps</b><span class="quiet">Manages check-ins, environments, and deployments.</span></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>18</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 19: GTM Team — Agents 5-8 -->
+  <section class="slide" data-slide="19">
+    <div class="meta-row">
+      <span>Agents 05 to 08</span>
+      <span class="right">The Go-to-Market Team</span>
+    </div>
+    <div class="track-head">
+      <div class="kicker">Half Two</div>
+      <h2 class="title">The Go-to-Market Team</h2>
+      <p class="sub">Building is half the job. Selling is the other half.</p>
+    </div>
+    <div class="stack-list">
+      <div class="row"><span class="num">05</span><span><b>Writer</b><span class="quiet">Produces content in your voice.</span></span></div>
+      <div class="row"><span class="num">06</span><span><b>Designer</b><span class="quiet">Works to your spec and design system.</span></span></div>
+      <div class="row"><span class="num">07</span><span><b>Web Publisher</b><span class="quiet">Pushes content live without a human handoff.</span></span></div>
+      <div class="row"><span class="num">08</span><span><b>Email Marketer</b><span class="quiet">Nurtures every lead the site generates.</span></span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>19</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 20: Not 8 chat windows -->
+  <section class="slide cream" data-slide="20">
+    <div class="meta-row">
+      <span>Distinction</span>
+      <span class="right">Not Chat Windows</span>
+    </div>
+    <div class="statement">
+      <h2 class="display-sm">These are not eight chat windows.</h2>
+      <p class="lead" style="margin-top: 32px; font-size: 1.4em; color: var(--ink-soft); max-width: 40ch;">Eight properly structured agents. Each with its own context, role, and responsibilities. Running on a machine you own.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>20</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 21: Minimum Viable Founder -->
+  <section class="slide" data-slide="21">
+    <div class="meta-row">
+      <span>The New Math</span>
+      <span class="right">Minimum Viable Founder</span>
+    </div>
+    <div class="pull-quote">
+      <p class="q">You + an AI engineer + this team<br><em>= the new minimum viable founder.</em></p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>21</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 22: The Trajectory -->
+  <section class="slide" data-slide="22">
+    <div class="meta-row">
+      <span>The Close</span>
+      <span class="right">Trajectory</span>
+    </div>
+    <div class="statement">
+      <h2 class="display-sm">"Infinite" is not infinite output today.<br><span class="accent">It is the trajectory.</span></h2>
+      <p class="lead" style="margin-top: 32px; font-size: 1.3em; color: var(--ink-soft); max-width: 40ch;">Every protocol compounds. Every agent compounds. Every closed loop returns value forever.</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>22</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 23: Roster -->
+  <section class="slide" data-slide="23">
+    <div class="meta-row">
+      <span>Proof</span>
+      <span class="right">Real Businesses, Right Now</span>
+    </div>
+    <div class="track-head" style="margin-bottom: 8px;">
+      <h2 class="title" style="font-size: clamp(36px, 4.4vw, 72px);">Real businesses. Real teams. Right now.</h2>
+    </div>
+    <div class="roster">
+      <div class="rrow head"><span>Operator</span><span>Business</span></div>
+      <div class="rrow"><span class="who">James Murray</span><span class="what">WorkHelby (Australia)</span></div>
+      <div class="rrow"><span class="who">Tracy Angwin</span><span class="what">Payroll Services Australia</span></div>
+      <div class="rrow"><span class="who">David Nilssen</span><span class="what">Doxa Talent</span></div>
+      <div class="rrow"><span class="who">TA</span><span class="what">Dunham Legal · President, EO Vietnam</span></div>
+      <div class="rrow"><span class="who">EO Vietnam</span><span class="what">Chapter program</span></div>
+      <div class="rrow"><span class="who">Dave Hajdu</span><span class="what">MahjongTarot.com + Forever-8.com</span></div>
+    </div>
+    <p class="roster-tag">Our job as a team is to get every one of these to profitability.</p>
+    <div class="meta-row footer-row">
+      <span>23</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 24: Retreat deliverable -->
+  <section class="slide cream" data-slide="24">
+    <div class="meta-row">
+      <span>How We Deliver</span>
+      <span class="right">The Retreat</span>
+    </div>
+    <div class="track-head" style="margin-bottom: 24px;">
+      <div class="kicker">The Infinite Leverage Retreat</div>
+      <h2 class="title" style="font-size: clamp(40px, 5vw, 84px);">You learn 18 protocols by doing them, not reading them.</h2>
+      <p class="sub">By the time you leave:</p>
+    </div>
+    <div class="outcome-list">
+      <div class="item"><span class="check">✓</span><span>An idea fleshed out, with a real plan</span></div>
+      <div class="item"><span class="check">✓</span><span>A live website to market it</span></div>
+      <div class="item"><span class="check">✓</span><span>A CRM behind it, ready to act on leads</span></div>
+      <div class="item"><span class="check">✓</span><span>Eight AI agents running on a brand-new Mac Mini</span></div>
+    </div>
+    <div class="meta-row footer-row">
+      <span>24</span>
+      <span class="right">Infinite Leverage · ai-officer.com</span>
+    </div>
+  </section>
+
+  <!-- Slide 25: CTA -->
+  <section class="slide ink" data-slide="25">
+    <div class="meta-row">
+      <span>The Invitation</span>
+      <span class="right">CTA</span>
+    </div>
+    <div class="closer">
+      <h2 class="cta-line">Lead AI.<br>Don't just use it.</h2>
+      <p class="cta-sub">Group retreats and private retreats available.</p>
+      <p class="cta-url">ai-officer.com</p>
+    </div>
+    <div class="meta-row footer-row">
+      <span>25 / 25</span>
+      <span class="right">Dave Hajdu · AI Officer Institute</span>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation -->
+<nav class="nav" aria-label="Slide navigation">
+  <button id="prevBtn" aria-label="Previous slide">←</button>
+  <span class="counter" id="counter">01 / 25</span>
+  <button id="nextBtn" aria-label="Next slide">→</button>
+</nav>
+
+<div class="hint">← → to navigate · F for fullscreen</div>
+
+<script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let current = 0;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function show(idx) {
+      idx = Math.max(0, Math.min(total - 1, idx));
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      counter.textContent = pad(idx + 1) + ' / ' + pad(total);
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx === total - 1;
+      current = idx;
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + (idx + 1));
+      }
+    }
+
+    function next() { show(current + 1); }
+    function prev() { show(current - 1); }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        next();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prev();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        show(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        show(total - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      }
+    });
+
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+
+    document.getElementById('stage').addEventListener('click', function (e) {
+      if (e.target.closest('button') || e.target.closest('.nav')) return;
+      const w = window.innerWidth;
+      if (e.clientX < w * 0.3) {
+        prev();
+      } else {
+        next();
+      }
+    });
+
+    const hashIdx = parseInt((location.hash || '').replace('#', ''), 10);
+    show(isNaN(hashIdx) ? 0 : hashIdx - 1);
+  })();
+</script>
+
+</body>
+</html>

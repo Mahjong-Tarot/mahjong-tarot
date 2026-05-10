@@ -674,10 +674,31 @@ Your core team is ready. Want to add any of these specialists?
   (a) Product Manager — OKRs, roadmap, competitive analysis
   (b) Marketing Manager — content calendar, performance tracking
   (c) Social Media Manager — weekly post batches, platform scheduling
-  (d) Skip — I can add these later
+  (d) Email Marketer — lead nurture sequences triggered by site signups
+  (e) Skip — I can add these later
 
-Reply with a, b, c (any combination), or d.
+Reply with a, b, c, d (any combination), or e.
 ```
+
+If (d) Email Marketer is selected, run this setup before installing the agent:
+
+```
+A few questions to set up your lead nurture sequence:
+
+1. How many emails in the sequence? (e.g. 3, 5)
+2. For each email:
+   - Subject line
+   - Key points or body copy
+   - Delay from previous send (e.g. "immediately", "3 days after stage 1")
+3. What exits a lead from the sequence?
+   (e.g. books a reading → converted, clicks unsubscribe → unsubscribed)
+4. Which lead sources does this sequence apply to?
+   (newsletter, contact, readings, mirror — or all)
+```
+
+Wait for answers. Then:
+- Save the sequence to `agents/email-marketer/context/email-index.md`
+- Install the agent using the standard template pattern below
 
 For each selected agent, install using the same template pattern as Section 4.
 Use brand context from resources/ files already written.

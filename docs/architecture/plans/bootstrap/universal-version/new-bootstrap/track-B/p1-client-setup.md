@@ -157,21 +157,22 @@ Replace all values from the credentials file transferred in P0.
 
 ## Step 7 — Configure Supabase MCP
 
-Update `~/.claude/settings.local.json` to add MCP:
+This connects the client's laptop to the same Supabase account set up in Track A.
 
-```json
-{
-  "permissions": { ... },
-  "mcpServers": {
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "{supabase-pat}"]
-    }
-  }
-}
+Say this to Claude Code:
+
+```
+Set up the Supabase MCP server on this machine:
+1. Fetch the latest Supabase MCP setup documentation so you follow the current install method
+2. Add the MCP server to ~/.claude/settings.local.json
+3. Start the Supabase authentication flow and give me the browser URL to authorize
+4. After I tell you I've completed authorization, finish the auth flow
+5. Verify the connection by listing the Supabase projects on this account
 ```
 
-Use the same Supabase PAT from Track A, or generate a new one for this machine at `supabase.com/dashboard/account/tokens`.
+**The only manual step**: Claude will output a URL — open it in a browser and click **Authorize**. Tell Claude "done" when the page confirms success.
+
+Claude handles everything else: package installation, config file update, auth completion, and connection verification.
 
 ---
 
@@ -196,13 +197,13 @@ triggers: ["daily checkin", "morning standup", "what's on today"]
 EOF
 ```
 
-### create-local-task skill
+### create-routines skill
 
 ```bash
-mkdir -p ~/.claude/skills/create-local-task
-cat > ~/.claude/skills/create-local-task/SKILL.md << 'EOF'
+mkdir -p ~/.claude/skills/create-routines
+cat > ~/.claude/skills/create-routines/SKILL.md << 'EOF'
 ---
-name: create-local-task
+name: create-routines
 description: Creates a task file in working_files/tasks/ with a clear description, acceptance criteria, and priority.
 triggers: ["create task", "new task", "log task"]
 ---
@@ -258,7 +259,7 @@ Ctrl+C
 - [ ] `~/.claude/CLAUDE.md` written (matches Mac Mini)
 - [ ] `~/.claude/rules/global-engineering.md` written
 - [ ] `~/.claude/.env` written with all API keys
-- [ ] Global skills installed: `daily-checkin`, `create-local-task`
+- [ ] Global skills installed: `daily-checkin`, `create-routines`
 - [ ] `~/code-projects/{project-slug}-website/` cloned locally, dev server verified
 
 **Next**: [P2 — Connect to Agent Team](p2-client-connect.md)

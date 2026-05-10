@@ -3,46 +3,29 @@
 > **Who runs this**: Dave (the developer) on the Mac Mini
 > **Machine state**: Completely fresh — nothing installed
 > **Prerequisite**: P0 complete; `{project-slug}-credentials.md` in hand
-> **Output**: Mac Mini fully configured, Hello World website live on Vercel, ready for P2
+> **Output**: Mac Mini fully configured, client website live on Vercel, ready for P2
 
 ---
 
-## Step 1 — Install Homebrew
+## Step 1 — Install remaining tools
+
+Homebrew and git were installed in P0. Claude Code runs the rest:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || eval "$(/usr/local/bin/brew shellenv)" 2>/dev/null || true
+brew install gh node jq ffmpeg
+npm install -g vercel
+brew tap supabase/tap && brew install supabase/tap/supabase
 ```
-
-After install, follow the printed instructions to add Homebrew to PATH (Apple Silicon Macs require adding to `~/.zprofile`).
 
 Verify:
 ```bash
-brew --version
+gh --version && node --version && jq --version && ffmpeg -version && vercel --version && supabase --version
 ```
 
 ---
 
-## Step 2 — Install core tools via Homebrew
-
-```bash
-brew install git gh node jq ffmpeg
-```
-
-Then install CLI tools via npm:
-
-```bash
-npm install -g vercel
-npm install -g supabase
-```
-
-Verify all tools:
-```bash
-git --version && gh --version && node --version && jq --version && ffmpeg -version && vercel --version && supabase --version
-```
-
----
-
-## Step 3 — Authenticate GitHub CLI
+## Step 2 — Authenticate GitHub CLI
 
 ```bash
 gh auth login
@@ -60,7 +43,7 @@ gh auth status
 
 ---
 
-## Step 4 — Pre-seed Claude Code permissions
+## Step 3 — Pre-seed Claude Code permissions
 
 ```bash
 mkdir -p ~/.claude
@@ -99,7 +82,7 @@ Write `~/.claude/settings.local.json`:
 
 ---
 
-## Step 5 — Create global Claude Code directories
+## Step 4 — Create global Claude Code directories
 
 ```bash
 mkdir -p ~/.claude/agents
@@ -109,7 +92,7 @@ mkdir -p ~/.claude/rules
 
 ---
 
-## Step 6 — Write global CLAUDE.md
+## Step 5 — Write global CLAUDE.md
 
 ```bash
 cat > ~/.claude/CLAUDE.md << 'EOF'
@@ -138,7 +121,7 @@ EOF
 
 ---
 
-## Step 7 — Write global engineering rules
+## Step 6 — Write global engineering rules
 
 ```bash
 cat > ~/.claude/rules/global-engineering.md << 'EOF'
@@ -170,7 +153,7 @@ EOF
 
 ---
 
-## Step 8 — Write Supabase credentials to .env
+## Step 7 — Write Supabase credentials to .env
 
 ```bash
 cat > ~/.claude/.env << 'EOF'
@@ -189,31 +172,26 @@ Replace all `{placeholder}` values from the credentials file created in P0.
 
 ---
 
-## Step 9 — Configure Supabase MCP
+## Step 8 — Configure Supabase MCP
 
-Add Supabase MCP to `~/.claude/settings.local.json`:
+Say this to Claude Code:
 
-```json
-{
-  "permissions": { ... },
-  "mcpServers": {
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "{your-supabase-pat}"]
-    }
-  }
-}
+```
+Set up the Supabase MCP server on this machine:
+1. Fetch the latest Supabase MCP setup documentation so you follow the current install method
+2. Add the MCP server to ~/.claude/settings.local.json
+3. Start the Supabase authentication flow and give me the browser URL to authorize
+4. After I tell you I've completed authorization, finish the auth flow
+5. Verify the connection by listing my Supabase projects
 ```
 
-Get your Supabase Personal Access Token (PAT):
-1. Go to `supabase.com/dashboard/account/tokens`
-2. Click **Generate new token**
-3. Name: `mac-mini-claude-mcp`
-4. Copy the token and replace `{your-supabase-pat}` above
+**The only manual step**: Claude will output a URL — open it in a browser and click **Authorize**. Tell Claude "done" when the page confirms success.
+
+Claude handles everything else: package installation, config file update, auth completion, and connection verification.
 
 ---
 
-## Step 10 — Install global skills
+## Step 9 — Install global skills
 
 ### daily-checkin skill
 
@@ -234,13 +212,13 @@ triggers: ["daily checkin", "morning standup", "what's on today"]
 EOF
 ```
 
-### create-local-task skill
+### create-routines skill
 
 ```bash
-mkdir -p ~/.claude/skills/create-local-task
-cat > ~/.claude/skills/create-local-task/SKILL.md << 'EOF'
+mkdir -p ~/.claude/skills/create-routines
+cat > ~/.claude/skills/create-routines/SKILL.md << 'EOF'
 ---
-name: create-local-task
+name: create-routines
 description: Creates a task file in working_files/tasks/ with a clear description, acceptance criteria, and priority.
 triggers: ["create task", "new task", "log task"]
 ---
@@ -283,11 +261,11 @@ EOF
 
 ---
 
-## Step 11 — First project: client website
+## Step 10 — First project: client website
 
 This is the final step of P1. All code projects live under `~/code-projects/` — the website is the first one. The Mac Mini will host a running agent team AND have this live website as proof of the system.
 
-### 11a — Create the code-projects folder and scaffold Next.js 16
+### 10a — Create the code-projects folder and scaffold Next.js 16
 
 ```bash
 mkdir -p ~/code-projects
@@ -323,7 +301,7 @@ npx shadcn@latest init --defaults
 ```
 This uses New York style, Zinc base, CSS variables — no prompts.
 
-### 11b — Add vercel.json at repo root
+### 10b — Add vercel.json at repo root
 
 ```bash
 cat > vercel.json << 'EOF'
@@ -336,7 +314,7 @@ EOF
 
 This tells Vercel where the Next.js app lives — the user never needs to find the Root Directory setting during import.
 
-### 11c — Configure fonts and Tailwind
+### 10c — Configure fonts and Tailwind
 
 `next/font` self-hosts both fonts — no Google Fonts network request at runtime, zero layout shift.
 
@@ -387,7 +365,7 @@ const config: Config = {
 export default config
 ```
 
-### 11d — Apply Infinite Leverage design tokens
+### 10d — Apply Infinite Leverage design tokens
 
 In `src/app/globals.css`, add root variables after the existing Tailwind directives:
 
@@ -418,7 +396,7 @@ body {
 
 Fonts are now available as Tailwind utilities: `font-sans` (Inter Tight) and `font-mono` (JetBrains Mono). Color tokens remain as CSS variables for use in inline styles and component CSS.
 
-### 11e — Build the website
+### 10e — Build the website
 
 The site has four sections on a single long-scroll home page plus two stub pages. This is not a placeholder — it is a real Infinite Leverage landing page for the client.
 
@@ -499,7 +477,7 @@ Below: "Ready to build?" with a mailto link to `{firstname}@{clientdomain}.com`.
 
 ---
 
-### 11f — Initialize git and push to GitHub
+### 10f — Initialize git and push to GitHub
 
 ```bash
 cd ~/code-projects/{project-slug}-website
@@ -510,7 +488,7 @@ git commit -m "init: {Client Name} — Infinite Leverage site"
 gh repo create {project-slug}-website --public --source=. --remote=origin --push
 ```
 
-### 11g — Import to Vercel and deploy
+### 10g — Import to Vercel and deploy
 
 Output this and wait for confirmation before continuing:
 
@@ -539,7 +517,7 @@ Verify: open the URL in a browser, confirm the hero, agenda, protocols, and CTA 
 
 ---
 
-## Step 12 — Final git commit and push
+## Step 11 — Final git commit and push
 
 ```bash
 cd ~/code-projects/{project-slug}-website
@@ -553,14 +531,13 @@ Confirm Vercel auto-deploys from the push (check Vercel dashboard for deployment
 
 ## P1 complete — what you have now
 
-- [ ] Homebrew, git, gh, node, jq, ffmpeg, vercel CLI, supabase CLI all installed
 - [ ] GitHub CLI authenticated as operator account
 - [ ] `~/.claude/settings.local.json` with permissions + Supabase MCP
 - [ ] `~/.claude/agents/`, `~/.claude/skills/`, `~/.claude/rules/` created
 - [ ] `~/.claude/CLAUDE.md` written
 - [ ] `~/.claude/rules/global-engineering.md` written
 - [ ] `~/.claude/.env` written with all API keys
-- [ ] Global skills installed: `daily-checkin`, `create-local-task`, `skill-creator`
+- [ ] Global skills installed: `daily-checkin`, `create-routines`, `skill-creator`
 - [ ] `~/code-projects/` folder created; website is the first project inside it
 - [ ] Client website live: Hero + Infinite Leverage Agenda + 18 Protocols + CTA
 - [ ] `{project-slug}-website` repo on GitHub

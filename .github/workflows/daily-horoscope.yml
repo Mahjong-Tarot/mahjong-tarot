@@ -47,7 +47,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        working-directory: architecture/readings/daily-horoscopes/encoding
+        working-directory: docs/architecture/readings/daily-horoscopes/encoding
         run: |
           python3 backfill_supabase.py \
             --commit \

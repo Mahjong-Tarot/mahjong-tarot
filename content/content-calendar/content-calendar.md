@@ -153,39 +153,77 @@ Publishes: Friday (blog + social — publishes May 8)
 
 ---
 
-## Week of May 11 — Love Life by Sign
+## Week of May 11 — The Kentucky Derby
 
-**Topic: 2026-05-11-horse-love-signs** — STATUS: WRITTEN
+**Topic: 2026-05-11-derby-fire-horse** — STATUS: DESIGNED
+Angle: Fire Horse — what Bill saw at the Derby (proof in real-world spectacle)
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-05-13-derby-mirror** — STATUS: DESIGNED
+Angle: Mahjong Mirror — what the favorites missed (the obstacle the trainers overlooked)
+Chapter/tile focus: Mirror's "different perspectives" + obstacle-naming framework
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-05-15-derby-feel-good** — STATUS: DESIGNED
+Angle: Feel Good Friday — this is the year you surprise yourself (readiness as affirmation, not condition)
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| May 11 | Mon | Blog | "I Went to the Kentucky Derby to See a Fire Horse Year in Action" — Golden Temple at 20-to-1 going from last to first in 30 seconds. The first woman trainer to win in 152 years. A jockey who'd lost six previous Derbys winning two races in two days. The 70-to-1 horse who shouldn't have even been in the race. Every Fire Horse year cliché — fast highs, brutal disasters, history rewritten in seconds — happened in a single afternoon. Here's what I saw, and what it tells you about the rest of the year. |
+| May 11 | Mon | Facebook EN | I went to Louisville to see Fire Horse energy with my own eyes. What I got was the most astonishing Derby in the race's 152-year history. Last to first in 30 seconds. The first woman trainer to win. A 20-to-1 victory and a 70-to-1 third place. This is what the rest of 2026 looks like. |
+| May 11 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| May 11 | Mon | Instagram | The favorites lost. The 20-to-1 won. The first woman trainer in 152 years took the trophy. The Kentucky Derby was Fire Horse year in 2 minutes — and the rest of 2026 is going to be more of the same. |
+| May 12 | Tue | Facebook EN | Out of the top three favorites at the Derby, only one made the top three of the actual race. The horse predicted to win came second. The others didn't crack the top six. If you're betting on the obvious favorite this year — in business, in love, in any decision — read the Monday post first. |
+| May 12 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| May 12 | Tue | Instagram | The pundits picked the favorites. The pace got fast. The favorites burned out. The patient horse won. That's the playbook for the rest of 2026. |
+| May 13 | Wed | Blog | "What the Favorites' Trainers Missed — and What You're Probably Missing in Your Own Plan" — The Mahjong Mirror asks one question most decisions skip: what are the obstacles? At the Derby, every favorite's team overlooked the same obstacle — that a fast pace could favor a horse with reserve. They had the talent and the data; they didn't run the Mirror. Here's how to apply the Mirror's third angle to a decision you're making right now. |
+| May 13 | Wed | Facebook EN | Bill wrote the book on the Mahjong Mirror partly because of races like this Derby. Every favorite's trainer saw the same race. None of them saw the obstacle. The Mirror is the discipline of asking the question they didn't ask. |
+| May 13 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| May 13 | Wed | Instagram | The Mirror's third angle isn't "what's the plan?" It's "what's the obstacle?" That's the question the favorites' trainers didn't ask. And the patient horse won. |
+| May 14 | Thu | Facebook EN | A horse went from last to first in 30 seconds. The trainer wasn't surprised — that was the plan. The favorites' trainers were stunned. That's the difference between people who use the Mirror and people who don't. |
+| May 14 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| May 14 | Thu | Instagram | The Golden Temple win wasn't an accident. It was a Mirror'd decision against a field that didn't Mirror anything. |
+| May 15 | Fri | Blog | "Feel Good Friday: This Is the Year You Surprise Yourself" — Bill said it after the Derby: "Readiness is all this year. When that gun goes off, each of us has to take action." Golden Tempo won at 23-to-1. Ocelli, the horse who replaced a scratched entry at the gate, came third at 70-to-1 with jockey Ashley Durr in the saddle. The first woman trainer in 152 years took the trophy. The Fire Horse rewards the prepared, even when the opportunity arrives from someone else's misfortune. The reader is already on the path. This post is the invitation to trust that. |
+| May 15 | Fri | Facebook EN | Feel Good Friday: Ocelli and jockey Ashley Durr only got into the Derby because another horse was scratched at the gate. They came third at 70-to-1. They were ready when the door opened. This is the year you surprise yourself, and the preparation you have already done is already working. |
+| May 15 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| May 15 | Fri | Instagram | Feel Good Friday: This is the year you surprise yourself. Not by hoping, by preparing. The door opens from places nobody predicts; the readiness is yours. |
+
+---
+
+## Week of May 18 — Love Life by Sign
+
+**Topic: 2026-05-18-horse-love-signs** — STATUS: DESIGNED
 Angle: Fire Horse — shock & awe (Sign-by-Sign Breakdown)
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-05-13-mirror-love-signs** — STATUS: WRITTEN
+**Topic: 2026-05-20-mirror-love-signs** — STATUS: DESIGNED
 Angle: Mahjong Mirror — the answer (ties back to sign-by-sign love risk)
 Chapter/tile focus: Chapter 3 (Opposition), Appendix — Love cards (Peach Blossom, Sword)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-05-15-feel-good-love** — STATUS: WRITTEN
+**Topic: 2026-05-22-feel-good-love** — STATUS: DESIGNED
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| May 11 | Mon | Blog | "Your Love Life in 2026 — What the Fire Horse Actually Means for Your Sign" — Sign-by-sign breakdown of love prospects in the Fire Horse year. Some signs will thrive. Most will face real challenges. Every reader gets their two-word headline and something actionable to do about it. |
-| May 11 | Mon | Facebook EN | Most years, your zodiac sign is background noise in your love life. This year it isn't. The Fire Horse amplifies everything — and it hits every sign differently. Here's yours. |
-| May 11 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| May 11 | Mon | Instagram | The Fire Horse doesn't treat all 12 signs the same. Find yours. Some of you are about to have the best love year in decades. Others need to hear this warning now. |
-| May 12 | Tue | Facebook EN | I've been doing this for 35 years. The Fire Horse sign-by-sign love forecast is the one I give every reader who walks in right now. It's not what most people expect. |
-| May 12 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
-| May 12 | Tue | Instagram | Sheep/Goat: best love year in 60 years. Monkey: the year to look in the mirror first. Two signs, two completely different stories. Find yours in the blog. |
-| May 13 | Wed | Blog | "What the Fire Horse Is Really Opposing in Your Love Life — and How to Work With It" — The Mahjong Mirror's Third Angle looks at what's blocking you. Not the surface argument, not the chemistry problem — the real opposition. The Peach Blossom in the problem position. The Sword that says cut now. The cards that show you what you're actually dealing with. |
-| May 13 | Wed | Facebook EN | The Mahjong Mirror's Third Angle is the one most people resist — it asks you to name what's actually opposing you in your love life. Not what you're fighting about. What's underneath it. |
-| May 13 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
-| May 13 | Wed | Instagram | The Mirror's Third Angle doesn't ask who's to blame. It asks what's really blocking the relationship from working. That's a harder question. And a more useful one. |
-| May 14 | Thu | Facebook EN | There are two tiles that show up repeatedly in Fire Horse year love readings: the Peach Blossom and the Sword. Neither one is comfortable. Both are clarifying. |
-| May 14 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
-| May 14 | Thu | Instagram | The Peach Blossom in the problem position. The Sword where the future should be. The Mirror doesn't soften what it shows — and that's exactly why it helps. |
-| May 15 | Fri | Blog | "Feel Good Friday: The Sheep Year Is Coming — Here's What to Build Before It Arrives" — The Fire Horse is a year of action and consequence. What you build, break, or begin now sets the conditions for the Sheep year ahead. For the signs thriving in love right now, the challenge is to make it last. For the signs struggling, the challenge is to clear the path. Either way — you're not just living through this year. You're building toward the next one. |
-| May 15 | Fri | Facebook EN | Feel Good Friday: The Fire Horse year doesn't end in silence. It ends in consequences — good or bad, depending on what you did with it. This week, your challenge: name one thing you're building in love. Not hoping for. Building. |
-| May 15 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
-| May 15 | Fri | Instagram | Feel Good Friday: The Sheep year follows the Horse. Calm follows fire. What are you making sure survives the transition? |
+| May 18 | Mon | Blog | "Your Love Life in 2026 — What the Fire Horse Actually Means for Your Sign" — Sign-by-sign breakdown of love prospects in the Fire Horse year. Some signs will thrive. Most will face real challenges. Every reader gets their two-word headline and something actionable to do about it. |
+| May 18 | Mon | Facebook EN | Most years, your zodiac sign is background noise in your love life. This year it isn't. The Fire Horse amplifies everything — and it hits every sign differently. Here's yours. |
+| May 18 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| May 18 | Mon | Instagram | The Fire Horse doesn't treat all 12 signs the same. Find yours. Some of you are about to have the best love year in decades. Others need to hear this warning now. |
+| May 19 | Tue | Facebook EN | I've been doing this for 35 years. The Fire Horse sign-by-sign love forecast is the one I give every reader who walks in right now. It's not what most people expect. |
+| May 19 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| May 19 | Tue | Instagram | Sheep/Goat: best love year in 60 years. Monkey: the year to look in the mirror first. Two signs, two completely different stories. Find yours in the blog. |
+| May 20 | Wed | Blog | "What the Fire Horse Is Really Opposing in Your Love Life — and How to Work With It" — The Mahjong Mirror's Third Angle looks at what's blocking you. Not the surface argument, not the chemistry problem — the real opposition. The Peach Blossom in the problem position. The Sword that says cut now. The cards that show you what you're actually dealing with. |
+| May 20 | Wed | Facebook EN | The Mahjong Mirror's Third Angle is the one most people resist — it asks you to name what's actually opposing you in your love life. Not what you're fighting about. What's underneath it. |
+| May 20 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| May 20 | Wed | Instagram | The Mirror's Third Angle doesn't ask who's to blame. It asks what's really blocking the relationship from working. That's a harder question. And a more useful one. |
+| May 21 | Thu | Facebook EN | There are two tiles that show up repeatedly in Fire Horse year love readings: the Peach Blossom and the Sword. Neither one is comfortable. Both are clarifying. |
+| May 21 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| May 21 | Thu | Instagram | The Peach Blossom in the problem position. The Sword where the future should be. The Mirror doesn't soften what it shows — and that's exactly why it helps. |
+| May 22 | Fri | Blog | "Feel Good Friday: The Sheep Year Is Coming — Here's What to Build Before It Arrives" — The Fire Horse is a year of action and consequence. What you build, break, or begin now sets the conditions for the Sheep year ahead. For the signs thriving in love right now, the challenge is to make it last. For the signs struggling, the challenge is to clear the path. Either way — you're not just living through this year. You're building toward the next one. |
+| May 22 | Fri | Facebook EN | Feel Good Friday: The Fire Horse year doesn't end in silence. It ends in consequences — good or bad, depending on what you did with it. This week, your challenge: name one thing you're building in love. Not hoping for. Building. |
+| May 22 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| May 22 | Fri | Instagram | Feel Good Friday: The Sheep year follows the Horse. Calm follows fire. What are you making sure survives the transition? |
 

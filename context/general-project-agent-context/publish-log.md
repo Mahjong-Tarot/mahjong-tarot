@@ -1,5 +1,6 @@
 | Date | Title | File | Category |
 |------|-------|------|----------|
+| 2026-05-11 | I Went to the Kentucky Derby to See a Fire Horse Year in Action | kentucky-derby-fire-horse-year-2026.jsx | Year of the Fire Horse |
 | 2026-05-04 | 'Opposites Attract' Is a Lie the Fire Horse Year Will Expose | opposites-attract-is-a-lie-fire-horse-love-2026.jsx | Year of the Fire Horse |
 | 2026-05-01 | Feel Good Friday: Your Career Is Not Your Cage | feel-good-friday-your-career-is-not-your-cage.jsx | Year of the Fire Horse |
 | 2026-04-29 | The Decision Framework That Was Built for Career Crossroads | the-decision-framework-for-career-crossroads.jsx | Year of the Fire Horse |
@@ -15,3 +16,4 @@
 | 2026-04-13 | What the Stars Actually Say About the Swift-Kelce Wedding | swift-kelce-wedding-stars.jsx | Year of the Fire Horse |
 | 2026-04-15 | Your Love Life in the Fire Horse Year: What Every Sign Needs to Know | your-love-life-in-the-fire-horse-year.jsx | Year of the Fire Horse |
 | 2026-04-15 | The Mahjong Mirror Way to Plan a Wedding | planning-a-wedding-through-the-mahjong-mirror.jsx | Romance |
+| 2026-05-13 | What the Favorites' Trainers Missed | what-the-favorites-trainers-missed-mahjong-mirror.jsx | Year of the Fire Horse |

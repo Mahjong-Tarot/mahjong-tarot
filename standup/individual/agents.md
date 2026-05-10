@@ -1,29 +1,30 @@
-date: 2026-05-05
+date: 2026-05-08
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #171: pm(standup-morning): 2026-05-04 — merged 2026-05-04 00:09 UTC
-- PR #173: pm(standup-compile): 2026-05-04 — merged 2026-05-04 02:12 UTC
+- PR #187: pm(standup-morning): 2026-05-07 — merged 2026-05-07 00:08 UTC
+- PR #190: pm(standup-compile): 2026-05-07 — merged 2026-05-07 02:10 UTC
 
 **Next:**
-- No open work detected (this 07:00 morning trigger is in flight)
+- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-08`)
+- 09:00 standup-compile run later this morning
 
 **Blockers:**
-- Lark bot auth still failing (`[10014] app secret invalid`) — recurring across all automated runs since 28 April (6th consecutive day). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. Flagged 28/29/30 April + 1/4 May; carried into 5 May.
+- Lark bot auth still failing (`[10014] app secret invalid`) — 9th consecutive day (28/29/30 April + 1/4/5/6/7/8 May). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. `lark-cli` upgrade (1.0.10 → 1.0.23+) also pending.
 
 ---
 
 ## web-developer
 
 **Completed:**
-- `11044c2` publish: 'Opposites Attract' Is a Lie the Fire Horse Year Will Expose — bundled into PR #174 merged 2026-05-04 04:13 UTC. New post `.jsx`, hero `.webp`, `lib/posts.js` entry, publish-log row, calendar STATUS flip.
+- PR #189: `publish: What the Favorites' Trainers Missed (Mahjong Mirror)` — merged 2026-05-07 01:38 UTC. Commit `31b3e47`. Mahjong Mirror Derby post shipped via `publish/derby-mirror-2026-05-07` branch.
 
 **Next:**
-- Monitor PR #174 post in production
-- Next eligible publishes: 2026-05-06 (Mirror Love) and 2026-05-08 (Feel Good Love) — both `STATUS: DESIGNED` per content calendar
+- Per content calendar: next scheduled publish is 2026-05-15 (Derby Feel Good) — `STATUS: WRITTEN/DESIGNED` in topics folder.
+- No open PRs.
 
 **Blockers:**
 None
@@ -33,10 +34,11 @@ None
 ## writer
 
 **Completed:**
-- `e600a4d` writer(tuesday-2026-05-05): content for week of 2026-05-11 — bundled into PR #175 merged 2026-05-04 18:33 UTC. 3 blog posts + social + SEO for Mon 5/11 (Fire Horse Love by Sign), Wed 5/13 (Mahjong Mirror Third Angle), Fri 5/15 (Feel Good Friday: Build Before Sheep Year). Calendar plan added by writer for week 5/11.
+- No activity in the 2026-05-07 00:00 UTC → 2026-05-08 00:00 UTC window.
 
 **Next:**
-- No open work detected
+- No open work detected — no open PRs.
+- Content calendar through end-of-May still has slots needing drafts.
 
 **Blockers:**
 None
@@ -46,10 +48,10 @@ None
 ## product-manager
 
 **Completed:**
-- No activity
+- No activity in the 2026-05-07 00:00 UTC → 2026-05-08 00:00 UTC window.
 
 **Next:**
-- Review auto-publishing checklist with Dave for implementation sign-off
+- Review auto-publishing checklist with Dave for implementation sign-off.
 
 **Blockers:**
 None
@@ -59,27 +61,25 @@ None
 ## image-designer
 
 **Completed:**
-- `bb455ca` design: generate images for week of May 4 — love and compatibility — bundled into PR #174 merged 2026-05-04 04:13 UTC. 30 image files across 3 topic folders (`2026-05-04-horse-love`, `2026-05-06-mirror-love`, `2026-05-08-feel-good-love`); each channel has both source PNG and `cwebp`-optimised WebP.
+- PR #188: `Designer: Hero images — 2026-05-07` — merged 2026-05-07 01:33 UTC. Commit `1f7b17e` `designer(thursday-2026-05-07): hero + social images for 6 topics`. Branch `designer/thursday-2026-05-07`.
 
 **Next:**
-- No open work detected
+- No open work detected.
+- Hero/social images for upcoming `2026-05-15-derby-feel-good` topic still needed before publish.
 
 **Blockers:**
-- Repo `.env` `GEMINI_API_KEY` rejected — agent fell back to `/content-studio/.env`. Repo key needs rotation/refresh before next autonomous run.
-- `ffmpeg` on Dave's machine lacks `libwebp`; SKILL.md `-q:v` flag silently fails — agent worked around with `cwebp`. SKILL update or `ffmpeg --with-libwebp` install pending.
-- Gemini content filter rejected the writer's "two silhouettes" prompt for `2026-05-04-horse-love-mon-facebook-en`; reframed by agent as interior-through-window scene. Worth a glance before social posting.
+- Repo `.env` `GEMINI_API_KEY` rejection (carry-forward from 2026-05-06): agent fell back to `/content-studio/.env`. Repo key needs rotation/refresh before next autonomous run.
+- `ffmpeg` on Dave's machine lacks `libwebp`; SKILL.md `-q:v` flag silently fails — `cwebp` workaround in place. SKILL update or `ffmpeg --with-libwebp` install pending.
 
 ---
 
 ## other-agents
 
 **Completed:**
-- PR #170: `agents: add MailerLite Manager for OCA reactivation + Mahjong Mirror launch` — `yon-create` bot, merged 2026-05-04 04:13 UTC after ~70h open. Adds full agent definition + 3 skills; Group `OCA Reactivation May 2026 — 500` already at 500/500 subscribers and 3 D-0 candidate drafts staged.
-- PR #172: `standup(yon): 2026-05-04` — `yon-create` daily-standup-briefing automation, merged 2026-05-04 02:08 UTC.
-- PR #176: `docs(status): refresh epic-status + project-status.html through 2026-05-05` — Claude Code automation under `dhajdu@gmail.com` identity, merged 2026-05-04 22:58 UTC. E5 50%→60%, E10 30%→45%, build log refreshed.
+- No agent-attributed activity in window. Two `docs(status):` commits by Dave (PR #191 `consolidate project-status.html into docs/`, direct commit `8f3b0cd` `reprice Phase 1 epics`) are manual human work, not agent work.
 
 **Next:**
-- No open work detected (no open PRs across the repo as of 2026-05-05 07:00)
+- No open work detected — no open PRs across the repo as of 2026-05-08 07:00 Asia/Saigon.
 
 **Blockers:**
 None

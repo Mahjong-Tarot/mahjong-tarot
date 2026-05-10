@@ -308,7 +308,7 @@ EOF
 cat > .claude/agents/email-marketer.md << 'EOF'
 ---
 name: email-marketer
-description: Nurtures every lead the site generates. Drafts and sends email campaigns via Resend. Uses Lark for internal team notifications. Acts when asked.
+description: Nurtures every lead the site generates. Drafts and sends email campaigns via Brevo. Uses Lark for internal team notifications. Acts when asked.
 ---
 
 ## On first invocation
@@ -319,7 +319,7 @@ If not found, fall back to `~/.claude/agents/email-marketer/context/default-pers
 You are the Email Marketer. You convert site visitors into subscribers and subscribers into clients.
 
 ## Stack
-- **Email marketing**: Resend (transactional + campaigns)
+- **Email marketing**: Brevo (transactional + campaigns)
 - **Internal notifications**: Lark (team alerts, not customer-facing)
 - **Subscriber data**: Supabase
 
@@ -330,6 +330,85 @@ You are the Email Marketer. You convert site visitors into subscribers and subsc
 - Never send to anyone who has not opted in
 EOF
 ```
+
+---
+
+## Step 3b — Set up Brevo for the Email Marketer agent
+
+Brevo is the email marketing platform used by the Email Marketer agent for lead nurture. Set it up now so the agent has credentials before it runs.
+
+### Create a Brevo account
+1. Go to `brevo.com` → **Sign up** with the operator email
+2. Verify the email address
+3. Complete the sender profile (business name, address — required for CAN-SPAM compliance)
+
+### Generate an API key
+1. After login: **SMTP & API** → **API Keys** → **Generate a new API key**
+2. Name: `{project-slug}-email-marketer`
+3. Copy and save as `BREVO_API_KEY`
+
+### Verify the sender email
+1. Go to **Senders & IPs** → **Senders** → **Add a sender**
+2. Add the operator email (`{firstname}@{clientdomain}.com`) as a verified sender
+3. Click the verification link sent to that address
+4. Confirm sender status shows **Verified**
+
+### Add `BREVO_API_KEY` to the project `.env`
+```bash
+echo "BREVO_API_KEY={your-key-here}" >> ~/Desktop/{project-slug}-website/.env.local
+```
+
+> **Note:** Never commit `.env.local` to the repo. Confirm it is in `.gitignore` before proceeding.
+
+---
+
+## Step 3c — Bootstrap the email sequence (email-index.md)
+
+The Email Marketer agent will not send anything if `agents/email-marketer/context/email-index.md` is missing or empty — it stops and asks the user to define the sequence first. Create it now with at least a Stage 0 welcome email before the agent goes live.
+
+Create `agents/email-marketer/context/email-index.md`:
+
+```markdown
+# Email Sequence Index
+
+## Sequence metadata
+
+- **Campaign name:** New Lead Welcome
+- **Applies to sources:** all (newsletter, contact, readings, mirror)
+- **Total stages:** 1 (expand as sequence grows)
+- **Last updated:** {YYYY-MM-DD}
+
+---
+
+## Stages
+
+### Stage 0 — Welcome + Latest Post
+- **Delay from signup:** immediately (`next_send_at = now()`)
+- **Subject:** {Subject line here}
+- **Body (HTML):**
+
+```html
+<p>Hi {{name}},</p>
+
+<p>Welcome — glad you're here.</p>
+
+<p>{1–2 sentences introducing the owner and the brand.}</p>
+
+<p>I just published something I think is worth your time:</p>
+
+<p><strong><a href="{latest post URL}">{Latest post title}</a></strong></p>
+
+<p>{1–2 sentence teaser for the post.}</p>
+
+<p>More soon.</p>
+
+<p>— {Owner first name}</p>
+```
+
+- **Next stage delay:** none (single-stage sequence — set `status = 'completed'` after send)
+```
+
+> **Note:** Replace all `{placeholders}` with real content before the Email Marketer agent runs. Add Stage 1, 2, etc. as the sequence grows — each with a delay, subject, body, and next stage delay.
 
 ---
 
@@ -401,7 +480,7 @@ sync agents
 | Writer | One post per run, owner's voice |
 | Designer | One hero image per run, Gemini |
 | Web Publisher | Publishes post, stages git commit |
-| Email Marketer | Subscriber nurture via Resend |
+| Email Marketer | Subscriber nurture via Brevo |
 EOF
 ```
 
@@ -613,6 +692,8 @@ Store it securely — do not commit it to any repository.
 - [ ] sync-agents skill installed globally
 - [ ] All 8 agents installed to `~/.claude/agents/`
 - [ ] Global CLAUDE.md updated with agents repo pointer
+- [ ] Brevo account created, sender verified, `BREVO_API_KEY` in `.env.local`
+- [ ] `agents/email-marketer/context/email-index.md` created with at least Stage 0
 - [ ] 7 RemoteTrigger schedules registered (4 PM + 3 content)
 - [ ] All verification checks passed
 - [ ] Hand-off document written

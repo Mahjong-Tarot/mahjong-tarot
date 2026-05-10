@@ -1,6 +1,6 @@
 # The Mahjong Tarot — Epic Status Dashboard
 
-**Last updated:** 2026-05-05
+**Last updated:** 2026-05-07
 **Phase in flight:** Phase 1 — Wedge
 
 At-a-glance status for each epic. Update this file whenever a workstream opens, ships, or stalls.
@@ -13,16 +13,16 @@ Status glyphs: 🔄 in flight · ✅ done · ⏳ partially done · ☐ planned �
 
 | Epic | Status | % done (est) | Open bugs | Notes |
 |---|---|---|---|---|
-| [E1 · Daily Almanac](./epics.md#e1--daily-almanac) | ⏳ | 60% | 0 | Almanac data through Feb 2032 in DB; home page does not yet lead with it |
-| [E2 · Find a Good Day](./epics.md#e2--find-a-good-day) | ⏳ | 40% | 0 | Search prototype exists; share-able artifact missing |
+| [E1 · Daily Almanac](./epics.md#e1--daily-almanac) | 🔄 | 85% | 0 | **2026-05-07:** Home page leads with today's almanac above the fold (PR #158); data through Feb 2032 live. Remaining: reading copy in voice; "Why this score?" expandable. |
+| [E2 · Find a Good Day](./epics.md#e2--find-a-good-day) | 🔄 | 80% | 0 | **2026-05-07:** Full feature shipped (PR #160) — search index, activity/date result page, `explainScore` helper. Remaining: share card; .ics download. |
 | [E3 · Personal Pillar Layer](./epics.md#e3--personal-pillar-layer) | ☐ | 5% | 0 | Birth-data capture spec drafted; pillar engine not started |
 | [E4 · Readings Catalogue](./epics.md#e4--readings-catalogue) | ☐ | 0% | 0 | Phase 5 |
-| [E5 · Voice & Content Engine](./epics.md#e5--voice--content-engine) | 🔄 | 60% | 0 | Pipeline shipping ~5 posts/week; voice doc + daily horoscope copy still missing |
+| [E5 · Voice & Content Engine](./epics.md#e5--voice--content-engine) | 🔄 | 70% | 0 | Pipeline active; Kentucky Derby post + 6 images shipped; Brevo email agent skills landed (PR #170). Remaining: voice doc; daily almanac copy pipeline; blind taste rig. |
 | [E6 · Founder Cohort & Subscription](./epics.md#e6--founder-cohort--subscription) | ☐ | 10% | 0 | Stripe wiring exists from earlier project; no founder tier yet |
 | [E7 · Book Integration](./epics.md#e7--book-integration) | ☐ | 0% | 0 | Phase 6 |
 | [E8 · 1-on-1 Practice Layer](./epics.md#e8--1-on-1-practice-layer) | ☐ | 5% | 0 | Bill's existing practice runs outside the product today |
 | [E9 · Share & Acquisition Loop](./epics.md#e9--share--acquisition-loop) | ☐ | 5% | 0 | Paid test budget allocated for May 2026 |
-| [E10 · Member Dashboard](./epics.md#e10--member-dashboard) | 🔄 | 45% | 0 | Horoscope-first restructure shipped (Today → Month → Year → Pillars → Purple Star); MemberNav + design tokens unified |
+| [E10 · Member Dashboard](./epics.md#e10--member-dashboard) | 🔄 | 70% | 0 | **2026-05-07:** Horoscope-first restructure shipped (PRs #167/168); all major sections rendering. Remaining: three-stack layout; notification rules; recent-readings rail. |
 
 Percent-done is an order-of-magnitude estimate (closer to 0/25/50/75/100 than to 47%). Use it to decide where attention goes, not to plan capacity.
 
@@ -30,21 +30,23 @@ Percent-done is an order-of-magnitude estimate (closer to 0/25/50/75/100 than to
 
 ## Drilldown
 
-### E1 · Daily Almanac — ⏳ 60%
+### E1 · Daily Almanac — 🔄 85%
 
 **What's done:** ~2,000 days of almanac data live in `public.almanac_days` through Feb 2032. Encoder pipeline (`docs/architecture/readings/daily-horoscopes/encoding/`) generates per-lunar-year SQL files. Day-officer, score, and pillar fields all populated.
 
-**What's missing:** Home page does not lead with today's almanac (currently leads with Bill's bio). One-paragraph reading copy is not yet in our voice. "Why this score?" expandable does not exist.
+**What's done (updated 2026-05-07, PR #158):** Home page now leads with today's almanac above the fold.
+
+**What's missing:** One-paragraph reading copy in Bill's voice. "Why this score?" expandable panel. D7 return-rate instrumentation.
 
 **Definition of done:** Logged-out home page shows today's almanac above the fold; reading copy passes voice review; D7 return rate ≥ 35%.
 
 ---
 
-### E2 · Find a Good Day — ⏳ 40%
+### E2 · Find a Good Day — 🔄 80%
 
-**What's done:** Free-text query → activity-rule mapping prototype exists. Date scoring algorithm runs in development.
+**What's done:** **2026-05-07 (PR #160):** Full feature shipped — search index at `/find-a-good-day`, activity/date result page, `explainScore` helper.
 
-**What's missing:** Share-able artifact (OG image / screenshot card). Calendar download (.ics). Result page polish.
+**What's missing:** Share-able OG card. Calendar download (.ics).
 
 **Definition of done:** ≥ 500 unique users hit the search by 2026-06-01; ≥ 10% of result pages are shared.
 
@@ -66,9 +68,9 @@ Not started. Phase 5.
 
 ---
 
-### E5 · Voice & Content Engine — 🔄 60%
+### E5 · Voice & Content Engine — 🔄 70%
 
-**What's done:** writer / designer / web-developer / mahjong-studio agent pipeline live and shipping content. Topic bundles in `content/topics/` flow through to published blog posts. Recent ships: 4-post bundle on 2026-05-02 (Feel Good Friday Wealth, Fire Horse Career, Decision Framework Career, Career Cage); "Opposites Attract" love-and-compatibility post on 2026-05-04; week-of-2026-05-11 content drafted on 2026-05-05. Generate-image skill producing hero + social images per post.
+**What's done:** writer / designer / web-developer / mahjong-studio agent pipeline live. Topic bundles flow through to published blog posts. Generate-image skill producing hero + social images per post. **2026-05-05 to 2026-05-07:** "Kentucky Derby Fire Horse Year" post (PR #186); 6 hero + social images (PR #188); Brevo email agent skills (PR #170) — campaign draft, subscriber import, OCA reactivation sequence.
 
 **What's missing:** Written voice doc that any contractor could write to. Daily horoscope content pipeline (currently we only ship blog posts, not daily almanac copy). Blind taste test rig.
 
@@ -112,9 +114,9 @@ Not started. Phase 6.
 
 ---
 
-### E10 · Member Dashboard — 🔄 45%
+### E10 · Member Dashboard — 🔄 70%
 
-**What's done:** `/dashboard` restructured horoscope-first on 2026-05-02 — Today → Month → Year → Pillars → Purple Star order (#168). MemberNav + design-token consistency pass landed (#167) so the member shell matches the public-site editorial system. BaZi profile, compatibility calculator, Inner Circle, Three Blessings, and Purple Star all rendering.
+**What's done:** `/dashboard` restructured horoscope-first (PRs #167/168) — Today → Month → Year → Pillars → Purple Star. MemberNav + design-token consistency pass. BaZi profile, compatibility calculator, Inner Circle, Three Blessings, and Purple Star all rendering. CI fix for daily horoscope workflow (PR #180).
 
 **What's missing:** Three-stack layout (almanac → personal → one-prompt) at the top. Notification rules. Recent-readings rail. Streak indicator.
 

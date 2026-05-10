@@ -1,0 +1,62 @@
+{
+  "topic": "The Mahjong Mirror's obstacle question applied to the 2026 Kentucky Derby: how Golden Tempo's team asked the question the favorites did not, and how to run that same question on any decision.",
+  "phrases": [
+    "Name the obstacle before the gun goes off.",
+    "The question nobody asked.",
+    "Stress-test the plan. Don't doubt it.",
+    "The mirror shows what confidence hides.",
+    "What is already in front of you?"
+  ],
+  "images": [
+    {
+      "file": "blog-derby-mirror.md",
+      "slug": "what-the-favorites-trainers-missed-mahjong-mirror",
+      "content_type": "blog-derby-mirror",
+      "concept": "An open notebook or journal on a dark wooden desk, one page showing a single written question near the top, the rest of the page blank and waiting. A pencil rests in the crease of the binding. The desk surface is worn, lived-in. Morning light falls across the page. The image captures the moment before a plan is tested, the honest question waiting to be answered.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up of an open journal on a dark weathered wooden desk. The left page has a single line of neat handwriting near the top, the rest of the page entirely blank. The right page is also blank. A pencil rests in the binding. Morning light from the upper left falls warmly across the paper. The paper is warm ivory. The desk surface is deep walnut toned and worn. An inkwell sits just out of focus at the upper right. The mood is quiet, deliberate, honest. This is the moment of asking the question you have been avoiding. No readable text visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "what-the-favorites-trainers-missed-mahjong-mirror",
+      "content_type": "wed-facebook-en",
+      "concept": "A woman seated at a table, a mirror propped up in front of her. She is looking into it, but the mirror reflects a different room than the one she is in. The reflected room is darker, more complex. The image captures the Mirror discipline: looking at a situation from an angle that shows what normal confidence does not.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman seated at a simple table, seen from slightly behind and to the side so her face is not fully visible. An ornate hand mirror is propped against a book in front of her. The mirror reflects a different room from the one she is in: slightly darker, with a window showing a stormy sky. She is leaning slightly forward, studying the reflection. Her expression is intent, not alarmed. The room around her has warm antique gold light; the reflection is cooler, midnight jade tones. Cinematic depth of field, the mirror sharp, the background soft. No text or symbols visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "what-the-favorites-trainers-missed-mahjong-mirror",
+      "content_type": "wed-instagram",
+      "concept": "A cracked stone surface with a single small plant growing through the crack. The crack is the obstacle. The plant growing through it is the answer: the plan adjusted around the obstacle, not defeated by it. Square format, overhead. Clean and metaphoric.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square overhead composition. A close-up of a pale stone surface with a single hairline crack running across the center. Through the widest point of the crack, a small green plant has pushed up: one stem, two fresh leaves, reaching toward light. The stone is pale warm ivory with warm antique gold tones where the light hits it. The plant is small and determined. Morning light from above. The mood is simple and resolute: the obstacle named, the plan growing through it. No text, no objects other than stone and plant. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "what-the-favorites-trainers-missed-mahjong-mirror",
+      "content_type": "thu-facebook-en",
+      "concept": "Two chess pieces on a board: one standing (king), one fallen on its side (a different piece). The standing piece is in the back row, not the front. The front of the board is empty. The image visualizes the strategy of holding back while others advance, and what happens to pieces that moved too early.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up of a wooden chess board. In the foreground, several pawns lie on their sides, fallen, scattered in the middle of the board. At the back of the board, one king piece stands upright, small but still in play. The board surface is dark walnut, the pieces warm ivory. Raking afternoon light from the right side casts long shadows from the fallen pieces. The mood is quiet aftermath: many pieces advanced too early, one held back and survived. No text. No other objects in frame. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "what-the-favorites-trainers-missed-mahjong-mirror",
+      "content_type": "thu-instagram",
+      "concept": "A woman's hands holding a compass on a flat wooden surface. The compass needle is pointing clearly in one direction. The hands are still and deliberate. The image is about the moment of knowing which way to go after you have asked the hard question.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. A woman's hands cupped around a small brass compass resting on a warm wooden surface. The compass needle points decisively to one side. The hands are steady and warm-toned. Morning light from the left. The brass of the compass catches antique gold tones. The wooden surface beneath is deep walnut. The background is out of focus and dark. The mood is quiet certainty after asking the right question. No face visible. No text on the compass readable. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

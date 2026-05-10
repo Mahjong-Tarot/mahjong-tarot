@@ -30,3 +30,33 @@
 | 2026-05-04 10:45 | feel-good-friday-balance-is-the-real-love-story | gemini-3.1-flash-image-preview | generate-image | fri-instagram | 91 | ✅ |
 | 2026-05-04 10:45 | feel-good-friday-balance-is-the-real-love-story | gemini-3.1-flash-image-preview | generate-image | card | 100 | ✅ |
 | 2026-05-04 10:45 | feel-good-friday-balance-is-the-real-love-story | gemini-3.1-flash-image-preview | generate-image | card-vn | 41 | ✅ |
+| 2026-05-07 08:00 | 2026-05-11-derby-fire-horse | gemini-3.1-flash-image-preview | generate-image | blog-derby-fire-horse | 131 KB | ✅ |
+| 2026-05-07 08:00 | 2026-05-11-derby-fire-horse | gemini-3.1-flash-image-preview | generate-image | mon-facebook-en | 106 KB | ✅ |
+| 2026-05-07 08:00 | 2026-05-11-derby-fire-horse | gemini-3.1-flash-image-preview | generate-image | mon-instagram | 91 KB | ✅ |
+| 2026-05-07 08:00 | 2026-05-11-derby-fire-horse | gemini-3.1-flash-image-preview | generate-image | tue-facebook-en | 127 KB | ✅ |
+| 2026-05-07 08:00 | 2026-05-11-derby-fire-horse | gemini-3.1-flash-image-preview | generate-image | tue-instagram | 147 KB | ✅ |
+| 2026-05-07 08:15 | 2026-05-13-derby-mirror | gemini-3.1-flash-image-preview | generate-image | blog-derby-mirror | 41 KB | ✅ |
+| 2026-05-07 08:15 | 2026-05-13-derby-mirror | gemini-3.1-flash-image-preview | generate-image | wed-facebook-en | 67 KB | ✅ |
+| 2026-05-07 08:15 | 2026-05-13-derby-mirror | gemini-3.1-flash-image-preview | generate-image | wed-instagram | 121 KB | ✅ |
+| 2026-05-07 08:15 | 2026-05-13-derby-mirror | gemini-3.1-flash-image-preview | generate-image | thu-facebook-en | 78 KB | ✅ |
+| 2026-05-07 08:15 | 2026-05-13-derby-mirror | gemini-3.1-flash-image-preview | generate-image | thu-instagram | 56 KB | ✅ |
+| 2026-05-07 08:30 | 2026-05-15-derby-feel-good | gemini-3.1-flash-image-preview | generate-image | blog-derby-feel-good | 95 KB | ✅ |
+| 2026-05-07 08:30 | 2026-05-15-derby-feel-good | gemini-3.1-flash-image-preview | generate-image | fri-facebook-en | 73 KB | ✅ |
+| 2026-05-07 08:30 | 2026-05-15-derby-feel-good | gemini-3.1-flash-image-preview | generate-image | fri-instagram | 79 KB | ✅ |
+| 2026-05-07 08:30 | 2026-05-15-derby-feel-good | gemini-3.1-flash-image-preview | generate-image | card | 1484 KB PNG | ✅ |
+| 2026-05-07 08:30 | 2026-05-15-derby-feel-good | gemini-3.1-flash-image-preview | generate-image | card-vn | 1614 KB PNG | ✅ |
+| 2026-05-07 08:45 | 2026-05-11-horse-love-signs | gemini-3.1-flash-image-preview | generate-image | blog-fire-horse | 80 KB | ✅ |
+| 2026-05-07 08:45 | 2026-05-11-horse-love-signs | gemini-3.1-flash-image-preview | generate-image | mon-facebook-en | 100 KB | ✅ |
+| 2026-05-07 08:45 | 2026-05-11-horse-love-signs | gemini-3.1-flash-image-preview | generate-image | mon-instagram | 143 KB | ✅ |
+| 2026-05-07 08:45 | 2026-05-11-horse-love-signs | gemini-3.1-flash-image-preview | generate-image | tue-facebook-en | 82 KB | ✅ |
+| 2026-05-07 08:45 | 2026-05-11-horse-love-signs | gemini-3.1-flash-image-preview | generate-image | tue-instagram | 95 KB | ✅ |
+| 2026-05-07 09:00 | 2026-05-13-mirror-love-signs | gemini-3.1-flash-image-preview | generate-image | blog-mahjong-mirror | 102 KB | ✅ |
+| 2026-05-07 09:00 | 2026-05-13-mirror-love-signs | gemini-3.1-flash-image-preview | generate-image | wed-facebook-en | 57 KB | ✅ |
+| 2026-05-07 09:00 | 2026-05-13-mirror-love-signs | gemini-3.1-flash-image-preview | generate-image | wed-instagram | 80 KB | ✅ |
+| 2026-05-07 09:00 | 2026-05-13-mirror-love-signs | gemini-3.1-flash-image-preview | generate-image | thu-facebook-en | 61 KB | ✅ |
+| 2026-05-07 09:00 | 2026-05-13-mirror-love-signs | gemini-3.1-flash-image-preview | generate-image | thu-instagram | 116 KB | ✅ |
+| 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | blog-feel-good-friday | 154 KB | ✅ |
+| 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | fri-facebook-en | 78 KB | ✅ |
+| 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | fri-instagram | 130 KB | ✅ |
+| 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | card | 1818 KB PNG | ✅ |
+| 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | card-vn | 1626 KB PNG | ✅ |

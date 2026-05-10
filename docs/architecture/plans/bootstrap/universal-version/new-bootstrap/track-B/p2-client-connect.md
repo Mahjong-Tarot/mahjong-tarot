@@ -81,9 +81,23 @@ Test each agent with a simple prompt:
 | `@writer what are you?` | Describes Writer role, mentions content/topics/ queue |
 | `@designer what are you?` | Describes Designer role, mentions Gemini |
 | `@web-publisher what are you?` | Describes Publisher role, mentions blog/posts/ |
-| `@email-marketer what are you?` | Describes Email Marketer role, mentions Resend |
+| `@email-marketer what are you?` | Describes Email Marketer role, mentions Brevo |
 
 All 8 should respond correctly before proceeding.
+
+---
+
+## Step 5b — Verify email-index.md exists
+
+The Email Marketer agent will refuse to send if `agents/email-marketer/context/email-index.md` is missing or empty. Confirm it was created in Track A before handing off to the client:
+
+```bash
+cat ~/{project-slug}-agents/agents/email-marketer/context/email-index.md
+```
+
+Expected: a file with at least `### Stage 0` defined (subject line, HTML body, delay).
+
+If the file is missing or empty — stop. Return to Track A Step 3c and populate it before proceeding.
 
 ---
 
@@ -212,6 +226,7 @@ Every `git push origin main` triggers a Vercel deploy. You'll see the live site 
 - [ ] sync-agents skill installed to `~/.claude/skills/`
 - [ ] First sync completed successfully
 - [ ] All 8 agents tested and responding
+- [ ] `email-index.md` verified — Stage 0 populated
 - [ ] Scheduled work confirmed running on Mac Mini
 - [ ] Client has first-actions guide
 

@@ -3,6 +3,24 @@
 
 export const POSTS = [
  {
+ slug: 'what-the-favorites-trainers-missed-mahjong-mirror',
+ title: "What the Favorites' Trainers Missed, and What You're Probably Missing in Your Own Plan",
+ excerpt: "Every trainer at the Derby saw the same race. None of them asked the one question that would have changed everything. The Mahjong Mirror's obstacle angle, and how to run it on the decision in front of you right now.",
+ categories: ['Year of the Fire Horse'],
+ date: 'May 13, 2026',
+ isoDate: '2026-05-13',
+ readTime: '6 min read',
+ },
+ {
+ slug: 'kentucky-derby-fire-horse-year-2026',
+ title: 'I Went to the Kentucky Derby to See a Fire Horse Year in Action',
+ excerpt: 'Golden Tempo went from dead last to first in 30 seconds. Cherie DeVaux became the first woman trainer in 152 years to win. I was there, and the Fire Horse year put on a show.',
+ categories: ['Year of the Fire Horse'],
+ date: 'May 11, 2026',
+ isoDate: '2026-05-11',
+ readTime: '7 min read',
+ },
+ {
  slug: 'opposites-attract-is-a-lie-fire-horse-love-2026',
  title: "'Opposites Attract' Is a Lie the Fire Horse Year Will Expose",
  excerpt: "The Fire Horse doesn't care about chemistry. It cares about compatibility. And the difference, for a lot of couples right now, is everything.",

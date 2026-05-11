@@ -1,26 +1,27 @@
-date: 2026-05-08
+date: 2026-05-11
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #187: pm(standup-morning): 2026-05-07 — merged 2026-05-07 00:08 UTC
-- PR #190: pm(standup-compile): 2026-05-07 — merged 2026-05-07 02:10 UTC
+- PR #192: pm(standup-morning): 2026-05-08 — merged 2026-05-08 00:08 UTC
+- PR #193: pm(standup-compile): 2026-05-08 — merged 2026-05-08 02:12 UTC
+- PR #194: pm(weekly-rag): 2026-05-08 — merged 2026-05-08 09:10 UTC
 
 **Next:**
-- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-08`)
+- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-11`)
 - 09:00 standup-compile run later this morning
 
 **Blockers:**
-- Lark bot auth still failing (`[10014] app secret invalid`) — 9th consecutive day (28/29/30 April + 1/4/5/6/7/8 May). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. `lark-cli` upgrade (1.0.10 → 1.0.23+) also pending.
+- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-05-08 (10+ consecutive working days). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. `lark-cli` upgrade (1.0.10 → 1.0.23+) also pending.
 
 ---
 
 ## web-developer
 
 **Completed:**
-- PR #189: `publish: What the Favorites' Trainers Missed (Mahjong Mirror)` — merged 2026-05-07 01:38 UTC. Commit `31b3e47`. Mahjong Mirror Derby post shipped via `publish/derby-mirror-2026-05-07` branch.
+- No activity in the 2026-05-08 00:00 UTC → 2026-05-11 00:00 UTC window (Fri–Sun).
 
 **Next:**
 - Per content calendar: next scheduled publish is 2026-05-15 (Derby Feel Good) — `STATUS: WRITTEN/DESIGNED` in topics folder.
@@ -34,7 +35,7 @@ None
 ## writer
 
 **Completed:**
-- No activity in the 2026-05-07 00:00 UTC → 2026-05-08 00:00 UTC window.
+- No activity in the 2026-05-08 00:00 UTC → 2026-05-11 00:00 UTC window.
 
 **Next:**
 - No open work detected — no open PRs.
@@ -48,7 +49,7 @@ None
 ## product-manager
 
 **Completed:**
-- No activity in the 2026-05-07 00:00 UTC → 2026-05-08 00:00 UTC window.
+- No activity in the 2026-05-08 00:00 UTC → 2026-05-11 00:00 UTC window.
 
 **Next:**
 - Review auto-publishing checklist with Dave for implementation sign-off.
@@ -61,7 +62,7 @@ None
 ## image-designer
 
 **Completed:**
-- PR #188: `Designer: Hero images — 2026-05-07` — merged 2026-05-07 01:33 UTC. Commit `1f7b17e` `designer(thursday-2026-05-07): hero + social images for 6 topics`. Branch `designer/thursday-2026-05-07`.
+- No activity in the 2026-05-08 00:00 UTC → 2026-05-11 00:00 UTC window.
 
 **Next:**
 - No open work detected.
@@ -76,10 +77,10 @@ None
 ## other-agents
 
 **Completed:**
-- No agent-attributed activity in window. Two `docs(status):` commits by Dave (PR #191 `consolidate project-status.html into docs/`, direct commit `8f3b0cd` `reprice Phase 1 epics`) are manual human work, not agent work.
+- No agent-attributed activity in window. Three human PRs landed over the weekend: #195 `Trac/workflows n processes` (Trac, 2026-05-10 08:08 UTC, `docs(bootstrap)` universal baseline setup guides); #196 `feat(mahjong): add email marketer agent` (Khang, 2026-05-10 09:31 UTC); #197 `fix(mahjong): improve template email` (Khang, 2026-05-10 09:38 UTC). None match agent commit prefixes.
 
 **Next:**
-- No open work detected — no open PRs across the repo as of 2026-05-08 07:00 Asia/Saigon.
+- No open work detected — no open PRs across the repo as of 2026-05-11 07:00 Asia/Saigon.
 
 **Blockers:**
 None

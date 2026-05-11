@@ -1,0 +1,72 @@
+{
+  "topic": "Sign-by-sign love life forecast for the Fire Horse year 2026. Every Chinese zodiac sign gets an honest headline and one actionable step for the second half of the year.",
+  "phrases": [
+    "The Fire Horse doesn't treat all 12 signs the same.",
+    "Some of you are heading into the best love year in decades.",
+    "Others need to hear this warning now.",
+    "What the astrology actually shows.",
+    "Hold up a mirror before the year holds one up for you."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "your-love-life-2026-fire-horse-by-sign",
+      "content_type": "blog-fire-horse",
+      "concept": "A woman seated at a round table, mahjong tiles laid out in front of her in a circular pattern representing the twelve signs. She leans forward, studying the arrangement, her face in profile. The table is an anchor; the tiles radiate outward from a central point like a clock or zodiac wheel. Intimate and authoritative at once.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman in profile, leaning forward over a round dark-wood table. On the table, mahjong tiles are arranged in a circular pattern radiating from the center. The tiles are real objects with weight and patina. She studies the arrangement with focused attention. Warm candlelight from the right, casting long shadows across the table surface. The background is midnight jade, deep and receding. Her clothing is simple and warm-toned. The composition is calm and authoritative. The tiles fill the lower third of the frame; she fills the right two-thirds. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630"
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "your-love-life-2026-fire-horse-by-sign",
+      "content_type": "mon-facebook-en",
+      "concept": "Twelve small ceramic bowls arranged in a circle on a dark surface, each holding a different-colored dried flower or spice. Some vibrant and full, some sparse, one empty. The difference between them is the story. This is about how twelve signs experience the same year in completely different ways.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Overhead view. Twelve small ceramic bowls arranged in a perfect circle on a dark aged-wood surface. Each bowl contains something different: some hold dried flowers in full bloom, some hold faded petals, one holds a single seed, one is empty. The bowls vary in fullness and color: warm reds, sage greens, dusty rose, pale ivory. Antique gold rim accents on the bowls. Morning light from the upper left. The arrangement is precise and slightly austere. The story is in the differences. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630"
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "your-love-life-2026-fire-horse-by-sign",
+      "content_type": "mon-instagram",
+      "concept": "A woman seated at a candlelit table, her hand resting near a spread of mahjong tiles. Her gaze is cast downward and slightly to the side, as if reading what the tiles have revealed. The atmosphere is intimate and slightly charged, the kind of moment just after a truth has landed.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. A woman seated at a dark wooden table, candlelight the only source of light. Her hand rests on the table surface near a spread of face-up mahjong tiles. Her gaze is cast downward and slightly to the side, contemplative, not distressed. The tiles catch the candlelight at their carved edges. The background fades to deep shadow. Her profile is visible; she is not facing the camera. The mood is intimate and slightly weighted, the kind of quiet after something true has been said. Warm ivory skin, antique gold tile accents, midnight jade background. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080"
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "your-love-life-2026-fire-horse-by-sign",
+      "content_type": "tue-facebook-en",
+      "concept": "A long wall with twelve framed mirrors of different shapes, some reflecting clear bright light, some showing distorted or dimmed reflections, one cracked. The metaphor is the twelve signs, each experiencing the Fire Horse year through their own particular lens. The mirrors are the story.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A gallery wall with twelve small ornate mirrors arranged in two rows of six. Each mirror is slightly different in shape and frame, antique brass and dark wood, some oval, some square, some arched. The reflections vary: some catch bright warm light, some are dimmer, one has a hairline crack running diagonally across its surface, one shows only shadow. The wall behind is midnight jade plaster. Side lighting from the left, warm amber. The mood is quiet and slightly mysterious, a hall of different truths. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630"
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "your-love-life-2026-fire-horse-by-sign",
+      "content_type": "tue-instagram",
+      "concept": "A single small hand mirror face down on a dark surface, with one more face up beside it, reflecting a warm amber sky. The face-down mirror is a choice to not look; the face-up mirror is the choice to see. Simple, binary, powerful.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. Two small ornate hand mirrors on a dark wood surface. One is face down, its back visible, slightly dusty. The other is face up, its glass catching and reflecting a warm amber light from above, giving it an almost glowing quality. The two mirrors are side by side, close but not touching. The surface beneath them is old, dark, smooth. Overhead lighting, warm and directional. The mood is about choice: one mirror shows nothing, the other shows something real. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080"
+    }
+  ]
+}

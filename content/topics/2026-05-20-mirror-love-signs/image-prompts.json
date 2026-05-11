@@ -1,0 +1,74 @@
+{
+  "topic": "The Mahjong Mirror's Third Angle applied to love. The Peach Blossom and Sword tiles, what they reveal about what is blocking love in the Fire Horse year, and how to work with that opposition before the year surfaces it for you.",
+  "phrases": [
+    "What's really blocking you.",
+    "The mirror doesn't soften what it shows.",
+    "Name the unmet need.",
+    "Something needs to end.",
+    "Hold up the mirror yourself."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "what-fire-horse-is-opposing-in-your-love-life",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A woman standing in front of a full-length mirror in a dim room, her reflection showing something slightly different from her posture. Her reflection is more still, more resolved, looking directly back at her. She is facing the mirror but her face is slightly averted. The gap between who she is and what the mirror reveals.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "card": "Peach card, Suit cards (romantic temptation, unmet desire)",
+      "prompt": "A woman standing before a tall antique mirror in a dim room, her body three-quarters turned toward it. Her reflection is slightly more direct, facing forward with quiet resolve. The room behind her is deep midnight jade; the mirror frame is dark ornate wood with antique gold trim. One candle on a low table beside her provides warm light. Her face is slightly averted. She is near the moment of full recognition, not quite there. The reflection holds her gaze. Cinematic. Intimate. The space between her and her reflection is the emotional center. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630"
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "what-fire-horse-is-opposing-in-your-love-life",
+      "content_type": "wed-facebook-en",
+      "concept": "Two paths diverging from a single point, photographed from directly above. One path is worn and familiar, the other is overgrown but leads toward a lighter clearing in the distance. The Third Angle is about identifying the structural obstacle: not which path to take, but what is blocking the path you actually want.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Aerial view of two garden paths diverging from a single stone point. One path is worn smooth, dark and familiar, leading into shadow. The other path is partially overgrown with moss and low plants, but further along, it opens into a clearing with warm golden light. The fork is centered in the frame. The texture of the stone and moss is detailed and real. Early morning light from the upper left. Soft sage green and antique gold tones. The image carries quiet tension: familiarity versus the harder direction. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630"
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "what-fire-horse-is-opposing-in-your-love-life",
+      "content_type": "wed-instagram",
+      "concept": "Close-up of feminine hands on either side of a face-up Mahjong tile on dark wood. The hands are still. The tile is the center. The moment of recognition just before a decision.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "card": "Sword card, Suit cards (what needs to end, clarity through cutting)",
+      "prompt": "Square composition. Close-up of two feminine hands resting palms-down on a dark wood surface, one on each side of a single face-up Mahjong tile. The tile is centered exactly in the frame, its carved face catching warm candlelight from below and to the right. The hands are slightly soft in focus; the tile is sharp. The surface beneath is old dark wood with fine grain. The mood is still, the pause before something is decided. Warm ivory skin, antique gold tile edge, midnight jade shadow. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080"
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "what-fire-horse-is-opposing-in-your-love-life",
+      "content_type": "thu-facebook-en",
+      "concept": "A room where most of the light comes from a single window, but a thick curtain partially covers it. The light that does enter is warm and clear. The curtain is the obstacle: not the absence of light, but the resistance to it. The Third Angle is about naming what is partially blocking what is already there.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Interior scene. A room with one tall window, partially obscured by a heavy curtain pulled halfway across. The curtain is deep plum velvet, slightly faded. Where the light enters around and through it, the air is warm gold, motes of dust visible in the beam. The rest of the room is in medium shadow, not darkness, just dimness. A chair sits in the light, empty. The floor is dark wood. The mood is about the gap between the light that is available and the obstacle that partially blocks it. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630"
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "what-fire-horse-is-opposing-in-your-love-life",
+      "content_type": "thu-instagram",
+      "concept": "A single Mahjong tile resting on the edge of a dark mirror, face up, its reflection slightly distorted, showing the tile from a different angle than it actually sits. The duality of what the tile shows on its face and what the mirror reveals underneath.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition. A single mahjong tile balanced on the flat edge of a dark rectangular mirror laid horizontally on a surface. The tile is face up. Its reflection in the mirror is slightly angled, showing the carved face from a slightly different perspective. What the tile presents versus what the mirror reveals. Candlelight from above and slightly right. The mirror surface has a slight aged dimness at its edges. Midnight jade surroundings, antique gold tile carving. The mood is about duality and revealed truth. No watermarks or Western zodiac imagery anywhere in the image.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080"
+    }
+  ]
+}

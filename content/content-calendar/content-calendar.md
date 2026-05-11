@@ -193,16 +193,16 @@ Publishes: Friday (blog + social)
 
 ## Week of May 18 — Love Life by Sign
 
-**Topic: 2026-05-18-horse-love-signs** — STATUS: DESIGNED
+**Topic: 2026-05-18-horse-love-signs** — STATUS: WRITTEN
 Angle: Fire Horse — shock & awe (Sign-by-Sign Breakdown)
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-05-20-mirror-love-signs** — STATUS: DESIGNED
+**Topic: 2026-05-20-mirror-love-signs** — STATUS: WRITTEN
 Angle: Mahjong Mirror — the answer (ties back to sign-by-sign love risk)
 Chapter/tile focus: Chapter 3 (Opposition), Appendix — Love cards (Peach Blossom, Sword)
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-05-22-feel-good-love** — STATUS: DESIGNED
+**Topic: 2026-05-22-feel-good-love** — STATUS: WRITTEN
 Angle: Feel Good Friday — positive aspiration
 Publishes: Friday (blog + social)
 

@@ -43,10 +43,16 @@ SEO reference for all written blog posts. Updated by the writer agent after each
 
 ---
 
-## Week of May 11 — Love Life by Sign
+## Week of May 11 — The Kentucky Derby
+
+(See content/topics/2026-05-11-derby-fire-horse/, 2026-05-13-derby-mirror/, 2026-05-15-derby-feel-good/ for SEO files)
+
+---
+
+## Week of May 18 — Love Life by Sign
 
 | Title | Primary Keyword | SEO Description | Internal Links | External Links |
 |-------|----------------|-----------------|----------------|----------------|
-| Your Love Life in 2026: What the Fire Horse Actually Means for Your Sign | fire horse love life by sign 2026 | The Fire Horse year hits every zodiac sign differently in love. Sign-by-sign forecast from a 35-year Chinese astrology practitioner. Find yours. | /readings, /the-mahjong-mirror, /blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026, /blog/posts/what-the-mirror-shows-about-love, /about | Wikipedia: Horse (Chinese zodiac), Wikipedia: Chinese zodiac, Psychology Today: Relationship Compatibility |
-| What the Fire Horse Is Really Opposing in Your Love Life | mahjong mirror love opposition fire horse year | The Mahjong Mirror's Third Angle reveals what's actually blocking your relationship. Not the surface argument. The real opposition. Apply it yourself, no reading required. | /the-mahjong-mirror, /readings, /blog/posts/fire-horse-love-life-by-sign-2026, /blog/posts/what-the-mirror-shows-about-love, /about | Wikipedia: Chinese philosophy, Psychology Today: Relationship Communication, Greater Good Science Center: The Science of Forgiveness in Relationships |
-| Feel Good Friday: The Sheep Year Is Coming. Here's What to Build Before It Arrives. | fire horse year love what to build 2026 | The Fire Horse doesn't end quietly. It ends with consequences. Here's what to build in love right now, before the Sheep year arrives. Your weekend challenge. | /readings, /the-mahjong-mirror, /blog/posts/fire-horse-love-life-by-sign-2026, /blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse, /about | Psychology Today: What Makes Relationships Last, Greater Good Science Center: The Science of Love and Connection, Wikipedia: Horse (Chinese zodiac) |
+| Your Love Life in 2026: What the Fire Horse Actually Means for Your Sign | love life 2026 Fire Horse year Chinese zodiac sign | The Fire Horse year hits every sign differently in love. Get your sign's honest two-word forecast plus one thing to do about it from Bill Hajdu, 35+ years of readings. | /readings, /the-mahjong-mirror, /blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026, /blog/posts/kentucky-derby-fire-horse-year-2026, /blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk | Wikipedia: Chinese zodiac, Wikipedia: Fire Horse (zodiac), Wikipedia: Zi wei dou shu |
+| What the Fire Horse Is Really Opposing in Your Love Life, and How to Work With It | Mahjong Mirror third angle opposition love relationship 2026 | Two tiles keep appearing in love readings this year. The Peach Blossom and the Sword. Neither one is comfortable. Both are clarifying. Here's what they mean. | /the-mahjong-mirror, /readings, /blog/posts/your-love-life-2026-fire-horse-by-sign, /blog/posts/what-the-mirror-shows-about-love, /blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026 | Wikipedia: Mahjong, Wikipedia: Fire Horse (zodiac), Wikipedia: Chinese astrology |
+| Feel Good Friday: The Sheep Year Is Coming. Here's What to Build Before It Arrives | Sheep year 2027 love relationships building Fire Horse year | The Fire Horse year is preparation. What you build, break, or begin in love right now sets the conditions for the Sheep year ahead. Here is the weekend challenge. | /readings, /the-mahjong-mirror, /blog/posts/your-love-life-2026-fire-horse-by-sign, /blog/posts/what-fire-horse-is-opposing-in-your-love-life, /blog/posts/feel-good-friday-balance-is-the-real-love-story | Wikipedia: Chinese zodiac, Wikipedia: Fire Horse (zodiac), Wikipedia: Goat (zodiac) |

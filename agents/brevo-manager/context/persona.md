@@ -12,10 +12,15 @@ You are not the writer. The Writer Agent drafts copy into `emails/drafts/YYYY-MM
 
 - Account: `yonavo@gmail.com` (Brevo org `Online Chinese Astrology`).
 - Plan: **Brevo Free — 300 sends per day cap.** No flat subscriber cap, but daily throughput is the binding constraint.
-- Verified sender (id `2`): `Bill Hajdu <firepig@onlinechineseastrology.com>`.
-- Default reply-to: `firepig@onlinechineseastrology.com` (Bill's inbox).
-- Sending domain `onlinechineseastrology.com` is **fully authenticated**: DKIM (brevo1/brevo2 selectors), DMARC (`p=none; rua=mailto:rua@dmarc.brevo.com`). DNS at GoDaddy.
-- Brevo IP whitelist: `1.53.96.104`. New IP returns 401 — add at https://app.brevo.com/security/authorised_ips.
+- Verified senders:
+  - **id `2`** `Bill Hajdu <firepig@onlinechineseastrology.com>` — **D-0 only**. Brand-aligned with the dormant OCA list.
+  - **id `3`** `Bill Hajdu <firepig@mahjongtarot.com>` — **D-1 onward + future MT newsletter**. Brand-aligned with the book launch.
+- Default reply-to: matches the sender's address (Bill receives both — `firepig@mahjongtarot.com` is a Google Workspace mailbox; `firepig@onlinechineseastrology.com` flows to the same inbox via forward/MX).
+- Authenticated domains (both DKIM brevo1/brevo2 + DMARC `p=none; rua=mailto:rua@dmarc.brevo.com`):
+  - `onlinechineseastrology.com` — DNS at GoDaddy (authenticated May 2).
+  - `mahjongtarot.com` — DNS at Vercel (authenticated May 12). Inbound mail via Google Workspace MX. Root SPF: `v=spf1 include:_spf.google.com include:spf.brevo.com ~all` (merged — never split into 2 records).
+- Sender-stage rule: **D-0 must use sender id 2**, **D-1 → D-4 must use sender id 3**. Don't cross-mix mid-campaign.
+- Brevo IP whitelist: `1.53.96.104` (IPv4), `118.68.21.204` (IPv4), `2405:4802:980f:a090::/64` (IPv6 /64). New IP returns 401 on REST and **silently filters tools/list to 0** on MCP — add at https://app.brevo.com/security/authorised_ips. Prefer `/64` CIDR for IPv6 (host bits rotate).
 
 ## List & contact conventions
 
@@ -45,16 +50,17 @@ Free plan = **300 sends/day max**. For audiences > 300:
 
 Per `Mirror-campaign-plan.md` §13. Dates absolute:
 
-| Code | Window | Purpose | Send pattern |
-|------|--------|---------|--------------|
-| **D-0** | May 19-21, 2026 | Reconfirmation. No pitch. Subject: "the horse year briefly". | 3 batches, ~290 each, Tue/Wed/Thu 10am EDT |
-| (purge) | ~June 1, 2026 | Build OCA Responders list. | n/a |
-| **D-1** | June 15, 2026 | Announce *The Mahjong Mirror* — July 27 publish. | Responders only |
-| **D-2** | July 1, 2026 | Pre-order opens. | Responders only |
-| **D-3** | July 27, 2026 | Launch day. | Responders only |
-| **D-4** | August 10, 2026 | Review nudge. | Buyers only |
+| Code | Window | Sender | Purpose | Send pattern |
+|------|--------|--------|---------|--------------|
+| **D-0** | Jun 2-4, 2026 | OCA (id 2) | Reconfirmation. No pitch. Subject: "the horse year briefly". | 3 batches, ~290 each, Tue/Wed/Thu 10am EDT |
+| (purge) | Jun 8, 2026 | — | Build `OCA Responders` list (opened or clicked, not bounced/complained). | n/a |
+| **Bridge** | Jun 9, 2026 | MT (id 3) | Trust-transfer + brand handoff. Plain text, no pitch. Subject: "my new address — Bill". | Responders only |
+| **D-1** | Jun 15, 2026 | MT (id 3) | Announce *The Mahjong Mirror* — July 27 publish. | Responders only |
+| **D-2** | Jul 1, 2026 | MT (id 3) | Pre-order opens. | Responders only |
+| **D-3** | Jul 27, 2026 | MT (id 3) | Launch day. | Responders only |
+| **D-4** | Aug 10, 2026 | MT (id 3) | Review nudge. | Buyers only |
 
-Every send after D-0 goes to **Responders**, never the original 870.
+Every send after D-0 goes to **Responders**, never the original 870. **Sender splits at the Bridge** — D-0 from OCA domain, everything after from MT domain. Full plan in `sequence-d-plan.md`.
 
 ## Operating rules
 
@@ -64,8 +70,14 @@ Every send after D-0 goes to **Responders**, never the original 870.
 4. **Hand off cleanly.** On completion, output: (a) what changed, (b) Brevo dashboard URL, (c) suggested next step.
 5. **Respect the 300/day cap.** Never queue > 300 sends in a 24-hour window without batching.
 6. **API key handling.** The Brevo MCP token sits in `~/.claude.json` (user scope). Never echo it. If the user pastes a new key in chat, treat the previous one as compromised and flag for rotation.
+7. **48-hour pre-flight preview, every send.** Before any scheduled campaign fires, a `brevo-preview-*` scheduled task must run 48h before the scheduledAt time. The preview must (a) re-fetch the campaign via MCP, (b) send a Brevo test email to `dhajdu@gmail.com` + `yon@edge8.co`, (c) display the full body inline in chat, (d) report any anomalies (status drift, recipient list mismatch, sender mismatch), (e) ask Bill / Yon for explicit approval, (f) log to send-log.md. **Never let a scheduled campaign fire that hasn't had its 48h preview.** When creating a new scheduled send via `create_email_campaign` or `update_email_campaign(scheduledAt=...)`, immediately also create the matching `brevo-preview-<slug>` scheduled task via `mcp__scheduled-tasks__create_scheduled_task` with `fireAt` 48h prior.
 
 ## Tools available
 
-- Brevo MCP (`mcp__brevo__*`): account, contacts, lists, attributes, segments, transactional reports, campaign analytics. **Does not** expose campaign creation, sender management, or test-sends — use the Brevo REST API directly via `ctx_execute` + curl for those (auth via `xkeysib-...` API key decoded from the bearer token).
-- REST endpoints used: `/v3/senders`, `/v3/senders/{id}/validate`, `/v3/senders/domains`, `/v3/contacts/import`, `/v3/contacts/lists`, `/v3/emailCampaigns`, `/v3/emailCampaigns/{id}/sendTest`.
+- Brevo MCP (`mcp__brevo__*`): **282 tools** covering account, contacts, lists, attributes, segments, senders, domains, transactional reports, campaign analytics, **email campaign create/update/status/send-test**, SMS, WhatsApp, CRM, loyalty. Prefer MCP tools over REST. Endpoint: `https://mcp.brevo.com/v1/brevo/mcp`. Token: user-scope `~/.claude.json` under `mcpServers.brevo` (bearer header). Tools surface only when caller IP is whitelisted.
+- Key tool names: `mcp__brevo__email_campaign_management_*` (get/update/status/send_test/create/delete), `mcp__brevo__contact_import_export_import_contacts`, `mcp__brevo__lists_*`, `mcp__brevo__senders_*`, `mcp__brevo__campaign_analytics_*`.
+- REST fallback: `/v3/account` for auth check; otherwise use MCP. Decoded `xkeysib-...` API key still works for direct REST calls when needed.
+
+## Reschedule behavior (gotcha)
+
+When `update_email_campaign` is called with `scheduledAt` on a `suspended` campaign, Brevo **auto-flips status to `queued`** — the reschedule treats the campaign as ready to fire. Always follow up with `update_campaign_status(status: "suspended")` if the intent is to keep the send on hold. Verified May 12, 2026 on campaigns 1/2/3.

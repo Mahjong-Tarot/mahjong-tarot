@@ -3,46 +3,29 @@
 > **Who runs this**: Dave (the developer) on the Mac Mini
 > **Machine state**: Completely fresh — nothing installed
 > **Prerequisite**: P0 complete; `{project-slug}-credentials.md` in hand
-> **Output**: Mac Mini fully configured, Hello World website live on Vercel, ready for P2
+> **Output**: Mac Mini fully configured, client website live on Vercel, ready for P2
 
 ---
 
-## Step 1 — Install Homebrew
+## Step 1 — Install remaining tools
+
+Homebrew and git were installed in P0. Claude Code runs the rest:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null || eval "$(/usr/local/bin/brew shellenv)" 2>/dev/null || true
+brew install gh node jq ffmpeg
+npm install -g vercel
+brew tap supabase/tap && brew install supabase/tap/supabase
 ```
-
-After install, follow the printed instructions to add Homebrew to PATH (Apple Silicon Macs require adding to `~/.zprofile`).
 
 Verify:
 ```bash
-brew --version
+gh --version && node --version && jq --version && ffmpeg -version && vercel --version && supabase --version
 ```
 
 ---
 
-## Step 2 — Install core tools via Homebrew
-
-```bash
-brew install git gh node jq ffmpeg
-```
-
-Then install CLI tools via npm:
-
-```bash
-npm install -g vercel
-npm install -g supabase
-```
-
-Verify all tools:
-```bash
-git --version && gh --version && node --version && jq --version && ffmpeg -version && vercel --version && supabase --version
-```
-
----
-
-## Step 3 — Authenticate GitHub CLI
+## Step 2 — Authenticate GitHub CLI
 
 ```bash
 gh auth login
@@ -60,46 +43,25 @@ gh auth status
 
 ---
 
-## Step 4 — Pre-seed Claude Code permissions
+## Step 3 — Pre-seed Claude Code permissions
 
 ```bash
 mkdir -p ~/.claude
-```
-
-Write `~/.claude/settings.local.json`:
-
-```json
+cat > ~/.claude/settings.local.json << 'EOF'
 {
   "permissions": {
-    "allow": [
-      "Bash(git:*)",
-      "Bash(gh:*)",
-      "Bash(npm:*)",
-      "Bash(node:*)",
-      "Bash(vercel:*)",
-      "Bash(supabase:*)",
-      "Bash(ffmpeg:*)",
-      "Bash(jq:*)",
-      "Bash(ls:*)",
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Bash(cp:*)",
-      "Bash(mv:*)",
-      "Bash(mkdir:*)",
-      "Bash(rm:*)",
-      "Bash(cat:*)",
-      "Bash(echo:*)",
-      "Bash(curl:*)",
-      "Bash(python3:*)",
-      "Bash(npx:*)"
-    ]
+    "allow": ["Bash(*)"],
+    "defaultMode": "acceptEdits"
   }
 }
+EOF
 ```
+
+`Bash(*)` allows every CLI command without a prompt. `acceptEdits` auto-approves all file writes. Claude will never interrupt mid-task to ask permission.
 
 ---
 
-## Step 5 — Create global Claude Code directories
+## Step 4 — Create global Claude Code directories
 
 ```bash
 mkdir -p ~/.claude/agents
@@ -109,7 +71,7 @@ mkdir -p ~/.claude/rules
 
 ---
 
-## Step 6 — Write global CLAUDE.md
+## Step 5 — Write global CLAUDE.md
 
 ```bash
 cat > ~/.claude/CLAUDE.md << 'EOF'
@@ -138,7 +100,7 @@ EOF
 
 ---
 
-## Step 7 — Write global engineering rules
+## Step 6 — Write global engineering rules
 
 ```bash
 cat > ~/.claude/rules/global-engineering.md << 'EOF'
@@ -170,7 +132,7 @@ EOF
 
 ---
 
-## Step 8 — Write Supabase credentials to .env
+## Step 7 — Write Supabase credentials to .env
 
 ```bash
 cat > ~/.claude/.env << 'EOF'
@@ -179,6 +141,7 @@ SUPABASE_ANON_KEY={your-anon-key}
 SUPABASE_SERVICE_ROLE_KEY={your-service-role-key}
 GEMINI_API_KEY={your-gemini-api-key}
 RESEND_API_KEY={your-resend-api-key}
+RESEND_DOMAIN={your-client-domain}
 LARK_APP_ID={your-lark-app-id}
 LARK_APP_SECRET={your-lark-app-secret}
 LARK_WEBHOOK_URL={your-lark-webhook-url}
@@ -189,31 +152,26 @@ Replace all `{placeholder}` values from the credentials file created in P0.
 
 ---
 
-## Step 9 — Configure Supabase MCP
+## Step 8 — Configure Supabase MCP
 
-Add Supabase MCP to `~/.claude/settings.local.json`:
+Say this to Claude Code:
 
-```json
-{
-  "permissions": { ... },
-  "mcpServers": {
-    "supabase": {
-      "command": "npx",
-      "args": ["-y", "@supabase/mcp-server-supabase@latest", "--access-token", "{your-supabase-pat}"]
-    }
-  }
-}
+```
+Set up the Supabase MCP server on this machine:
+1. Fetch the latest Supabase MCP setup documentation so you follow the current install method
+2. Add the MCP server to ~/.claude/settings.local.json
+3. Start the Supabase authentication flow and give me the browser URL to authorize
+4. After I tell you I've completed authorization, finish the auth flow
+5. Verify the connection by listing my Supabase projects
 ```
 
-Get your Supabase Personal Access Token (PAT):
-1. Go to `supabase.com/dashboard/account/tokens`
-2. Click **Generate new token**
-3. Name: `mac-mini-claude-mcp`
-4. Copy the token and replace `{your-supabase-pat}` above
+**The only manual step**: Claude will output a URL — open it in a browser and click **Authorize**. Tell Claude "done" when the page confirms success.
+
+Claude handles everything else: package installation, config file update, auth completion, and connection verification.
 
 ---
 
-## Step 10 — Install global skills
+## Step 9 — Install global skills
 
 ### daily-checkin skill
 
@@ -234,13 +192,13 @@ triggers: ["daily checkin", "morning standup", "what's on today"]
 EOF
 ```
 
-### create-local-task skill
+### create-routines skill
 
 ```bash
-mkdir -p ~/.claude/skills/create-local-task
-cat > ~/.claude/skills/create-local-task/SKILL.md << 'EOF'
+mkdir -p ~/.claude/skills/create-routines
+cat > ~/.claude/skills/create-routines/SKILL.md << 'EOF'
 ---
-name: create-local-task
+name: create-routines
 description: Creates a task file in working_files/tasks/ with a clear description, acceptance criteria, and priority.
 triggers: ["create task", "new task", "log task"]
 ---
@@ -283,16 +241,36 @@ EOF
 
 ---
 
-## Step 11 — First project: client website
+## Step 10 — First project: client website
 
-This is the final step of P1. All code projects live under `~/code-projects/` — the website is the first one. The Mac Mini will host a running agent team AND have this live website as proof of the system.
+This is the final step of P1. All code projects live under `~/code-projects/` — the project root is `{project-slug}/`, mirroring the mahjong-tarot codebase structure. The website lives inside it as `website/`.
 
-### 11a — Create the code-projects folder and scaffold Next.js 16
+### 10a — Create project root and full directory structure
 
 ```bash
-mkdir -p ~/code-projects
-cd ~/code-projects
-npx create-next-app@16 {project-slug}-website \
+mkdir -p ~/code-projects/{project-slug}
+cd ~/code-projects/{project-slug}
+
+# Core project folders (mirrors mahjong-tarot)
+mkdir -p agents/{product-manager,developer,qa,devops,writer,designer,web-publisher,email-marketer}/{context,skills}
+mkdir -p content/{topics,content-calendar}
+mkdir -p docs/architecture/{templates,workflows}
+mkdir -p docs/{brand,engineering,product,qa,features,archive}
+mkdir -p docs/engineering/{changes,prompts}
+mkdir -p docs/plans
+mkdir -p emails/drafts
+mkdir -p resources
+mkdir -p standup/{individual,briefings}
+mkdir -p working_files
+mkdir -p .claude/{agents,skills,rules}
+```
+
+### 10b — Scaffold Next.js 16 into `website/`
+
+Run from `~/code-projects/{project-slug}/`:
+
+```bash
+npx create-next-app@16 website \
   --typescript \
   --tailwind \
   --app \
@@ -302,45 +280,31 @@ npx create-next-app@16 {project-slug}-website \
   --agents-md \
   --disable-git \
   --yes
-cd {project-slug}-website
-```
-
-**What each flag does:**
-- `--typescript` — TypeScript (default in v16, explicit for clarity)
-- `--tailwind` — Tailwind CSS (default in v16)
-- `--app` — App Router (not Pages Router)
-- `--eslint` — ESLint config included
-- `--src-dir` — app code lives in `src/` for clean separation from config files
-- `--import-alias "@/*"` — `@/components/...` style imports
-- `--agents-md` — generates `AGENTS.md` for Claude Code (default in v16)
-- `--disable-git` — skip git init; we do it manually in step 11f
-
-> **Note — Next.js 16 rename:** `middleware.ts` → `proxy.ts`, export `proxy()` instead of `middleware()`. If you add auth or redirect logic later, use `proxy.ts` at the project root.
-
-Install shadcn:
-```bash
+cd website
 npx shadcn@latest init --defaults
+cd ..
 ```
-This uses New York style, Zinc base, CSS variables — no prompts.
 
-### 11b — Add vercel.json at repo root
+> **Note — Next.js 16 rename:** `middleware.ts` → `proxy.ts`. Use `proxy.ts` at `website/` root if you add auth or redirect logic.
+
+### 10c — Add vercel.json at project root
 
 ```bash
 cat > vercel.json << 'EOF'
 {
   "framework": "nextjs",
-  "rootDirectory": "."
+  "rootDirectory": "website"
 }
 EOF
 ```
 
-This tells Vercel where the Next.js app lives — the user never needs to find the Root Directory setting during import.
+`rootDirectory: "website"` tells Vercel the Next.js app is in the subdirectory — no manual setting needed during import.
 
-### 11c — Configure fonts and Tailwind
+### 10d — Configure fonts and Tailwind
 
-`next/font` self-hosts both fonts — no Google Fonts network request at runtime, zero layout shift.
+`next/font` self-hosts both fonts — no external request at runtime, zero layout shift.
 
-**`src/app/layout.tsx`** — import fonts with CSS variables:
+**`website/src/app/layout.tsx`**:
 
 ```tsx
 import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
@@ -368,7 +332,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-**`tailwind.config.ts`** — wire font variables into Tailwind:
+**`website/tailwind.config.ts`**:
 
 ```ts
 import type { Config } from 'tailwindcss'
@@ -378,8 +342,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans:  ['var(--font-inter-tight)', 'system-ui', 'sans-serif'],
-        mono:  ['var(--font-jetbrains-mono)', 'monospace'],
+        sans: ['var(--font-inter-tight)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'monospace'],
       },
     },
   },
@@ -387,9 +351,9 @@ const config: Config = {
 export default config
 ```
 
-### 11d — Apply Infinite Leverage design tokens
+### 10e — Apply Infinite Leverage design tokens
 
-In `src/app/globals.css`, add root variables after the existing Tailwind directives:
+**`website/src/app/globals.css`**:
 
 ```css
 @tailwind base;
@@ -416,32 +380,23 @@ body {
 }
 ```
 
-Fonts are now available as Tailwind utilities: `font-sans` (Inter Tight) and `font-mono` (JetBrains Mono). Color tokens remain as CSS variables for use in inline styles and component CSS.
+### 10f — Build the website
 
-### 11e — Build the website
+All page files go under `website/src/app/`.
 
-The site has four sections on a single long-scroll home page plus two stub pages. This is not a placeholder — it is a real Infinite Leverage landing page for the client.
-
-All files go under `src/app/`.
-
----
-
-**`src/app/page.tsx` — Home page (four sections)**
+**`website/src/app/page.tsx` — Home page (four sections)**
 
 **Section 1 — Hero**
-```
-Hello, {Client First Name}.
-```
 - Full-width, `#0B1426` background, white text
 - `{Client First Name}` in Inter Tight 800, `clamp(72px, 10vw, 160px)`, letter-spacing `-0.035em`
-- Subtitle below: `{Business Name}` in `var(--gray-3)`, 1.4em
-- Bottom of hero: "AI team is online" badge — green dot (#22C55E) + `JetBrains Mono` text, uppercase, 0.8em
+- Subtitle: `{Business Name}` in `var(--gray-3)`, 1.4em
+- Badge at bottom: green dot (#22C55E) + JetBrains Mono "AI team is online", uppercase, 0.8em
 
 **Section 2 — Infinite Leverage Agenda**
 
-Cream (`#F2EDE3`) background. Heading: **"The Infinite Leverage Agenda"** in `var(--ink)`, Inter Tight 800, display size.
+Cream (`#F2EDE3`) background. Heading: **"The Infinite Leverage Agenda"**.
 
-Five tracks as a numbered stack list (same visual pattern as the slides — border-top ruled rows, `JetBrains Mono` number in blue, bold track name, muted description):
+Five tracks as border-top ruled rows — JetBrains Mono number in blue, bold track name, muted description:
 
 | # | Track | Description |
 |---|-------|-------------|
@@ -453,9 +408,7 @@ Five tracks as a numbered stack list (same visual pattern as the slides — bord
 
 **Section 3 — 18 Protocols**
 
-White background. Heading: **"18 Protocols. One operating system."** 
-
-Two-column grid (single column on mobile). Each protocol as a ruled row with a `JetBrains Mono` number in blue and the protocol text:
+White background. Heading: **"18 Protocols. One operating system."** Two-column grid (single column on mobile), each row ruled, number in JetBrains Mono blue:
 
 | # | Protocol |
 |---|----------|
@@ -481,49 +434,129 @@ Two-column grid (single column on mobile). Each protocol as a ruled row with a `
 **Section 4 — CTA**
 
 `#0B1426` background, white text. Pull quote:
+> "You + an AI engineer + this team = the new minimum viable founder."
 
-> "You + an AI engineer + this team  
-> = the new minimum viable founder."
-
-Below: "Ready to build?" with a mailto link to `{firstname}@{clientdomain}.com`.
+"Ready to build?" with `mailto:{firstname}@{clientdomain}.com`.
 
 ---
 
-**`src/app/about/page.tsx`** — Stub:
-- Heading: "About {Business Name}"
-- Body: "Coming soon."
+**`website/src/app/about/page.tsx`** — Stub: "About {Business Name}" / "Coming soon."
 
-**`src/app/contact/page.tsx`** — Stub:
-- Heading: "Get in touch"
-- Email link: `mailto:{firstname}@{clientdomain}.com`
+**`website/src/app/contact/page.tsx`** — Stub: "Get in touch" / `mailto:{firstname}@{clientdomain}.com`
 
----
+### 10g — Write project CLAUDE.md
 
-### 11f — Initialize git and push to GitHub
+At project root (`~/code-projects/{project-slug}/CLAUDE.md`):
 
 ```bash
-cd ~/code-projects/{project-slug}-website
-git init
-git checkout -b main
-git add src/ public/ package.json package-lock.json tailwind.config.ts tsconfig.json next.config.ts components.json vercel.json .gitignore AGENTS.md
-git commit -m "init: {Client Name} — Infinite Leverage site"
-gh repo create {project-slug}-website --public --source=. --remote=origin --push
+cat > CLAUDE.md << 'EOF'
+# {Business Name} — Project Instructions
+
+## Stack
+- Website: Next.js 16 App Router + Tailwind + shadcn (`website/`)
+- Database: Supabase
+- Deployment: Vercel (auto-deploy on `git push origin main`)
+- Email: Resend
+
+## Folder structure
+```
+{project-slug}/
+├── agents/              ← Project-specific agent context and skills
+│   └── {agent}/
+│       ├── context/     ← persona.md, workflow files
+│       └── skills/      ← project-specific skills
+├── content/
+│   ├── topics/          ← One folder per post: brief.md → blog.md
+│   └── content-calendar/
+├── docs/
+│   ├── architecture/
+│   │   ├── templates/   ← Reusable doc templates
+│   │   └── workflows/   ← System workflow diagrams and specs
+│   ├── brand/           ← Palette, voice, visual identity
+│   ├── engineering/
+│   │   ├── changes/     ← Change records
+│   │   └── prompts/     ← Setup and bootstrap prompts
+│   ├── features/        ← Per-feature proposals and design docs
+│   ├── plans/           ← Project and feature plans (one file per plan)
+│   ├── product/         ← Vision, epics, phased timeline
+│   ├── qa/              ← QA plan and regression reports
+│   └── archive/         ← Historical and superseded material
+├── emails/drafts/       ← Email drafts before sending
+├── resources/           ← Design system, brand assets
+├── standup/
+│   ├── individual/      ← Per-person daily check-ins
+│   └── briefings/       ← Compiled daily briefings (YYYY-MM/YYYY-MM-DD.md)
+├── website/             ← Next.js app root
+│   └── src/app/         ← Pages and components
+├── working_files/       ← Git-ignored scratch space
+└── .claude/             ← Project-level agents, skills, rules
 ```
 
-### 11g — Import to Vercel and deploy
+## Content pipeline
+1. Add `brief.md` to `content/topics/{slug}/` to queue a post
+2. Writer writes `blog.md` on Monday
+3. Designer generates hero image on Tuesday
+4. Web Publisher builds and stages the page on Wednesday
+5. Owner runs `git push origin main` to deploy
+
+## Publishing
+Never push directly. All deploys via `git push origin main` → Vercel CI/CD.
+Never commit `.env.local` or any secrets.
+EOF
+```
+
+### 10h — Write .gitignore at project root
+
+```bash
+cat > .gitignore << 'EOF'
+# Dependencies
+website/node_modules/
+
+# Build output
+website/.next/
+website/out/
+
+# Secrets
+website/.env.local
+website/.env
+.env
+.env.local
+
+# Scratch space
+working_files/
+
+# System
+.DS_Store
+EOF
+```
+
+### 10i — Initialize git and push to GitHub
+
+```bash
+cd ~/code-projects/{project-slug}
+git init
+git checkout -b main
+git add agents/ content/ docs/ emails/ resources/ standup/ .claude/ \
+        website/src/ website/public/ website/package.json website/package-lock.json \
+        website/tailwind.config.ts website/tsconfig.json website/next.config.ts \
+        website/components.json website/AGENTS.md \
+        CLAUDE.md vercel.json .gitignore
+git commit -m "init: {Client Name} — project scaffold + Infinite Leverage site"
+gh repo create {project-slug} --public --source=. --remote=origin --push
+```
+
+### 10j — Import to Vercel and deploy
 
 Output this and wait for confirmation before continuing:
 
 ```
 ▲  VERCEL IMPORT
 
-Now let's connect the project to Vercel for automatic deployments.
-
 1. Go to https://vercel.com/new
-2. Under "Import Git Repository", find {project-slug}-website and click Import
+2. Find {project-slug} and click Import
 3. On the Configure Project screen:
    - Framework Preset: Next.js (auto-detected — correct)
-   - Root Directory: already set via vercel.json — do NOT change it
+   - Root Directory: "website" (set automatically via vercel.json — do NOT change)
    - Skip environment variables for now
 4. Click Deploy
 
@@ -533,16 +566,16 @@ Once it shows "Congratulations!", the site is live.
 Reply "done" when it's live.
 ```
 
-Wait for "done". Then note the live URL as `{project-slug}-live-url`.
+Wait for "done". Note the live URL as `{project-slug}-live-url`.
 
-Verify: open the URL in a browser, confirm the hero, agenda, protocols, and CTA sections all render correctly.
+Verify: confirm the hero, agenda, protocols, and CTA sections all render correctly.
 
 ---
 
-## Step 12 — Final git commit and push
+## Step 11 — Final git commit and push
 
 ```bash
-cd ~/code-projects/{project-slug}-website
+cd ~/code-projects/{project-slug}
 git status
 git push origin main
 ```
@@ -553,17 +586,17 @@ Confirm Vercel auto-deploys from the push (check Vercel dashboard for deployment
 
 ## P1 complete — what you have now
 
-- [ ] Homebrew, git, gh, node, jq, ffmpeg, vercel CLI, supabase CLI all installed
 - [ ] GitHub CLI authenticated as operator account
 - [ ] `~/.claude/settings.local.json` with permissions + Supabase MCP
 - [ ] `~/.claude/agents/`, `~/.claude/skills/`, `~/.claude/rules/` created
 - [ ] `~/.claude/CLAUDE.md` written
 - [ ] `~/.claude/rules/global-engineering.md` written
 - [ ] `~/.claude/.env` written with all API keys
-- [ ] Global skills installed: `daily-checkin`, `create-local-task`, `skill-creator`
-- [ ] `~/code-projects/` folder created; website is the first project inside it
+- [ ] Global skills installed: `daily-checkin`, `create-routines`, `skill-creator`
+- [ ] `~/code-projects/{project-slug}/` created with full mahjong-tarot-style folder structure
+- [ ] `website/` scaffolded with Next.js 16 + shadcn inside the project root
 - [ ] Client website live: Hero + Infinite Leverage Agenda + 18 Protocols + CTA
-- [ ] `{project-slug}-website` repo on GitHub
+- [ ] `{project-slug}` repo on GitHub
 - [ ] Live URL confirmed on Vercel
 
 **Next**: [P2 — Agent Team](p2-agent-team.md)

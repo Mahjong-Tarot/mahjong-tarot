@@ -156,6 +156,7 @@ Both Mac Mini (Track A) and client laptop (Track B) install this skill. When Dav
 7. Register all schedules via RemoteTrigger:
    - PM: standup morning/compile/EOD/weekly RAG
    - Content: Writer (Mon), Designer (Tue), Web Publisher (Wed)
+   - Email Marketer: weekly outreach (Thu) — checks for new posts, sends to opted-in subscribers via Resend
 8. Verification: test all 8 agents, confirm site is live, confirm schedules registered
 9. **Hand-off document**: what client needs to know, credentials file, first actions
 

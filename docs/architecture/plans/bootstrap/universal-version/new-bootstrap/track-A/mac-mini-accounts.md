@@ -110,11 +110,27 @@ Collect the following keys and store them in a secure credential document (NOT c
 3. Click **Get API key** → **Create API key**
 4. Copy and save as `GEMINI_API_KEY`
 
-### Resend API key (for Email Marketer agent)
+### Resend API key + domain verification (for Email Marketer agent)
+
+**API key:**
 1. Go to `resend.com` → **Sign up** with operator email
 2. After login: **API Keys** → **Create API Key**
 3. Name: `{project-slug}-email-marketer`
 4. Copy and save as `RESEND_API_KEY`
+
+**Domain verification** (so emails send from `{firstname}@{clientdomain}.com`, not a Resend subdomain):
+1. In Resend dashboard → **Domains** → **Add Domain**
+2. Enter `{clientdomain}.com` — Resend will display DNS records to add
+3. Return to Vercel → **Domains** → `{clientdomain}.com` → **DNS Records** (same panel as Steps 3–5)
+4. Add each record Resend provides — typically:
+   - **TXT** on `resend._domainkey` — DKIM key (Resend will show the exact name and value)
+   - **MX** on `bounce` — for bounce tracking (optional but recommended)
+   - **TXT** on `@` — SPF record (add `include:amazonses.com` to any existing SPF, or create new)
+5. Back in Resend → click **Verify DNS Records**
+6. Status turns green when verified (usually under 5 minutes)
+7. Save as `RESEND_DOMAIN={clientdomain}.com`
+
+> **Brevo upgrade path**: Resend handles all transactional email by default (welcome sequences, weekly outreach). When the stakeholder is ready for marketing campaigns — audience segmentation, bulk sends, open/click analytics — add Brevo. It follows the same DNS pattern: Brevo provides TXT (SPF + DKIM) records to add in the same Vercel DNS panel. No new DNS provider needed. The Email Marketer agent will prompt the stakeholder when Brevo becomes the better fit.
 
 ### Lark API credentials (for PM agent notifications)
 1. Go to `open.larksuite.com` or `open.feishu.cn` (if China region)
@@ -149,6 +165,7 @@ Create a local file (not in any repo) named `{project-slug}-credentials.md` with
 ## API Keys
 - GEMINI_API_KEY=
 - RESEND_API_KEY=
+- RESEND_DOMAIN=
 - LARK_APP_ID=
 - LARK_APP_SECRET=
 - LARK_WEBHOOK_URL=
@@ -163,6 +180,44 @@ Create a local file (not in any repo) named `{project-slug}-credentials.md` with
 
 ---
 
+## Step 10 — Install Homebrew on the Mac Mini
+
+Run this on the Mac Mini itself (not the machine you've been using for the browser steps):
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After install, follow the printed instructions to add Homebrew to PATH (Apple Silicon requires adding to `~/.zprofile`):
+
+```bash
+# These lines will be printed for you — copy them from YOUR terminal output
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+Verify:
+```bash
+brew --version
+```
+
+---
+
+## Step 11 — Install git
+
+```bash
+brew install git
+```
+
+Verify:
+```bash
+git --version
+```
+
+> Everything else (gh, node, jq, ffmpeg, vercel CLI, supabase CLI) is installed in P1 — Claude Code handles those steps automatically.
+
+---
+
 ## P0 complete — what you have now
 
 - [ ] Operator email active: `{firstname}@{clientdomain}.com`
@@ -172,7 +227,10 @@ Create a local file (not in any repo) named `{project-slug}-credentials.md` with
 - [ ] Supabase project created, database password saved
 - [ ] Gemini API key generated
 - [ ] Resend API key generated
+- [ ] Resend domain verified: `{clientdomain}.com`
 - [ ] Lark bot credentials collected
 - [ ] All credentials saved to local `{project-slug}-credentials.md`
+- [ ] Homebrew installed on Mac Mini
+- [ ] git installed
 
 **Next**: [P1 — Machine Setup](p1-machine-setup.md)

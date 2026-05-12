@@ -1,15 +1,15 @@
-# Track B — P2: Connect to Agent Team
+# Personal Laptop — Agents: Connect to Your AI Team
 
-> **Who runs this**: Dave (sets up), client watches — then client takes over
+> **Who runs this**: Dave (sets up), client watches — client takes over from Step 4 onward
 > **Machine**: Client's personal laptop
-> **Prerequisite**: Track B P1 complete; Track A P2 complete — agents repo live on GitHub
-> **Output**: Client laptop has all 8 agents synced; client leaves with a first-actions guide and can use the team immediately
+> **Prerequisite**: Personal Laptop Setup complete; Mac Mini Agents complete — agents repo live on GitHub
+> **Output**: All 8 agents installed and responding; client leaves with a first-actions guide and can use the team immediately
 
 ---
 
 ## Overview
 
-The agents were designed on the Mac Mini and pushed to GitHub in Track A. This phase clones that repo to the client's laptop and installs all 8 agents to `~/.claude/agents/`. From this point the client can invoke any agent directly from their laptop. Scheduled work still runs from the Mac Mini via RemoteTrigger.
+The agents were designed on the Mac Mini and pushed to GitHub. This phase clones that repo to the client's laptop and installs all 8 agents to `~/.claude/agents/`. From this point the client can invoke any agent directly from their laptop. Scheduled work still runs from the Mac Mini via RemoteTrigger.
 
 ---
 
@@ -29,7 +29,7 @@ ls ~/{project-slug}-agents/.claude/agents/
 
 ---
 
-## Step 2 — Run the install script
+## Step 2 — Install all 8 agents
 
 ```bash
 cp -r ~/{project-slug}-agents/.claude/agents/* ~/.claude/agents/
@@ -61,16 +61,16 @@ This confirms: the client can update their agents anytime Dave pushes a change �
 
 ---
 
-## Step 5 — Test all 8 agents respond
+## Step 5 — Test all 8 agents
 
-Open Claude Code in the `{project-slug}-website` directory:
+Open Claude Code in the project directory:
 
 ```bash
-cd ~/{project-slug}-website
+cd ~/code-projects/{project-slug}
 claude
 ```
 
-Test each agent with a simple prompt:
+Test each agent:
 
 | Say this | Expected response |
 |----------|-------------------|
@@ -81,7 +81,7 @@ Test each agent with a simple prompt:
 | `@writer what are you?` | Describes Writer role, mentions content/topics/ queue |
 | `@designer what are you?` | Describes Designer role, mentions Gemini |
 | `@web-publisher what are you?` | Describes Publisher role, mentions blog/posts/ |
-| `@email-marketer what are you?` | Describes Email Marketer role, mentions Brevo |
+| `@email-marketer what are you?` | Describes Email Marketer role, mentions Resend and Supabase |
 
 All 8 should respond correctly before proceeding.
 
@@ -89,7 +89,7 @@ All 8 should respond correctly before proceeding.
 
 ## Step 5b — Verify email-index.md exists
 
-The Email Marketer agent will refuse to send if `agents/email-marketer/context/email-index.md` is missing or empty. Confirm it was created in Track A before handing off to the client:
+The Email Marketer agent will refuse to send if `agents/email-marketer/context/email-index.md` is missing or empty. Confirm it was created in Mac Mini — Agents before handing off to the client:
 
 ```bash
 cat ~/{project-slug}-agents/agents/email-marketer/context/email-index.md
@@ -97,13 +97,13 @@ cat ~/{project-slug}-agents/agents/email-marketer/context/email-index.md
 
 Expected: a file with at least `### Stage 0` defined (subject line, HTML body, delay).
 
-If the file is missing or empty — stop. Return to Track A Step 3c and populate it before proceeding.
+If the file is missing or empty — stop. Return to Mac Mini — Agents Step 3c and populate it before proceeding.
 
 ---
 
 ## Step 6 — Confirm scheduled work is running on Mac Mini
 
-The client does NOT register new schedules — all 7 RemoteTrigger schedules were registered in Track A P2 and run in the cloud. Verify they exist:
+The client does NOT register new schedules — all 7 RemoteTrigger schedules were registered in Mac Mini — Agents and run in the cloud. Verify they exist:
 
 In Claude Code, ask the Product Manager:
 ```
@@ -114,7 +114,21 @@ Expected output: 7 schedules (4 PM + 3 content pipeline).
 
 ---
 
-## Step 7 — Leave client with the first-actions guide
+## Step 7 — First actions: Talk to your Product Manager
+
+Your AI team is live. Start here:
+
+```
+@product-manager I just finished setting up my AI team.
+Walk me through the business context you need to serve me well —
+what should I tell you about the project, goals, and priorities?
+```
+
+The Product Manager will ask for your business context and set itself up to give you useful daily briefings from day one.
+
+---
+
+## Step 8 — Leave client with the first-actions guide
 
 Print or share the following as a standalone document:
 
@@ -149,7 +163,7 @@ Open any terminal, navigate to your project, and run `claude`. Then talk to your
 **Content publishes itself Monday–Wednesday.** Your only jobs are:
 
 1. **Queue a post**: Add `brief.md` to `content/topics/{slug}/`
-   - What does a brief look like? It can be as simple as:
+   - A brief can be as simple as:
      ```
      Topic: 5 signs you need a systems audit
      Angle: Written for founders who feel like they're always in reactive mode
@@ -158,7 +172,7 @@ Open any terminal, navigate to your project, and run `claude`. Then talk to your
 
 2. **Push to go live** (Wednesday after 9am):
    ```bash
-   cd ~/{project-slug}-website
+   cd ~/code-projects/{project-slug}
    git push origin main
    ```
    That's it. Vercel deploys automatically.
@@ -188,7 +202,7 @@ That pulls the latest from GitHub and installs everything automatically.
 #### Your live website
 
 URL: `https://{project-slug}.vercel.app`
-Repo: `https://github.com/{clientslug}/{project-slug}-website`
+Repo: `https://github.com/{clientslug}/{project-slug}`
 
 Every `git push origin main` triggers a Vercel deploy. You'll see the live site update within 1–2 minutes.
 
@@ -219,7 +233,7 @@ Every `git push origin main` triggers a Vercel deploy. You'll see the live site 
 
 ---
 
-## P2 complete — what you have now
+## Agents phase complete — what you have now
 
 - [ ] Agents repo cloned to `~/{project-slug}-agents/`
 - [ ] All 8 agents installed to `~/.claude/agents/`
@@ -227,9 +241,10 @@ Every `git push origin main` triggers a Vercel deploy. You'll see the live site 
 - [ ] First sync completed successfully
 - [ ] All 8 agents tested and responding
 - [ ] `email-index.md` verified — Stage 0 populated
+- [ ] Product Manager briefed on business context
 - [ ] Scheduled work confirmed running on Mac Mini
 - [ ] Client has first-actions guide
 
-**Track B is complete.**
+**Personal Laptop track is complete.**
 
 The client's laptop is a fully functional AI team workstation. The Mac Mini handles scheduled automation. Both machines stay current via the agents repo on GitHub.

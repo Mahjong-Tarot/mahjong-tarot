@@ -130,7 +130,7 @@ Collect the following keys and store them in a secure credential document (NOT c
 6. Status turns green when verified (usually under 5 minutes)
 7. Save as `RESEND_DOMAIN={clientdomain}.com`
 
-> **Brevo note**: If Brevo is added later, it follows the same pattern — Brevo provides TXT (SPF + DKIM) records to add in the same Vercel DNS panel. No new DNS provider needed.
+> **Brevo upgrade path**: Resend handles all transactional email by default (welcome sequences, weekly outreach). When the stakeholder is ready for marketing campaigns — audience segmentation, bulk sends, open/click analytics — add Brevo. It follows the same DNS pattern: Brevo provides TXT (SPF + DKIM) records to add in the same Vercel DNS panel. No new DNS provider needed. The Email Marketer agent will prompt the stakeholder when Brevo becomes the better fit.
 
 ### Lark API credentials (for PM agent notifications)
 1. Go to `open.larksuite.com` or `open.feishu.cn` (if China region)

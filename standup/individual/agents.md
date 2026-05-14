@@ -1,29 +1,30 @@
-date: 2026-05-13
+date: 2026-05-14
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #201: pm(standup-morning): 2026-05-12 — merged 2026-05-12 00:07 UTC
+- PR #205: pm(standup-morning): 2026-05-13 — merged 2026-05-13 00:07 UTC (07:07 Asia/Saigon)
+- PR #206: pm(standup-compile): 2026-05-13 — merged 2026-05-13 02:10 UTC (09:10 Asia/Saigon)
 
 **Next:**
-- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-13`)
+- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-14`)
 - 09:00 standup-compile run later this morning
 
 **Blockers:**
-- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-05-08 (now 13 consecutive working days). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, and `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`. `lark-cli` upgrade (1.0.10 → 1.0.23+) also pending.
+- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-05-08 (now 14 consecutive working days). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`, and `lark-cli` upgrade (1.0.10 → 1.0.23+) still pending.
 
 ---
 
 ## brevo-manager
 
 **Completed:**
-- PR #203: brevo-manager: Sequence D dual-domain plan + warmup automation — merged 2026-05-12 17:10 UTC. Single landing covers Brevo MCP install (282 tools, IPv6 whitelist resolved), dual-domain strategy (D-0 from sacrificial `firepig@onlinechineseastrology.com`, D-1+ from pristine `firepig@mahjongtarot.com`), Bridge campaign Jun 9, 48h pre-flight preview as hard rule (persona §7), `sequence-d-plan.md` + `warmup-checklist.md` + `warmup-templates.md` + `send-log.md` published, `oca-reactivation-sequence/SKILL.md` updated. Operational state outside PR: Sender id 3 verified, mahjongtarot.com DKIM/DMARC live at Vercel DNS, campaigns 1–3 rescheduled to Jun 2-4 14:00Z (suspended pending Jun 1 decision gate), campaign 4 drafted, `firepig-warmup-daily` cron + 4 × `brevo-preview-*` + `brevo-d0-decision-gate` scheduled tasks queued.
+- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window. (PR #203 — Sequence D dual-domain plan + warmup automation — landed 2026-05-12 17:10 UTC and is reflected in yesterday's briefing.)
 
 **Next:**
 - No open PRs.
-- Phase 1 OCA warmup begins today — 5 plain-text personal sends from `firepig@onlinechineseastrology.com` (Yon executing per his check-in).
+- Phase 1 OCA warmup continues today — Yon owns the daily 5-send sequence from `firepig@onlinechineseastrology.com`.
 - 48h pre-flight previews fire at `brevo-preview-d0-batch1/2/3` on May 31 / Jun 1 / Jun 2 (21:00 Saigon) ahead of Jun 2-4 D-0 sends; Bridge preview Jun 7 21:00.
 - `brevo-d0-decision-gate` Mon Jun 1 18:00 Saigon classifies warmup GREEN/YELLOW/RED.
 
@@ -35,7 +36,7 @@ None blocking — but Brevo MCP token sits in chat history and should be rotated
 ## web-developer
 
 **Completed:**
-- No activity in the 2026-05-12 00:00 UTC → 2026-05-13 00:00 UTC window.
+- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
 
 **Next:**
 - No open PRs.
@@ -49,7 +50,7 @@ None
 ## writer
 
 **Completed:**
-- No activity in the 2026-05-12 00:00 UTC → 2026-05-13 00:00 UTC window. (PR #200 — Week of 2026-05-18 — landed 2026-05-11 18:23 UTC and is reflected in yesterday's briefing.)
+- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
 
 **Next:**
 - No open PRs.
@@ -63,7 +64,7 @@ None
 ## product-manager
 
 **Completed:**
-- No activity in the 2026-05-12 00:00 UTC → 2026-05-13 00:00 UTC window.
+- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
 
 **Next:**
 - Review auto-publishing checklist with Dave for implementation sign-off.
@@ -76,7 +77,7 @@ None
 ## image-designer
 
 **Completed:**
-- No activity in the 2026-05-12 00:00 UTC → 2026-05-13 00:00 UTC window.
+- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
 
 **Next:**
 - No open work detected.
@@ -92,11 +93,10 @@ None
 ## other-agents
 
 **Completed:**
-- PR #202 (`Trac/workflows n processes`, merged 2026-05-12 09:55 UTC) — human work by Trac, not agent-attributed.
-- PR #204 (`standup(yon): 2026-05-13`, merged 2026-05-12 17:18 UTC) — Yon's check-in update; counted as a human check-in, not an autonomous agent.
+- No autonomous agent activity in window beyond project-manager.
 
 **Next:**
-- No open PRs across the repo as of 2026-05-13 07:00 Asia/Saigon.
+- No open PRs across the repo as of 2026-05-14 07:00 Asia/Saigon.
 
 **Blockers:**
 None

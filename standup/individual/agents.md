@@ -1,26 +1,26 @@
-date: 2026-05-14
+date: 2026-05-15
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #205: pm(standup-morning): 2026-05-13 — merged 2026-05-13 00:07 UTC (07:07 Asia/Saigon)
-- PR #206: pm(standup-compile): 2026-05-13 — merged 2026-05-13 02:10 UTC (09:10 Asia/Saigon)
+- PR #207: pm(standup-morning): 2026-05-14 — merged 2026-05-14 00:07 UTC (07:07 Asia/Saigon)
+- PR #208: pm(standup-compile): 2026-05-14 — merged 2026-05-14 02:11 UTC (09:11 Asia/Saigon)
 
 **Next:**
-- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-14`)
+- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-15`)
 - 09:00 standup-compile run later this morning
 
 **Blockers:**
-- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-05-08 (now 14 consecutive working days). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`, and `lark-cli` upgrade (1.0.10 → 1.0.23+) still pending.
+- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-05-08 (now 15 consecutive working days). App secret for App ID `cli_a95707d3b57a5eed` needs rotation, `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`, and `lark-cli` upgrade (1.0.10 → 1.0.23+) still pending.
 
 ---
 
 ## brevo-manager
 
 **Completed:**
-- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window. (PR #203 — Sequence D dual-domain plan + warmup automation — landed 2026-05-12 17:10 UTC and is reflected in yesterday's briefing.)
+- No activity in the 2026-05-14 00:00 UTC → 2026-05-15 00:00 UTC window.
 
 **Next:**
 - No open PRs.
@@ -36,7 +36,7 @@ None blocking — but Brevo MCP token sits in chat history and should be rotated
 ## web-developer
 
 **Completed:**
-- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
+- No activity in the 2026-05-14 00:00 UTC → 2026-05-15 00:00 UTC window.
 
 **Next:**
 - No open PRs.
@@ -50,7 +50,7 @@ None
 ## writer
 
 **Completed:**
-- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
+- No activity in the 2026-05-14 00:00 UTC → 2026-05-15 00:00 UTC window.
 
 **Next:**
 - No open PRs.
@@ -64,7 +64,7 @@ None
 ## product-manager
 
 **Completed:**
-- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
+- No activity in the 2026-05-14 00:00 UTC → 2026-05-15 00:00 UTC window.
 
 **Next:**
 - Review auto-publishing checklist with Dave for implementation sign-off.
@@ -77,7 +77,7 @@ None
 ## image-designer
 
 **Completed:**
-- No activity in the 2026-05-13 00:00 UTC → 2026-05-14 00:00 UTC window.
+- No activity in the 2026-05-14 00:00 UTC → 2026-05-15 00:00 UTC window.
 
 **Next:**
 - No open work detected.
@@ -96,7 +96,7 @@ None
 - No autonomous agent activity in window beyond project-manager.
 
 **Next:**
-- No open PRs across the repo as of 2026-05-14 07:00 Asia/Saigon.
+- No open PRs across the repo as of 2026-05-15 07:00 Asia/Saigon.
 
 **Blockers:**
 None

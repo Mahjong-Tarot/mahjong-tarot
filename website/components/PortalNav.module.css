@@ -1,0 +1,131 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.brandMark {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--fire-500);
+}
+
+.brandText {
+  font-size: 16px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-left: auto;
+}
+
+.link,
+.linkActive {
+  font-family: var(--sans);
+  font-size: 14px;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.link {
+  color: var(--ink-3);
+}
+
+.link:hover {
+  color: var(--ink);
+  background: var(--rule-2);
+}
+
+.linkActive {
+  color: var(--ink);
+  background: var(--rule-2);
+  font-weight: 600;
+}
+
+.account {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-left: var(--space-md);
+  border-left: 1px solid var(--rule);
+}
+
+.who {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.signOut {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+
+.signOut:hover {
+  color: var(--ink);
+  border-color: var(--ink-4);
+}
+
+@media (max-width: 720px) {
+  .inner {
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .brandText {
+    font-size: 14px;
+  }
+
+  .links {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+  }
+
+  .account {
+    margin-left: auto;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .who {
+    display: none;
+  }
+}

@@ -51,6 +51,31 @@ export async function createSession(supabase, payload) {
   return data;
 }
 
+const CLIENT_EMBED_FIELDS = [
+  'id',
+  'full_name',
+  'email',
+  'phone',
+  'birthday',
+  'birth_time',
+  'birth_place',
+  'subscription_status',
+].join(', ');
+
+export async function listUpcomingSessions(supabase, { withinDays = 14 } = {}) {
+  const now = new Date();
+  const horizon = new Date(now.getTime() + withinDays * 24 * 60 * 60 * 1000);
+  const { data, error } = await supabase
+    .from('sessions')
+    .select(`${SESSION_FIELDS}, client:clients(${CLIENT_EMBED_FIELDS})`)
+    .gte('scheduled_at', now.toISOString())
+    .lte('scheduled_at', horizon.toISOString())
+    .neq('status', 'cancelled')
+    .order('scheduled_at', { ascending: true });
+  if (error) throw error;
+  return data ?? [];
+}
+
 export async function updateSession(supabase, id, payload) {
   const row = { ...payload, updated_at: new Date().toISOString() };
   const { data, error } = await supabase

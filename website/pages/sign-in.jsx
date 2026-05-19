@@ -7,6 +7,16 @@ import PasswordInput from '../components/PasswordInput';
 import { supabase } from '../lib/supabase';
 import styles from '../styles/Account.module.css';
 
+async function pathForUser(userId) {
+  if (!userId || !supabase) return '/dashboard';
+  const { data } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('user_id', userId)
+    .maybeSingle();
+  return data?.role === 'astrologer' || data?.role === 'admin' ? '/portal' : '/dashboard';
+}
+
 export default function SignInPage() {
   const router = useRouter();
   const [mode, setMode] = useState('signin');
@@ -30,13 +40,13 @@ export default function SignInPage() {
       const { data, error } = await supabase.auth.signUp({ email, password });
       setSubmitting(false);
       if (error) { setError(error.message); return; }
-      if (data.session) router.push('/dashboard');
+      if (data.session) router.push(await pathForUser(data.session.user.id));
       else setPendingConfirmation(true);
     } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       setSubmitting(false);
       if (error) { setError(error.message); return; }
-      router.push('/dashboard');
+      router.push(await pathForUser(data.user?.id));
     }
   };
 

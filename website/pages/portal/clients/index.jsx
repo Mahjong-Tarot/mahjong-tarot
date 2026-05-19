@@ -33,15 +33,33 @@ export default function ClientsListPage({ profile }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    console.log('[clients-debug] effect fired, supabase=', !!supabase);
     if (!supabase) {
+      console.log('[clients-debug] supabase is null — aborting');
       setError('Supabase not configured.');
       setLoading(false);
       return;
     }
+    supabase.auth.getSession().then(({ data, error }) => {
+      console.log('[clients-debug] getSession:', { hasSession: !!data?.session, hasUser: !!data?.session?.user, error: error?.message });
+    });
+    console.log('[clients-debug] calling listClients…');
+    const t0 = performance.now();
     listClients(supabase)
-      .then((rows) => setClients(rows))
-      .catch((err) => setError(err.message || 'Failed to load clients.'))
-      .finally(() => setLoading(false));
+      .then((rows) => {
+        const ms = Math.round(performance.now() - t0);
+        console.log('[clients-debug] listClients resolved in', ms, 'ms with', rows?.length, 'rows');
+        setClients(rows);
+      })
+      .catch((err) => {
+        const ms = Math.round(performance.now() - t0);
+        console.error('[clients-debug] listClients rejected after', ms, 'ms:', err);
+        setError(err.message || 'Failed to load clients.');
+      })
+      .finally(() => {
+        console.log('[clients-debug] finally — setting loading=false');
+        setLoading(false);
+      });
   }, []);
 
   const filtered = useMemo(() => {

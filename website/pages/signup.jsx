@@ -6,6 +6,16 @@ import PasswordInput from '../components/PasswordInput';
 import { supabase } from '../lib/supabase';
 import styles from '../styles/Signup.module.css';
 
+async function pathForUser(userId) {
+  if (!userId || !supabase) return '/dashboard';
+  const { data } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('user_id', userId)
+    .maybeSingle();
+  return data?.role === 'astrologer' || data?.role === 'admin' ? '/portal' : '/dashboard';
+}
+
 const REPORTS = [
   {
     glyph: '日',
@@ -96,7 +106,7 @@ export default function Signup() {
       return;
     }
     if (data?.session) {
-      router.push('/dashboard');
+      router.push(await pathForUser(data.session.user.id));
       return;
     }
     setSuccess(true);

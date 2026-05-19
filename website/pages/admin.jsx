@@ -3,7 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
+import { requireAdmin } from '../lib/requireAdmin';
 import styles from '../styles/Admin.module.css';
+
+export async function getServerSideProps(ctx) {
+  return requireAdmin(ctx);
+}
 
 const STATUSES = ['received', 'read', 'confirmed', 'completed', 'cancelled'];
 const TYPES = ['newsletter', 'contact', 'booking'];

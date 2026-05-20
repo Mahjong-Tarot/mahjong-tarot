@@ -7,6 +7,8 @@ import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { getClient, updateClient, markSubscription } from '../../../lib/clients';
 import { listSessions } from '../../../lib/sessions';
+import { getOrCreateReportForSession } from '../../../lib/reports';
+import { useAuth } from '../../../lib/auth';
 import portalStyles from '../../../styles/Portal.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
@@ -50,6 +52,7 @@ function formatDateTime(iso) {
 
 export default function ClientProfilePage({ profile }) {
   const router = useRouter();
+  const { user } = useAuth();
   const { id } = router.query;
 
   const [client, setClient] = useState(null);
@@ -60,6 +63,7 @@ export default function ClientProfilePage({ profile }) {
   const [form, setForm] = useState(null);
   const [savingEdit, setSavingEdit] = useState(false);
   const [savingSub, setSavingSub] = useState(false);
+  const [openingReportFor, setOpeningReportFor] = useState('');
 
   useEffect(() => {
     if (!id || !supabase) return;
@@ -116,6 +120,23 @@ export default function ClientProfilePage({ profile }) {
       setError(err.message || 'Failed to update subscription.');
     } finally {
       setSavingSub(false);
+    }
+  }
+
+  async function handleOpenReport(session) {
+    if (!session || openingReportFor) return;
+    setOpeningReportFor(session.id);
+    try {
+      const report = await getOrCreateReportForSession(
+        supabase,
+        session.id,
+        session.client_id,
+        user?.id,
+      );
+      router.push(`/portal/reports/${report.id}`);
+    } catch (err) {
+      setError(err.message || 'Failed to open report.');
+      setOpeningReportFor('');
     }
   }
 
@@ -273,6 +294,7 @@ export default function ClientProfilePage({ profile }) {
                 <th>Status</th>
                 <th>Meeting</th>
                 <th>Notes</th>
+                <th aria-label="Actions"></th>
               </tr>
             </thead>
             <tbody>
@@ -282,6 +304,16 @@ export default function ClientProfilePage({ profile }) {
                   <td>{SESSION_STATUS_LABEL[s.status] || s.status}</td>
                   <td>{s.meeting_external_id ? `${s.meeting_source}: ${s.meeting_external_id.slice(0, 8)}…` : '—'}</td>
                   <td className={styles.notesCell}>{s.prep_notes || '—'}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className={styles.linkAction}
+                      onClick={() => handleOpenReport(s)}
+                      disabled={openingReportFor === s.id}
+                    >
+                      {openingReportFor === s.id ? 'Opening…' : 'Open report'}
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

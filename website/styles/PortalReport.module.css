@@ -1,0 +1,231 @@
+.backLink {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: none;
+  margin-bottom: var(--space-md);
+}
+
+.backLink:hover {
+  color: var(--ink);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--rule);
+}
+
+.subtitle {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-3);
+  margin: var(--space-xs) 0 0;
+}
+
+.statusBadge {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: var(--paper-pure);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.status_draft {
+  color: var(--ink-3);
+  background: var(--rule-2);
+}
+
+.status_ready {
+  color: var(--fire-600);
+  background: var(--fire-50);
+  border-color: var(--fire-100);
+}
+
+.status_sent {
+  color: var(--success, #2a8a48);
+  background: rgba(42, 138, 72, 0.08);
+  border-color: rgba(42, 138, 72, 0.3);
+}
+
+.status_failed {
+  color: #b22;
+  background: rgba(178, 34, 34, 0.06);
+  border-color: rgba(178, 34, 34, 0.2);
+}
+
+.section {
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.sectionHeading {
+  font-family: var(--serif);
+  font-size: 20px;
+  margin: 0 0 var(--space-xs);
+  color: var(--ink);
+}
+
+.sectionLede {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  margin: 0 0 var(--space-md);
+  max-width: 70ch;
+}
+
+.contextGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-md);
+  margin: 0 0 var(--space-md);
+}
+
+.contextGrid dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 2px;
+}
+
+.contextGrid dd {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.notes {
+  background: var(--rule-2);
+  border-left: 2px solid var(--fire-300);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 6px;
+}
+
+.notesLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: 0 0 var(--space-xs);
+}
+
+.notesBody {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.fieldLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.input,
+.textarea {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.textarea {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--fire-500);
+  background: var(--paper-pure);
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.btnPrimary {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--fire-500);
+  background: var(--fire-500);
+  color: var(--paper);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.btnPrimary:hover {
+  background: var(--fire-600);
+  border-color: var(--fire-600);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.formMessage {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.error {
+  color: #b22;
+  font-family: var(--sans);
+  font-size: 14px;
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(178, 34, 34, 0.06);
+  border-radius: 6px;
+  border-left: 3px solid #b22;
+}

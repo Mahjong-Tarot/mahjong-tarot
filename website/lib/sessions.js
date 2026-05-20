@@ -11,6 +11,8 @@ const SESSION_FIELDS = [
   'meeting_external_id',
   'prep_notes',
   'post_call_notes',
+  'transcript_text',
+  'summary_text',
 ].join(', ');
 
 export async function listSessions(supabase, { clientId, since, until } = {}) {

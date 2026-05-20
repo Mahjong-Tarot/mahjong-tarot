@@ -5,9 +5,27 @@ import { useRouter } from 'next/router';
 import PortalNav from '../../../components/PortalNav';
 import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
-import { getReport, updateReport } from '../../../lib/reports';
-import { getSession, updateSession } from '../../../lib/sessions';
+import { getReport } from '../../../lib/reports';
+import { getSession } from '../../../lib/sessions';
 import { getClient } from '../../../lib/clients';
+
+// Server-side save endpoints used instead of the supabase-js client
+// update calls. The browser client's UPDATE chain was observed to
+// hang indefinitely on prod despite no-op locks and singleton
+// bypass (see PRs #233/#234/#236). Posting through Next.js API
+// routes — which authenticate via cookies and execute the UPDATE
+// server-side — is a known-good path that mirrors /api/portal/
+// reports/send.
+async function postJson(url, body) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || `${url} failed (${res.status})`);
+  return data;
+}
 import portalStyles from '../../../styles/Portal.module.css';
 import styles from '../../../styles/PortalReport.module.css';
 
@@ -114,10 +132,13 @@ export default function ReportPage({ profile }) {
     setSavingMeeting(true);
     setMeetingMessage('');
     try {
-      const updated = await withWatchdog(
-        updateSession(supabase, session.id, {
-          transcript_text: transcript || null,
-          summary_text: summary || null,
+      const { session: updated } = await withWatchdog(
+        postJson('/api/portal/sessions/update', {
+          sessionId: session.id,
+          fields: {
+            transcript_text: transcript || null,
+            summary_text: summary || null,
+          },
         }),
         15000,
         'Saving transcript',
@@ -138,10 +159,13 @@ export default function ReportPage({ profile }) {
     setSavingReport(true);
     setReportMessage('');
     try {
-      const updated = await withWatchdog(
-        updateReport(supabase, report.id, {
-          title: title.trim() || null,
-          body_markdown: body || null,
+      const { report: updated } = await withWatchdog(
+        postJson('/api/portal/reports/update', {
+          reportId: report.id,
+          fields: {
+            title: title.trim() || null,
+            body_markdown: body || null,
+          },
         }),
         15000,
         'Saving report',

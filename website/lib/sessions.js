@@ -15,6 +15,24 @@ const SESSION_FIELDS = [
   'summary_text',
 ].join(', ');
 
+// Same as SESSION_FIELDS but without the large free-text columns. Use
+// this for list views that don't need transcript/summary content —
+// past sessions can carry kilobytes of transcript and we don't want
+// the dashboard query to ship all of it across the wire.
+const SESSION_LIST_FIELDS = [
+  'id',
+  'created_at',
+  'updated_at',
+  'client_id',
+  'astrologer_id',
+  'scheduled_at',
+  'duration_minutes',
+  'status',
+  'meeting_source',
+  'meeting_external_id',
+  'prep_notes',
+].join(', ');
+
 export async function listSessions(supabase, { clientId, since, until } = {}) {
   let q = supabase.from('sessions').select(SESSION_FIELDS).order('scheduled_at', { ascending: true });
   if (clientId) q = q.eq('client_id', clientId);
@@ -90,7 +108,7 @@ export async function listSessionsWithClient(supabase, { range = 'upcoming', sin
   const nowIso = new Date().toISOString();
   let q = supabase
     .from('sessions')
-    .select(`${SESSION_FIELDS}, client:clients(${CLIENT_EMBED_FIELDS})`);
+    .select(`${SESSION_LIST_FIELDS}, client:clients(${CLIENT_EMBED_FIELDS})`);
 
   if (since) q = q.gte('scheduled_at', since);
   else if (range === 'upcoming') q = q.gte('scheduled_at', nowIso);

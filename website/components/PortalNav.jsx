@@ -4,9 +4,8 @@ import { useAuth } from '../lib/auth';
 import styles from './PortalNav.module.css';
 
 const LINKS = [
-  { href: '/portal',                          label: 'Upcoming', match: (p) => p === '/portal' },
-  { href: '/portal/clients',                  label: 'Clients',  match: (p) => p.startsWith('/portal/clients') },
-  { href: '/portal/settings/meeting-source',  label: 'Settings', match: (p) => p.startsWith('/portal/settings') },
+  { href: '/portal',          label: 'Sessions', match: (p) => p === '/portal' },
+  { href: '/portal/clients',  label: 'Clients',  match: (p) => p.startsWith('/portal/clients') },
 ];
 
 export default function PortalNav({ profile }) {

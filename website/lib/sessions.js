@@ -76,6 +76,35 @@ export async function listUpcomingSessions(supabase, { withinDays = 14 } = {}) {
   return data ?? [];
 }
 
+/**
+ * List sessions in a date range, with the embedded client row.
+ * @param {object} opts
+ * @param {'upcoming'|'past'} opts.range - 'upcoming' returns sessions at or after now; 'past' returns sessions strictly before now.
+ * @param {string} [opts.since] - ISO timestamp lower bound (inclusive). Overrides the range default if provided.
+ * @param {string} [opts.until] - ISO timestamp upper bound (inclusive). Overrides the range default if provided.
+ * @param {boolean} [opts.includeCancelled=false]
+ */
+export async function listSessionsWithClient(supabase, { range = 'upcoming', since, until, includeCancelled = false } = {}) {
+  const nowIso = new Date().toISOString();
+  let q = supabase
+    .from('sessions')
+    .select(`${SESSION_FIELDS}, client:clients(${CLIENT_EMBED_FIELDS})`);
+
+  if (since) q = q.gte('scheduled_at', since);
+  else if (range === 'upcoming') q = q.gte('scheduled_at', nowIso);
+
+  if (until) q = q.lte('scheduled_at', until);
+  else if (range === 'past') q = q.lt('scheduled_at', nowIso);
+
+  if (!includeCancelled) q = q.neq('status', 'cancelled');
+
+  q = q.order('scheduled_at', { ascending: range === 'upcoming' });
+
+  const { data, error } = await q;
+  if (error) throw error;
+  return data ?? [];
+}
+
 export async function updateSession(supabase, id, payload) {
   const row = { ...payload, updated_at: new Date().toISOString() };
   const { data, error } = await supabase

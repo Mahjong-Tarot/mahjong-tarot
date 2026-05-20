@@ -31,8 +31,22 @@ const noLock = async (_name, _acquireTimeout, fn) => fn();
 // Cookie-backed client so the same session is visible to server-side
 // gates (requirePortalUser / requireAdmin) on the next request. Drop-in
 // SupabaseClient API — only persistence behaviour changes vs. createClient.
+//
+// Additional auth options:
+//   - lockAcquireTimeout: 1000 — belt-and-suspenders. If anything
+//     still routes through a real lock (e.g. an older cached
+//     singleton in some hot-reload edge case), bail out fast
+//     instead of hanging.
+//   - isSingleton: false — bypass @supabase/ssr's cached singleton
+//     so the no-op lock above takes effect even after Next.js soft
+//     navigations / HMR that might otherwise hand back an old
+//     client with the navigator.locks default.
 export const supabase = supabaseUrl
   ? createBrowserClient(supabaseUrl, supabaseAnonKey, {
-      auth: { lock: noLock },
+      isSingleton: false,
+      auth: {
+        lock: noLock,
+        lockAcquireTimeout: 1000,
+      },
     })
   : null;

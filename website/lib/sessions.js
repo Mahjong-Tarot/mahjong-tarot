@@ -127,12 +127,26 @@ export async function listSessionsWithClient(supabase, { range = 'upcoming', sin
 
 export async function updateSession(supabase, id, payload) {
   const row = { ...payload, updated_at: new Date().toISOString() };
-  const { data, error } = await supabase
-    .from('sessions')
-    .update(row)
-    .eq('id', id)
-    .select(SESSION_FIELDS)
-    .single();
-  if (error) throw error;
-  return data;
+  // Diagnostic logging: if the call hangs we'll see "begin" but not
+  // "end" in the browser console, proving the supabase-js call
+  // itself never returned. Remove once the hang is resolved.
+  // eslint-disable-next-line no-console
+  console.info('[updateSession] begin', { id, fields: Object.keys(row) });
+  const t0 = Date.now();
+  try {
+    const { data, error } = await supabase
+      .from('sessions')
+      .update(row)
+      .eq('id', id)
+      .select(SESSION_FIELDS)
+      .single();
+    // eslint-disable-next-line no-console
+    console.info('[updateSession] end', { id, ms: Date.now() - t0, error });
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('[updateSession] threw', { id, ms: Date.now() - t0, err });
+    throw err;
+  }
 }

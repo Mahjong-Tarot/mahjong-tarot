@@ -45,12 +45,49 @@ export default function PortalHome({ profile }) {
       setLoading(false);
       return;
     }
+
+    // Stale-promise guard: if the user toggles the range tab fast,
+    // ignore older in-flight results so we never commit them to state
+    // and never leave loading stuck on a result that arrived out of
+    // order.
+    let cancelled = false;
     setLoading(true);
     setError('');
+
+    // Watchdog: if the request doesn't return in 15s, surface an
+    // error so the UI never hangs forever. This guards against the
+    // navigator.locks deadlock the Supabase browser client can hit
+    // when a previous tab / request held the auth lock.
+    const watchdog = setTimeout(() => {
+      if (cancelled) return;
+      // eslint-disable-next-line no-console
+      console.error('[portal] sessions query timed out after 15s', { range });
+      setError('Loading is taking longer than expected. Try refreshing the page.');
+      setLoading(false);
+    }, 15000);
+
     listSessionsWithClient(supabase, { range })
-      .then((rows) => setSessions(rows))
-      .catch((err) => setError(err.message || 'Failed to load sessions.'))
-      .finally(() => setLoading(false));
+      .then((rows) => {
+        if (cancelled) return;
+        setSessions(rows);
+        setError('');
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        // eslint-disable-next-line no-console
+        console.error('[portal] sessions query failed', { range, err });
+        setError(err?.message || 'Failed to load sessions.');
+      })
+      .finally(() => {
+        if (cancelled) return;
+        clearTimeout(watchdog);
+        setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+      clearTimeout(watchdog);
+    };
   }, [range]);
 
   const emptyMessage = range === 'upcoming'

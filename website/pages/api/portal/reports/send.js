@@ -5,11 +5,16 @@ const REPLY_TO = process.env.RESEND_REPLY_TO || 'firepig01@gmail.com';
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Mahjong Tarot <notifications@mahjongtarot.com>';
 const SITE_URL = 'https://mahjongtarot.com';
 
+// Conversion CTA target. v1: point clients at The Mahjong Mirror
+// page on mahjongtarot.com, which introduces the practice and
+// invites them to deepen the work. v2 (planned): swap this for a
+// dedicated subscribe landing page with pricing + Stripe Payment
+// Link, and add a secondary "Book another session" button.
+const CTA_URL = 'https://mahjongtarot.com/the-mahjong-mirror';
+
 function buildEmailHtml({ clientName, title, bodyHtml }) {
   const firstName = (clientName || '').split(' ')[0] || 'there';
   const safeTitle = title || `${firstName}'s reading`;
-  const ctaSubject = encodeURIComponent(`Continue our work — ${clientName || ''}`);
-  const ctaMailto = `mailto:${REPLY_TO}?subject=${ctaSubject}`;
 
   return `<!doctype html>
 <html lang="en">
@@ -43,10 +48,10 @@ function buildEmailHtml({ clientName, title, bodyHtml }) {
             <td align="center" style="padding:24px 32px 32px; background:#faf6ef;">
               <p style="margin:0 0 12px; font-size:14px; color:#2a2a2a;">Want to keep going?</p>
               <p style="margin:0 0 16px; font-size:13px; line-height:1.55; color:#6b6258;">
-                Ongoing readings build on each other. Reply to this email to schedule your next session and start a longer arc together.
+                Ongoing readings build on each other. Explore The Mahjong Mirror — Bill's framework for deeper, recurring work together.
               </p>
-              <a href="${ctaMailto}" style="display:inline-block; padding:10px 22px; background:#c8442e; color:#ffffff; text-decoration:none; border-radius:6px; font-size:14px; font-weight:600;">
-                Continue with Bill →
+              <a href="${CTA_URL}" style="display:inline-block; padding:10px 22px; background:#c8442e; color:#ffffff; text-decoration:none; border-radius:6px; font-size:14px; font-weight:600;">
+                Explore The Mahjong Mirror →
               </a>
             </td>
           </tr>

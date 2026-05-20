@@ -35,6 +35,22 @@ const STATUS_LABEL = {
   failed: 'Failed',
 };
 
+// Watchdog wrapper for async save / send handlers. If the underlying
+// promise (Supabase RPC, fetch, etc.) hangs — most often due to the
+// known navigator.locks deadlock in the SSR browser client — this
+// rejects with a recognisable error after `ms` milliseconds so the
+// UI never gets trapped with a permanently disabled "Saving…" button.
+function withWatchdog(promise, ms, label) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(
+      () => reject(new Error(`${label} timed out after ${ms / 1000}s. Try refreshing the page.`)),
+      ms,
+    );
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
 export default function ReportPage({ profile }) {
   const router = useRouter();
   const { id } = router.query;
@@ -98,14 +114,20 @@ export default function ReportPage({ profile }) {
     setSavingMeeting(true);
     setMeetingMessage('');
     try {
-      const updated = await updateSession(supabase, session.id, {
-        transcript_text: transcript || null,
-        summary_text: summary || null,
-      });
+      const updated = await withWatchdog(
+        updateSession(supabase, session.id, {
+          transcript_text: transcript || null,
+          summary_text: summary || null,
+        }),
+        15000,
+        'Saving transcript',
+      );
       setSession(updated);
       setMeetingMessage('Transcript and summary saved.');
     } catch (err) {
-      setMeetingMessage(err.message || 'Failed to save.');
+      // eslint-disable-next-line no-console
+      console.error('[portal] save transcript failed', err);
+      setMeetingMessage(err?.message || 'Failed to save.');
     } finally {
       setSavingMeeting(false);
     }
@@ -116,14 +138,20 @@ export default function ReportPage({ profile }) {
     setSavingReport(true);
     setReportMessage('');
     try {
-      const updated = await updateReport(supabase, report.id, {
-        title: title.trim() || null,
-        body_markdown: body || null,
-      });
+      const updated = await withWatchdog(
+        updateReport(supabase, report.id, {
+          title: title.trim() || null,
+          body_markdown: body || null,
+        }),
+        15000,
+        'Saving report',
+      );
       setReport(updated);
       setReportMessage('Report saved.');
     } catch (err) {
-      setReportMessage(err.message || 'Failed to save.');
+      // eslint-disable-next-line no-console
+      console.error('[portal] save report failed', err);
+      setReportMessage(err?.message || 'Failed to save.');
     } finally {
       setSavingReport(false);
     }
@@ -140,17 +168,23 @@ export default function ReportPage({ profile }) {
     setSending(true);
     setSendMessage('');
     try {
-      const res = await fetch('/api/portal/reports/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reportId: report.id }),
-      });
+      const res = await withWatchdog(
+        fetch('/api/portal/reports/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reportId: report.id }),
+        }),
+        30000,
+        'Sending email',
+      );
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Send failed.');
       setReport({ ...report, ...data.report });
       setSendMessage(isResend ? 'Report resent.' : 'Report sent.');
     } catch (err) {
-      setSendMessage(err.message || 'Send failed.');
+      // eslint-disable-next-line no-console
+      console.error('[portal] send email failed', err);
+      setSendMessage(err?.message || 'Send failed.');
     } finally {
       setSending(false);
     }

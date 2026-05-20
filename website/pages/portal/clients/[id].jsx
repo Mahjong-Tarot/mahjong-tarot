@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PortalNav from '../../../components/PortalNav';
+import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { getClient, updateClient, markSubscription } from '../../../lib/clients';
@@ -16,18 +17,14 @@ export async function getServerSideProps(ctx) {
   return requirePortalUser(ctx);
 }
 
+// Subscription status labels — used by the "mark as X" buttons in
+// the subscription panel (the inline status display itself uses the
+// SubscriptionIcon component for icon + label).
 const SUB_LABEL = {
   none: 'Not subscribed',
   active: 'Subscribed',
   lapsed: 'Lapsed',
   cancelled: 'Cancelled',
-};
-
-const SUB_CLASS = {
-  none: 'subNone',
-  active: 'subActive',
-  lapsed: 'subLapsed',
-  cancelled: 'subCancelled',
 };
 
 const SESSION_STATUS_LABEL = {
@@ -167,9 +164,7 @@ export default function ClientProfilePage({ profile }) {
       <header className={styles.profileHeader}>
         <div>
           <h1 className={portalStyles.h1}>{client.full_name}</h1>
-          <span className={`${styles.badge} ${styles[SUB_CLASS[client.subscription_status]] || ''}`}>
-            {SUB_LABEL[client.subscription_status] || client.subscription_status}
-          </span>
+          <SubscriptionIcon status={client.subscription_status} showLabel />
         </div>
         <button
           type="button"
@@ -254,9 +249,7 @@ export default function ClientProfilePage({ profile }) {
         <h2 className={styles.sectionTitle}>Subscription</h2>
         <div className={styles.subscriptionPanel}>
           <div>
-            <span className={`${styles.badge} ${styles[SUB_CLASS[client.subscription_status]] || ''}`}>
-              {SUB_LABEL[client.subscription_status] || client.subscription_status}
-            </span>
+            <SubscriptionIcon status={client.subscription_status} showLabel />
             <div className={styles.subDates}>
               {client.subscription_started_at && <span>Started {new Date(client.subscription_started_at).toLocaleDateString()}</span>}
               {client.subscription_ended_at && <span> · Ended {new Date(client.subscription_ended_at).toLocaleDateString()}</span>}

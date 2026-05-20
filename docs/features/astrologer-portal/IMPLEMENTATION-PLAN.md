@@ -3,7 +3,26 @@
 **Source spec:** the `Astrologer Portal — Implementation Spec` (2026-05-19) provided in chat
 **This doc:** maps each spec section to the actual files in the repo, flags collisions, calls out open questions, and lists the file-level changes per PR.
 **Date:** 2026-05-19
-**Branch for PR #1:** `feat/portal-01-roles`
+**Revised:** 2026-05-20 — see Revision Log below
+**Branch for PR #1:** `feat/portal-01-roles` (shipped)
+
+---
+
+## Revision Log
+
+### 2026-05-20 — stakeholder direction change (Dave)
+
+After PRs #1–#5 shipped, stakeholder feedback rerouted PRs #6–#9. Key changes:
+
+1. **Drop Anthropic API.** No automated report generation in v1. Bill (or an admin) pastes a transcript + optional summary; the report is written by a human into a textarea. Long-term automation may come back via the LLM workflow described in §8.
+2. **Hide Krisp connect UI.** Bill won't adopt new tools easily; scheduling and meeting-source connections will be handled by admins (or an AI agent) on his behalf later. The `lib/meetingSources/` abstraction, migration `017_meeting_source_connections.sql`, and the connect pages remain in the repo but are unlinked from the nav.
+3. **Sessions view: full list + calendar, no time cap.** Replace the "next 2 weeks" `/portal` dashboard with a grouped-by-week view (past + future) plus a list/calendar toggle. Default tab: Upcoming.
+4. **Subscription becomes an icon, not a filter chip.** Bill sees subscription status inline. The filter chip is removed.
+5. **Admins get a dedicated conversions dashboard.** New `/portal/admin/conversions` page (admin-only): cross-astrologer client list, status filter, warm-lead sort, quick actions.
+6. **Transcript editing scope expands.** Admins can paste transcripts on Bill's behalf — RLS loosens so `role='admin'` can write any astrologer's session/report rows.
+7. **`ANTHROPIC_API_KEY` no longer required.** Removed from the env-var list. `REPORT_MODEL` also removed.
+
+Revised PR plan: see §3 below. PRs #6–#9 are fully rewritten; sections marked **(superseded)** are kept for history.
 
 ---
 
@@ -178,14 +197,11 @@ https://mahjongtarot.com/portal/settings/meeting-source/callback?source=krisp
 ```
 The GitHub repo name `mahjong-tarot` is unchanged — only the live domain matters here.
 
-### OQ8 — Krisp readiness (blocks PR #5 only)
+### OQ8 — Krisp readiness (blocks PR #5 only) — **Deferred indefinitely (2026-05-20)**
 
-Before PR #5 merges:
-1. Krisp OAuth app registered with redirect URI from OQ7
-2. `KRISP_OAUTH_CLIENT_ID` set in Vercel env (and local `.env.local` for testing)
-3. `KRISP_OAUTH_REDIRECT_URI=https://mahjongtarot.com/portal/settings/meeting-source/callback?source=krisp`
+Originally: Krisp OAuth app + env vars required before PR #5 merges.
 
-PRs 1–4 are independent of these.
+**Update (2026-05-20):** Krisp's OAuth client creation now requires a paid tier upgrade we don't want to pay for. The connect UI shipped in PR #5 is hidden from the nav (see new PR #6). The underlying `lib/meetingSources/` abstraction stays in place so any service (Krisp paid, Zoom, Otter, etc.) can plug in later as a single file. No env vars needed in v1.
 
 ---
 
@@ -195,7 +211,7 @@ Each section lists: scope, files created/modified, migrations, env vars, smoke t
 
 ---
 
-### PR #1 — Roles foundation (this branch: `feat/portal-01-roles`)
+### PR #1 — Roles foundation (this branch: `feat/portal-01-roles`) — ✅ Shipped (#217)
 
 **Scope.** Add `role` column and helper functions to Postgres. Extend `useAuth()` to expose `profile`, `role`, `isPortalUser`. Add the SSR gate helper. Retrofit `/admin`. Commit the seed runbook.
 
@@ -253,7 +269,7 @@ Each section lists: scope, files created/modified, migrations, env vars, smoke t
 
 ---
 
-### PR #2 — Portal shell
+### PR #2 — Portal shell — ✅ Shipped (#218)
 
 **Scope.** `/portal` exists and renders an empty layout for portal users. Sign-in redirect now lands somewhere real.
 
@@ -271,7 +287,7 @@ Each section lists: scope, files created/modified, migrations, env vars, smoke t
 
 ---
 
-### PR #3 — Data model + manual client CRUD
+### PR #3 — Data model + manual client CRUD — ✅ Shipped (#220)
 
 **Scope.** Migration `018_astrologer_portal.sql` (note: spec uses 018 because 017 is the meeting_source table introduced in PR #5; we'll keep 018 here even though it lands first chronologically — see OQ-numbering note below). Pages for clients list, new client, client profile, manual session create.
 
@@ -299,7 +315,7 @@ Going with A unless flagged.
 
 ---
 
-### PR #4 — Upcoming Clients dashboard
+### PR #4 — Upcoming Clients dashboard — ✅ Shipped (#223) — **superseded by new PR #6**
 
 **Scope.** `/portal/index.jsx` becomes the real dashboard: today/this-week sessions, subscription filter chip, subscription badges.
 
@@ -313,7 +329,7 @@ Going with A unless flagged.
 
 ---
 
-### PR #5 — Meeting source abstraction + Krisp connect screen
+### PR #5 — Meeting source abstraction + Krisp connect screen — ✅ Shipped (#224) — UI to be hidden in new PR #6
 
 **Scope.** Pluggable adapter layer. Krisp OAuth start + callback exchange. UI for the connect screen.
 
@@ -338,69 +354,184 @@ Going with A unless flagged.
 
 ---
 
-### PR #6 — Krisp adapter completion + Attach meeting modal
+### PR #6 — Sessions view redesign + cleanup (revised 2026-05-20)
 
-**Scope.** Real `listMeetings` and `fetchMeeting`. Edge function or API route for both. Attach-meeting UI on session row in client profile.
+**Scope.** Replaces the "next 2 weeks" dashboard from PR #4 with a full sessions view. Removes the subscription filter chip in favor of an inline icon. Hides the Krisp connect UI from nav.
 
-**Files modified:** `website/lib/meetingSources/krisp.js` (real impls), `website/pages/portal/clients/[id].jsx` (attach modal).
+**UX:**
 
-**Files created:** `website/pages/api/portal/meetings/list.js` and `…/fetch.js` (or the edge function equivalents per OQ1). `website/components/AttachMeetingModal.jsx` + module CSS.
+- `/portal/index.jsx` becomes a sessions view with two tabs: **Upcoming** (default) and **Past**.
+- Each tab supports two view modes via toggle: **List** (grouped by week — `This week`, `Next week`, `Week of <Mon date>`) and **Calendar** (month grid with session pills on the day).
+- No time cap. Pagination only if the list grows beyond ~3 weeks of past data (lazy-load older weeks on scroll). Initial render: current week + 2 weeks forward / 2 weeks back.
+- Each session card/pill shows a small subscription-status icon next to the client name:
+  - ◯ not subscribed
+  - ● subscribed (active)
+  - ◐ lapsed
+  - ⊘ cancelled
+- The "Not yet subscribed" filter chip is removed. (Admin-side filtering moves to the new admin conversions dashboard — see PR #9.)
+- `PortalNav.jsx`: remove the "Settings → Meeting source" link. The page itself stays at `/portal/settings/meeting-source` (still reachable by URL) but is unlinked. Add a small note on that page: "Meeting-source automation is on hold — admins schedule sessions manually for now."
 
-**Smoke test.** Connect Krisp. Schedule a session. Click "Attach meeting" → list renders. Pick one → session row updates with `meeting_source = 'krisp'` and `meeting_external_id` set.
+**Files modified:**
 
-**Risk.** Medium. Krisp's actual JSON-RPC shape may differ from the spec's description. Build with logging on first.
-
----
-
-### PR #7 — Generate report
-
-**Scope.** "Generate report" button on session row → creates a `reports` row → calls Anthropic → fills `body_markdown` → user reviews on `/portal/reports/[id]`.
+- `website/pages/portal/index.jsx` — full rewrite of dashboard
+- `website/components/PortalNav.jsx` — drop the meeting-source link
+- `website/pages/portal/settings/meeting-source/index.jsx` — add the "on hold" banner
+- `website/lib/sessions.js` — extend `listSessions` to accept `{ range: 'upcoming' | 'past', weekStart, weekEnd }`
 
 **Files created:**
 
-- Either `website/pages/api/portal/reports/generate.js` (OQ1=A) or `website/supabase/functions/generate-report/index.ts`
-- `website/pages/portal/reports/[id].jsx` — view + edit + regenerate
-- `website/lib/reports.js` — `getReport`, `updateReport`, `markGenerating`, `markReady`, `markFailed`
-- `website/styles/PortalReport.module.css`
+- `website/components/SessionsCalendar.jsx` + `SessionsCalendar.module.css` — month view, week starts Monday, today highlighted
+- `website/components/SessionsList.jsx` + `SessionsList.module.css` — weekly grouping component
+- `website/components/SubscriptionIcon.jsx` — small icon mapped to `subscription_status`
+- `website/styles/PortalHome.module.css` — new layout (was using `Portal.module.css`)
 
-**Env vars new:**
+**Migrations:** none.
 
-- `ANTHROPIC_API_KEY`
-- `REPORT_MODEL` (default `claude-opus-4-7`)
+**Env vars:** none.
 
-**Packages:** `marked`, optionally `@anthropic-ai/sdk` (direct `fetch` works fine).
+**Smoke test.**
+1. Sign in as Bill → land at `/portal` → see Upcoming tab with this-week + next-week sessions
+2. Toggle to Past → see prior sessions grouped by week
+3. Toggle to Calendar → see month view with session pills on the right days
+4. Subscription icons render per-client
+5. Sidebar no longer shows the "Meeting source" link
 
-**Smoke test.** Attach a meeting → click Generate → status flips `draft` → `generating` → `ready`. Markdown renders with H2 sections, no H1.
-
-**Risk.** Medium. Failure modes around Krisp transcript unavailable, Anthropic timeout, partial generation. Status field must always end up `ready` or `failed`, never stuck in `generating`. Use a try/finally in the handler.
+**Risk.** Low — UI-only. Existing data unchanged. The PR #4 dashboard logic is replaced wholesale, so verify the data fetch path doesn't accidentally orphan the subscription badge work that already shipped.
 
 ---
 
-### PR #8 — Send report
+### PR #7 — Manual transcript + report textarea (revised 2026-05-20)
 
-**Scope.** "Send to client" → renders markdown to HTML → emails via Resend with subscription CTA.
+**Scope.** After a session, Bill (or an admin) pastes the Zoom AI Companion transcript + summary into the session record. A new `/portal/reports/[id]` page renders an editable report textarea where Bill pastes the polished report he produced from his Claude.ai Project. **No Anthropic API call.**
 
-**Files created:** either `website/pages/api/portal/reports/send.js` (OQ1=A) or `website/supabase/functions/send-report/index.ts`. New email template (inline HTML in the handler — matches `api/reply.js` style).
+**Migration `019_session_transcripts.sql`:**
 
-**Files modified:** `website/pages/portal/reports/[id].jsx` (Send button + sent_at display).
+```sql
+alter table public.sessions
+  add column if not exists transcript_text  text,
+  add column if not exists summary_text     text;
+
+-- Loosen RLS so admins can edit any astrologer's sessions/reports.
+-- Existing policies on these tables key on auth.uid() ownership; the new policies
+-- add an OR clause for role='admin' read/write. See migration file for exact SQL.
+```
+
+(Exact migration SQL committed in the file; uses `is_admin()` helper from PR #1's `016_roles.sql`.)
+
+**Files created:**
+
+- `website/supabase/019_session_transcripts.sql` — adds the two columns + admin-bypass RLS policies on `sessions` and `reports`
+- `website/pages/portal/reports/[id].jsx` — view + edit. Textareas for `report.body_markdown` (the polished text Bill pastes from Claude.ai) and session `transcript_text` / `summary_text`. Save button persists. No regenerate, no API call.
+- `website/lib/reports.js` — `getReport`, `updateReport`. Simpler than the original PR #7 plan — no `markGenerating`/`markReady`/`markFailed`.
+- `website/styles/PortalReport.module.css`
+- `website/components/TranscriptPasteForm.jsx` — paste form embedded in the session view; opens or links to the report row
+
+**Files modified:**
+
+- `website/pages/portal/clients/[id].jsx` — each session row gets an "Open report" link and a "Paste transcript" link (or one combined action)
+- `website/lib/sessions.js` — `updateSession` accepts the new fields
+
+**Env vars:** none. No `ANTHROPIC_API_KEY`. No `REPORT_MODEL`.
+
+**Packages:** none new. (No `@anthropic-ai/sdk`. `marked` deferred to PR #8 where rendered HTML is actually used.)
+
+**Status field:**
+
+- `reports.status` stays in the schema (already created in PR #3) but its lifecycle simplifies to: `draft` → `sent`. No `generating`/`ready`/`failed` states.
+
+**Smoke test.**
+1. As Bill: open a past session → click "Paste transcript" → paste a sample transcript + summary → save
+2. Open the report → paste polished markdown into the body textarea → save
+3. Sign in as admin (Yon) → repeat on a session that belongs to Bill, not the admin → succeeds (RLS bypass works)
+4. Sign in as a member → can't read either record (RLS still blocks non-portal users)
+
+**Risk.** Low. New columns are nullable. RLS change is additive (adds policies, doesn't remove). No external service calls.
+
+---
+
+### PR #8 — Send report by email + subscription CTA (revised 2026-05-20)
+
+**Scope.** "Send to client" button on `/portal/reports/[id]` → renders `body_markdown` to HTML → emails via Resend with a subscription CTA at the bottom. Same as the original PR #8 — the only change is dropping any dependency on PR #7 having generated the report (the source is now the manually-pasted textarea).
+
+**Files created:**
+
+- `website/pages/api/portal/reports/send.js` — Resend-backed handler. Markdown→HTML via `marked`. CTA links to a TBD landing page or `mailto:` reply.
+
+**Files modified:**
+
+- `website/pages/portal/reports/[id].jsx` — Send button + `sent_at` display; locks the body textarea once sent (or allows resend with a confirm).
+
+**Migrations:** none.
 
 **Env vars:** reuses `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_REPLY_TO`. No new vars.
 
-**Smoke test.** Click Send → client receives email → `reports.status = 'sent'`, `sent_at` populated, `email_message_id` stored.
+**Packages:** `marked` (new).
+
+**Smoke test.**
+1. Click Send → client receives an email rendering the markdown
+2. CTA renders at the bottom
+3. `reports.status` flips to `sent`, `sent_at` populated, `email_message_id` stored
+4. Resend works for both Bill (astrologer) and admin acting on Bill's behalf
 
 **Risk.** Low. Resend already proven via `api/reply.js`.
 
 ---
 
-### PR #9 — Subscription conversion surface
+### PR #9 — Admin conversions dashboard (new 2026-05-20)
 
-**Scope.** Subscription badges throughout, "Not yet subscribed" filter chip on dashboard (if not already in PR #4), manual mark-as-subscribed toggle, subscription CTA confirmed in report email.
+**Scope.** A dedicated admin-only page focused on converting non-subscribed clients into members. Replaces the conversion-by-filter behavior that lived on Bill's dashboard.
 
-**Files modified:** several portal pages. Mostly UI.
+**UX:**
 
-**Smoke test.** Toggle client to `active` → badge updates everywhere → dashboard filter respects it.
+- `/portal/admin/conversions` (admin-only — gated by `requireAdmin`)
+- Cross-astrologer table of every client across the system
+- Columns: client name · astrologer · subscription status · last session date · # sessions · last report sent · contact email
+- Default filter: status ≠ `active` (i.e. Not subscribed / Lapsed / Cancelled — the conversion targets)
+- Sort options: warm-lead (recent session + not subscribed first), recency, alphabetical
+- Quick actions per row:
+  - Mark subscribed (reuses existing `markSubscription` from `lib/clients.js`)
+  - Open client profile
+  - Send a note (opens a compose form that goes through Resend — same pattern as `api/reply.js`)
 
-**Risk.** None.
+**Files created:**
+
+- `website/pages/portal/admin/conversions.jsx` — the dashboard page. `getServerSideProps` calls `requireAdmin`.
+- `website/lib/conversions.js` — `listConversionTargets({ statusFilter, sort })` query, joins `clients` + last `sessions` + last sent `reports`.
+- `website/components/ConversionTable.jsx` + `ConversionTable.module.css`
+- `website/components/SendNoteModal.jsx` — small compose UI; calls a new API route
+- `website/pages/api/portal/conversions/send-note.js` — Resend-backed; admin-gated
+- `website/styles/PortalConversions.module.css`
+
+**Files modified:**
+
+- `website/components/PortalNav.jsx` — admin-only "Conversions" link visible when `role === 'admin'`
+
+**Migrations:** none. The query joins existing tables.
+
+**Env vars:** reuses Resend envs.
+
+**Packages:** none new.
+
+**Smoke test.**
+1. Sign in as admin → see "Conversions" link in nav, member view doesn't
+2. Open the page → table populates with non-subscribed clients across all astrologers
+3. Change filter to Lapsed → list updates
+4. Click "Mark subscribed" → row updates, badge flips on other portal pages
+5. Click "Send a note" → modal opens → submit → email sent via Resend
+6. Sign in as Bill (astrologer) → `/portal/admin/conversions` redirects (not admin)
+
+**Risk.** Low. Read-only join + a Resend call already proven. RLS already loosened in PR #7 covers admin's cross-astrologer read; verify the SELECT works under admin auth.
+
+---
+
+### PR #9 (original) — Subscription conversion surface — superseded
+
+Subscription badges/icon: folded into new PR #6 (`SubscriptionIcon` component).
+Manual mark-as-subscribed: already shipped in PR #3 (`/portal/clients/[id]` subscription panel).
+Filter chip: removed per stakeholder direction; admin filtering moved to new PR #9.
+CTA in report email: included in new PR #8.
+
+Nothing left in the original PR #9 that isn't covered elsewhere — closing this slot.
 
 ---
 
@@ -415,6 +546,9 @@ Going with A unless flagged.
 | Vault for OAuth tokens | Plain table + RLS | `supabase/017_meeting_source_connections.sql` |
 | Active-source toggle | Most-recently-updated wins | `lib/meetingSources/index.js` |
 | Zoom adapter | Not built | `lib/meetingSources/zoom.js` (does not yet exist) |
+| **Auto-pull transcripts (Krisp/Zoom/Otter)** | Manual paste in PR #7 | `lib/meetingSources/*.js` — abstraction kept |
+| **AI-drafted report generation** | Bill drafts manually via his Claude.ai Project (Max plan), pastes into portal | Could return as a one-click feature in v2 once volume justifies API spend; cheapest path is Gemini free-tier API |
+| **AI-agent–assisted scheduling** | Admin schedules manually | Future work; relates to Krisp/Zoom auto-link |
 
 ---
 
@@ -431,49 +565,42 @@ PR reviewers should grep for `krisp` outside `lib/meetingSources/krisp.js`. Any 
 
 ---
 
-## 6. Implementation order (mirrors spec §9, restated for clarity)
+## 6. Implementation order (revised 2026-05-20)
 
-| PR | Branch | Depends on |
-|---|---|---|
-| #1 | `feat/portal-01-roles` | — (this branch) |
-| #2 | `feat/portal-02-shell` | #1 |
-| #3 | `feat/portal-03-clients-crud` | #2 |
-| #4 | `feat/portal-04-dashboard` | #3 |
-| #5 | `feat/portal-05-meeting-source-connect` | #2 |
-| #6 | `feat/portal-06-attach-meeting` | #5, #3 |
-| #7 | `feat/portal-07-generate-report` | #6 |
-| #8 | `feat/portal-08-send-report` | #7 |
-| #9 | `feat/portal-09-subscription-surface` | #4 |
+| PR | Branch | Status | Depends on |
+|---|---|---|---|
+| #1 | `feat/portal-01-roles` | ✅ Shipped (#217) | — |
+| #2 | `feat/portal-02-shell` | ✅ Shipped (#218) | #1 |
+| #3 | `feat/portal-03-clients-crud` | ✅ Shipped (#220) | #2 |
+| #4 | `feat/portal-04-dashboard` | ✅ Shipped (#223) — superseded by new #6 | #3 |
+| #5 | `feat/portal-05-meeting-source` | ✅ Shipped (#224) — UI to be hidden | #2 |
+| **#6** | `feat/portal-06-sessions-redesign` | ⏭ Next | #4 |
+| **#7** | `feat/portal-07-transcript-report` | Planned | #3 |
+| **#8** | `feat/portal-08-send-report` | Planned | #7 |
+| **#9** | `feat/portal-09-admin-conversions` | Planned | #3, #7 (for RLS bypass) |
 
-#3 and #5 are independent of each other after #2; can be parallelized if there's a second developer or context.
+PRs #6 and #7 can be parallelized (no shared files). #8 depends on #7 (needs `body_markdown` to exist). #9 can land any time after #7 (needs the admin RLS bypass policies).
 
 ---
 
-## 7. Next action
+## 7. Next action (revised 2026-05-20)
 
-All decisions locked. PR #1 is ready to code on `feat/portal-01-roles`.
+PRs #1–#5 shipped. Migration `017_meeting_source_connections.sql` applied to prod 2026-05-20 (was outstanding at merge of PR #224). All decisions for PRs #6–#9 locked above.
 
-### PR #1 final file list
+### Next up — PR #6: Sessions view redesign + cleanup
 
-**Created:**
-- `website/supabase/016_roles.sql`
-- `website/supabase/seed-astrologers.sql` (runbook with real emails per OQ6)
-- `website/lib/requirePortalUser.js`
-- `website/lib/requireAdmin.js`
-
-**Modified:**
-- `website/package.json` — add `@supabase/ssr`
-- `website/lib/auth.js` — extend `useAuth()` per OQ5
-- `website/pages/sign-in.jsx` — branch redirect by role per OQ4
-- `website/pages/signup.jsx` — same branch
-- `website/pages/admin.jsx` — add `getServerSideProps` calling `requireAdmin` per OQ3
-
-**Scope estimate.** ~150 lines of JS/JSX + one SQL migration (~25 lines) + one seed file (~12 lines).
+**Branch:** `feat/portal-06-sessions-redesign` off `origin/main`
 
 **Pre-merge checklist:**
-- [ ] Apply `016_roles.sql` against dev Supabase project
-- [ ] Manually set one test profile to `astrologer` and verify portal redirect (will hit 404 on `/portal` until PR #2 — that's expected)
-- [ ] Verify `/admin` redirects unauthenticated and member users to `/`
-- [ ] Verify `/admin` still works for an admin-role profile
-- [ ] Run `seed-astrologers.sql` against dev after the real users have signed up at least once (creates their `profiles` row)
-- [ ] Run `seed-astrologers.sql` against prod only after PR #1 is live
+- [ ] `/portal` shows Upcoming tab by default; Past tab works
+- [ ] List view groups by week with `This week` / `Next week` / `Week of <Mon date>` headers
+- [ ] Calendar view renders month grid; today highlighted; session pills clickable
+- [ ] Subscription icon renders correctly for all four `subscription_status` values
+- [ ] Filter chip removed
+- [ ] Sidebar no longer shows "Meeting source" link; visiting `/portal/settings/meeting-source` directly shows the "on hold" banner
+- [ ] No regressions on existing client/session CRUD pages
+
+**Then in parallel or sequentially:**
+- PR #7 — Manual transcript + report textarea (depends only on PR #3; can start now)
+- PR #8 — Send report email (depends on PR #7)
+- PR #9 — Admin conversions dashboard (depends on PR #7 for admin RLS bypass)

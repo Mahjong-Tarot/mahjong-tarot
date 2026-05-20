@@ -55,6 +55,9 @@ export default function ReportPage({ profile }) {
   const [savingReport, setSavingReport] = useState(false);
   const [reportMessage, setReportMessage] = useState('');
 
+  const [sending, setSending] = useState(false);
+  const [sendMessage, setSendMessage] = useState('');
+
   useEffect(() => {
     if (!id || !supabase) return;
     let active = true;
@@ -123,6 +126,33 @@ export default function ReportPage({ profile }) {
       setReportMessage(err.message || 'Failed to save.');
     } finally {
       setSavingReport(false);
+    }
+  }
+
+  async function handleSend() {
+    if (!report || !client?.email || !body.trim()) return;
+    const isResend = report.status === 'sent';
+    const prompt = isResend
+      ? `Resend this report to ${client.email}?`
+      : `Send this report to ${client.email}?`;
+    if (typeof window !== 'undefined' && !window.confirm(prompt)) return;
+
+    setSending(true);
+    setSendMessage('');
+    try {
+      const res = await fetch('/api/portal/reports/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reportId: report.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Send failed.');
+      setReport({ ...report, ...data.report });
+      setSendMessage(isResend ? 'Report resent.' : 'Report sent.');
+    } catch (err) {
+      setSendMessage(err.message || 'Send failed.');
+    } finally {
+      setSending(false);
     }
   }
 
@@ -238,8 +268,8 @@ export default function ReportPage({ profile }) {
             <h2 className={styles.sectionHeading}>Report</h2>
             <p className={styles.sectionLede}>
               Paste the polished report you produced from your Claude.ai
-              Project. Markdown is supported — headings, lists, emphasis. The
-              client receives this in PR #8 once you click <em>Send</em>.
+              Project. Markdown is supported — headings, lists, emphasis. Save
+              your edits, then click <em>Send to client</em> when ready.
             </p>
             <form onSubmit={handleSaveReport} className={styles.form}>
               <label className={styles.field}>
@@ -269,6 +299,35 @@ export default function ReportPage({ profile }) {
                 {reportMessage && <span className={styles.formMessage}>{reportMessage}</span>}
               </div>
             </form>
+
+            <div className={styles.sendBlock}>
+              {!client?.email && (
+                <p className={styles.sendWarn}>
+                  Add an email to the client profile before sending.
+                </p>
+              )}
+              {report.status === 'sent' && (
+                <p className={styles.sendStatus}>
+                  Sent to <strong>{report.sent_to_email}</strong>
+                  {report.sent_at ? ` on ${formatDateTime(report.sent_at)}` : ''}.
+                </p>
+              )}
+              <div className={styles.sendActions}>
+                <button
+                  type="button"
+                  className={report.status === 'sent' ? styles.btnSecondary : styles.btnSend}
+                  onClick={handleSend}
+                  disabled={sending || !client?.email || !body.trim()}
+                >
+                  {sending
+                    ? 'Sending…'
+                    : report.status === 'sent'
+                      ? 'Send again'
+                      : 'Send to client'}
+                </button>
+                {sendMessage && <span className={styles.formMessage}>{sendMessage}</span>}
+              </div>
+            </div>
           </section>
         </>
       )}

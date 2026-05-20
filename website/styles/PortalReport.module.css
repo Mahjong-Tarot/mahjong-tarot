@@ -219,6 +219,81 @@
   color: var(--ink-3);
 }
 
+.sendBlock {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px dashed var(--rule);
+}
+
+.sendStatus {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(42, 138, 72, 0.06);
+  border-left: 3px solid rgba(42, 138, 72, 0.4);
+  border-radius: 6px;
+}
+
+.sendWarn {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 0 0 var(--space-sm);
+}
+
+.sendActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.btnSend {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 6px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.btnSend:hover {
+  background: var(--fire-600);
+  border-color: var(--fire-600);
+}
+
+.btnSend:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnSecondary {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background: var(--paper-pure);
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  border-color: var(--ink-4);
+  color: var(--ink);
+}
+
+.btnSecondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .error {
   color: #b22;
   font-family: var(--sans);

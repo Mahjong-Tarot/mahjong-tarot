@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import PortalNav from '../../../components/PortalNav';
+import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { listClients } from '../../../lib/clients';
@@ -11,20 +12,6 @@ import styles from '../../../styles/PortalClients.module.css';
 export async function getServerSideProps(ctx) {
   return requirePortalUser(ctx);
 }
-
-const SUB_LABEL = {
-  none: 'Not subscribed',
-  active: 'Subscribed',
-  lapsed: 'Lapsed',
-  cancelled: 'Cancelled',
-};
-
-const SUB_CLASS = {
-  none: 'subNone',
-  active: 'subActive',
-  lapsed: 'subLapsed',
-  cancelled: 'subCancelled',
-};
 
 export default function ClientsListPage({ profile }) {
   const [clients, setClients] = useState([]);
@@ -105,8 +92,8 @@ export default function ClientsListPage({ profile }) {
                       {c.phone && <span>{c.phone}</span>}
                       {c.birthday && <span>{c.birthday}</span>}
                     </div>
-                    <span className={`${styles.badge} ${styles[SUB_CLASS[c.subscription_status]] || ''}`}>
-                      {SUB_LABEL[c.subscription_status] || c.subscription_status}
+                    <span className={styles.statusCell}>
+                      <SubscriptionIcon status={c.subscription_status} showLabel />
                     </span>
                   </Link>
                 </li>

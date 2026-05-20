@@ -129,42 +129,11 @@
   margin-top: 2px;
 }
 
-.badge {
+.statusCell {
   grid-column: 2;
   grid-row: 1 / span 2;
   align-self: center;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--rule);
-  background: var(--paper-pure);
-  color: var(--ink-3);
   white-space: nowrap;
-}
-
-.subActive {
-  color: var(--success);
-  background: rgba(42, 138, 72, 0.08);
-  border-color: rgba(42, 138, 72, 0.3);
-}
-
-.subLapsed {
-  color: var(--fire-600);
-  background: var(--fire-50);
-  border-color: var(--fire-100);
-}
-
-.subCancelled {
-  color: var(--ink-4);
-  background: var(--rule-2);
-  border-color: var(--rule);
-}
-
-.subNone {
-  color: var(--ink-4);
 }
 
 @media (max-width: 720px) {

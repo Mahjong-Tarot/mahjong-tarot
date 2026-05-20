@@ -113,6 +113,12 @@ export default function MeetingSourceSettingsPage({ profile }) {
             connected at a time.
           </p>
 
+          <div className={styles.onHoldBanner} role="note">
+            <strong>Meeting-source automation is on hold.</strong> Admins schedule
+            sessions and paste transcripts manually for now. The connectors below
+            are kept available for future use — no action needed today.
+          </div>
+
           {error && <p className={styles.error}>{error}</p>}
 
           {loading ? (

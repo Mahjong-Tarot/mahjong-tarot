@@ -1,0 +1,32 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+}
+
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.sm .glyph { font-size: 14px; }
+.md .glyph { font-size: 18px; }
+
+.label {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+.none .glyph     { color: var(--ink-4); }
+.active .glyph   { color: var(--success, #2a8a48); }
+.lapsed .glyph   { color: var(--fire-600); }
+.cancelled .glyph { color: var(--ink-4); opacity: 0.5; }
+
+.none .label,
+.cancelled .label { color: var(--ink-4); }
+.active .label   { color: var(--success, #2a8a48); }
+.lapsed .label   { color: var(--fire-600); }

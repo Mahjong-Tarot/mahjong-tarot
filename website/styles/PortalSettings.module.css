@@ -29,6 +29,24 @@
   padding: var(--space-md) 0;
 }
 
+.onHoldBanner {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--fire-50);
+  border: 1px solid var(--fire-100);
+  border-left: 3px solid var(--fire-500);
+  border-radius: 6px;
+  margin: 0 0 var(--space-xl);
+}
+
+.onHoldBanner strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 /* ─── Source cards ─── */
 
 .list {

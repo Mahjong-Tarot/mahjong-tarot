@@ -4,13 +4,18 @@ import { useAuth } from '../lib/auth';
 import styles from './PortalNav.module.css';
 
 const LINKS = [
-  { href: '/portal',          label: 'Sessions', match: (p) => p === '/portal' },
-  { href: '/portal/clients',  label: 'Clients',  match: (p) => p.startsWith('/portal/clients') },
+  { href: '/portal',          label: 'Sessions',    match: (p) => p === '/portal' },
+  { href: '/portal/clients',  label: 'Clients',     match: (p) => p.startsWith('/portal/clients') },
+];
+
+const ADMIN_LINKS = [
+  { href: '/portal/admin/conversions', label: 'Conversions', match: (p) => p.startsWith('/portal/admin/conversions') },
 ];
 
 export default function PortalNav({ profile }) {
   const router = useRouter();
   const { signOut } = useAuth();
+  const links = profile?.role === 'admin' ? [...LINKS, ...ADMIN_LINKS] : LINKS;
 
   const handleSignOut = async () => {
     await signOut();
@@ -28,7 +33,7 @@ export default function PortalNav({ profile }) {
         </Link>
 
         <nav className={styles.links} aria-label="Portal sections">
-          {LINKS.map((link) => {
+          {links.map((link) => {
             const active = link.match(router.pathname);
             return (
               <Link

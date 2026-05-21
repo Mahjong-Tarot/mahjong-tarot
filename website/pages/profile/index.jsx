@@ -62,8 +62,7 @@ export default function ProfilePage() {
     setError('');
     setSuccess('');
     const pillars = birthday ? calculatePillars(birthday, birthTime || null) : null;
-    const payload = {
-      user_id: user.id,
+    const fields = {
       name: name || null,
       birthday: birthday || null,
       birth_time: birthTime || null,
@@ -71,12 +70,40 @@ export default function ProfilePage() {
       gender: gender || null,
       pillars,
     };
-    const { error } = await supabase
-      .from('profiles')
-      .upsert(payload, { onConflict: 'user_id' });
-    setSaving(false);
-    if (error) setError(error.message);
-    else setSuccess('Saved.');
+
+    // 15s watchdog. The supabase-js browser client has been observed
+    // to hang indefinitely on writes (see PR #237). Posting through
+    // a server-side API route avoids the hang; the watchdog protects
+    // against any future variant.
+    let timer;
+    const timeout = new Promise((_, reject) => {
+      timer = setTimeout(
+        () => reject(new Error('Saving timed out after 15s. Try refreshing the page.')),
+        15000,
+      );
+    });
+
+    try {
+      const res = await Promise.race([
+        fetch('/api/profile/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields }),
+        }),
+        timeout,
+      ]);
+      clearTimeout(timer);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to save.');
+      setSuccess('Saved.');
+    } catch (err) {
+      clearTimeout(timer);
+      // eslint-disable-next-line no-console
+      console.error('[profile] save failed', err);
+      setError(err?.message || 'Failed to save.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleSignOut = async () => {

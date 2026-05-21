@@ -1,499 +1,338 @@
-# Readings Generator — Stakeholder Spec
+# Live Consultation Prep — Stakeholder Spec
 
-**Status:** Draft v0.2 — for stakeholder review
+**Status:** Draft v0.3 — for stakeholder review
 **Date:** 2026-05-20
 **Author:** Yon (with Claude)
 **For:** Dave Hajdu, Bill Hajdu
 
-> **What changed in v0.2:** scope clarified to two distinct purposes
-> (practitioner prep tool *and* paid customer-facing reading product).
-> Pricing and Stripe integration moved from "deferred" to "in scope".
-> Customer-facing request flow added. Data model adjusted.
+> **What changed in v0.3:** scope collapsed back to a single purpose
+> — an internal prep tool for live Zoom consultations. No customer-
+> facing pages, no payments, no new reading content. Just aggregate
+> the readings the site already computes for that customer into one
+> view so Bill walks into every call armed with the data.
 
 ---
 
 ## TL;DR
 
-A new feature inside the portal that serves **two distinct purposes**:
+A new page inside the portal that gives Bill (or an admin assisting
+him) a **single dossier per client** — all the readings the site
+already produces, computed for that client's birth data, on one
+screen, ready to reference during a live Zoom Mahjong Mirror
+consultation.
 
-1. **Practitioner prep tool** — Bill creates a reading to prepare
-   for a meeting (or use mid-meeting as a structured notepad).
-   Lives entirely inside the portal. Not sent to a customer.
-2. **Paid on-demand reading product** — a customer requests and
-   pays for a written reading without booking a live session.
-   Bill (or an admin) writes it inside the same portal interface
-   and sends it by email when ready.
+- No new content types
+- No customer-facing pages
+- No payments / Stripe
+- No new third-party services
+- Reuses every reading library the site already ships
 
-Both purposes share the same data model and reading-creation UI.
-What differs is the **entry point**, **billing**, and **lifecycle**.
+Bill goes into the call armed. That's it.
 
 ---
 
 ## 1. Why we need it
 
-Today's portal works beautifully for **scheduled session → polished
-report**. But two big gaps:
+Right now, when Bill takes a live Zoom call for a Mahjong Mirror
+reading, he has to:
 
-### Gap A — Bill has no prep workspace
+1. Open the Bazi calculator separately and re-enter the client's
+   birth info
+2. Pull up the day's almanac in another browser tab
+3. Look up the client's horoscope sign manually
+4. Run the Zi Wei chart on a different tool
+5. Keep a paper notebook nearby for live notes
 
-Before a session, Bill has to dig through paper notes, generate a
-chart manually, and ad-hoc-write talking points. During a session
-he has nowhere clean to take live notes. After, his prep notes are
-lost.
+**Result**: he's flipping between five surfaces during the call,
+each requiring re-entering birth data. That's friction, error-prone,
+and unprofessional during a paid consultation.
 
-A purpose-built **prep view** — chart auto-generated from the client's
-birth data, blank notes area, references to past sessions — saves him
-time and makes every session sharper.
-
-### Gap B — No way to sell a written reading
-
-Right now, the only paid offering is a **live reading session**
-(`/book-a-reading` at $49 / $69 / $129 by duration). There's no way
-for a customer to say "I'd like Bill to write me a Bazi snapshot
-without a call" and pay for it.
-
-This is a real product category — many practitioners offer it
-because it's high-margin (no scheduled time, async delivery) and
-removes the calendar friction. Some customers prefer reading + reflect
-over a live call.
-
-Adding it requires:
-- A public **request form** with pricing
-- **Stripe Payment Link** for payment capture
-- A **work queue** for Bill / admins inside the portal
-- The same reading-creation UI as the prep tool, just delivered
-  to the customer when done
+What he needs is **one button** on the client's profile: **"Prep for
+consultation"** → opens a single page with everything the site
+already computes for that client, organised for live reference.
 
 ---
 
-## 2. The two purposes — side by side
+## 2. What the site already computes
 
-| | **Purpose A — Prep tool** | **Purpose B — Paid product** |
+The website already has libraries that produce structured readings
+from birth data. We're not adding any new readings — we're just
+surfacing the ones we have:
+
+| Library | What it produces | Currently used on |
 |---|---|---|
-| Who initiates | Bill (or admin on his behalf) | Customer (via public form) |
-| Billing | None | Stripe Payment Link, paid upfront |
-| Recipient | Existing client (the person Bill is meeting) | The paying customer (likely new — promote to client on payment) |
-| Lifecycle | `draft` → `archived` (Bill done with it) | `paid` → `in_progress` → `sent` |
-| Delivery | Never sent. Stays in portal. | Emailed when ready. SLA: 5 business days. |
-| Reference | Bill opens during prep + live meeting | Customer receives email, can request follow-up |
-| Subscription CTA | No — internal doc | Yes — every sent reading drives subscription conversion |
+| `lib/bazi.js` | Four Pillars chart, element tally, dominant element | `/profile`, `/dashboard` |
+| `lib/purpleStar.js` | Zi Wei Dou Shu chart (12 palaces, Big Limit, stars) | `/dashboard` |
+| `lib/almanac.js` | Chinese almanac for any date (lucky/unlucky activities, gods, branches) | `/almanac/[date]` |
+| `lib/horoscopes.js` | Daily horoscope by sign | `/horoscopes/[date]` |
+| `lib/three-blessings.js` | Three Blessings reading | `/dashboard/three-blessings` |
+| Find-a-good-day | Activity-based date matching | `/find-a-good-day/...` |
 
-Same underlying **reading-creation UI**. Different metadata, lifecycle, and entry point.
-
----
-
-## 3. User stories
-
-### Bill (practitioner)
-
-1. **Pre-session prep**: 5 minutes before a call with Sarah, Bill
-   opens her client profile, clicks **+ Prep for next session**,
-   gets a page with her Bazi chart + Zi Wei palaces + last 3
-   sessions' themes auto-populated. Adds bullet notes on what to
-   bring up. Saves.
-2. **Mid-session note-taking**: during the call, Bill switches
-   to meeting mode (full-screen view of his prep doc). Takes
-   live notes inside it. The chart stays visible as reference.
-3. **Paid-product work queue**: every morning, Bill sees a list
-   of paid reading requests in the portal — name, type, paid-on
-   date, due-by date. Opens one, writes it, clicks Send. Customer
-   receives the polished reading + Stripe receipt.
-
-### Admin (Dave / Yon)
-
-1. **Manage incoming requests**: see every paid reading request,
-   reassign / nudge / refund as needed.
-2. **Convert leads with samplers** (Phase 2 feature) — send free
-   short sampler readings to warm leads. Marked as `comped`.
-3. **Track revenue** — see paid-readings revenue alongside
-   subscription revenue on a dashboard (future).
-
-### Customer (recipient)
-
-1. Visits `mahjongtarot.com/readings` (public page), sees the
-   menu of available written readings + prices.
-2. Picks "Bazi snapshot — $39". Enters their birth info + email.
-3. Pays via Stripe Payment Link.
-4. Receives a confirmation email: "Bill will send your reading
-   within 5 business days."
-5. ~3 days later, receives the polished reading by email with a
-   subscription CTA.
-6. Optionally replies, books a follow-up live session, or subscribes.
+All of these run today. The prep tool pulls them together for one
+specific client + date.
 
 ---
 
-## 4. Scope
+## 3. Scope
 
 ### In scope for v1
 
-**Practitioner-side (Purpose A):**
+- New page **`/portal/clients/[id]/prep`** — the dossier view for
+  one client
+- Quick-entry button **"Prep for consultation"** on:
+  - The client profile page (`/portal/clients/[id]`)
+  - Each upcoming session row on the `/portal` dashboard
+- The page displays, for that client + chosen consultation date:
+  - **Bazi snapshot** — pillars table, element balance, dominant
+    element, current Big Limit
+  - **Zi Wei summary** — 12-palace map with the loudest stars in
+    the current Big Limit highlighted
+  - **Today's almanac** — for the meeting date — auspicious /
+    inauspicious activities, day/branch info
+  - **Daily horoscope** — for the client's zodiac sign, on the
+    meeting date
+  - **Three Blessings** — if applicable to their chart
+  - **Last 3 sessions** — date, prep notes, post-call notes (so
+    Bill remembers context from prior conversations)
+  - **Live notes area** — free-form markdown editor for jotting
+    during the call. Auto-saves every 5 seconds. Persisted on
+    the session record so Bill can come back to it.
+- **Meeting mode** toggle — collapses everything but the chart
+  references + live notes into a full-screen layout for screen-
+  sharing or split-screen during the call
+- Accessible to **astrologer** and **admin** roles only
 
-- New page **`/portal/readings`** — list of every reading the user can see (prep + paid)
-- **`/portal/readings/new`** — create a prep reading manually
-- **`/portal/readings/[id]`** — detail / editor / send
-- **Meeting mode** — full-screen distraction-free editor
-- Reading-creation supports **4 types**: Bazi snapshot · Zi Wei summary · Mahjong tile draw · Custom (free-form)
-- Auto-generated **chart data** from birth info using existing `iztro` + `lunar-typescript` libraries
-- Quick-create entry points from **client profile**, **session**, and (admin only) **conversions dashboard**
-- Astrologer + admin can both access. No member access.
+### Out of scope for v1
 
-**Customer-side (Purpose B):**
+- Any customer-facing page or email
+- Any Stripe / payment / paid reading product
+- Any AI-drafted content
+- PDF export
+- Multi-client comparison views
+- Forecasting beyond what `lib/horoscopes.js` already does
+- New reading types beyond what the site already has
 
-- New public page **`/readings`** — menu of written reading products with prices
-- New public page **`/readings/request`** — form to request + pay for a reading
-- **Stripe Payment Links** for each reading type (managed in Stripe dashboard, URL stored in env / DB)
-- On payment webhook → reading row created with `status='paid'`, customer is auto-promoted to a client record (if not already one), email confirmation sent
-- Portal users see paid readings in their dashboard with a clear "Paid · due by X" badge
-- When Bill clicks **Send to customer**, status flips to `sent`, customer gets the reading
-
-**Cross-cutting:**
-
-- Email template — reuses the existing report email template + reading-type badge + chart preview block
-- All deliveries via Resend (already wired)
-- Revenue + send timestamps logged for future reporting
-
-### Out of scope for v1 (deferred to v2)
-
-- **AI auto-drafting** of the reading body. Manual write only.
-- **PDF export.** Email-only delivery.
-- **Customer-facing reading archive** on the site (separate from email receipt).
-- **Auto-scheduled readings** ("send Sarah a birthday reading every year").
-- **Bundled pricing** (3-reading packs, etc.).
-- **Multi-language.**
-- **Sampler / comped reading flow** for admin lead-nurture (Phase 2, after v1 ships and we know what works).
-- **Refunds inside the portal** — handled via Stripe dashboard for v1.
-
----
-
-## 5. Page-by-page UX
-
-### 5.1 Customer-side
-
-#### `/readings` (public)
-
-Menu page — list of available written readings with prices.
-Same visual style as the existing `/book-a-reading` page.
-
-Each card:
-- Reading name (e.g. "Bazi Snapshot")
-- Price ($39 / $59 / $89 — TBC)
-- 2–3 sentence description ("A written interpretation of your
-  Four Pillars and current Big Limit. Delivered within 5 business
-  days.")
-- Sample length ("~600 words" / "~1200 words")
-- **Request →** button → `/readings/request?type=bazi`
-
-#### `/readings/request`
-
-A simple form:
-- Pre-filled reading type from the URL param
-- **Your name**
-- **Your email**
-- **Birthday** (date)
-- **Birth time** (optional)
-- **Birth place** (optional)
-- **Anything you'd like Bill to focus on?** (free text)
-- **Pay & request** button → redirects to the corresponding Stripe Payment Link with the request_id passed as `client_reference_id`
-
-#### `/readings/thank-you`
-
-Stripe redirect-on-success page:
-- "Thanks, Bill will send your reading within 5 business days."
-- A link to subscribe (subscription product, TBD) for ongoing readings
-- Order confirmation (reading_id + amount paid)
-
-### 5.2 Practitioner / admin side
-
-#### `/portal/readings` — list view
-
-A table of every reading the user can see, with a **Status** column
-that's the primary signal:
-
-- ✎ **Draft** — prep reading, never sent
-- 💵 **Paid · due by {date}** — customer paid, work outstanding
-- 🔄 **In progress** — Bill has started writing
-- ✉ **Sent** — delivered to recipient
-
-Columns: Title · Recipient (with subscription icon) · Type · Status · Generated/paid date · Actions.
-
-Filters at the top:
-- **Tab** — All / Prep (drafts) / Paid queue / Sent
-- **Search** by recipient name
-- **Sort** — most urgent (paid + closest due date) / recent / alphabetical
-
-Big primary actions:
-- **+ New prep reading** (any portal user)
-- **View paid queue** (jumps to filter)
-
-#### `/portal/readings/new` (prep flow)
-
-Manual create — used when Bill makes a prep doc himself.
-
-**Step 1 — Recipient**: existing client (search) or one-off person.
-**Step 2 — Reading type**: Bazi / Zi Wei / Mahjong / Custom.
-**Step 3 — System fetches chart data** from `iztro` / `lunar-typescript`
-based on birth info.
-**Step 4 — Editor**: markdown body + chart-reference panel.
-**Save draft** → status `draft`.
-
-This is the prep flow only — there's no "Send to customer" button
-unless Bill explicitly upgrades the draft to a sendable reading
-(useful in rare cases).
-
-#### `/portal/readings/[id]` (detail / editor)
-
-Same view for prep + paid readings — the **status** differs and
-the **action buttons** differ.
-
-Sections:
-1. **Header** — title + status badge + (if paid) "Paid {date} · Due {date}"
-2. **Recipient context** — client info, birth info, last sessions
-3. **Chart data** — auto-rendered tables / lists for the chosen reading type
-4. **Body editor** — markdown
-5. **Action footer**:
-   - Prep: **Save draft** · **Archive**
-   - Paid: **Save** · **Send to customer** (confirm)
-   - Sent: **Send again** (with confirm)
-
-#### Meeting mode
-
-Click **Open in meeting mode** from any reading detail page → full-viewport editor with chart sidebar. Same data, distraction-free rendering. Save button floats. Exit returns to detail page.
-
-#### `/portal/readings/paid-queue` (or filter on the list)
-
-A focused view for whoever is on duty — same table, filtered to `paid` and `in_progress`, sorted by closest due date.
+These are all good ideas. None of them are blocking the live-call
+prep need today.
 
 ---
 
-## 6. Email template
+## 4. The dossier page in detail
 
-Reuse the existing `buildEmailHtml`. Three additions for the paid-product case:
+### Route
 
-- **Reading type badge** under the title
-- **Chart preview block** above the body (optional per type)
-- **Order receipt footer** — "Order #abc123 · paid $39 on 2026-05-15"
+`/portal/clients/[id]/prep` — accepts an optional `?date=YYYY-MM-DD`
+query param. Defaults to today.
 
-CTA: **"Explore The Mahjong Mirror →"** for v1; will swap to subscribe-landing-page when that ships.
-
----
-
-## 7. Data model
-
-### Table: `public.readings`
+### Layout
 
 ```
-id                   uuid primary key
-created_at           timestamptz default now()
-updated_at           timestamptz default now()
-generated_by         uuid references auth.users(id)    -- who's writing it
-client_id            uuid nullable references clients(id) on delete set null
-adhoc_recipient      jsonb nullable                    -- { name, email, birthday, birth_time, birth_place, gender, focus }
-reading_type         text not null check (reading_type in ('bazi','ziwei','mahjong','custom'))
-purpose              text not null default 'prep' check (purpose in ('prep','paid','comped'))
-title                text
-body_markdown        text
-chart_data           jsonb
-session_id           uuid nullable references sessions(id) on delete set null
-status               text not null default 'draft'
-                       check (status in ('draft','paid','in_progress','sent','archived','refunded'))
-
--- Paid-product fields (NULL for purpose='prep')
-price_cents          int nullable
-stripe_session_id    text nullable        -- Stripe Checkout Session id
-stripe_payment_id    text nullable        -- Stripe PaymentIntent id
-paid_at              timestamptz nullable
-due_by               timestamptz nullable -- paid_at + 5 business days
-focus_request        text nullable        -- the "anything Bill should focus on?" field
-
--- Delivery
-sent_at              timestamptz nullable
-sent_to_email        text nullable
-email_message_id     text nullable
+┌─────────────────────────────────────────────────────────────┐
+│ ← Sarah Chen   |   Prep for consultation on May 23, 2026    │
+│                                          [Meeting mode →]    │
+├─────────────────────────────────────────────────────────────┤
+│ Birth: 1989-03-14 · 07:22 · San Francisco, CA · F · age 37  │
+├──────────────────────┬──────────────────────────────────────┤
+│ ░ Bazi snapshot       │ ░ Zi Wei summary                     │
+│   [4 pillars]         │   [12 palaces, current Big Limit]    │
+│   Element: Wood (5)   │   Loud stars: Hua Lu in Career…      │
+│   Big Limit: Travel   │                                       │
+├──────────────────────┴──────────────────────────────────────┤
+│ ░ Today's almanac (May 23, 2026)                              │
+│   Auspicious: marriage, travel, moving · Avoid: surgery       │
+├─────────────────────────────────────────────────────────────┤
+│ ░ Daily horoscope — Pisces                                    │
+│   "A quietly transformative day…"                             │
+├─────────────────────────────────────────────────────────────┤
+│ ░ Last sessions                                               │
+│   May 5  — "Career transition follow-up"                      │
+│   Apr 18 — "Initial NYC move conversation"                    │
+├─────────────────────────────────────────────────────────────┤
+│ ░ Live notes                                                  │
+│   [markdown editor, full-width, auto-saves]                   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**CHECK constraint**: either `client_id` OR `adhoc_recipient` is set.
+Each section is its own card. Bill can scroll through during prep.
+During the call, he toggles **Meeting mode** for a tighter layout
+focused on the chart cards + live notes.
 
-**Lifecycle by purpose**:
-- `purpose='prep'`: `draft` → `archived`
-- `purpose='paid'`: `paid` → `in_progress` → `sent` (or `refunded`)
-- `purpose='comped'`: `draft` → `sent` (no payment)
+### Date picker
 
-### Table: `public.reading_products` (small lookup table)
+A small date control in the header lets Bill change the consultation
+date (relevant for the almanac and horoscope sections). Default:
+today. If launched from a scheduled session, defaults to that
+session's date.
 
+### Live notes — persistence
+
+Bill's notes auto-save to a new column on `public.sessions`:
+**`prep_notes_live` (text, nullable)**. When launched from a
+specific session, notes go to that session row. When launched
+from a client profile without a session context, notes go to the
+**most recent upcoming session for that client** (or get
+discarded if there isn't one).
+
+Existing `prep_notes` (pre-call) and `post_call_notes` stay as
+they are.
+
+---
+
+## 5. Data model
+
+### One migration: `020_session_prep_notes.sql`
+
+```sql
+alter table public.sessions
+  add column if not exists prep_notes_live text;
 ```
-slug         text primary key   -- 'bazi-snapshot', 'ziwei-summary', etc.
-display_name text not null
-description  text
-reading_type text not null check (reading_type in ('bazi','ziwei','mahjong','custom'))
-price_cents  int not null
-stripe_payment_link_url text not null
-sample_length text                -- '~600 words'
-sla_days     int default 5
-is_active    boolean default true
-```
 
-This lets the public `/readings` page render its menu from the DB, and admins flip products on/off without a deploy.
-
-### RLS
-
-- `readings`: portal users (astrologer + admin) have full access; members get no access. End customers receive their reading by email only (no in-site read access in v1).
-- `reading_products`: public read access (used by the public menu); only admin can write.
-
-### Migrations
-
-- `020_readings.sql` — both tables + RLS in one migration
+That's it. No new tables, no new RLS policies (existing session
+policies cover this).
 
 ---
 
-## 8. Stripe integration (the new piece)
+## 6. Tech approach
 
-### Approach: Stripe Payment Links + webhook
+### Reuse existing libraries
 
-Lowest-friction option. **No Stripe Checkout custom flow, no Stripe Elements UI** in v1. Each reading product has its own pre-configured Stripe Payment Link.
+The page imports and calls:
+- `calculatePillars()` from `lib/bazi.js`
+- `tallyElements()`, `dominantElement()` from `lib/bazi.js`
+- Whatever the Zi Wei + horoscope libs expose
 
-**Flow**:
-1. Customer fills `/readings/request` form
-2. We POST to `/api/readings/intent` → creates a `readings` row with `status='paid' pending`, returns the Stripe Payment Link URL with `client_reference_id = reading.id`
-3. Customer is redirected to Stripe-hosted checkout
-4. On success, Stripe redirects to `/readings/thank-you`
-5. Stripe webhook (`checkout.session.completed`) hits `/api/webhooks/stripe` → marks the `readings` row as paid, stores `paid_at` + `stripe_*` IDs, sends customer the "Bill will send your reading within 5 business days" email
-6. Portal users see the new paid reading in their queue
+All of this runs **client-side** in the browser. No new API routes
+needed. No new server-side computation. The libraries already
+support being called directly from React components (they do today
+on `/dashboard`).
 
-**Why Payment Links (vs full Checkout)**:
-- Stripe dashboard manages all pricing changes — no deploys
-- No frontend Stripe code in our app
-- Refunds happen in Stripe dashboard
-- All compliance (3DS, EU VAT, etc.) handled by Stripe
+### Save endpoint for live notes
 
-**Required env vars**:
-- `STRIPE_WEBHOOK_SECRET` — for verifying webhook signatures
+Reuses the existing `/api/portal/sessions/update` endpoint
+(already shipping in PR #237). Just add `prep_notes_live` to the
+whitelist of allowed fields. One-line change.
 
-**No** `STRIPE_SECRET_KEY` needed in v1 — we don't talk to the Stripe API directly, only receive webhooks.
+### Files to create / modify
 
----
+| File | Change |
+|---|---|
+| `website/supabase/020_session_prep_notes.sql` | New migration |
+| `website/pages/portal/clients/[id]/prep.jsx` | New page |
+| `website/components/BaziSnapshotCard.jsx` | New — Bazi card |
+| `website/components/ZiWeiSnapshotCard.jsx` | New — Zi Wei card |
+| `website/components/AlmanacSnapshotCard.jsx` | New — almanac card |
+| `website/components/HoroscopeSnapshotCard.jsx` | New — horoscope card |
+| `website/components/RecentSessionsCard.jsx` | New — last 3 sessions list |
+| `website/components/LiveNotesEditor.jsx` | New — markdown editor + auto-save |
+| `website/styles/PortalPrep.module.css` | New |
+| `website/pages/portal/clients/[id].jsx` | Add "Prep for consultation" button |
+| `website/components/SessionsList.jsx` | Add "Prep" link on session cards |
+| `website/pages/api/portal/sessions/update.js` | Add `prep_notes_live` to whitelist |
 
-## 9. Integration with existing flows
-
-### From a client profile
-
-New **+ New reading** action next to **+ Schedule session** — launches the prep flow with that client pre-selected.
-
-### From a session
-
-Each session row gets a **+ Prep reading** button (alongside the existing **Open report**). Creates a prep reading linked via `session_id`.
-
-### From the conversions dashboard
-
-(Phase 2) — admin can comp a sampler reading from any row.
-
-### From `/book-a-reading`
-
-The existing live-session booking page gets an added "Or request a written reading →" footer linking to `/readings`. Cross-sell.
+Total: 1 migration, 9 new files, 3 modifications.
 
 ---
 
-## 10. Open questions for stakeholders
-
-These need answers before final v1 lock:
-
-1. **Pricing** — what should the written readings cost?
-   - Default proposal: **Bazi $39 / Zi Wei $59 / Mahjong $49 / Custom $89**.
-   - Aim is "less than a live session" so customers see the trade-off (live = personal but pricier; written = cheaper but async).
-2. **SLA** — 5 business days reasonable? Or shorter/longer?
-   - Default proposal: **5 business days**. Conservative — Bill can over-deliver.
-3. **Refund policy** — what triggers a refund?
-   - Default proposal: full refund if not delivered within 10 business days (we missed our SLA badly), 50% if delivered late but completed. No-questions-asked refund within 24 hrs of order.
-4. **One-off vs client record** — when a customer pays for a reading and they're not already a client, do we **auto-create a client record** for them?
-   - Default proposal: **yes** — auto-promote on payment. Saves Bill data-entry. They become a `subscription_status='none'` client.
-5. **Free sampler tier** — should we offer ONE free short reading as a conversion bait (e.g. "Free 1-card Mahjong draw")?
-   - Default proposal: **no in v1** — keep it simple and paid-only first. Add comped/free flow in v2 if data supports it.
-6. **AI assist re-visit** — is it worth using a free-tier LLM (Gemini Flash) to draft the reading body for Bill's review?
-   - Default proposal: **no in v1** — manual writing. Revisit after we see real volume + Bill's actual time per reading.
-7. **Stripe account ownership** — whose Stripe account holds the payment links and receives payouts? Bill's existing one? A new one? Mahjong Tarot business entity?
-   - **This is the only blocking question** — can't ship the paid flow until this is decided + payment links exist.
-
----
-
-## 11. Build plan (eng estimate)
+## 7. Build plan (eng estimate)
 
 | PR | Scope | Estimate |
 |---|---|---|
-| 1 | Migration `020_readings.sql` (both tables, RLS) + `lib/readings.js` library helpers + API routes `/api/portal/readings/update`, `/.../send` | ~2 hrs |
-| 2 | `/portal/readings` list view + nav link (+ Prep filter) | ~1.5 hrs |
-| 3 | `/portal/readings/new` prep flow + `/portal/readings/[id]` detail/editor + meeting mode | ~3.5 hrs |
-| 4 | Quick-create hooks from client profile + session row + nav | ~1 hr |
-| 5 | Public `/readings` menu + `/readings/request` form + `/api/readings/intent` | ~2 hrs |
-| 6 | Stripe webhook handler (`/api/webhooks/stripe`) + paid-queue UI + "Send to customer" send flow | ~2.5 hrs |
-| 7 | Seed `reading_products` rows + Stripe Payment Links created in Stripe dashboard + email confirmation templates | ~1 hr (mostly ops) |
+| 1 | Migration + `prep_notes_live` whitelist + page scaffold (`/portal/clients/[id]/prep`) with empty cards | ~1 hr |
+| 2 | BaziSnapshotCard + ZiWeiSnapshotCard (reusing existing libs) | ~1.5 hr |
+| 3 | AlmanacSnapshotCard + HoroscopeSnapshotCard + date picker | ~1.5 hr |
+| 4 | RecentSessionsCard + LiveNotesEditor with auto-save | ~1.5 hr |
+| 5 | Quick-entry buttons from client profile + session cards + meeting mode | ~1 hr |
 
-**Total v1: ~13–14 hours of focused engineering**, splittable across 7 PRs.
-
-PRs 1–4 are the practitioner prep tool. **That's the half we could ship first** while Stripe ownership (Question 7) gets resolved. PRs 5–7 are the paid product.
+**Total: ~6–7 hours**. Splittable across 5 PRs. Each PR ships an
+incrementally useful subset, so Bill can start using it after PR 1
+even with empty cards.
 
 ---
 
-## 12. Success criteria
+## 8. Open questions for stakeholders
 
-### Practitioner prep tool (after PR 4 ships)
+These need answers, but none of them are blocking — sensible
+defaults exist for all:
 
-- Bill creates a prep reading for **at least 1 in 3 upcoming sessions** within the first 2 weeks
-- Bill uses **meeting mode during at least one live session** in the first week
-
-### Paid reading product (after PR 7 ships)
-
-- **At least 2 paid reading orders per week** within first month
-- Average **time from paid to sent**: under 3 business days (so we beat our 5-day SLA)
-- **At least 25% of paid readings result in a follow-up action** (booking, subscription, reply) within 30 days
-- **Zero refund-for-SLA-miss events** in first quarter
-
-Track all via the existing `readings.status` + timestamps. No new analytics infrastructure needed.
+1. **Default date for the dossier** — should it be today's date,
+   or the date of the next upcoming session for that client?
+   - Default proposal: **upcoming session's date** if any
+     exists, otherwise today.
+2. **Which Zi Wei detail to surface** — full 12-palace chart is
+   visually busy. Show all 12, or just the 3–4 highlighted as
+   "loud" for the current Big Limit?
+   - Default proposal: **show all 12 in a small grid**,
+     visually highlight the loud ones.
+3. **Live notes during meeting mode** — should the auto-save
+   interval be tighter (1s) for live calls so nothing is ever
+   lost?
+   - Default proposal: **5s auto-save** is fine for most cases;
+     add a manual **Save** button as a backup.
+4. **Three Blessings card** — always show, or only when chart
+   has applicable signals?
+   - Default proposal: **always show** — pulls visual weight
+     even when there's not a strong signal.
+5. **Mobile view** — does Bill ever do this on a phone (e.g.
+   prepping in transit before opening the laptop)? Or
+   desktop-only?
+   - Default proposal: **desktop-primary**, mobile is best-effort
+     readable but no special layout work.
 
 ---
 
-## 13. Risks / mitigations
+## 9. Success criteria
+
+After v1 ships:
+
+- Bill opens **the prep page for at least one of every two upcoming
+  sessions** in the first two weeks
+- Bill uses **meeting mode at least once per week**
+- **Zero re-entry of birth data** across multiple tools during a
+  live session (this is the qualitative measure — ask Bill in
+  retrospective)
+
+---
+
+## 10. Risks / mitigations
 
 | Risk | Mitigation |
 |---|---|
-| Bill doesn't keep up with the paid queue, SLA breaches accumulate | Make `paid` readings impossible to miss — they sit at the top of `/portal` until handled. Admin can reassign or refund easily. |
-| Bill's reading style on paid product feels rushed vs his live work | Default tier at $39 sets a price-appropriate expectation; we can encourage Bill to do longer pieces by raising the price after volume proves out. |
-| Customers complain about wait time | Set conservative SLA (5 days), over-communicate (confirmation email + "Bill is working on it" mid-flight email if it's been 3+ days). |
-| Stripe fees eat into the small price points | At $39 with ~3% Stripe fees = ~$1.20 per reading lost. Acceptable. |
-| Spam / fake orders | Stripe Payment Link inherently filters this (must complete payment). |
-| Refund disputes / chargebacks | Stripe handles via dashboard. Low risk at this price point and volume. |
-| Customers paying for a reading expect a live call | Clear product copy on `/readings`: "written reading, no call included. For live readings see /book-a-reading." |
+| Bill prefers his existing paper / scattered-tab workflow | Make the prep page genuinely faster + show real value. If after 2 weeks he's not using it, retire it cheaply. |
+| Reading libraries don't output exactly the data the page needs | They already power the public site; we're just rearranging existing output. Low risk. |
+| Auto-save during a live call fights Bill's typing | Use idle-debounce (only save once typing pauses 1s), not interval-based. |
+| Bill's clients ask for a copy of the chart afterwards | Out of scope for v1 — but trivially addable later (PDF export, or "email this dossier" button). |
 
 ---
 
-## 14. What this feature does NOT change
+## 11. What this feature does NOT change
 
-- The **scheduled session → report** flow stays exactly as it is today.
-- Bill's **transcript paste + Claude.ai Project** workflow stays.
-- The **subscription product** (Stripe subscription, separate from this) is its own thing — readings can be a great cross-sell into a subscription, but we don't bundle them in v1.
-- No changes to the **`requirePortalUser` / `requireAdmin`** auth model.
-- No new external services beyond Stripe (which is the one new dependency).
+- The **scheduled session → transcript paste → polished report → send email** flow stays exactly as it is.
+- No new customer-facing pages, no public site changes.
+- No new external services, no new paid APIs, no Stripe.
+- No changes to billing, subscriptions, or pricing.
 
 ---
 
-## 15. Phasing recommendation
+## 12. Future ideas (explicitly out of v1)
 
-Suggest splitting v1 into **two ship dates** to de-risk the Stripe piece:
+Captured here so they aren't lost — none committed:
 
-### v1a — Practitioner prep tool (PRs 1–4)
-
-- 100% engineering, no external dependencies
-- Bill gets value immediately
-- ~7–8 hours of work
-- **Ship within 1 week of spec sign-off**
-
-### v1b — Paid reading product (PRs 5–7)
-
-- Requires Stripe account setup (Question 7) + Stripe Payment Links created
-- Requires public-page design pass
-- ~6 hours of engineering after the Stripe ops piece is done
-- **Ship as soon as Stripe is live + we've done a test purchase**
+- **Email the dossier to the client** before / after the call as a
+  professional artifact
+- **PDF export** of the dossier
+- **Multi-client comparison** (compatibility readings, family
+  readings)
+- **Customer-facing version** of this dossier as a paid product
+  (this is the v0.2 "paid reading" spec — preserved in git
+  history if we want to revisit)
+- **AI-assisted talking points** generated from the chart data
+- **Voice-to-text live note capture** during the Zoom call
+- **Auto-templates** Bill writes himself — preset prompt formats
 
 ---
 
 **Sign-off requested from:** Dave Hajdu + Bill Hajdu
 
-**Next step after sign-off**: I draft `IMPLEMENTATION-PLAN.md` in this folder, map each PR to specific files / migrations / API contracts, then start with PR 1 (practitioner prep tool).
+**Next step after sign-off**: I draft a small file-level plan and
+ship PR 1 (migration + page scaffold). Bill can start using even
+the skeletal version immediately while I add cards in subsequent PRs.

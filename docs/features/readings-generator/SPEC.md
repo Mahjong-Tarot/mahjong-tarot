@@ -1,13 +1,14 @@
 # Quick Reading Email Tool — Spec
 
-**Status:** Draft v0.4 — for stakeholder sign-off
+**Status:** v0.5 — locked, ready to build
 **Date:** 2026-05-20
 **Author:** Yon (with Claude)
 **For:** Dave Hajdu, Bill Hajdu
 
-> **What changed in v0.4:** scope cut to the bone per Bill's
-> direct request. Just a form + an email button. No client
-> picker, no notes editor, no persistence, no public pages.
+> **What changed in v0.5:** the two micro-decisions are answered:
+> Chinese zodiac is primary (Western shown alongside),
+> astrologer can override the consultation date (defaults to today).
+> Spec is now locked for build.
 
 ---
 
@@ -33,6 +34,7 @@ One page. One form. Two buttons.
 │ Time of birth        [ 07:22  ]  (optional)         │
 │ Place of birth       [ San Francisco, CA  ] (opt)   │
 │ Gender               [ Female ▾ ]  (optional)       │
+│ Consultation date    [ 2026-05-20 ]  (default today)│
 ├────────────────────────────────────────────────────┤
 │  [ Email to me ]    [ Email to another address ]    │
 └────────────────────────────────────────────────────┘
@@ -54,10 +56,11 @@ date, rendered as one HTML email:
   element (from `lib/bazi.js`)
 - **Zi Wei summary** — 12-palace chart (from `lib/purpleStar.js`)
 - **Three Blessings** — if applicable (from `lib/three-blessings.js`)
-- **Today's almanac** — auspicious / inauspicious activities for
-  today's date (from `lib/almanac.js`)
-- **Today's horoscope** — for the matching zodiac sign (from
-  `lib/horoscopes.js`)
+- **Almanac for the consultation date** — auspicious / inauspicious
+  activities (from `lib/almanac.js`)
+- **Daily horoscope** — **Chinese zodiac (primary)** + Western
+  zodiac, both shown side-by-side, for the consultation date
+  (from `lib/horoscopes.js`)
 
 All in one email, branded the same as the existing Mahjong Tarot
 report emails. Bill reads it in his inbox, references during a
@@ -151,19 +154,13 @@ Ships same day as sign-off.
 
 ---
 
-## 7. Open questions
+## 7. Locked decisions
 
-None blocking. Two micro-decisions worth flagging:
-
-1. **What zodiac sign for the horoscope** — Western (e.g. Pisces
-   for March 14) or Chinese (year animal)?
-   - Default: **both, in separate sub-cards**. The libraries
-     can produce both.
-2. **Date used for almanac + horoscope** — always today, or
-   accept a custom "consultation date" field?
-   - Default: **always today** for v1. If Bill wants to prep for
-     a future date, he runs the form on that date. Add a date
-     field later if it becomes annoying.
+1. **Horoscope**: show **Chinese zodiac as primary, Western
+   alongside**. Both in the email.
+2. **Consultation date**: form defaults to **today**, but
+   astrologer can change it. Almanac and horoscope sections
+   recompute for the chosen date.
 
 ---
 

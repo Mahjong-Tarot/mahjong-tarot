@@ -1,393 +1,499 @@
 # Readings Generator — Stakeholder Spec
 
-**Status:** Draft v0.1 — for stakeholder review
+**Status:** Draft v0.2 — for stakeholder review
 **Date:** 2026-05-20
 **Author:** Yon (with Claude)
 **For:** Dave Hajdu, Bill Hajdu
+
+> **What changed in v0.2:** scope clarified to two distinct purposes
+> (practitioner prep tool *and* paid customer-facing reading product).
+> Pricing and Stripe integration moved from "deferred" to "in scope".
+> Customer-facing request flow added. Data model adjusted.
 
 ---
 
 ## TL;DR
 
-A new page inside the portal where Bill or an admin can produce a reading
-for **any customer** — existing client or one-off lead — and either keep
-it on screen during a live call or email it directly to the recipient.
+A new feature inside the portal that serves **two distinct purposes**:
 
-Today's portal flow assumes a scheduled session → recording → report.
-This new feature unblocks every reading that *doesn't* fit that
-shape: live calls Bill takes off-the-cuff, sampler readings for
-prospects, gift readings for existing subscribers, ad-hoc requests
-that come in by DM or email.
+1. **Practitioner prep tool** — Bill creates a reading to prepare
+   for a meeting (or use mid-meeting as a structured notepad).
+   Lives entirely inside the portal. Not sent to a customer.
+2. **Paid on-demand reading product** — a customer requests and
+   pays for a written reading without booking a live session.
+   Bill (or an admin) writes it inside the same portal interface
+   and sends it by email when ready.
+
+Both purposes share the same data model and reading-creation UI.
+What differs is the **entry point**, **billing**, and **lifecycle**.
 
 ---
 
 ## 1. Why we need it
 
-The current portal works beautifully for the "scheduled-session → polished
-report" flow. But practice realities don't always fit:
+Today's portal works beautifully for **scheduled session → polished
+report**. But two big gaps:
 
-1. **Bill takes a lot of calls off-the-cuff.** A friend, a referral, a
-   curious DM — no session is scheduled, but Bill still wants a chart
-   + structured talking points in front of him.
-2. **Admins want a conversion lever that doesn't require Bill's calendar.**
-   A short "sampler" reading sent to a warm lead is a high-leverage way
-   to turn someone into a paying client. We can't ask Bill to record
-   a session for every lead.
-3. **Existing subscribers deserve delight.** A birthday reading, a
-   year-ahead snapshot at New Year, a "what's this week look like" —
-   small, frequent, automated-ish touches that strengthen the
-   subscription.
-4. **The system already has the charting libraries** (`iztro` for Zi Wei
-   Dou Shu, `lunar-typescript` for Bazi/Four Pillars). They're powering
-   the public horoscope pages. Reusing them for practitioner-facing
-   readings is essentially free.
+### Gap A — Bill has no prep workspace
+
+Before a session, Bill has to dig through paper notes, generate a
+chart manually, and ad-hoc-write talking points. During a session
+he has nowhere clean to take live notes. After, his prep notes are
+lost.
+
+A purpose-built **prep view** — chart auto-generated from the client's
+birth data, blank notes area, references to past sessions — saves him
+time and makes every session sharper.
+
+### Gap B — No way to sell a written reading
+
+Right now, the only paid offering is a **live reading session**
+(`/book-a-reading` at $49 / $69 / $129 by duration). There's no way
+for a customer to say "I'd like Bill to write me a Bazi snapshot
+without a call" and pay for it.
+
+This is a real product category — many practitioners offer it
+because it's high-margin (no scheduled time, async delivery) and
+removes the calendar friction. Some customers prefer reading + reflect
+over a live call.
+
+Adding it requires:
+- A public **request form** with pricing
+- **Stripe Payment Link** for payment capture
+- A **work queue** for Bill / admins inside the portal
+- The same reading-creation UI as the prep tool, just delivered
+  to the customer when done
 
 ---
 
-## 2. User stories
+## 2. The two purposes — side by side
+
+| | **Purpose A — Prep tool** | **Purpose B — Paid product** |
+|---|---|---|
+| Who initiates | Bill (or admin on his behalf) | Customer (via public form) |
+| Billing | None | Stripe Payment Link, paid upfront |
+| Recipient | Existing client (the person Bill is meeting) | The paying customer (likely new — promote to client on payment) |
+| Lifecycle | `draft` → `archived` (Bill done with it) | `paid` → `in_progress` → `sent` |
+| Delivery | Never sent. Stays in portal. | Emailed when ready. SLA: 5 business days. |
+| Reference | Bill opens during prep + live meeting | Customer receives email, can request follow-up |
+| Subscription CTA | No — internal doc | Yes — every sent reading drives subscription conversion |
+
+Same underlying **reading-creation UI**. Different metadata, lifecycle, and entry point.
+
+---
+
+## 3. User stories
 
 ### Bill (practitioner)
 
-1. *Mid-call*, Bill wants to pull up an existing client's chart, see
-   their current Big Limit, and have a clean place to jot live notes.
-2. *Pre-call*, Bill wants 5 minutes of structured prep — what's
-   coming up in this client's Bazi this year, what's loud in their
-   Zi Wei right now, last 3 sessions' themes.
-3. *Post-call*, when a person reaches out wanting a quick reading
-   without scheduling, Bill wants to put their birth info in,
-   write a short reading, send it, done.
+1. **Pre-session prep**: 5 minutes before a call with Sarah, Bill
+   opens her client profile, clicks **+ Prep for next session**,
+   gets a page with her Bazi chart + Zi Wei palaces + last 3
+   sessions' themes auto-populated. Adds bullet notes on what to
+   bring up. Saves.
+2. **Mid-session note-taking**: during the call, Bill switches
+   to meeting mode (full-screen view of his prep doc). Takes
+   live notes inside it. The chart stays visible as reference.
+3. **Paid-product work queue**: every morning, Bill sees a list
+   of paid reading requests in the portal — name, type, paid-on
+   date, due-by date. Opens one, writes it, clicks Send. Customer
+   receives the polished reading + Stripe receipt.
 
-### Dave / Yon (operators)
+### Admin (Dave / Yon)
 
-1. As a follow-up to a "warm lead" identified in the Conversions
-   dashboard, send the lead a free sampler reading — 200–400 words,
-   chart-based — to convert them.
-2. For an active subscriber, send a "year-ahead" reading on their
-   birthday or at lunar new year — relationship maintenance.
-3. Track which readings have been sent to whom, when, and whether
-   they led to a session or subscription.
+1. **Manage incoming requests**: see every paid reading request,
+   reassign / nudge / refund as needed.
+2. **Convert leads with samplers** (Phase 2 feature) — send free
+   short sampler readings to warm leads. Marked as `comped`.
+3. **Track revenue** — see paid-readings revenue alongside
+   subscription revenue on a dashboard (future).
 
 ### Customer (recipient)
 
-1. Receives a beautifully-formatted email reading.
-2. Sees a clear next step at the bottom — book a full session, or
-   subscribe for ongoing readings.
+1. Visits `mahjongtarot.com/readings` (public page), sees the
+   menu of available written readings + prices.
+2. Picks "Bazi snapshot — $39". Enters their birth info + email.
+3. Pays via Stripe Payment Link.
+4. Receives a confirmation email: "Bill will send your reading
+   within 5 business days."
+5. ~3 days later, receives the polished reading by email with a
+   subscription CTA.
+6. Optionally replies, books a follow-up live session, or subscribes.
 
 ---
 
-## 3. Scope
+## 4. Scope
 
 ### In scope for v1
 
-- New page **`/portal/readings`** (list of past readings) and
-  **`/portal/readings/new`** (create a reading)
+**Practitioner-side (Purpose A):**
+
+- New page **`/portal/readings`** — list of every reading the user can see (prep + paid)
+- **`/portal/readings/new`** — create a prep reading manually
+- **`/portal/readings/[id]`** — detail / editor / send
+- **Meeting mode** — full-screen distraction-free editor
+- Reading-creation supports **4 types**: Bazi snapshot · Zi Wei summary · Mahjong tile draw · Custom (free-form)
+- Auto-generated **chart data** from birth info using existing `iztro` + `lunar-typescript` libraries
+- Quick-create entry points from **client profile**, **session**, and (admin only) **conversions dashboard**
 - Astrologer + admin can both access. No member access.
-- Recipient picker: either an **existing client** (search the
-  clients table) **or** a **one-off person** (enter name +
-  email inline, no client record created unless Bill chooses)
-- **Reading types** (start with 4, easy to add more later):
-  - **Bazi snapshot** — Four Pillars from birth data, current
-    Big Limit, dominant element, year-ahead notes
-  - **Zi Wei summary** — current Big Limit palaces with the
-    loudest signals from `iztro`
-  - **Mahjong tile draw** — random 3- or 6-tile pull with
-    interpretive notes (Bill's signature offering)
-  - **Custom reading** — free-form. No template, just a text
-    editor. Useful when the standard types don't fit.
-- **Two delivery modes** per reading:
-  - **In-meeting view** — clean, on-screen, edit-as-you-go,
-    persisted in case the tab crashes
-  - **Send by email** — same beautiful template as session
-    reports, with subscription CTA at the bottom
-- **Storage**: every generated reading saved as a row in a new
-  `readings` table (distinct from `reports`, which stays
-  session-bound). Searchable + filterable per client.
-- **Provenance**: every reading shows who generated it, when, and
-  whether it was sent.
 
-### Out of scope for v1 (deferred)
+**Customer-side (Purpose B):**
 
-- **AI auto-drafting** of the reading body. Bill drafts in his
-  Claude.ai Project (Max-plan subscription), pastes in. Same
-  policy as the session-report flow.
-- **PDF export.** Email-only delivery in v1.
-- **Customer-facing reading archive.** Customers receive readings
-  by email only.
-- **Stripe payments.** A reading is free or part of a subscription
-  — no per-reading paywall yet.
-- **Auto-scheduled readings.** No "send Sarah a year-ahead on her
-  birthday every year" yet. v2.
-- **Multi-language.** English-only for v1.
-- **A/B testing the CTA.** v2 when we have volume.
+- New public page **`/readings`** — menu of written reading products with prices
+- New public page **`/readings/request`** — form to request + pay for a reading
+- **Stripe Payment Links** for each reading type (managed in Stripe dashboard, URL stored in env / DB)
+- On payment webhook → reading row created with `status='paid'`, customer is auto-promoted to a client record (if not already one), email confirmation sent
+- Portal users see paid readings in their dashboard with a clear "Paid · due by X" badge
+- When Bill clicks **Send to customer**, status flips to `sent`, customer gets the reading
+
+**Cross-cutting:**
+
+- Email template — reuses the existing report email template + reading-type badge + chart preview block
+- All deliveries via Resend (already wired)
+- Revenue + send timestamps logged for future reporting
+
+### Out of scope for v1 (deferred to v2)
+
+- **AI auto-drafting** of the reading body. Manual write only.
+- **PDF export.** Email-only delivery.
+- **Customer-facing reading archive** on the site (separate from email receipt).
+- **Auto-scheduled readings** ("send Sarah a birthday reading every year").
+- **Bundled pricing** (3-reading packs, etc.).
+- **Multi-language.**
+- **Sampler / comped reading flow** for admin lead-nurture (Phase 2, after v1 ships and we know what works).
+- **Refunds inside the portal** — handled via Stripe dashboard for v1.
 
 ---
 
-## 4. Page-by-page UX
+## 5. Page-by-page UX
 
-### 4.1 `/portal/readings` — list view
+### 5.1 Customer-side
 
-Sits in the portal nav between **Clients** and (admin-only) **Conversions**.
+#### `/readings` (public)
 
-A simple table of every reading the user can see, with:
+Menu page — list of available written readings with prices.
+Same visual style as the existing `/book-a-reading` page.
 
-| Column | Meaning |
-|---|---|
-| Title | Short title — defaults to "{type} for {recipient}" |
-| Recipient | Client name (with subscription icon) or ad-hoc email |
-| Type | Bazi / Zi Wei / Mahjong / Custom |
-| Generated | When + by whom |
-| Status | Draft / Sent (with sent date if sent) |
-| Actions | Open · Send · Duplicate · Delete |
+Each card:
+- Reading name (e.g. "Bazi Snapshot")
+- Price ($39 / $59 / $89 — TBC)
+- 2–3 sentence description ("A written interpretation of your
+  Four Pillars and current Big Limit. Delivered within 5 business
+  days.")
+- Sample length ("~600 words" / "~1200 words")
+- **Request →** button → `/readings/request?type=bazi`
 
-Filters: status (Draft / Sent / All), type, recipient (search).
-Sort: most recent first by default.
+#### `/readings/request`
 
-Big primary **+ New reading** button at the top right.
+A simple form:
+- Pre-filled reading type from the URL param
+- **Your name**
+- **Your email**
+- **Birthday** (date)
+- **Birth time** (optional)
+- **Birth place** (optional)
+- **Anything you'd like Bill to focus on?** (free text)
+- **Pay & request** button → redirects to the corresponding Stripe Payment Link with the request_id passed as `client_reference_id`
 
-### 4.2 `/portal/readings/new` — create flow
+#### `/readings/thank-you`
 
-**Step 1 — Who is this for?**
+Stripe redirect-on-success page:
+- "Thanks, Bill will send your reading within 5 business days."
+- A link to subscribe (subscription product, TBD) for ongoing readings
+- Order confirmation (reading_id + amount paid)
 
-A single picker with two modes:
+### 5.2 Practitioner / admin side
 
-- **Existing client** — search-as-you-type field that resolves to
-  clients in the `clients` table. Selecting one prefills name,
-  email, birthday, birth_time, birth_place, gender.
-- **One-off person** — toggle to manual entry. Enter name (required),
-  email (optional unless sending), birthday, birth_time, birth_place,
-  gender. Bill can later promote the one-off into a real client
-  with a single click ("Save as client").
+#### `/portal/readings` — list view
 
-**Step 2 — Reading type**
+A table of every reading the user can see, with a **Status** column
+that's the primary signal:
 
-A radio-card selector:
+- ✎ **Draft** — prep reading, never sent
+- 💵 **Paid · due by {date}** — customer paid, work outstanding
+- 🔄 **In progress** — Bill has started writing
+- ✉ **Sent** — delivered to recipient
 
-- ◐ **Bazi snapshot** — 4 pillars, current Big Limit, element
-  balance, year-ahead. Birth date required, time recommended.
-- ☯ **Zi Wei summary** — palace map, loud signals in current Big
-  Limit. Requires birth date + time + place.
-- 🀙 **Mahjong tile draw** — pick spread (3 tiles / 6 tiles /
-  custom), system draws random tiles, Bill writes the reading.
-  No birth data required.
-- ✎ **Custom reading** — free-form text. No template, no auto-
-  generated chart data. Use when the situation doesn't fit a
-  standard type.
+Columns: Title · Recipient (with subscription icon) · Type · Status · Generated/paid date · Actions.
 
-**Step 3 — Generate**
+Filters at the top:
+- **Tab** — All / Prep (drafts) / Paid queue / Sent
+- **Search** by recipient name
+- **Sort** — most urgent (paid + closest due date) / recent / alphabetical
 
-System computes the structured chart data using the existing libs
-(`iztro`, `lunar-typescript`) and shows it inline so Bill can see
-what he's working with. The reading body itself stays empty —
-Bill fills it in.
+Big primary actions:
+- **+ New prep reading** (any portal user)
+- **View paid queue** (jumps to filter)
 
-**Step 4 — Write the reading**
+#### `/portal/readings/new` (prep flow)
 
-A markdown editor (same component as the report-page body field).
-Left side: editor. Right side: a small "context" panel showing
-the structured chart data so Bill can reference while writing.
+Manual create — used when Bill makes a prep doc himself.
 
-Three buttons at the bottom:
+**Step 1 — Recipient**: existing client (search) or one-off person.
+**Step 2 — Reading type**: Bazi / Zi Wei / Mahjong / Custom.
+**Step 3 — System fetches chart data** from `iztro` / `lunar-typescript`
+based on birth info.
+**Step 4 — Editor**: markdown body + chart-reference panel.
+**Save draft** → status `draft`.
 
-- **Save draft** — persists to `readings` table with status='draft'
-- **Open in meeting mode** — full-screen, distraction-free editor
-  for live calls
-- **Send to recipient** — confirm dialog → email goes via Resend
-  using the same template as session reports, status='sent'
+This is the prep flow only — there's no "Send to customer" button
+unless Bill explicitly upgrades the draft to a sendable reading
+(useful in rare cases).
 
-### 4.3 `/portal/readings/[id]` — reading detail
+#### `/portal/readings/[id]` (detail / editor)
 
-Looks almost identical to `/portal/reports/[id]` today. Sections:
+Same view for prep + paid readings — the **status** differs and
+the **action buttons** differ.
 
-1. Recipient context (read-only)
-2. Chart data (if applicable to the reading type)
-3. Reading body (markdown editor)
-4. Send block (Send / Send again, sent metadata)
+Sections:
+1. **Header** — title + status badge + (if paid) "Paid {date} · Due {date}"
+2. **Recipient context** — client info, birth info, last sessions
+3. **Chart data** — auto-rendered tables / lists for the chosen reading type
+4. **Body editor** — markdown
+5. **Action footer**:
+   - Prep: **Save draft** · **Archive**
+   - Paid: **Save** · **Send to customer** (confirm)
+   - Sent: **Send again** (with confirm)
 
-A small "← Back to readings" link in the header.
+#### Meeting mode
 
-### 4.4 "Meeting mode"
+Click **Open in meeting mode** from any reading detail page → full-viewport editor with chart sidebar. Same data, distraction-free rendering. Save button floats. Exit returns to detail page.
 
-Full-viewport editor — no nav, no margins, just the markdown
-text area + a tiny floating toolbar with **Save** and **Exit
-meeting mode**. Use case: Bill on a video call, screen-sharing
-this view, taking notes live while talking.
+#### `/portal/readings/paid-queue` (or filter on the list)
 
-The same data, just a different rendering of the same row.
-
----
-
-## 5. Email template
-
-Reuse the existing `buildEmailHtml` from
-`pages/api/portal/reports/send.js`. Two small additions:
-
-- **Reading type badge** under the title — "Bazi snapshot",
-  "Zi Wei summary", etc.
-- **Chart preview block** (optional) above the reading body for
-  Bazi / Zi Wei readings — small visual table of pillars or
-  palaces. Skip for Mahjong / Custom.
-
-CTA stays the same: "Explore The Mahjong Mirror →" linking to
-`mahjongtarot.com/the-mahjong-mirror` (will swap to the
-subscribe landing page when that ships in v2).
+A focused view for whoever is on duty — same table, filtered to `paid` and `in_progress`, sorted by closest due date.
 
 ---
 
-## 6. Data model
+## 6. Email template
 
-### New table: `public.readings`
+Reuse the existing `buildEmailHtml`. Three additions for the paid-product case:
+
+- **Reading type badge** under the title
+- **Chart preview block** above the body (optional per type)
+- **Order receipt footer** — "Order #abc123 · paid $39 on 2026-05-15"
+
+CTA: **"Explore The Mahjong Mirror →"** for v1; will swap to subscribe-landing-page when that ships.
+
+---
+
+## 7. Data model
+
+### Table: `public.readings`
 
 ```
 id                   uuid primary key
 created_at           timestamptz default now()
 updated_at           timestamptz default now()
-generated_by         uuid references auth.users(id)
-client_id            uuid nullable, references clients(id) on delete set null
-adhoc_recipient      jsonb nullable        — { name, email, birthday, birth_time, birth_place, gender }
-reading_type         text not null         — 'bazi' | 'ziwei' | 'mahjong' | 'custom'
+generated_by         uuid references auth.users(id)    -- who's writing it
+client_id            uuid nullable references clients(id) on delete set null
+adhoc_recipient      jsonb nullable                    -- { name, email, birthday, birth_time, birth_place, gender, focus }
+reading_type         text not null check (reading_type in ('bazi','ziwei','mahjong','custom'))
+purpose              text not null default 'prep' check (purpose in ('prep','paid','comped'))
 title                text
 body_markdown        text
-chart_data           jsonb                  — structured output from iztro/lunar-typescript
-session_id           uuid nullable, references sessions(id) on delete set null
-status               text not null default 'draft'   — 'draft' | 'sent'
+chart_data           jsonb
+session_id           uuid nullable references sessions(id) on delete set null
+status               text not null default 'draft'
+                       check (status in ('draft','paid','in_progress','sent','archived','refunded'))
+
+-- Paid-product fields (NULL for purpose='prep')
+price_cents          int nullable
+stripe_session_id    text nullable        -- Stripe Checkout Session id
+stripe_payment_id    text nullable        -- Stripe PaymentIntent id
+paid_at              timestamptz nullable
+due_by               timestamptz nullable -- paid_at + 5 business days
+focus_request        text nullable        -- the "anything Bill should focus on?" field
+
+-- Delivery
 sent_at              timestamptz nullable
 sent_to_email        text nullable
 email_message_id     text nullable
 ```
 
-**Either** `client_id` **or** `adhoc_recipient` must be set (CHECK
-constraint). `session_id` is optional and links a reading to a
-specific session if it was used during one.
+**CHECK constraint**: either `client_id` OR `adhoc_recipient` is set.
+
+**Lifecycle by purpose**:
+- `purpose='prep'`: `draft` → `archived`
+- `purpose='paid'`: `paid` → `in_progress` → `sent` (or `refunded`)
+- `purpose='comped'`: `draft` → `sent` (no payment)
+
+### Table: `public.reading_products` (small lookup table)
+
+```
+slug         text primary key   -- 'bazi-snapshot', 'ziwei-summary', etc.
+display_name text not null
+description  text
+reading_type text not null check (reading_type in ('bazi','ziwei','mahjong','custom'))
+price_cents  int not null
+stripe_payment_link_url text not null
+sample_length text                -- '~600 words'
+sla_days     int default 5
+is_active    boolean default true
+```
+
+This lets the public `/readings` page render its menu from the DB, and admins flip products on/off without a deploy.
 
 ### RLS
 
-Mirror the `reports` policy: portal users (astrologer + admin)
-have full access. Members get no access.
+- `readings`: portal users (astrologer + admin) have full access; members get no access. End customers receive their reading by email only (no in-site read access in v1).
+- `reading_products`: public read access (used by the public menu); only admin can write.
 
-### Migration
+### Migrations
 
-`020_readings.sql` — single migration, additive only.
+- `020_readings.sql` — both tables + RLS in one migration
 
 ---
 
-## 7. Integration with existing flows
+## 8. Stripe integration (the new piece)
+
+### Approach: Stripe Payment Links + webhook
+
+Lowest-friction option. **No Stripe Checkout custom flow, no Stripe Elements UI** in v1. Each reading product has its own pre-configured Stripe Payment Link.
+
+**Flow**:
+1. Customer fills `/readings/request` form
+2. We POST to `/api/readings/intent` → creates a `readings` row with `status='paid' pending`, returns the Stripe Payment Link URL with `client_reference_id = reading.id`
+3. Customer is redirected to Stripe-hosted checkout
+4. On success, Stripe redirects to `/readings/thank-you`
+5. Stripe webhook (`checkout.session.completed`) hits `/api/webhooks/stripe` → marks the `readings` row as paid, stores `paid_at` + `stripe_*` IDs, sends customer the "Bill will send your reading within 5 business days" email
+6. Portal users see the new paid reading in their queue
+
+**Why Payment Links (vs full Checkout)**:
+- Stripe dashboard manages all pricing changes — no deploys
+- No frontend Stripe code in our app
+- Refunds happen in Stripe dashboard
+- All compliance (3DS, EU VAT, etc.) handled by Stripe
+
+**Required env vars**:
+- `STRIPE_WEBHOOK_SECRET` — for verifying webhook signatures
+
+**No** `STRIPE_SECRET_KEY` needed in v1 — we don't talk to the Stripe API directly, only receive webhooks.
+
+---
+
+## 9. Integration with existing flows
 
 ### From a client profile
 
-A new **+ New reading** link on `/portal/clients/[id]` next to
-**+ Schedule session**. Launches the readings/new page with the
-client pre-selected.
+New **+ New reading** action next to **+ Schedule session** — launches the prep flow with that client pre-selected.
 
 ### From a session
 
-Each session row gets an extra **+ Reading** action alongside the
-existing **Open report** button. Creates a reading linked to that
-session via `session_id`. Useful when Bill wants to send a
-follow-up sampler reading after a session that's already had its
-formal report.
+Each session row gets a **+ Prep reading** button (alongside the existing **Open report**). Creates a prep reading linked via `session_id`.
 
-### From the Conversions dashboard
+### From the conversions dashboard
 
-Each row gets a **+ Reading** quick action alongside the existing
-**Send note** button. Useful for admin-driven sampler sends to
-warm leads.
+(Phase 2) — admin can comp a sampler reading from any row.
+
+### From `/book-a-reading`
+
+The existing live-session booking page gets an added "Or request a written reading →" footer linking to `/readings`. Cross-sell.
 
 ---
 
-## 8. Open questions for stakeholders
+## 10. Open questions for stakeholders
 
-1. **Chart visualisation in the email**: do we want a visual chart
-   block (small SVG / table) inside the email, or text-only?
-   Visual is more impressive but takes longer to build and may
-   break in older email clients. Default proposal: text-only in
-   v1; visual in v2.
-2. **Tile randomness for Mahjong**: should the tile draw be
-   server-side (auditable) or client-side (instant)? Default
-   proposal: server-side via a `/api/portal/readings/draw-tiles`
-   endpoint so the draw is recorded and reproducible.
-3. **"Promote one-off to client"**: when Bill enters a one-off
-   recipient, should we auto-create a client record on send? Or
-   keep it as an opt-in button? Default proposal: explicit
-   button — Bill decides.
-4. **Reading templates / prompt library**: should we ship a
-   library of Bill's standard reading templates (e.g. "Career
-   transition Bazi") that pre-fill the body? Worth it if Bill
-   has repeatable structures. Default proposal: v2 feature —
-   start blank in v1, see what patterns emerge.
-5. **Free vs paid**: do subscribers get unlimited readings, and
-   non-subscribers get one free sampler? Or are readings always
-   manual / un-metered? Default proposal: un-metered for v1.
-   Pricing decisions wait for Stripe + subscription product
-   shape to settle.
-6. **AI assist re-visit**: the current "no Anthropic API in
-   prod" policy makes sense for full session reports (long
-   form, infrequent). For short sampler readings (200–400 words),
-   is it worth revisiting? A free-tier provider (Google Gemini
-   Flash) could draft a reading in 1 second. Default proposal:
-   still no in v1; revisit after we see real volume.
+These need answers before final v1 lock:
+
+1. **Pricing** — what should the written readings cost?
+   - Default proposal: **Bazi $39 / Zi Wei $59 / Mahjong $49 / Custom $89**.
+   - Aim is "less than a live session" so customers see the trade-off (live = personal but pricier; written = cheaper but async).
+2. **SLA** — 5 business days reasonable? Or shorter/longer?
+   - Default proposal: **5 business days**. Conservative — Bill can over-deliver.
+3. **Refund policy** — what triggers a refund?
+   - Default proposal: full refund if not delivered within 10 business days (we missed our SLA badly), 50% if delivered late but completed. No-questions-asked refund within 24 hrs of order.
+4. **One-off vs client record** — when a customer pays for a reading and they're not already a client, do we **auto-create a client record** for them?
+   - Default proposal: **yes** — auto-promote on payment. Saves Bill data-entry. They become a `subscription_status='none'` client.
+5. **Free sampler tier** — should we offer ONE free short reading as a conversion bait (e.g. "Free 1-card Mahjong draw")?
+   - Default proposal: **no in v1** — keep it simple and paid-only first. Add comped/free flow in v2 if data supports it.
+6. **AI assist re-visit** — is it worth using a free-tier LLM (Gemini Flash) to draft the reading body for Bill's review?
+   - Default proposal: **no in v1** — manual writing. Revisit after we see real volume + Bill's actual time per reading.
+7. **Stripe account ownership** — whose Stripe account holds the payment links and receives payouts? Bill's existing one? A new one? Mahjong Tarot business entity?
+   - **This is the only blocking question** — can't ship the paid flow until this is decided + payment links exist.
 
 ---
 
-## 9. Build plan (eng estimate, separate doc)
-
-The implementation plan with file-by-file changes and PR sequencing
-lives at `IMPLEMENTATION-PLAN.md` in this folder (drafted after
-spec sign-off). High-level shape:
+## 11. Build plan (eng estimate)
 
 | PR | Scope | Estimate |
 |---|---|---|
-| 1 | Migration `020_readings.sql` + `lib/readings.js` + `/api/portal/readings/update` and `/.../send` API routes | ~2 hours |
-| 2 | `/portal/readings` list page + nav link | ~1.5 hours |
-| 3 | `/portal/readings/new` create flow (recipient picker, type selector, generate, write) | ~3 hours |
-| 4 | `/portal/readings/[id]` detail page + meeting mode | ~2 hours |
-| 5 | Integration with clients/sessions/conversions (the "+ Reading" quick actions) | ~1 hour |
+| 1 | Migration `020_readings.sql` (both tables, RLS) + `lib/readings.js` library helpers + API routes `/api/portal/readings/update`, `/.../send` | ~2 hrs |
+| 2 | `/portal/readings` list view + nav link (+ Prep filter) | ~1.5 hrs |
+| 3 | `/portal/readings/new` prep flow + `/portal/readings/[id]` detail/editor + meeting mode | ~3.5 hrs |
+| 4 | Quick-create hooks from client profile + session row + nav | ~1 hr |
+| 5 | Public `/readings` menu + `/readings/request` form + `/api/readings/intent` | ~2 hrs |
+| 6 | Stripe webhook handler (`/api/webhooks/stripe`) + paid-queue UI + "Send to customer" send flow | ~2.5 hrs |
+| 7 | Seed `reading_products` rows + Stripe Payment Links created in Stripe dashboard + email confirmation templates | ~1 hr (mostly ops) |
 
-Total v1: roughly **9–10 hours of focused engineering**, splittable across 5 PRs.
+**Total v1: ~13–14 hours of focused engineering**, splittable across 7 PRs.
 
----
-
-## 10. Success criteria
-
-After v1 ships, we'll know it's working if:
-
-1. **Bill uses it during at least one live call** within the
-   first week (meeting mode usage event)
-2. **Admin sends at least one sampler reading** to a warm
-   lead per week
-3. **At least 25% of sampler readings result in a follow-up
-   action** — booking, reply, or subscription within 30 days
-
-Track via the existing `readings.status` + send timestamps. No
-new analytics infrastructure needed.
+PRs 1–4 are the practitioner prep tool. **That's the half we could ship first** while Stripe ownership (Question 7) gets resolved. PRs 5–7 are the paid product.
 
 ---
 
-## 11. Risks / mitigations
+## 12. Success criteria
+
+### Practitioner prep tool (after PR 4 ships)
+
+- Bill creates a prep reading for **at least 1 in 3 upcoming sessions** within the first 2 weeks
+- Bill uses **meeting mode during at least one live session** in the first week
+
+### Paid reading product (after PR 7 ships)
+
+- **At least 2 paid reading orders per week** within first month
+- Average **time from paid to sent**: under 3 business days (so we beat our 5-day SLA)
+- **At least 25% of paid readings result in a follow-up action** (booking, subscription, reply) within 30 days
+- **Zero refund-for-SLA-miss events** in first quarter
+
+Track all via the existing `readings.status` + timestamps. No new analytics infrastructure needed.
+
+---
+
+## 13. Risks / mitigations
 
 | Risk | Mitigation |
 |---|---|
-| Bill doesn't adopt because writing readings on a small editor isn't his style | Meeting mode = full screen. Plus: he can keep using Claude.ai Project and paste in. |
-| Sampler readings cannibalise paid sessions ("I got a free one, why pay?") | Length + depth cap on samplers. Send CTA every time. Watch conversion rate after 4 weeks. |
-| `iztro` library has bugs or surprising outputs | Already in production for horoscopes; risk is low. Show structured data alongside the reading so Bill can sanity-check before sending. |
-| Email rendering breaks in unusual clients | Same template as report email, which has been tested. Add reading-specific blocks defensively. |
-| Spam / abuse if admin role is compromised | Existing RLS + `requireAdminApi` covers it. No new attack surface. |
+| Bill doesn't keep up with the paid queue, SLA breaches accumulate | Make `paid` readings impossible to miss — they sit at the top of `/portal` until handled. Admin can reassign or refund easily. |
+| Bill's reading style on paid product feels rushed vs his live work | Default tier at $39 sets a price-appropriate expectation; we can encourage Bill to do longer pieces by raising the price after volume proves out. |
+| Customers complain about wait time | Set conservative SLA (5 days), over-communicate (confirmation email + "Bill is working on it" mid-flight email if it's been 3+ days). |
+| Stripe fees eat into the small price points | At $39 with ~3% Stripe fees = ~$1.20 per reading lost. Acceptable. |
+| Spam / fake orders | Stripe Payment Link inherently filters this (must complete payment). |
+| Refund disputes / chargebacks | Stripe handles via dashboard. Low risk at this price point and volume. |
+| Customers paying for a reading expect a live call | Clear product copy on `/readings`: "written reading, no call included. For live readings see /book-a-reading." |
 
 ---
 
-## 12. Out-of-scope notes for stakeholders
+## 14. What this feature does NOT change
 
-- This feature **does not replace** the existing session-report
-  flow. Session reports are still the right shape for paid
-  scheduled readings. The readings generator is for everything
-  else.
-- This feature **does not change** Bill's recording / transcript
-  workflow. Manual paste stays.
-- This feature **does not add** any new third-party services or
-  paid APIs.
+- The **scheduled session → report** flow stays exactly as it is today.
+- Bill's **transcript paste + Claude.ai Project** workflow stays.
+- The **subscription product** (Stripe subscription, separate from this) is its own thing — readings can be a great cross-sell into a subscription, but we don't bundle them in v1.
+- No changes to the **`requirePortalUser` / `requireAdmin`** auth model.
+- No new external services beyond Stripe (which is the one new dependency).
 
 ---
 
-**Questions, edits, or sign-off → reply to this doc or message Yon directly.**
+## 15. Phasing recommendation
 
-*Next step after sign-off: I'll draft `IMPLEMENTATION-PLAN.md` and we
-start with PR 1.*
+Suggest splitting v1 into **two ship dates** to de-risk the Stripe piece:
+
+### v1a — Practitioner prep tool (PRs 1–4)
+
+- 100% engineering, no external dependencies
+- Bill gets value immediately
+- ~7–8 hours of work
+- **Ship within 1 week of spec sign-off**
+
+### v1b — Paid reading product (PRs 5–7)
+
+- Requires Stripe account setup (Question 7) + Stripe Payment Links created
+- Requires public-page design pass
+- ~6 hours of engineering after the Stripe ops piece is done
+- **Ship as soon as Stripe is live + we've done a test purchase**
+
+---
+
+**Sign-off requested from:** Dave Hajdu + Bill Hajdu
+
+**Next step after sign-off**: I draft `IMPLEMENTATION-PLAN.md` in this folder, map each PR to specific files / migrations / API contracts, then start with PR 1 (practitioner prep tool).

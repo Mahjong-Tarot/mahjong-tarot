@@ -4,8 +4,9 @@ import { useAuth } from '../lib/auth';
 import styles from './PortalNav.module.css';
 
 const LINKS = [
-  { href: '/portal',          label: 'Sessions',    match: (p) => p === '/portal' },
-  { href: '/portal/clients',  label: 'Clients',     match: (p) => p.startsWith('/portal/clients') },
+  { href: '/portal',               label: 'Sessions',       match: (p) => p === '/portal' },
+  { href: '/portal/clients',       label: 'Clients',        match: (p) => p.startsWith('/portal/clients') },
+  { href: '/portal/quick-reading', label: 'Quick reading',  match: (p) => p.startsWith('/portal/quick-reading') },
 ];
 
 const ADMIN_LINKS = [

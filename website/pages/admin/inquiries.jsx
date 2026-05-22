@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
-import PortalNav from '../../../components/PortalNav';
-import { supabase } from '../../../lib/supabase';
-import { requireAdmin } from '../../../lib/requireAdmin';
-import portalStyles from '../../../styles/Portal.module.css';
-import styles from '../../../styles/PortalAdmin.module.css';
-import tableStyles from '../../../styles/PortalAdminTable.module.css';
-import kanbanStyles from '../../../styles/PortalAdminKanban.module.css';
+import AdminShell from '../../components/AdminShell';
+import { supabase } from '../../lib/supabase';
+import { requireAdmin } from '../../lib/requireAdmin';
+import styles from '../../styles/PortalAdmin.module.css';
+import tableStyles from '../../styles/PortalAdminTable.module.css';
+import kanbanStyles from '../../styles/PortalAdminKanban.module.css';
 
 export async function getServerSideProps(ctx) {
   return requireAdmin(ctx);
@@ -122,12 +121,10 @@ export default function AdminInquiries({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>Admin</p>
-          <h1 className={portalStyles.h1}>Inquiries</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <p className={styles.pageEyebrow}>Admin</p>
+          <h1 className={styles.pageTitle}>Inquiries</h1>
+          <p className={styles.pageLede}>
             Pipeline view of every contact form, booking and newsletter signup.
           </p>
 
@@ -260,7 +257,6 @@ export default function AdminInquiries({ profile }) {
               ))}
             </div>
           )}
-        </main>
 
         {selected && (
           <DetailDrawer
@@ -272,7 +268,7 @@ export default function AdminInquiries({ profile }) {
         )}
 
         {toast && <div className={kanbanStyles.toast}>{toast}</div>}
-      </div>
+      </AdminShell>
     </>
   );
 }

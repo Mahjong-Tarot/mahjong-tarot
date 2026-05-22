@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
-import PortalNav from '../../../components/PortalNav';
-import { supabase } from '../../../lib/supabase';
-import { requireAdmin } from '../../../lib/requireAdmin';
-import portalStyles from '../../../styles/Portal.module.css';
-import styles from '../../../styles/PortalAdmin.module.css';
-import tableStyles from '../../../styles/PortalAdminTable.module.css';
+import AdminShell from '../../components/AdminShell';
+import { supabase } from '../../lib/supabase';
+import { requireAdmin } from '../../lib/requireAdmin';
+import styles from '../../styles/PortalAdmin.module.css';
+import tableStyles from '../../styles/PortalAdminTable.module.css';
 
 export async function getServerSideProps(ctx) {
   return requireAdmin(ctx);
@@ -161,12 +160,10 @@ export default function AdminPeople({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>Admin</p>
-          <h1 className={portalStyles.h1}>People</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <p className={styles.pageEyebrow}>Admin</p>
+          <h1 className={styles.pageTitle}>People</h1>
+          <p className={styles.pageLede}>
             Every human who has interacted with the site — inquirers, subscribers, clients, members.
           </p>
 
@@ -260,8 +257,7 @@ export default function AdminPeople({ profile }) {
               </table>
             </div>
           )}
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

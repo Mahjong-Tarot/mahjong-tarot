@@ -1,0 +1,175 @@
+/* Shared table styles for /portal/admin/* list pages */
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0 var(--space-md);
+  flex-wrap: wrap;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.chip,
+.chipActive {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  background: var(--paper-pure);
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.chip:hover {
+  border-color: var(--ink-4);
+  color: var(--ink);
+}
+
+.chipActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.count {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-4);
+  margin: 0;
+}
+
+.tableWrap {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper-pure);
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 14px;
+}
+
+.table thead tr {
+  background: var(--paper);
+}
+
+.table th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table tbody tr:hover {
+  background: var(--paper);
+}
+
+.cellPrimary {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.cellSecondary {
+  color: var(--ink-3);
+}
+
+.cellMuted {
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+
+.muted {
+  color: var(--ink-4);
+  font-size: 13px;
+}
+
+/* ── tags ───────────────────────────────────────────────── */
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag,
+.tagMember,
+.tagClient,
+.tagActive,
+.tagLapsed,
+.tagOptedIn,
+.tagOptedOut {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  color: var(--ink-3);
+  background: var(--paper);
+  white-space: nowrap;
+}
+
+.tagMember {
+  background: rgba(40, 123, 232, 0.12);
+  color: #287BE8;
+  border-color: rgba(40, 123, 232, 0.3);
+}
+
+.tagClient {
+  background: rgba(26, 158, 116, 0.12);
+  color: #1a9e74;
+  border-color: rgba(26, 158, 116, 0.3);
+}
+
+.tagActive {
+  background: rgba(111, 242, 193, 0.18);
+  color: #1a9e74;
+  border-color: rgba(26, 158, 116, 0.3);
+  font-weight: 600;
+}
+
+.tagLapsed {
+  background: rgba(209, 69, 139, 0.12);
+  color: #d1458b;
+  border-color: rgba(209, 69, 139, 0.3);
+}
+
+.tagOptedIn {
+  color: #1a9e74;
+  background: rgba(26, 158, 116, 0.08);
+  border-color: rgba(26, 158, 116, 0.25);
+}
+
+.tagOptedOut {
+  color: var(--ink-4);
+  background: var(--paper);
+}

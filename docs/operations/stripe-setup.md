@@ -29,7 +29,7 @@ if Preview deploys need to process checkout).
 | `STRIPE_SECRET_KEY` | Talent Edge `sk_live_…` (shared with eo-vietnam) |
 | `STRIPE_PRICE_FOUNDERS` | `price_1TZvyrRouu1ZL9vsncnUwwZC` |
 | `STRIPE_WEBHOOK_SECRET` | The `whsec_…` returned when the endpoint above was created |
-| `SUPABASE_SERVICE_ROLE_KEY` | The Supabase service role key (also present in repo `.env` as `PUBLIC_SUPABASE_SERVICE_KEY` — misnamed legacy var) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role JWT for the live project `ntqmddmesgdquatodsyu` (fetch from Supabase dashboard → Project Settings → API). **Do not** use the `PUBLIC_SUPABASE_SERVICE_KEY` value in the repo root `.env` — it targets a different, stale Supabase project (`nrzxzkjjhktyyukijown`) and the webhook will silently write to the wrong database. |
 
 `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` is **not** needed — hosted Checkout
 runs entirely on Stripe's domain.

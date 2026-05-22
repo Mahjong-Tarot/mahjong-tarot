@@ -10,6 +10,9 @@ const LINKS = [
 ];
 
 const ADMIN_LINKS = [
+  { href: '/portal/admin',             label: 'Dashboard',   match: (p) => p === '/portal/admin' },
+  { href: '/portal/admin/people',      label: 'People',      match: (p) => p.startsWith('/portal/admin/people') },
+  { href: '/portal/admin/inquiries',   label: 'Inquiries',   match: (p) => p.startsWith('/portal/admin/inquiries') },
   { href: '/portal/admin/conversions', label: 'Conversions', match: (p) => p.startsWith('/portal/admin/conversions') },
 ];
 

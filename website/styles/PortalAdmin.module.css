@@ -1,0 +1,211 @@
+/* Admin dashboard at /portal/admin — shares Portal.module.css shell */
+
+.muted {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-4);
+  margin: 0 0 var(--space-md);
+}
+
+.error {
+  color: #b22;
+  font-family: var(--sans);
+  font-size: 14px;
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(178, 34, 34, 0.06);
+  border: 1px solid rgba(178, 34, 34, 0.2);
+  border-radius: 6px;
+}
+
+/* ── stat cards row ─────────────────────────────────────── */
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+  margin: var(--space-lg) 0 var(--space-xl);
+}
+
+.statCard {
+  display: block;
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper-pure);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.statCard:hover {
+  border-color: var(--ink-3);
+}
+
+.statLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: 0 0 var(--space-xs);
+}
+
+.statValue {
+  font-family: var(--serif);
+  font-size: 32px;
+  line-height: 1;
+  margin: 0 0 var(--space-xs);
+  color: var(--ink);
+}
+
+.statHint {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-4);
+  margin: 0;
+}
+
+/* ── side-by-side panels ────────────────────────────────── */
+.gridTwo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.panel {
+  padding: var(--space-lg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper-pure);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 var(--space-md);
+}
+
+.panelTitle {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: 0;
+}
+
+.panelLink {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-3);
+  text-decoration: none;
+}
+
+.panelLink:hover {
+  text-decoration: underline;
+}
+
+/* ── bar lists (by type / by stage) ─────────────────────── */
+.barList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 0;
+}
+
+.barLabel {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  width: 110px;
+  flex-shrink: 0;
+}
+
+.barTrack {
+  flex: 1;
+  height: 16px;
+  background: var(--paper);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--ink);
+  transition: width 360ms ease;
+}
+
+.stage_new_lead       { background: #287BE8; }
+.stage_contacted      { background: #6b7194; }
+.stage_discovery_call { background: #d1458b; }
+.stage_proposal       { background: #1a9e74; }
+.stage_won            { background: #6ff2c1; }
+.stage_lost           { background: #d8dce8; }
+
+.barCount {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 600;
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── recent activity feed ───────────────────────────────── */
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feedItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.feedItem:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.feedTime {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.feedTitle {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  flex: 1;
+}
+
+.feedDetail {
+  color: var(--ink-4);
+}
+
+.feedStage {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+}

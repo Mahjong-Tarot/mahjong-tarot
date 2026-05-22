@@ -19,6 +19,9 @@ where user_id = (select id from auth.users where email = 'firepig01@gmail.com');
 update public.profiles set role = 'admin'
 where user_id = (select id from auth.users where email = 'yon@edge8.co');
 
+update public.profiles set role = 'admin'
+where user_id = (select id from auth.users where email = 'dave@edge8.co');
+
 -- Verify:
 -- select p.role, u.email from public.profiles p
 --   join auth.users u on u.id = p.user_id

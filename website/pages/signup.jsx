@@ -79,12 +79,6 @@ export default function Signup() {
       return;
     }
 
-    if (mode === 'pay') {
-      // Stripe payment isn't wired yet — fall through to trial signup so the
-      // friend at least gets an account + email link, and we can charge later.
-      setError('Founders payment is coming soon. We\'ve started your free trial in the meantime — check your email.');
-    }
-
     const { data, error: authError } = await supabase.auth.signUp({
       email,
       password,
@@ -94,17 +88,44 @@ export default function Signup() {
           last_name: lastName,
           birthday: birthday || null,
           birth_time: birthTime || null,
-          signup_source: mode === 'pay' ? 'founder-pending' : 'trial',
+          signup_source: mode === 'pay' ? 'founder-checkout' : 'trial',
         },
         emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined,
       },
     });
 
-    setSubmitting(false);
     if (authError) {
+      setSubmitting(false);
       setError(authError.message);
       return;
     }
+
+    if (mode === 'pay') {
+      if (!data?.session) {
+        setSubmitting(false);
+        setSuccess(true);
+        return;
+      }
+      try {
+        const r = await fetch('/api/stripe/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plan: 'founders' }),
+        });
+        const json = await r.json();
+        if (!r.ok || !json.url) {
+          throw new Error(json.error || 'Checkout could not be created.');
+        }
+        window.location.assign(json.url);
+        return;
+      } catch (err) {
+        setSubmitting(false);
+        setError(`We created your account but couldn't reach Stripe: ${err.message}. Sign in and try again from your dashboard.`);
+        return;
+      }
+    }
+
+    setSubmitting(false);
     if (data?.session) {
       router.push(await pathForUser(data.session.user.id));
       return;
@@ -270,7 +291,7 @@ export default function Signup() {
                     <p>
                       We just sent a confirmation link to <strong>{email}</strong>.
                       Click it to finish setting up your Member Area
-                      {mode === 'pay' ? ' — and your founder rate will be applied once payment is wired up.' : '.'}
+                      {mode === 'pay' ? ' — once you sign in, we&apos;ll send you to Stripe to lock in your founder rate.' : '.'}
                     </p>
                     <p className={styles.successHint}>
                       Don&apos;t see it? Check your spam folder, or wait a minute and try again.
@@ -373,24 +394,6 @@ export default function Signup() {
                             Secured by Stripe
                           </span>
                         </div>
-                        <div className={`${styles.field} ${styles.fieldFull}`}>
-                          <label className={styles.fieldLabel} htmlFor="card">Card number</label>
-                          <input className={`${styles.input} ${styles.monoInput}`} id="card" placeholder="4242 4242 4242 4242" inputMode="numeric" autoComplete="cc-number" />
-                        </div>
-                        <div className={styles.formGrid}>
-                          <div className={styles.field}>
-                            <label className={styles.fieldLabel} htmlFor="exp">Expiry</label>
-                            <input className={`${styles.input} ${styles.monoInput}`} id="exp" placeholder="MM / YY" autoComplete="cc-exp" />
-                          </div>
-                          <div className={styles.field}>
-                            <label className={styles.fieldLabel} htmlFor="cvc">CVC</label>
-                            <input className={`${styles.input} ${styles.monoInput}`} id="cvc" placeholder="123" inputMode="numeric" autoComplete="cc-csc" />
-                          </div>
-                        </div>
-                        <div className={`${styles.field} ${styles.fieldFull}`}>
-                          <label className={styles.fieldLabel} htmlFor="zip">Billing ZIP / Postal code</label>
-                          <input className={`${styles.input} ${styles.monoInput}`} id="zip" placeholder="94110" autoComplete="postal-code" />
-                        </div>
                         <div className={styles.orderSummary}>
                           <div className={styles.orderRow}>
                             <span>Founders Membership</span>
@@ -403,6 +406,9 @@ export default function Signup() {
                           <div className={`${styles.orderRow} ${styles.orderTotal}`}>
                             <span>Total today</span>
                             <span>$49.50</span>
+                          </div>
+                          <div className={`${styles.orderRow} ${styles.orderMeta}`} style={{ marginTop: '8px' }}>
+                            <span>You&apos;ll enter card details on Stripe&apos;s secure checkout.</span>
                           </div>
                         </div>
                       </div>

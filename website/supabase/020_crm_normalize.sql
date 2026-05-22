@@ -47,26 +47,35 @@ create trigger set_people_updated_at
 alter table public.inquiries
   add column if not exists source_site text not null default 'themahjongtarot.com';
 
+-- Drop old check constraints FIRST. The original 001_initial_schema.sql
+-- constrains status to {received, read, confirmed, completed, cancelled}
+-- and type to {newsletter, contact, booking} — both narrower than the
+-- new pipeline. The UPDATE backfill below would fail under the old
+-- constraint, so they have to come off first.
+alter table public.inquiries drop constraint if exists inquiries_status_check;
+alter table public.inquiries drop constraint if exists inquiries_type_check;
+
 -- Backfill existing status values into the new pipeline enum:
 --   received  → new_lead
 --   read      → contacted
+--   confirmed → contacted   (pre-existing value not in current data)
 --   completed → won
+--   cancelled → lost        (pre-existing value not in current data)
 update public.inquiries set status = 'new_lead'  where status = 'received';
-update public.inquiries set status = 'contacted' where status = 'read';
+update public.inquiries set status = 'contacted' where status in ('read', 'confirmed');
 update public.inquiries set status = 'won'       where status = 'completed';
+update public.inquiries set status = 'lost'      where status = 'cancelled';
 
--- Drop any prior status default before adding the CHECK constraint
+-- Update default for new rows
 alter table public.inquiries alter column status set default 'new_lead';
 
--- Add CHECK constraints (drop+recreate so this migration is re-runnable)
-alter table public.inquiries drop constraint if exists inquiries_status_check;
+-- Add new check constraints
 alter table public.inquiries add constraint inquiries_status_check
   check (status in (
     'new_lead', 'contacted', 'discovery_call', 'proposal',
     'won', 'lost', 'archived'
   ));
 
-alter table public.inquiries drop constraint if exists inquiries_type_check;
 alter table public.inquiries add constraint inquiries_type_check
   check (type in (
     'contact', 'newsletter', 'booking', 'reading',

@@ -18,6 +18,21 @@
 -- ============================================================
 
 -- ────────────────────────────────────────────────────────────
+-- 0. Drop prior versions
+-- ────────────────────────────────────────────────────────────
+-- 002_admin_dashboard.sql created earlier versions of these RPCs
+-- with different return signatures. PG can't CREATE OR REPLACE
+-- a function when its return type changes, so we drop first.
+drop function if exists public.submit_inquiry(text, text, text, text, text, text, text, text, text, text);
+drop function if exists public.submit_newsletter(text, text, text, text);
+drop function if exists public.get_inquiries(text, text, text, int, int);
+drop function if exists public.get_inquiries(text, text, int, int);
+drop function if exists public.get_inquiry_detail(uuid);
+drop function if exists public.update_inquiry_status(uuid, text);
+drop function if exists public.get_inquiry_counts();
+drop function if exists public.update_person(uuid, text, text, text, text, text);
+
+-- ────────────────────────────────────────────────────────────
 -- 1. submit_inquiry — public form (anon) inserts person + inquiry
 -- ────────────────────────────────────────────────────────────
 create or replace function public.submit_inquiry(

@@ -1,0 +1,278 @@
+/* /portal/admin/inquiries — kanban + drawer + stage selectors */
+
+.select,
+.stageSelect {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 6px 28px 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background: var(--paper-pure);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* Stage-aware coloring on the per-row select */
+.stageSelect[data-stage='new_lead']       { border-color: #287BE8; color: #287BE8; }
+.stageSelect[data-stage='contacted']      { border-color: #6b7194; color: #6b7194; }
+.stageSelect[data-stage='discovery_call'] { border-color: #d1458b; color: #d1458b; }
+.stageSelect[data-stage='proposal']       { border-color: #1a9e74; color: #1a9e74; }
+.stageSelect[data-stage='won']            { border-color: #1a9e74; color: #1a9e74; background: rgba(111, 242, 193, 0.12); }
+.stageSelect[data-stage='lost']           { border-color: #d8dce8; color: var(--ink-4); }
+.stageSelect[data-stage='archived']       { border-color: var(--rule); color: var(--ink-4); }
+
+.subtle {
+  color: var(--ink-4);
+  font-size: 12px;
+}
+
+.openButton {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--ink-3);
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+
+.openButton:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+/* ── kanban board ───────────────────────────────────────── */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.column {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: var(--space-sm);
+  min-height: 200px;
+}
+
+.column[data-stage='new_lead']       { border-top: 3px solid #287BE8; }
+.column[data-stage='contacted']      { border-top: 3px solid #6b7194; }
+.column[data-stage='discovery_call'] { border-top: 3px solid #d1458b; }
+.column[data-stage='proposal']       { border-top: 3px solid #1a9e74; }
+.column[data-stage='won']            { border-top: 3px solid #6ff2c1; }
+.column[data-stage='lost']           { border-top: 3px solid #d8dce8; }
+
+.colHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px 10px;
+}
+
+.colLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+.colCount {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+.cardList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card {
+  margin: 0;
+}
+
+.cardButton {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.cardButton:hover {
+  border-color: var(--ink-3);
+}
+
+.cardName {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+}
+
+.cardSubject {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-3);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.emptyCol {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* ── detail drawer ──────────────────────────────────────── */
+.drawerBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 50;
+  animation: fadeIn 160ms ease;
+}
+
+.drawer {
+  width: min(480px, 100%);
+  height: 100%;
+  background: var(--paper-pure);
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 200ms ease;
+}
+
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideIn { from { transform: translateX(20px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+.drawerHeader {
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+
+.drawerClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: 0;
+  color: var(--ink-3);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.drawerEyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: 0 0 var(--space-xs);
+}
+
+.drawerTitle {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.drawerSub {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.drawerBody {
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+.drawerLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+.drawerLabel:first-child {
+  margin-top: 0;
+}
+
+.drawerText {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.drawerMessage {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0;
+  white-space: pre-wrap;
+  background: var(--paper);
+  border-left: 3px solid var(--rule);
+  padding: 10px 12px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ── toast ──────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  z-index: 60;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}

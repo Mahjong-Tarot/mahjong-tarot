@@ -132,10 +132,10 @@ export default function Home({ todayDate, todayAlmanac }) {
                   guiding you toward clarity, intuition, and deeper self-discovery.
                   No prior knowledge of Mahjong required.
                 </p>
-                <p className={styles.bookSpec}>Hardcover · 320 pp · Spring 2026</p>
+                <p className={styles.bookSpec}>Digital July 2026 · Print August 2026 · From $19.95</p>
                 <div className={styles.bookCtas}>
-                  <Link href="/the-mahjong-mirror#preorder" className={styles.heroPrimary}>
-                    Preorder $34
+                  <Link href="/the-mahjong-mirror/order" className={styles.heroPrimary}>
+                    Pre-Order the Book
                   </Link>
                   <Link href="/the-mahjong-mirror" className={styles.bookGhost}>
                     Read a chapter <span aria-hidden="true">→</span>

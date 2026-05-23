@@ -45,13 +45,28 @@ function relTime(value) {
 
 const LIFECYCLE_STAGES = ['subscriber', 'lead', 'mql', 'sql', 'opportunity', 'customer', 'evangelist'];
 
+function sortValue(row, key) {
+  switch (key) {
+    case 'name':           return (row.name || '').toLowerCase();
+    case 'email':          return (row.email || '').toLowerCase();
+    case 'tags':           return row.types.length;
+    case 'inquiry_count':  return row.inquiry_count || 0;
+    case 'order_count':    return row.order_count || 0;
+    case 'last_activity':  return row.last_activity || '';
+    default:               return row[key];
+  }
+}
+
 export default function AdminPeople({ profile }) {
   const [people, setPeople]       = useState([]);
   const [inquiries, setInquiries] = useState([]);
   const [profiles, setProfiles]   = useState([]);
+  const [deals, setDeals]         = useState([]);
   const [filter, setFilter]       = useState('all');
   const [error, setError]         = useState('');
   const [loading, setLoading]     = useState(true);
+  const [sortKey, setSortKey]     = useState('last_activity');
+  const [sortDir, setSortDir]     = useState('desc');
 
   // Detail-shelf state. selected = the row, draft = the editable copy.
   const [selectedId, setSelectedId] = useState(null);
@@ -62,17 +77,24 @@ export default function AdminPeople({ profile }) {
   function openShelf(p) {
     setSelectedId(p.id);
     setDraft({
-      name:            p.name            || '',
-      email:           p.email           || '',
-      phone:           p.phone           || '',
-      birthday:        p.birthday        || '',
-      birth_time:      p.birth_time      || '',
-      birth_place:     p.birth_place     || '',
-      lifecycle_stage: p.lifecycle_stage || 'lead',
-      ok_to_contact:   !!p.ok_to_contact,
-      gender:          p.gender          || '',
-      company:         p.company         || '',
-      role:            p.role            || '',
+      name:              p.name              || '',
+      email:             p.email             || '',
+      phone:             p.phone             || '',
+      address:           p.address           || '',
+      birthday:          p.birthday          || '',
+      birth_time:        p.birth_time        || '',
+      birth_place:       p.birth_place       || '',
+      gender:            p.gender            || '',
+      chinese_sign:      p.chinese_sign      || '',
+      company:           p.company           || '',
+      role:              p.role              || '',
+      lifecycle_stage:   p.lifecycle_stage   || 'lead',
+      nurture_stage:     p.nurture_stage ?? 0,
+      nurture_status:    p.nurture_status    || '',
+      membership_status: p.membership_status || '',
+      source:            p.source            || '',
+      source_site:       p.source_site       || '',
+      ok_to_contact:     !!p.ok_to_contact,
     });
     setShelfError('');
   }
@@ -106,9 +128,9 @@ export default function AdminPeople({ profile }) {
         return;
       }
       try {
-        const [pRes, iRes, prRes] = await Promise.all([
+        const [pRes, iRes, prRes, dRes] = await Promise.all([
           supabase
-            .from('people').select('id, email, name, company, role, phone, birthday, birth_time, birth_place, ok_to_contact, source_site, created_at, updated_at, lifecycle_stage')
+            .from('people').select('id, email, name, company, role, phone, address, birthday, birth_time, birth_place, gender, chinese_sign, ok_to_contact, source, source_site, lifecycle_stage, nurture_stage, nurture_status, membership_status, created_at, updated_at')
             .order('updated_at', { ascending: false }),
           supabase
             .from('inquiries')
@@ -116,13 +138,18 @@ export default function AdminPeople({ profile }) {
           supabase
             .from('profiles')
             .select('user_id, person_id, role, is_premium, name'),
+          supabase
+            .from('deals')
+            .select('person_id, status'),
         ]);
         if (pRes.error)  throw pRes.error;
         if (iRes.error)  throw iRes.error;
         if (prRes.error) throw prRes.error;
+        if (dRes.error)  throw dRes.error;
         setPeople(pRes.data ?? []);
         setInquiries(iRes.data ?? []);
         setProfiles(prRes.data ?? []);
+        setDeals(dRes.data ?? []);
       } catch (e) {
         setError(e.message || 'Failed to load people.');
       } finally {
@@ -144,6 +171,11 @@ export default function AdminPeople({ profile }) {
       if (pr.person_id) profilesByPersonId.set(pr.person_id, pr);
       if (pr.name)      profilesByName.set(pr.name.toLowerCase(), pr);
     }
+    const ordersByPerson = new Map();
+    for (const d of deals) {
+      if (d.status !== 'won') continue;
+      ordersByPerson.set(d.person_id, (ordersByPerson.get(d.person_id) || 0) + 1);
+    }
 
     return people.map((p) => {
       const pInq    = inquiriesByPerson.get(p.id) ?? [];
@@ -160,13 +192,14 @@ export default function AdminPeople({ profile }) {
         ...p,
         types,
         inquiry_count: pInq.length,
+        order_count:   ordersByPerson.get(p.id) || 0,
         is_customer:   p.lifecycle_stage === 'customer',
         is_member:     !!memberProfile,
         is_subscriber: subscriber,
         last_activity: lastActivity,
       };
-    }).sort((a, b) => (a.last_activity < b.last_activity ? 1 : -1));
-  }, [people, inquiries, profiles]);
+    });
+  }, [people, inquiries, profiles, deals]);
 
   const totals = useMemo(() => ({
     total:        aggregated.length,
@@ -183,6 +216,35 @@ export default function AdminPeople({ profile }) {
     if (filter === 'opted_out')   return !p.ok_to_contact;
     return true;
   });
+
+  const sorted = useMemo(() => {
+    const list = [...filtered];
+    list.sort((a, b) => {
+      const av = sortValue(a, sortKey);
+      const bv = sortValue(b, sortKey);
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (av < bv) return sortDir === 'asc' ? -1 : 1;
+      if (av > bv) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    return list;
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [filtered, sortKey, sortDir]);
+
+  function toggleSort(key) {
+    if (sortKey === key) {
+      setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortKey(key);
+      setSortDir(key === 'last_activity' ? 'desc' : 'asc');
+    }
+  }
+  function sortIndicator(key) {
+    if (sortKey !== key) return null;
+    return <span style={{ marginLeft: 4 }}>{sortDir === 'asc' ? '▲' : '▼'}</span>;
+  }
 
   return (
     <>
@@ -233,30 +295,29 @@ export default function AdminPeople({ profile }) {
               ))}
             </div>
             <p className={tableStyles.count}>
-              {loading ? 'Loading…' : `${filtered.length} ${filtered.length === 1 ? 'person' : 'people'}`}
+              {loading ? 'Loading…' : `${sorted.length} ${sorted.length === 1 ? 'person' : 'people'}`}
             </p>
           </div>
 
-          {!loading && filtered.length === 0 && (
+          {!loading && sorted.length === 0 && (
             <p className={styles.muted}>No people match this filter.</p>
           )}
 
-          {!loading && filtered.length > 0 && (
+          {!loading && sorted.length > 0 && (
             <div className={tableStyles.tableWrap}>
               <table className={tableStyles.table}>
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Tags</th>
-                    <th>Inquiries</th>
-                    <th>Source</th>
-                    <th>Last activity</th>
-                    <th>Consent</th>
+                    <th onClick={() => toggleSort('name')}          style={sortableTh}>Name{sortIndicator('name')}</th>
+                    <th onClick={() => toggleSort('email')}         style={sortableTh}>Email{sortIndicator('email')}</th>
+                    <th onClick={() => toggleSort('tags')}          style={sortableTh}>Tags{sortIndicator('tags')}</th>
+                    <th onClick={() => toggleSort('inquiry_count')} style={sortableTh}>Inquiries{sortIndicator('inquiry_count')}</th>
+                    <th onClick={() => toggleSort('order_count')}   style={sortableTh}>Orders{sortIndicator('order_count')}</th>
+                    <th onClick={() => toggleSort('last_activity')} style={sortableTh}>Last activity{sortIndicator('last_activity')}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filtered.map((p) => (
+                  {sorted.map((p) => (
                     <tr key={p.id} onClick={() => openShelf(p)} style={{ cursor: 'pointer' }}>
                       <td className={tableStyles.cellPrimary}>{p.name || '—'}</td>
                       <td className={tableStyles.cellSecondary}>{p.email}</td>
@@ -275,13 +336,8 @@ export default function AdminPeople({ profile }) {
                         </div>
                       </td>
                       <td className={tableStyles.cellMuted}>{p.inquiry_count || '—'}</td>
-                      <td className={tableStyles.cellMuted}>{p.source_site || '—'}</td>
+                      <td className={tableStyles.cellMuted}>{p.order_count || '—'}</td>
                       <td className={tableStyles.cellMuted}>{relTime(p.last_activity)}</td>
-                      <td>
-                        {p.ok_to_contact
-                          ? <span className={tableStyles.tagOptedIn}>opted in</span>
-                          : <span className={tableStyles.tagOptedOut}>opted out</span>}
-                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -309,6 +365,8 @@ export default function AdminPeople({ profile }) {
                        saving={savingField === 'email'} onSave={saveField} />
                 <Field label="Phone" name="phone" draft={draft} setDraft={setDraft}
                        saving={savingField === 'phone'} onSave={saveField} />
+                <Field label="Address" name="address" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'address'} onSave={saveField} />
                 <Field label="Birthday" name="birthday" type="date" draft={draft} setDraft={setDraft}
                        saving={savingField === 'birthday'} onSave={saveField} />
                 <Field label="Birth time" name="birth_time" type="time" draft={draft} setDraft={setDraft}
@@ -318,12 +376,24 @@ export default function AdminPeople({ profile }) {
                 <SelectField label="Gender (needed for Purple Star chart)" name="gender" draft={draft} setDraft={setDraft}
                        options={['', 'F', 'M']} optionLabels={{'': '— not set —', F: 'Female', M: 'Male'}}
                        saving={savingField === 'gender'} onSave={saveField} />
-                <SelectField label="Lifecycle stage" name="lifecycle_stage" draft={draft} setDraft={setDraft}
-                       options={LIFECYCLE_STAGES} saving={savingField === 'lifecycle_stage'} onSave={saveField} />
+                <Field label="Chinese sign" name="chinese_sign" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'chinese_sign'} onSave={saveField} />
                 <Field label="Company" name="company" draft={draft} setDraft={setDraft}
                        saving={savingField === 'company'} onSave={saveField} />
                 <Field label="Role" name="role" draft={draft} setDraft={setDraft}
                        saving={savingField === 'role'} onSave={saveField} />
+                <SelectField label="Lifecycle stage" name="lifecycle_stage" draft={draft} setDraft={setDraft}
+                       options={LIFECYCLE_STAGES} saving={savingField === 'lifecycle_stage'} onSave={saveField} />
+                <Field label="Nurture stage" name="nurture_stage" type="number" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'nurture_stage'} onSave={saveField} />
+                <Field label="Nurture status" name="nurture_status" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'nurture_status'} onSave={saveField} />
+                <Field label="Membership status" name="membership_status" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'membership_status'} onSave={saveField} />
+                <Field label="Source" name="source" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'source'} onSave={saveField} />
+                <Field label="Source site" name="source_site" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'source_site'} onSave={saveField} />
                 <CheckField label="OK to contact (newsletter / outreach)" name="ok_to_contact" draft={draft} setDraft={setDraft}
                        saving={savingField === 'ok_to_contact'} onSave={saveField} />
               </aside>
@@ -333,6 +403,9 @@ export default function AdminPeople({ profile }) {
     </>
   );
 }
+
+// ── Sortable table header style ─────────────────────────────────────
+const sortableTh = { cursor: 'pointer', userSelect: 'none' };
 
 // ── Shelf primitives ────────────────────────────────────────────────
 const shelfBackdrop = {

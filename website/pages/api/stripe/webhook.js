@@ -3,6 +3,7 @@
 // Raw body is required for signature verification, so the Next.js
 // JSON body parser is disabled below.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
+import { findOrCreatePersonByEmail, promoteToCustomer } from '../../../lib/people';
 
 export const config = {
   api: { bodyParser: false },
@@ -35,6 +36,75 @@ function resolveUserId(sub, session) {
     session?.metadata?.user_id ||
     null
   );
+}
+
+function paymentIntentId(session) {
+  return typeof session?.payment_intent === 'string'
+    ? session.payment_intent
+    : session?.payment_intent?.id || null;
+}
+
+// Inserts a deal row, swallowing the unique-constraint error so
+// double-deliveries from Stripe don't crash the handler.
+async function insertDealIfNew(service, row) {
+  const { error } = await service.from('deals').insert(row);
+  if (error && error.code !== '23505') throw error; // 23505 = unique_violation
+}
+
+async function handleBookOrderCompleted(service, session) {
+  const sku = session.metadata?.sku || null;
+  if (!sku) throw new Error('book_order session missing sku metadata');
+
+  const shipping =
+    session.shipping_details ||
+    session.collected_information?.shipping_details ||
+    null;
+  const addr = shipping?.address || null;
+
+  const { error } = await service
+    .from('book_orders')
+    .upsert(
+      {
+        email: session.customer_details?.email || session.customer_email || '',
+        full_name: session.customer_details?.name || shipping?.name || null,
+        phone: session.customer_details?.phone || null,
+        sku,
+        amount_cents: session.amount_total ?? null,
+        currency: session.currency || 'usd',
+        status: 'paid',
+        shipping_name: shipping?.name || null,
+        shipping_line1: addr?.line1 || null,
+        shipping_line2: addr?.line2 || null,
+        shipping_city: addr?.city || null,
+        shipping_state: addr?.state || null,
+        shipping_postal_code: addr?.postal_code || null,
+        shipping_country: addr?.country || null,
+        stripe_session_id: session.id,
+        stripe_payment_intent_id: paymentIntentId(session),
+      },
+      { onConflict: 'stripe_session_id' },
+    );
+
+  if (error) throw error;
+
+  // Write the corresponding Deal so revenue rolls up on the dashboard.
+  const email = session.customer_details?.email || session.customer_email;
+  const fullName = session.customer_details?.name || shipping?.name || null;
+  if (email) {
+    const person = await findOrCreatePersonByEmail(service, { email, name: fullName });
+    await insertDealIfNew(service, {
+      person_id: person?.id || null,
+      amount_cents: session.amount_total ?? 0,
+      currency: session.currency || 'usd',
+      source: 'stripe',
+      notes: `Book order · ${sku}`,
+      close_date: new Date().toISOString().slice(0, 10),
+      won_at: new Date().toISOString(),
+      status: 'won',
+      stripe_payment_intent_id: paymentIntentId(session),
+    });
+    await promoteToCustomer(service, person?.id, person?.lifecycle_stage);
+  }
 }
 
 async function handleBookingCompleted(service, session) {
@@ -92,6 +162,26 @@ async function handleBookingCompleted(service, session) {
       .from('reading_availability')
       .update({ status: 'booked', booking_id: booking.id, held_until: null })
       .eq('id', slotId);
+  }
+
+  // Find or create the person, write the deal, promote lifecycle.
+  const email = m.email || session.customer_details?.email || session.customer_email;
+  const fullName = m.full_name || session.customer_details?.name || null;
+  if (email && booking?.id) {
+    const person = await findOrCreatePersonByEmail(service, { email, name: fullName });
+    await insertDealIfNew(service, {
+      person_id: person?.id || null,
+      booking_id: booking.id,
+      amount_cents: session.amount_total ?? 0,
+      currency: session.currency || 'usd',
+      source: 'stripe',
+      notes: `Private Reading · ${duration} min`,
+      close_date: new Date().toISOString().slice(0, 10),
+      won_at: new Date().toISOString(),
+      status: 'won',
+      stripe_payment_intent_id: paymentIntentId(session),
+    });
+    await promoteToCustomer(service, person?.id, person?.lifecycle_stage);
   }
 }
 
@@ -167,6 +257,8 @@ export default async function handler(req, res) {
       // on session.mode / metadata.booking.
       if (session.mode === 'payment' && session.metadata?.booking === 'true') {
         await handleBookingCompleted(service, session);
+      } else if (session.mode === 'payment' && session.metadata?.book_order === 'true') {
+        await handleBookOrderCompleted(service, session);
       } else {
         const userId = session.client_reference_id || session.metadata?.user_id;
         const subId = session.subscription;
@@ -188,6 +280,29 @@ export default async function handler(req, res) {
             },
             { onConflict: 'user_id' },
           );
+        }
+
+        // Record the initial subscription charge as a Deal so it
+        // shows up on the dashboard alongside one-time sales.
+        const email = session.customer_details?.email || session.customer_email;
+        if (userId && email && (session.amount_total ?? 0) > 0) {
+          const person = await findOrCreatePersonByEmail(service, {
+            email,
+            name: session.customer_details?.name || null,
+          });
+          await insertDealIfNew(service, {
+            person_id: person?.id || null,
+            member_subscription_id: userId,
+            amount_cents: session.amount_total ?? 0,
+            currency: session.currency || 'usd',
+            source: 'stripe',
+            notes: `${session.metadata?.plan || 'founders'} subscription · first charge`,
+            close_date: new Date().toISOString().slice(0, 10),
+            won_at: new Date().toISOString(),
+            status: 'won',
+            stripe_payment_intent_id: paymentIntentId(session),
+          });
+          await promoteToCustomer(service, person?.id, person?.lifecycle_stage);
         }
       }
     } else {

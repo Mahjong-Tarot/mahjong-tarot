@@ -29,7 +29,7 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const noLock = async (_name, _acquireTimeout, fn) => fn();
 
 // Cookie-backed client so the same session is visible to server-side
-// gates (requirePortalUser / requireAdmin) on the next request. Drop-in
+// gates (requireStaff / requireAdmin) on the next request. Drop-in
 // SupabaseClient API — only persistence behaviour changes vs. createClient.
 //
 // Additional auth options (added 2026-05-20 after watchdog still

@@ -92,7 +92,7 @@ react-dom              ^18.0.0
 | Package | Used for | When | PR |
 |---|---|---|---|
 | `marked` | markdown→HTML for report view + email | View/send report | 7, 8 |
-| `@supabase/ssr` *(or rolling own cookie parser)* | server-side session read in `requirePortalUser` | Route protection | 1 |
+| `@supabase/ssr` *(or rolling own cookie parser)* | server-side session read in `requireStaff` | Route protection | 1 |
 | `@anthropic-ai/sdk` *(or direct `fetch`)* | report generation | Generate report | 7 |
 
 No new global tooling (no ESLint changes, no Tailwind, no test framework).
@@ -119,7 +119,7 @@ New portal CSS modules will follow PascalCase: `Portal.module.css`, `PortalClien
 - [website/pages/almanac/index.jsx](website/pages/almanac/index.jsx) — public data
 - [website/pages/horoscopes/forecast/index.jsx](website/pages/horoscopes/forecast/index.jsx) — public data
 
-**None of these read the Supabase session cookie.** `requirePortalUser` is a new pattern for this codebase.
+**None of these read the Supabase session cookie.** `requireStaff` is a new pattern for this codebase.
 
 ### Collision check
 
@@ -153,7 +153,7 @@ Each handler:
 ### OQ2 — SSR helper: **install `@supabase/ssr`**
 
 Added to `website/package.json` in PR #1. Used by:
-- `lib/requirePortalUser.js` and `lib/requireAdmin.js` (PR #1)
+- `lib/requireStaff.js` and `lib/requireAdmin.js` (PR #1)
 - Every `pages/api/admin/**` handler (PRs 5–8)
 
 ### OQ3 — `/admin` gate: **fold into PR #1**
@@ -219,7 +219,7 @@ Each section lists: scope, files created/modified, migrations, env vars, smoke t
 
 - `website/supabase/016_roles.sql` — exactly the SQL from spec §2.1
 - `website/supabase/seed-astrologers.sql` — runbook only (commit but don't auto-apply); placeholders replaced once OQ6 is answered
-- `website/lib/requirePortalUser.js` — new SSR helper. Reads Supabase session via `@supabase/ssr`, loads the profile, redirects to `/` if role isn't `astrologer`/`admin`, otherwise returns `{ props: { profile } }`.
+- `website/lib/requireStaff.js` — new SSR helper. Reads Supabase session via `@supabase/ssr`, loads the profile, redirects to `/` if role isn't `astrologer`/`admin`, otherwise returns `{ props: { profile } }`.
 - `website/lib/requireAdmin.js` — same shape, requires `role === 'admin'`. Used by `/admin`.
 
 **Files modified:**
@@ -275,7 +275,7 @@ Each section lists: scope, files created/modified, migrations, env vars, smoke t
 
 **Files created:**
 
-- `website/pages/portal/index.jsx` — placeholder content. Calls `requirePortalUser` in `getServerSideProps`.
+- `website/pages/portal/index.jsx` — placeholder content. Calls `requireStaff` in `getServerSideProps`.
 - `website/components/PortalNav.jsx` + `website/components/PortalNav.module.css` — sidebar or top nav for portal pages. Links: Upcoming, Clients, Settings.
 - `website/styles/Portal.module.css` — portal layout (sidebar + main column).
 

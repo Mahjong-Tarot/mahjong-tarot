@@ -7,7 +7,7 @@ import {
 /**
  * getServerSideProps helper for admin-only pages (/admin).
  *
- * Same shape as requirePortalUser but only role === 'admin' is allowed.
+ * Same shape as requireStaff but only role === 'admin' is allowed.
  * Astrologers are redirected to the portal home.
  */
 export async function requireAdmin(ctx) {

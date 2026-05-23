@@ -4,13 +4,13 @@ import Link from 'next/link';
 import AdminShell from '../../../components/AdminShell';
 import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
-import { requirePortalUser } from '../../../lib/requirePortalUser';
+import { requireStaff } from '../../../lib/requireStaff';
 import { listClients } from '../../../lib/clients';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClients.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePortalUser(ctx);
+  return requireStaff(ctx);
 }
 
 export default function ClientsListPage({ profile }) {

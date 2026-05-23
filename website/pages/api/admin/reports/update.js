@@ -1,4 +1,4 @@
-import { requirePortalUserApi } from '../../../../lib/requirePortalUserApi';
+import { requireStaffApi } from '../../../../lib/requireStaffApi';
 
 const ALLOWED_FIELDS = new Set([
   'title',
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const auth = await requirePortalUserApi(req, res);
+  const auth = await requireStaffApi(req, res);
   if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
   const { supabase } = auth;
 

@@ -4,13 +4,13 @@ import AdminShell from '../../../components/AdminShell';
 import SessionsList from '../../../components/SessionsList';
 import SessionsCalendar from '../../../components/SessionsCalendar';
 import { supabase } from '../../../lib/supabase';
-import { requirePortalUser } from '../../../lib/requirePortalUser';
+import { requireStaff } from '../../../lib/requireStaff';
 import { listSessionsWithClient } from '../../../lib/sessions';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 import homeStyles from '../../../styles/PortalHome.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePortalUser(ctx);
+  return requireStaff(ctx);
 }
 
 const ROLE_LABEL = {

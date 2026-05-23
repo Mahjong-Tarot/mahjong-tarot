@@ -95,7 +95,7 @@ export default function TheMahjongMirror() {
  guiding you toward clarity, intuition, and deeper self-discovery.
  </p>
  <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
- <Link href="#preorder" className="btn-primary">Preorder the Book</Link>
+ <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
  <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
  </div>
  </div>

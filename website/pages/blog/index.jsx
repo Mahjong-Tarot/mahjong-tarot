@@ -69,7 +69,7 @@ export default function BlogIndex() {
  hidden inside ancient symbols.
  </p>
  <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
- <Link href="/the-mahjong-mirror#preorder" className="btn-primary">Preorder the Book</Link>
+ <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
  <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
  </div>
  </div>

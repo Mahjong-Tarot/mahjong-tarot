@@ -37,6 +37,51 @@ function resolveUserId(sub, session) {
   );
 }
 
+async function handleBookingCompleted(service, session) {
+  const m = session.metadata || {};
+  const duration = parseInt(m.duration, 10);
+  const slotId = m.slot_id || null;
+  const scheduledAt = m.slot_start || null;
+
+  // Idempotent upsert by Stripe session id.
+  const { data: booking, error: bookingErr } = await service
+    .from('bookings')
+    .upsert(
+      {
+        full_name: m.full_name || session.customer_details?.name || '',
+        email: m.email || session.customer_details?.email || session.customer_email || '',
+        phone: m.phone || null,
+        birthday: m.birthday || null,
+        birth_time: m.birth_time || null,
+        question: m.question || null,
+        duration_minutes: duration,
+        scheduled_at: scheduledAt,
+        slot_id: slotId,
+        status: 'paid',
+        amount_cents: session.amount_total ?? null,
+        currency: session.currency || 'usd',
+        stripe_session_id: session.id,
+        stripe_payment_intent_id:
+          typeof session.payment_intent === 'string'
+            ? session.payment_intent
+            : session.payment_intent?.id || null,
+      },
+      { onConflict: 'stripe_session_id' },
+    )
+    .select('id')
+    .single();
+
+  if (bookingErr) throw bookingErr;
+
+  // Flip the held slot to booked and link it to the new booking row.
+  if (slotId && booking?.id) {
+    await service
+      .from('reading_availability')
+      .update({ status: 'booked', booking_id: booking.id, held_until: null })
+      .eq('id', slotId);
+  }
+}
+
 async function upsertFromSubscription(service, sub, userIdHint) {
   const userId = userIdHint || sub.metadata?.user_id;
   const row = {
@@ -102,26 +147,35 @@ export default async function handler(req, res) {
   try {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      const userId = session.client_reference_id || session.metadata?.user_id;
-      const subId = session.subscription;
-      if (subId) {
-        const sub = await stripe.subscriptions.retrieve(subId);
-        await upsertFromSubscription(service, sub, userId);
-      } else if (userId && session.customer) {
-        // Defensive: rare case where subscription id isn't on the session yet.
-        await service.from('member_subscriptions').upsert(
-          {
-            user_id: userId,
-            stripe_customer_id:
-              typeof session.customer === 'string'
-                ? session.customer
-                : session.customer?.id,
-            plan: session.metadata?.plan || 'founders',
-            status: 'active',
-            started_at: new Date().toISOString(),
-          },
-          { onConflict: 'user_id' },
-        );
+
+      // Two checkout types live on the same endpoint: the
+      // recurring Member Area subscription (mode=subscription) and
+      // one-time Private Reading bookings (mode=payment). Branch
+      // on session.mode / metadata.booking.
+      if (session.mode === 'payment' && session.metadata?.booking === 'true') {
+        await handleBookingCompleted(service, session);
+      } else {
+        const userId = session.client_reference_id || session.metadata?.user_id;
+        const subId = session.subscription;
+        if (subId) {
+          const sub = await stripe.subscriptions.retrieve(subId);
+          await upsertFromSubscription(service, sub, userId);
+        } else if (userId && session.customer) {
+          // Defensive: rare case where subscription id isn't on the session yet.
+          await service.from('member_subscriptions').upsert(
+            {
+              user_id: userId,
+              stripe_customer_id:
+                typeof session.customer === 'string'
+                  ? session.customer
+                  : session.customer?.id,
+              plan: session.metadata?.plan || 'founders',
+              status: 'active',
+              started_at: new Date().toISOString(),
+            },
+            { onConflict: 'user_id' },
+          );
+        }
       }
     } else {
       // customer.subscription.created | updated | deleted

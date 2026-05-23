@@ -77,7 +77,7 @@ export default function ReadingBriefPage({ profile }) {
         // People: match by email (canonical identity)
         const { data: pp } = await supabase
           .from('people')
-          .select('id, name, email, birthday, birth_time, birth_place, lifecycle_stage, gender')
+          .select('id, name, email, phone, birthday, birth_time, birth_place, lifecycle_stage, gender')
           .ilike('email', b.email)
           .maybeSingle();
         if (cancelled) return;
@@ -181,6 +181,19 @@ export default function ReadingBriefPage({ profile }) {
               <strong>{STATUS_LABEL[booking.status] || booking.status}</strong>
               {deal && <> · ${(deal.amount_cents / 100).toFixed(2)} {(deal.currency || 'usd').toUpperCase()}</>}
             </p>
+
+            {/* Contact */}
+            <Section title="Contact">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+                <Detail label="Email">{person?.email || booking?.email || <Missing />}</Detail>
+                <Detail label="Phone">{person?.phone || booking?.phone || <Missing />}</Detail>
+              </div>
+              {person?.id && (
+                <p className={adminStyles.muted} style={{ fontSize: 12, marginTop: 10 }}>
+                  Edit these in the <Link href={`/admin/people?focus=${person.id}`} style={{ textDecoration: 'underline', color: 'inherit' }}>People shelf</Link>.
+                </p>
+              )}
+            </Section>
 
             {/* What she's bringing */}
             <Section title="What she's bringing">

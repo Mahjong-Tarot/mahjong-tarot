@@ -143,6 +143,19 @@ export default function Signup() {
         path="/signup"
       />
 
+      {/* Funnel-locked nav */}
+      <header className={`container ${styles.navBar}`}>
+        <Link href="/" className={styles.logo}>
+          <span className={styles.logomark} />
+          Mahjong Tarot
+        </Link>
+        <div className={styles.navStep}>
+          <span className={styles.pip} />
+          Member Area sign up
+        </div>
+        <Link href="/sign-in" className={styles.navBack}>Already a member? Sign in</Link>
+      </header>
+
       <main className={styles.main}>
         <div className="container">
 

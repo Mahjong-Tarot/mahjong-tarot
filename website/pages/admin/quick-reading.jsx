@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import PortalNav from '../../components/PortalNav';
+import AdminShell from '../../components/AdminShell';
 import { requirePortalUser } from '../../lib/requirePortalUser';
-import portalStyles from '../../styles/Portal.module.css';
+import adminStyles from '../../styles/PortalAdmin.module.css';
 import styles from '../../styles/PortalQuickReading.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -59,7 +59,7 @@ export default function QuickReadingPage({ profile }) {
 
     try {
       const res = await Promise.race([
-        fetch('/api/portal/quick-reading', {
+        fetch('/api/admin/quick-reading', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -104,13 +104,10 @@ export default function QuickReadingPage({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>Portal · Quick reading</p>
-          <h1 className={portalStyles.h1}>Generate a reading</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <p className={adminStyles.pageEyebrow}>Quick reading</p>
+          <h1 className={adminStyles.pageTitle}>Generate a reading</h1>
+          <p className={adminStyles.pageLede}>
             Enter the subject's birth info. We email a packet with the Bazi
             chart, Zi Wei summary, Three Blessings, almanac, and horoscope
             for the consultation date.
@@ -241,8 +238,7 @@ export default function QuickReadingPage({ profile }) {
               </div>
             )}
           </form>
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

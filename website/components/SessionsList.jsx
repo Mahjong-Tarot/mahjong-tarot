@@ -28,7 +28,7 @@ export default function SessionsList({ sessions, emptyMessage = 'No sessions to 
               return (
                 <li key={s.id} className={styles.card}>
                   <Link
-                    href={`/portal/clients/${c.id || s.client_id}`}
+                    href={`/admin/private-readings/${c.id || s.client_id}`}
                     className={styles.cardLink}
                   >
                     <div className={styles.when}>

@@ -4,12 +4,28 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
 import styles from './AdminShell.module.css';
 
-const NAV = [
-  { href: '/admin',             label: 'Dashboard',   match: (p) => p === '/admin' },
-  { href: '/admin/people',      label: 'People',      match: (p) => p.startsWith('/admin/people') },
-  { href: '/admin/inquiries',   label: 'Inquiries',   match: (p) => p.startsWith('/admin/inquiries') },
-  { href: '/admin/conversions', label: 'Conversions', match: (p) => p.startsWith('/admin/conversions') },
+// Sidebar items visible to admin only.
+const ADMIN_NAV = [
+  { href: '/admin',           label: 'Dashboard',  match: (p) => p === '/admin' },
+  { href: '/admin/people',    label: 'People',     match: (p) => p.startsWith('/admin/people') },
+  { href: '/admin/inquiries', label: 'Inquiries',  match: (p) => p.startsWith('/admin/inquiries') },
+  { href: '/admin/sales',     label: 'Sales',      match: (p) => p.startsWith('/admin/sales') },
 ];
+
+// Sidebar items visible to astrologer + admin (operational pages).
+const OPS_NAV = [
+  { href: '/admin/sessions',          label: 'Sessions',         match: (p) => p.startsWith('/admin/sessions') },
+  { href: '/admin/private-readings',  label: 'Private readings', match: (p) => p.startsWith('/admin/private-readings') },
+  { href: '/admin/quick-reading',     label: 'Quick reading',    match: (p) => p.startsWith('/admin/quick-reading') },
+  { href: '/admin/reports',           label: 'Reports',          match: (p) => p.startsWith('/admin/reports') },
+  { href: '/admin/settings/meeting-source', label: 'Settings',   match: (p) => p.startsWith('/admin/settings') },
+];
+
+function navFor(role) {
+  if (role === 'admin')      return [...ADMIN_NAV, ...OPS_NAV];
+  if (role === 'astrologer') return OPS_NAV;
+  return [];
+}
 
 export default function AdminShell({ profile, children }) {
   const router = useRouter();
@@ -52,7 +68,7 @@ export default function AdminShell({ profile, children }) {
 
         <nav className={styles.nav} aria-label="Admin sections">
           <ul className={styles.navList}>
-            {NAV.map((item) => {
+            {navFor(profile?.role).map((item) => {
               const active = item.match(router.pathname);
               return (
                 <li key={item.href}>
@@ -70,9 +86,6 @@ export default function AdminShell({ profile, children }) {
         </nav>
 
         <div className={styles.footer}>
-          <Link href="/portal" className={styles.portalLink} onClick={() => setOpen(false)}>
-            Astrologer portal →
-          </Link>
           <div className={styles.who}>
             <span className={styles.whoName}>{displayName}</span>
             <button type="button" onClick={handleSignOut} className={styles.signOut}>

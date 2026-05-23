@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PortalNav from '../../../components/PortalNav';
+import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { useAuth } from '../../../lib/auth';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { listClients } from '../../../lib/clients';
 import { createSession } from '../../../lib/sessions';
-import portalStyles from '../../../styles/Portal.module.css';
+import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -85,7 +85,7 @@ export default function NewSessionPage({ profile }) {
         duration_minutes: parseInt(form.duration_minutes, 10) || 60,
         prep_notes: form.prep_notes,
       });
-      router.push(`/portal/clients/${form.client_id}`);
+      router.push(`/admin/private-readings/${form.client_id}`);
     } catch (err) {
       setError(err.message || 'Failed to schedule session.');
       setSubmitting(false);
@@ -99,18 +99,15 @@ export default function NewSessionPage({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
+      <AdminShell profile={profile}>
           <Link
-            href={presetClientId ? `/portal/clients/${presetClientId}` : '/portal/clients'}
+            href={presetClientId ? `/admin/private-readings/${presetClientId}` : '/admin/private-readings'}
             className={styles.backLink}
           >
-            ← {presetClientId ? 'Back to client' : 'All clients'}
+            ← {presetClientId ? 'Back to reading' : 'Private readings'}
           </Link>
-          <p className={portalStyles.eyebrow}>Portal · Schedule session</p>
-          <h1 className={portalStyles.h1}>Schedule a session</h1>
+          <p className={adminStyles.pageEyebrow}>Admin · Schedule session</p>
+          <h1 className={adminStyles.pageTitle}>Schedule a session</h1>
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.field}>
@@ -143,7 +140,7 @@ export default function NewSessionPage({ profile }) {
 
             <div className={styles.actions}>
               <Link
-                href={presetClientId ? `/portal/clients/${presetClientId}` : '/portal/clients'}
+                href={presetClientId ? `/admin/private-readings/${presetClientId}` : '/admin/private-readings'}
                 className={styles.btnSecondary}
               >
                 Cancel
@@ -153,8 +150,7 @@ export default function NewSessionPage({ profile }) {
               </button>
             </div>
           </form>
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

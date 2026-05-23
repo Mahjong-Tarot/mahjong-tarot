@@ -2,12 +2,12 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PortalNav from '../../../components/PortalNav';
+import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { useAuth } from '../../../lib/auth';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { createClient as createClientRow } from '../../../lib/clients';
-import portalStyles from '../../../styles/Portal.module.css';
+import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -42,7 +42,7 @@ export default function NewClientPage({ profile }) {
     setSubmitting(true);
     try {
       const row = await createClientRow(supabase, form, user?.id);
-      router.push(`/portal/clients/${row.id}`);
+      router.push(`/admin/private-readings/${row.id}`);
     } catch (err) {
       setError(err.message || 'Failed to create client.');
       setSubmitting(false);
@@ -56,14 +56,11 @@ export default function NewClientPage({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
-          <Link href="/portal/clients" className={styles.backLink}>← All clients</Link>
-          <p className={portalStyles.eyebrow}>Portal · New client</p>
-          <h1 className={portalStyles.h1}>Add a client</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <Link href="/admin/private-readings" className={styles.backLink}>← Private readings</Link>
+          <p className={adminStyles.pageEyebrow}>Admin · New private reading</p>
+          <h1 className={adminStyles.pageTitle}>Add a client</h1>
+          <p className={adminStyles.pageLede}>
             Manual entry for now. Auto-creation from bookings comes later.
           </p>
 
@@ -119,14 +116,13 @@ export default function NewClientPage({ profile }) {
             {error && <p className={styles.error}>{error}</p>}
 
             <div className={styles.actions}>
-              <Link href="/portal/clients" className={styles.btnSecondary}>Cancel</Link>
+              <Link href="/admin/private-readings" className={styles.btnSecondary}>Cancel</Link>
               <button type="submit" className={styles.btnPrimary} disabled={submitting}>
                 {submitting ? 'Creating…' : 'Create client'}
               </button>
             </div>
           </form>
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

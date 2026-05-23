@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import PortalNav from '../../../../components/PortalNav';
+import AdminShell from '../../../../components/AdminShell';
 import { supabase } from '../../../../lib/supabase';
 import { useAuth } from '../../../../lib/auth';
 import { requirePortalUser } from '../../../../lib/requirePortalUser';
 import { SUPPORTED_SOURCES } from '../../../../lib/meetingSources';
 import * as krisp from '../../../../lib/meetingSources/krisp';
-import portalStyles from '../../../../styles/Portal.module.css';
+import adminStyles from '../../../../styles/PortalAdmin.module.css';
 import styles from '../../../../styles/PortalSettings.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -100,14 +100,11 @@ export default function MeetingSourceSettingsPage({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
-          <Link href="/portal" className={styles.backLink}>← Back to portal</Link>
-          <p className={portalStyles.eyebrow}>Portal · Settings · Meeting source</p>
-          <h1 className={portalStyles.h1}>Connect your meeting source</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <Link href="/admin/sessions" className={styles.backLink}>← Sessions</Link>
+          <p className={adminStyles.pageEyebrow}>Settings · Meeting source</p>
+          <h1 className={adminStyles.pageTitle}>Connect your meeting source</h1>
+          <p className={adminStyles.pageLede}>
             Connect a recording service so the portal can pull transcripts and
             generate reports for your clients. Only one source needs to be
             connected at a time.
@@ -196,8 +193,7 @@ export default function MeetingSourceSettingsPage({ profile }) {
               })}
             </ul>
           )}
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

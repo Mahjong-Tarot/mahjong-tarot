@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PortalNav from '../../../components/PortalNav';
+import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { getReport } from '../../../lib/reports';
@@ -26,7 +26,7 @@ async function postJson(url, body) {
   if (!res.ok) throw new Error(data.error || `${url} failed (${res.status})`);
   return data;
 }
-import portalStyles from '../../../styles/Portal.module.css';
+import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalReport.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -160,7 +160,7 @@ export default function ReportPage({ profile }) {
     setReportMessage('');
     try {
       const { report: updated } = await withWatchdog(
-        postJson('/api/portal/reports/update', {
+        postJson('/api/admin/reports/update', {
           reportId: report.id,
           fields: {
             title: title.trim() || null,
@@ -193,7 +193,7 @@ export default function ReportPage({ profile }) {
     setSendMessage('');
     try {
       const res = await withWatchdog(
-        fetch('/api/portal/reports/send', {
+        fetch('/api/admin/reports/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ reportId: report.id }),
@@ -216,14 +216,14 @@ export default function ReportPage({ profile }) {
 
   return (
     <ShellLayout profile={profile} title={client?.full_name || 'Report'}>
-      <Link href={client ? `/portal/clients/${client.id}` : '/portal'} className={styles.backLink}>
+      <Link href={client ? `/admin/private-readings/${client.id}` : '/admin/sessions'} className={styles.backLink}>
         ← {client ? `Back to ${client.full_name}` : 'Back to portal'}
       </Link>
 
       <header className={styles.head}>
         <div>
-          <p className={portalStyles.eyebrow}>Portal · Report</p>
-          <h1 className={portalStyles.h1}>
+          <p className={adminStyles.pageEyebrow}>Portal · Report</p>
+          <h1 className={adminStyles.pageTitle}>
             {client?.full_name || 'Report'}
           </h1>
           {session && (
@@ -244,7 +244,7 @@ export default function ReportPage({ profile }) {
       </header>
 
       {error && <p className={styles.error}>{error}</p>}
-      {loading && <p className={portalStyles.muted}>Loading report…</p>}
+      {loading && <p className={adminStyles.muted}>Loading report…</p>}
 
       {!loading && report && (
         <>
@@ -397,13 +397,10 @@ function ShellLayout({ profile, title, children }) {
   return (
     <>
       <Head>
-        <title>{title ? `${title} · Report` : 'Report'} | Mahjong Tarot Portal</title>
+        <title>{title ? `${title} · Report` : 'Report'} | Mahjong Tarot Admin</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-        <main className={portalStyles.main}>{children}</main>
-      </div>
+      <AdminShell profile={profile}>{children}</AdminShell>
     </>
   );
 }

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PortalNav from '../../../../components/PortalNav';
+import AdminShell from '../../../../components/AdminShell';
 import { requirePortalUser } from '../../../../lib/requirePortalUser';
 import * as krisp from '../../../../lib/meetingSources/krisp';
-import portalStyles from '../../../../styles/Portal.module.css';
+import adminStyles from '../../../../styles/PortalAdmin.module.css';
 import styles from '../../../../styles/PortalSettings.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -84,7 +84,7 @@ export default function MeetingSourceCallback({ profile }) {
         );
         // Brief pause so the user sees the success message before the redirect.
         setTimeout(() => {
-          router.replace(stored.return_url || '/portal/settings/meeting-source');
+          router.replace(stored.return_url || '/admin/settings/meeting-source');
         }, 1200);
       })
       .catch((err) => {
@@ -104,25 +104,21 @@ export default function MeetingSourceCallback({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>Portal · Settings · Meeting source</p>
-          <h1 className={portalStyles.h1}>Connecting your meeting source</h1>
+      <AdminShell profile={profile}>
+          <p className={adminStyles.pageEyebrow}>Settings · Meeting source</p>
+          <h1 className={adminStyles.pageTitle}>Connecting your meeting source</h1>
 
           <div className={`${styles.callbackPanel} ${styles[`callback_${status}`] || ''}`}>
             <p className={styles.callbackMessage}>{message}</p>
             {status === 'error' && (
               <div className={styles.cardActions}>
-                <Link href="/portal/settings/meeting-source" className={styles.btnSecondary}>
+                <Link href="/admin/settings/meeting-source" className={styles.btnSecondary}>
                   Back to settings
                 </Link>
               </div>
             )}
           </div>
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

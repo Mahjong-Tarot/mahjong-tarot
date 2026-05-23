@@ -107,7 +107,7 @@ export default function SessionsCalendar({ sessions, initialMonth }) {
                   return (
                     <li key={s.id}>
                       <Link
-                        href={`/portal/clients/${c.id || s.client_id}`}
+                        href={`/admin/private-readings/${c.id || s.client_id}`}
                         className={styles.pill}
                         title={`${time} — ${c.full_name || 'Client'}`}
                       >

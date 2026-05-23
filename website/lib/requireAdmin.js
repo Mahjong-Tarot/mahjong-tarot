@@ -45,7 +45,7 @@ export async function requireAdmin(ctx) {
   if (!profile || profile.role !== 'admin') {
     return {
       redirect: {
-        destination: profile?.role === 'astrologer' ? '/portal' : '/',
+        destination: profile?.role === 'astrologer' ? '/admin/sessions' : '/',
         permanent: false,
       },
     };

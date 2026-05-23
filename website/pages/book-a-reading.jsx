@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Nav from '../components/Nav';
-import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import styles from '../styles/Booking.module.css';
 
@@ -73,7 +71,6 @@ export default function BookAReading() {
         description="Choose your card-reading length. 30, 60, or 90 minutes, live online with Bill Hajdu."
         path="/book-a-reading"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -181,19 +178,8 @@ export default function BookAReading() {
             </div>
           </div>
 
-          {/* Help */}
-          <div className={styles.help}>
-            <span className={styles.eyebrow}>Need help?</span>
-            <p>
-              Not sure which length fits? <Link href="/contact">Send Bill a note</Link> and
-              he&apos;ll point you to the right one.
-            </p>
-          </div>
-
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

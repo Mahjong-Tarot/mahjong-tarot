@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import styles from '../../styles/Booking.module.css';
 
@@ -47,7 +45,6 @@ export default function BookingConfirm() {
         description="Your Private Reading is booked."
         path="/book-a-reading/confirm"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -112,16 +109,11 @@ export default function BookingConfirm() {
               <Link href="/" className={styles.submitBtn} style={{ textDecoration: 'none' }}>
                 Back to home <span aria-hidden="true">→</span>
               </Link>
-              <p className={styles.fieldHint} style={{ marginTop: '10px', textAlign: 'center' }}>
-                // Need to reschedule? <Link href="/contact">Send Bill a note.</Link>
-              </p>
             </div>
           )}
 
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

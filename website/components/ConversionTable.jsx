@@ -29,7 +29,7 @@ export default function ConversionTable({
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Client</th>
+            <th>Customer</th>
             <th>Astrologer</th>
             <th>Status</th>
             <th>Sessions</th>

@@ -12,7 +12,7 @@ export async function getServerSideProps(ctx) {
 
 const FILTERS = [
   { id: 'all',         label: 'All' },
-  { id: 'clients',     label: 'Clients' },
+  { id: 'customers',    label: 'Customers' },
   { id: 'members',     label: 'Portal members' },
   { id: 'subscribers', label: 'Subscribers' },
   { id: 'opted_out',   label: 'Opted out' },
@@ -62,8 +62,7 @@ export default function AdminPeople({ profile }) {
       try {
         const [pRes, iRes, cRes, prRes] = await Promise.all([
           supabase
-            .from('people')
-            .select('id, email, name, company, role, phone, ok_to_contact, source_site, created_at, updated_at')
+            .from('people').select('id, email, name, company, role, phone, ok_to_contact, source_site, created_at, updated_at, lifecycle_stage')
             .order('updated_at', { ascending: false }),
           supabase
             .from('inquiries')
@@ -129,6 +128,7 @@ export default function AdminPeople({ profile }) {
         types,
         inquiry_count: pInq.length,
         client_id:        client?.id ?? null,
+        is_customer:      p.lifecycle_stage === 'customer',
         subscription:     client?.subscription_status ?? null,
         is_member:        !!memberProfile,
         is_subscriber:    subscriber,
@@ -139,14 +139,14 @@ export default function AdminPeople({ profile }) {
 
   const totals = useMemo(() => ({
     total:        aggregated.length,
-    clients:      aggregated.filter((p) => p.client_id).length,
+    customers:    aggregated.filter((p) => p.is_customer).length,
     members:      aggregated.filter((p) => p.is_member).length,
     subscribers:  aggregated.filter((p) => p.is_subscriber && p.ok_to_contact).length,
     opted_out:    aggregated.filter((p) => !p.ok_to_contact).length,
   }), [aggregated]);
 
   const filtered = aggregated.filter((p) => {
-    if (filter === 'clients')     return !!p.client_id;
+    if (filter === 'customers')     return p.is_customer;
     if (filter === 'members')     return p.is_member;
     if (filter === 'subscribers') return p.is_subscriber && p.ok_to_contact;
     if (filter === 'opted_out')   return !p.ok_to_contact;
@@ -175,8 +175,8 @@ export default function AdminPeople({ profile }) {
               <p className={styles.statValue}>{totals.total}</p>
             </div>
             <div className={styles.statCard}>
-              <p className={styles.statLabel}>Clients</p>
-              <p className={styles.statValue}>{totals.clients}</p>
+              <p className={styles.statLabel}>Customers</p>
+              <p className={styles.statValue}>{totals.customers}</p>
             </div>
             <div className={styles.statCard}>
               <p className={styles.statLabel}>Members</p>
@@ -232,13 +232,13 @@ export default function AdminPeople({ profile }) {
                       <td>
                         <div className={tableStyles.tagRow}>
                           {p.is_member && <span className={tableStyles.tagMember}>member</span>}
-                          {p.client_id && <span className={tableStyles.tagClient}>client</span>}
+                          {p.is_customer && <span className={tableStyles.tagClient}>customer</span>}
                           {p.subscription === 'active' && <span className={tableStyles.tagActive}>subscribed</span>}
                           {p.subscription === 'lapsed' && <span className={tableStyles.tagLapsed}>lapsed</span>}
                           {p.types.map((t) => (
                             <span key={t} className={tableStyles.tag}>{TYPE_LABELS[t] || t}</span>
                           ))}
-                          {p.types.length === 0 && !p.is_member && !p.client_id && (
+                          {p.types.length === 0 && !p.is_member && !p.is_customer && (
                             <span className={tableStyles.muted}>—</span>
                           )}
                         </div>

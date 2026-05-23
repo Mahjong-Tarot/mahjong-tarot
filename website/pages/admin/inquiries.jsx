@@ -53,6 +53,11 @@ export default function AdminInquiries({ profile }) {
   const [selected, setSelected] = useState(null);
   const [busy, setBusy]         = useState('');
   const [toast, setToast]       = useState('');
+  // When the user moves an inquiry to 'won', we intercept and open a
+  // small modal to capture the deal amount. The endpoint then writes
+  // a public.deals row + bumps people.lifecycle_stage to 'customer'.
+  const [winning, setWinning]   = useState(null); // {inquiry, amount, closeDate, notes}
+  const [winSubmitting, setWinSubmitting] = useState(false);
 
   async function load() {
     if (!supabase) {
@@ -88,6 +93,19 @@ export default function AdminInquiries({ profile }) {
   }, [toast]);
 
   async function changeStatus(inquiryId, newStatus) {
+    // Won is special: we need the deal amount before flipping status.
+    if (newStatus === 'won') {
+      const inquiry = rows.find((r) => r.id === inquiryId);
+      if (inquiry) {
+        setWinning({
+          inquiry,
+          amount: '',
+          closeDate: new Date().toISOString().slice(0, 10),
+          notes: '',
+        });
+      }
+      return;
+    }
     setBusy(inquiryId);
     try {
       const { error: e } = await supabase.rpc('update_inquiry_status', {
@@ -102,6 +120,47 @@ export default function AdminInquiries({ profile }) {
       setError(e.message || 'Failed to update status.');
     } finally {
       setBusy('');
+    }
+  }
+
+  async function submitMarkWon() {
+    if (!winning) return;
+    const dollars = parseFloat(winning.amount);
+    if (!Number.isFinite(dollars) || dollars < 0) {
+      setError('Enter a valid amount.');
+      return;
+    }
+    setWinSubmitting(true);
+    setError('');
+    try {
+      const r = await fetch('/api/admin/inquiries/mark-won', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inquiry_id: winning.inquiry.id,
+          amount_cents: Math.round(dollars * 100),
+          currency: 'usd',
+          close_date: winning.closeDate,
+          notes: winning.notes || null,
+        }),
+      });
+      const json = await r.json();
+      if (!r.ok) throw new Error(json.error || 'Mark Won failed');
+      // Update local state.
+      setRows((prev) => prev.map((row) =>
+        row.id === winning.inquiry.id ? { ...row, status: 'won' } : row,
+      ));
+      if (selected?.id === winning.inquiry.id) {
+        setSelected({ ...selected, status: 'won' });
+      }
+      setToast(json.reused
+        ? `Already marked Won earlier — opened that deal.`
+        : `Won! Deal recorded for $${dollars.toFixed(2)}.`);
+      setWinning(null);
+    } catch (e) {
+      setError(e.message || 'Mark Won failed');
+    } finally {
+      setWinSubmitting(false);
     }
   }
 
@@ -268,6 +327,72 @@ export default function AdminInquiries({ profile }) {
         )}
 
         {toast && <div className={kanbanStyles.toast}>{toast}</div>}
+      {winning && (
+        <div className={kanbanStyles.modalBackdrop} onClick={() => !winSubmitting && setWinning(null)}>
+          <div className={kanbanStyles.modal} onClick={(e) => e.stopPropagation()}>
+            <h3 className={kanbanStyles.modalTitle}>Mark as Won</h3>
+            <p className={kanbanStyles.modalSub}>
+              {winning.inquiry.person_name || winning.inquiry.person_email || 'Inquiry'} ·{' '}
+              {TYPE_LABELS[winning.inquiry.type] || winning.inquiry.type}
+            </p>
+
+            <label className={kanbanStyles.modalLabel}>
+              Amount (USD)
+              <input
+                type="number"
+                inputMode="decimal"
+                step="0.01"
+                min="0"
+                autoFocus
+                value={winning.amount}
+                onChange={(e) => setWinning({ ...winning, amount: e.target.value })}
+                placeholder="70.00"
+                className={kanbanStyles.modalInput}
+              />
+            </label>
+
+            <label className={kanbanStyles.modalLabel}>
+              Close date
+              <input
+                type="date"
+                value={winning.closeDate}
+                onChange={(e) => setWinning({ ...winning, closeDate: e.target.value })}
+                className={kanbanStyles.modalInput}
+              />
+            </label>
+
+            <label className={kanbanStyles.modalLabel}>
+              Notes (optional)
+              <textarea
+                rows={3}
+                value={winning.notes}
+                onChange={(e) => setWinning({ ...winning, notes: e.target.value })}
+                placeholder="Payment method, channel, anything worth remembering"
+                className={kanbanStyles.modalInput}
+              />
+            </label>
+
+            <div className={kanbanStyles.modalActions}>
+              <button
+                type="button"
+                onClick={() => setWinning(null)}
+                disabled={winSubmitting}
+                className={kanbanStyles.modalCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={submitMarkWon}
+                disabled={winSubmitting || !winning.amount}
+                className={kanbanStyles.modalSubmit}
+              >
+                {winSubmitting ? 'Recording…' : 'Mark Won'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </AdminShell>
     </>
   );

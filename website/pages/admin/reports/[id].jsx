@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
-import { requirePortalUser } from '../../../lib/requirePortalUser';
+import { requireStaff } from '../../../lib/requireStaff';
 import { getReport } from '../../../lib/reports';
 import { getSession } from '../../../lib/sessions';
 import { getClient } from '../../../lib/clients';
@@ -30,7 +30,7 @@ import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalReport.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePortalUser(ctx);
+  return requireStaff(ctx);
 }
 
 function formatDateTime(iso) {

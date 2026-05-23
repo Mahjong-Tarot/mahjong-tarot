@@ -20,13 +20,13 @@ import {
  * Usage:
  *
  *   export default async function handler(req, res) {
- *     const auth = await requirePortalUserApi(req, res);
+ *     const auth = await requireStaffApi(req, res);
  *     if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
  *     const { supabase, user, profile } = auth;
  *     // … do work
  *   }
  */
-export async function requirePortalUserApi(req, res) {
+export async function requireStaffApi(req, res) {
   const cookies = parseCookieHeader(req.headers.cookie ?? '');
 
   const supabase = createServerClient(

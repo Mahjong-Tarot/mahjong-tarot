@@ -5,14 +5,14 @@ import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { useAuth } from '../../../lib/auth';
-import { requirePortalUser } from '../../../lib/requirePortalUser';
+import { requireStaff } from '../../../lib/requireStaff';
 import { listClients } from '../../../lib/clients';
 import { createSession } from '../../../lib/sessions';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePortalUser(ctx);
+  return requireStaff(ctx);
 }
 
 function defaultScheduledAt() {

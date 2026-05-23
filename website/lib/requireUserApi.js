@@ -7,7 +7,7 @@ import {
 /**
  * API-route auth helper for endpoints that any signed-in user can hit.
  *
- * Lighter than requirePortalUserApi / requireAdminApi — no role check.
+ * Lighter than requireStaffApi / requireAdminApi — no role check.
  * Use for self-serve endpoints (own profile, own readings, etc.) where
  * RLS is the source of truth on what data the user can touch.
  *

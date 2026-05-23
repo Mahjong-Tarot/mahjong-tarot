@@ -3,7 +3,7 @@
 -- ============================================================
 -- Adds a `role` column to public.profiles and two SECURITY DEFINER
 -- helper functions used by Row-Level Security policies and by
--- application code (lib/requirePortalUser.js, lib/requireAdmin.js).
+-- application code (lib/requireStaff.js, lib/requireAdmin.js).
 --
 -- Roles:
 --   'member'      — default; standard site members

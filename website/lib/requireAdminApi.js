@@ -7,7 +7,7 @@ import {
 /**
  * API-route auth helper for admin-only endpoints.
  *
- * Same shape as requirePortalUserApi but only role === 'admin' is allowed.
+ * Same shape as requireStaffApi but only role === 'admin' is allowed.
  *
  *   const auth = await requireAdminApi(req, res);
  *   if (!auth.ok) return res.status(auth.status).json({ error: auth.error });

@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -10,9 +11,18 @@ import styles from '../styles/Contact.module.css';
 import form from '../styles/Forms.module.css';
 
 export default function Contact() {
+ const router = useRouter();
  const [fields, setFields] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
  const [status, setStatus] = useState('idle');
  const { checkSpam, SpamField } = useSpamGuard();
+
+ useEffect(() => {
+ if (!router.isReady) return;
+ const q = router.query.subject;
+ if (typeof q === 'string' && q.trim()) {
+ setFields((f) => (f.subject ? f : { ...f, subject: q.trim() }));
+ }
+ }, [router.isReady, router.query.subject]);
 
  function update(e) {
  setFields({ ...fields, [e.target.name]: e.target.value });

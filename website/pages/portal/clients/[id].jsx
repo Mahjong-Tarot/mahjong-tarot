@@ -9,6 +9,7 @@ import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { getClient, updateClient, markSubscription } from '../../../lib/clients';
 import { listSessions } from '../../../lib/sessions';
 import { getOrCreateReportForSession } from '../../../lib/reports';
+import LogPaymentModal from '../../../components/LogPaymentModal';
 import { useAuth } from '../../../lib/auth';
 import portalStyles from '../../../styles/Portal.module.css';
 import styles from '../../../styles/PortalClient.module.css';
@@ -58,6 +59,7 @@ export default function ClientProfilePage({ profile }) {
   const [error, setError] = useState('');
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState(null);
+  const [paymentSession, setPaymentSession] = useState(null);
   const [savingEdit, setSavingEdit] = useState(false);
   const [savingSub, setSavingSub] = useState(false);
   const [openingReportFor, setOpeningReportFor] = useState('');
@@ -286,6 +288,7 @@ export default function ClientProfilePage({ profile }) {
                 <th>When</th>
                 <th>Status</th>
                 <th>Meeting</th>
+                <th>Payment</th>
                 <th>Notes</th>
                 <th aria-label="Actions"></th>
               </tr>
@@ -296,6 +299,27 @@ export default function ClientProfilePage({ profile }) {
                   <td>{formatDateTime(s.scheduled_at)}</td>
                   <td>{SESSION_STATUS_LABEL[s.status] || s.status}</td>
                   <td>{s.meeting_external_id ? `${s.meeting_source}: ${s.meeting_external_id.slice(0, 8)}…` : '—'}</td>
+                  <td>
+                    {s.paid_at ? (
+                      <button
+                        type="button"
+                        onClick={() => setPaymentSession(s)}
+                        className={styles.paidPill}
+                        title={s.payment_notes || ''}
+                      >
+                        {s.payment_amount != null ? `$${Number(s.payment_amount).toFixed(2)} ` : ''}
+                        {s.payment_method || 'paid'}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setPaymentSession(s)}
+                        className={styles.linkAction}
+                      >
+                        Log payment
+                      </button>
+                    )}
+                  </td>
                   <td className={styles.notesCell}>{s.prep_notes || '—'}</td>
                   <td>
                     <button
@@ -313,6 +337,15 @@ export default function ClientProfilePage({ profile }) {
           </table>
         )}
       </section>
+
+      <LogPaymentModal
+        session={paymentSession}
+        onClose={() => setPaymentSession(null)}
+        onSaved={(updated) => {
+          setSessions((prev) => prev.map((s) => (s.id === updated.id ? { ...s, ...updated } : s)));
+          setPaymentSession(null);
+        }}
+      />
     </ShellLayout>
   );
 }

@@ -13,6 +13,10 @@ const SESSION_FIELDS = [
   'post_call_notes',
   'transcript_text',
   'summary_text',
+  'paid_at',
+  'payment_method',
+  'payment_amount',
+  'payment_notes',
 ].join(', ');
 
 // Same as SESSION_FIELDS but without the large free-text columns. Use
@@ -31,7 +35,29 @@ const SESSION_LIST_FIELDS = [
   'meeting_source',
   'meeting_external_id',
   'prep_notes',
+  'paid_at',
+  'payment_method',
+  'payment_amount',
+  'payment_notes',
 ].join(', ');
+
+export async function logSessionPayment(supabase, {
+  sessionId,
+  amount = null,
+  paidAt = null,
+  paymentMethod = 'offline',
+  notes = null,
+}) {
+  const { data, error } = await supabase.rpc('log_session_payment', {
+    p_session_id:     sessionId,
+    p_amount:         amount,
+    p_paid_at:        paidAt || new Date().toISOString(),
+    p_payment_method: paymentMethod,
+    p_notes:          notes,
+  });
+  if (error) throw error;
+  return data;
+}
 
 export async function listSessions(supabase, { clientId, since, until } = {}) {
   let q = supabase.from('sessions').select(SESSION_FIELDS).order('scheduled_at', { ascending: true });

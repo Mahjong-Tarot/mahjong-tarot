@@ -73,7 +73,7 @@ Zoom call, or forwards to whoever.
 ### In scope
 
 - New page **`/portal/quick-reading`** with the form
-- New API route **`/api/portal/quick-reading`**:
+- New API route **`/api/admin/quick-reading`**:
   1. Authenticates the caller (astrologer or admin)
   2. Validates the input
   3. Computes the readings server-side using the existing libraries
@@ -124,7 +124,7 @@ Default: import server-side. Drop to client-side computation if any lib doesn't 
 ### Email template
 
 Reuse `buildEmailHtml()` pattern from
-`pages/api/portal/reports/send.js`. New helper `buildQuickReadingEmail()`
+`pages/api/admin/reports/send.js`. New helper `buildQuickReadingEmail()`
 that lays out the chart sections in cards inside the same shell.
 
 ### Files
@@ -132,7 +132,7 @@ that lays out the chart sections in cards inside the same shell.
 | File | Status |
 |---|---|
 | `website/pages/portal/quick-reading.jsx` | New — the form |
-| `website/pages/api/portal/quick-reading.js` | New — auth, compute, email |
+| `website/pages/api/admin/quick-reading.js` | New — auth, compute, email |
 | `website/lib/quickReading.js` | New — small wrapper that calls each lib and returns a structured object |
 | `website/components/PortalNav.jsx` | Modified — add "Quick reading" link |
 | `website/styles/PortalQuickReading.module.css` | New — minimal styling |

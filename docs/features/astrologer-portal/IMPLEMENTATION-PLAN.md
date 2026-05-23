@@ -60,7 +60,7 @@ The repo has **two** patterns for server-side code, and the spec assumes one (ed
 - [website/supabase/functions/notify-inquiry/index.ts](website/supabase/functions/notify-inquiry/index.ts) — **Deno + TypeScript** edge function. Used as a Supabase webhook (triggered by a DB insert on `inquiries`). Not user-triggered.
 - [website/pages/api/reply.js](website/pages/api/reply.js) — **Next.js Node API route, JS.** User-triggered (admin clicks "Send Reply"). Calls Resend via `fetch('https://api.resend.com/emails', …)`. Uses env vars `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_REPLY_TO`.
 
-**Recommendation:** for `generate-report` and `send-report` (both user-triggered), use **Next.js API routes** at `website/pages/api/portal/generate-report.js` and `…/send-report.js` rather than Deno edge functions. Reasons:
+**Recommendation:** for `generate-report` and `send-report` (both user-triggered), use **Next.js API routes** at `website/pages/api/admin/generate-report.js` and `…/send-report.js` rather than Deno edge functions. Reasons:
 
 1. The spec mandates "JavaScript only (no TypeScript)" for the website app. Adding new TS edge functions splits the language. The existing `api/reply.js` precedent is JS.
 2. User-triggered flows want cookie-based session auth — straightforward with `getServerSideProps`-style cookie reads in API routes, awkward in Deno edge functions.
@@ -135,15 +135,15 @@ All eight open questions resolved 2026-05-19. Locked answers below.
 
 ### OQ1 — Server runtime for user-triggered flows: **Next.js API routes**
 
-Files under `pages/api/portal/*.js`. Matches existing `api/reply.js` precedent. JS-only. Cookie-based auth via `@supabase/ssr` (OQ2). The spec's `supabase/functions/<name>` paths are translated as:
+Files under `pages/api/admin/*.js`. Matches existing `api/reply.js` precedent. JS-only. Cookie-based auth via `@supabase/ssr` (OQ2). The spec's `supabase/functions/<name>` paths are translated as:
 
 | Spec path | Actual path |
 |---|---|
-| `supabase/functions/meeting-source-oauth-exchange/index.ts` | `pages/api/portal/meeting-source/oauth-exchange.js` |
-| `supabase/functions/meetings-list/index.ts` | `pages/api/portal/meetings/list.js` |
-| `supabase/functions/meetings-fetch/index.ts` | `pages/api/portal/meetings/fetch.js` |
-| `supabase/functions/generate-report/index.ts` | `pages/api/portal/reports/generate.js` |
-| `supabase/functions/send-report/index.ts` | `pages/api/portal/reports/send.js` |
+| `supabase/functions/meeting-source-oauth-exchange/index.ts` | `pages/api/admin/meeting-source/oauth-exchange.js` |
+| `supabase/functions/meetings-list/index.ts` | `pages/api/admin/meetings/list.js` |
+| `supabase/functions/meetings-fetch/index.ts` | `pages/api/admin/meetings/fetch.js` |
+| `supabase/functions/generate-report/index.ts` | `pages/api/admin/reports/generate.js` |
+| `supabase/functions/send-report/index.ts` | `pages/api/admin/reports/send.js` |
 
 Each handler:
 1. Reads the Supabase session via `@supabase/ssr` cookie client
@@ -154,7 +154,7 @@ Each handler:
 
 Added to `website/package.json` in PR #1. Used by:
 - `lib/requirePortalUser.js` and `lib/requireAdmin.js` (PR #1)
-- Every `pages/api/portal/**` handler (PRs 5–8)
+- Every `pages/api/admin/**` handler (PRs 5–8)
 
 ### OQ3 — `/admin` gate: **fold into PR #1**
 
@@ -340,7 +340,7 @@ Going with A unless flagged.
 - `website/lib/meetingSources/krisp.js` — `startOAuth` and `completeOAuth` only in this PR (PKCE, OAuth discovery via `.well-known/oauth-protected-resource`). Stubs for `listMeetings`/`fetchMeeting` that throw `Error('not implemented')`.
 - `website/pages/portal/settings/meeting-source/index.jsx` — connect cards
 - `website/pages/portal/settings/meeting-source/callback.jsx` — OAuth redirect target. Posts to the exchange endpoint.
-- Either `website/pages/api/portal/meeting-source/oauth-exchange.js` (OQ1=A) or `website/supabase/functions/meeting-source-oauth-exchange/index.ts` (OQ1=B)
+- Either `website/pages/api/admin/meeting-source/oauth-exchange.js` (OQ1=A) or `website/supabase/functions/meeting-source-oauth-exchange/index.ts` (OQ1=B)
 
 **Env vars new:**
 
@@ -455,7 +455,7 @@ alter table public.sessions
 
 **Files created:**
 
-- `website/pages/api/portal/reports/send.js` — Resend-backed handler. Markdown→HTML via `marked`. CTA links to a TBD landing page or `mailto:` reply.
+- `website/pages/api/admin/reports/send.js` — Resend-backed handler. Markdown→HTML via `marked`. CTA links to a TBD landing page or `mailto:` reply.
 
 **Files modified:**
 
@@ -499,7 +499,7 @@ alter table public.sessions
 - `website/lib/conversions.js` — `listConversionTargets({ statusFilter, sort })` query, joins `clients` + last `sessions` + last sent `reports`.
 - `website/components/ConversionTable.jsx` + `ConversionTable.module.css`
 - `website/components/SendNoteModal.jsx` — small compose UI; calls a new API route
-- `website/pages/api/portal/conversions/send-note.js` — Resend-backed; admin-gated
+- `website/pages/api/admin/conversions/send-note.js` — Resend-backed; admin-gated
 - `website/styles/PortalConversions.module.css`
 
 **Files modified:**

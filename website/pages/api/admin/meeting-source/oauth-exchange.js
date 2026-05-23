@@ -6,7 +6,7 @@ import {
 import { getAdapter, SUPPORTED_SOURCES } from '../../../../lib/meetingSources';
 
 /**
- * POST /api/portal/meeting-source/oauth-exchange
+ * POST /api/admin/meeting-source/oauth-exchange
  *
  * Body: { source, code, state, code_verifier }
  *

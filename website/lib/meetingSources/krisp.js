@@ -163,7 +163,7 @@ export function clearStoredPkce() {
  * code for access + refresh tokens by POSTing to Krisp's token
  * endpoint. Returns the tokens plus an account label for display.
  *
- * Called from the /api/portal/meeting-source/oauth-exchange route.
+ * Called from the /api/admin/meeting-source/oauth-exchange route.
  *
  * @param {object} args
  * @param {string} args.code           — authorization code from Krisp callback

@@ -237,12 +237,11 @@ export default function AdminInquiries({ profile }) {
                     <th>Person</th>
                     <th>Subject</th>
                     <th>Stage</th>
-                    <th aria-label="Open"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {rows.map((r) => (
-                    <tr key={r.id}>
+                    <tr key={r.id} onClick={() => setSelected(r)} style={{ cursor: 'pointer' }}>
                       <td className={tableStyles.cellMuted}>{relTime(r.created_at)}</td>
                       <td>
                         <span className={tableStyles.tag}>{TYPE_LABELS[r.type] || r.type}</span>
@@ -254,7 +253,7 @@ export default function AdminInquiries({ profile }) {
                       <td className={tableStyles.cellSecondary}>
                         {r.subject || r.message?.slice(0, 60) || '—'}
                       </td>
-                      <td>
+                      <td onClick={(e) => e.stopPropagation()}>
                         <select
                           value={r.status}
                           disabled={busy === r.id}
@@ -266,15 +265,6 @@ export default function AdminInquiries({ profile }) {
                             <option key={s.id} value={s.id}>{s.label}</option>
                           ))}
                         </select>
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          className={kanbanStyles.openButton}
-                          onClick={() => setSelected(r)}
-                        >
-                          Open →
-                        </button>
                       </td>
                     </tr>
                   ))}

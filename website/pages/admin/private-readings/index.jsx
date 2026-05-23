@@ -157,10 +157,6 @@ export default function PrivateReadingsListPage({ profile }) {
           </div>
         )}
 
-        <p className={adminStyles.muted} style={{ marginTop: 24 }}>
-          The legacy clients-list view used to live here. Manage contact records
-          on <Link href="/admin/people">/admin/people</Link>.
-        </p>
       </AdminShell>
     </>
   );

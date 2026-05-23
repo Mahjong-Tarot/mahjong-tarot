@@ -14,6 +14,8 @@ import {
   BRANCHES,
 } from '../../../lib/bazi';
 import { computeThreeBlessings } from '../../../lib/three-blessings';
+import { calculatePurpleStar } from '../../../lib/purpleStar';
+import { buildReadingBrief } from '../../../lib/readingBrief';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -75,7 +77,7 @@ export default function ReadingBriefPage({ profile }) {
         // People: match by email (canonical identity)
         const { data: pp } = await supabase
           .from('people')
-          .select('id, name, email, birthday, birth_time, birth_place, lifecycle_stage')
+          .select('id, name, email, birthday, birth_time, birth_place, lifecycle_stage, gender')
           .ilike('email', b.email)
           .maybeSingle();
         if (cancelled) return;
@@ -127,6 +129,19 @@ export default function ReadingBriefPage({ profile }) {
     try { return computeThreeBlessings({ birthday, birthTime, pillars }); }
     catch { return null; }
   }, [pillars, birthday, birthTime]);
+
+  const purpleStar = useMemo(() => {
+    if (!birthday || !birthTime || !person?.gender) return null;
+    try { return calculatePurpleStar({ birthday, birthTime, gender: person.gender }); }
+    catch { return null; }
+  }, [birthday, birthTime, person?.gender]);
+
+  const briefMarkdown = useMemo(() => {
+    if (!booking) return '';
+    return buildReadingBrief({
+      person, booking, inquiry, pillars, zodiac, dominant,
+    });
+  }, [person, booking, inquiry, pillars, zodiac, dominant]);
 
   async function saveField(field) {
     if (!booking) return;
@@ -210,8 +225,8 @@ export default function ReadingBriefPage({ profile }) {
                     {[['Year', pillars.year], ['Month', pillars.month], ['Day', pillars.day], ['Hour', pillars.hour]].map(([label, p]) => (
                       <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
                         <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
-                        <td style={{ padding: 8 }}>{p ? `${p.stem.name} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
-                        <td style={{ padding: 8 }}>{p ? `${p.branch.name} (${p.branch.element})` : '—'}</td>
+                        <td style={{ padding: 8 }}>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
+                        <td style={{ padding: 8 }}>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
                         <td style={{ padding: 8 }}>{p ? p.stem.element : '—'}</td>
                         <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
                       </tr>
@@ -221,7 +236,58 @@ export default function ReadingBriefPage({ profile }) {
                 <p className={adminStyles.muted} style={{ marginTop: 10 }}>
                   <strong>Day Master:</strong> {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} ·{' '}
                   <strong>Zodiac:</strong> {zodiac || '—'} ·{' '}
-                  <strong>Dominant element:</strong> {dominant?.name || '—'}
+                  <strong>Dominant element:</strong> {dominant || '—'}
+                </p>
+              </Section>
+            )}
+
+            {/* Brief — start here (rule-based synthesis from the chart) */}
+            {briefMarkdown && (
+              <Section title="Brief — start here">
+                <div style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, padding: 16, lineHeight: 1.6, fontSize: 14 }}>
+                  {briefMarkdown.split('\n\n').map((para, i) => (
+                    <p key={i} style={{ margin: i === 0 ? 0 : '10px 0 0' }} dangerouslySetInnerHTML={{
+                      __html: para.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                                   .replace(/_([^_]+)_/g, '<em>$1</em>')
+                                   .replace(/\n/g, '<br/>')
+                    }} />
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {/* Purple Star */}
+            {purpleStar ? (
+              <Section title="Purple Star (Zi Wei Dou Shu)">
+                <p className={adminStyles.muted} style={{ marginBottom: 10 }}>
+                  <strong>Life Palace:</strong> {purpleStar.lifePalace?.branchHan || '—'} ({purpleStar.lifePalace?.animal || '—'}) ·{' '}
+                  <strong>Body Palace:</strong> {purpleStar.bodyPalace?.branchHan || '—'}
+                </p>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                  <thead>
+                    <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
+                      <th style={{ padding: 6 }}>Palace</th>
+                      <th style={{ padding: 6 }}>Branch</th>
+                      <th style={{ padding: 6 }}>Major stars</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(purpleStar.palaces || []).slice(0, 12).map((pl, i) => (
+                      <tr key={i} style={{ borderTop: '1px solid #e5e7eb' }}>
+                        <td style={{ padding: 6, fontWeight: pl.isMing ? 600 : 400 }}>
+                          {pl.name}{pl.isMing && ' ★'}
+                        </td>
+                        <td style={{ padding: 6 }}>{pl.branchHan} ({pl.animal})</td>
+                        <td style={{ padding: 6 }}>{(pl.majorStars || []).map((s) => s.name).join(', ') || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Section>
+            ) : (
+              <Section title="Purple Star (Zi Wei Dou Shu)">
+                <p className={adminStyles.muted}>
+                  Requires <strong>birth time</strong> and <strong>gender</strong> on the customer's people record. Add them via the People shelf and refresh.
                 </p>
               </Section>
             )}
@@ -229,10 +295,16 @@ export default function ReadingBriefPage({ profile }) {
             {/* Three Blessings */}
             {threeBlessings && (
               <Section title="Three Blessings">
-                <ul style={{ paddingLeft: 18, lineHeight: 1.6 }}>
-                  {threeBlessings.positions && Object.entries(threeBlessings.positions).map(([k, v]) => (
-                    v?.line && <li key={k}><strong>{k}:</strong> {v.line}</li>
-                  ))}
+                <ul style={{ paddingLeft: 18, lineHeight: 1.7 }}>
+                  {['phuc', 'loc', 'tho'].map((key) => {
+                    const b = threeBlessings[key];
+                    if (!b?.personalLine) return null;
+                    return (
+                      <li key={key} style={{ marginBottom: 8 }}>
+                        <strong>{b.position?.name} — {b.position?.label}:</strong> {b.personalLine}
+                      </li>
+                    );
+                  })}
                 </ul>
               </Section>
             )}

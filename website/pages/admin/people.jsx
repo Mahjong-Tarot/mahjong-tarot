@@ -70,6 +70,7 @@ export default function AdminPeople({ profile }) {
       birth_place:     p.birth_place     || '',
       lifecycle_stage: p.lifecycle_stage || 'lead',
       ok_to_contact:   !!p.ok_to_contact,
+      gender:          p.gender          || '',
       company:         p.company         || '',
       role:            p.role            || '',
     });
@@ -304,8 +305,8 @@ export default function AdminPeople({ profile }) {
 
                 <Field label="Name" name="name" draft={draft} setDraft={setDraft}
                        saving={savingField === 'name'} onSave={saveField} />
-                <Field label="Email (read-only)" name="email" draft={draft} setDraft={setDraft}
-                       readOnly />
+                <Field label="Email" name="email" draft={draft} setDraft={setDraft}
+                       saving={savingField === 'email'} onSave={saveField} />
                 <Field label="Phone" name="phone" draft={draft} setDraft={setDraft}
                        saving={savingField === 'phone'} onSave={saveField} />
                 <Field label="Birthday" name="birthday" type="date" draft={draft} setDraft={setDraft}
@@ -314,6 +315,9 @@ export default function AdminPeople({ profile }) {
                        saving={savingField === 'birth_time'} onSave={saveField} />
                 <Field label="Birth place" name="birth_place" draft={draft} setDraft={setDraft}
                        saving={savingField === 'birth_place'} onSave={saveField} />
+                <SelectField label="Gender (needed for Purple Star chart)" name="gender" draft={draft} setDraft={setDraft}
+                       options={['', 'F', 'M', 'NB']} optionLabels={{'': '— not set —', F: 'Female', M: 'Male', NB: 'Non-binary'}}
+                       saving={savingField === 'gender'} onSave={saveField} />
                 <SelectField label="Lifecycle stage" name="lifecycle_stage" draft={draft} setDraft={setDraft}
                        options={LIFECYCLE_STAGES} saving={savingField === 'lifecycle_stage'} onSave={saveField} />
                 <Field label="Company" name="company" draft={draft} setDraft={setDraft}
@@ -382,7 +386,7 @@ function Field({ label, name, type = 'text', draft, setDraft, onSave, saving, re
   );
 }
 
-function SelectField({ label, name, draft, setDraft, options, onSave, saving }) {
+function SelectField({ label, name, draft, setDraft, options, optionLabels, onSave, saving }) {
   const initial = draft[name];
   return (
     <div style={fieldWrap}>
@@ -396,7 +400,7 @@ function SelectField({ label, name, draft, setDraft, options, onSave, saving }) 
         }}
         style={fieldInput}
       >
-        {options.map((o) => <option key={o} value={o}>{o}</option>)}
+        {options.map((o) => <option key={o || '_blank'} value={o}>{(optionLabels && optionLabels[o]) || o}</option>)}
       </select>
     </div>
   );

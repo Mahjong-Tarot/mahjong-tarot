@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import AdminShell from '../../components/AdminShell';
 import { supabase } from '../../lib/supabase';
 import { requireAdmin } from '../../lib/requireAdmin';
@@ -28,6 +28,7 @@ function kindOf(d) {
 }
 
 export default function SalesPage({ profile }) {
+  const router = useRouter();
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -116,18 +117,15 @@ export default function SalesPage({ profile }) {
             <tbody>
               {deals.map((d) => {
                 const customerLabel = d.people?.name || d.people?.email || '—';
-                const customerCell = d.booking_id ? (
-                  <Link
-                    href={`/admin/private-readings/${d.booking_id}`}
-                    style={{ color: 'inherit', textDecoration: 'underline' }}
-                  >
-                    {customerLabel}
-                  </Link>
-                ) : customerLabel;
+                const href = d.booking_id ? `/admin/private-readings/${d.booking_id}` : null;
                 return (
-                  <tr key={d.id}>
+                  <tr
+                    key={d.id}
+                    onClick={href ? () => router.push(href) : undefined}
+                    style={href ? { cursor: 'pointer' } : undefined}
+                  >
                     <td>{d.won_at ? new Date(d.won_at).toLocaleDateString() : '—'}</td>
-                    <td>{customerCell}</td>
+                    <td>{customerLabel}</td>
                     <td>{kindOf(d)}</td>
                     <td>{d.notes || '—'}</td>
                     <td>${((d.amount_cents ?? 0) / 100).toFixed(2)} {(d.currency || 'usd').toUpperCase()}</td>

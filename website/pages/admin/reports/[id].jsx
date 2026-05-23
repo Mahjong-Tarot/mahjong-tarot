@@ -160,7 +160,7 @@ export default function ReportPage({ profile }) {
     setReportMessage('');
     try {
       const { report: updated } = await withWatchdog(
-        postJson('/api/portal/reports/update', {
+        postJson('/api/admin/reports/update', {
           reportId: report.id,
           fields: {
             title: title.trim() || null,
@@ -193,7 +193,7 @@ export default function ReportPage({ profile }) {
     setSendMessage('');
     try {
       const res = await withWatchdog(
-        fetch('/api/portal/reports/send', {
+        fetch('/api/admin/reports/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ reportId: report.id }),
@@ -216,7 +216,7 @@ export default function ReportPage({ profile }) {
 
   return (
     <ShellLayout profile={profile} title={client?.full_name || 'Report'}>
-      <Link href={client ? `/portal/clients/${client.id}` : '/portal'} className={styles.backLink}>
+      <Link href={client ? `/admin/private-readings/${client.id}` : '/admin/sessions'} className={styles.backLink}>
         ← {client ? `Back to ${client.full_name}` : 'Back to portal'}
       </Link>
 

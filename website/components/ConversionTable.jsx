@@ -45,7 +45,7 @@ export default function ConversionTable({
             return (
               <tr key={r.id}>
                 <td>
-                  <Link href={`/portal/clients/${r.id}`} className={styles.nameLink}>
+                  <Link href={`/admin/private-readings/${r.id}`} className={styles.nameLink}>
                     {r.full_name || '—'}
                   </Link>
                 </td>

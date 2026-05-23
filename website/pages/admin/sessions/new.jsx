@@ -85,7 +85,7 @@ export default function NewSessionPage({ profile }) {
         duration_minutes: parseInt(form.duration_minutes, 10) || 60,
         prep_notes: form.prep_notes,
       });
-      router.push(`/portal/clients/${form.client_id}`);
+      router.push(`/admin/private-readings/${form.client_id}`);
     } catch (err) {
       setError(err.message || 'Failed to schedule session.');
       setSubmitting(false);
@@ -104,7 +104,7 @@ export default function NewSessionPage({ profile }) {
 
         <main className={portalStyles.main}>
           <Link
-            href={presetClientId ? `/portal/clients/${presetClientId}` : '/portal/clients'}
+            href={presetClientId ? `/admin/private-readings/${presetClientId}` : '/admin/private-readings'}
             className={styles.backLink}
           >
             ← {presetClientId ? 'Back to client' : 'All clients'}
@@ -143,7 +143,7 @@ export default function NewSessionPage({ profile }) {
 
             <div className={styles.actions}>
               <Link
-                href={presetClientId ? `/portal/clients/${presetClientId}` : '/portal/clients'}
+                href={presetClientId ? `/admin/private-readings/${presetClientId}` : '/admin/private-readings'}
                 className={styles.btnSecondary}
               >
                 Cancel

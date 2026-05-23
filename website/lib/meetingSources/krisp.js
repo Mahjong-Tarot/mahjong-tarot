@@ -8,7 +8,7 @@
  * and API-route contexts):
  *   - NEXT_PUBLIC_KRISP_OAUTH_CLIENT_ID
  *   - NEXT_PUBLIC_KRISP_OAUTH_REDIRECT_URI
- *     (defaults to `${origin}/portal/settings/meeting-source/callback?source=krisp`)
+ *     (defaults to `${origin}/admin/settings/meeting-source/callback?source=krisp`)
  *
  * Public scope identifiers:
  *   - SOURCE_KEY  = 'krisp'
@@ -89,7 +89,7 @@ function redirectUri() {
   if (typeof window === 'undefined') {
     throw new Error('NEXT_PUBLIC_KRISP_OAUTH_REDIRECT_URI must be set for server-side OAuth exchange.');
   }
-  return `${window.location.origin}/portal/settings/meeting-source/callback?source=${SOURCE_KEY}`;
+  return `${window.location.origin}/admin/settings/meeting-source/callback?source=${SOURCE_KEY}`;
 }
 
 // ─── Interface methods ────────────────────────────────────────────
@@ -112,7 +112,7 @@ export async function startOAuth({ user_id, return_url } = {}) {
   const verifier = randomString(64);
   const challenge = await pkceChallenge(verifier);
   const state = randomString(24);
-  const finalReturn = return_url || '/portal/settings/meeting-source';
+  const finalReturn = return_url || '/admin/settings/meeting-source';
 
   // Stash the verifier + state so the callback page can complete the flow.
   sessionStorage.setItem(

@@ -134,7 +134,7 @@ export default function AdminDashboard({ profile }) {
                   <p className={styles.statValue}>{stats.people}</p>
                   <p className={styles.statHint}>Total contacts</p>
                 </Link>
-                <Link href="/portal/clients" className={styles.statCard}>
+                <Link href="/admin/private-readings" className={styles.statCard}>
                   <p className={styles.statLabel}>Clients</p>
                   <p className={styles.statValue}>{stats.clients}</p>
                   <p className={styles.statHint}>In astrologer portal</p>

@@ -104,7 +104,7 @@ export default function MeetingSourceSettingsPage({ profile }) {
         <PortalNav profile={profile} />
 
         <main className={portalStyles.main}>
-          <Link href="/portal" className={styles.backLink}>← Back to portal</Link>
+          <Link href="/admin/sessions" className={styles.backLink}>← Back to portal</Link>
           <p className={portalStyles.eyebrow}>Portal · Settings · Meeting source</p>
           <h1 className={portalStyles.h1}>Connect your meeting source</h1>
           <p className={portalStyles.lede}>

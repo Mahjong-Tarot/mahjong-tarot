@@ -70,7 +70,7 @@ export default function AdminShell({ profile, children }) {
         </nav>
 
         <div className={styles.footer}>
-          <Link href="/portal" className={styles.portalLink} onClick={() => setOpen(false)}>
+          <Link href="/admin/sessions" className={styles.portalLink} onClick={() => setOpen(false)}>
             Astrologer portal →
           </Link>
           <div className={styles.who}>

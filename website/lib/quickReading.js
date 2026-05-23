@@ -1,5 +1,5 @@
 // Server-side wrapper that assembles a "quick reading" packet from the
-// existing reading libraries. Used by /api/portal/quick-reading to
+// existing reading libraries. Used by /api/admin/quick-reading to
 // build the email body.
 //
 // Pure-function libs (bazi, purpleStar, three-blessings) are imported

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import PortalNav from '../../components/PortalNav';
-import SessionsList from '../../components/SessionsList';
-import SessionsCalendar from '../../components/SessionsCalendar';
-import { supabase } from '../../lib/supabase';
-import { requirePortalUser } from '../../lib/requirePortalUser';
-import { listSessionsWithClient } from '../../lib/sessions';
-import portalStyles from '../../styles/Portal.module.css';
-import homeStyles from '../../styles/PortalHome.module.css';
+import AdminShell from '../../../components/AdminShell';
+import SessionsList from '../../../components/SessionsList';
+import SessionsCalendar from '../../../components/SessionsCalendar';
+import { supabase } from '../../../lib/supabase';
+import { requirePortalUser } from '../../../lib/requirePortalUser';
+import { listSessionsWithClient } from '../../../lib/sessions';
+import adminStyles from '../../../styles/PortalAdmin.module.css';
+import homeStyles from '../../../styles/PortalHome.module.css';
 
 export async function getServerSideProps(ctx) {
   return requirePortalUser(ctx);
@@ -101,13 +101,10 @@ export default function PortalHome({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>{roleLabel} · Sessions</p>
-          <h1 className={portalStyles.h1}>{greeting}</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <p className={adminStyles.pageEyebrow}>{roleLabel} · Sessions</p>
+          <h1 className={adminStyles.pageTitle}>{greeting}</h1>
+          <p className={adminStyles.pageLede}>
             All sessions, grouped by week. Switch to calendar view for a month overview.
           </p>
 
@@ -143,17 +140,16 @@ export default function PortalHome({ profile }) {
             </div>
           </div>
 
-          {error && <p className={portalStyles.error}>{error}</p>}
+          {error && <p className={adminStyles.error}>{error}</p>}
 
           {loading ? (
-            <p className={portalStyles.muted}>Loading sessions…</p>
+            <p className={adminStyles.muted}>Loading sessions…</p>
           ) : view === 'calendar' ? (
             <SessionsCalendar sessions={sessions} />
           ) : (
             <SessionsList sessions={sessions} emptyMessage={emptyMessage} />
           )}
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

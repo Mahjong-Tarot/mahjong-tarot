@@ -84,7 +84,7 @@ export default function MeetingSourceCallback({ profile }) {
         );
         // Brief pause so the user sees the success message before the redirect.
         setTimeout(() => {
-          router.replace(stored.return_url || '/portal/settings/meeting-source');
+          router.replace(stored.return_url || '/admin/settings/meeting-source');
         }, 1200);
       })
       .catch((err) => {
@@ -115,7 +115,7 @@ export default function MeetingSourceCallback({ profile }) {
             <p className={styles.callbackMessage}>{message}</p>
             {status === 'error' && (
               <div className={styles.cardActions}>
-                <Link href="/portal/settings/meeting-source" className={styles.btnSecondary}>
+                <Link href="/admin/settings/meeting-source" className={styles.btnSecondary}>
                   Back to settings
                 </Link>
               </div>

@@ -132,7 +132,7 @@ export default function ClientProfilePage({ profile }) {
         session.client_id,
         user?.id,
       );
-      router.push(`/portal/reports/${report.id}`);
+      router.push(`/admin/reports/${report.id}`);
     } catch (err) {
       setError(err.message || 'Failed to open report.');
       setOpeningReportFor('');
@@ -150,7 +150,7 @@ export default function ClientProfilePage({ profile }) {
   if (!client) {
     return (
       <ShellLayout profile={profile}>
-        <Link href="/portal/clients" className={styles.backLink}>← All clients</Link>
+        <Link href="/admin/private-readings" className={styles.backLink}>← All clients</Link>
         <p className={portalStyles.eyebrow}>Portal · Client</p>
         <h1 className={portalStyles.h1}>Client not found</h1>
         <p className={portalStyles.lede}>That ID doesn&apos;t match a client you can see.</p>
@@ -160,7 +160,7 @@ export default function ClientProfilePage({ profile }) {
 
   return (
     <ShellLayout profile={profile} title={client.full_name}>
-      <Link href="/portal/clients" className={styles.backLink}>← All clients</Link>
+      <Link href="/admin/private-readings" className={styles.backLink}>← All clients</Link>
       <p className={portalStyles.eyebrow}>Portal · Client</p>
 
       <header className={styles.profileHeader}>
@@ -277,7 +277,7 @@ export default function ClientProfilePage({ profile }) {
       <section className={styles.section}>
         <div className={styles.sectionHead}>
           <h2 className={styles.sectionTitle}>Sessions</h2>
-          <Link href={`/portal/sessions/new?client=${client.id}`} className={styles.linkAction}>+ Schedule session</Link>
+          <Link href={`/admin/sessions/new?client=${client.id}`} className={styles.linkAction}>+ Schedule session</Link>
         </div>
         {sessions.length === 0 ? (
           <p className={styles.muted}>No sessions yet.</p>

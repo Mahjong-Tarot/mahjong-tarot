@@ -55,7 +55,7 @@ export default function ClientsListPage({ profile }) {
               <p className={portalStyles.eyebrow}>Portal · Clients</p>
               <h1 className={portalStyles.h1}>Clients</h1>
             </div>
-            <Link href="/portal/clients/new" className={styles.newBtn}>+ New client</Link>
+            <Link href="/admin/private-readings/new" className={styles.newBtn}>+ New client</Link>
           </div>
 
           <div className={styles.toolbar}>
@@ -78,14 +78,14 @@ export default function ClientsListPage({ profile }) {
           ) : filtered.length === 0 ? (
             <div className={styles.empty}>
               {clients.length === 0
-                ? <>No clients yet. <Link href="/portal/clients/new" className={styles.emptyLink}>Add your first one →</Link></>
+                ? <>No clients yet. <Link href="/admin/private-readings/new" className={styles.emptyLink}>Add your first one →</Link></>
                 : 'No matches for that search.'}
             </div>
           ) : (
             <ul className={styles.list}>
               {filtered.map((c) => (
                 <li key={c.id} className={styles.row}>
-                  <Link href={`/portal/clients/${c.id}`} className={styles.rowLink}>
+                  <Link href={`/admin/private-readings/${c.id}`} className={styles.rowLink}>
                     <div className={styles.rowName}>{c.full_name}</div>
                     <div className={styles.rowMeta}>
                       {c.email && <span>{c.email}</span>}

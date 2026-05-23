@@ -4,9 +4,9 @@ import { useAuth } from '../lib/auth';
 import styles from './PortalNav.module.css';
 
 const LINKS = [
-  { href: '/portal',               label: 'Sessions',       match: (p) => p === '/portal' },
-  { href: '/portal/clients',       label: 'Clients',        match: (p) => p.startsWith('/portal/clients') },
-  { href: '/portal/quick-reading', label: 'Quick reading',  match: (p) => p.startsWith('/portal/quick-reading') },
+  { href: '/admin/sessions',               label: 'Sessions',       match: (p) => p === '/admin/sessions' },
+  { href: '/admin/private-readings',       label: 'Clients',        match: (p) => p.startsWith('/admin/private-readings') },
+  { href: '/admin/quick-reading', label: 'Quick reading',  match: (p) => p.startsWith('/admin/quick-reading') },
 ];
 
 // Admin pages live at /admin/* with their own AdminShell sidebar.
@@ -30,7 +30,7 @@ export default function PortalNav({ profile }) {
   return (
     <header className={styles.nav}>
       <div className={styles.inner}>
-        <Link href="/portal" className={styles.brand}>
+        <Link href="/admin/sessions" className={styles.brand}>
           <span className={styles.brandMark} />
           <span className={styles.brandText}>Mahjong Tarot Portal</span>
         </Link>

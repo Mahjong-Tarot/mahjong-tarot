@@ -14,7 +14,7 @@ async function pathForUser(userId) {
     .select('role')
     .eq('user_id', userId)
     .maybeSingle();
-  return data?.role === 'astrologer' || data?.role === 'admin' ? '/portal' : '/dashboard';
+  return data?.role === 'astrologer' || data?.role === 'admin' ? '/admin/sessions' : '/dashboard';
 }
 
 export default function SignInPage() {

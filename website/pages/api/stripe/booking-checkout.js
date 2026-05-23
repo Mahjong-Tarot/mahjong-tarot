@@ -52,7 +52,7 @@ export default async function handler(req, res) {
   // user took >10 min on Step 03 or someone raced us.
   const { data: slot, error: slotErr } = await service
     .from('reading_availability')
-    .select('id, slot_start, status, held_for_session, duration_minutes')
+    .select('id, slot_start, status, held_for_session, duration_minutes, astrologer_id')
     .eq('id', slot_id)
     .maybeSingle();
 
@@ -84,9 +84,15 @@ export default async function handler(req, res) {
       question: question ? question.slice(0, 500) : '',
       slot_id,
       slot_start: slot.slot_start,
+      astrologer_id: slot.astrologer_id || '',
     },
     payment_intent_data: {
-      metadata: { booking: 'true', slot_id, duration: String(duration) },
+      metadata: {
+        booking: 'true',
+        slot_id,
+        duration: String(duration),
+        astrologer_id: slot.astrologer_id || '',
+      },
       description: `Mahjong Tarot — Private Reading (${duration} min)`,
     },
     allow_promotion_codes: true,

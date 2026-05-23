@@ -4,9 +4,10 @@
 // duration_minutes) unique constraint to skip slots that already exist.
 //
 // Usage:
-//   node scripts/seed-availability.mjs                 # next 30 days, default config
-//   node scripts/seed-availability.mjs --days 60       # next 60 days
-//   node scripts/seed-availability.mjs --dry           # print what would be inserted
+//   node scripts/seed-availability.mjs                          # 30 days, Bill
+//   node scripts/seed-availability.mjs --days 60                # 60 days, Bill
+//   node scripts/seed-availability.mjs --astrologer-id <uuid>   # populate someone else's calendar
+//   node scripts/seed-availability.mjs --dry                    # print only
 //
 // Reads NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY from .env.local.
 
@@ -33,6 +34,9 @@ try {
 const args = process.argv.slice(2);
 const DAYS = parseInt(arg('--days') || '30', 10);
 const DRY  = args.includes('--dry');
+// Default = Bill (c02c4b87…); override with --astrologer-id when seeding
+// for a second astrologer.
+const ASTROLOGER_ID = arg('--astrologer-id') || 'c02c4b87-a890-4614-8720-cd19d7745943';
 
 function arg(name) {
   const i = args.indexOf(name);
@@ -120,6 +124,7 @@ function* generateSlots(days) {
         slot_start: utc.toISOString(),
         duration_minutes: cfg.duration_minutes,
         status: 'open',
+        astrologer_id: ASTROLOGER_ID,
       };
     }
   }
@@ -136,7 +141,7 @@ if (!url || !key) {
 const client = createClient(url, key, { auth: { persistSession: false } });
 
 const slots = Array.from(generateSlots(DAYS));
-console.log(`Generated ${slots.length} candidate slots over the next ${DAYS} days.`);
+console.log(`Generated ${slots.length} candidate slots over the next ${DAYS} days for astrologer ${ASTROLOGER_ID}.`);
 if (DRY) {
   for (const s of slots) console.log(' ', s.slot_start, `(${s.duration_minutes} min)`);
   process.exit(0);

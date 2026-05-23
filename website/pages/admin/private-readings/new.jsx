@@ -5,13 +5,13 @@ import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { useAuth } from '../../../lib/auth';
-import { requirePortalUser } from '../../../lib/requirePortalUser';
+import { requireAdmin } from '../../../lib/requireAdmin';
 import { createClient as createClientRow } from '../../../lib/clients';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePortalUser(ctx);
+  return requireAdmin(ctx);
 }
 
 export default function NewClientPage({ profile }) {

@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
   const { data, error } = await service
     .from('reading_availability')
-    .select('id, slot_start, duration_minutes')
+    .select('id, slot_start, duration_minutes, astrologer_id')
     .eq('status', 'open')
     .eq('duration_minutes', duration)
     .gte('slot_start', new Date().toISOString())

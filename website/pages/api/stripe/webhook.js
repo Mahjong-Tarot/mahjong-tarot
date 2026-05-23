@@ -43,6 +43,18 @@ async function handleBookingCompleted(service, session) {
   const slotId = m.slot_id || null;
   const scheduledAt = m.slot_start || null;
 
+  // Astrologer ownership: prefer the metadata value (set at checkout
+  // creation); fall back to the slot row in case metadata is missing.
+  let astrologerId = m.astrologer_id || null;
+  if (!astrologerId && slotId) {
+    const { data: slot } = await service
+      .from('reading_availability')
+      .select('astrologer_id')
+      .eq('id', slotId)
+      .maybeSingle();
+    astrologerId = slot?.astrologer_id || null;
+  }
+
   // Idempotent upsert by Stripe session id.
   const { data: booking, error: bookingErr } = await service
     .from('bookings')
@@ -57,6 +69,7 @@ async function handleBookingCompleted(service, session) {
         duration_minutes: duration,
         scheduled_at: scheduledAt,
         slot_id: slotId,
+        astrologer_id: astrologerId,
         status: 'paid',
         amount_cents: session.amount_total ?? null,
         currency: session.currency || 'usd',

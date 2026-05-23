@@ -44,7 +44,8 @@ function relTime(value) {
 export default function AdminDashboard({ profile }) {
   const [counts, setCounts] = useState([]);
   const [recent, setRecent] = useState([]);
-  const [stats, setStats] = useState({ people: 0, clients: 0, last7: 0 });
+  const [recentDeals, setRecentDeals] = useState([]);
+  const [stats, setStats] = useState({ people: 0, customers: 0, last7: 0, revenueCents: 0 });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -57,7 +58,7 @@ export default function AdminDashboard({ profile }) {
       }
       try {
         const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-        const [countsRes, recentRes, peopleRes, clientsRes, last7Res] = await Promise.all([
+        const [countsRes, recentRes, peopleRes, customersRes, last7Res, dealsRes, revenueRes] = await Promise.all([
           supabase.rpc('get_inquiry_counts'),
           supabase
             .from('inquiries')
@@ -65,25 +66,44 @@ export default function AdminDashboard({ profile }) {
             .order('created_at', { ascending: false })
             .limit(10),
           supabase.from('people').select('id', { count: 'exact', head: true }),
-          supabase.from('clients').select('id', { count: 'exact', head: true }),
+          supabase
+            .from('people')
+            .select('id', { count: 'exact', head: true })
+            .eq('lifecycle_stage', 'customer'),
           supabase
             .from('inquiries')
             .select('id', { count: 'exact', head: true })
             .gte('created_at', sevenDaysAgo),
+          supabase
+            .from('deals')
+            .select('id, amount_cents, currency, source, won_at, person_id, people(name, email)')
+            .eq('status', 'won')
+            .order('won_at', { ascending: false })
+            .limit(5),
+          supabase
+            .from('deals')
+            .select('amount_cents')
+            .eq('status', 'won'),
         ]);
 
-        if (countsRes.error)  throw countsRes.error;
-        if (recentRes.error)  throw recentRes.error;
-        if (peopleRes.error)  throw peopleRes.error;
-        if (clientsRes.error) throw clientsRes.error;
-        if (last7Res.error)   throw last7Res.error;
+        if (countsRes.error)    throw countsRes.error;
+        if (recentRes.error)    throw recentRes.error;
+        if (peopleRes.error)    throw peopleRes.error;
+        if (customersRes.error) throw customersRes.error;
+        if (last7Res.error)     throw last7Res.error;
+        if (dealsRes.error)     throw dealsRes.error;
+        if (revenueRes.error)   throw revenueRes.error;
+
+        const revenueCents = (revenueRes.data || []).reduce((sum, d) => sum + (d.amount_cents || 0), 0);
 
         setCounts(countsRes.data ?? []);
         setRecent(recentRes.data ?? []);
+        setRecentDeals(dealsRes.data ?? []);
         setStats({
-          people:  peopleRes.count  ?? 0,
-          clients: clientsRes.count ?? 0,
-          last7:   last7Res.count   ?? 0,
+          people:    peopleRes.count    ?? 0,
+          customers: customersRes.count ?? 0,
+          last7:     last7Res.count     ?? 0,
+          revenueCents,
         });
       } catch (e) {
         setError(e.message || 'Failed to load dashboard.');
@@ -134,10 +154,10 @@ export default function AdminDashboard({ profile }) {
                   <p className={styles.statValue}>{stats.people}</p>
                   <p className={styles.statHint}>Total contacts</p>
                 </Link>
-                <Link href="/admin/private-readings" className={styles.statCard}>
-                  <p className={styles.statLabel}>Private readings</p>
-                  <p className={styles.statValue}>{stats.clients}</p>
-                  <p className={styles.statHint}>Active client records</p>
+                <Link href="/admin/people" className={styles.statCard}>
+                  <p className={styles.statLabel}>Customers</p>
+                  <p className={styles.statValue}>{stats.customers}</p>
+                  <p className={styles.statHint}>People who have bought</p>
                 </Link>
                 <Link href="/admin/inquiries" className={styles.statCard}>
                   <p className={styles.statLabel}>Inquiries 7d</p>
@@ -145,9 +165,9 @@ export default function AdminDashboard({ profile }) {
                   <p className={styles.statHint}>{totalOpen} open total</p>
                 </Link>
                 <Link href="/admin/sales" className={styles.statCard}>
-                  <p className={styles.statLabel}>Sales</p>
-                  <p className={styles.statValue}>→</p>
-                  <p className={styles.statHint}>All revenue sources</p>
+                  <p className={styles.statLabel}>Revenue</p>
+                  <p className={styles.statValue}>${(stats.revenueCents / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+                  <p className={styles.statHint}>Won deals to date</p>
                 </Link>
               </div>
 
@@ -194,6 +214,33 @@ export default function AdminDashboard({ profile }) {
                   </ul>
                 </section>
               </div>
+
+              <section className={styles.panel}>
+                <header className={styles.panelHeader}>
+                  <h2 className={styles.panelTitle}>Recent deals</h2>
+                  <Link href="/admin/sales" className={styles.panelLink}>View sales →</Link>
+                </header>
+                {recentDeals.length === 0 ? (
+                  <p className={styles.muted}>No closed deals yet.</p>
+                ) : (
+                  <ul className={styles.feed}>
+                    {recentDeals.map((d) => {
+                      const who = d.people?.name || d.people?.email || 'unknown';
+                      const amt = `$${((d.amount_cents || 0) / 100).toFixed(2)}`;
+                      return (
+                        <li key={d.id} className={styles.feedItem}>
+                          <span className={styles.feedTime}>{d.won_at ? relTime(d.won_at) : '—'}</span>
+                          <span className={styles.feedTitle}>
+                            {amt} won
+                            <span className={styles.feedDetail}> · {who} · {d.source}</span>
+                          </span>
+                          <span className={styles.feedStage}>{(d.currency || 'usd').toUpperCase()}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </section>
 
               <section className={styles.panel}>
                 <header className={styles.panelHeader}>

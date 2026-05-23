@@ -115,7 +115,7 @@ Create a project at ~/code-projects/{project-slug}/ that follows the Infinite Le
 mkdir -p ~/code-projects/{project-slug}
 cd ~/code-projects/{project-slug}
 
-mkdir -p agents/{product-manager,developer,qa,devops,writer,designer,web-publisher,email-marketer}/{context,skills}
+mkdir -p agents/{product-manager,developer,qa,devops,writer,designer,web-publisher}/{context,skills}
 mkdir -p content/{topics,content-calendar}
 mkdir -p docs/architecture/{templates,workflows}
 mkdir -p docs/{brand,engineering,product,qa,features,archive,plans}
@@ -396,7 +396,7 @@ Never create a second agents repo. Never create a per-project agents repo.
 
 2. Create the repo structure (first time only):
    mkdir -p ~/{clientslug}-agents/.claude/agents
-   mkdir -p ~/{clientslug}-agents/agents/{product-manager,developer,qa,devops,writer,designer,web-publisher,email-marketer}/context
+   mkdir -p ~/{clientslug}-agents/agents/{product-manager,developer,qa,devops,writer,designer,web-publisher}/context
    mkdir -p ~/{clientslug}-agents/skills/sync-agents
 
    Write sync-agents/SKILL.md (triggers: "sync agents", "update agents", "pull latest agents")
@@ -409,8 +409,6 @@ Never create a second agents repo. Never create a per-project agents repo.
    Write the remaining 7 agent definition files to .claude/agents/ using the definitions in
    ~/.claude/skills/infiniteleverage-init/references/mac-mini-agents.md as the base.
    (developer.md was already written in Prompt 4 — do not overwrite it.)
-
-   Agents to write now: product-manager, qa, devops, writer, designer, web-publisher, email-marketer
 
    Apply the updated rules across all agents:
    - Product Manager: Dan Shipper product thinking, hypothesis-based epics, user story format; auto-approve only high-priority + low-risk items after 2h; backlog everything else; all approval decisions written directly to project-status.html
@@ -518,7 +516,6 @@ Never create a second agents repo. Never create a per-project agents repo.
 
 4. Write default-persona.md for all 8 agents at agents/{agent}/context/default-persona.md
 
-5. Write email sequence index at agents/email-marketer/context/email-index.md
    Include Stage 0 welcome email template with clear {placeholder} markers
 
 6. Write README.md describing the 8-agent team, install instructions, sync workflow
@@ -667,7 +664,6 @@ Tell me: "Dashboard ready — open ~/{clientslug}-agents/team-dashboard.html"
    Do not push — that's the operator's job."
 
    Email Marketer (Thursdays 10am):
-   "@email-marketer Check the email index at emails/email-index.md. Draft this week's newsletter
    based on the most recently published post. Save to emails/drafts/newsletter-$(date +%Y-%m-%d).md.
    Do not send — draft only until approved."
 

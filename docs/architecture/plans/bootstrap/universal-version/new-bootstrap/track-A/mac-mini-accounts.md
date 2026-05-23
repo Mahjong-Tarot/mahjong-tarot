@@ -115,7 +115,6 @@ Collect the following keys and store them in a secure credential document (NOT c
 **API key:**
 1. Go to `resend.com` → **Sign up** with operator email
 2. After login: **API Keys** → **Create API Key**
-3. Name: `{project-slug}-email-marketer`
 4. Copy and save as `RESEND_API_KEY`
 
 **Domain verification** (so emails send from `{firstname}@{clientdomain}.com`, not a Resend subdomain):

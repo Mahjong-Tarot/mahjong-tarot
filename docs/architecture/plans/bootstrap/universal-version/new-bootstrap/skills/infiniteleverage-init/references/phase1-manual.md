@@ -42,7 +42,6 @@ All steps are performed by the operator in a browser or terminal. Claude narrate
 
 **Resend (API key + domain verification)**:
 1. `resend.com` → Sign up with operator email
-2. **API Keys** → **Create API Key** → name: `{project-slug}-email-marketer` → copy → `RESEND_API_KEY`
 3. Resend dashboard → **Domains** → **Add Domain** → enter `{clientdomain}.com`
 4. Resend shows DNS records → return to Vercel DNS panel → add each:
    - TXT on `resend._domainkey` — DKIM key

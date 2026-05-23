@@ -252,7 +252,7 @@ mkdir -p ~/code-projects/{project-slug}
 cd ~/code-projects/{project-slug}
 
 # Core project folders (mirrors mahjong-tarot)
-mkdir -p agents/{product-manager,developer,qa,devops,writer,designer,web-publisher,email-marketer}/{context,skills}
+mkdir -p agents/{product-manager,developer,qa,devops,writer,designer,web-publisher}/{context,skills}
 mkdir -p content/{topics,content-calendar}
 mkdir -p docs/architecture/{templates,workflows}
 mkdir -p docs/{brand,engineering,product,qa,features,archive}

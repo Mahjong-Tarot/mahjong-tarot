@@ -133,7 +133,9 @@ export default function PrivateReadingsListPage({ profile }) {
                 {list.map((r) => (
                   <tr key={r.id}>
                     <td>
-                      <div style={{ fontWeight: 500 }}>{r.full_name || '—'}</div>
+                      <Link href={`/admin/private-readings/${r.id}`} style={{ fontWeight: 500, textDecoration: 'none', color: 'inherit' }}>
+                        {r.full_name || '—'}
+                      </Link>
                       {r.email && <div className={tableStyles.muted}>{r.email}</div>}
                     </td>
                     <td>

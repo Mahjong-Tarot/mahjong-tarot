@@ -143,19 +143,6 @@ export default function Signup() {
         path="/signup"
       />
 
-      {/* Funnel-locked nav */}
-      <header className={`container ${styles.navBar}`}>
-        <Link href="/" className={styles.logo}>
-          <span className={styles.logomark} />
-          Mahjong Tarot
-        </Link>
-        <div className={styles.navStep}>
-          <span className={styles.pip} />
-          Member Area sign up
-        </div>
-        <Link href="/sign-in" className={styles.navBack}>Already a member? Sign in</Link>
-      </header>
-
       <main className={styles.main}>
         <div className="container">
 
@@ -358,7 +345,7 @@ export default function Signup() {
                       </div>
                       <div className={styles.field}>
                         <label className={styles.fieldLabel} htmlFor="btime">
-                          Birth time <span className={styles.opt}>(if known, for the Hour Pillar)</span>
+                          Birth time <span className={styles.opt}>(4th Pillar if known)</span>
                         </label>
                         <input
                           className={styles.input}

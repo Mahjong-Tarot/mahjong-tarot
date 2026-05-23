@@ -1,2 +1,3 @@
 .vercel
 architecture/plans/bootstrap/.vercel
+.env*.local

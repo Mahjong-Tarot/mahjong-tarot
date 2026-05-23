@@ -1,4 +1,30 @@
-/* Admin dashboard at /portal/admin — shares Portal.module.css shell */
+/* Admin pages at /admin/* — used inside AdminShell content area */
+
+.pageEyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: 0 0 var(--space-sm);
+}
+
+.pageTitle {
+  font-family: var(--serif);
+  font-size: 36px;
+  line-height: 1.1;
+  margin: 0 0 var(--space-md);
+  color: var(--ink);
+}
+
+.pageLede {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  margin: 0 0 var(--space-xl);
+  max-width: 60ch;
+}
 
 .muted {
   font-family: var(--sans);

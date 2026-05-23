@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import PortalNav from '../../../components/PortalNav';
-import ConversionTable from '../../../components/ConversionTable';
-import SendNoteModal from '../../../components/SendNoteModal';
-import { supabase } from '../../../lib/supabase';
-import { requireAdmin } from '../../../lib/requireAdmin';
-import { listConversionTargets } from '../../../lib/conversions';
-import { markSubscription } from '../../../lib/clients';
-import portalStyles from '../../../styles/Portal.module.css';
-import styles from '../../../styles/PortalConversions.module.css';
+import AdminShell from '../../components/AdminShell';
+import ConversionTable from '../../components/ConversionTable';
+import SendNoteModal from '../../components/SendNoteModal';
+import { supabase } from '../../lib/supabase';
+import { requireAdmin } from '../../lib/requireAdmin';
+import { listConversionTargets } from '../../lib/conversions';
+import { markSubscription } from '../../lib/clients';
+import adminStyles from '../../styles/PortalAdmin.module.css';
+import styles from '../../styles/PortalConversions.module.css';
 
 export async function getServerSideProps(ctx) {
   return requireAdmin(ctx);
@@ -99,13 +99,10 @@ export default function ConversionsPage({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>Admin · Conversions</p>
-          <h1 className={portalStyles.h1}>Conversion dashboard</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <p className={adminStyles.pageEyebrow}>Admin · Conversions</p>
+          <h1 className={adminStyles.pageTitle}>Conversion dashboard</h1>
+          <p className={adminStyles.pageLede}>
             Every client across the portal, ranked by likelihood to convert.
             Send a note, mark them subscribed, or open the full profile.
           </p>
@@ -154,8 +151,7 @@ export default function ConversionsPage({ profile }) {
               busyClientId={busyClientId}
             />
           )}
-        </main>
-      </div>
+      </AdminShell>
 
       <SendNoteModal
         client={modalClient}

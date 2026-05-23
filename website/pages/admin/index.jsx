@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import PortalNav from '../../../components/PortalNav';
-import { supabase } from '../../../lib/supabase';
-import { requireAdmin } from '../../../lib/requireAdmin';
-import portalStyles from '../../../styles/Portal.module.css';
-import styles from '../../../styles/PortalAdmin.module.css';
+import AdminShell from '../../components/AdminShell';
+import { supabase } from '../../lib/supabase';
+import { requireAdmin } from '../../lib/requireAdmin';
+import styles from '../../styles/PortalAdmin.module.css';
 
 export async function getServerSideProps(ctx) {
   return requireAdmin(ctx);
@@ -117,12 +116,10 @@ export default function AdminDashboard({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-        <main className={portalStyles.main}>
-          <p className={portalStyles.eyebrow}>Admin</p>
-          <h1 className={portalStyles.h1}>Dashboard</h1>
-          <p className={portalStyles.lede}>
+      <AdminShell profile={profile}>
+          <p className={styles.pageEyebrow}>Admin</p>
+          <h1 className={styles.pageTitle}>Dashboard</h1>
+          <p className={styles.pageLede}>
             Pipeline state across every contact form, booking and newsletter signup.
           </p>
 
@@ -132,7 +129,7 @@ export default function AdminDashboard({ profile }) {
           {!loading && !error && (
             <>
               <div className={styles.statRow}>
-                <Link href="/portal/admin/people" className={styles.statCard}>
+                <Link href="/admin/people" className={styles.statCard}>
                   <p className={styles.statLabel}>People</p>
                   <p className={styles.statValue}>{stats.people}</p>
                   <p className={styles.statHint}>Total contacts</p>
@@ -142,12 +139,12 @@ export default function AdminDashboard({ profile }) {
                   <p className={styles.statValue}>{stats.clients}</p>
                   <p className={styles.statHint}>In astrologer portal</p>
                 </Link>
-                <Link href="/portal/admin/inquiries" className={styles.statCard}>
+                <Link href="/admin/inquiries" className={styles.statCard}>
                   <p className={styles.statLabel}>Inquiries 7d</p>
                   <p className={styles.statValue}>{stats.last7}</p>
                   <p className={styles.statHint}>{totalOpen} open total</p>
                 </Link>
-                <Link href="/portal/admin/conversions" className={styles.statCard}>
+                <Link href="/admin/conversions" className={styles.statCard}>
                   <p className={styles.statLabel}>Conversions</p>
                   <p className={styles.statValue}>→</p>
                   <p className={styles.statHint}>Subscription targets</p>
@@ -158,7 +155,7 @@ export default function AdminDashboard({ profile }) {
                 <section className={styles.panel}>
                   <header className={styles.panelHeader}>
                     <h2 className={styles.panelTitle}>Inquiries by type</h2>
-                    <Link href="/portal/admin/inquiries" className={styles.panelLink}>View all →</Link>
+                    <Link href="/admin/inquiries" className={styles.panelLink}>View all →</Link>
                   </header>
                   <ul className={styles.barList}>
                     {byType.map((t) => (
@@ -179,7 +176,7 @@ export default function AdminDashboard({ profile }) {
                 <section className={styles.panel}>
                   <header className={styles.panelHeader}>
                     <h2 className={styles.panelTitle}>Pipeline by stage</h2>
-                    <Link href="/portal/admin/inquiries" className={styles.panelLink}>View board →</Link>
+                    <Link href="/admin/inquiries" className={styles.panelLink}>View board →</Link>
                   </header>
                   <ul className={styles.barList}>
                     {byStage.map((s) => (
@@ -224,8 +221,7 @@ export default function AdminDashboard({ profile }) {
               </section>
             </>
           )}
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

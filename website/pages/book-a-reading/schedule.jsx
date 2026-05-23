@@ -7,9 +7,9 @@ import SEO from '../../components/SEO';
 import styles from '../../styles/Booking.module.css';
 
 const TIERS = {
-  30: { title: 'A focused look',  price: 49,  label: '30 min' },
-  60: { title: 'The full mirror', price: 69,  label: '60 min' },
-  90: { title: 'Deep counsel',    price: 129, label: '90 min' },
+  30: { title: 'A focused look',  price: 48,  label: '30 min' },
+  60: { title: 'The full mirror', price: 88,  label: '60 min' },
+  90: { title: 'Deep counsel',    price: 128, label: '90 min' },
 };
 
 const STORAGE_KEY = 'mt:booking-draft:v1';

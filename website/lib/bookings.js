@@ -2,9 +2,9 @@
 // Pricing/duration is the source of truth here — keep in sync
 // with the TIERS array in pages/book-a-reading.jsx.
 export const READING_TIERS = {
-  30: { duration: 30, amount_cents: 4900, label: 'A focused look',  priceEnvVar: 'STRIPE_PRICE_READING_30' },
-  60: { duration: 60, amount_cents: 6900, label: 'The full mirror', priceEnvVar: 'STRIPE_PRICE_READING_60' },
-  90: { duration: 90, amount_cents: 12900, label: 'Deep counsel',   priceEnvVar: 'STRIPE_PRICE_READING_90' },
+  30: { duration: 30, amount_cents: 4800, label: 'A focused look',  priceEnvVar: 'STRIPE_PRICE_READING_30' },
+  60: { duration: 60, amount_cents: 8800, label: 'The full mirror', priceEnvVar: 'STRIPE_PRICE_READING_60' },
+  90: { duration: 90, amount_cents: 12800, label: 'Deep counsel',   priceEnvVar: 'STRIPE_PRICE_READING_90' },
 };
 
 export function tierFor(duration) {

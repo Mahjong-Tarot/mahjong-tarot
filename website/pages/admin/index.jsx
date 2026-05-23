@@ -135,19 +135,19 @@ export default function AdminDashboard({ profile }) {
                   <p className={styles.statHint}>Total contacts</p>
                 </Link>
                 <Link href="/admin/private-readings" className={styles.statCard}>
-                  <p className={styles.statLabel}>Clients</p>
+                  <p className={styles.statLabel}>Private readings</p>
                   <p className={styles.statValue}>{stats.clients}</p>
-                  <p className={styles.statHint}>In astrologer portal</p>
+                  <p className={styles.statHint}>Active client records</p>
                 </Link>
                 <Link href="/admin/inquiries" className={styles.statCard}>
                   <p className={styles.statLabel}>Inquiries 7d</p>
                   <p className={styles.statValue}>{stats.last7}</p>
                   <p className={styles.statHint}>{totalOpen} open total</p>
                 </Link>
-                <Link href="/admin/conversions" className={styles.statCard}>
-                  <p className={styles.statLabel}>Conversions</p>
+                <Link href="/admin/sales" className={styles.statCard}>
+                  <p className={styles.statLabel}>Sales</p>
                   <p className={styles.statValue}>→</p>
-                  <p className={styles.statHint}>Subscription targets</p>
+                  <p className={styles.statHint}>All revenue sources</p>
                 </Link>
               </div>
 

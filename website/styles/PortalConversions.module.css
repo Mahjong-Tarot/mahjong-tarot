@@ -94,6 +94,42 @@
   border-left: 3px solid rgba(42, 138, 72, 0.4);
 }
 
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 14px;
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ordersTable thead tr {
+  background: var(--paper);
+}
+
+.ordersTable th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ordersTable td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+
+.ordersTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 @media (max-width: 720px) {
   .controls {
     flex-direction: column;

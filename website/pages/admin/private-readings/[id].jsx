@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PortalNav from '../../../components/PortalNav';
+import AdminShell from '../../../components/AdminShell';
 import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
@@ -11,7 +11,7 @@ import { listSessions } from '../../../lib/sessions';
 import { getOrCreateReportForSession } from '../../../lib/reports';
 import LogPaymentModal from '../../../components/LogPaymentModal';
 import { useAuth } from '../../../lib/auth';
-import portalStyles from '../../../styles/Portal.module.css';
+import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -151,9 +151,9 @@ export default function ClientProfilePage({ profile }) {
     return (
       <ShellLayout profile={profile}>
         <Link href="/admin/private-readings" className={styles.backLink}>← All clients</Link>
-        <p className={portalStyles.eyebrow}>Portal · Client</p>
-        <h1 className={portalStyles.h1}>Client not found</h1>
-        <p className={portalStyles.lede}>That ID doesn&apos;t match a client you can see.</p>
+        <p className={adminStyles.pageEyebrow}>Portal · Client</p>
+        <h1 className={adminStyles.pageTitle}>Client not found</h1>
+        <p className={adminStyles.pageLede}>That ID doesn&apos;t match a client you can see.</p>
       </ShellLayout>
     );
   }
@@ -161,11 +161,11 @@ export default function ClientProfilePage({ profile }) {
   return (
     <ShellLayout profile={profile} title={client.full_name}>
       <Link href="/admin/private-readings" className={styles.backLink}>← All clients</Link>
-      <p className={portalStyles.eyebrow}>Portal · Client</p>
+      <p className={adminStyles.pageEyebrow}>Portal · Client</p>
 
       <header className={styles.profileHeader}>
         <div>
-          <h1 className={portalStyles.h1}>{client.full_name}</h1>
+          <h1 className={adminStyles.pageTitle}>{client.full_name}</h1>
           <SubscriptionIcon status={client.subscription_status} showLabel />
         </div>
         <button
@@ -354,13 +354,10 @@ function ShellLayout({ profile, title, children }) {
   return (
     <>
       <Head>
-        <title>{title ? `${title} · Client` : 'Client'} | Mahjong Tarot Portal</title>
+        <title>{title ? `${title} · Reading` : 'Reading'} | Mahjong Tarot Admin</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-        <main className={portalStyles.main}>{children}</main>
-      </div>
+      <AdminShell profile={profile}>{children}</AdminShell>
     </>
   );
 }

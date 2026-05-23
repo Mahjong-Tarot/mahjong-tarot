@@ -1,12 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import PortalNav from '../../../components/PortalNav';
+import AdminShell from '../../../components/AdminShell';
 import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
 import { requirePortalUser } from '../../../lib/requirePortalUser';
 import { listClients } from '../../../lib/clients';
-import portalStyles from '../../../styles/Portal.module.css';
+import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClients.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -46,14 +46,11 @@ export default function ClientsListPage({ profile }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <div className={portalStyles.shell}>
-        <PortalNav profile={profile} />
-
-        <main className={portalStyles.main}>
+      <AdminShell profile={profile}>
           <div className={styles.header}>
             <div>
-              <p className={portalStyles.eyebrow}>Portal · Clients</p>
-              <h1 className={portalStyles.h1}>Clients</h1>
+              <p className={adminStyles.pageEyebrow}>Admin</p>
+              <h1 className={adminStyles.pageTitle}>Private readings</h1>
             </div>
             <Link href="/admin/private-readings/new" className={styles.newBtn}>+ New client</Link>
           </div>
@@ -100,8 +97,7 @@ export default function ClientsListPage({ profile }) {
               ))}
             </ul>
           )}
-        </main>
-      </div>
+      </AdminShell>
     </>
   );
 }

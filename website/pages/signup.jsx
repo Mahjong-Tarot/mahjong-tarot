@@ -13,7 +13,9 @@ async function pathForUser(userId) {
     .select('role')
     .eq('user_id', userId)
     .maybeSingle();
-  return data?.role === 'astrologer' || data?.role === 'admin' ? '/admin/sessions' : '/dashboard';
+  if (data?.role === 'admin') return '/admin';
+  if (data?.role === 'astrologer') return '/admin/private-readings';
+  return '/dashboard';
 }
 
 const REPORTS = [

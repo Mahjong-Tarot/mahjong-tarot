@@ -120,7 +120,7 @@ export default function CardPage({ card }) {
  </div>
 
  <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', marginTop: 'var(--space-xl)' }}>
- <Link href="/readings#book" className="btn-primary">Book a Reading with Bill</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading with Bill</Link>
  <Link href="/cards" className="btn-secondary">All 42 Cards</Link>
  </div>
  </div>

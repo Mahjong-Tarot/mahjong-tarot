@@ -74,7 +74,7 @@ export default function Contact() {
  We&rsquo;d love to hear from you.
  </p>
  <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
- <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
  </div>
  </div>

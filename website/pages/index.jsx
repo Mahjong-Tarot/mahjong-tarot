@@ -245,7 +245,7 @@ export default function Home({ todayDate, todayAlmanac }) {
             </article>
 
             <div className={styles.sessionsFooter}>
-              <Link href="/book-a-reading" className={styles.btnLink}>Book a Live Reading <span aria-hidden="true">→</span></Link>
+              <Link href="/book-a-reading" className={styles.btnLink}>Book a Private Reading <span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </section>

@@ -69,7 +69,7 @@ export default function BookAReading() {
   return (
     <>
       <SEO
-        title="Book a Reading with Bill Hajdu | Mahjong Tarot"
+        title="Book a Private Reading with Bill Hajdu | Mahjong Tarot"
         description="Choose your card-reading length. 30, 60, or 90 minutes, live online with Bill Hajdu."
         path="/book-a-reading"
       />

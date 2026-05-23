@@ -32,7 +32,7 @@ export default function Footer() {
               <li><Link href="/book-a-reading?duration=30">30 min · $49</Link></li>
               <li><Link href="/book-a-reading?duration=60">60 min · $69</Link></li>
               <li><Link href="/book-a-reading?duration=90">90 min · $129</Link></li>
-              <li><Link href="/book-a-reading">Book a Live Reading</Link></li>
+              <li><Link href="/book-a-reading">Book a Private Reading</Link></li>
             </ul>
           </div>
 

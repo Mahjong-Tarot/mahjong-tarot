@@ -68,16 +68,37 @@ export default function SalesPage({ profile }) {
         setRows(data);
         setOrders([]);
       } else {
-        const typeFilter = sourceFilter === 'books' ? 'book' : null;
+        // Read from the canonical `deals` table (was `orders`).
+        // Discriminator: booking_id → reading, member_subscription_id → subscription,
+        // notes ILIKE 'Book order%' → book. Everything else → other.
         let q = supabase
-          .from('orders')
-          .select('id, type, amount, currency, paid_at, payment_method, product_title, notes, person_id, client_id, session_id, status')
-          .eq('status', 'paid')
-          .order('paid_at', { ascending: false });
-        if (typeFilter) q = q.eq('type', typeFilter);
+          .from('deals')
+          .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, people(name, email)')
+          .eq('status', 'won')
+          .order('won_at', { ascending: false });
+        if (sourceFilter === 'books') q = q.ilike('notes', 'Book order%');
         const { data, error: e } = await q;
         if (e) throw e;
-        setOrders(data ?? []);
+        const mapped = (data ?? []).map((d) => {
+          const kind = d.booking_id
+            ? 'reading'
+            : d.member_subscription_id
+              ? 'subscription'
+              : (d.notes || '').toLowerCase().startsWith('book order')
+                ? 'book'
+                : 'other';
+          return {
+            id: d.id,
+            paid_at: d.won_at,
+            type: kind,
+            product_title: d.notes,
+            amount: (d.amount_cents ?? 0) / 100,
+            currency: (d.currency || 'usd').toUpperCase(),
+            payment_method: d.source === 'manual' ? 'manual' : (d.source === 'stripe' ? 'stripe' : d.source),
+            customer: d.people?.name || d.people?.email || null,
+          };
+        });
+        setOrders(mapped);
         setRows([]);
       }
     } catch (err) {
@@ -219,6 +240,7 @@ export default function SalesPage({ profile }) {
               <thead>
                 <tr>
                   <th>Paid</th>
+                  <th>Customer</th>
                   <th>Type</th>
                   <th>Item</th>
                   <th>Amount</th>
@@ -229,9 +251,10 @@ export default function SalesPage({ profile }) {
                 {orders.map((o) => (
                   <tr key={o.id}>
                     <td>{o.paid_at ? new Date(o.paid_at).toLocaleDateString() : '—'}</td>
+                    <td>{o.customer || '—'}</td>
                     <td>{o.type}</td>
-                    <td>{o.product_title || o.notes || '—'}</td>
-                    <td>{o.amount != null ? `${Number(o.amount).toFixed(2)} ${o.currency}` : '—'}</td>
+                    <td>{o.product_title || '—'}</td>
+                    <td>{o.amount != null ? `$${Number(o.amount).toFixed(2)} ${o.currency}` : '—'}</td>
                     <td>{o.payment_method || '—'}</td>
                   </tr>
                 ))}

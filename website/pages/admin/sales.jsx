@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import AdminShell from '../../components/AdminShell';
 import { supabase } from '../../lib/supabase';
 import { requireAdmin } from '../../lib/requireAdmin';
@@ -113,16 +114,27 @@ export default function SalesPage({ profile }) {
               </tr>
             </thead>
             <tbody>
-              {deals.map((d) => (
-                <tr key={d.id}>
-                  <td>{d.won_at ? new Date(d.won_at).toLocaleDateString() : '—'}</td>
-                  <td>{d.people?.name || d.people?.email || '—'}</td>
-                  <td>{kindOf(d)}</td>
-                  <td>{d.notes || '—'}</td>
-                  <td>${((d.amount_cents ?? 0) / 100).toFixed(2)} {(d.currency || 'usd').toUpperCase()}</td>
-                  <td>{d.source}</td>
-                </tr>
-              ))}
+              {deals.map((d) => {
+                const customerLabel = d.people?.name || d.people?.email || '—';
+                const customerCell = d.booking_id ? (
+                  <Link
+                    href={`/admin/private-readings/${d.booking_id}`}
+                    style={{ color: 'inherit', textDecoration: 'underline' }}
+                  >
+                    {customerLabel}
+                  </Link>
+                ) : customerLabel;
+                return (
+                  <tr key={d.id}>
+                    <td>{d.won_at ? new Date(d.won_at).toLocaleDateString() : '—'}</td>
+                    <td>{customerCell}</td>
+                    <td>{kindOf(d)}</td>
+                    <td>{d.notes || '—'}</td>
+                    <td>${((d.amount_cents ?? 0) / 100).toFixed(2)} {(d.currency || 'usd').toUpperCase()}</td>
+                    <td>{d.source}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}

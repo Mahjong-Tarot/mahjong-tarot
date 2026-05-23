@@ -14,6 +14,7 @@ const HANDLED_EVENTS = new Set([
   'customer.subscription.created',
   'customer.subscription.updated',
   'customer.subscription.deleted',
+  'invoice.paid',
 ]);
 
 async function readRawBody(req) {
@@ -49,6 +50,73 @@ function paymentIntentId(session) {
 async function insertDealIfNew(service, row) {
   const { error } = await service.from('deals').insert(row);
   if (error && error.code !== '23505') throw error; // 23505 = unique_violation
+}
+
+// Subscription renewals (and other invoice.paid events except the
+// initial subscription_create, which checkout.session.completed
+// already covers). Writes a Deal so recurring revenue rolls up
+// alongside one-time sales on the dashboard.
+async function handleInvoicePaid(service, invoice) {
+  const reason = invoice.billing_reason;
+  // Skip the very first charge — already handled at checkout time.
+  // Also skip the no-money preview / draft cases.
+  if (reason === 'subscription_create') return;
+  if ((invoice.amount_paid ?? 0) <= 0) return;
+  if (!['subscription_cycle', 'subscription_update'].includes(reason)) return;
+
+  const subId =
+    typeof invoice.subscription === 'string'
+      ? invoice.subscription
+      : invoice.subscription?.id || null;
+  const customerEmail =
+    invoice.customer_email ||
+    invoice.customer_details?.email ||
+    null;
+  const customerName =
+    invoice.customer_name ||
+    invoice.customer_details?.name ||
+    null;
+  const pi =
+    typeof invoice.payment_intent === 'string'
+      ? invoice.payment_intent
+      : invoice.payment_intent?.id || null;
+
+  // Resolve the member_subscriptions row → user_id (for the deal's
+  // member_subscription_id link). Best-effort; missing is OK.
+  let userId = null;
+  let plan = 'founders';
+  if (subId) {
+    const { data: sub } = await service
+      .from('member_subscriptions')
+      .select('user_id, plan')
+      .eq('stripe_subscription_id', subId)
+      .maybeSingle();
+    if (sub) {
+      userId = sub.user_id;
+      plan = sub.plan || plan;
+    }
+  }
+
+  if (!customerEmail) return; // can't attribute without an email
+
+  const person = await findOrCreatePersonByEmail(service, {
+    email: customerEmail,
+    name: customerName,
+  });
+
+  await insertDealIfNew(service, {
+    person_id: person?.id || null,
+    member_subscription_id: userId,
+    amount_cents: invoice.amount_paid ?? 0,
+    currency: invoice.currency || 'usd',
+    source: 'stripe',
+    notes: `${plan} subscription · ${reason === 'subscription_update' ? 'proration' : 'renewal'}`,
+    close_date: new Date().toISOString().slice(0, 10),
+    won_at: new Date().toISOString(),
+    status: 'won',
+    stripe_payment_intent_id: pi,
+  });
+  await promoteToCustomer(service, person?.id, person?.lifecycle_stage);
 }
 
 async function handleBookOrderCompleted(service, session) {
@@ -305,6 +373,8 @@ export default async function handler(req, res) {
           await promoteToCustomer(service, person?.id, person?.lifecycle_stage);
         }
       }
+    } else if (event.type === 'invoice.paid') {
+      await handleInvoicePaid(service, event.data.object);
     } else {
       // customer.subscription.created | updated | deleted
       const sub = event.data.object;

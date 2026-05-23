@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import styles from '../../styles/Booking.module.css';
 
@@ -88,7 +86,6 @@ export default function BookingPay() {
         description="Confirm and pay for your private reading."
         path="/book-a-reading/pay"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -148,8 +145,6 @@ export default function BookingPay() {
 
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

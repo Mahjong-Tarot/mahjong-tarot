@@ -46,7 +46,6 @@ function relTime(value) {
 export default function AdminPeople({ profile }) {
   const [people, setPeople]       = useState([]);
   const [inquiries, setInquiries] = useState([]);
-  const [clients, setClients]     = useState([]);
   const [profiles, setProfiles]   = useState([]);
   const [filter, setFilter]       = useState('all');
   const [error, setError]         = useState('');
@@ -60,7 +59,7 @@ export default function AdminPeople({ profile }) {
         return;
       }
       try {
-        const [pRes, iRes, cRes, prRes] = await Promise.all([
+        const [pRes, iRes, prRes] = await Promise.all([
           supabase
             .from('people').select('id, email, name, company, role, phone, ok_to_contact, source_site, created_at, updated_at, lifecycle_stage')
             .order('updated_at', { ascending: false }),
@@ -68,19 +67,14 @@ export default function AdminPeople({ profile }) {
             .from('inquiries')
             .select('person_id, type, status, created_at'),
           supabase
-            .from('clients')
-            .select('id, person_id, email, subscription_status'),
-          supabase
             .from('profiles')
             .select('user_id, person_id, role, is_premium, name'),
         ]);
         if (pRes.error)  throw pRes.error;
         if (iRes.error)  throw iRes.error;
-        if (cRes.error)  throw cRes.error;
         if (prRes.error) throw prRes.error;
         setPeople(pRes.data ?? []);
         setInquiries(iRes.data ?? []);
-        setClients(cRes.data ?? []);
         setProfiles(prRes.data ?? []);
       } catch (e) {
         setError(e.message || 'Failed to load people.');
@@ -97,13 +91,6 @@ export default function AdminPeople({ profile }) {
       if (!inquiriesByPerson.has(i.person_id)) inquiriesByPerson.set(i.person_id, []);
       inquiriesByPerson.get(i.person_id).push(i);
     }
-    // Clients can be linked by person_id (post slice 6) or by email fallback (slice 4-friendly)
-    const clientsByPersonId = new Map();
-    const clientsByEmail    = new Map();
-    for (const c of clients) {
-      if (c.person_id) clientsByPersonId.set(c.person_id, c);
-      if (c.email)     clientsByEmail.set(c.email.toLowerCase(), c);
-    }
     const profilesByPersonId = new Map();
     const profilesByName     = new Map(); // weak fallback — profiles lack email
     for (const pr of profiles) {
@@ -113,7 +100,6 @@ export default function AdminPeople({ profile }) {
 
     return people.map((p) => {
       const pInq    = inquiriesByPerson.get(p.id) ?? [];
-      const client  = clientsByPersonId.get(p.id) ?? clientsByEmail.get((p.email || '').toLowerCase()) ?? null;
       const memberProfile = profilesByPersonId.get(p.id)
         ?? (p.name ? profilesByName.get(p.name.toLowerCase()) : null);
 
@@ -127,15 +113,13 @@ export default function AdminPeople({ profile }) {
         ...p,
         types,
         inquiry_count: pInq.length,
-        client_id:        client?.id ?? null,
-        is_customer:      p.lifecycle_stage === 'customer',
-        subscription:     client?.subscription_status ?? null,
-        is_member:        !!memberProfile,
-        is_subscriber:    subscriber,
-        last_activity:    lastActivity,
+        is_customer:   p.lifecycle_stage === 'customer',
+        is_member:     !!memberProfile,
+        is_subscriber: subscriber,
+        last_activity: lastActivity,
       };
     }).sort((a, b) => (a.last_activity < b.last_activity ? 1 : -1));
-  }, [people, inquiries, clients, profiles]);
+  }, [people, inquiries, profiles]);
 
   const totals = useMemo(() => ({
     total:        aggregated.length,
@@ -164,7 +148,7 @@ export default function AdminPeople({ profile }) {
           <p className={styles.pageEyebrow}>Admin</p>
           <h1 className={styles.pageTitle}>People</h1>
           <p className={styles.pageLede}>
-            Every human who has interacted with the site — inquirers, subscribers, clients, members.
+            Every human who has interacted with the site — inquirers, subscribers, customers, members.
           </p>
 
           {error && <p className={styles.error}>{error}</p>}

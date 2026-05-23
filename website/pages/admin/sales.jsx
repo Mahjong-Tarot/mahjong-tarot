@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import AdminShell from '../../components/AdminShell';
-import ConversionTable from '../../components/ConversionTable';
-import SendNoteModal from '../../components/SendNoteModal';
 import { supabase } from '../../lib/supabase';
 import { requireAdmin } from '../../lib/requireAdmin';
-import { listConversionTargets } from '../../lib/conversions';
-import { markSubscription } from '../../lib/clients';
 import adminStyles from '../../styles/PortalAdmin.module.css';
 import styles from '../../styles/PortalConversions.module.css';
 
@@ -14,47 +11,29 @@ export async function getServerSideProps(ctx) {
   return requireAdmin(ctx);
 }
 
-// Top-level source: what kind of sale is being viewed.
+// Source filter — what kind of sale to surface. All read from
+// public.deals (the canonical money record).
 const SOURCE_FILTERS = [
   { id: 'all',              label: 'All' },
+  { id: 'private_readings', label: 'Private readings' },
   { id: 'subscriptions',    label: 'Subscriptions' },
   { id: 'books',            label: 'Books' },
-  { id: 'private_readings', label: 'Private readings' },
 ];
 
-// Sub-filter (only meaningful for subscription/private-reading sources;
-// drives the existing client conversion-targets RPC).
-const STATUS_FILTERS = [
-  { id: 'targets',   label: 'Conversion targets' },
-  { id: 'none',      label: 'Not subscribed' },
-  { id: 'lapsed',    label: 'Lapsed' },
-  { id: 'cancelled', label: 'Cancelled' },
-  { id: 'active',    label: 'Subscribed' },
-  { id: 'all',       label: 'All customers' },
-];
-
-const SORTS = [
-  { id: 'warm',         label: 'Warm leads' },
-  { id: 'recent',       label: 'Recent activity' },
-  { id: 'alphabetical', label: 'A → Z' },
-];
+function kindOf(d) {
+  if (d.booking_id) return 'reading';
+  if (d.member_subscription_id) return 'subscription';
+  if ((d.notes || '').toLowerCase().startsWith('book order')) return 'book';
+  return 'other';
+}
 
 export default function SalesPage({ profile }) {
-  const [rows, setRows] = useState([]);
-  const [orders, setOrders] = useState([]);
+  const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [sourceFilter, setSourceFilter] = useState('all');
-  const [statusFilter, setStatusFilter] = useState('targets');
-  const [sort, setSort] = useState('warm');
-  const [busyClientId, setBusyClientId] = useState('');
-  const [modalClient, setModalClient] = useState(null);
-  const [toast, setToast] = useState('');
 
-  const showsClientTable = sourceFilter === 'subscriptions' || sourceFilter === 'private_readings';
-  const showsOrdersTable = sourceFilter === 'all' || sourceFilter === 'books';
-
-  async function load() {
+  useEffect(() => {
     if (!supabase) {
       setError('Supabase not configured.');
       setLoading(false);
@@ -62,86 +41,22 @@ export default function SalesPage({ profile }) {
     }
     setLoading(true);
     setError('');
-    try {
-      if (showsClientTable) {
-        const data = await listConversionTargets(supabase, { statusFilter, sort });
-        setRows(data);
-        setOrders([]);
-      } else {
-        // Read from the canonical `deals` table (was `orders`).
-        // Discriminator: booking_id → reading, member_subscription_id → subscription,
-        // notes ILIKE 'Book order%' → book. Everything else → other.
-        let q = supabase
-          .from('deals')
-          .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, people(name, email)')
-          .eq('status', 'won')
-          .order('won_at', { ascending: false });
-        if (sourceFilter === 'books') q = q.ilike('notes', 'Book order%');
-        const { data, error: e } = await q;
-        if (e) throw e;
-        const mapped = (data ?? []).map((d) => {
-          const kind = d.booking_id
-            ? 'reading'
-            : d.member_subscription_id
-              ? 'subscription'
-              : (d.notes || '').toLowerCase().startsWith('book order')
-                ? 'book'
-                : 'other';
-          return {
-            id: d.id,
-            paid_at: d.won_at,
-            type: kind,
-            product_title: d.notes,
-            amount: (d.amount_cents ?? 0) / 100,
-            currency: (d.currency || 'usd').toUpperCase(),
-            payment_method: d.source === 'manual' ? 'manual' : (d.source === 'stripe' ? 'stripe' : d.source),
-            customer: d.people?.name || d.people?.email || null,
-          };
-        });
-        setOrders(mapped);
-        setRows([]);
-      }
-    } catch (err) {
-      setError(err.message || 'Failed to load sales.');
-    } finally {
+    let q = supabase
+      .from('deals')
+      .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, people(name, email)')
+      .eq('status', 'won')
+      .order('won_at', { ascending: false });
+    if (sourceFilter === 'books')            q = q.ilike('notes', 'Book order%');
+    if (sourceFilter === 'subscriptions')    q = q.not('member_subscription_id', 'is', null);
+    if (sourceFilter === 'private_readings') q = q.not('booking_id', 'is', null);
+    q.then(({ data, error: e }) => {
+      if (e) setError(e.message);
+      else   setDeals(data ?? []);
       setLoading(false);
-    }
-  }
+    });
+  }, [sourceFilter]);
 
-  useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sourceFilter, statusFilter, sort]);
-
-  async function handleMarkSubscribed(row) {
-    setBusyClientId(row.id);
-    try {
-      await markSubscription(supabase, row.id, 'active');
-      setToast(`${row.full_name} marked as subscribed.`);
-      await load();
-    } catch (err) {
-      setError(err.message || 'Failed to update subscription.');
-    } finally {
-      setBusyClientId('');
-    }
-  }
-
-  function handleSendNote(row) {
-    setModalClient(row);
-  }
-
-  function handleNoteSent({ client }) {
-    setModalClient(null);
-    setToast(`Note sent to ${client.full_name}.`);
-  }
-
-  useEffect(() => {
-    if (!toast) return;
-    const t = setTimeout(() => setToast(''), 4000);
-    return () => clearTimeout(t);
-  }, [toast]);
-
-  const counts = rows.length;
+  const totalCents = deals.reduce((s, d) => s + (d.amount_cents || 0), 0);
 
   return (
     <>
@@ -151,123 +66,79 @@ export default function SalesPage({ profile }) {
       </Head>
 
       <AdminShell profile={profile}>
-          <p className={adminStyles.pageEyebrow}>Admin</p>
-          <h1 className={adminStyles.pageTitle}>Sales</h1>
-          <p className={adminStyles.pageLede}>
-            Every paid order across the practice — subscriptions, books, and private readings.
-          </p>
+        <p className={adminStyles.pageEyebrow}>Admin</p>
+        <h1 className={adminStyles.pageTitle}>Sales</h1>
+        <p className={adminStyles.pageLede}>
+          Every won deal — Stripe, manual, all sources. One row per sale.
+        </p>
 
-          {/* Source filter — top-level */}
-          <div className={styles.controls}>
-            <div className={styles.chipRow} role="tablist" aria-label="Source">
-              {SOURCE_FILTERS.map((f) => (
-                <button
-                  key={f.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={sourceFilter === f.id}
-                  className={sourceFilter === f.id ? styles.chipActive : styles.chip}
-                  onClick={() => setSourceFilter(f.id)}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
+        <div className={styles.controls}>
+          <div className={styles.chipRow} role="tablist" aria-label="Source">
+            {SOURCE_FILTERS.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                role="tab"
+                aria-selected={sourceFilter === f.id}
+                className={sourceFilter === f.id ? styles.chipActive : styles.chip}
+                onClick={() => setSourceFilter(f.id)}
+              >
+                {f.label}
+              </button>
+            ))}
           </div>
+        </div>
 
-          {/* Sub-filter — only meaningful for client-based sources */}
-          {showsClientTable && (
-            <div className={styles.controls}>
-              <div className={styles.chipRow} role="tablist" aria-label="Status filter">
-                {STATUS_FILTERS.map((f) => (
-                  <button
-                    key={f.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={statusFilter === f.id}
-                    className={statusFilter === f.id ? styles.chipActive : styles.chip}
-                    onClick={() => setStatusFilter(f.id)}
+        {error && <p className={styles.error}>{error}</p>}
+
+        <p className={styles.count}>
+          {loading
+            ? 'Loading…'
+            : `${deals.length} deal${deals.length === 1 ? '' : 's'} · $${(totalCents / 100).toFixed(2)} total`}
+        </p>
+
+        {!loading && deals.length === 0 && (
+          <p className={adminStyles.muted}>No sales in this view yet.</p>
+        )}
+
+        {!loading && deals.length > 0 && (
+          <table className={styles.ordersTable}>
+            <thead>
+              <tr>
+                <th>Won</th>
+                <th>Customer</th>
+                <th>Type</th>
+                <th>Notes</th>
+                <th>Amount</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deals.map((d) => {
+                const customerLabel = d.people?.name || d.people?.email || '—';
+                const customerCell = d.booking_id ? (
+                  <Link
+                    href={`/admin/private-readings/${d.booking_id}`}
+                    style={{ color: 'inherit', textDecoration: 'underline' }}
                   >
-                    {f.label}
-                  </button>
-                ))}
-              </div>
-              <label className={styles.sortField}>
-                <span className={styles.sortLabel}>Sort by</span>
-                <select
-                  value={sort}
-                  onChange={(e) => setSort(e.target.value)}
-                  className={styles.sortSelect}
-                >
-                  {SORTS.map((s) => (
-                    <option key={s.id} value={s.id}>{s.label}</option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          )}
-
-          {error && <p className={styles.error}>{error}</p>}
-          {toast && <p className={styles.toast}>{toast}</p>}
-
-          <p className={styles.count}>
-            {loading
-              ? 'Loading…'
-              : showsClientTable
-                ? `${rows.length} client${rows.length === 1 ? '' : 's'}`
-                : `${orders.length} order${orders.length === 1 ? '' : 's'}`}
-          </p>
-
-          {!loading && showsClientTable && (
-            <ConversionTable
-              rows={rows}
-              onMarkSubscribed={handleMarkSubscribed}
-              onSendNote={handleSendNote}
-              busyClientId={busyClientId}
-            />
-          )}
-
-          {!loading && showsOrdersTable && orders.length === 0 && (
-            <p className={adminStyles.muted}>
-              {sourceFilter === 'books'
-                ? 'No book sales recorded yet.'
-                : 'No paid orders recorded yet.'}
-            </p>
-          )}
-
-          {!loading && showsOrdersTable && orders.length > 0 && (
-            <table className={styles.ordersTable}>
-              <thead>
-                <tr>
-                  <th>Paid</th>
-                  <th>Customer</th>
-                  <th>Type</th>
-                  <th>Item</th>
-                  <th>Amount</th>
-                  <th>Method</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((o) => (
-                  <tr key={o.id}>
-                    <td>{o.paid_at ? new Date(o.paid_at).toLocaleDateString() : '—'}</td>
-                    <td>{o.customer || '—'}</td>
-                    <td>{o.type}</td>
-                    <td>{o.product_title || '—'}</td>
-                    <td>{o.amount != null ? `$${Number(o.amount).toFixed(2)} ${o.currency}` : '—'}</td>
-                    <td>{o.payment_method || '—'}</td>
+                    {customerLabel}
+                  </Link>
+                ) : customerLabel;
+                return (
+                  <tr key={d.id}>
+                    <td>{d.won_at ? new Date(d.won_at).toLocaleDateString() : '—'}</td>
+                    <td>{customerCell}</td>
+                    <td>{kindOf(d)}</td>
+                    <td>{d.notes || '—'}</td>
+                    <td>${((d.amount_cents ?? 0) / 100).toFixed(2)} {(d.currency || 'usd').toUpperCase()}</td>
+                    <td>{d.source}</td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </AdminShell>
-
-      <SendNoteModal
-        client={modalClient}
-        onClose={() => setModalClient(null)}
-        onSent={handleNoteSent}
-      />
     </>
   );
 }

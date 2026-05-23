@@ -1,372 +1,322 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
-import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
 import { requireStaff } from '../../../lib/requireStaff';
-import { getClient, updateClient, markSubscription } from '../../../lib/clients';
-import { listSessions } from '../../../lib/sessions';
-import { getOrCreateReportForSession } from '../../../lib/reports';
-import LogPaymentModal from '../../../components/LogPaymentModal';
-import { useAuth } from '../../../lib/auth';
+import {
+  calculatePillars,
+  getZodiacAnimal,
+  tallyElements,
+  dominantElement,
+  STEMS,
+  BRANCHES,
+} from '../../../lib/bazi';
+import { computeThreeBlessings } from '../../../lib/three-blessings';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
-import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
   return requireStaff(ctx);
 }
 
-// Subscription status labels — used by the "mark as X" buttons in
-// the subscription panel (the inline status display itself uses the
-// SubscriptionIcon component for icon + label).
-const SUB_LABEL = {
-  none: 'Not subscribed',
-  active: 'Subscribed',
-  lapsed: 'Lapsed',
-  cancelled: 'Cancelled',
+const DATE_FMT = new Intl.DateTimeFormat(undefined, {
+  weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
+  hour: 'numeric', minute: '2-digit',
+});
+
+const STATUS_LABEL = {
+  pending_payment: 'Pending payment',
+  paid:            'Paid',
+  scheduled:       'Scheduled',
+  completed:       'Completed',
+  cancelled:       'Cancelled',
+  refunded:        'Refunded',
 };
 
-const SESSION_STATUS_LABEL = {
-  scheduled: 'Scheduled',
-  completed: 'Completed',
-  no_show: 'No-show',
-  cancelled: 'Cancelled',
-};
-
-function formatDateTime(iso) {
-  if (!iso) return '—';
-  const d = new Date(iso);
-  return d.toLocaleString(undefined, {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  });
-}
-
-export default function ClientProfilePage({ profile }) {
+export default function ReadingBriefPage({ profile }) {
   const router = useRouter();
-  const { user } = useAuth();
   const { id } = router.query;
 
-  const [client, setClient] = useState(null);
-  const [sessions, setSessions] = useState([]);
+  const [booking, setBooking] = useState(null);
+  const [person, setPerson]   = useState(null);
+  const [inquiry, setInquiry] = useState(null);
+  const [deal, setDeal]       = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [editing, setEditing] = useState(false);
-  const [form, setForm] = useState(null);
-  const [paymentSession, setPaymentSession] = useState(null);
-  const [savingEdit, setSavingEdit] = useState(false);
-  const [savingSub, setSavingSub] = useState(false);
-  const [openingReportFor, setOpeningReportFor] = useState('');
+  const [error, setError]     = useState('');
+
+  const [savingField, setSavingField] = useState('');
+  const [draft, setDraft]             = useState({ prep_notes: '', post_call_notes: '', summary_text: '', question: '' });
 
   useEffect(() => {
-    if (!id || !supabase) return;
-    let active = true;
-    setLoading(true);
-    Promise.all([getClient(supabase, id), listSessions(supabase, { clientId: id })])
-      .then(([c, s]) => {
-        if (!active) return;
-        setClient(c);
-        setSessions(s);
-        setForm(toForm(c));
-      })
-      .catch((err) => setError(err.message || 'Failed to load client.'))
-      .finally(() => active && setLoading(false));
-    return () => { active = false; };
-  }, [id]);
+    if (!router.isReady || !supabase) return;
+    let cancelled = false;
 
-  function toForm(c) {
-    if (!c) return null;
-    return {
-      full_name: c.full_name || '',
-      email: c.email || '',
-      phone: c.phone || '',
-      birthday: c.birthday || '',
-      birth_time: c.birth_time || '',
-      birth_place: c.birth_place || '',
-      gender: c.gender || '',
-      notes: c.notes || '',
-    };
-  }
+    async function load() {
+      setLoading(true);
+      setError('');
+      try {
+        const { data: b, error: be } = await supabase
+          .from('bookings')
+          .select('id, full_name, email, scheduled_at, duration_minutes, status, amount_cents, currency, astrologer_id, question, birthday, birth_time, meeting_source, meeting_external_id, prep_notes, post_call_notes, transcript_text, summary_text')
+          .eq('id', id)
+          .maybeSingle();
+        if (be) throw be;
+        if (!b) throw new Error('Booking not found');
+        if (cancelled) return;
+        setBooking(b);
+        setDraft({
+          prep_notes:      b.prep_notes      || '',
+          post_call_notes: b.post_call_notes || '',
+          summary_text:    b.summary_text    || '',
+          question:        b.question        || '',
+        });
 
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+        // People: match by email (canonical identity)
+        const { data: pp } = await supabase
+          .from('people')
+          .select('id, name, email, birthday, birth_time, birth_place, lifecycle_stage')
+          .ilike('email', b.email)
+          .maybeSingle();
+        if (cancelled) return;
+        setPerson(pp || null);
 
-  async function handleSave(e) {
-    e.preventDefault();
-    setSavingEdit(true);
-    try {
-      const updated = await updateClient(supabase, id, form);
-      setClient(updated);
-      setEditing(false);
-    } catch (err) {
-      setError(err.message || 'Failed to save.');
-    } finally {
-      setSavingEdit(false);
+        // Inquiry (latest) for this person, if any
+        if (pp?.id) {
+          const { data: iq } = await supabase
+            .from('inquiries')
+            .select('id, type, status, source, subject, message, created_at')
+            .eq('person_id', pp.id)
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+          if (cancelled) return;
+          setInquiry(iq || null);
+        }
+
+        // Deal for this booking
+        const { data: dl } = await supabase
+          .from('deals')
+          .select('id, amount_cents, currency, source, won_at, notes')
+          .eq('booking_id', b.id)
+          .maybeSingle();
+        if (cancelled) return;
+        setDeal(dl || null);
+      } catch (err) {
+        if (!cancelled) setError(err.message || 'Failed to load booking.');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
+
+    load();
+    return () => { cancelled = true; };
+  }, [router.isReady, id]);
+
+  // Birthday + birth_time: prefer the person's canonical record; fall
+  // back to the booking-specific copy (legacy behaviour).
+  const birthday  = person?.birthday  || booking?.birthday  || null;
+  const birthTime = person?.birth_time || booking?.birth_time || null;
+
+  const pillars = useMemo(() => birthday ? calculatePillars(birthday, birthTime) : null, [birthday, birthTime]);
+  const zodiac  = useMemo(() => birthday ? getZodiacAnimal(birthday) : null, [birthday]);
+  const tally   = useMemo(() => tallyElements(pillars), [pillars]);
+  const dominant = useMemo(() => dominantElement(tally), [tally]);
+  const threeBlessings = useMemo(() => {
+    if (!pillars) return null;
+    try { return computeThreeBlessings({ birthday, birthTime, pillars }); }
+    catch { return null; }
+  }, [pillars, birthday, birthTime]);
+
+  async function saveField(field) {
+    if (!booking) return;
+    setSavingField(field);
+    const { error: e } = await supabase
+      .from('bookings')
+      .update({ [field]: draft[field] || null })
+      .eq('id', booking.id);
+    setSavingField('');
+    if (e) { setError(e.message); return; }
+    setBooking({ ...booking, [field]: draft[field] });
   }
 
-  async function handleSubChange(newStatus) {
-    setSavingSub(true);
-    try {
-      const updated = await markSubscription(supabase, id, newStatus);
-      setClient(updated);
-    } catch (err) {
-      setError(err.message || 'Failed to update subscription.');
-    } finally {
-      setSavingSub(false);
-    }
-  }
-
-  async function handleOpenReport(session) {
-    if (!session || openingReportFor) return;
-    setOpeningReportFor(session.id);
-    try {
-      const report = await getOrCreateReportForSession(
-        supabase,
-        session.id,
-        session.client_id,
-        user?.id,
-      );
-      router.push(`/admin/reports/${report.id}`);
-    } catch (err) {
-      setError(err.message || 'Failed to open report.');
-      setOpeningReportFor('');
-    }
-  }
-
-  if (loading) {
-    return (
-      <ShellLayout profile={profile}>
-        <p className={styles.empty}>Loading client…</p>
-      </ShellLayout>
-    );
-  }
-
-  if (!client) {
-    return (
-      <ShellLayout profile={profile}>
-        <Link href="/admin/private-readings" className={styles.backLink}>← All clients</Link>
-        <p className={adminStyles.pageEyebrow}>Portal · Client</p>
-        <h1 className={adminStyles.pageTitle}>Client not found</h1>
-        <p className={adminStyles.pageLede}>That ID doesn&apos;t match a client you can see.</p>
-      </ShellLayout>
-    );
-  }
-
-  return (
-    <ShellLayout profile={profile} title={client.full_name}>
-      <Link href="/admin/private-readings" className={styles.backLink}>← All clients</Link>
-      <p className={adminStyles.pageEyebrow}>Portal · Client</p>
-
-      <header className={styles.profileHeader}>
-        <div>
-          <h1 className={adminStyles.pageTitle}>{client.full_name}</h1>
-          <SubscriptionIcon status={client.subscription_status} showLabel />
-        </div>
-        <button
-          type="button"
-          className={styles.btnSecondary}
-          onClick={() => { setForm(toForm(client)); setEditing((v) => !v); }}
-        >
-          {editing ? 'Cancel edit' : 'Edit client'}
-        </button>
-      </header>
-
-      {error && <p className={styles.error}>{error}</p>}
-
-      {/* ─── Contact + birth ─── */}
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Contact &amp; birth</h2>
-
-        {editing ? (
-          <form className={styles.form} onSubmit={handleSave}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="full_name">Full name</label>
-              <input id="full_name" className={styles.input} value={form.full_name} onChange={set('full_name')} required />
-            </div>
-            <div className={styles.row}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="email">Email</label>
-                <input id="email" type="email" className={styles.input} value={form.email} onChange={set('email')} />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="phone">Phone</label>
-                <input id="phone" className={styles.input} value={form.phone} onChange={set('phone')} />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="birthday">Birthday</label>
-                <input id="birthday" type="date" className={styles.input} value={form.birthday} onChange={set('birthday')} />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="birth_time">Birth time</label>
-                <input id="birth_time" type="time" className={styles.input} value={form.birth_time} onChange={set('birth_time')} />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="birth_place">Birth place</label>
-                <input id="birth_place" className={styles.input} value={form.birth_place} onChange={set('birth_place')} />
-              </div>
-              <div className={styles.field}>
-                <label className={styles.label} htmlFor="gender">Gender</label>
-                <select id="gender" className={styles.input} value={form.gender} onChange={set('gender')}>
-                  <option value="">—</option>
-                  <option value="F">Female</option>
-                  <option value="M">Male</option>
-                  <option value="X">Other</option>
-                </select>
-              </div>
-            </div>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="notes">Notes</label>
-              <textarea id="notes" className={styles.textarea} value={form.notes} onChange={set('notes')} rows={4} />
-            </div>
-            <div className={styles.actions}>
-              <button type="button" className={styles.btnSecondary} onClick={() => setEditing(false)} disabled={savingEdit}>Cancel</button>
-              <button type="submit" className={styles.btnPrimary} disabled={savingEdit}>{savingEdit ? 'Saving…' : 'Save changes'}</button>
-            </div>
-          </form>
-        ) : (
-          <dl className={styles.fields}>
-            <Field label="Email" value={client.email} />
-            <Field label="Phone" value={client.phone} />
-            <Field label="Birthday" value={client.birthday} />
-            <Field label="Birth time" value={client.birth_time} />
-            <Field label="Birth place" value={client.birth_place} />
-            <Field label="Gender" value={client.gender} />
-            <Field label="Notes" value={client.notes} long />
-          </dl>
-        )}
-      </section>
-
-      {/* ─── Subscription ─── */}
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Subscription</h2>
-        <div className={styles.subscriptionPanel}>
-          <div>
-            <SubscriptionIcon status={client.subscription_status} showLabel />
-            <div className={styles.subDates}>
-              {client.subscription_started_at && <span>Started {new Date(client.subscription_started_at).toLocaleDateString()}</span>}
-              {client.subscription_ended_at && <span> · Ended {new Date(client.subscription_ended_at).toLocaleDateString()}</span>}
-            </div>
-          </div>
-          <div className={styles.subButtons}>
-            {['none', 'active', 'lapsed', 'cancelled'].map((s) => (
-              <button
-                key={s}
-                type="button"
-                className={s === client.subscription_status ? styles.btnPrimary : styles.btnSecondary}
-                onClick={() => handleSubChange(s)}
-                disabled={savingSub || s === client.subscription_status}
-              >
-                {SUB_LABEL[s]}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Sessions ─── */}
-      <section className={styles.section}>
-        <div className={styles.sectionHead}>
-          <h2 className={styles.sectionTitle}>Sessions</h2>
-          <Link href={`/admin/sessions/new?client=${client.id}`} className={styles.linkAction}>+ Schedule session</Link>
-        </div>
-        {sessions.length === 0 ? (
-          <p className={styles.muted}>No sessions yet.</p>
-        ) : (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>When</th>
-                <th>Status</th>
-                <th>Meeting</th>
-                <th>Payment</th>
-                <th>Notes</th>
-                <th aria-label="Actions"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {sessions.map((s) => (
-                <tr key={s.id}>
-                  <td>{formatDateTime(s.scheduled_at)}</td>
-                  <td>{SESSION_STATUS_LABEL[s.status] || s.status}</td>
-                  <td>{s.meeting_external_id ? `${s.meeting_source}: ${s.meeting_external_id.slice(0, 8)}…` : '—'}</td>
-                  <td>
-                    {s.paid_at ? (
-                      <button
-                        type="button"
-                        onClick={() => setPaymentSession(s)}
-                        className={styles.paidPill}
-                        title={s.payment_notes || ''}
-                      >
-                        {s.payment_amount != null ? `$${Number(s.payment_amount).toFixed(2)} ` : ''}
-                        {s.payment_method || 'paid'}
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => setPaymentSession(s)}
-                        className={styles.linkAction}
-                      >
-                        Log payment
-                      </button>
-                    )}
-                  </td>
-                  <td className={styles.notesCell}>{s.prep_notes || '—'}</td>
-                  <td>
-                    <button
-                      type="button"
-                      className={styles.linkAction}
-                      onClick={() => handleOpenReport(s)}
-                      disabled={openingReportFor === s.id}
-                    >
-                      {openingReportFor === s.id ? 'Opening…' : 'Open report'}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </section>
-
-      <LogPaymentModal
-        session={paymentSession}
-        onClose={() => setPaymentSession(null)}
-        onSaved={(updated) => {
-          setSessions((prev) => prev.map((s) => (s.id === updated.id ? { ...s, ...updated } : s)));
-          setPaymentSession(null);
-        }}
-      />
-    </ShellLayout>
-  );
-}
-
-function ShellLayout({ profile, title, children }) {
   return (
     <>
       <Head>
-        <title>{title ? `${title} · Reading` : 'Reading'} | Mahjong Tarot Admin</title>
+        <title>Private Reading | Mahjong Tarot Admin</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
-      <AdminShell profile={profile}>{children}</AdminShell>
+
+      <AdminShell profile={profile}>
+        <Link href="/admin/private-readings" className={adminStyles.muted} style={{ display: 'inline-block', marginBottom: 16 }}>
+          ← Back to readings
+        </Link>
+
+        {loading && <p className={adminStyles.muted}>Loading…</p>}
+        {error && <p className={adminStyles.error}>{error}</p>}
+
+        {!loading && booking && (
+          <>
+            {/* Header */}
+            <p className={adminStyles.pageEyebrow}>Private Reading</p>
+            <h1 className={adminStyles.pageTitle}>{booking.full_name || person?.name || 'Unnamed'}</h1>
+            <p className={adminStyles.pageLede}>
+              {booking.scheduled_at ? DATE_FMT.format(new Date(booking.scheduled_at)) : 'unscheduled'} ·{' '}
+              {booking.duration_minutes ? `${booking.duration_minutes} min` : ''} ·{' '}
+              <strong>{STATUS_LABEL[booking.status] || booking.status}</strong>
+              {deal && <> · ${(deal.amount_cents / 100).toFixed(2)} {(deal.currency || 'usd').toUpperCase()}</>}
+            </p>
+
+            {/* What she's bringing */}
+            <Section title="What she's bringing">
+              {inquiry?.message && (
+                <Detail label={`First contact (inquiry, ${inquiry.status})`}>
+                  <em>“{inquiry.message}”</em>
+                </Detail>
+              )}
+              <EditableField
+                label="Reading question"
+                placeholder="What is she here to learn about? Add it here if she didn't say at booking."
+                value={draft.question}
+                onChange={(v) => setDraft({ ...draft, question: v })}
+                onBlur={() => booking.question !== draft.question && saveField('question')}
+                saving={savingField === 'question'}
+              />
+            </Section>
+
+            {/* Birth data */}
+            <Section title="Birth data">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+                <Detail label="Birthday">{birthday || <Missing />}</Detail>
+                <Detail label="Birth time">{birthTime || <Missing label="missing — Hour Pillar unavailable" />}</Detail>
+                <Detail label="Birth place">{person?.birth_place || <Missing label="missing" />}</Detail>
+              </div>
+            </Section>
+
+            {/* Four Pillars */}
+            {pillars && (
+              <Section title="Four Pillars (computed live)">
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                  <thead>
+                    <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
+                      <th style={{ padding: 8 }}>Pillar</th>
+                      <th style={{ padding: 8 }}>Stem</th>
+                      <th style={{ padding: 8 }}>Branch</th>
+                      <th style={{ padding: 8 }}>Element</th>
+                      <th style={{ padding: 8 }}>Animal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[['Year', pillars.year], ['Month', pillars.month], ['Day', pillars.day], ['Hour', pillars.hour]].map(([label, p]) => (
+                      <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
+                        <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
+                        <td style={{ padding: 8 }}>{p ? `${p.stem.name} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
+                        <td style={{ padding: 8 }}>{p ? `${p.branch.name} (${p.branch.element})` : '—'}</td>
+                        <td style={{ padding: 8 }}>{p ? p.stem.element : '—'}</td>
+                        <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p className={adminStyles.muted} style={{ marginTop: 10 }}>
+                  <strong>Day Master:</strong> {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} ·{' '}
+                  <strong>Zodiac:</strong> {zodiac || '—'} ·{' '}
+                  <strong>Dominant element:</strong> {dominant?.name || '—'}
+                </p>
+              </Section>
+            )}
+
+            {/* Three Blessings */}
+            {threeBlessings && (
+              <Section title="Three Blessings">
+                <ul style={{ paddingLeft: 18, lineHeight: 1.6 }}>
+                  {threeBlessings.positions && Object.entries(threeBlessings.positions).map(([k, v]) => (
+                    v?.line && <li key={k}><strong>{k}:</strong> {v.line}</li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {/* Prep notes */}
+            <Section title="Prep notes">
+              <textarea
+                value={draft.prep_notes}
+                onChange={(e) => setDraft({ ...draft, prep_notes: e.target.value })}
+                onBlur={() => booking.prep_notes !== draft.prep_notes && saveField('prep_notes')}
+                placeholder="What you've gathered before the call. Saves on blur."
+                rows={5}
+                style={{ width: '100%', padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'inherit', fontSize: 14 }}
+              />
+              {savingField === 'prep_notes' && <span className={adminStyles.muted}>Saving…</span>}
+            </Section>
+
+            {/* Post-call notes */}
+            <Section title="Post-call notes">
+              <textarea
+                value={draft.post_call_notes}
+                onChange={(e) => setDraft({ ...draft, post_call_notes: e.target.value })}
+                onBlur={() => booking.post_call_notes !== draft.post_call_notes && saveField('post_call_notes')}
+                placeholder="What she actually heard / what was decided."
+                rows={5}
+                style={{ width: '100%', padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'inherit', fontSize: 14 }}
+              />
+              {savingField === 'post_call_notes' && <span className={adminStyles.muted}>Saving…</span>}
+            </Section>
+
+            {/* Summary */}
+            <Section title="Summary (sent to her)">
+              <textarea
+                value={draft.summary_text}
+                onChange={(e) => setDraft({ ...draft, summary_text: e.target.value })}
+                onBlur={() => booking.summary_text !== draft.summary_text && saveField('summary_text')}
+                placeholder="The follow-up summary you'll email her."
+                rows={6}
+                style={{ width: '100%', padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'inherit', fontSize: 14 }}
+              />
+              {savingField === 'summary_text' && <span className={adminStyles.muted}>Saving…</span>}
+            </Section>
+          </>
+        )}
+      </AdminShell>
     </>
   );
 }
 
-function Field({ label, value, long }) {
+function Section({ title, children }) {
   return (
-    <div className={long ? styles.fieldFull : styles.fieldInline}>
-      <dt className={styles.fieldKey}>{label}</dt>
-      <dd className={styles.fieldVal}>{value || '—'}</dd>
+    <section style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid #e5e7eb' }}>
+      <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 14 }}>{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function Detail({ label, children }) {
+  return (
+    <div>
+      <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', fontWeight: 500, marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: 14, lineHeight: 1.5 }}>{children}</div>
+    </div>
+  );
+}
+
+function Missing({ label = 'missing' }) {
+  return <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>⚠ {label}</span>;
+}
+
+function EditableField({ label, value, onChange, onBlur, placeholder, saving }) {
+  return (
+    <div style={{ marginTop: 12 }}>
+      <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', fontWeight: 500, marginBottom: 4 }}>{label}</div>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: 8, fontSize: 14, fontFamily: 'inherit' }}
+      />
+      {saving && <span style={{ fontSize: 11, color: '#6b7280', marginLeft: 4 }}>Saving…</span>}
     </div>
   );
 }

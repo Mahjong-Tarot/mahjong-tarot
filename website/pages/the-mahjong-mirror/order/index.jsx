@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
 import SEO from '../../../components/SEO';
 import { BOOK_SKUS, BOOK_SKU_ORDER, formatBookPrice } from '../../../lib/books';
 import styles from '../../../styles/Booking.module.css';
@@ -59,7 +57,6 @@ export default function OrderBook() {
         description="Pre-order The Mahjong Mirror — digital edition, hardcopy, or signed hardcopy with the Mahjong Mirror Card Set."
         path="/the-mahjong-mirror/order"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -82,7 +79,7 @@ export default function OrderBook() {
           <header className={styles.header}>
             <span className={styles.eyebrow}>Pre-order</span>
             <h1 className={styles.title}>
-              The <em>Mahjong Mirror</em>, your way
+              The <em>Mahjong Mirror</em>,<br />your way
             </h1>
             <p className={styles.lede}>
               Three ways to receive the book. Choose digital for an instant
@@ -177,18 +174,8 @@ export default function OrderBook() {
             </div>
           </div>
 
-          <div className={styles.help}>
-            <span className={styles.eyebrow}>Questions?</span>
-            <p>
-              Not sure which edition fits? <Link href="/contact">Send Bill a note</Link> —
-              he&apos;ll point you to the right one.
-            </p>
-          </div>
-
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

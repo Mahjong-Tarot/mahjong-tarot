@@ -473,15 +473,6 @@ export default function Signup() {
 
         </div>
       </main>
-
-      <footer className={styles.foot}>
-        <div className="container">
-          <div className={styles.footInner}>
-            <div><span className={styles.pip} />© {new Date().getFullYear()} Mahjong Tarot · Bill Hajdu</div>
-            <div>Ancient Cards. Modern Insight.</div>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

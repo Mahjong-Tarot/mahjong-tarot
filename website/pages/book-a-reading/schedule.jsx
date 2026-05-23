@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import styles from '../../styles/Booking.module.css';
 
@@ -106,7 +104,6 @@ export default function BookingSchedule() {
         description="Pick a time for your private reading with Bill."
         path="/book-a-reading/schedule"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -142,8 +139,7 @@ export default function BookingSchedule() {
 
             {!loading && grouped.length === 0 && (
               <div className={styles.slotEmpty}>
-                No times available in the next 30 days.{' '}
-                <Link href="/contact">Send Bill a note</Link> and he&apos;ll open more.
+                No times available in the next 30 days. Bill will open more soon.
               </div>
             )}
 
@@ -183,8 +179,6 @@ export default function BookingSchedule() {
 
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

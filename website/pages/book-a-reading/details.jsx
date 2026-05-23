@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import styles from '../../styles/Booking.module.css';
 
@@ -92,7 +90,6 @@ export default function BookingDetails() {
         description="Tell Bill a little about yourself before your private reading."
         path="/book-a-reading/details"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -232,8 +229,6 @@ export default function BookingDetails() {
 
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

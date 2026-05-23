@@ -98,7 +98,7 @@ export default function Readings() {
  deeper intuition.
  </p>
  <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
- <Link href="#book" className="btn-primary">Book a Reading</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
  </div>
  </div>
@@ -304,7 +304,7 @@ export default function Readings() {
  <p style={{ maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
  Sessions are conducted online with flexible scheduling. Bill follows up personally within 24 hours.
  </p>
- <Link href="#book" className="btn-primary">Book a Reading</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  </div>
  </section>
 

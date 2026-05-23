@@ -5,10 +5,11 @@ import { useAuth } from '../lib/auth';
 import styles from './Nav.module.css';
 
 const PUBLIC_LINKS = [
-  { href: '/about',              label: 'About'   },
-  { href: '/the-mahjong-mirror', label: 'Book'    },
-  { href: '/blog',               label: 'Journal' },
-  { href: '/contact',            label: 'Contact' },
+  { href: '/about',              label: 'About'            },
+  { href: '/book-a-reading',     label: 'Private Readings' },
+  { href: '/the-mahjong-mirror', label: 'Book'             },
+  { href: '/blog',               label: 'Journal'          },
+  { href: '/contact',            label: 'Contact'          },
 ];
 
 const MEMBER_READINGS = [

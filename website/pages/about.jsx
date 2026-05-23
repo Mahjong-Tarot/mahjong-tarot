@@ -41,7 +41,7 @@ export default function About() {
  <span className="overline">Meet the Firepig</span>
  <h1>Bill Hajdu, Mahjong Tarot Reader &amp; Chinese Astrologer</h1>
  <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
- <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  <Link href="/the-mahjong-mirror#preorder" className="btn-secondary">Preorder the Book</Link>
  </div>
  </div>
@@ -106,7 +106,7 @@ export default function About() {
  <p style={{ maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
  35+ years of practice. Sessions conducted online with flexible scheduling.
  </p>
- <Link href="/readings#book" className="btn-primary">Book a Reading</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  </div>
  </section>
 
@@ -182,7 +182,7 @@ export default function About() {
  <h2>Ready to Begin Your Reading?</h2>
  <p>All sessions are conducted online, with flexible scheduling and clear follow-up notes.</p>
  <div className={styles.ctaBtns}>
- <Link href="/readings" className="btn-primary">Book a Reading</Link>
+ <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  <Link href="/the-mahjong-mirror" className="btn-ghost">Explore the Book</Link>
  </div>
  </div>

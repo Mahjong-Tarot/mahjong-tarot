@@ -276,3 +276,88 @@
   z-index: 60;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 }
+
+/* ── Mark-Won modal ── */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  padding: 24px;
+}
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+}
+.modalTitle {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.modalSub {
+  margin: 0 0 18px;
+  color: #6b7280;
+  font-size: 13px;
+}
+.modalLabel {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.modalInput {
+  display: block;
+  margin-top: 6px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  color: #111827;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.modalInput:focus {
+  outline: none;
+  border-color: #4b5563;
+}
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+.modalCancel,
+.modalSubmit {
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.modalCancel {
+  background: #fff;
+  color: #374151;
+  border-color: #d1d5db;
+}
+.modalCancel:hover:not(:disabled) { background: #f3f4f6; }
+.modalSubmit {
+  background: #111827;
+  color: #fff;
+}
+.modalSubmit:hover:not(:disabled) { background: #1f2937; }
+.modalSubmit:disabled,
+.modalCancel:disabled { opacity: 0.5; cursor: wait; }

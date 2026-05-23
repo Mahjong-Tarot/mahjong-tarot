@@ -19,7 +19,6 @@ const ADMIN_NAV = [
 
 // Sidebar items visible to astrologer + admin (their own operational pages).
 const OPS_NAV = [
-  { href: '/admin/sessions',          label: 'Sessions',         match: (p) => p.startsWith('/admin/sessions') },
   { href: '/admin/quick-reading',     label: 'Quick reading',    match: (p) => p.startsWith('/admin/quick-reading') },
   { href: '/admin/settings/meeting-source', label: 'Settings',   match: (p) => p.startsWith('/admin/settings') },
 ];

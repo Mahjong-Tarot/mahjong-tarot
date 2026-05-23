@@ -30,7 +30,7 @@ const STATUS_FILTERS = [
   { id: 'lapsed',    label: 'Lapsed' },
   { id: 'cancelled', label: 'Cancelled' },
   { id: 'active',    label: 'Subscribed' },
-  { id: 'all',       label: 'All clients' },
+  { id: 'all',       label: 'All customers' },
 ];
 
 const SORTS = [

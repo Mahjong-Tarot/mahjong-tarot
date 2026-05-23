@@ -21,7 +21,6 @@ const ADMIN_NAV = [
 const OPS_NAV = [
   { href: '/admin/sessions',          label: 'Sessions',         match: (p) => p.startsWith('/admin/sessions') },
   { href: '/admin/quick-reading',     label: 'Quick reading',    match: (p) => p.startsWith('/admin/quick-reading') },
-  { href: '/admin/reports',           label: 'Reports',          match: (p) => p.startsWith('/admin/reports') },
   { href: '/admin/settings/meeting-source', label: 'Settings',   match: (p) => p.startsWith('/admin/settings') },
 ];
 

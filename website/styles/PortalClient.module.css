@@ -80,6 +80,25 @@
   text-decoration: underline;
 }
 
+.paidPill {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(26, 158, 116, 0.12);
+  color: #1a9e74;
+  border: 1px solid rgba(26, 158, 116, 0.3);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.paidPill:hover {
+  background: rgba(26, 158, 116, 0.2);
+}
+
 /* ─── Read-only field display ─── */
 
 .fields {

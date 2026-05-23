@@ -31,7 +31,7 @@ export default function SendNoteModal({ client, onClose, onSent }) {
     setSending(true);
     setError('');
     try {
-      const res = await fetch('/api/portal/conversions/send-note', {
+      const res = await fetch('/api/admin/conversions/send-note', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ clientId: client.id, subject: subject.trim(), body }),

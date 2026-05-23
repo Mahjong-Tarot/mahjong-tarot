@@ -63,7 +63,7 @@ export default function MeetingSourceCallback({ profile }) {
     }
 
     let cancelled = false;
-    fetch('/api/portal/meeting-source/oauth-exchange', {
+    fetch('/api/admin/meeting-source/oauth-exchange', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ source, code, state, code_verifier: stored.verifier }),

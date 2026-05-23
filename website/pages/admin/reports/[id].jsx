@@ -14,7 +14,7 @@ import { getClient } from '../../../lib/clients';
 // hang indefinitely on prod despite no-op locks and singleton
 // bypass (see PRs #233/#234/#236). Posting through Next.js API
 // routes — which authenticate via cookies and execute the UPDATE
-// server-side — is a known-good path that mirrors /api/portal/
+// server-side — is a known-good path that mirrors /api/admin/
 // reports/send.
 async function postJson(url, body) {
   const res = await fetch(url, {
@@ -133,7 +133,7 @@ export default function ReportPage({ profile }) {
     setMeetingMessage('');
     try {
       const { session: updated } = await withWatchdog(
-        postJson('/api/portal/sessions/update', {
+        postJson('/api/admin/sessions/update', {
           sessionId: session.id,
           fields: {
             transcript_text: transcript || null,

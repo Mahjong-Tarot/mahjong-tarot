@@ -6,16 +6,20 @@ import styles from './AdminShell.module.css';
 
 // Sidebar items visible to admin only.
 const ADMIN_NAV = [
-  { href: '/admin',           label: 'Dashboard',  match: (p) => p === '/admin' },
-  { href: '/admin/people',    label: 'People',     match: (p) => p.startsWith('/admin/people') },
-  { href: '/admin/inquiries', label: 'Inquiries',  match: (p) => p.startsWith('/admin/inquiries') },
-  { href: '/admin/sales',     label: 'Sales',      match: (p) => p.startsWith('/admin/sales') },
+  { href: '/admin',                  label: 'Dashboard',        match: (p) => p === '/admin' },
+  { href: '/admin/people',           label: 'People',           match: (p) => p.startsWith('/admin/people') },
+  { href: '/admin/inquiries',        label: 'Inquiries',        match: (p) => p.startsWith('/admin/inquiries') },
+  { href: '/admin/sales',            label: 'Sales',            match: (p) => p.startsWith('/admin/sales') },
+  // The legacy /admin/private-readings page still shows the global CRM
+  // clients list. Showing it to astrologers would leak every other
+  // astrologer's clients, so it stays admin-only until the page is
+  // repurposed to actually surface paid bookings (the bookings table).
+  { href: '/admin/private-readings', label: 'Private readings', match: (p) => p.startsWith('/admin/private-readings') },
 ];
 
-// Sidebar items visible to astrologer + admin (operational pages).
+// Sidebar items visible to astrologer + admin (their own operational pages).
 const OPS_NAV = [
   { href: '/admin/sessions',          label: 'Sessions',         match: (p) => p.startsWith('/admin/sessions') },
-  { href: '/admin/private-readings',  label: 'Private readings', match: (p) => p.startsWith('/admin/private-readings') },
   { href: '/admin/quick-reading',     label: 'Quick reading',    match: (p) => p.startsWith('/admin/quick-reading') },
   { href: '/admin/reports',           label: 'Reports',          match: (p) => p.startsWith('/admin/reports') },
   { href: '/admin/settings/meeting-source', label: 'Settings',   match: (p) => p.startsWith('/admin/settings') },

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
 import SEO from '../../../components/SEO';
 import styles from '../../../styles/Booking.module.css';
 
@@ -32,7 +30,6 @@ export default function BookOrderConfirm() {
         description="Your pre-order for The Mahjong Mirror is confirmed."
         path="/the-mahjong-mirror/order/confirm"
       />
-      <Nav />
 
       <main className={styles.main}>
         <div className="container">
@@ -97,16 +94,11 @@ export default function BookOrderConfirm() {
               <Link href="/the-mahjong-mirror" className={styles.submitBtn} style={{ textDecoration: 'none' }}>
                 Back to the book <span aria-hidden="true">→</span>
               </Link>
-              <p className={styles.fieldHint} style={{ marginTop: '10px', textAlign: 'center' }}>
-                Questions about your order? <Link href="/contact">Send Bill a note.</Link>
-              </p>
             </div>
           )}
 
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import AdminShell from '../../components/AdminShell';
-import { requirePortalUser } from '../../lib/requirePortalUser';
+import { requireStaff } from '../../lib/requireStaff';
 import adminStyles from '../../styles/PortalAdmin.module.css';
 import styles from '../../styles/PortalQuickReading.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePortalUser(ctx);
+  return requireStaff(ctx);
 }
 
 function todayIso() {

@@ -5,7 +5,9 @@ import {
 } from '@supabase/ssr';
 
 /**
- * getServerSideProps helper for Astrologer Portal pages.
+ * getServerSideProps helper for staff-only pages — any /admin/* page
+ * that operational astrologers also need access to (sessions, reports,
+ * settings, etc.).
  *
  * Reads the Supabase session from request cookies, loads the caller's
  * profile, and:
@@ -13,13 +15,13 @@ import {
  *   - redirects to / if the user's role is not 'astrologer' or 'admin'
  *   - otherwise returns { props: { profile } }
  *
- * Use on every page under /portal/*:
+ * Use it like this:
  *
  *   export async function getServerSideProps(ctx) {
- *     return requirePortalUser(ctx);
+ *     return requireStaff(ctx);
  *   }
  */
-export async function requirePortalUser(ctx) {
+export async function requireStaff(ctx) {
   const cookies = parseCookieHeader(ctx.req.headers.cookie ?? '');
 
   const supabase = createServerClient(

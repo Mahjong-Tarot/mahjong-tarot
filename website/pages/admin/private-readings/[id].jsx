@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
 import SubscriptionIcon from '../../../components/SubscriptionIcon';
 import { supabase } from '../../../lib/supabase';
-import { requireAdmin } from '../../../lib/requireAdmin';
+import { requireStaff } from '../../../lib/requireStaff';
 import { getClient, updateClient, markSubscription } from '../../../lib/clients';
 import { listSessions } from '../../../lib/sessions';
 import { getOrCreateReportForSession } from '../../../lib/reports';
@@ -15,7 +15,7 @@ import adminStyles from '../../../styles/PortalAdmin.module.css';
 import styles from '../../../styles/PortalClient.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requireStaff(ctx);
 }
 
 // Subscription status labels — used by the "mark as X" buttons in

@@ -2,7 +2,7 @@
 // Body: { duration, full_name, email, phone?, birthday?, birth_time?,
 //         question?, slot_id, hold_token }
 // Guest checkout — no auth required. Creates a one-time Stripe
-// Checkout Session ($49 / $69 / $129 depending on duration) and
+// Checkout Session ($48 / $88 / $128 depending on duration) and
 // stamps the booking metadata so the webhook can finalise the row.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
 import { readingPriceId, tierFor } from '../../../lib/bookings';

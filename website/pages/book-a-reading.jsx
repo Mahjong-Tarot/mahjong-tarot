@@ -14,7 +14,7 @@ const TIERS = [
     title: 'A focused look',
     desc: 'One question, one spread. Good for a single decision.',
     meta: ['Live online', '30 min', '1-on-1'],
-    price: 49,
+    price: 48,
     bullets: [
       'One topic, one question',
       'Live with Bill, online',
@@ -28,7 +28,7 @@ const TIERS = [
     title: 'The full mirror',
     desc: 'Complete reading across all three traditions. Most chosen.',
     meta: ['Live online', '60 min', '1-on-1'],
-    price: 69,
+    price: 88,
     bullets: [
       'Up to three topics',
       'Live with Bill, online',
@@ -43,7 +43,7 @@ const TIERS = [
     title: 'Deep counsel',
     desc: 'Multiple questions, full Four Pillars chart. For periods of uncertainty or big transitions.',
     meta: ['Live online', '90 min', '1-on-1'],
-    price: 129,
+    price: 128,
     bullets: [
       'Multiple questions',
       'Full Four Pillars chart',

@@ -1,51 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb, faqPage } from '../lib/schema';
-import { supabase } from '../lib/supabase';
 import styles from '../styles/MahjongMirror.module.css';
-import form from '../styles/Forms.module.css';
 
 export default function TheMahjongMirror() {
- const [fields, setFields] = useState({
- name: '', email: '', phone: '', address: '', format: '', message: '',
- });
- const [status, setStatus] = useState('idle');
-
- function update(e) {
- setFields({ ...fields, [e.target.name]: e.target.value });
- }
-
- async function handlePreorder(e) {
- e.preventDefault();
- setStatus('submitting');
-
- if (!supabase) { setStatus('error'); return; }
-
- const parts = [];
- if (fields.format) parts.push(`Preferred format: ${fields.format}`);
- if (fields.address) parts.push(`Address: ${fields.address}`);
- if (fields.message) parts.push(fields.message);
- const fullMessage = parts.join('\n\n') || 'Interested in preordering The Mahjong Mirror.';
-
- const { error } = await supabase.rpc('submit_contact', {
- p_name: fields.name,
- p_email: fields.email,
- p_phone: fields.phone || null,
- p_subject: 'Mahjong Mirror Preorder',
- p_message: fullMessage,
- });
-
- if (error) {
- console.error('Preorder error:', error);
- setStatus('error');
- } else {
- setStatus('success');
- }
- }
  return (
  <>
  <SEO
@@ -262,110 +223,16 @@ export default function TheMahjongMirror() {
  <section id="preorder" className="section-stone">
  <div className={`container ${styles.preorder}`}>
  <span className="overline">Begin Your Journey Through the Tiles</span>
- <h2>Join the Waiting List for<br />The Mahjong Mirror</h2>
+ <h2>Ready to Reserve Your Copy?</h2>
  <p>
- Be among the first to receive your copy. Fill out the form below
- and Bill will follow up with you directly.
+ Pre-order the digital edition, the hardcopy, or the signed bundle
+ with the Mahjong Mirror Card Set. Or join the waitlist and Bill will
+ follow up with you directly.
  </p>
-
- {status === 'success' ? (
- <p className={form.successMsg}>
- You're on the list! Bill will be in touch when the book is ready.
- </p>
- ) : (
- <form className={form.bookingForm} onSubmit={handlePreorder}>
- <div className={form.bookingRow}>
- <div className={form.formGroup}>
- <label className={form.label} htmlFor="pre-name">Name *</label>
- <input
- id="pre-name"
- name="name"
- type="text"
- className={form.input}
- value={fields.name}
- onChange={update}
- required
- />
+ <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', justifyContent: 'center', marginTop: 'var(--space-lg)' }}>
+ <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
+ <Link href="/contact?subject=Mahjong+Mirror+Waitlist" className="btn-secondary">Join the Waitlist</Link>
  </div>
- <div className={form.formGroup}>
- <label className={form.label} htmlFor="pre-email">Email *</label>
- <input
- id="pre-email"
- name="email"
- type="email"
- className={form.input}
- value={fields.email}
- onChange={update}
- required
- />
- </div>
- </div>
-
- <div className={form.bookingRow}>
- <div className={form.formGroup}>
- <label className={form.label} htmlFor="pre-phone">Phone</label>
- <input
- id="pre-phone"
- name="phone"
- type="tel"
- className={form.input}
- value={fields.phone}
- onChange={update}
- />
- </div>
- <div className={form.formGroup}>
- <label className={form.label} htmlFor="pre-format">Preferred Format</label>
- <select
- id="pre-format"
- name="format"
- className={`${form.select} ${styles.formatSelect} ${!fields.format ? styles.formatSelectEmpty : ''}`}
- value={fields.format}
- onChange={update}
- >
- <option value="">Select (optional)</option>
- <option value="Digital">Digital</option>
- <option value="Hard Copy">Hard Copy</option>
- <option value="Both">Both</option>
- </select>
- </div>
- </div>
-
- <div className={form.formGroup}>
- <label className={form.label} htmlFor="pre-address">Mailing Address</label>
- <textarea
- id="pre-address"
- name="address"
- className={form.textarea}
- placeholder="Required for hard copy orders"
- rows={2}
- value={fields.address}
- onChange={update}
- />
- </div>
-
- <div className={form.formGroup}>
- <label className={form.label} htmlFor="pre-message">Message</label>
- <textarea
- id="pre-message"
- name="message"
- className={form.textarea}
- placeholder="Any questions about the book?"
- value={fields.message}
- onChange={update}
- />
- </div>
-
- <div className={form.bookingSubmit}>
- <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
- {status === 'submitting' ? 'Sending…' : 'Preorder the Book'}
- </button>
- </div>
-
- {status === 'error' && (
- <p className={form.errorText}>Something went wrong. Please try again.</p>
- )}
- </form>
- )}
  </div>
  </section>
 

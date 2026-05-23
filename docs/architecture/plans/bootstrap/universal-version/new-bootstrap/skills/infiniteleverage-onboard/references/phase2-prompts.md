@@ -175,7 +175,7 @@ Install the AI agent team from GitHub:
 
 2. Verify all 8 agents are present:
    ls ~/{clientslug}-agents/.claude/agents/
-   # Expected: developer.md, devops.md, designer.md, email-marketer.md,
+   # Expected: developer.md, devops.md, designer.md,
    #           product-manager.md, qa.md, web-publisher.md, writer.md
 
 3. Install all 8 agents globally:
@@ -208,7 +208,6 @@ Test in this order:
 @writer what are you?
 @designer what are you?
 @web-publisher what are you?
-@email-marketer what are you?
 
 All 8 must respond before proceeding. If any don't respond, run "sync agents" and retry.
 ```
@@ -219,7 +218,6 @@ All 8 must respond before proceeding. If any don't respond, run "sync agents" an
 
 ```
 1. Verify the email sequence index exists and has Stage 0 populated:
-   cat ~/{clientslug}-agents/agents/email-marketer/context/email-index.md
    Confirm: file exists AND Stage 0 has a real subject line and body (not just placeholders).
    If missing or empty — stop and flag to Dave before proceeding.
 

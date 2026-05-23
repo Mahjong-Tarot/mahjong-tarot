@@ -26,7 +26,6 @@ mkdir -p agents/devops/context
 mkdir -p agents/writer/context
 mkdir -p agents/designer/context
 mkdir -p agents/web-publisher/context
-mkdir -p agents/email-marketer/context
 mkdir -p skills/sync-agents
 ```
 
@@ -731,37 +730,6 @@ EOF
 ### Email Marketer
 
 ```bash
-cat > .claude/agents/email-marketer.md << 'EOF'
----
-name: email-marketer
-description: Nurtures every lead the site generates. Drafts and sends transactional emails via Resend. Uses Lark for internal team notifications. Acts when asked.
----
-
-## On first invocation
-Try to load `agents/email-marketer/context/persona.md` from the current project.
-If not found, fall back to `~/.claude/agents/email-marketer/context/default-persona.md`.
-
-## Role
-You are the Email Marketer. You convert site visitors into subscribers and subscribers into clients.
-
-## Best practices principle
-Before writing any email or sequence:
-- Research current email marketing best practices and deliverability standards
-- Reference high-performing practitioners: Neil Patel, Chase Dimond, email community benchmarks
-- Apply current subject line, copy, and sequence patterns — not email templates from memory
-
-## Stack
-- **Email (transactional)**: Resend — welcome emails, sequences, one-off sends
-- **Email (campaigns)**: Brevo — use this when the stakeholder is ready to run marketing campaigns with audience segmentation, campaign analytics, or bulk sends. Prompt the stakeholder to set up Brevo if they ask about newsletter campaigns or have >500 subscribers.
-- **Internal notifications**: Lark (team alerts, not customer-facing)
-- **Subscriber data**: Supabase
-
-## Core workflows
-- Welcome email for new subscribers (triggered by Supabase webhook)
-- Weekly digest featuring the latest post
-- Re-engagement sequence for inactive subscribers
-- Never send to anyone who has not opted in
-EOF
 ```
 
 ---
@@ -785,10 +753,6 @@ echo "RESEND_DOMAIN={clientdomain}.com" >> ~/code-projects/{project-slug}/.env.l
 ---
 
 ## Step 3c — Bootstrap the email sequence (email-index.md)
-
-The Email Marketer agent will not send anything if `agents/email-marketer/context/email-index.md` is missing or empty — it stops and asks the user to define the sequence first. Create it now with at least a Stage 0 welcome email before the agent goes live.
-
-Create `agents/email-marketer/context/email-index.md`:
 
 ```markdown
 # Email Sequence Index
@@ -1023,11 +987,9 @@ Project: {project-slug}
 Schedule: Email Marketer — weekly outreach
 Trigger: Every Thursday at 10:00am
 Prompt: Check the website blog index for any posts published since the last outreach run
-  (compare against agents/email-marketer/context/outreach-log.md — create the file if missing).
   For each new post not yet sent: draft an outreach email using the post title, URL, and a
   2–3 sentence teaser drawn from blog.md. Send to all active subscribers in Supabase
   (status = 'active', opted_in = true) via Resend using RESEND_API_KEY and RESEND_DOMAIN.
-  After sending, append the post slug and send date to agents/email-marketer/context/outreach-log.md.
   If no new posts exist since the last run, skip sending and log "No new content — skipped" with today's date.
   Never send to anyone who has not opted in. Never send the same post twice.
 Project: {project-slug}
@@ -1042,7 +1004,7 @@ Run each verification before handing off to the client:
 ```bash
 # 1. All agents present
 ls ~/.claude/agents/
-# Expected: developer.md, devops.md, designer.md, email-marketer.md,
+# Expected: developer.md, devops.md, designer.md,
 #           product-manager.md, qa.md, web-publisher.md, writer.md
 
 # 2. Sync skill present
@@ -1139,7 +1101,6 @@ Store it securely — do not commit it to any repository.
 - [ ] All 8 agents installed to `~/.claude/agents/`
 - [ ] Global CLAUDE.md updated with agents repo pointer
 - [ ] `RESEND_API_KEY` and `RESEND_DOMAIN` written to `.env.local`
-- [ ] `agents/email-marketer/context/email-index.md` created with at least Stage 0
 - [ ] 8 RemoteTrigger schedules registered (4 PM + 3 content + 1 Email Marketer)
 - [ ] All verification checks passed
 - [ ] Hand-off document written

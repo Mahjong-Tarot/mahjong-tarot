@@ -23,7 +23,7 @@ gh repo clone {clientslug}/{project-slug}-agents
 Verify:
 ```bash
 ls ~/{project-slug}-agents/.claude/agents/
-# Expected: developer.md, devops.md, designer.md, email-marketer.md,
+# Expected: developer.md, devops.md, designer.md,
 #           product-manager.md, qa.md, web-publisher.md, writer.md
 ```
 
@@ -81,7 +81,6 @@ Test each agent:
 | `@writer what are you?` | Describes Writer role, mentions content/topics/ queue |
 | `@designer what are you?` | Describes Designer role, mentions Gemini |
 | `@web-publisher what are you?` | Describes Publisher role, mentions blog/posts/ |
-| `@email-marketer what are you?` | Describes Email Marketer role, mentions Resend and Supabase |
 
 All 8 should respond correctly before proceeding.
 
@@ -89,10 +88,7 @@ All 8 should respond correctly before proceeding.
 
 ## Step 5b — Verify email-index.md exists
 
-The Email Marketer agent will refuse to send if `agents/email-marketer/context/email-index.md` is missing or empty. Confirm it was created in Mac Mini — Agents before handing off to the client:
-
 ```bash
-cat ~/{project-slug}-agents/agents/email-marketer/context/email-index.md
 ```
 
 Expected: a file with at least `### Stage 0` defined (subject line, HTML body, delay).
@@ -154,7 +150,6 @@ Open any terminal, navigate to your project, and run `claude`. Then talk to your
 - `@writer` — Ask: "Write this week's post" (or it runs automatically every Monday 9am)
 - `@designer` — Ask: "Generate the hero image" (or it runs automatically every Tuesday 9am)
 - `@web-publisher` — Ask: "Publish this post" (or it runs automatically every Wednesday 9am)
-- `@email-marketer` — Ask: "Draft a welcome email" / "Write the weekly newsletter"
 
 ---
 

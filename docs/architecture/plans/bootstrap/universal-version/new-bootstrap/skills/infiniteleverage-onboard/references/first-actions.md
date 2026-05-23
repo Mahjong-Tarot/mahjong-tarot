@@ -18,7 +18,6 @@ Open Terminal, navigate to the project, and run `claude`. Then talk to agents:
 - `@writer` — "Write this week's post" (or runs automatically every Monday 9am)
 - `@designer` — "Generate the hero image" (or runs automatically every Tuesday 9am)
 - `@web-publisher` — "Publish this post" (or runs automatically every Wednesday 9am)
-- `@email-marketer` — "Draft a welcome email" / "Write this week's newsletter"
 
 ---
 

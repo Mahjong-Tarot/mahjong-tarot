@@ -697,7 +697,6 @@ A few questions to set up your lead nurture sequence:
 ```
 
 Wait for answers. Then:
-- Save the sequence to `agents/email-marketer/context/email-index.md`
 - Install the agent using the standard template pattern below
 
 For each selected agent, install using the same template pattern as Section 4.

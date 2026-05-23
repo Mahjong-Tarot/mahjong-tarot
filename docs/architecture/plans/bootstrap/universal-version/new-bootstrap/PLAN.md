@@ -85,7 +85,6 @@ A dedicated GitHub repo — separate from the website project — that is the si
 │   ├── writer.md
 │   ├── designer.md
 │   ├── web-publisher.md
-│   └── email-marketer.md
 ├── agents/                           ← Project-agnostic context and personas
 │   ├── product-manager/context/default-persona.md
 │   ├── developer/context/default-persona.md
@@ -94,7 +93,6 @@ A dedicated GitHub repo — separate from the website project — that is the si
 │   ├── writer/context/default-persona.md
 │   ├── designer/context/default-persona.md
 │   ├── web-publisher/context/default-persona.md
-│   └── email-marketer/context/default-persona.md
 └── skills/
     └── sync-agents/SKILL.md          ← Pulls latest from this repo → copies to ~/.claude/agents/
 ```

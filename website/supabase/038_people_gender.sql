@@ -8,4 +8,4 @@
 
 alter table public.people
   add column if not exists gender text
-    check (gender in ('M', 'F', 'NB') or gender is null);
+    check (gender in ('M', 'F') or gender is null);

@@ -316,7 +316,7 @@ export default function AdminPeople({ profile }) {
                 <Field label="Birth place" name="birth_place" draft={draft} setDraft={setDraft}
                        saving={savingField === 'birth_place'} onSave={saveField} />
                 <SelectField label="Gender (needed for Purple Star chart)" name="gender" draft={draft} setDraft={setDraft}
-                       options={['', 'F', 'M', 'NB']} optionLabels={{'': '— not set —', F: 'Female', M: 'Male', NB: 'Non-binary'}}
+                       options={['', 'F', 'M']} optionLabels={{'': '— not set —', F: 'Female', M: 'Male'}}
                        saving={savingField === 'gender'} onSave={saveField} />
                 <SelectField label="Lifecycle stage" name="lifecycle_stage" draft={draft} setDraft={setDraft}
                        options={LIFECYCLE_STAGES} saving={savingField === 'lifecycle_stage'} onSave={saveField} />

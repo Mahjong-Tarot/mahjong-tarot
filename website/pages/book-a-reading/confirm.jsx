@@ -21,7 +21,7 @@ export default function BookingConfirm() {
     const sid = router.query.session_id;
     if (!sid) { setError('Missing session id.'); return; }
 
-    fetch(`/api/stripe/booking-confirm?session_id=${encodeURIComponent(sid)}`)
+    fetch(`/api/stripe/reading-confirm?session_id=${encodeURIComponent(sid)}`)
       .then((r) => r.json())
       .then((json) => {
         if (json.error) throw new Error(json.error);

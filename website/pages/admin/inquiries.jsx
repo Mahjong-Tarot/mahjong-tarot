@@ -6,14 +6,14 @@ import InquiryKanbanBoard from '../../components/InquiryKanbanBoard';
 import InquiryDetailDrawer from '../../components/InquiryDetailDrawer';
 import MarkWonModal from '../../components/MarkWonModal';
 import { supabase } from '../../lib/supabase';
-import { requireAdmin } from '../../lib/requireAdmin';
+import { requirePage } from '../../lib/guards';
 import { STAGES, TYPES } from '../../lib/admin-inquiries';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 import kanbanStyles from '../../styles/PortalAdminKanban.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requirePage('admin')(ctx);
 }
 
 export default function AdminInquiries({ profile }) {

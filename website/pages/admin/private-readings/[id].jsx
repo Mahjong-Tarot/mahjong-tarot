@@ -68,6 +68,7 @@ export default function ReadingBriefPage({ profile }) {
   });
   const [activeTab, setActiveTab]         = useState('prep'); // 'prep' | 'notes' | 'reading'
   const [generating, setGenerating]       = useState(false);
+  const [generationStep, setGenerationStep] = useState(0); // 0 idle, 1–3 active
   const [generateError, setGenerateError] = useState('');
   const fileInputRef = useRef(null);
 
@@ -166,6 +167,11 @@ export default function ReadingBriefPage({ profile }) {
     });
   }, [person, booking, inquiry, pillars, zodiac, dominant]);
 
+  const guestFirstName = useMemo(() => {
+    const full = person?.name || booking?.full_name || '';
+    return (full.trim().split(/\s+/)[0]) || 'their';
+  }, [person?.name, booking?.full_name]);
+
   async function saveField(field) {
     if (!booking) return;
     setSavingField(field);
@@ -214,8 +220,13 @@ export default function ReadingBriefPage({ profile }) {
 
   async function handleGenerate() {
     if (!booking) return;
+    setActiveTab('reading');          // jump straight to the progress view
     setGenerating(true);
     setGenerateError('');
+    setGenerationStep(1);
+    const stepTimer = setInterval(() => {
+      setGenerationStep((s) => (s < 3 ? s + 1 : s));
+    }, 10000);
     try {
       const r = await fetch('/api/admin/generate-reading', {
         method: 'POST',
@@ -227,11 +238,12 @@ export default function ReadingBriefPage({ profile }) {
       const html = data.html || '';
       setBooking({ ...booking, final_reading_html: html });
       setDraft((d) => ({ ...d, final_reading_html: html }));
-      setActiveTab('reading');
     } catch (err) {
       setGenerateError(err.message || 'Failed to generate reading.');
     } finally {
+      clearInterval(stepTimer);
       setGenerating(false);
+      setGenerationStep(0);
     }
   }
 
@@ -497,7 +509,6 @@ export default function ReadingBriefPage({ profile }) {
                       ? 'Generating… (10–30 sec)'
                       : (booking.final_reading_html ? 'Regenerate reading' : 'Generate final reading')}
                   </button>
-                  {generateError && <p className="error-block" style={{ marginTop: 10 }}>{generateError}</p>}
                 </Section>
               </>
             )}
@@ -505,7 +516,16 @@ export default function ReadingBriefPage({ profile }) {
             {activeTab === 'reading' && (
               <>
                 <Section title="Final reading">
-                  {!draft.final_reading_html ? (
+                  {generating ? (
+                    <GenerationProgress step={generationStep} guestFirstName={guestFirstName} />
+                  ) : generateError ? (
+                    <>
+                      <p className="error-block" style={{ marginBottom: 14 }}>{generateError}</p>
+                      <button type="button" onClick={handleGenerate} style={primaryButtonStyle}>
+                        Try again
+                      </button>
+                    </>
+                  ) : !draft.final_reading_html ? (
                     <p className={adminStyles.muted}>
                       Nothing yet. Go to <strong>Notes and Transcript</strong> and click <strong>Generate final reading</strong>.
                     </p>
@@ -540,7 +560,7 @@ export default function ReadingBriefPage({ profile }) {
                           disabled={generating}
                           style={secondaryButtonStyle}
                         >
-                          {generating ? 'Regenerating…' : 'Regenerate'}
+                          Regenerate
                         </button>
                       </div>
                     </>
@@ -552,6 +572,65 @@ export default function ReadingBriefPage({ profile }) {
         )}
       </AdminShell>
     </>
+  );
+}
+
+function GenerationProgress({ step, guestFirstName }) {
+  const steps = [
+    { id: 1, label: 'Analysing the transcript' },
+    { id: 2, label: `Checking ${guestFirstName}'s charts` },
+    { id: 3, label: 'Preparing the report' },
+  ];
+  return (
+    <div style={{ padding: '32px 24px', background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8 }}>
+      <p style={{ margin: '0 0 24px', color: '#6b7280', fontSize: 13 }}>
+        Sit tight — this usually takes 20–30 seconds.
+      </p>
+      <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+        {steps.map((s) => {
+          const isDone   = step > s.id;
+          const isActive = step === s.id;
+          return (
+            <li key={s.id} style={{
+              display:      'flex',
+              alignItems:   'center',
+              gap:          14,
+              padding:      '12px 0',
+              fontSize:     15,
+              color:        isDone || isActive ? '#1a1a1a' : '#9ca3af',
+              opacity:      isDone || isActive ? 1 : 0.6,
+              transition:   'opacity 0.4s ease, color 0.4s ease',
+            }}>
+              <span style={{ width: 22, display: 'inline-flex', justifyContent: 'center' }}>
+                {isDone ? (
+                  <span style={{ color: '#2a8a48', fontSize: 18, fontWeight: 600 }}>✓</span>
+                ) : isActive ? (
+                  <span className="rprog-spinner" aria-hidden="true" />
+                ) : (
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#d1d5db', display: 'inline-block' }} />
+                )}
+              </span>
+              <span style={{ fontWeight: isActive ? 600 : 500 }}>{s.label}</span>
+            </li>
+          );
+        })}
+      </ol>
+
+      <style jsx>{`
+        .rprog-spinner {
+          width: 16px;
+          height: 16px;
+          border: 2px solid #e7d8c0;
+          border-top-color: #1a1a1a;
+          border-radius: 50%;
+          display: inline-block;
+          animation: rprog-spin 0.8s linear infinite;
+        }
+        @keyframes rprog-spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </div>
   );
 }
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AdminShell from '../../components/AdminShell';
 import { supabase } from '../../lib/supabase';
 import { requirePage } from '../../lib/guards';
+import { RECENT_CUSTOMER_SINCE } from '../../lib/admin-people';
 import styles from '../../styles/PortalAdmin.module.css';
 
 export async function getServerSideProps(ctx) {
@@ -45,7 +46,13 @@ export default function AdminDashboard({ profile }) {
   const [counts, setCounts] = useState([]);
   const [recent, setRecent] = useState([]);
   const [recentDeals, setRecentDeals] = useState([]);
-  const [stats, setStats] = useState({ people: 0, customers: 0, last7: 0, revenueCents: 0 });
+  const [stats, setStats] = useState({
+    people: 0,
+    customers: 0,
+    premiumSubscribers: 0,
+    booksSold: 0,
+    revenueCents: 0,
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -57,8 +64,7 @@ export default function AdminDashboard({ profile }) {
         return;
       }
       try {
-        const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-        const [countsRes, recentRes, peopleRes, customersRes, last7Res, dealsRes, revenueRes] = await Promise.all([
+        const [countsRes, recentRes, peopleRes, premiumRes, booksRes, allDealsRes, recentDealsRes] = await Promise.all([
           supabase.rpc('get_inquiry_counts'),
           supabase
             .from('inquiries')
@@ -67,42 +73,59 @@ export default function AdminDashboard({ profile }) {
             .limit(10),
           supabase.from('people').select('id', { count: 'exact', head: true }),
           supabase
-            .from('people')
-            .select('id', { count: 'exact', head: true })
-            .eq('lifecycle_stage', 'customer'),
+            .from('profiles')
+            .select('user_id', { count: 'exact', head: true })
+            .eq('is_premium', true),
           supabase
-            .from('inquiries')
+            .from('book_orders')
             .select('id', { count: 'exact', head: true })
-            .gte('created_at', sevenDaysAgo),
+            .eq('status', 'paid'),
+          // All won deals — drives Customers (recent, dedupe by person)
+          // and Total Revenue (all-time sum). One query, two derived stats.
+          supabase
+            .from('deals')
+            .select('person_id, won_at, amount_cents')
+            .eq('status', 'won'),
           supabase
             .from('deals')
             .select('id, amount_cents, currency, source, won_at, person_id, people(name, email)')
             .eq('status', 'won')
             .order('won_at', { ascending: false })
             .limit(5),
-          supabase
-            .from('deals')
-            .select('amount_cents')
-            .eq('status', 'won'),
         ]);
 
-        if (countsRes.error)    throw countsRes.error;
-        if (recentRes.error)    throw recentRes.error;
-        if (peopleRes.error)    throw peopleRes.error;
-        if (customersRes.error) throw customersRes.error;
-        if (last7Res.error)     throw last7Res.error;
-        if (dealsRes.error)     throw dealsRes.error;
-        if (revenueRes.error)   throw revenueRes.error;
+        if (countsRes.error)      throw countsRes.error;
+        if (recentRes.error)      throw recentRes.error;
+        if (peopleRes.error)      throw peopleRes.error;
+        if (premiumRes.error)     throw premiumRes.error;
+        if (booksRes.error)       throw booksRes.error;
+        if (allDealsRes.error)    throw allDealsRes.error;
+        if (recentDealsRes.error) throw recentDealsRes.error;
 
-        const revenueCents = (revenueRes.data || []).reduce((sum, d) => sum + (d.amount_cents || 0), 0);
+        // Total revenue = sum of all won deal amounts (all-time).
+        const revenueCents = (allDealsRes.data || []).reduce((sum, d) => sum + (d.amount_cents || 0), 0);
+
+        // Customers = people whose MOST RECENT won deal lands on/after the
+        // RECENT_CUSTOMER_SINCE cutoff. Matches the /admin/people definition.
+        const latestDealByPerson = new Map();
+        for (const d of (allDealsRes.data || [])) {
+          if (!d.person_id || !d.won_at) continue;
+          const prev = latestDealByPerson.get(d.person_id);
+          if (!prev || d.won_at > prev) latestDealByPerson.set(d.person_id, d.won_at);
+        }
+        let customers = 0;
+        for (const latest of latestDealByPerson.values()) {
+          if (latest >= RECENT_CUSTOMER_SINCE) customers += 1;
+        }
 
         setCounts(countsRes.data ?? []);
         setRecent(recentRes.data ?? []);
-        setRecentDeals(dealsRes.data ?? []);
+        setRecentDeals(recentDealsRes.data ?? []);
         setStats({
-          people:    peopleRes.count    ?? 0,
-          customers: customersRes.count ?? 0,
-          last7:     last7Res.count     ?? 0,
+          people:             peopleRes.count  ?? 0,
+          customers,
+          premiumSubscribers: premiumRes.count ?? 0,
+          booksSold:          booksRes.count   ?? 0,
           revenueCents,
         });
       } catch (e) {
@@ -157,15 +180,20 @@ export default function AdminDashboard({ profile }) {
                 <Link href="/admin/people" className={styles.statCard}>
                   <p className={styles.statLabel}>Customers</p>
                   <p className={styles.statValue}>{stats.customers}</p>
-                  <p className={styles.statHint}>People who have bought</p>
+                  <p className={styles.statHint}>Since {RECENT_CUSTOMER_SINCE}</p>
                 </Link>
-                <Link href="/admin/inquiries" className={styles.statCard}>
-                  <p className={styles.statLabel}>Inquiries 7d</p>
-                  <p className={styles.statValue}>{stats.last7}</p>
-                  <p className={styles.statHint}>{totalOpen} open total</p>
+                <Link href="/admin/people" className={styles.statCard}>
+                  <p className={styles.statLabel}>Premium Subscribers</p>
+                  <p className={styles.statValue}>{stats.premiumSubscribers}</p>
+                  <p className={styles.statHint}>Paid portal members</p>
                 </Link>
                 <Link href="/admin/sales" className={styles.statCard}>
-                  <p className={styles.statLabel}>Revenue</p>
+                  <p className={styles.statLabel}>Books Sold</p>
+                  <p className={styles.statValue}>{stats.booksSold}</p>
+                  <p className={styles.statHint}>Paid book orders</p>
+                </Link>
+                <Link href="/admin/sales" className={styles.statCard}>
+                  <p className={styles.statLabel}>Total Revenue</p>
                   <p className={styles.statValue}>${(stats.revenueCents / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                   <p className={styles.statHint}>Won deals to date</p>
                 </Link>

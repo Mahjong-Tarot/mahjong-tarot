@@ -5,9 +5,26 @@
 // lib/admin-inquiries.js in PR #310). A follow-up will hoist both
 // copies into a shared lib/inquiry-types.js.
 
+// Customers created on or after this date show in the default "Customers" view.
+// Customers created BEFORE this date are tagged "Legacy" and live behind the
+// "Legacy" filter chip. Tweak this single date when your customer reality changes
+// (e.g., a relaunch, a data migration, or a new fiscal year).
+export const RECENT_CUSTOMER_SINCE = '2026-01-01';
+
+export function isRecentCustomer(person) {
+  if (!person || person.lifecycle_stage !== 'customer') return false;
+  return (person.created_at || '') >= RECENT_CUSTOMER_SINCE;
+}
+
+export function isLegacyCustomer(person) {
+  if (!person || person.lifecycle_stage !== 'customer') return false;
+  return (person.created_at || '') < RECENT_CUSTOMER_SINCE;
+}
+
 export const FILTERS = [
   { id: 'all',         label: 'All' },
   { id: 'customers',   label: 'Customers' },
+  { id: 'legacy',      label: 'Legacy customers' },
   { id: 'members',     label: 'Portal members' },
   { id: 'subscribers', label: 'Subscribers' },
   { id: 'opted_out',   label: 'Opted out' },

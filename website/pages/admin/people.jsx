@@ -5,7 +5,7 @@ import PersonRow from '../../components/PersonRow';
 import PersonEditShelf from '../../components/PersonEditShelf';
 import { supabase } from '../../lib/supabase';
 import { requirePage } from '../../lib/guards';
-import { FILTERS, sortValue } from '../../lib/admin-people';
+import { FILTERS, sortValue, isRecentCustomer, isLegacyCustomer } from '../../lib/admin-people';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 
@@ -151,7 +151,9 @@ export default function AdminPeople({ profile }) {
         types,
         inquiry_count: pInq.length,
         order_count:   ordersByPerson.get(p.id) || 0,
-        is_customer:   p.lifecycle_stage === 'customer',
+        is_customer:          p.lifecycle_stage === 'customer',
+        is_recent_customer:   isRecentCustomer(p),
+        is_legacy_customer:   isLegacyCustomer(p),
         is_member:     !!memberProfile,
         is_subscriber: subscriber,
         last_activity: lastActivity,
@@ -161,14 +163,15 @@ export default function AdminPeople({ profile }) {
 
   const totals = useMemo(() => ({
     total:        aggregated.length,
-    customers:    aggregated.filter((p) => p.is_customer).length,
+    customers:    aggregated.filter((p) => p.is_recent_customer).length,
     members:      aggregated.filter((p) => p.is_member).length,
     subscribers:  aggregated.filter((p) => p.is_subscriber && p.ok_to_contact).length,
     opted_out:    aggregated.filter((p) => !p.ok_to_contact).length,
   }), [aggregated]);
 
   const filtered = aggregated.filter((p) => {
-    if (filter === 'customers')     return p.is_customer;
+    if (filter === 'customers')   return p.is_recent_customer;
+    if (filter === 'legacy')      return p.is_legacy_customer;
     if (filter === 'members')     return p.is_member;
     if (filter === 'subscribers') return p.is_subscriber && p.ok_to_contact;
     if (filter === 'opted_out')   return !p.ok_to_contact;

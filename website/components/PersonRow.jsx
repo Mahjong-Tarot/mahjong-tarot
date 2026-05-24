@@ -9,6 +9,7 @@ export default function PersonRow({ person, tableStyles, onOpen }) {
         <div className={tableStyles.tagRow}>
           {person.is_member && <span className={tableStyles.tagMember}>member</span>}
           {person.is_customer && <span className={tableStyles.tagClient}>customer</span>}
+          {person.is_legacy_customer && <span className={tableStyles.tagLegacy}>legacy</span>}
           {person.subscription === 'active' && <span className={tableStyles.tagActive}>subscribed</span>}
           {person.subscription === 'lapsed' && <span className={tableStyles.tagLapsed}>lapsed</span>}
           {person.types.map((t) => (

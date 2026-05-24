@@ -27,13 +27,15 @@ export default function AdminPeople({ profile }) {
   const [sortDir, setSortDir]     = useState('desc');
 
   // Detail-shelf state. selected = the row, draft = the editable copy.
-  const [selectedId, setSelectedId] = useState(null);
-  const [draft, setDraft]           = useState(null);
-  const [savingField, setSavingField] = useState('');
-  const [shelfError, setShelfError]   = useState('');
+  const [selectedId, setSelectedId]       = useState(null);
+  const [selectedEmail, setSelectedEmail] = useState('');
+  const [draft, setDraft]                 = useState(null);
+  const [savingField, setSavingField]     = useState('');
+  const [shelfError, setShelfError]       = useState('');
 
   function openShelf(p) {
     setSelectedId(p.id);
+    setSelectedEmail(p.email || '');
     setDraft({
       name:              p.name              || '',
       email:             p.email             || '',
@@ -58,6 +60,7 @@ export default function AdminPeople({ profile }) {
   }
   function closeShelf() {
     setSelectedId(null);
+    setSelectedEmail('');
     setDraft(null);
     setShelfError('');
   }
@@ -98,7 +101,7 @@ export default function AdminPeople({ profile }) {
             .select('user_id, person_id, role, is_premium, name'),
           supabase
             .from('deals')
-            .select('person_id, status'),
+            .select('person_id, status, won_at'),
         ]);
         if (pRes.error)  throw pRes.error;
         if (iRes.error)  throw iRes.error;
@@ -129,10 +132,15 @@ export default function AdminPeople({ profile }) {
       if (pr.person_id) profilesByPersonId.set(pr.person_id, pr);
       if (pr.name)      profilesByName.set(pr.name.toLowerCase(), pr);
     }
-    const ordersByPerson = new Map();
+    const ordersByPerson       = new Map();
+    const latestDealByPerson   = new Map();
     for (const d of deals) {
       if (d.status !== 'won') continue;
       ordersByPerson.set(d.person_id, (ordersByPerson.get(d.person_id) || 0) + 1);
+      const prev = latestDealByPerson.get(d.person_id);
+      if (d.won_at && (!prev || d.won_at > prev)) {
+        latestDealByPerson.set(d.person_id, d.won_at);
+      }
     }
 
     return people.map((p) => {
@@ -146,14 +154,18 @@ export default function AdminPeople({ profile }) {
       let lastActivity = p.updated_at || p.created_at;
       for (const i of pInq) if (i.created_at > lastActivity) lastActivity = i.created_at;
 
+      const order_count    = ordersByPerson.get(p.id) || 0;
+      const latest_deal_at = latestDealByPerson.get(p.id) || null;
+
       return {
         ...p,
         types,
         inquiry_count: pInq.length,
-        order_count:   ordersByPerson.get(p.id) || 0,
-        is_customer:          p.lifecycle_stage === 'customer',
-        is_recent_customer:   isRecentCustomer(p),
-        is_legacy_customer:   isLegacyCustomer(p),
+        order_count,
+        is_customer:        order_count > 0,
+        latest_deal_at,
+        is_recent_customer: isRecentCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
+        is_legacy_customer: isLegacyCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
         is_member:     !!memberProfile,
         is_subscriber: subscriber,
         last_activity: lastActivity,
@@ -294,6 +306,8 @@ export default function AdminPeople({ profile }) {
           {/* Detail shelf — opens when a row is clicked */}
           {selectedId && draft && (
             <PersonEditShelf
+              personId={selectedId}
+              personEmail={selectedEmail}
               draft={draft}
               setDraft={setDraft}
               savingField={savingField}

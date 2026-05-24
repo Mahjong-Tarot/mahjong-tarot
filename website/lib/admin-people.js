@@ -5,20 +5,25 @@
 // lib/admin-inquiries.js in PR #310). A follow-up will hoist both
 // copies into a shared lib/inquiry-types.js.
 
-// Customers created on or after this date show in the default "Customers" view.
-// Customers created BEFORE this date are tagged "Legacy" and live behind the
-// "Legacy" filter chip. Tweak this single date when your customer reality changes
-// (e.g., a relaunch, a data migration, or a new fiscal year).
+// A "customer" is anyone with at least one WON deal (deals.status='won').
+// `is_customer` and `latest_deal_at` are assembled in pages/admin/people.jsx
+// from the deals query and passed to the helpers below.
+//
+// Customers whose most recent won deal landed on/after this date show in
+// the default "Customers" view. Those whose latest won deal predates it
+// (or who have no won_at on file) are tagged "Legacy" and live behind the
+// "Legacy" filter chip. Tweak this single date when your customer reality
+// changes (e.g., a relaunch, a data migration, or a new fiscal year).
 export const RECENT_CUSTOMER_SINCE = '2026-01-01';
 
 export function isRecentCustomer(person) {
-  if (!person || person.lifecycle_stage !== 'customer') return false;
-  return (person.created_at || '') >= RECENT_CUSTOMER_SINCE;
+  if (!person || !person.is_customer) return false;
+  return (person.latest_deal_at || '') >= RECENT_CUSTOMER_SINCE;
 }
 
 export function isLegacyCustomer(person) {
-  if (!person || person.lifecycle_stage !== 'customer') return false;
-  return (person.created_at || '') < RECENT_CUSTOMER_SINCE;
+  if (!person || !person.is_customer) return false;
+  return !person.latest_deal_at || person.latest_deal_at < RECENT_CUSTOMER_SINCE;
 }
 
 export const FILTERS = [

@@ -3,11 +3,11 @@ import { useState, useEffect, useCallback } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
-import { requireAdmin } from '../lib/requireAdmin';
+import { requirePage } from '../lib/guards';
 import styles from '../styles/Admin.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requirePage('admin')(ctx);
 }
 
 const STATUSES = ['received', 'read', 'confirmed', 'completed', 'cancelled'];

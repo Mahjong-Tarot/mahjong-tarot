@@ -1,4 +1,4 @@
-import { requireUserApi } from '../../../lib/requireUserApi';
+import { requireApi } from '../../../lib/guards';
 
 const ALLOWED_FIELDS = new Set([
   'name',
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const auth = await requireUserApi(req, res);
+  const auth = await requireApi('user')(req, res);
   if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
   const { supabase, user } = auth;
 

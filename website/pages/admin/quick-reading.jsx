@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import AdminShell from '../../components/AdminShell';
-import { requireStaff } from '../../lib/requireStaff';
+import { requirePage } from '../../lib/guards';
 import adminStyles from '../../styles/PortalAdmin.module.css';
 import styles from '../../styles/PortalQuickReading.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireStaff(ctx);
+  return requirePage('staff')(ctx);
 }
 
 function todayIso() {
@@ -193,7 +193,7 @@ export default function QuickReadingPage({ profile }) {
               </span>
             </label>
 
-            {error && <p className={styles.error}>{error}</p>}
+            {error && <p className="error-inline">{error}</p>}
             {message && <p className={styles.success}>{message}</p>}
 
             <div className={styles.actions}>

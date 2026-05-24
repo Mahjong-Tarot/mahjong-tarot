@@ -1,24 +1,5 @@
-import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
+import { calculatePillars, tallyElements, dominantElement, norm, tier, findSignMatch } from '../../lib/bazi';
 import secrets from '../../data/love-secrets.json';
-
-const SIGN_NORMALIZE = { Goat: 'Sheep', Ram: 'Sheep', Boar: 'Pig' };
-const norm = (s) => SIGN_NORMALIZE[s] || s;
-
-function tier(rating) {
-  if (rating == null) return null;
-  if (rating >= 90) return { name: 'Soul Mate Material', tone: 'great' };
-  if (rating >= 80) return { name: 'Strong Match',       tone: 'good'  };
-  if (rating >= 70) return { name: 'Solid',              tone: 'good'  };
-  if (rating >= 60) return { name: 'Workable',           tone: 'mixed' };
-  if (rating >= 50) return { name: 'Mixed',              tone: 'mixed' };
-  return                 { name: 'Tough Match',          tone: 'rough' };
-}
-
-function findSignMatch(primarySign, partnerSign) {
-  return secrets.sign_match.find(
-    (r) => norm(r.PrimarySign) === primarySign && norm(r.PartnerSign) === partnerSign,
-  ) || null;
-}
 
 function findSoulMate(primarySign, partnerSign) {
   const row = secrets.soul_mate.find((r) => norm(r.PrimarySign) === primarySign);
@@ -59,7 +40,7 @@ export default function handler(req, res) {
     const e2 = tallyElements(p2);
     const combined = { Wood: e1.Wood + e2.Wood, Fire: e1.Fire + e2.Fire, Earth: e1.Earth + e2.Earth, Metal: e1.Metal + e2.Metal, Water: e1.Water + e2.Water };
 
-    const match = findSignMatch(sign1, sign2);
+    const match = findSignMatch(sign1, sign2, secrets.sign_match);
     const rating = match?.Rating ?? null;
     const t = tier(rating);
 

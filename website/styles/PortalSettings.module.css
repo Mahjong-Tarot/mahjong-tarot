@@ -11,16 +11,7 @@
   color: var(--ink);
 }
 
-.error {
-  color: #b22;
-  font-family: var(--sans);
-  font-size: 14px;
-  margin: 0 0 var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background: rgba(178, 34, 34, 0.06);
-  border-radius: 6px;
-  border-left: 3px solid #b22;
-}
+/* .error-block / .error-inline live in globals.css */
 
 .muted {
   font-family: var(--sans);

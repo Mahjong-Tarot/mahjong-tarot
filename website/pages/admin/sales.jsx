@@ -3,12 +3,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import AdminShell from '../../components/AdminShell';
 import { supabase } from '../../lib/supabase';
-import { requireAdmin } from '../../lib/requireAdmin';
+import { requirePage } from '../../lib/guards';
 import adminStyles from '../../styles/PortalAdmin.module.css';
-import styles from '../../styles/PortalConversions.module.css';
+import styles from '../../styles/PortalAdminTable.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requirePage('admin')(ctx);
 }
 
 // Source filter — what kind of sale to surface. All read from
@@ -73,7 +73,7 @@ export default function SalesPage({ profile }) {
           Every won deal — Stripe, manual, all sources. One row per sale.
         </p>
 
-        <div className={styles.controls}>
+        <div className={styles.controlsDivider}>
           <div className={styles.chipRow} role="tablist" aria-label="Source">
             {SOURCE_FILTERS.map((f) => (
               <button
@@ -92,7 +92,7 @@ export default function SalesPage({ profile }) {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <p className={styles.count}>
+        <p className={styles.countSpaced}>
           {loading
             ? 'Loading…'
             : `${deals.length} deal${deals.length === 1 ? '' : 's'} · $${(totalCents / 100).toFixed(2)} total`}

@@ -1,141 +1,129 @@
 ---
 name: build-page
-description: Reads a markdown (.md) file from the content/ folder and generates a complete Next.js page component (.jsx), saving it to agents/web-developer/output/. Use this skill whenever a content file needs to be converted into a website page or blog post.
-allowed-tools: Read Write Bash
+description: Writes a blog post as markdown to content/blog/<slug>.md and registers it in website/lib/posts.js. The dynamic route at website/pages/blog/posts/[slug].jsx renders the markdown — there is no per-post JSX file. Use this skill whenever a blog post needs to be published.
+allowed-tools: Read Write Bash Edit
 ---
 
 # Build Page Skill
 
-Your job is to convert a markdown file from `content/` into a valid Next.js page component and save it to `agents/web-developer/output/`.
+Blog posts are published as **markdown only**. The dynamic route at `website/pages/blog/posts/[slug].jsx` reads `content/blog/<slug>.md` at build time and renders the full post (SEO, hero, body, FAQs, JSON-LD, post nav, related cards, CTA). There is no per-post `.jsx` file to generate.
+
+This skill is responsible for:
+1. Writing the markdown with full frontmatter at `content/blog/<slug>.md`
+2. Registering the post at the top of `POSTS[]` in `website/lib/posts.js` (so it appears on the `/blog` index)
 
 ## Before you start
 
-Read the style guide at `agents/web-developer/context/style-guide.md` before generating any component. The design is editorial and strict — Playfair Display headings, Source Sans 3 body, Warm Cream background, no rounded corners anywhere.
+Read these in order — do not generate anything from memory:
 
-## Steps
+1. `agents/web-developer/context/web-style-guide.md` — brand and design rules, valid category list
+2. `agents/web-developer/context/style-guide.md` — component conventions
+3. `website/pages/blog/posts/[slug].jsx` — the template; see its destructured frontmatter to know what fields it consumes
+4. `website/lib/blogContent.js` — the loader, with the canonical frontmatter schema
+5. `website/lib/posts.js` — the ordered index used by `/blog`
+6. The full canonical spec at `.claude/skills/build-page/SKILL.md` (which you should mirror if you change anything here)
 
-### 1. Read the source file
-- The file will be a `.md` file inside `content/` (e.g. `content/about.md`)
-- Read the YAML front matter — it contains `title`, `slug`, `output`, `hero_image`, and image notes
-- Read the full body content before generating anything
+## Inputs
 
-### 2. Determine the output path and component name
-- Output file: `agents/web-developer/output/<slug>.jsx`
-- Component name: PascalCase version of the slug — e.g. `the-mahjong-mirror` → `TheMahjongMirror`
-- For blog posts, the final destination will be `website/pages/blog/posts/<slug>.jsx`
-- For site pages, the final destination will be `website/pages/<slug>.jsx`
+- An approved draft markdown (often produced upstream by the writer agent under `content/topics/<bundle>/blog*.md`), or
+- A slug + topic the user wants published
 
-### 3. Generate the Next.js component
+## Step 1: Choose the slug
 
-Use this base structure for every page:
+The slug is the URL path: `/blog/posts/<slug>`. It must be kebab-case, descriptive, and unique. Use the slug from the source draft's frontmatter when present.
 
-```jsx
-import Head from 'next/head';
-import Image from 'next/image';
-// Import shared components as needed:
-// import Nav from '../../components/Nav';
-// import Footer from '../../components/Footer';
+## Step 2: Write `content/blog/<slug>.md`
 
-export default function PageName() {
-  return (
-    <>
-      <Head>
-        <title>{/* Page title */} | The Mahjong Tarot</title>
-        <meta name="description" content="{/* 150-char excerpt */}" />
-        <meta property="og:title" content="{/* Page title */}" />
-        <meta property="og:description" content="{/* 150-char excerpt */}" />
-        <meta property="og:image" content="https://mahjong-tarot.com/images/{/* image path */}" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://mahjong-tarot.com/{/* slug */}" />
-      </Head>
+Frontmatter schema (required keys in bold):
 
-      {/* <Nav /> */}
+- **`title`** — page H1. Use real Unicode em-dashes (`—`) and smart quotes (`‘’ “”`). Never use HTML entities (`&mdash;` would render as literal text).
+- **`author`** — default `"Bill Hajdu"`
+- **`date`** — display-formatted (e.g. `"Apr 17, 2026"`)
+- **`readTime`** — e.g. `"6 min read"`
+- **`categoryPill`** — category label above the H1
+- **`breadcrumbLabel`** — usually same as `categoryPill`
+- **`seo`** — `{ title, description, canonical, og: { title, description, image, siteName? } }`
+- **`jsonLd`** — `{ datePublished, image, headline?, publisherUrl? }`
+- **`cta`** — `{ overline, heading, body, primary, primaryLabel, secondary, secondaryLabel }`
 
-      <main>
-        {/* Page content */}
-      </main>
+Optional:
 
-      {/* <Footer /> */}
-    </>
-  );
-}
-```
+- `hero` — `{ src, alt, caption?, width?, height?, useHeroClass? }`
+- `faqs` — list of `{ q, a }` pairs (also feeds FAQPage JSON-LD)
+- `nav` — `{ prev?: { slug, label }, next?: { slug, label } }`
+- `related` — list of `{ slug, title, dateLabel, image?, alt? }` cards
 
-### 4. Convert markdown content to JSX
+## Step 3: Write the body
 
-Map markdown elements to their JSX equivalents:
+Plain markdown after the frontmatter. `marked` renders it; inline HTML is preserved.
 
-| Markdown | JSX |
+Standard markdown:
+- `## Subhead` → `<h2>` (avoid `#` — the H1 comes from the `title` field)
+- `**bold**`, `*italic*`, `> quote`, `[text](/internal)`, `[text](https://external)`
+- `---` → `<hr>`
+
+For external links that need `target="_blank"`, write raw HTML: `<a href="..." target="_blank" rel="noopener noreferrer">...</a>`.
+
+## Step 4: Use raw HTML for bespoke blocks
+
+CSS for these lives in `website/styles/blog-post-blocks.css` (globally loaded), so plain HTML class names work inside the markdown body:
+
+| Class | Usage |
 |---|---|
-| `# Heading` | `<h1>` |
-| `## Heading` | `<h2>` |
-| `### Heading` | `<h3>` |
-| Paragraph | `<p>` |
-| `**bold**` | `<strong>` |
-| `*italic*` | `<em>` |
-| `[text](url)` | `<a href="url">text</a>` |
-| `![alt](src)` | `<Image src="..." alt="..." width={...} height={...} />` |
-| `> blockquote` | `<blockquote>` |
-| Unordered list | `<ul><li>...</li></ul>` |
-| Ordered list | `<ol><li>...</li></ul>` |
+| `pullQuote` | `<div class="pullQuote"><p>...</p></div>` |
+| `riskCard` + `riskLabel` | numbered risk callout |
+| `pivotBanner` | mid-post centered banner with `<h2>` and `<p>` |
+| `predictionBox` + `predictionLabel` | gold-bar prediction callout |
+| `imagePair` + `imagePairCaption` | side-by-side two-image block |
+| `signGrid` + `signCard` + `signBadge` + `badge{Exceptional,Favorable,Neutral,Mixed,Challenging,HighRisk}` | zodiac sign card grid |
 
-**Important JSX rules:**
-- Use `className` instead of `class`
-- Self-close empty elements: `<img />`, `<br />`, `<hr />`
-- Wrap the return in a single root element or `<>...</>`
-- HTML comments become `{/* comment */}`
-- All `next/image` components require `src`, `alt`, `width`, and `height` props
+Canonical examples:
+- pullQuote, riskCard, pivotBanner, imagePair, predictionBox → `content/blog/swift-kelce-wedding-stars.md`
+- signGrid → `content/blog/love-in-the-fire-horse-year.md`
 
-### 5. Handle images
+For inline mid-body figures with figcaptions, write raw `<figure style="...">...<figcaption>...</figcaption></figure>`.
 
-- Hero image: use `next/image` with `layout="responsive"` or `fill` inside a positioned container
-- Inline images: wrap in `<figure>` with `<figcaption>` for captions
-- All image `src` paths reference `/images/blog/<slug>.webp` (from `public/`) for blog posts, or `/images/<filename>.webp` for site pages
-- Use the image notes table in the `.md` front matter to map source files to placements
+## Step 5: Register the post
 
-### 6. Blog post specifics
+Open `website/lib/posts.js` and add the post at the top of `POSTS[]`:
 
-For blog post components, include a post header section:
-
-```jsx
-<header className="post-header">
-  <span className="post-category">{/* Category tag */}</span>
-  <h1>{/* Title */}</h1>
-  <p className="post-meta">
-    By Bill Hajdu · {/* Date */} · {/* X min read */}
-  </p>
-  <figure className="post-hero">
-    <Image
-      src="/images/blog/{slug}.webp"
-      alt="{/* Descriptive alt text */}"
-      width={1200}
-      height={630}
-      priority
-    />
-  </figure>
-</header>
+```js
+{
+  slug: '<slug>',
+  title: '...',
+  excerpt: '...',
+  categories: ['Year of the Fire Horse'],   // see web-style-guide.md for the valid list
+  date: 'Apr 17, 2026',
+  isoDate: '2026-04-17',
+  readTime: '6 min read',
+},
 ```
 
-And a post footer with a CTA:
+## Step 6: Place the hero image
 
-```jsx
-<footer className="post-footer">
-  <div className="post-cta">
-    <p>Ready to explore your path through the tiles?</p>
-    <a href="/readings" className="btn-primary">Book a Reading</a>
-    <a href="/the-mahjong-mirror" className="btn-secondary">Pre-order the Book</a>
-  </div>
-</footer>
+The hero must exist at `website/public/images/blog/<slug>.webp` and match `hero.src` in the frontmatter. Invoke the `generate-image` skill if a new one is needed.
+
+## Step 7: Verify
+
+```bash
+cd website && npm run build
 ```
 
-### 7. Save the output
+The build output should list `/blog/posts/<slug>` under the dynamic `[slug]` route.
 
-Write the complete `.jsx` component to `agents/web-developer/output/<slug>.jsx`. Create subdirectories if needed.
+## Step 8: Stage and commit (only when the user asks)
 
-### 8. Confirm
+```bash
+git add content/blog/<slug>.md \
+        website/public/images/blog/<slug>.webp \
+        website/lib/posts.js
+git commit -m "publish: <Post title>"
+```
 
-Report:
-- Source file read
-- Output file written
-- Any content that was ambiguous or could not be converted cleanly
-- Any images that need to be optimised before this component will render correctly
+## What this skill no longer does
+
+- ❌ Writes `.jsx` files to `agents/web-developer/output/`
+- ❌ Copies `.jsx` files to `website/pages/blog/posts/`
+- ❌ Edits `website/pages/blog/index.jsx` — that page is driven by `lib/posts.js`
+
+The shape of the output is now `content/blog/<slug>.md` plus a one-line addition to `lib/posts.js`. Everything else is handled by the dynamic route at build time.

@@ -4,14 +4,14 @@ import Link from 'next/link';
 import AdminShell from '../../../../components/AdminShell';
 import { supabase } from '../../../../lib/supabase';
 import { useAuth } from '../../../../lib/auth';
-import { requireStaff } from '../../../../lib/requireStaff';
+import { requirePage } from '../../../../lib/guards';
 import { SUPPORTED_SOURCES } from '../../../../lib/meetingSources';
 import * as krisp from '../../../../lib/meetingSources/krisp';
 import adminStyles from '../../../../styles/PortalAdmin.module.css';
 import styles from '../../../../styles/PortalSettings.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireStaff(ctx);
+  return requirePage('staff')(ctx);
 }
 
 const SOURCE_META = {
@@ -116,7 +116,7 @@ export default function MeetingSourceSettingsPage({ profile }) {
             are kept available for future use — no action needed today.
           </div>
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className="error-block">{error}</p>}
 
           {loading ? (
             <p className={styles.muted}>Loading current connections…</p>

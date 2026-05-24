@@ -1,18 +1,5 @@
-.pageHeader {
-  padding: var(--space-2xl) 0 var(--space-xl);
-  background-color: var(--paper);
-  border-bottom: 1px solid var(--rule);
-}
-.pageHeader h1 {
-  color: var(--ink);
-  margin-top: var(--space-md);
-  max-width: 720px;
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(40px, 5vw, 64px);
-  line-height: 1;
-  letter-spacing: -0.035em;
-}
+/* .page-header lives in globals.css (use .page-header.is-bounded for max-width 720px h1) */
+
 .headerLead {
   font-family: var(--serif);
   font-size: 19px;

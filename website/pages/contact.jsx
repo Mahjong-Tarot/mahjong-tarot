@@ -75,7 +75,7 @@ export default function Contact() {
  <Nav />
 
  <main>
- <section className={styles.pageHeader}>
+ <section className="page-header is-bounded">
  <div className="container">
  <span className="overline">Get in Touch</span>
  <h1>Contact Us</h1>

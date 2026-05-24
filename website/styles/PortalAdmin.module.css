@@ -33,16 +33,7 @@
   margin: 0 0 var(--space-md);
 }
 
-.error {
-  color: #b22;
-  font-family: var(--sans);
-  font-size: 14px;
-  margin: 0 0 var(--space-md);
-  padding: var(--space-sm) var(--space-md);
-  background: rgba(178, 34, 34, 0.06);
-  border: 1px solid rgba(178, 34, 34, 0.2);
-  border-radius: 6px;
-}
+/* .error-block / .error-inline live in globals.css */
 
 /* ── stat cards row ─────────────────────────────────────── */
 .statRow {

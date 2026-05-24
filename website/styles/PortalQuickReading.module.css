@@ -114,16 +114,7 @@
   border-top: 1px dashed var(--rule);
 }
 
-.error {
-  color: #b22;
-  font-family: var(--sans);
-  font-size: 14px;
-  margin: 0;
-  padding: var(--space-sm) var(--space-md);
-  background: rgba(178, 34, 34, 0.06);
-  border-radius: 6px;
-  border-left: 3px solid #b22;
-}
+/* .error-block / .error-inline live in globals.css */
 
 .success {
   font-family: var(--sans);

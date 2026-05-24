@@ -116,7 +116,7 @@ export default function MeetingSourceSettingsPage({ profile }) {
             are kept available for future use — no action needed today.
           </div>
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className="error-block">{error}</p>}
 
           {loading ? (
             <p className={styles.muted}>Loading current connections…</p>

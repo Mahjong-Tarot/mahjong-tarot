@@ -260,7 +260,7 @@ export default function AdminPeople({ profile }) {
             Every human who has interacted with the site — inquirers, subscribers, customers, members.
           </p>
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className="error-block">{error}</p>}
 
           <div className={styles.statRow}>
             <div className={styles.statCard}>

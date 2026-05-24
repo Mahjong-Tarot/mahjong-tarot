@@ -193,7 +193,7 @@ export default function QuickReadingPage({ profile }) {
               </span>
             </label>
 
-            {error && <p className={styles.error}>{error}</p>}
+            {error && <p className="error-inline">{error}</p>}
             {message && <p className={styles.success}>{message}</p>}
 
             <div className={styles.actions}>

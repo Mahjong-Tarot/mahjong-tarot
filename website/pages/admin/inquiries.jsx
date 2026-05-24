@@ -187,7 +187,7 @@ export default function AdminInquiries({ profile }) {
             Pipeline view of every contact form, booking and newsletter signup.
           </p>
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className="error-block">{error}</p>}
 
           <div className={tableStyles.controlsRow}>
             <div className={tableStyles.chipRow}>

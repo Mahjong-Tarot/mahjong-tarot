@@ -36,7 +36,7 @@ export default function AdminShell({ profile, children }) {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/');
+    window.location.href = '/';
   };
 
   const displayName = profile?.name?.split(' ')[0] || profile?.name || 'Admin';

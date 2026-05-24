@@ -54,8 +54,23 @@ export function AuthProvider({ children }) {
   }, []);
 
   const signOut = async () => {
-    if (supabase) await supabase.auth.signOut();
-    setProfile(null);
+    try {
+      if (supabase) {
+        // scope:'local' clears the cookie + localStorage without waiting on
+        // /auth/v1/logout. The race+timeout prevents the prod hang where the
+        // SDK call never resolves and the handler never gets to redirect.
+        await Promise.race([
+          supabase.auth.signOut({ scope: 'local' }),
+          new Promise((resolve) => setTimeout(resolve, 1500)),
+        ]);
+      }
+    } catch (err) {
+      console.error('signOut failed:', err);
+    } finally {
+      // Don't depend on onAuthStateChange firing — clear local state ourselves.
+      setUser(null);
+      setProfile(null);
+    }
   };
 
   // `profile.id` is the user's UUID (== profiles.user_id), not a separate row id.

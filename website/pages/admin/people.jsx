@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import AdminShell from '../../components/AdminShell';
+import PersonRow from '../../components/PersonRow';
+import PersonEditShelf from '../../components/PersonEditShelf';
 import { supabase } from '../../lib/supabase';
 import { requireAdmin } from '../../lib/requireAdmin';
+import { FILTERS, sortValue } from '../../lib/admin-people';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 
@@ -10,52 +13,7 @@ export async function getServerSideProps(ctx) {
   return requireAdmin(ctx);
 }
 
-const FILTERS = [
-  { id: 'all',         label: 'All' },
-  { id: 'customers',    label: 'Customers' },
-  { id: 'members',     label: 'Portal members' },
-  { id: 'subscribers', label: 'Subscribers' },
-  { id: 'opted_out',   label: 'Opted out' },
-];
-
-const TYPE_LABELS = {
-  contact:      'Contact',
-  newsletter:   'Newsletter',
-  booking:      'Booking',
-  reading:      'Reading',
-  consultation: 'Consultation',
-  general:      'General',
-};
-
-function formatDate(value) {
-  return new Date(value).toLocaleDateString('en-US', {
-    month: 'short', day: 'numeric', year: 'numeric',
-  });
-}
-
-function relTime(value) {
-  const diffMs = Date.now() - new Date(value).getTime();
-  const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
-  if (days <= 0)  return 'today';
-  if (days === 1) return 'yesterday';
-  if (days < 7)   return `${days}d ago`;
-  if (days < 30)  return `${Math.floor(days / 7)}w ago`;
-  return formatDate(value);
-}
-
-const LIFECYCLE_STAGES = ['subscriber', 'lead', 'mql', 'sql', 'opportunity', 'customer', 'evangelist'];
-
-function sortValue(row, key) {
-  switch (key) {
-    case 'name':           return (row.name || '').toLowerCase();
-    case 'email':          return (row.email || '').toLowerCase();
-    case 'tags':           return row.types.length;
-    case 'inquiry_count':  return row.inquiry_count || 0;
-    case 'order_count':    return row.order_count || 0;
-    case 'last_activity':  return row.last_activity || '';
-    default:               return row[key];
-  }
-}
+const sortableTh = { cursor: 'pointer', userSelect: 'none' };
 
 export default function AdminPeople({ profile }) {
   const [people, setPeople]       = useState([]);
@@ -318,27 +276,12 @@ export default function AdminPeople({ profile }) {
                 </thead>
                 <tbody>
                   {sorted.map((p) => (
-                    <tr key={p.id} onClick={() => openShelf(p)} style={{ cursor: 'pointer' }}>
-                      <td className={tableStyles.cellPrimary}>{p.name || '—'}</td>
-                      <td className={tableStyles.cellSecondary}>{p.email}</td>
-                      <td>
-                        <div className={tableStyles.tagRow}>
-                          {p.is_member && <span className={tableStyles.tagMember}>member</span>}
-                          {p.is_customer && <span className={tableStyles.tagClient}>customer</span>}
-                          {p.subscription === 'active' && <span className={tableStyles.tagActive}>subscribed</span>}
-                          {p.subscription === 'lapsed' && <span className={tableStyles.tagLapsed}>lapsed</span>}
-                          {p.types.map((t) => (
-                            <span key={t} className={tableStyles.tag}>{TYPE_LABELS[t] || t}</span>
-                          ))}
-                          {p.types.length === 0 && !p.is_member && !p.is_customer && (
-                            <span className={tableStyles.muted}>—</span>
-                          )}
-                        </div>
-                      </td>
-                      <td className={tableStyles.cellMuted}>{p.inquiry_count || '—'}</td>
-                      <td className={tableStyles.cellMuted}>{p.order_count || '—'}</td>
-                      <td className={tableStyles.cellMuted}>{relTime(p.last_activity)}</td>
-                    </tr>
+                    <PersonRow
+                      key={p.id}
+                      person={p}
+                      tableStyles={tableStyles}
+                      onOpen={openShelf}
+                    />
                   ))}
                 </tbody>
               </table>
@@ -347,154 +290,16 @@ export default function AdminPeople({ profile }) {
 
           {/* Detail shelf — opens when a row is clicked */}
           {selectedId && draft && (
-            <>
-              <div onClick={closeShelf} style={shelfBackdrop} />
-              <aside style={shelfPanel} onClick={(e) => e.stopPropagation()}>
-                <header style={shelfHeader}>
-                  <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>
-                    {draft.name || draft.email || 'Untitled person'}
-                  </h2>
-                  <button type="button" onClick={closeShelf} aria-label="Close" style={shelfClose}>×</button>
-                </header>
-
-                {shelfError && <p style={shelfErr}>{shelfError}</p>}
-
-                <Field label="Name" name="name" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'name'} onSave={saveField} />
-                <Field label="Email" name="email" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'email'} onSave={saveField} />
-                <Field label="Phone" name="phone" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'phone'} onSave={saveField} />
-                <Field label="Address" name="address" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'address'} onSave={saveField} />
-                <Field label="Birthday" name="birthday" type="date" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'birthday'} onSave={saveField} />
-                <Field label="Birth time" name="birth_time" type="time" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'birth_time'} onSave={saveField} />
-                <Field label="Birth place" name="birth_place" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'birth_place'} onSave={saveField} />
-                <SelectField label="Gender (needed for Purple Star chart)" name="gender" draft={draft} setDraft={setDraft}
-                       options={['', 'F', 'M']} optionLabels={{'': '— not set —', F: 'Female', M: 'Male'}}
-                       saving={savingField === 'gender'} onSave={saveField} />
-                <Field label="Chinese sign" name="chinese_sign" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'chinese_sign'} onSave={saveField} />
-                <Field label="Company" name="company" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'company'} onSave={saveField} />
-                <Field label="Role" name="role" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'role'} onSave={saveField} />
-                <SelectField label="Lifecycle stage" name="lifecycle_stage" draft={draft} setDraft={setDraft}
-                       options={LIFECYCLE_STAGES} saving={savingField === 'lifecycle_stage'} onSave={saveField} />
-                <Field label="Nurture stage" name="nurture_stage" type="number" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'nurture_stage'} onSave={saveField} />
-                <Field label="Nurture status" name="nurture_status" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'nurture_status'} onSave={saveField} />
-                <Field label="Membership status" name="membership_status" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'membership_status'} onSave={saveField} />
-                <Field label="Source" name="source" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'source'} onSave={saveField} />
-                <Field label="Source site" name="source_site" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'source_site'} onSave={saveField} />
-                <CheckField label="OK to contact (newsletter / outreach)" name="ok_to_contact" draft={draft} setDraft={setDraft}
-                       saving={savingField === 'ok_to_contact'} onSave={saveField} />
-              </aside>
-            </>
+            <PersonEditShelf
+              draft={draft}
+              setDraft={setDraft}
+              savingField={savingField}
+              shelfError={shelfError}
+              onSave={saveField}
+              onClose={closeShelf}
+            />
           )}
       </AdminShell>
     </>
-  );
-}
-
-// ── Sortable table header style ─────────────────────────────────────
-const sortableTh = { cursor: 'pointer', userSelect: 'none' };
-
-// ── Shelf primitives ────────────────────────────────────────────────
-const shelfBackdrop = {
-  position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.35)', zIndex: 60,
-};
-const shelfPanel = {
-  position: 'fixed', top: 0, right: 0, bottom: 0,
-  width: 'min(440px, 92vw)', background: '#fff', boxShadow: '-12px 0 32px rgba(0,0,0,0.15)',
-  padding: 20, overflowY: 'auto', zIndex: 61,
-};
-const shelfHeader = {
-  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-  marginBottom: 18, paddingBottom: 12, borderBottom: '1px solid #e5e7eb',
-};
-const shelfClose = {
-  background: 'transparent', border: 'none', fontSize: 28, cursor: 'pointer',
-  lineHeight: 1, color: '#6b7280', padding: '0 4px',
-};
-const shelfErr = {
-  background: '#fef2f2', color: '#991b1b', padding: '8px 12px', borderRadius: 6,
-  fontSize: 13, marginBottom: 12,
-};
-const fieldWrap = { marginBottom: 14 };
-const fieldLabel = {
-  display: 'block', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em',
-  color: '#6b7280', fontWeight: 500, marginBottom: 4,
-};
-const fieldInput = {
-  display: 'block', width: '100%', padding: '8px 10px',
-  border: '1px solid #d1d5db', borderRadius: 6, fontSize: 14, fontFamily: 'inherit',
-  background: '#fff',
-};
-const fieldSaving = {
-  display: 'inline-block', fontSize: 11, color: '#6b7280', marginLeft: 6,
-};
-
-function Field({ label, name, type = 'text', draft, setDraft, onSave, saving, readOnly = false }) {
-  const initial = draft[name];
-  return (
-    <div style={fieldWrap}>
-      <label style={fieldLabel}>{label}{saving && <span style={fieldSaving}>Saving…</span>}</label>
-      <input
-        type={type}
-        readOnly={readOnly}
-        value={draft[name] ?? ''}
-        onChange={(e) => setDraft({ ...draft, [name]: e.target.value })}
-        onBlur={() => !readOnly && draft[name] !== initial && onSave?.(name, draft[name])}
-        style={{ ...fieldInput, background: readOnly ? '#f9fafb' : '#fff' }}
-      />
-    </div>
-  );
-}
-
-function SelectField({ label, name, draft, setDraft, options, optionLabels, onSave, saving }) {
-  const initial = draft[name];
-  return (
-    <div style={fieldWrap}>
-      <label style={fieldLabel}>{label}{saving && <span style={fieldSaving}>Saving…</span>}</label>
-      <select
-        value={draft[name] ?? ''}
-        onChange={(e) => {
-          const next = e.target.value;
-          setDraft({ ...draft, [name]: next });
-          if (next !== initial) onSave?.(name, next);
-        }}
-        style={fieldInput}
-      >
-        {options.map((o) => <option key={o || '_blank'} value={o}>{(optionLabels && optionLabels[o]) || o}</option>)}
-      </select>
-    </div>
-  );
-}
-
-function CheckField({ label, name, draft, setDraft, onSave, saving }) {
-  return (
-    <div style={{ ...fieldWrap, display: 'flex', alignItems: 'center', gap: 10 }}>
-      <input
-        id={`f-${name}`}
-        type="checkbox"
-        checked={!!draft[name]}
-        onChange={(e) => {
-          const next = e.target.checked;
-          setDraft({ ...draft, [name]: next });
-          onSave?.(name, next);
-        }}
-      />
-      <label htmlFor={`f-${name}`} style={{ ...fieldLabel, marginBottom: 0 }}>
-        {label}{saving && <span style={fieldSaving}>Saving…</span>}
-      </label>
-    </div>
   );
 }

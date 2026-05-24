@@ -11,15 +11,6 @@ export async function getServerSideProps(ctx) {
   return requirePage('admin')(ctx);
 }
 
-// Source filter — what kind of sale to surface. All read from
-// public.deals (the canonical money record).
-const SOURCE_FILTERS = [
-  { id: 'all',              label: 'All' },
-  { id: 'private_readings', label: 'Private readings' },
-  { id: 'subscriptions',    label: 'Subscriptions' },
-  { id: 'books',            label: 'Books' },
-];
-
 function kindOf(d) {
   if (d.booking_id) return 'reading';
   if (d.member_subscription_id) return 'subscription';
@@ -27,11 +18,17 @@ function kindOf(d) {
   return 'other';
 }
 
+function fmtMoney(cents) {
+  return `$${((cents ?? 0) / 100).toLocaleString('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })}`;
+}
+
 export default function SalesPage({ profile }) {
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [sourceFilter, setSourceFilter] = useState('all');
   const [selectedDeal, setSelectedDeal] = useState(null);
 
   useEffect(() => {
@@ -42,22 +39,44 @@ export default function SalesPage({ profile }) {
     }
     setLoading(true);
     setError('');
-    let q = supabase
+    supabase
       .from('deals')
-      .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, stripe_payment_intent_id, stripe_session_id, people(name, email)')
+      .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, stripe_payment_intent_id, people(name, email)')
       .eq('status', 'won')
-      .order('won_at', { ascending: false });
-    if (sourceFilter === 'books')            q = q.ilike('notes', 'Book order%');
-    if (sourceFilter === 'subscriptions')    q = q.not('member_subscription_id', 'is', null);
-    if (sourceFilter === 'private_readings') q = q.not('booking_id', 'is', null);
-    q.then(({ data, error: e }) => {
-      if (e) setError(e.message);
-      else   setDeals(data ?? []);
-      setLoading(false);
-    });
-  }, [sourceFilter]);
+      .order('won_at', { ascending: false })
+      .then(({ data, error: e }) => {
+        if (e) setError(e.message);
+        else   setDeals(data ?? []);
+        setLoading(false);
+      });
+  }, []);
 
-  const totalCents = deals.reduce((s, d) => s + (d.amount_cents || 0), 0);
+  // Bucket totals for the stat cards. One pass over the deals list.
+  const totals = deals.reduce(
+    (acc, d) => {
+      const cents = d.amount_cents || 0;
+      acc.total.cents += cents;
+      acc.total.count += 1;
+      const k = kindOf(d);
+      if (k === 'subscription') {
+        acc.subscription.cents += cents;
+        acc.subscription.count += 1;
+      } else if (k === 'book') {
+        acc.book.cents += cents;
+        acc.book.count += 1;
+      } else if (k === 'reading') {
+        acc.reading.cents += cents;
+        acc.reading.count += 1;
+      }
+      return acc;
+    },
+    {
+      total:        { cents: 0, count: 0 },
+      subscription: { cents: 0, count: 0 },
+      book:         { cents: 0, count: 0 },
+      reading:      { cents: 0, count: 0 },
+    },
+  );
 
   return (
     <>
@@ -73,33 +92,45 @@ export default function SalesPage({ profile }) {
           Every won deal — Stripe, manual, all sources. One row per sale.
         </p>
 
-        <div className={styles.controlsDivider}>
-          <div className={styles.chipRow} role="tablist" aria-label="Source">
-            {SOURCE_FILTERS.map((f) => (
-              <button
-                key={f.id}
-                type="button"
-                role="tab"
-                aria-selected={sourceFilter === f.id}
-                className={sourceFilter === f.id ? styles.chipActive : styles.chip}
-                onClick={() => setSourceFilter(f.id)}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {error && <p className={styles.error}>{error}</p>}
 
-        <p className={styles.countSpaced}>
-          {loading
-            ? 'Loading…'
-            : `${deals.length} deal${deals.length === 1 ? '' : 's'} · $${(totalCents / 100).toFixed(2)} total`}
-        </p>
+        {!loading && !error && (
+          <div className={adminStyles.statRow}>
+            <div className={adminStyles.statCard}>
+              <p className={adminStyles.statLabel}>Total Sales</p>
+              <p className={adminStyles.statValue}>{fmtMoney(totals.total.cents)}</p>
+              <p className={adminStyles.statHint}>
+                {totals.total.count} sale{totals.total.count === 1 ? '' : 's'}
+              </p>
+            </div>
+            <div className={adminStyles.statCard}>
+              <p className={adminStyles.statLabel}>Premium Subscription</p>
+              <p className={adminStyles.statValue}>{fmtMoney(totals.subscription.cents)}</p>
+              <p className={adminStyles.statHint}>
+                {totals.subscription.count} sale{totals.subscription.count === 1 ? '' : 's'}
+              </p>
+            </div>
+            <div className={adminStyles.statCard}>
+              <p className={adminStyles.statLabel}>Book</p>
+              <p className={adminStyles.statValue}>{fmtMoney(totals.book.cents)}</p>
+              <p className={adminStyles.statHint}>
+                {totals.book.count} sale{totals.book.count === 1 ? '' : 's'}
+              </p>
+            </div>
+            <div className={adminStyles.statCard}>
+              <p className={adminStyles.statLabel}>Private Readings</p>
+              <p className={adminStyles.statValue}>{fmtMoney(totals.reading.cents)}</p>
+              <p className={adminStyles.statHint}>
+                {totals.reading.count} sale{totals.reading.count === 1 ? '' : 's'}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {loading && <p className={adminStyles.muted}>Loading…</p>}
 
         {!loading && deals.length === 0 && (
-          <p className={adminStyles.muted}>No sales in this view yet.</p>
+          <p className={adminStyles.muted}>No sales yet.</p>
         )}
 
         {!loading && deals.length > 0 && (

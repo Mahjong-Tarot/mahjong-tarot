@@ -4,13 +4,13 @@ import AdminShell from '../../components/AdminShell';
 import PersonRow from '../../components/PersonRow';
 import PersonEditShelf from '../../components/PersonEditShelf';
 import { supabase } from '../../lib/supabase';
-import { requireAdmin } from '../../lib/requireAdmin';
+import { requirePage } from '../../lib/guards';
 import { FILTERS, sortValue } from '../../lib/admin-people';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requirePage('admin')(ctx);
 }
 
 const sortableTh = { cursor: 'pointer', userSelect: 'none' };

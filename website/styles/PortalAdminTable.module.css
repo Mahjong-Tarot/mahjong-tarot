@@ -173,3 +173,119 @@
   color: var(--ink-4);
   background: var(--paper);
 }
+
+/* ── merged from PortalConversions.module.css ─────────────── */
+/* Used by /admin/sales. Renamed to avoid collisions with the
+   inquiries/people .controlsRow + .count variants above. */
+
+.controlsDivider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0 var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+
+.sortField {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.sortLabel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.sortSelect {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 6px 28px 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  background: var(--paper-pure);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.countSpaced {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-4);
+  margin: 0 0 var(--space-md);
+}
+
+.error {
+  color: #b22;
+  font-family: var(--sans);
+  font-size: 14px;
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(178, 34, 34, 0.06);
+  border-radius: 6px;
+  border-left: 3px solid #b22;
+}
+
+.toast {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(42, 138, 72, 0.08);
+  border-radius: 6px;
+  border-left: 3px solid rgba(42, 138, 72, 0.4);
+}
+
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 14px;
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ordersTable thead tr {
+  background: var(--paper);
+}
+
+.ordersTable th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ordersTable td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+
+.ordersTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .controlsDivider {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sortField {
+    justify-content: space-between;
+  }
+}

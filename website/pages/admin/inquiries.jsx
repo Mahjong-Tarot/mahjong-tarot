@@ -2,13 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import AdminShell from '../../components/AdminShell';
 import { supabase } from '../../lib/supabase';
-import { requireAdmin } from '../../lib/requireAdmin';
+import { requirePage } from '../../lib/guards';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 import kanbanStyles from '../../styles/PortalAdminKanban.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requirePage('admin')(ctx);
 }
 
 const STAGES = [

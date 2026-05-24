@@ -36,7 +36,7 @@ export default function OrderBook() {
     setError('');
     setSubmitting(true);
     try {
-      const r = await fetch('/api/stripe/book-checkout', {
+      const r = await fetch('/api/stripe/book-purchase-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sku: selected, email: email.trim() || undefined }),

@@ -1,0 +1,221 @@
+/* ══════════════════════════════════════════════════════════════════════
+   Blog Post — body block components
+   Globally-scoped class rules for custom blocks that appear inside the
+   markdown-rendered body of a blog post (riskCard, pivotBanner, signGrid,
+   etc.). These mirror the same-named rules in BlogPost.module.css so that
+   raw HTML inside the markdown body — which can't reach CSS-Module-hashed
+   class names — still renders with the intended styling.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Risk Cards ── */
+.riskCard {
+  background-color: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: 24px 24px 20px;
+  margin: 28px 0;
+}
+.riskCard h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 10px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.riskCard p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 0;
+  color: var(--ink-2);
+}
+.riskLabel {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  margin-bottom: 12px;
+  background-color: var(--fire-50);
+  color: var(--fire-600);
+  border-radius: var(--r-pill);
+}
+
+/* ── Pivot Banner ── */
+.pivotBanner {
+  background-color: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: 36px 32px;
+  margin: 48px 0;
+  text-align: center;
+  position: relative;
+}
+.pivotBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 32px;
+  width: 32px;
+  height: 2px;
+  background: var(--fire-500);
+}
+.pivotBanner h2 {
+  font-family: var(--serif);
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 14px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.pivotBanner p {
+  font-family: var(--sans);
+  color: var(--ink-2);
+  font-size: 16px;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Image Pair ── */
+.imagePair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin: 44px 0;
+  background-color: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.imagePair img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.imagePairCaption {
+  grid-column: 1 / -1;
+  background-color: var(--paper-pure);
+  padding: 12px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  text-align: center;
+  font-style: normal;
+}
+
+/* ── Prediction Box ── */
+.predictionBox {
+  background-color: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: 36px 32px;
+  margin: 36px 0;
+  text-align: center;
+  position: relative;
+}
+.predictionBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+}
+.predictionBox .predictionLabel {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.predictionBox p {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+
+/* ── Pull Quote ── */
+.pullQuote {
+  border-left: 2px solid var(--fire-500);
+  padding: 8px 0 8px 24px;
+  margin: 36px 0;
+}
+.pullQuote p {
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+
+/* ── Sign Grid + Sign Cards ── */
+.signGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 36px 0;
+}
+.signCard {
+  background-color: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: 18px 18px 16px;
+}
+.signCard h4 {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.signBadge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  margin-bottom: 10px;
+  border-radius: var(--r-pill);
+}
+.badgeExceptional { background-color: var(--gold-soft); color: var(--gold); }
+.badgeFavorable   { background-color: var(--ink); color: var(--paper); }
+.badgeNeutral     { background-color: var(--rule-2); color: var(--ink-3); }
+.badgeMixed       { background-color: var(--rule-2); color: var(--ink-3); }
+.badgeChallenging { background-color: var(--fire-50); color: var(--fire-600); }
+.badgeHighRisk    { background-color: var(--fire-50); color: var(--fire-700); }
+.signCard p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .signGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .signGrid { grid-template-columns: 1fr; }
+  .pivotBanner { padding: 24px 20px; }
+  .predictionBox { padding: 24px 20px; }
+  .pullQuote p { font-size: 19px; }
+}

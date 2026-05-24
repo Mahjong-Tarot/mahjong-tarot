@@ -12,6 +12,7 @@
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.103.0",
     "@vercel/analytics": "^2.0.1",
+    "gray-matter": "^4.0.3",
     "iztro": "^2.5.8",
     "lunar-typescript": "^1.8.6",
     "marked": "^14.1.3",

@@ -464,8 +464,6 @@ function DetailPanel({ inquiry, onClose, onStatusUpdate, onPersonUpdate }) {
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({
  inquiry_id: inquiry.id,
- to_email: inquiry.person_email,
- to_name: inquiry.person_name || '',
  subject: reply.subject,
  body: reply.body,
  }),

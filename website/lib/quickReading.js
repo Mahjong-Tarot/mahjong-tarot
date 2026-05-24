@@ -2,12 +2,10 @@
 // existing reading libraries. Used by /api/admin/quick-reading to
 // build the email body.
 //
-// Pure-function libs (bazi, purpleStar, three-blessings) are imported
-// directly. Data-backed libs (almanac, horoscopes) are queried inline
-// using a fresh server-side supabase client so we don't depend on the
-// module-level browser client.
+// The astrologer ticks one or more reading types on the Quick Reading
+// form. This function computes only the sections that were requested
+// and leaves the others undefined so the HTML renderer skips them.
 
-import { createClient } from '@supabase/supabase-js';
 import {
   calculatePillars,
   tallyElements,
@@ -16,12 +14,8 @@ import {
 } from './bazi';
 import { calculatePurpleStar } from './purpleStar';
 import { computeThreeBlessings } from './three-blessings';
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-const ALMANAC_START = '2026-02-17';
-const ALMANAC_END_EXCLUSIVE = '2032-02-10';
+import { computeFireHorseForecast } from './fire-horse-forecast';
+import { computeCompatibility } from './compatibility';
 
 // Western sun-sign date ranges (month-day). End is exclusive.
 const WESTERN_SIGNS = [
@@ -46,108 +40,91 @@ function westernSunSign(birthday) {
   return WESTERN_SIGNS.find((s) => md >= s.start && md < s.end)?.name || null;
 }
 
-function serverSupabase() {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
-  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-}
-
-async function fetchAlmanac(date) {
-  if (!date) return null;
-  if (date < ALMANAC_START || date >= ALMANAC_END_EXCLUSIVE) return null;
-  const sb = serverSupabase();
-  if (!sb) return null;
-  const { data, error } = await sb
-    .from('almanac_days')
-    .select('date, weekday, score, tone, officer, activities, year_conflict, auspicious_hours, holiday, lunar_day, lunar_month')
-    .eq('date', date)
-    .maybeSingle();
-  if (error) {
-    // eslint-disable-next-line no-console
-    console.error('quickReading: almanac fetch error', error);
-    return null;
-  }
-  return data;
-}
-
-async function fetchChineseHoroscope(date, animal) {
-  if (!date || !animal) return null;
-  const sb = serverSupabase();
-  if (!sb) return null;
-  const scope = animal.toLowerCase();
-  const { data, error } = await sb
-    .from('horoscopes')
-    .select('scope, category, text, score, tone')
-    .eq('date', date)
-    .eq('scope', scope)
-    .eq('status', 'published');
-  if (error) {
-    // eslint-disable-next-line no-console
-    console.error('quickReading: horoscope fetch error', error);
-    return null;
-  }
-  if (!data || data.length === 0) return null;
-  const byCategory = {};
-  for (const row of data) byCategory[row.category] = row;
-  return {
-    animal,
-    general: byCategory.general?.text || null,
-    love:    byCategory.love?.text    || null,
-    money:   byCategory.money?.text   || null,
-  };
-}
+export const READING_TYPES = ['bazi', 'ziwei', 'three_blessings', 'fire_horse', 'compatibility'];
 
 /**
- * Build a full reading packet from subject birth data + a consultation date.
+ * Build a Quick Reading packet for a subject (and optionally a partner
+ * for compatibility). Only the reading types passed in `types` are
+ * computed — every other section is left undefined so the renderer
+ * skips it cleanly.
  *
  * @param {object} args
- * @param {string} args.name
- * @param {string} args.birthday        YYYY-MM-DD
- * @param {string} [args.birthTime]     HH:MM
- * @param {string} [args.birthPlace]
- * @param {string} [args.gender]        'M' | 'F'
- * @param {string} args.consultationDate YYYY-MM-DD
+ * @param {object} args.subject  { name, birthday, birthTime, birthPlace, gender }
+ * @param {object} [args.partner] { name, birthday, birthTime, gender }
+ * @param {string[]} args.types  subset of READING_TYPES
  */
-export async function buildQuickReading({ name, birthday, birthTime, birthPlace, gender, consultationDate }) {
-  if (!birthday || !consultationDate) {
-    throw new Error('birthday and consultationDate are required');
+export function buildQuickReading({ subject, partner, types }) {
+  if (!subject?.birthday) {
+    throw new Error('subject.birthday is required');
+  }
+  if (!Array.isArray(types) || types.length === 0) {
+    throw new Error('types must be a non-empty array');
   }
 
-  // Pure (synchronous) computations
-  const pillars = calculatePillars(birthday, birthTime || null);
-  const elements = pillars ? tallyElements(pillars) : null;
-  const dominant = elements ? dominantElement(elements) : null;
-  const zodiacAnimal = pillars?.year?.branch?.animal || getZodiacAnimal(birthday);
+  const pillars = calculatePillars(subject.birthday, subject.birthTime || null);
+  const zodiacAnimal = pillars?.year?.branch?.animal || getZodiacAnimal(subject.birthday);
 
-  const ziwei = birthTime
-    ? calculatePurpleStar({ birthday, birthTime, gender })
-    : null;
-
-  const threeBlessings = computeThreeBlessings({ birthday, birthTime });
-
-  // Data-backed (async) sections
-  const [almanac, chineseHoroscope] = await Promise.all([
-    fetchAlmanac(consultationDate),
-    fetchChineseHoroscope(consultationDate, zodiacAnimal),
-  ]);
-
-  return {
+  const out = {
     subject: {
-      name: name || null,
-      birthday,
-      birthTime: birthTime || null,
-      birthPlace: birthPlace || null,
-      gender: gender || null,
+      name: subject.name || null,
+      birthday: subject.birthday,
+      birthTime: subject.birthTime || null,
+      birthPlace: subject.birthPlace || null,
+      gender: subject.gender || null,
       zodiacAnimal,
-      westernSign: westernSunSign(birthday),
+      westernSign: westernSunSign(subject.birthday),
     },
-    consultationDate,
-    bazi: pillars ? { pillars, elements, dominant } : null,
-    ziwei,
-    threeBlessings,
-    almanac,
-    horoscope: {
-      chinese: chineseHoroscope,
-      western: westernSunSign(birthday),
-    },
+    partner: partner ? {
+      name: partner.name || null,
+      birthday: partner.birthday,
+      birthTime: partner.birthTime || null,
+      gender: partner.gender || null,
+    } : null,
+    types,
   };
+
+  if (types.includes('bazi') && pillars) {
+    const elements = tallyElements(pillars);
+    out.bazi = { pillars, elements, dominant: dominantElement(elements) };
+  }
+
+  if (types.includes('ziwei')) {
+    out.ziwei = subject.birthTime
+      ? calculatePurpleStar({
+          birthday: subject.birthday,
+          birthTime: subject.birthTime,
+          gender: subject.gender,
+        })
+      : null; // null = requested but no birth time → renderer shows fallback message
+  }
+
+  if (types.includes('three_blessings')) {
+    out.threeBlessings = computeThreeBlessings({
+      birthday: subject.birthday,
+      birthTime: subject.birthTime,
+    });
+  }
+
+  if (types.includes('fire_horse')) {
+    out.fireHorse = pillars ? computeFireHorseForecast(pillars) : null;
+  }
+
+  if (types.includes('compatibility') && partner?.birthday) {
+    out.compatibility = computeCompatibility(
+      {
+        name: subject.name,
+        birthday: subject.birthday,
+        birthTime: subject.birthTime || null,
+        gender: subject.gender || null,
+      },
+      {
+        name: partner.name,
+        birthday: partner.birthday,
+        birthTime: partner.birthTime || null,
+        gender: partner.gender || null,
+      },
+    );
+  }
+
+  return out;
 }

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import AlmanacSearch from '../../../components/AlmanacSearch';
-import { useAuth } from '../../../lib/auth';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import AlmanacSearch from '../../../../components/AlmanacSearch';
+import { useAuth } from '../../../../lib/auth';
 
 export default function AlmanacSearchPage() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function AlmanacSearchPage() {
         <title>Find a Good Day | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -40,13 +40,14 @@ export default function AlmanacSearchPage() {
           </div>
 
           <AlmanacSearch
-            buildResultHref={(date) => `/dashboard/almanac/${date}`}
-            backHref="/dashboard/almanac"
+            buildResultHref={(date) => `/member/dashboard/almanac/${date}`}
+            backHref="/member/dashboard/almanac"
             backLabel="← Back to Today’s Almanac"
           />
         </section>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

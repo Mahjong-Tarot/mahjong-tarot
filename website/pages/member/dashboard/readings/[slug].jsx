@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import CompatibilityReport from '../../../components/CompatibilityReport';
-import { useAuth } from '../../../lib/auth';
-import { supabase } from '../../../lib/supabase';
-import styles from '../../../styles/Account.module.css';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import CompatibilityReport from '../../../../components/CompatibilityReport';
+import { useAuth } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
+import styles from '../../../../styles/Account.module.css';
 
 export default function ReadingPage() {
   const router = useRouter();
@@ -42,20 +42,21 @@ export default function ReadingPage() {
   const handleDelete = async () => {
     if (!confirm('Delete this reading? This cannot be undone.')) return;
     const { error } = await supabase.from('readings').delete().eq('id', reading.id);
-    if (!error) router.push('/dashboard/readings');
+    if (!error) router.push('/member/dashboard/readings');
   };
 
   if (loaded && !reading) {
     return (
       <>
         <Head><title>Reading not found | Mahjong Tarot</title></Head>
-        <Nav />
+        <MemberShell>
         <main className={`container ${styles.wrap}`}>
           <h1 className={styles.title}>Reading not found</h1>
           <p className={styles.lede}>That reading doesn&apos;t exist or isn&apos;t yours.</p>
-          <p><Link href="/dashboard/readings">← Back to readings</Link></p>
+          <p><Link href="/member/dashboard/readings">← Back to readings</Link></p>
         </main>
         <Footer />
+      </MemberShell>
       </>
     );
   }
@@ -71,10 +72,10 @@ export default function ReadingPage() {
         <title>{title || 'Reading'} | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <p className={styles.authFootnote} style={{ marginBottom: '0.5rem' }}>
-          <Link href="/dashboard/readings">← Saved readings</Link>
+          <Link href="/member/dashboard/readings">← Saved readings</Link>
         </p>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
@@ -97,6 +98,7 @@ export default function ReadingPage() {
         )}
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

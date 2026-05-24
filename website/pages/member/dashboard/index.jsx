@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import BaziChart from '../../components/BaziChart';
-import ProfileCompletion from '../../components/ProfileCompletion';
-import { useAuth } from '../../lib/auth';
-import { supabase } from '../../lib/supabase';
-import { calculatePillars, tallyElements, dominantElement, elementInteraction } from '../../lib/bazi';
-import { calculatePurpleStar } from '../../lib/purpleStar';
-import accountStyles from '../../styles/Account.module.css';
-import styles from '../../styles/Dashboard.module.css';
+import MemberShell from '../../../components/MemberShell';
+import Footer from '../../../components/Footer';
+import BaziChart from '../../../components/BaziChart';
+import ProfileCompletion from '../../../components/ProfileCompletion';
+import { useAuth } from '../../../lib/auth';
+import { supabase } from '../../../lib/supabase';
+import { calculatePillars, tallyElements, dominantElement, elementInteraction } from '../../../lib/bazi';
+import { calculatePurpleStar } from '../../../lib/purpleStar';
+import accountStyles from '../../../styles/Account.module.css';
+import styles from '../../../styles/Dashboard.module.css';
 
 const PALACE_ROLE = {
   Ming: 'The Self', Body: 'How You Show Up', Parents: 'Family & Authority',
@@ -160,7 +160,7 @@ export default function Dashboard() {
         <title>My Dashboard | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${accountStyles.wrap}`}>
 
         {/* ── 1. Greeting ───────────────────────────────────────── */}
@@ -191,12 +191,12 @@ export default function Dashboard() {
               ) : (
                 <p className={styles.heroMuted}>
                   {profileLoaded && !profile?.birthday
-                    ? <><Link href="/profile">Add your birthday</Link> for your personal energy reading.</>
+                    ? <><Link href="/member/profile">Add your birthday</Link> for your personal energy reading.</>
                     : ' '
                   }
                 </p>
               )}
-              <Link href="/dashboard/almanac" className={styles.heroLink}>
+              <Link href="/member/dashboard/almanac" className={styles.heroLink}>
                 View today&apos;s almanac →
               </Link>
             </div>
@@ -218,7 +218,7 @@ export default function Dashboard() {
             )}
             {!monthEnergy && profileLoaded && !profile?.birthday && (
               <p className={styles.periodMuted}>
-                <Link href="/profile">Add your birthday</Link> for your monthly energy.
+                <Link href="/member/profile">Add your birthday</Link> for your monthly energy.
               </p>
             )}
           </div>
@@ -242,7 +242,7 @@ export default function Dashboard() {
               </>
             ) : profileLoaded && !profile?.birthday ? (
               <p className={styles.periodMuted}>
-                <Link href="/profile">Add your birthday</Link> to see your favorability.
+                <Link href="/member/profile">Add your birthday</Link> to see your favorability.
               </p>
             ) : null}
           </div>
@@ -263,7 +263,7 @@ export default function Dashboard() {
           <div className={styles.chartSection}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Purple Star · Now</h2>
-              <Link href="/dashboard/readings/purple-star" className={styles.sectionLink}>
+              <Link href="/member/dashboard/readings/purple-star" className={styles.sectionLink}>
                 Full chart →
               </Link>
             </div>
@@ -301,12 +301,12 @@ export default function Dashboard() {
               <div className={styles.circleCol}>
                 <div className={styles.sectionHeader}>
                   <h2 className={styles.sectionTitle}>Inner circle</h2>
-                  <Link href="/dashboard/inner-circle" className={styles.sectionLink}>Manage →</Link>
+                  <Link href="/member/dashboard/inner-circle" className={styles.sectionLink}>Manage →</Link>
                 </div>
                 <ul className={styles.gridList}>
                   {data.memberRatings.map((m) => (
                     <li key={m.id}>
-                      <Link href={`/dashboard/inner-circle/${m.id}`}>
+                      <Link href={`/member/dashboard/inner-circle/${m.id}`}>
                         <span className={styles.gridName}>
                           {m.name}
                           {m.relationship && <small>· {m.relationship}</small>}
@@ -333,7 +333,7 @@ export default function Dashboard() {
                 <ul className={styles.bdayList}>
                   {upcomingBirthdays.map((m) => (
                     <li key={m.id}>
-                      <Link href={`/dashboard/inner-circle/${m.id}`}>
+                      <Link href={`/member/dashboard/inner-circle/${m.id}`}>
                         <strong>{m.name}</strong>
                         <span className={styles.bdayMeta}>· {m.relationship}</span>
                         <span className={styles.bdayDays}>
@@ -353,12 +353,12 @@ export default function Dashboard() {
           <div className={styles.chartSection}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Recent readings</h2>
-              <Link href="/dashboard/readings" className={styles.sectionLink}>View all →</Link>
+              <Link href="/member/dashboard/readings" className={styles.sectionLink}>View all →</Link>
             </div>
             <ul className={styles.recentList}>
               {readings.map((r) => (
                 <li key={r.id}>
-                  <Link href={`/dashboard/readings/${r.slug}`}>
+                  <Link href={`/member/dashboard/readings/${r.slug}`}>
                     <strong>{r.person1_name || 'You'} × {r.person2_name || 'Partner'}</strong>
                     <span className={styles.recentDate}>
                       {new Date(r.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
@@ -379,13 +379,14 @@ export default function Dashboard() {
             <h3 className={styles.teaserTitle}>Tong Shu Almanac</h3>
             <p className={styles.teaserSub}>Daily guidance · auspicious activities and what to avoid</p>
           </div>
-          <Link href="/dashboard/almanac" className={styles.periodLink}>
+          <Link href="/member/dashboard/almanac" className={styles.periodLink}>
             View today in the almanac →
           </Link>
         </div>
 
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

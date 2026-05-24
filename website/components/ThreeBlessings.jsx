@@ -106,7 +106,7 @@ export default function ThreeBlessings({ reading }) {
             : `${[flipped.phuc, flipped.loc, flipped.tho].filter(Boolean).length} of 3 revealed.`}
         </p>
         {allFlipped && (
-          <Link href="/dashboard/three-blessings" className={styles.ctaLink}>
+          <Link href="/member/dashboard/three-blessings" className={styles.ctaLink}>
             Read your full Three Blessings reading →
           </Link>
         )}

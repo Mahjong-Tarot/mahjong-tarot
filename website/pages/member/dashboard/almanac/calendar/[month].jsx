@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../../components/Nav';
-import Footer from '../../../../components/Footer';
-import { useAuth } from '../../../../lib/auth';
+import MemberShell from '../../../../../components/MemberShell';
+import Footer from '../../../../../components/Footer';
+import { useAuth } from '../../../../../lib/auth';
 import {
   fetchAlmanacSummariesForMonth,
   todayInLA,
@@ -12,7 +12,7 @@ import {
   formatMonthHuman,
   LNY_2026,
   ALMANAC_RANGE_END_EXCLUSIVE,
-} from '../../../../lib/almanac';
+} from '../../../../../lib/almanac';
 import styles from './AlmanacCalendar.module.css';
 
 function buildCalendar(yyyymm, summaries) {
@@ -76,7 +76,7 @@ export default function AlmanacCalendar() {
         <title>{human} Almanac | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -87,11 +87,11 @@ export default function AlmanacCalendar() {
           <div className={styles.container}>
             <div className={styles.monthNav}>
               {canGoBack ? (
-                <Link href={`/dashboard/almanac/calendar/${prevMonth}`}>‹ {formatMonthHuman(prevMonth)}</Link>
+                <Link href={`/member/dashboard/almanac/calendar/${prevMonth}`}>‹ {formatMonthHuman(prevMonth)}</Link>
               ) : <span />}
-              <Link href="/dashboard/almanac" className={styles.todayLink}>Today</Link>
+              <Link href="/member/dashboard/almanac" className={styles.todayLink}>Today</Link>
               {canGoForward ? (
-                <Link href={`/dashboard/almanac/calendar/${nextMonth}`}>{formatMonthHuman(nextMonth)} ›</Link>
+                <Link href={`/member/dashboard/almanac/calendar/${nextMonth}`}>{formatMonthHuman(nextMonth)} ›</Link>
               ) : <span />}
             </div>
 
@@ -121,7 +121,7 @@ export default function AlmanacCalendar() {
                   </div>
                 );
                 return c.summary ? (
-                  <Link key={i} href={`/dashboard/almanac/${c.date}`}>{cell}</Link>
+                  <Link key={i} href={`/member/dashboard/almanac/${c.date}`}>{cell}</Link>
                 ) : (
                   <div key={i}>{cell}</div>
                 );
@@ -147,6 +147,7 @@ export default function AlmanacCalendar() {
         </section>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

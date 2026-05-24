@@ -93,7 +93,7 @@ export default async function handler(req, res) {
     allow_promotion_codes: true,
     automatic_tax: { enabled: false },
     billing_address_collection: 'auto',
-    success_url: `${origin}/dashboard?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${origin}/member/dashboard?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/signup?checkout=cancel`,
   });
 

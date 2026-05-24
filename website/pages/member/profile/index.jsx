@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import BaziChart from '../../components/BaziChart';
-import { useAuth } from '../../lib/auth';
-import { supabase } from '../../lib/supabase';
-import { calculatePillars, tallyElements, dominantElement } from '../../lib/bazi';
-import styles from '../../styles/Account.module.css';
+import MemberShell from '../../../components/MemberShell';
+import Footer from '../../../components/Footer';
+import BaziChart from '../../../components/BaziChart';
+import { useAuth } from '../../../lib/auth';
+import { supabase } from '../../../lib/supabase';
+import { calculatePillars, tallyElements, dominantElement } from '../../../lib/bazi';
+import styles from '../../../styles/Account.module.css';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -117,7 +117,7 @@ export default function ProfilePage() {
         <title>Profile | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Your profile</h1>
         <p className={styles.lede}>
@@ -191,7 +191,7 @@ export default function ProfilePage() {
             </div>
 
             <p className={styles.authFootnote}>
-              <Link href="/dashboard">← Back to dashboard</Link>
+              <Link href="/member/dashboard">← Back to dashboard</Link>
             </p>
           </form>
 
@@ -210,6 +210,7 @@ export default function ProfilePage() {
         </div>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

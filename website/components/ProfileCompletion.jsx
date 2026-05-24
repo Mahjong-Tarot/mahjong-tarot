@@ -33,7 +33,7 @@ export default function ProfileCompletion({ profile }) {
         <span className={completionStyles.pct}>{pct}% complete</span>
         {' · '}
         {message}{' '}
-        <Link href="/profile" className={completionStyles.link}>Update profile →</Link>
+        <Link href="/member/profile" className={completionStyles.link}>Update profile →</Link>
       </p>
     </div>
   );

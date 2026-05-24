@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import AlmanacView from '../../../components/AlmanacView';
-import { useAuth } from '../../../lib/auth';
-import { fetchAlmanacForDate, todayInLA, isValidAlmanacDate, formatHumanDate } from '../../../lib/almanac';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import AlmanacView from '../../../../components/AlmanacView';
+import { useAuth } from '../../../../lib/auth';
+import { fetchAlmanacForDate, todayInLA, isValidAlmanacDate, formatHumanDate } from '../../../../lib/almanac';
 
 export default function AlmanacDate() {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function AlmanacDate() {
         </title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -60,9 +60,9 @@ export default function AlmanacDate() {
               date={date}
               almanac={almanac}
               today={today}
-              basePath="/dashboard/almanac"
-              searchHref="/dashboard/almanac/search"
-              monthlyHref={`/dashboard/almanac/calendar/${date.slice(0, 7)}`}
+              basePath="/member/dashboard/almanac"
+              searchHref="/member/dashboard/almanac/search"
+              monthlyHref={`/member/dashboard/almanac/calendar/${date.slice(0, 7)}`}
             />
           )}
           {loaded && notFound && (
@@ -73,6 +73,7 @@ export default function AlmanacDate() {
         </section>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

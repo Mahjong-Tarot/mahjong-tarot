@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import PurpleStarChart from '../../../components/PurpleStarChart';
-import { useAuth } from '../../../lib/auth';
-import { supabase } from '../../../lib/supabase';
-import { calculatePurpleStar } from '../../../lib/purpleStar';
-import accountStyles from '../../../styles/Account.module.css';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import PurpleStarChart from '../../../../components/PurpleStarChart';
+import { useAuth } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
+import { calculatePurpleStar } from '../../../../lib/purpleStar';
+import accountStyles from '../../../../styles/Account.module.css';
 
 const PALACE_MEANINGS = {
   Ming:     { role: 'The Self',          blurb: 'Your core character, temperament, and the essential lens through which you meet life.' },
@@ -90,10 +90,10 @@ export default function PurpleStarReading() {
         <title>Purple Star Reading | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${accountStyles.wrap}`}>
         <p className={accountStyles.authFootnote} style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
-          <Link href="/dashboard/readings">← Saved readings</Link>
+          <Link href="/member/dashboard/readings">← Saved readings</Link>
         </p>
 
         <h1 className={accountStyles.title}>Purple Star · Zi Wei Dou Shu</h1>
@@ -102,8 +102,8 @@ export default function PurpleStarReading() {
           <div className={accountStyles.placeholder} style={{ marginTop: '1.5rem' }}>
             <p style={{ margin: 0 }}>
               {!profile?.birthday
-                ? <>Add your birthday to your <Link href="/profile">profile</Link> to unlock this reading.</>
-                : <>Purple Star needs your <strong>birth time</strong>. Add it to your <Link href="/profile">profile</Link> to generate the chart.</>
+                ? <>Add your birthday to your <Link href="/member/profile">profile</Link> to unlock this reading.</>
+                : <>Purple Star needs your <strong>birth time</strong>. Add it to your <Link href="/member/profile">profile</Link> to generate the chart.</>
               }
             </p>
           </div>
@@ -251,6 +251,7 @@ export default function PurpleStarReading() {
         )}
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

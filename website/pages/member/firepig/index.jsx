@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import { useAuth } from '../../lib/auth';
-import styles from '../../styles/Account.module.css';
+import MemberShell from '../../../components/MemberShell';
+import Footer from '../../../components/Footer';
+import { useAuth } from '../../../lib/auth';
+import styles from '../../../styles/Account.module.css';
 
 export default function FirePig() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function FirePig() {
         <title>FirePig | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>FirePig</h1>
         <p className={styles.lede}>Bill&apos;s AI guide.</p>
@@ -34,6 +34,7 @@ export default function FirePig() {
         </div>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

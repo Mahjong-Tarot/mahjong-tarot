@@ -14,7 +14,7 @@ function groupActivities(activities, order, labels) {
   return groups;
 }
 
-export default function AlmanacView({ date, almanac, today, basePath = '/dashboard/almanac', searchHref = '/dashboard/almanac/search', monthlyHref }) {
+export default function AlmanacView({ date, almanac, today, basePath = '/member/dashboard/almanac', searchHref = '/member/dashboard/almanac/search', monthlyHref }) {
   if (!almanac) {
     return (
       <div className={styles.container}>

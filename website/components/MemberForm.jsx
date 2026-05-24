@@ -44,7 +44,7 @@ export default function MemberForm({ userId, initial }) {
       setError(resp.error.message);
       return;
     }
-    router.push('/dashboard/inner-circle');
+    router.push('/member/dashboard/inner-circle');
   };
 
   return (
@@ -86,7 +86,7 @@ export default function MemberForm({ userId, initial }) {
         <button type="submit" disabled={saving} className={styles.authSubmit}>
           {saving ? 'Saving…' : (initial?.id ? 'Save changes' : 'Add to circle')}
         </button>
-        <Link href="/dashboard/inner-circle" className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+        <Link href="/member/dashboard/inner-circle" className={styles.btnGhost} style={{ textDecoration: 'none' }}>
           Cancel
         </Link>
       </div>

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Nav from '../../../../components/Nav';
-import Footer from '../../../../components/Footer';
-import MemberForm from '../../../../components/MemberForm';
-import { useAuth } from '../../../../lib/auth';
-import { supabase } from '../../../../lib/supabase';
-import styles from '../../../../styles/Account.module.css';
+import MemberShell from '../../../../../components/MemberShell';
+import Footer from '../../../../../components/Footer';
+import MemberForm from '../../../../../components/MemberForm';
+import { useAuth } from '../../../../../lib/auth';
+import { supabase } from '../../../../../lib/supabase';
+import styles from '../../../../../styles/Account.module.css';
 
 export default function EditMember() {
   const router = useRouter();
@@ -44,7 +44,7 @@ export default function EditMember() {
         <title>Edit member | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Edit {member?.name || 'member'}</h1>
         <div style={{ marginTop: '1.5rem' }}>
@@ -56,6 +56,7 @@ export default function EditMember() {
         </div>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

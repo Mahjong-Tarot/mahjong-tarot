@@ -5,7 +5,7 @@ import styles from './AlmanacToday.module.css';
 
 const TOP_LIMIT = 4;
 
-export default function AlmanacToday({ almanac: almanacProp, href = '/dashboard/almanac' }) {
+export default function AlmanacToday({ almanac: almanacProp, href = '/member/dashboard/almanac' }) {
   // Prop semantics:
   //   undefined → fetch on client (standalone usage)
   //   null      → server tried and got nothing — fall back to client fetch

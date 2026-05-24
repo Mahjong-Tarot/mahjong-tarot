@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import AlmanacView from '../../../components/AlmanacView';
-import { useAuth } from '../../../lib/auth';
-import { fetchAlmanacForDate, todayInLA } from '../../../lib/almanac';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import AlmanacView from '../../../../components/AlmanacView';
+import { useAuth } from '../../../../lib/auth';
+import { fetchAlmanacForDate, todayInLA } from '../../../../lib/almanac';
 
 export default function AlmanacToday() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function AlmanacToday() {
         <title>Almanac | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -53,6 +53,7 @@ export default function AlmanacToday() {
         </section>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

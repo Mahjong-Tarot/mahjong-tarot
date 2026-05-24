@@ -8,7 +8,7 @@ import { supabase } from '../lib/supabase';
 import styles from '../styles/Account.module.css';
 
 async function pathForUser(userId) {
-  if (!userId || !supabase) return '/dashboard';
+  if (!userId || !supabase) return '/member/dashboard';
   const { data } = await supabase
     .from('profiles')
     .select('role')
@@ -16,7 +16,7 @@ async function pathForUser(userId) {
     .maybeSingle();
   if (data?.role === 'admin') return '/admin';
   if (data?.role === 'astrologer') return '/admin/private-readings';
-  return '/dashboard';
+  return '/member/dashboard';
 }
 
 export default function SignInPage() {
@@ -62,7 +62,7 @@ export default function SignInPage() {
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined,
+        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/member/dashboard` : undefined,
       },
     });
     setSendingMagic(false);

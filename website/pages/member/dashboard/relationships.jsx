@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import { useAuth } from '../../lib/auth';
-import { supabase } from '../../lib/supabase';
-import { saveReading } from '../../lib/readings';
-import styles from '../../styles/Account.module.css';
+import MemberShell from '../../../components/MemberShell';
+import Footer from '../../../components/Footer';
+import { useAuth } from '../../../lib/auth';
+import { supabase } from '../../../lib/supabase';
+import { saveReading } from '../../../lib/readings';
+import styles from '../../../styles/Account.module.css';
 
 export default function CompatibilityPage() {
   const router = useRouter();
@@ -63,7 +63,7 @@ export default function CompatibilityPage() {
         person2: p2,
         report: data,
       });
-      router.push(`/dashboard/readings/${saved.slug}`);
+      router.push(`/member/dashboard/readings/${saved.slug}`);
     } catch (e) {
       setError(e.message);
       setSubmitting(false);
@@ -103,7 +103,7 @@ export default function CompatibilityPage() {
         <title>Relationships | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Relationships</h1>
         <p className={styles.lede}>
@@ -127,10 +127,11 @@ export default function CompatibilityPage() {
         </form>
 
         <p className={styles.authFootnote} style={{ marginTop: '2.5rem' }}>
-          <Link href="/dashboard/readings">View saved readings</Link> · <Link href="/dashboard">← Dashboard</Link>
+          <Link href="/member/dashboard/readings">View saved readings</Link> · <Link href="/member/dashboard">← Dashboard</Link>
         </p>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../../components/Nav';
-import Footer from '../../../../components/Footer';
-import CompatibilityReport from '../../../../components/CompatibilityReport';
-import { useAuth } from '../../../../lib/auth';
-import { supabase } from '../../../../lib/supabase';
-import { saveReading } from '../../../../lib/readings';
-import styles from '../../../../styles/Account.module.css';
+import MemberShell from '../../../../../components/MemberShell';
+import Footer from '../../../../../components/Footer';
+import CompatibilityReport from '../../../../../components/CompatibilityReport';
+import { useAuth } from '../../../../../lib/auth';
+import { supabase } from '../../../../../lib/supabase';
+import { saveReading } from '../../../../../lib/readings';
+import styles from '../../../../../styles/Account.module.css';
 
 export default function MemberDetail() {
   const router = useRouter();
@@ -95,7 +95,7 @@ export default function MemberDetail() {
         },
         report,
       });
-      router.push(`/dashboard/readings/${saved.slug}`);
+      router.push(`/member/dashboard/readings/${saved.slug}`);
     } catch (e) {
       setError(e.message);
       setSavingReading(false);
@@ -108,13 +108,13 @@ export default function MemberDetail() {
         <title>{member?.name || 'Member'} | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         {loadedMember && !member ? (
           <>
             <h1 className={styles.title}>Not found</h1>
             <p className={styles.lede}>That person isn&apos;t in your inner circle.</p>
-            <p><Link href="/dashboard/inner-circle">← Back to inner circle</Link></p>
+            <p><Link href="/member/dashboard/inner-circle">← Back to inner circle</Link></p>
           </>
         ) : (
           <>
@@ -122,10 +122,10 @@ export default function MemberDetail() {
             <p className={styles.lede}>{member?.relationship} · {member?.birthday}</p>
 
             <div style={{ display: 'flex', gap: '0.75rem', margin: '1rem 0' }}>
-              <Link href={`/dashboard/inner-circle/${id}/edit`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+              <Link href={`/member/dashboard/inner-circle/${id}/edit`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
                 Edit
               </Link>
-              <Link href="/dashboard/inner-circle" className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+              <Link href="/member/dashboard/inner-circle" className={styles.btnGhost} style={{ textDecoration: 'none' }}>
                 Back to circle
               </Link>
             </div>
@@ -133,7 +133,7 @@ export default function MemberDetail() {
             {!profile?.birthday && (
               <div className={styles.placeholder}>
                 <p style={{ margin: 0 }}>
-                  Add your own birth data on <Link href="/profile">your profile</Link> to see a compatibility report.
+                  Add your own birth data on <Link href="/member/profile">your profile</Link> to see a compatibility report.
                 </p>
               </div>
             )}
@@ -160,6 +160,7 @@ export default function MemberDetail() {
         )}
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

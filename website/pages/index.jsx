@@ -57,7 +57,7 @@ export default function Home({ todayDate, todayAlmanac }) {
   // SSR HTML is always the marketing page so the almanac is in the initial
   // payload (SEO + above-the-fold render).
   useEffect(() => {
-    if (!loading && user) router.replace('/dashboard');
+    if (!loading && user) router.replace('/member/dashboard');
   }, [loading, user, router]);
 
   const jsonLd = graph([

@@ -1,0 +1,169 @@
+/* ══════════════════════════════════════════════════════════════════════
+   MemberShell — left sidebar layout for all /member/* pages
+   Desktop: fixed 240px rail. Mobile: slide-in drawer triggered by hamburger.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.shell {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────── */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  background: var(--paper-pure);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0 16px;
+  z-index: 50;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.logo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.closeBtn {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--ink-4);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.closeBtn:hover { color: var(--ink); }
+
+.nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 0;
+}
+
+.linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.link {
+  display: block;
+  padding: 10px 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.link:hover {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.active {
+  color: var(--fire-600);
+  border-left-color: var(--fire-500);
+  background: var(--paper);
+}
+
+.sidebarFooter {
+  padding: 16px 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.signOut {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 8px 0;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.signOut:hover { color: var(--ink); }
+
+/* ── Main content area ────────────────────────────────────────────── */
+
+.main {
+  margin-left: 240px;
+  min-height: 100vh;
+}
+
+/* ── Hamburger (mobile only) ──────────────────────────────────────── */
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 40;
+  width: 40px;
+  height: 40px;
+  background: var(--paper-pure);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 45;
+}
+
+/* ── Mobile breakpoint ────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.15);
+  }
+  .sidebarOpen { transform: translateX(0); }
+
+  .main { margin-left: 0; padding-top: 64px; }
+
+  .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+  .closeBtn { display: inline-block; }
+  .backdrop { display: block; }
+}

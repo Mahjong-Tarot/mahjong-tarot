@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import { useAuth } from '../../../lib/auth';
-import { supabase } from '../../../lib/supabase';
-import styles from '../../../styles/Account.module.css';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import { useAuth } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
+import styles from '../../../../styles/Account.module.css';
 
 export default function InnerCircleList() {
   const router = useRouter();
@@ -48,14 +48,14 @@ export default function InnerCircleList() {
         <title>Inner Circle | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
             <h1 className={styles.title}>Inner circle</h1>
             <p className={styles.lede}>Wife, partners, parents, kids, anyone whose chart you want to keep close.</p>
           </div>
-          <Link href="/dashboard/inner-circle/new" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
+          <Link href="/member/dashboard/inner-circle/new" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
             + Add person
           </Link>
         </div>
@@ -63,7 +63,7 @@ export default function InnerCircleList() {
         {loaded && members.length === 0 && (
           <div className={styles.placeholder} style={{ marginTop: '1.5rem' }}>
             <p style={{ margin: 0 }}>
-              No one in your inner circle yet. <Link href="/dashboard/inner-circle/new">Add your first person</Link>.
+              No one in your inner circle yet. <Link href="/member/dashboard/inner-circle/new">Add your first person</Link>.
             </p>
           </div>
         )}
@@ -76,10 +76,10 @@ export default function InnerCircleList() {
                 <span>{m.relationship}{m.birthday ? ` · ${m.birthday}` : ''}</span>
               </div>
               <div className={styles.icActions}>
-                <Link href={`/dashboard/inner-circle/${m.id}`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+                <Link href={`/member/dashboard/inner-circle/${m.id}`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
                   View
                 </Link>
-                <Link href={`/dashboard/inner-circle/${m.id}/edit`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+                <Link href={`/member/dashboard/inner-circle/${m.id}/edit`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
                   Edit
                 </Link>
                 <button type="button" onClick={() => handleDelete(m.id, m.name)} className={styles.btnDanger}>
@@ -91,10 +91,11 @@ export default function InnerCircleList() {
         </div>
 
         <p className={styles.authFootnote} style={{ marginTop: '2rem' }}>
-          <Link href="/dashboard">← Back to dashboard</Link>
+          <Link href="/member/dashboard">← Back to dashboard</Link>
         </p>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

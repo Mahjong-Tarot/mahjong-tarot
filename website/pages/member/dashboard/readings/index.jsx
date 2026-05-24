@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../../components/Nav';
-import Footer from '../../../components/Footer';
-import { useAuth } from '../../../lib/auth';
-import { supabase } from '../../../lib/supabase';
-import styles from '../../../styles/Account.module.css';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import { useAuth } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
+import styles from '../../../../styles/Account.module.css';
 
 const PERSONAL_READINGS = [
   {
@@ -20,14 +20,14 @@ const PERSONAL_READINGS = [
     key: 'purple-star',
     title: 'Purple Star (Zi Wei Dou Shu)',
     blurb: 'The 12-palace map of your life themes and seasons.',
-    href: '/dashboard/readings/purple-star',
+    href: '/member/dashboard/readings/purple-star',
     available: true,
   },
   {
     key: 'three-blessings',
     title: 'Three Blessings',
     blurb: 'Your stars of wealth, prosperity, and longevity.',
-    href: '/dashboard/three-blessings',
+    href: '/member/dashboard/three-blessings',
     available: false,
   },
 ];
@@ -77,7 +77,7 @@ export default function ReadingsList() {
         <title>Your readings | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Your readings</h1>
 
@@ -87,7 +87,7 @@ export default function ReadingsList() {
           {loaded && !hasBirthday && (
             <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
               <p style={{ margin: 0 }}>
-                Add your birthday to your <Link href="/profile">profile</Link> to unlock your personal readings.
+                Add your birthday to your <Link href="/member/profile">profile</Link> to unlock your personal readings.
               </p>
             </div>
           )}
@@ -115,7 +115,7 @@ export default function ReadingsList() {
         <section style={{ marginTop: '2.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
             <h2 className={styles.subTitle} style={{ margin: 0 }}>Compatibility reports</h2>
-            <Link href="/dashboard/relationships" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
+            <Link href="/member/dashboard/relationships" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
               + New reading
             </Link>
           </div>
@@ -123,7 +123,7 @@ export default function ReadingsList() {
           {loaded && readings.length === 0 && (
             <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
               <p style={{ margin: 0 }}>
-                No readings yet. <Link href="/dashboard/relationships">Generate your first one</Link>.
+                No readings yet. <Link href="/member/dashboard/relationships">Generate your first one</Link>.
               </p>
             </div>
           )}
@@ -132,7 +132,7 @@ export default function ReadingsList() {
             {readings.map((r) => {
               const date = new Date(r.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
               return (
-                <Link key={r.id} href={`/dashboard/readings/${r.slug}`} className={styles.icMember} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
+                <Link key={r.id} href={`/member/dashboard/readings/${r.slug}`} className={styles.icMember} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
                   <div className={styles.icMemberInfo}>
                     <h3>{r.person1_name || 'You'} × {r.person2_name || 'Partner'}</h3>
                     <span>{date}{r.rating != null ? ` · ${Math.round(r.rating)}% match` : ''}</span>
@@ -145,10 +145,11 @@ export default function ReadingsList() {
         </section>
 
         <p className={styles.authFootnote} style={{ marginTop: '2rem' }}>
-          <Link href="/dashboard">← Back to dashboard</Link>
+          <Link href="/member/dashboard">← Back to dashboard</Link>
         </p>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

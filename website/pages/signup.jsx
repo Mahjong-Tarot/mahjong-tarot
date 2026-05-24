@@ -7,7 +7,7 @@ import { supabase } from '../lib/supabase';
 import styles from '../styles/Signup.module.css';
 
 async function pathForUser(userId) {
-  if (!userId || !supabase) return '/dashboard';
+  if (!userId || !supabase) return '/member/dashboard';
   const { data } = await supabase
     .from('profiles')
     .select('role')
@@ -15,7 +15,7 @@ async function pathForUser(userId) {
     .maybeSingle();
   if (data?.role === 'admin') return '/admin';
   if (data?.role === 'astrologer') return '/admin/private-readings';
-  return '/dashboard';
+  return '/member/dashboard';
 }
 
 const REPORTS = [
@@ -92,7 +92,7 @@ export default function Signup() {
           birth_time: birthTime || null,
           signup_source: mode === 'pay' ? 'founder-checkout' : 'trial',
         },
-        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/dashboard` : undefined,
+        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/member/dashboard` : undefined,
       },
     });
 

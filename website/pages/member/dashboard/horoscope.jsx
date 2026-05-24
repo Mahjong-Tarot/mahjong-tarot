@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import HoroscopeView from '../../components/HoroscopeView';
-import { useAuth } from '../../lib/auth';
-import { fetchHoroscopesForDate, todayInLA } from '../../lib/horoscopes';
+import MemberShell from '../../../components/MemberShell';
+import Footer from '../../../components/Footer';
+import HoroscopeView from '../../../components/HoroscopeView';
+import { useAuth } from '../../../lib/auth';
+import { fetchHoroscopesForDate, todayInLA } from '../../../lib/horoscopes';
 
 export default function DashboardHoroscope({ date, horoscopes, today }) {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function DashboardHoroscope({ date, horoscopes, today }) {
         <title>Daily Horoscope | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main>
         <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
@@ -34,6 +34,7 @@ export default function DashboardHoroscope({ date, horoscopes, today }) {
         </section>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

@@ -3,13 +3,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Nav from '../../components/Nav';
-import Footer from '../../components/Footer';
-import { useAuth } from '../../lib/auth';
-import { supabase } from '../../lib/supabase';
-import { computeThreeBlessings } from '../../lib/three-blessings';
-import styles from '../../styles/ThreeBlessingsReport.module.css';
-import account from '../../styles/Account.module.css';
+import MemberShell from '../../../components/MemberShell';
+import Footer from '../../../components/Footer';
+import { useAuth } from '../../../lib/auth';
+import { supabase } from '../../../lib/supabase';
+import { computeThreeBlessings } from '../../../lib/three-blessings';
+import styles from '../../../styles/ThreeBlessingsReport.module.css';
+import account from '../../../styles/Account.module.css';
 
 const ORDER = ['phuc', 'loc', 'tho'];
 const ORNAMENTS = { phuc: '福', loc: '禄', tho: '寿' };
@@ -58,10 +58,10 @@ export default function ThreeBlessingsReport() {
         <title>Your Three Blessings | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Nav />
+      <MemberShell>
       <main className={`container ${account.wrap}`}>
         <p className={account.authFootnote} style={{ marginBottom: '0.5rem' }}>
-          <Link href="/dashboard">← Dashboard</Link>
+          <Link href="/member/dashboard">← Dashboard</Link>
         </p>
 
         <h1 className={account.title}>Your Three Blessings</h1>
@@ -75,7 +75,7 @@ export default function ThreeBlessingsReport() {
         {profileLoaded && !profile?.birthday && (
           <div className={account.placeholder} style={{ marginTop: '1.5rem' }}>
             <p style={{ margin: 0 }}>
-              Add your birth data on your <Link href="/profile">profile</Link> to see your reading.
+              Add your birth data on your <Link href="/member/profile">profile</Link> to see your reading.
             </p>
           </div>
         )}
@@ -174,10 +174,11 @@ export default function ThreeBlessingsReport() {
         )}
 
         <p className={account.authFootnote} style={{ marginTop: '2.5rem' }}>
-          <Link href="/dashboard">← Back to dashboard</Link>
+          <Link href="/member/dashboard">← Back to dashboard</Link>
         </p>
       </main>
       <Footer />
+      </MemberShell>
     </>
   );
 }

@@ -13,29 +13,29 @@ const PUBLIC_LINKS = [
 ];
 
 const MEMBER_READINGS = [
-  { href: '/dashboard/almanac',                 label: 'Daily Almanac'   },
-  { href: '/dashboard/horoscope',               label: 'Daily Horoscope' },
-  { href: '/dashboard/readings/purple-star',    label: 'Purple Star'     },
-  { href: '/dashboard/three-blessings',         label: 'Three Blessings' },
-  { href: '/dashboard/relationships',           label: 'Compatibility'   },
+  { href: '/member/dashboard/almanac',                 label: 'Daily Almanac'   },
+  { href: '/member/dashboard/horoscope',               label: 'Daily Horoscope' },
+  { href: '/member/dashboard/readings/purple-star',    label: 'Purple Star'     },
+  { href: '/member/dashboard/three-blessings',         label: 'Three Blessings' },
+  { href: '/member/dashboard/relationships',           label: 'Compatibility'   },
 ];
 
 const MEMBER_LINKS = [
-  { href: '/dashboard',              label: 'Dashboard',    match: (p) => p === '/dashboard' },
+  { href: '/member/dashboard',              label: 'Dashboard',    match: (p) => p === '/member/dashboard' },
   {
-    href: '/dashboard/readings',
+    href: '/member/dashboard/readings',
     label: 'Readings',
     match: (p) =>
-      p.startsWith('/dashboard/readings') ||
-      p.startsWith('/dashboard/almanac') ||
-      p.startsWith('/dashboard/horoscope') ||
-      p.startsWith('/dashboard/three-blessings') ||
-      p.startsWith('/dashboard/relationships') ||
-      p.startsWith('/dashboard/compatibility'),
+      p.startsWith('/member/dashboard/readings') ||
+      p.startsWith('/member/dashboard/almanac') ||
+      p.startsWith('/member/dashboard/horoscope') ||
+      p.startsWith('/member/dashboard/three-blessings') ||
+      p.startsWith('/member/dashboard/relationships') ||
+      p.startsWith('/member/dashboard/compatibility'),
     dropdown: MEMBER_READINGS,
   },
-  { href: '/dashboard/inner-circle', label: 'Inner Circle', match: (p) => p.startsWith('/dashboard/inner-circle') },
-  { href: '/profile',                label: 'Profile',      match: (p) => p.startsWith('/profile'), dropdown: [
+  { href: '/member/dashboard/inner-circle', label: 'Inner Circle', match: (p) => p.startsWith('/member/dashboard/inner-circle') },
+  { href: '/member/profile',                label: 'Profile',      match: (p) => p.startsWith('/member/profile'), dropdown: [
     { action: 'signOut', label: 'Sign out' },
   ] },
 ];
@@ -68,7 +68,7 @@ export default function Nav() {
       )}
     <nav className={styles.nav}>
       <div className={`container ${styles.inner}`}>
-        <Link href={user ? '/dashboard' : '/'} className={styles.logo}>
+        <Link href={user ? '/member/dashboard' : '/'} className={styles.logo}>
           Mahjong Tarot
         </Link>
 

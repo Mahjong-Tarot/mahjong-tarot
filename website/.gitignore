@@ -1,3 +1,4 @@
 .vercel
 architecture/plans/bootstrap/.vercel
 .env*.local
+.DS_Store

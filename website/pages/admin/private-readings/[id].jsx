@@ -168,7 +168,7 @@ export default function ReadingBriefPage({ profile }) {
         </Link>
 
         {loading && <p className={adminStyles.muted}>Loading…</p>}
-        {error && <p className={adminStyles.error}>{error}</p>}
+        {error && <p className="error-block">{error}</p>}
 
         {!loading && booking && (
           <>

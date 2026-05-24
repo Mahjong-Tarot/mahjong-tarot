@@ -143,7 +143,7 @@ export default function AdminDashboard({ profile }) {
             Pipeline state across every contact form, booking and newsletter signup.
           </p>
 
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className="error-block">{error}</p>}
           {loading && !error && <p className={styles.muted}>Loading…</p>}
 
           {!loading && !error && (

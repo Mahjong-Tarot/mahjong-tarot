@@ -91,7 +91,7 @@ export default function PrivateReadingsListPage({ profile }) {
           everyone&apos;s when you&apos;re an admin.
         </p>
 
-        {error && <p className={adminStyles.error}>{error}</p>}
+        {error && <p className="error-block">{error}</p>}
 
         <div className={tableStyles.controlsRow}>
           <div className={tableStyles.chipRow}>

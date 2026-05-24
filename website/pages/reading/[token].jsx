@@ -32,7 +32,7 @@ export async function getServerSideProps({ params, req }) {
 
   const { data: booking, error } = await svc
     .from('bookings')
-    .select('id, full_name, scheduled_at, final_reading_html')
+    .select('id, full_name, email, scheduled_at, final_reading_html')
     .eq('public_token', token)
     .maybeSingle();
 
@@ -45,6 +45,46 @@ export async function getServerSideProps({ params, req }) {
   const host  = req.headers['x-forwarded-host']  || req.headers.host;
   const origin = process.env.NEXT_PUBLIC_SITE_URL || `${proto}://${host}`;
 
+  // Look up the guest's purchase state so we render the right upsell.
+  // Best-effort — if any of these fail we silently default to the cold
+  // offer rather than blocking the page.
+  let hasPremium = false;
+  let hasBook    = false;
+  const guestEmail = (booking.email || '').trim().toLowerCase();
+  if (guestEmail) {
+    try {
+      // book_orders is keyed by email + status='paid'.
+      const { data: orders } = await svc
+        .from('book_orders')
+        .select('id')
+        .ilike('email', guestEmail)
+        .eq('status', 'paid')
+        .limit(1);
+      hasBook = !!orders?.length;
+
+      // member_subscriptions joins via auth.users.id — look that up first.
+      const { data: authRows } = await svc
+        .schema('auth')
+        .from('users')
+        .select('id')
+        .eq('email', guestEmail)
+        .limit(1);
+      const userId = authRows?.[0]?.id;
+      if (userId) {
+        const { data: sub } = await svc
+          .from('member_subscriptions')
+          .select('status')
+          .eq('user_id', userId)
+          .maybeSingle();
+        if (sub && ['active', 'trialing', 'past_due'].includes(sub.status)) {
+          hasPremium = true;
+        }
+      }
+    } catch {
+      // swallow — upsell defaults to cold offer
+    }
+  }
+
   return {
     props: {
       guestName:    booking.full_name || 'friend',
@@ -52,11 +92,13 @@ export async function getServerSideProps({ params, req }) {
       readingHtml:  booking.final_reading_html,
       readingUrl:   `${origin}/reading/${token}`,
       ogImage:      `${origin}/images/hero.webp`,
+      hasPremium,
+      hasBook,
     },
   };
 }
 
-export default function PublicReadingPage({ guestName, scheduledAt, readingHtml, readingUrl, ogImage, error }) {
+export default function PublicReadingPage({ guestName, scheduledAt, readingHtml, readingUrl, ogImage, hasPremium, hasBook, error }) {
   const [shareStatus, setShareStatus] = useState('');
 
   function flashStatus(msg) {
@@ -156,6 +198,8 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
             <p>With warmth,</p>
             <p className="signature">Bill</p>
           </div>
+
+          <UpsellPS hasPremium={hasPremium} hasBook={hasBook} />
 
           <footer className="letterFooter">
             <p className="contact">
@@ -315,6 +359,189 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
         }
       `}</style>
     </>
+  );
+}
+
+function UpsellPS({ hasPremium, hasBook }) {
+  // Three states, each a P.S. in Bill's voice. Subscriber gets a warm
+  // thank-you + re-book; book-buyer-no-premium gets a focused Inner
+  // Circle upsell; cold gets the full stack.
+  if (hasPremium) {
+    return (
+      <section className="ps ps--member" aria-label="A note from Bill">
+        <p className="psLabel">P.S.</p>
+        <p className="psBody">
+          Thank you for being in the Inner Circle. The fact that you&apos;re already
+          showing up daily is the work, really. When you&apos;re ready for the next
+          conversation, just say the word.
+        </p>
+        <div className="psCtas">
+          <Link href="/book-a-reading" className="psBtnPrimary">Book another reading</Link>
+        </div>
+        <p className="psSig">— Bill</p>
+        <UpsellStyles />
+      </section>
+    );
+  }
+
+  if (hasBook) {
+    return (
+      <section className="ps ps--book" aria-label="A note from Bill">
+        <p className="psLabel">P.S.</p>
+        <p className="psBody">
+          You already have the book on the way, which is half the picture.
+          The other half is the daily side — your horoscope, the almanac of
+          lucky and unlucky activities for the day, and your charts ready to
+          look at every morning. That&apos;s what the Inner Circle is.
+        </p>
+        <p className="psBody">
+          <strong>$49.50 for the year</strong>, locked in at Founders pricing
+          (it goes to $99 in 2027). Cancel anytime. Your book stays yours
+          either way.
+        </p>
+        <div className="psCtas">
+          <Link href="/signup" className="psBtnPrimary">Add the Inner Circle — $49.50/yr</Link>
+        </div>
+        <p className="psSig">— Bill</p>
+        <UpsellStyles />
+      </section>
+    );
+  }
+
+  return (
+    <section className="ps ps--cold" aria-label="A note from Bill">
+      <p className="psLabel">P.S.</p>
+      <p className="psBody">
+        A few people have asked what&apos;s next. The honest answer: keep paying
+        attention. If you want the daily version of what we did today, the
+        <strong> Inner Circle</strong> is it — a Chinese-zodiac horoscope, an
+        almanac of lucky and unlucky activities, and your own Bazi + Purple
+        Star charts, in one place every morning.
+      </p>
+      <div className="psStack">
+        <p className="psStackTitle">What&apos;s included <span className="psStackPrice">— $49.50/yr</span></p>
+        <ul className="psStackList">
+          <li><strong>The Mahjong Mirror</strong> — digital edition, included <em>($18.88 value)</em></li>
+          <li><strong>Daily horoscope</strong> for your Chinese zodiac sign</li>
+          <li><strong>Daily almanac</strong> — lucky &amp; unlucky activities for the day</li>
+          <li><strong>Your Bazi &amp; Purple Star charts</strong>, computed and ready</li>
+          <li><strong>Founders pricing locked in for life</strong> <em>(renews at $99 from 2027)</em></li>
+        </ul>
+        <p className="psStackUrgency">
+          Founders pricing closes when the <strong>Year of the Fire Horse</strong> does — May 2026.
+        </p>
+      </div>
+      <div className="psCtas">
+        <Link href="/signup" className="psBtnPrimary">Join the Inner Circle — $49.50/yr</Link>
+        <Link href="/the-mahjong-mirror/order?sku=digital" className="psBtnSecondary">I just want the book — $18.88</Link>
+      </div>
+      <p className="psSig">— Bill</p>
+      <UpsellStyles />
+    </section>
+  );
+}
+
+function UpsellStyles() {
+  return (
+    <style jsx>{`
+      .ps {
+        margin: 32px 0 0;
+        padding: 24px 24px 22px;
+        background: #faf6ef;
+        border: 1px solid #ece6da;
+        border-radius: 10px;
+      }
+      .psLabel {
+        margin: 0 0 8px;
+        font-family: var(--serif);
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        color: var(--ink-3);
+      }
+      .psBody {
+        margin: 0 0 12px;
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--ink-2);
+      }
+      .psBody :global(strong) { color: var(--ink); font-weight: 600; }
+      .psStack {
+        margin: 16px 0;
+        padding: 16px 18px;
+        background: var(--paper-pure);
+        border: 1px solid #e3dccf;
+        border-radius: 8px;
+      }
+      .psStackTitle {
+        margin: 0 0 10px;
+        font-family: var(--serif);
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .psStackPrice {
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink-3);
+      }
+      .psStackList {
+        margin: 0;
+        padding: 0 0 0 18px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--ink-2);
+      }
+      .psStackList li { margin: 4px 0; }
+      .psStackList :global(strong) { color: var(--ink); font-weight: 600; }
+      .psStackList :global(em) { font-style: normal; color: var(--ink-4); }
+      .psStackUrgency {
+        margin: 12px 0 0;
+        font-size: 12px;
+        color: var(--ink-3);
+        font-style: italic;
+      }
+      .psStackUrgency :global(strong) { font-style: normal; color: var(--ink-2); font-weight: 600; }
+      .psCtas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 16px 0 12px;
+      }
+      .psBtnPrimary {
+        display: inline-block;
+        padding: 12px 22px;
+        background: var(--ink);
+        color: var(--paper-pure);
+        border-radius: 6px;
+        text-decoration: none;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 500;
+        transition: opacity 0.15s ease;
+      }
+      .psBtnPrimary:hover { opacity: 0.9; }
+      .psBtnSecondary {
+        display: inline-block;
+        padding: 12px 22px;
+        background: var(--paper-pure);
+        color: var(--ink-2);
+        border: 1px solid #d1c3a5;
+        border-radius: 6px;
+        text-decoration: none;
+        font-family: var(--sans);
+        font-size: 14px;
+        font-weight: 500;
+        transition: background 0.15s ease;
+      }
+      .psBtnSecondary:hover { background: #f7f3ec; }
+      .psSig {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: 14px;
+        color: var(--ink-3);
+      }
+    `}</style>
   );
 }
 

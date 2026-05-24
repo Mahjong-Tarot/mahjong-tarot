@@ -42,7 +42,7 @@ export default function Readings() {
 
       <main>
         {/* ── Page Header ── */}
-        <section className={styles.pageHeader}>
+        <section className="page-header is-bounded">
           <div className="container">
             <span className="overline">Personal Sessions</span>
             <h1>Mahjong Tarot Readings Online with Bill Hajdu</h1>

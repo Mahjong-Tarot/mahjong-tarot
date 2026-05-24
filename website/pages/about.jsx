@@ -36,7 +36,7 @@ export default function About() {
 
  <main>
  {/* ── Page Header ── */}
- <section className={styles.pageHeader}>
+ <section className="page-header">
  <div className="container">
  <span className="overline">Meet the Firepig</span>
  <h1>Bill Hajdu, Mahjong Tarot Reader &amp; Chinese Astrologer</h1>

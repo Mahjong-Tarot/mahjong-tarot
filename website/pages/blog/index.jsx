@@ -60,7 +60,7 @@ export default function BlogIndex() {
 
       <main>
         {/* ── Page Header ── */}
-        <section className={styles.pageHeader}>
+        <section className="page-header is-wide">
           <div className="container">
             <span className="overline">Writing & Insight</span>
             <h1>The Blog</h1>

@@ -1,8 +1,7 @@
-// GET /api/stripe/book-confirm?session_id=...
-// Lightweight read for the /the-mahjong-mirror/order/confirm page —
-// reads the Stripe session + the matching book_orders row.
+// GET /api/stripe/reading-confirm?session_id=...
+// Lightweight read for the /book-a-reading/confirm page so we can
+// show the customer their booking without exposing raw Stripe data.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
-import { bookFor } from '../../../lib/books';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -23,23 +22,19 @@ export default async function handler(req, res) {
     return res.status(404).json({ error: 'Session not found' });
   }
 
-  const { data: order } = await service
-    .from('book_orders')
-    .select('sku, email, status, amount_cents, currency')
+  const { data: booking } = await service
+    .from('bookings')
+    .select('full_name, email, duration_minutes, scheduled_at, status')
     .eq('stripe_session_id', session_id)
     .maybeSingle();
-
-  const sku = order?.sku || session.metadata?.sku || null;
-  const book = sku ? bookFor(sku) : null;
 
   return res.status(200).json({
     paid: session.payment_status === 'paid',
     amount_total: session.amount_total,
     currency: session.currency,
     customer_email: session.customer_details?.email || session.customer_email,
-    sku,
-    label: book?.label || null,
-    delivery_label: book?.delivery_label || null,
-    requires_shipping: book?.requires_shipping ?? null,
+    booking: booking || null,
+    scheduled_at: booking?.scheduled_at || session.metadata?.slot_start || null,
+    duration: booking?.duration_minutes || parseInt(session.metadata?.duration, 10) || null,
   });
 }

@@ -49,7 +49,7 @@ export default function BookingPay() {
     setSubmitting(true);
     setError('');
     try {
-      const r = await fetch('/api/stripe/booking-checkout', {
+      const r = await fetch('/api/stripe/reading-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

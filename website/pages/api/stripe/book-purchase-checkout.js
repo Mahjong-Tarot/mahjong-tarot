@@ -1,4 +1,4 @@
-// POST /api/stripe/book-checkout
+// POST /api/stripe/book-purchase-checkout
 // Body: { sku, email }
 // Guest checkout for the book pre-order page. Creates a one-time
 // Stripe Checkout Session for one of the three book SKUs. Stripe

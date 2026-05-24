@@ -1,4 +1,4 @@
-// POST /api/stripe/booking-checkout
+// POST /api/stripe/reading-checkout
 // Body: { duration, full_name, email, phone?, birthday?, birth_time?,
 //         question?, slot_id, hold_token }
 // Guest checkout — no auth required. Creates a one-time Stripe

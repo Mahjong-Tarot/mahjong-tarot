@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { requirePage } from '../../../lib/guards';
@@ -35,6 +36,7 @@ const TABS = [
 ];
 
 export default function PrivateReadingsListPage({ profile }) {
+  const router = useRouter();
   const [rows, setRows]       = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState('');
@@ -131,7 +133,11 @@ export default function PrivateReadingsListPage({ profile }) {
               </thead>
               <tbody>
                 {list.map((r) => (
-                  <tr key={r.id}>
+                  <tr
+                    key={r.id}
+                    onClick={() => router.push(`/admin/private-readings/${r.id}`)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <td>
                       <Link href={`/admin/private-readings/${r.id}`} style={{ fontWeight: 500, textDecoration: 'none', color: 'inherit' }}>
                         {r.full_name || '—'}

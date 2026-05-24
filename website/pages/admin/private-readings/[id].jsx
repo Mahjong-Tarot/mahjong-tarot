@@ -72,6 +72,8 @@ export default function ReadingBriefPage({ profile }) {
   const [generating, setGenerating]       = useState(false);
   const [generationStep, setGenerationStep] = useState(0); // 0 idle, 1–3 active
   const [generateError, setGenerateError] = useState('');
+  const [sending, setSending]             = useState(false);
+  const [sendError, setSendError]         = useState('');
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -84,7 +86,7 @@ export default function ReadingBriefPage({ profile }) {
       try {
         const { data: b, error: be } = await supabase
           .from('bookings')
-          .select('id, full_name, email, scheduled_at, duration_minutes, status, amount_cents, currency, astrologer_id, question, birthday, birth_time, meeting_source, meeting_external_id, prep_notes, post_call_notes, transcript_text, summary_text, final_reading_html')
+          .select('id, full_name, email, scheduled_at, duration_minutes, status, amount_cents, currency, astrologer_id, question, birthday, birth_time, meeting_source, meeting_external_id, prep_notes, post_call_notes, transcript_text, summary_text, final_reading_html, public_token, final_reading_sent_at')
           .eq('id', id)
           .maybeSingle();
         if (be) throw be;
@@ -259,6 +261,30 @@ export default function ReadingBriefPage({ profile }) {
     reader.readAsText(file);
     // Reset so the same file can be re-picked later.
     e.target.value = '';
+  }
+
+  async function handleSendEmail() {
+    if (!booking) return;
+    setSending(true);
+    setSendError('');
+    try {
+      const r = await fetch('/api/admin/email-reading', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingId: booking.id }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data?.error || 'Failed to send email.');
+      setBooking({
+        ...booking,
+        public_token:          data.publicToken || booking.public_token,
+        final_reading_sent_at: data.sentAt || new Date().toISOString(),
+      });
+    } catch (err) {
+      setSendError(err.message || 'Failed to send email.');
+    } finally {
+      setSending(false);
+    }
   }
 
   async function handleGenerate() {
@@ -596,13 +622,17 @@ export default function ReadingBriefPage({ profile }) {
                       {savingField === 'final_reading_html' && (
                         <span className={adminStyles.muted} style={{ display: 'inline-block', marginTop: 8 }}>Saving…</span>
                       )}
-                      <div style={{ marginTop: 18, display: 'flex', gap: 10 }}>
+                      <div style={{ marginTop: 18, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                         <button
                           type="button"
-                          onClick={() => alert('Email PDF is phase 2 — not wired up yet.')}
+                          onClick={handleSendEmail}
+                          disabled={sending || !booking?.email}
                           style={primaryButtonStyle}
+                          title={!booking?.email ? 'No guest email on file' : undefined}
                         >
-                          Email PDF to guest
+                          {sending
+                            ? 'Sending…'
+                            : (booking?.final_reading_sent_at ? 'Email link again' : 'Email link to guest')}
                         </button>
                         <button
                           type="button"
@@ -613,6 +643,18 @@ export default function ReadingBriefPage({ profile }) {
                           Regenerate
                         </button>
                       </div>
+                      <SendStatus
+                        sending={sending}
+                        sentAt={booking?.final_reading_sent_at}
+                        sentTo={booking?.email}
+                        publicToken={booking?.public_token}
+                        error={sendError}
+                      />
+                      {!booking?.email && (
+                        <p className={adminStyles.muted} style={{ marginTop: 8, fontSize: 12 }}>
+                          No guest email on file — add one to the booking first.
+                        </p>
+                      )}
                     </>
                   )}
                 </Section>
@@ -680,6 +722,45 @@ function GenerationProgress({ step, guestFirstName }) {
           to { transform: rotate(360deg); }
         }
       `}</style>
+    </div>
+  );
+}
+
+function SendStatus({ sending, sentAt, sentTo, publicToken, error }) {
+  if (sending) {
+    return <p style={{ marginTop: 12, fontSize: 13, color: '#6b7280' }}>Sending email…</p>;
+  }
+  if (error) {
+    return <p className="error-block" style={{ marginTop: 12 }}>{error}</p>;
+  }
+  if (!sentAt) return null;
+  const when = new Date(sentAt).toLocaleString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+    hour: 'numeric', minute: '2-digit',
+  });
+  const link = publicToken
+    ? (typeof window !== 'undefined' ? `${window.location.origin}/reading/${publicToken}` : `/reading/${publicToken}`)
+    : null;
+  return (
+    <div style={{ marginTop: 12, padding: '10px 14px', background: '#f0f9f3', border: '1px solid #c8e6c9', borderRadius: 6, fontSize: 13, color: '#1a3a22' }}>
+      <span style={{ marginRight: 8 }}>✓ Sent to <strong>{sentTo}</strong> on {when}.</span>
+      {link && (
+        <button
+          type="button"
+          onClick={() => navigator.clipboard?.writeText(link)}
+          style={{
+            background: 'transparent',
+            border:     'none',
+            color:      '#1a3a22',
+            textDecoration: 'underline',
+            cursor:     'pointer',
+            fontSize:   13,
+            padding:    0,
+          }}
+        >
+          Copy link
+        </button>
+      )}
     </div>
   );
 }

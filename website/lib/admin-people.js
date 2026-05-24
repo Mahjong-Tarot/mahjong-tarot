@@ -5,34 +5,30 @@
 // lib/admin-inquiries.js in PR #310). A follow-up will hoist both
 // copies into a shared lib/inquiry-types.js.
 
-// A "customer" is anyone with at least one WON deal (deals.status='won').
-// `is_customer` and `latest_deal_at` are assembled in pages/admin/people.jsx
-// from the deals query and passed to the helpers below.
+// Customer definitions (broad ⊃ recent ⊕ legacy):
 //
-// Customers whose most recent won deal landed on/after this date show in
-// the default "Customers" view. Those whose latest won deal predates it
-// (or who have no won_at on file) are tagged "Legacy" and live behind the
-// "Legacy" filter chip. Tweak this single date when your customer reality
-// changes (e.g., a relaunch, a data migration, or a new fiscal year).
+//   - "Recent customer" = has a WON deal on/after RECENT_CUSTOMER_SINCE.
+//     This matches the unique-people set on /admin/sales.
+//
+//   - "Legacy customer" = was a customer at some point (either marked
+//     lifecycle_stage='customer' OR has any prior won deal) but is NOT
+//     a recent customer. These are the people who bought before the
+//     deals table existed or before the relaunch cutoff.
+//
+// Helpers expect `person` to have: `latest_deal_at`, `order_count`,
+// and `lifecycle_stage` (the raw people-table column).
 export const RECENT_CUSTOMER_SINCE = '2026-01-01';
 
 export function isRecentCustomer(person) {
-  if (!person || !person.is_customer) return false;
-  return (person.latest_deal_at || '') >= RECENT_CUSTOMER_SINCE;
+  if (!person) return false;
+  return !!person.latest_deal_at && person.latest_deal_at >= RECENT_CUSTOMER_SINCE;
 }
 
 export function isLegacyCustomer(person) {
-  if (!person || !person.is_customer) return false;
-  return !person.latest_deal_at || person.latest_deal_at < RECENT_CUSTOMER_SINCE;
+  if (!person) return false;
+  if (isRecentCustomer(person)) return false;
+  return person.lifecycle_stage === 'customer' || (person.order_count || 0) > 0;
 }
-
-export const FILTERS = [
-  { id: 'all',       label: 'All' },
-  { id: 'customers', label: 'Customers' },
-  { id: 'legacy',    label: 'Legacy customers' },
-  { id: 'premium',   label: 'Premium members' },
-  { id: 'opted_out', label: 'Opted out' },
-];
 
 export const TYPE_LABELS = {
   contact:      'Contact',

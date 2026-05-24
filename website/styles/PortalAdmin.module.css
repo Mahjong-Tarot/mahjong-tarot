@@ -51,11 +51,24 @@
   background: var(--paper-pure);
   color: var(--ink);
   text-decoration: none;
-  transition: border-color 120ms ease, background-color 120ms ease;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
 }
 
 .statCard:hover {
   border-color: var(--ink-3);
+}
+
+.statCardActive {
+  border-color: var(--fire-500, #c1271f);
+  box-shadow: 0 0 0 2px rgba(193, 39, 31, 0.15);
+}
+
+.statCardActive .statLabel {
+  color: var(--fire-500, #c1271f);
 }
 
 .statLabel {

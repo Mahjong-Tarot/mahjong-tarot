@@ -1,9 +1,13 @@
 # /admin/people — Refactor for 140k+ rows
 
-**Status:** v0.1 — draft, not yet built
+**Status:** v0.2 — questions answered, ready to phase
 **Date:** 2026-05-24
 **Author:** Claude (paired with Dave)
 **For:** Dave Hajdu, Yon
+
+> **v0.2 changes:** Dave confirmed the page must scale to the full ~140k
+> mailing list (planned import). Stat cards always show **global** totals
+> (they ignore the search box). CSV export is **in scope** — added as §2.8.
 
 ---
 
@@ -24,7 +28,8 @@ This spec replaces the all-client-side model with:
 3. **Server-side filter + sort + search** — pushed to Supabase, not
    computed in `useMemo`.
 4. **Aggregate stat-card counts** via 4 `{ count: 'exact', head: true }`
-   queries that respect the active filter and search.
+   queries — global, not narrowed by the search box.
+5. **CSV export** of the currently-filtered list via a streaming server route.
 
 PR [#326](https://github.com/Mahjong-Tarot/mahjong-tarot/pull/326)
 (`.range(0, 9999)`) stays in place as a stopgap until this lands.
@@ -124,26 +129,36 @@ in QA before shipping.
 Replace the 4-table-Promise.all with:
 
 ```js
-// 1. The visible page of rows
-const list = await supabase
+// 1. The visible page of rows — applies search, filter, sort, pagination.
+let list = supabase
   .from('people_admin_list')
   .select('*')
   .order(sortColumn, { ascending: sortDir === 'asc' })
-  .ilike('email_or_name_search_expr', `%${q}%`)   // see §2.3
-  .eq('is_recent_customer', filter === 'customers' ? true : undefined)  // applied conditionally
   .range(page * pageSize, page * pageSize + pageSize - 1);
+if (q)                          list = list.or(`email.ilike.%${q}%,name.ilike.%${q}%`);
+if (filter === 'customers')     list = list.eq('is_recent_customer', true);
+if (filter === 'legacy')        list = list.eq('is_legacy_customer', true);
+if (filter === 'premium')       list = list.eq('is_premium_member', true);
+const { data, error } = await list;
 
-// 2. Aggregate counts for the stat cards (each respects current search)
+// 2. Stat-card counts — GLOBAL. They do NOT include the search box, so
+// they keep showing real DB totals while you type into search. Per Dave:
+// "always global". They're cached and only re-fetched on initial load
+// and after a shelf save (since edits can move someone in/out of a bucket).
 const [total, customers, legacy, premium] = await Promise.all([
-  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).matchesSearch(q),
-  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).matchesSearch(q).eq('is_recent_customer', true),
-  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).matchesSearch(q).eq('is_legacy_customer', true),
-  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).matchesSearch(q).eq('is_premium_member', true),
+  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }),
+  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).eq('is_recent_customer', true),
+  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).eq('is_legacy_customer', true),
+  supabase.from('people_admin_list').select('id', { count: 'exact', head: true }).eq('is_premium_member', true),
 ]);
 ```
 
-5 queries per page-load. All hit the same view; the count queries are
-`HEAD` so no rows come over the wire.
+5 queries per page-load on first paint. After that, typing into search
+or changing sort/page only re-fires query #1 — the 4 count queries are
+memoised and stay put until a shelf save invalidates them.
+
+`HEAD` count queries don't ship rows, so they're cheap even on the 140k
+table (PostgREST runs `COUNT(*) WHERE …` server-side).
 
 ### 2.3 Search
 
@@ -188,14 +203,55 @@ need a generated column or an explicit sort key).
 The 4 stat cards stay clickable, same as today. Pushing the active
 filter into the query is one of `.eq('is_recent_customer', true)`,
 `.eq('is_legacy_customer', true)`, `.eq('is_premium_member', true)`,
-or no filter for "all". The aggregate count queries above already
-reflect the same definitions, so the cards stay accurate.
+or no filter for "all". The visible row list reflects search + filter +
+pagination; the card numbers above the table are global (§2.2).
 
 ### 2.7 Shelf edits
 
 The detail shelf's per-field save flow keeps working unchanged — it
-hits `from('people').update(...).eq('id', selectedId)`. After save,
-update the local row in state (already does this) instead of refetching.
+hits `from('people').update(...).eq('id', selectedId)`. After save:
+- Patch the local row in state (already happens today).
+- Refetch the 4 stat-card counts, since a lifecycle-stage edit can move
+  the person in/out of the Customers / Legacy / Premium buckets.
+
+### 2.8 CSV export
+
+**Button.** A small "Export CSV" button in the controls row, next to the
+search box. Disabled while a fetch is in flight.
+
+**What it exports.** The full list that matches the current filter +
+search — *not* just the current page. No `range`, no `limit`. If you've
+filtered to "Customers" and searched "sarah", you get every Customer
+named Sarah as one file.
+
+**How.** New server route at [pages/api/admin/people/export.js](website/pages/api/admin/people/export.js):
+
+```js
+// GET /api/admin/people/export?filter=customers&q=sarah
+// Auth: requireApi('admin')
+// Response: Content-Type: text/csv; Content-Disposition: attachment; filename="people-2026-05-24.csv"
+//
+// Streams the people_admin_list view row-by-row through a CSV transform.
+// At 140k rows × ~25 cols the file is ~25-40 MB; streaming keeps memory
+// bounded and avoids the 300s function-timeout risk.
+```
+
+Implementation notes:
+- Server-side iteration uses the Postgres connection (via the Supabase
+  service-role key) with `.from(...).select(...).order(...)` and
+  consumes results page-by-page in 5k-row chunks. Each chunk gets
+  written to `res` as it arrives.
+- Use a tiny inline CSV writer (no new dep) — Postgres values come
+  pre-typed from PostgREST, just need quote-and-escape on text fields.
+- Columns: same 20 people columns + the 5 view-derived ones
+  (`inquiry_count`, `last_inquiry_at`, `order_count`, `latest_deal_at`,
+  `is_premium_member`). `types` (text[]) joined as `"newsletter|booking"`.
+- Filename format: `people-YYYY-MM-DD[-filter][-q-{slug}].csv` so
+  downloads are self-describing.
+
+Client side: the button just does `window.location = '/api/admin/people/export?…'`
+with the current filter+search in the query string. Browser handles the
+download.
 
 ---
 
@@ -203,48 +259,52 @@ update the local row in state (already does this) instead of refetching.
 
 | # | PR | Risk | Notes |
 |---|---|---|---|
-| 1 | `feat/admin-people-view` — create `people_admin_list` view + trigram indexes | low | Migration only. App still queries `people` directly. |
-| 2 | `feat/admin-people-paginated` — rewrite the page to use the view + pagination + filter + sort + search | medium | The big one. Behind a feature flag if Dave wants A/B comparison. |
-| 3 | `chore/admin-people-rip-range-stopgap` — revert PR #326's `.range(0, 9999)` once #2 ships | trivial | |
+| 1 | `feat/admin-people-view` — create `people_admin_list` view + trigram indexes | low | Migration only. App still queries `people` directly. Verify RLS in QA. |
+| 2 | `feat/admin-people-paginated` — rewrite the page to use the view + pagination + filter + sort + search + global stat cards | medium | The big one. |
+| 3 | `feat/admin-people-csv-export` — `/api/admin/people/export.js` streaming route + Export button | small | Depends on #1 (uses the view). Independent of #2. |
+| 4 | `chore/admin-people-rip-range-stopgap` — revert PR #326's `.range(0, 9999)` once #2 ships | trivial | |
 
-If we want a stepping stone: PR #1 + a tiny PR #1.5 that swaps the data source on the current page (still all-client-side, but reads pre-aggregated rows). That doesn't fix the 140k problem but makes the eventual paginated version smaller.
+#3 can land before or after #2 — the export route doesn't need the page rewrite, it only needs the view from #1.
 
 ---
 
-## 4. Open questions
+## 4. Resolved decisions
+
+| # | Question | Decision |
+|---|---|---|
+| 1 | Page scope — full mailing list or only people with activity? | **Full mailing list.** Dave will import ~140k subscribers into `people`. Spec assumes this. |
+| 2 | When search is active, do stat cards count search results or DB totals? | **Always global.** Cards show DB-wide totals regardless of search/page state. |
+| 3 | CSV export needed once pagination removes "render everything"? | **Yes.** Spec'd in §2.8. Streams the current filter+search, ignores pagination. |
+
+## 5. Still open (low-priority, can be answered during implementation)
 
 1. **Search latency target.** Trigram search on 140k rows is typically
    <100ms but worth measuring in staging. If too slow, switch to
    Postgres full-text search (`tsvector` + `tsquery`).
-2. **"All people who have ever inquired" vs "all 140k subscribers."**
-   Is the page meant to show the full mailing list, or just people with
-   activity? If only people with `inquiry_count > 0 OR order_count > 0`,
-   the effective row count drops dramatically and pagination matters
-   less. Confirm with Dave.
-3. **Sort by computed columns.** `last_activity` is computed in the
+2. **Sort by computed columns.** `last_activity` is computed in the
    view, so PostgREST can `.order` by it, but the planner may not use
    any index. May need a generated column on `people` for fast sort.
-4. **Export.** Today the page renders everything so "copy/paste to a
-   CSV" works. Paginated, that's gone. Add an explicit "Export CSV"
-   button that hits a server route streaming the full table?
-5. **Stats card definitions across the search filter.** When a search
-   is active, should "Customers: 47" mean (a) customers matching the
-   search, or (b) all customers in the DB? Spec assumes (a) — confirm.
+3. **Page-size dropdown.** Spec says 25/50/100/200 — confirm 200 isn't
+   too high (200 rows × 25 cols ≈ 100 KB, still fine).
+4. **Mailing-list import format.** Out of scope for this spec, but the
+   import path (CSV upload? script?) should be sketched separately so
+   the 140k arrive with sensible defaults for `source`, `source_site`,
+   and `lifecycle_stage`.
 
 ---
 
-## 5. Out of scope
+## 6. Out of scope
 
 - Real-time updates (Postgres `listen/notify` → Supabase Realtime).
   The page is admin-only and refreshed manually today; no need to
   layer in subscriptions.
 - Bulk operations (delete, tag, merge people). Different feature.
 - The Person detail shelf — works unchanged.
+- The mailing-list import itself (separate spec when Dave is ready).
 
 ---
 
-## 6. Next step
+## 7. Next step
 
-Dave reviews + answers Q2 (full mailing list vs activity only) and Q5
-(stats respect search?). Then PR #1 (view + indexes) can land first
-as a no-op preparation.
+PR #1 (view + trigram indexes) can land first as a no-op preparation —
+no app code touches it yet, so it's safe to ship immediately.

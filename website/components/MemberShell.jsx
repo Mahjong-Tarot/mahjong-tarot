@@ -33,7 +33,9 @@ export default function MemberShell({ children }) {
 
   const handleSignOut = async () => {
     await signOut();
-    router.push('/');
+    // Hard reload rather than router.push so a wedged React tree can't
+    // strand the user — the browser always navigates.
+    window.location.href = '/';
   };
 
   return (

@@ -92,7 +92,11 @@ export default function AdminPeople({ profile }) {
         const [pRes, iRes, prRes, dRes] = await Promise.all([
           supabase
             .from('people').select('id, email, name, company, role, phone, address, birthday, birth_time, birth_place, gender, chinese_sign, ok_to_contact, source, source_site, lifecycle_stage, nurture_stage, nurture_status, membership_status, created_at, updated_at')
-            .order('updated_at', { ascending: false }),
+            .order('updated_at', { ascending: false })
+            // PostgREST caps responses at 1000 rows by default; bump to 10k
+            // so the page shows every person. Switch to pagination if we
+            // ever push past that.
+            .range(0, 9999),
           supabase
             .from('inquiries')
             .select('person_id, type, status, created_at'),

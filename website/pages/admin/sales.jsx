@@ -3,12 +3,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import AdminShell from '../../components/AdminShell';
 import { supabase } from '../../lib/supabase';
-import { requireAdmin } from '../../lib/requireAdmin';
+import { requirePage } from '../../lib/guards';
 import adminStyles from '../../styles/PortalAdmin.module.css';
 import styles from '../../styles/PortalConversions.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireAdmin(ctx);
+  return requirePage('admin')(ctx);
 }
 
 // Source filter — what kind of sale to surface. All read from

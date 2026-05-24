@@ -7,7 +7,7 @@
 //
 // Body: { inquiry_id, amount_cents, currency?='usd',
 //         close_date?=today, notes? }
-import { requireAdminApi } from '../../../../lib/requireAdminApi';
+import { requireApi } from '../../../../lib/guards';
 import { getServiceSupabase } from '../../../../lib/stripe';
 
 const PROMOTE_FROM = new Set([
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const auth = await requireAdminApi(req, res);
+  const auth = await requireApi('admin')(req, res);
   if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
   const { user } = auth;
 

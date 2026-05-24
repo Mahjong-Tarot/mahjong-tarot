@@ -3,13 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AdminShell from '../../../../components/AdminShell';
-import { requireStaff } from '../../../../lib/requireStaff';
+import { requirePage } from '../../../../lib/guards';
 import * as krisp from '../../../../lib/meetingSources/krisp';
 import adminStyles from '../../../../styles/PortalAdmin.module.css';
 import styles from '../../../../styles/PortalSettings.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireStaff(ctx);
+  return requirePage('staff')(ctx);
 }
 
 const ADAPTER_BY_SOURCE = {

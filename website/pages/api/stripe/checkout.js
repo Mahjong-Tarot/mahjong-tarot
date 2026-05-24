@@ -5,7 +5,7 @@
 // redirects window.location to that URL. The webhook at
 // /api/stripe/webhook flips member_subscriptions.status to 'active'
 // once Stripe confirms the payment.
-import { requireUserApi } from '../../../lib/requireUserApi';
+import { requireApi } from '../../../lib/guards';
 import {
   getStripe,
   getServiceSupabase,
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const auth = await requireUserApi(req, res);
+  const auth = await requireApi('user')(req, res);
   if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
   const { user } = auth;
 

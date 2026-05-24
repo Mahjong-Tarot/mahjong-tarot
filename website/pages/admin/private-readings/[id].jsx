@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
 import { requirePage } from '../../../lib/guards';
@@ -171,6 +173,47 @@ export default function ReadingBriefPage({ profile }) {
     const full = person?.name || booking?.full_name || '';
     return (full.trim().split(/\s+/)[0]) || 'their';
   }, [person?.name, booking?.full_name]);
+
+  // Rich-text editor for the final reading. Always-on (the toolbar is
+  // the affordance that "this is editable"). Saves on blur.
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        codeBlock: false,
+        code: false,
+        horizontalRule: false,
+      }),
+    ],
+    content: '',
+    immediatelyRender: false,
+    editorProps: {
+      attributes: { class: 'reading-editor' },
+    },
+  });
+
+  // Sync editor content when draft changes externally (initial load, regen).
+  // We compare against the editor's own HTML to avoid clobbering in-flight edits.
+  useEffect(() => {
+    if (!editor) return;
+    const target = draft.final_reading_html || '';
+    if (!target) return;
+    if (editor.getHTML() !== target) {
+      editor.commands.setContent(target, { emitUpdate: false });
+    }
+  }, [editor, draft.final_reading_html]);
+
+  // Save on editor blur (matches the textarea-blur-save pattern used elsewhere on this page).
+  useEffect(() => {
+    if (!editor || !booking) return;
+    const handler = () => {
+      const html = editor.getHTML();
+      if (booking.final_reading_html !== html) {
+        saveValue('final_reading_html', html);
+      }
+    };
+    editor.on('blur', handler);
+    return () => { editor.off('blur', handler); };
+  }, [editor, booking?.final_reading_html]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function saveField(field) {
     if (!booking) return;
@@ -531,21 +574,28 @@ export default function ReadingBriefPage({ profile }) {
                     </p>
                   ) : (
                     <>
-                      <div
-                        style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, padding: 24, lineHeight: 1.65, fontSize: 15 }}
-                        dangerouslySetInnerHTML={{ __html: draft.final_reading_html }}
-                      />
-                      <details style={{ marginTop: 18 }}>
-                        <summary style={{ cursor: 'pointer', fontSize: 13, color: '#6b7280' }}>Edit HTML source</summary>
-                        <textarea
-                          value={draft.final_reading_html}
-                          onChange={(e) => setDraft({ ...draft, final_reading_html: e.target.value })}
-                          onBlur={() => booking.final_reading_html !== draft.final_reading_html && saveField('final_reading_html')}
-                          rows={20}
-                          style={{ width: '100%', marginTop: 10, padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'ui-monospace, monospace', fontSize: 12 }}
-                        />
-                        {savingField === 'final_reading_html' && <span className={adminStyles.muted}>Saving…</span>}
-                      </details>
+                      <div style={{ border: '1px solid #f0e0c8', borderRadius: 8, overflow: 'hidden', background: '#fffaf3' }}>
+                        <EditorToolbar editor={editor} />
+                        <div style={{ padding: '20px 24px' }}>
+                          <EditorContent editor={editor} />
+                        </div>
+                      </div>
+                      <style jsx global>{`
+                        .reading-editor { outline: none; line-height: 1.65; font-size: 15px; color: #1a1a1a; min-height: 200px; }
+                        .reading-editor h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; margin: 18px 0 10px; font-weight: 600; color: #1a1a1a; }
+                        .reading-editor h2:first-child { margin-top: 0; }
+                        .reading-editor h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 17px; margin: 16px 0 8px; font-weight: 600; color: #1a1a1a; }
+                        .reading-editor p { margin: 0 0 12px; }
+                        .reading-editor ul, .reading-editor ol { padding-left: 22px; margin: 0 0 14px; }
+                        .reading-editor li { margin: 4px 0; }
+                        .reading-editor li p { margin: 0; }
+                        .reading-editor blockquote { border-left: 3px solid #d1c3a5; padding: 2px 0 2px 14px; margin: 12px 0; color: #6b6258; font-style: italic; }
+                        .reading-editor strong { font-weight: 600; }
+                        .reading-editor em { font-style: italic; }
+                      `}</style>
+                      {savingField === 'final_reading_html' && (
+                        <span className={adminStyles.muted} style={{ display: 'inline-block', marginTop: 8 }}>Saving…</span>
+                      )}
                       <div style={{ marginTop: 18, display: 'flex', gap: 10 }}>
                         <button
                           type="button"
@@ -630,6 +680,64 @@ function GenerationProgress({ step, guestFirstName }) {
           to { transform: rotate(360deg); }
         }
       `}</style>
+    </div>
+  );
+}
+
+function EditorToolbar({ editor }) {
+  if (!editor) return null;
+  const btn = (action, isActive, title, label, disabled) => (
+    <button
+      key={title}
+      type="button"
+      onClick={action}
+      disabled={disabled}
+      title={title}
+      aria-pressed={!!isActive}
+      style={{
+        padding:      '4px 10px',
+        minWidth:     30,
+        height:       28,
+        fontSize:     13,
+        fontWeight:   500,
+        border:       '1px solid ' + (isActive ? '#1a1a1a' : '#d1d5db'),
+        background:   isActive ? '#1a1a1a' : '#fff',
+        color:        isActive ? '#fff' : '#1a1a1a',
+        borderRadius: 4,
+        cursor:       disabled ? 'not-allowed' : 'pointer',
+        opacity:      disabled ? 0.4 : 1,
+      }}
+    >
+      {label}
+    </button>
+  );
+  const divider = (key) => (
+    <span key={key} style={{ width: 1, background: '#e5e7eb', margin: '0 4px', alignSelf: 'stretch' }} />
+  );
+
+  return (
+    <div style={{
+      display:       'flex',
+      gap:           4,
+      padding:       '8px 12px',
+      borderBottom:  '1px solid #f0e0c8',
+      background:    '#fffaf3',
+      flexWrap:      'wrap',
+      alignItems:    'center',
+    }}>
+      {btn(() => editor.chain().focus().toggleBold().run(),                editor.isActive('bold'),                  'Bold (⌘B)',          <strong>B</strong>)}
+      {btn(() => editor.chain().focus().toggleItalic().run(),              editor.isActive('italic'),                'Italic (⌘I)',        <em>I</em>)}
+      {divider('d1')}
+      {btn(() => editor.chain().focus().toggleHeading({ level: 2 }).run(), editor.isActive('heading', { level: 2 }), 'Heading 2',          'H2')}
+      {btn(() => editor.chain().focus().toggleHeading({ level: 3 }).run(), editor.isActive('heading', { level: 3 }), 'Heading 3',          'H3')}
+      {btn(() => editor.chain().focus().setParagraph().run(),              editor.isActive('paragraph'),             'Paragraph',          'P')}
+      {divider('d2')}
+      {btn(() => editor.chain().focus().toggleBulletList().run(),          editor.isActive('bulletList'),            'Bullet list',        '•')}
+      {btn(() => editor.chain().focus().toggleOrderedList().run(),         editor.isActive('orderedList'),           'Numbered list',      '1.')}
+      {btn(() => editor.chain().focus().toggleBlockquote().run(),          editor.isActive('blockquote'),            'Quote',              '“')}
+      {divider('d3')}
+      {btn(() => editor.chain().focus().undo().run(),                      false,                                    'Undo (⌘Z)',          '↶', !editor.can().undo())}
+      {btn(() => editor.chain().focus().redo().run(),                      false,                                    'Redo (⇧⌘Z)',         '↷', !editor.can().redo())}
     </div>
   );
 }

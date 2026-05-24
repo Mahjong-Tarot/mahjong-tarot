@@ -162,11 +162,12 @@ export default function AdminPeople({ profile }) {
         types,
         inquiry_count: pInq.length,
         order_count,
-        is_customer:        order_count > 0,
+        is_customer:         order_count > 0,
         latest_deal_at,
-        is_recent_customer: isRecentCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
-        is_legacy_customer: isLegacyCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
-        is_member:     !!memberProfile,
+        is_recent_customer:  isRecentCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
+        is_legacy_customer:  isLegacyCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
+        is_member:           !!memberProfile,
+        is_premium_member:   memberProfile?.is_premium === true,
         is_subscriber: subscriber,
         last_activity: lastActivity,
       };
@@ -174,19 +175,18 @@ export default function AdminPeople({ profile }) {
   }, [people, inquiries, profiles, deals]);
 
   const totals = useMemo(() => ({
-    total:        aggregated.length,
-    customers:    aggregated.filter((p) => p.is_recent_customer).length,
-    members:      aggregated.filter((p) => p.is_member).length,
-    subscribers:  aggregated.filter((p) => p.is_subscriber && p.ok_to_contact).length,
-    opted_out:    aggregated.filter((p) => !p.ok_to_contact).length,
+    total:           aggregated.length,
+    customers:       aggregated.filter((p) => p.is_recent_customer).length,
+    legacy:          aggregated.filter((p) => p.is_legacy_customer).length,
+    premium_members: aggregated.filter((p) => p.is_premium_member).length,
+    opted_out:       aggregated.filter((p) => !p.ok_to_contact).length,
   }), [aggregated]);
 
   const filtered = aggregated.filter((p) => {
-    if (filter === 'customers')   return p.is_recent_customer;
-    if (filter === 'legacy')      return p.is_legacy_customer;
-    if (filter === 'members')     return p.is_member;
-    if (filter === 'subscribers') return p.is_subscriber && p.ok_to_contact;
-    if (filter === 'opted_out')   return !p.ok_to_contact;
+    if (filter === 'customers') return p.is_recent_customer;
+    if (filter === 'legacy')    return p.is_legacy_customer;
+    if (filter === 'premium')   return p.is_premium_member;
+    if (filter === 'opted_out') return !p.ok_to_contact;
     return true;
   });
 
@@ -245,12 +245,12 @@ export default function AdminPeople({ profile }) {
               <p className={styles.statValue}>{totals.customers}</p>
             </div>
             <div className={styles.statCard}>
-              <p className={styles.statLabel}>Members</p>
-              <p className={styles.statValue}>{totals.members}</p>
+              <p className={styles.statLabel}>Legacy Customers</p>
+              <p className={styles.statValue}>{totals.legacy}</p>
             </div>
             <div className={styles.statCard}>
-              <p className={styles.statLabel}>Subscribers</p>
-              <p className={styles.statValue}>{totals.subscribers}</p>
+              <p className={styles.statLabel}>Premium Members</p>
+              <p className={styles.statValue}>{totals.premium_members}</p>
             </div>
           </div>
 

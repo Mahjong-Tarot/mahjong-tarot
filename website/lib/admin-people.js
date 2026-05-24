@@ -27,12 +27,11 @@ export function isLegacyCustomer(person) {
 }
 
 export const FILTERS = [
-  { id: 'all',         label: 'All' },
-  { id: 'customers',   label: 'Customers' },
-  { id: 'legacy',      label: 'Legacy customers' },
-  { id: 'members',     label: 'Portal members' },
-  { id: 'subscribers', label: 'Subscribers' },
-  { id: 'opted_out',   label: 'Opted out' },
+  { id: 'all',       label: 'All' },
+  { id: 'customers', label: 'Customers' },
+  { id: 'legacy',    label: 'Legacy customers' },
+  { id: 'premium',   label: 'Premium members' },
+  { id: 'opted_out', label: 'Opted out' },
 ];
 
 export const TYPE_LABELS = {

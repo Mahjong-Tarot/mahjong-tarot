@@ -5,7 +5,7 @@ import PersonRow from '../../components/PersonRow';
 import PersonEditShelf from '../../components/PersonEditShelf';
 import { supabase } from '../../lib/supabase';
 import { requirePage } from '../../lib/guards';
-import { FILTERS, sortValue, isRecentCustomer, isLegacyCustomer } from '../../lib/admin-people';
+import { sortValue, isRecentCustomer, isLegacyCustomer } from '../../lib/admin-people';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 
@@ -156,16 +156,22 @@ export default function AdminPeople({ profile }) {
 
       const order_count    = ordersByPerson.get(p.id) || 0;
       const latest_deal_at = latestDealByPerson.get(p.id) || null;
+      const checkInput = {
+        lifecycle_stage: p.lifecycle_stage,
+        order_count,
+        latest_deal_at,
+      };
 
       return {
         ...p,
         types,
         inquiry_count: pInq.length,
         order_count,
-        is_customer:         order_count > 0,
         latest_deal_at,
-        is_recent_customer:  isRecentCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
-        is_legacy_customer:  isLegacyCustomer({ ...p, latest_deal_at, is_customer: order_count > 0 }),
+        // Broad customer = anyone who bought at any point (deal OR legacy stage)
+        is_customer:         order_count > 0 || p.lifecycle_stage === 'customer',
+        is_recent_customer:  isRecentCustomer(checkInput),
+        is_legacy_customer:  isLegacyCustomer(checkInput),
         is_member:           !!memberProfile,
         is_premium_member:   memberProfile?.is_premium === true,
         is_subscriber: subscriber,
@@ -174,19 +180,20 @@ export default function AdminPeople({ profile }) {
     });
   }, [people, inquiries, profiles, deals]);
 
+  // Premium count comes from the profiles table directly — same source the
+  // /admin dashboard uses. Counting via aggregated would undercount any
+  // premium profile that doesn't link back to a people row (orphans).
   const totals = useMemo(() => ({
     total:           aggregated.length,
     customers:       aggregated.filter((p) => p.is_recent_customer).length,
     legacy:          aggregated.filter((p) => p.is_legacy_customer).length,
-    premium_members: aggregated.filter((p) => p.is_premium_member).length,
-    opted_out:       aggregated.filter((p) => !p.ok_to_contact).length,
-  }), [aggregated]);
+    premium_members: profiles.filter((pr) => pr.is_premium === true).length,
+  }), [aggregated, profiles]);
 
   const filtered = aggregated.filter((p) => {
     if (filter === 'customers') return p.is_recent_customer;
     if (filter === 'legacy')    return p.is_legacy_customer;
     if (filter === 'premium')   return p.is_premium_member;
-    if (filter === 'opted_out') return !p.ok_to_contact;
     return true;
   });
 
@@ -236,37 +243,29 @@ export default function AdminPeople({ profile }) {
           {error && <p className="error-block">{error}</p>}
 
           <div className={styles.statRow}>
-            <div className={styles.statCard}>
-              <p className={styles.statLabel}>Total</p>
-              <p className={styles.statValue}>{totals.total}</p>
-            </div>
-            <div className={styles.statCard}>
-              <p className={styles.statLabel}>Customers</p>
-              <p className={styles.statValue}>{totals.customers}</p>
-            </div>
-            <div className={styles.statCard}>
-              <p className={styles.statLabel}>Legacy Customers</p>
-              <p className={styles.statValue}>{totals.legacy}</p>
-            </div>
-            <div className={styles.statCard}>
-              <p className={styles.statLabel}>Premium Members</p>
-              <p className={styles.statValue}>{totals.premium_members}</p>
-            </div>
+            {[
+              { id: 'all',       label: 'Total',            value: totals.total },
+              { id: 'customers', label: 'Customers',        value: totals.customers },
+              { id: 'legacy',    label: 'Legacy Customers', value: totals.legacy },
+              { id: 'premium',   label: 'Premium Members',  value: totals.premium_members },
+            ].map((card) => {
+              const isActive = filter === card.id;
+              return (
+                <button
+                  key={card.id}
+                  type="button"
+                  onClick={() => setFilter(card.id)}
+                  aria-pressed={isActive}
+                  className={`${styles.statCard} ${isActive ? styles.statCardActive : ''}`}
+                >
+                  <p className={styles.statLabel}>{card.label}</p>
+                  <p className={styles.statValue}>{card.value}</p>
+                </button>
+              );
+            })}
           </div>
 
           <div className={tableStyles.controlsRow}>
-            <div className={tableStyles.chipRow}>
-              {FILTERS.map((f) => (
-                <button
-                  key={f.id}
-                  type="button"
-                  className={filter === f.id ? tableStyles.chipActive : tableStyles.chip}
-                  onClick={() => setFilter(f.id)}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
             <p className={tableStyles.count}>
               {loading ? 'Loading…' : `${sorted.length} ${sorted.length === 1 ? 'person' : 'people'}`}
             </p>

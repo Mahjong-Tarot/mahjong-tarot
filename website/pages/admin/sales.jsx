@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import AdminShell from '../../components/AdminShell';
+import SalesDetailDrawer from '../../components/SalesDetailDrawer';
 import { supabase } from '../../lib/supabase';
 import { requirePage } from '../../lib/guards';
 import adminStyles from '../../styles/PortalAdmin.module.css';
@@ -28,11 +28,11 @@ function kindOf(d) {
 }
 
 export default function SalesPage({ profile }) {
-  const router = useRouter();
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [sourceFilter, setSourceFilter] = useState('all');
+  const [selectedDeal, setSelectedDeal] = useState(null);
 
   useEffect(() => {
     if (!supabase) {
@@ -44,7 +44,7 @@ export default function SalesPage({ profile }) {
     setError('');
     let q = supabase
       .from('deals')
-      .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, people(name, email)')
+      .select('id, amount_cents, currency, won_at, source, notes, person_id, booking_id, member_subscription_id, status, stripe_payment_intent_id, stripe_session_id, people(name, email)')
       .eq('status', 'won')
       .order('won_at', { ascending: false });
     if (sourceFilter === 'books')            q = q.ilike('notes', 'Book order%');
@@ -117,12 +117,11 @@ export default function SalesPage({ profile }) {
             <tbody>
               {deals.map((d) => {
                 const customerLabel = d.people?.name || d.people?.email || '—';
-                const href = d.booking_id ? `/admin/private-readings/${d.booking_id}` : null;
                 return (
                   <tr
                     key={d.id}
-                    onClick={href ? () => router.push(href) : undefined}
-                    style={href ? { cursor: 'pointer' } : undefined}
+                    onClick={() => setSelectedDeal(d)}
+                    style={{ cursor: 'pointer' }}
                   >
                     <td>{d.won_at ? new Date(d.won_at).toLocaleDateString() : '—'}</td>
                     <td>{customerLabel}</td>
@@ -136,6 +135,24 @@ export default function SalesPage({ profile }) {
             </tbody>
           </table>
         )}
+
+        <SalesDetailDrawer
+          deal={selectedDeal}
+          onClose={() => setSelectedDeal(null)}
+          onRefunded={(dealId) => {
+            // Update local row state so the badge flips immediately.
+            // The next filter pass will drop refunded rows naturally
+            // because the query is .eq('status', 'won').
+            setDeals((prev) =>
+              prev.map((d) =>
+                d.id === dealId ? { ...d, status: 'refunded' } : d,
+              ),
+            );
+            setSelectedDeal((curr) =>
+              curr && curr.id === dealId ? { ...curr, status: 'refunded' } : curr,
+            );
+          }}
+        />
       </AdminShell>
     </>
   );

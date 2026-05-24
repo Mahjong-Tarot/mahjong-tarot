@@ -96,9 +96,7 @@
   cursor: pointer;
 }
 
-.error {
-  border-color: var(--fire-500) !important;
-}
+/* .error-block / .error-inline live in globals.css */
 
 .errorText {
   font-family: var(--sans);

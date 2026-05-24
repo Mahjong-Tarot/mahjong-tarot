@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
-import { requireStaff } from '../../../lib/requireStaff';
+import { requirePage } from '../../../lib/guards';
 import {
   calculatePillars,
   getZodiacAnimal,
@@ -19,7 +19,7 @@ import { buildReadingBrief } from '../../../lib/readingBrief';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireStaff(ctx);
+  return requirePage('staff')(ctx);
 }
 
 const DATE_FMT = new Intl.DateTimeFormat(undefined, {
@@ -168,7 +168,7 @@ export default function ReadingBriefPage({ profile }) {
         </Link>
 
         {loading && <p className={adminStyles.muted}>Loading…</p>}
-        {error && <p className={adminStyles.error}>{error}</p>}
+        {error && <p className="error-block">{error}</p>}
 
         {!loading && booking && (
           <>

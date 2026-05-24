@@ -130,3 +130,22 @@ export function elementInteraction(self, other) {
   if (ELEMENT_DESTROYS[other] === self)  return { kind: 'controlled', ...INTERACTION_COPY.controlled };
   return null;
 }
+
+export const SIGN_NORMALIZE = { Goat: 'Sheep', Ram: 'Sheep', Boar: 'Pig' };
+export const norm = (s) => SIGN_NORMALIZE[s] || s;
+
+export function tier(rating) {
+  if (rating == null) return null;
+  if (rating >= 90) return { name: 'Soul Mate Material', tone: 'great' };
+  if (rating >= 80) return { name: 'Strong Match',       tone: 'good'  };
+  if (rating >= 70) return { name: 'Solid',              tone: 'good'  };
+  if (rating >= 60) return { name: 'Workable',           tone: 'mixed' };
+  if (rating >= 50) return { name: 'Mixed',              tone: 'mixed' };
+  return                 { name: 'Tough Match',          tone: 'rough' };
+}
+
+export function findSignMatch(primarySign, partnerSign, signMatchRows) {
+  return signMatchRows.find(
+    (r) => norm(r.PrimarySign) === primarySign && norm(r.PartnerSign) === partnerSign,
+  ) || null;
+}

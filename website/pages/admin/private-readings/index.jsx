@@ -3,12 +3,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import AdminShell from '../../../components/AdminShell';
 import { supabase } from '../../../lib/supabase';
-import { requireStaff } from '../../../lib/requireStaff';
+import { requirePage } from '../../../lib/guards';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 import tableStyles from '../../../styles/PortalAdminTable.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requireStaff(ctx);
+  return requirePage('staff')(ctx);
 }
 
 const DATE_FMT = new Intl.DateTimeFormat(undefined, {
@@ -91,7 +91,7 @@ export default function PrivateReadingsListPage({ profile }) {
           everyone&apos;s when you&apos;re an admin.
         </p>
 
-        {error && <p className={adminStyles.error}>{error}</p>}
+        {error && <p className="error-block">{error}</p>}
 
         <div className={tableStyles.controlsRow}>
           <div className={tableStyles.chipRow}>

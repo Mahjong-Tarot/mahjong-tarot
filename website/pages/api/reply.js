@@ -1,12 +1,46 @@
+// POST /api/reply
+//
+// Staff-only. Sends a reply email to the contact behind an inquiry.
+// The recipient address is derived server-side from inquiry_id —
+// callers do not get to pick the to_email (otherwise this becomes
+// an open Resend relay).
+//
+// Body: { inquiry_id, subject, body }
+import { requireStaffApi } from '../../lib/requireStaffApi';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { to_email, to_name, subject, body } = req.body;
+  const auth = await requireStaffApi(req, res);
+  if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
+  const { supabase } = auth;
 
-  if (!to_email || !subject || !body) {
-    return res.status(400).json({ error: 'Missing required fields: to_email, subject, body' });
+  const { inquiry_id, subject, body } = req.body || {};
+
+  if (!inquiry_id || typeof inquiry_id !== 'string') {
+    return res.status(400).json({ error: 'inquiry_id is required' });
+  }
+  if (!subject || !body) {
+    return res.status(400).json({ error: 'Missing required fields: subject, body' });
+  }
+
+  // Resolve recipient from the inquiry — the caller does not get to
+  // choose to_email. RLS on the cookie-aware client gates access.
+  const { data: inquiry, error: inquiryErr } = await supabase
+    .from('inquiries')
+    .select('id, person:people!inner(email, name)')
+    .eq('id', inquiry_id)
+    .maybeSingle();
+
+  if (inquiryErr) {
+    console.error('Reply lookup error:', inquiryErr);
+    return res.status(500).json({ error: inquiryErr.message });
+  }
+  if (!inquiry || !inquiry.person?.email) {
+    return res.status(404).json({ error: 'Inquiry not found' });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -23,7 +57,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || 'Mahjong Tarot <notifications@mahjongtarot.com>',
-        to: [to_email],
+        to: [inquiry.person.email],
         subject,
         text: body,
         reply_to: process.env.RESEND_REPLY_TO || 'firepig01@gmail.com',

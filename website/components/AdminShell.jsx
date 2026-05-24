@@ -10,6 +10,7 @@ const ADMIN_NAV = [
   { href: '/admin/people',           label: 'People',           match: (p) => p.startsWith('/admin/people') },
   { href: '/admin/inquiries',        label: 'Inquiries',        match: (p) => p.startsWith('/admin/inquiries') },
   { href: '/admin/sales',            label: 'Sales',            match: (p) => p.startsWith('/admin/sales') },
+  { href: '/admin/astrologers',      label: 'Astrologers',      match: (p) => p.startsWith('/admin/astrologers') },
   // The legacy /admin/private-readings page still shows the global CRM
   // clients list. Showing it to astrologers would leak every other
   // astrologer's clients, so it stays admin-only until the page is

@@ -1,38 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import AdminShell from '../../components/AdminShell';
-import { supabase } from '../../lib/supabase';
 import { requirePage } from '../../lib/guards';
+import { getServiceSupabase } from '../../lib/stripe';
 import styles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePage('admin')(ctx);
+  // Reuse the admin guard — redirects non-admins before we ever query.
+  const guarded = await requirePage('admin')(ctx);
+  if ('redirect' in guarded || 'notFound' in guarded) return guarded;
+
+  // RLS on `profiles` only allows reading your own row, so the admin's
+  // browser query returns nothing. Fetch with the service role on the server
+  // and hand the list to the client as a prop.
+  const service = getServiceSupabase();
+  const { data: rows, error } = await service
+    .from('profiles')
+    .select('user_id, name')
+    .eq('role', 'astrologer')
+    .order('name', { ascending: true });
+
+  if (error) {
+    return {
+      props: { ...guarded.props, astrologers: [], loadError: error.message },
+    };
+  }
+
+  // Look up email per astrologer via Supabase Admin API. The list is tiny
+  // (a handful of practitioners) — per-row calls are fine here.
+  const astrologers = await Promise.all(
+    (rows || []).map(async (r) => {
+      const { data } = await service.auth.admin.getUserById(r.user_id);
+      return {
+        user_id: r.user_id,
+        name: r.name || '',
+        email: data?.user?.email || '',
+      };
+    }),
+  );
+
+  return { props: { ...guarded.props, astrologers, loadError: '' } };
 }
 
-export default function AdminAstrologers({ profile }) {
-  const [astrologers, setAstrologers] = useState([]);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState('');
-  const [pendingId, setPendingId]     = useState(null);
-
-  useEffect(() => {
-    if (!supabase) {
-      setError('Supabase not configured.');
-      setLoading(false);
-      return;
-    }
-    (async () => {
-      const { data, error: e } = await supabase
-        .from('profiles')
-        .select('user_id, name')
-        .eq('role', 'astrologer')
-        .order('name', { ascending: true });
-      if (e) setError(e.message);
-      else setAstrologers(data || []);
-      setLoading(false);
-    })();
-  }, []);
+export default function AdminAstrologers({ profile, astrologers, loadError }) {
+  const [error, setError]         = useState(loadError || '');
+  const [pendingId, setPendingId] = useState(null);
 
   async function viewAs(userId) {
     setPendingId(userId);
@@ -73,22 +86,21 @@ export default function AdminAstrologers({ profile }) {
 
         <div className={tableStyles.controlsRow}>
           <p className={tableStyles.count}>
-            {loading
-              ? 'Loading…'
-              : `${astrologers.length} ${astrologers.length === 1 ? 'astrologer' : 'astrologers'}`}
+            {astrologers.length} {astrologers.length === 1 ? 'astrologer' : 'astrologers'}
           </p>
         </div>
 
-        {!loading && astrologers.length === 0 && (
+        {astrologers.length === 0 && (
           <p className={styles.muted}>No astrologers found.</p>
         )}
 
-        {!loading && astrologers.length > 0 && (
+        {astrologers.length > 0 && (
           <div className={tableStyles.tableWrap}>
             <table className={tableStyles.table}>
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Email</th>
                   <th aria-label="Actions" />
                 </tr>
               </thead>
@@ -96,6 +108,7 @@ export default function AdminAstrologers({ profile }) {
                 {astrologers.map((a) => (
                   <tr key={a.user_id}>
                     <td>{a.name || <span className={styles.muted}>(no name)</span>}</td>
+                    <td>{a.email || <span className={styles.muted}>—</span>}</td>
                     <td style={{ textAlign: 'right' }}>
                       <button
                         type="button"

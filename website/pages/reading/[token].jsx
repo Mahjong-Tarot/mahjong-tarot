@@ -207,12 +207,6 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
               Got questions? Send us a note at{' '}
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
             </p>
-            <ShareBar
-              onFb={shareFacebook}
-              onIg={shareInstagram}
-              onCopy={() => copyLink('Link copied')}
-              position="bottom"
-            />
           </footer>
 
           <p className="shareStatus" aria-live="polite">{shareStatus || ' '}</p>

@@ -180,17 +180,17 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
       <main className="readingPage">
         <article className="letter">
           <header className="letterHeader">
-            <div className="letterTitleBlock">
-              <p className="eyebrow">A reading for</p>
-              <h1 className="title">{firstName}</h1>
-              {callDateLine && <p className="dateline">{callDateLine}</p>}
-            </div>
             <ShareBar
               onFb={shareFacebook}
               onIg={shareInstagram}
               onCopy={() => copyLink('Link copied')}
               position="top"
             />
+            <div className="letterTitleBlock">
+              <p className="eyebrow">A reading for</p>
+              <h1 className="title">{firstName}</h1>
+              {callDateLine && <p className="dateline">{callDateLine}</p>}
+            </div>
           </header>
 
           <div className="reading" dangerouslySetInnerHTML={{ __html: readingHtml }} />
@@ -240,15 +240,12 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
         }
         .letterHeader {
           display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 24px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 14px;
           margin: 0 0 24px;
         }
-        @media (max-width: 640px) {
-          .letterHeader { flex-direction: column; align-items: stretch; }
-        }
-        .letterTitleBlock { flex: 1; min-width: 0; }
+        .letterTitleBlock { min-width: 0; }
         .eyebrow {
           margin: 0 0 4px;
           font-size: 11px;
@@ -328,21 +325,17 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
         }
         .letterFooter {
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 14px;
           margin: 30px 0 0;
           padding-top: 20px;
           border-top: 1px solid #ece6da;
-        }
-        @media (max-width: 640px) {
-          .letterFooter { flex-direction: column; align-items: stretch; gap: 16px; }
         }
         .contact {
           margin: 0;
           font-size: 13px;
           color: var(--ink-3);
-          flex: 1;
           min-width: 0;
         }
         .contact :global(a) {
@@ -592,7 +585,7 @@ function ShareBar({ onFb, onIg, onCopy, position }) {
           flex-shrink: 0;
         }
         @media (min-width: 641px) {
-          .shareBar--top    { justify-content: flex-end; margin-top: 4px; }
+          .shareBar--top    { justify-content: flex-end; }
           .shareBar--bottom { justify-content: flex-end; }
         }
         @media (max-width: 640px) {

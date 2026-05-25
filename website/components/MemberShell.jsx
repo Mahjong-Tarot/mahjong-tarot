@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
+import PortalSwitcher from './PortalSwitcher';
 import styles from './MemberShell.module.css';
 
 const LINKS = [
@@ -17,7 +18,7 @@ const LINKS = [
 
 export default function MemberShell({ children }) {
   const router = useRouter();
-  const { signOut } = useAuth();
+  const { signOut, role } = useAuth();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -75,6 +76,8 @@ export default function MemberShell({ children }) {
             <span aria-hidden="true">×</span>
           </button>
         </div>
+
+        <PortalSwitcher role={role} onNavigate={() => setDrawerOpen(false)} />
 
         <nav className={styles.nav}>
           <ul className={styles.linkList}>

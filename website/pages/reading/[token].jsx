@@ -3,7 +3,6 @@
 // Server-side render so the HTML is delivered ready-to-read with no
 // loading flash. noindex so this never ends up in search.
 
-import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { createClient } from '@supabase/supabase-js';
@@ -14,8 +13,7 @@ const DATE_FMT = new Intl.DateTimeFormat('en-US', {
   weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
 });
 
-const CONTACT_EMAIL  = 'firepig@onlinechineseastrology.com';
-const FB_REVIEW_URL  = 'https://www.facebook.com/mahjongtarot/reviews';
+const CONTACT_EMAIL = 'firepig@onlinechineseastrology.com';
 
 export async function getServerSideProps({ params, req }) {
   const token = String(params?.token || '').trim();
@@ -41,7 +39,7 @@ export async function getServerSideProps({ params, req }) {
   if (!booking) return { notFound: true };
   if (!booking.final_reading_html) return { notFound: true };
 
-  // Build absolute URL for OG tags and share buttons.
+  // Build absolute URL for OG tags.
   const proto = req.headers['x-forwarded-proto'] || 'https';
   const host  = req.headers['x-forwarded-host']  || req.headers.host;
   const origin = process.env.NEXT_PUBLIC_SITE_URL || `${proto}://${host}`;
@@ -100,43 +98,6 @@ export async function getServerSideProps({ params, req }) {
 }
 
 export default function PublicReadingPage({ guestName, scheduledAt, readingHtml, readingUrl, ogImage, hasPremium, hasBook, error }) {
-  const [shareStatus, setShareStatus] = useState('');
-
-  function flashStatus(msg) {
-    setShareStatus(msg);
-    setTimeout(() => setShareStatus(''), 2500);
-  }
-
-  function copyLink(msg = 'Link copied') {
-    if (typeof navigator === 'undefined') return;
-    if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(readingUrl).then(
-        () => flashStatus(msg),
-        () => flashStatus('Could not copy — long-press to copy the address bar.'),
-      );
-    }
-  }
-
-  function shareFacebook() {
-    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(readingUrl)}`;
-    if (typeof window !== 'undefined') {
-      window.open(url, '_blank', 'width=600,height=520,noopener,noreferrer');
-    }
-  }
-
-  async function shareInstagram() {
-    // Instagram has no web share API. Try navigator.share() (mobile
-    // gets the system share sheet with IG as a target); otherwise
-    // copy with a "paste into Instagram" hint.
-    if (typeof navigator !== 'undefined' && navigator.share) {
-      try {
-        await navigator.share({ url: readingUrl, title: 'My Mahjong Tarot reading' });
-        return;
-      } catch { /* user cancelled — fall through to copy */ }
-    }
-    copyLink('Link copied — paste it into your Instagram post or story.');
-  }
-
   if (error) {
     return (
       <>
@@ -180,17 +141,9 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
       <main className="readingPage">
         <article className="letter">
           <header className="letterHeader">
-            <ShareBar
-              onFb={shareFacebook}
-              onIg={shareInstagram}
-              onCopy={() => copyLink('Link copied')}
-              position="top"
-            />
-            <div className="letterTitleBlock">
-              <p className="eyebrow">A reading for</p>
-              <h1 className="title">{firstName}</h1>
-              {callDateLine && <p className="dateline">{callDateLine}</p>}
-            </div>
+            <p className="eyebrow">A reading for</p>
+            <h1 className="title">{firstName}</h1>
+            {callDateLine && <p className="dateline">{callDateLine}</p>}
           </header>
 
           <div className="reading" dangerouslySetInnerHTML={{ __html: readingHtml }} />
@@ -209,7 +162,6 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
             </p>
           </footer>
 
-          <p className="shareStatus" aria-live="polite">{shareStatus || ' '}</p>
         </article>
       </main>
 
@@ -239,7 +191,6 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
           gap: 14px;
           margin: 0 0 24px;
         }
-        .letterTitleBlock { min-width: 0; }
         .eyebrow {
           margin: 0 0 4px;
           font-size: 11px;
@@ -338,13 +289,6 @@ export default function PublicReadingPage({ guestName, scheduledAt, readingHtml,
           text-underline-offset: 2px;
         }
         .contact :global(a:hover) { color: var(--ink); }
-        .shareStatus {
-          margin: 14px 0 0;
-          min-height: 18px;
-          text-align: right;
-          font-size: 12px;
-          color: #2a8a48;
-        }
       `}</style>
     </>
   );
@@ -533,89 +477,3 @@ function UpsellStyles() {
   );
 }
 
-function ShareBar({ onFb, onIg, onCopy, position }) {
-  return (
-    <div className={`shareBar shareBar--${position}`} role="group" aria-label="Share this reading">
-      <button type="button" onClick={onFb} className="shareBtn shareBtn--fb" aria-label="Share to Facebook" title="Share to Facebook">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-          <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-        </svg>
-        <span>Facebook</span>
-      </button>
-      <button type="button" onClick={onIg} className="shareBtn shareBtn--ig" aria-label="Share to Instagram" title="Share to Instagram">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
-        </svg>
-        <span>Instagram</span>
-      </button>
-      <button type="button" onClick={onCopy} className="shareBtn shareBtn--copy" aria-label="Copy link" title="Copy link">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-        </svg>
-        <span>Copy link</span>
-      </button>
-      <span className="shareDivider" aria-hidden="true" />
-      <a
-        href={FB_REVIEW_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="shareBtn shareBtn--review"
-        aria-label="Leave a review on Facebook"
-        title="Leave a review on Facebook"
-      >
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-        <span>Review</span>
-      </a>
-
-      <style jsx>{`
-        .shareBar {
-          display: flex;
-          gap: 6px;
-          flex-shrink: 0;
-        }
-        @media (min-width: 641px) {
-          .shareBar--top    { justify-content: flex-end; }
-          .shareBar--bottom { justify-content: flex-end; }
-        }
-        @media (max-width: 640px) {
-          .shareBar { justify-content: flex-end; flex-wrap: wrap; }
-        }
-        .shareBtn {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 7px 12px;
-          border: 1px solid #e3dccf;
-          background: var(--paper-pure);
-          color: var(--ink-2);
-          border-radius: 6px;
-          font-family: var(--sans);
-          font-size: 12px;
-          font-weight: 500;
-          cursor: pointer;
-          transition: background 0.15s ease, border-color 0.15s ease;
-        }
-        .shareBtn:hover { background: #faf6ef; border-color: #c8b893; }
-        .shareBtn--fb svg     { color: #1877F2; }
-        .shareBtn--ig svg     { color: #d62976; }
-        .shareBtn--copy svg   { color: var(--ink-3); }
-        .shareBtn--review svg { color: #f5a623; }
-        .shareBtn--review     { text-decoration: none; }
-        .shareDivider {
-          width: 1px;
-          align-self: stretch;
-          background: #e3dccf;
-          margin: 4px 2px;
-        }
-        @media (max-width: 640px) {
-          .shareDivider { display: none; }
-        }
-      `}</style>
-    </div>
-  );
-}

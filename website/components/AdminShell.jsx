@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
+import PortalSwitcher from './PortalSwitcher';
 import styles from './AdminShell.module.css';
 
 // Sidebar items visible to admin only.
@@ -68,6 +69,8 @@ export default function AdminShell({ profile, children }) {
             </span>
           </Link>
         </div>
+
+        <PortalSwitcher role={profile?.role} onNavigate={() => setOpen(false)} />
 
         <nav className={styles.nav} aria-label="Admin sections">
           <ul className={styles.navList}>

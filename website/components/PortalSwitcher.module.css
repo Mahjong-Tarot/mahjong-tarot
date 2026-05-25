@@ -1,0 +1,35 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 10px 20px 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.link,
+.linkActive {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color 120ms ease, background 120ms ease;
+}
+
+.link {
+  color: var(--ink-4);
+}
+
+.link:hover {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.linkActive {
+  color: var(--fire-600);
+  font-weight: 600;
+  background: var(--paper);
+}

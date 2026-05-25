@@ -14,7 +14,8 @@ const DATE_FMT = new Intl.DateTimeFormat('en-US', {
   weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
 });
 
-const CONTACT_EMAIL = 'firepig@onlinechineseastrology.com';
+const CONTACT_EMAIL  = 'firepig@onlinechineseastrology.com';
+const FB_REVIEW_URL  = 'https://www.facebook.com/mahjongtarot/reviews';
 
 export async function getServerSideProps({ params, req }) {
   const token = String(params?.token || '').trim();
@@ -569,6 +570,20 @@ function ShareBar({ onFb, onIg, onCopy, position }) {
         </svg>
         <span>Copy link</span>
       </button>
+      <span className="shareDivider" aria-hidden="true" />
+      <a
+        href={FB_REVIEW_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shareBtn shareBtn--review"
+        aria-label="Leave a review on Facebook"
+        title="Leave a review on Facebook"
+      >
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+        <span>Review</span>
+      </a>
 
       <style jsx>{`
         .shareBar {
@@ -599,9 +614,20 @@ function ShareBar({ onFb, onIg, onCopy, position }) {
           transition: background 0.15s ease, border-color 0.15s ease;
         }
         .shareBtn:hover { background: #faf6ef; border-color: #c8b893; }
-        .shareBtn--fb svg   { color: #1877F2; }
-        .shareBtn--ig svg   { color: #d62976; }
-        .shareBtn--copy svg { color: var(--ink-3); }
+        .shareBtn--fb svg     { color: #1877F2; }
+        .shareBtn--ig svg     { color: #d62976; }
+        .shareBtn--copy svg   { color: var(--ink-3); }
+        .shareBtn--review svg { color: #f5a623; }
+        .shareBtn--review     { text-decoration: none; }
+        .shareDivider {
+          width: 1px;
+          align-self: stretch;
+          background: #e3dccf;
+          margin: 4px 2px;
+        }
+        @media (max-width: 640px) {
+          .shareDivider { display: none; }
+        }
       `}</style>
     </div>
   );

@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
-import PortalSwitcher from './PortalSwitcher';
+import PortalSwitcher, { readView } from './PortalSwitcher';
 import styles from './AdminShell.module.css';
 
 // Sidebar items visible to admin only.
@@ -25,8 +25,14 @@ const OPS_NAV = [
   { href: '/admin/settings/meeting-source', label: 'Settings',   match: (p) => p.startsWith('/admin/settings') },
 ];
 
-function navFor(role) {
-  if (role === 'admin')      return [...ADMIN_NAV, ...OPS_NAV];
+// Admin can be in two views — 'admin' (full nav) or 'astrologer'
+// (operational nav only, same items a real astrologer sees). The
+// view preference is set by clicking the PortalSwitcher and stored
+// in localStorage.
+function navFor(role, view) {
+  if (role === 'admin') {
+    return view === 'astrologer' ? OPS_NAV : [...ADMIN_NAV, ...OPS_NAV];
+  }
   if (role === 'astrologer') return OPS_NAV;
   return [];
 }
@@ -36,17 +42,34 @@ export default function AdminShell({ profile, children }) {
   const { signOut } = useAuth();
   const [open, setOpen] = useState(false);
 
+  // Sync to the admin's portal-view preference set by PortalSwitcher.
+  // Reads after mount so we don't fight hydration. Listens for both
+  // same-tab ('mt-view-change') and cross-tab ('storage') updates.
+  const [view, setView] = useState(null);
+  useEffect(() => {
+    setView(readView());
+    const handler = () => setView(readView());
+    window.addEventListener('mt-view-change', handler);
+    window.addEventListener('storage',        handler);
+    return () => {
+      window.removeEventListener('mt-view-change', handler);
+      window.removeEventListener('storage',        handler);
+    };
+  }, []);
+
   const handleSignOut = async () => {
     await signOut();
     window.location.href = '/';
   };
 
   const displayName = profile?.name?.split(' ')[0] || profile?.name || 'Admin';
+  const inAstrologerView = profile?.role === 'admin' && view === 'astrologer';
+  const shellLabel = inAstrologerView ? 'Astrologer' : 'Admin';
 
   return (
     <div className={styles.shell}>
       <header className={styles.mobileBar}>
-        <Link href="/admin" className={styles.brandSm}>Mahjong Tarot · Admin</Link>
+        <Link href="/admin" className={styles.brandSm}>Mahjong Tarot · {shellLabel}</Link>
         <button
           type="button"
           className={styles.menuButton}
@@ -65,7 +88,7 @@ export default function AdminShell({ profile, children }) {
             <span className={styles.brandMark} />
             <span className={styles.brandText}>
               Mahjong Tarot
-              <span className={styles.brandSub}>Admin</span>
+              <span className={styles.brandSub}>{shellLabel}</span>
             </span>
           </Link>
         </div>
@@ -74,7 +97,7 @@ export default function AdminShell({ profile, children }) {
 
         <nav className={styles.nav} aria-label="Admin sections">
           <ul className={styles.navList}>
-            {navFor(profile?.role).map((item) => {
+            {navFor(profile?.role, view).map((item) => {
               const active = item.match(router.pathname);
               return (
                 <li key={item.href}>

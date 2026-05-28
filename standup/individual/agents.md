@@ -1,31 +1,30 @@
-date: 2026-05-22
+date: 2026-05-28
 
 ---
 
 ## project-manager
 
 **Completed:**
-- PR #242: pm(standup-morning): 2026-05-21 — merged 2026-05-21 00:08 UTC (07:08 Asia/Saigon)
-- PR #244: pm(standup-compile): 2026-05-21 — merged 2026-05-21 02:12 UTC (09:12 Asia/Saigon)
+- No agent activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window. Last PM agent run was PR #344 `pm(standup-compile): 2026-05-26` (merged 2026-05-26 — Tuesday). No scheduled morning/EOD or compile runs landed on Wed 2026-05-27.
 
 **Next:**
-- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-22`)
-- 09:00 standup-compile run later this morning
-- 17:00 EOD reminder later today
+- This 07:00 morning trigger is in flight (`pm/standup-morning/2026-05-28`).
+- 09:00 standup-compile run later this morning.
+- 17:00 EOD reminder later today.
 
 **Blockers:**
-- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-05-08 (now **22 consecutive working days**). App secret for App ID `cli_a95707d3b57a5eed` needs rotation in Lark Open Platform, `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`, and `lark-cli` upgrade (1.0.10 → 1.0.23+) still pending. Dave owns rotation.
+- Lark bot auth still failing (`[10014] app secret invalid`) — carrying forward from 2026-04-28 (now **25 consecutive working days**, including today). App secret for App ID `cli_a95707d3b57a5eed` needs rotation in Lark Open Platform; `LARK_CHAT_ID` (`oc_e5fe68740864439744b3fb0f31f81040`) still missing from root `.env`; `lark-cli` upgrade (1.0.10 → 1.0.23+) still pending. Dave owns rotation.
 
 ---
 
 ## brevo-manager
 
 **Completed:**
-- No activity in the 2026-05-21 00:00 UTC → 2026-05-22 00:00 UTC window.
+- No activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window.
 
 **Next:**
 - No open PRs.
-- Phase 1 OCA warmup continues — Yon owns the daily 5-send sequence from `firepig@onlinechineseastrology.com`. Day 10 of the 21-day plan today (per Yon's last live check-in dated 2026-05-13, now 7 working days stale — confirm with Yon).
+- Phase 1 OCA warmup continues — Yon owns the daily 5-send sequence from `firepig@onlinechineseastrology.com`.
 - 48h pre-flight previews fire at `brevo-preview-d0-batch1/2/3` on May 31 / Jun 1 / Jun 2 (21:00 Saigon) ahead of Jun 2–4 D-0 sends; Bridge preview Jun 7 21:00.
 - `brevo-d0-decision-gate` Mon Jun 1 18:00 Saigon classifies warmup GREEN/YELLOW/RED.
 
@@ -37,11 +36,11 @@ None blocking — but Brevo MCP token sits in chat history and should be rotated
 ## web-developer
 
 **Completed:**
-- No activity in the 2026-05-21 00:00 UTC → 2026-05-22 00:00 UTC window.
+- No activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window.
 
 **Next:**
 - No open PRs.
-- Per content calendar: 2026-05-18 publish slot now **4 days overdue**. Writer bundles for 2026-05-18 / 2026-05-20 / 2026-05-22 remain ready for hero image generation + page build. `2026-05-15-derby-feel-good` page build still outstanding from prior queue.
+- Backlog: writer bundles 2026-05-18 / 2026-05-20 / 2026-05-22 still awaiting hero image generation + page build. `2026-05-15-derby-feel-good` page build remains outstanding from the prior queue.
 
 **Blockers:**
 None — but blocked downstream on image-designer hero image generation.
@@ -51,7 +50,7 @@ None — but blocked downstream on image-designer hero image generation.
 ## writer
 
 **Completed:**
-- No activity in the 2026-05-21 00:00 UTC → 2026-05-22 00:00 UTC window.
+- No activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window.
 
 **Next:**
 - No open PRs.
@@ -65,12 +64,12 @@ None
 ## product-manager
 
 **Completed:**
-- No activity in the 2026-05-21 00:00 UTC → 2026-05-22 00:00 UTC window.
-- _Note (in-window, human-authored):_ PR #243 `docs(readings-generator): stakeholder spec v0.1` merged 2026-05-21 00:50 UTC — human work by `yon-create`, covers readings-generator scope; PM agent has not yet generated its own derivative artefacts.
+- No activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window.
+- _Note (in-window, human-authored):_ PR #346 `docs(engineering): add OCA email list validation reports (May 2026)` merged 2026-05-27 00:41 UTC — human work by `yon-create` / `Tiga Bait`. PM agent has not yet generated derivative artefacts from these reports.
 
 **Next:**
-- Review auto-publishing checklist with Dave for implementation sign-off.
-- Triage PR #243 readings-generator spec into a vertical-slice epic and follow-up `IMPLEMENTATION-PLAN.md`.
+- Triage PR #346 OCA email-list validation reports into any required follow-up tickets (warmup eligibility / suppression list updates).
+- Carry-forward: triage readings-generator spec (PR #243) into a vertical-slice epic and follow-up `IMPLEMENTATION-PLAN.md`.
 
 **Blockers:**
 None
@@ -80,11 +79,11 @@ None
 ## image-designer
 
 **Completed:**
-- No activity in the 2026-05-21 00:00 UTC → 2026-05-22 00:00 UTC window.
+- No activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window.
 
 **Next:**
 - No open work detected.
-- `image-prompts.json` files from writer for 2026-05-18 / 2026-05-20 / 2026-05-22 — hero + social images still required. 2026-05-18 publish slot is now 4 days overdue.
+- `image-prompts.json` files from writer for 2026-05-18 / 2026-05-20 / 2026-05-22 — hero + social images still required.
 - Hero/social images for `2026-05-15-derby-feel-good` still outstanding from the prior queue.
 
 **Blockers:**
@@ -96,10 +95,10 @@ None
 ## other-agents
 
 **Completed:**
-- No autonomous agent activity in window beyond project-manager. PRs #241 (`fix(profile): save via API route…`), #243 (`docs(readings-generator): stakeholder spec v0.1`), and #245 (`feat(portal): quick-reading email tool`) are human/dev work by `yon-create`, not agent automation.
+- No autonomous agent activity in the 2026-05-27 00:00 UTC → 2026-05-28 00:00 UTC window. The only in-window commit (e09b0d7) and merge (PR #346) are human-authored (Tiga Bait / yon-create).
 
 **Next:**
-- Open PR #226 (`OCA D-0 results — DATA UNAVAILABLE`, yon-create, branch `oca-d0-results-2026-05-20`) — human-owned, still open, last updated 2026-05-20 02:02 UTC (~48h with no new activity).
+- No open PRs in the repo (`gh pr list --state open` returned empty at 07:00 Asia/Saigon on 2026-05-28).
 
 **Blockers:**
 None

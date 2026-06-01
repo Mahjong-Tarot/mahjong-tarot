@@ -3,6 +3,15 @@
 
 export const POSTS = [
  {
+ slug: 'metal-snake-month-2026-forecast',
+ title: 'The Hardest Month of the Fire Horse Year Is Here',
+ excerpt: "The Metal Snake month is the worst elemental combination of the year. Fire melts metal's luck, and the Snake and Horse are not friends. Here is what to avoid, what to protect, and which days actually favor you.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Jun 1, 2026',
+ isoDate: '2026-06-01',
+ readTime: '6 min read',
+ },
+ {
  slug: 'what-the-favorites-trainers-missed-mahjong-mirror',
  title: "What the Favorites' Trainers Missed, and What You're Probably Missing in Your Own Plan",
  excerpt: "Every trainer at the Derby saw the same race. None of them asked the one question that would have changed everything. The Mahjong Mirror's obstacle angle, and how to run it on the decision in front of you right now.",

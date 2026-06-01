@@ -17,3 +17,4 @@
 | 2026-04-15 | Your Love Life in the Fire Horse Year: What Every Sign Needs to Know | your-love-life-in-the-fire-horse-year.jsx | Year of the Fire Horse |
 | 2026-04-15 | The Mahjong Mirror Way to Plan a Wedding | planning-a-wedding-through-the-mahjong-mirror.jsx | Romance |
 | 2026-05-13 | What the Favorites' Trainers Missed | what-the-favorites-trainers-missed-mahjong-mirror.jsx | Year of the Fire Horse |
+| 2026-06-01 | The Hardest Month of the Fire Horse Year Is Here | metal-snake-month-2026-forecast.md | Year of the Fire Horse |

@@ -1,0 +1,64 @@
+{
+  "topic": "A weekend challenge for the Snake month: one action each for rest, caution, and honesty. Using the month's energy constructively rather than fighting it.",
+  "phrases": [
+    "Rest. Caution. Honesty.",
+    "Work with the month, not against it.",
+    "The real rest is the one that restores you.",
+    "Pause one risky impulse.",
+    "Name the true thing first."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-three-words-for-the-snake-month",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A woman lying in a hammock in a garden, genuinely at rest. Not scrolling, not planning, just present. Deep summer, dappled light, restorative.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman lying in a hammock strung between two trees in a lush summer garden. Her eyes are closed, body loose and at ease. Afternoon sun filters through the canopy above, creating dappled light across her and the surrounding grass. She is not holding a phone. There is a small table nearby with a glass of water and a book, closed. The mood is genuine restoration: summer, stillness, permission to stop. Palette: soft sage green, warm ivory, antique gold light. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-three-words-for-the-snake-month",
+      "content_type": "fri-facebook-en",
+      "concept": "Three stones arranged in a deliberate line on a calm water surface. Rest, caution, honesty as three distinct, balanced steps.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A wide, calm shot of three smooth river stones arranged in a deliberate line on the surface of still, shallow water. Each stone is placed with intention, spaced evenly. The water reflects the sky, soft blue and ivory light. The surrounding bank is just barely visible, lush and green. The composition is spare and deliberate. The mood is calm, purposeful balance. Palette: smooth grey stones, still water reflecting warm ivory sky, soft sage bank. No text, no symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-three-words-for-the-snake-month",
+      "content_type": "fri-instagram",
+      "concept": "A woman in a garden, mid-pause, holding a cup of tea with both hands, eyes half-closed in the sunlight. Rest as a deliberate act.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square composition: a woman standing in a garden, her back three-quarters to the camera, holding a ceramic tea cup with both hands. Her eyes are closed or nearly so, face tilted slightly toward the sun. The garden around her is lush and summer-full. The mood is permission: she has stopped, deliberately, and is present. Palette: warm ivory, soft sage greens, dusty rose. Sunlight warm and direct. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-three-words-for-the-snake-month",
+      "content_type": "card",
+      "concept": "English affirmation card for the Snake month: the three-word phrase as a daily reminder.",
+      "image_style": "TEXT",
+      "text": "Rest. Caution. Honesty.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture. Subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Rest. Caution. Honesty.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant. Modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-three-words-for-the-snake-month",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card for the Snake month: natural Vietnamese translation of the three-word phrase.",
+      "image_style": "TEXT",
+      "text": "Nghỉ ngơi. Thận trọng. Trung thực.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture. Subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Nghỉ ngơi. Thận trọng. Trung thực.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant. Modern calligraphy, not cursive. Spell every word perfectly and preserve all Vietnamese diacritics exactly (ỉ, ơ, ọ, ậ, ọ, ự, ự). One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "topic": "The Mahjong Mirror's three practical moves for the Snake month: name the risk, go deep on existing relationships, and use honesty as an active discipline.",
+  "phrases": [
+    "Name what you're tempted to risk.",
+    "Depth over width.",
+    "Honesty before the month finds the omission.",
+    "Lay low, but don't stand still.",
+    "The consolidation is the work."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "mahjong-mirror-snake-month-playbook",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A woman seen from behind at a writing desk with a journal open, morning light streaming in. The act of honest self-reflection, naming something on paper before acting on it.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman seated at a small wooden writing desk near a tall window, seen from behind and slightly to the side. Her posture is open and settled. She is writing or about to write. A journal lies open in front of her. Morning light streams through the window, falling across the desk and her hands. The room is simple: a dark wood floor, a few mahjong tiles resting on the corner of the desk. The mood is purposeful quiet. Someone making a decision before the day begins. Palette: warm ivory journal, midnight jade wall, antique gold morning light. Women never face the camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "mahjong-mirror-snake-month-playbook",
+      "content_type": "wed-facebook-en",
+      "concept": "The Mirror's three moves as a visual metaphor: a path that goes deep rather than branching wide. A garden path that leads inward rather than splitting outward.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A narrow stone garden path winding deeper into a lush, slightly overgrown garden. The path curves away from the viewer, pulling the eye inward rather than outward. Late afternoon light filtering through dense green canopy. The path is clearly intentional (tended, not wild) but it goes deep, not broad. The feeling is purposeful depth. Palette: soft sage greens, warm stone, antique gold light. No text, no symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "mahjong-mirror-snake-month-playbook",
+      "content_type": "wed-instagram",
+      "concept": "The Mirror's action: a woman writing in a journal at a window, seen in profile, the act of naming something clearly before acting on it.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A woman in profile, seated near a window, writing in a journal. Her concentration is complete. Pen moving on the page, chin slightly tilted down. Natural side-light catches her hands and the open page. The window behind her shows a blurred garden outside. The room is spare: a small table, a journal, a cup of tea to the side. The mood is focused, private, deliberate. Palette: warm ivory, soft sage, antique gold light. Women never face the camera directly. No text legible in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "mahjong-mirror-snake-month-playbook",
+      "content_type": "thu-facebook-en",
+      "concept": "Two people in genuine conversation at a cafe. The act of tending an existing relationship with real attention.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Two women at a small cafe table, one leaning forward toward the other, caught mid-conversation. One face is in profile, the other partially visible. Coffee cups and a small notebook on the table. Warm afternoon window light. The body language speaks of real engagement, not small talk. The mood is intimate, honest, attentive. Palette: dusty rose, antique gold, warm wood table. Film-still quality. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "mahjong-mirror-snake-month-playbook",
+      "content_type": "thu-instagram",
+      "concept": "A mahjong tile being turned face-up on a dark surface. The Mirror's reveal, the act of honesty making visible what was face-down.",
+      "image_style": "SCENE",
+      "card": "Guardian, Guardian of the Gate (the tile that blocks or reveals what needs addressing)",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Close-up, square composition: a single mahjong tile in the process of being turned face-up on a dark wood surface. The tile is ornate, clearly a real object with weight and history. Its face is partially revealed, a carved character visible. The light is warm and directional, casting a short shadow. The surrounding wood is bare, clean, intentional. The mood is quiet revelation. Not drama, but clarity emerging. Palette: antique gold tile, midnight jade wood surface, amber light. No text legible, no Western symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

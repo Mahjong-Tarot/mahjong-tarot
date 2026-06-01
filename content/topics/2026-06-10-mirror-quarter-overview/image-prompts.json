@@ -1,0 +1,62 @@
+{
+  "topic": "The Mahjong Mirror as a sequencing tool: applying its four angles to understand which months reward boldness and which demand patience. So you spend effort where the quarter pays it back.",
+  "phrases": [
+    "Push in some months. Hold in others.",
+    "Read the month before you spend the month.",
+    "Three mandates. One discipline.",
+    "The Mirror tells you which is which.",
+    "Clarity before the current turns."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "mahjong-mirror-quarter-sequencing-push-hold",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A woman studying a map spread on a large table, with mahjong tiles arranged as markers. The act of strategic planning with the Mirror's tools, deliberate and purposeful.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A wide cinematic shot: a woman leans over a large wooden table covered with an unrolled paper map or calendar spread. Her hands are on the table, studying. Several mahjong tiles are arranged at different points on the spread, as if marking decisions or time windows. A candle burns at the edge. The room around her is dim. Her posture is focused, engaged. This is a planning session, not a crisis. Palette: midnight jade shadows, antique gold candlelight, warm ivory paper. Women never face camera directly. No text legible in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "mahjong-mirror-quarter-sequencing-push-hold",
+      "content_type": "wed-facebook-en",
+      "concept": "A fork in a path, seen from above, the two branches going in distinctly different directions. The moment of choosing which kind of energy the month calls for.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "An aerial or high-angle shot of a garden path that splits cleanly into two branches. One branch is wide and well-lit, heading toward open ground. The other is narrower, winding into deeper shade. The fork itself is clear and intentional (stone or gravel, garden borders). The mood is decision and discernment, not anxiety. Soft sage greens, antique gold light on the open branch, deep shade on the sheltered one. No figures, no text, no symbols. Lush and clean. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "mahjong-mirror-quarter-sequencing-push-hold",
+      "content_type": "wed-instagram",
+      "concept": "A woman at a garden fork, hand on a gate post, looking down one branch with deliberate evaluation. Choosing, not hesitating.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square composition: a woman stands at a fork in a garden path, seen from slightly behind and to the side. Her hand rests lightly on a stone gate post. She is looking down one branch of the path, not paralyzed but evaluating. Her posture is considered and calm. The two paths lead in distinctly different directions. Late afternoon light. Soft sage foliage, antique gold light. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "mahjong-mirror-quarter-sequencing-push-hold",
+      "content_type": "thu-facebook-en",
+      "concept": "A woman's hands writing three items in a journal, deliberate and organized. The pre-work exercise of naming one bold move, one unresolved thing, one thing to protect.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up, wide frame: a woman's hands writing in a journal, pen moving with purpose. The journal is open to a clean page with three numbered lines. The writing itself is not legible, just visible as intentional marks. A small arrangement of mahjong tiles rests beside the journal, and a cup of tea is in the background. Natural window light from the left. The mood is purposeful, organized, pre-decision clarity. Palette: warm ivory journal, dark wood surface, antique gold light. No text legible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "mahjong-mirror-quarter-sequencing-push-hold",
+      "content_type": "thu-instagram",
+      "concept": "Overhead flat lay of a map or large journal page with mahjong tiles arranged as markers. Planning with the Mirror's tools before the month turns.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square overhead flat lay: a large journal or paper spread fills most of the frame, open and clean. Four mahjong tiles are arranged at different positions on the spread (corners, center) as deliberate markers, not random placement. An ink pen rests diagonally. A small candle stub burns at one edge. The composition has breathing room. Warm candlelight from below-left. Palette: warm ivory, antique gold tiles, dark wood visible at the edges. No text legible, no symbols identifiable. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

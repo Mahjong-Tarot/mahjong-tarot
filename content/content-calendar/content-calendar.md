@@ -227,3 +227,106 @@ Publishes: Friday (blog + social)
 | May 22 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | May 22 | Fri | Instagram | Feel Good Friday: The Sheep year follows the Horse. Calm follows fire. What are you making sure survives the transition? |
 
+---
+
+## Week of June 1 — Month of the Metal Snake
+
+> Lunar context: Metal Snake month runs **May 17 – June 14, 2026** (verified against the project lunar calendar). This week sits mid-snake-month. Source brief: `content/source-material/metal-snake-month-2026.md`.
+
+**Topic: 2026-06-01-horse-snake-month** — STATUS: WRITTEN
+Angle: Fire Horse — shock & awe. The year's most inauspicious month is here: the year's fire melts metal's luck, and the Snake can't stand the Horse's pace.
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-06-03-mirror-snake-month** — STATUS: WRITTEN
+Angle: Mahjong Mirror — the answer. Navigating a "lay low" month with the Mirror: name what you're tempted to risk, go deep on what you already have, choose honesty.
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-06-05-feel-good-snake-month** — STATUS: WRITTEN
+Angle: Feel Good Friday — the three snake-month takeaways as a weekend challenge: rest, caution, honesty.
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jun 1 | Mon | Blog | "The Hardest Month of the Fire Horse Year Is Here" — The Metal Snake month (May 17–Jun 14) is the year's worst elemental combination: the year's fire melts metal's luck, and the Snake can't stand the Horse's pace. What to avoid (risk, new ventures), what to protect (relationships, honesty), who feels it most (Rat hardest; Ox and Rooster spared), and the days that actually favor you (water days and Sheep days; avoid Rat days). |
+| Jun 1 | Mon | Facebook EN | We just entered the Metal Snake month (May 17 to Jun 14), and in a Fire Horse year it is the hardest stretch on the calendar. The year's fire melts metal's luck, and the Snake cannot stand the Horse's pace. Here is what to avoid, what to protect, and which days actually favor you. |
+| Jun 1 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 1 | Mon | Instagram | The Metal Snake month is here, and in a Fire Horse year it is the tough one. Slow down. Protect what you have. Tell the truth. Full forecast on the blog. |
+| Jun 2 | Tue | Facebook EN | The single most important thing in the Snake month is honesty. In a year this charged, getting caught in even a small lie can undo a relationship. Here is why the Snake rewards the people who keep it straight. |
+| Jun 2 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 2 | Tue | Instagram | Snake month rule number one: honesty. The small lie is the expensive one this month. |
+| Jun 3 | Wed | Blog | "Lay Low, but Don't Stand Still — the Mirror's Playbook for the Snake Month" — The Mahjong Mirror turned on a month that punishes action: name what you're tempted to risk, go deep on what you already have, and let honesty be the discipline that protects your relationships. |
+| Jun 3 | Wed | Facebook EN | Laying low does not mean doing nothing. The Mahjong Mirror gives you three moves for a month that punishes action: name what you are tempted to risk, go deep on what you already have, and let honesty carry the weight. |
+| Jun 3 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 3 | Wed | Instagram | Lay low, but do not stand still. Three Mirror moves for the Snake month, on the blog. |
+| Jun 4 | Thu | Facebook EN | The Snake month is a relationship month, not a risk month. The Mirror's discipline this week is to go deeper on what you already have instead of chasing something new. Here is what that looks like in practice. |
+| Jun 4 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 4 | Thu | Instagram | Go deep, not wide. The Snake month rewards the relationships you already have. |
+| Jun 5 | Fri | Blog | "Feel Good Friday: Three Words for the Snake Month" — Rest, caution, honesty. The weekend challenge: schedule real R&R, pause one risky impulse, and have the honest conversation you have been avoiding. |
+| Jun 5 | Fri | Facebook EN | Feel Good Friday: three words for the Snake month. Rest. Caution. Honesty. Your weekend challenge is one of each: schedule real downtime, pause one risky impulse, and have the honest conversation you have been putting off. |
+| Jun 5 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 5 | Fri | Instagram | Feel Good Friday: Rest. Caution. Honesty. Pick one and start this weekend. |
+
+---
+
+## Week of June 8 — The Quarter You're In: Dragon → Snake → Horse
+
+> Source brief: `content/source-material/q3-2026-three-month-overview.md`. Note: by Jun 8 the Dragon month has ended and the Snake month closes Jun 14 — frame this forward, toward the incoming **Water Horse month (begins Jun 15)**.
+
+**Topic: 2026-06-08-horse-quarter-overview** — STATUS: WRITTEN
+Angle: Fire Horse — shock & awe. Three challenging months in a row: Metal Dragon (workable, even big wins) → Metal Snake (the turn) → Water Horse (double-horse plus the water/fire clash).
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-06-10-mirror-quarter-overview** — STATUS: WRITTEN
+Angle: Mahjong Mirror — sequencing decisions across a hard quarter: where to be bold (Dragon-style windows) and where to hold.
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-06-12-feel-good-quarter-overview** — STATUS: WRITTEN
+Angle: Feel Good Friday — a planning challenge: map your next six weeks to the energy, not against it.
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jun 8 | Mon | Blog | "Two Metal Months and a Water Horse — the Quarter Nobody Warned You About" — A high-level read of the arc: fire destroys metal's luck through the Dragon and Snake months, then the Water Horse doubles the horse energy and adds a water/fire clash. The Dragon was where the big wins lived; the Snake and Horse are where you protect what you built. |
+| Jun 8 | Mon | Facebook EN | Three hard months in a row. The Metal Dragon brought the wins, the Metal Snake is the turn, and the Water Horse doubles the horse energy with a water and fire clash on top. Here is how to read the quarter you are standing in. |
+| Jun 8 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 8 | Mon | Instagram | Dragon, Snake, Water Horse. Three tough months back to back. Where the wins were, and where you hold. On the blog. |
+| Jun 9 | Tue | Facebook EN | The Dragon month was where the big moves paid off. From here the job changes from chasing wins to protecting them. Here is why the back half of this quarter rewards patience over speed. |
+| Jun 9 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 9 | Tue | Instagram | The Dragon gave you the win. The Snake and the Horse ask you to protect it. |
+| Jun 10 | Wed | Blog | "When to Push and When to Hold — the Mirror Across a Hard Quarter" — The Mahjong Mirror as a sequencing tool: read which windows reward boldness and which demand patience, so you spend your energy where the quarter actually pays it back. |
+| Jun 10 | Wed | Facebook EN | Not every month wants the same energy from you. The Mahjong Mirror is a sequencing tool: it shows which windows reward boldness and which demand patience, so you spend your effort where the quarter actually pays it back. |
+| Jun 10 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 10 | Wed | Instagram | Push in some months. Hold in others. The Mirror tells you which is which. |
+| Jun 11 | Thu | Facebook EN | The mistake in a hard quarter is treating every month the same. Push when the energy is with you, hold when it is against you. Here is how to map the next six weeks before they map you. |
+| Jun 11 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 11 | Thu | Instagram | Read the month before you spend the month. The Mirror's quarter playbook. |
+| Jun 12 | Fri | Blog | "Feel Good Friday: Plan With the Current, Not Against It" — The weekend challenge: map the next six weeks to the energy of each month and pick one bold move and one thing to hold. |
+| Jun 12 | Fri | Facebook EN | Feel Good Friday: stop swimming against the month. Your weekend challenge is to map the next six weeks to the energy of each one, then pick one bold move and one thing to simply hold. Plan with the current. |
+| Jun 12 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 12 | Fri | Instagram | Feel Good Friday: One bold move. One thing to hold. Plan with the current, not against it. |
+
+---
+
+## Week of June 15 — The Year of the Sheep Is Coming (2027 Preview) — DEFERRED
+
+> NOT in the current writing batch — we are writing Jun 1 + Jun 8 first. Daily social hooks will be filled in when this week enters the writing queue. Source brief ready: `content/source-material/year-of-the-sheep-2027.md`. The Fire Sheep year begins **Feb 6, 2027**; Jun 15 also begins the Water Horse month.
+
+**Topic: 2026-06-15-horse-sheep-year** — STATUS: PLANNED
+Angle: Fire Horse — the pivot. After a year of fire and action, the Fire Sheep is the Yin counterweight: calmer and slower, but a "year of emotions."
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-06-17-mirror-sheep-year** — STATUS: PLANNED
+Angle: Mahjong Mirror — what to build now so you arrive in the Sheep year steady: emotional control, the relationships worth keeping, the foundations worth laying.
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-06-19-feel-good-sheep-year** — STATUS: PLANNED
+Angle: Feel Good Friday — a "build before it arrives" challenge: name one thing to carry into the calmer year.
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jun 15 | Mon | Blog | "The Fire Burns Out Next Year — Here's What Replaces It" — The Fire Sheep year (begins Feb 6, 2027) is the Yin to the Horse's Yang: the pace slows, the extremes ease, but emotions take center stage. Strong for romance, watchful for money and career, and a year where beauty, fashion, and peace of mind matter. Who thrives (Rabbit, Sheep, Pig, Snake) and who struggles (Rat, Monkey, Dog, Ox). |
+| Jun 17 | Wed | Blog | "Build It Now, Carry It Into the Sheep Year — the Mirror's Long Game" — The Mahjong Mirror applied to the transition: emotional control, the relationships worth keeping, and the foundations worth laying while the Horse year still has momentum. |
+| Jun 19 | Fri | Blog | "Feel Good Friday: One Thing to Carry Into the Calm" — The weekend challenge: name one thing — a habit, a relationship, a practice — to build now so you arrive in the Sheep year steady. |
+| — | Mon–Fri | Facebook EN / Facebook VN / Instagram | Daily social to be drafted by the Writer (Tuesday run) per the content-calendar process. |
+

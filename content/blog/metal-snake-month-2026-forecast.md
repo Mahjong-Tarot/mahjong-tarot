@@ -19,7 +19,7 @@ jsonLd:
   image: "https://mahjongtarot.com/images/blog/metal-snake-month-2026-forecast.webp"
 hero:
   src: "/images/blog/metal-snake-month-2026-forecast.webp"
-  alt: "A crucible of molten metal glowing amber among dark coals, with the consumed remnants of a cast object nearby"
+  alt: "An antique brass snake coiled on dark walnut wood beside a single lit candle, its metal scales catching the warm light"
 nav:
   prev:
     slug: "what-the-favorites-trainers-missed-mahjong-mirror"

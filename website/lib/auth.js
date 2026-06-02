@@ -66,11 +66,19 @@ export function AuthProvider({ children }) {
       }
     } catch (err) {
       console.error('signOut failed:', err);
-    } finally {
-      // Don't depend on onAuthStateChange firing — clear local state ourselves.
-      setUser(null);
-      setProfile(null);
     }
+    // The browser signOut above can hang (or resolve via the 1500ms race
+    // before the cookie is actually cleared), leaving the SSR auth cookie
+    // intact so the next page load is still authenticated. Hit a server
+    // route that authoritatively expires the cookie before we navigate.
+    try {
+      await fetch('/api/auth/signout', { method: 'POST' });
+    } catch (err) {
+      console.error('server signOut failed:', err);
+    }
+    // Don't depend on onAuthStateChange firing — clear local state ourselves.
+    setUser(null);
+    setProfile(null);
   };
 
   // `profile.id` is the user's UUID (== profiles.user_id), not a separate row id.

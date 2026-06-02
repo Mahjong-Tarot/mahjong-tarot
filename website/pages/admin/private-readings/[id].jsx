@@ -48,6 +48,19 @@ const secondaryButtonStyle = {
   border: '1px solid #d1d5db', borderRadius: 6, fontSize: 14, fontWeight: 500, cursor: 'pointer',
 };
 
+const detailLabelStyle = {
+  fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em',
+  color: '#6b7280', fontWeight: 500, marginBottom: 4,
+};
+
+const inlineInputStyle = {
+  width: '100%', padding: '8px 10px', border: '1px solid #d1d5db',
+  borderRadius: 6, fontSize: 14, fontFamily: 'inherit',
+};
+
+// HTML <input type="time"> wants HH:MM; Postgres time comes back HH:MM:SS.
+const hhmm = (v) => (v || '').slice(0, 5);
+
 export default function ReadingBriefPage({ profile }) {
   const router = useRouter();
   const { id } = router.query;
@@ -67,6 +80,12 @@ export default function ReadingBriefPage({ profile }) {
     question:           '',
     transcript_text:    '',
     final_reading_html: '',
+    birthday:           '',
+    birth_time:         '',
+    partner_name:       '',
+    partner_birthday:   '',
+    partner_birth_time: '',
+    partner_gender:     '',
   });
   const [activeTab, setActiveTab]         = useState('prep'); // 'prep' | 'notes' | 'reading'
   const [generating, setGenerating]       = useState(false);
@@ -86,7 +105,7 @@ export default function ReadingBriefPage({ profile }) {
       try {
         const { data: b, error: be } = await supabase
           .from('bookings')
-          .select('id, full_name, email, scheduled_at, duration_minutes, status, amount_cents, currency, astrologer_id, question, birthday, birth_time, meeting_source, meeting_external_id, prep_notes, post_call_notes, transcript_text, summary_text, final_reading_html, public_token, final_reading_sent_at')
+          .select('id, full_name, email, scheduled_at, duration_minutes, status, amount_cents, currency, astrologer_id, question, birthday, birth_time, meeting_source, meeting_external_id, prep_notes, post_call_notes, transcript_text, summary_text, final_reading_html, public_token, final_reading_sent_at, is_relationship, partner_name, partner_birthday, partner_birth_time, partner_gender')
           .eq('id', id)
           .maybeSingle();
         if (be) throw be;
@@ -100,6 +119,12 @@ export default function ReadingBriefPage({ profile }) {
           question:           b.question           || '',
           transcript_text:    b.transcript_text    || '',
           final_reading_html: b.final_reading_html || '',
+          birthday:           b.birthday           || '',
+          birth_time:         b.birth_time         || '',
+          partner_name:       b.partner_name       || '',
+          partner_birthday:   b.partner_birthday   || '',
+          partner_birth_time: b.partner_birth_time || '',
+          partner_gender:     b.partner_gender     || '',
         });
 
         // People: match by email (canonical identity)
@@ -143,10 +168,12 @@ export default function ReadingBriefPage({ profile }) {
     return () => { cancelled = true; };
   }, [router.isReady, id]);
 
-  // Birthday + birth_time: prefer the person's canonical record; fall
-  // back to the booking-specific copy (legacy behaviour).
-  const birthday  = person?.birthday  || booking?.birthday  || null;
-  const birthTime = person?.birth_time || booking?.birth_time || null;
+  // Birthday + birth_time: prefer the value entered on the booking
+  // (the prep tab is authoritative — it lets the astrologer fill in a
+  // missing birthday and have it take), then the person's canonical
+  // record.
+  const birthday  = booking?.birthday  || person?.birthday  || null;
+  const birthTime = booking?.birth_time || person?.birth_time || null;
 
   const pillars = useMemo(() => birthday ? calculatePillars(birthday, birthTime) : null, [birthday, birthTime]);
   const zodiac  = useMemo(() => birthday ? getZodiacAnimal(birthday) : null, [birthday]);
@@ -164,12 +191,28 @@ export default function ReadingBriefPage({ profile }) {
     catch { return null; }
   }, [birthday, birthTime, person?.gender]);
 
+  // Second person (relationship reading). Charts compute off the
+  // booking's saved partner_* fields, mirroring the guest's charts.
+  const partnerBirthday  = booking?.partner_birthday  || null;
+  const partnerBirthTime = booking?.partner_birth_time || null;
+  const partnerGender    = booking?.partner_gender || null;
+  const partnerPillars  = useMemo(() => (partnerBirthday ? calculatePillars(partnerBirthday, partnerBirthTime) : null), [partnerBirthday, partnerBirthTime]);
+  const partnerZodiac   = useMemo(() => (partnerBirthday ? getZodiacAnimal(partnerBirthday) : null), [partnerBirthday]);
+  const partnerTally    = useMemo(() => tallyElements(partnerPillars), [partnerPillars]);
+  const partnerDominant = useMemo(() => dominantElement(partnerTally), [partnerTally]);
+  const partnerPurpleStar = useMemo(() => {
+    if (!partnerBirthday || !partnerBirthTime || !partnerGender) return null;
+    try { return calculatePurpleStar({ birthday: partnerBirthday, birthTime: partnerBirthTime, gender: partnerGender }); }
+    catch { return null; }
+  }, [partnerBirthday, partnerBirthTime, partnerGender]);
+
   const briefMarkdown = useMemo(() => {
     if (!booking) return '';
     return buildReadingBrief({
       person, booking, inquiry, pillars, zodiac, dominant,
+      partnerPillars, partnerZodiac, partnerDominant,
     });
-  }, [person, booking, inquiry, pillars, zodiac, dominant]);
+  }, [person, booking, inquiry, pillars, zodiac, dominant, partnerPillars, partnerZodiac, partnerDominant]);
 
   const guestFirstName = useMemo(() => {
     const full = person?.name || booking?.full_name || '';
@@ -237,6 +280,22 @@ export default function ReadingBriefPage({ profile }) {
     const { error: e } = await supabase
       .from('bookings')
       .update({ [field]: value || null })
+      .eq('id', booking.id);
+    setSavingField('');
+    if (e) { setError(e.message); return; }
+    setBooking({ ...booking, [field]: value });
+    setDraft((d) => ({ ...d, [field]: value }));
+  }
+
+  // Save a raw value with no falsy→null coercion — for the
+  // is_relationship boolean and the partner gender select, where
+  // `false` / cleared must round-trip exactly.
+  async function saveRaw(field, value) {
+    if (!booking) return;
+    setSavingField(field);
+    const { error: e } = await supabase
+      .from('bookings')
+      .update({ [field]: value })
       .eq('id', booking.id);
     setSavingField('');
     if (e) { setError(e.message); return; }
@@ -386,13 +445,42 @@ export default function ReadingBriefPage({ profile }) {
                   />
                 </Section>
 
-                {/* Birth data */}
+                {/* Birth data — editable; saves to this booking */}
                 <Section title="Birth data">
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
-                    <Detail label="Birthday">{birthday || <Missing />}</Detail>
-                    <Detail label="Birth time">{birthTime || <Missing label="missing — Hour Pillar unavailable" />}</Detail>
+                    <div>
+                      <div style={detailLabelStyle}>Birthday</div>
+                      <input
+                        type="date"
+                        value={draft.birthday}
+                        onChange={(e) => setDraft({ ...draft, birthday: e.target.value })}
+                        onBlur={() => (booking.birthday || '') !== draft.birthday && saveField('birthday')}
+                        style={inlineInputStyle}
+                      />
+                    </div>
+                    <div>
+                      <div style={detailLabelStyle}>Birth time</div>
+                      <input
+                        type="time"
+                        value={hhmm(draft.birth_time)}
+                        onChange={(e) => setDraft({ ...draft, birth_time: e.target.value })}
+                        onBlur={() => hhmm(booking.birth_time) !== hhmm(draft.birth_time) && saveField('birth_time')}
+                        style={inlineInputStyle}
+                      />
+                      {!draft.birth_time && (
+                        <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 4, fontStyle: 'italic' }}>
+                          missing — Hour Pillar unavailable
+                        </div>
+                      )}
+                    </div>
                     <Detail label="Birth place">{person?.birth_place || <Missing label="missing" />}</Detail>
                   </div>
+                  {(savingField === 'birthday' || savingField === 'birth_time') && (
+                    <span className={adminStyles.muted}>Saving…</span>
+                  )}
+                  <p className={adminStyles.muted} style={{ fontSize: 12, marginTop: 10 }}>
+                    Editing here saves to this reading — the charts below update on save.
+                  </p>
                 </Section>
 
                 {/* Four Pillars */}
@@ -495,6 +583,121 @@ export default function ReadingBriefPage({ profile }) {
                     </ul>
                   </Section>
                 )}
+
+                {/* Relationship / second person */}
+                <Section title="Relationship / second person">
+                  <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: booking.is_relationship ? 18 : 0 }}>
+                    <input
+                      type="checkbox"
+                      checked={!!booking.is_relationship}
+                      onChange={(e) => saveRaw('is_relationship', e.target.checked)}
+                      style={{ width: 16, height: 16 }}
+                    />
+                    <span style={{ fontSize: 14 }}>This reading is about a relationship with another person</span>
+                  </label>
+
+                  {booking.is_relationship && (
+                    <>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+                        <div>
+                          <div style={detailLabelStyle}>Their name</div>
+                          <input
+                            type="text"
+                            value={draft.partner_name}
+                            onChange={(e) => setDraft({ ...draft, partner_name: e.target.value })}
+                            onBlur={() => (booking.partner_name || '') !== draft.partner_name && saveField('partner_name')}
+                            placeholder="The other person"
+                            style={inlineInputStyle}
+                          />
+                        </div>
+                        <div>
+                          <div style={detailLabelStyle}>Their gender</div>
+                          <select
+                            value={draft.partner_gender || ''}
+                            onChange={(e) => saveRaw('partner_gender', e.target.value || null)}
+                            style={inlineInputStyle}
+                          >
+                            <option value="">—</option>
+                            <option value="F">Female</option>
+                            <option value="M">Male</option>
+                          </select>
+                        </div>
+                        <div>
+                          <div style={detailLabelStyle}>Their birthday</div>
+                          <input
+                            type="date"
+                            value={draft.partner_birthday}
+                            onChange={(e) => setDraft({ ...draft, partner_birthday: e.target.value })}
+                            onBlur={() => (booking.partner_birthday || '') !== draft.partner_birthday && saveField('partner_birthday')}
+                            style={inlineInputStyle}
+                          />
+                        </div>
+                        <div>
+                          <div style={detailLabelStyle}>Their birth time</div>
+                          <input
+                            type="time"
+                            value={hhmm(draft.partner_birth_time)}
+                            onChange={(e) => setDraft({ ...draft, partner_birth_time: e.target.value })}
+                            onBlur={() => hhmm(booking.partner_birth_time) !== hhmm(draft.partner_birth_time) && saveField('partner_birth_time')}
+                            style={inlineInputStyle}
+                          />
+                        </div>
+                      </div>
+                      {savingField.startsWith('partner_') && <span className={adminStyles.muted}>Saving…</span>}
+
+                      {partnerPillars ? (
+                        <div style={{ marginTop: 18 }}>
+                          <p className={adminStyles.muted} style={{ marginBottom: 10 }}>
+                            <strong>{draft.partner_name || 'Second person'}:</strong>{' '}
+                            Day Master {partnerPillars.day?.stem?.element} {partnerPillars.day?.stem?.polarity} ·{' '}
+                            Zodiac {partnerZodiac || '—'} ·{' '}
+                            Dominant {partnerDominant || '—'}
+                          </p>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                            <thead>
+                              <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
+                                <th style={{ padding: 8 }}>Pillar</th>
+                                <th style={{ padding: 8 }}>Stem</th>
+                                <th style={{ padding: 8 }}>Branch</th>
+                                <th style={{ padding: 8 }}>Animal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {[['Year', partnerPillars.year], ['Month', partnerPillars.month], ['Day', partnerPillars.day], ['Hour', partnerPillars.hour]].map(([label, p]) => (
+                                <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
+                                  <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
+                                  <td style={{ padding: 8 }}>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
+                                  <td style={{ padding: 8 }}>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
+                                  <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                          {partnerPurpleStar && (
+                            <p className={adminStyles.muted} style={{ marginTop: 10 }}>
+                              <strong>Purple Star — Life Palace:</strong>{' '}
+                              {partnerPurpleStar.lifePalace?.branchHan || '—'} ({partnerPurpleStar.lifePalace?.animal || '—'})
+                            </p>
+                          )}
+                          {pillars && (
+                            <div style={{ marginTop: 14, padding: 14, background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, fontSize: 14, lineHeight: 1.6 }}>
+                              <strong>Compatibility at a glance</strong>
+                              <div style={{ marginTop: 6 }}>
+                                {guestFirstName}: {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} day master · {zodiac || '—'}
+                                <br />
+                                {draft.partner_name || 'Second person'}: {partnerPillars.day?.stem?.element} {partnerPillars.day?.stem?.polarity} day master · {partnerZodiac || '—'}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <p className={adminStyles.muted} style={{ marginTop: 14, fontSize: 13 }}>
+                          Add their birthday to compute their chart.
+                        </p>
+                      )}
+                    </>
+                  )}
+                </Section>
 
                 {/* Prep notes */}
                 <Section title="Prep notes">

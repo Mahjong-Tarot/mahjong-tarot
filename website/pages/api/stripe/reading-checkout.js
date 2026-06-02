@@ -5,7 +5,7 @@
 // Checkout Session ($48 / $88 / $128 depending on duration) and
 // stamps the booking metadata so the webhook can finalise the row.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
-import { readingPriceId, tierFor } from '../../../lib/bookings';
+import { readingPriceId, tierFor, DEFAULT_ASTROLOGER_ID } from '../../../lib/bookings';
 
 function originFromReq(req) {
   if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
@@ -30,6 +30,11 @@ export default async function handler(req, res) {
     question,
     slot_id,
     hold_token,
+    is_relationship,
+    partner_name,
+    partner_birthday,
+    partner_birth_time,
+    partner_gender,
   } = req.body || {};
 
   const tier = tierFor(duration);
@@ -84,14 +89,19 @@ export default async function handler(req, res) {
       question: question ? question.slice(0, 500) : '',
       slot_id,
       slot_start: slot.slot_start,
-      astrologer_id: slot.astrologer_id || '',
+      astrologer_id: slot.astrologer_id || DEFAULT_ASTROLOGER_ID,
+      is_relationship: is_relationship ? 'true' : 'false',
+      partner_name: partner_name || '',
+      partner_birthday: partner_birthday || '',
+      partner_birth_time: partner_birth_time || '',
+      partner_gender: partner_gender || '',
     },
     payment_intent_data: {
       metadata: {
         booking: 'true',
         slot_id,
         duration: String(duration),
-        astrologer_id: slot.astrologer_id || '',
+        astrologer_id: slot.astrologer_id || DEFAULT_ASTROLOGER_ID,
       },
       description: `Mahjong Tarot — Private Reading (${duration} min)`,
     },

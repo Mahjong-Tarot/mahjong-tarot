@@ -76,7 +76,7 @@ export default async function handler(req, res) {
   // Load booking
   const { data: booking, error: bErr } = await svc
     .from('bookings')
-    .select('id, full_name, email, scheduled_at, duration_minutes, question, birthday, birth_time, prep_notes, post_call_notes, transcript_text')
+    .select('id, full_name, email, scheduled_at, duration_minutes, question, birthday, birth_time, prep_notes, post_call_notes, transcript_text, is_relationship, partner_name, partner_birthday, partner_birth_time, partner_gender')
     .eq('id', bookingId)
     .maybeSingle();
   if (bErr) return res.status(500).json({ error: bErr.message });
@@ -132,8 +132,22 @@ export default async function handler(req, res) {
     // Fall through with nulls — buildReadingBrief handles missing pillars.
   }
 
+  let partnerPillars = null;
+  let partnerZodiac = null;
+  let partnerDominant = null;
+  try {
+    if (booking.partner_birthday) {
+      partnerPillars = calculatePillars(booking.partner_birthday, booking.partner_birth_time);
+      partnerZodiac = getZodiacAnimal(booking.partner_birthday);
+      partnerDominant = dominantElement(tallyElements(partnerPillars));
+    }
+  } catch {
+    // Fall through — buildReadingBrief handles missing partner pillars.
+  }
+
   const prepBrief = buildReadingBrief({
     person, booking, inquiry, pillars, zodiac, dominant,
+    partnerPillars, partnerZodiac, partnerDominant,
   });
 
   const guestName = (person?.name || booking.full_name || '').trim() || 'the guest';
@@ -147,6 +161,19 @@ export default async function handler(req, res) {
     `## Reading question`,
     (booking.question || inquiry?.message || '(none on file)').trim(),
     '',
+    booking.is_relationship ? `## Relationship / second person` : null,
+    booking.is_relationship
+      ? [
+          booking.partner_name ? `Name: ${booking.partner_name}` : null,
+          booking.partner_birthday ? `Birthday: ${booking.partner_birthday}` : '(birthday not provided)',
+          booking.partner_birth_time ? `Birth time: ${booking.partner_birth_time}` : null,
+          booking.partner_gender ? `Gender: ${booking.partner_gender}` : null,
+          partnerPillars
+            ? `Chart: ${partnerPillars.day?.stem?.polarity} ${partnerPillars.day?.stem?.element} day master · Year of the ${partnerZodiac} · ${partnerDominant}-dominant`
+            : null,
+        ].filter(Boolean).join('\n')
+      : null,
+    booking.is_relationship ? '' : null,
     `## Prep brief (chart + opening)`,
     prepBrief || '(no chart computed — birthday missing)',
     '',

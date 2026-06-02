@@ -4,6 +4,7 @@
 // JSON body parser is disabled below.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
 import { findOrCreatePersonByEmail, promoteToCustomer } from '../../../lib/people';
+import { DEFAULT_ASTROLOGER_ID } from '../../../lib/bookings';
 
 export const config = {
   api: { bodyParser: false },
@@ -192,6 +193,9 @@ async function handleBookingCompleted(service, session) {
       .maybeSingle();
     astrologerId = slot?.astrologer_id || null;
   }
+  // For now every reading routes to the default astrologer (Bill) so
+  // it lands in his queue even if the slot had no owner.
+  astrologerId = astrologerId || DEFAULT_ASTROLOGER_ID;
 
   // Idempotent upsert by Stripe session id.
   const { data: booking, error: bookingErr } = await service
@@ -204,6 +208,11 @@ async function handleBookingCompleted(service, session) {
         birthday: m.birthday || null,
         birth_time: m.birth_time || null,
         question: m.question || null,
+        is_relationship: m.is_relationship === 'true',
+        partner_name: m.partner_name || null,
+        partner_birthday: m.partner_birthday || null,
+        partner_birth_time: m.partner_birth_time || null,
+        partner_gender: m.partner_gender || null,
         duration_minutes: duration,
         scheduled_at: scheduledAt,
         slot_id: slotId,

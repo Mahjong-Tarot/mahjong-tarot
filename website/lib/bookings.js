@@ -23,3 +23,9 @@ export function readingPriceId(duration) {
 // Hold expires this many minutes after the user picks a slot,
 // giving them time to complete Stripe Checkout.
 export const HOLD_TTL_MINUTES = 10;
+
+// Default astrologer for new bookings. "For now" every reading routes
+// to Bill Hajdu so his queue shows everything when he logs in. This is
+// the same id 024_astrologer_scoping.sql backfills as the sole
+// astrologer (maps to the firepig01@gmail.com astrologer account).
+export const DEFAULT_ASTROLOGER_ID = 'c02c4b87-a890-4614-8720-cd19d7745943';

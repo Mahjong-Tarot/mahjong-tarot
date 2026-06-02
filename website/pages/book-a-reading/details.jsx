@@ -40,6 +40,11 @@ export default function BookingDetails() {
   const [birthday, setBirthday] = useState('');
   const [birthTime, setBirthTime] = useState('');
   const [question, setQuestion] = useState('');
+  const [isRelationship, setIsRelationship] = useState(false);
+  const [partnerName, setPartnerName] = useState('');
+  const [partnerBirthday, setPartnerBirthday] = useState('');
+  const [partnerBirthTime, setPartnerBirthTime] = useState('');
+  const [partnerGender, setPartnerGender] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -55,6 +60,11 @@ export default function BookingDetails() {
     if (draft.birthday)  setBirthday(draft.birthday);
     if (draft.birthTime) setBirthTime(draft.birthTime);
     if (draft.question)  setQuestion(draft.question);
+    if (draft.isRelationship) setIsRelationship(!!draft.isRelationship);
+    if (draft.partnerName) setPartnerName(draft.partnerName);
+    if (draft.partnerBirthday) setPartnerBirthday(draft.partnerBirthday);
+    if (draft.partnerBirthTime) setPartnerBirthTime(draft.partnerBirthTime);
+    if (draft.partnerGender) setPartnerGender(draft.partnerGender);
   }, [router.isReady, router.query.duration]);
 
   const tier = TIERS[duration] || TIERS[60];
@@ -70,6 +80,10 @@ export default function BookingDetails() {
       setError('Please enter a valid email address.');
       return;
     }
+    if (isRelationship && !partnerBirthday) {
+      setError("Please add the other person's birthday, or uncheck the relationship option.");
+      return;
+    }
     writeDraft({
       duration,
       firstName: firstName.trim(),
@@ -79,6 +93,11 @@ export default function BookingDetails() {
       birthday: birthday || '',
       birthTime: birthTime || '',
       question: question.trim(),
+      isRelationship,
+      partnerName: partnerName.trim(),
+      partnerBirthday: partnerBirthday || '',
+      partnerBirthTime: partnerBirthTime || '',
+      partnerGender: partnerGender || '',
     });
     router.push(`/book-a-reading/schedule?duration=${duration}`);
   }
@@ -219,6 +238,77 @@ export default function BookingDetails() {
               />
               <div className={styles.fieldHint}>// Up to 500 characters. You can also leave this for the call.</div>
             </div>
+
+            <div className={`${styles.field} ${styles.fieldFull}`}>
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={isRelationship}
+                  onChange={(e) => setIsRelationship(e.target.checked)}
+                  style={{ width: 18, height: 18, marginTop: 2, flexShrink: 0 }}
+                />
+                <span>This reading is about a relationship with another person</span>
+              </label>
+              <div className={styles.fieldHint}>// Most readings are. Add their birth details so Bill can read both charts.</div>
+            </div>
+
+            {isRelationship && (
+              <>
+                <div className={styles.formGrid}>
+                  <div className={styles.field}>
+                    <label className={styles.fieldLabel} htmlFor="pname">
+                      Their name <span className={styles.opt}>(optional)</span>
+                    </label>
+                    <input
+                      className={styles.input}
+                      id="pname"
+                      value={partnerName}
+                      onChange={(e) => setPartnerName(e.target.value)}
+                      placeholder="The other person"
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label className={styles.fieldLabel} htmlFor="pgender">
+                      Their gender <span className={styles.opt}>(optional)</span>
+                    </label>
+                    <select
+                      className={styles.input}
+                      id="pgender"
+                      value={partnerGender}
+                      onChange={(e) => setPartnerGender(e.target.value)}
+                    >
+                      <option value="">—</option>
+                      <option value="F">Female</option>
+                      <option value="M">Male</option>
+                    </select>
+                  </div>
+                </div>
+                <div className={styles.formGrid}>
+                  <div className={styles.field}>
+                    <label className={styles.fieldLabel} htmlFor="pbday">Their birthday</label>
+                    <input
+                      className={styles.input}
+                      id="pbday"
+                      type="date"
+                      value={partnerBirthday}
+                      onChange={(e) => setPartnerBirthday(e.target.value)}
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label className={styles.fieldLabel} htmlFor="pbtime">
+                      Their birth time <span className={styles.opt}>(if known)</span>
+                    </label>
+                    <input
+                      className={styles.input}
+                      id="pbtime"
+                      type="time"
+                      value={partnerBirthTime}
+                      onChange={(e) => setPartnerBirthTime(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
 
             {error && <div className={styles.formError}>{error}</div>}
 

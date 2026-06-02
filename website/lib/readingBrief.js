@@ -2,7 +2,7 @@
 // Bazi chart + the inquiry context to produce a paragraph Bill can
 // read at the top of the call. Returns a markdown string.
 
-export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, dominant }) {
+export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, dominant, partnerPillars, partnerZodiac, partnerDominant }) {
   if (!pillars) {
     return [
       `Open the reading by collecting birth data — birthday is missing so Bazi can't be computed.`,
@@ -37,6 +37,20 @@ export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, d
 
   if (dominant && elementLine) {
     parts.push(`${elementLine}.`);
+  }
+
+  if (partnerPillars) {
+    const pDm = partnerPillars.day?.stem;
+    const pName = (booking?.partner_name || '').trim() || 'The other person';
+    const pAnimal = partnerZodiac || partnerPillars.year?.branch?.animal || null;
+    const pDmText = pDm ? `${pDm.polarity} ${pDm.element} day master` : 'day master';
+    parts.push(
+      `**Relationship reading.** ${pName} is a **${pDmText}**` +
+      (pAnimal ? ` born in the Year of the ${pAnimal}` : '') +
+      (partnerDominant ? `, chart leaning ${partnerDominant}` : '') +
+      `. Read the two charts together — how ${name}'s ${dm?.element || 'element'} and ` +
+      `${pName}'s ${pDm?.element || 'element'} interact (support vs. control) is the core of the relationship question.`,
+    );
   }
 
   if (hourMissing) {

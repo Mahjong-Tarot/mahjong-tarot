@@ -483,107 +483,6 @@ export default function ReadingBriefPage({ profile }) {
                   </p>
                 </Section>
 
-                {/* Four Pillars */}
-                {pillars && (
-                  <Section title="Four Pillars (computed live)">
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
-                      <thead>
-                        <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
-                          <th style={{ padding: 8 }}>Pillar</th>
-                          <th style={{ padding: 8 }}>Stem</th>
-                          <th style={{ padding: 8 }}>Branch</th>
-                          <th style={{ padding: 8 }}>Element</th>
-                          <th style={{ padding: 8 }}>Animal</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {[['Year', pillars.year], ['Month', pillars.month], ['Day', pillars.day], ['Hour', pillars.hour]].map(([label, p]) => (
-                          <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
-                            <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
-                            <td style={{ padding: 8 }}>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
-                            <td style={{ padding: 8 }}>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
-                            <td style={{ padding: 8 }}>{p ? p.stem.element : '—'}</td>
-                            <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    <p className={adminStyles.muted} style={{ marginTop: 10 }}>
-                      <strong>Day Master:</strong> {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} ·{' '}
-                      <strong>Zodiac:</strong> {zodiac || '—'} ·{' '}
-                      <strong>Dominant element:</strong> {dominant || '—'}
-                    </p>
-                  </Section>
-                )}
-
-                {/* Brief — start here (rule-based synthesis from the chart) */}
-                {briefMarkdown && (
-                  <Section title="Brief — start here">
-                    <div style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, padding: 16, lineHeight: 1.6, fontSize: 14 }}>
-                      {briefMarkdown.split('\n\n').map((para, i) => (
-                        <p key={i} style={{ margin: i === 0 ? 0 : '10px 0 0' }} dangerouslySetInnerHTML={{
-                          __html: para.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-                                       .replace(/_([^_]+)_/g, '<em>$1</em>')
-                                       .replace(/\n/g, '<br/>')
-                        }} />
-                      ))}
-                    </div>
-                  </Section>
-                )}
-
-                {/* Purple Star */}
-                {purpleStar ? (
-                  <Section title="Purple Star (Zi Wei Dou Shu)">
-                    <p className={adminStyles.muted} style={{ marginBottom: 10 }}>
-                      <strong>Life Palace:</strong> {purpleStar.lifePalace?.branchHan || '—'} ({purpleStar.lifePalace?.animal || '—'}) ·{' '}
-                      <strong>Body Palace:</strong> {purpleStar.bodyPalace?.branchHan || '—'}
-                    </p>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-                      <thead>
-                        <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
-                          <th style={{ padding: 6 }}>Palace</th>
-                          <th style={{ padding: 6 }}>Branch</th>
-                          <th style={{ padding: 6 }}>Major stars</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {(purpleStar.palaces || []).slice(0, 12).map((pl, i) => (
-                          <tr key={i} style={{ borderTop: '1px solid #e5e7eb' }}>
-                            <td style={{ padding: 6, fontWeight: pl.isMing ? 600 : 400 }}>
-                              {pl.name}{pl.isMing && ' ★'}
-                            </td>
-                            <td style={{ padding: 6 }}>{pl.branchHan} ({pl.animal})</td>
-                            <td style={{ padding: 6 }}>{(pl.majorStars || []).map((s) => s.name).join(', ') || '—'}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </Section>
-                ) : (
-                  <Section title="Purple Star (Zi Wei Dou Shu)">
-                    <p className={adminStyles.muted}>
-                      Requires <strong>birth time</strong> and <strong>gender</strong> on the customer's people record. Add them via the People shelf and refresh.
-                    </p>
-                  </Section>
-                )}
-
-                {/* Three Blessings */}
-                {threeBlessings && (
-                  <Section title="Three Blessings">
-                    <ul style={{ paddingLeft: 18, lineHeight: 1.7 }}>
-                      {['phuc', 'loc', 'tho'].map((key) => {
-                        const b = threeBlessings[key];
-                        if (!b?.personalLine) return null;
-                        return (
-                          <li key={key} style={{ marginBottom: 8 }}>
-                            <strong>{b.position?.name} — {b.position?.label}:</strong> {b.personalLine}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </Section>
-                )}
-
                 {/* Relationship / second person */}
                 <Section title="Relationship / second person">
                   <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: booking.is_relationship ? 18 : 0 }}>
@@ -698,6 +597,107 @@ export default function ReadingBriefPage({ profile }) {
                     </>
                   )}
                 </Section>
+
+                {/* Four Pillars */}
+                {pillars && (
+                  <Section title="Four Pillars (computed live)">
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                      <thead>
+                        <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
+                          <th style={{ padding: 8 }}>Pillar</th>
+                          <th style={{ padding: 8 }}>Stem</th>
+                          <th style={{ padding: 8 }}>Branch</th>
+                          <th style={{ padding: 8 }}>Element</th>
+                          <th style={{ padding: 8 }}>Animal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {[['Year', pillars.year], ['Month', pillars.month], ['Day', pillars.day], ['Hour', pillars.hour]].map(([label, p]) => (
+                          <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
+                            <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
+                            <td style={{ padding: 8 }}>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
+                            <td style={{ padding: 8 }}>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
+                            <td style={{ padding: 8 }}>{p ? p.stem.element : '—'}</td>
+                            <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <p className={adminStyles.muted} style={{ marginTop: 10 }}>
+                      <strong>Day Master:</strong> {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} ·{' '}
+                      <strong>Zodiac:</strong> {zodiac || '—'} ·{' '}
+                      <strong>Dominant element:</strong> {dominant || '—'}
+                    </p>
+                  </Section>
+                )}
+
+                {/* Brief — start here (rule-based synthesis from the chart) */}
+                {briefMarkdown && (
+                  <Section title="Brief — start here">
+                    <div style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, padding: 16, lineHeight: 1.6, fontSize: 14 }}>
+                      {briefMarkdown.split('\n\n').map((para, i) => (
+                        <p key={i} style={{ margin: i === 0 ? 0 : '10px 0 0' }} dangerouslySetInnerHTML={{
+                          __html: para.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                                       .replace(/_([^_]+)_/g, '<em>$1</em>')
+                                       .replace(/\n/g, '<br/>')
+                        }} />
+                      ))}
+                    </div>
+                  </Section>
+                )}
+
+                {/* Purple Star */}
+                {purpleStar ? (
+                  <Section title="Purple Star (Zi Wei Dou Shu)">
+                    <p className={adminStyles.muted} style={{ marginBottom: 10 }}>
+                      <strong>Life Palace:</strong> {purpleStar.lifePalace?.branchHan || '—'} ({purpleStar.lifePalace?.animal || '—'}) ·{' '}
+                      <strong>Body Palace:</strong> {purpleStar.bodyPalace?.branchHan || '—'}
+                    </p>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                      <thead>
+                        <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
+                          <th style={{ padding: 6 }}>Palace</th>
+                          <th style={{ padding: 6 }}>Branch</th>
+                          <th style={{ padding: 6 }}>Major stars</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(purpleStar.palaces || []).slice(0, 12).map((pl, i) => (
+                          <tr key={i} style={{ borderTop: '1px solid #e5e7eb' }}>
+                            <td style={{ padding: 6, fontWeight: pl.isMing ? 600 : 400 }}>
+                              {pl.name}{pl.isMing && ' ★'}
+                            </td>
+                            <td style={{ padding: 6 }}>{pl.branchHan} ({pl.animal})</td>
+                            <td style={{ padding: 6 }}>{(pl.majorStars || []).map((s) => s.name).join(', ') || '—'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </Section>
+                ) : (
+                  <Section title="Purple Star (Zi Wei Dou Shu)">
+                    <p className={adminStyles.muted}>
+                      Requires <strong>birth time</strong> and <strong>gender</strong> on the customer's people record. Add them via the People shelf and refresh.
+                    </p>
+                  </Section>
+                )}
+
+                {/* Three Blessings */}
+                {threeBlessings && (
+                  <Section title="Three Blessings">
+                    <ul style={{ paddingLeft: 18, lineHeight: 1.7 }}>
+                      {['phuc', 'loc', 'tho'].map((key) => {
+                        const b = threeBlessings[key];
+                        if (!b?.personalLine) return null;
+                        return (
+                          <li key={key} style={{ marginBottom: 8 }}>
+                            <strong>{b.position?.name} — {b.position?.label}:</strong> {b.personalLine}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </Section>
+                )}
 
                 {/* Prep notes */}
                 <Section title="Prep notes">

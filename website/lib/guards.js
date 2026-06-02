@@ -95,7 +95,7 @@ export function requirePage(role) {
       // 'admin' guard sends astrologers to their portal; everyone else home.
       const destination =
         role === 'admin' && profile?.role === 'astrologer'
-          ? '/admin/sessions'
+          ? '/admin/private-readings'
           : '/';
       return { redirect: { destination, permanent: false } };
     }

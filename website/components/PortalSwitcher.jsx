@@ -31,7 +31,7 @@ export function writeView(view) {
 
 const PORTAL_DEFS = {
   admin:      { label: 'Admin',      href: '/admin' },
-  astrologer: { label: 'Astrologer', href: '/admin/quick-reading' },
+  astrologer: { label: 'Astrologer', href: '/admin/private-readings' },
   member:     { label: 'Member',     href: '/member/dashboard' },
 };
 

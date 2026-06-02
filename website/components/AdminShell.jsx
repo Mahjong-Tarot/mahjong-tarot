@@ -25,15 +25,26 @@ const OPS_NAV = [
   { href: '/admin/settings/meeting-source', label: 'Settings',   match: (p) => p.startsWith('/admin/settings') },
 ];
 
+// The astrologer's home — their own paid consultations (the bookings
+// table, RLS-scoped to them). Listed first so it is the obvious default.
+const CONSULTATIONS_ITEM = {
+  href: '/admin/private-readings',
+  label: 'My Consultations',
+  match: (p) => p.startsWith('/admin/private-readings'),
+};
+
+// What an astrologer (and an admin previewing the astrologer view) sees.
+const ASTRO_NAV = [CONSULTATIONS_ITEM, ...OPS_NAV];
+
 // Admin can be in two views — 'admin' (full nav) or 'astrologer'
 // (operational nav only, same items a real astrologer sees). The
 // view preference is set by clicking the PortalSwitcher and stored
 // in localStorage.
 function navFor(role, view) {
   if (role === 'admin') {
-    return view === 'astrologer' ? OPS_NAV : [...ADMIN_NAV, ...OPS_NAV];
+    return view === 'astrologer' ? ASTRO_NAV : [...ADMIN_NAV, ...OPS_NAV];
   }
-  if (role === 'astrologer') return OPS_NAV;
+  if (role === 'astrologer') return ASTRO_NAV;
   return [];
 }
 
@@ -65,11 +76,16 @@ export default function AdminShell({ profile, children }) {
   const displayName = profile?.name?.split(' ')[0] || profile?.name || 'Admin';
   const inAstrologerView = profile?.role === 'admin' && view === 'astrologer';
   const shellLabel = inAstrologerView ? 'Astrologer' : 'Admin';
+  // Astrologers have no /admin dashboard — point the logo at their
+  // consultations instead of the dead /admin → /admin/sessions redirect.
+  const homeHref = profile?.role === 'astrologer' || inAstrologerView
+    ? '/admin/private-readings'
+    : '/admin';
 
   return (
     <div className={styles.shell}>
       <header className={styles.mobileBar}>
-        <Link href="/admin" className={styles.brandSm}>Mahjong Tarot · {shellLabel}</Link>
+        <Link href={homeHref} className={styles.brandSm}>Mahjong Tarot · {shellLabel}</Link>
         <button
           type="button"
           className={styles.menuButton}
@@ -84,7 +100,7 @@ export default function AdminShell({ profile, children }) {
 
       <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ''}`}>
         <div className={styles.brand}>
-          <Link href="/admin" className={styles.brandLink}>
+          <Link href={homeHref} className={styles.brandLink}>
             <span className={styles.brandMark} />
             <span className={styles.brandText}>
               Mahjong Tarot

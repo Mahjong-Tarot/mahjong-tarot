@@ -1,4 +1,5 @@
 import { astro } from 'iztro';
+import { resolveStarName } from './purpleStarNames';
 
 const IZTRO_TO_KEY = {
   yin: 'yin', mao: 'mao', chen: 'chen', si: 'si',
@@ -77,8 +78,12 @@ function mutagenLabel(m) {
 }
 
 function normalizeStar(s) {
+  const r = resolveStarName(s.name);
   return {
-    name:       s.name,
+    name:       r.display,
+    hanzi:      r.hanzi,
+    pinyin:     r.pinyin,
+    courtRole:  r.courtRole,
     type:       s.type,
     brightness: s.brightness || '',
     bright:     brightnessLabel(s.brightness),
@@ -139,8 +144,8 @@ export function calculatePurpleStar({ birthday, birthTime, gender }) {
     zodiac:      a.zodiac,
     soulBranch:  IZTRO_TO_KEY[a.earthlyBranchOfSoulPalace] || a.earthlyBranchOfSoulPalace,
     bodyBranch:  IZTRO_TO_KEY[a.earthlyBranchOfBodyPalace] || a.earthlyBranchOfBodyPalace,
-    soulStar:    a.soul,
-    bodyStar:    a.body,
+    soulStar:    a.soul ? resolveStarName(a.soul).display : a.soul,
+    bodyStar:    a.body ? resolveStarName(a.body).display : a.body,
     fiveElementsClass: a.fiveElementsClass,
     palaces,
   };

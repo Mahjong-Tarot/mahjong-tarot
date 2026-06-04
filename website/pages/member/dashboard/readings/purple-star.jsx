@@ -8,6 +8,7 @@ import PurpleStarChart from '../../../../components/PurpleStarChart';
 import { useAuth } from '../../../../lib/auth';
 import { supabase } from '../../../../lib/supabase';
 import { calculatePurpleStar } from '../../../../lib/purpleStar';
+import { computePalaceOutlook } from '../../../../lib/purpleStarReport';
 import accountStyles from '../../../../styles/Account.module.css';
 
 const PALACE_MEANINGS = {
@@ -27,6 +28,14 @@ const PALACE_MEANINGS = {
 };
 
 const KEY_PALACES = ['Ming', 'Marriage', 'Career', 'Wealth', 'Health'];
+
+const LUCK_COLOR = {
+  'Most Lucky':        '#2c8a4a',
+  'Generally Lucky':   '#3a7bb8',
+  'Mixed Luck':        '#b88c4f',
+  'Generally Unlucky': '#c0392b',
+  'Least Lucky':       '#a01b0b',
+};
 
 function calculateAge(birthday) {
   if (!birthday) return null;
@@ -83,6 +92,8 @@ export default function PurpleStarReading() {
   const mingPalace = chart?.palaces.find((p) => p.isMing) || null;
   const bodyPalace = chart?.palaces.find((p) => p.isBody) || null;
   const palaceByName = (n) => chart?.palaces.find((p) => p.name === n) || null;
+  const outlook = chart ? computePalaceOutlook(chart) : null;
+  const outlookByName = (n) => outlook?.palaces.find((p) => p.name === n) || null;
 
   return (
     <>
@@ -207,6 +218,43 @@ export default function PurpleStarReading() {
               <PurpleStarChart chart={chart} name={profile?.name} />
             </section>
 
+            {/* Luck outlook — Bill's authored palace narratives */}
+            {outlook && (outlook.luckiest || outlook.unluckiest) && (
+              <section style={{ marginTop: '2.5rem' }}>
+                <h2 className={accountStyles.subTitle}>Where your luck concentrates</h2>
+                <p className={accountStyles.lede} style={{ marginTop: '0.5rem' }}>
+                  Read this as a forecast, not a verdict, the palaces show where fortune leans,
+                  what you do with it is still yours.
+                </p>
+                <div className={accountStyles.compatGrid} style={{ marginTop: '1rem' }}>
+                  {outlook.luckiest && (
+                    <div className={accountStyles.compatCard}>
+                      <p className={accountStyles.muted} style={{ margin: 0, textTransform: 'uppercase', fontSize: '0.72rem', letterSpacing: '0.06em' }}>Your luckiest palace</p>
+                      <h3 style={{ margin: '0.3rem 0 0.5rem 0' }}>
+                        {outlook.luckiest.name}
+                        {PALACE_MEANINGS[outlook.luckiest.name] && (
+                          <span className={accountStyles.muted} style={{ fontWeight: 400 }}> · {PALACE_MEANINGS[outlook.luckiest.name].role}</span>
+                        )}
+                      </h3>
+                      <p style={{ margin: 0 }}>{outlook.luckiest.extremeNarrative}</p>
+                    </div>
+                  )}
+                  {outlook.unluckiest && (
+                    <div className={accountStyles.compatCard}>
+                      <p className={accountStyles.muted} style={{ margin: 0, textTransform: 'uppercase', fontSize: '0.72rem', letterSpacing: '0.06em' }}>Your most challenging palace</p>
+                      <h3 style={{ margin: '0.3rem 0 0.5rem 0' }}>
+                        {outlook.unluckiest.name}
+                        {PALACE_MEANINGS[outlook.unluckiest.name] && (
+                          <span className={accountStyles.muted} style={{ fontWeight: 400 }}> · {PALACE_MEANINGS[outlook.unluckiest.name].role}</span>
+                        )}
+                      </h3>
+                      <p style={{ margin: 0 }}>{outlook.unluckiest.extremeNarrative}</p>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
             {/* Key palaces */}
             <section style={{ marginTop: '2.5rem' }}>
               <h2 className={accountStyles.subTitle}>Key palaces in your life</h2>
@@ -214,27 +262,35 @@ export default function PurpleStarReading() {
                 {KEY_PALACES.map((name) => {
                   const p = palaceByName(name);
                   const meaning = PALACE_MEANINGS[name];
+                  const o = outlookByName(name);
                   if (!p || !meaning) return null;
                   return (
                     <div key={name} className={accountStyles.compatCard}>
-                      <h3 style={{ margin: '0 0 0.25rem 0' }}>
-                        {name} · {meaning.role}
-                        <span className={accountStyles.muted} style={{ fontWeight: 400, marginLeft: '0.5rem' }}>
-                          {p.animal} {p.branchHan}
-                        </span>
+                      <h3 style={{ margin: '0 0 0.4rem 0', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                        <span>{name} · {meaning.role}</span>
+                        {o && (
+                          <span style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#fff', background: LUCK_COLOR[o.label] || '#6b6258', borderRadius: '999px', padding: '0.12rem 0.55rem' }}>
+                            {o.label}
+                          </span>
+                        )}
+                        <span className={accountStyles.muted} style={{ fontWeight: 400 }}>{p.animal} {p.branchHan}</span>
                       </h3>
-                      <p className={accountStyles.muted} style={{ margin: '0 0 0.5rem 0' }}>{meaning.blurb}</p>
+                      {o ? (
+                        <p style={{ margin: '0 0 0.5rem 0' }}>{o.narrative}</p>
+                      ) : (
+                        <p className={accountStyles.muted} style={{ margin: '0 0 0.5rem 0' }}>{meaning.blurb}</p>
+                      )}
                       {p.majorStars.length > 0 ? (
-                        <p style={{ margin: 0 }}>
+                        <p className={accountStyles.muted} style={{ margin: 0, fontSize: '0.9rem' }}>
                           <strong>Major stars:</strong> {p.majorStars.map((s) => s.name + (s.mutagen ? ` (${s.mutagen})` : '')).join(', ')}
                         </p>
                       ) : (
-                        <p className={accountStyles.muted} style={{ margin: 0 }}>
-                          No major stars here, read this palace from its supporting and adjacent stars.
+                        <p className={accountStyles.muted} style={{ margin: 0, fontSize: '0.9rem' }}>
+                          No major stars here, read from the opposite palace and supporting stars.
                         </p>
                       )}
                       {p.minorStars.length > 0 && (
-                        <p style={{ margin: '0.4rem 0 0 0', fontSize: '0.9rem' }}>
+                        <p className={accountStyles.muted} style={{ margin: '0.3rem 0 0 0', fontSize: '0.85rem' }}>
                           <strong>Minor:</strong> {p.minorStars.slice(0, 4).map((s) => s.name).join(', ')}
                         </p>
                       )}

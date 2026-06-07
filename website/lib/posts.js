@@ -3,6 +3,24 @@
 
 export const POSTS = [
  {
+ slug: 'feel-good-friday-three-words-for-the-snake-month',
+ title: 'Feel Good Friday: Three Words for the Snake Month',
+ excerpt: "Rest. Caution. Honesty. Three words for the hardest month of the Fire Horse year. Here is one weekend challenge for each.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Jun 5, 2026',
+ isoDate: '2026-06-05',
+ readTime: '4 min read',
+ },
+ {
+ slug: 'mahjong-mirror-snake-month-playbook',
+ title: "Lay Low, but Don't Stand Still: The Mirror's Playbook for the Snake Month",
+ excerpt: "Laying low does not mean doing nothing. Here are three Mirror moves that let you work with the Snake month instead of against it.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Jun 3, 2026',
+ isoDate: '2026-06-03',
+ readTime: '5 min read',
+ },
+ {
  slug: 'metal-snake-month-2026-forecast',
  title: 'The Hardest Month of the Fire Horse Year Is Here',
  excerpt: "The Metal Snake month is the worst elemental combination of the year. Fire melts metal's luck, and the Snake and Horse are not friends. Here is what to avoid, what to protect, and which days actually favor you.",

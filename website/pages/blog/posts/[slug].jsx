@@ -25,6 +25,7 @@ import Footer from '../../../components/Footer';
 import FaqItem from '../../../components/FaqItem';
 import styles from '../../../styles/BlogPost.module.css';
 import { listSlugs, loadPost } from '../../../lib/blogContent';
+import { isPublished } from '../../../lib/posts';
 
 export default function BlogPost({ frontmatter, html }) {
   const {
@@ -236,5 +237,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const post = loadPost(params.slug);
   if (!post) return { notFound: true };
-  return { props: post };
+  // Hold future-dated posts until their publish day (see lib/posts.js).
+  // revalidate lets the 404 flip to the live page when the date arrives.
+  if (!isPublished(params.slug)) return { notFound: true, revalidate: 1800 };
+  return { props: post, revalidate: 1800 };
 }

@@ -3,6 +3,33 @@
 
 export const POSTS = [
  {
+ slug: 'feel-good-friday-plan-with-the-current-not-against-it',
+ title: 'Feel Good Friday: Plan With the Current, Not Against It',
+ excerpt: "Stop swimming against the month. Map your next six weeks to the energy of each one, pick one bold move and one thing to hold. The weekend challenge for June 12.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Jun 12, 2026',
+ isoDate: '2026-06-12',
+ readTime: '4 min read',
+ },
+ {
+ slug: 'mahjong-mirror-quarter-sequencing-push-hold',
+ title: 'When to Push and When to Hold: the Mirror Across a Hard Quarter',
+ excerpt: "Not every month wants the same thing from you. The Mahjong Mirror as a sequencing tool: where the quarter pays boldness back and where it demands patience.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Jun 10, 2026',
+ isoDate: '2026-06-10',
+ readTime: '5 min read',
+ },
+ {
+ slug: 'two-metal-months-water-horse-quarter-2026',
+ title: 'Two Metal Months and a Water Horse: the Quarter Nobody Warned You About',
+ excerpt: "Three challenging months back to back: Metal Dragon, Metal Snake, Water Horse. Most people rode the Dragon without knowing why it worked. Here's what the arc looks like from here.",
+ categories: ['Year of the Fire Horse'],
+ date: 'Jun 8, 2026',
+ isoDate: '2026-06-08',
+ readTime: '6 min read',
+ },
+ {
  slug: 'feel-good-friday-three-words-for-the-snake-month',
  title: 'Feel Good Friday: Three Words for the Snake Month',
  excerpt: "Rest. Caution. Honesty. Three words for the hardest month of the Fire Horse year. Here is one weekend challenge for each.",
@@ -174,3 +201,33 @@ export const POSTS = [
  readTime: '5 min read',
  },
 ];
+
+// ── Scheduled publishing ──────────────────────────────────────────────
+// Posts are dated in the future so a whole week can be staged in one deploy.
+// A post becomes visible once its isoDate has arrived, evaluated in the
+// business timezone below. ISO date strings (YYYY-MM-DD) compare correctly
+// as plain strings. The /blog index and per-post page both gate on this,
+// and both use ISR (revalidate) so the gate flips without a manual redeploy.
+
+export const PUBLISH_TZ = 'Asia/Bangkok'; // UTC+7, no DST — deterministic flip
+
+export function todayIsoInTz(tz = PUBLISH_TZ) {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+}
+
+// Posts visible as of `todayIso`, newest first (POSTS is already ordered).
+export function publishedPosts(todayIso = todayIsoInTz()) {
+  return POSTS.filter((p) => p.isoDate <= todayIso);
+}
+
+// Whether a single slug is live yet. Unknown slugs are not gated.
+export function isPublished(slug, todayIso = todayIsoInTz()) {
+  const p = POSTS.find((x) => x.slug === slug);
+  if (!p) return true;
+  return p.isoDate <= todayIso;
+}

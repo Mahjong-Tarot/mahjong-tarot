@@ -83,32 +83,57 @@ from email_events
 where event_type in ('hard_bounce', 'spam', 'unsubscribe');
 ```
 
-## Phase 2 — Reply capture (specced, not built)
+## Phase 2 — Reply capture (built 2026-06-11)
 
-Replies currently go to `firepig@mahjongtarot.com` (Bill's inbox) with no
-tracking. Brevo **inbound parsing** can capture them:
+Mail sent to `*@reply.mahjongtarot.com` is parsed by Brevo inbound
+parsing and POSTed to `POST /api/brevo/inbound` (same shared-secret
+auth), which stores each message in `public.email_replies` (migration
+047, dedup on Message-ID, RLS service-role only) **and forwards a copy
+to Bill via Resend** — `reply_to` is the original sender, so hitting
+Reply in Gmail goes straight back to them. Forward target:
+`REPLY_FORWARD_TO` env var, falling back to `RESEND_REPLY_TO`.
 
-1. Create a reply subdomain, e.g. `reply.mahjongtarot.com`, and point its
-   **MX record** at Brevo (`mx1.brevo.com` / per Brevo docs) — DNS change,
-   same access as the `news.` subdomain setup.
-2. Register an **inbound** webhook in Brevo pointing at a new
-   `/api/brevo/inbound` route; store sender, subject, text body in a
-   `email_replies` table (or `email_events` with `event_type='reply'`).
-3. Set campaign reply-to to `bill@reply.mahjongtarot.com`; Brevo forwards
-   parsed replies to the webhook. Optionally auto-forward a copy to Bill's
-   Gmail so his workflow doesn't change.
-4. Surface replies in the admin dashboard and/or push to Lark — filters
-   out the out-of-office noise the campaign plan predicts (risk #12).
+```
+Subscriber replies to bill@reply.mahjongtarot.com
+        │  (MX: inbound1/inbound2.sendinblue.com)
+        ▼
+Brevo inbound parsing ──POST──► /api/brevo/inbound?token=…
+        │                              │
+        ▼                              ▼
+public.email_replies          Resend forward → Bill's inbox
+```
 
-Decision needed: whether Bill is OK with reply-to moving off his Gmail
-(forwarding keeps him in the loop). Until then, replies stay manual.
+### Phase 2 setup
 
-## Deliberate non-goals (phase 1)
+1. DNS (Vercel, `mahjongtarot.com` zone): two MX records —
+   `reply` → `inbound1.sendinblue.com` (priority 10) and
+   `reply` → `inbound2.sendinblue.com` (priority 20).
+2. Register the **inbound** webhook in Brevo: type `inbound`,
+   `domain: reply.mahjongtarot.com`, event `inboundEmailProcessed`,
+   URL `https://www.mahjongtarot.com/api/brevo/inbound?token=<secret>`.
+3. Set campaign **reply-to** to `bill@reply.mahjongtarot.com` (any
+   local-part works). Bill still receives every reply via the forward;
+   only the Reply-To header changes.
+4. Verify: email the reply address, then
+   `select from_email, subject, forwarded_at from email_replies order by created_at desc limit 5;`
 
-- No automatic suppression: hard bounces / spam complaints are recorded
-  but do not yet update `people` (nurture status). Do this once we've
-  watched real data for a send or two.
+## Auto-suppression (built 2026-06-11)
+
+`/api/brevo/webhook` now also updates `people` when a suppressing
+event arrives — `hard_bounce` → `nurture_status='bounced'`,
+`spam` → `'complained'`, `unsubscribe`/`unsubscribed` →
+`'unsubscribed'` — and sets `ok_to_contact=false` in all three cases.
+Any non-`active` nurture_status drops the contact from the
+nurture-due index (migration 032), so suppressed contacts stop
+receiving internal nurture sends. Best-effort: a suppression failure
+is logged but never 500s the webhook. Brevo independently maintains
+its own suppression for campaign sends.
+
+## Deliberate non-goals
+
 - No UI: query via SQL / admin server routes for now.
+- Replies are not pushed to Lark/Telegram yet — the Resend forward to
+  Bill covers visibility. Add a notifier if reply volume justifies it.
 
 ---
 

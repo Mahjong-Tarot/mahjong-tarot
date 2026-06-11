@@ -33,6 +33,37 @@ function eventTimestamp(evt) {
   return new Date().toISOString();
 }
 
+// Events that make an address unsendable. Brevo's exact event strings
+// have varied across payload versions, so both spellings are matched.
+// Maps to the nurture_status written on people (suppression reason).
+const SUPPRESSING_EVENTS = {
+  hard_bounce: 'bounced',
+  hardbounce: 'bounced',
+  spam: 'complained',
+  complaint: 'complained',
+  unsubscribe: 'unsubscribed',
+  unsubscribed: 'unsubscribed',
+};
+
+// Marks the matching contact unsendable: ok_to_contact=false and
+// nurture_status set to the suppression reason (anything other than
+// 'active' drops them from the nurture-due index, migration 032).
+// Idempotent; best-effort — a failure here must not 500 the webhook,
+// or Brevo's retry would re-run an already-stored event forever.
+async function suppressContact(service, email, eventType) {
+  const status = SUPPRESSING_EVENTS[eventType];
+  if (!status) return;
+  // ilike for case-insensitive match (convention from lib/people.js),
+  // with % and _ escaped — '_' is common in addresses and is an ILIKE
+  // single-char wildcard, which could suppress the wrong contact.
+  const pattern = email.replace(/([%_\\])/g, '\\$1');
+  const { error } = await service
+    .from('people')
+    .update({ ok_to_contact: false, nurture_status: status })
+    .ilike('email', pattern);
+  if (error) console.error('[brevo-webhook] suppression failed', email, status, error);
+}
+
 function toRow(evt) {
   if (!evt || typeof evt !== 'object') return null;
   const email = typeof evt.email === 'string' ? evt.email.trim().toLowerCase() : '';
@@ -89,6 +120,9 @@ export default async function handler(req, res) {
       // 500 so Brevo retries — inserts are idempotent via the dedup index.
       return res.status(500).json({ error: 'Storage failed' });
     }
+    // Runs even for deduped rows — the update is idempotent, and a
+    // replay may be Brevo retrying after a suppression failure.
+    await suppressContact(service, row.email, row.event_type);
   }
 
   return res.status(200).json({ received: true, stored });

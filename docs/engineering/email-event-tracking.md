@@ -1,6 +1,6 @@
 # Email Event Tracking — Brevo → Supabase
 
-**Status:** Phase 1 built (engagement events). Phase 2 (reply capture) specced below.
+**Status:** Phase 1 live (engagement events). Phase 2 (reply capture) specced below.
 **Owner:** Engineering (Yon)
 **Date:** 2026-06-11
 **Related:** [email-system-overview.md](email-system-overview.md), [oca-book-launch-campaign-plan.md](oca-book-launch-campaign-plan.md)
@@ -57,15 +57,16 @@ makes Brevo retries/replays no-ops (the endpoint swallows `23505`).
 
 ## Setup / runbook
 
-1. Apply the migration (`046_email_events.sql`) via Supabase SQL editor or MCP.
-2. Generate a secret: `openssl rand -hex 32`.
-3. Add `BREVO_WEBHOOK_SECRET` to Vercel production env (and `.env.local` for dev).
-4. Register the webhook in Brevo (type **marketing**), URL:
+1. ✅ Apply the migration (`046_email_events.sql`) via Supabase SQL editor or MCP. *(Done 2026-06-11 via MCP.)*
+2. ✅ Generate a secret: `openssl rand -hex 32`. *(Done 2026-06-11; value in `website/.env.local`.)*
+3. ✅ Add `BREVO_WEBHOOK_SECRET` to Vercel production env (and `.env.local` for dev). *(Done 2026-06-11 — added by Yon via dashboard, Production only.)*
+4. ✅ Register the webhook in Brevo (type **marketing**), URL:
    `https://www.mahjongtarot.com/api/brevo/webhook?token=<secret>`
    Events: delivered, opened, click, hard bounce, soft bounce,
-   unsubscribed, marked as spam.
-5. Send a test event from Brevo's webhook UI, confirm a row lands:
+   unsubscribed, marked as spam. *(Done 2026-06-11 via Brevo API.)*
+5. ✅ Send a test event, confirm a row lands:
    `select event_type, email, occurred_at from email_events order by created_at desc limit 5;`
+   *(Verified 2026-06-11 against production; test row deleted.)*
 
 ## Useful queries
 

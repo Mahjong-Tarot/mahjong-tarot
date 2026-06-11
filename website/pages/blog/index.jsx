@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 import NewsletterSignup from '../../components/NewsletterSignup';
 import SEO from '../../components/SEO';
 import { ORGANIZATION, WEBSITE, PERSON_BILL, graph, breadcrumb } from '../../lib/schema';
-import { POSTS } from '../../lib/posts';
+import { publishedPosts } from '../../lib/posts';
 import styles from '../../styles/Blog.module.css';
 
 const CATEGORIES = [
@@ -17,11 +17,11 @@ const CATEGORIES = [
   'Chinese Astrology',
 ];
 
-export default function BlogIndex() {
+export default function BlogIndex({ posts }) {
   const [active, setActive] = useState('All Posts');
 
-  const featured = POSTS[0];
-  const rest = POSTS.slice(1);
+  const featured = posts[0];
+  const rest = posts.slice(1);
   const filtered = active === 'All Posts'
     ? rest
     : rest.filter((p) => p.categories.includes(active));
@@ -45,7 +45,7 @@ export default function BlogIndex() {
             url: 'https://www.mahjongtarot.com/blog',
             name: 'Mahjong Tarot Blog',
             author: { '@id': 'https://www.mahjongtarot.com/#bill-hajdu' },
-            blogPost: POSTS.slice(0, 10).map((p) => ({
+            blogPost: posts.slice(0, 10).map((p) => ({
               '@type': 'BlogPosting',
               headline: p.title,
               datePublished: p.isoDate,
@@ -173,4 +173,14 @@ export default function BlogIndex() {
       <Footer />
     </>
   );
+}
+
+export async function getStaticProps() {
+  // Only surface posts whose publish date has arrived. revalidate lets the
+  // gate flip on schedule (when a future-dated post's day comes) without a
+  // manual redeploy.
+  return {
+    props: { posts: publishedPosts() },
+    revalidate: 1800,
+  };
 }

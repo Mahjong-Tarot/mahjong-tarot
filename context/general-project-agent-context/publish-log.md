@@ -18,3 +18,8 @@
 | 2026-04-15 | The Mahjong Mirror Way to Plan a Wedding | planning-a-wedding-through-the-mahjong-mirror.jsx | Romance |
 | 2026-05-13 | What the Favorites' Trainers Missed | what-the-favorites-trainers-missed-mahjong-mirror.jsx | Year of the Fire Horse |
 | 2026-06-01 | The Hardest Month of the Fire Horse Year Is Here | metal-snake-month-2026-forecast.md | Year of the Fire Horse |
+| 2026-06-03 | Lay Low, but Don't Stand Still: The Mirror's Playbook for the Snake Month | mahjong-mirror-snake-month-playbook.md | Year of the Fire Horse |
+| 2026-06-05 | Feel Good Friday: Three Words for the Snake Month | feel-good-friday-three-words-for-the-snake-month.md | Year of the Fire Horse |
+| 2026-06-08 | Two Metal Months and a Water Horse: the Quarter Nobody Warned You About | two-metal-months-water-horse-quarter-2026.md | Year of the Fire Horse |
+| 2026-06-10 | When to Push and When to Hold: the Mirror Across a Hard Quarter | mahjong-mirror-quarter-sequencing-push-hold.md | Year of the Fire Horse |
+| 2026-06-12 | Feel Good Friday: Plan With the Current, Not Against It | feel-good-friday-plan-with-the-current-not-against-it.md | Year of the Fire Horse |

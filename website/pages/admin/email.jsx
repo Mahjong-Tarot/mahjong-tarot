@@ -300,7 +300,7 @@ export default function EmailDashboard({ profile }) {
                         />
                       </span>
                       <span className={adminStyles.barCount}>
-                        {t.opens}o / {t.clicks}c
+                        {t.opens} {t.opens === 1 ? 'open' : 'opens'} · {t.clicks} {t.clicks === 1 ? 'click' : 'clicks'}
                       </span>
                     </div>
                   ))}

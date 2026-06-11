@@ -59,9 +59,12 @@ function toRow(item) {
 // and the dedup index would drop the duplicate, losing the forward).
 async function forwardToBill(row) {
   const apiKey = process.env.RESEND_API_KEY;
-  const forwardTo = process.env.REPLY_FORWARD_TO || process.env.RESEND_REPLY_TO;
-  if (!apiKey || !forwardTo) {
-    console.warn('[brevo-inbound] forwarding skipped: RESEND_API_KEY / REPLY_FORWARD_TO not set');
+  // Bill's address fallback matches the convention in api/reply.js and
+  // api/admin/* — RESEND_REPLY_TO is not actually set in production.
+  const forwardTo =
+    process.env.REPLY_FORWARD_TO || process.env.RESEND_REPLY_TO || 'firepig01@gmail.com';
+  if (!apiKey) {
+    console.warn('[brevo-inbound] forwarding skipped: RESEND_API_KEY not set');
     return null;
   }
   const sender = row.from_name ? `${row.from_name} <${row.from_email}>` : row.from_email;

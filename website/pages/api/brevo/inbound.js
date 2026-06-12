@@ -8,6 +8,7 @@
 // payloads, so the token lives in the registered webhook URL.
 import { timingSafeEqual } from 'crypto';
 import { getServiceSupabase } from '../../../lib/stripe';
+import { extractChineseSign } from '../../../lib/zodiac-harvest';
 
 // Resolve the sender to a CRM contact — find-only, never create.
 // Out-of-office autoresponders and forwards come from addresses that
@@ -125,6 +126,22 @@ export default async function handler(req, res) {
   let stored = 0;
   for (const row of rows) {
     row.person_id = await findPersonId(service, row.from_email);
+
+    // Sign harvester: the reply-bait asks for the sender's zodiac
+    // sign — record what they stated, and enrich the CRM contact if
+    // their sign is still unknown. Never overwrites an existing one.
+    const harvest = extractChineseSign(row.text_body);
+    row.harvested_sign = harvest?.sign || null;
+    row.harvest_basis = harvest?.basis || null;
+    if (harvest && row.person_id) {
+      const { error: signErr } = await service
+        .from('people')
+        .update({ chinese_sign: harvest.sign })
+        .eq('id', row.person_id)
+        .is('chinese_sign', null);
+      if (signErr) console.error('[brevo-inbound] sign update failed', signErr);
+    }
+
     const { data, error } = await service
       .from('email_replies')
       .insert(row)

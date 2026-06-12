@@ -9,6 +9,23 @@
 import { timingSafeEqual } from 'crypto';
 import { getServiceSupabase } from '../../../lib/stripe';
 
+// Resolve the sender to a CRM contact — find-only, never create.
+// Out-of-office autoresponders and forwards come from addresses that
+// aren't contacts; creating people rows for them would pollute the CRM.
+async function findPersonId(service, email) {
+  const pattern = email.replace(/([%_\\])/g, '\\$1');
+  const { data, error } = await service
+    .from('people')
+    .select('id')
+    .ilike('email', pattern)
+    .limit(1);
+  if (error) {
+    console.error('[brevo-inbound] person lookup failed', email, error);
+    return null;
+  }
+  return data?.[0]?.id || null;
+}
+
 function isAuthorized(req) {
   const secret = process.env.BREVO_WEBHOOK_SECRET;
   if (!secret) return false;
@@ -107,6 +124,7 @@ export default async function handler(req, res) {
   const service = getServiceSupabase();
   let stored = 0;
   for (const row of rows) {
+    row.person_id = await findPersonId(service, row.from_email);
     const { data, error } = await service
       .from('email_replies')
       .insert(row)

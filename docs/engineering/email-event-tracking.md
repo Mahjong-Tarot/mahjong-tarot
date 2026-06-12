@@ -129,11 +129,34 @@ receiving internal nurture sends. Best-effort: a suppression failure
 is logged but never 500s the webhook. Brevo independently maintains
 its own suppression for campaign sends.
 
+## Newsletter signup → Brevo auto-sync (built 2026-06-12)
+
+Closes the gap from email-system-overview.md §2: signups reached the
+CRM but only got to Brevo via a manual export before each send. Now a
+Postgres trigger on `inquiries` (`type='newsletter'`, migration 051)
+fires `net.http_post` to Brevo `POST /v3/contacts` — upsert with
+`updateEnabled`, added to **list 9** ("OCA Master Deliverable") —
+within seconds of signup. Supabase stays the source of truth.
+
+- **API key** lives in Supabase Vault as `brevo_api_key`. Rotation:
+  call the service-role-only RPC `admin_set_brevo_vault_key('<new>')`
+  (via PostgREST with the service key — never paste the key in chat
+  or SQL editor history).
+- **Requires Brevo IP authorization OFF** (disabled 2026-06-12):
+  Supabase egress IPs vary, an allowlist would randomly break sync.
+- **No retry**: pg_net is fire-and-forget (responses visible in
+  `net._http_response` for ~6h). If Brevo is down during a signup,
+  that contact misses the sync — the manual export remains the
+  backstop and is still worth running as a pre-send checklist item.
+
 ## Deliberate non-goals
 
 - No UI: query via SQL / admin server routes for now.
 - Replies are not pushed to Lark/Telegram yet — the Resend forward to
   Bill covers visibility. Add a notifier if reply volume justifies it.
+- Brevo unsubscribes are mirrored into Supabase (auto-suppression)
+  but Supabase-side deletes/changes don't push back to Brevo beyond
+  the signup sync — full two-way sync is out of scope.
 
 ---
 

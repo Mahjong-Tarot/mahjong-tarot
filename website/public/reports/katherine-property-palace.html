@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katherine · Purple Star · Property Palace</title>
+<style>
+  :root{
+    --bg1:#140b29; --bg2:#241449; --bg3:#0d0720;
+    --paper:#f5edda; --paper2:#efe4c9;
+    --ink:#2b2138; --ink-soft:#5c5170;
+    --gold:#d8b25f; --gold-deep:#b8924a;
+    --jade:#74b89a; --ember:#e0795f; --rose:#d98aae;
+    --void:#9f93c4; --muted:#9387ad; --action:#e3b25c;
+    --line:rgba(216,178,95,.28);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:32px 18px 64px;
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif;
+    color:var(--paper);
+    background:
+      radial-gradient(1200px 700px at 70% -10%, rgba(120,80,200,.35), transparent 60%),
+      radial-gradient(900px 600px at 10% 110%, rgba(60,150,130,.18), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+    background-attachment:fixed;
+    line-height:1.6;
+  }
+  .wrap{max-width:1080px;margin:0 auto}
+  .topline{display:flex;align-items:center;gap:10px;justify-content:center;
+    font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);opacity:.85}
+  .topline::before,.topline::after{content:"";height:1px;width:54px;background:var(--line)}
+  h1{font-size:2.35rem;text-align:center;margin:.35em 0 .1em;font-weight:600;letter-spacing:.01em}
+  h1 .han{font-family:"Songti SC","STSong",serif;color:var(--gold);margin-left:.3em}
+  .sub{text-align:center;color:var(--muted);margin:0 0 6px;font-style:italic}
+  .ident{text-align:center;color:var(--paper2);font-size:.92rem;margin:0 auto 26px;max-width:640px}
+  .ident b{color:var(--gold)}
+
+  /* ---------- CHART ---------- */
+  .chart{
+    display:grid;gap:6px;aspect-ratio:1/1;max-width:760px;margin:0 auto 10px;
+    grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);
+    grid-template-areas:
+      "si  wu  wei shen"
+      "chen ctr ctr you"
+      "mao ctr ctr xu"
+      "yin chou zi hai";
+  }
+  .palace{
+    position:relative;border:1px solid var(--line);border-radius:9px;
+    background:rgba(20,12,38,.55);padding:7px 8px 26px;overflow:hidden;
+    display:flex;flex-direction:column;gap:2px;min-height:0;
+  }
+  .palace.dim{opacity:.46}
+  .palace.focus{
+    background:linear-gradient(180deg,rgba(216,178,95,.16),rgba(20,12,38,.6));
+    border-color:var(--gold);box-shadow:0 0 0 1px rgba(216,178,95,.35),0 0 26px rgba(216,178,95,.22) inset;
+  }
+  .palace.mirror{
+    background:linear-gradient(180deg,rgba(116,184,154,.13),rgba(20,12,38,.6));
+    border-color:rgba(116,184,154,.6);box-shadow:0 0 18px rgba(116,184,154,.15) inset;
+  }
+  .pflag{position:absolute;top:6px;right:7px;font-size:.55rem;letter-spacing:.12em;
+    text-transform:uppercase;padding:2px 6px;border-radius:99px;font-family:Georgia,serif}
+  .pflag.f{background:var(--gold);color:#2a1d05}
+  .pflag.m{background:rgba(116,184,154,.9);color:#08201a}
+  .stars{display:flex;flex-direction:column;gap:2px;flex:1;min-height:0}
+  .star{display:flex;align-items:baseline;gap:5px;line-height:1.15}
+  .star .han{font-family:"Songti SC","STSong",serif;font-size:.96rem;font-weight:600;white-space:nowrap}
+  .star .en{font-size:.62rem;color:var(--muted);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .star .bd{font-size:.5rem;border-radius:3px;padding:0 3px;margin-left:1px;font-family:Georgia,serif;opacity:.9}
+  .star.major .han{font-size:1.04rem}
+  .star.minor .han{font-size:.86rem;font-weight:500}
+  .star.adj .han{font-size:.74rem;font-weight:400;opacity:.82}
+  .star.adj .en{font-size:.56rem;opacity:.7}
+  /* natures */
+  .n-imperial .han{color:#f0d98c}
+  .n-action   .han{color:var(--action)}
+  .n-benefic  .han{color:#e7dcae}
+  .n-helper   .han{color:var(--jade)}
+  .n-speech   .han{color:#c9b6e0}
+  .n-norm     .han{color:#e0c98c}
+  .n-malefic  .han{color:var(--ember)}
+  .n-romance  .han{color:var(--rose)}
+  .n-void     .han{color:var(--void)}
+  .n-phase    .han{color:#9fb8d8}
+  .bd.mu{background:rgba(216,178,95,.22);color:#f0d98c}
+  .bd.br{background:rgba(255,255,255,.08);color:var(--muted)}
+  .pfoot{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;
+    justify-content:space-between;gap:4px;padding:3px 8px;background:rgba(8,4,18,.5);
+    border-top:1px solid var(--line);font-size:.6rem}
+  .pname{font-weight:600;color:var(--paper2)}
+  .pname .ph{font-family:"Songti SC",serif;color:var(--muted);margin-left:3px;font-weight:400}
+  .pbranch{color:var(--gold);font-family:"Songti SC",serif}
+  .page{color:var(--muted)}
+  /* center */
+  .center{grid-area:ctr;border:1px solid var(--line);border-radius:11px;
+    background:radial-gradient(120% 120% at 50% 0,rgba(40,24,70,.7),rgba(10,6,22,.85));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px}
+  .center .cn{font-family:"Songti SC",serif;color:var(--gold);font-size:1.5rem;letter-spacing:.08em}
+  .center h2{margin:.2em 0 .1em;font-size:1.15rem;font-weight:600}
+  .center .meta{font-size:.72rem;color:var(--muted);line-height:1.7;margin-top:6px}
+  .center .meta b{color:var(--paper2);font-weight:600}
+  .center .pillars{font-family:"Songti SC",serif;color:var(--jade);letter-spacing:.18em;font-size:.85rem;margin-top:7px}
+  .axis{font-size:.64rem;color:var(--gold);margin-top:8px;letter-spacing:.06em;opacity:.9}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;
+    max-width:760px;margin:14px auto 0;font-size:.68rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+  /* ---------- READING ---------- */
+  .reading{max-width:760px;margin:46px auto 0;background:var(--paper);color:var(--ink);
+    border-radius:14px;padding:38px 40px 44px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .reading .kicker{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);text-align:center}
+  .reading h2{font-size:1.9rem;text-align:center;margin:.2em 0 .1em;color:var(--ink)}
+  .reading .lede{text-align:center;color:var(--ink-soft);font-style:italic;margin:0 auto 26px;max-width:60ch}
+  .reading h3{font-size:1.18rem;margin:30px 0 4px;color:#5b3f7a;display:flex;align-items:center;gap:9px}
+  .reading h3 .num{font-family:Georgia,serif;font-size:.8rem;background:#5b3f7a;color:#fff;
+    width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;flex:none}
+  .reading p{margin:.5em 0}
+  .reading .entry{margin:12px 0;padding:12px 16px;border-radius:9px;background:var(--paper2);border-left:4px solid var(--gold)}
+  .reading .entry.warn{border-left-color:var(--ember)}
+  .reading .entry.help{border-left-color:var(--jade)}
+  .reading .entry.mirror{border-left-color:#6fa98c;background:#e8efe3}
+  .reading .entry .lead{font-weight:600;color:var(--ink);display:block;margin-bottom:3px}
+  .ref{white-space:nowrap;font-weight:600}
+  .ref .h{font-family:"Songti SC","STSong",serif;color:#7a3f8c}
+  .ref .p{font-style:italic;color:var(--ink-soft);font-weight:400;font-size:.92em}
+  .ref .m{color:var(--gold-deep)}
+  .summary{margin-top:34px;padding:22px 24px;border-radius:11px;
+    background:linear-gradient(135deg,#2a1c47,#3a2563);color:var(--paper)}
+  .summary h3{color:var(--gold);justify-content:center;border:0;margin:0 0 6px}
+  .summary p{margin:.4em 0;color:#ede5f5}
+  .footnote{max-width:760px;margin:22px auto 0;font-size:.72rem;color:var(--muted);text-align:center;line-height:1.7}
+  .footnote code{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topline">Purple Star Astrology · 紫微斗數</div>
+  <h1>The Property Palace <span class="han">田宅宮</span></h1>
+  <p class="sub">A reading of home, household, and the life lived within four walls</p>
+  <p class="ident">Prepared for <b>Katherine</b> · born 12 January 1996, 05:00–07:00 (卯時) ·
+     Lunar year <b>乙亥</b> (Wood Pig) · Soul star <b>文曲 The Muse</b> · Body star <b>天機 The Matrix</b> · Water-2 frame</p>
+
+  <div id="chart" class="chart"></div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:#f0d98c"></i>Imperial</span>
+    <span><i class="dot" style="background:var(--action)"></i>Drivers</span>
+    <span><i class="dot" style="background:var(--jade)"></i>Helpers / benefic</span>
+    <span><i class="dot" style="background:var(--ember)"></i>Malefic / friction</span>
+    <span><i class="dot" style="background:var(--rose)"></i>Romance / charm</span>
+    <span><i class="dot" style="background:var(--void)"></i>Void / empty</span>
+    <span>科 / 權 / 祿 / 忌 = the Four Transformations</span>
+  </div>
+
+  <!-- ===================== READING ===================== -->
+  <div class="reading">
+    <div class="kicker">Your Home Life</div>
+    <h2>Grand, Hospitable, and Quick to Spark</h2>
+    <p class="lede">I've already covered a little of your Fate and Marriage Palaces. Here I'll turn to your Property Palace, which is not only about the home you own or live in, but about your home life in general, and that bears directly on your relationships.</p>
+
+    <p>In general this palace is governed by several fortunate stars, crowned by the top star of the whole system: <span class="ref"><span class="h">紫微</span> <span class="p">Zǐ Wēi</span> · <span class="m">The Emperor</span></span>. There is, however, one inauspicious star, <span class="ref"><span class="h">火星</span> <span class="p">Huǒ Xīng</span> · <span class="m">The Flashpoint</span></span>, that brings real difficulty too. Here are the details.</p>
+
+    <h3><span class="num">1</span>The Domestic Atmosphere: Grand but Intense</h3>
+    <div class="entry">
+      <span class="lead"><span class="ref"><span class="h">紫微</span> <span class="p">Zǐ Wēi</span> · <span class="m">The Emperor</span></span> + <span class="ref"><span class="h">帝旺</span> <span class="p">Dì Wàng</span> · <span class="m">The Zenith</span></span></span>
+      You view your home as your kingdom. You like to be the ruler of your living space and need full control of your environment. There is genuine pride and dignity in your home life, but it can also make you stubborn or demanding with the people you live with.
+    </div>
+    <div class="entry warn">
+      <span class="lead"><span class="ref"><span class="h">火星</span> <span class="p">Huǒ Xīng</span> · <span class="m">The Flashpoint</span></span></span>
+      This is the key to your domestic weather. The Flashpoint brings a quick fuse, sudden arguments, and high tension into the household. Home is rarely calm for long stretches; instead it runs in bursts of intense feeling, impatience, and loud disagreement.
+    </div>
+
+    <h3><span class="num">2</span>The Contradiction: Drain vs. Repair</h3>
+    <div class="entry warn">
+      <span class="lead"><span class="ref"><span class="h">大耗</span> <span class="p">Dà Hào</span> · <span class="m">The Great Drain</span></span> &amp; <span class="ref"><span class="h">天空</span> <span class="p">Tiān Kōng</span> · <span class="m">The Void</span></span></span>
+      Emotionally, these two create a feeling of emptiness or restlessness at home. You may feel lonely even when surrounded by others, or sense that energy and money simply drain away under your roof. It can also show up as frequent packing and moving, or a lack of physical stability in your earlier years.
+    </div>
+    <div class="entry help">
+      <span class="lead"><span class="ref"><span class="h">右弼</span> <span class="p">Yòu Bì</span> · <span class="m">The Right Hand</span></span> &amp; <span class="ref"><span class="h">天魁</span> <span class="p">Tiān Kuí</span> · <span class="m">The Mentor</span></span></span>
+      Despite the fiery arguments, these are your domestic saving grace. They make sure harmony is always restored. When a family crisis hits, helpers or wise relatives step in to smooth things over. You will rarely be left completely unsupported by your household.
+    </div>
+
+    <h3><span class="num">3</span>Entertainment, Hosting, and Culture</h3>
+    <div class="entry">
+      <span class="lead"><span class="ref"><span class="h">咸池</span> <span class="p">Xián Chí</span> · <span class="m">The Allure</span></span></span>
+      Your home is social by nature. You love an attractive, sensory-rich environment, a place for romance, dressing up, and beauty.
+    </div>
+    <div class="entry mirror">
+      <span class="lead">The opposite palace, your Children Palace <span class="ref"><span class="h">子女宮</span></span>, shines across into this one:
+      <span class="ref"><span class="h">貪狼</span> <span class="p">Tān Láng</span> · <span class="m">The Appetite</span></span> + <span class="ref"><span class="h">文昌</span> <span class="p">Wén Chāng</span> · <span class="m">The Scholar</span></span> + <span class="ref"><span class="h">天廚</span> <span class="p">Tiān Chú</span> · <span class="m">The Hearth</span></span></span>
+      This strongly shapes your daily rhythm. Your home life revolves around good food, hosting friends, lively conversation, and creativity. The kitchen is likely the heart of the house. Your domestic world thrives when it's full of music, books, and the smell of great cooking, and that warmth balances out the stressful energy of The Flashpoint.
+    </div>
+
+    <div class="summary">
+      <h3>🏠 Summary of Your Home Life</h3>
+      <p>Your home life is never boring. It swings between a high-class, hospitable sanctuary full of food and laughter, and a high-tension battlefield where tempers flare in an instant.</p>
+      <p>To find true peace at home, the work is twofold: learn to <b>share control</b> (managing The Emperor), and build in <b>physical space to cool down</b> when arguments rise (managing The Flashpoint).</p>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Chart computed from Katherine's birth data via the Zi Wei Dou Shu engine; her birth hour (卯時, 05:00–07:00) was recovered to match the reading.<br>
+    Modern English names are Bill's modernization layer: <code>locked</code> names (The Emperor, The Matrix, The Sun) are final; others are working drafts shown here for review.
+  </p>
+</div>
+
+<script>
+const STARS = {
+  "紫微":["Zǐ Wēi","The Emperor","imperial"], "天機":["Tiān Jī","The Matrix","action"],"天机":["Tiān Jī","The Matrix","action"],
+  "太陽":["Tài Yáng","The Sun","benefic"],"太阳":["Tài Yáng","The Sun","benefic"],
+  "武曲":["Wǔ Qū","The Chamber","action"],"天同":["Tiān Tóng","The Balance","benefic"],
+  "廉貞":["Lián Zhēn","Propriety","norm"],"廉贞":["Lián Zhēn","Propriety","norm"],
+  "天府":["Tiān Fǔ","The Treasury","benefic"],"太陰":["Tài Yīn","The Moon","benefic"],"太阴":["Tài Yīn","The Moon","benefic"],
+  "貪狼":["Tān Láng","The Appetite","action"],"贪狼":["Tān Láng","The Appetite","action"],
+  "巨門":["Jù Mén","The Voice","speech"],"巨门":["Jù Mén","The Voice","speech"],
+  "天相":["Tiān Xiāng","The Chancellor","benefic"],
+  "天梁":["Tiān Liáng","The Aegis","benefic"],
+  "七殺":["Qī Shā","The Marshal","action"],"七杀":["Qī Shā","The Marshal","action"],
+  "破軍":["Pò Jūn","The Vanguard","action"],"破军":["Pò Jūn","The Vanguard","action"],
+  "左輔":["Zuǒ Fǔ","The Left Hand","helper"],"左辅":["Zuǒ Fǔ","The Left Hand","helper"],
+  "右弼":["Yòu Bì","The Right Hand","helper"],
+  "天魁":["Tiān Kuí","The Mentor","helper"],"天鉞":["Tiān Yuè","The Patron","helper"],"天钺":["Tiān Yuè","The Patron","helper"],
+  "文昌":["Wén Chāng","The Scholar","helper"],"文曲":["Wén Qū","The Muse","helper"],
+  "祿存":["Lù Cún","The Reserve","helper"],"禄存":["Lù Cún","The Reserve","helper"],
+  "天馬":["Tiān Mǎ","The Wayfarer","helper"],"天马":["Tiān Mǎ","The Wayfarer","helper"],
+  "火星":["Huǒ Xīng","The Flashpoint","malefic"],"鈴星":["Líng Xīng","The Smoulder","malefic"],"铃星":["Líng Xīng","The Smoulder","malefic"],
+  "擎羊":["Qíng Yáng","The Blade","malefic"],"陀羅":["Tuó Luó","The Snare","malefic"],"陀罗":["Tuó Luó","The Snare","malefic"],
+  "地劫":["Dì Jié","The Sapper","malefic"],"地空":["Dì Kōng","The Hollow","malefic"],"天空":["Tiān Kōng","The Void","malefic"],
+  "咸池":["Xián Chí","The Allure","romance"],"紅鸞":["Hóng Luán","The Betrothal","romance"],"红鸾":["Hóng Luán","The Betrothal","romance"],
+  "天喜":["Tiān Xǐ","The Joy","romance"],"天姚":["Tiān Yáo","The Charm","romance"],
+  "天廚":["Tiān Chú","The Hearth","helper"],"天厨":["Tiān Chú","The Hearth","helper"],
+  "解神":["Jiě Shén","The Resolver","helper"],"天巫":["Tiān Wū","The Oracle","helper"],
+  "華蓋":["Huá Gài","The Canopy","void"],"华盖":["Huá Gài","The Canopy","void"],
+  "天才":["Tiān Cái","The Gift","helper"],"天壽":["Tiān Shòu","Longevity","helper"],"天寿":["Tiān Shòu","Longevity","helper"],
+  "天福":["Tiān Fú","The Blessing","helper"],"天德":["Tiān Dé","Heaven's Virtue","helper"],"月德":["Yuè Dé","Moon's Virtue","helper"],
+  "天貴":["Tiān Guì","The Noble","helper"],"天贵":["Tiān Guì","The Noble","helper"],
+  "天官":["Tiān Guān","The Seal","helper"],"恩光":["Ēn Guāng","The Grace","helper"],
+  "台輔":["Tái Fǔ","The Honor","helper"],"台辅":["Tái Fǔ","The Honor","helper"],
+  "封誥":["Fēng Gào","The Patent","helper"],"封诰":["Fēng Gào","The Patent","helper"],
+  "八座":["Bā Zuò","The Dais","helper"],"三台":["Sān Tái","The Tier","helper"],
+  "鳳閣":["Fèng Gé","The Pavilion","helper"],"凤阁":["Fèng Gé","The Pavilion","helper"],
+  "龍池":["Lóng Chí","The Dragon Pool","helper"],"龙池":["Lóng Chí","The Dragon Pool","helper"],
+  "年解":["Nián Jiě","The Yearly Resolver","helper"],
+  "陰煞":["Yīn Shà","The Shadow","malefic"],"阴煞":["Yīn Shà","The Shadow","malefic"],
+  "蜚廉":["Fēi Lián","The Whisper","malefic"],
+  "孤辰":["Gū Chén","The Solitary","void"],"寡宿":["Guǎ Sù","The Widowed","void"],
+  "天哭":["Tiān Kū","The Lament","malefic"],"天虛":["Tiān Xū","The Vain","void"],"天虚":["Tiān Xū","The Vain","void"],
+  "天月":["Tiān Yuè","The Ailment","malefic"],"天傷":["Tiān Shāng","The Wound","malefic"],"天伤":["Tiān Shāng","The Wound","malefic"],
+  "天使":["Tiān Shǐ","The Herald","void"],"天刑":["Tiān Xíng","The Gavel","malefic"],
+  "破碎":["Pò Suì","The Fracture","malefic"],
+  "旬空":["Xún Kōng","The Gap","void"],"空亡":["Kōng Wáng","The Null","void"],"截路":["Jié Lù","The Cutoff","void"],
+  "帝旺":["Dì Wàng","The Zenith","phase"],"大耗":["Dà Hào","The Great Drain","malefic"]
+};
+const BRANCH = {
+  子:["Rat","子"],丑:["Ox","丑"],寅:["Tiger","寅"],卯:["Rabbit","卯"],辰:["Dragon","辰"],巳:["Snake","巳"],
+  午:["Horse","午"],未:["Goat","未"],申:["Monkey","申"],酉:["Rooster","酉"],戌:["Dog","戌"],亥:["Pig","亥"]
+};
+const PAL_EN = {命宫:"Life",兄弟:"Siblings",夫妻:"Spouse",子女:"Children",财帛:"Wealth",疾厄:"Health",
+  迁移:"Travel",仆役:"Friends",官禄:"Career",田宅:"Property",福德:"Wellbeing",父母:"Parents"};
+const PAL_HAN = {命宫:"命宮",兄弟:"兄弟",夫妻:"夫妻",子女:"子女",财帛:"財帛",疾厄:"疾厄",
+  迁移:"遷移",仆役:"僕役",官禄:"官祿",田宅:"田宅",福德:"福德",父母:"父母"};
+
+const CHART = [
+ {b:"寅",p:"仆役",mj:[["破军","得",""]],mn:[["左辅","",""],["地劫","",""],["陀罗","陷",""]],aj:["天寿","天巫","孤辰","天伤"]},
+ {b:"卯",p:"迁移",body:1,mj:[],mn:[["禄存","",""]],aj:["八座","恩光","天贵","龙池"]},
+ {b:"辰",p:"疾厄",mj:[["廉贞","利",""],["天府","庙",""]],mn:[["擎羊","庙",""]],aj:["红鸾","天官","月德","天使"]},
+ {b:"巳",p:"财帛",mj:[["太阴","陷","忌"]],mn:[["天马","",""]],aj:["封诰","天虚"]},
+ {b:"午",p:"子女",mirror:1,mj:[["贪狼","旺",""]],mn:[],aj:["天厨","解神","截路","阴煞"]},
+ {b:"未",p:"夫妻",mj:[["天同","不",""],["巨门","不",""]],mn:[["文昌","利",""],["文曲","旺",""]],aj:["华盖","空亡","天刑","天哭"]},
+ {b:"申",p:"兄弟",mj:[["武曲","得",""],["天相","庙",""]],mn:[["天钺","",""],["地空","",""]],aj:["天才","天福","天德"]},
+ {b:"酉",p:"命宫",soul:1,mj:[["太阳","陷",""],["天梁","得","权"]],mn:[],aj:["台辅","旬空","破碎"]},
+ {b:"戌",p:"父母",mj:[["七杀","庙",""]],mn:[],aj:["天喜","天月","寡宿"]},
+ {b:"亥",p:"福德",mj:[["天机","平","禄"]],mn:[],aj:["天姚","三台","凤阁","年解"]},
+ {b:"子",p:"田宅",focus:1,mj:[["紫微","平","科"]],mn:[["右弼","",""],["天魁","",""],["火星","陷",""]],aj:["咸池","天空"],extra:[["帝旺","",""],["大耗","",""]]},
+ {b:"丑",p:"官禄",mj:[],mn:[["铃星","得",""]],aj:["蜚廉"]}
+];
+
+function starHTML(name, kind, bright, mut){
+  const e = STARS[name] || [ "", name, "void" ];
+  const py = e[0], en = e[1], nat = e[2];
+  let badges = "";
+  if (mut) badges += `<span class="bd mu">${{"科":"科","权":"權","禄":"祿","忌":"忌"}[mut]||mut}</span>`;
+  if (bright) badges += `<span class="bd br">${bright}</span>`;
+  return `<div class="star ${kind} n-${nat}">
+      <span class="han">${name}</span>
+      <span class="en">${py?py+" · ":""}${en}</span>${badges}
+    </div>`;
+}
+
+const chartEl = document.getElementById("chart");
+for (const c of CHART){
+  const div = document.createElement("div");
+  let cls = "palace";
+  if (c.focus) cls += " focus"; else if (c.mirror) cls += " mirror"; else cls += " dim";
+  div.className = cls;
+  div.style.gridArea = ({寅:"yin",卯:"mao",辰:"chen",巳:"si",午:"wu",未:"wei",申:"shen",酉:"you",戌:"xu",亥:"hai",子:"zi",丑:"chou"})[c.b];
+
+  let flag = "";
+  if (c.focus) flag = `<div class="pflag f">Focus</div>`;
+  if (c.mirror) flag = `<div class="pflag m">Mirror</div>`;
+
+  let stars = "";
+  (c.mj||[]).forEach(s=> stars += starHTML(s[0],"major",s[1],s[2]));
+  (c.extra||[]).forEach(s=> stars += starHTML(s[0],"minor",s[1],s[2]));
+  (c.mn||[]).forEach(s=> stars += starHTML(s[0],"minor",s[1],s[2]));
+  (c.aj||[]).forEach(n=> stars += starHTML(n,"adj","",""));
+
+  const tags = (c.soul?" · Soul":"") + (c.body?" · Body":"");
+  div.innerHTML = `${flag}
+    <div class="stars">${stars}</div>
+    <div class="pfoot">
+      <span class="pname">${PAL_EN[c.p]}<span class="ph">${PAL_HAN[c.p]}</span><span class="page">${tags}</span></span>
+      <span class="pbranch">${BRANCH[c.b][0]} ${BRANCH[c.b][1]}</span>
+    </div>`;
+  chartEl.appendChild(div);
+}
+
+// center panel
+const center = document.createElement("div");
+center.className = "center";
+center.innerHTML = `
+  <div class="cn">凱瑟琳</div>
+  <h2>Katherine</h2>
+  <div class="meta">
+    12 Jan 1996 · <b>05:00–07:00</b><br>
+    Lunar <b>乙亥</b> · Year of the Pig<br>
+    Capricorn ♑ · Water-2 frame
+  </div>
+  <div class="pillars">乙亥 戊子 戊申 乙卯</div>
+  <div class="axis">★ Property 田宅 ⇄ Children 子女 ★</div>`;
+chartEl.appendChild(center);
+</script>
+</body>
+</html>

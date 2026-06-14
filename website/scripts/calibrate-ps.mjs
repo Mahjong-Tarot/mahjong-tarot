@@ -3,7 +3,7 @@
 
 import { scoreChart, buildFullReport, PALACE_LABEL, INAUSPICIOUS_AT_OR_BELOW } from '../lib/ps/engine.mjs';
 import { loadData } from '../lib/ps/data-node.mjs';
-import { buildChartFromBirth, chineseAge } from '../lib/ps/chart-iztro.mjs';
+import { buildChartFromBirth, chineseAge } from '../lib/ps/chart.mjs';
 
 const data = loadData();
 

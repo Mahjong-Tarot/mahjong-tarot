@@ -1,8 +1,8 @@
 // Generate a Purple Star report (full fate+luck, or single palace) from birth data.
 //
-// Chart placement currently comes from iztro (a swappable provider — the native
-// iztro-free engine is a separate track). Everything downstream — the 37-star
-// canon, San Fang Si Zheng scoring, and all narrative — is Bill's own data.
+// Chart placement comes from the proprietary native engine (lib/ps/chart.mjs).
+// Everything — placement, the canon, San Fang Si Zheng scoring, and all narrative —
+// is now ours: no third-party astrology library.
 //
 // Usage: node website/scripts/gen-ps-report.mjs
 
@@ -11,7 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { scoreChart, buildFullReport, buildPalaceReading } from '../lib/ps/engine.mjs';
 import { loadData } from '../lib/ps/data-node.mjs';
-import { buildChartFromBirth, chineseAge } from '../lib/ps/chart-iztro.mjs';
+import { buildChartFromBirth, chineseAge } from '../lib/ps/chart.mjs';
 import { renderFullReport, renderPalaceReading } from '../lib/ps/render.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));

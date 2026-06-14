@@ -2,6 +2,31 @@
 
 **Updated:** 2026-06-14 · supersedes parts of PLAN.md with what's now built.
 
+## 2026-06-14 — Native engine landed; third-party astrology library removed
+
+Placement is now **100% proprietary**. The third-party library is **gone** from
+`package.json` and the lockfile (0 refs); `npm run build` is clean.
+
+- **`lib/ps/lunar.mjs`** + vendored **`data/ps/lunar-table.json`** — Gregorian→lunar
+  conversion + ganzhi + Five-Elements-Bureau (纳音), zero runtime dependency.
+  Validated byte-for-byte over **73,017 days** (1900–2099).
+- **`lib/ps/chart.mjs`** — full classical placement (命宫/身宫, palace stems, Bureau,
+  紫微 table, 14 majors, all minor/adjunct stars, Si-Hua, the four 12-god series,
+  decades, 小限 ages, soul/body, brightness slot). Places the **full matrix canon**
+  (108 stars), so 咸池 etc. are placed by construction.
+- **Validation:** differential vs the prior provider — **1,585,619 placements, 0 diffs**
+  across 14,318 births (full range, all hours, both genders, leap months). A frozen
+  `data/ps/chart-golden.json` + `scripts/diff-chart.mjs` keep this as a dependency-free
+  regression test (0 diffs).
+- **Cutover:** member page, scripts, and the legacy `lib/purpleStar.js` (member
+  dashboard + admin private-readings) all run on the native engine. `chart-iztro.mjs`
+  deleted. `lib/purpleStarNames.js` is now unused (left in place).
+- **Scoring note:** the fuller canon (~10 stars/palace) shifts the score scale, so the
+  luck-category logic was moved to a score-band (`engine.LUCK_BAND`, knob 2). Current
+  distributions skew unfavorable (more 凶 cyclical stars) — **first-draft pending Bill's
+  calibration** of the weights + band against his real charts. Placement is exact; only
+  the luck thresholds are provisional.
+
 ## 2026-06-14 — Auspiciousness source swapped to Bill's matrix
 
 **What changed:** scoring no longer derives from iztro brightness. It now reads

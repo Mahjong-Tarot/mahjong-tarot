@@ -10,7 +10,7 @@ import accountStyles from '../../../../styles/Account.module.css';
 
 import { data } from '../../../../lib/ps/data.mjs';
 import { scoreChart, buildFullReport, buildPalaceReading, PALACE_LABEL } from '../../../../lib/ps/engine.mjs';
-import { buildChartFromBirth, chineseAge } from '../../../../lib/ps/chart-iztro.mjs';
+import { buildChartFromBirth, chineseAge } from '../../../../lib/ps/chart.mjs';
 import { renderFullReport, renderPalaceReading } from '../../../../lib/ps/render.mjs';
 
 const PALACE_KEYS = Object.keys(PALACE_LABEL);

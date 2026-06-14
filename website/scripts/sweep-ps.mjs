@@ -3,7 +3,7 @@
 
 import { scoreChart, buildFullReport, buildPalaceReading, PALACE_LABEL } from '../lib/ps/engine.mjs';
 import { loadData } from '../lib/ps/data-node.mjs';
-import { buildChartFromBirth, chineseAge } from '../lib/ps/chart-iztro.mjs';
+import { buildChartFromBirth, chineseAge } from '../lib/ps/chart.mjs';
 
 const data = loadData();
 const PALACES = Object.keys(PALACE_LABEL);

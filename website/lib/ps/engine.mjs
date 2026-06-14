@@ -75,6 +75,7 @@ export function sanFangSiZheng(idx) {
   return { focus: idx, opposite: (idx + 6) % 12, trine: [(idx + 4) % 12, (idx + 8) % 12] };
 }
 const WEIGHTS = { focus: 1.0, opposite: 0.3, trine: 0.3 }; // tunable; calibrate vs samples
+const LUCK_BAND = 1.5; // tunable knob 2: |score| band for lucky/unlucky vs mixed (full-canon first-draft)
 
 // ── scoring ──────────────────────────────────────────────────────────────────
 function palaceRawScore(palace) {
@@ -103,18 +104,19 @@ export function scoreChart(chart, data) {
     p.score = Math.round(score * 100) / 100;
     p.influences = sfsz;
   }
-  // rank palaces → luck category
+  // rank palaces → luck category.
+  // TUNABLE KNOB 2 — luck-category band. A palace reads lucky/unlucky when its net
+  // weighted auspiciousness clears ±LUCK_BAND; otherwise mixed (top/bottom always
+  // extremes). First-draft for the full canon — pending Bill's calibration; the
+  // fuller star set shifts the score scale, so this band is the dial to adjust.
   const ranked = [...chart.palaces].sort((a, b) => b.score - a.score);
   const top = ranked[0], bottom = ranked[ranked.length - 1];
   const tie = top.score === bottom.score;
   for (const p of chart.palaces) {
-    const hasPos = p.majors.some((s) => s.weight > 0) || p.minors.some((s) => s.weight > 0);
-    const hasNeg = p.majors.some((s) => s.weight < 0) || p.minors.some((s) => s.weight < 0);
     if (!tie && p === top) p.luck = 'mostLucky';
     else if (!tie && p === bottom) p.luck = 'leastLucky';
-    else if (hasPos && hasNeg) p.luck = 'mixed';
-    else if (p.score > 0.001) p.luck = 'generallyLucky';
-    else if (p.score < -0.001) p.luck = 'generallyUnlucky';
+    else if (p.score >= LUCK_BAND) p.luck = 'generallyLucky';
+    else if (p.score <= -LUCK_BAND) p.luck = 'generallyUnlucky';
     else p.luck = 'mixed';
   }
   chart.luckiest = tie ? null : top;

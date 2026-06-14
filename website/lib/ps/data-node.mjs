@@ -8,5 +8,5 @@ const DATA = path.join(DIR, '..', '..', 'data', 'ps');
 export function loadData() {
   const read = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'));
   return { stars: read('stars.json'), narratives: read('narratives.json'), fate: read('fate.json'),
-    auspiciousness: read('auspiciousness.json') };
+    auspiciousness: read('auspiciousness.json'), lunarTable: read('lunar-table.json') };
 }

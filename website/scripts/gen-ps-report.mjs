@@ -21,7 +21,7 @@ const data = loadData();
 const chart = buildChartFromBirth({ solarDate: '1996-1-12', hour: 6, gender: 'female' }, data);
 chart.name = 'Katherine';
 chart.currentAge = chineseAge('1996-1-12');
-scoreChart(chart);
+scoreChart(chart, data);
 const full = buildFullReport(chart, data);
 const palace = buildPalaceReading(chart, 'Property', data);
 

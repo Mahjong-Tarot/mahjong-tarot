@@ -25,7 +25,7 @@ for (const b of births) {
     const chart = buildChartFromBirth(b, data);
     chart.name = 'Test';
     chart.currentAge = chineseAge(b.solarDate);
-    scoreChart(chart);
+    scoreChart(chart, data);
     if (chart.palaces.length !== 12) throw new Error(`palaces=${chart.palaces.length}`);
     const full = buildFullReport(chart, data);
     if (full.decades.length !== 12) throw new Error(`decades=${full.decades.length}`);

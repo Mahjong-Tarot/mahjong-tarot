@@ -22,7 +22,9 @@ export const PALACE_LABEL = { Ming:'Fate', Siblings:'Siblings', Marriage:'Marria
   Wealth:'Wealth', Health:'Health', Travel:'Travel', Associates:'Friends', Career:'Career',
   Property:'Property', Happiness:'Wellbeing', Parents:'Parents' };
 
-// brightness (庙旺得利平不陷) → luck code + weight
+// brightness (庙旺得利平不陷) → luck code + weight.
+// NOTE: brightness no longer drives scoring — auspiciousness does (see below).
+// Kept for display only and for any provider that still wants a brightness hint.
 const BRIGHT = { 庙:['VL',2], 旺:['VL',2], 得:['L',1], 利:['L',1], 平:['neutral',0], 不:['U',-1], 陷:['VUL',-2] };
 const MUTAGEN = { 禄:1, 权:1, 科:1, 忌:-1, Lu:1, Quan:1, Ke:1, Ji:-1 };
 
@@ -34,6 +36,38 @@ export function brightnessInfo(brightness, mutagen) {
   if (shift > 0 && code === 'neutral') code = 'L';
   if (shift < 0 && code === 'neutral') code = 'U';
   return { code, weight };
+}
+
+// ── auspiciousness (Bill's authored 1–4 star×palace matrix) ───────────────────
+// The columns of Bill's matrix are LIFE-PALACES (his interpretive choice), so the
+// lookup is star×palace, NOT star×branch. This is where palace context lives, so
+// weight is assigned here in the engine rather than in the chart provider.
+//
+// TUNABLE KNOB 1 — rating → weight. Rating 2 is "below neutral" and scores
+// negative on purpose: the old brightness engine under-counted unlucky stars.
+export const RATING_WEIGHT = { 1: -2, 2: -1, 3: 1, 4: 2 };
+// rating → luck code, for the star-combo narrative lookup (4→VL 3→L 2→U 1→VUL).
+const RATING_CODE = { 1: 'VUL', 2: 'U', 3: 'L', 4: 'VL' };
+// A star is "inauspicious" when its rating sits at or below this band (for the
+// report's inauspicious-star count / display). Tunable.
+export const INAUSPICIOUS_AT_OR_BELOW = 2;
+// Si-Hua mutagen shifts a star's rating one band (clamped 1–4) before weighting.
+// 化禄/权/科 lift, 化忌 drags. iztro tags the single mutagen char (禄/权/科/忌);
+// the romanized aliases cover other providers.
+const MUTAGEN_BAND = { 禄: 1, 权: 1, 科: 1, 忌: -1, Lu: 1, Quan: 1, Ke: 1, Ji: -1 };
+const clampRating = (r) => Math.max(1, Math.min(4, r));
+
+// Resolve a star's rating in a given palace, apply any mutagen band, and return
+// { rating, weight, code }. A chart star absent from the matrix → default 2 + warn.
+export function rateStarInPalace(star, palaceKey, auspiciousness) {
+  const tbl = auspiciousness && auspiciousness.stars && auspiciousness.stars[star.hanzi];
+  let rating = tbl ? tbl[palaceKey] : undefined;
+  if (rating == null) {
+    rating = 2;
+    console.warn(`[ps] no auspiciousness rating for ${star.hanzi || star.display} in palace ${palaceKey}; defaulting to 2`);
+  }
+  rating = clampRating(rating + (MUTAGEN_BAND[star.mutagen] || 0));
+  return { rating, weight: RATING_WEIGHT[rating], code: RATING_CODE[rating] };
 }
 
 // 三方四正: focus + opposite(+6) + trine(+4,+8)
@@ -50,7 +84,15 @@ function palaceRawScore(palace) {
   return s;
 }
 
-export function scoreChart(chart) {
+export function scoreChart(chart, data) {
+  // Assign each star's rating/weight/code from Bill's matrix, in palace context.
+  const ausp = data && data.auspiciousness;
+  for (const p of chart.palaces) {
+    for (const st of [...p.majors, ...p.minors]) {
+      const r = rateStarInPalace(st, p.key, ausp);
+      st.rating = r.rating; st.weight = r.weight; st.code = r.code;
+    }
+  }
   const byBranch = {};
   for (const p of chart.palaces) byBranch[p.branchIdx] = p;
   for (const p of chart.palaces) {

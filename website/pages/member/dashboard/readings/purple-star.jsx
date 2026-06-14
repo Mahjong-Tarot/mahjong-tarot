@@ -66,7 +66,7 @@ export default function PurpleStarReading() {
       }, data);
       chart.name = (profile.name || 'Your').split(' ')[0];
       chart.currentAge = chineseAge(toSolar(profile.birthday));
-      scoreChart(chart);
+      scoreChart(chart, data);
       const full = renderFullReport(chart, buildFullReport(chart, data));
       const palaces = {};
       for (const k of PALACE_KEYS) palaces[k] = renderPalaceReading(chart, buildPalaceReading(chart, k, data));

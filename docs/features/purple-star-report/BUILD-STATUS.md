@@ -1,6 +1,50 @@
 # Purple Star Report — Build Status
 
-**Updated:** 2026-06-13 · supersedes parts of PLAN.md with what's now built.
+**Updated:** 2026-06-14 · supersedes parts of PLAN.md with what's now built.
+
+## 2026-06-14 — Auspiciousness source swapped to Bill's matrix
+
+**What changed:** scoring no longer derives from iztro brightness. It now reads
+Bill's authored **1–4 star×palace matrix** (the canonical Google Sheet
+`1_hfURgUyHsL-9_BFUHjmUU0DcCppgvpbhBKJf38olBY`, tab gid `1466894022`).
+
+- New ETL [`etl_auspiciousness.py`](etl_auspiciousness.py) → `website/data/ps/auspiciousness.json`
+  (keyed by hanzi + internal palace keys; `Fate→Ming`, `Friends→Associates`,
+  `Wellbeing→Happiness`; 114 star rows deduped to **108 unique** by hanzi; 4 Si-Hua
+  catalysts kept separate as mutagen modifiers).
+- `engine.mjs scoreChart(chart, data)` now assigns each star's rating/weight/code
+  from the matrix **in palace context** (`rateStarInPalace`). Two tunable knobs:
+  `RATING_WEIGHT {1:-2,2:-1,3:+1,4:+2}` and the palace luck thresholds. Luck code
+  derives from rating (4→VL 3→L 2→U 1→VUL). Mutagen shifts the rating ±1 band,
+  clamped 1–4. Missing star → rating 2 + `console.warn`.
+- `chart-iztro.mjs` still places stars and tags hanzi/mutagen/brightness, but no
+  longer decides weight from brightness (brightness is display-only now).
+- Data loaders (`data.mjs`, `data-node.mjs`) load `auspiciousness.json`. Callers
+  (`gen-ps-report`, `sweep-ps`, member page) pass `data` to `scoreChart`.
+
+**What did NOT change:** placement is still **iztro** (the 33-star canon, unchanged);
+narratives and the fate bank are untouched; the paywall is untouched.
+
+**Validation** (`sweep-ps.mjs` 180 births → 0 failures; `calibrate-ps.mjs` for the
+three reference charts):
+- Bill (1947-02-06 13:42 M): **6 六煞 malefic stars** now properly weighted (the old
+  brightness engine counted only 2 — the whole point of the change); **Marriage =
+  leastLucky** (破军 + 铃星 + 陀罗, all rating 1); palace luck **5 auspicious / 5 mixed /
+  2 unfavorable** (target ~4/6/2); a **Very Unfavorable late-life decade** (Wellbeing,
+  ages 102–111 — the 92–101 decade reads Neutral).
+- Dave: **4/6/2** exactly; Marriage = leastLucky. Katherine: 2/7/3; Marriage mixed.
+
+**Known gaps (flagged, not fudged):**
+- **咸池 (Peach Blossom) is not in the 33-star canon**, so it is not placed and cannot
+  appear in Travel — the matrix rates it (Travel=1) and is ready, but surfacing it
+  needs the placement/canon to be expanded (separate task; placement is out of scope
+  here). Do not "fix" by expanding the canon in this change.
+- The very-unfavorable decade lands at ages **102–111**, not strictly the 90s; decade
+  ranges come from iztro placement (unchanged here).
+- Knobs are **first-draft pending Bill's calibration**. The 1–4 ratings and the new
+  English names in the sheet are **Bill's to verify** — the engine consumes them as-is.
+
+---
 
 ## What was built this session
 

@@ -6,7 +6,7 @@
 // engine can replace this file without touching engine.mjs / render.mjs.
 
 import { astro } from 'iztro';
-import { brightnessInfo, BRANCH_IDX, BRANCH_ANIMAL, PALACE_CN_TO_KEY, PALACE_LABEL } from './engine.mjs';
+import { BRANCH_IDX, BRANCH_ANIMAL, PALACE_CN_TO_KEY, PALACE_LABEL } from './engine.mjs';
 
 function display(c) {
   if (c.nameStatus === 'locked' && c.modernName) return c.modernName;
@@ -33,11 +33,12 @@ export function buildChartFromBirth({ solarDate, hour, gender }, data) {
     for (const st of raw) {
       const c = CANON[st.name];
       if (!c) continue; // honor Bill's 37 — drop everything else
-      const { code, weight } = brightnessInfo(st.brightness, st.mutagen);
+      // Placement + tagging only. rating/weight/code come from the auspiciousness
+      // matrix in engine.scoreChart (needs palace context). brightness is display.
       const star = {
         hanzi: c.hanzi, roman: c.romanization, display: display(c),
         en: (c.nameStatus === 'locked' && c.modernName) ? c.modernName : c.romanization,
-        brightness: st.brightness || '', mutagen: st.mutagen || '', code, weight, billType: c.billType,
+        brightness: st.brightness || '', mutagen: st.mutagen || '', billType: c.billType,
       };
       (c.billType === 'Major' ? majors : minors).push(star);
     }

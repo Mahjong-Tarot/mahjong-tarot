@@ -23,3 +23,9 @@
 | 2026-06-08 | Two Metal Months and a Water Horse: the Quarter Nobody Warned You About | two-metal-months-water-horse-quarter-2026.md | Year of the Fire Horse |
 | 2026-06-10 | When to Push and When to Hold: the Mirror Across a Hard Quarter | mahjong-mirror-quarter-sequencing-push-hold.md | Year of the Fire Horse |
 | 2026-06-12 | Feel Good Friday: Plan With the Current, Not Against It | feel-good-friday-plan-with-the-current-not-against-it.md | Year of the Fire Horse |
+| 2026-06-15 | The Fire Burns Out Next Year. Here Is What Replaces It. | fire-sheep-year-2027-preview-what-changes.md | Chinese Astrology |
+| 2026-06-17 | Build It Now, Carry It Into the Sheep Year: the Mirror's Long Game | mahjong-mirror-build-now-carry-into-sheep-year.md | Chinese Astrology |
+| 2026-06-19 | Feel Good Friday: One Thing to Carry Into the Calm | feel-good-friday-one-thing-to-carry-into-the-sheep-year.md | Chinese Astrology |
+| 2026-06-22 | The Oldest Answer to the Fire Horse Year Is 2,500 Years Old | oldest-answer-fire-horse-year-wu-wei-tao-te-ching.md | Mahjong and Tarot |
+| 2026-06-24 | Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror | doing-by-not-doing-tao-wu-wei-mahjong-mirror.md | Mahjong and Tarot |
+| 2026-06-26 | Feel Good Friday: Find Your Curl | feel-good-friday-find-your-curl.md | Mahjong and Tarot |

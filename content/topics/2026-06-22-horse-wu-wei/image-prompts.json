@@ -1,0 +1,62 @@
+{
+  "topic": "Wu Wei from the Tao Te Ching: effortless action in the Fire Horse year, contrasting the champion surfer in the curl with the flailing surfer who falls in. The oldest answer to the most frantic year in 60.",
+  "phrases": [
+    "The wave does the work.",
+    "Alignment, not force.",
+    "Stop flailing. Find your curl.",
+    "Doing by not doing.",
+    "The champion looks effortless. He isn't. He's aligned."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "oldest-answer-fire-horse-year-wu-wei-tao-te-ching",
+      "content_type": "blog-fire-horse",
+      "concept": "A champion surfer inside the barrel of a large ocean wave, body perfectly still relative to the motion around him, arms relaxed and low, the wall of water enormous on either side. The wave is doing the work. He looks like he is barely moving. The power of the situation is carrying him.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Cinematic wide shot inside a large ocean wave barrel. A lone surfer is mid-ride, body low and still, arms relaxed at his sides. The tunnel of the wave arches over and around him. The water is translucent blue-green, backlit by sunlight coming through the lip of the curl. His silhouette is the calmest thing in the frame. Everything around him is motion; he is stillness inside it. No spray on the lens. No text. The mood is awe and composure. Palette: deep ocean teal, translucent aqua, white foam, antique gold where sun breaks through the lip. Film still quality. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "oldest-answer-fire-horse-year-wu-wei-tao-te-ching",
+      "content_type": "mon-facebook-en",
+      "concept": "Two figures on the same ocean surface: one at rest in aligned, calm posture reading the wave; the other clearly flailing, arms wide, off-balance. The contrast shows the difference between Wu Wei and force, without judgment.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Wide ocean shot from a low angle near the waterline. On the left side of the frame, a figure in silhouette stands balanced and calm on a surfboard, weight low, arms relaxed, riding a wave with ease. On the right side, further from the camera, another figure is mid-wipeout: arms out, body tilted, off-balance. Both in the same sea. The contrast is clear and unsparing. Neither face is visible. Dramatic natural lighting: late afternoon sun, deep shadows on the water, gold light catching the wave crests. Palette: deep ocean blue, antique gold light, soft ivory foam. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "oldest-answer-fire-horse-year-wu-wei-tao-te-ching",
+      "content_type": "mon-instagram",
+      "concept": "A square overhead view of a single perfectly formed ocean wave from above, its curl clean and complete, the sun lighting the inside of the barrel. The emptiness inside the curl is the subject: the space where the champion surfer lives.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square aerial or high-angle view of a perfect wave barrel as seen from above and slightly behind. The inside of the curl is open, hollow, lit by sunlight coming through the lip. The water is deep teal and translucent aqua. The curl forms a clean arc from top-left to bottom-right of the frame. No surfer visible, the frame focuses entirely on the empty space inside the wave, which is the point. Palette: deep teal ocean, translucent aqua interior, white foam at the edges, antique gold where sunlight penetrates. Clean, graphic, meditative. No text, no symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "oldest-answer-fire-horse-year-wu-wei-tao-te-ching",
+      "content_type": "tue-facebook-en",
+      "concept": "A woman at a rain-streaked window, not looking at the storm, but at the reflection of her own face in the glass, examining her own alignment. The outside is frantic; the inside is still.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A woman stands at a large window on a rainy day, seen from the side. Outside, rain streaks the glass and the sky is restless and grey. Her gaze is not on the storm. She is looking at her own reflection in the glass, thoughtful, composed. Her posture is still. The room behind her is warm and dim. The contrast between the frantic weather and her internal calm is the whole image. Palette: midnight jade interior, cool grey storm light outside, warm ivory lamp glow from behind. Film still quality. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "oldest-answer-fire-horse-year-wu-wei-tao-te-ching",
+      "content_type": "tue-instagram",
+      "concept": "A split square: one half is turbulent churning ocean water seen close up; the other half is a perfectly still tide pool reflecting the sky. Same element, two relationships to force. The contrast carries the Wu Wei argument without words.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square image split precisely down the center. Left half: close-up of turbulent ocean water, churning, white foam, force and chaos. Right half: a perfectly still tide pool, glassy, reflecting the sky above it, calm and clear. The dividing line is exact. The same element, two states. Palette: left side dark navy and white foam; right side pale sky blue reflection, smooth stone border. Graphic and deliberate. No text, no symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

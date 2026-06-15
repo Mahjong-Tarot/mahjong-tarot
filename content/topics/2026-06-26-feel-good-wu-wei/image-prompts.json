@@ -1,0 +1,65 @@
+{
+  "topic": "The Wu Wei weekend practice: finding the one place you're flailing, asking whether you're aligned with the current, and doing less with it instead of more. The practical right-hand page of Bill's Tao Te Ching book.",
+  "phrases": [
+    "Find your curl.",
+    "Do less. Align more.",
+    "The wave does the work when you stop fighting it.",
+    "One place. One question. One weekend.",
+    "Stillness is not the same as stopping."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-find-your-curl",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A woman kneeling at the edge of a garden pool, seen from behind, one hand resting lightly on the still water surface. Not gripping. Just touching. The gesture of releasing force, of feeling what is there rather than imposing on it.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Wide cinematic shot: a woman kneels at the mossy stone edge of a calm garden pool, seen from behind and slightly to the side. One hand rests open on the surface of the still water, barely touching it. Her shoulders are relaxed. The other hand rests on her knee. The pool's surface is mirror-smooth and reflects the garden above it. Morning light filters through trees. The mood is stillness, release, the opposite of forcing. Palette: deep midnight jade water, soft sage green garden, warm ivory morning light, antique gold glinting on the water surface. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-find-your-curl",
+      "content_type": "fri-facebook-en",
+      "concept": "A woman walking a curved garden path, seen from behind, her pace easy and unhurried. The path curves naturally and she follows it, not forcing a straight line. Forward movement that follows the natural shape of the ground.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Wide shot: a woman walks a gently curving garden path away from the camera. The path bends naturally, following the shape of the garden rather than cutting straight. She walks at an easy, unhurried pace, hands at her sides, body relaxed. Morning light falls across the path from between the trees. Lush garden on either side. Her silhouette is clear against the dappled light ahead. Palette: sage green garden, antique gold path light, midnight jade shadows, warm ivory sky where the path curves out of view. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-find-your-curl",
+      "content_type": "fri-instagram",
+      "concept": "A single open palm, facing upward, seen from above, with a small smooth river stone resting in it. The stone is being held without gripping. The gesture of holding something lightly, ready to release it.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square overhead close-up of an open palm, facing upward. A single small smooth river stone rests in the center of the palm. The hand is relaxed, not gripping. The fingers are open, slightly curved, the stone barely touching the skin. Soft warm morning light from above. The skin is warm toned. The stone is smooth and grey-green. The mood is lightness, the readiness to release. Palette: warm ivory skin, soft sage-grey stone, antique gold morning light. Clean, intimate, quiet. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image.",
+      "card": null
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-find-your-curl",
+      "content_type": "card",
+      "concept": "English affirmation card: the most quotable Wu Wei line from the week, set in hand-inked calligraphy on aged paper.",
+      "image_style": "TEXT",
+      "text": "Find your curl. Do less. Align more.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Find your curl. Do less. Align more.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant: modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-find-your-curl",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card: natural translation of the Wu Wei affirmation, set in hand-inked calligraphy on aged paper.",
+      "image_style": "TEXT",
+      "text": "Tim lan song cua ban. Lam it hon. Hoa minh vao dong chay.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Tìm làn sóng của bạn. Làm ít hơn. Hòa mình vào dòng chảy.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant: modern calligraphy, not cursive. Spell every word perfectly, preserve all Vietnamese diacritics exactly (à, ó, ợ, ề, ạ, etc.), and space the letters clearly. Preserve diacritics: Tìm làn sóng của bạn. Làm ít hơn. Hòa mình vào dòng chảy. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

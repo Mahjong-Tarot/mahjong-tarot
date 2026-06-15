@@ -307,30 +307,30 @@ Publishes: Friday (blog + social)
 
 ---
 
-## Week of June 15 — The Year of the Sheep Is Coming (2027 Preview)
+## Week of June 15: The Year of the Sheep Is Coming (2027 Preview)
 
-> IN PRODUCTION (writing batch of 2026-06-15). Source brief: `content/source-material/year-of-the-sheep-2027.md`. The Fire Sheep year begins **Feb 6, 2027**; Jun 15 also begins the Water Horse month. Posts are date-gated via `website/lib/posts.js` — each becomes visible on the blog only on/after its `isoDate`.
+> IN PRODUCTION (writing batch of 2026-06-15). Source brief: `content/source-material/year-of-the-sheep-2027.md`. The Fire Sheep year begins **Feb 6, 2027**; Jun 15 also begins the Water Horse month. Posts are date-gated via `website/lib/posts.js`, each becomes visible on the blog only on/after its `isoDate`.
 
-**Topic: 2026-06-15-horse-sheep-year** — STATUS: PUBLISHED
-Angle: Fire Horse — the pivot. After a year of fire and action, the Fire Sheep is the Yin counterweight: calmer and slower, but a "year of emotions."
+**Topic: 2026-06-15-horse-sheep-year**, STATUS: PUBLISHED
+Angle: Fire Horse, the pivot. After a year of fire and action, the Fire Sheep is the Yin counterweight: calmer and slower, but a "year of emotions."
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-06-17-mirror-sheep-year** — STATUS: PUBLISHED
-Angle: Mahjong Mirror — what to build now so you arrive in the Sheep year steady: emotional control, the relationships worth keeping, the foundations worth laying.
+**Topic: 2026-06-17-mirror-sheep-year**, STATUS: PUBLISHED
+Angle: Mahjong Mirror, what to build now so you arrive in the Sheep year steady: emotional control, the relationships worth keeping, the foundations worth laying.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-06-19-feel-good-sheep-year** — STATUS: PUBLISHED
-Angle: Feel Good Friday — a "build before it arrives" challenge: name one thing to carry into the calmer year.
+**Topic: 2026-06-19-feel-good-sheep-year**, STATUS: PUBLISHED
+Angle: Feel Good Friday, a "build before it arrives" challenge: name one thing to carry into the calmer year.
 Publishes: Friday (blog + social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| Jun 15 | Mon | Blog | "The Fire Burns Out Next Year — Here's What Replaces It" — The Fire Sheep year (begins Feb 6, 2027) is the Yin to the Horse's Yang: the pace slows, the extremes ease, but emotions take center stage. Strong for romance, watchful for money and career, and a year where beauty, fashion, and peace of mind matter. Who thrives (Rabbit, Sheep, Pig, Snake) and who struggles (Rat, Monkey, Dog, Ox). |
-| Jun 17 | Wed | Blog | "Build It Now, Carry It Into the Sheep Year — the Mirror's Long Game" — The Mahjong Mirror applied to the transition: emotional control, the relationships worth keeping, and the foundations worth laying while the Horse year still has momentum. |
-| Jun 15 | Mon | Facebook EN | The Fire Horse year has one more big lesson left: it's almost over. In Feb 2027 the Fire Sheep takes over — the Yin to this year's Yang. Slower, calmer, but a year ruled by emotions. Here's the preview, sign by sign. |
+| Jun 15 | Mon | Blog | "The Fire Burns Out Next Year, Here's What Replaces It", The Fire Sheep year (begins Feb 6, 2027) is the Yin to the Horse's Yang: the pace slows, the extremes ease, but emotions take center stage. Strong for romance, watchful for money and career, and a year where beauty, fashion, and peace of mind matter. Who thrives (Rabbit, Sheep, Pig, Snake) and who struggles (Rat, Monkey, Dog, Ox). |
+| Jun 17 | Wed | Blog | "Build It Now, Carry It Into the Sheep Year, the Mirror's Long Game", The Mahjong Mirror applied to the transition: emotional control, the relationships worth keeping, and the foundations worth laying while the Horse year still has momentum. |
+| Jun 15 | Mon | Facebook EN | The Fire Horse year has one more big lesson left: it's almost over. In Feb 2027 the Fire Sheep takes over, the Yin to this year's Yang. Slower, calmer, but a year ruled by emotions. Here's the preview, sign by sign. |
 | Jun 15 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| Jun 15 | Mon | Instagram | The fire doesn't burn forever. Next year the Sheep slows everything down — and turns the volume up on your emotions. Here's who thrives. |
-| Jun 16 | Tue | Facebook EN | If the Horse year was about action, the Sheep year is about feelings. The number-one skill for 2027 is emotional control — your own, and reading it in others. Romance gets strong; money and career need a closer watch. |
+| Jun 15 | Mon | Instagram | The fire doesn't burn forever. Next year the Sheep slows everything down, and turns the volume up on your emotions. Here's who thrives. |
+| Jun 16 | Tue | Facebook EN | If the Horse year was about action, the Sheep year is about feelings. The number-one skill for 2027 is emotional control, your own, and reading it in others. Romance gets strong; money and career need a closer watch. |
 | Jun 16 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 16 | Tue | Instagram | Horse year: trekking trips, back to back. Sheep year: an afternoon at the botanical garden. The pace is about to change. Are you ready to slow down? |
 | Jun 17 | Wed | Facebook EN | You don't wait for the Sheep year to start preparing for it. The Mahjong Mirror's long game: build emotional control, keep the relationships that matter, and lay foundations now while the Horse year still has momentum. |
@@ -339,48 +339,48 @@ Publishes: Friday (blog + social)
 | Jun 18 | Thu | Facebook EN | Rabbit, Sheep, Pig, and Snake are set up to thrive in 2027. Rat, Monkey, Dog, and Ox will have to work harder. Either way, the move is the same: build the steadiness now that the calmer year will ask you to live on. |
 | Jun 18 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 18 | Thu | Instagram | Your sign sets the weather. Your preparation sets the outcome. The Sheep year is coming either way. |
-| Jun 19 | Fri | Facebook EN | Feel Good Friday: name one thing — a habit, a relationship, a practice — to carry into the Sheep year. Don't wait for the calendar to flip. Start building the steadiness now, while the fire still has something to give. |
+| Jun 19 | Fri | Facebook EN | Feel Good Friday: name one thing, a habit, a relationship, a practice, to carry into the Sheep year. Don't wait for the calendar to flip. Start building the steadiness now, while the fire still has something to give. |
 | Jun 19 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 19 | Fri | Instagram | Feel Good Friday: One thing to carry into the calm. Pick it now. Build it now. The Sheep year will thank you. |
 
 ---
 
-## Week of June 22 — The Tao Te Ching: Wu Wei
+## Week of June 22: The Tao Te Ching (Wu Wei)
 
-> IN PRODUCTION (writing batch of 2026-06-15). Source brief: `content/source-material/Dao Te Ching/Summary - Purple Star and Tao Te Ching (06-15).md` — the 2026-06-15 Mahjong Mirror interview with Bill. This week steps off the zodiac calendar and into Bill's own 30-year Taoist practice and his in-progress fresh retranslation of the Tao Te Ching. The unifying idea is **Wu Wei** — "doing by not doing," effortless action — and it lands as the perfect counter-energy to the frantic Fire Horse year. Posts are date-gated via `website/lib/posts.js`.
+> IN PRODUCTION (writing batch of 2026-06-15). Source brief: `content/source-material/Dao Te Ching/Summary - Purple Star and Tao Te Ching (06-15).md`, the 2026-06-15 Mahjong Mirror interview with Bill. This week steps off the zodiac calendar and into Bill's own 30-year Taoist practice and his in-progress fresh retranslation of the Tao Te Ching. The unifying idea is **Wu Wei**, "doing by not doing," effortless action, and it lands as the perfect counter-energy to the frantic Fire Horse year. Posts are date-gated via `website/lib/posts.js`.
 >
 > **Source note:** the brief is a single interview summary and contains no verses from Bill's actual translation. The posts draw on the ideas Bill describes (the retranslation goal, the two-part book structure, the down-to-earth imagery, Wu Wei, the surfer). If we want to quote real lines from his draft, drop a few translated verses into the source folder before the writing run.
 
-**Topic: 2026-06-22-horse-wu-wei** — STATUS: PUBLISHED
-Angle: Fire Horse — shock & awe, reframed. In the most frantic year in 60, the oldest answer on Earth says: stop flailing. Bill's 30 years as a Taoist, his new plain-language retranslation, and Wu Wei as the surfer-in-the-curl who looks like he's barely moving while everyone else wipes out.
+**Topic: 2026-06-22-horse-wu-wei**, STATUS: PUBLISHED
+Angle: Fire Horse, shock & awe, reframed. In the most frantic year in 60, the oldest answer on Earth says: stop flailing. Bill's 30 years as a Taoist, his new plain-language retranslation, and Wu Wei as the surfer-in-the-curl who looks like he's barely moving while everyone else wipes out.
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-06-24-mirror-wu-wei** — STATUS: PUBLISHED
-Angle: Mahjong Mirror — the answer. Why most Tao translations fail (too poetic, need a PhD) and what Bill's "Google-translatable" version restores: the teapot emptied before it's refilled, the spokes around the hub, wood before the carving. Wu Wei is the discipline behind the Mirror — empty the cup, read the current, act with it instead of forcing.
+**Topic: 2026-06-24-mirror-wu-wei**, STATUS: PUBLISHED
+Angle: Mahjong Mirror, the answer. Why most Tao translations fail (too poetic, need a PhD) and what Bill's "Google-translatable" version restores: the teapot emptied before it's refilled, the spokes around the hub, wood before the carving. Wu Wei is the discipline behind the Mirror, empty the cup, read the current, act with it instead of forcing.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-06-26-feel-good-wu-wei** — STATUS: PUBLISHED
-Angle: Feel Good Friday — positive aspiration. The right-hand page of Bill's book: three to five things anyone can apply almost daily. The weekend challenge — find the one place you're flailing and do less, align more. Lao Tzu wrote for common people doing common things.
+**Topic: 2026-06-26-feel-good-wu-wei**, STATUS: PUBLISHED
+Angle: Feel Good Friday, positive aspiration. The right-hand page of Bill's book: three to five things anyone can apply almost daily. The weekend challenge, find the one place you're flailing and do less, align more. Lao Tzu wrote for common people doing common things.
 Publishes: Friday (blog + social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| Jun 22 | Mon | Blog | "The Oldest Answer to the Fire Horse Year Is 2,500 Years Old" — In a year that screams *move faster, do more*, the Tao Te Ching says the opposite. Bill has been a Taoist for 30 years and is a third of the way through a fresh, plain-language retranslation. The heart of it is Wu Wei — not "go with the flow" or the lazy path, but effortless action. The champion surfer riding the curl looks like he's barely moving; the guy flailing next to him falls in. Most people flail through life. This is the year to stop. |
-| Jun 22 | Mon | Facebook EN | I've called myself a Taoist for 30 years, and in the middle of the most frantic year in 60, I keep coming back to one idea from the Tao Te Ching: Wu Wei. People think it means "go with the flow." It doesn't. It means effortless action — doing by not doing. Picture the best surfer on the North Shore, barely moving inside the wave, while everyone else wipes out. That's the year I want for you. |
+| Jun 22 | Mon | Blog | "The Oldest Answer to the Fire Horse Year Is 2,500 Years Old", In a year that screams *move faster, do more*, the Tao Te Ching says the opposite. Bill has been a Taoist for 30 years and is a third of the way through a fresh, plain-language retranslation. The heart of it is Wu Wei, not "go with the flow" or the lazy path, but effortless action. The champion surfer riding the curl looks like he's barely moving; the guy flailing next to him falls in. Most people flail through life. This is the year to stop. |
+| Jun 22 | Mon | Facebook EN | I've called myself a Taoist for 30 years, and in the middle of the most frantic year in 60, I keep coming back to one idea from the Tao Te Ching: Wu Wei. People think it means "go with the flow." It doesn't. It means effortless action, doing by not doing. Picture the best surfer on the North Shore, barely moving inside the wave, while everyone else wipes out. That's the year I want for you. |
 | Jun 22 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| Jun 22 | Mon | Instagram | Everyone's flailing through the Fire Horse year. The surfer in the curl isn't. That's Wu Wei — and it's 2,500 years old. |
-| Jun 23 | Tue | Facebook EN | Wu Wei is the most misunderstood idea in the Tao Te Ching. It is not "do nothing." It is "do by not doing" — effortless action, the modern idea of flow. The flailing surfer works ten times as hard as the champion and still falls in. Where in your life are you flailing? |
+| Jun 22 | Mon | Instagram | Everyone's flailing through the Fire Horse year. The surfer in the curl isn't. That's Wu Wei, and it's 2,500 years old. |
+| Jun 23 | Tue | Facebook EN | Wu Wei is the most misunderstood idea in the Tao Te Ching. It is not "do nothing." It is "do by not doing", effortless action, the modern idea of flow. The flailing surfer works ten times as hard as the champion and still falls in. Where in your life are you flailing? |
 | Jun 23 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 23 | Tue | Instagram | Effort isn't the same as progress. The flailing surfer proves it. Wu Wei is doing less and aligning more. |
-| Jun 24 | Wed | Blog | "Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror" — Most translations of the Tao Te Ching are unreadable — too poetic, too abstract, like you need a PhD in Chinese to follow them. As an English teacher, that always bothered me, so I'm writing a version a common person anywhere can understand. Lao Tzu wrote in plain images: a teapot has to be emptied before it can be refilled; the spokes are useful because of the empty hub; the wood matters before the carving. That's the same discipline behind the Mahjong Mirror — empty the cup, read the current, and act with it instead of forcing your way through. |
-| Jun 24 | Wed | Facebook EN | Most Tao Te Ching translations read like they need a master's degree to decode. Lao Tzu didn't write for scholars — he wrote for common people, in plain images: a teapot emptied before it's refilled, spokes around an empty hub, wood before the carving. That literal wisdom is exactly what the Mahjong Mirror runs on: empty the cup before you decide. |
+| Jun 24 | Wed | Blog | "Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror", Most translations of the Tao Te Ching are unreadable, too poetic, too abstract, like you need a PhD in Chinese to follow them. As an English teacher, that always bothered me, so I'm writing a version a common person anywhere can understand. Lao Tzu wrote in plain images: a teapot has to be emptied before it can be refilled; the spokes are useful because of the empty hub; the wood matters before the carving. That's the same discipline behind the Mahjong Mirror, empty the cup, read the current, and act with it instead of forcing your way through. |
+| Jun 24 | Wed | Facebook EN | Most Tao Te Ching translations read like they need a master's degree to decode. Lao Tzu didn't write for scholars, he wrote for common people, in plain images: a teapot emptied before it's refilled, spokes around an empty hub, wood before the carving. That literal wisdom is exactly what the Mahjong Mirror runs on: empty the cup before you decide. |
 | Jun 24 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 24 | Wed | Instagram | A teapot has to be emptied before it can be refilled. That's the Tao. That's the Mirror. Empty the cup before you decide. |
-| Jun 25 | Thu | Facebook EN | The point of the Tao Te Ching was never to be admired — it was to be used. That's why my translation has two halves: the verse on one page, and three to five things you can actually do with it on the other. Wisdom you can apply on a Tuesday beats wisdom you can only quote. |
+| Jun 25 | Thu | Facebook EN | The point of the Tao Te Ching was never to be admired, it was to be used. That's why my translation has two halves: the verse on one page, and three to five things you can actually do with it on the other. Wisdom you can apply on a Tuesday beats wisdom you can only quote. |
 | Jun 25 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 25 | Thu | Instagram | Wisdom you can use beats wisdom you can quote. The Tao was written for common people doing common things. |
-| Jun 26 | Fri | Blog | "Feel Good Friday: Find Your Curl" — You don't need to add anything to your life this weekend. You need to stop flailing at one thing. Pick the single place you've been forcing — a conversation, a project, a worry you keep gripping — and try the Wu Wei move: do less, align more. This is the practice behind the right-hand page of the book I'm writing — small, daily, applicable. Lao Tzu wrote for common people doing common things. So can you. |
-| Jun 26 | Fri | Facebook EN | Feel Good Friday: find your curl. Pick the one place you've been forcing this week — a conversation, a project, a worry — and do less with it, not more. Align instead of fight. That's Wu Wei, and it's the kind of small daily practice the Tao was actually written for. |
+| Jun 26 | Fri | Blog | "Feel Good Friday: Find Your Curl", You don't need to add anything to your life this weekend. You need to stop flailing at one thing. Pick the single place you've been forcing, a conversation, a project, a worry you keep gripping, and try the Wu Wei move: do less, align more. This is the practice behind the right-hand page of the book I'm writing, small, daily, applicable. Lao Tzu wrote for common people doing common things. So can you. |
+| Jun 26 | Fri | Facebook EN | Feel Good Friday: find your curl. Pick the one place you've been forcing this week, a conversation, a project, a worry, and do less with it, not more. Align instead of fight. That's Wu Wei, and it's the kind of small daily practice the Tao was actually written for. |
 | Jun 26 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
-| Jun 26 | Fri | Instagram | Feel Good Friday: Find your curl. One place you're forcing — do less, align more. That's Wu Wei. |
+| Jun 26 | Fri | Instagram | Feel Good Friday: Find your curl. One place you're forcing, do less, align more. That's Wu Wei. |
 

@@ -29,7 +29,7 @@ Every piece of content is written for **one specific reader**. Keep her in mind 
 
 ### Who Bill Is
 
-Bill Hajdu is a fortune teller and divination practitioner with over 35 years of experience. He was born in the Fire Pig year of 1947. He combines Chinese astrology, Mahjong tile readings, and tarot into a unique system he calls The Mahjong Mirror — a decision-making framework that uses Mahjong tiles to surface what's really happening in someone's life.
+Bill Hajdu is a fortune teller and divination practitioner with over 35 years of experience. He was born in the Fire Pig year of 1947. He combines Chinese astrology, Mahjong card readings, and tarot into a unique system he calls The Mahjong Mirror — a decision-making framework that uses Mahjong cards to surface what's really happening in someone's life. The system uses **cards, never "tiles"**. The full 42-card set lives in `agents/designer/context/mahjong-cards/` (Honor, Guardian, and Suit cards) — only reference cards that exist there.
 
 He is the author of *The Mahjong Mirror: Your Path to Wiser Decisions*.
 
@@ -38,7 +38,7 @@ Bill goes by "The Firepig" — a nickname derived from his birth year. He uses i
 ### Bill's Background and Credibility
 
 - Over 35 years reading Chinese astrology
-- Thousands of personal Mahjong tile readings
+- Thousands of personal Mahjong card readings
 - Deep knowledge of the 60-year Chinese zodiac cycle (12 animals × 5 elements)
 - Fluent in the interplay between Chinese astrology, feng shui, Mahjong symbolism, and Chinese Philosophy
 - Practical, experience-based knowledge. Bill learned by doing, not by feeling
@@ -73,7 +73,7 @@ He is never clinical. He is never precious. He is never vague.
 ### Vocabulary
 
 - Plain, muscular language. Prefer "use" over "utilize," "show" over "demonstrate," "break" over "disintegrate."
-- Astrology and Mahjong terms are used naturally and explained through context, not parenthetical definitions. Don't write "the Peach Blossom (a tile representing romantic temptation)." Write "the Peach Blossom tile: the card of romantic temptation and affairs."
+- Astrology and Mahjong terms are used naturally and explained through context, not parenthetical definitions. Don't write "the Peach Blossom (a card representing romantic temptation)." Write "the Peach Blossom: the card of romantic temptation and affairs."
 - Metaphors drawn from fire, nature, and physical experience. Bill talks about tending gardens, forest fires, holding up mirrors, riding horses. Not about "paradigm shifts" or "leveraging synergies."
 
 ### Punctuation — NO EM DASHES
@@ -84,7 +84,7 @@ He is never clinical. He is never precious. He is never vague.
 
 1. **Period.** Two sentences almost always beat one em-dash sentence. "The Horse doesn't reward caution. It rewards movement." not "The Horse doesn't reward caution — it rewards movement."
 2. **Colon.** When the second half explains or names the first. "She wanted one thing: clarity."
-3. **Comma.** For a parenthetical aside that's short and tight. "Bill, the Firepig, has read tiles for 35 years."
+3. **Comma.** For a parenthetical aside that's short and tight. "Bill, the Firepig, has read cards for 35 years."
 4. **Parentheses.** For a genuine aside the reader could skip.
 5. **Rewrite.** If none of the above fit, the em dash was probably masking weak structure — rewrite the whole sentence.
 
@@ -202,7 +202,7 @@ Each style is a distinct structural and tonal template. The `write-post` skill (
 
 **What it is:** A deep, educational dive into a single concept. Teaches the reader something specific about Chinese astrology, Mahjong symbolism, elemental theory, or how readings work. Builds Bill's authority by showing the depth of his knowledge.
 
-**When to use it:** When a concept has come up in previous posts without full explanation, or when introducing something the audience is unlikely to know (double fire, the 60-year cycle, how Mahjong tiles map to life areas).
+**When to use it:** When a concept has come up in previous posts without full explanation, or when introducing something the audience is unlikely to know (double fire, the 60-year cycle, how Mahjong cards map to life areas).
 
 **Structure:**
 - Hook: A surprising fact or reframe that makes the concept feel urgent to understand
@@ -248,7 +248,7 @@ Each style is a distinct structural and tonal template. The `write-post` skill (
 
 **Structure:**
 - Hook: Drop into the scene. "A client sat down across from me last month..."
-- The story unfolds — the reading, the tiles that appeared, what they meant, what happened next
+- The story unfolds — the reading, the cards that appeared, what they meant, what happened next
 - The lesson: what this story reveals about a larger pattern or principle
 - The bridge: how this applies to the reader's own life
 - CTA
@@ -297,7 +297,7 @@ Each style is a distinct structural and tonal template. The `write-post` skill (
 
 **Tone:** Punchy and direct. Each list item should hit hard on its own. No filler items to pad the count.
 
-**Example hook:** "5 Tiles That Show Up When a Relationship Is About to Break — and What to Do Before They Appear in Yours."
+**Example hook:** "5 Cards That Show Up When a Relationship Is About to Break — and What to Do Before They Appear in Yours."
 
 **Word count:** 1,000–1,500
 
@@ -355,7 +355,7 @@ Each style is a distinct structural and tonal template. The `write-post` skill (
 - Hook: A striking historical fact that mirrors the present
 - Walk through 2-3 historical Fire Horse (or relevant cycle) years, highlighting the extremes
 - Draw the thread to the present — what pattern is repeating
-- What Bill sees in the tiles and the astrology that confirms or complicates the pattern
+- What Bill sees in the cards and the astrology that confirms or complicates the pattern
 - CTA
 
 **Tone:** Authoritative and slightly ominous. The weight of history is doing the persuasion. Bill is the interpreter who connects then to now.

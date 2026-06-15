@@ -117,7 +117,7 @@ export default function EmailDashboard({ profile }) {
         .limit(8),
       supabase
         .from('email_replies')
-        .select('from_email, from_name, subject, text_body, forwarded_at, created_at')
+        .select('from_email, from_name, subject, text_body, forwarded_at, created_at, harvested_sign')
         .order('created_at', { ascending: false })
         .limit(25),
       supabase
@@ -342,6 +342,7 @@ export default function EmailDashboard({ profile }) {
                     <div className={adminStyles.feedItem} key={`${r.from_email}-${r.created_at}`}>
                       <p className={adminStyles.feedTitle}>
                         {r.from_name || r.from_email} — {r.subject || '(no subject)'}
+                        {r.harvested_sign ? ` · 🐉 ${r.harvested_sign}` : ''}
                         {r.forwarded_at ? ' ✓' : ' (not forwarded)'}
                       </p>
                       <p className={adminStyles.feedDetail}>

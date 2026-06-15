@@ -8,6 +8,24 @@
 // payloads, so the token lives in the registered webhook URL.
 import { timingSafeEqual } from 'crypto';
 import { getServiceSupabase } from '../../../lib/stripe';
+import { extractChineseSign } from '../../../lib/zodiac-harvest';
+
+// Resolve the sender to a CRM contact — find-only, never create.
+// Out-of-office autoresponders and forwards come from addresses that
+// aren't contacts; creating people rows for them would pollute the CRM.
+async function findPersonId(service, email) {
+  const pattern = email.replace(/([%_\\])/g, '\\$1');
+  const { data, error } = await service
+    .from('people')
+    .select('id')
+    .ilike('email', pattern)
+    .limit(1);
+  if (error) {
+    console.error('[brevo-inbound] person lookup failed', email, error);
+    return null;
+  }
+  return data?.[0]?.id || null;
+}
 
 function isAuthorized(req) {
   const secret = process.env.BREVO_WEBHOOK_SECRET;
@@ -59,10 +77,12 @@ function toRow(item) {
 // and the dedup index would drop the duplicate, losing the forward).
 async function forwardToBill(row) {
   const apiKey = process.env.RESEND_API_KEY;
-  // Bill's address fallback matches the convention in api/reply.js and
-  // api/admin/* — RESEND_REPLY_TO is not actually set in production.
+  // Campaign replies belong in the firepig@ Workspace inbox — the same
+  // address campaigns historically used as their reply-to. (The gmail
+  // fallback used elsewhere sent the first two warm-up forwards to
+  // Bill's personal Gmail instead; Yon expects them at firepig@.)
   const forwardTo =
-    process.env.REPLY_FORWARD_TO || process.env.RESEND_REPLY_TO || 'firepig01@gmail.com';
+    process.env.REPLY_FORWARD_TO || 'firepig@mahjongtarot.com';
   if (!apiKey) {
     console.warn('[brevo-inbound] forwarding skipped: RESEND_API_KEY not set');
     return null;
@@ -105,6 +125,23 @@ export default async function handler(req, res) {
   const service = getServiceSupabase();
   let stored = 0;
   for (const row of rows) {
+    row.person_id = await findPersonId(service, row.from_email);
+
+    // Sign harvester: the reply-bait asks for the sender's zodiac
+    // sign — record what they stated, and enrich the CRM contact if
+    // their sign is still unknown. Never overwrites an existing one.
+    const harvest = extractChineseSign(row.text_body);
+    row.harvested_sign = harvest?.sign || null;
+    row.harvest_basis = harvest?.basis || null;
+    if (harvest && row.person_id) {
+      const { error: signErr } = await service
+        .from('people')
+        .update({ chinese_sign: harvest.sign })
+        .eq('id', row.person_id)
+        .is('chinese_sign', null);
+      if (signErr) console.error('[brevo-inbound] sign update failed', signErr);
+    }
+
     const { data, error } = await service
       .from('email_replies')
       .insert(row)

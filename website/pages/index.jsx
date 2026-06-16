@@ -9,7 +9,7 @@ import NewsletterSignup from '../components/NewsletterSignup';
 import AlmanacToday from '../components/AlmanacToday';
 import { useAuth } from '../lib/auth';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
-import { POSTS } from '../lib/posts';
+import { publishedPosts } from '../lib/posts';
 import { fetchAlmanacForDate, todayInLA } from '../lib/almanac';
 import styles from '../styles/Home.module.css';
 
@@ -49,7 +49,7 @@ const DECK = [
 
 const stripTrailingPeriod = (s) => s.replace(/\.$/, '');
 
-export default function Home({ todayDate, todayAlmanac }) {
+export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
@@ -74,8 +74,6 @@ export default function Home({ todayDate, todayAlmanac }) {
       primaryImageOfPage: 'https://www.mahjongtarot.com/images/gallery-3.webp',
     },
   ]);
-
-  const featuredPosts = POSTS.slice(0, 3);
 
   return (
     <>
@@ -397,8 +395,11 @@ export default function Home({ todayDate, todayAlmanac }) {
 export async function getStaticProps() {
   const todayDate = todayInLA();
   const todayAlmanac = await fetchAlmanacForDate(todayDate);
+  // Only feature posts whose publish date has arrived, so the homepage never
+  // links to a date-gated post that 404s. revalidate flips it in on schedule.
+  const featuredPosts = publishedPosts().slice(0, 3);
   return {
-    props: { todayDate, todayAlmanac: todayAlmanac || null },
+    props: { todayDate, todayAlmanac: todayAlmanac || null, featuredPosts },
     revalidate: 300,
   };
 }

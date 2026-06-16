@@ -182,7 +182,7 @@ export default function Home({ todayDate, todayAlmanac }) {
                       style={{ objectFit: 'cover' }}
                     />
                   </div>
-                  <div className={styles.postEyebrow}>{post.categories[0]}</div>
+                  <div className={styles.postEyebrow}>{post.topic}</div>
                   <h3 className={styles.postTitle}>{stripTrailingPeriod(post.title)}</h3>
                   <div className={styles.postMeta}>{post.date} · {post.readTime}</div>
                 </Link>

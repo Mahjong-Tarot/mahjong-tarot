@@ -25,7 +25,7 @@ import Footer from '../../../components/Footer';
 import FaqItem from '../../../components/FaqItem';
 import styles from '../../../styles/BlogPost.module.css';
 import { listSlugs, loadPost } from '../../../lib/blogContent';
-import { isPublished } from '../../../lib/posts';
+import { isPublished, topicOf } from '../../../lib/posts';
 
 export default function BlogPost({ frontmatter, html }) {
   const {
@@ -240,5 +240,13 @@ export async function getStaticProps({ params }) {
   // Hold future-dated posts until their publish day (see lib/posts.js).
   // revalidate lets the 404 flip to the live page when the date arrives.
   if (!isPublished(params.slug)) return { notFound: true, revalidate: 1800 };
+  // The post's topic (pill + breadcrumb) comes from lib/posts.js, the single
+  // source of truth — not the markdown frontmatter — so it can never drift from
+  // the /blog card or the homepage eyebrow.
+  const topic = topicOf(params.slug);
+  if (topic) {
+    post.frontmatter.categoryPill = topic;
+    post.frontmatter.breadcrumbLabel = topic;
+  }
   return { props: post, revalidate: 1800 };
 }

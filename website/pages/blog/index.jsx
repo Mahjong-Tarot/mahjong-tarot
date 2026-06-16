@@ -6,16 +6,12 @@ import Footer from '../../components/Footer';
 import NewsletterSignup from '../../components/NewsletterSignup';
 import SEO from '../../components/SEO';
 import { ORGANIZATION, WEBSITE, PERSON_BILL, graph, breadcrumb } from '../../lib/schema';
-import { publishedPosts } from '../../lib/posts';
+import { publishedPosts, TOPICS } from '../../lib/posts';
 import styles from '../../styles/Blog.module.css';
 
-const CATEGORIES = [
-  'All Posts',
-  'Romance',
-  'Year of the Fire Horse',
-  'Mahjong Reading',
-  'Chinese Astrology',
-];
+// Filter buttons are derived from the canonical topic list, so every button
+// always has posts and every post always has a matching button.
+const CATEGORIES = ['All Posts', ...TOPICS];
 
 export default function BlogIndex({ posts }) {
   const [active, setActive] = useState('All Posts');
@@ -24,7 +20,7 @@ export default function BlogIndex({ posts }) {
   const rest = posts.slice(1);
   const filtered = active === 'All Posts'
     ? rest
-    : rest.filter((p) => p.categories.includes(active));
+    : rest.filter((p) => p.topic === active);
 
   return (
     <>
@@ -89,7 +85,7 @@ export default function BlogIndex({ posts }) {
                 />
               </Link>
               <div className={styles.featuredText}>
-                <span className="post-category">{featured.categories[0]}</span>
+                <span className="post-category">{featured.topic}</span>
                 <h2 className={styles.featuredTitle}>
                   <Link href={`/blog/posts/${featured.slug}`}>
                     {featured.title}
@@ -143,7 +139,7 @@ export default function BlogIndex({ posts }) {
                       </div>
                     </Link>
                     <div className={styles.cardBody}>
-                      <span className="post-category">{post.categories[0]}</span>
+                      <span className="post-category">{post.topic}</span>
                       <h2 className={styles.cardTitle}>
                         <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
                       </h2>

@@ -543,3 +543,4 @@ Committed. Run this from your terminal to push to GitHub:
 | Writer marks a week STATUS: WRITTEN but topic folder missing | Re-run writer for that week. |
 | `jq` not found | `brew install jq` |
 | `ffmpeg` not found | `brew install ffmpeg` |
+| `cwebp` not found | `brew install webp` — the generate-image skill encodes WebP with cwebp, not ffmpeg |

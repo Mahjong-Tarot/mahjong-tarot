@@ -7,11 +7,11 @@ categoryPill: "Mahjong and Tarot"
 breadcrumbLabel: "Mahjong and Tarot"
 seo:
   title: "Wu Wei, the Tao Te Ching, and the Mahjong Mirror | Mahjong Tarot"
-  description: "Bill Hajdu is retranslating the Tao Te Ching in plain language. The images Lao Tzu used connect directly to how the Mahjong Mirror works: the teapot, the spokes, the uncarved wood."
+  description: "Bill Hajdu is retranslating the Tao Te Ching in plain language. The images Lao Tzu used connect directly to how the Mahjong Mirror works: the clay pot, the spokes, the uncarved wood."
   canonical: "https://mahjongtarot.com/blog/posts/doing-by-not-doing-tao-wu-wei-mahjong-mirror"
   og:
     title: "Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror"
-    description: "Bill Hajdu is retranslating the Tao Te Ching in plain language. The images Lao Tzu used connect directly to how the Mahjong Mirror works: the teapot, the spokes, the uncarved wood."
+    description: "Bill Hajdu is retranslating the Tao Te Ching in plain language. The images Lao Tzu used connect directly to how the Mahjong Mirror works: the clay pot, the spokes, the uncarved wood."
     image: "https://mahjongtarot.com/images/blog/doing-by-not-doing-tao-wu-wei-mahjong-mirror.webp"
 jsonLd:
   headline: "Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror"
@@ -19,16 +19,16 @@ jsonLd:
   image: "https://mahjongtarot.com/images/blog/doing-by-not-doing-tao-wu-wei-mahjong-mirror.webp"
 hero:
   src: "/images/blog/doing-by-not-doing-tao-wu-wei-mahjong-mirror.webp"
-  alt: "A simple unglazed clay teapot with its lid removed and set beside it, resting on dark aged wood, the empty interior visible, soft overhead natural light from the upper left"
+  alt: "A simple empty unglazed clay pot resting on dark aged wood, its hollow interior visible from above, soft overhead natural light from the upper left"
 nav:
   prev:
     slug: "oldest-answer-fire-horse-year-wu-wei-tao-te-ching"
     label: "The Oldest Answer to the Fire Horse Year"
 faqs:
   - q: "What are the key images in the Tao Te Ching and what do they mean?"
-    a: "Lao Tzu used three foundational physical images. A teapot: it must be emptied before it can receive more tea. The emptying is the preparation. A wheel with spokes: the empty hub where the axle fits is what makes the wheel turn. Uncarved wood: before a decision is fixed, all possibilities are open. These images describe the value of emptiness, space, and potential. They describe what makes usefulness possible."
+    a: "Lao Tzu used three foundational physical images. A clay pot: it is useful only because it is empty, and it must be emptied before it can hold anything new. The emptying is the preparation. A wheel with spokes: the empty hub where the axle fits is what makes the wheel turn. Uncarved wood: before a decision is fixed, all possibilities are open. These images describe the value of emptiness, space, and potential. They describe what makes usefulness possible."
   - q: "How does the Mahjong Mirror connect to the Tao Te Ching?"
-    a: "Both tools work from the same root discipline: empty the cup before deciding. The Mahjong Mirror's First Angle asks 'what is actually happening here?' rather than 'what should I do?' That is exactly the Taoist practice of releasing assumptions before acting. Wu Wei, in Mahjong Mirror terms, is the quality of action that emerges when you've done the Mirror's reflection honestly."
+    a: "Both tools work from the same root discipline: empty the pot before deciding. The Mahjong Mirror's First Angle asks 'what is actually happening here?' rather than 'what should I do?' That is exactly the Taoist practice of releasing assumptions before acting. Wu Wei, in Mahjong Mirror terms, is the quality of action that emerges when you've done the Mirror's reflection honestly."
   - q: "Why is Bill Hajdu retranslating the Tao Te Ching?"
     a: "As an English teacher and 30-year Taoist practitioner, Bill found most existing translations overly poetic and inaccessible. They buried Lao Tzu's original plain-language images under abstraction. His goal is a translation clear enough to survive Google Translation into any language and still communicate the original idea. The book has a practical structure: translation on the left-hand page, three to five actionable applications on the right-hand page."
   - q: "What is the uncarved wood image in the Tao Te Ching?"
@@ -63,11 +63,11 @@ This week I want to share some of what I've found, and explain why I think it co
 
 Lao Tzu wasn't obscure. That's the thing most people don't realize.
 
-He used the kind of images that anyone would recognize. A teapot. A wheel. Wood before it's been carved. He chose these images deliberately, because they're universal. You don't need a scholar to explain a teapot. You've used one. You know what it does and what it doesn't do when it's full.
+He used the kind of images that anyone would recognize. A clay pot. A wheel. Wood before it's been carved. He chose these images deliberately, because they're universal. You don't need a scholar to explain a clay pot. You've used one. You know what it does and what it doesn't do when it's full.
 
 Here's one of the most important images in the whole text.
 
-A teapot that is full cannot receive more tea. Before you can pour something new in, you have to empty it first. Not as a loss. The emptying is the preparation. The emptying is the point. The space you create is what makes the next thing possible.
+A clay pot is useful only because it's empty. The hollow space is the whole point of it. And a pot that is already full cannot hold anything new. Before you can put something new in, you have to empty it first. Not as a loss. The emptying is the preparation. The emptying is the point. The space you create is what makes the next thing possible.
 
 Simple. Practical. True at the kitchen level and at every level above it.
 
@@ -105,7 +105,7 @@ This is what I find most compelling about the connection between the Tao Te Chin
 
 They're working from the same root discipline.
 
-The Mahjong Mirror asks you to empty the cup before you decide. The First Angle isn't "what should I do?" It's "what is actually happening here?" That's the teapot. Put down what you think you know. Empty the assumptions. Then read the situation.
+The Mahjong Mirror asks you to empty the pot before you decide. The First Angle isn't "what should I do?" It's "what is actually happening here?" That's the clay pot. Put down what you think you know. Empty the assumptions. Then read the situation.
 
 The Mirror's framework creates the hub. It builds the empty space where honest reflection happens before action. Without that space, you're filling the hub. Without the hub, the wheel can't turn.
 
@@ -123,6 +123,6 @@ That structure reflects a belief I've held for 30 years: ancient wisdom that sta
 
 The same is true of the Mahjong Mirror. The framework isn't an intellectual exercise. It's a tool. You use it on the decision in front of you, and the reading shifts how you see that decision, which shifts what you actually do.
 
-Empty the cup. Read the wheel. Find the uncarved wood.
+Empty the pot. Read the wheel. Find the uncarved wood.
 
 That's the practice. Not complicated. But it requires you to stop and actually do it, rather than staying in motion because motion feels like progress.

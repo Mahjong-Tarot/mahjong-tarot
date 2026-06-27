@@ -10,6 +10,31 @@ The website is a **Next.js** application (Pages Router). You read source content
 
 ---
 
+## Where customers / bookings / readings live — NEVER ask, it is always this
+
+**All customer, booking, and reading data is in Supabase.** The live prod project is **`ntqmddmesgdquatodsyu`**. Do **not** use `nrzxzkjjhktyyukijown` — it is a stale project (see `docs/operations/stripe-setup.md`). Do **not** ask the operator which database, which project, or "where do new customers live" — the answer is always prod `ntqmddmesgdquatodsyu`.
+
+- **"A new reading" / "a new customer" for `<name>` = a row in `public.bookings`.** Match by `full_name` (ILIKE) or `email`. Related tables: `people` (canonical identity, birth data, gender), `inquiries` (first contact), `deals` (revenue).
+- **Booking lifecycle:** `pending_payment → paid → scheduled → completed` (also `cancelled`, `refunded`). Reading-fulfilment columns on `bookings`: `question`, `birthday`, `birth_time`, `prep_notes`, `transcript_text`, `post_call_notes`, `final_reading_html`, `public_token`, `final_reading_sent_at`.
+- **Fulfilment UI:** `website/pages/admin/private-readings/[id].jsx` — Prep → Notes/Transcript → Generate (Claude, `/api/admin/generate-reading`) → Email link to guest (`/api/admin/email-reading` → `/reading/[token]`).
+- **How to query it:** use the service-role key in **`website/.env.local`** (`SUPABASE_SERVICE_ROLE_KEY` + `NEXT_PUBLIC_SUPABASE_URL` → `ntqmddmesgdquatodsyu`) against PostgREST/psql — service role bypasses RLS. The Supabase **MCP is signed into a different org and returns "permission denied" for this project — it does NOT work here.** Don't reach for the MCP; read `website/.env.local`.
+- **Two `.env.local` files — don't get fooled (this wasted a whole session once):**
+  - ✅ **`website/.env.local`** — the current Next app's env, correct prod project `ntqmddmesgdquatodsyu`. **Use this.** If its `SUPABASE_SERVICE_ROLE_KEY` is ever blank, the real key is in Vercel's **Development** env (prod's slot is blank): `vercel env pull <tmpfile> --environment=development --scope dave-hajdus-projects`, copy the key in.
+  - ❌ **`./.env.local`** (repo root) — **LEGACY / STALE. Ignore it.** Its `PUBLIC_SUPABASE_*` keys target the dead project `nrzxzkjjhktyyukijown` (returns 404/401). Leftover from when Next.js lived at the repo root.
+- **Vercel project:** `mahjong-tarot`, scope `dave-hajdus-projects` (CLI logged in as `dhajdu`).
+- **Secret hygiene:** never print or commit secrets; `*.env.local` and `.vercel` are gitignored.
+
+Standard "find a customer / their reading" query:
+```sql
+select id, full_name, email, status, scheduled_at, duration_minutes,
+       (final_reading_html is not null) as has_reading, final_reading_sent_at, created_at
+from public.bookings
+where full_name ilike '%<name>%' or email ilike '%<email>%'
+order by created_at desc;
+```
+
+---
+
 ## What this project DOES
 
 - Read approved content drafts (`.md` files) from `content/`

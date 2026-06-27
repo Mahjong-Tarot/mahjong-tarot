@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
 import styles from './Nav.module.css';
+import { MEMBER_TOPBAR } from '../lib/nav';
 
 const PUBLIC_LINKS = [
   { href: '/about',              label: 'About'            },
@@ -10,34 +11,6 @@ const PUBLIC_LINKS = [
   { href: '/the-mahjong-mirror', label: 'Book'             },
   { href: '/blog',               label: 'Journal'          },
   { href: '/contact',            label: 'Contact'          },
-];
-
-const MEMBER_READINGS = [
-  { href: '/member/dashboard/almanac',                 label: 'Daily Almanac'   },
-  { href: '/member/dashboard/horoscope',               label: 'Daily Horoscope' },
-  { href: '/member/dashboard/readings/purple-star',    label: 'Purple Star'     },
-  { href: '/member/dashboard/three-blessings',         label: 'Three Blessings' },
-  { href: '/member/dashboard/relationships',           label: 'Compatibility'   },
-];
-
-const MEMBER_LINKS = [
-  { href: '/member/dashboard',              label: 'Dashboard',    match: (p) => p === '/member/dashboard' },
-  {
-    href: '/member/dashboard/readings',
-    label: 'Readings',
-    match: (p) =>
-      p.startsWith('/member/dashboard/readings') ||
-      p.startsWith('/member/dashboard/almanac') ||
-      p.startsWith('/member/dashboard/horoscope') ||
-      p.startsWith('/member/dashboard/three-blessings') ||
-      p.startsWith('/member/dashboard/relationships') ||
-      p.startsWith('/member/dashboard/compatibility'),
-    dropdown: MEMBER_READINGS,
-  },
-  { href: '/member/dashboard/inner-circle', label: 'Inner Circle', match: (p) => p.startsWith('/member/dashboard/inner-circle') },
-  { href: '/member/profile',                label: 'Profile',      match: (p) => p.startsWith('/member/profile'), dropdown: [
-    { action: 'signOut', label: 'Sign out' },
-  ] },
 ];
 
 export default function Nav() {
@@ -74,7 +47,7 @@ export default function Nav() {
 
         {inMemberArea ? (
           <ul className={styles.links}>
-            {MEMBER_LINKS.map((l) =>
+            {MEMBER_TOPBAR.map((l) =>
               l.dropdown ? (
                 <li
                   key={l.href}

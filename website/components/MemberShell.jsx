@@ -3,18 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '../lib/auth';
 import PortalSwitcher from './PortalSwitcher';
+import { MEMBER_NAV } from '../lib/nav';
 import styles from './MemberShell.module.css';
-
-const LINKS = [
-  { href: '/member/dashboard',                  label: 'Dashboard',      match: (p) => p === '/member/dashboard' },
-  { href: '/member/dashboard/almanac',          label: 'Almanac',        match: (p) => p.startsWith('/member/dashboard/almanac') },
-  { href: '/member/dashboard/horoscope',        label: 'Horoscope',      match: (p) => p.startsWith('/member/dashboard/horoscope') },
-  { href: '/member/dashboard/readings',         label: 'Readings',       match: (p) => p.startsWith('/member/dashboard/readings') },
-  { href: '/member/dashboard/three-blessings',  label: 'Three Blessings', match: (p) => p.startsWith('/member/dashboard/three-blessings') },
-  { href: '/member/dashboard/relationships',    label: 'Compatibility',  match: (p) => p.startsWith('/member/dashboard/relationships') },
-  { href: '/member/dashboard/inner-circle',     label: 'Inner Circle',   match: (p) => p.startsWith('/member/dashboard/inner-circle') },
-  { href: '/member/profile',                    label: 'Profile',        match: (p) => p.startsWith('/member/profile') },
-];
 
 export default function MemberShell({ children }) {
   const router = useRouter();
@@ -81,7 +71,7 @@ export default function MemberShell({ children }) {
 
         <nav className={styles.nav}>
           <ul className={styles.linkList}>
-            {LINKS.map((l) => (
+            {MEMBER_NAV.map((l) => (
               <li key={l.href}>
                 <Link
                   href={l.href}

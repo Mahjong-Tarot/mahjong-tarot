@@ -1,0 +1,62 @@
+{
+  "topic": "Lao Tzu's plain-language images from the Tao Te Ching (teapot, wheel spokes, uncarved wood) restored to their literal meaning, and how that same discipline underlies the Mahjong Mirror framework.",
+  "phrases": [
+    "Empty the cup before you decide.",
+    "Protect the hub. The wheel can't turn without it.",
+    "Before the carving, infinite possibility.",
+    "Wisdom you can use on a Tuesday.",
+    "Read the current first. Then act."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "doing-by-not-doing-tao-wu-wei-mahjong-mirror",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A close-up of an unglazed clay teapot with its lid lifted and set aside, the interior open and empty, steam gone. Aged wood beneath it. The emptiness of the vessel is the subject. What's gone is not a loss but a preparation.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up still-life of a simple unglazed clay teapot, warm terracotta-brown. The lid has been removed and set beside it. The interior of the pot is visible, empty, clean, open. No steam, no tea. The pot rests on dark aged wood. Soft overhead natural light from the upper left. The composition is quiet and deliberate. The emptiness is the whole subject. Palette: warm terracotta, dark walnut wood, warm ivory light, a faint shadow cast by the lid. No text, no symbols, no decorative elements. Still life with the quality of a painting. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "doing-by-not-doing-tao-wu-wei-mahjong-mirror",
+      "content_type": "wed-facebook-en",
+      "concept": "A woman's hands resting open and upward on a wooden table, palms up, nothing held, nothing gripped. The gesture of having released something. Ready to receive.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Close-up of a woman's hands resting on a dark wood surface, palms facing upward and open. Nothing is held in them. The gesture is deliberate openness, not emptiness by accident but by choice. Warm morning light from the left. Faint shadows under the fingers. The wood grain is visible beneath the hands. Palette: warm ivory skin, dark walnut wood, antique gold light. Intimate, quiet, still. No other objects in frame. Women never face camera directly. No text in image. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "doing-by-not-doing-tao-wu-wei-mahjong-mirror",
+      "content_type": "wed-instagram",
+      "concept": "Square overhead flat-lay: a single empty ceramic cup centered on aged parchment, a few dried herbs or petals scattered nearby. The cup is the subject. Nothing else fills it.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square overhead flat-lay. At the center: a single ceramic cup or bowl, unglazed or pale, completely empty. The interior is visible from directly above. Around it on the aged parchment surface: a few dried botanicals (petals, a sprig), scattered but sparse. Nothing fills or crowds the center cup. The empty interior is the whole composition. Palette: warm cream parchment, pale ceramic, dusty sage botanicals, antique gold light from above. Clean, meditative, deliberately sparse. No text, no symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "doing-by-not-doing-tao-wu-wei-mahjong-mirror",
+      "content_type": "thu-facebook-en",
+      "concept": "An open book on a wooden table, seen in three-quarter view. Left page: clean, spare text in soft focus. Right page: a hand writing in the margins or on a personal note tucked inside. The two-page structure of Bill's book made visual.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A wide, low-angle three-quarter view of an open book on a warm wooden table. The left page is visible with spare, clean printed text in soft focus. On the right page, or on a slip of paper tucked into the right side, a woman's hand is visible holding a pen, mid-sentence, writing something personal. Her face and body are out of frame. Warm morning light from the left catches the edge of the pages. The mood is engaged, active, thoughtful. Palette: warm ivory pages, dark walnut table, antique gold light, midnight jade pen. Women never face camera directly. No text in image legible or readable. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "doing-by-not-doing-tao-wu-wei-mahjong-mirror",
+      "content_type": "thu-instagram",
+      "concept": "A raw, uncarved piece of beautiful wood grain, seen close up. The natural figure of the wood is striking and full of possibility. No tool marks. No carving. The subject is pure potential.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Square extreme close-up of a piece of raw, unworked wood. The grain is striking and complex, swirling figures of dark and light. No tool marks, no carving, no finish, no joints. Just the natural surface of the material, rich with possibility. Warm directional light from the left catches the grain and makes it three-dimensional. Palette: warm walnut browns, honey amber, deep dark streaks, antique gold where light catches the grain. The image is purely about the material and its unrealized potential. No objects, no people, no symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

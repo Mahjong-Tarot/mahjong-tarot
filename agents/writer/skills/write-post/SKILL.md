@@ -12,11 +12,12 @@ Your job is to read the content calendar, identify the upcoming week's topics, g
 
 ## Before You Start
 
-Read these three files in full before doing anything else:
+Read these files in full before doing anything else:
 
 1. **Content calendar:** `content/content-calendar/content-calendar.md` — the weekly topics, hooks, and publish schedule
 2. **Content calendar process:** `content/content-calendar/content-calendar-process.md` — the weekly rhythm, file naming conventions, and channel rules
 3. **Writer style guide:** `agents/writer/context/style-guide.md` — ICP, persona, voice, ten blog styles
+4. **Mahjong card set:** `agents/designer/context/mahjong-cards/` — the canonical set of 42 Mahjong cards used in Bill's readings: `Honor cards/` (7), `Guardian cards/` (8), and `Suit cards/` (27). The Mahjong Mirror uses **cards, not tiles** — never write "tile". Only reference cards that exist in this set, using their exact names (the image file names).
 
 Do not skip this step. Do not write from memory of these files. Read them fresh every time.
 
@@ -39,7 +40,7 @@ Note for each topic:
 - The **slug** — the semantic URL slug for the published post (different from the folder slug). You decide this and write it to each blog markdown's frontmatter as `slug:`. Keep it descriptive for SEO (e.g. `how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk`)
 - The **angle** (Fire Horse, Mahjong Mirror, or Feel Good Friday)
 - The **hooks** for each day and channel
-- Any **chapter/tile focus** noted in the calendar
+- Any **chapter/card focus** noted in the calendar (older calendar entries may say "tile" — treat it as the card focus)
 
 ---
 
@@ -49,9 +50,9 @@ For each topic in the week:
 
 1. **Scan `content/source-material/`** — list all subfolders and identify which ones are relevant. Read every relevant `.md` and `.txt` file in full.
 2. **Check the content calendar hooks** — the calendar provides specific hooks and angles for each day. These are your creative brief.
-3. **Collect all raw material** before writing. You need Bill's voice, his anecdotes, tile references, sign-by-sign details, historical facts — the full picture before you structure anything.
+3. **Collect all raw material** before writing. You need Bill's voice, his anecdotes, card references, sign-by-sign details, historical facts — the full picture before you structure anything.
 
-If source material is thin or missing for a topic, **stop and report** what you found. Do not invent astrology content, tile meanings, or sign-specific guidance that isn't grounded in the source material or Bill's established knowledge.
+If source material is thin or missing for a topic, **stop and report** what you found. Do not invent astrology content, card meanings, or sign-specific guidance that isn't grounded in the source material or Bill's established knowledge.
 
 ---
 
@@ -196,8 +197,8 @@ Select a style that:
 ### 4b. Write `blog-mahjong-mirror.md`
 
 Same requirements as Step 3b, but:
-- The angle connects to the Mahjong Mirror book, framework, or a specific chapter/tile
-- Reference the **chapter/tile focus** from the content calendar if one is specified
+- The angle connects to the Mahjong Mirror book, framework, or a specific chapter/card
+- Reference the **chapter/card focus** from the content calendar if one is specified
 - Must tie back to Monday's topic — Wednesday is the answer to Monday's provocation
 
 **CTA:** Wednesday blogs end with a Book CTA — link to `/the-mahjong-mirror`. Can include a secondary Reading CTA if natural.

@@ -15,6 +15,7 @@ Read these three files in full before doing anything else:
 
 1. **Blog index:** `context/blog-index.md` — existing posts, keywords taken, styles used, next Order number
 2. **Writer style guide:** `agents/writer/context/style-guide.md` — ICP, persona, voice, blog styles
+3. **Mahjong card set:** `agents/designer/context/mahjong-cards/` — the canonical set of 42 Mahjong cards used in Bill's readings: `Honor cards/` (7), `Guardian cards/` (8), and `Suit cards/` (27). The Mahjong Mirror uses **cards, not tiles** — never write "tile". Only reference cards that exist in this set, using their exact names (the image file names).
 
 
 Do not skip this step. Do not write from memory of these files. Read them fresh every time.
@@ -27,9 +28,9 @@ Based on the topic you've been given:
 
 1. **Scan `content/source-material/`** — list all subfolders and identify which ones are relevant to the topic. Read every relevant file (`.md`, `.txt`) in full.
 2. **Check `content/topics/`** — see if there are existing topic folders with related content (`.docx` summaries, prior drafts) that provide context or material to build on. Read what's useful.
-3. **Collect all raw material** before writing. You need the full picture — Bill's voice, his specific anecdotes, tile references, sign-by-sign details, historical facts — before you structure anything.
+3. **Collect all raw material** before writing. You need the full picture — Bill's voice, his specific anecdotes, card references, sign-by-sign details, historical facts — before you structure anything.
 
-If the source material is thin or missing for the requested topic, stop and report what you found. Do not invent astrology content, tile meanings, or sign-specific guidance that isn't grounded in the source material or Bill's established knowledge.
+If the source material is thin or missing for the requested topic, stop and report what you found. Do not invent astrology content, card meanings, or sign-specific guidance that isn't grounded in the source material or Bill's established knowledge.
 
 ---
 

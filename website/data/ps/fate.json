@@ -1,0 +1,631 @@
+{
+  "Ming": {
+    "VL": [
+      "Round and full physical appearance",
+      "Thick eyebrows",
+      "Wide forehead",
+      "Good looking",
+      "Distinctive characteristic, e.g., a prominent birthmark",
+      "Fine facial features.",
+      "Refined, Reflective, Well dressed",
+      "Intelligent, clever, imaginative, Wise, Organizational ability, Full of energy,  Gentle, modest, warm,  Polite, Hard working",
+      "Enthusiastic about starting things but may not be perseverant",
+      "Sensible",
+      "Helpful",
+      "Enjoy working with others",
+      "Leadership qualities.",
+      "Favored by fortune",
+      "Good luck",
+      "Wealthy, Famous, Living conditions will improve later in life",
+      "Material well being",
+      "(Work) Position of authority",
+      "Elevated social position",
+      "Long life",
+      "Responsible position, Prosperity",
+      "Good education",
+      "Respected",
+      "Peaceful surroundings",
+      "Attractive to the opposite sex."
+    ],
+    "L": [
+      "Short and slim, high/piercing voice,",
+      "Strong willed, Good decision making skills, Quick witted, sometimes Impatient,  sometimes hot tempered, Rush into things, Lack foresight,",
+      "Happy",
+      "Financial success",
+      "Rich but miserly",
+      "Broad knowledge",
+      "Successful if you acquire depth",
+      "Make your family prosperous",
+      "May have to leave town to be financially successful,"
+    ],
+    "UL": [
+      "Thick eyebrows, large eyes",
+      "Protruding bones over the eyes",
+      "May be deformed or have a disability",
+      "Scar.",
+      "Clever, Like to display your authority, may be lazy, Firm",
+      "Like to show off authority and intelligence",
+      "In the end you will be lost (gently say could be tougher later in life)",
+      "Overindulgent in your desire for fame and money will bring disaster",
+      "Appear unfriendly (ironic as u probably make a good friend)",
+      "Stubborn but give up easily when you have to do anything",
+      "Over attentive",
+      "Prone to accidents/illness",
+      "Tend to overspend.",
+      "Rich and powerful (if no other  UL stars),  Well known,  Will have to leave home to be successful,  Excellent social life",
+      "Accidents",
+      "Unexpected expenses",
+      "Success may be elusive",
+      "Trouble in relation to the opposite sex (bring you into disrepute)",
+      "May not have any authority",
+      "Travel to a distant place could have bad consequences",
+      "Occasional disasters",
+      "Victim of a robbery",
+      "Standard of living below average",
+      "Lonely",
+      "May have rift with one or more relatives."
+    ],
+    "VUL": [
+      "Scars, marks, disability",
+      "Overindulgence in drink and sex",
+      "May not have long life",
+      "Likely to suffer a disability",
+      "Waste time and money",
+      "(Wasteful)",
+      "Harsh and difficult life",
+      "Separat e from marriage partner",
+      "Wealthy but it could destroy you.",
+      "Likely to suffer from a serious accident or illness",
+      "Recurrent illnesses",
+      "May have difficulty making ends meet during periods of your life",
+      "Fluctuate between success and loss",
+      "May die far away from birth place",
+      "History of missed opportunities",
+      "Difficult to achieve success",
+      "Alone",
+      "Rift with relatives."
+    ]
+  },
+  "Siblings": {
+    "VL": [
+      "Siblings will give you great support",
+      "your older brother or sister will care for you as a parent",
+      "you are in (great) harmony with your siblings",
+      "you will stay together",
+      "you will have many brothers and sisters",
+      "their help will bring you success",
+      "harmonious feelings",
+      "you will receive a great benefit from your siblings;"
+    ],
+    "L": [
+      "will support each other",
+      "material/moral support",
+      "you are in harmony",
+      "you will stay together",
+      "deep love for one another",
+      "siblings will help you achieve a comfortable life",
+      "their help will result in business success",
+      "average to above average number of siblings;"
+    ],
+    "mixed": [
+      "May get get along well with one sibling but have a rift with another",
+      "may have a lot of siblings and  not get along that well",
+      "may get along well but only have one (or two at the most)",
+      "may not help each other that much but still get along reasonably well",
+      "likely to have a rift with a sibling but could get back together again in the future",
+      "may have a strong attachment with siblings but live far from each other",
+      "may have many brothers and sisters but they won’t help you",
+      "cold feelings towards one sibling but get along with the rest;"
+    ],
+    "UL": [
+      "small family/few brothers and sisters",
+      "no harmony among you/not in harmony",
+      "quarrel easily",
+      "(predestined) attachment with your siblings is weak",
+      "likely to separate",
+      "cold feelings between you and a sibling or between 2 of your siblings",
+      "siblings will cause you worry",
+      "you could suffer a loss due to direct involvement or just being distracted by siblings",
+      "you could have a rift with a sibling but it may not be too bad",
+      "you and your siblings may see the world very differently from each other resulting in conflicts",
+      "even if you reasonably get along you might live in different places and not see each other that much",
+      "cold feelings"
+    ],
+    "VUL": [
+      "few or no brothers and sisters",
+      "frequent quarrels",
+      "one of more of your bros & sisters could cause you harm",
+      "you will distrust and speak badly of each other",
+      "will have no siblings or live (far) apart from the ones you do have",
+      "your  siblings won’t help you",
+      "your siblings will cause you worry",
+      "at least one of your siblings will marry late or not at all",
+      "there will be a rift between you and one or more of your siblings",
+      "general strife among you and your siblings",
+      "a sibling may not have a long life;"
+    ]
+  },
+  "Marriage": {
+    "VL": [
+      "Your partner will help you gain promotion",
+      "you will greatly benefit from your partner",
+      "your partner will be extremely virtuous and clever",
+      "your partner will offer you material support",
+      "your partner will bring you great wealth",
+      "your partner will be yielding (compromising) and kind",
+      "you will love each other dearly and live in harmony",
+      "you will be united in your love for each other",
+      "your partner will ensure you are financially secure",
+      "your love life will be excellent",
+      "your partner will be very capable",
+      "you will respect each other;"
+    ],
+    "L": [
+      "your partner is good looking but your age difference is great",
+      "your spouse is good looking",
+      "you will be a happy couple",
+      "your partner will be good looking and classy",
+      "you will both have the same aspirations and will help each other to build a strong foundation for achieving them",
+      "you will be cooperative and forgive each other’s faults",
+      "your partner will be virtuous;"
+    ],
+    "mixed": [
+      "If you marry too early, there could be a rift between you and your partner",
+      "your life will be average",
+      "I didn’t put much here",
+      "You have to use common sense",
+      "Here’s an example: your spouse may be good looking but you may not have strong feelings for each other (or vice versa)."
+    ],
+    "UL": [
+      "If you marry too early, there could be a rift between you and your partner",
+      "marrying late will reduce and maybe eliminate the negative effect of these stars",
+      "you may separate from your partner or your partner may die",
+      "you will not be in harmony with your partner",
+      "you will quarrel (a lot)",
+      "you will have no feeling for each other and will quarrel constantly",
+      "you will appear to be in love and live in harmony, but this will not be the case;"
+    ],
+    "VUL": [
+      "There will be a rift between you and your partner",
+      "you may harm each other",
+      "marrying late may minimize the worst effects of these stars",
+      "you will not be in harmony",
+      "you will marry someone with a hot temper",
+      "you must be patient to avoid quarrels",
+      "your partner will be too intelligent for you and you ideas will differ greatly",
+      "you are likely to suffer",
+      "you will separate because your partner is too good looking and will attract others",
+      "you will change partner many times",
+      "you will divorce",
+      "you will either separate or one partner will die early",
+      "your feelings for each other will not be good",
+      "early on in your marriage you will cause harm to your partner",
+      "you are likely to live with your boy/girlfriend (but don’t use boy/girl in your narrative) rather than marry",
+      "you will commit adultery",
+      "your partner will cause you distress",
+      "your partner succumbs to drink and sex;"
+    ]
+  },
+  "Children": {
+    "VL": [
+      "Your children will be particularly clever and even outstanding",
+      "You will have pleasant, attractive children",
+      "One of your children will bring you renown and a high social position",
+      "Your children will make great progress in their careers",
+      "You will have many children",
+      "One of your children will be very wealthy",
+      "Your children will help you be comfortable in old age."
+    ],
+    "L": [
+      "Your children will be successful, prosperous",
+      "Your children will save money and be rich",
+      "They will be comfortable in old age",
+      "They will be clever and obedient",
+      "You will have pleasant, attractive children",
+      "You will have creative children",
+      "They will be adept socially in later life",
+      "Your children will already be outstanding in some way when they are young",
+      "Your children will be helpful, especially if you have a family business",
+      "Your children will be intelligent",
+      "Your children will be physically healthy."
+    ],
+    "mixed": [
+      "You may have more daughters than sons",
+      "If they (daughters ) are good looking, they could give you problems",
+      "You will be in harmony with some of your children but may have a rift with at least one other",
+      "You will be close to your sons or daughters  but probably not with both",
+      "Some of your children will be helpful , but you may have a rift with another, or will live apart from one or more of them",
+      "Your children may be bad tempered, but they will nevertheless be successful",
+      "Your children may be gentle, good lucking and obedient but not successful."
+    ],
+    "UL": [
+      "There will be a rift between you and your children",
+      "You will live apart from your children",
+      "Your children will quarrel among themselves or with you",
+      "Your children may not obey you."
+    ],
+    "VUL": [
+      "(Definitely do not use all of these) Your children will not have good relations with the opposite sex",
+      "You will have few children",
+      "You will have few or no sons",
+      "Your children will not always be able to give you financial support",
+      "There will be a rift and discord between you and your children",
+      "When your children are young, a parent or child may die",
+      "Your (predestined) attraction with your children will be weak",
+      "You are likely to live apart",
+      "When your children are very young there will be a lack of harmony and either a parent or child may die",
+      "You and your children may be suspicious of each other",
+      "Your children will suffer loss",
+      "Your children will cause many problems when they are young",
+      "Your children may not share your ideas, and you will quarrel constantly",
+      "Your children could cause you heartache",
+      "One of them could disappear",
+      "You may bring harm to your children."
+    ]
+  },
+  "Wealth": {
+    "VL": [
+      "You will gain a steady income",
+      "you will have many business interests",
+      "you have influential connections which will bring you great wealth",
+      "You will use your fame or your position in society to create a business and earn a lot of money",
+      "You will be successful in three different areas",
+      "You will be well known, have a high social position and wealth",
+      "You will gain a large income",
+      "You will be lucky in earning money",
+      "You will receive help from your friends and relatives",
+      "You will enjoy wealth to the end of your life",
+      "You will be extremely rich",
+      "You will have a steady occupation and earn a lot of money",
+      "You will have a wealthy style of living."
+    ],
+    "L": [
+      "You will earn a good income from a sideline-related to your own interests",
+      "Your income and expenditure will be balanced",
+      "You will not waste money and therefore save a reasonable amount",
+      "You will move from poverty to wealth",
+      "After middle age your income will be steady",
+      "(Maybe not rich but) You will earn a lot of money",
+      "You will save money, and your wealth will grow",
+      "You will earn money unexpectedly",
+      "You will have a good salary and a comfortable life",
+      "You will have few money worries",
+      "You have no need to work hard for you will always have money",
+      "Your style of living will be comfortable",
+      "You earn a good income with the help of friends",
+      "Although you will not have great wealth you will never need to worry about your livelihood."
+    ],
+    "mixed": [
+      "Although you know how to organize financial accounts, your income will not be  quite satisfactory",
+      "You may have to spend a lot of money to live up to your position",
+      "Your income will be small (but probably adequate)",
+      "You will have a large income but be in danger of losing it",
+      "You will spend money as soon as you receive it",
+      "You will never be wealthy",
+      "Your luck in wealth will be unsteady",
+      "At times you will be rich and at times poor",
+      "You will have to work hard to make money, but you could make a lot",
+      "You need not worry about having enough to live on but you will not be able to save a lot of money",
+      "Your financial success will be insecure",
+      "You will sometimes keep your head above water and sometimes go under",
+      "Your finances will fluctuate substantially during your life",
+      "Although you work hard, your standard of living will be only moderately comfortable."
+    ],
+    "UL": [
+      "You will spend too much and suffer the consequences",
+      "You will work hard but earn little income from it",
+      "You will overspend and have little savings",
+      "You will miss opportunities to earn money",
+      "You will waste lots of money",
+      "You will have to work hard to make money",
+      "Although you will not have a lot of money in your youth, in middle age your income will increase",
+      "You will be on the edge of bankruptcy",
+      "You will have difficulty finding a good job—even if you have the qualifications",
+      "Your finances will cause you to worry",
+      "You are not predestined to have a good relationship with money."
+    ]
+  },
+  "Health": {
+    "VL": [
+      "You are physically strong and seldom ill",
+      "Even if you are unwell you recover easily",
+      "You will be healthy throughout your life."
+    ],
+    "L": [
+      "You will never suffer serious illness",
+      "You are unlikely to suffer from illness."
+    ],
+    "mixed": [
+      "You may never suffer serious illness but you could have issues with your nerves",
+      "You could have eye problems",
+      "Your legs and arms may be weak."
+    ],
+    "UL": [
+      "As a child you tended to be sickly, but you will have very few serious illnesses",
+      "You are prone to purulent boils",
+      "Your skin bruises easily",
+      "You are likely to have sinus problems",
+      "Your bodily functions will deteriorate",
+      "You suffer from allergies."
+    ],
+    "VUL": [
+      "You are likely to be anemic",
+      "You could have a weak heart/be susceptible to a heart attack",
+      "You will suffer from ill health all your life",
+      "You are weak and often ill",
+      "You are likely to suffer from venereal disease or other sexual illness",
+      "When you are young, you will have skin problems",
+      "when an adult you will have stomach (perhaps ulcer) problems",
+      "Your lungs are weak",
+      "You are unlikely to live long",
+      "You will suffer from many illnesses, disasters and injuries",
+      "You are likely to suffer injuries such as broken bones",
+      "You will have many illnesses which will make you unhappy and miserable",
+      "You are physically weak."
+    ]
+  },
+  "Travel": {
+    "VL": [
+      "You will have friends to help you in a foreign place",
+      "You will have great success abroad",
+      "You have position, renown and money",
+      "You are suited to living and working abroad",
+      "You should have a job in which you are physically active",
+      "You will work hard for many years and be prosperous",
+      "You will achieve international fame",
+      "You will be supported by strong and powerful people and will become rich",
+      "Older people will recommend and help you",
+      "You will work in an unusual job",
+      "You should live away from home if you want your business to prosper---if you remain in your home town you will not succeed",
+      "You will have a high position, renown and wealth."
+    ],
+    "L": [
+      "You should leave your home and work in a foreign country",
+      "Your social connections will bring you great fortune",
+      "You will always be busy and will have good fortune",
+      "You treat  people well when you are abroad",
+      "You will make progress in a foreign country",
+      "Your name will be known in distant places",
+      "The help you receive from older people in foreign countries will bring business success and an introduction to a marriage partner",
+      "Your relations with people will be good, and your work will go well",
+      "You have to travel widely in a foreign country."
+    ],
+    "mixed": [
+      "You will have support from older people but take care that the opposite sex does not ruin your name",
+      "When you put a plan into practice, you will sometimes achieve the reverse of what you intended",
+      "You may make money but not work hard enough to be able to save some",
+      "You will work hard and make money but suffer and be miserable",
+      "You will have difficult as well as good plans",
+      "Sometimes you will make progress but others not",
+      "You may be successful in business but your life may be harsh."
+    ],
+    "UL": [
+      "When you put a plan into practice, you will achieve the reverse of what you intended",
+      "You will be cheated in a foreign country",
+      "You will not work in one place but have to travel o great deal",
+      "You will be forced to travel to make a living",
+      "Your life will be unstable."
+    ],
+    "VUL": [
+      "If you leave home you will suffer or meet disasters",
+      "Your life may be in danger in a foreign country",
+      "You are not suited to live in distant places—if you do your life or your money could be in danger",
+      "You will have a harsh life in a foreign country",
+      "You are easily cheated and could lose everything",
+      "You will suffer a great loss in a foreign country and be unable to recover from it."
+    ]
+  },
+  "Associates": {
+    "VL": [
+      "Your friends and subordinates will be good to you",
+      "They will help you develop your work",
+      "Your subordinates will respect you",
+      "Your work will be successful and you will be happy in your job",
+      "You will get on well with people",
+      "Your subordinates will be able to help and support you",
+      "The will bring you success",
+      "Your subordinates will be intelligent and capable",
+      "This will bring you promotion and renown",
+      "The reliability of your subordinates will help you achieve a successful career."
+    ],
+    "L": [
+      "Your subordinates will be helpful or you will have many good friends who will assist you in business and help you to make money",
+      "Your friends will help you become successful",
+      "You will be very kind to your subordinates"
+    ],
+    "mixed": [
+      "During the first half of your life you will not be helped by your subordinates",
+      "In the second half you will always be helped by them",
+      "You may have good relations with friends and subordinates , but they may not be able to help you",
+      "Your relationship with others improves after middle age",
+      "Note: You can say there will be help/good relations at some times and, or, in some jobs but not in others",
+      "Some subordinates peers will be helpful, some not."
+    ],
+    "UL": [
+      "You will lack support from subordinates",
+      "You will not be liked by your subordinates",
+      "Your subordinates may be jealous and suspicious of each other and you",
+      "Your subordinates may refuse to obey you",
+      "You will not be helped by the opposite sex—this will make you suspicious and jealous",
+      "You will be too considerate towards your subordinates,  and may be cheated",
+      "You will be an incompetent leader because you fail to see others’ aims and ideas",
+      "You will be too stern with your subordinates",
+      "they will be unhappy and may take revenge",
+      "Your subordinates will be rebellious",
+      "Your relationships with coworkers and subordinates will limit your career",
+      "Your subordinates will be unreliable",
+      "You are likely to quarrel with coworkers/subordinates",
+      "You will not have good subordinates (coworkers) to help you."
+    ],
+    "VUL": [
+      "Your subordinates will not help you, however many people there are under you",
+      "Not only will your subordinates not help you, but they will also be jealous and suspicious",
+      "Your subordinates may betray you and cause you loss",
+      "You will always be on bad terms with your subordinates",
+      "Your subordinates will not obey you, causing you to lose money",
+      "You will easily make enemies."
+    ]
+  },
+  "Career": {
+    "VL": [
+      "You will be a skilled and expert chairman, director, government official or administrator",
+      "Your work will be successful",
+      "Your authority will be great and your position high",
+      "You will become well known and receive a good income",
+      "You will be promoted to a high position and obtain great wealth",
+      "Your business will be favored with good luck",
+      "You will progress smoothly to success",
+      "As you grow older your business will improve by leaps and bounds."
+    ],
+    "L": [
+      "You will have unexpected success",
+      "You may use the opposite sex to gain promotion",
+      "You will be well known in a distant place",
+      "You will have a good position and authority",
+      "You will have a stable livelihood",
+      "You will work methodically and be successful",
+      "You will be lucky",
+      "You will have authority and wealth."
+    ],
+    "mixed": [
+      "Your standard of living will be average",
+      "Although you will be well known in a distant place, your renown will not last long",
+      "You will work extremely hard, but you will have difficult times",
+      "You will have difficulty progressing in your career",
+      "Although your business appears to be successful you will have no real authority and you will not reap any benefit",
+      "You may gain a position of authority and later lose it",
+      "You will have an unstable and changeable life",
+      "You may have to leave your home town to maintain your authority and be successful",
+      "You will not have an outstanding life or be able to develop your business very far",
+      "You will have an uneventful life with no particular successes or failures",
+      "There will be many unexpected events in your life, including both good and bad luck",
+      "You could do well financially but still not be well known",
+      "You may swing between success and failure",
+      "You may change jobs many times."
+    ],
+    "UL": [
+      "You will work very hard but without reward and will have a harsh life",
+      "Your likely to have conflicts with your bosses and other people in authority",
+      "Your career will progress slowly or not at all."
+    ],
+    "VUL": [
+      "You will become involved in corruption and probably lose your job",
+      "Whatever your job, there will be no harmony between you and your workmates",
+      "You may be cheated or lose money",
+      "You will not progress in your career",
+      "A rift with your boss is likely to cost you your job."
+    ]
+  },
+  "Property": {
+    "VL": [
+      "You will possess a lot of property",
+      "From your early years you will buy houses and land, so that by your middle years you will have amassed a large amount of property",
+      "You will buy a lot of property",
+      "You will not only inherit property, you will be able to buy more throughout your life",
+      "You will become wealthy through buying property",
+      "You will not only own a house but land too."
+    ],
+    "L": [
+      "You will own a lot of property",
+      "Your property will increase year by year",
+      "You will gain more property, and its value will increase greatly",
+      "You will be able to keep the property that you inherit in the family",
+      "You will start buying property when you are young and will increase you holding annually",
+      "You will not only possess a lot of property, you will benefit from it."
+    ],
+    "mixed": [
+      "You will own a moderate amount of property",
+      "Although at first you sell all your property, as time goes on you will acquire more",
+      "You will buy and sell property frequently, sometimes making money, sometimes losing."
+    ],
+    "UL": [
+      "You need to sell the property you inherit",
+      "In middle age your property holdings will decrease",
+      "You will either give away your inherited property or have to sell much of it",
+      "You will lose your property."
+    ],
+    "VUL": [
+      "You will not own any property",
+      "You will never have property",
+      "You will own nothing",
+      "You will not be able to buy any property."
+    ]
+  },
+  "Happiness": {
+    "VL": [
+      "You enjoy making friends, especially of the opposite sex",
+      "You prefer to live in the countryside rather than the town",
+      "You enjoy eating and drinking (could mention gourmet)",
+      "You will be interested in education and cultural affairs",
+      "You enjoy writing and will want to publish your work",
+      "You will have a long and happy life and be very interested in material pleasures, such as clothes, food and drink",
+      "You greatly enjoy your social life, especially meeting members of the opposite sex."
+    ],
+    "L": [
+      "You want to work on projects connected with charity or community work without regards to financial rewards",
+      "You like to make friends with famous people and those in important positions",
+      "You will be comfortably off and will have no need to worry about your living expenses",
+      "It will not be material pleasures that interest you but those of the spirit",
+      "Relationships with people and ideas will form the main source of your enjoyment",
+      "You will be happy throughout your life",
+      "You are very interested in literary, cultural and religious/metaphysical studies",
+      "You enjoy traveling and beautiful views."
+    ],
+    "mixed": [
+      "When you’re young you will have to work very hard but you will be comfortably off from your middle years onwards",
+      "You are particularly fond of running and enjoy training hard",
+      "You will work in an active job."
+    ],
+    "UL": [
+      "You will have a hard life with little enjoyment",
+      "Your spirit will suffer and you will have a hard life",
+      "You will not be interested in enjoying yourself",
+      "You will have such a busy life you probably will not have time to enjoy yourself",
+      "You will work so much you will not know how to enjoy yourself."
+    ],
+    "VUL": [
+      "You will not have much money and will suffer from stomach or digestive troubles",
+      "This means you will not be interested in enjoying yourself",
+      "You will have a hard life with little enjoyment."
+    ]
+  },
+  "Parents": {
+    "L": [
+      "You will receive many benefits from your parents",
+      "You will receive great moral and material support from them",
+      "You will receive long-term benefits from your parents-this will last until your middle years",
+      "Your parents will not only support you materially but will give you a good education and moral support",
+      "Your parents’ support and encouragement helps you to achieve social success",
+      "Your parents will be long-lived."
+    ],
+    "mixed": [
+      "Although you live with your parents, in spirit and feeling you are not in harmony with them",
+      "There will be a rift with one of your parents but a close attachment with another",
+      "Your parents will give you a good education but they will not spoil you",
+      "You will only receive short-term benefits from your parents, or when you are young you may lose your father or mother",
+      "Although you may have a strong attachment to your parents, you may live apart from them",
+      "You may have a tense and argumentative relationship with one parent",
+      "When you are young you will cause you parents to worry",
+      "However, there will be no serious rift between you",
+      "You may have a strong attachment with one parent but not the other."
+    ],
+    "UL": [
+      "Your (predestined) attachment with your parents is weak",
+      "You may live apart from your parents, or one of them may die",
+      "You may lose one of your parents when you are young",
+      "Your relationship with your parents is troubled",
+      "There will be a rift between you and one of your parents",
+      "You are likely to move away from your parents",
+      "Your brothers’ and sisters’ relationship with you and your parents will be troubled and unhappy",
+      "In later life there will be a rift between you and your parents."
+    ],
+    "VUL": [
+      "You are not close to your parents and will either live apart from them or one of them may die",
+      "When you are young there will be a rift between you and your parents",
+      "Your parents do not love you",
+      "You are forever arguing",
+      "Sometimes you are very rude or cruel to one of your parents",
+      "Your parents will be short-lived."
+    ]
+  }
+}

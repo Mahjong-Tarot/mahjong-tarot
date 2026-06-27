@@ -1,13 +1,13 @@
 ---
 name: generate-image
-description: Generates blog hero and social channel images using Gemini (gemini-3.1-flash-image-preview). Reads image prompts written by the Writer from content/topics/<slug>/image-prompts.md — does not write its own prompts. Works in pipeline mode (called by mahjong-studio) and autonomous mode. Uses curl + jq + base64 for generation and ffmpeg for WebP optimisation. No Python or Pillow required.
+description: Generates blog hero and social channel images using Gemini (gemini-3.1-flash-image-preview). Reads image prompts written by the Writer from content/topics/<slug>/image-prompts.md — does not write its own prompts. Works in pipeline mode (called by mahjong-studio) and autonomous mode. Uses curl + jq + base64 for generation, ffmpeg for scaling/cropping, and cwebp for WebP encoding. No Python or Pillow required.
 trigger: Called by mahjong-studio pipeline, OR autonomously by Claude Code Routine when unimaged slugs are found.
 ---
 
 # Generate Image — Designer Skill
 
 Reads prompts from the Writer's `image-prompts.md`. Calls Gemini via `curl` + `jq` + `base64`.
-Converts raw PNG → WebP via `ffmpeg`. No Python or Pillow required.
+Scales/crops the raw PNG with `ffmpeg`, then encodes to WebP with `cwebp`. No Python or Pillow required.
 
 ---
 
@@ -134,7 +134,15 @@ cp "$RAW_PATH" "content/topics/${SLUG}/${SLUG}-${CHANNEL}-original.png"
 
 ## Step 5 — Optimise to WebP
 
-Uses `ffmpeg` — no Python or Pillow required.
+Two stages: `ffmpeg` scales/crops the raw PNG (PNG → PNG, which does **not** rely on
+ffmpeg's WebP encoder), then `cwebp` encodes the result to WebP. No Python or Pillow required.
+
+> **Why not `ffmpeg … out.webp` directly?** On some machines the installed ffmpeg is built
+> without `libwebp` (the WebP encoder is disabled). When that happens, `ffmpeg` fails but — if its
+> stderr is suppressed and a `.webp` already exists from a previous run — `du` reads the **stale**
+> file and the step falsely reports `PASS`, silently leaving the old image in place. Encoding with
+> `cwebp` avoids the unreliable ffmpeg WebP path. We also keep stderr visible and halt on any
+> non-zero exit so a failure can never be mistaken for success.
 
 ```bash
 # RATIO is "16:9" or "1:1" — read from image-prompts.md Aspect field
@@ -146,12 +154,23 @@ fi
 
 SOURCE="working_files/${SLUG}-${CHANNEL}-raw.png"
 OUTPUT="content/topics/${SLUG}/${SLUG}-${CHANNEL}.webp"
+SCALED="working_files/${SLUG}-${CHANNEL}-scaled.png"
 mkdir -p "$(dirname "$OUTPUT")"
 
+# Remove any stale output so a failed encode can't masquerade as success.
+rm -f "$OUTPUT"
+
+# Stage 1 — scale to cover + crop to exact dimensions (PNG out; no WebP encoder needed).
+# No 2>/dev/null: keep errors visible. Halt on failure.
+ffmpeg -y -i "$SOURCE" \
+  -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}" \
+  "$SCALED" || { echo "FAIL  ffmpeg scale/crop errored — see output above"; exit 1; }
+
+# Stage 2 — encode PNG → WebP with cwebp, stepping quality down until under MAX_KB.
+SIZE_KB=0
 for Q in 82 72 65; do
-  ffmpeg -y -i "$SOURCE" \
-    -vf "scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}" \
-    -q:v $Q "$OUTPUT" 2>/dev/null
+  cwebp -quiet -q "$Q" "$SCALED" -o "$OUTPUT" \
+    || { echo "FAIL  cwebp errored — see output above"; exit 1; }
   SIZE_KB=$(du -k "$OUTPUT" | cut -f1)
   if [ "$SIZE_KB" -le "$MAX_KB" ]; then
     echo "PASS  ${SIZE_KB} KB → $OUTPUT"
@@ -162,7 +181,11 @@ done
 if [ "$SIZE_KB" -gt "$MAX_KB" ]; then
   echo "WARN  ${SIZE_KB} KB exceeds ${MAX_KB} KB at q65 — using as-is"
 fi
+
+rm -f "$SCALED"
 ```
+
+> `cwebp` ships with Homebrew's `webp` formula (`brew install webp`) at `/opt/homebrew/bin/cwebp`.
 
 ---
 
@@ -187,3 +210,5 @@ Append to `agents/image-designer/output/run-log.md`:
 | Unwanted text or watermark | Ask Writer to add "No text, letters, numbers, symbols, or watermarks anywhere in the image." to the prompt. Retry. |
 | `jq` not found | `brew install jq` |
 | `ffmpeg` not found | `brew install ffmpeg` |
+| `cwebp` not found | `brew install webp` (provides `/opt/homebrew/bin/cwebp`) |
+| WebP step printed `PASS` but image did not change | Old bug from encoding WebP with ffmpeg + suppressed stderr. Confirm Step 5 uses the ffmpeg-scale → cwebp-encode two-stage block above; verify the output `.webp` mtime updated after the run. |

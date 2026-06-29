@@ -1,0 +1,42 @@
+{
+  "topic": "Parenting a firehorse baby in 2026: managing extraordinary energy, the double horse, and the tension between greatest joy and greatest aggravation.",
+  "phrases": [
+    "A hyperactive firehorse baby is not cause for worry.",
+    "Channel the energy. Don't suppress it.",
+    "Harness the fire before it harnesses you.",
+    "Greatest joy. Greatest aggravation. Same child.",
+    "The horse needs a direction, not a cage."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "firehorse-baby-greatest-joy-greatest-aggravation",
+      "content_type": "blog-fire-horse",
+      "concept": "A toddler caught mid-movement, running at full speed toward open garden light, shot from behind. The child is pure kinetic energy -- arms out, feet barely touching the ground. A woman's hand is just visible at the edge of the frame, reaching gently in the direction the child is running, guiding rather than restraining. The scene is warm and slightly overexposed in the background, giving the impression of barely-contained fire.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A toddler running at full sprint across a sunlit garden, photographed from behind, arms flung wide, feet barely touching the earth. In the lower right corner, a woman's hand -- warm skin, relaxed fingers -- extends gently toward the child, not grabbing but guiding. The child is a silhouette of motion against bright backlit grass. Overhead light pours down from the upper left. The garden is soft jade green, the sky a warm ivory. The overall feeling is barely-contained joy, wildness that someone loves. Shot in a cinematic, slightly overexposed film-photography style. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "firehorse-baby-greatest-joy-greatest-aggravation",
+      "content_type": "mon-facebook-en",
+      "concept": "A split composition. Left half: a single candle flame burning tall in midnight jade darkness, intense and high. Right half: the same candle in warm ivory light, contained in a small glass lantern, steady and quiet. Two versions of the same fire. The tension between untamed and directed energy, between chaos and care.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "Split composition, frame divided vertically. Left half: a tall candle flame burning in deep midnight jade darkness, the flame high and wild, the wax dripping, the light casting orange and gold against the dark background. Right half: the same candle flame held inside a small antique glass lantern, warm ivory surroundings, the flame still bright but contained and steady. Both flames are the same fire. The left side feels wild and slightly dangerous; the right side feels beautiful and cared for. Cinematic lighting. No text, no typography. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "firehorse-baby-greatest-joy-greatest-aggravation",
+      "content_type": "mon-instagram",
+      "concept": "A square overhead flat lay: a small pair of children's shoes, red with tiny gold buckles, sitting in the center of an aged cream silk cloth. Around them, scattered tiny objects: a dried flower petal, a smooth river stone, a small bundle of red thread. The shoes are impossibly small and impossibly energetic even in stillness. Warm antique gold tones throughout.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "Overhead flat lay on aged cream silk. At the center, a tiny pair of children's red shoes with small antique gold buckles. Around them, casually arranged: a single dried chrysanthemum petal, a smooth dark river stone, a small loop of crimson thread. Natural morning light from the upper left casts gentle shadows. The shoes look like they belong to a child who just ran off somewhere and will be back any second. Palette: warm cream, deep crimson, antique gold, dark jade stone. The overall feeling is intimate and slightly electric -- a small life with enormous energy. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

@@ -384,3 +384,88 @@ Publishes: Friday (blog + social)
 | Jun 26 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | Jun 26 | Fri | Instagram | Feel Good Friday: Find your curl. One place you're forcing, do less, align more. That's Wu Wei. |
 
+---
+
+## Week of June 29 — Month of the Wood Sheep (Predictions)
+
+> Lunar context: previews the **Wood Sheep month — July 7 to ~Aug 7, 2026** (solar-term / Four Pillars reckoning; the 小暑 *Xiaoshu* solar term starts the Sheep month on **Jul 7** — verified independently against astronomical sources). Note: the repo's `lunar_calendar.json` / `year-overview.json` use the *new-moon* date (Jul 14), a different calendar — these posts follow Bill's solar-term dates. This week itself is still the Wood Horse month, so the posts are a forward-looking forecast. The Wood Sheep month is the year's **Soulmate Month** (month sign + year sign are soulmates) and its most love-charged stretch. Source brief: `context/source-material/year-of-the-fire-horse/Month of the Wood Sheep.md`.
+
+**Topic: 2026-06-29-horse-sheep-month** — STATUS: PLANNED
+Angle: Fire Horse — shock & awe, reframed as relief. After the year's two hardest months, the Wood Sheep month (Jul 7–Aug 7) is the **Soulmate Month**: wood feeds fire, two fire signs together, the most love-charged month of the year. Sign-by-sign, it's a mixed bag — ~half favored (Horse, Pig, Rabbit, Dragon, Dog, Snake), ~half challenged (Rat, Ox, Tiger, Monkey, Rooster). The one rule: high passion means high temper — lead with self-control.
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-07-01-mirror-sheep-month** — STATUS: PLANNED
+Angle: Mahjong Mirror — the answer. In a love-charged, hot-tempered month, the Mirror is how you tell a soulmate moment from a hot-headed mistake: name what you actually want from the relationship (not just the chemistry), and name the real opposition — which in a two-fire month is often your own short fuse.
+Chapter/tile focus: Know Thyself (Second Angle), The Opposition (Third Angle)
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-07-03-feel-good-sheep-month** — STATUS: PLANNED
+Angle: Feel Good Friday — a planning challenge: walk into the Soulmate Month with one relationship to deepen (or one connection to make) and one fight you'll refuse to pick. The month brings the passion; you bring the self-control.
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jun 29 | Mon | Blog | "The Soulmate Month Is Coming — and It's All About Love" — After two of the year's hardest months, the Wood Sheep month (July 7–Aug 7) is the relief: the year's **Soulmate Month**, when the month sign and the year sign are soulmates and many people have one of their biggest life events of the whole year. Wood feeds fire, so the energy is auspicious, and two fire signs — Sheep and Horse — mean passion runs high. It's the best window of the year to deepen a relationship, take one to the next level, or find someone new. The catch: high passion means high temper. And because it's still a Fire Horse year, no sign is truly "great" — about half are favored (Horse, Pig, Rabbit, Dragon, Dog, Snake) and half are challenged (Rat, Ox, Tiger, Monkey, Rooster). Here's your sign. |
+| Jun 29 | Mon | Facebook EN | The hardest stretch of the Fire Horse year is almost behind us. On July 7 the Wood Sheep month begins — and it's the **Soulmate Month**, when the month and the year are soulmates, big life events cluster, and love takes center stage. Two fire signs means a lot of passion. Just remember: where passion runs high, tempers do too. Here's what's coming, sign by sign. |
+| Jun 29 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 29 | Mon | Instagram | The Soulmate Month is coming. July 7–Aug 7: the most love-charged month of the Fire Horse year. Passion runs high — so do tempers. Find your sign on the blog. |
+| Jun 30 | Tue | Facebook EN | More on the Soulmate Month: "soulmate" doesn't always mean easy. Some of the most important events of your year land in this window — and a few are hard lessons. Even the favored signs — Horse, Pig, Rabbit — should be confident but not go hog wild. This month rewards passion paired with self-control, not passion without it. |
+| Jun 30 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Jun 30 | Tue | Instagram | Soulmate ≠ easy. The biggest moments of your year may land in the next month — some joyful, some hard lessons. Lead with self-control. |
+| Jul 1 | Wed | Blog | "The Soulmate Month Decision: How to Tell Love From Heat" — A month this passionate will hand you real choices: deepen this relationship, start a new one, or walk away. The Mahjong Mirror is how you make that call without letting the month's hot temper make it for you. Empty the cup, name what you actually want from the relationship (not just the chemistry), and name the real opposition — because in a two-fire month, the obstacle is often your own short fuse. The best love window of the year rewards the people who decide with clarity, not heat. |
+| Jul 1 | Wed | Facebook EN | The Wood Sheep month is the best love window of the year — and the most flammable. The Mahjong Mirror is how you tell a soulmate moment from a hot-headed mistake: name what you really want from the relationship, and name what's really opposing it. Often, in a two-fire month, the obstacle is your own temper. |
+| Jul 1 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 1 | Wed | Instagram | Love month or temper month? Both. The Mirror is how you tell the difference — before you decide. |
+| Jul 2 | Thu | Facebook EN | The Mirror's discipline for a passionate month: before the big conversation, empty the cup. Most fights in a two-fire month aren't about what they're about — they're about pace and pride. Name the real issue first, then talk. |
+| Jul 2 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 2 | Thu | Instagram | Before the big talk this month: empty the cup. The fight is rarely about what it's about. |
+| Jul 3 | Fri | Blog | "Feel Good Friday: Walk Into the Soulmate Month With a Plan" — The best love month of the year starts in four days. Don't drift into it — walk in with intention. Your weekend challenge: name one relationship you want to deepen (or one connection you want to make), and one guardrail — the argument you're going to refuse to have. Passion is the gift of the Wood Sheep month; self-control is what lets you keep it. |
+| Jul 3 | Fri | Facebook EN | Feel Good Friday: the Soulmate Month begins July 7. Two moves before it does — name one relationship to deepen, and one fight you'll refuse to pick. The month brings the passion; you bring the self-control. |
+| Jul 3 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 3 | Fri | Instagram | Feel Good Friday: One relationship to deepen. One fight to skip. That's how you enter the Soulmate Month. |
+
+---
+
+## Week of July 6 — Parenting in the Year of the Fire Horse
+
+> Source brief: `context/source-material/year-of-the-fire-horse/Parenting in the Year of the Firehorse.md` (Bill + David Hajdu, Jun 23 conversation; flagged in the brief as a possible two-part series). Timeless theme — not lunar-gated. **Bonus this week:** Tuesday Jul 7 is given to a standalone *"The Wood Sheep month has begun"* post (the Sheep month opens Jul 7, the arc the week of Jun 29 predicted), so the Monday parenting post has no Tuesday social echo this week.
+
+**Topic: 2026-07-06-horse-parenting** — STATUS: PLANNED
+Angle: Fire Horse — shock & awe. Of all 60 Chinese signs, the firehorse child is the one most likely to bring the greatest joy *and* the greatest aggravation: high energy, high crying, high potential, high risk. And it's not just the year — a baby born now is already a double horse (triple horse on a few days, including Jul 7). This is the year that demands you really focus on being a parent, and sharpen your skills fast.
+Publishes: Monday (blog + social) — *Tuesday slot goes to the bonus post*
+
+**Topic: 2026-07-07-horse-sheep-month-begins** — STATUS: PLANNED  (🎁 Bonus)
+Angle: Standalone marker. The Wood Sheep month opens **today, July 7** — the Soulmate Month previewed the week of Jun 29 is here. Short and celebratory; points readers back to their sign in the forecast, and carries the one rule: high passion, high temper, lead with self-control.
+Publishes: Tuesday (blog + social) — standalone bonus
+
+**Topic: 2026-07-08-mirror-parenting** — STATUS: PLANNED
+Angle: Mahjong Mirror — the answer. You don't parent "a firehorse," you parent *your* child: read all four pillars (year, month, day, and more), not just the birth year — the day element is where the real personalization lives. Parenting as coaching: understand how this child is different rather than applying one technique to everyone.
+Chapter/tile focus: reading the individual / the four pillars; the Children palace (Purple Star)
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-07-10-feel-good-parenting** — STATUS: PLANNED
+Angle: Feel Good Friday — channel the fire, don't fight it. A hyperactive firehorse child is energy to aim, not a problem to suppress: find the outlet (the horse is the sports-and-performing-arts sign) and build one pocket of calm (a soothing, feng-shui'd space).
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jul 6 | Mon | Blog | "The Firehorse Baby: The Greatest Joy and the Greatest Aggravation You'll Ever Parent" — Of all 60 signs in Chinese astrology, the firehorse child is the one most likely to bring you both. A baby born this year is high energy and, frankly, high crying — high potential and high risk in equal measure. And it's not just the year: a baby born this month is already a double horse, and on a few days (like July 7) a triple horse, which dials both the promise and the chaos all the way up. This is the year that demands you really focus on being a parent — and sharpen your skills fast, because it's going to be a wild ride. |
+| Jul 6 | Mon | Facebook EN | Thinking about a firehorse baby? Here's the truth: of all 60 Chinese signs, the firehorse child is the one most likely to bring you the greatest joy — and the greatest aggravation. High energy, high crying, high potential, high risk. A baby born this month is already a double horse. This is the year that asks you to really focus on being a parent. |
+| Jul 6 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 6 | Mon | Instagram | The firehorse baby: greatest joy, greatest aggravation, all in one. High energy. High crying. High everything. Here's how to parent it. |
+| Jul 7 | Tue | Blog | "The Month of the Wood Sheep Has Begun" — Today, July 7, the Wood Sheep month opens — the **Soulmate Month** we forecast last week, and the best love window of the whole Fire Horse year. The two hardest months are behind us; wood now feeds fire, the month and the year are soulmates, and passion runs high through August 7. If you missed the sign-by-sign forecast, here's where to find yours — and the one rule that carries the whole month: where passion runs high, lead with self-control. |
+| Jul 7 | Tue | Facebook EN | It's here. As of today, July 7, we're in the Wood Sheep month — the Soulmate Month, and the most love-charged stretch of the Fire Horse year. The hard months are behind us. Passion runs high through August 7; so can tempers. Lead with self-control, and check last week's post for your sign. |
+| Jul 7 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 7 | Tue | Instagram | Today: the Wood Sheep month begins. The Soulmate Month is here — the best love window of the year, through Aug 7. |
+| Jul 8 | Wed | Blog | "You Don't Parent a Firehorse — You Parent Your Child" — Monday's warning was about the firehorse in general. But there's no such thing as parenting "a firehorse." A child is four pillars — year, month, day, and more — layered on top of each other, and the day element is where the real personalization lives. The Mahjong Mirror's discipline is exactly this: look closer, and customize. Great parenting works like great coaching — you don't learn one technique and apply it to every kid; you understand how this child is different. Knowing your child's makeup even tells you how to read them: if a firehorse baby is lying quiet, don't just count your blessings — ask why, because that's not what they normally do. |
+| Jul 8 | Wed | Facebook EN | There's no such thing as parenting "a firehorse." Your child is four pillars — year, month, day — and the day is where the real personalization is. The Mahjong Mirror's discipline is to look closer and customize. Good parenting is like good coaching: you don't apply one technique to every kid. You learn how this one is different. |
+| Jul 8 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 8 | Wed | Instagram | You don't parent a firehorse. You parent YOUR child. Four pillars, not one. Look closer — that's the Mirror. |
+| Jul 9 | Thu | Facebook EN | More on parenting by the pillars: the firehorse child's number-one need is to learn to relax. Have your soothing techniques ready — calming music, holding, rocking — and tune the home to help: calming colors, a soothing layout. In Chinese astrology, feng shui isn't separate; it's the space side of the same wisdom. |
+| Jul 9 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 9 | Thu | Instagram | The firehorse baby's #1 lesson: how to relax. Calm techniques, calm room, calm colors. Feng shui is part of parenting. |
+| Jul 10 | Fri | Blog | "Feel Good Friday: Channel the Fire, Don't Fight It" — A hyperactive firehorse child isn't a problem to fix — it's energy to aim. The horse is the sign of sports and performing arts, so the job isn't to push, it's to encourage: find what lights them up and let them run at it. And build one pocket of calm — a soothing room, a wind-down ritual — so they can choose to relax. Your weekend challenge: pick one outlet for the energy and one moment of calm. That's the whole art of parenting a firehorse — joy directed, fire channeled. |
+| Jul 10 | Fri | Facebook EN | Feel Good Friday: a hyperactive firehorse kid isn't a problem — it's potential pointed in every direction at once. The horse is the sports-and-performing-arts sign. Don't push; encourage. Find the one thing that lights them up, and build one pocket of calm at home. Channel the fire, don't fight it. |
+| Jul 10 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 10 | Fri | Instagram | Feel Good Friday: Channel the fire, don't fight it. One outlet for the energy. One pocket of calm. That's firehorse parenting. |
+

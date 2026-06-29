@@ -1,0 +1,43 @@
+{
+  "topic": "The arrival of the Wood Sheep month on July 7, 2026. The Soulmate Month of the Fire Horse year. A celebratory marker post that confirms the forecast from the week before and carries the one rule: lead with self-control.",
+  "phrases": [
+    "It's here.",
+    "The hard months are behind us.",
+    "Lead with self-control, not heat.",
+    "The Soulmate Month is here. Use it well.",
+    "Wood feeds fire."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "wood-sheep-month-has-begun-soulmate-month-july-7",
+      "content_type": "blog-fire-horse",
+      "concept": "Arrival. The feeling of stepping from shadow into light, the hard stretch behind, something good finally beginning.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic 16:9 landscape. A stone garden path emerges from deep shade and opens into full summer sunlight. Lush green on both sides. The garden is at its peak. The path leads forward and slightly upward, light pouring in from ahead. The mood is arrival: something hard is behind; something generous is in front. No people. Late morning light. Palette: midnight jade in the shaded foreground, antique gold in the sunlit opening, soft sage in the garden foliage, warm ivory in the stone path. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "wood-sheep-month-has-begun-soulmate-month-july-7",
+      "content_type": "tue-facebook-en",
+      "concept": "Celebration of arrival. The month is here, the energy is warm, the long wait is over.",
+      "image_style": "TEXT",
+      "text": "The Soulmate Month is here. Use it well.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A 16:9 typographic composition. Warm aged parchment background, soft edge shadow. In hand-inked brush lettering, deep walnut ink, centered, the phrase: \"The Soulmate Month is here. Use it well.\" Two lines, centered, first line slightly larger. Modern calligraphy, not ornate. One small ink flourish beneath the second line. Behind the text, a very faint watercolor wash of antique gold and dusty rose. Warm, celebratory, barely visible. Palette: warm cream parchment, walnut brown ink, faint antique gold and dusty rose wash. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "wood-sheep-month-has-begun-soulmate-month-july-7",
+      "content_type": "tue-instagram",
+      "concept": "Pure celebratory arrival. A sunflower in full bloom, shot from below against a bright sky.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square photograph of a single large sunflower in full bloom, shot from directly below, looking up into the open flower against a bright morning sky. The petals are golden, fully extended, unapologetically open. The feeling is pure arrival. Something has finally come into its fullness. Natural morning light. Palette: antique gold petals, warm ivory sky, soft sage in the leaves and stem. No people. No text. No zodiac symbols. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

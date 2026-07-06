@@ -1,0 +1,64 @@
+{
+  "topic": "Three concrete moves for the last three weeks of the Soulmate Month: tend the relationship on purpose, name any temptation honestly, and put one real gesture of passion toward the partner you already have.",
+  "phrases": [
+    "Tend the garden on purpose.",
+    "Name the temptation before it names you.",
+    "The fire is real. You get to choose where it goes.",
+    "Passion that gets spent at home doesn't go looking elsewhere."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-three-moves-for-the-soulmate-month",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A pair of hands actively tending a small garden bed in warm evening light, literalizing 'tend the garden' as a warm, hopeful scene rather than a warning.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm cinematic photograph of a pair of hands gently tending a small garden bed at golden hour, fingers working soil around a newly planted flower. Soft warm antique gold sunlight rakes low across the frame, catching dust and pollen in the air. The greenery is lush, soft sage in tone, with a few dusty rose blossoms visible. The mood is hopeful, intentional, and quietly romantic, evoking care and attention rather than danger. No faces visible, just the hands and the garden. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-three-moves-for-the-soulmate-month",
+      "content_type": "fri-facebook-en",
+      "concept": "A couple's hands resting together on a table at a warmly lit dinner, not facing camera, evoking one real gesture of presence and attention.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm, intimate cinematic photograph of two hands resting together on a wooden table at a softly candlelit dinner setting, seen from an angle that keeps both people's faces out of frame. Warm antique gold candlelight flickers across the hands and the table's surface. A single flower in a small vase sits softly out of focus in the background. The mood is tender, present, unhurried. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-three-moves-for-the-soulmate-month",
+      "content_type": "fri-instagram",
+      "concept": "TEXT-style card carrying the week's closing affirmation about choosing where the fire goes.",
+      "image_style": "TEXT",
+      "text": "The fire is real. You choose where it goes.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square social graphic, 1080x1080, deep midnight jade background with a warm antique gold glow radiating softly from the center like gentle firelight. Centered in elegant modern serif typography, in warm antique gold, the phrase: \"The fire is real. You choose where it goes.\" Two lines, centered, generous letter spacing, the first line slightly larger than the second. A single thin gold hairline rule beneath the text. Minimal, warm, atmospheric. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-three-moves-for-the-soulmate-month",
+      "content_type": "card",
+      "concept": "English affirmation card, journal-page style, carrying the week's most quotable line for standalone sharing.",
+      "image_style": "TEXT",
+      "text": "Tend the garden on purpose.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Tend the garden on purpose.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant, modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-three-moves-for-the-soulmate-month",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card, journal-page style, natural translation of the English affirmation.",
+      "image_style": "TEXT",
+      "text": "Chăm sóc khu vườn của mình, một cách có chủ đích.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Chăm sóc khu vườn của mình, một cách có chủ đích.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant, modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve the Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

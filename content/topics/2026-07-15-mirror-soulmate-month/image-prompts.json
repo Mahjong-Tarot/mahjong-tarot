@@ -1,0 +1,65 @@
+{
+  "topic": "How to read the Peach Blossom and Sword cards this month, and how the Mahjong Mirror's Know Thyself and Opposition angles tell a real soulmate moment apart from a relationship quietly breaking down.",
+  "phrases": [
+    "Chemistry tells you how you feel. The Mirror tells you what's actually there.",
+    "Neither one is comfortable. Both are clarifying.",
+    "Know thyself, before anything happens you can't undo.",
+    "Name the real obstacle, not the excuse."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "what-the-peach-blossom-and-the-sword-are-telling-you",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "The Peach card itself, shown as a real object with weight and history, resting on a reading table beside the Sword card, mid-reading.",
+      "image_style": "HUMAN",
+      "card": "Peach (Suit card) and Sword (Suit card)",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A close-up cinematic photograph of a pair of feminine hands mid-reading, one hand just having placed a mahjong card face-up on a dark wooden table beside another card already lying face-up. The cards are aged and hand-painted, one showing a stylized peach blossom motif, the other a stylized sword motif, both rendered as if hand-crafted decades ago, with real texture, wear, and weight, never cartoonish. Warm candlelight from just outside the frame catches the edges of both cards and the reader's fingers. Deep midnight jade shadow surrounds the table. The reader's face is not visible. The mood is quiet, serious, a moment of real recognition. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "what-the-peach-blossom-and-the-sword-are-telling-you",
+      "content_type": "wed-facebook-en",
+      "concept": "TEXT-style graphic carrying the post's key pull quote about chemistry versus the Mirror's honesty.",
+      "image_style": "TEXT",
+      "text": "Chemistry tells you how you feel. The Mirror tells you what's actually there.",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A wide social graphic, 1200x630, deep plum background fading softly into midnight jade at the edges. Centered in elegant modern serif typography, in warm antique gold, the phrase: \"Chemistry tells you how you feel. The Mirror tells you what's actually there.\" Two lines, centered, generous spacing, balanced sizing between the two lines. A single thin gold hairline rule above the text. Minimal, atmospheric, no clutter, no imagery beyond the gradient and a very faint texture like aged parchment behind the type. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "what-the-peach-blossom-and-the-sword-are-telling-you",
+      "content_type": "wed-instagram",
+      "concept": "The Sword card alone, shot as a dramatic object still life, held up to catch the light as if the reader is studying it closely.",
+      "image_style": "SCENE",
+      "card": "Sword (Suit card)",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A dramatic object still-life photograph of a single aged mahjong card held between two fingers, tilted to catch warm side lighting. The card shows a stylized hand-painted sword motif, textured and weathered like a real object with decades of history, not a clean digital render. The background falls into deep midnight jade darkness. A soft antique gold rim light traces the edge of the card and the fingers holding it. The mood is focused and serious, a private moment of decision. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "what-the-peach-blossom-and-the-sword-are-telling-you",
+      "content_type": "thu-facebook-en",
+      "concept": "A woman in soft morning light near a mirror, her reflection turned slightly away, evoking the Second Angle's Know Thyself discipline.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A quiet cinematic photograph of a woman standing near an antique mirror in soft early morning light, seen from the side and slightly behind so her face is not visible to camera, only a partial reflection catching warm ivory light in the mirror's glass. She wears simple, timeless clothing. Dust motes drift visibly in a shaft of window light. The room is softly furnished in warm ivory and soft sage tones. The mood is private, reflective, a moment of honest self-appraisal rather than vanity. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "what-the-peach-blossom-and-the-sword-are-telling-you",
+      "content_type": "thu-instagram",
+      "concept": "TEXT-style card with a short, punchy line about tending the garden versus looking elsewhere.",
+      "image_style": "TEXT",
+      "text": "Know thyself, especially this month.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square social graphic, 1080x1080, warm ivory background with a soft aged parchment texture and the faintest antique gold filigree border. Centered in confident modern serif typography, in deep plum ink, the phrase: \"Know thyself, especially this month.\" Two lines, centered, generous letter spacing, the first line slightly larger than the second. A small hand-drawn gold flourish beneath the text. Minimal, warm, intimate. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

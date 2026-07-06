@@ -469,3 +469,43 @@ Publishes: Friday (blog + social)
 | Jul 10 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | Jul 10 | Fri | Instagram | Feel Good Friday: Channel the fire, don't fight it. One outlet for the energy. One pocket of calm. That's firehorse parenting. |
 
+---
+
+## Week of July 13 — Inside the Soulmate Month: Passion's Other Edge
+
+> Lunar context: we are now inside the **Wood Sheep month (Jul 7 – Aug 7)**, the Soulmate Month previewed the week of Jun 29 and confirmed the week of Jul 6. Two fire signs stacked (Sheep month, Horse year) means passion is running at its highest point of the whole year — and so is the risk that comes with uncontrolled fire. Source brief: `context/source-material/year-of-the-fire-horse/fire-horse-love-and-sex.md` and `context/source-material/year-of-the-fire-horse/fire-horse-extremes-and-danger.md`. This week goes past the sign-by-sign forecast already published and into the sharper question: the same fire that deepens a relationship is the fire that burns one down, and the Mahjong Mirror is how you tell which one you are standing in.
+
+**Topic: 2026-07-13-horse-soulmate-month** — STATUS: WRITTEN
+Angle: Fire Horse — shock & awe, Myth Buster. The myth: "Soulmate Month" sounds safe, even guaranteed. The truth: it is the single month all year where Bill sees the Peach Blossom (romantic temptation, affairs) turning up in the problem position most often. Same fire that deepens a real relationship also lights up the wandering eye — especially for the Horse, Rat, Ox, Monkey, and Rooster, who are already carrying friction into the month.
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-07-15-mirror-soulmate-month** — STATUS: WRITTEN
+Angle: Mahjong Mirror — the answer, Explainer. What the Peach Blossom and the Sword actually mean when they show up in a reading this month, and how the Second Angle (Know Thyself) and Third Angle (The Opposition) tell a soulmate moment apart from a hot-headed mistake before it costs you the relationship.
+Chapter/tile focus: Know Thyself (Second Angle), The Opposition (Third Angle), Peach card, Sword card
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-07-17-feel-good-soulmate-month** — STATUS: WRITTEN
+Angle: Feel Good Friday — How-To. Three concrete moves for the back half of the Soulmate Month: tend the garden on purpose, name the temptation before it names you, and put one real gesture of passion toward the partner you already have.
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jul 13 | Mon | Blog | "The Soulmate Month Isn't as Safe as It Sounds" — Everyone assumes a month called "Soulmate" is the safe one. Bill has read cards for 35 years, and this is the single month where the Peach Blossom, the card of romantic temptation and affairs, shows up most often in the problem position. The same double-fire energy that deepens a real relationship also lights the wandering eye. Here's the myth, the truth, and who's most exposed. |
+| Jul 13 | Mon | Facebook EN | Everyone hears "Soulmate Month" and thinks it means safe, easy, guaranteed. In over 35 years of readings, this is the month I see the Peach Blossom, the card for affairs and temptation, more than any other. Same fire, two different directions. Here's how to tell which one you're in. |
+| Jul 13 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 13 | Mon | Instagram | "Soulmate Month" sounds safe. It isn't. Same fire that deepens a relationship also lights the wandering eye. Here's the myth, on the blog. |
+| Jul 14 | Tue | Facebook EN | The Horse, Rat, Ox, Monkey, and Rooster are the signs I'd watch closest this month. Not because they're bad people. Because they're already carrying friction into a month built on fire. A word to the wise. |
+| Jul 14 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 14 | Tue | Instagram | Some signs carry more friction into the Soulmate Month than others. If you're one of them, this is your heads-up. |
+| Jul 15 | Wed | Blog | "What the Peach Blossom and the Sword Are Really Telling You This Month" — The Mahjong Mirror's Second Angle, Know Thyself, and Third Angle, The Opposition, applied to the Soulmate Month's sharpest question: is this passion building something, or is it the first sign of something breaking? Bill explains what these two cards mean when they turn up right now, and how to read your own situation without lying to yourself. |
+| Jul 15 | Wed | Facebook EN | Two cards keep showing up in my readings this month: the Peach and the Sword. Neither one is comfortable. Both are clarifying. The Mirror's Second Angle asks who you really are in this. The Third asks what's actually standing in the way. |
+| Jul 15 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 15 | Wed | Instagram | The Peach Blossom. The Sword. Two cards, one month. The Mirror shows you which one you're actually holding. |
+| Jul 16 | Thu | Facebook EN | You don't need a card reading to ask the Mirror's questions. Know thyself: are you bringing passion home, or are you looking for it somewhere else? Name it honestly. That's the whole exercise. |
+| Jul 16 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 16 | Thu | Instagram | Know thyself, especially this month. Are you tending your garden or eyeing the one next door? |
+| Jul 17 | Fri | Blog | "Feel Good Friday: Three Moves for the Rest of the Soulmate Month" — The Wood Sheep month runs through August 7. Three weeks left to make sure the fire builds instead of burns. Tend the garden on purpose. Name the temptation before it names you. And put one real, specific gesture of passion toward the partner you already have. |
+| Jul 17 | Fri | Facebook EN | Feel Good Friday: three weeks left in the Soulmate Month. Tend the garden on purpose. Name any temptation before it names you. And do one specific, real thing for the partner you already have this weekend. What's yours going to be? |
+| Jul 17 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 17 | Fri | Instagram | Feel Good Friday: Tend the garden. Name the temptation. Choose the partner you already have, on purpose. |
+

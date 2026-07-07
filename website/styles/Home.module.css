@@ -976,6 +976,56 @@
   font-size: 15px;
 }
 
+/* ── Card Gallery — deck cards, ceremonial (used by /cards) ── */
+.cardGallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+.cardItem {
+  margin: 0;
+  text-align: center;
+  transition: transform var(--transition);
+  text-decoration: none;
+}
+.cardItem:hover { transform: translateY(-4px); }
+.cardImageWrap {
+  position: relative;
+  aspect-ratio: 5 / 8;
+  background: var(--paper-pure);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 14px;
+  transition: box-shadow var(--transition);
+}
+.cardItem:hover .cardImageWrap {
+  box-shadow: 0 14px 40px rgba(20, 22, 27, 0.12);
+}
+.cardItem figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--space-md);
+  text-align: center;
+}
+.cardName {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.cardMeaning {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .heroInner { grid-template-columns: 1fr; gap: var(--d-5); }
@@ -985,6 +1035,7 @@
   .aboutFigure { max-width: 540px; aspect-ratio: 4 / 3; }
   .book { grid-template-columns: 1fr; padding: var(--d-6); gap: var(--d-5); }
   .deckStrip { grid-template-columns: repeat(3, 1fr); }
+  .cardGallery { grid-template-columns: repeat(3, 1fr); }
   .journalGrid { grid-template-columns: 1fr; }
   .quotesGrid { grid-template-columns: 1fr; }
   .cta { grid-template-columns: 1fr; padding: var(--d-6); gap: var(--d-5); }
@@ -1005,5 +1056,6 @@
 
 @media (max-width: 640px) {
   .deckStrip { grid-template-columns: repeat(2, 1fr); }
+  .cardGallery { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
   .heroPullQuote { display: none; }
 }

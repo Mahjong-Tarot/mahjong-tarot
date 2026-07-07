@@ -24,6 +24,9 @@ nav:
   prev:
     slug: "you-dont-parent-a-firehorse-you-parent-your-child"
     label: "You Don't Parent a Firehorse"
+  next:
+    slug: "soulmate-month-isnt-as-safe-as-it-sounds"
+    label: "The Soulmate Month Isn't as Safe as It Sounds"
 faqs:
   - q: "How do I channel a firehorse baby's energy?"
     a: "The horse is the sign of sports and performing arts. Watch for what physical activities or creative pursuits light your child up, and make space for those rather than trying to suppress the energy. You cannot push a child toward an activity, but you can encourage the one they love."

@@ -36,3 +36,6 @@
 | 2026-07-07 | The Month of the Wood Sheep Has Begun | wood-sheep-month-has-begun-soulmate-month-july-7.md | The Mahjong Mirror |
 | 2026-07-08 | You Don't Parent a Firehorse. You Parent Your Child. | you-dont-parent-a-firehorse-you-parent-your-child.md | The Mahjong Mirror |
 | 2026-07-10 | Feel Good Friday: Channel the Fire, Don't Fight It | feel-good-friday-channel-the-fire-dont-fight-it.md | The Mahjong Mirror |
+| 2026-07-13 | The Soulmate Month Isn't as Safe as It Sounds | soulmate-month-isnt-as-safe-as-it-sounds.md | Love & Relationships |
+| 2026-07-15 | What the Peach Blossom and the Sword Are Really Telling You This Month | what-the-peach-blossom-and-the-sword-are-telling-you.md | Love & Relationships |
+| 2026-07-17 | Feel Good Friday: Three Moves for the Rest of the Soulmate Month | feel-good-friday-three-moves-for-the-soulmate-month.md | Love & Relationships |

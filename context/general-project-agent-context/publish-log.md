@@ -29,3 +29,6 @@
 | 2026-06-22 | The Oldest Answer to the Fire Horse Year Is 2,500 Years Old | oldest-answer-fire-horse-year-wu-wei-tao-te-ching.md | Mahjong and Tarot |
 | 2026-06-24 | Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror | doing-by-not-doing-tao-wu-wei-mahjong-mirror.md | Mahjong and Tarot |
 | 2026-06-26 | Feel Good Friday: Find Your Curl | feel-good-friday-find-your-curl.md | Mahjong and Tarot |
+| 2026-07-13 | The Soulmate Month Isn't as Safe as It Sounds | soulmate-month-isnt-as-safe-as-it-sounds.md | Year of the Fire Horse |
+| 2026-07-15 | What the Peach Blossom and the Sword Are Really Telling You This Month | what-the-peach-blossom-and-the-sword-are-telling-you.md | Mahjong Readings |
+| 2026-07-17 | Feel Good Friday: Three Moves for the Rest of the Soulmate Month | feel-good-friday-three-moves-for-the-soulmate-month.md | Year of the Fire Horse |

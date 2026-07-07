@@ -24,6 +24,9 @@ nav:
   prev:
     slug: "doing-by-not-doing-tao-wu-wei-mahjong-mirror"
     label: "Doing by Not Doing"
+  next:
+    slug: "soulmate-month-isnt-as-safe-as-it-sounds"
+    label: "The Soulmate Month Isn't as Safe as It Sounds"
 faqs:
   - q: "How do you practice Wu Wei in daily life?"
     a: "Start with one specific thing, not a broad review of your life. Find the place where you are working harder than the results justify. Ask whether your effort is aligned with the actual current of the situation or working against it. Then, rather than adding more effort, experiment with doing less in that one area, and notice what opens up when the forcing stops."

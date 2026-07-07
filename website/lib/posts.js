@@ -3,6 +3,33 @@
 
 export const POSTS = [
  {
+ slug: 'feel-good-friday-three-moves-for-the-soulmate-month',
+ title: 'Feel Good Friday: Three Moves for the Rest of the Soulmate Month',
+ excerpt: "Three weeks left in the Soulmate Month. Here are three specific things to do so the fire builds something instead of burning it down.",
+ topic: 'Love & Relationships',
+ date: 'Jul 17, 2026',
+ isoDate: '2026-07-17',
+ readTime: '5 min read',
+ },
+ {
+ slug: 'what-the-peach-blossom-and-the-sword-are-telling-you',
+ title: 'What the Peach Blossom and the Sword Are Really Telling You This Month',
+ excerpt: "Two cards keep showing up in my readings this month. Neither one is comfortable. Both are clarifying, if you know how to read them.",
+ topic: 'Love & Relationships',
+ date: 'Jul 15, 2026',
+ isoDate: '2026-07-15',
+ readTime: '7 min read',
+ },
+ {
+ slug: 'soulmate-month-isnt-as-safe-as-it-sounds',
+ title: "The Soulmate Month Isn't as Safe as It Sounds",
+ excerpt: "Everyone hears 'Soulmate Month' and assumes it means safe. I've read cards for 35 years, and this is the single month I see the Peach Blossom showing up in the problem position more than any other.",
+ topic: 'Love & Relationships',
+ date: 'Jul 13, 2026',
+ isoDate: '2026-07-13',
+ readTime: '6 min read',
+ },
+ {
  slug: 'feel-good-friday-find-your-curl',
  title: 'Feel Good Friday: Find Your Curl',
  excerpt: "You don't need to add anything this weekend. You need to stop flailing at one thing. Here's the Wu Wei practice, from the right-hand page of Bill's book.",

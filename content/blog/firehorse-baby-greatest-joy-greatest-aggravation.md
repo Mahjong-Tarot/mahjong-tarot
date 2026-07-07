@@ -76,7 +76,7 @@ Do not be intimidated by this. But do take it seriously.
 
 ## What You Should Be Ready For
 
-Let me tell you what I have seen and what I know. A firehorse baby is going to cry. Not the quiet, puzzled cry of a calm sign. The full-throated, absolute-commitment cry. My wife Tan, who has done nanny work for years, puts it plainly: the first month or two are manageable. Once the baby starts moving, everything changes. A firehorse child will be everywhere, fast. They will probably walk earlier than expected. You will need to baby-proof the house more thoroughly than you planned, and then do it again.
+Let me tell you what I have seen and what I know. A firehorse baby is going to cry. Not the quiet, puzzled cry of a calm sign. The full-throated, absolute-commitment cry. My wife Thanh, who has done nanny work for years, puts it plainly: the first month or two are manageable. Once the baby starts moving, everything changes. A firehorse child will be everywhere, fast. They will probably walk earlier than expected. You will need to baby-proof the house more thoroughly than you planned, and then do it again.
 
 I raised one boy who was coddled: daily buggy rides before naps, held and soothed the moment he cried. I raised another who was simply laid down and left to find his own way. Both approaches have their logic. But with a firehorse baby, if you choose the cry-it-out route, prepare yourself, because the volume and persistence of that cry may be more than you anticipated. Have good soothing techniques ready. Calming music. Holding. Rocking. Start building your toolkit now, before the baby arrives.
 

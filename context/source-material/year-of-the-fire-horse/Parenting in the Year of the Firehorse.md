@@ -26,7 +26,7 @@ The top job for parents is to harness the firehorse child's energy, enthusiasm, 
 
 Like a cowboy tying up his horse so it does not wander, a double horse child will likely have a short attention span. This may be the student who gets into trouble, lacks self control, and gets called out by teachers. Helping the child concentrate will be a big challenge. Beyond attention span, they struggle to stick with things: a firehorse will go all-in on projects that finish quickly, but will abandon anything that starts to feel too long.
 
-Once the baby becomes mobile, things get hectic. Bill's wife Tan, doing nanny work, notes that the first month or two are relatively easy, but once the baby starts crawling and moving, a firehorse will be everywhere, fast, and will probably walk early. Baby-proof the house thoroughly.
+Once the baby becomes mobile, things get hectic. Bill's wife Thanh, doing nanny work, notes that the first month or two are relatively easy, but once the baby starts crawling and moving, a firehorse will be everywhere, fast, and will probably walk early. Baby-proof the house thoroughly.
 
 ## Feng Shui is part of this
 

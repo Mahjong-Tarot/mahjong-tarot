@@ -13,7 +13,6 @@ seo:
     title: "Feel Good Friday: Walk Into the Soulmate Month With a Plan"
     description: "The Soulmate Month starts July 7. Four days to decide what kind of month you walk into. Two moves: one relationship to deepen, one fight to skip."
     image: "https://mahjongtarot.com/images/blog/feel-good-friday-walk-into-soulmate-month-with-a-plan.webp"
-    siteName: "The Mahjong Mirror"
 jsonLd:
   headline: "Feel Good Friday: Walk Into the Soulmate Month With a Plan"
   datePublished: "2026-07-03"
@@ -25,6 +24,9 @@ nav:
   prev:
     slug: "soulmate-month-decision-love-vs-heat"
     label: "The Soulmate Month Decision"
+  next:
+    slug: "firehorse-baby-greatest-joy-greatest-aggravation"
+    label: "The Firehorse Baby"
 faqs:
   - q: "What is the weekend challenge for the Soulmate Month?"
     a: "Two moves before July 7 begins. First: name one relationship to deepen this month. Not fix or repair, but actively deepen. Second: name one specific fight you're going to refuse to pick. Write both down. That's the plan for the Wood Sheep Soulmate Month."
@@ -37,7 +39,7 @@ faqs:
 cta:
   overline: "Go Deeper Into This"
   heading: "Explore the Mahjong Mirror"
-  body: "The Mahjong Mirror is the framework that makes the month's energy work for you, not on you. If you want to see the full picture of what this month holds for you before it begins, the sign-by-sign forecast is on the blog. Walk in with your two things: one to deepen, one to skip."
+  body: "If you want to see the full picture of what this month holds for you, the sign-by-sign forecast is on the blog. And if you want to work through the Mirror's full decision framework for the relationship you're planning to deepen, that's what the book is for."
   primary: "/the-mahjong-mirror"
   primaryLabel: "Explore the Book"
   secondary: "/readings#book"
@@ -101,3 +103,11 @@ The Soulmate Month is going to be rich. It is going to be full of feeling and co
 The passion is the gift of the Wood Sheep month. The self-control is what lets you keep the gift.
 
 Walk in with your two things: one to deepen, one to skip. And let the month do the rest.
+
+---
+
+July 7 starts in four days. That's more than enough time to decide.
+
+If you want to see the full picture of what this month holds for you before it begins, the [sign-by-sign forecast](/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast) is on the blog. And if you want to work through the Mirror's full decision framework for the relationship you're planning to deepen, that's what the book is for.
+
+[*The Mahjong Mirror: Your Path to Wiser Decisions*](/the-mahjong-mirror). The decision framework that makes the month's energy work for you, not on you.

@@ -13,7 +13,6 @@ seo:
     title: "The Month of the Wood Sheep Has Begun"
     description: "The Wood Sheep month begins today, July 7. The Soulmate Month is here. Find your forecast and the one rule for every sign."
     image: "https://mahjongtarot.com/images/blog/wood-sheep-month-has-begun-soulmate-month-july-7.webp"
-    siteName: "The Mahjong Mirror"
 jsonLd:
   headline: "The Month of the Wood Sheep Has Begun"
   datePublished: "2026-07-07"
@@ -25,6 +24,9 @@ nav:
   prev:
     slug: "firehorse-baby-greatest-joy-greatest-aggravation"
     label: "The Firehorse Baby"
+  next:
+    slug: "you-dont-parent-a-firehorse-you-parent-your-child"
+    label: "You Don't Parent a Firehorse"
 faqs:
   - q: "When does the Wood Sheep month 2026 start?"
     a: "The Wood Sheep month 2026 begins on July 7, 2026 at the Xiaoshu solar term, and runs to approximately August 7, 2026."
@@ -35,8 +37,8 @@ faqs:
   - q: "Which signs are favored in the Wood Sheep month 2026?"
     a: "About half the signs are favored: Horse, Pig, Rabbit, Dragon, Dog, and Snake. The other half (Rat, Ox, Tiger, Monkey, Rooster) need to focus on tending existing relationships and avoiding unnecessary conflicts."
 cta:
-  overline: "Find Where the Month Lands for You"
-  heading: "Book a Personal Reading"
+  overline: "Go Deeper Into This"
+  heading: "Book a Reading with Bill"
   body: "If you want to know what the cards are specifically showing for your situation right now, I have readings available."
   primary: "/readings#book"
   primaryLabel: "Book a Reading"
@@ -79,3 +81,7 @@ The sign-by-sign forecast for the Wood Sheep month, which signs are favored (Hor
 [Find your sign in the full forecast here.](/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast)
 
 Welcome to the Soulmate Month. Use it well.
+
+---
+
+If you want to know what the cards are specifically showing for your situation right now, I have readings available. [Book yours at mahjong-tarot.com/readings.](/readings)

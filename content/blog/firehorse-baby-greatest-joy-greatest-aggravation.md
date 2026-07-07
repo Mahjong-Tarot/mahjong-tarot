@@ -13,7 +13,6 @@ seo:
     title: "The Firehorse Baby: The Greatest Joy and the Greatest Aggravation You Will Ever Parent"
     description: "Of all 60 Chinese signs, the firehorse child brings the greatest joy and the greatest aggravation. A baby born in 2026 is already a double horse. Here is what to expect."
     image: "https://mahjongtarot.com/images/blog/firehorse-baby-greatest-joy-greatest-aggravation.webp"
-    siteName: "The Mahjong Mirror"
 jsonLd:
   headline: "The Firehorse Baby: The Greatest Joy and the Greatest Aggravation You Will Ever Parent"
   datePublished: "2026-07-06"
@@ -24,7 +23,10 @@ hero:
 nav:
   prev:
     slug: "feel-good-friday-walk-into-soulmate-month-with-a-plan"
-    label: "Walk Into the Soulmate Month With a Plan"
+    label: "Feel Good Friday: Walk In With a Plan"
+  next:
+    slug: "wood-sheep-month-has-begun-soulmate-month-july-7"
+    label: "The Month of the Wood Sheep Has Begun"
 faqs:
   - q: "What is a firehorse baby in Chinese astrology?"
     a: "A firehorse baby is a child born in the year of the Fire Horse, which occurs once every 60 years. The Fire Horse year combines the Horse animal sign with the fire element, producing traits of high energy, high passion, and high potential alongside high intensity and short attention span."
@@ -37,9 +39,9 @@ faqs:
   - q: "What is a triple horse baby?"
     a: "A triple horse baby is born on a Horse day, in a Horse month, within a Horse year. In 2026, certain dates (such as July 7) align all three pillars on the Horse sign, creating extraordinary intensity of energy, potential, and challenge."
 cta:
-  overline: "Understand Your Child's Full Chart"
-  heading: "Book a Personal Reading"
-  body: "The year picture tells you the weather. The full chart tells you who you are actually raising. A personal reading walks through all four pillars, the month layer, the day element, and the personality that is actually showing up."
+  overline: "Go Deeper Into This"
+  heading: "Book a Reading with Bill"
+  body: "If you want to understand the full picture of your firehorse child -- all four pillars, the month layer, the day element, the personality that is actually showing up -- a personal reading is the place to start. The year picture tells you the weather. The full chart tells you who you are actually raising."
   primary: "/readings#book"
   primaryLabel: "Book a Reading"
   secondary: "/the-mahjong-mirror"
@@ -78,7 +80,7 @@ Let me tell you what I have seen and what I know. A firehorse baby is going to c
 
 I raised one boy who was coddled: daily buggy rides before naps, held and soothed the moment he cried. I raised another who was simply laid down and left to find his own way. Both approaches have their logic. But with a firehorse baby, if you choose the cry-it-out route, prepare yourself, because the volume and persistence of that cry may be more than you anticipated. Have good soothing techniques ready. Calming music. Holding. Rocking. Start building your toolkit now, before the baby arrives.
 
-> A hyperactive firehorse baby is not cause for worry. It is just a matter of helping them channel the energy.
+<div class="pullQuote"><p>A hyperactive firehorse baby is not cause for worry. It is just a matter of helping them channel the energy.</p></div>
 
 ## Attention Span and the Long Project
 
@@ -109,3 +111,7 @@ I will say it again because I mean it: this is not a year to coast through paren
 The greatest joy and the greatest aggravation. Both are real. Both are coming. The parents who come out of this ride with a strong, focused, passionate child in their hands are the ones who leaned in early, built their skills fast, and never made the mistake of thinking one approach works for every kid.
 
 It does not. Especially not this one.
+
+If you want to understand the full picture of your firehorse child -- all four pillars, the month layer, the day element, the personality that is actually showing up -- a personal reading is the place to start. The year picture tells you the weather. The full chart tells you who you are actually raising.
+
+Book a reading at [/readings](/readings). Come in with your questions. Let's look at what you are working with.

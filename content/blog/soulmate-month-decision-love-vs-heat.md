@@ -13,7 +13,6 @@ seo:
     title: "The Soulmate Month Decision: How to Tell Love From Heat"
     description: "The Mahjong Mirror shows you how to tell a soulmate moment from a hot-headed mistake in the most passionate month of 2026."
     image: "https://mahjongtarot.com/images/blog/soulmate-month-decision-love-vs-heat.webp"
-    siteName: "The Mahjong Mirror"
 jsonLd:
   headline: "The Soulmate Month Decision: How to Tell Love From Heat"
   datePublished: "2026-07-01"
@@ -25,6 +24,9 @@ nav:
   prev:
     slug: "soulmate-month-wood-sheep-sign-by-sign-forecast"
     label: "The Soulmate Month Is Coming"
+  next:
+    slug: "feel-good-friday-walk-into-soulmate-month-with-a-plan"
+    label: "Feel Good Friday: Walk In With a Plan"
 faqs:
   - q: "What is the Mahjong Mirror Second Angle in relationships?"
     a: "The Mahjong Mirror's Second Angle is Know Thyself. Applied to relationships, it asks one question before any big conversation or decision: who are you right now in this relationship? Not who you want to be, but who you actually are. This honest self-assessment is the foundation for any clear love decision."
@@ -37,9 +39,9 @@ faqs:
   - q: "Is the Mahjong Mirror only for romantic decisions?"
     a: "No. The Mahjong Mirror is a decision-making framework applicable to any major life decision: career, finances, relationships, transitions. The four angles work the same way regardless of the topic. In the Wood Sheep month, romantic decisions are the most likely surface where the framework is needed, but the method transfers anywhere."
 cta:
-  overline: "Make the Call With Clarity, Not Heat"
-  heading: "Book a Personal Reading"
-  body: "The Mahjong Mirror: Your Path to Wiser Decisions walks you through the full four-angle framework, with practical exercises for exactly the kind of decision the Soulmate Month is going to put in front of you. And if you want to see what the cards are specifically saying about your situation before the month opens, I have readings available now."
+  overline: "Go Deeper Into This"
+  heading: "Book a Reading with Bill"
+  body: "The best love window of the year rewards the people who decide with clarity, not with heat. The Wood Sheep month is generous. It wants to give you something real. Give it a self that knows what it's asking for."
   primary: "/readings#book"
   primaryLabel: "Book a Reading"
   secondary: "/the-mahjong-mirror"
@@ -129,3 +131,7 @@ That's your compass for the month. When the heat rises, and it will, go back to 
 The best love window of the year rewards the people who decide with clarity, not with heat. The Wood Sheep month is generous. It wants to give you something real.
 
 Give it a self that knows what it's asking for.
+
+*The Mahjong Mirror: Your Path to Wiser Decisions* walks you through the full four-angle framework, with practical exercises for exactly the kind of decision the Soulmate Month is going to put in front of you. [Pick it up here](/the-mahjong-mirror).
+
+And if you want to see what the cards are specifically saying about your situation before the month opens, I have readings available now. [Book yours at mahjong-tarot.com/readings](/readings).

@@ -13,7 +13,6 @@ seo:
     title: "You Don't Parent a Firehorse. You Parent Your Child."
     description: "Monday was the warning. Wednesday is the answer: read all four pillars, not just the birth year, and customize your approach like a great coach reads each player differently."
     image: "https://mahjongtarot.com/images/blog/you-dont-parent-a-firehorse-you-parent-your-child.webp"
-    siteName: "The Mahjong Mirror"
 jsonLd:
   headline: "You Don't Parent a Firehorse. You Parent Your Child."
   datePublished: "2026-07-08"
@@ -25,6 +24,9 @@ nav:
   prev:
     slug: "wood-sheep-month-has-begun-soulmate-month-july-7"
     label: "The Month of the Wood Sheep Has Begun"
+  next:
+    slug: "feel-good-friday-channel-the-fire-dont-fight-it"
+    label: "Feel Good Friday: Channel the Fire"
 faqs:
   - q: "What are the four pillars in Chinese astrology?"
     a: "The four pillars (Ba Zi) are the year, month, day, and hour of birth. Each pillar contributes a different layer to a person's personality and life energy. Most people only consider the birth year (their animal sign), but the month and day pillars add important nuance. A baby born in 2026 is a firehorse by year, but may also carry a Wood, Water, Earth, or Metal energy from their birth month and day."
@@ -37,8 +39,8 @@ faqs:
   - q: "How do the months of 2026 affect a firehorse baby?"
     a: "Each month has its own animal and element energy that layers over the year's Fire Horse energy. The Wood Sheep month (July 7 to August 7) is the year's soulmate month -- slightly calmer fire but more emotionally demanding. The Dog month (approximately October 8 to November 6) is a complementary, more relaxed energy that can help a firehorse child slow down."
 cta:
-  overline: "Read Your Child's Full Chart"
-  heading: "Book a Personal Reading"
+  overline: "Go Deeper Into This"
+  heading: "Book a Reading with Bill"
   body: "If you want to go deeper on the full four pillars for your firehorse child -- the year, the month, the day element, and what all of it means for their personality and development -- that is exactly the kind of reading I do. Come in with what you know. Let's look at the full picture together."
   primary: "/readings#book"
   primaryLabel: "Book a Reading"
@@ -50,9 +52,9 @@ Two boys. Same nanny. Same house. Completely different.
 
 I spent ten years doing nanny work, and I raised two boys under the same roof. I'm the Firepig. I've been reading Chinese astrology for over 35 years. And the decade I spent with those two boys taught me something that 35 years of chart reading confirms every time: there is no such thing as parenting a type. There is only parenting a person.
 
-Monday's post was the honest warning: the firehorse child is most likely to bring you the greatest joy and the greatest aggravation of any of the 60 signs. That is true. But it is the beginning of the conversation, not the whole thing. Because the most important thing I can tell any parent right now is this: you do not parent a firehorse. You parent your child.
+Monday's post was the honest warning: [the firehorse child is most likely to bring you the greatest joy and the greatest aggravation](/blog/posts/firehorse-baby-greatest-joy-greatest-aggravation) of any of the 60 signs. That is true. But it is the beginning of the conversation, not the whole thing. Because the most important thing I can tell any parent right now is this: you do not parent a firehorse. You parent your child.
 
-<h2>Two Boys, Two Completely Different Stories</h2>
+## Two Boys, Two Completely Different Stories
 
 The first boy I raised was coddled. Every afternoon, a buggy ride before his nap. The moment he cried, someone was there -- holding him, soothing him, making sure he never sat in his discomfort for long. It worked for him. He settled. He found his rhythm. The routine became the container for his energy, and he thrived in it.
 
@@ -62,7 +64,7 @@ Same house. Same nanny. Opposite methods. Both boys did fine.
 
 What would have happened if I had applied the first boy's approach to the second, or the second's to the first? I do not know exactly. But I know this: it would not have worked as well. Because children are not types. They are individuals. And the job of anyone caring for a child is to figure out which child they actually have, not which child they assumed they would get.
 
-<h2>The Four Pillars Are Why One Size Never Fits</h2>
+## The Four Pillars Are Why One Size Never Fits
 
 In Chinese astrology, the year of birth is one pillar. One quarter of the picture. There are four: year, month, day, and more. Each one layers on the last.
 
@@ -72,11 +74,9 @@ Each combination produces a different child. Not a radically different child, bu
 
 This is why the work matters. Not as an intellectual exercise. As a practical tool for understanding the child in front of you.
 
-<blockquote>
-Knowing the astrological makeup helps you read when the baby is in their comfort zone and when they are not.
-</blockquote>
+<div class="pullQuote"><p>Knowing the astrological makeup helps you read when the baby is in their comfort zone and when they are not.</p></div>
 
-<h2>The Mahjong Mirror Discipline: Look Closer and Customize</h2>
+## The Mahjong Mirror Discipline: Look Closer and Customize
 
 The Mahjong Mirror is built on the same principle. The framework is not a formula. It is a set of lenses that help you look more clearly at what is actually in front of you -- the specific situation, the specific person, the specific moment -- so that your response is appropriate to the reality rather than to your assumptions about it.
 
@@ -86,7 +86,7 @@ You customize. Not once, early on, and then coast. Continuously, as the child gr
 
 Good parenting works like good coaching. A good coach does not learn one technique and apply it to every player on the team. A good coach understands each player's wiring -- their strengths, their weak spots, where they go when they are under pressure, what actually motivates them -- and builds a relationship and an approach around that specific person. The technique is in service of understanding. Not the other way around.
 
-<h2>The Detail That Should Make You Pay Attention</h2>
+## The Detail That Should Make You Pay Attention
 
 Here is a practical signal the source material points to, and I want to make sure you hear it clearly.
 
@@ -94,7 +94,7 @@ If a firehorse baby is lying quietly and not very active, do not just count your
 
 That is the value of knowing your child's astrological makeup. It gives you a baseline. And when behavior departs from the baseline, you notice -- not because you are anxious, but because you are paying attention.
 
-<h2>What This Means for the Months Ahead</h2>
+## What This Means for the Months Ahead
 
 The months ahead shift the weather around the firehorse baby, and knowing what is coming helps you prepare.
 
@@ -104,10 +104,16 @@ Later in the year, the Dog month (roughly October 8 to November 6) is a more nat
 
 The point is not to plan around the months as fixed rules. The point is to know what is coming so you are not surprised. The firehorse baby is already demanding a lot from you. The months shifting the energy up or down are not disasters or windfalls. They are information. And parents who have the information are always better equipped than parents who are guessing.
 
-<h2>You Are the Expert on Your Child</h2>
+## You Are the Expert on Your Child
 
 Chinese astrology gives you a map. It does not drive the car. You do.
 
 The four pillars, the monthly energy, the feng shui of the home -- these are all tools for reading the situation more clearly. They do not replace your direct knowledge of your child, the specific things that soothe them, the specific triggers that set them off, the specific look on their face when they are about to lose it versus when they are just warming up.
 
 No framework substitutes for that. But a good framework helps you organize what you already know and see what you might have missed.
+
+If you want to go deeper on the full four pillars for your firehorse child -- the year, the month, the day element, and what all of it means for their personality and development -- that is exactly the kind of reading I do. Come in with what you know. Let's look at the full picture together.
+
+Get the book first: [*The Mahjong Mirror: Your Path to Wiser Decisions*](/the-mahjong-mirror). The framework that applies to every decision applies here too. You are coaching a child. Start by understanding the player.
+
+Or book a personal reading at [/readings](/readings). We can work through the pillars together.

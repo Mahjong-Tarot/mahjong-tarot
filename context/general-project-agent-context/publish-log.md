@@ -29,3 +29,10 @@
 | 2026-06-22 | The Oldest Answer to the Fire Horse Year Is 2,500 Years Old | oldest-answer-fire-horse-year-wu-wei-tao-te-ching.md | Mahjong and Tarot |
 | 2026-06-24 | Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror | doing-by-not-doing-tao-wu-wei-mahjong-mirror.md | Mahjong and Tarot |
 | 2026-06-26 | Feel Good Friday: Find Your Curl | feel-good-friday-find-your-curl.md | Mahjong and Tarot |
+| 2026-06-29 | The Soulmate Month Is Coming: It's All About Love | soulmate-month-wood-sheep-sign-by-sign-forecast.md | The Mahjong Mirror |
+| 2026-07-01 | The Soulmate Month Decision: How to Tell Love From Heat | soulmate-month-decision-love-vs-heat.md | The Mahjong Mirror |
+| 2026-07-03 | Feel Good Friday: Walk Into the Soulmate Month With a Plan | feel-good-friday-walk-into-soulmate-month-with-a-plan.md | The Mahjong Mirror |
+| 2026-07-06 | The Firehorse Baby: The Greatest Joy and the Greatest Aggravation You Will Ever Parent | firehorse-baby-greatest-joy-greatest-aggravation.md | The Mahjong Mirror |
+| 2026-07-07 | The Month of the Wood Sheep Has Begun | wood-sheep-month-has-begun-soulmate-month-july-7.md | The Mahjong Mirror |
+| 2026-07-08 | You Don't Parent a Firehorse. You Parent Your Child. | you-dont-parent-a-firehorse-you-parent-your-child.md | The Mahjong Mirror |
+| 2026-07-10 | Feel Good Friday: Channel the Fire, Don't Fight It | feel-good-friday-channel-the-fire-dont-fight-it.md | The Mahjong Mirror |

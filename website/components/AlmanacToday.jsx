@@ -20,9 +20,12 @@ export default function AlmanacToday({ almanac: almanacProp, href = '/member/das
     let cancelled = false;
     (async () => {
       const today = todayInLA();
-      const a = await fetchAlmanacForDate(today);
+      // Best-effort public widget: on any error just fall back to the empty
+      // render (returns null). No session recovery here — this also runs for
+      // logged-out visitors, who read via the anon policy.
+      const { data } = await fetchAlmanacForDate(today);
       if (cancelled) return;
-      setAlmanac(a);
+      setAlmanac(data);
       setLoaded(true);
     })();
     return () => { cancelled = true; };

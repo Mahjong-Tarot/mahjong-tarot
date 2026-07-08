@@ -20,8 +20,13 @@ export function isValidAlmanacDate(d) {
   return true;
 }
 
+// Returns { data, error }. `data` is the row or null; `error` is set only on a
+// real query failure (network / auth 401), NOT when the date simply has no row.
+// Callers must distinguish the two: a null data with no error means "no such
+// day"; a non-null error means the read failed (e.g. an expired session) and
+// should be recovered, not shown as an empty almanac.
 export async function fetchAlmanacForDate(date) {
-  if (!supabase) return null;
+  if (!supabase) return { data: null, error: null };
   const { data, error } = await supabase
     .from('almanac_days')
     .select('*')
@@ -29,9 +34,9 @@ export async function fetchAlmanacForDate(date) {
     .maybeSingle();
   if (error) {
     console.error('fetchAlmanacForDate', date, error);
-    return null;
+    return { data: null, error };
   }
-  return data;
+  return { data, error: null };
 }
 
 export async function fetchAlmanacSummariesForMonth(yearMonth) {

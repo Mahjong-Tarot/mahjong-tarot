@@ -1,0 +1,72 @@
+[
+ {
+  "TBMeansOpportunityID": 1,
+  "Indicator": "Wealth",
+  "ElementID": 1,
+  "MeansDescription": "According to your chart the best way for you to make money is in the visual or performing arts. The notion of the starving artist has some truth to it. This indicator is UNLUCKY.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMeansOpportunityID": 2,
+  "Indicator": "Wealth",
+  "ElementID": 2,
+  "MeansDescription": "According to your chart the best way for you to make money is in management. This can be a key to many, high paying jobs. This indicator is LUCKY.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMeansOpportunityID": 3,
+  "Indicator": "Wealth",
+  "ElementID": 3,
+  "MeansDescription": "According to your chart the best way for you to make money is in land or other property. This may or may not be way to financial success, so this indicator is NEUTRAL.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMeansOpportunityID": 4,
+  "Indicator": "Wealth",
+  "ElementID": 4,
+  "MeansDescription": "According to your chart the best way for you to make money is buying and selling goods or services. This is usually the best way to accumulate wealth, so this indicator is LUCKY.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMeansOpportunityID": 5,
+  "Indicator": "Wealth",
+  "ElementID": 5,
+  "MeansDescription": "According to your chart the best way for you to make money is in communications. This covers many different careers which may or may not involve high paying jobs. This indicator is, therefore, NEUTRAL.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMeansOpportunityID": 6,
+  "Indicator": "Opportunity",
+  "ElementID": 1,
+  "MeansDescription": "There is a chance you will have some good ideas, which you may or may not be able to translate into financial success. This indicator, therefore, is NEUTRAL.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMeansOpportunityID": 7,
+  "Indicator": "Opportunity",
+  "ElementID": 2,
+  "MeansDescription": "There is a chance you will have an opportunity to change careers. This does not necessarily  signify acquiring riches, however, and should be considered a NEUTRAL indicator.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMeansOpportunityID": 8,
+  "Indicator": "Opportunity",
+  "ElementID": 3,
+  "MeansDescription": "There is a chance you will have a good opportunity to move to a new area. This does not necessarily signify acquiring riches, however, and should be considered a NEUTRAL indicator.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMeansOpportunityID": 9,
+  "Indicator": "Opportunity",
+  "ElementID": 4,
+  "MeansDescription": "There is a chance you will derive considerable wealth from shrewd investments. If acted upon this signifies acquiring riches and should be considered a LUCKY indicator.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMeansOpportunityID": 10,
+  "Indicator": "Opportunity",
+  "ElementID": 5,
+  "MeansDescription": "There is a chance you will have a good travel opportunity or benefit from your education. This does not signify acquiring riches, however, and should be considered a NEUTRAL indicator.",
+  "LuckValueID": 2
+ }
+]

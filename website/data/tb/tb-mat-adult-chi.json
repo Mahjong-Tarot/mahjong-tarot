@@ -1,0 +1,306 @@
+[
+ {
+  "TBMatAdultChiID": 1,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 0,
+  "MatAdultDescription": "Well, your chi level at Maturation is way below normal. So this is an unlucky indicator, suggesting you might not have the energy and spunk to really tackle life or make the best use of your opportunities. It's not the end of the world, but it does mean you'll have to find the fire inside and motivate yourself. This is an important period to set yourself up for a bright future. Don't just sit back on your haunches.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 2,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 1,
+  "MatAdultDescription": "Well, your chi level at Maturation is below normal. So this is an unlucky indicator, suggesting you might not have the energy and spunk to really tackle life or make the best use of your opportunities. It's not the end of the world, but it does mean you'll have to find the fire inside and motivate yourself. This is an important period to set yourself up for a bright future. Don't just sit back on your haunches.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 3,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 2,
+  "MatAdultDescription": "Well, your chi level at Maturation is low normal. So this is a neutral indicator. You don't have the energy of a kid but you're also not an old slug quite yet. You might have to be more proactive than others to get what you want, but your drive and focus isn't totally lacking, either.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 4,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 3,
+  "MatAdultDescription": "Your chi level at Maturation is slightly above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 5,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 4,
+  "MatAdultDescription": "Your chi level at Maturation is significantly above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 6,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 5,
+  "MatAdultDescription": "Your chi level at Maturation is significantly above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 7,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 6,
+  "MatAdultDescription": "Your chi level at Maturation is significantly above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 8,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 7,
+  "MatAdultDescription": "Well, your chi level at Maturation is far above average. So this is a neutral indicator. You have a lot of excess energy that - well - might work against you. Careful not to burn out or become scattered when trying to get what you want. Easy does it. Find the balance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 9,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 8,
+  "MatAdultDescription": "Well, your chi level at Maturation is far above average. So this is a neutral indicator. You have a lot of excess energy that - well - might work against you. Careful not to burn out or become scattered when trying to get what you want. Easy does it. Find the balance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 10,
+  "HasHour": 1,
+  "Period": "Maturation",
+  "ChiRating": 9,
+  "MatAdultDescription": "Well, your chi level at Maturation is far above average. So this is a neutral indicator. You have a lot of excess energy that - well - might work against you. Careful not to burn out or become scattered when trying to get what you want. Easy does it. Find the balance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 11,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 0,
+  "MatAdultDescription": "Well, your chi level at Maturation is below normal. So this is an unlucky indicator, suggesting you might not have the energy and spunk to really tackle life or make the best use of your opportunities. It's not the end of the world, but it does mean you'll have to find the fire inside and motivate yourself. This is an important period to set yourself up for a bright future. Don't just sit back on your haunches.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 12,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 1,
+  "MatAdultDescription": "Well, your chi level at Maturation is below normal. So this is an unlucky indicator, suggesting you might not have the energy and spunk to really tackle life or make the best use of your opportunities. It's not the end of the world, but it does mean you'll have to find the fire inside and motivate yourself. This is an important period to set yourself up for a bright future. Don't just sit back on your haunches.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 13,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 2,
+  "MatAdultDescription": "Well, your chi level at Maturation is above average. So this is a neutral indicator. You don't have the energy of a kid but you're also not an old slug quite yet. You might have to be more proactive than others to get what you want, but your drive and focus isn't totally lacking, either.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 14,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 3,
+  "MatAdultDescription": "Your chi level at Maturation is above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 15,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 4,
+  "MatAdultDescription": "Your chi level at Maturation is above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 16,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 5,
+  "MatAdultDescription": "Your chi level at Maturation is significantly above average. This indicator is lucky - hooray! Since chi = life force and energy, you should have all the spunk you need to carry out plans, accomplish goals, and go after what you want. Grab the bull by the horns and ride, partner.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 17,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 6,
+  "MatAdultDescription": "Well, your chi level at Maturation is far above average. So this is a neutral indicator. You have a lot of excess energy that - well - might work against you. Careful not to burn out or become scattered when trying to get what you want. Easy does it. Find the balance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 18,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 7,
+  "MatAdultDescription": "Well, your chi level at Maturation is far above average. So this is a neutral indicator. You have a lot of excess energy that - well - might work against you. Careful not to burn out or become scattered when trying to get what you want. Easy does it. Find the balance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 19,
+  "HasHour": 0,
+  "Period": "Maturation",
+  "ChiRating": 8,
+  "MatAdultDescription": "Well, your chi level at Maturation is far above average. So this is a neutral indicator. You have a lot of excess energy that - well - might work against you. Careful not to burn out or become scattered when trying to get what you want. Easy does it. Find the balance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 21,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 0,
+  "MatAdultDescription": "Your chi level at Adulthood is far below normal. This indicator is unlucky, but it doesn't mean things are beyond hope. Since you might not have the energy and stick-to-it-ness of other life stages, now's the time to stay focused on your goals. Don't let life pass you by. Take good care of your health so you can make best use of the energy you do have.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 22,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 1,
+  "MatAdultDescription": "Your chi level at Adulthood is below normal. This indicator is unlucky, but it doesn't mean things are beyond hope. Since you might not have the energy and stick-to-it-ness of other life stages, now's the time to stay focused on your goals. Don't let life pass you by. Take good care of your health so you can make best use of the energy you do have.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 23,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 2,
+  "MatAdultDescription": "Your chi level at Adulthood is low normal. This indicator is neutral. So you're neither a fire ball of energy nor an unmotivated couch potato. Take life into your own hands and don't rely so much on sudden bursts of inpiration to carry you forward. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 24,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 3,
+  "MatAdultDescription": "So your chi level at Adulthood is slightly above average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 25,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 4,
+  "MatAdultDescription": "So your chi level at Adulthood is significantly above average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 26,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 5,
+  "MatAdultDescription": "So your chi level at Adulthood is significantly above average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 27,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 6,
+  "MatAdultDescription": "So your chi level at Adulthood is significantly above average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 28,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 7,
+  "MatAdultDescription": "Your chi level at Adulthood is far above average. This indicator is neutral, since you might have an excess of energy. The problem here could be trying to take on too much and getting scattered. Take life into your own hands, but don't lose focus. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 29,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 8,
+  "MatAdultDescription": "Your chi level at Adulthood is far above average. This indicator is neutral, since you might have an excess of energy. The problem here could be trying to take on too much and getting scattered. Take life into your own hands, but don't lose focus. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 30,
+  "HasHour": 1,
+  "Period": "Adulthood",
+  "ChiRating": 9,
+  "MatAdultDescription": "Your chi level at Adulthood is far above average. This indicator is neutral, since you might have an excess of energy. The problem here could be trying to take on too much and getting scattered. Take life into your own hands, but don't lose focus. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 31,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 0,
+  "MatAdultDescription": "Your chi level at Adulthood is below normal. This indicator is unlucky, but it doesn't mean things are beyond hope. Since you might not have the energy and stick-to-it-ness of other life stages, now's the time to stay focused on your goals. Don't let life pass you by. Take good care of your health so you can make best use of the energy you do have.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 32,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 1,
+  "MatAdultDescription": "Your chi level at Adulthood is below normal. This indicator is unlucky, but it doesn't mean things are beyond hope. Since you might not have the energy and stick-to-it-ness of other life stages, now's the time to stay focused on your goals. Don't let life pass you by. Take good care of your health so you can make best use of the energy you do have.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMatAdultChiID": 33,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 2,
+  "MatAdultDescription": "Your chi level at Adulthood is average. This indicator is neutral. So you're neither a fire ball of energy nor an unmotivated couch potato. Take life into your own hands and don't rely so much on sudden bursts of inpiration to carry you forward. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 34,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 3,
+  "MatAdultDescription": "So your chi level at Adulthood is above average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 35,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 4,
+  "MatAdultDescription": "So your chi level at Adulthood is average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 36,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 5,
+  "MatAdultDescription": "So your chi level at Adulthood is significantly above average. This indicator is lucky. Yep, you have the guts and gusto needed to really make things happen. You're energized, inspired, and always ready to tackle what life throws your way. Excellent!",
+  "LuckValueID": 1
+ },
+ {
+  "TBMatAdultChiID": 37,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 6,
+  "MatAdultDescription": "Your chi level at Adulthood is far above average. This indicator is neutral, since you might have an excess of energy. The problem here could be trying to take on too much and getting scattered. Take life into your own hands, but don't lose focus. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 38,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 7,
+  "MatAdultDescription": "Your chi level at Adulthood is far above average. This indicator is neutral, since you might have an excess of energy. The problem here could be trying to take on too much and getting scattered. Take life into your own hands, but don't lose focus. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMatAdultChiID": 39,
+  "HasHour": 0,
+  "Period": "Adulthood",
+  "ChiRating": 8,
+  "MatAdultDescription": "Your chi level at Adulthood is far above average. This indicator is neutral, since you might have an excess of energy. The problem here could be trying to take on too much and getting scattered. Take life into your own hands, but don't lose focus. Move steadily toward the things you want with a plan.",
+  "LuckValueID": 2
+ }
+]

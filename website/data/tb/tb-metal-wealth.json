@@ -1,0 +1,97 @@
+[
+ {
+  "MetalWealth": 0,
+  "MetalWealthNarrative": "Your indicators have an extremely, below-average rating, and are VERY UNLUCKY. You probably do not have the potential to achieve a comfortable financial position and will have to work very hard in any case.",
+  "LuckValueID": 3
+ },
+ {
+  "MetalWealth": 1,
+  "MetalWealthNarrative": "Your indicators have a far, below-average rating, and are VERY UNLUCKY. You may not have the potential to achieve a comfortable financial position and will have to work very hard in any case.",
+  "LuckValueID": 3
+ },
+ {
+  "MetalWealth": 2,
+  "MetalWealthNarrative": "Your indicators have a substantially, below-average rating, and are UNLUCKY. You may have the potential to achieve a comfortable financial position but will have to work very hard.",
+  "LuckValueID": 3
+ },
+ {
+  "MetalWealth": 3,
+  "MetalWealthNarrative": "Your indicators have a below-average rating, and can be considered UNLUCKY. You may have the potential to achieve a comfortable financial position but will have to work very hard, especially to do better.",
+  "LuckValueID": 3
+ },
+ {
+  "MetalWealth": 4,
+  "MetalWealthNarrative": "Your indicators have a slightly, below-average rating, and can be considered NEUTRAL. You have the potential to achieve a comfortable financial position but will have to work hard, especially to do better.",
+  "LuckValueID": 2
+ },
+ {
+  "MetalWealth": 5,
+  "MetalWealthNarrative": "Your indicators have an average rating, and can be considered NEUTRAL. You have the potential to achieve a comfortable financial position but will have to work hard, especially to do better.",
+  "LuckValueID": 2
+ },
+ {
+  "MetalWealth": 6,
+  "MetalWealthNarrative": "Your indicators have an above average rating, and can be considered LUCKY. You have the potential, with a reasonable effort, to achieve a comfortable financial position and, perhaps, better.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 7,
+  "MetalWealthNarrative": "Your indicators have an above average rating, and can be considered LUCKY. You have the potential, with a reasonable effort, to achieve a comfortable financial position and, perhaps, better.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 8,
+  "MetalWealthNarrative": "Your indicators have a substantially, above average rating, and are LUCKY. You have the potential, with a reasonable effort, to achieve a comfortable financial position and should do even better.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 9,
+  "MetalWealthNarrative": "Your indicators have a substantially, above average rating, and are LUCKY. You have the potential, with a reasonable effort, to achieve a comfortable financial position and should do even better.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 10,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 11,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 12,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 13,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 14,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 15,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 16,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 17,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ },
+ {
+  "MetalWealth": 18,
+  "MetalWealthNarrative": "Your indicators have an extremely, above-average rating, and are VERY LUCKY. You have great potential, not only to achieve a comfortable financial position, but also significant wealth.",
+  "LuckValueID": 1
+ }
+]

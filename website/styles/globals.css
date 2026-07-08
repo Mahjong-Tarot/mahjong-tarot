@@ -37,6 +37,15 @@
   /* Semantic status */
   --success:      #2A8A48;   /* positive ratings, save confirmations */
 
+  /* Auspiciousness verdicts — shared by the almanac and Three Blessings reports.
+     LUCKY green / NEUTRAL paper / UNLUCKY fire. */
+  --luck-lucky-bg:     #e8f5e8;
+  --luck-lucky-ink:    #1e6334;
+  --luck-neutral-bg:   #f8f6f0;
+  --luck-neutral-ink:  var(--ink-3);
+  --luck-unlucky-bg:   #fbe9e7;
+  --luck-unlucky-ink:  var(--fire-700);
+
   /* Legacy token remap — keeps existing modules working */
   --midnight-indigo:   var(--ink);
   --mystic-fire:       var(--fire-500);

@@ -1,0 +1,482 @@
+[
+ {
+  "TBOpportunityID": 1,
+  "YearSignID": 1,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 2,
+  "YearSignID": 1,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 3,
+  "YearSignID": 1,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 4,
+  "YearSignID": 1,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 5,
+  "YearSignID": 1,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 6,
+  "YearSignID": 2,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 7,
+  "YearSignID": 2,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 8,
+  "YearSignID": 2,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 9,
+  "YearSignID": 2,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 10,
+  "YearSignID": 2,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 11,
+  "YearSignID": 3,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 12,
+  "YearSignID": 3,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 13,
+  "YearSignID": 3,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 14,
+  "YearSignID": 3,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 15,
+  "YearSignID": 3,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 16,
+  "YearSignID": 4,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 17,
+  "YearSignID": 4,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 18,
+  "YearSignID": 4,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 19,
+  "YearSignID": 4,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 20,
+  "YearSignID": 4,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 21,
+  "YearSignID": 5,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 22,
+  "YearSignID": 5,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 23,
+  "YearSignID": 5,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 24,
+  "YearSignID": 5,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 25,
+  "YearSignID": 5,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 26,
+  "YearSignID": 6,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 27,
+  "YearSignID": 6,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 28,
+  "YearSignID": 6,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 29,
+  "YearSignID": 6,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 30,
+  "YearSignID": 6,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 31,
+  "YearSignID": 7,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 32,
+  "YearSignID": 7,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 33,
+  "YearSignID": 7,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 34,
+  "YearSignID": 7,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 35,
+  "YearSignID": 7,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 36,
+  "YearSignID": 8,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 37,
+  "YearSignID": 8,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 38,
+  "YearSignID": 8,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 39,
+  "YearSignID": 8,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 40,
+  "YearSignID": 8,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 41,
+  "YearSignID": 9,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 42,
+  "YearSignID": 9,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 43,
+  "YearSignID": 9,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 44,
+  "YearSignID": 9,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 45,
+  "YearSignID": 9,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 46,
+  "YearSignID": 10,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 47,
+  "YearSignID": 10,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 48,
+  "YearSignID": 10,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 49,
+  "YearSignID": 10,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 50,
+  "YearSignID": 10,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 51,
+  "YearSignID": 11,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 52,
+  "YearSignID": 11,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 53,
+  "YearSignID": 11,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 54,
+  "YearSignID": 11,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 55,
+  "YearSignID": 11,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 56,
+  "YearSignID": 12,
+  "Opportunity": "Opportunity",
+  "Stage": "Birth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Birth, which is UNLUCKY. After all there is not a whole lot you can do with a big break while crawling around your baby crib. You can only hope this applies to your parents.",
+  "LuckValueID": 3
+ },
+ {
+  "TBOpportunityID": 57,
+  "YearSignID": 12,
+  "Opportunity": "Opportunity",
+  "Stage": "Youth",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Youth, which is NEUTRAL. It is possible this could denote, for example, acceptance to a prestigious school. Generally, however, you are more likely to derive greater benefit from a big break during the stages of Maturation and Adulthood than your school years.",
+  "LuckValueID": 2
+ },
+ {
+  "TBOpportunityID": 58,
+  "YearSignID": 12,
+  "Opportunity": "Opportunity",
+  "Stage": "Maturation",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Maturation, which is LUCKY.  This could help you transition from Youth to Adulthood ahead of your peers and, also, jump start your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 59,
+  "YearSignID": 12,
+  "Opportunity": "Opportunity",
+  "Stage": "Adulthood",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Adulthood, which is LUCKY. This could, for example, manifest as a career break or successful investment, which results in a solid financial position.",
+  "LuckValueID": 1
+ },
+ {
+  "TBOpportunityID": 60,
+  "YearSignID": 12,
+  "Opportunity": "Opportunity",
+  "Stage": "Retirement",
+  "OpportunityNarrative": "For you the moment of Opportunity is at Retirement, which is UNLUCKY. This, nevertheless, could be a positive development, but the benefits are more likely to accrue to your children than to you.",
+  "LuckValueID": 3
+ }
+]

@@ -1,0 +1,177 @@
+[
+ {
+  "TBLuckFixedElementID": 1,
+  "FixedElementID": 1,
+  "YearElementID": 1,
+  "LuckFixedElementNarrative": "Your birth year element, Wood, is the same as your fixed element. This is NEUTRAL in terms of your luck.  It neither adds to nor detracts from your chi (energy/life force).",
+  "LuckValueID": 2
+ },
+ {
+  "TBLuckFixedElementID": 2,
+  "FixedElementID": 1,
+  "YearElementID": 2,
+  "LuckFixedElementNarrative": "Your birth year element, Fire, has a constructive relationship with your fixed element, Wood. Wood fuels Fire. This is LUCKY as it does not necessarily boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 3,
+  "FixedElementID": 1,
+  "YearElementID": 3,
+  "LuckFixedElementNarrative": "Your birth year element, Earth, has a destructive relationship with your fixed element, Wood. Wood (plants) draw resources out of the Earth. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 4,
+  "FixedElementID": 1,
+  "YearElementID": 4,
+  "LuckFixedElementNarrative": "Your birth year element, Metal, has a destructive relationship with your fixed element, Wood. Metal chops Wood. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 5,
+  "FixedElementID": 1,
+  "YearElementID": 5,
+  "LuckFixedElementNarrative": "Your birth year element, Water, has a constructive relationship with your fixed element, Wood. Water nourishes Wood (plants). This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 6,
+  "FixedElementID": 2,
+  "YearElementID": 1,
+  "LuckFixedElementNarrative": "Your birth year element, Wood, has a constructive relationship with your fixed element, Fire. Wood fuels Fire. This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 7,
+  "FixedElementID": 2,
+  "YearElementID": 2,
+  "LuckFixedElementNarrative": "Your birth year element, Fire, is the same as your fixed element. This is NEUTRAL in terms of your luck.  It neither adds to nor detracts from your chi (energy/life force).",
+  "LuckValueID": 2
+ },
+ {
+  "TBLuckFixedElementID": 8,
+  "FixedElementID": 2,
+  "YearElementID": 3,
+  "LuckFixedElementNarrative": "Your birth year element, Earth, has a constructive relationship with your fixed element, Fire. This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 9,
+  "FixedElementID": 2,
+  "YearElementID": 4,
+  "LuckFixedElementNarrative": "Your birth year element, Metal, has a destructive relationship with your fixed element, Fire. Fire melts Metal. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 10,
+  "FixedElementID": 2,
+  "YearElementID": 5,
+  "LuckFixedElementNarrative": "Your birth year element, Water, has a destructive relationship with your fixed element, Fire. Water puts out Fire. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 11,
+  "FixedElementID": 3,
+  "YearElementID": 1,
+  "LuckFixedElementNarrative": "Your birth year element, Wood, has a destructive relationship with your fixed element, Earth. Earth (plants) draw resources out of the Earth. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 12,
+  "FixedElementID": 3,
+  "YearElementID": 2,
+  "LuckFixedElementNarrative": "Your birth year element, Fire, has a constructive relationship with your fixed element, Earth. This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 13,
+  "FixedElementID": 3,
+  "YearElementID": 3,
+  "LuckFixedElementNarrative": "Your birth year element, Earth, is the same as your fixed element. This is NEUTRAL in terms of your luck.  It neither adds to nor detracts from your chi (energy/life force).",
+  "LuckValueID": 2
+ },
+ {
+  "TBLuckFixedElementID": 14,
+  "FixedElementID": 3,
+  "YearElementID": 4,
+  "LuckFixedElementNarrative": "Your birth year element, Metal, has a constructive relationship with your fixed element, Earth. This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 15,
+  "FixedElementID": 3,
+  "YearElementID": 5,
+  "LuckFixedElementNarrative": "Your birth year element, Water, has a destructive relationship with your fixed element, Earth. Water drains into the Earth. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 16,
+  "FixedElementID": 4,
+  "YearElementID": 1,
+  "LuckFixedElementNarrative": "Your birth year element, Wood has a destructive relationship with your fixed element, Metal. Metal chops Wood. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 17,
+  "FixedElementID": 4,
+  "YearElementID": 2,
+  "LuckFixedElementNarrative": "Your birth year element, Fire, has a destructive relationship with your fixed element, Metal. Fire melts Metal. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 18,
+  "FixedElementID": 4,
+  "YearElementID": 3,
+  "LuckFixedElementNarrative": "Your birth year element, Earth, has a constructive relationship with your fixed element, Metal. Earth produces Metal (ore). This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 19,
+  "FixedElementID": 4,
+  "YearElementID": 4,
+  "LuckFixedElementNarrative": "Your birth year element, Metal, is the same as your fixed element. This is NEUTRAL in terms of your luck.  It neither adds to nor detracts from your chi (energy/life force).",
+  "LuckValueID": 2
+ },
+ {
+  "TBLuckFixedElementID": 20,
+  "FixedElementID": 4,
+  "YearElementID": 5,
+  "LuckFixedElementNarrative": "Your birth year element, Water, has a constructive relationship with your fixed element, Metal. This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 21,
+  "FixedElementID": 5,
+  "YearElementID": 1,
+  "LuckFixedElementNarrative": "Your birth year element, Wood, has a constructive relationship with your fixed element, Water. Water nourishes Wood (plants). This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 22,
+  "FixedElementID": 5,
+  "YearElementID": 2,
+  "LuckFixedElementNarrative": "Your birth year element, Fire, has a destructive relationship with your fixed element, Water. Water puts out Fire. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 23,
+  "FixedElementID": 5,
+  "YearElementID": 3,
+  "LuckFixedElementNarrative": "Your birth year element, Earth, has a destructive relationship with your fixed element, Water. Water drains into the Earth. This is UNLUCKY as it drains your chi (energy/life force), thereby decreasing your chance of success in life.",
+  "LuckValueID": 3
+ },
+ {
+  "TBLuckFixedElementID": 24,
+  "FixedElementID": 5,
+  "YearElementID": 4,
+  "LuckFixedElementNarrative": "Your birth year element, Metal, has a constructive relationship with your fixed element, Water. This is LUCKY as it boosts your chi (energy/life force), thereby increasing your chance of success in life.",
+  "LuckValueID": 1
+ },
+ {
+  "TBLuckFixedElementID": 25,
+  "FixedElementID": 5,
+  "YearElementID": 5,
+  "LuckFixedElementNarrative": "Your birth year element, Water, is the same as your fixed element. This is NEUTRAL in terms of your luck.  It neither adds to nor detracts from your chi (energy/life force).",
+  "LuckValueID": 2
+ }
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "ID": null,
+  "Element": "Wood",
+  "HowToImprove": null,
+  "Color": "Green",
+  "Type": "Shortage",
+  "NOTE:": "With Hour"
+ },
+ {
+  "ID": null,
+  "Element": "Fire",
+  "HowToImprove": null,
+  "Color": "Red",
+  "Type": "Shortage",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Earth",
+  "HowToImprove": null,
+  "Color": "Yellow",
+  "Type": "Shortage",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Metal",
+  "HowToImprove": null,
+  "Color": "White",
+  "Type": "Shortage",
+  "NOTE:": "Without Hour"
+ },
+ {
+  "ID": null,
+  "Element": "Water",
+  "HowToImprove": null,
+  "Color": "Black",
+  "Type": "Shortage",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Wood",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Excess",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Fire",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Excess",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Earth",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Excess",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Metal",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Excess",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Water",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Excess",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Wood",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Satisfactory",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Fire",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Satisfactory",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Earth",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Satisfactory",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Metal",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Satisfactory",
+  "NOTE:": null
+ },
+ {
+  "ID": null,
+  "Element": "Water",
+  "HowToImprove": null,
+  "Color": null,
+  "Type": "Satisfactory",
+  "NOTE:": null
+ }
+]

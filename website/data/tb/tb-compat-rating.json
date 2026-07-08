@@ -1,0 +1,1154 @@
+[
+ {
+  "ComptRatingID": 1,
+  "FirstSignID": 1,
+  "SecondSignID": 1,
+  "Rating": 69,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 2,
+  "FirstSignID": 1,
+  "SecondSignID": 2,
+  "Rating": 62,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 3,
+  "FirstSignID": 1,
+  "SecondSignID": 3,
+  "Rating": 41,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 4,
+  "FirstSignID": 1,
+  "SecondSignID": 4,
+  "Rating": 31,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 5,
+  "FirstSignID": 1,
+  "SecondSignID": 5,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 6,
+  "FirstSignID": 1,
+  "SecondSignID": 6,
+  "Rating": 76,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 7,
+  "FirstSignID": 1,
+  "SecondSignID": 7,
+  "Rating": 11,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 8,
+  "FirstSignID": 1,
+  "SecondSignID": 8,
+  "Rating": 29,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 9,
+  "FirstSignID": 1,
+  "SecondSignID": 9,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 10,
+  "FirstSignID": 1,
+  "SecondSignID": 10,
+  "Rating": 25,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 11,
+  "FirstSignID": 1,
+  "SecondSignID": 11,
+  "Rating": 49,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 12,
+  "FirstSignID": 1,
+  "SecondSignID": 12,
+  "Rating": 78,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 13,
+  "FirstSignID": 2,
+  "SecondSignID": 1,
+  "Rating": 62,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 14,
+  "FirstSignID": 2,
+  "SecondSignID": 2,
+  "Rating": 49,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 15,
+  "FirstSignID": 2,
+  "SecondSignID": 3,
+  "Rating": 7,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 16,
+  "FirstSignID": 2,
+  "SecondSignID": 4,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 17,
+  "FirstSignID": 2,
+  "SecondSignID": 5,
+  "Rating": 24,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 18,
+  "FirstSignID": 2,
+  "SecondSignID": 6,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 19,
+  "FirstSignID": 2,
+  "SecondSignID": 7,
+  "Rating": 16,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 20,
+  "FirstSignID": 2,
+  "SecondSignID": 8,
+  "Rating": 8,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 21,
+  "FirstSignID": 2,
+  "SecondSignID": 9,
+  "Rating": 42,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 22,
+  "FirstSignID": 2,
+  "SecondSignID": 10,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 23,
+  "FirstSignID": 2,
+  "SecondSignID": 11,
+  "Rating": 36,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 24,
+  "FirstSignID": 2,
+  "SecondSignID": 12,
+  "Rating": 47,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 25,
+  "FirstSignID": 3,
+  "SecondSignID": 1,
+  "Rating": 41,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 26,
+  "FirstSignID": 3,
+  "SecondSignID": 2,
+  "Rating": 7,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 27,
+  "FirstSignID": 3,
+  "SecondSignID": 3,
+  "Rating": 36,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 28,
+  "FirstSignID": 3,
+  "SecondSignID": 4,
+  "Rating": 68,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 29,
+  "FirstSignID": 3,
+  "SecondSignID": 5,
+  "Rating": 71,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 30,
+  "FirstSignID": 3,
+  "SecondSignID": 6,
+  "Rating": 17,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 31,
+  "FirstSignID": 3,
+  "SecondSignID": 7,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 32,
+  "FirstSignID": 3,
+  "SecondSignID": 8,
+  "Rating": 34,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 33,
+  "FirstSignID": 3,
+  "SecondSignID": 9,
+  "Rating": 9,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 34,
+  "FirstSignID": 3,
+  "SecondSignID": 10,
+  "Rating": 32,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 35,
+  "FirstSignID": 3,
+  "SecondSignID": 11,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 36,
+  "FirstSignID": 3,
+  "SecondSignID": 12,
+  "Rating": 77,
+  "LuckValueID": 3,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 37,
+  "FirstSignID": 4,
+  "SecondSignID": 1,
+  "Rating": 31,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 38,
+  "FirstSignID": 4,
+  "SecondSignID": 2,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 39,
+  "FirstSignID": 4,
+  "SecondSignID": 3,
+  "Rating": 68,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 40,
+  "FirstSignID": 4,
+  "SecondSignID": 4,
+  "Rating": 89,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 41,
+  "FirstSignID": 4,
+  "SecondSignID": 5,
+  "Rating": 46,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 42,
+  "FirstSignID": 4,
+  "SecondSignID": 6,
+  "Rating": 72,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 43,
+  "FirstSignID": 4,
+  "SecondSignID": 7,
+  "Rating": 38,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 44,
+  "FirstSignID": 4,
+  "SecondSignID": 8,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 45,
+  "FirstSignID": 4,
+  "SecondSignID": 9,
+  "Rating": 17,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 46,
+  "FirstSignID": 4,
+  "SecondSignID": 10,
+  "Rating": 7,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 47,
+  "FirstSignID": 4,
+  "SecondSignID": 11,
+  "Rating": 78,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 48,
+  "FirstSignID": 4,
+  "SecondSignID": 12,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 49,
+  "FirstSignID": 5,
+  "SecondSignID": 1,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 50,
+  "FirstSignID": 5,
+  "SecondSignID": 2,
+  "Rating": 24,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 51,
+  "FirstSignID": 5,
+  "SecondSignID": 3,
+  "Rating": 71,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 52,
+  "FirstSignID": 5,
+  "SecondSignID": 4,
+  "Rating": 46,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 53,
+  "FirstSignID": 5,
+  "SecondSignID": 5,
+  "Rating": 55,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 54,
+  "FirstSignID": 5,
+  "SecondSignID": 6,
+  "Rating": 75,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 55,
+  "FirstSignID": 5,
+  "SecondSignID": 7,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 56,
+  "FirstSignID": 5,
+  "SecondSignID": 8,
+  "Rating": 22,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 57,
+  "FirstSignID": 5,
+  "SecondSignID": 9,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 58,
+  "FirstSignID": 5,
+  "SecondSignID": 10,
+  "Rating": 53,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 59,
+  "FirstSignID": 5,
+  "SecondSignID": 11,
+  "Rating": 9,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 60,
+  "FirstSignID": 5,
+  "SecondSignID": 12,
+  "Rating": 76,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 61,
+  "FirstSignID": 6,
+  "SecondSignID": 1,
+  "Rating": 76,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 62,
+  "FirstSignID": 6,
+  "SecondSignID": 2,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 63,
+  "FirstSignID": 6,
+  "SecondSignID": 3,
+  "Rating": 17,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 64,
+  "FirstSignID": 6,
+  "SecondSignID": 4,
+  "Rating": 72,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 65,
+  "FirstSignID": 6,
+  "SecondSignID": 5,
+  "Rating": 75,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 66,
+  "FirstSignID": 6,
+  "SecondSignID": 6,
+  "Rating": 45,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 67,
+  "FirstSignID": 6,
+  "SecondSignID": 7,
+  "Rating": 35,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 68,
+  "FirstSignID": 6,
+  "SecondSignID": 8,
+  "Rating": 87,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 69,
+  "FirstSignID": 6,
+  "SecondSignID": 9,
+  "Rating": 43,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 70,
+  "FirstSignID": 6,
+  "SecondSignID": 10,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 71,
+  "FirstSignID": 6,
+  "SecondSignID": 11,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 72,
+  "FirstSignID": 6,
+  "SecondSignID": 12,
+  "Rating": 12,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 73,
+  "FirstSignID": 7,
+  "SecondSignID": 1,
+  "Rating": 11,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 74,
+  "FirstSignID": 7,
+  "SecondSignID": 2,
+  "Rating": 13,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 75,
+  "FirstSignID": 7,
+  "SecondSignID": 3,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 76,
+  "FirstSignID": 7,
+  "SecondSignID": 4,
+  "Rating": 38,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 77,
+  "FirstSignID": 7,
+  "SecondSignID": 5,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 78,
+  "FirstSignID": 7,
+  "SecondSignID": 6,
+  "Rating": 33,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 79,
+  "FirstSignID": 7,
+  "SecondSignID": 7,
+  "Rating": 40,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 80,
+  "FirstSignID": 7,
+  "SecondSignID": 8,
+  "Rating": 90,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 81,
+  "FirstSignID": 7,
+  "SecondSignID": 9,
+  "Rating": 33,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 82,
+  "FirstSignID": 7,
+  "SecondSignID": 10,
+  "Rating": 63,
+  "LuckValueID": 3,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 83,
+  "FirstSignID": 7,
+  "SecondSignID": 11,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 84,
+  "FirstSignID": 7,
+  "SecondSignID": 12,
+  "Rating": 48,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 85,
+  "FirstSignID": 8,
+  "SecondSignID": 1,
+  "Rating": 29,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 86,
+  "FirstSignID": 8,
+  "SecondSignID": 2,
+  "Rating": 8,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 87,
+  "FirstSignID": 8,
+  "SecondSignID": 3,
+  "Rating": 34,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 88,
+  "FirstSignID": 8,
+  "SecondSignID": 4,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 89,
+  "FirstSignID": 8,
+  "SecondSignID": 5,
+  "Rating": 22,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 90,
+  "FirstSignID": 8,
+  "SecondSignID": 6,
+  "Rating": 87,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 91,
+  "FirstSignID": 8,
+  "SecondSignID": 7,
+  "Rating": 90,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 92,
+  "FirstSignID": 8,
+  "SecondSignID": 8,
+  "Rating": 74,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 93,
+  "FirstSignID": 8,
+  "SecondSignID": 9,
+  "Rating": 44,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 94,
+  "FirstSignID": 8,
+  "SecondSignID": 10,
+  "Rating": 21,
+  "LuckValueID": 2,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 95,
+  "FirstSignID": 8,
+  "SecondSignID": 11,
+  "Rating": 22,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 96,
+  "FirstSignID": 8,
+  "SecondSignID": 12,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 97,
+  "FirstSignID": 9,
+  "SecondSignID": 1,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 98,
+  "FirstSignID": 9,
+  "SecondSignID": 2,
+  "Rating": 42,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 99,
+  "FirstSignID": 9,
+  "SecondSignID": 3,
+  "Rating": 9,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 100,
+  "FirstSignID": 9,
+  "SecondSignID": 4,
+  "Rating": 17,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 101,
+  "FirstSignID": 9,
+  "SecondSignID": 5,
+  "Rating": 96,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 102,
+  "FirstSignID": 9,
+  "SecondSignID": 6,
+  "Rating": 43,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 103,
+  "FirstSignID": 9,
+  "SecondSignID": 7,
+  "Rating": 33,
+  "LuckValueID": 2,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 104,
+  "FirstSignID": 9,
+  "SecondSignID": 8,
+  "Rating": 44,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 105,
+  "FirstSignID": 9,
+  "SecondSignID": 9,
+  "Rating": 92,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 106,
+  "FirstSignID": 9,
+  "SecondSignID": 10,
+  "Rating": 20,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 107,
+  "FirstSignID": 9,
+  "SecondSignID": 11,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 108,
+  "FirstSignID": 9,
+  "SecondSignID": 12,
+  "Rating": 67,
+  "LuckValueID": 3,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 109,
+  "FirstSignID": 10,
+  "SecondSignID": 1,
+  "Rating": 25,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 110,
+  "FirstSignID": 10,
+  "SecondSignID": 2,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 111,
+  "FirstSignID": 10,
+  "SecondSignID": 3,
+  "Rating": 32,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 112,
+  "FirstSignID": 10,
+  "SecondSignID": 4,
+  "Rating": 7,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 113,
+  "FirstSignID": 10,
+  "SecondSignID": 5,
+  "Rating": 53,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 114,
+  "FirstSignID": 10,
+  "SecondSignID": 6,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 115,
+  "FirstSignID": 10,
+  "SecondSignID": 7,
+  "Rating": 63,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 116,
+  "FirstSignID": 10,
+  "SecondSignID": 8,
+  "Rating": 21,
+  "LuckValueID": 2,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 117,
+  "FirstSignID": 10,
+  "SecondSignID": 9,
+  "Rating": 20,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 118,
+  "FirstSignID": 10,
+  "SecondSignID": 10,
+  "Rating": 14,
+  "LuckValueID": 2,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 119,
+  "FirstSignID": 10,
+  "SecondSignID": 11,
+  "Rating": 38,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 120,
+  "FirstSignID": 10,
+  "SecondSignID": 12,
+  "Rating": 61,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 121,
+  "FirstSignID": 11,
+  "SecondSignID": 1,
+  "Rating": 49,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 122,
+  "FirstSignID": 11,
+  "SecondSignID": 2,
+  "Rating": 36,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 123,
+  "FirstSignID": 11,
+  "SecondSignID": 3,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 124,
+  "FirstSignID": 11,
+  "SecondSignID": 4,
+  "Rating": 78,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 125,
+  "FirstSignID": 11,
+  "SecondSignID": 5,
+  "Rating": 9,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 126,
+  "FirstSignID": 11,
+  "SecondSignID": 6,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 127,
+  "FirstSignID": 11,
+  "SecondSignID": 7,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 128,
+  "FirstSignID": 11,
+  "SecondSignID": 8,
+  "Rating": 22,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 129,
+  "FirstSignID": 11,
+  "SecondSignID": 9,
+  "Rating": 77,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 130,
+  "FirstSignID": 11,
+  "SecondSignID": 10,
+  "Rating": 38,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ },
+ {
+  "ComptRatingID": 131,
+  "FirstSignID": 11,
+  "SecondSignID": 11,
+  "Rating": 86,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 132,
+  "FirstSignID": 11,
+  "SecondSignID": 12,
+  "Rating": 71,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 133,
+  "FirstSignID": 12,
+  "SecondSignID": 1,
+  "Rating": 78,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 134,
+  "FirstSignID": 12,
+  "SecondSignID": 2,
+  "Rating": 47,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 135,
+  "FirstSignID": 12,
+  "SecondSignID": 3,
+  "Rating": 77,
+  "LuckValueID": 3,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 136,
+  "FirstSignID": 12,
+  "SecondSignID": 4,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 137,
+  "FirstSignID": 12,
+  "SecondSignID": 5,
+  "Rating": 76,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 138,
+  "FirstSignID": 12,
+  "SecondSignID": 6,
+  "Rating": 12,
+  "LuckValueID": 3,
+  "LuckHarmony": "Very Incompatible"
+ },
+ {
+  "ComptRatingID": 139,
+  "FirstSignID": 12,
+  "SecondSignID": 7,
+  "Rating": 48,
+  "LuckValueID": 2,
+  "LuckHarmony": "Neutral"
+ },
+ {
+  "ComptRatingID": 140,
+  "FirstSignID": 12,
+  "SecondSignID": 8,
+  "Rating": 95,
+  "LuckValueID": 1,
+  "LuckHarmony": "Very Harmonious"
+ },
+ {
+  "ComptRatingID": 141,
+  "FirstSignID": 12,
+  "SecondSignID": 9,
+  "Rating": 67,
+  "LuckValueID": 3,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 142,
+  "FirstSignID": 12,
+  "SecondSignID": 10,
+  "Rating": 61,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 143,
+  "FirstSignID": 12,
+  "SecondSignID": 11,
+  "Rating": 71,
+  "LuckValueID": 1,
+  "LuckHarmony": "Harmonious"
+ },
+ {
+  "ComptRatingID": 144,
+  "FirstSignID": 12,
+  "SecondSignID": 12,
+  "Rating": 37,
+  "LuckValueID": 3,
+  "LuckHarmony": "Incompatible"
+ }
+]

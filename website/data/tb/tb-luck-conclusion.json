@@ -1,0 +1,596 @@
+[
+ {
+  "TBLuckConclusionID": 1,
+  "NumLucky": 10,
+  "NumNeutral": 0,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "Wow! It doesn't get much better than this. You have ten lucky and no nuetral or unlucky indicators. No question about it - you're incredibly lucky, and probably more so than your friends or family members. Yep. There should be plenty of opportunities that come your way. Success? Oh yeah. It comes easily, whether in business, relationships, or personal endeavors. Make the most of your good fortune - with the right moves, you could set yourself up for a cushy future!",
+  "WealthConclusionNarrative": "You have ten lucky and no neutral or unlucky indicators. Fate has spoken: you are downright lucky in money and have an incredibly good chance of wealth and prosperity. The best part? You may not even have to work that hard for it. Money comes to you easily, and you may even have a knack for managing it well. Since you'll probably hit the jackpot at some point in life, you should be sittin' pretty as an adult and into retirement. Fabulous.",
+  "HealthConclusionNarrative": "Here you have ten lucky and no neutral or unlucky indicators. Need we say more? You're lucky! You have the unbelievably good fortune of good health and a long life. Best of all, your robust health can help  contribute to you achieving  goals and enjoying life. Don't we all wish we had this? Enjoy this blessing; you're probably going to be the envy of everyone in the old folk's home."
+ },
+ {
+  "TBLuckConclusionID": 2,
+  "NumLucky": 9,
+  "NumNeutral": 1,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have nine lucky one neutral, and no unlucky indicators. Your fate? You're incredibly lucky. More so than the vast majority of people. Opportunities. Education. Success. Everything should come easily for you. True, things may come at different times and in different areas of your life, but there's little doubt about it: good fortune is yours. What will you do with your empire?",
+  "WealthConclusionNarrative": "You have nine lucky, one neutral, and no unlucky indicators. Fate has spoken: you are lucky. With luck, comes prosperity. You've got all the ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have nine lucky, one neutral, and no unlucky indicators. Let's do the math: you're lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do? Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect."
+ },
+ {
+  "TBLuckConclusionID": 3,
+  "NumLucky": 9,
+  "NumNeutral": 0,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have nine lucky, no neutral, and one unlucky indicator. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Everything should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with your empire?",
+  "WealthConclusionNarrative": "You have nine lucky, no neutral, and one unlucky indicator. Fate has spoken: you are lucky. With luck, comes prosperity. You've got all the ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have nine lucky, one neutral, and one unlucky indicators. Let's do the math: you're lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 4,
+  "NumLucky": 8,
+  "NumNeutral": 2,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have nine lucky, two neutral, and no unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Everything should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with your empire?",
+  "WealthConclusionNarrative": "You have eight lucky, two neutral, and no unlucky indicators. Fate has spoken: you are lucky! With luck, comes prosperity. You've got all the ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have eight lucky, two neutral, no unlucky indicators. Let's do the math: you're lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect."
+ },
+ {
+  "TBLuckConclusionID": 5,
+  "NumLucky": 8,
+  "NumNeutral": 1,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have eight lucky, one neutral, and one unlucky indicator. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have eight lucky, one neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have eight lucky, one neutral, and one unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 6,
+  "NumLucky": 8,
+  "NumNeutral": 0,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have eight lucky, no neutral, and two unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have eight lucky, no neutral, and two unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have eight lucky, no neutral, and two unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 7,
+  "NumLucky": 7,
+  "NumNeutral": 3,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have seven lucky, three neutral, and zero unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have seven lucky, three neutral, and zero unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have seven lucky, three neutral, and zero unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 8,
+  "NumLucky": 7,
+  "NumNeutral": 2,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have seven lucky, two neutral, and one unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have seven lucky, two neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have seven lucky, two neutral, and one unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 9,
+  "NumLucky": 7,
+  "NumNeutral": 1,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have seven lucky, one neutral, and two unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have seven lucky, one neutral, and two unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have seven lucky, one neutral, and two unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 10,
+  "NumLucky": 7,
+  "NumNeutral": 0,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have seven lucky, no neutral, and three unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have seven lucky, no neutral, and three unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have seven lucky, no neutral, and three unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 11,
+  "NumLucky": 6,
+  "NumNeutral": 4,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have six lucky, four neutral, and no unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have six lucky, four neutral, and no unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have six lucky, four neutral, and no unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 12,
+  "NumLucky": 6,
+  "NumNeutral": 3,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have six lucky, three neutral, and one unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have six lucky, three neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have six lucky, three neutral, and one unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 13,
+  "NumLucky": 6,
+  "NumNeutral": 2,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have six lucky, two neutral, and two unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have six lucky, two neutral, and two unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have six lucky, two neutral, and two unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 14,
+  "NumLucky": 6,
+  "NumNeutral": 1,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have six lucky, two neutral, and three unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have six lucky, two neutral, and three unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have six lucky, two neutral, and three unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 15,
+  "NumLucky": 6,
+  "NumNeutral": 0,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have six lucky, no neutral, and four unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have six lucky, no neutral, and four unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have six lucky, no neutral, and four unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 16,
+  "NumLucky": 5,
+  "NumNeutral": 5,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have five lucky, five neutral, and no unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have five lucky, five neutral, and no unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have five lucky, five neutral, and no unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 17,
+  "NumLucky": 5,
+  "NumNeutral": 4,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have five lucky, four neutral, and one unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have five lucky, four neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have five lucky, four neutral, and one unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 18,
+  "NumLucky": 5,
+  "NumNeutral": 3,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have five lucky, three neutral, and two unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have five lucky, three neutral, and two unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have five lucky, three neutral, and two unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 19,
+  "NumLucky": 5,
+  "NumNeutral": 2,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have five lucky, two neutral, and three unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have five lucky, two neutral, and three unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have five lucky, two neutral, and three unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 20,
+  "NumLucky": 5,
+  "NumNeutral": 1,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have five lucky, one neutral, and four unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have five lucky, one neutral, and four unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have five lucky, one neutral, and four unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 21,
+  "NumLucky": 5,
+  "NumNeutral": 0,
+  "NumUnlucky": 5,
+  "LuckConclusionNarrative": "You have five lucky, no neutral and five unlucky indicators. Your fate is that you are neither lucky nor unlucky. So you're luckier than some, but not quite up there with the happiest people on the planet. Not a bad place to be. You'll have your opportunities and your challenges, probably in equal measure. So yes. You'll have to work to achieve your goals, but at least fate isn't throwing you under the bus. You'll be more lucky than not at certain times and in different areas. But in the end? You'll just get your fair share.",
+  "WealthConclusionNarrative": "You have five lucky, no neutral, and five unlucky indicators. Fate has spoken: you are neither lucky nor unlucky. Huh. So you're not flat broke but can't compare yourself to Mark Zuckerberg, either. Like most people, you're in the middle. Yes, you're going to have to work at it if you want to strike it rich, but at least fate isn't saying you'll be destitute. Mixed results might be more common than consistency. So just work on making conservative investments and gaining a lot of headway when and where you can.",
+  "HealthConclusionNarrative": "You have five lucky, no neutral, and five unlucky indicators. So it's a mixed bag when it comes to your health. You're not fated to a life of accidents and illnesses, but you're not guaranteed great health forever, either. It's pretty much up to you how things go. Take care of that body and you'll probably be sittin' pretty. Waste it away and you're bound to get sick and struggle with low energy. Watch what you eat. Exercise. And treat yourself well. Enough said."
+ },
+ {
+  "TBLuckConclusionID": 22,
+  "NumLucky": 4,
+  "NumNeutral": 6,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have four lucky, six neutral, and no unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have four lucky, six neutral, and no unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have four lucky, six neutral, and no unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 23,
+  "NumLucky": 4,
+  "NumNeutral": 5,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have four lucky, five neutral, and one unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, fortune may come at different times and in different areas of your life, but there's little doubt about it: wealth and abundance are yours. What will you do with it? There's no telling what you can accomplish!",
+  "WealthConclusionNarrative": "You have four lucky, five neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not even have to lift a finger to get it. Sure, maybe you'll have a fulfilling career, but it's more likely you'll fall easily into quick cash and lots of it. What on earth will you spend it all on? That's a good problem to have, ain't it?",
+  "HealthConclusionNarrative": "You have four lucky, five neutral, and one unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. So what will you do?  Climb mountains? Travel? Your body is your servant. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 24,
+  "NumLucky": 4,
+  "NumNeutral": 4,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have four lucky, four neutral, and two unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have four lucky, four neutral, and two unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have four lucky, four neutral, and two unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 25,
+  "NumLucky": 4,
+  "NumNeutral": 3,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have four lucky, three neutral, and three unlucky indicators. Your fate? Well, you're pretty lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have four lucky, three neutral, and three unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have four lucky, three neutral, and three unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 26,
+  "NumLucky": 4,
+  "NumNeutral": 2,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have four lucky, two neutral and four unlucky indicators. Your fate is that you are neither lucky nor unlucky. So you're luckier than some, but not quite up there with the happiest people on the planet. Not a bad place to be. You'll have your opportunities and your challenges, probably in equal measure. So yes. You'll have to work to achieve your goals, but at least fate isn't throwing you under the bus. You'll be more lucky than not at certain times and in different areas. But in the end? You'll just get your fair share.",
+  "WealthConclusionNarrative": "You have four lucky, two neutral, and four unlucky indicators. Fate has spoken: you are neither lucky nor unlucky. Huh. So you're not flat broke but can't compare yourself to Mark Zuckerberg, either. Like most people, you're in the middle. Yes, you're going to have to work at it if you want to strike it rich, but at least fate isn't saying you'll be destitute. Mixed results might be more common than consistency. So just work on making conservative investments and gaining a lot of headway when and where you can.",
+  "HealthConclusionNarrative": "You have four lucky, two neutral, and four unlucky indicators. So it's a mixed bag when it comes to your health. You're not fated to a life of accidents and illnesses, but you're not guaranteed great health forever, either. It's pretty much up to you how things go. Take care of that body and you'll probably be sittin' pretty. Waste it away and you're bound to get sick and struggle with low energy. Watch what you eat. Exercise. And treat yourself well. Enough said."
+ },
+ {
+  "TBLuckConclusionID": 27,
+  "NumLucky": 4,
+  "NumNeutral": 1,
+  "NumUnlucky": 5,
+  "LuckConclusionNarrative": "You have four lucky one neutral and five unlucky indicators. Your fate? Well, you may be slightly unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have four lucky one neutral and five unlucky indicators. So you're slightly unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have four lucky one neutral and five unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 28,
+  "NumLucky": 4,
+  "NumNeutral": 0,
+  "NumUnlucky": 6,
+  "LuckConclusionNarrative": "You have four lucky, no neutral and six unlucky indicators. Your fate? Well, you may be unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have four lucky, no neutral and six unlucky indicators. So you're unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have four lucky, no neutral and six unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 29,
+  "NumLucky": 3,
+  "NumNeutral": 7,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have three lucky seven neutral and no unlucky indicators. Your fate is that you're lucky. Great. With seven neutral indicators, you're still going to have to work to achieve your goals. But wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness. Isn't that the definition of luck anyway?",
+  "WealthConclusionNarrative": "You have three lucky, seven neutral, and no unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have to work your fanny off before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have three lucky, seven neutral, and no unlucky indicators. Let's do the math: you're lucky! No doubt about it here. Health and longevity are yours. Sure, you might not have boundless energy and perfect skin, but you're robust enough to stay active and kickin' - even into your later years. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 30,
+  "NumLucky": 3,
+  "NumNeutral": 6,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have three lucky six neutral and one unlucky indicators. Your fate is that you're lucky. Great. With six neutral and one unlucky indicators, you're still going to have to work to achieve your goals. But wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness. Isn't that the definition of luck anyway?",
+  "WealthConclusionNarrative": "You have three lucky, six neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have to work your fanny off before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have three lucky, six neutral, and one unlucky indicators. Let's do the math: you're lucky! No doubt about it here. Health and longevity are yours. Sure, you might not have boundless energy and perfect skin, but you're robust enough to stay active and kickin' - even into your later years. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 31,
+  "NumLucky": 3,
+  "NumNeutral": 5,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have three lucky five neutral and two unlucky indicators. Your fate is that you're lucky. Great. With five neutral and two unlucky indicators, you're still going to have to work to achieve your goals. But wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness. Isn't that the definition of luck anyway?",
+  "WealthConclusionNarrative": "You have three lucky, five neutral, and two unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have to work your fanny off before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have three lucky, five neutral, and two unlucky indicators. Let's do the math: you're lucky! No doubt about it here. Health and longevity are yours. Sure, you might not have boundless energy and perfect skin, but you're robust enough to stay active and kickin' - even into your later years. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 32,
+  "NumLucky": 3,
+  "NumNeutral": 4,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have three lucky, four neutral and three unlucky indicators. Your fate is that you are neither lucky nor unlucky. So you're luckier than some, but not quite up there with the happiest people on the planet. Not a bad place to be. You'll have your opportunities and your challenges, probably in equal measure. So yes. You'll have to work to achieve your goals, but at least fate isn't throwing you under the bus. You'll be more lucky than not at certain times and in different areas. But in the end? You'll just get your fair share.",
+  "WealthConclusionNarrative": "You have three lucky, four neutral, and three unlucky indicators. Fate has spoken: you are neither lucky nor unlucky. Huh. So you're not flat broke but can't compare yourself to Mark Zuckerberg, either. Like most people, you're in the middle. Yes, you're going to have to work at it if you want to strike it rich, but at least fate isn't saying you'll be destitute. Mixed results might be more common than consistency. So just work on making conservative investments and gaining a lot of headway when and where you can.",
+  "HealthConclusionNarrative": "You have three lucky, four neutral, and three unlucky indicators. So it's a mixed bag when it comes to your health. You're not fated to a life of accidents and illnesses, but you're not guaranteed great health forever, either. It's pretty much up to you how things go. Take care of that body and you'll probably be sittin' pretty. Waste it away and you're bound to get sick and struggle with low energy. Watch what you eat. Exercise. And treat yourself well. Enough said."
+ },
+ {
+  "TBLuckConclusionID": 33,
+  "NumLucky": 3,
+  "NumNeutral": 3,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have three lucky, three neutral, and four unlucky indicators. Your fate? Well, you may be slightly unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have three lucky, three neutra,l and four unlucky indicators. So you're slightly unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have three lucky, three neutral, and four unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 34,
+  "NumLucky": 3,
+  "NumNeutral": 2,
+  "NumUnlucky": 5,
+  "LuckConclusionNarrative": "You have three lucky, two neutral and five unlucky indicators. Your fate? Well, you may be unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have three lucky, two neutral and five unlucky indicators. So you're unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have three lucky, two neutral and five unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 35,
+  "NumLucky": 3,
+  "NumNeutral": 1,
+  "NumUnlucky": 6,
+  "LuckConclusionNarrative": "You have three lucky, one neutral and six unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have three lucky, one neutral and six unlucky indicators. Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have three lucky, one neutral and six unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 36,
+  "NumLucky": 3,
+  "NumNeutral": 0,
+  "NumUnlucky": 7,
+  "LuckConclusionNarrative": "You have three lucky, no neutral and seven unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have three lucky, no neutral and seven unlucky indicators. Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have three lucky, no neutral and seven unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 37,
+  "NumLucky": 2,
+  "NumNeutral": 8,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have two lucky, eight neutral, and no unlucky indicators. Your fate? Well, you're lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have two lucky, eight neutral, and no unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have two lucky, eight neutral, and no unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 38,
+  "NumLucky": 2,
+  "NumNeutral": 7,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have two lucky, seven neutral, and one unlucky indicators. Your fate? Well, you're lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have two lucky, seven neutral, and one unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have two lucky, seven neutral, and one unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 39,
+  "NumLucky": 2,
+  "NumNeutral": 6,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have two lucky, six neutral and two unlucky indicators. Your fate is that you are neither lucky nor unlucky. So you're luckier than some, but not quite up there with the happiest people on the planet. Not a bad place to be. You'll have your opportunities and your challenges, probably in equal measure. So yes. You'll have to work to achieve your goals, but at least fate isn't throwing you under the bus. You'll be more lucky than not at certain times and in different areas. But in the end? You'll just get your fair share.",
+  "WealthConclusionNarrative": "You have two lucky, six neutral, and two unlucky indicators. Fate has spoken: you are neither lucky nor unlucky. Huh. So you're not flat broke but can't compare yourself to Mark Zuckerberg, either. Like most people, you're in the middle. Yes, you're going to have to work at it if you want to strike it rich, but at least fate isn't saying you'll be destitute. Mixed results might be more common than consistency. So just work on making conservative investments and gaining a lot of headway when and where you can.",
+  "HealthConclusionNarrative": "You have two lucky, six neutral, and two unlucky indicators. So it's a mixed bag when it comes to your health. You're not fated to a life of accidents and illnesses, but you're not guaranteed great health forever, either. It's pretty much up to you how things go. Take care of that body and you'll probably be sittin' pretty. Waste it away and you're bound to get sick and struggle with low energy. Watch what you eat. Exercise. And treat yourself well. Enough said."
+ },
+ {
+  "TBLuckConclusionID": 40,
+  "NumLucky": 2,
+  "NumNeutral": 5,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have two lucky, five neutral, and three unlucky indicators. Your fate? Well, you may be slightly unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have two lucky, five neutral, and three unlucky indicators. So you're slightly unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have two lucky, five neutral, and three unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 41,
+  "NumLucky": 2,
+  "NumNeutral": 4,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have two lucky, four neutral and four unlucky indicators. Your fate? Well, you may be unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have two lucky, four neutral and four unlucky indicators. So you're unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have two lucky, four neutral and four unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 42,
+  "NumLucky": 2,
+  "NumNeutral": 3,
+  "NumUnlucky": 5,
+  "LuckConclusionNarrative": "You have two lucky, three neutral and five unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have two lucky, three neutral and five unlucky indicators. Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have two lucky, three neutral and five unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 43,
+  "NumLucky": 2,
+  "NumNeutral": 2,
+  "NumUnlucky": 6,
+  "LuckConclusionNarrative": "You have two lucky, two neutral and six unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have two lucky, two neutral and six unlucky indicators. Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have two lucky, two neutral and six unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 44,
+  "NumLucky": 2,
+  "NumNeutral": 1,
+  "NumUnlucky": 7,
+  "LuckConclusionNarrative": "You have two lucky, one neutral and seven unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have two lucky, one neutral and seven unlucky indicators. Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have two lucky, one neutral and seven unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 45,
+  "NumLucky": 2,
+  "NumNeutral": 0,
+  "NumUnlucky": 8,
+  "LuckConclusionNarrative": "You have two lucky, no neutral and eight unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have two lucky, no neutral and eight unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have two lucky, no neutral and eight unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 46,
+  "NumLucky": 1,
+  "NumNeutral": 9,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have one lucky, nine neutral, and zero unlucky indicators. Your fate? Well, you're lucky. More so than the vast majority of people. Opportunities. Education. Success. Most things should come easily for you. True, you might run into a few challenges along the way, but wealth and abundance can be yours - if you're willing to work for it. With the right moves and a good dose of dedication, you'll have what everyone wants in life: outward success and inner happiness.",
+  "WealthConclusionNarrative": "You have one lucky, nine neutral, and no unlucky indicators. Fate has spoken: you are lucky! What comes with luck? Prosperity, of course. You've got all your ducks in a row to really rake in the dough. And the best part? You may not have to work that hard. Sure, maybe you'll have a few challenges before you strike it rich, but the stars are aligned for your success. Aim high.",
+  "HealthConclusionNarrative": "You have one lucky, nine neutral, and no unlucky indicators. Let's do the math: you're pretty lucky! No doubt about it here. Health and longevity are yours. Not everyone gets this type of blessing, so make the best of it. When you're healthy and strong, there's virtually no limit on what you can do. Yes, you might get the occasional illness or bout with fatigue, but your body is strong. Make sure to treat it with respect and it will last a long time."
+ },
+ {
+  "TBLuckConclusionID": 47,
+  "NumLucky": 1,
+  "NumNeutral": 8,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have one lucky, eight neutral and one unlucky indicators. Your fate is that you are neither lucky nor unlucky. So you're luckier than some, but not quite up there with the happiest people on the planet. Not a bad place to be. You'll have your opportunities and your challenges, probably in equal measure. So yes. You'll have to work to achieve your goals, but at least fate isn't throwing you under the bus. You'll be more lucky than not at certain times and in different areas. But in the end? You'll just get your fair share.",
+  "WealthConclusionNarrative": "You have one lucky, eight neutral, and one unlucky indicators. Fate has spoken: you are neither lucky nor unlucky. Huh. So you're not flat broke but can't compare yourself to Mark Zuckerberg, either. Like most people, you're in the middle. Yes, you're going to have to work at it if you want to strike it rich, but at least fate isn't saying you'll be destitute. Mixed results might be more common than consistency. So just work on making conservative investments and gaining a lot of headway when and where you can.",
+  "HealthConclusionNarrative": "You have one lucky, eight neutral, and one unlucky indicators. So it's a mixed bag when it comes to your health. You're not fated to a life of accidents and illnesses, but you're not guaranteed great health forever, either. It's pretty much up to you how things go. Take care of that body and you'll probably be sittin' pretty. Waste it away and you're bound to get sick and struggle with low energy. Watch what you eat. Exercise. And treat yourself well. Enough said."
+ },
+ {
+  "TBLuckConclusionID": 48,
+  "NumLucky": 1,
+  "NumNeutral": 7,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have one lucky, seven neutral, and two unlucky indicators. Your fate? Well, you may be slightly unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have one lucky, seven neutral, and two unlucky indicators. So you're slightly unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have one lucky, seven neutral, and two unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 49,
+  "NumLucky": 1,
+  "NumNeutral": 6,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have one lucky, six neutral and three unlucky indicators. Your fate? Well, you may be unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have one lucky, six neutral and three unlucky indicators. So you're unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have one lucky, six neutral and three unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 50,
+  "NumLucky": 1,
+  "NumNeutral": 5,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have one lucky, five neutral and four unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have one lucky, five neutral and four unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have one lucky, five neutral and four unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 51,
+  "NumLucky": 1,
+  "NumNeutral": 4,
+  "NumUnlucky": 5,
+  "LuckConclusionNarrative": "You have one lucky, four neutral and five unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have one lucky, four neutral and five unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have one lucky, four neutral and five unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 52,
+  "NumLucky": 1,
+  "NumNeutral": 3,
+  "NumUnlucky": 6,
+  "LuckConclusionNarrative": "You have one lucky, three neutral and six unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have one lucky, three neutral and six unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have one lucky, three neutral and six unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 53,
+  "NumLucky": 1,
+  "NumNeutral": 2,
+  "NumUnlucky": 7,
+  "LuckConclusionNarrative": "You have one lucky, two neutral and seven unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have one lucky, two neutral and seven unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have one lucky, two neutral and seven unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 54,
+  "NumLucky": 1,
+  "NumNeutral": 1,
+  "NumUnlucky": 8,
+  "LuckConclusionNarrative": "You have one lucky, one neutral and eight unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have one lucky, one neutral and eight unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have one lucky, one neutral and eight unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 55,
+  "NumLucky": 1,
+  "NumNeutral": 0,
+  "NumUnlucky": 9,
+  "LuckConclusionNarrative": "You have one lucky, no neutral and nine unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have one lucky, no neutral and nine unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have one lucky, no neutral and nine unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 56,
+  "NumLucky": 0,
+  "NumNeutral": 10,
+  "NumUnlucky": 0,
+  "LuckConclusionNarrative": "You have no lucky, 10 neutral and no unlucky indicators. Your fate is that you are neither lucky nor unlucky. So you're luckier than some, but not quite up there with the happiest people on the planet. Not a bad place to be. You'll have your opportunities and your challenges, probably in equal measure. So yes. You'll have to work to achieve your goals, but at least fate isn't throwing you under the bus. You'll be more lucky than not at certain times and in different areas. But in the end? You'll just get your fair share.",
+  "WealthConclusionNarrative": "You have no lucky, 10 neutral, and no unlucky indicators. Fate has spoken: you are neither lucky nor unlucky. Huh. So you're not flat broke but can't compare yourself to Mark Zuckerberg, either. Like most people, you're in the middle. Yes, you're going to have to work at it if you want to strike it rich, but at least fate isn't saying you'll be destitute. Mixed results might be more common than consistency. So just work on making conservative investments and gaining a lot of headway when and where you can.",
+  "HealthConclusionNarrative": "You have no lucky, 10 neutral, and no unlucky indicators. So it's a mixed bag when it comes to your health. You're not fated to a life of accidents and illnesses, but you're not guaranteed great health forever, either. It's pretty much up to you how things go. Take care of that body and you'll probably be sittin' pretty. Waste it away and you're bound to get sick and struggle with low energy. Watch what you eat. Exercise. And treat yourself well. Enough said."
+ },
+ {
+  "TBLuckConclusionID": 57,
+  "NumLucky": 0,
+  "NumNeutral": 9,
+  "NumUnlucky": 1,
+  "LuckConclusionNarrative": "You have no lucky, nine neutral, and one unlucky indicators. Your fate? Well, you may be slightly unlucky. Bummer, yes, but this isn't the end-all-be-all. Maybe you'll have a few more challenges to face than others. But your resourcefulness, attitude, and work ethic all come into play here. You can beat the odds if you're smart and careful. Highlight those strengths. Work on your weaknesses. Free will always gives you options to do better and make the most of life.",
+  "WealthConclusionNarrative": "You have no lucky, nine neutral, and one unlucky indicators. So you're slightly unlucky. Big deal. There are still four favorable indicators here. That could mean money. So you have the potential to get rich. Yes. But you'll have to work hard. Also, you'll need to guard your resources and be smart. A wrong move could tips the scales in a negative way. Get the idea? Be scrappy, safe, and conservative.",
+  "HealthConclusionNarrative": "You have no lucky, nine neutral, and one unlucky indicators. Ok. So maybe you're not as fit and healthy as the next guy. But a lot of that is within your control. Since there are four, favorable indicators, you can expect some help. Generally, however, you might battle illnesses, allergies or other yucky health stuff. The answer is simple, really. Take excellent care of yourself. Eat right. Exercise. Be good to your body. That's all you can do."
+ },
+ {
+  "TBLuckConclusionID": 58,
+  "NumLucky": 0,
+  "NumNeutral": 8,
+  "NumUnlucky": 2,
+  "LuckConclusionNarrative": "You have no lucky, eight neutral and two unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, eight neutral and two unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, eight neutral and two unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 59,
+  "NumLucky": 0,
+  "NumNeutral": 7,
+  "NumUnlucky": 3,
+  "LuckConclusionNarrative": "You have no lucky, seven neutral and three unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, seven neutral and three unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, seven neutral and three unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 60,
+  "NumLucky": 0,
+  "NumNeutral": 6,
+  "NumUnlucky": 4,
+  "LuckConclusionNarrative": "You have no lucky, six neutral and four unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, six neutral and four unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, six neutral and four unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 61,
+  "NumLucky": 0,
+  "NumNeutral": 5,
+  "NumUnlucky": 5,
+  "LuckConclusionNarrative": "You have no lucky, five neutral and five unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, five neutral and five unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, five neutral and five unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 62,
+  "NumLucky": 0,
+  "NumNeutral": 4,
+  "NumUnlucky": 6,
+  "LuckConclusionNarrative": "You have no lucky, four neutral and six unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, four neutral and six unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, four neutral and six unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 63,
+  "NumLucky": 0,
+  "NumNeutral": 3,
+  "NumUnlucky": 7,
+  "LuckConclusionNarrative": "You have no lucky, three neutral and seven unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, three neutral and seven unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, three neutral and seven unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 64,
+  "NumLucky": 0,
+  "NumNeutral": 2,
+  "NumUnlucky": 8,
+  "LuckConclusionNarrative": "You have no lucky, two neutral and eight unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, two neutral and eight unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, two neutral and eight unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 65,
+  "NumLucky": 0,
+  "NumNeutral": 1,
+  "NumUnlucky": 9,
+  "LuckConclusionNarrative": "You have no lucky, one neutral and nine unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, one neutral and nine unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, one neutral and nine unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ },
+ {
+  "TBLuckConclusionID": 66,
+  "NumLucky": 0,
+  "NumNeutral": 0,
+  "NumUnlucky": 10,
+  "LuckConclusionNarrative": "You have no lucky, no neutral and 10 unlucky indicators. So supposedly Fate is saying you're pretty unlucky. But don't throw in the towel just yet. Sure, you're going to have to work hard - probably more so than others - but free will is also a factor. It's not the hand you're dealt - it's what you do with your cards. Try to make wise decisions and don't expect a life where you're living on the edge. A \"slow and steady wins the race\" motto should be your guide. You can stay ahead of the game and avoid obstacles if you stay on the right path.",
+  "WealthConclusionNarrative": "You have no lucky, no neutral and ten unlucky indicators.  Sadly, it doesn't look like Fate favors you when it comes to money. But cold hard cash isn't the only indication of a successful life. Remember that. Play up your strengths here. Be savvy about where you put your money. Work hard for it and don't squander it away. A little caution can go a long way. You'll have to learn how to save smartly and live frugally - but this isn't a death sentence. Just stay away from yearly trips to Vegas!",
+  "HealthConclusionNarrative": "You have no lucky, no neutral and ten unlucky indicators. Alright. So you might have some hurdles to deal with on the health front. Who doesn't? The good news here is that health is about 90 percent preventative measures. Really, a lot of it's within your control. Keep a consistent exercise routine, even into old age. Try a vegetarian or vegan lifestyle. Laugh a lot. And stay away from dangerous sports or activities where accidents are just waiting to happen. As long as you play it safe, you should be OK."
+ }
+]

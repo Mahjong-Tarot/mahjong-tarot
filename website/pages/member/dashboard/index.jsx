@@ -9,6 +9,7 @@ import ProfileCompletion from '../../../components/ProfileCompletion';
 import { useAuth } from '../../../lib/auth';
 import { supabase } from '../../../lib/supabase';
 import { calculatePillars, tallyElements, dominantElement, elementInteraction } from '../../../lib/bazi';
+import { renderFourPillarsReading } from '../../../lib/fp/render.mjs';
 import { calculatePurpleStar } from '../../../lib/purpleStar';
 import accountStyles from '../../../styles/Account.module.css';
 import styles from '../../../styles/Dashboard.module.css';
@@ -249,12 +250,18 @@ export default function Dashboard() {
         </div>
 
         {/* ── 5. YOUR FOUR PILLARS ──────────────────────────────── */}
-        {userPillars && (
+        {(data?.fourPillars || userPillars) && (
           <div className={styles.chartSection}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Your Four Pillars</h2>
             </div>
-            <BaziChart pillars={userPillars} elements={userElements} dominantElement={userDominant} />
+            {data?.fourPillars ? (
+              // Bill's authored Life Cycle reading, assembled server-side in
+              // /api/dashboard; rendered here from the small reading object.
+              <div dangerouslySetInnerHTML={{ __html: renderFourPillarsReading(data.fourPillars, { compact: true, hideHeading: true }) }} />
+            ) : (
+              <BaziChart pillars={userPillars} elements={userElements} dominantElement={userDominant} />
+            )}
           </div>
         )}
 

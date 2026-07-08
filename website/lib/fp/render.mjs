@@ -189,8 +189,10 @@ function yearSignNarrative(ys) {
 export function renderFourPillarsReading(reading, opts = {}) {
   if (!reading) return '';
   const name = opts.name || null;
+  // compact: omit the long year-sign narrative (for the dashboard summary).
+  // hideHeading: the host section already has its own title.
   return `<div style="font-family:${C.sans}; margin:0 0 28px;">
-    <h2 style="font-family:${C.serif}; font-size:18px; margin:0 0 14px; color:${C.ink};">Four Pillars · Life Cycle</h2>
+    ${opts.hideHeading ? '' : `<h2 style="font-family:${C.serif}; font-size:18px; margin:0 0 14px; color:${C.ink};">Four Pillars · Life Cycle</h2>`}
     ${yearSignCard(reading.yearSign, name)}
     ${chiTimeline(reading.stages)}
     ${elementBalance(reading.elementMix.counts, reading.elementMix.code)}
@@ -198,7 +200,7 @@ export function renderFourPillarsReading(reading, opts = {}) {
     <div style="margin:0 0 4px;">${microLabel('The five stages of your life')}</div>
     ${reading.stages.map(stageCard).join('')}
     ${reading.conclusion?.desc1 ? `<div style="margin:16px 0 22px; padding:13px 15px; background:${C.fill}; border:1px solid ${C.rule}; border-radius:14px;">${microLabel('In conclusion')}<p style="margin:0; font-size:13px; line-height:1.55; color:${C.ink2};">${escapeHtml(reading.conclusion.desc1)}${reading.conclusion.desc2 ? ' ' + escapeHtml(reading.conclusion.desc2) : ''}</p></div>` : ''}
-    ${yearSignNarrative(reading.yearSign)}
+    ${opts.compact ? '' : yearSignNarrative(reading.yearSign)}
   </div>`;
 }
 

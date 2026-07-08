@@ -1,13 +1,30 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import AdminShell from '../../../components/AdminShell';
-import { supabase } from '../../../lib/supabase';
-import { requirePage } from '../../../lib/guards';
+import { requirePage, serverSupabase } from '../../../lib/guards';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
 
 export async function getServerSideProps(ctx) {
-  return requirePage('staff')(ctx);
+  const guard = await requirePage('staff')(ctx);
+  if (!guard.props) return guard; // unauthenticated / wrong role → redirect
+
+  // Load the bookings server-side (RLS-scoped by the request's session) so
+  // the list ships with the HTML — no post-hydration fetch or spinner.
+  const supabase = serverSupabase(ctx);
+  const { data: bookings, error } = await supabase
+    .from('bookings')
+    .select('id, full_name, scheduled_at, duration_minutes, status, question, is_relationship, partner_name, created_at')
+    .order('scheduled_at', { ascending: false, nullsFirst: false })
+    .limit(200);
+
+  return {
+    props: {
+      ...guard.props,
+      bookings: bookings ?? [],
+      bookingsError: error?.message ?? null,
+    },
+  };
 }
 
 const STATUS_LABEL = {
@@ -35,28 +52,10 @@ function friendlyWhen(value) {
   return `${day} at ${time}`;
 }
 
-export default function PrivateReadingsListPage({ profile }) {
-  const [rows, setRows]       = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState('');
-  const [tab, setTab]         = useState('upcoming');
-
-  useEffect(() => {
-    if (!supabase) {
-      setError('Supabase not configured.');
-      setLoading(false);
-      return;
-    }
-    supabase
-      .from('bookings')
-      .select('id, full_name, email, scheduled_at, duration_minutes, status, question, is_relationship, partner_name, created_at')
-      .order('scheduled_at', { ascending: false, nullsFirst: false })
-      .then(({ data, error }) => {
-        if (error) setError(error.message);
-        else setRows(data ?? []);
-        setLoading(false);
-      });
-  }, []);
+export default function PrivateReadingsListPage({ profile, bookings, bookingsError }) {
+  const [tab, setTab] = useState('upcoming');
+  const rows  = bookings ?? [];
+  const error = bookingsError ?? '';
 
   const now = Date.now();
   const { upcoming, past } = useMemo(() => {
@@ -94,9 +93,8 @@ export default function PrivateReadingsListPage({ profile }) {
         <h1 className={adminStyles.pageTitle}>{heading}</h1>
 
         {error && <p className="error-block">{error}</p>}
-        {loading && <p className={adminStyles.muted}>Loading…</p>}
 
-        {!loading && !error && (
+        {!error && (
           <>
             {next ? <NextConsultationCard booking={next} /> : <EmptyNext />}
 

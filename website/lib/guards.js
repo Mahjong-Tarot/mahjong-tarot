@@ -148,3 +148,16 @@ export function requireApi(role) {
     return { ok: true, supabase, user, profile };
   };
 }
+
+/**
+ * Cookie-backed server Supabase client for use inside getServerSideProps,
+ * after a requirePage guard has already validated the session. Lets a page
+ * load its own data server-side (shipping it with the HTML) instead of a
+ * post-hydration client fetch. RLS still applies via the request's cookies.
+ */
+export function serverSupabase(ctx) {
+  return buildSupabase(
+    () => ctx.req.headers.cookie,
+    (name, value) => ctx.res.appendHeader(name, value),
+  );
+}

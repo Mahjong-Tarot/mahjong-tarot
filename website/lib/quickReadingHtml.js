@@ -65,7 +65,66 @@ function renderBaziSection(bazi) {
 
 // ── Zi Wei Dou Shu ──────────────────────────────────────────────────
 
-function renderZiweiSection(ziwei) {
+const LUCK_LABEL = { mostLucky: 'Most Lucky', generallyLucky: 'Generally Lucky', mixed: 'Mixed Luck', generallyUnlucky: 'Generally Unlucky', leastLucky: 'Least Lucky' };
+const LUCK_COLOR = { mostLucky: '#2c8a4a', generallyLucky: '#6a9f5a', mixed: '#b88c4f', generallyUnlucky: '#c2693f', leastLucky: '#c0392b' };
+const ratingColor = (r) => (/Unfav|Unlucky/.test(r) ? '#c0392b' : r === 'Neutral' ? '#b88c4f' : '#2c8a4a');
+
+// Full fate & luck report (Bill's authored Purple Star narratives),
+// rendered with email-safe inline styles.
+function renderZiweiFullReport(full) {
+  if (!full) return '';
+  const h3 = (t) => `<h3 style="font-family: Georgia, 'Times New Roman', serif; font-size:15px; margin:18px 0 4px; color:#1a1a1a;">${t}</h3>`;
+  const para = (t) => `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2a2a2a;">${escapeHtml(t)}</p>`;
+
+  const decadeBlock = (d) => `
+    <div style="margin:10px 0; padding:10px 14px; background:#faf6ef; border-left:3px solid ${ratingColor(d.rating)}; border-radius:4px;">
+      <div style="font-size:12px; color:#1a1a1a;"><strong>Decade ${escapeHtml(d.index)} — ages ${d.ages[0]}–${d.ages[1]} · ${escapeHtml(d.palace)}</strong>
+        <span style="color:${ratingColor(d.rating)}; font-weight:600; margin-left:6px;">${escapeHtml(d.rating)}</span></div>
+      ${d.yun ? para(d.yun) : ''}
+      ${d.major ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2a2a2a;"><em>Major stars:</em> ${escapeHtml(d.major)}</p>` : ''}
+      ${d.period ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2a2a2a;"><em>${d === full.luckiestDecade ? '★ Luckiest decade' : '△ Most challenging decade'}:</em> ${escapeHtml(d.period)}</p>` : ''}
+    </div>`;
+
+  const ageItem = (y) => `<li style="margin:0 0 5px; font-size:12px; line-height:1.5; color:#2a2a2a;"><strong>Age ${y.age}</strong> (${escapeHtml(y.palace)}) — ${escapeHtml(y.text || '')}</li>`;
+  const ageList = (label, arr) => `
+    <div style="margin:10px 0; padding:10px 14px; background:#faf6ef; border-radius:4px;">
+      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#9a8f81; margin-bottom:6px;">${label}</div>
+      <ul style="margin:0; padding-left:18px;">${arr.map(ageItem).join('')}</ul>
+    </div>`;
+  const ny = full.years?.nextYear;
+
+  const palaceBlock = (p) => `
+    <div style="margin:10px 0; padding:10px 14px; border:1px solid #ece6da; border-radius:4px;">
+      <div style="font-size:12px; color:#1a1a1a;"><strong>${escapeHtml(p.label)} Palace</strong>
+        <span style="color:#9a8f81;"> ${escapeHtml(p.branch)}</span>
+        <span style="color:${LUCK_COLOR[p.luck] || '#444'}; font-weight:600; margin-left:6px;">${escapeHtml(LUCK_LABEL[p.luck] || '')}</span></div>
+      ${p.conclusion ? para(p.conclusion) : ''}
+      ${p.extreme ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2a2a2a;"><em>${escapeHtml(p.extreme)}</em></p>` : ''}
+      ${p.fate?.length ? `<ul style="margin:6px 0 0; padding-left:18px;">${p.fate.map((t) => `<li style="margin:0 0 4px; font-size:12px; line-height:1.5; color:#2a2a2a;">${escapeHtml(t)}</li>`).join('')}</ul>` : ''}
+    </div>`;
+
+  return `
+    <p style="margin:14px 0 0; font-size:13px; color:#2a2a2a;">Your luckiest area of life is your <strong>${escapeHtml(full.luckiestPalace)}</strong> palace; your most challenging is <strong>${escapeHtml(full.unluckiestPalace)}</strong>.</p>
+    ${full.genderAssumed ? `<p style="margin:6px 0 0; font-size:11px; color:#9a8f81; font-style:italic;">Gender was not provided — the decade luck cycle assumes male. Set the gender for an exact reading.</p>` : ''}
+    ${h3('Part 1 — The decades of your life')}
+    ${full.decades.map(decadeBlock).join('')}
+    ${full.years ? `
+      ${h3('Part 2 — Your years')}
+      ${ageList('★ Your 10 luckiest ages', full.years.mostLucky)}
+      ${ageList('△ Your 10 most challenging ages', full.years.leastLucky)}
+      ${ny ? `
+        <div style="margin:10px 0; padding:10px 14px; border:1px solid #ece6da; border-radius:4px;">
+          <div style="font-size:12px; color:#1a1a1a;"><strong>The next 12 months — age ${ny.age} (${escapeHtml(ny.palace)})</strong>
+            <span style="color:${ratingColor(ny.rating)}; font-weight:600; margin-left:6px;">${escapeHtml(ny.rating)}</span></div>
+          ${ny.firstMonths ? para(ny.firstMonths) : ''}
+          ${ny.secondMonths ? para(ny.secondMonths) : ''}
+        </div>` : ''}
+    ` : ''}
+    ${h3('Part 3 — The twelve palaces')}
+    ${full.palaces.map(palaceBlock).join('')}`;
+}
+
+function renderZiweiSection(ziwei, ziweiFull) {
   if (!ziwei) {
     return `
       <div style="margin: 0 0 28px;">
@@ -92,6 +151,7 @@ function renderZiweiSection(ziwei) {
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
         ${rows.join('')}
       </table>
+      ${renderZiweiFullReport(ziweiFull)}
     </div>`;
 }
 
@@ -273,7 +333,7 @@ export function buildQuickReadingHtml(reading) {
           <tr>
             <td style="padding:24px 28px 12px;">
               ${reading.bazi           !== undefined ? renderBaziSection(reading.bazi) : ''}
-              ${reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei) : ''}
+              ${reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : ''}
               ${reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : ''}
               ${reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : ''}
               ${reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, partner?.name) : ''}

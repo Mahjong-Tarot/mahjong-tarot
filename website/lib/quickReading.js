@@ -13,6 +13,9 @@ import {
   getZodiacAnimal,
 } from './bazi';
 import { calculatePurpleStar } from './purpleStar';
+import { data as psData } from './ps/data.mjs';
+import { buildChartFromBirth, chineseAge } from './ps/chart.mjs';
+import { scoreChart, buildFullReport } from './ps/engine.mjs';
 import { computeThreeBlessings } from './three-blessings';
 import { computeFireHorseForecast } from './fire-horse-forecast';
 import { computeCompatibility } from './compatibility';
@@ -96,6 +99,28 @@ export function buildQuickReading({ subject, partner, types }) {
           gender: subject.gender,
         })
       : null; // null = requested but no birth time → renderer shows fallback message
+
+    // Full fate & luck report from Bill's authored Purple Star data — the
+    // same engine that powers the member Purple Star reading.
+    out.ziweiFull = null;
+    if (subject.birthTime) {
+      try {
+        const solarDate = subject.birthday.split('-').map(Number).join('-');
+        const chart = buildChartFromBirth({
+          solarDate,
+          hour: parseInt(subject.birthTime.split(':')[0], 10),
+          gender: subject.gender === 'F' ? 'female' : 'male',
+        }, psData);
+        chart.name = (subject.name || 'Your').split(' ')[0];
+        chart.currentAge = chineseAge(solarDate);
+        scoreChart(chart, psData);
+        out.ziweiFull = buildFullReport(chart, psData);
+        out.ziweiFull.genderAssumed = !subject.gender;
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('quick-reading: ziwei full report failed', err);
+      }
+    }
   }
 
   if (types.includes('three_blessings')) {

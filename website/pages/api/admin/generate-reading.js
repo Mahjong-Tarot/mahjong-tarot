@@ -17,6 +17,9 @@ import {
   dominantElement,
 } from '../../../lib/bazi';
 import { buildReadingBrief } from '../../../lib/readingBrief';
+import { buildFourPillarsChart } from '../../../lib/fp/chart.mjs';
+import { buildFourPillarsReading } from '../../../lib/fp/engine.mjs';
+import { content as fpContent } from '../../../lib/fp/content.mjs';
 
 const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5-20250929';
 const MAX_OUTPUT_TOKENS = 8000;
@@ -33,7 +36,7 @@ Length: tight. 600–900 words. No filler.
 
 Structure the reading as:
   1. A two-sentence opening that names what the guest came in asking about.
-  2. "What the chart shows" — the Bazi / Zi Wei reading in plain language.
+  2. "What the chart shows" — the Four Pillars / Zi Wei reading in plain language.
      Pull from the prep brief; ground each statement in something that came up on the call.
   3. "What we explored" — the heart of the conversation. 2–4 short sections with
      <h3> headers. Each section: 1–2 paragraphs, then a single short bullet list
@@ -150,6 +153,30 @@ export default async function handler(req, res) {
     partnerPillars, partnerZodiac, partnerDominant,
   });
 
+  // Bill's authored Four Pillars (Life Cycle) reading. Grounds the chart section
+  // in his real stage-by-stage narrative instead of a generic day-master line.
+  let fourPillarsBrief = null;
+  try {
+    if (birthday) {
+      const fp = buildFourPillarsReading(buildFourPillarsChart({ birthday, birthTime }), fpContent);
+      if (fp) {
+        const stageLines = fp.stages.map(
+          (s) => `- ${s.stage} (${s.element}, ${s.force}): ${[s.chi, s.fate].filter(Boolean).join(' ')}`,
+        );
+        fourPillarsBrief = [
+          `Year sign ${fp.yearSign.combined}, fixed element ${fp.yearSign.fixedElement}. Element mix ${fp.elementMix.code}.`,
+          '',
+          "Life-cycle stages (chi level and ruling force, in Bill's words):",
+          ...stageLines,
+          fp.conclusion?.desc1 ? `\nOverall: ${fp.conclusion.desc1}` : '',
+        ].filter(Boolean).join('\n');
+      }
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('generate-reading: four-pillars failed', err);
+  }
+
   const guestName = (person?.name || booking.full_name || '').trim() || 'the guest';
 
   const userMessage = [
@@ -177,6 +204,9 @@ export default async function handler(req, res) {
     `## Prep brief (chart + opening)`,
     prepBrief || '(no chart computed — birthday missing)',
     '',
+    fourPillarsBrief ? `## Four Pillars (Life Cycle): Bill's authored chart reading` : null,
+    fourPillarsBrief,
+    fourPillarsBrief ? '' : null,
     `## Prep notes (practitioner, pre-call)`,
     (booking.prep_notes || '(none)').trim(),
     '',

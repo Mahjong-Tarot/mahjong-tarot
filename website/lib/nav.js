@@ -8,30 +8,38 @@
 // Add or rename a member destination in ONE place — here.
 
 export const MEMBER_NAV = [
-  { key: 'dashboard',      href: '/member/dashboard',                 label: 'Dashboard',       match: (p) => p === '/member/dashboard' },
-  { key: 'almanac',        href: '/member/dashboard/almanac',         label: 'Almanac',         match: (p) => p.startsWith('/member/dashboard/almanac') },
-  { key: 'horoscope',      href: '/member/dashboard/horoscope',       label: 'Horoscope',       match: (p) => p.startsWith('/member/dashboard/horoscope') },
-  { key: 'readings',       href: '/member/dashboard/readings',        label: 'Readings',        match: (p) => p.startsWith('/member/dashboard/readings') },
-  { key: 'threeBlessings', href: '/member/dashboard/three-blessings', label: 'Three Blessings', match: (p) => p.startsWith('/member/dashboard/three-blessings') },
-  { key: 'compatibility',  href: '/member/dashboard/relationships',   label: 'Compatibility',   match: (p) => p.startsWith('/member/dashboard/relationships') },
-  { key: 'innerCircle',    href: '/member/dashboard/inner-circle',    label: 'Inner Circle',    match: (p) => p.startsWith('/member/dashboard/inner-circle') },
-  { key: 'profile',        href: '/member/profile',                   label: 'Profile',         match: (p) => p.startsWith('/member/profile') },
+  { key: 'dashboard',   href: '/member/dashboard',              label: 'Dashboard',    match: (p) => p === '/member/dashboard' },
+  { key: 'almanac',     href: '/member/dashboard/almanac',      label: 'Almanac',      match: (p) => p.startsWith('/member/dashboard/almanac') },
+  { key: 'horoscope',   href: '/member/dashboard/horoscope',    label: 'Horoscope',    match: (p) => p.startsWith('/member/dashboard/horoscope') },
+  { key: 'readings',    href: '/member/dashboard/readings',     label: 'Readings',     match: (p) => p.startsWith('/member/dashboard/readings') },
+  { key: 'innerCircle', href: '/member/dashboard/inner-circle', label: 'Inner Circle', match: (p) => p.startsWith('/member/dashboard/inner-circle') },
+  { key: 'profile',     href: '/member/profile',                label: 'Profile',      match: (p) => p.startsWith('/member/profile') },
 ];
 
 const byKey = Object.fromEntries(MEMBER_NAV.map((i) => [i.key, i]));
 
-// Purple Star is a specific reading surface under /readings — surfaced
-// as a direct link in the compact top-bar dropdown, but reached via the
-// Readings index card in the sidebar. Not a top-level sidebar item.
-const PURPLE_STAR = {
-  key: 'purpleStar',
-  href: '/member/dashboard/readings/purple-star',
-  label: 'Purple Star',
-  match: (p) => p.startsWith('/member/dashboard/readings/purple-star'),
-};
+// The individual reading surfaces, all under /member/dashboard/readings.
+// Reached via the Readings index cards in the sidebar; surfaced as direct
+// links in the compact top-bar dropdown. Labels here are the canonical
+// customer-facing reading names — keep them in sync with the Readings
+// index cards and the admin Quick Reading flow.
+const readingLink = (key, slug, label) => ({
+  key,
+  href: `/member/dashboard/readings/${slug}`,
+  label,
+  match: (p) => p.startsWith(`/member/dashboard/readings/${slug}`),
+});
+
+export const READING_LINKS = [
+  readingLink('fourPillars',    'four-pillars',    'Four Pillars'),
+  readingLink('purpleStar',     'purple-star',     'Purple Star (Zi Wei Dou Shu)'),
+  readingLink('threeBlessings', 'three-blessings', 'Three Blessings'),
+  readingLink('fireHorse',      'fire-horse',      'Year of the Fire Horse'),
+  readingLink('compatibility',  'compatibility',   'Compatibility Reading'),
+];
 
 // Keys that collapse under the "Readings" dropdown in the compact top-bar.
-const READINGS_GROUP = [byKey.almanac, byKey.horoscope, PURPLE_STAR, byKey.threeBlessings, byKey.compatibility];
+const READINGS_GROUP = [byKey.almanac, byKey.horoscope, ...READING_LINKS];
 
 // Public Nav, signed-in mode. Reading surfaces collapse under a single
 // "Readings" dropdown to save horizontal space; everything resolves back

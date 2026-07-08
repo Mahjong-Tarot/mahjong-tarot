@@ -237,7 +237,7 @@ export default function Dashboard() {
                   {Math.round(yearForecast.rating)}<span>%</span>
                 </p>
                 <p className={styles.periodFav}>Your year favorability</p>
-                <Link href="/year-of-the-fire-horse" className={styles.periodLink}>
+                <Link href="/member/dashboard/readings/fire-horse" className={styles.periodLink}>
                   Full year reading →
                 </Link>
               </>
@@ -254,6 +254,9 @@ export default function Dashboard() {
           <div className={styles.chartSection}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Your Four Pillars</h2>
+              <Link href="/member/dashboard/readings/four-pillars" className={styles.sectionLink}>
+                Full reading →
+              </Link>
             </div>
             {data?.fourPillars ? (
               // Bill's authored Life Cycle reading, assembled server-side in

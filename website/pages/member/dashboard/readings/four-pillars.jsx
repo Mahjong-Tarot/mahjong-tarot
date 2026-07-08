@@ -2,17 +2,17 @@ import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import MemberShell from '../../../components/MemberShell';
-import Footer from '../../../components/Footer';
-import ThreeBlessingsReportView from '../../../components/ThreeBlessingsReportView';
-import { useAuth } from '../../../lib/auth';
-import { supabase } from '../../../lib/supabase';
-import { buildFourPillarsChart } from '../../../lib/fp/chart.mjs';
-import { computeThreeBlessings } from '../../../lib/tb/engine.mjs';
-import { tables } from '../../../lib/tb/data.mjs';
-import account from '../../../styles/Account.module.css';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import { useAuth } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
+import { buildFourPillarsChart } from '../../../../lib/fp/chart.mjs';
+import { buildFourPillarsReading } from '../../../../lib/fp/engine.mjs';
+import { content as fpContent } from '../../../../lib/fp/content.mjs';
+import { renderFourPillarsReading } from '../../../../lib/fp/render.mjs';
+import account from '../../../../styles/Account.module.css';
 
-export default function ThreeBlessingsReport() {
+export default function FourPillarsReading() {
   const router = useRouter();
   const { user, loading } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -38,35 +38,35 @@ export default function ThreeBlessingsReport() {
     return () => { cancelled = true; };
   }, [user]);
 
-  const reading = useMemo(() => {
+  const readingHtml = useMemo(() => {
     if (!profile?.birthday) return null;
     try {
       const chart = buildFourPillarsChart({ birthday: profile.birthday, birthTime: profile.birth_time });
-      return computeThreeBlessings(chart, tables, profile.birthday);
+      const reading = buildFourPillarsReading(chart, fpContent);
+      return renderFourPillarsReading(reading, { hideHeading: true, name: profile.name });
     } catch (_) {
       return null;
     }
-  }, [profile?.birthday, profile?.birth_time]);
+  }, [profile?.birthday, profile?.birth_time, profile?.name]);
 
   if (loading || !user) return null;
 
   return (
     <>
       <Head>
-        <title>Your Three Blessings | Mahjong Tarot</title>
+        <title>Your Four Pillars | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
       <MemberShell>
         <main className={`container ${account.wrap}`}>
           <p className={account.authFootnote} style={{ marginBottom: '0.5rem' }}>
-            <Link href="/member/dashboard">← Dashboard</Link>
+            <Link href="/member/dashboard/readings">← Readings</Link>
           </p>
 
-          <h1 className={account.title}>Your Three Blessings</h1>
+          <h1 className={account.title}>Your Four Pillars</h1>
           <p className={account.lede}>
-            Phúc, Lộc, Thọ. Happiness, Prosperity, Longevity, the Fu Lu Shou. Each blessing is
-            weighed across ten indicators drawn from your Four Pillars: your elements, your
-            animal signs, and the chi of your life stages. Here is how fate has dealt each one.
+            The Four Pillars of Destiny. Your year, month, day, and hour pillars set the
+            elements you were dealt at birth, and the life cycle that unfolds from them.
           </p>
 
           {profileLoaded && !profile?.birthday && (
@@ -77,7 +77,7 @@ export default function ThreeBlessingsReport() {
             </div>
           )}
 
-          <ThreeBlessingsReportView reading={reading} />
+          {readingHtml && <div dangerouslySetInnerHTML={{ __html: readingHtml }} />}
 
           <p className={account.authFootnote} style={{ marginTop: '2.5rem' }}>
             <Link href="/member/dashboard">← Back to dashboard</Link>

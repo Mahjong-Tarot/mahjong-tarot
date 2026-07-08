@@ -134,7 +134,7 @@ export async function getStaticProps({ params }) {
   if (!activity || !isValidAlmanacDate(date)) {
     return { notFound: true };
   }
-  const almanac = await fetchAlmanacForDate(date);
+  const { data: almanac } = await fetchAlmanacForDate(date);
   return {
     props: {
       activity,

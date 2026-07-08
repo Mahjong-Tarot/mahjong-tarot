@@ -15,7 +15,7 @@ export async function getServerSideProps(ctx) {
 // Reading types the astrologer can tick. Order matters — drives the
 // checkbox grid AND the order of sections in the email.
 const READING_OPTIONS = [
-  { id: 'bazi',            label: 'Bazi — Four Pillars', hint: 'Year / Month / Day / Hour pillars + element balance.' },
+  { id: 'bazi',            label: 'Four Pillars',        hint: 'Year / Month / Day / Hour pillars + element balance.' },
   { id: 'ziwei',           label: 'Zi Wei Dou Shu',      hint: 'Purple Star palaces. Needs the birth time.' },
   { id: 'three_blessings', label: 'Three Blessings',     hint: 'Phúc / Lộc / Thọ tile spread.' },
   { id: 'fire_horse',      label: 'Fire Horse 2026 Forecast', hint: 'Year score + sign narrative + best / hardest months.' },

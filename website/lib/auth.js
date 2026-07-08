@@ -93,3 +93,19 @@ export function AuthProvider({ children }) {
 }
 
 export const useAuth = () => useContext(AuthContext);
+
+// Force a one-off token refresh after a data read fails with an auth error
+// (an expired access token surfaces as a 401 / PGRST301). Returns true if a
+// valid session was recovered so the caller can retry, false if the member
+// must sign in again. Kept out of onAuthStateChange so a single failed read
+// can self-heal without a full page reload.
+export async function tryRefreshSession() {
+  if (!supabase) return false;
+  try {
+    const { data, error } = await supabase.auth.refreshSession();
+    return !error && Boolean(data?.session);
+  } catch (err) {
+    console.error('tryRefreshSession failed:', err);
+    return false;
+  }
+}

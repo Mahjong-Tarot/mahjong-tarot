@@ -1,4 +1,7 @@
 import { calculatePillars, elementInteraction, norm, tier, findSignMatch } from '../../lib/bazi';
+import { buildFourPillarsChart } from '../../lib/fp/chart.mjs';
+import { buildFourPillarsReading } from '../../lib/fp/engine.mjs';
+import { content as fpContent } from '../../lib/fp/content.mjs';
 import secrets from '../../data/love-secrets.json';
 
 // Chinese New Year 2026 → start of Fire Horse year
@@ -15,9 +18,22 @@ export default function handler(req, res) {
     let userPillars = null;
     let todayEnergy = null;
     let fireHorseForecast = null;
+    let fourPillars = null;
 
     if (user?.birthday) {
       userPillars = calculatePillars(user.birthday, user.birthTime || null);
+
+      // Bill's authored Four Pillars (Life Cycle) reading. Assembled here so the
+      // 1.8 MB narrative content stays server-side; the small reading object is
+      // sent to the client, which renders it with lib/fp/render.mjs.
+      try {
+        const fpChart = buildFourPillarsChart({ birthday: user.birthday, birthTime: user.birthTime || null });
+        fourPillars = buildFourPillarsReading(fpChart, fpContent);
+      } catch (err) {
+        // Non-fatal: the rest of the dashboard still renders without it.
+        // eslint-disable-next-line no-console
+        console.error('dashboard: four-pillars reading failed', err);
+      }
       const userDayElement = userPillars?.day?.stem?.element;
       const todayDayElement = todayPillars?.day?.stem?.element;
       todayEnergy = elementInteraction(userDayElement, todayDayElement);
@@ -61,6 +77,7 @@ export default function handler(req, res) {
     res.status(200).json({
       today: { date: todayDate, pillars: todayPillars, energy: todayEnergy },
       userPillars,
+      fourPillars,
       fireHorseForecast,
       memberRatings,
     });

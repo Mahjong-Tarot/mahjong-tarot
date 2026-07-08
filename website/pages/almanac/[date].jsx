@@ -76,7 +76,7 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
   const today = todayInLA();
-  const almanac = await fetchAlmanacForDate(date);
+  const { data: almanac } = await fetchAlmanacForDate(date);
   if (!almanac) {
     return { notFound: true, revalidate: 300 };
   }

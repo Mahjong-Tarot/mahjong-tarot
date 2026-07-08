@@ -32,6 +32,24 @@ function findElementStrength(combinedCounts) {
   return row ? { element: strongest, conclusion: row.Conclusion } : null;
 }
 
+// Each zodiac sign carries a fixed element (Snake = Fire, Rat = Water, …),
+// stored on the year-branch. element_luck describes how the two sign
+// elements interact on the Wu Xing cycle (Constructive / Destructive /
+// Neutral). This is the single richest vein of compatibility data and was
+// never surfaced before — it explains *why* a pairing scores the way it does.
+function findElementDynamic(el1, el2) {
+  if (!el1 || !el2) return null;
+  const row = secrets.element_luck.find((r) => r.PrimaryElement === el1 && r.PartnerElement === el2)
+    || secrets.element_luck.find((r) => r.PrimaryElement === el2 && r.PartnerElement === el1);
+  if (!row) return null;
+  return {
+    primary: el1,
+    partner: el2,
+    indicator: row.Indicator, // 'Constructive' | 'Destructive' | 'Neutral'
+    description: row.LuckDescription,
+  };
+}
+
 /**
  * Compute a compatibility report between two people.
  * Both persons need a birthday (YYYY-MM-DD). Birth time is optional.
@@ -61,11 +79,16 @@ export function computeCompatibility(person1, person2) {
   const rating = match?.Rating ?? null;
   const t = tier(rating);
 
+  // Fixed element of each zodiac sign, read off the year-branch.
+  const signEl1 = p1.year?.branch?.element || null;
+  const signEl2 = p2.year?.branch?.element || null;
+
   return {
-    person1: { sign: sign1, pillars: p1, elements: e1, dominantElement: dominantElement(e1) },
-    person2: { sign: sign2, pillars: p2, elements: e2, dominantElement: dominantElement(e2) },
+    person1: { sign: sign1, signElement: signEl1, pillars: p1, elements: e1, dominantElement: dominantElement(e1) },
+    person2: { sign: sign2, signElement: signEl2, pillars: p2, elements: e2, dominantElement: dominantElement(e2) },
     rating,
     tier: t,
+    elementDynamic: findElementDynamic(signEl1, signEl2),
     generalMatchDescription: match?.GeneralMatchDescription || null,
     yinYangDescription:      match?.YinYangDescription || null,
     yin:  match?.Yin ?? null,

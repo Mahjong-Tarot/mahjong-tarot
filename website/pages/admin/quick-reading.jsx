@@ -99,7 +99,7 @@ export default function QuickReadingPage({ profile }) {
     }
     setError('');
     setMessage('');
-    setSending(recipient === 'me' ? 'me' : 'other');
+    setSending(recipient === 'me' || recipient === 'screen' ? recipient : 'other');
 
     let timer;
     const timeout = new Promise((_, reject) => {
@@ -135,7 +135,18 @@ export default function QuickReadingPage({ profile }) {
       clearTimeout(timer);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to send.');
-      setMessage(`Sent to ${data.sentTo}.`);
+      if (recipient === 'screen') {
+        setOpenReading({
+          id: 'fresh',
+          created_at: new Date().toISOString(),
+          person1_name: name || null,
+          person2_name: types.includes('compatibility') ? (partnerName || null) : null,
+          sent_to: null,
+          html: data.html,
+        });
+      } else {
+        setMessage(`Sent to ${data.sentTo}.`);
+      }
       // Force the Past tab to reload next time it's opened.
       setPastLoaded(false);
     } catch (err) {
@@ -196,7 +207,7 @@ export default function QuickReadingPage({ profile }) {
         {tab === 'generate' && (
           <form
             className={styles.form}
-            onSubmit={(e) => { e.preventDefault(); postReading('me'); }}
+            onSubmit={(e) => { e.preventDefault(); postReading('screen'); }}
           >
             <p className={styles.sectionHead}>Subject</p>
 
@@ -346,6 +357,15 @@ export default function QuickReadingPage({ profile }) {
               <button
                 type="submit"
                 className={styles.btnPrimary}
+                disabled={sending !== ''}
+              >
+                {sending === 'screen' ? 'Generating…' : 'Generate reading'}
+              </button>
+
+              <button
+                type="button"
+                className={styles.btnSecondary}
+                onClick={() => postReading('me')}
                 disabled={sending !== ''}
               >
                 {sending === 'me' ? 'Sending…' : 'Email to me'}

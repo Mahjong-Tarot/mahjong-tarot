@@ -1,6 +1,7 @@
-// Generates a multi-section Quick Reading email and persists the row
-// to public.readings so the astrologer can see it in the "Past readings"
-// tab. The astrologer selects which sections to render via `types`.
+// Generates a multi-section Quick Reading (rendered on screen and/or
+// emailed) and persists the row to public.readings so the astrologer can
+// see it in the "Past readings" tab. The astrologer selects which
+// sections to render via `types`.
 //
 // Gated by requireApi('staff'). The insert uses the user-scoped supabase
 // client returned by the guard, so the existing readings RLS policy
@@ -59,17 +60,21 @@ export default async function handler(req, res) {
     }
   }
 
-  // Recipient: 'me' (caller's email) or an explicit email string.
-  let toEmail = user.email;
-  if (recipient && recipient !== 'me') {
-    if (typeof recipient !== 'string' || !EMAIL_RE.test(recipient)) {
-      return res.status(400).json({ error: 'recipient must be "me" or a valid email address.' });
+  // Recipient: 'screen' (render in the portal, no email), 'me' (caller's
+  // email) or an explicit email string.
+  let toEmail = null;
+  if (recipient !== 'screen') {
+    toEmail = user.email;
+    if (recipient && recipient !== 'me') {
+      if (typeof recipient !== 'string' || !EMAIL_RE.test(recipient)) {
+        return res.status(400).json({ error: 'recipient must be "me", "screen", or a valid email address.' });
+      }
+      toEmail = recipient;
     }
-    toEmail = recipient;
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  if (toEmail && !apiKey) {
     return res.status(500).json({ error: 'RESEND_API_KEY is not configured.' });
   }
 
@@ -83,27 +88,31 @@ export default async function handler(req, res) {
     const html = buildQuickReadingHtml(reading);
     const subjectLine = `Quick reading — ${name || 'unnamed subject'}`;
 
-    // Send via Resend
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: FROM_EMAIL,
-        to: [toEmail],
-        subject: subjectLine,
-        html,
-        reply_to: REPLY_TO,
-      }),
-    });
+    // Send via Resend (skipped for on-screen readings)
+    let emailId = null;
+    if (toEmail) {
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: FROM_EMAIL,
+          to: [toEmail],
+          subject: subjectLine,
+          html,
+          reply_to: REPLY_TO,
+        }),
+      });
 
-    const data = await response.json();
-    if (!response.ok) {
-      // eslint-disable-next-line no-console
-      console.error('Resend error (quick-reading):', data);
-      return res.status(response.status).json({ error: data.message || 'Failed to send email.' });
+      const data = await response.json();
+      if (!response.ok) {
+        // eslint-disable-next-line no-console
+        console.error('Resend error (quick-reading):', data);
+        return res.status(response.status).json({ error: data.message || 'Failed to send email.' });
+      }
+      emailId = data.id;
     }
 
     // Persist the reading so it shows up in the "Past readings" tab.
@@ -135,7 +144,7 @@ export default async function handler(req, res) {
       console.error('quick-reading: readings insert failed', insErr);
     }
 
-    return res.status(200).json({ success: true, sentTo: toEmail, id: data.id });
+    return res.status(200).json({ success: true, sentTo: toEmail, id: emailId, html });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('quick-reading handler error:', err);

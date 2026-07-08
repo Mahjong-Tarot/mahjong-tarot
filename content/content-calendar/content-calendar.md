@@ -475,16 +475,16 @@ Publishes: Friday (blog + social)
 
 > Lunar context: we are now inside the **Wood Sheep month (Jul 7 – Aug 7)**, the Soulmate Month previewed the week of Jun 29 and confirmed the week of Jul 6. Two fire signs stacked (Sheep month, Horse year) means passion is running at its highest point of the whole year — and so is the risk that comes with uncontrolled fire. Source brief: `context/source-material/year-of-the-fire-horse/fire-horse-love-and-sex.md` and `context/source-material/year-of-the-fire-horse/fire-horse-extremes-and-danger.md`. This week goes past the sign-by-sign forecast already published and into the sharper question: the same fire that deepens a relationship is the fire that burns one down, and the Mahjong Mirror is how you tell which one you are standing in.
 
-**Topic: 2026-07-13-horse-soulmate-month** — STATUS: WRITTEN
+**Topic: 2026-07-13-horse-soulmate-month** — STATUS: DESIGNED
 Angle: Fire Horse — shock & awe, Myth Buster. The myth: "Soulmate Month" sounds safe, even guaranteed. The truth: it is the single month all year where Bill sees the Peach Blossom (romantic temptation, affairs) turning up in the problem position most often. Same fire that deepens a real relationship also lights up the wandering eye — especially for the Horse, Rat, Ox, Monkey, and Rooster, who are already carrying friction into the month.
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-07-15-mirror-soulmate-month** — STATUS: WRITTEN
+**Topic: 2026-07-15-mirror-soulmate-month** — STATUS: DESIGNED
 Angle: Mahjong Mirror — the answer, Explainer. What the Peach Blossom and the Sword actually mean when they show up in a reading this month, and how the Second Angle (Know Thyself) and Third Angle (The Opposition) tell a soulmate moment apart from a hot-headed mistake before it costs you the relationship.
 Chapter/tile focus: Know Thyself (Second Angle), The Opposition (Third Angle), Peach card, Sword card
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-07-17-feel-good-soulmate-month** — STATUS: WRITTEN
+**Topic: 2026-07-17-feel-good-soulmate-month** — STATUS: DESIGNED
 Angle: Feel Good Friday — How-To. Three concrete moves for the back half of the Soulmate Month: tend the garden on purpose, name the temptation before it names you, and put one real gesture of passion toward the partner you already have.
 Publishes: Friday (blog + social)
 

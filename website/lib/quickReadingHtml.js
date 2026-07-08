@@ -5,6 +5,7 @@
 import { SIGN_LABEL, ELEMENT_LABEL, BAND_FOR, BAND_COLOR } from './fire-horse';
 import { CHART_CSS, renderChartEmbed } from './ps/render.mjs';
 import { renderFourPillarsReading } from './fp/render.mjs';
+import { readingByKey } from './reading-meta';
 
 const TONE_COLORS = {
   great: '#217A43',
@@ -550,11 +551,11 @@ export function buildQuickReadingHtml(reading) {
   // default and enabled by the script below, so email clients (no JS) show
   // every section in sequence while browsers get switchable tabs.
   const sections = [
-    { key: 'fourPillars',    tab: 'Four Pillars',    html: reading.fourPillars    ? renderFourPillarsReading(reading.fourPillars, { name: subjectName }) : null },
-    { key: 'ziwei',          tab: 'Zi Wei',          html: reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : null },
-    { key: 'threeBlessings', tab: 'Three Blessings', html: reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : null },
-    { key: 'fireHorse',      tab: 'Fire Horse',      html: reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : null },
-    { key: 'compatibility',  tab: 'Compatibility',   html: reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, subject.name || null, partner?.name, relationshipCards) : null },
+    { key: 'fourPillars',    tab: readingByKey.bazi.tab,            html: reading.fourPillars    ? renderFourPillarsReading(reading.fourPillars, { name: subjectName }) : null },
+    { key: 'ziwei',          tab: readingByKey.ziwei.tab,           html: reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : null },
+    { key: 'threeBlessings', tab: readingByKey.three_blessings.tab, html: reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : null },
+    { key: 'fireHorse',      tab: readingByKey.fire_horse.tab,      html: reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : null },
+    { key: 'compatibility',  tab: readingByKey.compatibility.tab,   html: reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, subject.name || null, partner?.name, relationshipCards) : null },
   ].filter((s) => s.html !== null);
 
   const tabBar = `<div id="qr-tabs">

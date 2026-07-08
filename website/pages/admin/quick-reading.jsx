@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import AdminShell from '../../components/AdminShell';
 import { requirePage } from '../../lib/guards';
 import { supabase } from '../../lib/supabase';
+import { READINGS } from '../../lib/reading-meta';
 import adminStyles from '../../styles/PortalAdmin.module.css';
 import tableStyles from '../../styles/PortalAdminTable.module.css';
 import styles from '../../styles/PortalQuickReading.module.css';
@@ -13,14 +14,9 @@ export async function getServerSideProps(ctx) {
 }
 
 // Reading types the astrologer can tick. Order matters — drives the
-// checkbox grid AND the order of sections in the email.
-const READING_OPTIONS = [
-  { id: 'bazi',            label: 'Four Pillars',        hint: 'Year / Month / Day / Hour pillars + element balance.' },
-  { id: 'ziwei',           label: 'Zi Wei Dou Shu',      hint: 'Purple Star palaces. Needs the birth time.' },
-  { id: 'three_blessings', label: 'Three Blessings',     hint: 'Phúc / Lộc / Thọ tile spread.' },
-  { id: 'fire_horse',      label: 'Fire Horse 2026 Forecast', hint: 'Year score + sign narrative + best / hardest months.' },
-  { id: 'compatibility',   label: 'Compatibility',       hint: 'Match with a second person. Requires their birthday.' },
-];
+// checkbox grid AND the order of sections in the email. Names and keys
+// come from the canonical reading metadata (lib/reading-meta.js).
+const READING_OPTIONS = READINGS.map(({ key, label, hint }) => ({ id: key, label, hint }));
 
 function readingLabel(id) {
   return READING_OPTIONS.find((r) => r.id === id)?.label || id;

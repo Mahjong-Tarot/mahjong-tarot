@@ -61,14 +61,18 @@ export default function QuickReadingPage({ profile }) {
   const [pastError, setPastError] = useState('');
   const [pastLoaded, setPastLoaded] = useState(false);
   const [openReading, setOpenReading] = useState(null);
+  const [htmlLoading, setHtmlLoading] = useState(false);
 
   useEffect(() => {
     if (tab !== 'past' || pastLoaded || !supabase) return;
     setPastLoading(true);
     setPastError('');
+    // Note: `html` is deliberately excluded — it is the full rendered
+    // reading (tens of KB each) and would bloat the list payload. It is
+    // fetched on demand when a row is opened (see openRow).
     supabase
       .from('readings')
-      .select('id, created_at, person1_name, person1_birthday, person2_name, person2_birthday, types, html, sent_to')
+      .select('id, created_at, person1_name, person1_birthday, person2_name, person2_birthday, types, sent_to')
       .eq('type', 'admin')
       .order('created_at', { ascending: false })
       .limit(200)
@@ -82,6 +86,28 @@ export default function QuickReadingPage({ profile }) {
 
   function toggleType(id) {
     setTypes((prev) => prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]);
+  }
+
+  // Open a saved reading. The list query no longer carries the (large)
+  // html blob, so fetch it on demand for just this row. Fresh screen
+  // readings already hold their html in memory and skip the fetch.
+  async function openRow(r) {
+    setOpenReading(r);
+    if (r.html != null || !supabase) {
+      setHtmlLoading(false);
+      return;
+    }
+    setHtmlLoading(true);
+    const { data, error: e } = await supabase
+      .from('readings')
+      .select('html')
+      .eq('id', r.id)
+      .maybeSingle();
+    setHtmlLoading(false);
+    // Only apply if this row is still the open one (guards fast clicks).
+    setOpenReading((cur) =>
+      cur && cur.id === r.id ? { ...cur, html: e ? '' : (data?.html ?? '') } : cur,
+    );
   }
 
   async function postReading(recipient) {
@@ -436,7 +462,7 @@ export default function QuickReadingPage({ profile }) {
                       <tr
                         key={r.id}
                         className={styles.rowClickable}
-                        onClick={() => setOpenReading(r)}
+                        onClick={() => openRow(r)}
                       >
                         <td className={tableStyles.cellMuted}>{relTime(r.created_at)}</td>
                         <td className={tableStyles.cellPrimary}>
@@ -496,12 +522,16 @@ export default function QuickReadingPage({ profile }) {
                 </button>
               </div>
               <div className={styles.drawerBody}>
-                <iframe
-                  className={styles.drawerFrame}
-                  sandbox=""
-                  srcDoc={openReading.html || '<p style="padding:20px; font-family:sans-serif;">No saved HTML for this reading.</p>'}
-                  title="Saved reading"
-                />
+                {htmlLoading && openReading.html == null ? (
+                  <p className={adminStyles.muted} style={{ padding: 20 }}>Loading…</p>
+                ) : (
+                  <iframe
+                    className={styles.drawerFrame}
+                    sandbox=""
+                    srcDoc={openReading.html || '<p style="padding:20px; font-family:sans-serif;">No saved HTML for this reading.</p>'}
+                    title="Saved reading"
+                  />
+                )}
               </div>
             </div>
           </>

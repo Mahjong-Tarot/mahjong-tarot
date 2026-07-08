@@ -45,7 +45,7 @@ export default function PublicQuickReading({ name, html, error }) {
       <iframe
         srcDoc={html}
         title={`Reading${name ? ` for ${name}` : ''}`}
-        sandbox=""
+        sandbox="allow-scripts"
         style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', border: 0, background: '#f7f3ec' }}
       />
     </>

@@ -394,7 +394,7 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
 
 export async function getStaticProps() {
   const todayDate = todayInLA();
-  const todayAlmanac = await fetchAlmanacForDate(todayDate);
+  const { data: todayAlmanac } = await fetchAlmanacForDate(todayDate);
   // Only feature posts whose publish date has arrived, so the homepage never
   // links to a date-gated post that 404s. revalidate flips it in on schedule.
   const featuredPosts = publishedPosts().slice(0, 3);

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import MemberShell from '../../../../components/MemberShell';
 import Footer from '../../../../components/Footer';
 import AlmanacView from '../../../../components/AlmanacView';
-import { useAuth } from '../../../../lib/auth';
+import { useAuth, tryRefreshSession } from '../../../../lib/auth';
 import { fetchAlmanacForDate, todayInLA, isValidAlmanacDate, formatHumanDate } from '../../../../lib/almanac';
 
 export default function AlmanacDate() {
@@ -29,14 +29,25 @@ export default function AlmanacDate() {
     }
     let cancelled = false;
     (async () => {
-      const a = await fetchAlmanacForDate(date);
+      let { data, error } = await fetchAlmanacForDate(date);
+      if (error) {
+        // Auth error (e.g. expired token → 401): recover the session and retry
+        // once, then bounce to sign-in rather than showing a false empty state.
+        if (cancelled) return;
+        const recovered = await tryRefreshSession();
+        if (cancelled) return;
+        if (!recovered) { router.replace('/sign-in'); return; }
+        ({ data, error } = await fetchAlmanacForDate(date));
+        if (cancelled) return;
+        if (error) { router.replace('/sign-in'); return; }
+      }
       if (cancelled) return;
-      setAlmanac(a);
+      setAlmanac(data);
       setToday(todayInLA());
       setLoaded(true);
     })();
     return () => { cancelled = true; };
-  }, [user, date]);
+  }, [user, date, router]);
 
   if (loading || !user) return null;
 

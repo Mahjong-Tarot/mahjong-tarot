@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import MemberShell from '../../../../components/MemberShell';
 import Footer from '../../../../components/Footer';
 import AlmanacView from '../../../../components/AlmanacView';
-import { useAuth } from '../../../../lib/auth';
+import { useAuth, tryRefreshSession } from '../../../../lib/auth';
 import { fetchAlmanacForDate, todayInLA } from '../../../../lib/almanac';
 
 export default function AlmanacToday() {
@@ -23,14 +23,26 @@ export default function AlmanacToday() {
     let cancelled = false;
     (async () => {
       const today = todayInLA();
-      const a = await fetchAlmanacForDate(today);
+      let { data, error } = await fetchAlmanacForDate(today);
+      if (error) {
+        // An auth error (e.g. an expired token surfacing as a 401) must not be
+        // shown as "No almanac record". Refresh the session and retry once; if
+        // it can't be recovered, send the member to sign in.
+        if (cancelled) return;
+        const recovered = await tryRefreshSession();
+        if (cancelled) return;
+        if (!recovered) { router.replace('/sign-in'); return; }
+        ({ data, error } = await fetchAlmanacForDate(today));
+        if (cancelled) return;
+        if (error) { router.replace('/sign-in'); return; }
+      }
       if (cancelled) return;
       setDate(today);
-      setAlmanac(a);
+      setAlmanac(data);
       setLoaded(true);
     })();
     return () => { cancelled = true; };
-  }, [user]);
+  }, [user, router]);
 
   if (loading || !user) return null;
 

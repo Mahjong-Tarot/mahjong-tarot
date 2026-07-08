@@ -12,8 +12,28 @@
 // while still printing an hour section; its "12pm" is the classic unknown-time
 // default, i.e. it was really a no-hour reading. bill is the canonical target.)
 
+import { Solar } from 'lunar-typescript';
+
 const ELEMENT_IDS = [1, 2, 3, 4, 5];
 const NAME_BY_ID = { 1: 'Wood', 2: 'Fire', 3: 'Earth', 4: 'Metal', 5: 'Water' };
+
+// The 28 lunar mansions (xiu). lunar-typescript getXiu() returns the Chinese
+// character; the Three Blessings TBConstellation table numbers them 1-28 (see
+// tb-constellation.json). Verified against bill's golden: 奎 -> 26 (Wolf) -> UNLUCKY.
+const XIU_TO_CONSTELLATION_ID = {
+  角: 13, 亢: 12, 氐: 14, 房: 15, 心: 16, 尾: 17, 箕: 18, 斗: 19, 牛: 20, 女: 21,
+  虚: 22, 危: 23, 室: 24, 壁: 25, 奎: 26, 娄: 27, 胃: 28, 昴: 1, 毕: 2, 觜: 3,
+  参: 4, 井: 5, 鬼: 6, 柳: 7, 星: 8, 张: 9, 翼: 10, 轸: 11,
+};
+
+/** ConstellationID (1-28) ruling a birth date, via the day's lunar mansion. */
+export function constellationIdFor(birthday) {
+  if (!birthday) return null;
+  const [y, m, d] = birthday.split('-').map(Number);
+  if (!y || !m || !d) return null;
+  const xiu = Solar.fromYmd(y, m, d).getLunar().getXiu();
+  return XIU_TO_CONSTELLATION_ID[xiu] ?? null;
+}
 
 // Native ("fixed") element of each animal sign (branch id 1-12).
 export const FIXED_ELEMENT_BY_SIGN = {
@@ -34,15 +54,28 @@ export const FIXED_ELEMENT_BY_SIGN = {
 /**
  * Derive Three Blessings inputs from a Four Pillars chart.
  * @param {object} chart  output of buildFourPillarsChart()
+ * @param {string} [birthday]  YYYY-MM-DD, for the day-constellation indicator
  * @returns {object|null}
  */
-export function deriveInputs(chart) {
+export function deriveInputs(chart, birthday) {
   if (!chart) return null;
 
   const countsById = {};
   for (const id of ELEMENT_IDS) countsById[id] = chart.elementCounts[NAME_BY_ID[id]];
 
   const yearSignId = chart.pillars.year.branch;
+
+  // Dominant element = highest count (ties -> lowest element id, Wood..Water order).
+  let dominantElementId = 1;
+  for (const id of ELEMENT_IDS) {
+    if (countsById[id] > countsById[dominantElementId]) dominantElementId = id;
+  }
+
+  // The stage carrying each of the five forces (fp assigns one force per stage).
+  const stageByForce = {};
+  for (const s of chart.stages) stageByForce[s.force] = s;
+  const stageByName = {};
+  for (const s of chart.stages) stageByName[s.stage] = s;
 
   return {
     hasHour: chart.hasHour,
@@ -55,8 +88,12 @@ export function deriveInputs(chart) {
     },
     yearElementId: chart.pillars.year.stemElement,
     fixedElementId: FIXED_ELEMENT_BY_SIGN[yearSignId],
+    dominantElementId,
+    constellationId: constellationIdFor(birthday),
     elementCounts: countsById,           // { 1..5 } numeric, 4-pillar when hasHour
     mix: chart.mix,                      // sorted rating string, e.g. "42222"
     stages: chart.stages,                // [{ stage, elementId, element, count, force }]
+    stageByForce,                        // force -> stage
+    stageByName,                         // stage name -> stage
   };
 }

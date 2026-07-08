@@ -1,165 +1,176 @@
-.triangle {
+/* Three Blessings report — auspiciousness color system shared with the almanac.
+   Verdict tokens (--luck-*) live in globals.css. */
+
+/* ── Verdict chip ─────────────────────────────────────────────────────────── */
+.chip {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.lucky   { background: var(--luck-lucky-bg);   color: var(--luck-lucky-ink); }
+.neutral { background: var(--luck-neutral-bg); color: var(--luck-neutral-ink); border: 1px solid var(--rule); }
+.unlucky { background: var(--luck-unlucky-bg); color: var(--luck-unlucky-ink); }
+
+/* ── Summary row ──────────────────────────────────────────────────────────── */
+.summaryRow {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-lg);
+  gap: var(--space-md);
   margin-top: var(--space-xl);
-  padding: var(--space-lg);
-  background:
-    radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.10), transparent 70%),
-    var(--rule-2);
-  border-radius: 16px;
 }
-
-.tileCol {
+.summaryTile {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 6px;
+  padding: var(--space-lg) var(--space-md);
+  border-radius: 14px;
+  border: 1px solid var(--rule);
 }
+.tone_lucky   { background: linear-gradient(180deg, var(--luck-lucky-bg) 0%, var(--paper) 78%); }
+.tone_neutral { background: var(--luck-neutral-bg); }
+.tone_unlucky { background: linear-gradient(180deg, var(--luck-unlucky-bg) 0%, var(--paper) 78%); }
 
 .ornament {
   font-family: 'Cormorant Garamond', var(--serif);
-  font-size: 2.2rem;
-  color: var(--fire-600);
+  font-size: 2.4rem;
   line-height: 1;
-  margin-bottom: 4px;
+  color: var(--fire-600);
 }
-
-.position {
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink);
+.summaryName {
+  font-family: var(--serif);
+  font-size: 1.15rem;
   font-weight: 600;
-}
-
-.positionLabel {
-  font-size: 0.85rem;
-  color: var(--ink-4);
-  margin-bottom: var(--space-sm);
-}
-
-.tileImage {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  border-radius: 10px;
-  overflow: hidden;
-  background: var(--paper);
-  box-shadow: 0 8px 22px rgba(27, 31, 59, 0.18);
-  margin-bottom: var(--space-sm);
-}
-
-.cardName {
-  font-family: 'Cormorant Garamond', var(--serif);
-  font-size: 1.4rem;
   color: var(--ink);
-  margin: 0;
 }
+.summaryVi { font-size: 0.8rem; color: var(--ink-4); margin-bottom: 4px; }
+.tally { font-size: 0.72rem; color: var(--ink-3); margin-top: 2px; }
 
-.cardShort {
-  font-size: 0.85rem;
-  color: var(--ink-4);
-  margin: 0;
-}
-
-.report {
-  margin-top: var(--space-xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-}
-
+/* ── Section ──────────────────────────────────────────────────────────────── */
 .section {
-  padding: var(--space-lg) 0;
-  border-top: 1px solid rgba(27, 31, 59, 0.1);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--rule);
 }
-
 .sectionHeader {
   display: flex;
+  align-items: center;
   gap: var(--space-md);
-  align-items: flex-start;
-  margin-bottom: var(--space-md);
 }
-
 .sectionOrnament {
   font-family: 'Cormorant Garamond', var(--serif);
-  font-size: 2.4rem;
-  color: var(--fire-600);
+  font-size: 2rem;
   line-height: 1;
-  flex-shrink: 0;
+  color: var(--fire-600);
 }
-
+.sectionHeadText { flex: 1; }
 .sectionTitle {
-  font-family: 'Cormorant Garamond', var(--serif);
-  font-size: 1.6rem;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--ink);
-  margin: 0 0 4px;
-}
-
-.sectionSource {
-  font-size: 0.85rem;
-  color: var(--ink-4);
   margin: 0;
 }
-
-.bodyPara {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--ink);
-  margin: 0 0 var(--space-md);
+.sectionSub {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin: 2px 0 0;
 }
 
-.personalLine {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--ink);
-  margin: 0 0 var(--space-md);
-  padding-left: var(--space-md);
-  border-left: 3px solid var(--fire-600);
-  font-style: italic;
+/* ── Indicators ───────────────────────────────────────────────────────────── */
+.indicators {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
 }
-
-.quote {
-  margin: var(--space-md) 0 0;
-  padding: var(--space-md);
-  background: var(--paper);
-  border-radius: 8px;
-  font-family: 'Cormorant Garamond', var(--serif);
-  font-size: 1.1rem;
-  color: var(--ink);
-  font-style: italic;
+.indicator {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--rule-2);
 }
-
-.legend {
-  margin-top: var(--space-md);
-  padding: var(--space-lg);
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: 12px;
+.indicatorHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
 }
-
-.legend .sectionTitle {
-  color: var(--paper);
-  margin-bottom: var(--space-md);
-}
-
-.legend p {
+.indicatorLabel {
+  font-weight: 600;
   font-size: 0.95rem;
-  line-height: 1.7;
-  margin: 0 0 var(--space-md);
-  color: rgba(250, 248, 244, 0.9);
+  color: var(--ink-2);
+}
+.indicatorMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.estimated {
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  border: 1px dashed var(--ink-4);
+  border-radius: var(--r-pill);
+  padding: 2px 7px;
+}
+.indicatorText {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-3);
 }
 
-.legend p:last-child { margin-bottom: 0; }
+/* ── Per-section conclusion ───────────────────────────────────────────────── */
+.conclusion {
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 10px;
+  border-left: 3px solid var(--rule);
+  background: var(--rule-2);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.edge_lucky   { border-left-color: var(--luck-lucky-ink);   background: var(--luck-lucky-bg); }
+.edge_neutral { border-left-color: var(--ink-4); }
+.edge_unlucky { border-left-color: var(--luck-unlucky-ink); background: var(--luck-unlucky-bg); }
 
-@media (max-width: 720px) {
-  .triangle {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-  .ornament { font-size: 1.8rem; }
-  .cardName { font-size: 1.2rem; }
-  .sectionTitle { font-size: 1.3rem; }
-  .sectionOrnament { font-size: 2rem; }
+/* ── Grand conclusion ─────────────────────────────────────────────────────── */
+.grand {
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(184, 137, 58, 0.10), transparent 70%),
+    var(--rule-2);
+  text-align: center;
+}
+.grandTitle {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 var(--space-sm);
+}
+.grand p { margin: 0 auto; max-width: 60ch; line-height: 1.65; color: var(--ink-2); }
+
+.method {
+  margin-top: var(--space-lg);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-4);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .summaryRow { grid-template-columns: 1fr; }
+  .indicatorHead { flex-wrap: wrap; }
 }

@@ -1,0 +1,3 @@
+# Raw extraction of the authored workbooks — regenerable via etl_four_pillars.py.
+# The shipped, cleaned engine data will live under website/lib/fp/ instead.
+data/

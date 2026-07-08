@@ -302,6 +302,57 @@
   background: #f7f3ec;
 }
 
+.fullPage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-pure);
+  z-index: 50;
+}
+
+.fullHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: var(--space-sm, 0.6rem) var(--space-lg);
+  border-bottom: 1px solid var(--rule);
+}
+
+.fullHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fullHeaderActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.backLink {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.backLink:hover {
+  color: var(--ink);
+}
+
+.fullBody {
+  flex: 1;
+  overflow: hidden;
+  background: #f7f3ec;
+}
+
 .emptyState {
   font-family: var(--sans);
   font-size: 14px;

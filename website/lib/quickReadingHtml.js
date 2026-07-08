@@ -304,19 +304,45 @@ export function buildQuickReadingHtml(reading) {
     subject.zodiacAnimal ? `Year of the ${subject.zodiacAnimal}` : null,
   ].filter(Boolean).join(' · ');
 
+  // One tab per included reading, rendered top-right. The bar is hidden by
+  // default and enabled by the script below, so email clients (no JS) show
+  // every section in sequence while browsers get switchable tabs.
+  const sections = [
+    { key: 'bazi',           tab: 'Four Pillars',    html: reading.bazi           !== undefined ? renderBaziSection(reading.bazi) : null },
+    { key: 'ziwei',          tab: 'Zi Wei',          html: reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : null },
+    { key: 'threeBlessings', tab: 'Three Blessings', html: reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : null },
+    { key: 'fireHorse',      tab: 'Fire Horse',      html: reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : null },
+    { key: 'compatibility',  tab: 'Compatibility',   html: reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, partner?.name) : null },
+  ].filter((s) => s.html !== null);
+
+  const tabBar = `<div id="qr-tabs">
+    <button type="button" data-tab="all" class="on">All</button>
+    ${sections.map((s) => `<button type="button" data-tab="${s.key}">${escapeHtml(s.tab)}</button>`).join('')}
+  </div>`;
+
+  const sectionHtml = sections
+    .map((s) => `<div class="qr-sec" data-sec="${s.key}">${s.html}</div>`)
+    .join('');
+
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quick reading — ${escapeHtml(subjectName)}</title>
-  ${reading.ziwei ? `<style>${CHART_CSS}</style>` : ''}
+  <style>
+    #qr-tabs{display:none;position:sticky;top:0;z-index:30;justify-content:flex-end;flex-wrap:wrap;gap:6px;padding:10px 16px;background:rgba(247,243,236,0.97);border-bottom:1px solid #ece6da}
+    #qr-tabs button{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid #d8cdbc;background:#fff;color:#4a4238;cursor:pointer}
+    #qr-tabs button.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+  </style>
+  ${reading.ziwei ? `<style>${CHART_CSS}.psc-chart .chart{max-width:900px}</style>` : ''}
 </head>
 <body style="margin:0; padding:0; background:#f7f3ec; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#1a1a1a;">
+  ${tabBar}
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f7f3ec;">
     <tr>
       <td align="center" style="padding:24px 16px;">
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:760px; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:1000px; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <tr>
             <td style="padding:24px 28px 14px; border-bottom:1px solid #ece6da;">
               <p style="margin:0 0 6px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#6b6258;">Mahjong Tarot · Quick reading</p>
@@ -327,11 +353,7 @@ export function buildQuickReadingHtml(reading) {
           </tr>
           <tr>
             <td style="padding:24px 28px 12px;">
-              ${reading.bazi           !== undefined ? renderBaziSection(reading.bazi) : ''}
-              ${reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : ''}
-              ${reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : ''}
-              ${reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : ''}
-              ${reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, partner?.name) : ''}
+              ${sectionHtml}
             </td>
           </tr>
           <tr>
@@ -343,6 +365,19 @@ export function buildQuickReadingHtml(reading) {
       </td>
     </tr>
   </table>
+  <script>(function(){
+    var bar=document.getElementById('qr-tabs');if(!bar)return;
+    var secs=[].slice.call(document.querySelectorAll('.qr-sec'));
+    if(secs.length<2)return;
+    bar.style.display='flex';
+    var btns=[].slice.call(bar.querySelectorAll('button'));
+    function show(k){
+      secs.forEach(function(s){s.style.display=(k==='all'||s.getAttribute('data-sec')===k)?'':'none';});
+      btns.forEach(function(b){b.className=b.getAttribute('data-tab')===k?'on':'';});
+      window.scrollTo(0,0);
+    }
+    btns.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-tab'));});});
+  })();</script>
 </body>
 </html>`;
 }

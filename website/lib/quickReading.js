@@ -12,7 +12,6 @@ import {
   dominantElement,
   getZodiacAnimal,
 } from './bazi';
-import { calculatePurpleStar } from './purpleStar';
 import { data as psData } from './ps/data.mjs';
 import { buildChartFromBirth, chineseAge } from './ps/chart.mjs';
 import { scoreChart, buildFullReport } from './ps/engine.mjs';
@@ -92,16 +91,11 @@ export function buildQuickReading({ subject, partner, types }) {
   }
 
   if (types.includes('ziwei')) {
-    out.ziwei = subject.birthTime
-      ? calculatePurpleStar({
-          birthday: subject.birthday,
-          birthTime: subject.birthTime,
-          gender: subject.gender,
-        })
-      : null; // null = requested but no birth time → renderer shows fallback message
-
-    // Full fate & luck report from Bill's authored Purple Star data — the
-    // same engine that powers the member Purple Star reading.
+    // Native chart + full fate & luck report from Bill's authored Purple
+    // Star data — the same engine that powers the member Purple Star
+    // reading. null = requested but no birth time → renderer shows a
+    // fallback message.
+    out.ziwei = null;
     out.ziweiFull = null;
     if (subject.birthTime) {
       try {
@@ -114,11 +108,12 @@ export function buildQuickReading({ subject, partner, types }) {
         chart.name = (subject.name || 'Your').split(' ')[0];
         chart.currentAge = chineseAge(solarDate);
         scoreChart(chart, psData);
+        out.ziwei = chart;
         out.ziweiFull = buildFullReport(chart, psData);
         out.ziweiFull.genderAssumed = !subject.gender;
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.error('quick-reading: ziwei full report failed', err);
+        console.error('quick-reading: ziwei chart failed', err);
       }
     }
   }

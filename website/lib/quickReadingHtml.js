@@ -7,11 +7,22 @@ import { CHART_CSS, renderChartEmbed } from './ps/render.mjs';
 import { renderFourPillarsReading } from './fp/render.mjs';
 import { readingByKey } from './reading-meta';
 
+// One verdict color system for the whole document: the almanac
+// auspiciousness palette (globals.css --luck-* tokens) plus the brand
+// gold for mixed states. Every section grades outcomes with these.
+const LUCK_GREEN    = '#1e6334';
+const LUCK_GREEN_2  = '#2A8A48'; // softer step for "good but not great"
+const LUCK_GREEN_BG = '#e8f5e8';
+const LUCK_GOLD     = '#B8893A';
+const LUCK_RED      = '#9E1B14';
+const LUCK_RED_2    = '#C2693F'; // softer step for "challenging but not dire"
+const LUCK_RED_BG   = '#fbe9e7';
+
 const TONE_COLORS = {
-  great: '#217A43',
-  good:  '#2A8A48',
-  mixed: '#B8893A',
-  rough: '#E63329',
+  great: LUCK_GREEN,
+  good:  LUCK_GREEN_2,
+  mixed: LUCK_GOLD,
+  rough: LUCK_RED,
 };
 
 function escapeHtml(s) {
@@ -82,8 +93,8 @@ function elementBarsPanel(title, counts, max) {
 // ── Zi Wei Dou Shu ──────────────────────────────────────────────────
 
 const LUCK_LABEL = { mostLucky: 'Most Lucky', generallyLucky: 'Generally Lucky', mixed: 'Mixed Luck', generallyUnlucky: 'Generally Unlucky', leastLucky: 'Least Lucky' };
-const LUCK_COLOR = { mostLucky: '#2c8a4a', generallyLucky: '#6a9f5a', mixed: '#B8893A', generallyUnlucky: '#c2693f', leastLucky: '#c0392b' };
-const ratingColor = (r) => (/Unfav|Unlucky/.test(r) ? '#c0392b' : r === 'Neutral' ? '#B8893A' : '#2c8a4a');
+const LUCK_COLOR = { mostLucky: LUCK_GREEN, generallyLucky: LUCK_GREEN_2, mixed: LUCK_GOLD, generallyUnlucky: LUCK_RED_2, leastLucky: LUCK_RED };
+const ratingColor = (r) => (/Unfav|Unlucky/.test(r) ? LUCK_RED : r === 'Neutral' ? LUCK_GOLD : LUCK_GREEN);
 
 // Full fate & luck report (Bill's authored Purple Star narratives),
 // rendered with email-safe inline styles.
@@ -144,14 +155,14 @@ function renderZiweiSection(chart, ziweiFull) {
   if (!chart) {
     return `
       <div style="margin: 0 0 28px;">
-        <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Zi Wei Dou Shu</h2>
+        <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Purple Star (Zi Wei Dou Shu)</h2>
         <p style="margin:0; font-size:13px; color:#50545E; font-style:italic;">Birth time not provided — Zi Wei chart skipped. Add the birth time to compute.</p>
       </div>`;
   }
   const m = chart.meta;
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Zi Wei Dou Shu</h2>
+      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Purple Star (Zi Wei Dou Shu)</h2>
       <p style="margin:0 0 8px; font-size:12px; color:#50545E;">
         ${escapeHtml(m.chinese || '')} · Soul: <strong>${escapeHtml(m.soul || '—')}</strong> · Body: <strong>${escapeHtml(m.body || '—')}</strong> · Five Elements: <strong>${escapeHtml(m.fiveElements || '—')}</strong>
       </p>
@@ -174,11 +185,10 @@ const TB_SECTIONS = [
   { key: 'prosperity', ornament: '禄', name: 'Prosperity', vi: 'Lộc',  sub: 'Wealth' },
   { key: 'longevity',  ornament: '寿', name: 'Longevity',  vi: 'Thọ',  sub: 'Health' },
 ];
-// Almanac auspiciousness palette (globals.css --luck-* tokens, inlined for email).
 const TB_VERDICT = {
-  1: { label: 'Lucky',   bg: '#e8f5e8', ink: '#1e6334', border: '#e8f5e8' },
-  2: { label: 'Neutral', bg: '#f8f6f0', ink: '#50545E', border: '#E4E5EA' },
-  3: { label: 'Unlucky', bg: '#fbe9e7', ink: '#9E1B14', border: '#fbe9e7' },
+  1: { label: 'Lucky',   bg: LUCK_GREEN_BG, ink: LUCK_GREEN, border: LUCK_GREEN_BG },
+  2: { label: 'Neutral', bg: '#f8f6f0',     ink: '#50545E',  border: '#E4E5EA' },
+  3: { label: 'Unlucky', bg: LUCK_RED_BG,   ink: LUCK_RED,   border: LUCK_RED_BG },
 };
 const tbVerdict = (lv) => TB_VERDICT[lv] || TB_VERDICT[2];
 const tbChip = (lv) => {
@@ -258,7 +268,7 @@ function renderFireHorseSection(fh) {
   if (!fh) {
     return `
       <div style="margin: 0 0 28px;">
-        <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Year of the Fire Horse — 2026 Forecast</h2>
+        <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Year of the Fire Horse</h2>
         <p style="margin:0; font-size:13px; color:#50545E; font-style:italic;">Forecast unavailable — sign / element could not be resolved from the birthday provided.</p>
       </div>`;
   }
@@ -278,9 +288,9 @@ function renderFireHorseSection(fh) {
 
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Year of the Fire Horse — 2026 Forecast</h2>
+      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Year of the Fire Horse</h2>
       <p style="margin:0 0 10px; font-size:12px; letter-spacing:0.04em; text-transform:uppercase; color:#8A8E98;">
-        ${escapeHtml(SIGN_LABEL[fh.sign])} · ${escapeHtml(ELEMENT_LABEL[fh.effectiveElement])}${dm ? ` · Day Master ${escapeHtml(dm.en)}` : ''}
+        2026 Forecast · ${escapeHtml(SIGN_LABEL[fh.sign])} · ${escapeHtml(ELEMENT_LABEL[fh.effectiveElement])}${dm ? ` · Day Master ${escapeHtml(dm.en)}` : ''}
       </p>
 
       <div style="display:inline-block; padding:8px 12px; background:#EFEFF2; border-left:3px solid ${yearColor}; border-radius:4px; margin: 0 0 12px;">
@@ -338,9 +348,9 @@ function renderFireHorseSection(fh) {
 
 // Indicator → colour + verb for the Wu Xing element dynamic.
 const INDICATOR = {
-  Constructive: { color: '#2A8A48', bg: '#EAF6EE' },
-  Destructive:  { color: '#E63329', bg: '#FFF4F2' },
-  Neutral:      { color: '#B8893A', bg: '#EFEFF2' },
+  Constructive: { color: LUCK_GREEN, bg: LUCK_GREEN_BG },
+  Destructive:  { color: LUCK_RED,   bg: LUCK_RED_BG },
+  Neutral:      { color: LUCK_GOLD,  bg: '#EFEFF2' },
 };
 
 function ratingMeter(compat, color) {
@@ -450,8 +460,8 @@ function renderCompatibilitySection(compat, subjectName, partnerName, relationsh
 
   const toneCard = (label, body, tone) => body ? `
     <td width="50%" style="vertical-align:top; padding:0 6px;">
-      <div style="background:${tone === 'good' ? '#EAF6EE' : '#FFF4F2'}; border-radius:8px; padding:12px 14px;">
-        <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${tone === 'good' ? '#2A8A48' : '#E63329'}; margin:0 0 5px;">${escapeHtml(label)}</div>
+      <div style="background:${tone === 'good' ? LUCK_GREEN_BG : LUCK_RED_BG}; border-radius:8px; padding:12px 14px;">
+        <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${tone === 'good' ? LUCK_GREEN : LUCK_RED}; margin:0 0 5px;">${escapeHtml(label)}</div>
         <p style="margin:0; font-size:13px; line-height:1.55; color:#2A2D35;">${escapeHtml(body)}</p>
       </div>
     </td>` : '<td width="50%"></td>';
@@ -465,7 +475,7 @@ function renderCompatibilitySection(compat, subjectName, partnerName, relationsh
 
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Compatibility</h2>
+      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Compatibility Reading</h2>
       ${relationshipHeader || ''}
       ${ratingMeter(compat, color)}
 
@@ -599,8 +609,21 @@ export function buildQuickReadingHtml(reading) {
             </td>
           </tr>
           <tr>
+            <td style="padding:8px 28px 24px;">
+              <div style="background:#14161B; border-radius:12px; padding:24px 26px; text-align:center;">
+                <div style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:19px; color:#ffffff; margin:0 0 8px;">This reading is only the beginning</div>
+                <p style="margin:0 auto 16px; max-width:520px; font-size:12.5px; line-height:1.6; color:#B9BCC4;">
+                  Members get all five readings on a personal dashboard — the daily Tong Shu almanac,
+                  your Four Pillars life cycle, Purple Star palaces, your Three Blessings, the Year of
+                  the Fire Horse, and compatibility readings for the people around you.
+                </p>
+                <a href="https://www.mahjongtarot.com/signup" style="display:inline-block; background:#E63329; color:#ffffff; font-size:13px; font-weight:600; padding:11px 24px; border-radius:999px; text-decoration:none;">Become a member &rarr;</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
             <td align="center" style="padding:14px 28px 22px; font-size:11px; color:#8A8E98; border-top:1px solid #E4E5EA;">
-              Generated from <a href="https://mahjongtarot.com" style="color:#8A8E98; text-decoration:none;">mahjongtarot.com</a> · For practitioner reference only.
+              Prepared for ${escapeHtml(subjectName)} by The Mahjong Tarot · <a href="https://www.mahjongtarot.com" style="color:#8A8E98; text-decoration:none;">mahjongtarot.com</a>
             </td>
           </tr>
         </table>

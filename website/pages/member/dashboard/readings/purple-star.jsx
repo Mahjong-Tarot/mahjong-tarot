@@ -91,7 +91,7 @@ export default function PurpleStarReading() {
       <MemberShell>
         <main className={`container ${accountStyles.wrap}`}>
           <p className={accountStyles.authFootnote} style={{ marginBottom: '0.5rem', textAlign: 'left' }}>
-            <Link href="/member/dashboard/readings">← Saved readings</Link>
+            <Link href="/member/dashboard/readings">← Readings</Link>
           </p>
           <h1 className={accountStyles.title}>Purple Star · 紫微斗數</h1>
           <p className={accountStyles.muted}>

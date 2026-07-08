@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import MemberShell from '../../../components/MemberShell';
-import Footer from '../../../components/Footer';
-import { useAuth } from '../../../lib/auth';
-import { supabase } from '../../../lib/supabase';
-import { saveReading } from '../../../lib/readings';
-import styles from '../../../styles/Account.module.css';
+import MemberShell from '../../../../components/MemberShell';
+import Footer from '../../../../components/Footer';
+import { useAuth } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
+import { saveReading } from '../../../../lib/readings';
+import styles from '../../../../styles/Account.module.css';
 
 export default function CompatibilityPage() {
   const router = useRouter();
@@ -100,12 +100,12 @@ export default function CompatibilityPage() {
   return (
     <>
       <Head>
-        <title>Relationships | Mahjong Tarot</title>
+        <title>Compatibility Reading | Mahjong Tarot</title>
         <meta name="robots" content="noindex" />
       </Head>
       <MemberShell>
       <main className={`container ${styles.wrap}`}>
-        <h1 className={styles.title}>Relationships</h1>
+        <h1 className={styles.title}>Compatibility Reading</h1>
         <p className={styles.lede}>
           Enter two people. We&apos;ll save the report to your dashboard with its
           own page so you can come back to it.

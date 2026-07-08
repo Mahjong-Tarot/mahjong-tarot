@@ -10,10 +10,10 @@ import styles from '../../../../styles/Account.module.css';
 
 const PERSONAL_READINGS = [
   {
-    key: 'fire-horse',
-    title: 'Year of the Fire Horse',
-    blurb: "Your full year ahead, read against your day master.",
-    href: '/year-of-the-fire-horse',
+    key: 'four-pillars',
+    title: 'Four Pillars',
+    blurb: 'Your birth chart elements and the five stages of your life cycle.',
+    href: '/member/dashboard/readings/four-pillars',
     available: true,
   },
   {
@@ -27,8 +27,15 @@ const PERSONAL_READINGS = [
     key: 'three-blessings',
     title: 'Three Blessings',
     blurb: 'Your stars of wealth, prosperity, and longevity.',
-    href: '/member/dashboard/three-blessings',
-    available: false,
+    href: '/member/dashboard/readings/three-blessings',
+    available: true,
+  },
+  {
+    key: 'fire-horse',
+    title: 'Year of the Fire Horse',
+    blurb: 'Your full 2026 forecast, read against your day master.',
+    href: '/member/dashboard/readings/fire-horse',
+    available: true,
   },
 ];
 
@@ -114,8 +121,8 @@ export default function ReadingsList() {
 
         <section style={{ marginTop: '2.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-            <h2 className={styles.subTitle} style={{ margin: 0 }}>Compatibility reports</h2>
-            <Link href="/member/dashboard/relationships" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
+            <h2 className={styles.subTitle} style={{ margin: 0 }}>Compatibility readings</h2>
+            <Link href="/member/dashboard/readings/compatibility" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
               + New reading
             </Link>
           </div>
@@ -123,7 +130,7 @@ export default function ReadingsList() {
           {loaded && readings.length === 0 && (
             <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
               <p style={{ margin: 0 }}>
-                No readings yet. <Link href="/member/dashboard/relationships">Generate your first one</Link>.
+                No readings yet. <Link href="/member/dashboard/readings/compatibility">Generate your first one</Link>.
               </p>
             </div>
           )}

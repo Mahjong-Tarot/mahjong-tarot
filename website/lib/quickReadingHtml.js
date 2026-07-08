@@ -418,7 +418,7 @@ function yinYangBar(yin, yang) {
     </div>`;
 }
 
-function renderCompatibilitySection(compat, subjectName, partnerName) {
+function renderCompatibilitySection(compat, subjectName, partnerName, relationshipHeader) {
   if (!compat) return '';
   const color = TONE_COLORS[compat.tier?.tone] || '#444';
   const n1 = subjectName || compat.person1?.sign || 'Person 1';
@@ -448,7 +448,7 @@ function renderCompatibilitySection(compat, subjectName, partnerName) {
   return `
     <div style="margin: 0 0 28px;">
       <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Compatibility</h2>
-
+      ${relationshipHeader || ''}
       ${ratingMeter(compat, color)}
 
       <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin:0 0 8px;">Five-element balance</div>
@@ -504,20 +504,9 @@ export function buildQuickReadingHtml(reading) {
     subject.zodiacAnimal ? `Year of the ${subject.zodiacAnimal}` : null,
   ].filter(Boolean).join(' · ');
 
-  // For a comparison reading the compatibility packet already carries the
-  // partner's pillars + elements, so Four Pillars can show both charts side
-  // by side without recomputing anything.
-  const subjectBazi = reading.bazi ? { ...reading.bazi, name: subjectName } : reading.bazi;
-  const partnerBazi = (reading.bazi && reading.compatibility?.person2) ? {
-    name: partner?.name || 'Partner',
-    pillars: reading.compatibility.person2.pillars,
-    elements: reading.compatibility.person2.elements,
-    dominant: reading.compatibility.person2.dominantElement,
-  } : null;
-
-  // Two-person masthead for comparison readings: the two charts flanking a
-  // "×", each with their sign, fixed element and gender. Falls back to the
-  // single-subject header for solo readings.
+  // The two people, side by side, shown ONLY inside the Compatibility
+  // (relationship) section. Every other report is about the subject alone,
+  // so this never sits on their headers.
   const compat = reading.compatibility;
   const personCard = (name, sign, element, gender, birthday, birthTime) => {
     const el = element ? `<span style="color:${ELEMENT_HEX[element] || '#50545E'};">${escapeHtml(element)}</span>` : '';
@@ -531,30 +520,28 @@ export function buildQuickReadingHtml(reading) {
         ${birth ? `<div style="font-size:11px; color:#8A8E98;">${escapeHtml(birth)}</div>` : ''}
       </td>`;
   };
-  const comparisonHeader = compat ? `
-    <p style="margin:0 0 10px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#50545E;">Mahjong Tarot · Relationship comparison</p>
-    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+  const relationshipCards = compat ? `
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 18px;">
       <tr>
         ${personCard(subject.name, compat.person1?.sign || subject.zodiacAnimal, compat.person1?.signElement, subject.gender, subject.birthday, subject.birthTime)}
         <td width="16%" style="text-align:center; vertical-align:middle;"><span style="font-family: 'Fraunces', Georgia, serif; font-size:22px; color:#E63329;">&times;</span></td>
         ${personCard(partner?.name, compat.person2?.sign, compat.person2?.signElement, partner?.gender, partner?.birthday, partner?.birthTime)}
       </tr>
-    </table>` : null;
+    </table>` : '';
 
   // One tab per included reading, rendered top-right. The bar is hidden by
   // default and enabled by the script below, so email clients (no JS) show
   // every section in sequence while browsers get switchable tabs.
   const sections = [
-    { key: 'bazi',           tab: 'Four Pillars',    html: reading.bazi           !== undefined ? renderBaziSection(subjectBazi, partnerBazi) : null },
+    { key: 'bazi',           tab: 'Four Pillars',    html: reading.bazi           !== undefined ? renderBaziSection(reading.bazi) : null },
     { key: 'ziwei',          tab: 'Zi Wei',          html: reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : null },
     { key: 'threeBlessings', tab: 'Three Blessings', html: reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : null },
     { key: 'fireHorse',      tab: 'Fire Horse',      html: reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : null },
-    { key: 'compatibility',  tab: 'Compatibility',   html: reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, subject.name || null, partner?.name) : null },
+    { key: 'compatibility',  tab: 'Compatibility',   html: reading.compatibility  !== undefined ? renderCompatibilitySection(reading.compatibility, subject.name || null, partner?.name, relationshipCards) : null },
   ].filter((s) => s.html !== null);
 
   const tabBar = `<div id="qr-tabs">
-    <button type="button" data-tab="all" class="on">All</button>
-    ${sections.map((s) => `<button type="button" data-tab="${s.key}">${escapeHtml(s.tab)}</button>`).join('')}
+    ${sections.map((s, i) => `<button type="button" data-tab="${s.key}"${i === 0 ? ' class="on"' : ''}>${escapeHtml(s.tab)}</button>`).join('')}
   </div>`;
 
   const sectionHtml = sections
@@ -583,10 +570,9 @@ export function buildQuickReadingHtml(reading) {
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:1000px; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <tr>
             <td style="padding:24px 28px 18px; border-bottom:1px solid #E4E5EA;">
-              ${comparisonHeader || `
               <p style="margin:0 0 6px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#50545E;">Mahjong Tarot · Quick reading</p>
               <h1 style="margin:0; font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:22px; line-height:1.3; color:#14161B;">Reading for ${escapeHtml(subjectName)}</h1>
-              <p style="margin:6px 0 0; font-size:12px; color:#50545E;">${escapeHtml(birthLine)}</p>`}
+              <p style="margin:6px 0 0; font-size:12px; color:#50545E;">${escapeHtml(birthLine)}</p>
             </td>
           </tr>
           <tr>
@@ -610,11 +596,12 @@ export function buildQuickReadingHtml(reading) {
     bar.style.display='flex';
     var btns=[].slice.call(bar.querySelectorAll('button'));
     function show(k){
-      secs.forEach(function(s){s.style.display=(k==='all'||s.getAttribute('data-sec')===k)?'':'none';});
+      secs.forEach(function(s){s.style.display=(s.getAttribute('data-sec')===k)?'':'none';});
       btns.forEach(function(b){b.className=b.getAttribute('data-tab')===k?'on':'';});
       window.scrollTo(0,0);
     }
     btns.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-tab'));});});
+    show(secs[0].getAttribute('data-sec'));
   })();</script>
 </body>
 </html>`;

@@ -60,3 +60,18 @@
 | 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | fri-instagram | 130 KB | ✅ |
 | 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | card | 1818 KB PNG | ✅ |
 | 2026-05-07 09:15 | 2026-05-15-feel-good-love | gemini-3.1-flash-image-preview | generate-image | card-vn | 1626 KB PNG | ✅ |
+| 2026-07-07 08:30 | 2026-07-13-horse-soulmate-month | gemini-3.1-flash-image-preview | generate-image | blog-fire-horse | 39 KB | ✅ |
+| 2026-07-07 08:30 | 2026-07-13-horse-soulmate-month | gemini-3.1-flash-image-preview | generate-image | mon-facebook-en | 46 KB | ✅ |
+| 2026-07-07 08:30 | 2026-07-13-horse-soulmate-month | gemini-3.1-flash-image-preview | generate-image | mon-instagram | 19 KB | ✅ |
+| 2026-07-07 08:30 | 2026-07-13-horse-soulmate-month | gemini-3.1-flash-image-preview | generate-image | tue-facebook-en | 43 KB | ✅ |
+| 2026-07-07 08:30 | 2026-07-13-horse-soulmate-month | gemini-3.1-flash-image-preview | generate-image | tue-instagram | 150 KB | ✅ |
+| 2026-07-07 08:45 | 2026-07-15-mirror-soulmate-month | gemini-3.1-flash-image-preview | generate-image | blog-mahjong-mirror | 57 KB | ✅ |
+| 2026-07-07 08:45 | 2026-07-15-mirror-soulmate-month | gemini-3.1-flash-image-preview | generate-image | wed-facebook-en | 22 KB | ✅ |
+| 2026-07-07 08:45 | 2026-07-15-mirror-soulmate-month | gemini-3.1-flash-image-preview | generate-image | wed-instagram | 92 KB | ✅ |
+| 2026-07-07 08:45 | 2026-07-15-mirror-soulmate-month | gemini-3.1-flash-image-preview | generate-image | thu-facebook-en | 49 KB | ✅ |
+| 2026-07-07 08:45 | 2026-07-15-mirror-soulmate-month | gemini-3.1-flash-image-preview | generate-image | thu-instagram | 35 KB | ✅ |
+| 2026-07-07 09:00 | 2026-07-17-feel-good-soulmate-month | gemini-3.1-flash-image-preview | generate-image | blog-feel-good-friday | 140 KB | ✅ |
+| 2026-07-07 09:00 | 2026-07-17-feel-good-soulmate-month | gemini-3.1-flash-image-preview | generate-image | fri-facebook-en | 48 KB | ✅ |
+| 2026-07-07 09:00 | 2026-07-17-feel-good-soulmate-month | gemini-3.1-flash-image-preview | generate-image | fri-instagram | 22 KB | ✅ |
+| 2026-07-07 09:00 | 2026-07-17-feel-good-soulmate-month | gemini-3.1-flash-image-preview | generate-image | card | 78 KB | ✅ |
+| 2026-07-07 09:00 | 2026-07-17-feel-good-soulmate-month | gemini-3.1-flash-image-preview | generate-image | card-vn | 82 KB | ✅ |

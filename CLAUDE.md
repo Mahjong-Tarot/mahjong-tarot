@@ -33,6 +33,11 @@ where full_name ilike '%<name>%' or email ilike '%<email>%'
 order by created_at desc;
 ```
 
+### Troubleshooting: almanac shows "No almanac record for this date"
+
+When the member almanac (`/member/dashboard/almanac`) shows "No almanac record for this date", check the browser auth session FIRST, before investigating the data or RLS.
+<!-- Rationale: almanac_days is complete and continuous (2026-02-17 → 2032-02-09, verified) and readable by both anon and authenticated roles. A stale/expired Supabase token returns 401/PGRST301, and website/lib/almanac.js fetchAlmanacForDate() swallows any error into null, which website/components/AlmanacView.jsx renders as the same "No almanac record" empty state — so an auth failure is disguised as missing data. Workaround: sign out/in for a fresh token. Logged-out users are unaffected (anon read falls back to the migration-014 public policy); only a present-but-invalid token triggers it. Open defect: fetchAlmanacForDate should refresh the session or redirect to sign-in on 401 instead of showing the empty state. -->
+
 ---
 
 ## What this project DOES

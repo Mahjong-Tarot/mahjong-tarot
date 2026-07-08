@@ -15,7 +15,9 @@ import {
   STEMS,
   BRANCHES,
 } from '../../../lib/bazi';
-import { computeThreeBlessings } from '../../../lib/three-blessings';
+import { computeThreeBlessings } from '../../../lib/tb/engine.mjs';
+import { tables as tbTables } from '../../../lib/tb/data.mjs';
+import { buildFourPillarsChart } from '../../../lib/fp/chart.mjs';
 import { calculatePurpleStar } from '../../../lib/purpleStar';
 import { buildReadingBrief } from '../../../lib/readingBrief';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
@@ -180,10 +182,16 @@ export default function ReadingBriefPage({ profile }) {
   const tally   = useMemo(() => tallyElements(pillars), [pillars]);
   const dominant = useMemo(() => dominantElement(tally), [tally]);
   const threeBlessings = useMemo(() => {
-    if (!pillars) return null;
-    try { return computeThreeBlessings({ birthday, birthTime, pillars }); }
+    if (!birthday) return null;
+    try {
+      return computeThreeBlessings(
+        buildFourPillarsChart({ birthday, birthTime: birthTime || null }),
+        tbTables,
+        birthday,
+      );
+    }
     catch { return null; }
-  }, [pillars, birthday, birthTime]);
+  }, [birthday, birthTime]);
 
   const purpleStar = useMemo(() => {
     if (!birthday || !birthTime || !person?.gender) return null;
@@ -686,16 +694,27 @@ export default function ReadingBriefPage({ profile }) {
                 {threeBlessings && (
                   <Section title="Three Blessings">
                     <ul style={{ paddingLeft: 18, lineHeight: 1.7 }}>
-                      {['phuc', 'loc', 'tho'].map((key) => {
+                      {[
+                        ['luck', 'Happiness (Phúc)'],
+                        ['prosperity', 'Prosperity (Lộc)'],
+                        ['longevity', 'Longevity (Thọ)'],
+                      ].map(([key, label]) => {
                         const b = threeBlessings[key];
-                        if (!b?.personalLine) return null;
+                        if (!b) return null;
+                        const verdict = { 1: 'Lucky', 2: 'Neutral', 3: 'Unlucky' }[b.verdict] || 'Neutral';
                         return (
                           <li key={key} style={{ marginBottom: 8 }}>
-                            <strong>{b.position?.name} — {b.position?.label}:</strong> {b.personalLine}
+                            <strong>{label}:</strong> {verdict} ({b.tally.L}L / {b.tally.N}N / {b.tally.U}U)
+                            {b.conclusion ? <> — {b.conclusion}</> : null}
                           </li>
                         );
                       })}
                     </ul>
+                    {threeBlessings.grand?.narrative && (
+                      <p style={{ marginTop: 4 }}>
+                        <strong>Grand conclusion:</strong> {threeBlessings.grand.narrative}
+                      </p>
+                    )}
                   </Section>
                 )}
 

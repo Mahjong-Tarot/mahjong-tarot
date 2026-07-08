@@ -13,7 +13,8 @@ import { content as fpContent } from './fp/content.mjs';
 import { data as psData } from './ps/data.mjs';
 import { buildChartFromBirth, chineseAge } from './ps/chart.mjs';
 import { scoreChart, buildFullReport } from './ps/engine.mjs';
-import { computeThreeBlessings } from './three-blessings';
+import { computeThreeBlessings } from './tb/engine.mjs';
+import { tables as tbTables } from './tb/data.mjs';
 import { computeFireHorseForecast } from './fire-horse-forecast';
 import { computeCompatibility } from './compatibility';
 
@@ -127,10 +128,19 @@ export function buildQuickReading({ subject, partner, types }) {
   }
 
   if (types.includes('three_blessings')) {
-    out.threeBlessings = computeThreeBlessings({
-      birthday: subject.birthday,
-      birthTime: subject.birthTime,
-    });
+    // Bill's authored Fu Lu Shou rating engine — the same one that powers
+    // the member Three Blessings report.
+    try {
+      out.threeBlessings = computeThreeBlessings(
+        buildFourPillarsChart({ birthday: subject.birthday, birthTime: subject.birthTime || null }),
+        tbTables,
+        subject.birthday,
+      );
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('quick-reading: three-blessings failed', err);
+      out.threeBlessings = null;
+    }
   }
 
   if (types.includes('fire_horse')) {

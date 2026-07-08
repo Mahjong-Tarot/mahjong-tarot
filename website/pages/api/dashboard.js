@@ -2,10 +2,8 @@ import { calculatePillars, elementInteraction, norm, tier, findSignMatch } from 
 import { buildFourPillarsChart } from '../../lib/fp/chart.mjs';
 import { buildFourPillarsReading } from '../../lib/fp/engine.mjs';
 import { content as fpContent } from '../../lib/fp/content.mjs';
+import { computeFireHorseForecast } from '../../lib/fire-horse-forecast';
 import secrets from '../../data/love-secrets.json';
-
-// Chinese New Year 2026 → start of Fire Horse year
-const FIRE_HORSE_NEW_YEAR = '2026-02-17';
 
 export default function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
@@ -38,19 +36,14 @@ export default function handler(req, res) {
       const todayDayElement = todayPillars?.day?.stem?.element;
       todayEnergy = elementInteraction(userDayElement, todayDayElement);
 
-      const fhPillars = calculatePillars(FIRE_HORSE_NEW_YEAR, null);
-      const userSign = norm(userPillars?.year?.branch?.animal);
-      const fhSign = norm(fhPillars?.year?.branch?.animal); // Horse
-      const fhMatch = findSignMatch(userSign, fhSign, secrets.sign_match);
-      if (fhMatch) {
+      // Same engine as the member Fire Horse reading and the quick reading,
+      // so the dashboard favorability number always matches the full report.
+      const fh = computeFireHorseForecast(userPillars);
+      if (fh) {
         fireHorseForecast = {
-          rating: fhMatch.Rating,
-          tier: tier(fhMatch.Rating),
-          headline: fhMatch.GeneralMatchDescription?.split('. ')[0] + '.',
-          narrative: fhMatch.GeneralMatchDescription,
-          theGood: fhMatch.TheGood || null,
-          userSign,
-          yearSign: fhSign,
+          rating: fh.yearScore * 100,
+          band: fh.yearBand,
+          sign: fh.sign,
         };
       }
     }

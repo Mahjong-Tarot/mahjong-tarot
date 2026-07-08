@@ -6,12 +6,10 @@
 // form. This function computes only the sections that were requested
 // and leaves the others undefined so the HTML renderer skips them.
 
-import {
-  calculatePillars,
-  tallyElements,
-  dominantElement,
-  getZodiacAnimal,
-} from './bazi';
+import { calculatePillars, getZodiacAnimal } from './bazi';
+import { buildFourPillarsChart } from './fp/chart.mjs';
+import { buildFourPillarsReading } from './fp/engine.mjs';
+import { content as fpContent } from './fp/content.mjs';
 import { data as psData } from './ps/data.mjs';
 import { buildChartFromBirth, chineseAge } from './ps/chart.mjs';
 import { scoreChart, buildFullReport } from './ps/engine.mjs';
@@ -85,9 +83,19 @@ export function buildQuickReading({ subject, partner, types }) {
     types,
   };
 
-  if (types.includes('bazi') && pillars) {
-    const elements = tallyElements(pillars);
-    out.bazi = { pillars, elements, dominant: dominantElement(elements) };
+  if (types.includes('bazi')) {
+    // Bill's authored Four Pillars (Life Cycle) reading. Always an individual
+    // report: the subject only, never a side-by-side comparison.
+    try {
+      out.fourPillars = buildFourPillarsReading(
+        buildFourPillarsChart({ birthday: subject.birthday, birthTime: subject.birthTime || null }),
+        fpContent,
+      );
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('quick-reading: four-pillars failed', err);
+      out.fourPillars = null;
+    }
   }
 
   if (types.includes('ziwei')) {

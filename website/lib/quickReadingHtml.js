@@ -4,6 +4,7 @@
 
 import { SIGN_LABEL, ELEMENT_LABEL, BAND_FOR, BAND_COLOR } from './fire-horse';
 import { CHART_CSS, renderChartEmbed } from './ps/render.mjs';
+import { renderFourPillarsReading } from './fp/render.mjs';
 
 const TONE_COLORS = {
   great: '#217A43',
@@ -74,61 +75,8 @@ function elementBarsPanel(title, counts, max) {
     </div>`;
 }
 
-// ── Bazi ────────────────────────────────────────────────────────────
-
-function pillarCell(p, label) {
-  if (!p) {
-    return `
-      <td style="padding:10px 8px; border:1px solid #E4E5EA; vertical-align:top; text-align:center; color:#8A8E98;">
-        <div style="font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8A8E98;">${escapeHtml(label)}</div>
-        <div style="font-size:18px; margin-top:6px;">—</div>
-      </td>`;
-  }
-  return `
-    <td style="padding:10px 8px; border:1px solid #E4E5EA; vertical-align:top; text-align:center;">
-      <div style="font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#8A8E98;">${escapeHtml(label)}</div>
-      <div style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:22px; color:#14161B; margin-top:4px;">${escapeHtml(p.gan)}${escapeHtml(p.zhi)}</div>
-      <div style="font-size:11px; color:#50545E; margin-top:4px;">${escapeHtml(p.stem?.en || '')} ${escapeHtml(p.stem?.element || '')}</div>
-      <div style="font-size:11px; color:#50545E;">${escapeHtml(p.branch?.en || '')} · ${escapeHtml(p.branch?.animal || '')}</div>
-    </td>`;
-}
-
-// Renders one person's four pillars + a dominant-element line. `partnerBazi`
-// (when present) stacks a second chart below and switches the element
-// display to two comparable bar panels so both charts read side by side.
-function renderBaziSection(bazi, partnerBazi) {
-  if (!bazi) return '';
-
-  const chart = (b) => `
-    <div style="margin:0 0 12px;">
-      ${b.name ? `<div style="font-size:12px; color:#50545E; margin:0 0 6px;"><strong style="color:#14161B;">${escapeHtml(b.name)}</strong>${b.dominant ? ` · dominant <span style="color:${ELEMENT_HEX[b.dominant] || '#50545E'};">${escapeHtml(b.dominant)}</span>` : ''}</div>` : ''}
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
-        <tr>
-          ${pillarCell(b.pillars.year,  'Year')}
-          ${pillarCell(b.pillars.month, 'Month')}
-          ${pillarCell(b.pillars.day,   'Day')}
-          ${pillarCell(b.pillars.hour,  b.pillars.hasTime ? 'Hour' : 'Hour (no time given)')}
-        </tr>
-      </table>
-    </div>`;
-
-  const maxEl = 4;
-  const barsRow = partnerBazi
-    ? `<tr>
-        <td width="50%" style="padding:0 6px 0 0; vertical-align:top;">${elementBarsPanel(bazi.name || 'Person 1', bazi.elements, maxEl)}</td>
-        <td width="50%" style="padding:0 0 0 6px; vertical-align:top;">${elementBarsPanel(partnerBazi.name || 'Person 2', partnerBazi.elements, maxEl)}</td>
-      </tr>`
-    : `<tr><td style="vertical-align:top;">${elementBarsPanel('Five elements', bazi.elements, maxEl)}</td></tr>`;
-
-  return `
-    <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Bazi · Four Pillars${partnerBazi ? ' · Side by side' : ''}</h2>
-      ${chart(bazi)}
-      ${partnerBazi ? chart(partnerBazi) : ''}
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin-top:4px;">${barsRow}</table>
-      ${!partnerBazi && bazi.dominant ? `<p style="margin:8px 0 0; font-size:13px; color:#2A2D35;"><strong>Dominant element:</strong> ${escapeHtml(bazi.dominant)}</p>` : ''}
-    </div>`;
-}
+// Four Pillars (Life Cycle) is rendered from lib/fp/render.mjs — see the
+// sections table below. It is always an individual report.
 
 // ── Zi Wei Dou Shu ──────────────────────────────────────────────────
 
@@ -533,7 +481,7 @@ export function buildQuickReadingHtml(reading) {
   // default and enabled by the script below, so email clients (no JS) show
   // every section in sequence while browsers get switchable tabs.
   const sections = [
-    { key: 'bazi',           tab: 'Four Pillars',    html: reading.bazi           !== undefined ? renderBaziSection(reading.bazi) : null },
+    { key: 'fourPillars',    tab: 'Four Pillars',    html: reading.fourPillars    ? renderFourPillarsReading(reading.fourPillars, { name: subjectName }) : null },
     { key: 'ziwei',          tab: 'Zi Wei',          html: reading.ziwei          !== undefined ? renderZiweiSection(reading.ziwei, reading.ziweiFull) : null },
     { key: 'threeBlessings', tab: 'Three Blessings', html: reading.threeBlessings !== undefined ? renderThreeBlessingsSection(reading.threeBlessings) : null },
     { key: 'fireHorse',      tab: 'Fire Horse',      html: reading.fireHorse      !== undefined ? renderFireHorseSection(reading.fireHorse) : null },

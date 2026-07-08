@@ -1,0 +1,37 @@
+[
+ {
+  "Sign": "Rat",
+  "ConflictSign": "Horse",
+  "HowToImprove": null
+ },
+ {
+  "Sign": "Ox",
+  "ConflictSign": "Sheep",
+  "HowToImprove": null
+ },
+ {
+  "Sign": "Tiger",
+  "ConflictSign": "Monkey",
+  "HowToImprove": null
+ },
+ {
+  "Sign": "Rabbit",
+  "ConflictSign": "Rooster",
+  "HowToImprove": null
+ },
+ {
+  "Sign": "Dragon",
+  "ConflictSign": "Dog",
+  "HowToImprove": null
+ },
+ {
+  "Sign": "Snake",
+  "ConflictSign": "Pig",
+  "HowToImprove": null
+ },
+ {
+  "Sign": "None",
+  "ConflictSign": null,
+  "HowToImprove": null
+ }
+]

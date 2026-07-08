@@ -1,0 +1,14 @@
+[
+ {
+  "LuckValueID": 1,
+  "Value": "LUCKY"
+ },
+ {
+  "LuckValueID": 2,
+  "Value": "NEUTRAL"
+ },
+ {
+  "LuckValueID": 3,
+  "Value": "UNLUCKY"
+ }
+]

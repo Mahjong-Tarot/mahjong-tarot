@@ -1,0 +1,42 @@
+[
+ {
+  "TBElementID": 1,
+  "ElementID": 1,
+  "YearWealthOverallNarrative": "You were born in a Wood year. This indicator is NEUTRAL, as Metal is the element that best indicates money and the accumulation of wealth.",
+  "YearWealthLuckValueID": 2,
+  "BirthStageElementNarrative": "The first stage of your life cycle is ruled by the element, Wood, which is the natural element ruling new life. This is LUCKY, as your element is in harmony with the natural order. This not only favors you in the first stage but also throughout life, as your ruling element will match the natural element in every, succeeding one.",
+  "BirthStageElementLuckValueID": 1
+ },
+ {
+  "TBElementID": 2,
+  "ElementID": 2,
+  "YearWealthOverallNarrative": "You were born in a Fire year. Fire has a destructive relationship with Metal, the element that best indicates money and the accumulation of wealth. This indicator is UNFAVORABLE.",
+  "YearWealthLuckValueID": 3,
+  "BirthStageElementNarrative": "The first stage of your life cycle is ruled by the element, Fire, which is not the natural element ruling new life. This is NEUTRAL, however, as Fire has a harmonious relationship with the natural element, Wood. This relationship also exists in the remaining, four stages of  your life, as your ruling element will be in harmony with the natural element in every, succeeding one.",
+  "BirthStageElementLuckValueID": 2
+ },
+ {
+  "TBElementID": 3,
+  "ElementID": 3,
+  "YearWealthOverallNarrative": "You were born in an Earth year. This indicator is NEUTRAL, as Metal is the element that best indicates money and the accumulation of wealth.",
+  "YearWealthLuckValueID": 2,
+  "BirthStageElementNarrative": "The first stage of your life cycle is ruled by the element, Earth, which is not the natural element ruling new life. This is UNLUCKY, as your element is in a destructive relationship with the natural order. This not only affects you adversely in the first stage but also throughout life, as your ruling element conflicts with  the natural element in every, succeeding one.",
+  "BirthStageElementLuckValueID": 3
+ },
+ {
+  "TBElementID": 4,
+  "ElementID": 4,
+  "YearWealthOverallNarrative": "You were born in a Metal year. Metal is the element that best indicates money and the accumulation of wealth. This indicator is LUCKY.",
+  "YearWealthLuckValueID": 1,
+  "BirthStageElementNarrative": "The first stage of your life cycle is ruled by the element, Metal, which is not the natural element ruling new life. In fact it conflicts with Wood. This is NEUTRAL, however, as you are more likely to be the cause rather than the recipient of the bad luck. This relationship also exists in the remaining, four stages of  your life, as your ruling element will not be in harmony with the natural element in every, succeeding one.",
+  "BirthStageElementLuckValueID": 2
+ },
+ {
+  "TBElementID": 5,
+  "ElementID": 5,
+  "YearWealthOverallNarrative": "You were born in a Water year. This indicator is NEUTRAL, as Metal is the element that best indicates money and the accumulation of wealth.",
+  "YearWealthLuckValueID": 2,
+  "BirthStageElementNarrative": "The first stage of your life cycle is ruled by the element, Water, which is not the natural element ruling new life. This is NEUTRAL, however, as Water has a harmonious relationship with the natural element, Wood. This relationship also exists in the remaining, four stages of  your life, as your ruling element will be in harmony with the natural element in every, succeeding one.",
+  "BirthStageElementLuckValueID": 2
+ }
+]

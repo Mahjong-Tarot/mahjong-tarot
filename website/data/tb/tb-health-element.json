@@ -1,0 +1,666 @@
+[
+ {
+  "TBHealthElementID": 1,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 2,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 3,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 4,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 5,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 6,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 7,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 8,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 9,
+  "YearElementID": 1,
+  "HasHour": 1,
+  "Rating": 9,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 10,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. Given the small amount of Fire in your chart overall, however, this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 11,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. Given the modest amount of Fire in your chart overall, however, this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 12,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 13,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 14,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 15,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 16,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 17,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 18,
+  "YearElementID": 2,
+  "HasHour": 1,
+  "Rating": 9,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 19,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Although Earth favors longevity, this indicator is NEUTRAL for you given the small amount of it in your chart.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 20,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Although Earth favors longevity, this indicator is NEUTRAL for you given the modest amount of it in your chart.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 21,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 22,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 23,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 24,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 25,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 26,
+  "YearElementID": 3,
+  "HasHour": 1,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 27,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart indicates longevity. Although it is your year sign, you do not have that much overall. This indicator is, therefore, NEUTRAL. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 28,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart indicates longevity. Although it is your year sign, you do not have that much overall. This indicator is, therefore, NEUTRAL. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 29,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart indicates longevity. Although it is your year sign, you do not have that much overall. This indicator is, therefore, NEUTRAL. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 30,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 31,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 32,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 33,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 34,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 35,
+  "YearElementID": 4,
+  "HasHour": 1,
+  "Rating": 9,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 36,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. The small amount of Water in your chart, however, makes this indicator NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 37,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. The moderate amount of Water in your chart, however, makes this indicator NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 38,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. The moderate amount of Water in your chart, however, makes this indicator NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 39,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 40,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 41,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 42,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 43,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 44,
+  "YearElementID": 5,
+  "HasHour": 1,
+  "Rating": 9,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 45,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 46,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 47,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 48,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 49,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 50,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 51,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 52,
+  "YearElementID": 1,
+  "HasHour": 0,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Wood year. As a general rule Wood does not bestow any great advantage or difficulty in the areas of health and longevity. A positive is you are likely to be more relaxed than other people due to your willingness to compromise. A downside is you could be susceptible to problems with the liver, gallbladder and eyes. On balance this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 53,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. Given the small amount of Fire in your chart overall, however, this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 54,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. Given the modest amount of Fire in your chart overall, however, this indicator is NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 55,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 56,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 57,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 58,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 59,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 60,
+  "YearElementID": 2,
+  "HasHour": 0,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Fire year. As a Fire sign you could have a tendency to be reckless and take unnecessary risks. Also, you may be susceptible to problems with the heart, small intestine and tongue. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 61,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Although Earth favors longevity, this indicator is NEUTRAL for you given the small amount of it in your chart.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 62,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 63,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 64,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 65,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 66,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 67,
+  "YearElementID": 3,
+  "HasHour": 0,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in an Earth year. Earth is associated with patience, stability, resilience and reserves of strength. You could, however, be susceptible to problems with the spleen, pancreas, stomach and mouth. Earth however favors longevity and, given the amount in your chart, is LUCKY.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 68,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "A lot of Metal in a chart indicates longevity. Although it is your year sign, you do not have that much overall. This indicator is, therefore, NEUTRAL. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 69,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "A lot of Metal in a chart indicates longevity. Although it is your year sign, you do not have that much overall. This indicator is, therefore, NEUTRAL. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 70,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 71,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 72,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 73,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 74,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 75,
+  "YearElementID": 4,
+  "HasHour": 0,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Metal year. A lot of Metal in a chart, which you have, indicates longevity and is, therefore, LUCKY. Since you have so much Metal, however, you could be susceptible to illnesses of the lungs, nose and, or, large intestine, as well as bouts of melancholy. Things you can do to improve your health include learning how to control your anger and be less rigid.",
+  "HealthLuckValueID": 1
+ },
+ {
+  "TBHealthElementID": 76,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 1,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. The small amount of Water in your chart, however, makes this indicator NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 77,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 2,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. The moderate amount of Water in your chart, however, makes this indicator NEUTRAL.",
+  "HealthLuckValueID": 2
+ },
+ {
+  "TBHealthElementID": 78,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 3,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 79,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 4,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 80,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 5,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 81,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 6,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 82,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 7,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ },
+ {
+  "TBHealthElementID": 83,
+  "YearElementID": 5,
+  "HasHour": 0,
+  "Rating": 8,
+  "HealthElementHealthNarrative": "You were born in a Water year. You are likely to have a lot of empathy, if not hypersensitivity, to the feelings emotions of others, not to mention having a lot of your own. This makes you vulnerable to stress and, in extreme cases, breakdowns. You could also be susceptible to problems with the kidneys, bladder or ear. This indicator is, therefore, UNLUCKY.",
+  "HealthLuckValueID": 3
+ }
+]

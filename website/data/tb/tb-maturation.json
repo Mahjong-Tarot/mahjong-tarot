@@ -1,0 +1,2054 @@
+[
+ {
+  "TBMaturationID": 1,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 2,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 3,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 4,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 5,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 6,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 7,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 8,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 9,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 10,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 11,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 12,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 13,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 14,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 15,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 16,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 17,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 18,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 19,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 20,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 21,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 22,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 23,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 24,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 25,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 26,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 27,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 28,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 29,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 30,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 31,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 32,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Well, your chi rating at Maturation is below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 33,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 34,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 35,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "So your chi rating at Maturation is far above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 36,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "So your chi rating at Maturation is far above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 37,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "So your chi rating at Maturation is far above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 38,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 39,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 40,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 41,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Well, your chi rating at Maturation is far below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 42,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Well, your chi rating at Maturation is below average. Unfortunately, this indicator is unlucky. In terms of your energy levels, you have may have a lower chance of success than your friends as you start your career. It doesn't mean all hope is lost, but yeah - you'll have to work hard to get where you want to be.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 43,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 44,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average - this indicator is neutral. In terms of your energy level, you probably have about the same chance of success as your peers as you start  your career. You may not have the get-up-and-go of other people, but you'll have enough drive to make some strides.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 45,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 46,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "So your chi rating at Maturation is above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 47,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "So your chi rating at Maturation is far above average. This indicator is lucky. In terms of your energy levels, you should have a better chance of success than your peers as you start your working life and career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 48,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 49,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average - this indicator is neutral. In terms of your energy level, you have a much better chance of success than the majority of your peers, yes. But you may have some vulnerabilities with that extreme element imabalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 50,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 51,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 52,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 53,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 54,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 55,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 56,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 57,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 58,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 59,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 60,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 61,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 62,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 63,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 64,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 65,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 66,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 67,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 68,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 69,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 70,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 71,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 72,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 73,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 74,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 75,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 76,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 77,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 78,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 79,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 80,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 81,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 82,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 83,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 84,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 85,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 86,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 87,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 88,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 89,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 90,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 91,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 92,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 93,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 94,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 95,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 96,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 97,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 98,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 99,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 100,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 101,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 102,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 103,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 104,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 105,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 106,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 107,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 108,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 109,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 110,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 111,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 112,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. This indicator is UNLUCKY. In terms of your energy level you have less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 113,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 114,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 115,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 116,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 117,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is far above average. This indicator is LUCKY. In terms of your energy level you have a much greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 118,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 119,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 120,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 1,
+  "ChiRating": 9,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 121,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 122,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 123,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 124,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 125,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 126,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 127,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 128,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 129,
+  "YearSignID": 1,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 130,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 131,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 132,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 133,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 134,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 135,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 136,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 137,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 138,
+  "YearSignID": 2,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 139,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 140,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 141,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 142,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 143,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 144,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 145,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 146,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 147,
+  "YearSignID": 3,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 148,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 149,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 150,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 151,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 152,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 153,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 154,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 155,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 156,
+  "YearSignID": 4,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 157,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 158,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 159,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 160,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 161,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 162,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 163,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 164,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 165,
+  "YearSignID": 5,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 166,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 167,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 168,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 169,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 170,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 171,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 172,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 173,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 174,
+  "YearSignID": 6,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 175,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 176,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 177,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 178,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 179,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 180,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 181,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 182,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 183,
+  "YearSignID": 7,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 184,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 185,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 186,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 187,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 188,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 189,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 190,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 191,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 192,
+  "YearSignID": 8,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 193,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 194,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 195,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 196,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 197,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 198,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 199,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 200,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 201,
+  "YearSignID": 9,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 202,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 203,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 204,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 205,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 206,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 207,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 208,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 209,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 210,
+  "YearSignID": 10,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 211,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 212,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 213,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 214,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 215,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 216,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 217,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 218,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 219,
+  "YearSignID": 11,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 220,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 0,
+  "MaturationNarrative": "Your chi rating at Maturation is far below average. This indicator is UNLUCKY. In terms of your energy level you have much less chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 3
+ },
+ {
+  "TBMaturationID": 221,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 1,
+  "MaturationNarrative": "Your chi rating at Maturation is below average. Since your hour is unknown however, there is better than a fifty fifty chance this indicator is NEUTRAL in terms of your energy level and ability to achieve success as compared to your peers.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 222,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 2,
+  "MaturationNarrative": "Your chi rating at Maturation is about average. This indicator is NEUTRAL. In terms of your energy level you are likely to have about the same chance of success as the majority of your peers as you embark upon your career.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 223,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 3,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 224,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 4,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 225,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 5,
+  "MaturationNarrative": "Your chi rating at Maturation is above average. This indicator is LUCKY. In terms of your energy level you are likely to have a greater  chance of success than the majority of your peers as you embark upon your career.",
+  "LuckValueID": 1
+ },
+ {
+  "TBMaturationID": 226,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 6,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 227,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 7,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ },
+ {
+  "TBMaturationID": 228,
+  "YearSignID": 12,
+  "Stage": "Maturation",
+  "HasHour": 0,
+  "ChiRating": 8,
+  "MaturationNarrative": "Your chi rating at Maturation is extraordinarily above average. This indicator is NEUTRAL. In terms of your energy level you have a much greater  chance of success than the majority of your peers, but you are likely to have significant vulnerabilities due to your extreme, element imbalance.",
+  "LuckValueID": 2
+ }
+]

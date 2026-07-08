@@ -3,6 +3,7 @@
 // /admin/quick-reading page.
 
 import { SIGN_LABEL, ELEMENT_LABEL, BAND_FOR, BAND_COLOR } from './fire-horse';
+import { CHART_CSS, renderChartEmbed } from './ps/render.mjs';
 
 const TONE_COLORS = {
   great: '#2c8a4a',
@@ -124,33 +125,26 @@ function renderZiweiFullReport(full) {
     ${full.palaces.map(palaceBlock).join('')}`;
 }
 
-function renderZiweiSection(ziwei, ziweiFull) {
-  if (!ziwei) {
+function renderZiweiSection(chart, ziweiFull) {
+  if (!chart) {
     return `
       <div style="margin: 0 0 28px;">
         <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size:18px; margin:0 0 10px; color:#1a1a1a;">Zi Wei Dou Shu</h2>
         <p style="margin:0; font-size:13px; color:#6b6258; font-style:italic;">Birth time not provided — Zi Wei chart skipped. Add the birth time to compute.</p>
       </div>`;
   }
-  const palaceCells = ziwei.palaces.slice(0, 12).map((p) => `
-    <td style="border:1px solid #ece6da; padding:8px; vertical-align:top; width: 25%; font-size:11px; color:#2a2a2a;">
-      <div style="font-weight:600; color:#1a1a1a; font-size:12px;">${escapeHtml(p.name)}${p.isMing ? ' <span style="color:#c8442e;">★</span>' : ''}${p.isBody ? ' <span style="color:#6b6258;">(Body)</span>' : ''}</div>
-      <div style="color:#9a8f81; font-size:10px; margin-bottom:4px;">${escapeHtml(p.branchHan || '')}${p.animal ? ' · ' + escapeHtml(p.animal) : ''}</div>
-      ${(p.majorStars || []).slice(0, 4).map((s) => `<div>${escapeHtml(s.name)}${s.mutagen ? ` <em style="color:#c8442e;">${escapeHtml(s.mutagen)}</em>` : ''}</div>`).join('')}
-    </td>`);
-  const rows = [];
-  for (let i = 0; i < 12; i += 4) {
-    rows.push(`<tr>${palaceCells.slice(i, i + 4).join('')}</tr>`);
-  }
+  const m = chart.meta;
   return `
     <div style="margin: 0 0 28px;">
       <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size:18px; margin:0 0 10px; color:#1a1a1a;">Zi Wei Dou Shu</h2>
       <p style="margin:0 0 8px; font-size:12px; color:#6b6258;">
-        Soul star: <strong>${escapeHtml(ziwei.soulStar || '—')}</strong> · Body star: <strong>${escapeHtml(ziwei.bodyStar || '—')}</strong> · Five Elements: <strong>${escapeHtml(ziwei.fiveElementsClass || '—')}</strong>
+        ${escapeHtml(m.chinese || '')} · Soul: <strong>${escapeHtml(m.soul || '—')}</strong> · Body: <strong>${escapeHtml(m.body || '—')}</strong> · Five Elements: <strong>${escapeHtml(m.fiveElements || '—')}</strong>
       </p>
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
-        ${rows.join('')}
-      </table>
+      ${renderChartEmbed(chart, 'Ming')}
+      <p style="margin:0 0 8px; font-size:11px; color:#9a8f81;">
+        The chart shows the twelve palaces on the classical board. The Fate palace is highlighted with its
+        三方四正 influences: the mirror palace directly opposite (6 branches across) and the two trine palaces (4 apart).
+      </p>
       ${renderZiweiFullReport(ziweiFull)}
     </div>`;
 }
@@ -316,6 +310,7 @@ export function buildQuickReadingHtml(reading) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quick reading — ${escapeHtml(subjectName)}</title>
+  ${reading.ziwei ? `<style>${CHART_CSS}</style>` : ''}
 </head>
 <body style="margin:0; padding:0; background:#f7f3ec; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#1a1a1a;">
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f7f3ec;">

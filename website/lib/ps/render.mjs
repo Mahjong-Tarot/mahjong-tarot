@@ -66,9 +66,59 @@ function renderChart(chart, focusKey) {
       <div class="meta">${esc(m.chinese)}<br>${esc(m.fiveElements)} · Soul ${esc(m.soul)} / Body ${esc(m.body)}<br>
       ${esc(m.solarDate)} · ${esc(m.timeRange)}</div></div>`;
 
-  return `<div class="chart">${lines}${cells}${centerPanel}</div>
+  return `<div class="psc-chart"><div class="chart">${lines}${cells}${centerPanel}</div>
     <p class="chartnote">The chart is a map, not the message — it's here for gravitas and as a keepsake.
-    Everything it encodes is spelled out, in plain language, in your reading below.</p>`;
+    Everything it encodes is spelled out, in plain language, in your reading below.</p></div>`;
+}
+
+// Chart styling, scoped under .psc-chart so the chart can be embedded in
+// other documents (Quick Reading HTML) without leaking rules. The member
+// report PAGE below includes this same block — single source of truth.
+export const CHART_CSS = `
+.psc-chart{--paper:#f5edda;--paper2:#efe4c9;--gold:#d8b25f;--jade:#74b89a;--ember:#e0795f;--rose:#d98aae;--muted:#9387ad;--line:rgba(216,178,95,.28);
+color:var(--paper);line-height:1.6;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Songti SC",serif}
+.psc-chart *{box-sizing:border-box}
+.psc-chart .chart{position:relative;display:grid;gap:6px;aspect-ratio:1/1;max-width:740px;margin:0 auto 8px;
+grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);
+grid-template-areas:"si wu wei shen" "chen ctr ctr you" "mao ctr ctr xu" "yin chou zi hai"}
+.psc-chart .sfsz{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.psc-chart .sfsz .axis{stroke:rgba(216,178,95,.55);stroke-width:.02;stroke-dasharray:.06 .04}
+.psc-chart .sfsz .tri{fill:rgba(116,184,154,.07);stroke:rgba(116,184,154,.55);stroke-width:.02}
+.psc-chart .palace{position:relative;border:1px solid var(--line);border-radius:9px;background:rgba(20,12,38,.55);
+padding:7px 8px 24px;overflow:hidden;display:flex;flex-direction:column;gap:2px;min-height:0}
+.psc-chart .palace.dim{opacity:.4}
+.psc-chart .palace.focus{background:linear-gradient(180deg,rgba(216,178,95,.16),rgba(20,12,38,.6));border-color:var(--gold);
+box-shadow:0 0 0 1px rgba(216,178,95,.35),0 0 26px rgba(216,178,95,.2) inset}
+.psc-chart .palace.mirror{background:linear-gradient(180deg,rgba(116,184,154,.13),rgba(20,12,38,.6));border-color:rgba(116,184,154,.6)}
+.psc-chart .palace.trine{background:linear-gradient(180deg,rgba(116,184,154,.07),rgba(20,12,38,.6));border-color:rgba(116,184,154,.35)}
+.psc-chart .center{grid-area:ctr;border:1px solid var(--line);border-radius:11px;display:flex;flex-direction:column;
+align-items:center;justify-content:center;text-align:center;padding:12px;
+background:radial-gradient(120% 120% at 50% 0,rgba(40,24,70,.7),rgba(10,6,22,.85))}
+.psc-chart .center .cn{font-family:"Songti SC",serif;color:var(--gold);font-size:1.3rem;letter-spacing:.14em}
+.psc-chart .center h2{margin:.2em 0;font-size:1.05rem}.psc-chart .center .meta{font-size:.68rem;color:var(--muted);line-height:1.7}
+.psc-chart .pflag{position:absolute;top:6px;right:7px;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;
+padding:2px 6px;border-radius:99px;font-family:Georgia,serif}
+.psc-chart .pflag.f{background:var(--gold);color:#2a1d05}.psc-chart .pflag.m{background:rgba(116,184,154,.9);color:#08201a}
+.psc-chart .pflag.t{background:rgba(116,184,154,.45);color:#dff0e8}
+.psc-chart .stars{display:flex;flex-direction:column;gap:1px;flex:1;min-height:0;z-index:2}
+.psc-chart .star{display:flex;align-items:baseline;gap:5px;line-height:1.15}
+.psc-chart .star .han{font-family:"Songti SC",serif;font-weight:600;font-size:.92rem;white-space:nowrap}
+.psc-chart .star .en{font-size:.58rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.psc-chart .star.major .han{font-size:1rem}.psc-chart .star.minor .han{font-size:.82rem;font-weight:500}
+.psc-chart .n-major .han{color:#f0d98c}.psc-chart .n-minor .han{color:var(--jade)}.psc-chart .n-malefic .han{color:var(--ember)}.psc-chart .n-romance .han{color:var(--rose)}
+.psc-chart .bd{font-size:.5rem;border-radius:3px;padding:0 3px;font-family:Georgia,serif}
+.psc-chart .bd.mu{background:rgba(216,178,95,.22);color:#f0d98c}.psc-chart .bd.br{background:rgba(255,255,255,.08);color:var(--muted)}
+.psc-chart .empty{font-size:.6rem;color:var(--muted);font-style:italic}
+.psc-chart .pfoot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:4px;
+padding:3px 8px;background:rgba(8,4,18,.5);border-top:1px solid var(--line);font-size:.58rem;z-index:2}
+.psc-chart .pname{font-weight:600;color:var(--paper2)}.psc-chart .pbranch{color:var(--gold);font-family:"Songti SC",serif}
+.psc-chart .chartnote{text-align:center;color:var(--muted);font-size:.72rem;font-style:italic;max-width:560px;margin:0 auto 30px}
+`;
+
+// Self-contained chart block on its own night-sky backdrop, for embedding
+// in a light document. The host document must include CHART_CSS once.
+export function renderChartEmbed(chart, focusKey = null) {
+  return `<div style="background:linear-gradient(160deg,#140b29,#241449 55%,#0d0720);border-radius:12px;padding:18px 14px 4px;margin:0 0 12px;">${renderChart(chart, focusKey)}</div>`;
 }
 
 const PAGE = (title, ident, body) => `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
@@ -87,41 +137,7 @@ h1{text-align:center;font-size:2.2rem;margin:.3em 0 .1em;font-weight:600}
 h1 .han{color:var(--gold);font-family:"Songti SC",serif;margin-left:.25em}
 .ident{text-align:center;color:var(--paper2);font-size:.92rem;margin:0 auto 26px;max-width:680px}
 .ident b{color:var(--gold)}
-.chart{position:relative;display:grid;gap:6px;aspect-ratio:1/1;max-width:740px;margin:0 auto 8px;
-grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);
-grid-template-areas:"si wu wei shen" "chen ctr ctr you" "mao ctr ctr xu" "yin chou zi hai"}
-.sfsz{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
-.sfsz .axis{stroke:rgba(216,178,95,.55);stroke-width:.02;stroke-dasharray:.06 .04}
-.sfsz .tri{fill:rgba(116,184,154,.07);stroke:rgba(116,184,154,.55);stroke-width:.02}
-.palace{position:relative;border:1px solid var(--line);border-radius:9px;background:rgba(20,12,38,.55);
-padding:7px 8px 24px;overflow:hidden;display:flex;flex-direction:column;gap:2px;min-height:0}
-.palace.dim{opacity:.4}
-.palace.focus{background:linear-gradient(180deg,rgba(216,178,95,.16),rgba(20,12,38,.6));border-color:var(--gold);
-box-shadow:0 0 0 1px rgba(216,178,95,.35),0 0 26px rgba(216,178,95,.2) inset}
-.palace.mirror{background:linear-gradient(180deg,rgba(116,184,154,.13),rgba(20,12,38,.6));border-color:rgba(116,184,154,.6)}
-.palace.trine{background:linear-gradient(180deg,rgba(116,184,154,.07),rgba(20,12,38,.6));border-color:rgba(116,184,154,.35)}
-.center{grid-area:ctr;border:1px solid var(--line);border-radius:11px;display:flex;flex-direction:column;
-align-items:center;justify-content:center;text-align:center;padding:12px;
-background:radial-gradient(120% 120% at 50% 0,rgba(40,24,70,.7),rgba(10,6,22,.85))}
-.center .cn{font-family:"Songti SC",serif;color:var(--gold);font-size:1.3rem;letter-spacing:.14em}
-.center h2{margin:.2em 0;font-size:1.05rem}.center .meta{font-size:.68rem;color:var(--muted);line-height:1.7}
-.pflag{position:absolute;top:6px;right:7px;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;
-padding:2px 6px;border-radius:99px;font-family:Georgia,serif}
-.pflag.f{background:var(--gold);color:#2a1d05}.pflag.m{background:rgba(116,184,154,.9);color:#08201a}
-.pflag.t{background:rgba(116,184,154,.45);color:#dff0e8}
-.stars{display:flex;flex-direction:column;gap:1px;flex:1;min-height:0;z-index:2}
-.star{display:flex;align-items:baseline;gap:5px;line-height:1.15}
-.star .han{font-family:"Songti SC",serif;font-weight:600;font-size:.92rem;white-space:nowrap}
-.star .en{font-size:.58rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.star.major .han{font-size:1rem}.star.minor .han{font-size:.82rem;font-weight:500}
-.n-major .han{color:#f0d98c}.n-minor .han{color:var(--jade)}.n-malefic .han{color:var(--ember)}.n-romance .han{color:var(--rose)}
-.bd{font-size:.5rem;border-radius:3px;padding:0 3px;font-family:Georgia,serif}
-.bd.mu{background:rgba(216,178,95,.22);color:#f0d98c}.bd.br{background:rgba(255,255,255,.08);color:var(--muted)}
-.empty{font-size:.6rem;color:var(--muted);font-style:italic}
-.pfoot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:4px;
-padding:3px 8px;background:rgba(8,4,18,.5);border-top:1px solid var(--line);font-size:.58rem;z-index:2}
-.pname{font-weight:600;color:var(--paper2)}.pbranch{color:var(--gold);font-family:"Songti SC",serif}
-.chartnote{text-align:center;color:var(--muted);font-size:.72rem;font-style:italic;max-width:560px;margin:0 auto 30px}
+${CHART_CSS}
 .reading{max-width:760px;margin:30px auto 0;background:var(--paper);color:var(--ink);border-radius:14px;
 padding:34px 38px 40px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
 .reading .kicker{text-align:center;font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-deep)}

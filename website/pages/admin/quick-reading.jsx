@@ -49,11 +49,15 @@ export default function QuickReadingPage({ profile }) {
   const [partnerBirthTime, setPartnerBirthTime] = useState('');
   const [partnerGender, setPartnerGender] = useState('');
 
-  const [otherEmail, setOtherEmail] = useState('');
-  const [showOtherInput, setShowOtherInput] = useState(false);
-  const [sending, setSending] = useState('');
-  const [message, setMessage] = useState('');
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
+
+  // ── Drawer action state (copy link + email) ──────────────────────
+  const [copied, setCopied] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailMsg, setEmailMsg] = useState('');
+  const [emailErr, setEmailErr] = useState('');
 
   // ── Past-tab state ────────────────────────────────────────────────
   const [pastRows, setPastRows] = useState([]);
@@ -69,10 +73,10 @@ export default function QuickReadingPage({ profile }) {
     setPastError('');
     // Note: `html` is deliberately excluded — it is the full rendered
     // reading (tens of KB each) and would bloat the list payload. It is
-    // fetched on demand when a row is opened (see openRow).
+    // fetched on demand when a row is opened (see openDrawer).
     supabase
       .from('readings')
-      .select('id, created_at, person1_name, person1_birthday, person2_name, person2_birthday, types, sent_to')
+      .select('id, created_at, person1_name, person1_birthday, person2_name, person2_birthday, types, sent_to, public_token')
       .eq('type', 'admin')
       .order('created_at', { ascending: false })
       .limit(200)
@@ -88,12 +92,17 @@ export default function QuickReadingPage({ profile }) {
     setTypes((prev) => prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]);
   }
 
-  // Open a saved reading. The list query no longer carries the (large)
-  // html blob, so fetch it on demand for just this row. Fresh screen
-  // readings already hold their html in memory and skip the fetch.
-  async function openRow(r) {
-    setOpenReading(r);
-    if (r.html != null || !supabase) {
+  // Open the drawer on a reading, resetting the copy/email action state.
+  // The list query no longer carries the (large) html blob, so fetch it
+  // on demand for just this row. Freshly generated readings already hold
+  // their html in memory and skip the fetch.
+  async function openDrawer(reading) {
+    setCopied(false);
+    setEmailInput('');
+    setEmailMsg('');
+    setEmailErr('');
+    setOpenReading(reading);
+    if (reading.html != null || !supabase) {
       setHtmlLoading(false);
       return;
     }
@@ -101,16 +110,16 @@ export default function QuickReadingPage({ profile }) {
     const { data, error: e } = await supabase
       .from('readings')
       .select('html')
-      .eq('id', r.id)
+      .eq('id', reading.id)
       .maybeSingle();
     setHtmlLoading(false);
     // Only apply if this row is still the open one (guards fast clicks).
     setOpenReading((cur) =>
-      cur && cur.id === r.id ? { ...cur, html: e ? '' : (data?.html ?? '') } : cur,
+      cur && cur.id === reading.id ? { ...cur, html: e ? '' : (data?.html ?? '') } : cur,
     );
   }
 
-  async function postReading(recipient) {
+  async function generateReading() {
     if (!birthday) {
       setError('Date of birth is required.');
       return;
@@ -124,13 +133,12 @@ export default function QuickReadingPage({ profile }) {
       return;
     }
     setError('');
-    setMessage('');
-    setSending(recipient === 'me' || recipient === 'screen' ? recipient : 'other');
+    setSending(true);
 
     let timer;
     const timeout = new Promise((_, reject) => {
       timer = setTimeout(
-        () => reject(new Error('Send timed out after 30s. Try refreshing the page.')),
+        () => reject(new Error('Generation timed out after 30s. Try refreshing the page.')),
         30000,
       );
     });
@@ -153,45 +161,74 @@ export default function QuickReadingPage({ profile }) {
               birthTime: partnerBirthTime || null,
               gender: partnerGender || null,
             } : null,
-            recipient,
           }),
         }),
         timeout,
       ]);
       clearTimeout(timer);
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to send.');
-      if (recipient === 'screen') {
-        setOpenReading({
-          id: 'fresh',
-          created_at: new Date().toISOString(),
-          person1_name: name || null,
-          person2_name: types.includes('compatibility') ? (partnerName || null) : null,
-          sent_to: null,
-          html: data.html,
-        });
-      } else {
-        setMessage(`Sent to ${data.sentTo}.`);
-      }
+      if (!res.ok) throw new Error(data.error || 'Failed to generate.');
+      openDrawer({
+        id: data.readingId,
+        public_token: data.publicToken,
+        created_at: new Date().toISOString(),
+        person1_name: name || null,
+        person2_name: types.includes('compatibility') ? (partnerName || null) : null,
+        sent_to: null,
+        html: data.html,
+      });
       // Force the Past tab to reload next time it's opened.
       setPastLoaded(false);
     } catch (err) {
       clearTimeout(timer);
       // eslint-disable-next-line no-console
-      console.error('[quick-reading] send failed', err);
-      setError(err?.message || 'Failed to send.');
+      console.error('[quick-reading] generate failed', err);
+      setError(err?.message || 'Failed to generate.');
     } finally {
-      setSending('');
+      setSending(false);
     }
   }
 
-  function handleSendOther(e) {
-    e?.preventDefault?.();
-    if (!otherEmail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(otherEmail)) {
-      setError('Please enter a valid email address.');
+  function copyPublicLink() {
+    if (!openReading?.public_token) return;
+    const url = `${window.location.origin}/reading/q/${openReading.public_token}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
+  }
+
+  async function sendEmails() {
+    const emails = emailInput.split(/[,;\s]+/).map((s) => s.trim()).filter(Boolean);
+    if (emails.length === 0) {
+      setEmailErr('Enter at least one email address.');
       return;
     }
-    postReading(otherEmail);
+    const bad = emails.find((e) => !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e));
+    if (bad) {
+      setEmailErr(`Invalid email address: ${bad}`);
+      return;
+    }
+    setEmailErr('');
+    setEmailMsg('');
+    setEmailSending(true);
+    try {
+      const res = await fetch('/api/admin/email-quick-reading', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: openReading.id, emails }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to send.');
+      setEmailMsg(`Sent to ${data.sentTo.join(', ')}.`);
+      setEmailInput('');
+      setOpenReading((r) => (r ? { ...r, sent_to: data.sentToAll } : r));
+      setPastLoaded(false);
+    } catch (err) {
+      setEmailErr(err?.message || 'Failed to send.');
+    } finally {
+      setEmailSending(false);
+    }
   }
 
   const compatChecked = types.includes('compatibility');
@@ -233,7 +270,7 @@ export default function QuickReadingPage({ profile }) {
         {tab === 'generate' && (
           <form
             className={styles.form}
-            onSubmit={(e) => { e.preventDefault(); postReading('screen'); }}
+            onSubmit={(e) => { e.preventDefault(); generateReading(); }}
           >
             <p className={styles.sectionHead}>Subject</p>
 
@@ -377,58 +414,16 @@ export default function QuickReadingPage({ profile }) {
             )}
 
             {error && <p className="error-inline">{error}</p>}
-            {message && <p className={styles.success}>{message}</p>}
 
             <div className={styles.actions}>
               <button
                 type="submit"
                 className={styles.btnPrimary}
-                disabled={sending !== ''}
+                disabled={sending}
               >
-                {sending === 'screen' ? 'Generating…' : 'Generate reading'}
-              </button>
-
-              <button
-                type="button"
-                className={styles.btnSecondary}
-                onClick={() => postReading('me')}
-                disabled={sending !== ''}
-              >
-                {sending === 'me' ? 'Sending…' : 'Email to me'}
-              </button>
-
-              <button
-                type="button"
-                className={styles.btnSecondary}
-                onClick={() => setShowOtherInput((v) => !v)}
-                disabled={sending !== ''}
-              >
-                Email to another address
+                {sending ? 'Generating…' : 'Generate reading'}
               </button>
             </div>
-
-            {showOtherInput && (
-              <div className={styles.otherBlock}>
-                <label className={styles.field}>
-                  <span className={styles.label}>Recipient email</span>
-                  <input
-                    type="email"
-                    className={styles.input}
-                    value={otherEmail}
-                    onChange={(e) => setOtherEmail(e.target.value)}
-                    placeholder="recipient@example.com"
-                  />
-                </label>
-                <button
-                  type="button"
-                  className={styles.btnPrimary}
-                  onClick={handleSendOther}
-                  disabled={sending !== '' || !otherEmail}
-                >
-                  {sending === 'other' ? 'Sending…' : `Send to ${otherEmail || 'address'}`}
-                </button>
-              </div>
-            )}
           </form>
         )}
 
@@ -462,7 +457,7 @@ export default function QuickReadingPage({ profile }) {
                       <tr
                         key={r.id}
                         className={styles.rowClickable}
-                        onClick={() => openRow(r)}
+                        onClick={() => openDrawer(r)}
                       >
                         <td className={tableStyles.cellMuted}>{relTime(r.created_at)}</td>
                         <td className={tableStyles.cellPrimary}>
@@ -520,6 +515,37 @@ export default function QuickReadingPage({ profile }) {
                 >
                   ×
                 </button>
+              </div>
+              <div className={styles.drawerActions}>
+                {openReading.public_token && (
+                  <button
+                    type="button"
+                    className={styles.btnSecondary}
+                    onClick={copyPublicLink}
+                  >
+                    {copied ? 'Link copied ✓' : 'Copy public link'}
+                  </button>
+                )}
+                <input
+                  type="text"
+                  className={styles.input}
+                  style={{ flex: '1 1 220px', maxWidth: '360px' }}
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); sendEmails(); } }}
+                  placeholder="one@example.com, two@example.com"
+                  disabled={emailSending}
+                />
+                <button
+                  type="button"
+                  className={styles.btnPrimary}
+                  onClick={sendEmails}
+                  disabled={emailSending || !emailInput.trim() || !openReading.id}
+                >
+                  {emailSending ? 'Sending…' : 'Email'}
+                </button>
+                {emailMsg && <span className={styles.success} style={{ margin: 0 }}>{emailMsg}</span>}
+                {emailErr && <span className="error-inline" style={{ margin: 0 }}>{emailErr}</span>}
               </div>
               <div className={styles.drawerBody}>
                 {htmlLoading && openReading.html == null ? (

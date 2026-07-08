@@ -254,6 +254,15 @@
   border-bottom: 1px solid var(--rule);
 }
 
+.drawerActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--space-sm, 0.6rem) var(--space-lg);
+  border-bottom: 1px solid var(--rule);
+}
+
 .drawerTitle {
   font-family: var(--serif);
   font-size: 16px;

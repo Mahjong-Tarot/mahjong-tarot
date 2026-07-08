@@ -6,38 +6,14 @@ import MemberShell from '../../../../components/MemberShell';
 import Footer from '../../../../components/Footer';
 import { useAuth } from '../../../../lib/auth';
 import { supabase } from '../../../../lib/supabase';
+import { READINGS, memberReadingHref } from '../../../../lib/reading-meta';
 import styles from '../../../../styles/Account.module.css';
 
-const PERSONAL_READINGS = [
-  {
-    key: 'four-pillars',
-    title: 'Four Pillars',
-    blurb: 'Your birth chart elements and the five stages of your life cycle.',
-    href: '/member/dashboard/readings/four-pillars',
-    available: true,
-  },
-  {
-    key: 'purple-star',
-    title: 'Purple Star (Zi Wei Dou Shu)',
-    blurb: 'The 12-palace map of your life themes and seasons.',
-    href: '/member/dashboard/readings/purple-star',
-    available: true,
-  },
-  {
-    key: 'three-blessings',
-    title: 'Three Blessings',
-    blurb: 'Your stars of wealth, prosperity, and longevity.',
-    href: '/member/dashboard/readings/three-blessings',
-    available: true,
-  },
-  {
-    key: 'fire-horse',
-    title: 'Year of the Fire Horse',
-    blurb: 'Your full 2026 forecast, read against your day master.',
-    href: '/member/dashboard/readings/fire-horse',
-    available: true,
-  },
-];
+// Canonical names, slugs, and blurbs come from lib/reading-meta.js.
+// Compatibility has its own section below (saved reports + new-reading form).
+const PERSONAL_READINGS = READINGS
+  .filter((r) => r.key !== 'compatibility')
+  .map((r) => ({ key: r.slug, title: r.label, blurb: r.blurb, href: memberReadingHref(r) }));
 
 export default function ReadingsList() {
   const router = useRouter();
@@ -101,20 +77,12 @@ export default function ReadingsList() {
 
           {loaded && hasBirthday && (
             <div className={styles.cards}>
-              {PERSONAL_READINGS.map((r) =>
-                r.available ? (
-                  <Link key={r.key} href={r.href} className={styles.card}>
-                    <h2>{r.title}</h2>
-                    <p>{r.blurb}</p>
-                  </Link>
-                ) : (
-                  <div key={r.key} className={styles.cardDisabled}>
-                    <span className={styles.comingSoonBadge}>Coming soon</span>
-                    <h2>{r.title}</h2>
-                    <p>{r.blurb}</p>
-                  </div>
-                ),
-              )}
+              {PERSONAL_READINGS.map((r) => (
+                <Link key={r.key} href={r.href} className={styles.card}>
+                  <h2>{r.title}</h2>
+                  <p>{r.blurb}</p>
+                </Link>
+              ))}
             </div>
           )}
         </section>

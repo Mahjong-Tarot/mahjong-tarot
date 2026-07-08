@@ -41,7 +41,7 @@ function westernSunSign(birthday) {
   return WESTERN_SIGNS.find((s) => md >= s.start && md < s.end)?.name || null;
 }
 
-export const READING_TYPES = ['bazi', 'ziwei', 'three_blessings', 'fire_horse', 'compatibility'];
+export { READING_TYPES } from './reading-meta';
 
 /**
  * Build a Quick Reading packet for a subject (and optionally a partner

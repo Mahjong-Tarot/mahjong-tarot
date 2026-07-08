@@ -7,6 +7,8 @@
 //
 // Add or rename a member destination in ONE place — here.
 
+import { READINGS, memberReadingHref } from './reading-meta';
+
 export const MEMBER_NAV = [
   { key: 'dashboard',   href: '/member/dashboard',              label: 'Dashboard',    match: (p) => p === '/member/dashboard' },
   { key: 'almanac',     href: '/member/dashboard/almanac',      label: 'Almanac',      match: (p) => p.startsWith('/member/dashboard/almanac') },
@@ -20,23 +22,15 @@ const byKey = Object.fromEntries(MEMBER_NAV.map((i) => [i.key, i]));
 
 // The individual reading surfaces, all under /member/dashboard/readings.
 // Reached via the Readings index cards in the sidebar; surfaced as direct
-// links in the compact top-bar dropdown. Labels here are the canonical
-// customer-facing reading names — keep them in sync with the Readings
-// index cards and the admin Quick Reading flow.
-const readingLink = (key, slug, label) => ({
-  key,
-  href: `/member/dashboard/readings/${slug}`,
-  label,
-  match: (p) => p.startsWith(`/member/dashboard/readings/${slug}`),
-});
-
-export const READING_LINKS = [
-  readingLink('fourPillars',    'four-pillars',    'Four Pillars'),
-  readingLink('purpleStar',     'purple-star',     'Purple Star (Zi Wei Dou Shu)'),
-  readingLink('threeBlessings', 'three-blessings', 'Three Blessings'),
-  readingLink('fireHorse',      'fire-horse',      'Year of the Fire Horse'),
-  readingLink('compatibility',  'compatibility',   'Compatibility Reading'),
-];
+// links in the compact top-bar dropdown. Slugs and labels come from the
+// canonical reading metadata (lib/reading-meta.js), shared with the admin
+// Quick Reading flow.
+export const READING_LINKS = READINGS.map((r) => ({
+  key: r.key,
+  href: memberReadingHref(r),
+  label: r.label,
+  match: (p) => p.startsWith(memberReadingHref(r)),
+}));
 
 // Keys that collapse under the "Readings" dropdown in the compact top-bar.
 const READINGS_GROUP = [byKey.almanac, byKey.horoscope, ...READING_LINKS];

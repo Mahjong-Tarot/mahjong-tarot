@@ -165,20 +165,89 @@ function renderZiweiSection(chart, ziweiFull) {
 
 // ── Three Blessings ─────────────────────────────────────────────────
 
+// Bill's Fu Lu Shou reading (lib/tb/engine.mjs shape). Mirrors the member
+// ThreeBlessingsReportView: summary tiles, ten indicators per blessing,
+// per-blessing conclusions, grand conclusion — in the almanac verdict colors.
+const TB_SECTIONS = [
+  { key: 'luck',       ornament: '福', name: 'Happiness',  vi: 'Phúc', sub: 'Luck' },
+  { key: 'prosperity', ornament: '禄', name: 'Prosperity', vi: 'Lộc',  sub: 'Wealth' },
+  { key: 'longevity',  ornament: '寿', name: 'Longevity',  vi: 'Thọ',  sub: 'Health' },
+];
+// Almanac auspiciousness palette (globals.css --luck-* tokens, inlined for email).
+const TB_VERDICT = {
+  1: { label: 'Lucky',   bg: '#e8f5e8', ink: '#1e6334', border: '#e8f5e8' },
+  2: { label: 'Neutral', bg: '#f8f6f0', ink: '#50545E', border: '#E4E5EA' },
+  3: { label: 'Unlucky', bg: '#fbe9e7', ink: '#9E1B14', border: '#fbe9e7' },
+};
+const tbVerdict = (lv) => TB_VERDICT[lv] || TB_VERDICT[2];
+const tbChip = (lv) => {
+  const v = tbVerdict(lv);
+  return `<span style="display:inline-block; padding:2px 10px; border-radius:999px; font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; background:${v.bg}; color:${v.ink}; border:1px solid ${v.border};">${v.label}</span>`;
+};
+
 function renderThreeBlessingsSection(tb) {
   if (!tb) return '';
-  const blessing = (b) => `
-    <td style="vertical-align:top; padding:10px; border:1px solid #E4E5EA; width:33%;">
-      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98;">${escapeHtml(b.position.name)} — ${escapeHtml(b.position.label)}</div>
-      <div style="font-family: 'Fraunces', Georgia, serif; font-size:14px; color:#14161B; margin-top:4px;">${escapeHtml(b.card?.name || '—')}${b.isIdeal ? ' <span style="color:#E63329;">★</span>' : ''}</div>
-      <div style="font-size:11px; color:#50545E; margin-top:6px; line-height:1.5;">${escapeHtml(b.personalLine || '')}</div>
-    </td>`;
+
+  const tile = ({ key, ornament, name, vi }) => {
+    const s = tb[key];
+    const v = tbVerdict(s.verdict);
+    return `
+      <td style="vertical-align:top; padding:14px 12px; border:1px solid #E4E5EA; border-radius:10px; width:33%; background:${v.bg}; text-align:center;">
+        <div style="font-family: 'Fraunces', Georgia, serif; font-size:22px; color:${v.ink};">${ornament}</div>
+        <div style="font-family: 'Fraunces', Georgia, serif; font-size:15px; color:#14161B; margin-top:4px;">${name}</div>
+        <div style="font-size:11px; color:#8A8E98; margin:2px 0 8px;">${vi}</div>
+        ${tbChip(s.verdict)}
+        <div style="font-size:10.5px; color:#50545E; margin-top:8px;">${s.tally.L} lucky · ${s.tally.N} neutral · ${s.tally.U} unlucky</div>
+      </td>`;
+  };
+
+  const crossRefLine = (lv) =>
+    `Your overall Happiness rating is ${tbVerdict(lv).label.toLowerCase()}, which carries into your health and longevity.`;
+
+  const indicatorRow = (ind) => `
+    <tr>
+      <td style="padding:8px 0 8px; border-bottom:1px solid #EFEFF2; vertical-align:top;">
+        <div style="font-size:12px; font-weight:600; color:#2A2D35;">${escapeHtml(ind.label)}${ind.provisional ? ' <span style="font-size:10px; font-weight:400; font-style:italic; color:#8A8E98;">estimated</span>' : ''}</div>
+        ${ind.narrative || ind.crossRef ? `<p style="margin:4px 0 0; font-size:12px; line-height:1.55; color:#50545E;">${escapeHtml(ind.narrative || crossRefLine(ind.lv))}</p>` : ''}
+      </td>
+      <td style="padding:8px 0 8px 12px; border-bottom:1px solid #EFEFF2; vertical-align:top; text-align:right; white-space:nowrap;">${tbChip(ind.lv)}</td>
+    </tr>`;
+
+  const section = ({ key, ornament, name, vi, sub }) => {
+    const s = tb[key];
+    const v = tbVerdict(s.verdict);
+    return `
+      <div style="margin:0 0 22px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 6px;">
+          <tr>
+            <td style="width:34px; vertical-align:middle;"><span style="font-family: 'Fraunces', Georgia, serif; font-size:22px; color:${v.ink};">${ornament}</span></td>
+            <td style="vertical-align:middle;">
+              <div style="font-family: 'Fraunces', Georgia, serif; font-size:17px; color:#14161B;">${name}</div>
+              <div style="font-size:11px; color:#8A8E98;">${vi} · ${sub}</div>
+            </td>
+            <td style="vertical-align:middle; text-align:right;">${tbChip(s.verdict)}</td>
+          </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
+          ${s.indicators.map(indicatorRow).join('')}
+        </table>
+        ${s.conclusion ? `<div style="margin:12px 0 0; padding:10px 14px; background:${v.bg}; border-left:3px solid ${v.ink}; border-radius:4px; font-size:12.5px; line-height:1.55; color:#2A2D35;">${escapeHtml(s.conclusion)}</div>` : ''}
+      </div>`;
+  };
+
   return `
     <div style="margin: 0 0 28px;">
       <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Three Blessings</h2>
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
-        <tr>${blessing(tb.phuc)}${blessing(tb.loc)}${blessing(tb.tho)}</tr>
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:separate; border-spacing:8px 0; margin:0 -8px 18px;">
+        <tr>${TB_SECTIONS.map(tile).join('')}</tr>
       </table>
+      ${TB_SECTIONS.map(section).join('')}
+      ${tb.grand?.narrative ? `
+        <div style="margin:4px 0 0; padding:14px 16px; background:#F8F6F0; border:1px solid #E4E5EA; border-radius:10px;">
+          <div style="font-family: 'Fraunces', Georgia, serif; font-size:15px; color:#14161B; margin:0 0 6px;">The whole of your fortune</div>
+          <p style="margin:0; font-size:12.5px; line-height:1.6; color:#2A2D35;">${escapeHtml(tb.grand.narrative)}</p>
+        </div>` : ''}
+      <p style="margin:12px 0 0; font-size:10.5px; font-style:italic; color:#8A8E98;">Ten indicators weigh each blessing; a blessing is granted when its lucky indicators outnumber the unlucky.</p>
     </div>`;
 }
 

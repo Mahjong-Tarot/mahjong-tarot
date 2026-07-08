@@ -76,12 +76,17 @@ export function sanFangSiZheng(idx) {
 }
 const WEIGHTS = { focus: 1.0, opposite: 0.3, trine: 0.3 }; // tunable; calibrate vs samples
 const LUCK_BAND = 1.5; // tunable knob 2: |score| band for lucky/unlucky vs mixed (full-canon first-draft)
+// TUNABLE KNOB 3 — minor-star weight. The canon places ~90 minor stars vs ~20
+// majors per chart; at the old 0.5 the minors' bulk swamped the majors, so a
+// palace holding 紫微/天府 could score net-negative and read "Mixed" while an
+// empty palace read "Most Lucky". Minors now nuance the rating, majors drive it.
+const MINOR_WEIGHT = 0.1;
 
 // ── scoring ──────────────────────────────────────────────────────────────────
 function palaceRawScore(palace) {
   let s = 0;
   for (const st of palace.majors) s += st.weight;
-  for (const st of palace.minors) s += st.weight * 0.5;
+  for (const st of palace.minors) s += st.weight * MINOR_WEIGHT;
   return s;
 }
 
@@ -112,15 +117,21 @@ export function scoreChart(chart, data) {
   const ranked = [...chart.palaces].sort((a, b) => b.score - a.score);
   const top = ranked[0], bottom = ranked[ranked.length - 1];
   const tie = top.score === bottom.score;
+  // "Most/Least Lucky" are absolute claims, so only award them when the score is
+  // genuinely positive/negative. The best palace must also actually hold major
+  // stars — an empty palace (which borrows its opposite) must never be crowned
+  // the single luckiest area of life just for scoring near zero.
+  const topIsLucky = !tie && top.score > 0 && top.majors.length > 0;
+  const bottomIsUnlucky = !tie && bottom.score < 0;
   for (const p of chart.palaces) {
-    if (!tie && p === top) p.luck = 'mostLucky';
-    else if (!tie && p === bottom) p.luck = 'leastLucky';
+    if (topIsLucky && p === top) p.luck = 'mostLucky';
+    else if (bottomIsUnlucky && p === bottom) p.luck = 'leastLucky';
     else if (p.score >= LUCK_BAND) p.luck = 'generallyLucky';
     else if (p.score <= -LUCK_BAND) p.luck = 'generallyUnlucky';
     else p.luck = 'mixed';
   }
-  chart.luckiest = tie ? null : top;
-  chart.unluckiest = tie ? null : bottom;
+  chart.luckiest = topIsLucky ? top : null;
+  chart.unluckiest = bottomIsUnlucky ? bottom : null;
   return chart;
 }
 
@@ -197,9 +208,19 @@ export function buildYears(chart, narratives, currentAge, maxAge = 100) {
 }
 
 // ── report assembly ───────────────────────────────────────────────────────────
+// Some palaces are missing a bucket in fate.json (e.g. Ming has no "mixed",
+// Wealth no "VUL", Parents no "VL"). Fall back to the nearest-polarity bank so a
+// palace never renders with zero personality traits.
+const FATE_FALLBACK = {
+  VL: ['VL', 'L', 'mixed'], L: ['L', 'mixed', 'VL'], mixed: ['mixed', 'L', 'UL'],
+  UL: ['UL', 'mixed', 'VUL'], VUL: ['VUL', 'UL', 'mixed'],
+};
 function fateTraits(fate, key, level, n = 4) {
-  const bank = (fate[key] && (fate[key][level] || fate[key][level === 'mixed' ? 'mixed' : level])) || [];
-  return bank.slice(0, n);
+  const bank = fate[key] || {};
+  for (const lv of (FATE_FALLBACK[level] || [level])) {
+    if (bank[lv] && bank[lv].length) return bank[lv].slice(0, n);
+  }
+  return [];
 }
 
 export function buildPalaceReading(chart, palaceKey, data) {

@@ -74,8 +74,8 @@ export default function ReadingPage() {
       </Head>
       <MemberShell>
       <main className={`container ${styles.wrap}`}>
-        <p className={styles.authFootnote} style={{ marginBottom: '0.5rem' }}>
-          <Link href="/member/dashboard/readings">← Saved readings</Link>
+        <p className={styles.breadcrumb}>
+          <Link href="/member/dashboard/readings">← Readings</Link>
         </p>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '1rem' }}>
           <div>

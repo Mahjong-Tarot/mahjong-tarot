@@ -114,44 +114,50 @@ export default function QuickReadingView() {
         <div className={styles.fullHeader}>
           <div className={styles.fullHeaderLeft}>
             <Link href="/admin/quick-reading" className={styles.backLink}>← Quick readings</Link>
-            <div>
-              <h1 className={styles.drawerTitle}>{title}</h1>
-              {reading && (
-                <p className={styles.drawerSub}>
-                  {relTime(reading.created_at)}
-                  {reading.sent_to ? ` · sent to ${reading.sent_to}` : ''}
-                </p>
-              )}
-            </div>
+            <h1 className={styles.drawerTitle}>{title}</h1>
+            {reading && (
+              <div className={styles.drawerMeta}>
+                <span className={styles.drawerDate}>{relTime(reading.created_at)}</span>
+                {reading.sent_to && (
+                  <>
+                    <span className={styles.metaDot} aria-hidden="true">·</span>
+                    <span className={styles.drawerSent}>Sent to {reading.sent_to}</span>
+                  </>
+                )}
+              </div>
+            )}
           </div>
 
           {reading && (
-            <div className={styles.fullHeaderActions}>
-              {reading.public_token && (
-                <button type="button" className={styles.btnSecondary} onClick={copyPublicLink}>
-                  {copied ? 'Link copied ✓' : 'Copy public link'}
-                </button>
-              )}
-              <input
-                type="text"
-                className={styles.input}
-                style={{ flex: '1 1 220px', maxWidth: '360px' }}
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); sendEmails(); } }}
-                placeholder="one@example.com, two@example.com"
-                disabled={emailSending}
-              />
-              <button
-                type="button"
-                className={styles.btnPrimary}
-                onClick={sendEmails}
-                disabled={emailSending || !emailInput.trim()}
-              >
-                {emailSending ? 'Sending…' : 'Email'}
-              </button>
-              {emailMsg && <span className={styles.success} style={{ margin: 0 }}>{emailMsg}</span>}
-              {emailErr && <span className="error-inline" style={{ margin: 0 }}>{emailErr}</span>}
+            <div className={styles.fullHeaderRight}>
+              <div className={styles.fullHeaderActions}>
+                {reading.public_token && (
+                  <button type="button" className={styles.btnSecondary} onClick={copyPublicLink}>
+                    {copied ? 'Link copied ✓' : 'Copy public link'}
+                  </button>
+                )}
+                <div className={styles.emailGroup}>
+                  <input
+                    type="text"
+                    className={styles.emailInput}
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); sendEmails(); } }}
+                    placeholder="one@example.com, two@example.com"
+                    disabled={emailSending}
+                  />
+                  <button
+                    type="button"
+                    className={styles.btnPrimary}
+                    onClick={sendEmails}
+                    disabled={emailSending || !emailInput.trim()}
+                  >
+                    {emailSending ? 'Sending…' : 'Email'}
+                  </button>
+                </div>
+              </div>
+              {emailMsg && <p className={styles.actionMsg}>{emailMsg}</p>}
+              {emailErr && <p className={`${styles.actionMsg} ${styles.actionMsgError}`}>{emailErr}</p>}
             </div>
           )}
         </div>

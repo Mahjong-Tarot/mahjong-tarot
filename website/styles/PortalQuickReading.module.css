@@ -265,18 +265,9 @@
 
 .drawerTitle {
   font-family: var(--serif);
-  font-size: 16px;
-  margin: 0;
-  color: var(--ink);
-}
-
-.drawerSub {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-4);
+  font-size: 20px;
   margin: 4px 0 0;
+  color: var(--ink);
 }
 
 .drawerClose {
@@ -313,38 +304,123 @@
 
 .fullHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--space-lg);
   flex-wrap: wrap;
-  padding: var(--space-sm, 0.6rem) var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
   border-bottom: 1px solid var(--rule);
 }
 
 .fullHeaderLeft {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fullHeaderRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
 }
 
 .fullHeaderActions {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-sm);
 }
 
 .backLink {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--ink-3);
   text-decoration: none;
   white-space: nowrap;
 }
 
 .backLink:hover {
+  color: var(--fire-600);
+}
+
+.drawerMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0 0;
+}
+
+.drawerDate {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.metaDot {
+  color: var(--rule);
+}
+
+.drawerSent {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.emailGroup {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 320px;
+  max-width: 420px;
+}
+
+.emailInput {
+  flex: 1 1 auto;
+  min-width: 160px;
+  box-sizing: border-box;
+  font-family: var(--sans);
+  font-size: 14px;
   color: var(--ink);
+  padding: 9px 14px;
+  border: 1px solid var(--rule);
+  border-right: 0;
+  border-radius: 6px 0 0 6px;
+  background: var(--paper-pure);
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: var(--fire-500);
+  position: relative;
+  z-index: 1;
+}
+
+.emailInput:disabled {
+  color: var(--ink-4);
+  background: var(--paper);
+}
+
+.emailGroup .btnPrimary {
+  flex: 0 0 auto;
+  border-radius: 0 6px 6px 0;
+}
+
+.actionMsg {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-3);
+  text-align: right;
+}
+
+.actionMsgError {
+  color: #b22;
 }
 
 .fullBody {

@@ -58,7 +58,7 @@ export default function ThreeBlessingsReport() {
       </Head>
       <MemberShell>
         <main className={`container ${account.wrap}`}>
-          <p className={account.authFootnote} style={{ marginBottom: '0.5rem' }}>
+          <p className={account.breadcrumb}>
             <Link href="/member/dashboard/readings">← Readings</Link>
           </p>
 

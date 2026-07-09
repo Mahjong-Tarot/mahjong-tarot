@@ -105,6 +105,9 @@ export default function CompatibilityPage() {
       </Head>
       <MemberShell>
       <main className={`container ${styles.wrap}`}>
+        <p className={styles.breadcrumb}>
+          <Link href="/member/dashboard/readings">← Readings</Link>
+        </p>
         <h1 className={styles.title}>Compatibility Reading</h1>
         <p className={styles.lede}>
           Enter two people. We&apos;ll save the report to your dashboard with its

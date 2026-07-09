@@ -431,3 +431,12 @@
   display: flex;
   gap: var(--space-sm);
 }
+
+/* Top-of-page breadcrumb link — always top left. */
+.breadcrumb {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  text-align: left;
+}

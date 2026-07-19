@@ -27,15 +27,15 @@ ARMS={
 CENTER=(264,174)
 
 def card_rect(x,y,cls):
-    fills={"solid":'fill="#F4F1E8" stroke="#6B5B4A" stroke-width="1.6"',
-           "ghost":'fill="none" stroke="#C7B48F" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.7"',
-           "new":'fill="#EAF1EC" stroke="#2C5245" stroke-width="1.8"'}
+    fills={"solid":'fill="#FFFFFF" stroke="#2A2D35" stroke-width="1.6"',
+           "ghost":'fill="none" stroke="#C9CCD4" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.7"',
+           "new":'fill="#FFE2DD" stroke="#9E1B14" stroke-width="1.8"'}
     return f'<rect x="{x}" y="{y}" width="52" height="76" rx="6" {fills[cls]}/>'
 
 def arm_label(a, active):
     kind,x,y1,y2=a["lab"]
-    col = "#2C5245" if active else "#8A8A82"
-    sub = "#5F5E5A" if active else "#B4B2A9"
+    col = "#9E1B14" if active else "#8A8E98"
+    sub = "#50545E" if active else "#B8BBC4"
     if kind=="h":
         return (f'<text x="{x}" y="{y1}" text-anchor="middle" font-size="15" fill="{col}" font-weight="700" letter-spacing="1.5">{a["dir"]}</text>'
                 f'<text x="{x}" y="{y2}" text-anchor="middle" font-size="12.5" fill="{sub}">{esc(a["meaning"])}</text>')
@@ -52,7 +52,7 @@ FULL_CARDS={
 
 # Daoist single-gesture brush glyphs, drawn in the card's local 52x76 space.
 # Each is a list of (path, fill_or_stroke, opacity) — "S" prefix means stroked line.
-INK="#3D372F"
+INK="#14161B"
 GLYPHS={
  "fire":  [("M26 20 q7 8 3 16 q-1 3 -6 5 q6 -1 11 3 q6 5 2 13 q9 -6 6 -16 q7 4 5 12 q6 -9 -2 -19 q-9 -11 -24 -14z","F",1)],
  "dragon":[("M15 64 C 6 52, 25 46, 27 35 C 28 27, 32 19, 40 12 C 34 22, 31 29, 30 36 C 29 48, 12 53, 15 64 Z","F",1)],
@@ -100,19 +100,19 @@ def glyph_svg(card, color=INK):
 def full_spread_svg():
     parts=['<svg viewBox="0 0 580 440" xmlns="http://www.w3.org/2000/svg" role="img" class="compass">',
            '<title>Maya&#39;s complete reading, all thirteen cards</title>',
-           '<line x1="34" y1="212" x2="546" y2="212" stroke="#D8CDB8" stroke-width="1" stroke-dasharray="3 5"/>',
-           '<line x1="290" y1="66" x2="290" y2="358" stroke="#D8CDB8" stroke-width="1" stroke-dasharray="3 5"/>']
+           '<line x1="34" y1="212" x2="546" y2="212" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>',
+           '<line x1="290" y1="66" x2="290" y2="358" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>']
     def slot(x,y,card,accent=None):
         col=accent or INK
-        frame=f'<rect x="0" y="0" width="52" height="76" rx="6" fill="{"#FAECE7" if accent else "#F4F1E8"}" stroke="{accent or "#6B5B4A"}" stroke-width="{3 if accent else 1.6}"/>'
-        name=f'<text x="26" y="90" text-anchor="middle" font-size="8" letter-spacing="1" fill="{"#993C1D" if accent else "#5A5049"}" font-weight="600">{card.upper()}</text>'
+        frame=f'<rect x="0" y="0" width="52" height="76" rx="6" fill="{"#FFF4F2" if accent else "#FFFFFF"}" stroke="{accent or "#2A2D35"}" stroke-width="{3 if accent else 1.6}"/>'
+        name=f'<text x="26" y="90" text-anchor="middle" font-size="8" letter-spacing="1" fill="{"#9E1B14" if accent else "#50545E"}" font-weight="600">{card.upper()}</text>'
         return f'<g transform="translate({x},{y})">{frame}{glyph_svg(card,col)}{name}</g>'
     for name,a in ARMS.items():
         for (x,y),card in zip(a["slots"], FULL_CARDS[name]):
             parts.append(slot(x,y,card))
         parts.append(arm_label(a, True))
     cx,cy=CENTER
-    parts.append(slot(cx,cy,FULL_CARDS["center"],accent="#D85A30"))
+    parts.append(slot(cx,cy,FULL_CARDS["center"],accent="#E63329"))
     parts.append('</svg>')
     return "\n".join(parts)
 
@@ -124,8 +124,8 @@ def compass_svg(level, full=False):
     ttl = "Maya&#39;s complete reading" if full else f"Spread reveal, stage {level}"
     parts=[f'<svg viewBox="0 0 580 430" xmlns="http://www.w3.org/2000/svg" role="img" class="compass">',
            f'<title>{ttl}</title>',
-           '<line x1="34" y1="212" x2="546" y2="212" stroke="#D8CDB8" stroke-width="1" stroke-dasharray="3 5"/>',
-           '<line x1="290" y1="66" x2="290" y2="358" stroke="#D8CDB8" stroke-width="1" stroke-dasharray="3 5"/>']
+           '<line x1="34" y1="212" x2="546" y2="212" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>',
+           '<line x1="290" y1="66" x2="290" y2="358" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>']
     for name,a in ARMS.items():
         active = name in shown
         newly = (not full) and ((level==4 and name in ("north","south")) or (NEW.get(level)==name))
@@ -135,9 +135,9 @@ def compass_svg(level, full=False):
         parts.append(arm_label(a, active))
     # center
     cx,cy=CENTER
-    parts.append(f'<rect x="{cx}" y="{cy}" width="52" height="76" rx="6" fill="#FAECE7" stroke="#D85A30" stroke-width="3"/>')
-    parts.append(f'<path d="M{cx+26} {cy+20} q7 8 3 16 q-1 3 -6 5 q6 -1 11 3 q6 5 2 13 q9 -6 6 -16 q7 4 5 12 q6 -9 -2 -19 q-9 -11 -24 -14z" fill="#D85A30" opacity="0.9"/>')
-    parts.append(f'<text x="{cx+26}" y="{cy+92}" text-anchor="middle" font-size="10" fill="#993C1D" font-weight="700" letter-spacing="1">THE HEART OF IT</text>')
+    parts.append(f'<rect x="{cx}" y="{cy}" width="52" height="76" rx="6" fill="#FFF4F2" stroke="#E63329" stroke-width="3"/>')
+    parts.append(f'<path d="M{cx+26} {cy+20} q7 8 3 16 q-1 3 -6 5 q6 -1 11 3 q6 5 2 13 q9 -6 6 -16 q7 4 5 12 q6 -9 -2 -19 q-9 -11 -24 -14z" fill="#E63329" opacity="0.9"/>')
+    parts.append(f'<text x="{cx+26}" y="{cy+92}" text-anchor="middle" font-size="10" fill="#9E1B14" font-weight="700" letter-spacing="1">THE HEART OF IT</text>')
     parts.append('</svg>')
     return "\n".join(parts)
 
@@ -236,13 +236,10 @@ toc_html="\n".join(
 body_html="\n".join(bodyht)
 
 CSS=r"""
-:root{--paper:#f6f1e7;--paper-2:#efe7d6;--ink:#2b2622;--ink-soft:#5a5049;--jade:#3f6f5b;
---jade-deep:#2c5245;--gold:#b98a3e;--fire:#a5432f;--rule:#d8cdb8;--frame:#c7b48f;
+:root{--paper:#FFFFFF;--paper-2:#F5F5F7;--ink:#14161B;--ink-soft:#50545E;--red:#E63329;
+--red-deep:#9E1B14;--red-dark:#75130E;--rule:#E4E5EA;--frame:#C9CCD4;
 --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
 --sans:"Avenir Next","Segoe UI",system-ui,sans-serif;--measure:36rem;}
-@media(prefers-color-scheme:dark){:root{--paper:#181613;--paper-2:#201d18;--ink:#e9e1d3;
---ink-soft:#b3a893;--jade:#7cae97;--jade-deep:#9ec9b4;--gold:#d8ab5f;--fire:#d9765f;
---rule:#3a352c;--frame:#5a5140;}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:1.18rem;
 line-height:1.75;text-align:left;hyphens:none;-webkit-hyphens:none;word-break:normal;overflow-wrap:break-word;
@@ -254,55 +251,55 @@ p{margin:0 0 1.15rem}
 /* title */
 .titlepage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
 text-align:center;border-bottom:1px solid var(--rule)}
-.tp-kicker{font-family:var(--sans);letter-spacing:.42em;text-transform:uppercase;font-size:.72rem;color:var(--gold);margin:0 0 1.4rem}
+.tp-kicker{font-family:var(--sans);letter-spacing:.42em;text-transform:uppercase;font-size:.72rem;color:var(--red);margin:0 0 1.4rem}
 .titlepage h1{font-size:clamp(2.8rem,9vw,4.6rem);line-height:1.02;margin:0;font-weight:600}
 .tp-sub{font-style:italic;color:var(--ink-soft);font-size:1.25rem;margin:1.2rem 0 2rem}
-.tp-orn{color:var(--jade);font-size:1.6rem;margin-bottom:2rem}
+.tp-orn{color:var(--red-deep);font-size:1.6rem;margin-bottom:2rem}
 .tp-author{font-family:var(--sans);letter-spacing:.06em}
 .tp-role{font-family:var(--sans);font-size:.82rem;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase;margin-top:.4rem}
 /* toc */
 .toc{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:3rem 0}
-.toc h2{font-family:var(--sans);text-transform:uppercase;letter-spacing:.3em;font-size:.8rem;color:var(--gold);text-align:center;margin:0 0 1.8rem}
+.toc h2{font-family:var(--sans);text-transform:uppercase;letter-spacing:.3em;font-size:.8rem;color:var(--red);text-align:center;margin:0 0 1.8rem}
 .toc ul{list-style:none;margin:0;padding:0}
 .toc a{text-decoration:none;color:var(--ink);display:flex;flex-direction:column;padding:.32rem .2rem;border-radius:4px}
 .toc a:hover{background:var(--paper-2)}
 .toc-lab{font-family:var(--sans);font-size:.92rem}
 .toc-sub{color:var(--ink-soft);font-style:italic;font-size:.9rem}
 .toc-part{margin-top:1.3rem}
-.toc-part .toc-lab{text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;color:var(--jade);font-weight:600}
+.toc-part .toc-lab{text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;color:var(--red-deep);font-weight:600}
 .toc-chapter{padding-left:1.2rem}
 .toc-appendix .toc-lab,.toc-front .toc-lab{color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase;font-size:.76rem;margin-top:.7rem}
 /* section opener (full page) */
 .section-open{text-align:center;border-top:1px solid var(--rule)}
 .so-art{margin:0 0 2.4rem}
-.so-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.5em;font-size:.74rem;color:var(--gold);margin:0}
+.so-kicker{font-family:var(--sans);text-transform:uppercase;letter-spacing:.5em;font-size:.74rem;color:var(--red);margin:0}
 .so-title{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:500;font-style:italic;margin:.6rem auto 0;max-width:26rem}
-.so-orn{color:var(--gold);font-size:1.3rem;margin-top:1.2rem}
+.so-orn{color:var(--red);font-size:1.3rem;margin-top:1.2rem}
 /* chapter */
 .chapter{margin:0;padding-top:3rem}
 .ch-head{text-align:center;margin:0 0 2rem}
-.ch-kick{font-family:var(--sans);text-transform:uppercase;letter-spacing:.34em;font-size:.74rem;color:var(--gold);margin:0 0 .5rem}
+.ch-kick{font-family:var(--sans);text-transform:uppercase;letter-spacing:.34em;font-size:.74rem;color:var(--red);margin:0 0 .5rem}
 .ch-title{font-size:2rem;line-height:1.15;margin:0;font-weight:600}
 .ch-title.solo{font-size:1.7rem}
-.ch-orn{color:var(--jade);letter-spacing:.5em;margin-top:1rem;font-size:.8rem}
+.ch-orn{color:var(--red-deep);letter-spacing:.5em;margin-top:1rem;font-size:.8rem}
 .angle-intro{border-top:1px solid var(--rule)}
 /* reveal diagram */
 .reveal{width:min(48rem,92vw);max-width:none;margin:1.5rem auto 3rem;text-align:center;position:relative;left:50%;transform:translateX(-50%)}
 .compass{width:100%;height:auto;font-family:var(--sans)}
 .reveal-cap{font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);font-style:italic;margin-top:.9rem}
 /* subhead / epigraph */
-.subhead{font-family:var(--sans);font-weight:600;font-size:1.12rem;margin:2.6rem 0 1rem;color:var(--jade-deep);line-height:1.35}
-.subhead::before{content:"";display:block;width:2.2rem;height:2px;background:var(--gold);margin:0 0 .9rem;opacity:.7}
+.subhead{font-family:var(--sans);font-weight:600;font-size:1.12rem;margin:2.6rem 0 1rem;color:var(--red-deep);line-height:1.35}
+.subhead::before{content:"";display:block;width:2.2rem;height:2px;background:var(--red);margin:0 0 .9rem;opacity:.7}
 .epigraph{margin:1.4rem auto 2.2rem;max-width:27rem;text-align:center;font-style:italic;color:var(--ink-soft);border:none;padding:0}
-.epigraph::before{content:"\201C";font-size:2.6rem;color:var(--gold);opacity:.5;display:block;line-height:.6;margin-bottom:.3rem}
+.epigraph::before{content:"\201C";font-size:2.6rem;color:var(--red);opacity:.5;display:block;line-height:.6;margin-bottom:.3rem}
 .angles-num{margin:1rem 0 1.4rem;padding-left:0;list-style:none;counter-reset:a}
 .angles-num li{counter-increment:a;position:relative;padding-left:2.6rem;margin:.7rem 0}
 .angles-num li::before{content:counter(a);position:absolute;left:0;top:-.1rem;width:1.7rem;height:1.7rem;
-background:var(--jade);color:var(--paper);border-radius:50%;font-family:var(--sans);font-weight:700;
+background:var(--red-deep);color:var(--paper);border-radius:50%;font-family:var(--sans);font-weight:700;
 font-size:.9rem;display:flex;align-items:center;justify-content:center}
-.prologue-note{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-size:.72rem;color:var(--gold);text-align:center;margin:0 0 2rem}
+.prologue-note{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-size:.72rem;color:var(--red);text-align:center;margin:0 0 2rem}
 .cardgroup{text-align:center;margin:3.5rem 0 1rem}
-.cg-title{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-size:1rem;color:var(--gold);margin:0;padding:1rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.cg-title{font-family:var(--sans);text-transform:uppercase;letter-spacing:.28em;font-size:1rem;color:var(--red);margin:0;padding:1rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 /* placeholders */
 .ex,.reveal{page-break-inside:avoid}
 .ex{margin:2rem auto 2.4rem;max-width:30rem}
@@ -314,13 +311,13 @@ display:flex;flex-direction:column;align-items:center;justify-content:center;gap
 .ex-plus{font-size:1.7rem;color:var(--frame)}
 .ex-drop{font-family:var(--sans);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
 .ex figcaption{font-family:var(--sans);font-size:.84rem;text-align:center;margin-top:.6rem;color:var(--ink)}
-.ex-tag{display:inline-block;background:var(--jade);color:#fff;font-size:.62rem;letter-spacing:.14em;
+.ex-tag{display:inline-block;background:var(--red-deep);color:#fff;font-size:.62rem;letter-spacing:.14em;
 text-transform:uppercase;padding:.16rem .48rem;border-radius:3px;margin-right:.5rem;vertical-align:.08em}
-@media(prefers-color-scheme:dark){.ex-tag{color:#12100d}}
+}
 .angle-loose{font-style:italic;color:var(--ink-soft);text-align:center}
 .totop{position:fixed;right:1rem;bottom:1rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;
-text-transform:uppercase;background:var(--jade);color:#fff;text-decoration:none;padding:.5rem .8rem;border-radius:20px;opacity:.85}
-@media(prefers-color-scheme:dark){.totop{color:#12100d}}
+text-transform:uppercase;background:var(--red-deep);color:#fff;text-decoration:none;padding:.5rem .8rem;border-radius:20px;opacity:.85}
+}
 @media print{.totop{display:none}.page,.section-open,.titlepage,.toc{min-height:auto;page-break-after:always}
 .angle-intro{page-break-before:always}}
 """

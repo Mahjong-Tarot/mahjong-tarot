@@ -39,3 +39,6 @@
 | 2026-07-13 | The Soulmate Month Isn't as Safe as It Sounds | soulmate-month-isnt-as-safe-as-it-sounds.md | Love & Relationships |
 | 2026-07-15 | What the Peach Blossom and the Sword Are Really Telling You This Month | what-the-peach-blossom-and-the-sword-are-telling-you.md | Love & Relationships |
 | 2026-07-17 | Feel Good Friday: Three Moves for the Rest of the Soulmate Month | feel-good-friday-three-moves-for-the-soulmate-month.md | Love & Relationships |
+| 2026-07-20 | The Soulmate-Month Baby Isn't the Easy One | soulmate-month-baby-isnt-the-easy-one.md | The Mahjong Mirror |
+| 2026-07-22 | You Can't Pick the Month. You Can Read It. | you-cant-pick-the-month-you-can-read-it.md | The Mahjong Mirror |
+| 2026-07-24 | Feel Good Friday: The Month of Emotions Wants Your Attention | feel-good-friday-the-month-of-emotions-wants-your-attention.md | The Mahjong Mirror |

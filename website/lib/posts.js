@@ -3,6 +3,33 @@
 
 export const POSTS = [
  {
+ slug: 'feel-good-friday-the-month-of-emotions-wants-your-attention',
+ title: 'Feel Good Friday: The Month of Emotions Wants Your Attention',
+ excerpt: "The Sheep month isn't only demanding for new parents. It's the month of emotions for all of us. Your weekend challenge: give one person your full attention.",
+ topic: 'The Mahjong Mirror',
+ date: 'Jul 24, 2026',
+ isoDate: '2026-07-24',
+ readTime: '5 min read',
+ },
+ {
+ slug: 'you-cant-pick-the-month-you-can-read-it',
+ title: "You Can't Pick the Month. You Can Read It.",
+ excerpt: "There's no scheduling a baby into the right lunar window. What the Mirror teaches instead is to read what the month actually writes onto the year, and to know what's coming next.",
+ topic: 'The Mahjong Mirror',
+ date: 'Jul 22, 2026',
+ isoDate: '2026-07-22',
+ readTime: '7 min read',
+ },
+ {
+ slug: 'soulmate-month-baby-isnt-the-easy-one',
+ title: "The Soulmate-Month Baby Isn't the Easy One",
+ excerpt: "Everyone assumes the baby born after the wild firehorse window is the easy one. I've read this month's charts for weeks now, and I need to correct that before you build a nursery around it.",
+ topic: 'The Mahjong Mirror',
+ date: 'Jul 20, 2026',
+ isoDate: '2026-07-20',
+ readTime: '6 min read',
+ },
+ {
  slug: 'feel-good-friday-three-moves-for-the-soulmate-month',
  title: 'Feel Good Friday: Three Moves for the Rest of the Soulmate Month',
  excerpt: "Three weeks left in the Soulmate Month. Here are three specific things to do so the fire builds something instead of burning it down.",

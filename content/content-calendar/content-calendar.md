@@ -509,3 +509,43 @@ Publishes: Friday (blog + social)
 | Jul 17 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
 | Jul 17 | Fri | Instagram | Feel Good Friday: Tend the garden. Name the temptation. Choose the partner you already have, on purpose. |
 
+---
+
+## Week of July 20 — The Soulmate-Month Baby (Parenting, Part Two)
+
+> Lunar context: week three inside the **Wood Sheep month (Jul 7 – Aug 7)** — the Soulmate Month. The week of Jul 6 ran part one of the parenting series (the firehorse child in general); the source brief was flagged as a possible two-part series, and this is part two: the baby **born in this window**. Source briefs: `context/source-material/year-of-the-fire-horse/Parenting in the Year of the Firehorse.md` (the unused "Months ahead: what amplifies and what balances" section) and `context/source-material/year-of-the-fire-horse/Month of the Wood Sheep.md`. Core mechanic: the Sheep is the Horse's soulmate sign and a gentler, yin fire — wood feeds fire, so a baby born now arrives on the most auspicious wave of the year, with something important and meaningful likely early on. The twist: the surrounding energy calms, but the Sheep is the sign of emotions — this baby needs more attention, more stroking, more emotional support, so the parenting actually gets harder in the way nobody warns you about.
+
+**Topic: 2026-07-20-horse-soulmate-baby** — STATUS: PUBLISHED
+Angle: Fire Horse — shock & awe, Myth Buster. The myth: after the wild firehorse baby of part one, a baby born in the gentle Soulmate Month should be the easy one. The truth: the Wood Sheep baby arrives on the year's most auspicious combination (soulmate signs, wood feeding fire) — and is the most emotionally demanding baby of the year. The yin fire calms the room and raises the stakes: less crying-up-a-storm, more needing you, specifically, all the time.
+Publishes: Monday (blog + social), Tuesday (social)
+
+**Topic: 2026-07-22-mirror-soulmate-baby** — STATUS: PUBLISHED
+Angle: Mahjong Mirror — the answer. You can't pick the month a baby arrives, but you can read what the month writes into the chart and parent to it. The month pillar (Sheep: emotions, attention, support) layers onto the year pillar (Horse: energy, freedom) — the Mirror's discipline of looking closer instead of guessing, applied forward. Includes the months-ahead map from Bill's brief: the two wood months amplify the firehorse traits, and the Metal Dog month (roughly Oct 8 – Nov 6) is the balancing, calming window to plan around.
+Chapter/card focus: reading the individual / the four pillars, applied to the month pillar
+Publishes: Wednesday (blog + social), Thursday (social)
+
+**Topic: 2026-07-24-feel-good-soulmate-baby** — STATUS: PUBLISHED
+Angle: Feel Good Friday — How-To. The Sheep month is the month of emotions for everyone, not just newborns. The weekend challenge: give one person your undivided emotional attention — a baby, a partner, a parent — because in a Sheep month, attention is the whole game. For new parents: the gentler fire is an invitation, and the calming Dog month is coming; you're building toward it.
+Publishes: Friday (blog + social)
+
+| Date | Day | Channel | Hook |
+|------|-----|---------|------|
+| Jul 20 | Mon | Blog | "The Soulmate-Month Baby Isn't the Easy One" — Two weeks ago we warned you about the firehorse baby: high energy, high crying, high everything. So a baby born now, in the gentle Soulmate Month, should be the easy one — right? Not quite. A Wood Sheep baby arrives on the most auspicious wave of the whole Fire Horse year: the Sheep is the Horse's soulmate sign, wood feeds fire, and Bill's brief says to expect something important and meaningful early on. But the Sheep is the sign of emotions — a gentler fire that needs more attention, more soothing, more of you. The room gets calmer. The parenting gets harder. |
+| Jul 20 | Mon | Facebook EN | Everyone thinks the baby born in the Soulmate Month is the easy one. Gentler energy, yes — the Sheep is a yin fire, and it calms the firehorse chaos a little. But the Sheep is the sign of emotions. This baby doesn't cry up a storm like a double horse. This baby needs YOU — more attention, more holding, more emotional support than any other baby this year. The most auspicious window of the year, and the most demanding one. |
+| Jul 20 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 20 | Mon | Instagram | The Soulmate-Month baby: born on the year's best wave, needing the year's most attention. Gentler fire, higher stakes. |
+| Jul 21 | Tue | Facebook EN | More on the Wood Sheep baby: the Sheep and the Horse are soulmates, and wood feeds fire — the elements line up in this baby's favor. Bill puts it simply: expect something important and meaningful early on. The odds tilt toward this child. Your job is to meet the emotions that come with it. |
+| Jul 21 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 21 | Tue | Instagram | Wood feeds fire. Sheep loves Horse. The elements are on this baby's side — the emotions are your department. |
+| Jul 22 | Wed | Blog | "You Can't Pick the Month — But You Can Read It" — There's no scheduling a baby into the right lunar window, and the Mirror wouldn't tell you to try. What it tells you to do is look: the month pillar layers onto the year pillar, and a Sheep month writes emotional depth onto the Horse year's engine. Bill maps the months ahead the way he maps a reading — which months amplify the firehorse traits (the two wood months) and which balance them (the Metal Dog month, Oct 8 to Nov 6, the calming window). Don't label months good or bad. Read them, and parent to what's actually in front of you. |
+| Jul 22 | Wed | Facebook EN | You can't pick the month your baby arrives. You can read it. A Sheep month writes emotion onto the Horse year's energy — that's the layer most parents never look at. And the calendar ahead has a gift in it: the Dog month (Oct 8 – Nov 6) is the calming window. The Mirror's whole discipline in one sentence: don't guess, look. |
+| Jul 22 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 22 | Wed | Instagram | Year pillar: the engine. Month pillar: the emotions. Read both — that's the Mirror. The calm window comes Oct 8. |
+| Jul 23 | Thu | Facebook EN | The four pillars aren't trivia — they're a parenting manual written at birth. Year says how much engine. Month says how much emotion. And when a firehorse-year baby goes quiet, don't count your blessings — ask why. Knowing the makeup tells you when your child is in their comfort zone and when they're not. |
+| Jul 23 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 23 | Thu | Instagram | The pillars are a parenting manual written at birth. Learn to read yours. |
+| Jul 24 | Fri | Blog | "Feel Good Friday: The Month of Emotions Wants Your Attention" — The Sheep month isn't just for newborns. It's the month of emotions for every one of us — the month where attention is the whole game. Your weekend challenge: pick one person and give them your undivided emotional attention. A baby, a partner, a parent, a friend carrying something heavy. No phone, no half-listening. In a month where passion runs high and tempers run close behind, the most powerful move is the gentlest one. And if you're parenting a soulmate-month baby: take heart — the calming Dog month is coming, and you're building toward it. |
+| Jul 24 | Fri | Facebook EN | Feel Good Friday: the Sheep month is the month of emotions — and attention is the whole game. This weekend, give one person your undivided emotional attention. A baby. A partner. A parent. No phone, no half-listening, just presence. In a month this charged, the gentlest move is the strongest one. Who's yours going to be? |
+| Jul 24 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Jul 24 | Fri | Instagram | Feel Good Friday: One person. Your full attention. No phone. That's the whole challenge — and in the month of emotions, it's everything. |
+

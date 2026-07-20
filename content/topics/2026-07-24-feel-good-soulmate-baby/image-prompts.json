@@ -1,0 +1,85 @@
+{
+  "topic": "The Wood Sheep month is the month of emotions for everyone, not just new parents. The weekend challenge: give one person undivided emotional attention, phone away, noticing the feeling under the words.",
+  "phrases": [
+    "Attention is the whole game this month.",
+    "The gentlest move is the strongest one.",
+    "Notice what's underneath the words.",
+    "One person. Your full attention. No phone.",
+    "You're building toward a calmer one."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A phone left face-down and out of reach on a side table while, out of focus in the foreground, two hands rest together on a couch cushion, literalizing 'put the phone down first' as a warm, hopeful scene.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm cinematic photograph. In the soft-focus foreground, two hands rest gently together on a linen couch cushion. In the sharper background, a smartphone lies face-down on a small wooden side table, screen dark, clearly set aside. Warm evening lamp light in antique gold tones fills the room, fading to soft shadow at the edges. The mood is intentional presence, a distraction deliberately removed. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "fri-facebook-en",
+      "concept": "A parent's hand gently cupping a baby's tiny hand in soft window light, an image of emotional presence rather than the wildness of Monday's fire imagery.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm, intimate cinematic photograph of an adult hand gently cupping a tiny infant hand in soft natural window light. Warm antique gold light falls across both, with soft dusty rose tones in the out-of-focus background fabric. The composition is close, tender, unhurried, faces out of frame. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "fri-instagram",
+      "concept": "TEXT-style card carrying the week's closing challenge as a punchy, shareable statement.",
+      "image_style": "TEXT",
+      "text": "One person.\nYour full attention. No phone.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square social graphic, 1080x1080, deep midnight jade background with a warm antique gold glow radiating softly from the center like gentle firelight. Centered in elegant modern serif typography, in warm antique gold, the phrase: \"One person. Your full attention. No phone.\" Two lines, centered, generous letter spacing, the first line slightly larger than the second. A single thin gold hairline rule beneath the text. Minimal, warm, atmospheric. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-linkedin.md",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "fri-linkedin",
+      "concept": "Two coffee cups across a table from each other, one slightly tilted toward the other, no people visible, suggesting a conversation where someone is actually leaning in to listen.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm photograph of two ceramic coffee cups on a wooden table across from each other, steam rising gently from both. The cup on the right is angled very slightly toward the one on the left, as if someone leaned in. Soft window light from one side, warm ivory and antique gold tones. The mood is attentive, unhurried conversation. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-x.md",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "fri-x",
+      "concept": "Close-up of a single lit candle on a windowsill at dusk, steady flame, calm sky beyond, evoking the gentleness of the challenge itself rather than any urgency.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A close-up cinematic photograph of a single lit candle on a windowsill at dusk, its flame steady and warm. Beyond the glass, a calm deep midnight jade sky fades toward the horizon. Soft antique gold light from the flame illuminates the sill. The mood is gentle and settled, an invitation rather than a warning. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "card",
+      "concept": "English affirmation card, journal-page style, carrying the week's most quotable line for standalone sharing.",
+      "image_style": "TEXT",
+      "text": "The gentlest move is the strongest one.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"The gentlest move is the strongest one.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant, modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-the-month-of-emotions-wants-your-attention",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card, journal-page style, natural translation of the English affirmation.",
+      "image_style": "TEXT",
+      "text": "Hành động dịu dàng nhất lại là hành động mạnh mẽ nhất.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Hành động dịu dàng nhất lại là hành động mạnh mẽ nhất.\" Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant, modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve the Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

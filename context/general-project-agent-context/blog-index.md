@@ -22,3 +22,6 @@ Source of truth for all published blog posts. Used by the writer agent (topic pl
 | 5 | taylor-swift-travis-kelce-wedding | taylor swift travis kelce chinese astrology | The Myth Buster | Year of the Fire Horse | 2026-04-14 |
 | 6 | your-love-life-in-the-fire-horse-year | fire horse year love horoscope | The Sign-by-Sign Breakdown | Year of the Fire Horse | 2026-04-15 |
 | 7 | money-in-the-year-of-the-fire-horse | fire horse year money | The Provocation | Year of the Fire Horse | 2026-04-20 |
+| 8 | soulmate-month-baby-isnt-the-easy-one | soulmate month baby chinese astrology 2026 | The Myth Buster | Year of the Fire Horse | 2026-07-20 |
+| 9 | you-cant-pick-the-month-you-can-read-it | metal dog month firehorse baby chinese astrology | The Prediction | Year of the Fire Horse | 2026-07-22 |
+| 10 | feel-good-friday-the-month-of-emotions-wants-your-attention | feel good friday sheep month attention challenge | The How-To/Practical Guide | Year of the Fire Horse | 2026-07-24 |

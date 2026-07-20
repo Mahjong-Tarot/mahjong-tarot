@@ -515,16 +515,16 @@ Publishes: Friday (blog + social)
 
 > Lunar context: week three inside the **Wood Sheep month (Jul 7 – Aug 7)** — the Soulmate Month. The week of Jul 6 ran part one of the parenting series (the firehorse child in general); the source brief was flagged as a possible two-part series, and this is part two: the baby **born in this window**. Source briefs: `context/source-material/year-of-the-fire-horse/Parenting in the Year of the Firehorse.md` (the unused "Months ahead: what amplifies and what balances" section) and `context/source-material/year-of-the-fire-horse/Month of the Wood Sheep.md`. Core mechanic: the Sheep is the Horse's soulmate sign and a gentler, yin fire — wood feeds fire, so a baby born now arrives on the most auspicious wave of the year, with something important and meaningful likely early on. The twist: the surrounding energy calms, but the Sheep is the sign of emotions — this baby needs more attention, more stroking, more emotional support, so the parenting actually gets harder in the way nobody warns you about.
 
-**Topic: 2026-07-20-horse-soulmate-baby** — STATUS: WRITTEN
+**Topic: 2026-07-20-horse-soulmate-baby** — STATUS: PUBLISHED
 Angle: Fire Horse — shock & awe, Myth Buster. The myth: after the wild firehorse baby of part one, a baby born in the gentle Soulmate Month should be the easy one. The truth: the Wood Sheep baby arrives on the year's most auspicious combination (soulmate signs, wood feeding fire) — and is the most emotionally demanding baby of the year. The yin fire calms the room and raises the stakes: less crying-up-a-storm, more needing you, specifically, all the time.
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-07-22-mirror-soulmate-baby** — STATUS: WRITTEN
+**Topic: 2026-07-22-mirror-soulmate-baby** — STATUS: PUBLISHED
 Angle: Mahjong Mirror — the answer. You can't pick the month a baby arrives, but you can read what the month writes into the chart and parent to it. The month pillar (Sheep: emotions, attention, support) layers onto the year pillar (Horse: energy, freedom) — the Mirror's discipline of looking closer instead of guessing, applied forward. Includes the months-ahead map from Bill's brief: the two wood months amplify the firehorse traits, and the Metal Dog month (roughly Oct 8 – Nov 6) is the balancing, calming window to plan around.
 Chapter/card focus: reading the individual / the four pillars, applied to the month pillar
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-07-24-feel-good-soulmate-baby** — STATUS: WRITTEN
+**Topic: 2026-07-24-feel-good-soulmate-baby** — STATUS: PUBLISHED
 Angle: Feel Good Friday — How-To. The Sheep month is the month of emotions for everyone, not just newborns. The weekend challenge: give one person your undivided emotional attention — a baby, a partner, a parent — because in a Sheep month, attention is the whole game. For new parents: the gentler fire is an invitation, and the calming Dog month is coming; you're building toward it.
 Publishes: Friday (blog + social)
 

@@ -63,6 +63,9 @@ GLYPHS={
  "lotus": [("M25 58 C 24 46, 25 34, 29 22 C 28 34, 28 46, 27 58 Z","F",1),
            ("M29 22 C 32 18, 36 16, 40 16 C 37 20, 33 22, 29 22 Z","F",.85),
            ("M14 64 C 20 61, 30 60, 38 62 C 30 64, 20 65, 14 64 Z","F",.5)],
+ "water": [("M10 30 C 17 24, 25 30, 32 26 C 38 23, 43 25, 46 22 C 42 28, 36 30, 30 30 C 23 32, 15 34, 10 30 Z","F",1),
+           ("M14 44 C 20 39, 27 43, 33 40 C 38 38, 42 39, 44 37 C 41 42, 35 44, 30 44 C 24 45, 18 47, 14 44 Z","F",.7),
+           ("M18 56 C 23 52, 29 55, 34 53 C 37 52, 40 52, 42 51 C 39 55, 34 56, 30 56 C 26 57, 21 58, 18 56 Z","F",.45)],
  "sword": [("M26 14 C 27 28, 27 44, 26 58 C 25 44, 25 28, 26 14 Z","F",1),
            ("M19 24 C 23 23, 29 23, 33 24 C 29 26, 23 26, 19 24 Z","F",.85)],
  "knot":  [("M16 24 C 34 28, 36 46, 22 52 C 12 56, 12 40, 24 38 C 36 36, 40 24, 30 18","S",1)],
@@ -85,6 +88,21 @@ GLYPHS={
            ("M28 16 C 31 13, 35 12, 38 13 C 35 16, 31 17, 28 16 Z","F",.85)],
  "house": [("M12 34 L26 20 L40 34","S",1),
            ("M18 48 C 24 46, 30 46, 36 48 C 30 50, 24 50, 18 48 Z","F",.7)],
+ "mushroom":[("M14 36 C 17 24, 35 24, 38 36 C 30 32, 22 32, 14 36 Z","F",1),
+             ("M24 38 C 24 46, 24 52, 26 58 C 28 52, 28 46, 28 38 Z","F",1),
+             ("M20 30 C 22 29, 24 29, 26 30 C 24 31, 22 31, 20 30 Z","F",.6)],
+ "pearl": [("M32 26 a9 9 0 1 0 0.15 0","S",1),
+           ("M14 48 C 22 42, 34 42, 42 48","S",.7)],
+ "willow":[("M20 18 C 22 32, 22 44, 20 58 C 19 44, 19 30, 20 18 Z","F",1),
+           ("M22 22 C 30 28, 33 40, 30 52","S",.75),
+           ("M24 20 C 34 24, 39 34, 38 46","S",.5)],
+ "north": [("M32 24 C 39 28, 41 37, 37 44 C 32 51, 22 50, 18 43 C 14 36, 18 27, 26 24","S",1)],
+ "earth": [("M17 46 L27 30 L37 46 C 30 43, 24 43, 17 46 Z","F",1),
+           ("M12 54 C 22 51, 32 51, 42 54 C 32 56, 22 56, 12 54 Z","F",.55)],
+ "coin":  [("M26 24 a13 13 0 1 0 0.15 0","S",1),
+           ("M21 32 h10 v11 h-10 Z","S",.85)],
+ "south": [("M16 44 C 19 33, 32 29, 39 37","S",1),
+           ("M27 22 l0 -6","S",.8),("M37 26 l4 -5","S",.8),("M17 27 l-4 -4","S",.8)],
 }
 
 def glyph_svg(card, color=INK):
@@ -116,30 +134,131 @@ def full_spread_svg():
     parts.append('</svg>')
     return "\n".join(parts)
 
+# The author's own cards, shown in the arm each Angle unlocks (Ch.2: Water/Ducks/Lotus)
+STAGE_CARDS={2:{"east":["water","ducks","lotus"]}}
+CAPTIONS={
+ 1:"The spread begins at the centre: one card names the heart of it.",
+ 2:"From my own reading: Water, Ducks, and Lotus, the three cards of my essential nature.",
+ 3:"The spread so far — this Angle turns to what stands in the way.",
+ 4:"The spread complete — both futures open at once.",
+}
 REVEAL={1:["center"],2:["center","east"],3:["center","east","west"],4:["center","east","west","north","south"]}
 NEW={1:"center",2:"east",3:"west",4:"north"}   # arm highlighted as newly-unlocked (4 unlocks both futures)
 
-def compass_svg(level, full=False):
-    shown=set(ARMS) if full else set(REVEAL[level])
-    ttl = "Maya&#39;s complete reading" if full else f"Spread reveal, stage {level}"
-    parts=[f'<svg viewBox="0 0 580 430" xmlns="http://www.w3.org/2000/svg" role="img" class="compass">',
-           f'<title>{ttl}</title>',
-           '<line x1="34" y1="212" x2="546" y2="212" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>',
-           '<line x1="290" y1="66" x2="290" y2="358" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>']
+def compass_svg(level, full=False, master=False, focus=None, title=None):
+    # master: all four arms established (labels active, solid slots)
+    # focus:  arm name to highlight in red while everything is established
+    shown=set(ARMS) if (full or master) else (set(REVEAL[level]) if not focus else set())
+    ttl = title or ("Maya&#39;s complete reading" if full else f"Spread reveal, stage {level}")
+    FOCUS_VB={"south":"300 130 272 160","north":"8 130 272 160","west":"176 18 228 150",
+              "east":"176 262 228 158","center":"228 150 124 152"}
+    vb=FOCUS_VB.get(focus,"0 0 580 430") if focus else "0 0 580 430"
+    parts=[f'<svg viewBox="{vb}" xmlns="http://www.w3.org/2000/svg" role="img" class="compass">',
+           f'<title>{ttl}</title>']
+    if not focus:   # focus mode isolates one arm: no compass axes
+        parts+=['<line x1="34" y1="212" x2="546" y2="212" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>',
+                '<line x1="290" y1="66" x2="290" y2="358" stroke="#E4E5EA" stroke-width="1" stroke-dasharray="3 5"/>']
     for name,a in ARMS.items():
-        active = name in shown
-        newly = (not full) and ((level==4 and name in ("north","south")) or (NEW.get(level)==name))
+        if focus and name!=focus:      # focus: draw only the focused arm
+            continue
+        active = (name in shown) or (focus==name)
+        if master or focus:
+            newly = (focus==name)
+        else:
+            newly = (not full) and ((level==4 and name in ("north","south")) or (NEW.get(level)==name))
         cls = "new" if (active and newly) else ("solid" if active else "ghost")
-        for (x,y) in a["slots"]:
-            parts.append(card_rect(x,y,cls))
+        # which cards (if any) to draw face-up in this arm
+        arm_cards = None
+        if master or focus:
+            arm_cards = FULL_CARDS[name]                 # master/focus: full deck face-up
+        elif (not full) and STAGE_CARDS.get(level,{}).get(name) and active:
+            arm_cards = STAGE_CARDS[level][name]         # per-Angle author cards
+        if arm_cards and active:
+            hi = newly                                    # focused (or newly revealed) arm shows red
+            for (x,y),card in zip(a["slots"], arm_cards):
+                fill = "#FFF4F2" if hi else "#FFFFFF"
+                stroke = "#9E1B14" if hi else "#2A2D35"
+                gcol = "#9E1B14" if hi else INK
+                ncol = "#9E1B14" if hi else "#50545E"
+                parts.append(f'<g transform="translate({x},{y})">'
+                             f'<rect x="0" y="0" width="52" height="76" rx="6" fill="{fill}" stroke="{stroke}" stroke-width="{1.8 if hi else 1.6}"/>'
+                             f'{glyph_svg(card,gcol)}'
+                             f'<text x="26" y="90" text-anchor="middle" font-size="8" letter-spacing="1" fill="{ncol}" font-weight="600">{card.upper()}</text></g>')
+        else:
+            for (x,y) in a["slots"]:
+                parts.append(card_rect(x,y,cls))
         parts.append(arm_label(a, active))
-    # center
-    cx,cy=CENTER
-    parts.append(f'<rect x="{cx}" y="{cy}" width="52" height="76" rx="6" fill="#FFF4F2" stroke="#E63329" stroke-width="3"/>')
-    parts.append(f'<path d="M{cx+26} {cy+20} q7 8 3 16 q-1 3 -6 5 q6 -1 11 3 q6 5 2 13 q9 -6 6 -16 q7 4 5 12 q6 -9 -2 -19 q-9 -11 -24 -14z" fill="#E63329" opacity="0.9"/>')
-    parts.append(f'<text x="{cx+26}" y="{cy+92}" text-anchor="middle" font-size="10" fill="#9E1B14" font-weight="700" letter-spacing="1">THE HEART OF IT</text>')
+    # center card — drawn for every view except a focus on an arm
+    if (not focus) or focus=="center":
+        cx,cy=CENTER
+        parts.append(f'<rect x="{cx}" y="{cy}" width="52" height="76" rx="6" fill="#FFF4F2" stroke="#E63329" stroke-width="3"/>')
+        parts.append(f'<path d="M{cx+26} {cy+20} q7 8 3 16 q-1 3 -6 5 q6 -1 11 3 q6 5 2 13 q9 -6 6 -16 q7 4 5 12 q6 -9 -2 -19 q-9 -11 -24 -14z" fill="#E63329" opacity="0.9"/>')
+        parts.append(f'<text x="{cx+26}" y="{cy+92}" text-anchor="middle" font-size="10" fill="#9E1B14" font-weight="700" letter-spacing="1">THE HEART OF IT</text>')
     parts.append('</svg>')
     return "\n".join(parts)
+
+# ---------------------------------------------------------------- card figures & blessings
+def card_fig(file, label):
+    """A single card shown as line art of the real deck card, for in-text discussion."""
+    return (f'<figure class="cardfig"><img class="cardimg" src="cards-lineart/{file}.webp" alt="{esc(label)} card">'
+            f'<figcaption>{esc(label)}</figcaption></figure>')
+
+def blessings_svg():
+    """The Three Blessings pattern: Green Dragon first, Red Dragon centre, White Dragon final."""
+    n=13; w=24; h=35; gap=6
+    total=n*w+(n-1)*gap
+    parts=[f'<svg viewBox="0 0 {total} 78" xmlns="http://www.w3.org/2000/svg" role="img">',
+           '<title>The Three Blessings pattern: Green Dragon in the first position, Red Dragon in the centre, White Dragon in the final position</title>']
+    special={0:("#2A8A48","GREEN"),6:("#E63329","RED"),12:("#9AA0AA","WHITE")}
+    for k in range(n):
+        x=k*(w+gap)
+        if k in special:
+            col,nm=special[k]
+            parts.append(f'<g transform="translate({x},0)"><rect x="0.8" y="0.8" width="{w-1.6}" height="{h-1.6}" rx="3" fill="#FFFFFF" stroke="{col}" stroke-width="1.6"/>'
+                         f'<g transform="scale({w/52:.3f})">{glyph_svg("dragon",col)}</g>'
+                         f'<text x="{w/2}" y="{h+12}" text-anchor="middle" font-size="6.5" letter-spacing="0.5" fill="{col}" font-weight="700">{nm}</text>'
+                         f'<text x="{w/2}" y="{h+21}" text-anchor="middle" font-size="6" letter-spacing="0.5" fill="#50545E">DRAGON</text></g>')
+        else:
+            parts.append(f'<rect x="{x+0.8}" y="0.8" width="{w-1.6}" height="{h-1.6}" rx="3" fill="none" stroke="#C9CCD4" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>')
+    for pos,lab in ((0,"FIRST"),(6,"CENTRE"),(12,"FINAL")):
+        parts.append(f'<text x="{pos*(w+gap)+w/2}" y="{h+33}" text-anchor="middle" font-size="6" letter-spacing="1" fill="#9E1B14" font-weight="600">{lab}</text>')
+    parts.append('</svg>')
+    return "".join(parts)
+
+# subhead prefix -> single real-card line-art figure (file, label)
+CARD_FIGS={
+ "The Enlightening Mushroom":("mushroom","Mushroom"),
+ "Green Dragon - New Beginnings":("green-dragon","Green Dragon"),
+ "Red Dragon - Prosperity":("red-dragon","Red Dragon"),
+ "White Dragon - Spirituality":("white-dragon","White Dragon"),
+ "South - General Success":("south","South"),
+ "Phoenix - Joy":("phoenix","Phoenix"),
+ "Pearl - Hidden Treasures":("pearl","Pearl"),
+ "The North - The Void":("north","North"),
+ "Fire - The Consuming Flame":("fire","Fire"),
+ "The Knot - The Web":("knot","Knot"),
+ "The Willow - The Collapse":("willow","Willow"),
+ "The Ducks - True Partnership":("ducks","Ducks"),
+ "The Phoenix - Passionate Joy":("phoenix","Phoenix"),
+ "The Peach - Complications":("peach","Peach"),
+ "The Earth Card - Stability":("earth","Earth"),
+ "The Red Dragon - Abundant Prosperity":("red-dragon","Red Dragon"),
+}
+# subhead prefix -> the Three Blessings diagram
+BLESSINGS_AFTER="The Sacred Triangle of Fortune"
+
+# chapter number -> extra diagram after the chapter head
+CHAPTER_DIAGRAMS={
+ 9:("focus","south","The Year Ahead: the South arm holds your next twelve months."),
+ 10:("focus","north","The Long View: the North arm holds the future you are building toward."),
+ 11:("master",None,"The complete Mahjong Mirror: all four angles of reflection at once."),
+}
+SECTION_ART={
+ 1:("sec1-contemplation.webp","A hand holds a mirror upright; a faint reflection waits in the glass."),
+ 2:("sec2-know-thyself.webp","The mirror drawn close; the reflection fills the glass."),
+ 3:("sec3-opposition.webp","The mirror turned away; only its dark back shows."),
+ 4:("sec4-future.webp","The mirror lifted high; red light streams from the glass."),
+}
 
 # ---------------------------------------------------------------- exhibit / imagery placeholders
 exhibit_n=0
@@ -177,8 +296,11 @@ while i<N:
         num=re.sub(r"[^0-9]","",tx); rid=uid("section-"+num)
         toc.append(("part",f"Section {num}",sub,rid))
         if open_sec: bodyht.append("</section>"); open_sec=False
+        art=SECTION_ART.get(int(num))
+        art_html=(f'<div class="so-art"><img class="so-img" src="art/{art[0]}" alt="{esc(art[1])}"></div>' if art
+                  else '<div class="so-art"><div class="ex-frame art"><span class="ex-plus">＋</span><span class="ex-drop">section art</span></div></div>')
         bodyht.append(f'''<section class="page section-open" id="{rid}">
-  <div class="so-art"><div class="ex-frame art"><span class="ex-plus">＋</span><span class="ex-drop">section art</span></div></div>
+  {art_html}
   <p class="so-kicker">Section {esc(roman.get(int(num),num))}</p>
   <h2 class="so-title">{esc(sub or tx)}</h2>
   <div class="so-orn">✦</div>
@@ -196,8 +318,14 @@ while i<N:
             toc.append(("chapter",f"Chapter {cnum}",ctitle,rid))
             reveal_html=""
             if awaiting_reveal:
-                reveal_html=f'<div class="reveal">{compass_svg(min(awaiting_reveal,4))}<p class="reveal-cap">The spread so far — this Angle adds a new direction.</p></div>'
+                reveal_html=f'<div class="reveal">{compass_svg(min(awaiting_reveal,4))}<p class="reveal-cap">{CAPTIONS[min(awaiting_reveal,4)]}</p></div>'
                 awaiting_reveal=None
+                cls="page chapter angle-intro"
+            elif int(cnum) in CHAPTER_DIAGRAMS:
+                kind,arg,cap=CHAPTER_DIAGRAMS[int(cnum)]
+                svg=compass_svg(4,master=(kind=="master"),focus=arg,title=cap)
+                rc="reveal reveal-focus" if kind=="focus" else "reveal"
+                reveal_html=f'<div class="{rc}">{svg}<p class="reveal-cap">{esc(cap)}</p></div>'
                 cls="page chapter angle-intro"
             else:
                 cls="chapter"
@@ -210,6 +338,9 @@ while i<N:
             toc.append((kind,label,"",rid))
             if open_sec: bodyht.append("</section>"); open_sec=False
             bodyht.append(f'<section class="chapter {kind}" id="{rid}"><header class="ch-head {kind}"><h3 class="ch-title solo">{esc(label)}</h3><div class="ch-orn">✦ ✦ ✦</div></header>')
+            if tx.strip()=="APPENDIX B":
+                cap="The Four Angles of the Mahjong Mirror: the complete thirteen-card compass."
+                bodyht.append(f'<div class="reveal">{compass_svg(4,master=True,title=cap)}<p class="reveal-cap">{esc(cap)}</p></div>')
             open_sec=True
         i+=1; continue
     if t=="prologue_note":
@@ -219,7 +350,13 @@ while i<N:
     if t=="cardgroup":
         bodyht.append(f'<div class="cardgroup"><h4 class="cg-title">{esc(tx)}</h4></div>'); i+=1; continue
     if t=="subhead":
-        bodyht.append(f'<h4 class="subhead">{esc(tx)}</h4>'); i+=1; continue
+        bodyht.append(f'<h4 class="subhead">{esc(tx)}</h4>')
+        if tx.startswith(BLESSINGS_AFTER):
+            bodyht.append(f'<figure class="blessings">{blessings_svg()}<figcaption class="reveal-cap">The Three Blessings: Green Dragon first, Red Dragon centre, White Dragon final, the rarest and most auspicious pattern.</figcaption></figure>')
+        for pref,(cfile,label) in CARD_FIGS.items():
+            if tx.startswith(pref):
+                bodyht.append(card_fig(cfile,label)); break
+        i+=1; continue
     if t=="epigraph":
         bodyht.append(f'<blockquote class="epigraph">{esc(tx)}</blockquote>'); i+=1; continue
     if t=="numbered_angles":
@@ -285,6 +422,9 @@ text-align:center;border-bottom:1px solid var(--rule)}
 .angle-intro{border-top:1px solid var(--rule)}
 /* reveal diagram */
 .reveal{width:min(48rem,92vw);max-width:none;margin:1.5rem auto 3rem;text-align:center;position:relative;left:50%;transform:translateX(-50%)}
+.reveal-focus{width:min(26rem,80vw)}
+.cardimg{width:100%;height:auto;display:block;border-radius:4px}
+.cardfig figcaption{font-family:var(--sans);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red-deep);margin-top:.5rem;font-weight:600}
 .compass{width:100%;height:auto;font-family:var(--sans)}
 .reveal-cap{font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);font-style:italic;margin-top:.9rem}
 /* subhead / epigraph */
@@ -313,18 +453,36 @@ display:flex;flex-direction:column;align-items:center;justify-content:center;gap
 .ex figcaption{font-family:var(--sans);font-size:.84rem;text-align:center;margin-top:.6rem;color:var(--ink)}
 .ex-tag{display:inline-block;background:var(--red-deep);color:#fff;font-size:.62rem;letter-spacing:.14em;
 text-transform:uppercase;padding:.16rem .48rem;border-radius:3px;margin-right:.5rem;vertical-align:.08em}
-}
 .angle-loose{font-style:italic;color:var(--ink-soft);text-align:center}
 .totop{position:fixed;right:1rem;bottom:1rem;font-family:var(--sans);font-size:.72rem;letter-spacing:.1em;
 text-transform:uppercase;background:var(--red-deep);color:#fff;text-decoration:none;padding:.5rem .8rem;border-radius:20px;opacity:.85}
-}
+.so-img{width:100%;height:auto;display:block;margin:0 auto}
+.cardfig{margin:1.8rem auto 2.2rem;width:8.5rem;text-align:center;page-break-inside:avoid}
+.cardfig svg{width:100%;height:auto}
+.blessings{width:min(40rem,92vw);margin:1.8rem auto 2.4rem;text-align:center;position:relative;left:50%;transform:translateX(-50%);page-break-inside:avoid}
+.blessings svg{width:100%;height:auto}
 @media print{.totop{display:none}.page,.section-open,.titlepage,.toc{min-height:auto;page-break-after:always}
 .angle-intro{page-break-before:always}}
 """
 
 HTML=f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Mahjong Mirror — Bill Hajdu</title><style>{CSS}</style></head>
+<title>The Mahjong Mirror by Bill Hajdu</title>
+<meta name="description" content="Your path to wiser decisions. Bill Hajdu&#39;s guide to the thirteen-card Mahjong spread: four angles of reflection revealing the heart of it, who you are, what stands in the way, and the futures ahead.">
+<link rel="canonical" href="https://www.mahjongtarot.com/book/the-mahjong-mirror.html">
+<meta property="og:type" content="book">
+<meta property="og:title" content="The Mahjong Mirror: Your Path to Wiser Decisions">
+<meta property="og:description" content="Bill Hajdu&#39;s guide to the thirteen-card Mahjong spread: four angles of reflection revealing the heart of it, who you are, what stands in the way, and the futures ahead.">
+<meta property="og:url" content="https://www.mahjongtarot.com/book/the-mahjong-mirror.html">
+<meta property="og:image" content="https://www.mahjongtarot.com/book/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="The Mahjong Tarot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Mahjong Mirror: Your Path to Wiser Decisions">
+<meta name="twitter:description" content="Bill Hajdu&#39;s guide to the thirteen-card Mahjong spread: four angles of reflection for wiser decisions.">
+<meta name="twitter:image" content="https://www.mahjongtarot.com/book/og-image.png">
+<style>{CSS}</style></head>
 <body><a class="totop" href="#top">↑ Top</a><main class="book" id="top">
 <header class="titlepage"><p class="tp-kicker">The Mahjong Mirror</p>
 <h1>The<br>Mahjong<br>Mirror</h1><p class="tp-sub">Your Path to Wiser Decisions</p>

@@ -199,9 +199,9 @@ def compass_svg(level, full=False, master=False, focus=None, title=None):
 
 # ---------------------------------------------------------------- card figures & blessings
 def card_fig(file, label):
-    """A single card shown as line art of the real deck card, for in-text discussion."""
-    return (f'<figure class="cardfig"><img class="cardimg" src="cards-lineart/{file}.webp" alt="{esc(label)} card">'
-            f'<figcaption>{esc(label)}</figcaption></figure>')
+    """A single card shown as line art of the real deck card, for in-text discussion.
+    No caption: the card's own name plate already labels it."""
+    return (f'<figure class="cardfig"><img class="cardimg" src="cards-lineart/{file}.webp" alt="{esc(label)} card"></figure>')
 
 def blessings_svg():
     """The Three Blessings pattern: Green Dragon first, Red Dragon centre, White Dragon final."""

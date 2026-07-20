@@ -12,9 +12,8 @@ os.makedirs(OUT, exist_ok=True)
 
 PAPER=(255,255,255); INK=(20,22,27)
 
-# real card files needed for the appendix single-card figures
-CARDS=["mushroom","green-dragon","red-dragon","white-dragon","south","phoenix",
-       "pearl","north","fire","knot","willow","ducks","peach","earth"]
+# derive line art for the entire deck (any card the book discusses)
+CARDS=[os.path.splitext(f)[0] for f in sorted(os.listdir(SRC)) if f.endswith(".webp")]
 
 def lineart(im):
     g=im.convert("L")

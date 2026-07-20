@@ -198,10 +198,12 @@ def compass_svg(level, full=False, master=False, focus=None, title=None):
     return "\n".join(parts)
 
 # ---------------------------------------------------------------- card figures & blessings
-def card_fig(file, label):
+def card_fig(file, label, float_side=False):
     """A single card shown as line art of the real deck card, for in-text discussion.
-    No caption: the card's own name plate already labels it."""
-    return (f'<figure class="cardfig"><img class="cardimg" src="cards-lineart/{file}.webp" alt="{esc(label)} card"></figure>')
+    No caption: the card's own name plate already labels it.
+    float_side=True floats it beside the following prose (used in the card catalog)."""
+    cls="cardfig cardfloat" if float_side else "cardfig"
+    return (f'<figure class="{cls}"><img class="cardimg" src="cards-lineart/{file}.webp" alt="{esc(label)} card"></figure>')
 
 def blessings_svg():
     """The Three Blessings pattern: Green Dragon first, Red Dragon centre, White Dragon final."""
@@ -247,6 +249,38 @@ CARD_FIGS={
 # subhead prefix -> the Three Blessings diagram
 BLESSINGS_AFTER="The Sacred Triangle of Fortune"
 
+# ---- full-deck card matcher: display name -> line-art file ----
+DECK={
+ "Green Dragon":"green-dragon","Red Dragon":"red-dragon","White Dragon":"white-dragon",
+ "Plum Blossom":"plum-blossom","Seven Stars":"seven-stars",
+ "Bamboo":"bamboo","Carp":"carp","Chrysanthemum":"chrysanthemum","Door":"door","Dragon":"dragon",
+ "Ducks":"ducks","Earth":"earth","Farmer":"farmer","Fire":"fire","Fisherman":"fisherman",
+ "Heaven":"heaven","House":"house","Insect":"insect","Jade":"jade","Knot":"knot","Lotus":"lotus",
+ "Lute":"lute","Mushroom":"mushroom","Orchid":"orchid","Peach":"peach","Peacock":"peacock",
+ "Pearl":"pearl","Phoenix":"phoenix","Pine":"pine","Scholar":"scholar","Sword":"sword",
+ "Tiger":"tiger","Toad":"toad","Tortoise":"tortoise","Unicorn":"unicorn","Water":"water",
+ "Willow":"willow","Woodcutter":"woodcutter",
+ "North":"north","South":"south","East":"east","West":"west",
+}
+# longest names first so "Green Dragon" wins over "Dragon"
+_DECK_ORDER=sorted(DECK, key=lambda s:-len(s))
+def find_card(text):
+    """Return (file,label) for a high-confidence card reference in text, else None.
+    High-confidence = the Title-Case card name followed by Card / Guardian / '(' /
+    'in the ... position', or preceded by 'the'."""
+    for name in _DECK_ORDER:
+        # directional honor cards double as spread positions -> too ambiguous to auto-detect
+        if name in ("North","South","East","West"):
+            continue
+        # name as a proper card reference: "<Name> Card/Guardian" or "The <Name>"
+        if re.search(r'\b'+re.escape(name)+r'\b(?=\s+(?:Card|Guardian))',text):
+            return DECK[name],name
+        if re.search(r'\b'+re.escape(name)+r'\b(?=\s+in\s+the\s+\w+\s+position)',text):
+            return DECK[name],name
+        if re.search(r'\bThe\s+'+re.escape(name)+r'\b',text):
+            return DECK[name],name
+    return None
+
 # chapter number -> extra diagram after the chapter head
 CHAPTER_DIAGRAMS={
  9:("focus","south","The Year Ahead: the South arm holds your next twelve months."),
@@ -282,6 +316,7 @@ def close_open():   # close any open <section>
     if bodyht and bodyht[-1]=="<!open-sec-->": bodyht.pop()
 
 i=0; N=len(BLOCKS); open_sec=False
+in_appendix_c=False; cards_shown=set()
 def opensec(cls,rid,extra=""):
     global open_sec
     if open_sec: bodyht.append("</section>")
@@ -311,7 +346,11 @@ while i<N:
         bodyht.append(f'<p class="angle-loose">{esc(tx)}</p>'); i+=1; continue
     if t=="chapter":
         named=b.get("named"); app=b.get("appendix")
-        if tx.strip()=="APPENDIX C": pass
+        in_appendix_c = (tx.strip()=="APPENDIX C")
+        if in_appendix_c:
+            # dragons feature in the Three Blessings diagram; keep their reference-guide
+            # subhead portraits but suppress redundant auto-inserts in the narrative
+            cards_shown={"green-dragon","red-dragon","white-dragon"}
         m=re.match(r"Chapter\s+(\d+):\s*(.+)",tx); rid=uid(tx)
         if m:
             cnum,ctitle=m.group(1),m.group(2)
@@ -353,9 +392,10 @@ while i<N:
         bodyht.append(f'<h4 class="subhead">{esc(tx)}</h4>')
         if tx.startswith(BLESSINGS_AFTER):
             bodyht.append(f'<figure class="blessings">{blessings_svg()}<figcaption class="reveal-cap">The Three Blessings: Green Dragon first, Red Dragon centre, White Dragon final, the rarest and most auspicious pattern.</figcaption></figure>')
+            cards_shown.update({"green-dragon","red-dragon","white-dragon"})   # shown in the pattern; don't auto-repeat
         for pref,(cfile,label) in CARD_FIGS.items():
             if tx.startswith(pref):
-                bodyht.append(card_fig(cfile,label)); break
+                bodyht.append(card_fig(cfile,label)); cards_shown.add(cfile); break
         i+=1; continue
     if t=="epigraph":
         bodyht.append(f'<blockquote class="epigraph">{esc(tx)}</blockquote>'); i+=1; continue
@@ -363,6 +403,11 @@ while i<N:
         items="".join(f"<li>{esc(x)}</li>" for x in b["items"])
         tail=f'<p>{esc(b["tail"])}</p>' if b.get("tail") else ""
         bodyht.append(f'<p>{esc(b["lead"])}</p><ol class="angles-num">{items}</ol>{tail}'); i+=1; continue
+    if in_appendix_c:
+        hit=find_card(tx)
+        if hit and hit[0] not in cards_shown:
+            cards_shown.add(hit[0])
+            bodyht.append(card_fig(hit[0],hit[1],float_side=True))
     bodyht.append(f'<p>{esc(tx)}</p>'); i+=1
 if open_sec: bodyht.append("</section>")
 
@@ -425,6 +470,8 @@ text-align:center;border-bottom:1px solid var(--rule)}
 .reveal-focus{width:min(26rem,80vw)}
 .cardimg{width:100%;height:auto;display:block;border-radius:4px}
 .cardfig figcaption{font-family:var(--sans);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red-deep);margin-top:.5rem;font-weight:600}
+.cardfloat{float:right;width:9rem;margin:.2rem 0 1rem 1.6rem;clear:right}
+@media(max-width:34rem){.cardfloat{float:none;margin:1.2rem auto;width:8rem}}
 .compass{width:100%;height:auto;font-family:var(--sans)}
 .reveal-cap{font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);font-style:italic;margin-top:.9rem}
 /* subhead / epigraph */

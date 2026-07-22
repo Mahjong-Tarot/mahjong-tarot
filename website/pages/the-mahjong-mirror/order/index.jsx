@@ -56,6 +56,8 @@ export default function OrderBook() {
         title="Pre-Order The Mahjong Mirror by Bill Hajdu"
         description="Pre-order The Mahjong Mirror — digital edition, hardcopy, or signed hardcopy with the Mahjong Mirror Card Set."
         path="/the-mahjong-mirror/order"
+        image="/images/book-cover.webp"
+        type="book"
       />
 
       <main className={styles.main}>

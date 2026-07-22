@@ -1,0 +1,39 @@
+name: Domain Guard
+
+# Fails any push or PR that references the DEAD domain mahjong-tarot.com
+# (hyphenated). The canonical site domain is mahjongtarot.com — no hyphen.
+#
+# Why this exists: the July 2026 newsletter drafts shipped with every link
+# pointing at mahjong-tarot.com, which does not resolve. Emails with dead
+# links to ~36k subscribers were one click away from sending. The GitHub
+# org is legitimately named "Mahjong-Tarot", so github.com URLs are
+# excluded from the check.
+on:
+  push:
+  pull_request:
+
+jobs:
+  no-dead-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject references to the dead hyphenated domain
+        run: |
+          # Match mahjong-tarot.com (any case), excluding:
+          #   - lines that are github.com org/repo URLs
+          #   - this workflow file itself
+          #   - .git internals
+          MATCHES=$(grep -rniI 'mahjong-tarot\.com' . \
+            --exclude-dir=.git \
+            --exclude-dir=node_modules \
+            --exclude-dir=.next \
+            --exclude='domain-guard.yml' \
+            | grep -vi 'github\.com' || true)
+
+          if [ -n "$MATCHES" ]; then
+            echo "::error::Found references to the DEAD domain mahjong-tarot.com (canonical is mahjongtarot.com, no hyphen):"
+            echo "$MATCHES"
+            exit 1
+          fi
+          echo "Clean — no dead-domain references."

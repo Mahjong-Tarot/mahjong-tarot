@@ -8,6 +8,13 @@ Your job is to take approved content from `content/`, optimise images, build pol
 
 The website is a **Next.js** application (Pages Router). You read source content from `content/` and write finished components to `website/`. All React component generation is handled by the **web-developer agent** in `agents/web-developer/`.
 
+## The site domain — ONE spelling, no exceptions
+
+The canonical domain is **`mahjongtarot.com`** — no hyphen, no "the" prefix. Every link in every email draft, blog post, social post, component, and doc uses `https://www.mahjongtarot.com/...`.
+
+- ❌ `mahjong-tarot.com` — DEAD DOMAIN, does not resolve. The July 2026 newsletter drafts shipped with every link dead because of this. CI (`.github/workflows/domain-guard.yml`) fails any commit containing it — github.com org URLs (`github.com/Mahjong-Tarot/...`) are the only legitimate hyphenated use.
+- ⚠️ `themahjongtarot.com` — legacy label that survives only as the `source_site` value on ~38k existing CRM rows and in old migration defaults. Never use it in links or new code.
+
 ---
 
 ## Where customers / bookings / readings live — NEVER ask, it is always this

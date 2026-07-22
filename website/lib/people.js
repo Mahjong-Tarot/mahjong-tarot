@@ -21,7 +21,7 @@ export async function findOrCreatePersonByEmail(serviceSupabase, {
   email,
   name = null,
   source = 'stripe',
-  source_site = 'mahjong-tarot.com',
+  source_site = 'mahjongtarot.com',
 }) {
   if (!email) return null;
   const normalised = email.trim().toLowerCase();

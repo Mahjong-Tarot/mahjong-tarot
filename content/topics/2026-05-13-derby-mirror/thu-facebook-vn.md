@@ -8,4 +8,4 @@ Câu trả lời đó đã có sẵn cho mọi huấn luyện viên trong cuộc
 
 Quyết định lớn tiếp theo của bạn có phiên bản này. Một điều kiện mà mọi người xung quanh bạn đang giả định sẽ giữ nguyên. Một tốc độ mà mọi người đang chạy. Một làn đường nhanh mà đám đông đã vào. Mirror yêu cầu bạn dừng lại và đặt tên cho nó trước khi bạn tham gia vào cuộc tấn công.
 
-Bài đăng thứ Tư có quy trình năm bước đầy đủ để áp dụng Góc thứ Ba vào bất kỳ quyết định nào bạn đang đối mặt ngay bây giờ: [https://www.mahjong-tarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]
+Bài đăng thứ Tư có quy trình năm bước đầy đủ để áp dụng Góc thứ Ba vào bất kỳ quyết định nào bạn đang đối mặt ngay bây giờ: [https://www.mahjongtarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]

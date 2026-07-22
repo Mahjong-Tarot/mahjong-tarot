@@ -21,6 +21,6 @@ That's what you miss when you stop at the animal.
 
 If you've only ever looked at your sign, you've only read the cover of your own book. The story is inside.
 
-Want to know yours? Book a reading: https://www.mahjong-tarot.com/readings
+Want to know yours? Book a reading: https://www.mahjongtarot.com/readings
 
-Full analysis: https://www.mahjong-tarot.com/blog/posts/taylor-swift-travis-kelce-wedding
+Full analysis: https://www.mahjongtarot.com/blog/posts/taylor-swift-travis-kelce-wedding

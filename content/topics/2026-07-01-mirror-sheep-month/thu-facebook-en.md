@@ -8,4 +8,4 @@ Then go in knowing what you actually want. Not what you want to win. What you wa
 
 The month will hand you openings. What you do with them is on you.
 
-Read the full breakdown on the blog: https://www.mahjong-tarot.com/blog/posts/soulmate-month-decision-love-vs-heat
+Read the full breakdown on the blog: https://www.mahjongtarot.com/blog/posts/soulmate-month-decision-love-vs-heat

@@ -17,4 +17,4 @@ Năm khuếch đại bất cứ điều gì đã diễn ra. Nếu bạn đang x�
 
 Của bạn đang đi theo hướng nào?
 
-Bài đăng mới hôm nay — phân tích lịch sử và chiêm tinh học đầy đủ: https://www.mahjong-tarot.com/blog/posts/fire-horse-will-blow-up-your-career
+Bài đăng mới hôm nay — phân tích lịch sử và chiêm tinh học đầy đủ: https://www.mahjongtarot.com/blog/posts/fire-horse-will-blow-up-your-career

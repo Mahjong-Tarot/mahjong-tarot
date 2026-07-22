@@ -8,6 +8,6 @@ Meanwhile, Golden Tempo sat at the back, conserving everything. His trainer had 
 
 In business, in relationships, in any decision you're making this year: if you're betting on the obvious play because everyone else is backing it, read the Monday blog post first. The Fire Horse year has a way of making favorites look foolish and long shots look wise.
 
-Full post here: [https://www.mahjong-tarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
+Full post here: [https://www.mahjongtarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
 
 Are you running with the crowd right now, or waiting with your reserve?

@@ -8,6 +8,6 @@ Trong khi đó, Golden Tempo ngồi ở cuối đoàn, tiết kiệm tất cả 
 
 Trong công việc kinh doanh, trong các mối quan hệ, trong bất kỳ quyết định nào bạn đang đưa ra năm nay: nếu bạn đặt cược vào bước đi rõ ràng nhất vì mọi người đều ủng hộ nó, hãy đọc bài đăng thứ Hai trước. Năm Hỏa Mã có cách khiến những người được yêu thích trông thật ngốc nghếch và những kẻ yếu thế trông thật khôn ngoan.
 
-Bài đăng đầy đủ tại đây: [https://www.mahjong-tarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
+Bài đăng đầy đủ tại đây: [https://www.mahjongtarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
 
 Bạn đang chạy theo đám đông hay đang chờ đợi với sức dự trữ của mình?

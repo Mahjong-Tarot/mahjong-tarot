@@ -16,6 +16,6 @@ The trainers of the favorites all made the same mistake: they didn't ask what co
 
 This is what the rest of 2026 looks like.
 
-I wrote about the whole race, what I saw, and what it tells you about this year on the blog: [https://www.mahjong-tarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
+I wrote about the whole race, what I saw, and what it tells you about this year on the blog: [https://www.mahjongtarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
 
 What surprised you most about the Derby this year?

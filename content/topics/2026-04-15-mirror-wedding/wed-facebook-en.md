@@ -12,6 +12,6 @@ On Monday we looked at whether Taylor Swift and Travis Kelce's match would actua
 
 Five steps. No tiles required. Just honesty and a quiet room.
 
-Read the full guide: https://www.mahjong-tarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
+Read the full guide: https://www.mahjongtarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
 
 What's the one thing your wedding is really about? Drop it in the comments — I'd love to hear.

@@ -59,7 +59,7 @@ A: A Central Theme is the gravitational force shaping your situation — the dee
 A: Compatibility charts compare two people's signs and elements. The Mahjong Mirror goes deeper — it reveals what your relationship is actually about (the Central Theme) and what each partner truly wants from the marriage. Couples who thrive are those who understand their Central Theme and build from there, regardless of their compatibility scores.
 
 **Q: Can I book a Mahjong tile reading for relationship guidance?**
-A: Yes. Bill Hajdu offers personal Mahjong tile readings for individuals and couples seeking clarity on relationships, wedding planning, and major life decisions. Visit mahjong-tarot.com/readings to book a session.
+A: Yes. Bill Hajdu offers personal Mahjong tile readings for individuals and couples seeking clarity on relationships, wedding planning, and major life decisions. Visit mahjongtarot.com/readings to book a session.
 
 ## Image Alt Text
 - Hero image: "Mahjong tiles arranged in the four-angle Mirror spread with wedding flowers — representing intentional wedding planning through the Mahjong Mirror framework"

@@ -8,4 +8,4 @@ This month rewards passion paired with self-control. Not passion without it.
 
 If you haven't read the sign-by-sign forecast yet, now's the time. July 7 is closer than it feels.
 
-Full forecast here: https://www.mahjong-tarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
+Full forecast here: https://www.mahjongtarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast

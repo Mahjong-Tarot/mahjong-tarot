@@ -12,6 +12,6 @@ Tìm con giáp của bạn trong bài tuần trước và xem lại kế hoạch
 
 Tháng Tri Kỷ đã đến. Hãy tận dụng nó thật tốt.
 
-Dự báo đầy đủ từ tuần trước: https://www.mahjong-tarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
+Dự báo đầy đủ từ tuần trước: https://www.mahjongtarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
 
-Bài hôm nay: https://www.mahjong-tarot.com/blog/posts/wood-sheep-month-has-begun-soulmate-month-july-7
+Bài hôm nay: https://www.mahjongtarot.com/blog/posts/wood-sheep-month-has-begun-soulmate-month-july-7

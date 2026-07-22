@@ -17,4 +17,4 @@ What makes a move right or wrong isn't just the opportunity. It's whether you, a
 
 That's the difference between a bold move and a reckless one. And in a Fire Horse year, that difference is everything.
 
-The full breakdown is in yesterday's post: https://www.mahjong-tarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk
+The full breakdown is in yesterday's post: https://www.mahjongtarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk

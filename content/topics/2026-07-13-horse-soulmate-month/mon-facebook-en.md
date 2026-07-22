@@ -4,6 +4,6 @@ In over 35 years of doing readings, I can tell you this: the Wood Sheep month, t
 
 Same double-fire energy that makes this the best month to deepen a relationship also makes it the month where an unattended fire goes looking somewhere else. Both are true at once.
 
-I wrote about who's carrying the most risk into this month, and what to actually do about it, on the blog. Full post here: https://www.mahjong-tarot.com/blog/posts/soulmate-month-isnt-as-safe-as-it-sounds
+I wrote about who's carrying the most risk into this month, and what to actually do about it, on the blog. Full post here: https://www.mahjongtarot.com/blog/posts/soulmate-month-isnt-as-safe-as-it-sounds
 
 Has this month felt more intense for you than usual? Tell me in the comments.

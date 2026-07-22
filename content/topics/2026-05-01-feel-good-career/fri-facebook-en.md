@@ -21,6 +21,6 @@ This weekend: write down "What I actually want is..." and finish the sentence.
 
 Not what seems realistic. What you actually want.
 
-The full story is in today's post: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-your-career-is-not-your-cage
+The full story is in today's post: https://www.mahjongtarot.com/blog/posts/feel-good-friday-your-career-is-not-your-cage
 
 What signal has your career been sending you this year?

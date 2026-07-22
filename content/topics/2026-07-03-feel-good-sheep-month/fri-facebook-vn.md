@@ -12,4 +12,4 @@ Viết cả hai xuống. Chỉ vậy thôi. Tháng này mang lại đam mê. B�
 
 Của bạn là gì? Hãy chia sẻ trong phần bình luận nếu bạn muốn nói lên điều đó.
 
-https://www.mahjong-tarot.com/blog/posts/feel-good-friday-walk-into-soulmate-month-with-a-plan
+https://www.mahjongtarot.com/blog/posts/feel-good-friday-walk-into-soulmate-month-with-a-plan

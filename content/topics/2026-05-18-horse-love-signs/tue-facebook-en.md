@@ -6,6 +6,6 @@ The Fire Horse year doesn't just create storms. It reveals patterns. The ones yo
 
 Every sign has a pattern this year. Most people know something is off. What they don't always know is exactly what the astrology is showing them.
 
-That's what Monday's post is for: https://www.mahjong-tarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
+That's what Monday's post is for: https://www.mahjongtarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
 
 Have you read yours? What landed for you?

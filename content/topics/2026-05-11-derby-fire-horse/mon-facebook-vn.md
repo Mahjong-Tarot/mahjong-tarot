@@ -16,6 +16,6 @@ Các huấn luyện viên của những con ngựa yêu thích đều mắc cùn
 
 Đây là những gì phần còn lại của năm 2026 trông như thế nào.
 
-Tôi đã viết về toàn bộ cuộc đua, những gì tôi chứng kiến, và ý nghĩa của nó đối với năm nay trên blog: [https://www.mahjong-tarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
+Tôi đã viết về toàn bộ cuộc đua, những gì tôi chứng kiến, và ý nghĩa của nó đối với năm nay trên blog: [https://www.mahjongtarot.com/blog/posts/kentucky-derby-fire-horse-year-2026]
 
 Điều gì ở giải Derby năm nay đã khiến bạn ngạc nhiên nhất?

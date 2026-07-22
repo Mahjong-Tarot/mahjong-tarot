@@ -12,6 +12,6 @@ Vậy nên tôi đã làm điều đó. Cả 12 con giáp. Chỉ dẫn thẳng t
 
 Năm 2026 thực sự có ý nghĩa gì với chuyện tình cảm của con giáp CỦA BẠN?
 
-Đọc phân tích đầy đủ tại đây: https://www.mahjong-tarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026
+Đọc phân tích đầy đủ tại đây: https://www.mahjongtarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026
 
 Bạn thuộc con giáp nào? Để lại bình luận và tôi sẽ cho bạn biết điều cần chú ý trong năm nay.

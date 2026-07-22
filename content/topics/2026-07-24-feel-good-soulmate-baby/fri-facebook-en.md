@@ -10,4 +10,4 @@ In a month this charged, the gentlest move is the strongest one. Who's yours goi
 
 Full post on the blog.
 
-https://www.mahjong-tarot.com/blog/posts/feel-good-friday-the-month-of-emotions-wants-your-attention
+https://www.mahjongtarot.com/blog/posts/feel-good-friday-the-month-of-emotions-wants-your-attention

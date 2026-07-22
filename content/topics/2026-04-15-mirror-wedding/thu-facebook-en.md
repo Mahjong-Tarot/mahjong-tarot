@@ -14,6 +14,6 @@ Those aren't vows. They're foundations.
 
 Yesterday's blog walks you through five steps to get there — using the same Mahjong Mirror framework from the book. No tiles required.
 
-If you missed it: https://www.mahjong-tarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
+If you missed it: https://www.mahjongtarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
 
 What do you really want from your marriage — not your wedding day? I'd love to hear.

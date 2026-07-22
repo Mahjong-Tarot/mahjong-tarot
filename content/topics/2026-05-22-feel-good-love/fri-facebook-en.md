@@ -10,6 +10,6 @@ This week's challenge: name one thing in your love life that this week surfaced 
 
 Both are valid. The point is to choose, not drift.
 
-Read the full post here: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-sheep-year-is-coming-build-before-it-arrives
+Read the full post here: https://www.mahjongtarot.com/blog/posts/feel-good-friday-sheep-year-is-coming-build-before-it-arrives
 
 What are you building this year that you want to still be standing in 2027?

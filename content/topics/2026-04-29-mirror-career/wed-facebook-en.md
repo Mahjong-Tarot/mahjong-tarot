@@ -15,6 +15,6 @@ They name the external obstacles — the difficult boss, the market shift, the r
 
 The Mahjong Mirror was built to look where you don't want to.
 
-New post today — the full four-angle career framework: https://www.mahjong-tarot.com/blog/posts/the-decision-framework-for-career-crossroads
+New post today — the full four-angle career framework: https://www.mahjongtarot.com/blog/posts/the-decision-framework-for-career-crossroads
 
 What's the career decision you've been wrestling with this year?

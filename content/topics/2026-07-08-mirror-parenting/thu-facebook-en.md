@@ -10,6 +10,6 @@ Wednesday's blog went deeper on the four pillars and the coaching approach. If y
 
 And here is the practical signal from the blog I want to repeat: if a firehorse baby is lying quietly and not very active, do not just count your blessings. Ask why. Knowing the baseline helps you notice when something is off.
 
-https://www.mahjong-tarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
+https://www.mahjongtarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
 
 What soothing techniques have worked best for high-energy babies in your experience?

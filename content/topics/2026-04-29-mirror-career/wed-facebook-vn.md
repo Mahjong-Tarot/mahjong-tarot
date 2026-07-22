@@ -15,6 +15,6 @@ Họ đặt tên cho những trở ngại bên ngoài — ông sếp khó tính,
 
 Tấm Gương Mạt Chược được xây dựng để nhìn vào nơi bạn không muốn nhìn.
 
-Bài đăng mới hôm nay — khung làm việc sự nghiệp bốn góc nhìn đầy đủ: https://www.mahjong-tarot.com/blog/posts/the-decision-framework-for-career-crossroads
+Bài đăng mới hôm nay — khung làm việc sự nghiệp bốn góc nhìn đầy đủ: https://www.mahjongtarot.com/blog/posts/the-decision-framework-for-career-crossroads
 
 Bạn đang vật lộn với quyết định sự nghiệp nào trong năm nay?

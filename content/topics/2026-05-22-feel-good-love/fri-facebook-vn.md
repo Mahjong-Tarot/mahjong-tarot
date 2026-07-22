@@ -10,6 +10,6 @@ Thử thách của tuần này: đặt tên cho một điều trong cuộc sốn
 
 Cả hai đều hợp lệ. Điều quan trọng là chọn lựa có chủ ý, không phải trôi theo dòng chảy.
 
-Đọc bài đầy đủ tại đây: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-sheep-year-is-coming-build-before-it-arrives
+Đọc bài đầy đủ tại đây: https://www.mahjongtarot.com/blog/posts/feel-good-friday-sheep-year-is-coming-build-before-it-arrives
 
 Bạn đang xây dựng điều gì trong năm nay mà bạn muốn vẫn còn vững chắc vào năm 2027?

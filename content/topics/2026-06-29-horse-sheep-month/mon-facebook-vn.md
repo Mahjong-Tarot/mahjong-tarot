@@ -10,4 +10,4 @@ Không phải dấu hiệu nào cũng có trải nghiệm giống nhau. Khoảng
 
 Tìm con giáp của bạn trong dự báo đầy đủ trên blog. Tháng này mang đến điều gì cho bạn?
 
-Đọc ngay tại đây: https://www.mahjong-tarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
+Đọc ngay tại đây: https://www.mahjongtarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast

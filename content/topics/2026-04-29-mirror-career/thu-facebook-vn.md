@@ -17,6 +17,6 @@ Sự rõ ràng không đến từ nhiều dữ liệu hơn. Nó đến từ vi�
 
 Đó là Tấm Gương. Đó là cuốn sách. Đó là thực hành.
 
-Khung làm việc đầy đủ có trong bài đăng hôm qua: https://www.mahjong-tarot.com/blog/posts/the-decision-framework-for-career-crossroads
+Khung làm việc đầy đủ có trong bài đăng hôm qua: https://www.mahjongtarot.com/blog/posts/the-decision-framework-for-career-crossroads
 
-Nếu bạn muốn áp dụng nó cho tình huống cụ thể của bạn cùng với tôi: https://www.mahjong-tarot.com/readings
+Nếu bạn muốn áp dụng nó cho tình huống cụ thể của bạn cùng với tôi: https://www.mahjongtarot.com/readings

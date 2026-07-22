@@ -8,6 +8,6 @@ Gươm không chỉ nói về kết thúc. Nó chỉ ra điều gì đó đã đ
 
 Góc thứ ba đặt ra câu hỏi khó vì câu hỏi khó mới là câu hỏi hữu ích. Năm nay, câu hỏi đó sẽ được đặt ra dù bạn có cầm gương lên hay không.
 
-Bài đầy đủ tại đây: https://www.mahjong-tarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
+Bài đầy đủ tại đây: https://www.mahjongtarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
 
 Bạn sẽ cắt bỏ điều gì nếu hoàn toàn trung thực với bản thân?

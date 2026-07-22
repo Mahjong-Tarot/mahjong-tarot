@@ -14,4 +14,4 @@ The Mirror gives you a chance to name it before it names you.
 
 Read today's post for the three questions to ask yourself.
 
-https://www.mahjong-tarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse
+https://www.mahjongtarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse

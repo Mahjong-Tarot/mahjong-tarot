@@ -8,4 +8,4 @@ That answer was available to every trainer in the race. The information was the 
 
 Your next big decision has a version of this. A condition everyone around you is assuming will hold. A pace everyone is running. A fast lane the crowd has already entered. The Mirror asks you to stop and name it before you join the charge.
 
-Wednesday's blog post has the full five-step process for running the Third Angle on any decision you're facing right now: [https://www.mahjong-tarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]
+Wednesday's blog post has the full five-step process for running the Third Angle on any decision you're facing right now: [https://www.mahjongtarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]

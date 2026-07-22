@@ -10,4 +10,4 @@ Second, the Third Angle: The Opposition. In a two-fire month, the thing most oft
 
 The best love window of the year rewards clarity. Not just heat.
 
-Full breakdown on the blog: https://www.mahjong-tarot.com/blog/posts/soulmate-month-decision-love-vs-heat
+Full breakdown on the blog: https://www.mahjongtarot.com/blog/posts/soulmate-month-decision-love-vs-heat

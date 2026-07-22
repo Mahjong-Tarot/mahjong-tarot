@@ -12,6 +12,6 @@ Nuôi dạy con tốt giống như huấn luyện tốt. Một huấn luyện vi
 
 Nếu bạn muốn xem bốn trụ đầy đủ của con bạn, đó chính xác là loại đọc bài mà tôi thực hiện. Bài viết đầy đủ trên blog hôm nay.
 
-https://www.mahjong-tarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
+https://www.mahjongtarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
 
 Con bạn tuổi gì? Bạn đã xem bốn trụ đầy đủ chưa?

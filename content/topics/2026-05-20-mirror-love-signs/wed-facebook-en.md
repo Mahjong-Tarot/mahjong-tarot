@@ -8,6 +8,6 @@ The Sword isn't just about endings. It points to something that has been allowed
 
 The Third Angle asks the hard question because the hard question is the useful one. This year, that question is being asked whether you hold up the mirror or not.
 
-Full post here: https://www.mahjong-tarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
+Full post here: https://www.mahjongtarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
 
 What would you cut if you were being fully honest?

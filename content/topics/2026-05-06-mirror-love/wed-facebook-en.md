@@ -12,4 +12,4 @@ The Second Angle of the Mahjong Mirror asks something different: Who are you in 
 
 That's the question most couples skip. And in a Fire Horse year, when everything is amplified and the gap between how things feel and what's actually there gets wider fast, it's the question that matters most.
 
-Read the full post and see what the Mirror shows that chemistry can't: https://www.mahjong-tarot.com/blog/posts/what-the-mirror-shows-about-love
+Read the full post and see what the Mirror shows that chemistry can't: https://www.mahjongtarot.com/blog/posts/what-the-mirror-shows-about-love

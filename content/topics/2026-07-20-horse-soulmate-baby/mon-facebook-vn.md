@@ -8,6 +8,6 @@ Nhưng Dê là cung của cảm xúc. Em bé này không khóc dữ dội như m
 
 Khoảng thời gian may mắn nhất trong năm, và cũng là khoảng thời gian đòi hỏi nhiều nhất. Bài viết đầy đủ trên blog.
 
-https://www.mahjong-tarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
+https://www.mahjongtarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
 
 Em bé của bạn có chào đời trong khoảng thời gian này không? Bạn đã nhận thấy điều gì rồi?

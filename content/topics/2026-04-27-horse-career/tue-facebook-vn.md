@@ -15,6 +15,6 @@ Ngựa Hỏa khuếch đại bất cứ điều gì đã diễn ra. Nếu sự n
 
 Ổn chưa bao giờ là nền tảng mà nó cảm thấy như vậy. Năm nay đang cho mọi người thấy nền tảng thực sự là gì.
 
-Phân tích sự nghiệp đầy đủ — mô hình lịch sử trông như thế nào, phải làm gì bây giờ — có trong bài đăng hôm qua: https://www.mahjong-tarot.com/blog/posts/fire-horse-will-blow-up-your-career
+Phân tích sự nghiệp đầy đủ — mô hình lịch sử trông như thế nào, phải làm gì bây giờ — có trong bài đăng hôm qua: https://www.mahjongtarot.com/blog/posts/fire-horse-will-blow-up-your-career
 
 Sự nghiệp của bạn đứng ở đâu ngay bây giờ — đang tiến lên hay đang trôi dạt?

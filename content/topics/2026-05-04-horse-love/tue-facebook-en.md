@@ -12,4 +12,4 @@ That's not destiny. That's information.
 
 Five elements. Two charts. They have to balance. If they don't, the Fire Horse year is going to show you exactly where the gaps are. That's not a curse. That's a mirror.
 
-Full breakdown for all 12 signs here: https://www.mahjong-tarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026
+Full breakdown for all 12 signs here: https://www.mahjongtarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026

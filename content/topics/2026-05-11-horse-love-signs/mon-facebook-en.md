@@ -12,6 +12,6 @@ The Sheep's year? Best in 60. The Monkey's? Look in the mirror before you look f
 
 Find your sign in today's post.
 
-https://www.mahjong-tarot.com/blog/posts/fire-horse-love-life-by-sign-2026
+https://www.mahjongtarot.com/blog/posts/fire-horse-love-life-by-sign-2026
 
 What's your sign? Drop it in the comments and I'll tell you the one thing to watch for this year.

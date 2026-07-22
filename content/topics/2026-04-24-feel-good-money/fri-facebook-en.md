@@ -19,4 +19,4 @@ Writing it makes it real. And in a Fire Horse year, real is where the energy goe
 
 What financial move have you been circling this year? Tell me in the comments.
 
-Read today's full piece here: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-the-horse-rewards-risk-takers
+Read today's full piece here: https://www.mahjongtarot.com/blog/posts/feel-good-friday-the-horse-rewards-risk-takers

@@ -8,4 +8,4 @@ Tháng này thưởng cho đam mê kết hợp với kiềm chế bản thân. K
 
 Nếu bạn chưa đọc dự báo theo từng con giáp, đây là lúc rồi. Ngày 7 tháng 7 đến gần hơn bạn nghĩ.
 
-Dự báo đầy đủ tại đây: https://www.mahjong-tarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
+Dự báo đầy đủ tại đây: https://www.mahjongtarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast

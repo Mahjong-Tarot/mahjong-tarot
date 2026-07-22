@@ -17,6 +17,6 @@ Clarity doesn't come from more data. It comes from looking at what's already the
 
 That's the Mirror. That's the book. That's the practice.
 
-The full framework is in yesterday's post: https://www.mahjong-tarot.com/blog/posts/the-decision-framework-for-career-crossroads
+The full framework is in yesterday's post: https://www.mahjongtarot.com/blog/posts/the-decision-framework-for-career-crossroads
 
-If you want to apply it to your specific situation with me: https://www.mahjong-tarot.com/readings
+If you want to apply it to your specific situation with me: https://www.mahjongtarot.com/readings

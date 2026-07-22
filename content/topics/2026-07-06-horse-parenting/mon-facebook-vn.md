@@ -12,6 +12,6 @@ Tin tốt: chính ngọn lửa khiến đứa trẻ này đòi hỏi cao cũng l
 
 Bài viết đầy đủ trên blog. Đáng đọc trước khi bắt đầu chuyến đi đầy sóng gió.
 
-https://www.mahjong-tarot.com/blog/posts/firehorse-baby-greatest-joy-greatest-aggravation
+https://www.mahjongtarot.com/blog/posts/firehorse-baby-greatest-joy-greatest-aggravation
 
 Bạn có em bé tuổi Ngựa Lửa ở nhà không? Kinh nghiệm của bạn cho đến nay như thế nào?

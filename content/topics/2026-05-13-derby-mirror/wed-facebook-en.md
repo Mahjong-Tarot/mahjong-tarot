@@ -8,4 +8,4 @@ At the Derby, the obstacle was the fast pace. Golden Tempo's team named it. They
 
 What is the unnamed obstacle in your biggest decision right now?
 
-The full Wednesday post walks through how to run the Third Angle on any decision you're facing: [https://www.mahjong-tarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]
+The full Wednesday post walks through how to run the Third Angle on any decision you're facing: [https://www.mahjongtarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]

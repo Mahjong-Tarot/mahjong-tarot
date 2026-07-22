@@ -12,6 +12,6 @@ Năm của Mùi? Tốt nhất trong 60 năm. Của Thân? Hãy nhìn vào gươn
 
 Tìm cung của bạn trong bài viết hôm nay.
 
-https://www.mahjong-tarot.com/blog/posts/fire-horse-love-life-by-sign-2026
+https://www.mahjongtarot.com/blog/posts/fire-horse-love-life-by-sign-2026
 
 Cung của bạn là gì? Bình luận phía dưới và tôi sẽ cho bạn biết một điều cần chú ý nhất trong năm nay.

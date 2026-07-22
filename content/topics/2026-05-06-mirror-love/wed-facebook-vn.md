@@ -12,4 +12,4 @@ Góc Thứ Hai của Gương Mạt Chược hỏi điều khác: Bạn là ai tr
 
 Đó là câu hỏi mà hầu hết các cặp đôi bỏ qua. Và trong năm Ngọ Hỏa, khi mọi thứ đều được khuếch đại và khoảng cách giữa cảm giác và thực tế ngày càng lớn hơn, đây là câu hỏi quan trọng nhất.
 
-Đọc bài viết đầy đủ và xem Gương cho thấy điều gì mà cảm xúc không thể: https://www.mahjong-tarot.com/blog/posts/what-the-mirror-shows-about-love
+Đọc bài viết đầy đủ và xem Gương cho thấy điều gì mà cảm xúc không thể: https://www.mahjongtarot.com/blog/posts/what-the-mirror-shows-about-love

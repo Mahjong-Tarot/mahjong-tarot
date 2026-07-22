@@ -10,4 +10,4 @@ Not every sign has the same experience. About half are favored (Horse, Pig, Rabb
 
 Find your sign in the full forecast on the blog. What's coming for you this month?
 
-Read it here: https://www.mahjong-tarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
+Read it here: https://www.mahjongtarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast

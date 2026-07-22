@@ -12,4 +12,4 @@ That's where real love starts. Not with finding someone. With knowing yourself w
 
 What's the one thing you're learning about yourself in love right now? Drop it in the comments.
 
-Read the full post: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-love-starts-with-knowing-yourself
+Read the full post: https://www.mahjongtarot.com/blog/posts/feel-good-friday-love-starts-with-knowing-yourself

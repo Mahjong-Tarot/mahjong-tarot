@@ -14,4 +14,4 @@ Góc Thứ Hai của Gương hỏi: bạn thực sự là ai? Không phải tron
 
 Câu trả lời thành thật cho câu hỏi đó là nền tảng của mọi mối quan hệ tốt mà tôi đã thấy tồn tại lâu dài.
 
-Toàn bộ khung làm việc có trong bài viết: https://www.mahjong-tarot.com/blog/posts/what-the-mirror-shows-about-love
+Toàn bộ khung làm việc có trong bài viết: https://www.mahjongtarot.com/blog/posts/what-the-mirror-shows-about-love

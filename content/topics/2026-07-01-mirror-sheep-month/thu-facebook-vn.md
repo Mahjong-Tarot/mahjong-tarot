@@ -8,4 +8,4 @@ Rồi hãy bước vào cuộc trò chuyện với ý thức rõ ràng về đi�
 
 Tháng này sẽ trao cho bạn những cơ hội. Bạn làm gì với chúng là do bạn quyết định.
 
-Đọc phân tích đầy đủ trên blog: https://www.mahjong-tarot.com/blog/posts/soulmate-month-decision-love-vs-heat
+Đọc phân tích đầy đủ trên blog: https://www.mahjongtarot.com/blog/posts/soulmate-month-decision-love-vs-heat

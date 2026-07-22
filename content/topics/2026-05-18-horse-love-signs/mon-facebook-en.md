@@ -6,6 +6,6 @@ That's four signs. We're halfway through the year. I've written a full breakdown
 
 Every sign gets a two-word headline and something specific to do with it. This isn't a vague horoscope. It's what the Fire Horse energy actually produces for each sign, based on 35-plus years of reading charts and tiles.
 
-Find yours here: https://www.mahjong-tarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
+Find yours here: https://www.mahjongtarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
 
 Which sign are you? Tell me in the comments.

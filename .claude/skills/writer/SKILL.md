@@ -107,7 +107,7 @@ Generate `seo.md` — a reference file for optimizing the blog post and its prom
 [List the H1 and all H2s from the blog post — confirm they include keywords naturally]
 
 ## Internal Links
-[Suggest 1–3 internal links to other pages on mahjong-tarot.com that should be linked from this post, and which anchor text to use]
+[Suggest 1–3 internal links to other pages on mahjongtarot.com that should be linked from this post, and which anchor text to use]
 
 ## External Link Opportunities
 [Suggest 1–2 external sites, forums, or communities where this post could be shared or linked from]
@@ -278,15 +278,15 @@ Subject: [Compelling subject line — one sentence, no more than 60 characters]
 
 **[Post 1 title]**
 [2–3 sentence blurb that teases the post without giving it all away]
-Read more → https://mahjong-tarot.com/blog/posts/[slug]
+Read more → https://mahjongtarot.com/blog/posts/[slug]
 
 **[Post 2 title]**
 [2–3 sentence blurb]
-Read more → https://mahjong-tarot.com/blog/posts/[slug]
+Read more → https://mahjongtarot.com/blog/posts/[slug]
 
 **[Post 3 title]**
 [2–3 sentence blurb]
-Read more → https://mahjong-tarot.com/blog/posts/[slug]
+Read more → https://mahjongtarot.com/blog/posts/[slug]
 
 [Closing line — warm, personal, in Bill's voice]
 

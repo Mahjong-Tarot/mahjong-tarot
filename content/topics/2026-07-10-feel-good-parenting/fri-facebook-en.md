@@ -14,6 +14,6 @@ The fire is not the problem. The direction is the question.
 
 Full list of five moves on the blog today. Worth reading if you have a firehorse child or are expecting one.
 
-https://www.mahjong-tarot.com/blog/posts/feel-good-friday-channel-the-fire-dont-fight-it
+https://www.mahjongtarot.com/blog/posts/feel-good-friday-channel-the-fire-dont-fight-it
 
 What is the one thing that always reliably holds your high-energy child's attention?

@@ -6,6 +6,6 @@ Năm Ngựa Lửa khuếch đại mọi thứ, và nó tác động đến mỗi
 
 Mỗi cung có một tiêu đề hai từ và một điều cụ thể để thực hiện. Đây không phải là tử vi mơ hồ, mà là những gì năng lượng Ngựa Lửa thực sự mang lại cho mỗi cung, dựa trên hơn 35 năm đọc tử vi và bài.
 
-Tìm cung của bạn tại đây: https://www.mahjong-tarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
+Tìm cung của bạn tại đây: https://www.mahjongtarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
 
 Bạn thuộc cung nào? Cho tôi biết trong phần bình luận.

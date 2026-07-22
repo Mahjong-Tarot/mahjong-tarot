@@ -12,4 +12,4 @@ Write both down. That's it. The month brings the passion. You bring the self-con
 
 What's yours? Drop it in the comments if you want to say it out loud.
 
-https://www.mahjong-tarot.com/blog/posts/feel-good-friday-walk-into-soulmate-month-with-a-plan
+https://www.mahjongtarot.com/blog/posts/feel-good-friday-walk-into-soulmate-month-with-a-plan

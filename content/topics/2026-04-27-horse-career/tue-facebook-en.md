@@ -15,6 +15,6 @@ The Fire Horse amplifies whatever was already in motion. If your career had real
 
 Fine was never the foundation it felt like. This year is showing people what the foundation actually is.
 
-The full career analysis — what the pattern looks like historically, what to do about it now — is in yesterday's post: https://www.mahjong-tarot.com/blog/posts/fire-horse-will-blow-up-your-career
+The full career analysis — what the pattern looks like historically, what to do about it now — is in yesterday's post: https://www.mahjongtarot.com/blog/posts/fire-horse-will-blow-up-your-career
 
 Where does your career stand right now — moving or coasting?

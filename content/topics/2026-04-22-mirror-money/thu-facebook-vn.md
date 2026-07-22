@@ -17,4 +17,4 @@ Hầu hết mọi người bỏ qua cả bốn và nhảy thẳng đến: cơ h�
 
 Đó là sự khác biệt giữa một bước đi táo bạo và một bước đi liều lĩnh. Và trong một năm Ngựa Hỏa, sự khác biệt đó là tất cả.
 
-Phân tích đầy đủ có trong bài đăng hôm qua: https://www.mahjong-tarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk
+Phân tích đầy đủ có trong bài đăng hôm qua: https://www.mahjongtarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk

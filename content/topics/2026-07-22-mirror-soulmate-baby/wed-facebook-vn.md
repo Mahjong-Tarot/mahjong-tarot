@@ -8,6 +8,6 @@ Toàn bộ nguyên tắc của Gương Mạt Chược trong một câu: đừng 
 
 Bài viết đầy đủ trên blog.
 
-https://www.mahjong-tarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
+https://www.mahjongtarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
 
 Nếu bạn có một em bé tuổi Ngựa Lửa, bạn đang đếm ngược đến tháng 10 như thế nào?

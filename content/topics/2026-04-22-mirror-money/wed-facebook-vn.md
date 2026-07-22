@@ -15,6 +15,6 @@ Năm Ngựa Hỏa là cơ hội thực sự. Nhưng cơ hội không có sự r�
 
 Khung làm việc bốn góc nhìn đầy đủ cho các quyết định tài chính có trong bài đăng hôm nay. Tấm Gương Mạt Chược được tạo ra chính xác cho loại ngã rẽ này.
 
-Đọc tại đây: https://www.mahjong-tarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk
+Đọc tại đây: https://www.mahjongtarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk
 
 Bạn đang suy nghĩ đến bước đi tài chính nào trong năm nay? Hãy để lại bình luận — tôi đọc từng cái một.

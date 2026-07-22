@@ -10,6 +10,6 @@ Blog hôm thứ Tư đã đi sâu hơn về bốn trụ và cách tiếp cận t
 
 Và đây là dấu hiệu thực tế từ bài blog mà tôi muốn nhắc lại: nếu một em bé Ngựa Lửa nằm im lặng và không năng động, đừng chỉ mừng thầm. Hãy hỏi tại sao. Biết được hành vi bình thường của con giúp bạn nhận ra khi nào có điều gì đó không ổn.
 
-https://www.mahjong-tarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
+https://www.mahjongtarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
 
 Những kỹ thuật dỗ dành nào đã hiệu quả nhất với trẻ có năng lượng cao trong kinh nghiệm của bạn?

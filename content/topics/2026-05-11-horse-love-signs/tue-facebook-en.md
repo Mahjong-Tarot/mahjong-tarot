@@ -10,4 +10,4 @@ The Fire Horse is not what it looks like from the outside. It's not about who's 
 
 If you haven't read your sign yet, today's the day.
 
-https://www.mahjong-tarot.com/blog/posts/fire-horse-love-life-by-sign-2026
+https://www.mahjongtarot.com/blog/posts/fire-horse-love-life-by-sign-2026

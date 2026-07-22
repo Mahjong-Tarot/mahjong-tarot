@@ -4,4 +4,4 @@ Tend the garden on purpose. Notice what your partner actually wants right now an
 
 The fire this month is real. Point it somewhere on purpose. What's your one move going to be this weekend? Drop it in the comments.
 
-Full post: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-three-moves-for-the-soulmate-month
+Full post: https://www.mahjongtarot.com/blog/posts/feel-good-friday-three-moves-for-the-soulmate-month

@@ -19,4 +19,4 @@ Viết ra làm cho nó trở nên thực tế. Và trong năm Ngựa Hỏa, th�
 
 Bạn đang xoay quanh bước đi tài chính nào trong năm nay? Hãy cho tôi biết trong phần bình luận.
 
-Đọc bài đầy đủ hôm nay tại đây: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-the-horse-rewards-risk-takers
+Đọc bài đầy đủ hôm nay tại đây: https://www.mahjongtarot.com/blog/posts/feel-good-friday-the-horse-rewards-risk-takers

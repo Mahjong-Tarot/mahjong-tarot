@@ -14,6 +14,6 @@ The weekend challenge from today's post: write down one thing you are almost rea
 
 If the answer is clear, you're closer than you thought. If it's unclear, the work is in front of you, and the year still has time.
 
-Full post: [https://www.mahjong-tarot.com/blog/posts/feel-good-friday-this-is-the-year-you-surprise-yourself]
+Full post: [https://www.mahjongtarot.com/blog/posts/feel-good-friday-this-is-the-year-you-surprise-yourself]
 
 What are you almost ready for?

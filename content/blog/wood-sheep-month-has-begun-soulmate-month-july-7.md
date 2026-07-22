@@ -84,4 +84,4 @@ Welcome to the Soulmate Month. Use it well.
 
 ---
 
-If you want to know what the cards are specifically showing for your situation right now, I have readings available. [Book yours at mahjong-tarot.com/readings.](/readings)
+If you want to know what the cards are specifically showing for your situation right now, I have readings available. [Book yours at mahjongtarot.com/readings.](/readings)

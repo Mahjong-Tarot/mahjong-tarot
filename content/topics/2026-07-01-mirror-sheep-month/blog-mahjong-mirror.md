@@ -101,4 +101,4 @@ Give it a self that knows what it's asking for.
 
 *The Mahjong Mirror: Your Path to Wiser Decisions* walks you through the full four-angle framework, with practical exercises for exactly the kind of decision the Soulmate Month is going to put in front of you. [Pick it up here](/the-mahjong-mirror).
 
-And if you want to see what the cards are specifically saying about your situation before the month opens, I have readings available now. [Book yours at mahjong-tarot.com/readings](/readings).
+And if you want to see what the cards are specifically saying about your situation before the month opens, I have readings available now. [Book yours at mahjongtarot.com/readings](/readings).

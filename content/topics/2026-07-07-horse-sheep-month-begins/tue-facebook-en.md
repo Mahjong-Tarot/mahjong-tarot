@@ -12,6 +12,6 @@ Find your sign in last week's post and check back in on your two-move plan: one 
 
 The Soulmate Month is here. Use it well.
 
-Full forecast from last week: https://www.mahjong-tarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
+Full forecast from last week: https://www.mahjongtarot.com/blog/posts/soulmate-month-wood-sheep-sign-by-sign-forecast
 
-Today's post: https://www.mahjong-tarot.com/blog/posts/wood-sheep-month-has-begun-soulmate-month-july-7
+Today's post: https://www.mahjongtarot.com/blog/posts/wood-sheep-month-has-begun-soulmate-month-july-7

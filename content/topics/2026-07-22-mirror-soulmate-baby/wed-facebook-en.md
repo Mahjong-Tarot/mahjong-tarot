@@ -8,6 +8,6 @@ The Mirror's whole discipline in one sentence: don't guess, look. You can circle
 
 Full breakdown on the blog.
 
-https://www.mahjong-tarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
+https://www.mahjongtarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
 
 If you've got a firehorse baby, how are you counting down to October?

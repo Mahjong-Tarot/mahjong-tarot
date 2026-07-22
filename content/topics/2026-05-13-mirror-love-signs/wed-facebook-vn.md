@@ -14,4 +14,4 @@ Gương cho bạn cơ hội đặt tên cho nó trước khi nó đặt tên cho
 
 Đọc bài viết hôm nay để biết ba câu hỏi cần tự hỏi bản thân.
 
-https://www.mahjong-tarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse
+https://www.mahjongtarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse

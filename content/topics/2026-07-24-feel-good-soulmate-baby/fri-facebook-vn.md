@@ -10,4 +10,4 @@ Trong một tháng đầy nhiệt huyết như thế này, hành động dịu d
 
 Bài viết đầy đủ trên blog.
 
-https://www.mahjong-tarot.com/blog/posts/feel-good-friday-the-month-of-emotions-wants-your-attention
+https://www.mahjongtarot.com/blog/posts/feel-good-friday-the-month-of-emotions-wants-your-attention

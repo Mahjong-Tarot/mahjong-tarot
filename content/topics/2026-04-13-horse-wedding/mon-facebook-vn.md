@@ -21,6 +21,6 @@ Năm Bính Ngọ không phá hủy những mối quan hệ vững chắc. Nó đ
 
 Tôi đã phân tích đầy đủ trên blog — rủi ro, ngũ hành, và dự đoán.
 
-Đọc tại đây: https://www.mahjong-tarot.com/blog/posts/taylor-swift-travis-kelce-wedding
+Đọc tại đây: https://www.mahjongtarot.com/blog/posts/taylor-swift-travis-kelce-wedding
 
 Bạn đã bao giờ bị nói rằng con giáp của bạn không hợp với ai đó chưa? Bạn nghe theo, hay bạn tin vào điều gì đó sâu hơn?

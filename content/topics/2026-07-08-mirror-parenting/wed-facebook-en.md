@@ -12,6 +12,6 @@ Great parenting is great coaching. A good coach does not use the same play for e
 
 If you want to look at your firehorse child's full four pillars, that is exactly the kind of reading I do. Full post on the blog today.
 
-https://www.mahjong-tarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
+https://www.mahjongtarot.com/blog/posts/you-dont-parent-a-firehorse-you-parent-your-child
 
 What is your child's sign? Have you looked at the full four pillars?

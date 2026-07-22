@@ -15,6 +15,6 @@ The Fire Horse year is real opportunity. But opportunity without clarity is just
 
 The full four-angle framework for financial decisions is in today's post. The Mahjong Mirror was built for exactly this kind of crossroads.
 
-Read it here: https://www.mahjong-tarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk
+Read it here: https://www.mahjongtarot.com/blog/posts/how-to-know-if-this-is-the-year-for-you-to-take-a-financial-risk
 
 What financial move has been on your mind this year? Drop it in the comments — I read every one.

@@ -21,6 +21,6 @@ Cuối tuần này: hãy viết "Điều tôi thực sự muốn là..." và ho�
 
 Không phải những gì có vẻ thực tế. Điều bạn thực sự muốn.
 
-Câu chuyện đầy đủ có trong bài đăng hôm nay: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-your-career-is-not-your-cage
+Câu chuyện đầy đủ có trong bài đăng hôm nay: https://www.mahjongtarot.com/blog/posts/feel-good-friday-your-career-is-not-your-cage
 
 Sự nghiệp của bạn đang gửi tín hiệu gì cho bạn trong năm nay?

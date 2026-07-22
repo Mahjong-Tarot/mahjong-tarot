@@ -10,4 +10,4 @@ Cả hai lá bài đều xuất hiện trong các buổi đọc năm nay nhiều
 
 Góc thứ ba của Gương Mạt Chược cho bạn cách nhìn vào điều này một cách rõ ràng, có đọc bài hay không. Ba câu hỏi. Hãy dành thời gian với chúng.
 
-https://www.mahjong-tarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse
+https://www.mahjongtarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse

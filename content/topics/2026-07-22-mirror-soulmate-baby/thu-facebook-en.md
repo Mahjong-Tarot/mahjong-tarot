@@ -8,6 +8,6 @@ Knowing the makeup tells you when your child is in their comfort zone and when t
 
 Wednesday's post mapped the months ahead, including the calming window arriving in October. If you missed it, the link's below.
 
-https://www.mahjong-tarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
+https://www.mahjongtarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
 
 Have you noticed your own child's "comfort zone" versus when something's off?

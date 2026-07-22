@@ -17,4 +17,4 @@ The year amplifies whatever was already in motion. If you've been building, it a
 
 Which direction is yours headed?
 
-New post today — the full historical and astrological breakdown: https://www.mahjong-tarot.com/blog/posts/fire-horse-will-blow-up-your-career
+New post today — the full historical and astrological breakdown: https://www.mahjongtarot.com/blog/posts/fire-horse-will-blow-up-your-career

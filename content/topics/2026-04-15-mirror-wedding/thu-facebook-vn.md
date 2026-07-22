@@ -14,6 +14,6 @@ Trong 35 năm đọc bài, đây là điều tôi thấy: những cặp đôi b�
 
 Bài viết hôm qua hướng dẫn bạn năm bước để đạt được điều đó — sử dụng khung Gương Mạt Chược từ cuốn sách. Không cần quân bài.
 
-Nếu bạn chưa đọc: https://www.mahjong-tarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
+Nếu bạn chưa đọc: https://www.mahjongtarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
 
 Bạn thực sự muốn gì từ cuộc hôn nhân — không phải ngày cưới? Tôi rất muốn nghe.

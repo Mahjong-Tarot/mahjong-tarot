@@ -12,6 +12,6 @@ The good news: the same fire that makes this child demanding makes them extraord
 
 Full post on the blog. Worth reading before the wild ride begins.
 
-https://www.mahjong-tarot.com/blog/posts/firehorse-baby-greatest-joy-greatest-aggravation
+https://www.mahjongtarot.com/blog/posts/firehorse-baby-greatest-joy-greatest-aggravation
 
 Have a firehorse baby at home? What is your experience so far?

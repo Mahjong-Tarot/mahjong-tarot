@@ -6,6 +6,6 @@ Năm Ngựa Lửa không chỉ tạo ra bão tố. Nó phơi bày những mô h�
 
 Mỗi cung đều có một mô hình trong năm nay. Hầu hết mọi người đều cảm nhận được điều gì đó không ổn. Điều họ không phải lúc nào cũng biết là chính xác tử vi đang cho họ thấy gì.
 
-Đó là lý do bài viết hôm thứ Hai tồn tại: https://www.mahjong-tarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
+Đó là lý do bài viết hôm thứ Hai tồn tại: https://www.mahjongtarot.com/blog/posts/your-love-life-2026-fire-horse-by-sign
 
 Bạn đã đọc cung của mình chưa? Điều gì trong bài đã chạm đến bạn?

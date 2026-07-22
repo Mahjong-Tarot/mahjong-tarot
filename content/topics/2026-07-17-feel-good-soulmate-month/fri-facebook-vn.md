@@ -4,4 +4,4 @@ Hãy chăm sóc khu vườn của mình một cách có chủ đích. Để ý x
 
 Ngọn lửa tháng này là có thật. Hãy hướng nó đi đúng chỗ, một cách có chủ đích. Cuối tuần này bạn sẽ làm gì? Chia sẻ trong phần bình luận nhé.
 
-Đọc bài đầy đủ: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-three-moves-for-the-soulmate-month
+Đọc bài đầy đủ: https://www.mahjongtarot.com/blog/posts/feel-good-friday-three-moves-for-the-soulmate-month

@@ -14,6 +14,6 @@ Ngọn lửa không phải là vấn đề. Câu hỏi là hướng đi.
 
 Danh sách đầy đủ năm bước trên blog hôm nay. Đáng đọc nếu bạn có con tuổi Ngựa Lửa hoặc đang mong đợi một đứa.
 
-https://www.mahjong-tarot.com/blog/posts/feel-good-friday-channel-the-fire-dont-fight-it
+https://www.mahjongtarot.com/blog/posts/feel-good-friday-channel-the-fire-dont-fight-it
 
 Điều gì luôn luôn giữ được sự chú ý của đứa trẻ năng động nhà bạn một cách đáng tin cậy?

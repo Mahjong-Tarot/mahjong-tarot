@@ -6,6 +6,6 @@ And the answer is almost never what people expect. It's usually a pattern that h
 
 The useful move this week is to ask the Third Angle question yourself before the year asks it for you. What is the structural obstacle in your love life right now? Not the argument, not the habit. The thing underneath.
 
-Yesterday's post walks through exactly how to do that: https://www.mahjong-tarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
+Yesterday's post walks through exactly how to do that: https://www.mahjongtarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
 
 What's your Third Angle question this week?

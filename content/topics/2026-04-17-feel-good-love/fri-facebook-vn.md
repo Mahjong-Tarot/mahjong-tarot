@@ -12,4 +12,4 @@ Tình yêu đích thực bắt đầu từ đây. Không phải từ việc tìm
 
 Bạn đang học được điều gì về bản thân trong tình yêu? Chia sẻ trong phần bình luận nhé.
 
-Đọc bài viết đầy đủ: https://www.mahjong-tarot.com/blog/posts/feel-good-friday-love-starts-with-knowing-yourself
+Đọc bài viết đầy đủ: https://www.mahjongtarot.com/blog/posts/feel-good-friday-love-starts-with-knowing-yourself

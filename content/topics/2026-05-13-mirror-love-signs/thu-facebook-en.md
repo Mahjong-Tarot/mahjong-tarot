@@ -10,4 +10,4 @@ Both tiles are appearing in readings this year more than I'd expect. The Fire Ho
 
 The Mahjong Mirror's Third Angle gives you a way to look at this clearly, with or without a reading. Three questions. Take your time with them.
 
-https://www.mahjong-tarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse
+https://www.mahjongtarot.com/blog/posts/mahjong-mirror-third-angle-love-opposition-fire-horse

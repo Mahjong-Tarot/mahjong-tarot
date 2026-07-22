@@ -12,4 +12,4 @@ Sự tương hợp không chỉ là con giáp. Đó là sự cân bằng âm dư
 
 Năm nguyên tố. Hai lá số. Chúng phải cân bằng. Nếu không, năm Ngọ Hỏa sẽ chỉ cho bạn thấy chính xác khoảng trống ở đâu. Đó không phải là lời nguyền. Đó là tấm gương.
 
-Phân tích đầy đủ cho cả 12 con giáp tại đây: https://www.mahjong-tarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026
+Phân tích đầy đủ cho cả 12 con giáp tại đây: https://www.mahjongtarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026

@@ -21,6 +21,6 @@ The Fire Horse year doesn't destroy strong matches. It accelerates them.
 
 I broke down the full analysis on the blog — the risks, the elements, the prediction.
 
-Read it here: https://www.mahjong-tarot.com/blog/posts/taylor-swift-travis-kelce-wedding
+Read it here: https://www.mahjongtarot.com/blog/posts/taylor-swift-travis-kelce-wedding
 
 Have you ever been told your signs don't match with someone? Did you listen, or did you follow something deeper?

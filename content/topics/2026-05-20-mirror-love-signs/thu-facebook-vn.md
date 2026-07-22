@@ -6,6 +6,6 @@ Và câu trả lời hầu như không bao giờ là những gì người ta mon
 
 Bước đi hữu ích trong tuần này là tự đặt câu hỏi của Góc thứ ba trước khi năm đặt ra cho bạn. Trở ngại cốt lõi trong cuộc sống tình cảm của bạn ngay lúc này là gì? Không phải cuộc tranh cãi, không phải thói quen. Mà là điều ẩn bên dưới.
 
-Bài đăng hôm qua giải thích chính xác cách làm điều đó: https://www.mahjong-tarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
+Bài đăng hôm qua giải thích chính xác cách làm điều đó: https://www.mahjongtarot.com/blog/posts/what-fire-horse-is-opposing-in-your-love-life
 
 Câu hỏi Góc thứ ba của bạn trong tuần này là gì?

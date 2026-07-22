@@ -14,6 +14,6 @@ Trong năm Ngọ Hỏa, nhiều người đang chạy theo cảm xúc: sức nó
 
 Thử thách tuần này: chọn một điều trong danh sách cần được chú ý nhất trong mối quan hệ của bạn ngay lúc này, và làm gì đó về nó trong cuối tuần này. Không cần một cử chỉ lớn lao. Chỉ cần một cuộc trò chuyện thành thật, một hành động nhỏ chứng tỏ bạn chọn người của mình.
 
-Bài viết đầy đủ (với danh sách 5 điểm kiểm tra): https://www.mahjong-tarot.com/blog/posts/feel-good-friday-balance-is-the-real-love-story
+Bài viết đầy đủ (với danh sách 5 điểm kiểm tra): https://www.mahjongtarot.com/blog/posts/feel-good-friday-balance-is-the-real-love-story
 
 Bạn sẽ tập trung vào điều gì? Hãy để lại bình luận.

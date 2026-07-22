@@ -10,4 +10,4 @@ Năm Bính Ngọ không phải những gì nó trông từ bên ngoài. Không p
 
 Nếu bạn chưa đọc cung của mình, hôm nay là lúc rồi đấy.
 
-https://www.mahjong-tarot.com/blog/posts/fire-horse-love-life-by-sign-2026
+https://www.mahjongtarot.com/blog/posts/fire-horse-love-life-by-sign-2026

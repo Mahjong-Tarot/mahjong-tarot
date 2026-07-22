@@ -110,6 +110,6 @@ In over 35 years of doing readings, the months I see produce the most meaningful
 
 If you want to know where you specifically stand before the month opens, I'm doing personal readings now. A reading won't tell you what to want. It'll show you where you already are and what the month is most likely to ask of you.
 
-Book a reading at [mahjong-tarot.com/readings](/readings).
+Book a reading at [mahjongtarot.com/readings](/readings).
 
 And if you want the decision framework that helps you name what you actually want from a relationship before passion runs the show, that's what *The Mahjong Mirror* is built for. [Pick it up here](/the-mahjong-mirror).

@@ -10,4 +10,4 @@ Thứ hai, Góc Thứ Ba: Sự Đối Lập. Trong một tháng hai hỏa, đi�
 
 Cửa sổ tình yêu tốt nhất trong năm thưởng cho sự rõ ràng. Không chỉ cho nhiệt huyết.
 
-Xem đầy đủ trên blog: https://www.mahjong-tarot.com/blog/posts/soulmate-month-decision-love-vs-heat
+Xem đầy đủ trên blog: https://www.mahjongtarot.com/blog/posts/soulmate-month-decision-love-vs-heat

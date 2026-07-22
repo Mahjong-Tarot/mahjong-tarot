@@ -8,6 +8,6 @@ Dê và Ngựa là hai cung tri kỷ, mức độ hợp nhau cao nhất mà mộ
 
 Các yếu tố ngũ hành đang ủng hộ em bé này. Cảm xúc là phần việc của bạn.
 
-https://www.mahjong-tarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
+https://www.mahjongtarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
 
 Bạn đang làm gì khác để chuẩn bị cho một em bé dịu dàng hơn nhưng cần nhiều hơn?

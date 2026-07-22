@@ -12,17 +12,17 @@ hero:
 seo:
   title: "Your Love Life in the Fire Horse Year: All 12 Signs, The Mahjong Tarot"
   description: "What does the 2026 Fire Horse year mean for your love life? Bill Hajdu breaks down relationship guidance for all 12 Chinese zodiac signs."
-  canonical: "https://mahjong-tarot.com/blog/posts/your-love-life-in-the-fire-horse-year"
+  canonical: "https://mahjongtarot.com/blog/posts/your-love-life-in-the-fire-horse-year"
   og:
     title: "Your Love Life in the Fire Horse Year: All 12 Signs | Mahjong Tarot"
     description: "The Fire Horse doesn't care how solid you think your relationship is. Here's what it actually means for your sign, and what to do about it."
-    image: "https://mahjong-tarot.com/images/blog/your-love-life-in-the-fire-horse-year.webp"
+    image: "https://mahjongtarot.com/images/blog/your-love-life-in-the-fire-horse-year.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
   headline: "Your Love Life in the Fire Horse Year: What Every Sign Needs to Know"
   datePublished: "2026-04-15"
-  image: "https://mahjong-tarot.com/images/blog/your-love-life-in-the-fire-horse-year.webp"
-  publisherUrl: "https://mahjong-tarot.com"
+  image: "https://mahjongtarot.com/images/blog/your-love-life-in-the-fire-horse-year.webp"
+  publisherUrl: "https://mahjongtarot.com"
 nav:
   prev:
     slug: "swift-kelce-wedding-stars"

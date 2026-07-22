@@ -12,6 +12,6 @@ So I did. All 12 signs. Honest guidance, no sugarcoating.
 
 What does 2026 really mean for YOUR sign's love life?
 
-Read the full breakdown here: https://www.mahjong-tarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026
+Read the full breakdown here: https://www.mahjongtarot.com/blog/posts/opposites-attract-is-a-lie-fire-horse-love-2026
 
 What sign are you? Drop it in the comments and I'll tell you what to watch for this year.

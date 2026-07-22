@@ -19,6 +19,6 @@ Taylor và Travis có bốn cung mạnh. Nội tâm Travis bình an. Lá số Ta
 
 Nếu bạn chỉ mới xem con giáp, bạn mới đọc bìa cuốn sách của mình thôi. Câu chuyện nằm bên trong.
 
-Muốn biết câu chuyện của bạn? Đặt lịch đọc bài: https://www.mahjong-tarot.com/readings
+Muốn biết câu chuyện của bạn? Đặt lịch đọc bài: https://www.mahjongtarot.com/readings
 
-Bài phân tích đầy đủ: https://www.mahjong-tarot.com/blog/posts/taylor-swift-travis-kelce-wedding
+Bài phân tích đầy đủ: https://www.mahjongtarot.com/blog/posts/taylor-swift-travis-kelce-wedding

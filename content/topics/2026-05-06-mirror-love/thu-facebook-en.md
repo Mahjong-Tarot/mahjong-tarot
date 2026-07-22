@@ -14,4 +14,4 @@ The Second Angle of the Mirror asks: who are you, really? Not in your best momen
 
 Honest answer to that question is the foundation of every good relationship I've seen last.
 
-The full framework is in the book: https://www.mahjong-tarot.com/blog/posts/what-the-mirror-shows-about-love
+The full framework is in the book: https://www.mahjongtarot.com/blog/posts/what-the-mirror-shows-about-love

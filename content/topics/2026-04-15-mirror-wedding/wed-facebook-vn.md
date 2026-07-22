@@ -12,6 +12,6 @@ Hôm thứ Hai, chúng ta phân tích xem Taylor Swift và Travis Kelce có hợ
 
 Năm bước. Không cần quân bài. Chỉ cần sự thành thật và một phòng yên tĩnh.
 
-Đọc bài hướng dẫn đầy đủ: https://www.mahjong-tarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
+Đọc bài hướng dẫn đầy đủ: https://www.mahjongtarot.com/blog/posts/planning-a-wedding-through-the-mahjong-mirror
 
 Đám cưới của bạn thực sự nói về điều gì? Chia sẻ ở phần bình luận nhé — tôi rất muốn nghe.

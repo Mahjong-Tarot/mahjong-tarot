@@ -8,6 +8,6 @@ Here's what that means in practice. You're not managing a wildfire, like the dou
 
 The elements are on this baby's side. The emotions are your department.
 
-https://www.mahjong-tarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
+https://www.mahjongtarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
 
 What's the one thing you're doing differently to prepare for a gentler-but-needier baby?

@@ -8,4 +8,4 @@ Tại Derby, trở ngại là tốc độ nhanh. Đội của Golden Tempo đã 
 
 Trở ngại chưa được đặt tên trong quyết định lớn nhất của bạn ngay bây giờ là gì?
 
-Bài đăng thứ Tư đầy đủ hướng dẫn cách áp dụng Góc thứ Ba vào bất kỳ quyết định nào bạn đang đối mặt: [https://www.mahjong-tarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]
+Bài đăng thứ Tư đầy đủ hướng dẫn cách áp dụng Góc thứ Ba vào bất kỳ quyết định nào bạn đang đối mặt: [https://www.mahjongtarot.com/blog/posts/what-the-favorites-trainers-missed-mahjong-mirror]

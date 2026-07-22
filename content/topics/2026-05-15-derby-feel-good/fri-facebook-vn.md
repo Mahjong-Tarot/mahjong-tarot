@@ -14,6 +14,6 @@ Thử thách cuối tuần từ bài viết hôm nay: viết xuống một đi�
 
 Nếu câu trả lời rõ ràng, bạn gần hơn bạn nghĩ. Nếu không rõ ràng, công việc đang ở phía trước, và năm vẫn còn thời gian.
 
-Bài đăng đầy đủ: [https://www.mahjong-tarot.com/blog/posts/feel-good-friday-this-is-the-year-you-surprise-yourself]
+Bài đăng đầy đủ: [https://www.mahjongtarot.com/blog/posts/feel-good-friday-this-is-the-year-you-surprise-yourself]
 
 Bạn gần như đã sẵn sàng cho điều gì?

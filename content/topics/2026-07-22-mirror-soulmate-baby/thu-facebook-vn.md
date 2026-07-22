@@ -8,6 +8,6 @@ Hiểu được cấu trúc chiêm tinh sẽ cho bạn biết khi nào con bạn
 
 Bài viết hôm thứ Tư đã vẽ ra bản đồ các tháng sắp tới, bao gồm cả khoảng thời gian dịu lại đến vào tháng 10. Nếu bạn chưa đọc, đường link ở dưới.
 
-https://www.mahjong-tarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
+https://www.mahjongtarot.com/blog/posts/you-cant-pick-the-month-you-can-read-it
 
 Bạn có nhận thấy "vùng thoải mái" của con mình so với khi có điều gì không ổn không?

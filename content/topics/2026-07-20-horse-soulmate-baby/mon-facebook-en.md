@@ -8,6 +8,6 @@ But the Sheep is the sign of emotions. This baby doesn't cry up a storm like a d
 
 The most auspicious window of the year, and the most demanding one. Full post on the blog.
 
-https://www.mahjong-tarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
+https://www.mahjongtarot.com/blog/posts/soulmate-month-baby-isnt-the-easy-one
 
 Is your baby arriving in this window? What have you noticed so far?

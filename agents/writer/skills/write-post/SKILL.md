@@ -61,14 +61,14 @@ If source material is thin or missing for a topic, **stop and report** what you 
 Every social post that links to a blog post must use the full URL. The blog URL pattern is:
 
 ```
-https://www.mahjong-tarot.com/blog/posts/<slug>
+https://www.mahjongtarot.com/blog/posts/<slug>
 ```
 
 Where `<slug>` is the semantic URL slug you defined in the blog markdown's frontmatter (NOT the folder name). Folder names follow `<YYYY-MM-DD>-<type>-<topic>` for organization; URL slugs stay descriptive for SEO. Use this URL in all Facebook CTAs and as the `[blog link]` placeholder in all social files. For Instagram, use "Link in bio" as the CTA (Instagram doesn't support clickable links in captions).
 
-**Monday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<monday-slug>`
-**Wednesday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<wednesday-slug>`
-**Friday blog URL:** `https://www.mahjong-tarot.com/blog/posts/<friday-slug>`
+**Monday blog URL:** `https://www.mahjongtarot.com/blog/posts/<monday-slug>`
+**Wednesday blog URL:** `https://www.mahjongtarot.com/blog/posts/<wednesday-slug>`
+**Friday blog URL:** `https://www.mahjongtarot.com/blog/posts/<friday-slug>`
 
 ---
 
@@ -128,7 +128,7 @@ Generate the SEO guide for the Monday blog:
 [H1 and all H2s from the blog post]
 
 ## Internal Links
-[3-5 internal links to other mahjong-tarot.com pages with anchor text]
+[3-5 internal links to other mahjongtarot.com pages with anchor text]
 
 ## External Links
 [2-3 external links to authoritative sources]

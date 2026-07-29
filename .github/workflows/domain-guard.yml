@@ -37,3 +37,21 @@ jobs:
             exit 1
           fi
           echo "Clean — no dead-domain references."
+
+      - name: Reject the legacy themahjongtarot.com label in content and code
+        run: |
+          # 'themahjongtarot.com' was a legacy source_site label, fully
+          # normalised out of the database on 2026-07-22 (migration 052).
+          # It must never appear in links, content, or app code. It is
+          # allowed only in historical migrations (website/supabase) and
+          # historical docs — hence the scoped search paths below.
+          MATCHES=$(grep -rniI 'themahjongtarot\.com' \
+            emails content website/pages website/components website/lib \
+            website/scripts agents .claude/skills 2>/dev/null || true)
+
+          if [ -n "$MATCHES" ]; then
+            echo "::error::Found the legacy label themahjongtarot.com in content/code (canonical is mahjongtarot.com):"
+            echo "$MATCHES"
+            exit 1
+          fi
+          echo "Clean — no legacy-label references in content or code."

@@ -13,7 +13,7 @@ The website is a **Next.js** application (Pages Router). You read source content
 The canonical domain is **`mahjongtarot.com`** — no hyphen, no "the" prefix. Every link in every email draft, blog post, social post, component, and doc uses `https://www.mahjongtarot.com/...`.
 
 - ❌ `mahjong-tarot.com` — DEAD DOMAIN, does not resolve. The July 2026 newsletter drafts shipped with every link dead because of this. CI (`.github/workflows/domain-guard.yml`) fails any commit containing it — github.com org URLs (`github.com/Mahjong-Tarot/...`) are the only legitimate hyphenated use.
-- ⚠️ `themahjongtarot.com` — legacy label that survives only as the `source_site` value on ~38k existing CRM rows and in old migration defaults. Never use it in links or new code.
+- ❌ `themahjongtarot.com` — legacy label, fully retired. All CRM `source_site` rows and DB defaults were normalised to `mahjongtarot.com` on 2026-07-22 (migration 052). It survives only inside historical migration files; CI fails any new use in content or code. Never use it.
 
 ---
 

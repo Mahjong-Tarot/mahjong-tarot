@@ -5,6 +5,7 @@
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
 import { findOrCreatePersonByEmail, promoteToCustomer } from '../../../lib/people';
 import { DEFAULT_ASTROLOGER_ID } from '../../../lib/bookings';
+import { notifyBookOrder } from '../../../lib/order-notify';
 
 export const config = {
   api: { bodyParser: false },
@@ -130,31 +131,44 @@ async function handleBookOrderCompleted(service, session) {
     null;
   const addr = shipping?.address || null;
 
+  // Stripe retries webhooks; only notify on the first write.
+  const { data: existing } = await service
+    .from('book_orders')
+    .select('id')
+    .eq('stripe_session_id', session.id)
+    .maybeSingle();
+
+  const order = {
+    email: session.customer_details?.email || session.customer_email || '',
+    full_name: session.customer_details?.name || shipping?.name || null,
+    phone: session.customer_details?.phone || null,
+    sku,
+    amount_cents: session.amount_total ?? null,
+    currency: session.currency || 'usd',
+    status: 'paid',
+    shipping_name: shipping?.name || null,
+    shipping_line1: addr?.line1 || null,
+    shipping_line2: addr?.line2 || null,
+    shipping_city: addr?.city || null,
+    shipping_state: addr?.state || null,
+    shipping_postal_code: addr?.postal_code || null,
+    shipping_country: addr?.country || null,
+    stripe_session_id: session.id,
+    stripe_payment_intent_id: paymentIntentId(session),
+  };
+
   const { error } = await service
     .from('book_orders')
-    .upsert(
-      {
-        email: session.customer_details?.email || session.customer_email || '',
-        full_name: session.customer_details?.name || shipping?.name || null,
-        phone: session.customer_details?.phone || null,
-        sku,
-        amount_cents: session.amount_total ?? null,
-        currency: session.currency || 'usd',
-        status: 'paid',
-        shipping_name: shipping?.name || null,
-        shipping_line1: addr?.line1 || null,
-        shipping_line2: addr?.line2 || null,
-        shipping_city: addr?.city || null,
-        shipping_state: addr?.state || null,
-        shipping_postal_code: addr?.postal_code || null,
-        shipping_country: addr?.country || null,
-        stripe_session_id: session.id,
-        stripe_payment_intent_id: paymentIntentId(session),
-      },
-      { onConflict: 'stripe_session_id' },
-    );
+    .upsert(order, { onConflict: 'stripe_session_id' });
 
   if (error) throw error;
+
+  if (!existing) {
+    await notifyBookOrder({
+      ...order,
+      country: session.customer_details?.address?.country || null,
+    });
+  }
 
   // Write the corresponding Deal so revenue rolls up on the dashboard.
   const email = session.customer_details?.email || session.customer_email;

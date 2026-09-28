@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import styles from './PortalSwitcher.module.css';
 
 // ─── View preference (admin-only) ────────────────────────────────
@@ -43,7 +43,9 @@ const PORTALS_FOR_ROLE = {
 };
 
 export default function PortalSwitcher({ role, onNavigate }) {
-  const router = useRouter();
+  // next/navigation, not next/router, so the shell also renders under the
+  // App Router (/admin/revenue).
+  const pathname = usePathname() ?? '';
   const keys = PORTALS_FOR_ROLE[role] || [];
 
   // Track admin's view preference. Reads after mount to avoid
@@ -67,7 +69,7 @@ export default function PortalSwitcher({ role, onNavigate }) {
   // /admin/*, admins fall back to their stored view (default 'admin'),
   // astrologers always see 'astrologer'.
   let active;
-  if (router.pathname.startsWith('/member')) {
+  if (pathname.startsWith('/member')) {
     active = 'member';
   } else if (role === 'astrologer') {
     active = 'astrologer';

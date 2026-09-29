@@ -26,8 +26,15 @@ import { EVENTS, type EventName, type EventPayload } from "./catalogue";
 
 type Handler = (payload: unknown) => Promise<void> | void;
 
-/** name -> the handlers registered for it, in registration order. */
-const handlers = new Map<EventName, { entity: string; run: Handler }[]>();
+/** name -> the handlers registered for it, in registration order.
+ *
+ * Kept on globalThis: Next compiles instrumentation.ts (which registers) and
+ * each route (which publishes) as separate bundles with their own module
+ * instances, so a module-level Map filled at boot was empty where a server
+ * action published (mahjong-tarot, 2026-09-29). One process, one registry. */
+const REGISTRY = "__companyOsEventHandlers" as const;
+const store = globalThis as typeof globalThis & { [REGISTRY]?: Map<EventName, { entity: string; run: Handler }[]> };
+const handlers = (store[REGISTRY] ??= new Map<EventName, { entity: string; run: Handler }[]>());
 
 /**
  * Register one entity's interest in one event. The composition root calls this

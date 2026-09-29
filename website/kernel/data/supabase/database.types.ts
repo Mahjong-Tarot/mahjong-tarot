@@ -113,6 +113,148 @@ export type Database = {
         }
         Relationships: []
       }
+      board_columns: {
+        Row: {
+          board_id: string
+          created_at: string
+          id: string
+          is_done: boolean
+          is_not_doing: boolean
+          name: string
+          position: number
+          updated_at: string
+          wip_limit: number | null
+        }
+        Insert: {
+          board_id: string
+          created_at?: string
+          id?: string
+          is_done?: boolean
+          is_not_doing?: boolean
+          name: string
+          position?: number
+          updated_at?: string
+          wip_limit?: number | null
+        }
+        Update: {
+          board_id?: string
+          created_at?: string
+          id?: string
+          is_done?: boolean
+          is_not_doing?: boolean
+          name?: string
+          position?: number
+          updated_at?: string
+          wip_limit?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "board_columns_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "boards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      board_members: {
+        Row: {
+          board_id: string
+          created_at: string
+          id: string
+          person_id: string
+          role: string
+        }
+        Insert: {
+          board_id: string
+          created_at?: string
+          id?: string
+          person_id: string
+          role?: string
+        }
+        Update: {
+          board_id?: string
+          created_at?: string
+          id?: string
+          person_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "board_members_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "board_members_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      boards: {
+        Row: {
+          ai_program_id: string | null
+          archived_at: string | null
+          archived_by: string | null
+          client_company_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json
+          name: string
+          owner_id: string | null
+          slug: string
+          sort_order: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          ai_program_id?: string | null
+          archived_at?: string | null
+          archived_by?: string | null
+          client_company_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name: string
+          owner_id?: string | null
+          slug: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          ai_program_id?: string | null
+          archived_at?: string | null
+          archived_by?: string | null
+          client_company_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json
+          name?: string
+          owner_id?: string | null
+          slug?: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "boards_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       book_chapters: {
         Row: {
           body_md: string
@@ -1694,6 +1836,191 @@ export type Database = {
         }
         Relationships: []
       }
+      task_stage_log: {
+        Row: {
+          from_column_id: string | null
+          from_sprint_id: string | null
+          id: string
+          kind: string
+          moved_at: string
+          moved_by: string | null
+          note: string | null
+          task_id: string
+          to_column_id: string | null
+          to_sprint_id: string | null
+        }
+        Insert: {
+          from_column_id?: string | null
+          from_sprint_id?: string | null
+          id?: string
+          kind?: string
+          moved_at?: string
+          moved_by?: string | null
+          note?: string | null
+          task_id: string
+          to_column_id?: string | null
+          to_sprint_id?: string | null
+        }
+        Update: {
+          from_column_id?: string | null
+          from_sprint_id?: string | null
+          id?: string
+          kind?: string
+          moved_at?: string
+          moved_by?: string | null
+          note?: string | null
+          task_id?: string
+          to_column_id?: string | null
+          to_sprint_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_stage_log_from_column_id_fkey"
+            columns: ["from_column_id"]
+            isOneToOne: false
+            referencedRelation: "board_columns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_stage_log_moved_by_fkey"
+            columns: ["moved_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_stage_log_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_stage_log_to_column_id_fkey"
+            columns: ["to_column_id"]
+            isOneToOne: false
+            referencedRelation: "board_columns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tasks: {
+        Row: {
+          archived_at: string | null
+          archived_by: string | null
+          assignee_id: string | null
+          board_column_id: string | null
+          board_id: string | null
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          epic_id: string | null
+          human_tokens: number | null
+          id: string
+          internal: boolean
+          metadata: Json
+          parent_task_id: string | null
+          position: number
+          priority: string
+          sprint_id: string | null
+          status: string
+          subject_id: string | null
+          subject_type: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          archived_at?: string | null
+          archived_by?: string | null
+          assignee_id?: string | null
+          board_column_id?: string | null
+          board_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          epic_id?: string | null
+          human_tokens?: number | null
+          id?: string
+          internal?: boolean
+          metadata?: Json
+          parent_task_id?: string | null
+          position?: number
+          priority?: string
+          sprint_id?: string | null
+          status?: string
+          subject_id?: string | null
+          subject_type?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          archived_at?: string | null
+          archived_by?: string | null
+          assignee_id?: string | null
+          board_column_id?: string | null
+          board_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          epic_id?: string | null
+          human_tokens?: number | null
+          id?: string
+          internal?: boolean
+          metadata?: Json
+          parent_task_id?: string | null
+          position?: number
+          priority?: string
+          sprint_id?: string | null
+          status?: string
+          subject_id?: string | null
+          subject_type?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_assignee_id_fkey"
+            columns: ["assignee_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_board_column_id_fkey"
+            columns: ["board_column_id"]
+            isOneToOne: false
+            referencedRelation: "board_columns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_parent_task_id_fkey"
+            columns: ["parent_task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       deals: {
@@ -1844,6 +2171,10 @@ export type Database = {
       }
     }
     Functions: {
+      append_task_position: {
+        Args: { p_board_id: string; p_column_id: string }
+        Returns: number
+      }
       campaign_recipient_stats: {
         Args: { p_campaign_id: string }
         Returns: {

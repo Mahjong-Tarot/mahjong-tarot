@@ -5,9 +5,9 @@ description: "Converts content/blog/<slug>.md markdown into a published blog pos
 
 # Build Page — Markdown to Published Post
 
-Blog posts are now rendered dynamically from a single markdown source file. The dynamic route at `website/pages/blog/posts/[slug].jsx` reads `content/blog/<slug>.md` at build time and renders the entire post: SEO tags, hero, body, FAQs, JSON-LD, post navigation, related cards, and CTA.
+Blog posts are served from the blog database (`company_os.marketing_content`). The dynamic route at `website/pages/blog/posts/[slug].jsx` reads it through `website/lib/blogDb.js` and renders the entire post: SEO tags, hero, body, FAQs, JSON-LD, post navigation, related cards, and CTA.
 
-**There is no per-post JSX file anymore.** The skill's job is to write the markdown — full frontmatter plus body — and place it at `content/blog/<slug>.md`. Then update `website/lib/posts.js` so the post appears on the blog index.
+**There is no per-post JSX file.** The skill's job is to write the markdown (full frontmatter plus body) at `content/blog/<slug>.md`, then publish it to the database with `website/scripts/publish-blog-post.mjs`.
 
 ## Before you start
 
@@ -17,7 +17,7 @@ Read these files in order:
 2. `agents/web-developer/context/style-guide.md` — Agent-specific component conventions
 3. `agents/web-developer/context/file-conventions.md` — Naming and path rules
 4. `website/pages/blog/posts/[slug].jsx` — see the template that will render this post (especially the destructured frontmatter fields)
-5. `website/lib/blogContent.js` — see the loader, which documents the full frontmatter schema
+5. `website/scripts/publish-blog-post.mjs` — how frontmatter maps onto the database row
 6. The source draft the user wants to build (one of `content/topics/<bundle>/blog*.md`, or a free-form draft the user pastes)
 
 ## Inputs
@@ -41,6 +41,10 @@ Required frontmatter fields:
 
 ```yaml
 title: "..."              # h1 text (use real em-dashes —, smart quotes ‘’, not HTML entities)
+topic: "..."              # one of: Love & Relationships | Money & Career | Forecasts & Timing | The Mahjong Mirror
+excerpt: "..."            # card text on /blog and the homepage, 1-2 sentences
+isoDate: "2026-04-17"     # publish date (US Eastern); the post goes live on this day
+cardDate: "Apr 17, 2026"  # short date on the /blog card
 author: "Bill Hajdu"
 date: "Apr 17, 2026"     # display-formatted date
 readTime: "6 min read"
@@ -132,33 +136,34 @@ Available block class names:
 
 For inline mid-body images, use raw HTML `<figure>` with inline style attributes.
 
-### 5. Update `website/lib/posts.js`
+### 5. Publish to the blog database
 
-Add the new post at the top of the `POSTS` array (newest first). Required fields:
+The public blog reads `company_os.marketing_content`, not the markdown file
+(`docs/engineering/2026-09-28-marketing-platform-port.md`, decision 1). After the
+markdown and hero image are committed **and deployed** (merged to `main`), run:
 
-```js
-{
-  slug: '<slug>',
-  title: '...',                          // can be different from the page <h1>
-  excerpt: '...',                        // shown on /blog
-  categories: ['Year of the Fire Horse'], // used by the /blog filter
-  date: 'Apr 17, 2026',
-  isoDate: '2026-04-17',
-  readTime: '6 min read',
-},
+```bash
+cd website && node scripts/publish-blog-post.mjs <slug>
 ```
+
+It upserts the post (title, topic, excerpt, SEO, body + FAQ, hero, CTA, nav,
+related) and prints `+ <slug>` (new) or `↻ <slug>` (updated). The post shows on
+`/blog` and `/blog/posts/<slug>` within 5 minutes, and not before its `isoDate`.
+Run it before the image is deployed and the post goes live with a broken hero.
+Posts written in the admin (Marketing → Campaigns) are already in the database
+and skip this step.
 
 ### 6. Generate or place the hero image
 
 If a new hero is needed, invoke the `generate-image` skill. The image must end up at `website/public/images/blog/<slug>.webp` (matches `hero.src` in the frontmatter).
 
-### 7. Verify
+### 7. Verify (before step 5)
 
 ```bash
 cd website && npm run build
 ```
 
-The build output should list the new slug under `/blog/posts/[slug]`. Visit `/blog` and `/blog/posts/<slug>` via `npm run dev` to confirm visual parity.
+The build should pass. After step 5, visit `/blog` and `/blog/posts/<slug>` to confirm the post renders.
 
 ### 8. Stage, commit, push
 
@@ -166,8 +171,7 @@ Stage explicitly:
 
 ```bash
 git add content/blog/<slug>.md \
-        website/public/images/blog/<slug>.webp \
-        website/lib/posts.js
+        website/public/images/blog/<slug>.webp
 git commit -m "publish: <Post title>"
 ```
 

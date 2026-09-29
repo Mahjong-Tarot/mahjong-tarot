@@ -1,5 +1,9 @@
 ---
 title: "The Fire Horse Year Will Blow Up Your Career — One Way or Another"
+topic: "Money & Career"
+excerpt: "Every 60 years, the Fire Horse tears through careers and industries and rewrites who wins. The pattern from 1906, 1966, and now 2026 is not subtle. The ones who thrive all did the same thing."
+isoDate: "2026-04-27"
+cardDate: "Apr 27, 2026"
 author: "Bill Hajdu"
 date: "Apr 27, 2026"
 readTime: "7 min read"

@@ -1,5 +1,9 @@
 ---
 title: "A Once-in-a-Generation Blood Moon Signal Just Landed on the Most Volatile Year in the Chinese Zodiac"
+topic: "Forecasts & Timing"
+excerpt: "A blood moon in the first lunar month has only happened twice in the last hundred years. The last time was 2007. This time it's amplified by the Fire Horse."
+isoDate: "2026-04-04"
+cardDate: "Apr 4, 2026"
 author: "Bill Hajdu"
 date: "April 4, 2026"
 readTime: "5 min read"

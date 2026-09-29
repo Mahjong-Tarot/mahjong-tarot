@@ -1,5 +1,9 @@
 ---
 title: "You Don't Parent a Firehorse. You Parent Your Child."
+topic: "The Mahjong Mirror"
+excerpt: "Monday was about the firehorse in general. But there is no such thing as parenting a firehorse. Your child is four pillars, not one, and the day element is where the real personalization lives."
+isoDate: "2026-07-08"
+cardDate: "Jul 8, 2026"
 author: "Bill Hajdu"
 date: "July 8, 2026"
 readTime: "6 min read"

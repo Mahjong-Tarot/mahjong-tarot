@@ -69,7 +69,7 @@ export function keywordTakenError(recent: LedgerRow[], keyword: string | null | 
   if (!keyword) return null;
   const hit = recent.find((r) => r.primaryKeyword && norm(r.primaryKeyword) === norm(keyword));
   if (!hit) return null;
-  return `The primary keyword "${keyword}" is already the keyword of "${hit.campaignName}"${hit.slug ? ` (/post/${hit.slug}/)` : ""}; pick a keyword this post can own.`;
+  return `The primary keyword "${keyword}" is already the keyword of "${hit.campaignName}"${hit.slug ? ` (/blog/posts/${hit.slug})` : ""}; pick a keyword this post can own.`;
 }
 
 // The ledger as the writer reads it: one line per post, oldest last.
@@ -80,7 +80,7 @@ export function ledgerLines(rows: LedgerRow[]): string {
       const social = r.social.filter((s) => s.socialStyle).map((s) => `${s.channel}=${s.socialStyle}`).join(" ");
       return [
         r.date ?? "undated",
-        r.slug ? `/post/${r.slug}/` : r.campaignName,
+        r.slug ? `/blog/posts/${r.slug}` : r.campaignName,
         `keyword: ${r.primaryKeyword ?? "none"}`,
         `question: ${r.primaryQuestion ?? "none"}`,
         `blog: ${r.blogType ?? "none"}`,

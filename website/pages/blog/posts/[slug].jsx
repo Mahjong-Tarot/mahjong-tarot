@@ -1,21 +1,20 @@
 // Dynamic blog post template.
 //
-// Renders any post at /blog/posts/<slug> from the markdown source at
-//   <repo>/content/blog/<slug>.md
+// Renders any post at /blog/posts/<slug> from the blog database
+// (company_os.marketing_content, via lib/blogDb.js). Posts reach the database
+// from the marketing platform's admin or from content/blog/<slug>.md through
+// scripts/publish-blog-post.mjs.
 //
 // This file replaces 16 hand-written per-post JSX files that all shared
 // ~90% boilerplate (identical <Head>/<Nav>/<Footer> wiring, an inlined
 // FaqItem component duplicated 12 times, hand-written JSON-LD).
 //
-// Per-post knobs live in the markdown frontmatter — see lib/blogContent.js
-// for the full schema. Anything that isn't expressible in standard markdown
+// Per-post knobs come from the row's columns and page_meta (lib/blogDb.js
+// builds the frontmatter-shaped object this page renders). Anything that isn't expressible in standard markdown
 // (Swift/Kelce's risk cards, the love post's sign grid, mid-body figures
 // with figcaptions) goes in as raw HTML in the body — `marked` passes
 // inline HTML through unchanged, so those blocks render exactly as the
 // hand-written JSX did.
-//
-// The lib/posts.js index is unchanged and remains the canonical ordered
-// list used by the /blog listing page.
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -24,8 +23,7 @@ import Nav from '../../../components/Nav';
 import Footer from '../../../components/Footer';
 import FaqItem from '../../../components/FaqItem';
 import styles from '../../../styles/BlogPost.module.css';
-import { listSlugs, loadPost } from '../../../lib/blogContent';
-import { isPublished, topicOf } from '../../../lib/posts';
+import { listPublishedPosts, loadPublishedPost } from '../../../lib/blogDb';
 
 export default function BlogPost({ frontmatter, html }) {
   const {
@@ -228,25 +226,19 @@ export default function BlogPost({ frontmatter, html }) {
 }
 
 export async function getStaticPaths() {
+  // Prerender every live post; a post published after the build renders on
+  // its first request (fallback: 'blocking') and is then cached.
+  const posts = await listPublishedPosts();
   return {
-    paths: listSlugs().map((slug) => ({ params: { slug } })),
-    fallback: false,
+    paths: posts.map((p) => ({ params: { slug: p.slug } })),
+    fallback: 'blocking',
   };
 }
 
 export async function getStaticProps({ params }) {
-  const post = loadPost(params.slug);
-  if (!post) return { notFound: true };
-  // Hold future-dated posts until their publish day (see lib/posts.js).
-  // revalidate lets the 404 flip to the live page when the date arrives.
-  if (!isPublished(params.slug)) return { notFound: true, revalidate: 1800 };
-  // The post's topic (pill + breadcrumb) comes from lib/posts.js, the single
-  // source of truth — not the markdown frontmatter — so it can never drift from
-  // the /blog card or the homepage eyebrow.
-  const topic = topicOf(params.slug);
-  if (topic) {
-    post.frontmatter.categoryPill = topic;
-    post.frontmatter.breadcrumbLabel = topic;
-  }
-  return { props: post, revalidate: 1800 };
+  // Future-dated and unpublished posts are not returned, so they 404 until
+  // their day; revalidate lets the page flip live without a redeploy.
+  const post = await loadPublishedPost(params.slug);
+  if (!post) return { notFound: true, revalidate: 300 };
+  return { props: post, revalidate: 300 };
 }

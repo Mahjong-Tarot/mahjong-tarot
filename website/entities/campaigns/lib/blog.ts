@@ -11,7 +11,7 @@ import { pillarsFrom, type Pillar } from "@/entities/site";
 // Unified blog lookup: the public site reads published posts from BOTH the 29
 // legacy static posts (lib/postData.ts + content/blog markdown) and blog assets
 // published from the marketing system (company_os.marketing_calendar). Every
-// surface — /post/[slug], /blog, the sitemap, related posts — goes through here
+// surface — /blog/posts/[slug], /blog, the sitemap, related posts — goes through here
 // so the two sources render identically. DB reads are tag-cached and degrade to
 // [] on failure, so the site never depends on Supabase being up.
 

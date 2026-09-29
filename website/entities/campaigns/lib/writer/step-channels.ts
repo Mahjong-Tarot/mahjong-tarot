@@ -68,7 +68,7 @@ The blog post below is final; it goes live at the URL given. Write the ${wanted.
 ${ledgerLines(recent.slice(0, 12))}`;
   const site = siteForBrandSlug(profile.brandSlug);
   const slug = parseSeoMd(blog.seoMd).slug;
-  const liveUrl = blog.postedUrl ?? (site && slug ? `${site.domain}/post/${slug}/` : "(not yet live)");
+  const liveUrl = blog.postedUrl ?? (site && slug ? `${site.domain}/blog/posts/${slug}` : "(not yet live)");
   const user = `# Live post
 ${liveUrl}
 

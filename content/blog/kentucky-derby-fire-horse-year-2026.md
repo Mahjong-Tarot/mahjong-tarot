@@ -1,5 +1,9 @@
 ---
 title: "I Went to the Kentucky Derby to See a Fire Horse Year in Action"
+topic: "Forecasts & Timing"
+excerpt: "Golden Tempo went from dead last to first in 30 seconds. Cherie DeVaux became the first woman trainer in 152 years to win. I was there, and the Fire Horse year put on a show."
+isoDate: "2026-05-11"
+cardDate: "May 11, 2026"
 author: "Bill Hajdu"
 date: "May 11, 2026"
 readTime: "7 min read"

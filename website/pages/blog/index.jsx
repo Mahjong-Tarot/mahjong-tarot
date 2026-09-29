@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 import NewsletterSignup from '../../components/NewsletterSignup';
 import SEO from '../../components/SEO';
 import { ORGANIZATION, WEBSITE, PERSON_BILL, graph, breadcrumb } from '../../lib/schema';
-import { publishedPosts, TOPICS } from '../../lib/posts';
+import { listPublishedPosts, TOPICS } from '../../lib/blogDb';
 import styles from '../../styles/Blog.module.css';
 
 // Filter buttons are derived from the canonical topic list, so every button
@@ -71,14 +71,16 @@ export default function BlogIndex({ posts }) {
           </div>
         </section>
 
-        {/* ── Featured ── */}
+        {/* ── Featured ── (absent only when the blog has no posts, e.g. a
+            preview build with no database key) */}
+        {featured && (
         <section className={`section-stone ${styles.featured}`}>
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
               <Link href={`/blog/posts/${featured.slug}`} className={styles.featuredImage}>
                 <Image
-                  src={`/images/blog/${featured.slug}.webp`}
+                  src={featured.image}
                   alt={featured.title}
                   fill
                   style={{ objectFit: 'cover' }}
@@ -99,6 +101,7 @@ export default function BlogIndex({ posts }) {
             </div>
           </div>
         </section>
+        )}
 
         {/* ── Filter ── */}
         <section className={styles.filterSection}>
@@ -131,7 +134,7 @@ export default function BlogIndex({ posts }) {
                     <Link href={`/blog/posts/${post.slug}`} className={styles.cardImageLink}>
                       <div className={styles.cardImage}>
                         <Image
-                          src={`/images/blog/${post.slug}.webp`}
+                          src={post.image}
                           alt={post.title}
                           fill
                           style={{ objectFit: 'cover' }}
@@ -172,11 +175,11 @@ export default function BlogIndex({ posts }) {
 }
 
 export async function getStaticProps() {
-  // Only surface posts whose publish date has arrived. revalidate lets the
-  // gate flip on schedule (when a future-dated post's day comes) without a
-  // manual redeploy.
+  // Posts come from the blog database (company_os.marketing_content), only
+  // those whose publish date has arrived. revalidate picks up new posts and
+  // flips date-gated ones in without a redeploy.
   return {
-    props: { posts: publishedPosts() },
-    revalidate: 1800,
+    props: { posts: await listPublishedPosts() },
+    revalidate: 300,
   };
 }

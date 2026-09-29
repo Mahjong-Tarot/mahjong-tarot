@@ -1,5 +1,9 @@
 ---
 title: "The Horse Is the Traveling Star, and It Carries Gold"
+topic: "Money & Career"
+excerpt: "The Fire Horse year is the most volatile wealth window in 60 years. The energy doesn't reward caution. It rewards movement, boldness, and the financial decisions most people are too afraid to make."
+isoDate: "2026-04-20"
+cardDate: "Apr 20, 2026"
 author: "Bill Hajdu"
 date: "Apr 20, 2026"
 readTime: "6 min read"

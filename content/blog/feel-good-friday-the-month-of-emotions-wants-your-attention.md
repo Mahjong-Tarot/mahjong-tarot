@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: The Month of Emotions Wants Your Attention"
+topic: "The Mahjong Mirror"
+excerpt: "The Sheep month isn't only demanding for new parents. It's the month of emotions for all of us. Your weekend challenge: give one person your full attention."
+isoDate: "2026-07-24"
+cardDate: "Jul 24, 2026"
 author: "Bill Hajdu"
 date: "Jul 24, 2026"
 readTime: "5 min read"

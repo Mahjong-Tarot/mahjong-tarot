@@ -1,5 +1,10 @@
 ---
 title: "Your Love Life in the Fire Horse Year: What Every Sign Needs to Know"
+topic: "Love & Relationships"
+excerpt: "The Fire Horse doesn’t care how solid you think your relationship is. Here’s what it actually means for your sign, and what to do about it."
+isoDate: "2026-04-15"
+cardDate: "Apr 15, 2026"
+cardReadTime: "7 min read"
 author: "Bill Hajdu"
 date: "April 15, 2026"
 readTime: "8 min read"

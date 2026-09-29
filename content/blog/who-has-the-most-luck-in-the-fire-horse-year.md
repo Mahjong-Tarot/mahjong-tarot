@@ -1,5 +1,9 @@
 ---
 title: "Who Has the Most Luck in 2026, Fire Horse Year? (And Why That's the Wrong Question)"
+topic: "Forecasts & Timing"
+excerpt: "Tiger, Dog, and Sheep have the best alignment. But luck is not something that happens to you. It's something you create, and the Fire Horse rewards boldness."
+isoDate: "2026-04-05"
+cardDate: "Apr 5, 2026"
 author: "Bill Hajdu"
 date: "April 5, 2026"
 readTime: "5 min read"

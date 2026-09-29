@@ -1,5 +1,9 @@
 ---
 title: "What the Stars Actually Say About the Swift-Kelce Wedding"
+topic: "Love & Relationships"
+excerpt: "Every Chinese astrology expert says two snakes is a bad match. But when you look at the elements - not just the signs - the charts tell a completely different story."
+isoDate: "2026-04-13"
+cardDate: "Apr 13, 2026"
 author: "Bill Hajdu"
 date: "Apr 13, 2026"
 readTime: "6 min read"

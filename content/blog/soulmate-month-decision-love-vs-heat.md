@@ -1,5 +1,9 @@
 ---
 title: "The Soulmate Month Decision: How to Tell Love From Heat"
+topic: "Love & Relationships"
+excerpt: "A month this passionate will hand you real choices. The Mahjong Mirror is how you make them without letting the heat decide for you."
+isoDate: "2026-07-01"
+cardDate: "Jul 1, 2026"
 author: "Bill Hajdu"
 date: "July 1, 2026"
 readTime: "6 min read"

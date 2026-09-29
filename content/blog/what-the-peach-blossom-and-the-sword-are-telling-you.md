@@ -1,5 +1,9 @@
 ---
 title: "What the Peach Blossom and the Sword Are Really Telling You This Month"
+topic: "Love & Relationships"
+excerpt: "Two cards keep showing up in my readings this month. Neither one is comfortable. Both are clarifying, if you know how to read them."
+isoDate: "2026-07-15"
+cardDate: "Jul 15, 2026"
 author: "Bill Hajdu"
 date: "Jul 15, 2026"
 readTime: "7 min read"

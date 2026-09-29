@@ -2,7 +2,7 @@
 
 import { blogPreviewFamily, blogTypeLabel } from "@/entities/campaigns/lib/style-catalogues";
 
-// Full-page render of a blog asset, matching the live /post/[slug] layout:
+// Full-page render of a blog asset, matching the live /blog/posts/[slug] layout:
 // cover image, meta row, title, article typography. The presentation family
 // (statement / structured / analytical / narrative) follows the chosen blog
 // style via the .admin-campaign-blogprev--{family} variants in admin.css.

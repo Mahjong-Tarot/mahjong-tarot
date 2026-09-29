@@ -93,3 +93,9 @@ recaps and weekly pulse (emailed), books (The Mahjong Mirror), broadcast summary
   tables, generated from edge8's live schema), 055 (run log ticks, ai_calls), 056 (deals view), 057 (Mahjong Tarot brand
   profile and pillars). Brand, time zone (US Eastern), writer rules (cards not tiles), prompts and palette adapted.
   Crons are routed but not scheduled (`website/vercel.json` has no crons yet).
+- 2026-09-29: the blog reads the database. All 41 posts loaded into `company_os.marketing_content` (migration 058
+  adds `page_meta` for their hero alt, CTA, nav, related, og/canonical/JSON-LD), `lib/posts.js` and
+  `lib/blogContent.js` removed, `/blog`, `/blog/posts/[slug]`, the homepage journal and the sitemap read
+  `website/lib/blogDb.js`. `content/blog/<slug>.md` stays the authoring format for the build-page skill and reaches
+  the site through `website/scripts/publish-blog-post.mjs`. Verified byte-identical against production for all 41
+  posts (main and head), `/blog` and the sitemap. The marketing platform's links use `/blog/posts/<slug>`.

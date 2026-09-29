@@ -1242,6 +1242,7 @@ export type Database = {
           language: string
           meta_description: string | null
           notes: string | null
+          page_meta: Json
           parent_id: string | null
           pillar: string | null
           pillar_id: string | null
@@ -1283,6 +1284,7 @@ export type Database = {
           language?: string
           meta_description?: string | null
           notes?: string | null
+          page_meta?: Json
           parent_id?: string | null
           pillar?: string | null
           pillar_id?: string | null
@@ -1324,6 +1326,7 @@ export type Database = {
           language?: string
           meta_description?: string | null
           notes?: string | null
+          page_meta?: Json
           parent_id?: string | null
           pillar?: string | null
           pillar_id?: string | null

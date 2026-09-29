@@ -1,5 +1,9 @@
 ---
 title: "The Soulmate-Month Baby Isn't the Easy One"
+topic: "The Mahjong Mirror"
+excerpt: "Everyone assumes the baby born after the wild firehorse window is the easy one. I've read this month's charts for weeks now, and I need to correct that before you build a nursery around it."
+isoDate: "2026-07-20"
+cardDate: "Jul 20, 2026"
 author: "Bill Hajdu"
 date: "Jul 20, 2026"
 readTime: "6 min read"

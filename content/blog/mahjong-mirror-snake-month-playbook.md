@@ -1,5 +1,9 @@
 ---
 title: "Lay Low, but Don't Stand Still: The Mirror's Playbook for the Snake Month"
+topic: "Forecasts & Timing"
+excerpt: "Laying low does not mean doing nothing. Here are three Mirror moves that let you work with the Snake month instead of against it."
+isoDate: "2026-06-03"
+cardDate: "Jun 3, 2026"
 author: "Bill Hajdu"
 date: "June 3, 2026"
 readTime: "5 min read"

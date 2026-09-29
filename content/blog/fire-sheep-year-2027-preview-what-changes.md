@@ -1,5 +1,9 @@
 ---
 title: "The Fire Burns Out Next Year. Here Is What Replaces It."
+topic: "Forecasts & Timing"
+excerpt: "The Fire Sheep year begins Feb 6, 2027, and it is the Yin to the Horse's Yang: slower, calmer, ruled by emotions. Here is who thrives, who struggles, and what to expect."
+isoDate: "2026-06-15"
+cardDate: "Jun 15, 2026"
 author: "Bill Hajdu"
 date: "June 15, 2026"
 readTime: "6 min read"

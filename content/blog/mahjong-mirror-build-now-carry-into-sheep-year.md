@@ -1,5 +1,9 @@
 ---
 title: "Build It Now, Carry It Into the Sheep Year: the Mirror's Long Game"
+topic: "Forecasts & Timing"
+excerpt: "You don't wait for the Sheep year to start preparing for it. The Mahjong Mirror applied to the transition: emotional control, the relationships worth keeping, and the foundations worth laying while the Horse year still has momentum."
+isoDate: "2026-06-17"
+cardDate: "Jun 17, 2026"
 author: "Bill Hajdu"
 date: "June 17, 2026"
 readTime: "6 min read"

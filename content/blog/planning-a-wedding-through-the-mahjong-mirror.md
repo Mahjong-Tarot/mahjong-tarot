@@ -1,5 +1,9 @@
 ---
 title: "The Mahjong Mirror Way to Plan a Wedding"
+topic: "Love & Relationships"
+excerpt: "The biggest day of your life deserves more than a color scheme. The Mahjong Mirror asks two questions no wedding planner will: what does this day actually mean, and what do you really want from the marriage itself?"
+isoDate: "2026-04-15"
+cardDate: "Apr 15, 2026"
 author: "Bill Hajdu"
 date: "Apr 15, 2026"
 readTime: "6 min read"

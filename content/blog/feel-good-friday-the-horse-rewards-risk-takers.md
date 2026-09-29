@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: The Wealth You've Been Circling Around Is Closer Than You Think"
+topic: "Money & Career"
+excerpt: "The Horse doesn't reward the ones who wait for certainty. It rewards the ones who decide. The financial move you keep postponing? That's the one this year is asking you to make."
+isoDate: "2026-04-24"
+cardDate: "Apr 24, 2026"
 author: "Bill Hajdu"
 date: "Apr 24, 2026"
 readTime: "5 min read"

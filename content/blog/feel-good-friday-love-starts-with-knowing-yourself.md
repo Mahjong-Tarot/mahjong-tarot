@@ -1,5 +1,10 @@
 ---
 title: "Feel Good Friday: The Best Relationship You’ll Ever Have Starts in the Mirror"
+topic: "Love & Relationships"
+excerpt: "Before you can be the right partner, you have to know who you are. The Mahjong Mirror's Second Angle shows you where real love actually begins."
+isoDate: "2026-04-17"
+cardDate: "Apr 17, 2026"
+cardTitle: "Feel Good Friday: The Best Relationship You'll Ever Have Starts in the Mirror"
 author: "Bill Hajdu"
 date: "Apr 17, 2026"
 readTime: "6 min read"

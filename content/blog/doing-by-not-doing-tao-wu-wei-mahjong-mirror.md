@@ -1,5 +1,9 @@
 ---
 title: "Doing by Not Doing: The Tao, Wu Wei, and the Mahjong Mirror"
+topic: "The Mahjong Mirror"
+excerpt: "Most Tao Te Ching translations are unreadable. Bill is fixing that. And the wisdom he's restoring connects directly to how the Mahjong Mirror works."
+isoDate: "2026-06-24"
+cardDate: "Jun 24, 2026"
 author: "Bill Hajdu"
 date: "June 24, 2026"
 readTime: "6 min read"

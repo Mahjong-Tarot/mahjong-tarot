@@ -19,6 +19,7 @@ const ADMIN_NAV = [
   // come from the campaigns entity's own nav contribution.
   { href: '/admin/revenue/marketing', label: 'Marketing',       match: (p) => p.startsWith('/admin/revenue/marketing'),
     children: marketingNav.flatMap((g) => g.items) },
+  { href: '/admin/revenue/board',    label: 'Revenue board',    match: (p) => p.startsWith('/admin/revenue/board') },
   { href: '/admin/astrologers',      label: 'Astrologers',      match: (p) => p.startsWith('/admin/astrologers') },
   // The legacy /admin/private-readings page still shows the global CRM
   // clients list. Showing it to astrologers would leak every other

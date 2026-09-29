@@ -99,3 +99,9 @@ recaps and weekly pulse (emailed), books (The Mahjong Mirror), broadcast summary
   `website/lib/blogDb.js`. `content/blog/<slug>.md` stays the authoring format for the build-page skill and reaches
   the site through `website/scripts/publish-blog-post.mjs`. Verified byte-identical against production for all 41
   posts (main and head), `/blog` and the sitemap. The marketing platform's links use `/blog/posts/<slug>`.
+- 2026-09-29: the Revenue board. Migration 059 creates edge8's board tables (boards, board_columns, board_members,
+  tasks, task_stage_log) and seeds the "Revenue" board (flagged `content_board`). `website/entities/boards` holds the
+  reads/writes, card moves and subtask ticks (slimmed from edge8's land-card), and the screen at
+  `/admin/revenue/board`. `instrumentation.ts` registers the campaigns listener, so a ticked post goes Published and a
+  day moved to Done closes its posts; the event registry lives on `globalThis` because Next bundles instrumentation
+  separately from routes. Verified end to end locally against production data (test rows removed).

@@ -1,0 +1,17 @@
+.subtasks {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.subtask,
+.subtaskDropped {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.subtaskDropped {
+  text-decoration: line-through;
+  opacity: 0.6;
+}

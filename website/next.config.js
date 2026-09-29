@@ -15,6 +15,9 @@ const nextConfig = {
     // resvg ships a native binary webpack cannot bundle; load it from
     // node_modules (the writer agent's exhibit renderer).
     serverComponentsExternalPackages: ['@resvg/resvg-js'],
+    // instrumentation.ts registers the event subscribers (Revenue board →
+    // content calendar); Next 14 only runs it behind this flag.
+    instrumentationHook: true,
   },
 }
 

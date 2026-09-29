@@ -105,3 +105,30 @@ recaps and weekly pulse (emailed), books (The Mahjong Mirror), broadcast summary
   `/admin/revenue/board`. `instrumentation.ts` registers the campaigns listener, so a ticked post goes Published and a
   day moved to Done closes its posts; the event registry lives on `globalThis` because Next bundles instrumentation
   separately from routes. Verified end to end locally against production data (test rows removed).
+- 2026-09-29: go-live. `website/vercel.json` schedules 11 routines in UTC for US Eastern mornings (writer 06:00,
+  blog publish 07:00, digest 08:00, broadcast summary 09:20, Monday pulse 09:00, recap on the 4th; sends every
+  15 minutes). The weekly letter is **not** scheduled (follow-up below). Migration 060 stops the Brevo newsletter sync
+  and makes a newsletter signup (re)subscribe the person.
+
+## Go-live checklist (Dave)
+
+Production environment variables in Vercel (project `mahjong-tarot`), names only; values in `website/.env.local`:
+`CRON_SECRET`, `UNSUBSCRIBE_SECRET`, `EMAIL_FROM`, `MARKETING_EMAIL_FROM`, `MARKETING_REPLY_TO`, `MARKETING_TEST_TO`,
+`MARKETING_NOTIFY_EMAIL`, `MARKETING_POSTAL_ADDRESS` (required in every broadcast footer), `RESEND_WEBHOOK_SECRET`,
+`VERCEL_ANALYTICS_TOKEN`, `NEXT_PUBLIC_SUPPORT_EMAIL`, `NEXT_PUBLIC_ORG_NAME`. `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`
+and `RESEND_API_KEY` should already be set.
+
+Resend webhook: endpoint `https://www.mahjongtarot.com/api/webhooks/resend`, events sent / delivered /
+delivery_delayed / bounced / complained / opened / clicked / failed; its signing secret is `RESEND_WEBHOOK_SECRET`.
+
+First sends: warm `mahjongtarot.com` on engaged contacts before the full 37k list (an audience of recent openers,
+batch size 150), and check the list-validation reports in `docs/engineering/email-list-validation*` first.
+
+## Follow-up tasks
+
+1. **Weekly letter (Bill's voice)**: decide its sources (edge8's reads a Notion journal, meetings and retreat events)
+   and calls to action, adapt `entities/campaigns/lib/letter/*`, then schedule `letter-weekly`.
+2. Personal email agents read edge8's AIOlabz learner progress (`lib/learner-progress.ts`); it no-ops without
+   `AIOLABZ_*` and can be removed or replaced with Mahjong member data.
+3. Instagram and Vietnamese Facebook as calendar channels: content has `language` (en/vi); the channel list and
+   writer prompts still offer edge8's set (blog, email, LinkedIn, Facebook, Twitter).

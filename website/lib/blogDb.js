@@ -26,6 +26,11 @@ export const TOPICS = [
 
 marked.setOptions({ gfm: true, breaks: false });
 
+// Vercel preview builds carry no service-role key. There the blog renders
+// empty rather than failing the build; production has the key and a failed
+// read there still throws (see listPublishedPosts).
+export const blogDbConfigured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+
 function db() {
   return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
     auth: { persistSession: false },
@@ -64,6 +69,7 @@ function toCard(row) {
 // error so a build or revalidation fails loudly instead of publishing an empty
 // blog (ISR keeps serving the last good page).
 export async function listPublishedPosts(todayIso = todayIsoInTz()) {
+  if (!blogDbConfigured) return [];
   const { data, error } = await db()
     .from('marketing_content')
     .select(LIST_COLUMNS)
@@ -109,6 +115,7 @@ const DEFAULT_CTA = {
 // own page_meta when it has them (the migrated posts), else from its
 // neighbours in the published list.
 export async function loadPublishedPost(slug, todayIso = todayIsoInTz()) {
+  if (!blogDbConfigured) return null;
   const { data: row, error } = await db()
     .from('marketing_content')
     .select(`${LIST_COLUMNS}, copy_md, title_tag, meta_description`)

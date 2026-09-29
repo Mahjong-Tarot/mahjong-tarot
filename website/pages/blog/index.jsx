@@ -71,14 +71,16 @@ export default function BlogIndex({ posts }) {
           </div>
         </section>
 
-        {/* ── Featured ── */}
+        {/* ── Featured ── (absent only when the blog has no posts, e.g. a
+            preview build with no database key) */}
+        {featured && (
         <section className={`section-stone ${styles.featured}`}>
           <div className="container">
             <span className="overline">Featured</span>
             <div className={styles.featuredInner}>
               <Link href={`/blog/posts/${featured.slug}`} className={styles.featuredImage}>
                 <Image
-                  src={`/images/blog/${featured.slug}.webp`}
+                  src={featured.image}
                   alt={featured.title}
                   fill
                   style={{ objectFit: 'cover' }}
@@ -99,6 +101,7 @@ export default function BlogIndex({ posts }) {
             </div>
           </div>
         </section>
+        )}
 
         {/* ── Filter ── */}
         <section className={styles.filterSection}>

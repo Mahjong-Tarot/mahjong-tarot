@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '../lib/auth';
 import PortalSwitcher, { readView } from './PortalSwitcher';
 import styles from './AdminShell.module.css';
+import { adminNav as marketingNav } from '@/entities/campaigns/ui/nav';
 
 // Sidebar items visible to admin only.
 const ADMIN_NAV = [
@@ -14,7 +15,10 @@ const ADMIN_NAV = [
   { href: '/admin/inquiries',        label: 'Inquiries',        match: (p) => p.startsWith('/admin/inquiries') },
   { href: '/admin/sales',            label: 'Sales',            match: (p) => p.startsWith('/admin/sales') },
   { href: '/admin/email',            label: 'Email',            match: (p) => p.startsWith('/admin/email') },
-  { href: '/admin/revenue/marketing', label: 'Marketing',       match: (p) => p.startsWith('/admin/revenue/marketing') },
+  // The marketing platform (App Router, copied from edge8-web). Its sub-pages
+  // come from the campaigns entity's own nav contribution.
+  { href: '/admin/revenue/marketing', label: 'Marketing',       match: (p) => p.startsWith('/admin/revenue/marketing'),
+    children: marketingNav.flatMap((g) => g.items) },
   { href: '/admin/astrologers',      label: 'Astrologers',      match: (p) => p.startsWith('/admin/astrologers') },
   // The legacy /admin/private-readings page still shows the global CRM
   // clients list. Showing it to astrologers would leak every other
@@ -130,6 +134,26 @@ export default function AdminShell({ profile, children }) {
                   >
                     {item.label}
                   </Link>
+                  {active && item.children && (
+                    <ul className={styles.subNavList}>
+                      {item.children.map((child) => {
+                        const childActive = child.href === item.href
+                          ? pathname === child.href
+                          : pathname.startsWith(child.href);
+                        return (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              className={childActive ? styles.subNavLinkActive : styles.subNavLink}
+                              onClick={() => setOpen(false)}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </li>
               );
             })}

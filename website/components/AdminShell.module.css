@@ -97,6 +97,37 @@
   font-weight: 600;
 }
 
+/* Sub-pages of an active section (the marketing platform's screens). */
+.subNavList {
+  list-style: none;
+  margin: 4px 0 6px;
+  padding: 0 0 0 12px;
+  border-left: 1px solid var(--rule);
+  margin-left: 12px;
+}
+
+.subNavLink,
+.subNavLinkActive {
+  display: block;
+  padding: 6px 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.subNavLink:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.subNavLinkActive {
+  color: var(--ink);
+  font-weight: 600;
+  background: var(--paper);
+}
+
 .footer {
   padding: 14px 16px 18px;
   border-top: 1px solid var(--rule);

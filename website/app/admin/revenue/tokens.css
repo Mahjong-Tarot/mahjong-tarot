@@ -1,3 +1,4 @@
+/* Copied from edge8-web app/styles/tokens.css for the marketing platform (loaded only under /admin/revenue). mahjong-tarot changes: --admin-font-sans and --admin-accent. */
 /* ═══════════════════════════════════════════════════════════════════════════
    DESIGN TOKENS — the single source of truth for the whole product.
 
@@ -133,7 +134,7 @@
 
   /* ── 3. App tokens — admin / team / portal ───────────────────────────── */
   /* Type ramp (Manrope only; tabular-nums does numeric alignment) */
-  --admin-font-sans: var(--font-body);
+  --admin-font-sans: var(--sans); /* mahjong-tarot: the site's Inter stack */
   --admin-font-mono: var(--font-body);
   --admin-text-xs: 11px;    /* eyebrow labels, lock notes */
   --admin-text-sm: 12px;    /* meta, table labels, notes */
@@ -164,7 +165,7 @@
   --admin-radius-pill: 9999px;  /* badges / avatars */
 
   /* Accent. Per-section themes override --admin-accent only. */
-  --admin-accent: var(--color-primary-blue);
+  --admin-accent: #E63329; /* mahjong-tarot: Fire red (--fire-500) */
   --admin-accent-strong: var(--color-primary-blue-hover);
   --admin-accent-soft: var(--color-accent-soft);
   --admin-accent-line: var(--color-accent-line);

@@ -1,8 +1,9 @@
 /**
  * The one place a Claude model id is spelled.
  *
- * Every call site names a *tier*, not a model, and resolves it through
- * `modelFor(site, tier)`. `site` is the same string the call site already
+ * Every call site names a *tier*, not a model, and the gateway
+ * (kernel/ai/gateway.ts, `aiSite`) resolves it through `modelFor(site, tier)`;
+ * no call site calls it directly (check:ai-routing). `site` is the same string the call site already
  * passes to `logAiUsage` / `readTextOutput` in kernel/ai/response.ts, so the
  * usage line, the env override, and the model choice all key off one name.
  *

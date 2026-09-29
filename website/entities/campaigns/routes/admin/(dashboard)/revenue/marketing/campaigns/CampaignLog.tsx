@@ -70,7 +70,7 @@ export function CampaignLog({ rows }: { rows: LedgerRow[] }) {
                     <Link href={`/admin/revenue/marketing/campaigns/${r.campaignId}`}>{r.title ?? r.campaignName}</Link>
                     {r.postedUrl && (
                       <div className="admin-cell-muted u-mt-1">
-                        <ExternalLink href={r.postedUrl} fallback={r.postedUrl}>{r.slug ? `/post/${r.slug}/` : r.postedUrl}</ExternalLink>
+                        <ExternalLink href={r.postedUrl} fallback={r.postedUrl}>{r.slug ? `/blog/posts/${r.slug}` : r.postedUrl}</ExternalLink>
                       </div>
                     )}
                   </td>

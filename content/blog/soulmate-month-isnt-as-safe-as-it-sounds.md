@@ -1,5 +1,9 @@
 ---
 title: "The Soulmate Month Isn't as Safe as It Sounds"
+topic: "Love & Relationships"
+excerpt: "Everyone hears 'Soulmate Month' and assumes it means safe. I've read cards for 35 years, and this is the single month I see the Peach Blossom showing up in the problem position more than any other."
+isoDate: "2026-07-13"
+cardDate: "Jul 13, 2026"
 author: "Bill Hajdu"
 date: "Jul 13, 2026"
 readTime: "6 min read"

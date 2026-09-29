@@ -1,5 +1,9 @@
 ---
 title: "The Firehorse Baby: The Greatest Joy and the Greatest Aggravation You Will Ever Parent"
+topic: "The Mahjong Mirror"
+excerpt: "Of all 60 Chinese signs, the firehorse child is the one most likely to bring you both the greatest joy and the greatest aggravation you have ever felt. And a baby born right now is already a double horse."
+isoDate: "2026-07-06"
+cardDate: "Jul 6, 2026"
 author: "Bill Hajdu"
 date: "July 6, 2026"
 readTime: "7 min read"

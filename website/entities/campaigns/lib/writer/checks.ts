@@ -103,11 +103,11 @@ export function auditLinkError(_md: string): string | null {
   return null;
 }
 
-// The internal-link floor counts markdown links to /post/<slug>/ in the body
+// The internal-link floor counts markdown links to /blog/posts/<slug> in the body
 // above the FAQ, the same count validateBlogForPublish makes.
 export function internalPostLinks(md: string): string[] {
   const body = md.split(/^## FAQ\s*$/im)[0];
-  return Array.from(body.matchAll(/\]\(\/post\/([a-z0-9-]+)\/?\)/g)).map((m) => m[1]);
+  return Array.from(body.matchAll(/\]\(\/blog\/posts\/([a-z0-9-]+)\/?\)/g)).map((m) => m[1]);
 }
 
 // FAQ: five items, the first a How or What question that carries the primary

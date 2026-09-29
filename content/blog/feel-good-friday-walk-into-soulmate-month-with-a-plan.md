@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: Walk Into the Soulmate Month With a Plan"
+topic: "Love & Relationships"
+excerpt: "The Soulmate Month starts July 7. You have four days to decide what kind of month you want to walk into. Make them count."
+isoDate: "2026-07-03"
+cardDate: "Jul 3, 2026"
 author: "Bill Hajdu"
 date: "July 3, 2026"
 readTime: "5 min read"

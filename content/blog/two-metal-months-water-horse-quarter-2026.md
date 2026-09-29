@@ -1,5 +1,9 @@
 ---
 title: "Two Metal Months and a Water Horse: the Quarter Nobody Warned You About"
+topic: "Forecasts & Timing"
+excerpt: "Three challenging months back to back: Metal Dragon, Metal Snake, Water Horse. Most people rode the Dragon without knowing why it worked. Here's what the arc looks like from here."
+isoDate: "2026-06-08"
+cardDate: "Jun 8, 2026"
 author: "Bill Hajdu"
 date: "June 8, 2026"
 readTime: "6 min read"

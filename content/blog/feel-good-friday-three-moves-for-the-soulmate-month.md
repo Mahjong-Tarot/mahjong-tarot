@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: Three Moves for the Rest of the Soulmate Month"
+topic: "Love & Relationships"
+excerpt: "Three weeks left in the Soulmate Month. Here are three specific things to do so the fire builds something instead of burning it down."
+isoDate: "2026-07-17"
+cardDate: "Jul 17, 2026"
 author: "Bill Hajdu"
 date: "Jul 17, 2026"
 readTime: "5 min read"

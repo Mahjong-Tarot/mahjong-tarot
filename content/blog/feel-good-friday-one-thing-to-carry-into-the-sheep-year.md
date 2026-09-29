@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: One Thing to Carry Into the Calm"
+topic: "Forecasts & Timing"
+excerpt: "Name one thing to carry into the Sheep year. A habit, a relationship, a practice. Don't wait for the calendar to flip. Build the steadiness now, while the fire still has something to give."
+isoDate: "2026-06-19"
+cardDate: "Jun 19, 2026"
 author: "Bill Hajdu"
 date: "June 19, 2026"
 readTime: "5 min read"

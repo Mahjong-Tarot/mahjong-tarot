@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: Three Words for the Snake Month"
+topic: "Forecasts & Timing"
+excerpt: "Rest. Caution. Honesty. Three words for the hardest month of the Fire Horse year. Here is one weekend challenge for each."
+isoDate: "2026-06-05"
+cardDate: "Jun 5, 2026"
 author: "Bill Hajdu"
 date: "June 5, 2026"
 readTime: "4 min read"

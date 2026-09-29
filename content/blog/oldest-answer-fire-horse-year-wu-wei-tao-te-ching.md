@@ -1,5 +1,9 @@
 ---
 title: "The Oldest Answer to the Fire Horse Year Is 2,500 Years Old"
+topic: "The Mahjong Mirror"
+excerpt: "In the most frantic year in 60, the Tao Te Ching says the opposite of what everyone else is saying. Bill has been a Taoist for 30 years. Here's what Wu Wei actually means."
+isoDate: "2026-06-22"
+cardDate: "Jun 22, 2026"
 author: "Bill Hajdu"
 date: "June 22, 2026"
 readTime: "6 min read"

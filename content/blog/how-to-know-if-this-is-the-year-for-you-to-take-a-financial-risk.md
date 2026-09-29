@@ -1,5 +1,9 @@
 ---
 title: "How to Know If This Is the Year for You to Take a Financial Risk"
+topic: "Money & Career"
+excerpt: "The Fire Horse rewards movement, but not every move. Before you act, the Mahjong Mirror asks four questions that reveal whether a financial risk will change your life or just your account balance."
+isoDate: "2026-04-22"
+cardDate: "Apr 22, 2026"
 author: "Bill Hajdu"
 date: "Apr 22, 2026"
 readTime: "7 min read"

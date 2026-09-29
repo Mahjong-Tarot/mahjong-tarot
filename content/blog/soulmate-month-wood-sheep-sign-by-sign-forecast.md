@@ -1,5 +1,9 @@
 ---
 title: "The Soulmate Month Is Coming: It's All About Love"
+topic: "Love & Relationships"
+excerpt: "After two of the year's hardest months, the Wood Sheep month arrives on July 7. It's the most love-charged window in the entire Fire Horse year. Here's what your sign can expect."
+isoDate: "2026-06-29"
+cardDate: "Jun 29, 2026"
 author: "Bill Hajdu"
 date: "June 29, 2026"
 readTime: "7 min read"

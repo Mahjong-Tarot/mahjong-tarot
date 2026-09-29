@@ -36,7 +36,7 @@ export async function resolveBroadcastBlocks(blocks: BroadcastBlocks): Promise<R
     const r = byId.get(id);
     if (!r || !r.slug || r.status !== "published") return [];
     const domain = siteForBrandSlug(one(r.brands)?.slug ?? null)?.domain ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}`;
-    return [{ title: r.title, excerpt: r.excerpt ?? "", imageUrl: r.image_url, url: `${domain}/post/${r.slug}/`, pillar: one(r.marketing_pillars)?.name ?? null }];
+    return [{ title: r.title, excerpt: r.excerpt ?? "", imageUrl: r.image_url, url: `${domain}/blog/posts/${r.slug}`, pillar: one(r.marketing_pillars)?.name ?? null }];
   });
   return { posts, cta, layout };
 }

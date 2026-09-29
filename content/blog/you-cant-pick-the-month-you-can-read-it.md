@@ -1,5 +1,9 @@
 ---
 title: "You Can't Pick the Month. You Can Read It."
+topic: "The Mahjong Mirror"
+excerpt: "There's no scheduling a baby into the right lunar window. What the Mirror teaches instead is to read what the month actually writes onto the year, and to know what's coming next."
+isoDate: "2026-07-22"
+cardDate: "Jul 22, 2026"
 author: "Bill Hajdu"
 date: "Jul 22, 2026"
 readTime: "7 min read"

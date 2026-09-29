@@ -1,5 +1,10 @@
 ---
 title: "Feel Good Friday: Channel the Fire, Don't Fight It"
+topic: "The Mahjong Mirror"
+excerpt: "A hyperactive firehorse child is not a problem to fix. It is energy to aim. Here are five things you can do this weekend to channel the fire instead of fighting it."
+isoDate: "2026-07-10"
+cardDate: "Jul 10, 2026"
+cardTitle: "Feel Good Friday: Channel the Fire, Don’t Fight It"
 author: "Bill Hajdu"
 date: "July 10, 2026"
 readTime: "5 min read"

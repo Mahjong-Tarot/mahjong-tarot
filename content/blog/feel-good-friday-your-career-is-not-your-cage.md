@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: Your Career Is Not Your Cage"
+topic: "Money & Career"
+excerpt: "If the Fire Horse year is amplifying frustration in your career, that's not a curse — it's a signal. A story from the reading table about what that signal means, and what to do with it."
+isoDate: "2026-05-01"
+cardDate: "May 1, 2026"
 author: "Bill Hajdu"
 date: "May 1, 2026"
 readTime: "5 min read"

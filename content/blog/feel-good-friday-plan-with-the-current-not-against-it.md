@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: Plan With the Current, Not Against It"
+topic: "Forecasts & Timing"
+excerpt: "Stop swimming against the month. Map your next six weeks to the energy of each one, pick one bold move and one thing to hold. The weekend challenge for June 12."
+isoDate: "2026-06-12"
+cardDate: "Jun 12, 2026"
 author: "Bill Hajdu"
 date: "June 12, 2026"
 readTime: "4 min read"

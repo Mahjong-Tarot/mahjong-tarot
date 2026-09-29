@@ -89,9 +89,9 @@ export function validateBlogForPublish(
   // Both defects shipped at scale once (the static migration bypassed this
   // gate); the gate keeps them out of anything published from here on.
   const bodyOnly = copy.split("## FAQ")[0];
-  const internalLinks = (bodyOnly.match(/\]\(\/post\//g) ?? []).length;
+  const internalLinks = (bodyOnly.match(/\]\(\/blog\/posts\//g) ?? []).length;
   if (copy && internalLinks < 2) {
-    errors.push(`Only ${internalLinks} internal link(s) in the body. Add at least 2 links to related posts (/post/<slug>/).`);
+    errors.push(`Only ${internalLinks} internal link(s) in the body. Add at least 2 links to related posts (/blog/posts/<slug>).`);
   }
   if (parsed.titleTag && /\|\s*(?:The )?Mahjong Tarot(?: Blog)?\s*$/i.test(parsed.titleTag)) {
     errors.push('Title tag is the generic "... | Mahjong Tarot" pattern. Write a keyword-led title tag.');
@@ -117,7 +117,7 @@ async function isSlugTaken(slug: string, selfId: string): Promise<boolean> {
 export function revalidateBlog(slug: string): void {
   revalidateTag(BLOG_CACHE_TAG);
   revalidateTag(postTag(slug));
-  revalidatePath(`/post/${slug}/`);
+  revalidatePath(`/blog/posts/${slug}`);
   revalidatePath("/blog");
   revalidatePath("/sitemap.xml");
   revalidatePath("/llms.txt");
@@ -181,7 +181,7 @@ export async function publishBlogAsset(id: string, actor: string): Promise<Publi
     .eq("id", id);
   if (upErr) return { ok: false, errors: [upErr.message] };
 
-  const liveUrl = `${site.domain}/post/${slug}/`;
+  const liveUrl = `${site.domain}/blog/posts/${slug}`;
 
   // Only this site's own cache can be revalidated from here. A different brand's
   // site (a future AIO blog) revalidates itself; we still verify its live URL.

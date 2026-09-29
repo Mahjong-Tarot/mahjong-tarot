@@ -1,5 +1,9 @@
 ---
 title: "The Hardest Month of the Fire Horse Year Is Here"
+topic: "Forecasts & Timing"
+excerpt: "The Metal Snake month is the worst elemental combination of the year. Fire melts metal's luck, and the Snake and Horse are not friends. Here is what to avoid, what to protect, and which days actually favor you."
+isoDate: "2026-06-01"
+cardDate: "Jun 1, 2026"
 author: "Bill Hajdu"
 date: "June 1, 2026"
 readTime: "6 min read"

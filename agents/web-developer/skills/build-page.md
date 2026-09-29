@@ -1,16 +1,16 @@
 ---
 name: build-page
-description: Writes a blog post as markdown to content/blog/<slug>.md and registers it in website/lib/posts.js. The dynamic route at website/pages/blog/posts/[slug].jsx renders the markdown — there is no per-post JSX file. Use this skill whenever a blog post needs to be published.
+description: Writes a blog post as markdown to content/blog/<slug>.md and publishes it to the blog database with website/scripts/publish-blog-post.mjs. The dynamic route at website/pages/blog/posts/[slug].jsx renders it from the database — there is no per-post JSX file. Use this skill whenever a blog post needs to be published.
 allowed-tools: Read Write Bash Edit
 ---
 
 # Build Page Skill
 
-Blog posts are published as **markdown only**. The dynamic route at `website/pages/blog/posts/[slug].jsx` reads `content/blog/<slug>.md` at build time and renders the full post (SEO, hero, body, FAQs, JSON-LD, post nav, related cards, CTA). There is no per-post `.jsx` file to generate.
+Blog posts are written as **markdown** and served from the blog database (`company_os.marketing_content`). The dynamic route at `website/pages/blog/posts/[slug].jsx` reads it through `website/lib/blogDb.js` and renders the full post (SEO, hero, body, FAQs, JSON-LD, post nav, related cards, CTA). There is no per-post `.jsx` file to generate.
 
 This skill is responsible for:
 1. Writing the markdown with full frontmatter at `content/blog/<slug>.md`
-2. Registering the post at the top of `POSTS[]` in `website/lib/posts.js` (so it appears on the `/blog` index)
+2. Publishing it to the database with `website/scripts/publish-blog-post.mjs <slug>` (so it appears on `/blog`)
 
 ## Before you start
 
@@ -19,8 +19,8 @@ Read these in order — do not generate anything from memory:
 1. `agents/web-developer/context/web-style-guide.md` — brand and design rules, valid category list
 2. `agents/web-developer/context/style-guide.md` — component conventions
 3. `website/pages/blog/posts/[slug].jsx` — the template; see its destructured frontmatter to know what fields it consumes
-4. `website/lib/blogContent.js` — the loader, with the canonical frontmatter schema
-5. `website/lib/posts.js` — the ordered index used by `/blog`
+4. `website/lib/blogDb.js` — the loader that turns a database row into the page's frontmatter
+5. `website/scripts/publish-blog-post.mjs` — how frontmatter maps onto the database row
 6. The full canonical spec at `.claude/skills/build-page/SKILL.md` (which you should mirror if you change anything here)
 
 ## Inputs
@@ -37,6 +37,10 @@ The slug is the URL path: `/blog/posts/<slug>`. It must be kebab-case, descripti
 Frontmatter schema (required keys in bold):
 
 - **`title`** — page H1. Use real Unicode em-dashes (`—`) and smart quotes (`‘’ “”`). Never use HTML entities (`&mdash;` would render as literal text).
+- **`topic`** — one of `Love & Relationships`, `Money & Career`, `Forecasts & Timing`, `The Mahjong Mirror`
+- **`excerpt`** — card text on `/blog` and the homepage, 1-2 sentences
+- **`isoDate`** — publish date `"2026-04-17"` (US Eastern); the post goes live that day
+- **`cardDate`** — short date on the `/blog` card, e.g. `"Apr 17, 2026"`
 - **`author`** — default `"Bill Hajdu"`
 - **`date`** — display-formatted (e.g. `"Apr 17, 2026"`)
 - **`readTime`** — e.g. `"6 min read"`
@@ -83,21 +87,22 @@ Canonical examples:
 
 For inline mid-body figures with figcaptions, write raw `<figure style="...">...<figcaption>...</figcaption></figure>`.
 
-## Step 5: Register the post
+## Step 5: Publish to the blog database
 
-Open `website/lib/posts.js` and add the post at the top of `POSTS[]`:
+The public blog reads `company_os.marketing_content`, not the markdown file
+(`docs/engineering/2026-09-28-marketing-platform-port.md`, decision 1). After the
+markdown and hero image are committed **and deployed** (merged to `main`), run:
 
-```js
-{
-  slug: '<slug>',
-  title: '...',
-  excerpt: '...',
-  categories: ['Year of the Fire Horse'],   // see web-style-guide.md for the valid list
-  date: 'Apr 17, 2026',
-  isoDate: '2026-04-17',
-  readTime: '6 min read',
-},
+```bash
+cd website && node scripts/publish-blog-post.mjs <slug>
 ```
+
+It upserts the post (title, topic, excerpt, SEO, body + FAQ, hero, CTA, nav,
+related) and prints `+ <slug>` (new) or `↻ <slug>` (updated). The post shows on
+`/blog` and `/blog/posts/<slug>` within 5 minutes, and not before its `isoDate`.
+Run it before the image is deployed and the post goes live with a broken hero.
+Posts written in the admin (Marketing → Campaigns) are already in the database
+and skip this step.
 
 ## Step 6: Place the hero image
 
@@ -115,8 +120,7 @@ The build output should list `/blog/posts/<slug>` under the dynamic `[slug]` rou
 
 ```bash
 git add content/blog/<slug>.md \
-        website/public/images/blog/<slug>.webp \
-        website/lib/posts.js
+        website/public/images/blog/<slug>.webp
 git commit -m "publish: <Post title>"
 ```
 
@@ -124,6 +128,6 @@ git commit -m "publish: <Post title>"
 
 - ❌ Writes `.jsx` files to `agents/web-developer/output/`
 - ❌ Copies `.jsx` files to `website/pages/blog/posts/`
-- ❌ Edits `website/pages/blog/index.jsx` — that page is driven by `lib/posts.js`
+- ❌ Edits `website/pages/blog/index.jsx` or any post index — the blog reads the database
 
-The shape of the output is now `content/blog/<slug>.md` plus a one-line addition to `lib/posts.js`. Everything else is handled by the dynamic route at build time.
+The shape of the output is now `content/blog/<slug>.md`, published to the database with `website/scripts/publish-blog-post.mjs <slug>`. Everything else is handled by the dynamic route.

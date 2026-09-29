@@ -62,10 +62,10 @@ ${sourceUrls.length ? sourceUrls.join("\n") : "(none)"}`;
   const log: string[] = [];
   for (const l of r.data.internal ?? []) {
     if (!bySlug.has(l.slug)) continue;
-    const next = linkPhrase(md, l.phrase.trim(), `/post/${l.slug}/`);
+    const next = linkPhrase(md, l.phrase.trim(), `/blog/posts/${l.slug}`);
     if (!next) continue;
     md = next;
-    log.push(`"${l.phrase.trim()}" -> /post/${l.slug}/`);
+    log.push(`"${l.phrase.trim()}" -> /blog/posts/${l.slug}`);
   }
   const internal = internalPostLinks(md);
   if (internal.length < 2) {

@@ -1,5 +1,10 @@
 ---
 title: "What the Favorites’ Trainers Missed, and What You’re Probably Missing in Your Own Plan"
+topic: "The Mahjong Mirror"
+excerpt: "Every trainer at the Derby saw the same race. None of them asked the one question that would have changed everything. The Mahjong Mirror's obstacle angle, and how to run it on the decision in front of you right now."
+isoDate: "2026-05-13"
+cardDate: "May 13, 2026"
+cardTitle: "What the Favorites' Trainers Missed, and What You're Probably Missing in Your Own Plan"
 author: "Bill Hajdu"
 date: "May 13, 2026"
 readTime: "6 min read"

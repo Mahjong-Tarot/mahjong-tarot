@@ -1,5 +1,9 @@
 ---
 title: "Love in the Year of the Fire Horse: What 2026 Means for Your Relationships, Sign by Sign"
+topic: "Love & Relationships"
+excerpt: "This is the one year in 60 where your partner is most likely to cheat and most likely to propose. Record proposals. Record divorces. The Fire Horse doesn't do anything halfway."
+isoDate: "2026-04-06"
+cardDate: "Apr 6, 2026"
 author: "Bill Hajdu"
 date: "April 6, 2026"
 readTime: "8 min read"

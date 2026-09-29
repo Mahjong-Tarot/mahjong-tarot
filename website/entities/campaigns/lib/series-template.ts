@@ -38,8 +38,8 @@ async function latestPost(previousBodies: string[]): Promise<{ title: string; ex
     return null;
   }
   const domain = siteForBrandSlug(SELF_BRAND_SLUG)?.domain ?? "";
-  const post = (data ?? []).find((p) => !previousBodies.some((b) => b.includes(`/post/${p.slug}/`))) ?? data?.[0];
-  return post ? { title: post.title, excerpt: post.excerpt ?? "", url: `${domain}/post/${post.slug}/` } : null;
+  const post = (data ?? []).find((p) => !previousBodies.some((b) => b.includes(`/blog/posts/${p.slug}`))) ?? data?.[0];
+  return post ? { title: post.title, excerpt: post.excerpt ?? "", url: `${domain}/blog/posts/${post.slug}` } : null;
 }
 
 async function draftIntro(context: string): Promise<string | null> {

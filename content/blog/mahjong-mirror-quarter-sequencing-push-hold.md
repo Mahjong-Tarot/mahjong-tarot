@@ -1,5 +1,9 @@
 ---
 title: "When to Push and When to Hold: the Mirror Across a Hard Quarter"
+topic: "Forecasts & Timing"
+excerpt: "Not every month wants the same thing from you. The Mahjong Mirror as a sequencing tool: where the quarter pays boldness back and where it demands patience."
+isoDate: "2026-06-10"
+cardDate: "Jun 10, 2026"
 author: "Bill Hajdu"
 date: "June 10, 2026"
 readTime: "5 min read"

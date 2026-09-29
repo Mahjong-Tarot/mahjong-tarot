@@ -2229,7 +2229,7 @@ a.admin-chip:hover { border-color: var(--admin-accent); color: var(--admin-accen
 .admin-campaign-style-select { width: auto; padding-top: 6px; padding-bottom: 6px; font-size: 13px; }
 
 /* ── Full blog preview ─────────────────────────────────────────────────
-   Renders a blog asset the way /post/[slug] will publish it, inside the
+   Renders a blog asset the way /blog/posts/[slug] will publish it, inside the
    admin. Marketing foundation tokens (globals.css) on purpose, not admin
    tokens: the point is fidelity to the live site. The presentation family
    follows the chosen blog style via the --{family} variants below. */

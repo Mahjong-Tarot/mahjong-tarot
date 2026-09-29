@@ -9,7 +9,7 @@ import NewsletterSignup from '../components/NewsletterSignup';
 import AlmanacToday from '../components/AlmanacToday';
 import { useAuth } from '../lib/auth';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
-import { publishedPosts } from '../lib/posts';
+import { listPublishedPosts } from '../lib/blogDb';
 import { fetchAlmanacForDate, todayInLA } from '../lib/almanac';
 import styles from '../styles/Home.module.css';
 
@@ -173,7 +173,7 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
                 <Link key={post.slug} href={`/blog/posts/${post.slug}`} className={styles.post}>
                   <div className={styles.postImg}>
                     <Image
-                      src={`/images/blog/${post.slug}.webp`}
+                      src={post.image}
                       alt={post.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 33vw"
@@ -397,7 +397,14 @@ export async function getStaticProps() {
   const { data: todayAlmanac } = await fetchAlmanacForDate(todayDate);
   // Only feature posts whose publish date has arrived, so the homepage never
   // links to a date-gated post that 404s. revalidate flips it in on schedule.
-  const featuredPosts = publishedPosts().slice(0, 3);
+  // Posts come from the blog database; a failed read shows no journal cards
+  // rather than failing the homepage.
+  let featuredPosts = [];
+  try {
+    featuredPosts = (await listPublishedPosts()).slice(0, 3);
+  } catch (err) {
+    console.error(err);
+  }
   return {
     props: { todayDate, todayAlmanac: todayAlmanac || null, featuredPosts },
     revalidate: 300,

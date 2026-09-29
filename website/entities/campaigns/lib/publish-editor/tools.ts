@@ -185,7 +185,7 @@ export function makePublishEditorTools(assetId: string, actor: string) {
 
       case "check_live_url": {
         if (!site) return { content: JSON.stringify({ ok: false, reason: "no site for brand" }) };
-        const url = row.posted_url ?? (parsed.slug ? `${site.domain}/post/${parsed.slug}/` : null);
+        const url = row.posted_url ?? (parsed.slug ? `${site.domain}/blog/posts/${parsed.slug}` : null);
         if (!url) return { content: JSON.stringify({ ok: false, reason: "no slug yet" }) };
         try {
           const res = await fetch(url, { cache: "no-store", redirect: "follow" });

@@ -1,5 +1,9 @@
 ---
 title: "Feel Good Friday: Find Your Curl"
+topic: "The Mahjong Mirror"
+excerpt: "You don't need to add anything this weekend. You need to stop flailing at one thing. Here's the Wu Wei practice, from the right-hand page of Bill's book."
+isoDate: "2026-06-26"
+cardDate: "Jun 26, 2026"
 author: "Bill Hajdu"
 date: "June 26, 2026"
 readTime: "5 min read"

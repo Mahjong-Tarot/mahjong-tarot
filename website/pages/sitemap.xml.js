@@ -1,9 +1,9 @@
-import { POSTS } from '../lib/posts';
+import { listPublishedPosts } from '../lib/blogDb';
 import { CARDS } from '../lib/cards';
 
 const SITE = 'https://www.mahjongtarot.com';
 
-function generate() {
+function generate(posts) {
   const staticUrls = [
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
     { loc: '/about', priority: '0.7', changefreq: 'monthly' },
@@ -20,7 +20,7 @@ function generate() {
     changefreq: 'monthly',
   }));
 
-  const postUrls = POSTS.map((p) => ({
+  const postUrls = posts.map((p) => ({
     loc: `/blog/posts/${p.slug}`,
     lastmod: p.isoDate,
     priority: '0.8',
@@ -42,7 +42,7 @@ ${all.map((u) => `  <url>
 export async function getServerSideProps({ res }) {
   res.setHeader('Content-Type', 'text/xml');
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
-  res.write(generate());
+  res.write(generate(await listPublishedPosts()));
   res.end();
   return { props: {} };
 }

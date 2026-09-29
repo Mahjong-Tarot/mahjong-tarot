@@ -1,5 +1,9 @@
 ---
 title: "The Month of the Wood Sheep Has Begun"
+topic: "The Mahjong Mirror"
+excerpt: "Today, July 7, the Wood Sheep month opens. The Soulmate Month is here. Here's what that means and what to do with it."
+isoDate: "2026-07-07"
+cardDate: "Jul 7, 2026"
 author: "Bill Hajdu"
 date: "July 7, 2026"
 readTime: "2 min read"

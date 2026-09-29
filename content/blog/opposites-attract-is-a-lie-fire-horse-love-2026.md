@@ -1,5 +1,10 @@
 ---
 title: "‘Opposites Attract’ Is a Lie the Fire Horse Year Will Expose"
+topic: "Love & Relationships"
+excerpt: "The Fire Horse doesn't care about chemistry. It cares about compatibility. And the difference, for a lot of couples right now, is everything."
+isoDate: "2026-05-04"
+cardDate: "May 4, 2026"
+cardTitle: "'Opposites Attract' Is a Lie the Fire Horse Year Will Expose"
 author: "Bill Hajdu"
 date: "May 4, 2026"
 readTime: "8 min read"

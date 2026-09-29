@@ -1,5 +1,9 @@
 ---
 title: "The Decision Framework That Was Built for Career Crossroads"
+topic: "Money & Career"
+excerpt: "The Mahjong Mirror's four angles applied to career decisions. Most people skip three of them. The third angle — what's really opposing you — is where the breakthrough hides."
+isoDate: "2026-04-29"
+cardDate: "Apr 29, 2026"
 author: "Bill Hajdu"
 date: "Apr 29, 2026"
 readTime: "8 min read"

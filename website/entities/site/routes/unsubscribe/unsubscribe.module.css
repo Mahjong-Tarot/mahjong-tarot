@@ -1,0 +1,42 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--space-8, 64px) 16px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body, Inter, sans-serif);
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 32px;
+  color: var(--ink-muted, var(--ink));
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--fire-500);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 24px;
+  font-family: var(--font-display, Fraunces, serif);
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.body {
+  line-height: 1.6;
+}

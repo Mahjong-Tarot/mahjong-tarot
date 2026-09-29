@@ -76,7 +76,8 @@ export async function publish<N extends EventName>(name: N, payload: EventPayloa
       // the trail is what tells someone the follow-up never happened.
       await recordAudit({
         table: "events",
-        recordId: name,
+        // An event's name is not a uuid; newData carries it (B.13).
+        recordId: null,
         operation: "update",
         actor: `kernel/events:${entity}`,
         newData: { event: name, entity, error: message },

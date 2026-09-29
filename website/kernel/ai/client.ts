@@ -45,7 +45,33 @@ export function anthropicIfConfigured(): Anthropic | null {
   return process.env.ANTHROPIC_API_KEY ? anthropic() : null;
 }
 
-/** Drop the cached instance so the next call re-reads the env. Tests only. */
+/**
+ * OpenRouter serves the Anthropic Messages format at /api/v1/messages, so the
+ * same SDK with another base URL carries a non-Claude model with no call site
+ * rewritten (plan Part C2). Only kernel/ai/gateway.ts reaches for it, and only
+ * after kernel/ai/routing.ts has allowed the route: Claude never goes this way.
+ */
+export const OPENROUTER_BASE_URL = "https://openrouter.ai/api";
+
+let openRouterInstance: Anthropic | null = null;
+
+/** The OpenRouter client. Throws if OPENROUTER_API_KEY is unset. */
+export function openRouter(): Anthropic {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) throw new Error("OPENROUTER_API_KEY is not configured.");
+  if (!openRouterInstance) {
+    openRouterInstance = new Anthropic({ apiKey, baseURL: OPENROUTER_BASE_URL, timeout: anthropicTimeoutMs(), maxRetries: 2 });
+  }
+  return openRouterInstance;
+}
+
+/** The OpenRouter client, or null without OPENROUTER_API_KEY. */
+export function openRouterIfConfigured(): Anthropic | null {
+  return process.env.OPENROUTER_API_KEY ? openRouter() : null;
+}
+
+/** Drop the cached instances so the next call re-reads the env. Tests only. */
 export function resetAnthropicClient(): void {
   instance = null;
+  openRouterInstance = null;
 }

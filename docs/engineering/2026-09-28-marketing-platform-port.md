@@ -83,3 +83,13 @@ recaps and weekly pulse (emailed), books (The Mahjong Mirror), broadcast summary
    `saigonToday()` and friends become brand-zone helpers in the kernel shim.
 6. **No Lark.** Marketing notices (digest, recap, pulse, writer steps, broadcast summaries)
    are emailed to `dave@edge8.ai` via Resend. The shim's `notifyMarketing` sends email.
+
+## Progress
+
+- 2026-09-28, PR #436: Phase 0 foundations (kernel slice, App Router, migration 053).
+- 2026-09-29: the campaigns entity copied whole from edge8-web origin/main (`website/entities/campaigns`), with
+  stand-ins for the other edge8 entities it reads (`website/entities/{contacts,site,crm,company-os,library,retreats,boards,billing}`),
+  the Resend webhook, unsubscribe, publish editor and broadcast summary. Migrations 054 (the 19 campaigns and contacts
+  tables, generated from edge8's live schema), 055 (run log ticks, ai_calls), 056 (deals view), 057 (Mahjong Tarot brand
+  profile and pillars). Brand, time zone (US Eastern), writer rules (cards not tiles), prompts and palette adapted.
+  Crons are routed but not scheduled (`website/vercel.json` has no crons yet).

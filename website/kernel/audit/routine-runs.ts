@@ -1,10 +1,14 @@
 import { AsyncLocalStorage } from "node:async_hooks";
+import { randomUUID } from "node:crypto";
 import { companyOs } from "@/kernel/data/supabase";
+import type { TablesUpdate } from "@/kernel/data/supabase/database.types";
 import { notifyOps } from "@/kernel/messaging/lark";
+import { tickForRequest } from "./routine-tick";
 
 // Run log for scheduled routines. Every Vercel cron wraps its handler in
-// withRoutineRun, which opens a company_os.routine_runs row, runs the handler,
-// and closes the row with the outcome, the handler's JSON body and the AI
+// withRoutineRun, which claims the run's tick (opening a `running`
+// company_os.routine_runs row before any work, Y.6), runs the handler, and
+// closes the row with the outcome, the handler's JSON body and the AI
 // tokens spent while it ran. Token attribution rides on AsyncLocalStorage:
 // kernel/ai/response.ts reports every model call's usage into whichever run is
 // active on the current async chain, so no handler has to thread a run id
@@ -25,7 +29,7 @@ export interface AiUsage {
 }
 
 export type RoutineHost = "vercel" | "mac-mini";
-export type RoutineRunStatus = "running" | "ok" | "skipped" | "error";
+export type RoutineRunStatus = "running" | "waiting" | "ok" | "skipped" | "error" | "died";
 
 export type RoutineRun = {
   id: string;
@@ -44,6 +48,12 @@ export type RoutineRun = {
   ai_output_tokens: number;
   ai_cache_read_tokens: number;
   ai_cache_write_tokens: number;
+  // Since Y.6 (null on rows written before it): the tick the run claimed, and
+  // when its current step must have finished before the reaper marks it died.
+  tick_key: string | null;
+  step_deadline_at: string | null;
+  mode: "shadow" | "live";
+  attempt: number;
 };
 
 type RunContext = {
@@ -73,18 +83,14 @@ export function summarizeResult(body: unknown): string | null {
   if (!body || typeof body !== "object") return null;
   const parts: string[] = [];
   for (const [k, v] of Object.entries(body as Record<string, unknown>)) {
+    // The run's own status column says ok or skipped; repeating it here would
+    // push a counter out of the six the line has room for.
+    if (k === "status") continue;
     if (typeof v === "number" || typeof v === "boolean") parts.push(`${k} ${v}`);
     else if (typeof v === "string" && v.length <= 80 && k !== "error") parts.push(`${k} ${v}`);
     if (parts.length >= 6) break;
   }
   return parts.length ? parts.join(", ") : null;
-}
-
-function statusFor(response: Response, body: unknown): RoutineRunStatus {
-  if (!response.ok) return "error";
-  const b = body as Record<string, unknown> | null;
-  if (b && typeof b === "object" && ("skipped" in b || b.ok === false)) return "skipped";
-  return "ok";
 }
 
 /** True when the request carries the Vercel Cron bearer (Authorization: Bearer $CRON_SECRET). */
@@ -113,22 +119,70 @@ export async function withRoutineRun(
   if (!hasCronBearer(req)) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return recordRoutineRun(routineId, () => handler(req), host);
+  // Vercel Cron's delivery claims its schedule slot; a run by hand (the
+  // runbook's curl, the Mac mini's in-process GET, a POST) claims a tick of its own.
+  return recordRoutineRun(routineId, () => handler(req), host, { tick: tickForRequest(routineId, req) });
 }
+
+// The longest maxDuration any route declares (entities/*/mounts.ts). A run's
+// step deadline is its claim time plus this, so the reaper can never mark a
+// function died while Vercel would still let it run.
+const DEFAULT_STEP_SECONDS = 300;
+
+/** Only the handler's own word makes a run skipped; a throw or a non-2xx makes it an error. */
+function outcomeOf(response: Response, body: unknown): "ok" | "skipped" | "error" {
+  if (!response.ok) return "error";
+  const status = (body as { status?: unknown } | null)?.status;
+  return status === "skipped" ? "skipped" : "ok";
+}
+
+export type RecordOptions = {
+  /** The tick this run claims: a schedule slot for a cron; omitted, a fresh UUID, for a button. */
+  tick?: string;
+  /** Seconds the run may take before the reaper marks it died. */
+  stepSeconds?: number;
+};
+
+type RunOutcome = TablesUpdate<{ schema: "company_os" }, "routine_runs">;
 
 /**
  * Record one execution of a routine without a bearer gate: for work that is
  * already inside an authenticated request (a server action running the writer
  * agent's first step) and still belongs in Settings -> Agents with its tokens.
  * The handler's JSON body becomes the run's result and summary, as for a cron.
+ *
+ * The row opens before the handler runs (Y.6): claim_tick inserts a `running`
+ * row for the tick, and a tick that is already running, waiting, ok or skipped
+ * is not run again — the call answers `{ status: "skipped", reason:
+ * "tick-taken" }` without calling the handler. The close is fenced to a row
+ * still running or waiting, so a run the reaper already marked died stays
+ * died and the late result is logged instead. The status is explicit (Y.34):
+ * `status: "skipped"` in the body is a skipped run, a throw or a non-2xx is an
+ * error, and anything else is ok — a counter named `skipped` is only a counter.
  */
 export async function recordRoutineRun(
   routineId: string,
   handler: () => Promise<Response>,
   host: RoutineHost = "vercel",
+  opts: RecordOptions = {},
 ): Promise<Response> {
   const ctx: RunContext = { aiCalls: 0, aiInput: 0, aiOutput: 0, aiCacheRead: 0, aiCacheWrite: 0 };
   const startedAt = new Date();
+  const tick = opts.tick ?? randomUUID();
+
+  const claim = await claimTick(routineId, tick, host, opts.stepSeconds ?? DEFAULT_STEP_SECONDS);
+  // Until the migration lands the function does not exist. Recording has
+  // always been best-effort and must never stop a routine, so a failed claim
+  // runs the work and writes one closed row at the end, as before Y.6. That
+  // loses the one-run-per-tick guarantee for as long as the claim fails,
+  // which is the behaviour every routine had before it existed.
+  const runId: string | null = claim.error ? null : claim.id;
+  if (claim.error) {
+    console.error(`[routine-runs] ${routineId}: tick claim failed, recording at the end: ${claim.error}`);
+  } else if (!runId) {
+    console.log(`[routine-runs] ${routineId}: tick ${tick} is already taken; not running it again`);
+    return Response.json({ status: "skipped", reason: "tick-taken" });
+  }
 
   return storage.run(ctx, async () => {
     let response: Response;
@@ -137,14 +191,23 @@ export async function recordRoutineRun(
       response = await handler();
     } catch (err) {
       // Next signals "this route cannot be prerendered" by throwing while it
-      // probes the handler at build time. That is not a run: let it through,
-      // or the build records a phantom error and may freeze the probe's
-      // response as the route's static output.
-      if ((err as { digest?: string })?.digest === "DYNAMIC_SERVER_USAGE") throw err;
+      // probes the handler at build time. That is not a run: close the claimed
+      // row as skipped and let the signal through, or the build records a
+      // phantom error and may freeze the probe's response as the route's
+      // static output.
+      if ((err as { digest?: string })?.digest === "DYNAMIC_SERVER_USAGE") {
+        if (runId) {
+          await closeRun(routineId, runId, {
+            status: "skipped",
+            finished_at: new Date().toISOString(),
+            summary: "prerender probe, not a run",
+          });
+        }
+        throw err;
+      }
       failure = err instanceof Error ? (err.stack ?? err.message) : String(err);
       response = Response.json({ error: failure.split("\n")[0] }, { status: 500 });
     }
-    if (response.status === 401) return response;
 
     // Read the body off a clone so the caller's response stream is untouched.
     let body: unknown = null;
@@ -154,62 +217,120 @@ export async function recordRoutineRun(
       body = null;
     }
     const finishedAt = new Date();
-    const row = {
-      routine_id: routineId,
-      host,
-      status: failure ? ("error" as const) : statusFor(response, body),
-      started_at: startedAt.toISOString(),
+    const status = failure ? ("error" as const) : outcomeOf(response, body);
+    const outcome = {
+      status,
       finished_at: finishedAt.toISOString(),
       duration_ms: finishedAt.getTime() - startedAt.getTime(),
       summary: failure ? failure.split("\n")[0] : summarizeResult(body),
       result: body as never,
       error: failure ?? ((body as Record<string, unknown> | null)?.error as string | undefined) ?? null,
-      log: null,
       ai_calls: ctx.aiCalls,
       ai_input_tokens: ctx.aiInput,
       ai_output_tokens: ctx.aiOutput,
       ai_cache_read_tokens: ctx.aiCacheRead,
       ai_cache_write_tokens: ctx.aiCacheWrite,
     };
-    const { data, error } = await companyOs.from("routine_runs").insert(row).select("id").single();
-    if (error) console.error(`[routine-runs] ${routineId}: ${error.message}`);
-    else console.log(`[routine-runs] ${routineId}: ${row.status} run ${data.id}`);
-    if (row.status === "error") await alertOnRepeatedFailure(routineId, startedAt, row.error ?? row.summary ?? "unknown error");
+    if (runId) {
+      await closeRun(routineId, runId, outcome);
+    } else {
+      const { data, error } = await companyOs
+        .from("routine_runs")
+        .insert({ routine_id: routineId, host, started_at: startedAt.toISOString(), log: null, ...outcome })
+        .select("id")
+        .single();
+      if (error) console.error(`[routine-runs] ${routineId}: ${error.message}`);
+      else console.log(`[routine-runs] ${routineId}: ${status} run ${data.id}`);
+    }
+    if (status === "error") {
+      await alertOnRepeatedFailure(routineId, runId, startedAt, outcome.error ?? outcome.summary ?? "unknown error");
+    }
     return response;
   });
 }
 
+// The claim, with a throw folded into the error arm: a client that throws
+// (a network failure, or a test double without rpc) must not stop the run
+// any more than a returned error does.
+async function claimTick(
+  routineId: string,
+  tick: string,
+  host: RoutineHost,
+  stepSeconds: number,
+): Promise<{ id: string | null; error: null } | { id: null; error: string }> {
+  try {
+    const { data, error } = await companyOs.rpc("claim_tick", {
+      p_routine: routineId,
+      p_tick: tick,
+      p_mode: "live",
+      p_host: host,
+      p_step_s: stepSeconds,
+    });
+    if (error) return { id: null, error: error.message };
+    return { id: data ?? null, error: null };
+  } catch (err) {
+    return { id: null, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+// The fenced close: only a row still running or waiting takes the outcome.
+// Zero rows means the reaper marked the run died while it worked, and the
+// late result is logged rather than applied, so `died` stays the record.
+async function closeRun(routineId: string, runId: string, outcome: RunOutcome): Promise<void> {
+  const { data, error } = await companyOs
+    .from("routine_runs")
+    .update(outcome)
+    .eq("id", runId)
+    .in("status", ["running", "waiting"])
+    .select("id");
+  if (error) {
+    console.error(`[routine-runs] ${routineId}: closing run ${runId} failed: ${error.message}`);
+  } else if (!data || data.length === 0) {
+    console.warn(
+      `[routine-runs] ${routineId}: late result for run ${runId}, which is no longer running; not applied: ${outcome.status} ${outcome.summary ?? ""}`,
+    );
+  } else {
+    console.log(`[routine-runs] ${routineId}: ${outcome.status} run ${runId}`);
+  }
+}
+
+// The states a finished run can be in. Running and waiting rows are runs in
+// progress, not outcomes, so a failure streak never counts them.
+const OUTCOMES: RoutineRunStatus[] = ["ok", "skipped", "error", "died"];
+const isFailure = (status: string | undefined) => status === "error" || status === "died";
+
 /**
  * Post to the Operations chat when a routine has now failed twice in a row,
- * and only then: the second error of a streak alerts, later ones stay quiet,
- * and a success in between starts a new streak. One failed run is noise (a
- * Lark hiccup, a cold start); two on consecutive schedules is an outage, which
- * is what the daily coaching cycle was for five days in September 2026 with
- * nobody reading the run table. Best-effort, like the recording itself.
+ * and only then: the second failure of a streak alerts, later ones stay quiet,
+ * and a success in between starts a new streak. An error and a died run both
+ * count as failures. One failed run is noise (a Lark hiccup, a cold start);
+ * two on consecutive schedules is an outage, which is what the daily coaching
+ * cycle was for five days in September 2026 with nobody reading the run
+ * table. Best-effort, like the recording itself.
  */
-async function alertOnRepeatedFailure(routineId: string, startedAt: Date, failure: string): Promise<void> {
+async function alertOnRepeatedFailure(routineId: string, runId: string | null, startedAt: Date, failure: string): Promise<void> {
   try {
     // Test doubles for the run recorder often stub only insert; without a
     // reader there is no streak to judge, and that is not an error.
     const table = companyOs.from("routine_runs") as { select?: unknown };
     if (typeof table.select !== "function") return;
-    const { data, error } = await companyOs
+    let query = companyOs
       .from("routine_runs")
       .select("status")
       .eq("routine_id", routineId)
-      // Runs before this one, so the row just inserted (or not, if the
-      // insert failed) never counts twice.
-      .lt("started_at", startedAt.toISOString())
-      .order("started_at", { ascending: false })
-      .limit(2);
+      .in("status", OUTCOMES)
+      // Runs before this one, so this run's own row never counts twice.
+      .lt("started_at", startedAt.toISOString());
+    if (runId) query = query.neq("id", runId);
+    const { data, error } = await query.order("started_at", { ascending: false }).limit(2);
     if (error) {
       console.error(`[routine-runs] ${routineId}: streak read failed: ${error.message}`);
       return;
     }
-    // This run is error number one. The previous run makes it a streak of
+    // This run is failure number one. The previous run makes it a streak of
     // two; the one before that decides whether the streak is new.
     const previous = ((data ?? []) as { status: string }[]).map((r) => r.status);
-    const secondOfStreak = previous[0] === "error" && previous[1] !== "error";
+    const secondOfStreak = isFailure(previous[0]) && !isFailure(previous[1]);
     if (!secondOfStreak) return;
     const head = failure.split("\n")[0].slice(0, 300);
     await notifyOps(
@@ -220,16 +341,24 @@ async function alertOnRepeatedFailure(routineId: string, startedAt: Date, failur
   }
 }
 
-/** Latest run per routine, for the Agents list. */
-export async function latestRunsByRoutine(): Promise<Map<string, RoutineRun>> {
-  const { data, error } = await companyOs
-    .from("routine_runs")
-    .select("*")
-    .order("started_at", { ascending: false })
-    .limit(2000);
-  if (error) throw new Error(`routine_runs: ${error.message}`);
+/**
+ * Latest run per routine, for the Agents list: one indexed read per routine
+ * (routine_runs_routine_started_idx). It used to take the newest 2000 rows of
+ * the whole table, which the five-minute reaper and the fifteen-minute send
+ * crons fill in a few days, so a weekly routine read as "Never run".
+ */
+export async function latestRunsByRoutine(routineIds: string[]): Promise<Map<string, RoutineRun>> {
+  const reads = await Promise.all(
+    routineIds.map((id) =>
+      companyOs.from("routine_runs").select("*").eq("routine_id", id).order("started_at", { ascending: false }).limit(1),
+    ),
+  );
   const latest = new Map<string, RoutineRun>();
-  for (const r of (data ?? []) as RoutineRun[]) if (!latest.has(r.routine_id)) latest.set(r.routine_id, r);
+  for (const { data, error } of reads) {
+    if (error) throw new Error(`routine_runs: ${error.message}`);
+    const row = (data ?? [])[0] as RoutineRun | undefined;
+    if (row) latest.set(row.routine_id, row);
+  }
   return latest;
 }
 
@@ -240,6 +369,10 @@ export async function aiTokensByRoutine(days: number): Promise<Map<string, { cal
     .from("routine_runs")
     .select("routine_id, ai_calls, ai_input_tokens, ai_output_tokens")
     .gte("started_at", since)
+    // A run with no model calls adds nothing to any sum, and most runs make
+    // none (the reaper alone writes 288 a day), so leaving them out keeps the
+    // window's AI runs inside the row limit.
+    .gt("ai_calls", 0)
     .limit(5000);
   if (error) throw new Error(`routine_runs: ${error.message}`);
   const out = new Map<string, { calls: number; input: number; output: number }>();

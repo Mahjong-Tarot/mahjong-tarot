@@ -1,6 +1,8 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../lib/auth';
 import PortalSwitcher, { readView } from './PortalSwitcher';
 import styles from './AdminShell.module.css';
@@ -12,6 +14,7 @@ const ADMIN_NAV = [
   { href: '/admin/inquiries',        label: 'Inquiries',        match: (p) => p.startsWith('/admin/inquiries') },
   { href: '/admin/sales',            label: 'Sales',            match: (p) => p.startsWith('/admin/sales') },
   { href: '/admin/email',            label: 'Email',            match: (p) => p.startsWith('/admin/email') },
+  { href: '/admin/revenue/marketing', label: 'Marketing',       match: (p) => p.startsWith('/admin/revenue/marketing') },
   { href: '/admin/astrologers',      label: 'Astrologers',      match: (p) => p.startsWith('/admin/astrologers') },
   // The legacy /admin/private-readings page still shows the global CRM
   // clients list. Showing it to astrologers would leak every other
@@ -50,7 +53,9 @@ function navFor(role, view) {
 }
 
 export default function AdminShell({ profile, children }) {
-  const router = useRouter();
+  // next/navigation, not next/router, so the shell also renders under the
+  // App Router (/admin/revenue).
+  const pathname = usePathname() ?? '';
   const { signOut } = useAuth();
   const [open, setOpen] = useState(false);
 
@@ -115,7 +120,7 @@ export default function AdminShell({ profile, children }) {
         <nav className={styles.nav} aria-label="Admin sections">
           <ul className={styles.navList}>
             {navFor(profile?.role, view).map((item) => {
-              const active = item.match(router.pathname);
+              const active = item.match(pathname);
               return (
                 <li key={item.href}>
                   <Link

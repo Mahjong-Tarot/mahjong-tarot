@@ -21,6 +21,12 @@ export const BLOG_TYPES: StyleOption[] = [
   { value: "open-letter", label: "Open letter", desc: "Written directly to one reader" },
   { value: "research-dive", label: "Research dive", desc: "Data-driven, cites sources" },
   { value: "quick-win", label: "Quick win", desc: "Short, one thing to do today" },
+  // Bill Hajdu's styles for The Mahjong Tarot that the list above has no match
+  // for (agents/writer/context/style-guide.md). "trend" is his Prediction.
+  { value: "provocation", label: "Provocation", desc: "A bold, unsettling claim that raises the stakes from sentence one" },
+  { value: "explainer", label: "Explainer", desc: "One concept taught deeply, tied to right now" },
+  { value: "sign-by-sign", label: "Sign-by-sign", desc: "Tailored guidance for each of the 12 signs" },
+  { value: "historical-deep-dive", label: "Historical deep dive", desc: "The pattern across past cycles, drawn to the present" },
 ];
 
 export const IMAGE_STYLES: StyleOption[] = [

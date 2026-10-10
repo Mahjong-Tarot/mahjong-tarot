@@ -552,39 +552,39 @@ Publishes: Friday (blog + social)
 
 ---
 
-## Week of October 12: Same Fire, Opposite Direction (Horse to Sheep: Love, Money, Career)
+## Week of October 5: Same Fire, Opposite Direction (Horse to Sheep: Love, Money, Career)
 
-> PLANNED. Source brief: `content/source-material/fire-horse-to-fire-sheep-passion-love-business-career.md`, the 2026-09-28 Mahjong Mirror interview with Bill. About a quarter of the Fire Horse year is left, and we are inside the calming Metal Dog month (Oct 8 to Nov 6). 2027 is the Fire Sheep (begins Feb 6, 2027): a second double fire year in a row. The June 15 week previewed the general mood shift; this week is new ground: the passion carries over, but its direction flips. The Horse leaves, the Sheep stays. Threaded through love (Monday), money and career (Wednesday), and self-control (Friday).
+> PUBLISHED. Source brief: `content/source-material/fire-horse-to-fire-sheep-passion-love-business-career.md`, the 2026-09-28 Mahjong Mirror interview with Bill. About a quarter of the Fire Horse year is left, and the calming Metal Dog month begins Oct 8 (to Nov 6). Written and published on Oct 10, backdated to this week. 2027 is the Fire Sheep (begins Feb 6, 2027): a second double fire year in a row. The June 15 week previewed the general mood shift; this week is new ground: the passion carries over, but its direction flips. The Horse leaves, the Sheep stays. Threaded through love (Monday), money and career (Wednesday), and self-control (Friday).
 
-**Topic: 2026-10-12-horse-passion-flips** — STATUS: PLANNED
+**Topic: 2026-10-05-horse-passion-flips** — STATUS: PUBLISHED
 Angle: Fire Horse, shock & awe. Same fire, opposite direction. This year's passion breaks couples up; next year's builds them. The Horse is independence and leaving; the Sheep is staying and strengthening. What it means if you're in a relationship (move it up a level) and if you're single (get off the sidelines).
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-10-14-mirror-caution-career** — STATUS: PLANNED
+**Topic: 2026-10-07-mirror-caution-career** — STATUS: PUBLISHED
 Angle: Mahjong Mirror, the answer. The same flip that helps love makes money and work harder. Business: one word, caution (the Sheep spends, a double fire year tempts risk, stick to the plan). Career: people will be sensitive, relationships at work matter, passion is a double-edged sword. The Mirror's Second Angle (know yourself) and Third Angle (the opposition, which next year is often your own fire) turn that into decisions.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-10-16-feel-good-walk-away** — STATUS: PLANNED
-Angle: Feel Good Friday. Self-control is the number-one skill of a double fire Sheep year, and you can start practicing it now, in the calming Dog month. The weekend challenge: the next time you feel the heat rise, walk away first and answer later.
+**Topic: 2026-10-09-feel-good-walk-away** — STATUS: PUBLISHED
+Angle: Feel Good Friday. Self-control is the number-one skill of a double fire Sheep year, and you can start practicing it now, in the calming Dog month that begins Oct 8. The weekend challenge: the next time you feel the heat rise, walk away first and answer later.
 Publishes: Friday (blog + social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| Oct 12 | Mon | Blog | "This Year's Passion Breaks Couples Up. Next Year's Builds Them." 2026 and 2027 are both fire years, and both animals are fire signs. Same passion, opposite direction. The Fire Horse is independence and adventure; it leaves what no longer satisfies it, so this year's passion has shown up as arguments, stress and breakups (a few couples have been fantastic, most have struggled). The Fire Sheep is the Yin to the Horse's Yang: it stays, fosters and strengthens. Next year the flow favors deeper love. In a relationship: work on moving it up a level. Single: don't sit on the sidelines; the flow is with you, but nothing comes automatic. |
-| Oct 12 | Mon | Facebook EN | Two fire years in a row. Same passion. Opposite direction. This year the fire has been breaking couples up. Next year, the Fire Sheep, the same fire turns toward building them. If your relationship survived the Horse, 2027 is the year to take it up a level. |
-| Oct 12 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| Oct 12 | Mon | Instagram | The Horse leaves. The Sheep stays. Same fire, opposite direction, and it changes everything about love next year. |
-| Oct 13 | Tue | Facebook EN | Single? The worst thing you can do in 2027 is sit on the sidelines. The Fire Sheep favors love, but even when the flow is in your favor, nothing comes automatic. Get out there. Make yourself available. |
-| Oct 13 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
-| Oct 13 | Tue | Instagram | Dating to engaged. Engaged to married. 2027 is the year to give it your all. |
-| Oct 14 | Wed | Blog | "One Word for Your Money Next Year: Caution." The same flip that helps love makes money and work harder. In both Mahjong and astrology the Sheep is the spender, and a double fire year pulls you toward risk: don't stretch too thin, don't let emotion make the call, stick to the plan. At work, people will be sensitive and relationships will matter; passion is a double-edged sword that can make it your best year or your worst. The Mirror's Second Angle (know yourself) and Third Angle (the opposition, which next year is often your own fire) turn that into decisions you can make before the heat makes them for you. |
-| Oct 14 | Wed | Facebook EN | One word for money in the Fire Sheep year: caution. The Sheep spends, and a double fire year tempts you to take risks. Not scared. Careful. Stick with the plan you already have. |
-| Oct 14 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
-| Oct 14 | Wed | Instagram | Next year's fire wants you to spend. Your plan wants you to wait. Listen to the plan. |
-| Oct 15 | Thu | Facebook EN | Most of us have a career, not a business. Here's the career rule for 2027: people will be sensitive, so relationships at work matter more than usual. Use the fire to work harder, not to fight. And never, at any cost, get into a personality conflict with the boss. |
-| Oct 15 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
-| Oct 15 | Thu | Instagram | Passion is a double-edged sword at work. Best year or worst year: it depends on what you do with the fire. |
-| Oct 16 | Fri | Blog | "Feel Good Friday: Walk Away First, Answer Later." Self-control is the number-one skill of a double fire Sheep year, and the calming Dog month is the best time all year to practice it. The weekend challenge: the next time you feel the heat rise (with a partner, a colleague, a purchase you want right now), walk away first and answer later. Practice it now so it is a habit before February. |
-| Oct 16 | Fri | Facebook EN | Feel Good Friday: this weekend, practice one move. When the heat rises, walk away first and answer later. It's the number-one skill for next year, and we're in the calmest month of this one. Perfect time to start. Who's going to try it with me? |
-| Oct 16 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
-| Oct 16 | Fri | Instagram | Feel Good Friday: walk away first. Answer later. The skill of 2027 starts this weekend. |
+| Oct 5 | Mon | Blog | "This Year's Passion Breaks Couples Up. Next Year's Builds Them." 2026 and 2027 are both fire years, and both animals are fire signs. Same passion, opposite direction. The Fire Horse is independence and adventure; it leaves what no longer satisfies it, so this year's passion has shown up as arguments, stress and breakups (a few couples have been fantastic, most have struggled). The Fire Sheep is the Yin to the Horse's Yang: it stays, fosters and strengthens. Next year the flow favors deeper love. In a relationship: work on moving it up a level. Single: don't sit on the sidelines; the flow is with you, but nothing comes automatic. |
+| Oct 5 | Mon | Facebook EN | Two fire years in a row. Same passion. Opposite direction. This year the fire has been breaking couples up. Next year, the Fire Sheep, the same fire turns toward building them. If your relationship survived the Horse, 2027 is the year to take it up a level. |
+| Oct 5 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 5 | Mon | Instagram | The Horse leaves. The Sheep stays. Same fire, opposite direction, and it changes everything about love next year. |
+| Oct 6 | Tue | Facebook EN | Single? The worst thing you can do in 2027 is sit on the sidelines. The Fire Sheep favors love, but even when the flow is in your favor, nothing comes automatic. Get out there. Make yourself available. |
+| Oct 6 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 6 | Tue | Instagram | Dating to engaged. Engaged to married. 2027 is the year to give it your all. |
+| Oct 7 | Wed | Blog | "One Word for Your Money Next Year: Caution." The same flip that helps love makes money and work harder. In both Mahjong and astrology the Sheep is the spender, and a double fire year pulls you toward risk: don't stretch too thin, don't let emotion make the call, stick to the plan. At work, people will be sensitive and relationships will matter; passion is a double-edged sword that can make it your best year or your worst. The Mirror's Second Angle (know yourself) and Third Angle (the opposition, which next year is often your own fire) turn that into decisions you can make before the heat makes them for you. |
+| Oct 7 | Wed | Facebook EN | One word for money in the Fire Sheep year: caution. The Sheep spends, and a double fire year tempts you to take risks. Not scared. Careful. Stick with the plan you already have. |
+| Oct 7 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 7 | Wed | Instagram | Next year's fire wants you to spend. Your plan wants you to wait. Listen to the plan. |
+| Oct 8 | Thu | Facebook EN | Most of us have a career, not a business. Here's the career rule for 2027: people will be sensitive, so relationships at work matter more than usual. Use the fire to work harder, not to fight. And never, at any cost, get into a personality conflict with the boss. |
+| Oct 8 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 8 | Thu | Instagram | Passion is a double-edged sword at work. Best year or worst year: it depends on what you do with the fire. |
+| Oct 9 | Fri | Blog | "Feel Good Friday: Walk Away First, Answer Later." Self-control is the number-one skill of a double fire Sheep year, and the calming Dog month, which began yesterday, is the best time all year to practice it. The weekend challenge: the next time you feel the heat rise (with a partner, a colleague, a purchase you want right now), walk away first and answer later. Practice it now so it is a habit before February. |
+| Oct 9 | Fri | Facebook EN | Feel Good Friday: this weekend, practice one move. When the heat rises, walk away first and answer later. It's the number-one skill for next year, and the calmest month of this one just began. Perfect time to start. Who's going to try it with me? |
+| Oct 9 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 9 | Fri | Instagram | Feel Good Friday: walk away first. Answer later. The skill of 2027 starts this weekend. |

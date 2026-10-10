@@ -1,0 +1,62 @@
+{
+  "topic": "Two fire years in a row: the Fire Horse's passion broke couples up in 2026; the Fire Sheep turns the same passion toward building love in 2027.",
+  "phrases": [
+    "Same fire. Opposite direction.",
+    "The Horse leaves. The Sheep stays.",
+    "Tend the garden while the weather is on your side.",
+    "Don't make a permanent decision based on a temporary animal."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "fire-sheep-2027-love-passion-builds",
+      "content_type": "blog-fire-horse",
+      "concept": "One candle flame cupped between two pairs of hands: the same fire, now held and protected rather than burning.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm cinematic photograph at dusk. Two pairs of hands, a woman's and a man's, cupped together around a single small candle flame on a weathered wooden table. Faces out of frame. Antique gold candlelight glows on the skin and the wood grain; the background falls into midnight jade shadow with a soft blur of dusty rose fabric. The mood is tender and protective, fire being sheltered rather than spreading. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "fire-sheep-2027-love-passion-builds",
+      "content_type": "mon-facebook-en",
+      "concept": "A couple seen from behind on a porch at sunset, close together after a hard year.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of a man and a woman seen from behind, sitting close on a wooden porch step at sunset, her head resting on his shoulder. Warm antique gold light, long shadows, a garden softly out of focus beyond them. Calm after a storm. Faces not visible. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "fire-sheep-2027-love-passion-builds",
+      "content_type": "mon-instagram",
+      "concept": "Card-style text image of the week's core line.",
+      "image_style": "TEXT",
+      "text": "Same fire. Opposite direction.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Same fire. Opposite direction.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "fire-sheep-2027-love-passion-builds",
+      "content_type": "tue-facebook-en",
+      "concept": "An open garden gate at golden hour: the door is open for singles, but you still have to walk through it.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of an old wooden garden gate standing open onto a path lined with soft sage greenery and late roses, golden hour light streaming through. No people. The feeling is invitation and possibility. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "fire-sheep-2027-love-passion-builds",
+      "content_type": "tue-instagram",
+      "concept": "Overhead flat lay of a quiet commitment moment.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An overhead flat lay photograph on warm ivory linen: two coffee cups, a small velvet ring box slightly open, a sprig of dried flowers, morning light. Antique gold and dusty rose tones. Hands of a woman entering the frame from one side, reaching for a cup. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

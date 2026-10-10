@@ -1,0 +1,64 @@
+{
+  "topic": "Self-control is the number-one skill of the 2027 Fire Sheep year; practice it now, in the calm Metal Dog month, by walking away first and answering later.",
+  "phrases": [
+    "Walk away first. Answer later.",
+    "Name the heat before it names you.",
+    "Point the fire at someone you love.",
+    "The skill of 2027 starts this weekend."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-walk-away-first-answer-later",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A woman walking away down a tree-lined path in morning light: the walk that cools the heat.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of a woman seen from behind walking along a quiet tree-lined path in soft autumn morning light, fallen leaves at her feet, golden sun filtering through branches, soft sage and antique gold tones. Unhurried, calm, a breath of fresh air. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-walk-away-first-answer-later",
+      "content_type": "fri-facebook-en",
+      "concept": "A phone face-down beside a glass of water: the hard message can wait until tomorrow.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A still life photograph on a wooden kitchen table in morning light: a smartphone lying face-down, a full glass of water beside it, a small vase of fresh flowers. Warm ivory and antique gold tones, peaceful and unhurried. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-walk-away-first-answer-later",
+      "content_type": "fri-instagram",
+      "concept": "Text card with the weekend challenge.",
+      "image_style": "TEXT",
+      "text": "Walk away first. Answer later.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture. Centered text in refined serif lettering, deep walnut ink: \"Walk away first. Answer later.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-walk-away-first-answer-later",
+      "content_type": "card",
+      "concept": "English affirmation card.",
+      "image_style": "TEXT",
+      "text": "Walk away first. Answer later.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Walk away first. Answer later.\". Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant, modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-walk-away-first-answer-later",
+      "content_type": "card-vn",
+      "concept": "Vietnamese affirmation card.",
+      "image_style": "TEXT",
+      "text": "Bước đi trước. Trả lời sau.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A square affirmation card, 1080x1080. Warm cream paper background with a soft aged texture, subtle deckle edges on the top and right, a single faint tea-stain ring in the lower right corner, one folded corner top-left catching gentle shadow. The paper fills the frame edge-to-edge. Overhead natural morning light from the upper left. Rendered in the exact center of the paper, in hand-inked brush lettering, deep walnut ink, the phrase: \"Bước đi trước. Trả lời sau.\". Two lines, centered, the first line slightly larger than the second. The lettering is confident and elegant, modern calligraphy, not cursive. Spell every word perfectly and space the letters clearly. Preserve any Vietnamese diacritics exactly. One tiny hand-drawn ink flourish beneath the second line. Palette: warm cream, walnut brown ink, a single faint blush tea-stain. The overall feeling is intimate, like a page torn from a woman's journal. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

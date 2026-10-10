@@ -42,3 +42,6 @@
 | 2026-07-20 | The Soulmate-Month Baby Isn't the Easy One | soulmate-month-baby-isnt-the-easy-one.md | The Mahjong Mirror |
 | 2026-07-22 | You Can't Pick the Month. You Can Read It. | you-cant-pick-the-month-you-can-read-it.md | The Mahjong Mirror |
 | 2026-07-24 | Feel Good Friday: The Month of Emotions Wants Your Attention | feel-good-friday-the-month-of-emotions-wants-your-attention.md | The Mahjong Mirror |
+| 2026-10-05 | This Year's Passion Breaks Couples Up. Next Year's Builds Them. | fire-sheep-2027-love-passion-builds.md | Love & Relationships |
+| 2026-10-07 | One Word for Your Money Next Year: Caution | fire-sheep-2027-money-career-caution.md | Money & Career |
+| 2026-10-09 | Feel Good Friday: Walk Away First, Answer Later | feel-good-friday-walk-away-first-answer-later.md | The Mahjong Mirror |

@@ -74,6 +74,76 @@ export type Database = {
         }
         Relationships: []
       }
+      approvals: {
+        Row: {
+          approver_permission: string | null
+          approver_person_id: string | null
+          created_at: string
+          decided_at: string | null
+          decided_by: string | null
+          id: string
+          metadata: Json
+          reason: string | null
+          requested_by: string | null
+          state: string
+          subject_id: string
+          subject_type: string
+          updated_at: string
+        }
+        Insert: {
+          approver_permission?: string | null
+          approver_person_id?: string | null
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          id?: string
+          metadata?: Json
+          reason?: string | null
+          requested_by?: string | null
+          state?: string
+          subject_id: string
+          subject_type: string
+          updated_at?: string
+        }
+        Update: {
+          approver_permission?: string | null
+          approver_person_id?: string | null
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          id?: string
+          metadata?: Json
+          reason?: string | null
+          requested_by?: string | null
+          state?: string
+          subject_id?: string
+          subject_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "approvals_approver_person_id_fkey"
+            columns: ["approver_person_id"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "approvals_decided_by_fkey"
+            columns: ["decided_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "approvals_requested_by_fkey"
+            columns: ["requested_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_log: {
         Row: {
           actor_label: string | null
@@ -112,6 +182,59 @@ export type Database = {
           table_name?: string
         }
         Relationships: []
+      }
+      automation_effects: {
+        Row: {
+          attempt: number
+          claimed_at: string
+          detail: Json | null
+          done_at: string | null
+          id: string
+          key: string
+          kind: string
+          provider_ref: string | null
+          routine_id: string
+          run_id: string | null
+          status: string
+          summary: string | null
+        }
+        Insert: {
+          attempt?: number
+          claimed_at?: string
+          detail?: Json | null
+          done_at?: string | null
+          id?: string
+          key: string
+          kind: string
+          provider_ref?: string | null
+          routine_id: string
+          run_id?: string | null
+          status: string
+          summary?: string | null
+        }
+        Update: {
+          attempt?: number
+          claimed_at?: string
+          detail?: Json | null
+          done_at?: string | null
+          id?: string
+          key?: string
+          kind?: string
+          provider_ref?: string | null
+          routine_id?: string
+          run_id?: string | null
+          status?: string
+          summary?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "automation_effects_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "routine_runs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       board_columns: {
         Row: {
@@ -1150,6 +1273,75 @@ export type Database = {
           },
         ]
       }
+      event_deliveries: {
+        Row: {
+          delivered_at: string
+          duration_ms: number | null
+          error: string | null
+          event_id: string
+          event_name: string
+          id: string
+          ok: boolean
+          subscriber: string
+        }
+        Insert: {
+          delivered_at?: string
+          duration_ms?: number | null
+          error?: string | null
+          event_id: string
+          event_name: string
+          id?: string
+          ok: boolean
+          subscriber: string
+        }
+        Update: {
+          delivered_at?: string
+          duration_ms?: number | null
+          error?: string | null
+          event_id?: string
+          event_name?: string
+          id?: string
+          ok?: boolean
+          subscriber?: string
+        }
+        Relationships: []
+      }
+      event_outbox: {
+        Row: {
+          attempts: number
+          claimed_at: string | null
+          created_at: string
+          dedupe_key: string
+          event_name: string
+          id: string
+          last_error: string | null
+          payload: Json
+          published_at: string | null
+        }
+        Insert: {
+          attempts?: number
+          claimed_at?: string | null
+          created_at?: string
+          dedupe_key: string
+          event_name: string
+          id?: string
+          last_error?: string | null
+          payload: Json
+          published_at?: string | null
+        }
+        Update: {
+          attempts?: number
+          claimed_at?: string | null
+          created_at?: string
+          dedupe_key?: string
+          event_name?: string
+          id?: string
+          last_error?: string | null
+          payload?: Json
+          published_at?: string | null
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           blurb: string | null
@@ -1186,6 +1378,7 @@ export type Database = {
       interactions: {
         Row: {
           body: string | null
+          category: string | null
           company_id: string | null
           created_at: string
           id: string
@@ -1200,6 +1393,7 @@ export type Database = {
         }
         Insert: {
           body?: string | null
+          category?: string | null
           company_id?: string | null
           created_at?: string
           id?: string
@@ -1214,6 +1408,7 @@ export type Database = {
         }
         Update: {
           body?: string | null
+          category?: string | null
           company_id?: string | null
           created_at?: string
           id?: string
@@ -1701,6 +1896,38 @@ export type Database = {
           sort_order?: number
         }
         Relationships: []
+      }
+      routine_config: {
+        Row: {
+          mode: string
+          paused_reason: string | null
+          routine_id: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          mode?: string
+          paused_reason?: string | null
+          routine_id: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          mode?: string
+          paused_reason?: string | null
+          routine_id?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "routine_config_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "people"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       routine_runs: {
         Row: {
@@ -2192,6 +2419,18 @@ export type Database = {
           email: string
           id: string
           person_id: string
+        }[]
+      }
+      claim_effect: {
+        Args: {
+          p_key: string
+          p_kind: string
+          p_routine: string
+          p_run: string
+        }
+        Returns: {
+          attempt: number
+          id: string
         }[]
       }
       claim_tick: {

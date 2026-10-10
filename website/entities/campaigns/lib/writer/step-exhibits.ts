@@ -2,7 +2,9 @@ import { uploadExhibit } from "@/entities/campaigns/lib/exhibits";
 import { countBlocks, exhibitNumbersError } from "./checks";
 import { appendBlogNotes, loadBlogAsset, updateBlogAsset } from "./data";
 import { figureBlock, headingLines, insertAfterHeading } from "./markup";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./model";
+import { WRITER_EXHIBITS_PROMPT } from "./step-exhibits.prompt";
 import type { StepRunner } from "./types";
 import { z } from "zod/v4";
 
@@ -46,21 +48,12 @@ export const runExhibits: StepRunner = async ({ campaign, profile }) => {
   const headings = headingLines(base);
   if (!headings.length) return { ok: false, error: "Exhibits: the body has no ## headings to place figures under." };
 
-  const system = `${brandPreamble(profile)}
+  const P = WRITER_EXHIBITS_PROMPT;
+  const system = fillPrompt(P.system, { preamble: brandPreamble(profile), imageStyle: profile.imageStyleMd ?? P.parts.notSet });
 
-## Image style
-${profile.imageStyleMd ?? "(not set)"}
+  const user = fillPrompt(P.user, { body: base, headings: headings.join("\n") });
 
-# Task
-Propose two or three exhibits for the post: charts, comparisons or timelines that make a point the body already makes with numbers or named items. Every number, name and label in an exhibit must appear in the body verbatim; an exhibit illustrates, it never introduces a fact. Write each as a complete SVG (viewBox 0 0 1600 900, Manrope, the brand palette above, generous margins, labels at 32px or larger so they read at 700px wide). Name the exact heading each figure sits under.`;
-
-  const user = `# Post body
-${base}
-
-# Headings you may anchor to (exact text)
-${headings.join("\n")}`;
-
-  const r = await callWriterModel({ step: "exhibits", system, user, schema: exhibitsOutput });
+  const r = await callWriterModel({ step: "exhibits", prompt: P, system, user, schema: exhibitsOutput });
   if (!r.ok) return r;
 
   let md = base;

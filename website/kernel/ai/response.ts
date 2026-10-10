@@ -110,7 +110,7 @@ export function jsonSchemaFor(schema: z.ZodType): Record<string, unknown> {
   const emitted = z.toJSONSchema(schema) as Record<string, unknown>;
   delete emitted.$schema;
   stripSafeIntegerBounds(emitted);
-  assertNoRefusedArrayBounds(emitted, "$");
+  assertNoRefusedBounds(emitted, "$");
   return emitted;
 }
 
@@ -122,7 +122,8 @@ export function jsonSchemaFor(schema: z.ZodType): Record<string, unknown> {
  * for a range. The hand-written schemas it replaces wrote a bare
  * `type: "integer"`, and a bound in the request is a bound the model is told
  * to respect, so it is removed for the same reason `$schema` is. A bound the
- * author did write (`.max(100)`) is never this value and survives.
+ * author did write (`.max(100)`) is never this value, survives, and is refused
+ * by `assertNoRefusedBounds`.
  */
 function stripSafeIntegerBounds(node: unknown): void {
   if (Array.isArray(node)) {
@@ -138,21 +139,29 @@ function stripSafeIntegerBounds(node: unknown): void {
   for (const value of Object.values(obj)) stripSafeIntegerBounds(value);
 }
 
+/** The numeric keywords the structured-output API refuses on an integer or a number. */
+const REFUSED_NUMBER_BOUNDS = ["minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "multipleOf"] as const;
+
 /**
- * The structured-output API refuses array bounds: `minItems` other than 0 or 1
- * is a 400 ("For 'array' type, 'minItems' values other than 0 or 1 are not
- * supported") and `maxItems` is refused outright. That 400 was a real run,
- * stopped at the campaigns SEO step; the API's message names the keyword and
- * not the file, so the failure arrives at the wrong end of the stack.
+ * The structured-output API refuses bounds it cannot enforce while sampling.
+ * On an array, `minItems` other than 0 or 1 is a 400 ("For 'array' type,
+ * 'minItems' values other than 0 or 1 are not supported") and `maxItems` is
+ * refused outright; that 400 was a real run, stopped at the campaigns SEO step.
+ * On an integer or a number every bound is refused ("For 'integer' type,
+ * property 'minimum' is not supported", checked against a live call for each
+ * keyword). That one was the receipt reader's `.nonnegative()`: every receipt
+ * read failed from launch until 2026-10-08, and a real claim reached its
+ * checker with no reading on any of its receipts. The API's message names the
+ * keyword and not the file, so the failure arrives at the wrong end of the stack.
  *
  * A derived schema is a module-level const, so throwing here fails the import
  * — the test run or the build — rather than a request in production. Counts
- * belong in a `.describe()`, where the model reads them, and in the server-side
- * check after the call, where they are enforced.
+ * and ranges belong in a `.describe()`, where the model reads them, and in the
+ * server-side check after the call, where they are enforced.
  */
-function assertNoRefusedArrayBounds(node: unknown, path: string): void {
+function assertNoRefusedBounds(node: unknown, path: string): void {
   if (Array.isArray(node)) {
-    node.forEach((child, i) => assertNoRefusedArrayBounds(child, `${path}[${i}]`));
+    node.forEach((child, i) => assertNoRefusedBounds(child, `${path}[${i}]`));
     return;
   }
   if (node === null || typeof node !== "object") return;
@@ -163,7 +172,11 @@ function assertNoRefusedArrayBounds(node: unknown, path: string): void {
   if ("minItems" in obj && obj.minItems !== 0 && obj.minItems !== 1) {
     throw new Error(`${path}: the structured-output API refuses minItems ${String(obj.minItems)}; only 0 and 1 are accepted.`);
   }
-  for (const [key, value] of Object.entries(obj)) assertNoRefusedArrayBounds(value, `${path}.${key}`);
+  if (obj.type === "integer" || obj.type === "number") {
+    const bound = REFUSED_NUMBER_BOUNDS.find((key) => key in obj);
+    if (bound) throw new Error(`${path}: the structured-output API refuses ${bound} on type ${String(obj.type)}. Put the range in .describe() and check it after the call.`);
+  }
+  for (const [key, value] of Object.entries(obj)) assertNoRefusedBounds(value, `${path}.${key}`);
 }
 
 export type StructuredOutput<T> = { ok: true; data: T } | { ok: false; error: string };

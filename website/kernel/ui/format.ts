@@ -78,7 +78,10 @@ export function formatBytes(n: number | null | undefined): string {
   if (n == null) return "";
   if (n < 1024) return `${n} B`;
   if (n < 1024 * 1024) return `${(n / 1024).toFixed(0)} KB`;
-  return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+  if (n < 1024 * 1024 * 1024) return `${(n / (1024 * 1024)).toFixed(1)} MB`;
+  // A file over the 500 MB deliverable cap is refused by its size (W.128):
+  // "4.1 GB" reads; "4198.4 MB" makes the reader do the arithmetic.
+  return `${(n / (1024 * 1024 * 1024)).toFixed(1)} GB`;
 }
 
 // Program hours for the portal KPI strips: round to one decimal, then group

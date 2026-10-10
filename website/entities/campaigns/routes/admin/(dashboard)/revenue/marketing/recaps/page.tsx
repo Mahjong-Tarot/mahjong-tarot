@@ -2,7 +2,7 @@ import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
 import { MetricCard } from "@/kernel/ui/MetricCard";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { listMarketingRecaps, type MarketingRecapRow } from "@/entities/campaigns/lib/marketing-recaps";
 
 export const metadata: Metadata = {
@@ -51,7 +51,7 @@ function RecapCard({ recap }: { recap: MarketingRecapRow }) {
 }
 
 export default async function MarketingRecapsPage() {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const { rows, error } = await listMarketingRecaps();
 
   return (

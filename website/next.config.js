@@ -6,18 +6,14 @@ const nextConfig = {
   images: {
     remotePatterns: [{ protocol: 'https', hostname: 'ntqmddmesgdquatodsyu.supabase.co', pathname: '/storage/v1/object/public/**' }],
   },
-  // Settings the App Router marketing platform (copied from edge8-web) needs;
-  // see docs/engineering/2026-09-28-marketing-platform-port.md.
+  // resvg ships a native binary the bundler cannot pack; load it from
+  // node_modules (the writer agent's exhibit renderer). instrumentation.ts
+  // (event subscribers) runs without a flag since Next 15.
+  serverExternalPackages: ['@resvg/resvg-js'],
   experimental: {
     // Admin pages are force-dynamic; re-fetch on every soft navigation rather
     // than re-using a 30-second-old payload.
     staleTimes: { dynamic: 0 },
-    // resvg ships a native binary webpack cannot bundle; load it from
-    // node_modules (the writer agent's exhibit renderer).
-    serverComponentsExternalPackages: ['@resvg/resvg-js'],
-    // instrumentation.ts registers the event subscribers (Revenue board →
-    // content calendar); Next 14 only runs it behind this flag.
-    instrumentationHook: true,
   },
 }
 

@@ -1,0 +1,188 @@
+[
+  {
+    "path": "/api/cron/agent-driver",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/agent-driver.ts",
+    "schedule": "*/5 * * * *",
+    "name": "Agent driver",
+    "description": "Every five minutes. Advances every writer and letter agent run that is at a step by one step, each recorded on its agent's row here. A step that keeps failing is backed off and, after three attempts, the run is stopped with the reason on its campaign.",
+    "content": [
+      "Marketing campaigns",
+      "Email campaigns",
+      "Routine runs (this page)"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/blog-publish",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/blog-publish.ts",
+    "schedule": "0 11 * * *",
+    "name": "Blog auto-publish",
+    "description": "Daily. Auto-publishes blog assets that were scheduled and are now due, and tells the Revenue chat, holding a weekend notice to Monday 08:30.",
+    "content": [
+      "Blog assets"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/broadcast-summary",
+    "entity": "company-os",
+    "file": "entities/company-os/crons/broadcast-summary.ts",
+    "schedule": "20 13 * * *",
+    "name": "Broadcast summary",
+    "description": "Daily. Posts one Lark summary to the Marketing channel for each broadcast whose numbers have settled (72h after send), with a one-line Claude takeaway. Latches per broadcast so each is summarised once.",
+    "content": [
+      "Email campaigns",
+      "Email events"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/email-campaign-send",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/email-campaign-send.ts",
+    "schedule": "*/15 * * * *",
+    "name": "Email campaign send",
+    "description": "Every 15 minutes. Sends the next batch of a scheduled email campaign sequentially, one Resend call per recipient.",
+    "content": [
+      "Email campaigns",
+      "Recipients"
+    ],
+    "apps": [
+      "Supabase",
+      "Resend"
+    ]
+  },
+  {
+    "path": "/api/cron/email-series-draft",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/email-series-draft.ts",
+    "schedule": "0 10 * * *",
+    "name": "Series drafter",
+    "description": "Daily at 07:00 Vietnam time. Opens each active series' issue for the week as a draft broadcast for its saved audience, scheduled for the series' send moment. Nothing sends until a person approves the issue.",
+    "content": [
+      "Email series",
+      "Audiences",
+      "Email campaigns"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/letter-weekly",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/letter-weekly.ts",
+    "name": "Letter agent: weekly",
+    "description": "Monday and Thursday 07:00 Ho Chi Minh City. Opens the next letter as a draft broadcast and starts the letter agent; the run builds the list, sends the approver a test and parks at ready on a send approval. Nothing sends until a person approves it; then it goes at the Tuesday or Friday 08:00 window unless cancelled first.",
+    "content": [
+      "Email campaigns",
+      "Events",
+      "Meetings",
+      "Journal (Notion)",
+      "Blog assets"
+    ],
+    "apps": [
+      "Supabase",
+      "Notion",
+      "Anthropic",
+      "Resend",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/marketing-digest",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/marketing-digest.ts",
+    "schedule": "0 12 * * *",
+    "name": "Marketing digest",
+    "description": "Weekdays at 09:00 Vietnam time. Reminds the founder and the Revenue chat of manual-post content (blog, LinkedIn, Facebook) due today or overdue and not yet posted. Monday's reminder covers anything that fell due over the weekend.",
+    "content": [
+      "Marketing calendar"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/marketing-recap",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/marketing-recap.ts",
+    "schedule": "30 12 4 * *",
+    "name": "Marketing recap",
+    "description": "Monthly, on the 4th. Recaps the prior month's email marketing and asks Claude for content suggestions, then stores it, posts to the Marketing Lark channel, and emails the founder. Runs on the 4th so every send is past its 72h settle window.",
+    "content": [
+      "Email campaigns",
+      "Email events",
+      "Marketing recaps"
+    ],
+    "apps": [
+      "Supabase",
+      "Anthropic",
+      "Resend",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/marketing-weekly-pulse",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/marketing-weekly-pulse.ts",
+    "schedule": "0 13 * * 1",
+    "name": "Marketing weekly pulse",
+    "description": "Weekly, Monday. Posts a facts-only 'Marketing this week' to the Marketing Lark channel: public-site traffic with a week-over-week line, posts published, and the broadcasts that went out. No AI; the monthly recap owns content suggestions.",
+    "content": [
+      "Vercel Analytics",
+      "Marketing content",
+      "Email campaigns"
+    ],
+    "apps": [
+      "Vercel Analytics",
+      "Supabase",
+      "Lark"
+    ]
+  },
+  {
+    "path": "/api/cron/revenue-content-sync",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/revenue-content-sync.ts",
+    "schedule": "20 * * * *",
+    "name": "Revenue content sync",
+    "description": "Hourly. Keeps the Revenue board in step with the content calendar: a card per day of posts for the board's owner with a subtask per post, and a card per campaign the writer agent runs, moved as the writer moves. A post the agent publishes ticks itself.",
+    "content": [
+      "Boards",
+      "Board cards",
+      "Marketing content",
+      "Marketing campaigns"
+    ],
+    "apps": [
+      "Supabase"
+    ]
+  },
+  {
+    "path": "/api/cron/writer-schedule",
+    "entity": "campaigns",
+    "file": "entities/campaigns/crons/writer-schedule.ts",
+    "schedule": "0 10 * * *",
+    "name": "Writer schedule",
+    "description": "Hourly. Starts the writer on a campaign the day before its date, and re-arms a run that lost its hand-off between steps. Quiet unless it did something.",
+    "content": [
+      "Marketing campaigns",
+      "Blog assets"
+    ],
+    "apps": [
+      "Supabase",
+      "Lark"
+    ]
+  }
+]

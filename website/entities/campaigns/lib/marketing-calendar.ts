@@ -259,11 +259,13 @@ export function noteWriteFailure(
   failed: string[],
   channel: string,
   what: string,
-  error: { message: string } | null,
+  error: { message: string; refused?: true } | null,
 ): boolean {
   if (!error) return false;
   console.error(`${LOG} write to ${what} failed: ${error.message}`);
-  failed.push(channel);
+  // A refusal (a live post on a gated campaign, Y.91) says what to do instead,
+  // so it travels with the channel; a database error stays in the log.
+  failed.push(error.refused ? `${channel} (${error.message})` : channel);
   return true;
 }
 

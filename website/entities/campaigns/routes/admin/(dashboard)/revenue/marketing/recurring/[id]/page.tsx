@@ -5,7 +5,7 @@ import { companyOs } from "@/kernel/data/supabase";
 import { PageHead } from "@/kernel/ui/PageHead";
 import { Badge } from "@/kernel/ui/Badge";
 import { formatDate } from "@/kernel/ui/format";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { listAudiences } from "@/entities/campaigns/lib/audiences";
 import { listBrands } from "@/entities/campaigns/lib/marketing-calendar";
 import { getSeries } from "@/entities/campaigns/lib/series";
@@ -16,8 +16,9 @@ export const metadata: Metadata = {
   description: "A recurring broadcast's audience, schedule and issues.",
 };
 
-export default async function SeriesDetailPage({ params }: { params: { id: string } }) {
-  await requireRevenueAccess();
+export default async function SeriesDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  await requirePermission("campaigns.marketing");
   const [series, audiences, brands, issues] = await Promise.all([
     getSeries(params.id),
     listAudiences(),

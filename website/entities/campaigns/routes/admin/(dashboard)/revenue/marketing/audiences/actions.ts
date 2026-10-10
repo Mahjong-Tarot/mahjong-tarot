@@ -2,7 +2,7 @@
 
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { zodIssuesToMessage } from "@/kernel/config/schemas";
 import { resolveAudience } from "@/entities/campaigns/lib/broadcasts";
@@ -16,7 +16,7 @@ function refresh(id?: string) {
 }
 
 export async function createAudience(input: { name: string }): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const name = input.name.trim();
   if (!name) return { ok: false, error: "Give the audience a name." };
 
@@ -30,7 +30,7 @@ export async function createAudience(input: { name: string }): Promise<{ ok: tru
 }
 
 export async function updateAudience(id: string, input: { name: string; rules: unknown }): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const name = input.name.trim();
   if (!name) return { ok: false, error: "Name cannot be empty." };
   const rules = audienceRulesSchema.safeParse(input.rules);
@@ -47,7 +47,7 @@ export async function updateAudience(id: string, input: { name: string; rules: u
 // Who the rules reach right now, after consent and do-not-contact: the same
 // resolution a broadcast build uses, so the preview is the list you would get.
 export async function previewAudience(input: { rules: unknown }): Promise<{ ok: true; count: number; names: string[] } | { ok: false; error: string }> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const rules = audienceRulesSchema.safeParse(input.rules);
   if (!rules.success) return { ok: false, error: zodIssuesToMessage(rules.error.issues) };
 

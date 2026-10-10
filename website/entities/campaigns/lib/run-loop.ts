@@ -1,18 +1,13 @@
-import { waitUntil } from "@vercel/functions";
-import { getSiteOrigin } from "@/kernel/config/site-origin";
+import { runLoop, type StepResult as RunStepResult } from "@/kernel/audit/run-loop";
+import type { DrivenAgent, DrivenRun } from "@/kernel/audit/step-driver";
 import { notifyMarketing } from "@/kernel/messaging/lark";
 
-// How an agent run chains through its steps, written once for the writer and
-// the letter agents (A.2). Each agent advances one step per function
-// invocation; after a passing step the run hands itself on to the next step
-// and, when it parks or stops, ops hears about it once. The two agents used to
-// carry this mechanism as two near-identical files, and the hand-off was
-// changed in lockstep in both (abbfa6db, then fb270935) — the cost of a rule
-// with two homes. An agent now supplies what differs: its advance function,
-// its routine id, and the words for a parked or stopped run.
-//
-// Recording as a routine run (Settings -> Agents, with tokens) is the caller's
-// job: withRoutineRun in the step route, recordRoutineRun in the hub action.
+// The writer and letter agents' view of the shared run loop. The loop itself
+// moved to kernel/audit/run-loop.ts with Z.13 (decision 10), so the meeting
+// follow-up chain in crm runs on the same code; this file keeps the campaigns
+// agents' own shape (a result names its `campaignId`) and their channel (the
+// Marketing chat), so neither agent changed when the loop moved. It converts
+// at the edges and does nothing else.
 
 // What one step reports. `ok` with a `next` state means the step passed and
 // says what runs next (a step id) or where the run parked (a state that is not
@@ -23,13 +18,23 @@ export type StepResult<Step extends string, State extends string> =
   | { ok: false; campaignId: string; step: Step; error: string }
   | { skipped: string; campaignId: string };
 
+function toRun<Step extends string, State extends string>(r: StepResult<Step, State>): RunStepResult<Step, State> {
+  if ("skipped" in r) return { skipped: r.skipped, id: r.campaignId };
+  const { campaignId, ...rest } = r;
+  return { ...rest, id: campaignId } as RunStepResult<Step, State>;
+}
+
+function fromRun<Step extends string, State extends string>(r: RunStepResult<Step, State>): StepResult<Step, State> {
+  if ("skipped" in r) return { skipped: r.skipped, campaignId: r.id };
+  const { id, ...rest } = r;
+  return { ...rest, campaignId: id } as StepResult<Step, State>;
+}
+
 /**
  * One step's HTTP shape, shared by the step routes and the hub actions that
  * run a first step, because it is what the run recorder reads (Y.34): a tick
  * with nothing to do says `status: "skipped"`, and a failed check answers 422
- * so the run records as an error. Before Y.34 the recorder read the `skipped`
- * key and `ok: false` alike as a skipped run, which filed every failed check
- * as a quiet skip on Settings -> Agents.
+ * so the run records as an error.
  */
 export function stepResponse(result: StepResult<string, string>): Response {
   if ("skipped" in result) return Response.json({ status: "skipped", reason: result.skipped, ...result });
@@ -40,72 +45,45 @@ export function stepResponse(result: StepResult<string, string>): Response {
 export type AgentRunDefinition<Step extends string, State extends string> = {
   // The log prefix, "[writer]" or "[letter]".
   tag: string;
-  // The agent's own step route, which the hand-off POSTs to.
+  // Where each step is recorded as a routine run (Settings -> Agents).
   routineId: string;
+  // Seconds one step may take: the longest a step route or the driver may run.
+  stepSeconds: number;
   advance: (campaignId: string) => Promise<StepResult<Step, State>>;
+  // The run a campaign is at, or null when it is parked, stopped or finished.
+  current: (campaignId: string) => Promise<DrivenRun | null>;
+  // Every run at a step, for the driver.
+  dueRuns: () => Promise<DrivenRun[]>;
+  // Stop the run at `step` with `error` in the agent's own error column.
+  stop: (campaignId: string, step: Step, error: string) => Promise<void>;
   // The message for ops when a passing step leaves the run parked at `next`,
-  // or null when `next` is a step to hand on to.
+  // or null when `next` is a step the driver will advance to.
   parked: (result: Extract<StepResult<Step, State>, { ok: true }>) => Promise<string | null> | string | null;
   // The message for ops when a step's check fails.
   stopped: (result: Extract<StepResult<Step, State>, { ok: false }>) => string;
+  // The agent honours shadow mode (Z.17). The driver and a person's button
+  // both pass it on, so the switch decides the mode of every step either runs.
+  shadow?: boolean;
 };
 
-// How long the caller stays with the hand-off before returning: long enough
-// for the request to connect and be accepted, well short of the step itself.
-const HANDOFF_HOLD_MS = 3_000;
-
-export function agentRunLoop<Step extends string, State extends string>(def: AgentRunDefinition<Step, State>) {
-  // Fire the next step without waiting for it to finish. The server holds
-  // CRON_SECRET, so it may call the step route the way Vercel Cron would. The
-  // caller holds for a few seconds so the request is on the wire before its
-  // own response goes out (in the first real run one hand-off of six never
-  // arrived, with nothing logged on either side), and waitUntil keeps the
-  // function alive for the rest. The next step's function then owns the run.
-  //
-  // That call needs the site's public origin. A request that arrived on the
-  // deployment host (every cron does) has none, and the deployment host itself
-  // sits behind Vercel SSO, so calling it answers 401. In that case the next
-  // step runs inside this function instead, kept alive by waitUntil; the chain
-  // continues here until the run parks, stops, or the function's time runs
-  // out, and the hourly schedule re-arms whatever is left.
-  async function kick(campaignId: string): Promise<void> {
-    const secret = process.env.CRON_SECRET;
-    if (!secret) {
-      console.error(`[${def.tag}] CRON_SECRET is not set; the run cannot hand itself on.`);
-      return;
-    }
-    const origin = getSiteOrigin();
-    if (!origin) {
-      console.warn(`[${def.tag}] no public origin for the hand-off; running the next step for ${campaignId} in this function.`);
-      waitUntil(run(campaignId));
-      return;
-    }
-    const request = fetch(`${origin}${def.routineId}`, {
-      method: "POST",
-      headers: { authorization: `Bearer ${secret}`, "content-type": "application/json" },
-      body: JSON.stringify({ campaignId }),
-    }).then(
-      (res) => {
-        if (!res.ok) console.error(`[${def.tag}] hand-off for ${campaignId} answered ${res.status}`);
-      },
-      (err) => console.error(`[${def.tag}] hand-off failed:`, err instanceof Error ? err.message : String(err)),
-    );
-    waitUntil(request);
-    await Promise.race([request, new Promise<void>((r) => setTimeout(r, HANDOFF_HOLD_MS))]);
-  }
-
-  async function run(campaignId: string): Promise<StepResult<Step, State>> {
-    const result = await def.advance(campaignId);
-    if ("skipped" in result) return result;
-    if (result.ok) {
-      const parked = await def.parked(result);
-      if (parked) await notifyMarketing(parked);
-      else await kick(campaignId);
-      return result;
-    }
-    await notifyMarketing(def.stopped(result));
-    return result;
-  }
-
-  return { kick, run };
+export function agentRunLoop<Step extends string, State extends string>(
+  def: AgentRunDefinition<Step, State>,
+): { run: (campaignId: string) => Promise<StepResult<Step, State>>; runNow: (campaignId: string) => Promise<StepResult<Step, State>>; driven: DrivenAgent } {
+  const loop = runLoop<Step, State>({
+    routineId: def.routineId,
+    stepSeconds: def.stepSeconds,
+    advance: async (id) => toRun(await def.advance(id)),
+    current: def.current,
+    dueRuns: def.dueRuns,
+    stop: def.stop,
+    parked: (r) => def.parked(fromRun(r) as Extract<StepResult<Step, State>, { ok: true }>),
+    stopped: (r) => def.stopped(fromRun(r) as Extract<StepResult<Step, State>, { ok: false }>),
+    notify: (message) => notifyMarketing(message),
+    shadow: def.shadow,
+  });
+  return {
+    run: async (campaignId) => fromRun(await loop.run(campaignId)),
+    runNow: async (campaignId) => fromRun(await loop.runNow(campaignId)),
+    driven: loop.driven,
+  };
 }

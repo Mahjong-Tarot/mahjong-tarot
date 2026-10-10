@@ -2,7 +2,7 @@ import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { getEntry, listEntriesByCampaign, CHANNEL_LABEL } from "@/entities/campaigns/lib/marketing-calendar";
 import { listAssetImages } from "@/entities/campaigns/lib/marketing-images";
 import { marketingMarkdownToHtml } from "@/entities/campaigns/lib/markdown";
@@ -13,12 +13,13 @@ export const metadata: Metadata = {
   description: "One content asset: its copy and images.",
 };
 
-export default async function AssetDetailPage({
-  params,
-}: {
-  params: { id: string; assetId: string };
-}) {
-  await requireRevenueAccess();
+export default async function AssetDetailPage(
+  props: {
+    params: Promise<{ id: string; assetId: string }>;
+  }
+) {
+  const params = await props.params;
+  await requirePermission("campaigns.marketing");
   const entry = await getEntry(params.assetId);
   // The asset must exist and belong to this campaign.
   if (!entry || entry.campaignId !== params.id) notFound();

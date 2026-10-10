@@ -1,4 +1,6 @@
 import { aiSite } from "@/kernel/ai/gateway";
+import { fillPrompt } from "@/kernel/ai/prompts";
+import { BRAND_WRITER_PROMPT, type ENTRY_COPY_PROMPT } from "./brand-writer.prompt";
 import type { AiDataClass } from "@/kernel/ai/routing";
 import { getBrandProfile, type BrandProfile } from "@/entities/campaigns/lib/brand-profiles";
 import { jsonSchemaFor, readStructuredOutput } from "@/kernel/ai/response";
@@ -57,58 +59,33 @@ export const brandWriterOutput = z.object({
 
 const OUTPUT_SCHEMA = jsonSchemaFor(brandWriterOutput);
 
-export function systemPrompt(profile: BrandProfile): string {
-  const s = (v: string | null) => v ?? "(not set)";
-  return `You are the content writer for ${profile.brandName}. Write only in this brand's voice and follow its channel rules and writing process exactly. The brand's own rules, not any default, decide which deliverables you produce and how each channel reads.
-
-# Brand: ${profile.brandName}
-
-## Positioning
-${s(profile.positioning)}
-
-## Audience
-${s(profile.audience)}
-
-## What we sell
-${s(profile.offer)}
-
-## Default call to action
-${s(profile.primaryCta)}
-
-## Author and credentials
-${s(profile.authorMd)}
-
-## Voice
-${s(profile.voiceMd)}
-
-## Hard rules (never break these)
-${s(profile.rulesMd)}
-
-## Channel guidelines (produce exactly these channels, each per its rules)
-${s(profile.channelsMd)}
-
-## Writing process
-${s(profile.processMd)}
-
-## Blog styles (choose the one that fits)
-${s(profile.blogStylesMd)}
-
-## Editing lens (apply before finalising every piece)
-${s(profile.editingLensMd)}
-
-## SEO lens (apply to any blog or headline work)
-${s(profile.seoLensMd)}
-
-## Image style (for any visual direction you suggest)
-${s(profile.imageStyleMd)}
-
-## Preferred styles (choose only from these slugs)
-- Blog types: ${profile.preferredBlogTypes.join(", ") || "(none set)"}
-- Image styles: ${profile.preferredImageStyles.join(", ") || "(none set)"}
-- Social styles: ${profile.preferredSocialStyles.join(", ") || "(none set)"}
-
-# Output
-Produce one output per channel the Channel guidelines mark active for a write request (typically email, LinkedIn, Facebook). Re-purpose the same core idea per channel; never repeat identical text across channels. Run every piece through the editing lens before returning it. Tag each output with an image_style slug from the preferred list; tag social outputs with a social_style slug; if you produce a blog output, tag its blog_style, and include seo_md run through the SEO lens plus an image_brief_md. Never open body_md with a heading that repeats the piece's title; the page renders the title above the body. Never use em dashes. Do not invent facts, metrics, or quotes that are not in the source. Return through the provided schema only.`;
+// The brand-voice system text, filled from the profile. Shared with
+// entry-copy, which passes its own prompt: both prompts declare the same text
+// (./brand-writer.prompt.ts), and each site sends the one named after it.
+export function systemPrompt(
+  profile: BrandProfile,
+  prompt: typeof BRAND_WRITER_PROMPT | typeof ENTRY_COPY_PROMPT = BRAND_WRITER_PROMPT,
+): string {
+  const s = (v: string | null) => v ?? prompt.parts.notSet;
+  return fillPrompt(prompt.system, {
+    brandName: profile.brandName,
+    positioning: s(profile.positioning),
+    audience: s(profile.audience),
+    offer: s(profile.offer),
+    primaryCta: s(profile.primaryCta),
+    author: s(profile.authorMd),
+    voice: s(profile.voiceMd),
+    rules: s(profile.rulesMd),
+    channels: s(profile.channelsMd),
+    process: s(profile.processMd),
+    blogStyles: s(profile.blogStylesMd),
+    editingLens: s(profile.editingLensMd),
+    seoLens: s(profile.seoLensMd),
+    imageStyle: s(profile.imageStyleMd),
+    blogTypes: profile.preferredBlogTypes.join(", ") || prompt.parts.noneSet,
+    imageStyles: profile.preferredImageStyles.join(", ") || prompt.parts.noneSet,
+    socialStyles: profile.preferredSocialStyles.join(", ") || prompt.parts.noneSet,
+  });
 }
 
 export async function writeForBrand(input: {
@@ -135,24 +112,18 @@ export async function writeForBrand(input: {
       return { ok: false, error: "This brand has no writing profile yet. Fill it in under Marketing > Brands." };
     }
 
-    const userMsg = `# Source material
-
-${input.sourceUrl ? `Source URL: ${input.sourceUrl}\n\n` : ""}${input.brief ? `Brief: ${input.brief}\n\n` : ""}${input.sourceText || "(no source text; work from the brief above)"}
-
-${input.plan ? `# Campaign plan (decided before drafting; follow it)
-${input.plan}
-
-Write the blog as the planned blog type, answer the primary question with figures from the source, brief the hero in the planned image style, and write each social post in its planned style.
-
-` : ""}${input.history ? `# Recent posts (newest first)
-${input.history}
-
-Choose the blog type, image style and social styles that fit this idea, not by turn; but a shape the last posts leaned on is the wrong choice unless the idea demands it, and the keyword and primary question must be ones no recent post already owns.
-
-` : ""}Draft the deliverables the content rules specify, re-purposed to this brand's lens.`;
+    const P = BRAND_WRITER_PROMPT;
+    const userMsg = fillPrompt(P.user, {
+      sourceUrlLine: input.sourceUrl ? fillPrompt(P.parts.sourceUrlLine, { url: input.sourceUrl }) : "",
+      briefLine: input.brief ? fillPrompt(P.parts.briefLine, { brief: input.brief }) : "",
+      sourceText: input.sourceText || P.parts.noSourceText,
+      planSection: input.plan ? fillPrompt(P.parts.planSection, { plan: input.plan }) : "",
+      historySection: input.history ? fillPrompt(P.parts.historySection, { history: input.history }) : "",
+    });
 
     const response = await llm.messages.create(
       {
+        prompt: BRAND_WRITER_PROMPT,
         model: MODEL,
         max_tokens: MAX_TOKENS,
         system: systemPrompt(profile),

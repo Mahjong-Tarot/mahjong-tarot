@@ -8,8 +8,13 @@ import { headers } from "next/headers";
 // *.vercel.app host (which sits behind deployment protection), so that host
 // must never leak into user-facing links; treat it like the no-request case.
 // NEVER import from a client component.
-export function getSiteOrigin(): string {
-  const h = headers();
+//
+// Async since Next 16 removed synchronous headers() (B.18.3). Six crons call it
+// too; Khoa chose on 2026-10-02 to have them await it rather than read only the
+// configured origin, so a cron run from a custom host keeps building links on
+// that host.
+export async function getSiteOrigin(): Promise<string> {
+  const h = await headers();
   const host = h.get("host");
   const proto = h.get("x-forwarded-proto") ?? (host?.includes("localhost") ? "http" : "https");
   if (host && !host.endsWith(".vercel.app")) return `${proto}://${host}`;

@@ -1,6 +1,8 @@
 import { bannedLanguageError, brandNameError, emDashError, wordCount, wordRangeError } from "./checks";
 import { appendBlogNotes, loadBlogAsset, updateBlogAsset } from "./data";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./model";
+import { WRITER_EDIT_PROMPT } from "./step-edit.prompt";
 import { wordRangeFrom } from "./profile-rules";
 import type { StepRunner } from "./types";
 import { z } from "zod/v4";
@@ -26,27 +28,18 @@ export const runEdit: StepRunner = async ({ campaign, profile }) => {
   const blog = loaded.data;
   if (!blog.copyMd?.trim()) return { ok: false, error: "The blog asset has no body to edit." };
 
-  const system = `${brandPreamble(profile)}
+  const P = WRITER_EDIT_PROMPT;
+  const system = fillPrompt(P.system, {
+    preamble: brandPreamble(profile),
+    editingLens: profile.editingLensMd ?? P.parts.noEditingLens,
+    channels: profile.channelsMd ?? P.parts.notSet,
+    min: range.min,
+    max: range.max,
+  });
 
-## Editing lens (apply it to every section)
-${profile.editingLensMd ?? "(the brand has no editing lens; apply the voice and hard rules and cut anything that does not earn its place)"}
+  const user = fillPrompt(P.user, { title: blog.title, body: blog.copyMd, idea: campaign.idea ?? P.parts.noIdea });
 
-## Blog rules
-${profile.channelsMd ?? "(not set)"}
-
-# Task
-You are the editor, not the author. Apply the editing lens to the post you are given and return the edited body plus a change log. Keep the author's argument and voice; cut filler, reorder for the argument, sharpen the opening and the close. Hold the body between ${range.min} and ${range.max} words. Put the key data points in bold (**like this**) where the reader should catch them. Do not write an FAQ, an Idea in Brief, figures or any HTML; later steps add those. Do not add facts, numbers or quotes that are not in the post or its source material.`;
-
-  const user = `# Post title
-${blog.title}
-
-# Post body
-${blog.copyMd}
-
-# Source material (the approved idea, for facts and quotes only)
-${campaign.idea ?? "(none)"}`;
-
-  const r = await callWriterModel({ step: "edit", system, user, schema: editOutput });
+  const r = await callWriterModel({ step: "edit", prompt: P, system, user, schema: editOutput });
   if (!r.ok) return r;
   const body = r.data.body_md?.trim() ?? "";
   const log = (r.data.change_log ?? []).map((l) => l.trim()).filter(Boolean);

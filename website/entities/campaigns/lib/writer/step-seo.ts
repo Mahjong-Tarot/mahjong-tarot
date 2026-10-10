@@ -4,7 +4,9 @@ import { isValidSlug, normalizeSlug, parseSeoMd } from "@/entities/campaigns/lib
 import { emDashError, faqDataError, faqError, hasFigure, readerQuestionError, readerText } from "./checks";
 import { loadBlogAsset, loadBrandLedger, slugTaken, updateBlogAsset } from "./data";
 import { faqBlock, seoMdFrom, type FaqItem } from "./markup";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./model";
+import { WRITER_SEO_PROMPT } from "./step-seo.prompt";
 import type { StepRunner } from "./types";
 import { z } from "zod/v4";
 
@@ -53,35 +55,22 @@ export const runSeo: StepRunner = async ({ campaign, profile }) => {
   // small numbers out, so "four layers" counts as much as "37%" does.
   const figureLines = Array.from(new Set(readerText(blog.copyMd).split(/(?<=[.!?])\s+/).filter((line) => hasFigure(line)).map((line) => line.trim()))).slice(0, 30);
 
-  const system = `${brandPreamble(profile)}
+  const P = WRITER_SEO_PROMPT;
+  const system = fillPrompt(P.system, {
+    preamble: brandPreamble(profile),
+    seoLens: profile.seoLensMd ?? P.parts.noSeoLens,
+    brandName: profile.brandName,
+  });
 
-## SEO lens (apply every point)
-${profile.seoLensMd ?? "(the brand has no SEO lens; use keyword realism, intent match, and a title tag split from the H1)"}
-
-# Task
-Produce the search and AI-search package for the post you are given. Keyword realism first: would the audience type it? If page one is owned by a major publisher or the term's originator, pick a long-tail alternative this site can win. The title tag is keyword-led; the H1 is the brand hook. Start from the reader, not the post. The five FAQ questions are ones a founder or manager would actually type into ChatGPT or Google about their own problem, in their own words: "How do I run better one-on-one meetings with AI?", never "How does AI one-on-one meeting prep work at ${profile.brandName}?". A question never names ${profile.brandName}, never asks what a report, study or post says, and never uses a term the post coined. Write the first question before anything else: it starts with How or What, it is the one question this post answers best, and its answer quotes a number from the body. Then take the primary keyword from inside that question, the phrase a person would search, exactly as it appears there. Answer every question with data: each answer states at least one specific figure from the post body (a percentage, a count, a cost, a time; a number the post spells out, like "four layers" or "six months", counts) and names its source when it has one, because AI answers quote the numbers they can cite. Never introduce a figure the body does not state. When the natural answer to a question has no figure of its own, bring in one of the listed figures that bears on it, or ask a different question the post answers with data. The keywords and questions listed as already owned belong to earlier posts: choose a keyword and a first question this post can own instead. Categories available: Revenue, Talent, Operations, Innovation.`;
-
-  const user = `# Post title (current H1)
-${blog.title}
-
-# Post body
-${blog.copyMd}
-
-# Figures the post states (every FAQ answer cites at least one of these)
-${figureLines.length ? figureLines.map((line) => `- ${line}`).join("\n") : "(none)"}
-
-# Idea and sources
-${campaign.idea ?? "(none)"}
-
-# Current SEO notes (may be incomplete or wrongly labelled; supersede them)
-${blog.seoMd ?? "(none)"}
-
-${plan ? `# Campaign plan (use exactly)
-Primary question, the first FAQ question word for word: ${plan.question}
-Primary keyword: ${plan.keyword}
-
-` : ""}# Keywords and questions already owned by earlier posts
-${taken.length ? taken.map((r) => `- ${r.primaryKeyword ?? "(no keyword)"} / ${r.primaryQuestion ?? "(no question)"}`).join("\n") : "(none)"}`;
+  const user = fillPrompt(P.user, {
+    title: blog.title,
+    body: blog.copyMd,
+    figures: figureLines.length ? figureLines.map((line) => `- ${line}`).join("\n") : P.parts.none,
+    idea: campaign.idea ?? P.parts.none,
+    seoNotes: blog.seoMd ?? P.parts.none,
+    plan: plan ? fillPrompt(P.parts.plan, { question: plan.question, keyword: plan.keyword }) : "",
+    taken: taken.length ? taken.map((r) => `- ${r.primaryKeyword ?? "(no keyword)"} / ${r.primaryQuestion ?? "(no question)"}`).join("\n") : P.parts.none,
+  });
 
   // One retry inside the step with the failed checks named: the model
   // usually fixes a named rule on the second pass, and a stopped run waits an
@@ -91,8 +80,8 @@ ${taken.length ? taken.map((r) => `- ${r.primaryKeyword ?? "(no keyword)"} / ${r
   let slug: string | null = null;
   let failures: string[] = [];
   for (let attempt = 0; attempt < 2; attempt++) {
-    const feedback = attempt && failures.length ? `\n\n# Your previous package failed these checks; fix every one\n${failures.map((f) => `- ${f}`).join("\n")}` : "";
-    const r = await callWriterModel({ step: "seo", system, user: user + feedback, schema: seoOutput });
+    const feedback = attempt && failures.length ? fillPrompt(P.parts.retry, { failures: failures.map((f) => `- ${f}`).join("\n") }) : "";
+    const r = await callWriterModel({ step: "seo", prompt: P, system, user: user + feedback, schema: seoOutput });
     if (!r.ok) return r;
     out = r.data;
     failures = [];

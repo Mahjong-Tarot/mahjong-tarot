@@ -1,5 +1,7 @@
 import { selectEmailCampaigns } from "../reads";
 import { aiSite } from "@/kernel/ai/gateway";
+import { fillPrompt } from "@/kernel/ai/prompts";
+import { MARKETING_RECAP_PROMPT } from "./marketing-recap.prompt";
 import type { AiDataClass } from "@/kernel/ai/routing";
 import { companyOs } from "@/kernel/data/supabase";
 import { jsonSchemaFor, readStructuredOutput } from "@/kernel/ai/response";
@@ -108,25 +110,26 @@ export async function generateMarketingRecap(month: Date): Promise<MarketingReca
     .map(([topic, people]) => `${topic} (${people} people)`)
     .join(", ");
 
-  const material =
-    `Month total: ${metrics.broadcasts} broadcasts, ${metrics.sent} sent, ${pct(metrics.opened, metrics.delivered)} open rate, ` +
-    `${pct(metrics.clicked, metrics.delivered)} click rate, ${metrics.unsubscribed} unsubscribes.\n\n` +
-    `Per broadcast:\n${lines.join("\n")}\n\n` +
-    `Topics by total clickers across the month: ${topTopics || "none tagged"}.`;
+  // The prompt's template is the whole user message: the instruction, then
+  // the month's figures (./marketing-recap.prompt.ts says why it sits in
+  // `system`). No system prompt is sent.
+  const content = fillPrompt(MARKETING_RECAP_PROMPT.user, {
+    broadcasts: metrics.broadcasts,
+    sent: metrics.sent,
+    openRate: pct(metrics.opened, metrics.delivered),
+    clickRate: pct(metrics.clicked, metrics.delivered),
+    unsubscribed: metrics.unsubscribed,
+    perBroadcast: lines.join("\n"),
+    topics: topTopics || MARKETING_RECAP_PROMPT.parts.noTopics,
+  });
 
   try {
     const response = await anthropic.messages.create({
+      prompt: MARKETING_RECAP_PROMPT,
       model: MODEL,
       max_tokens: 2000,
       output_config: { format: { type: "json_schema", schema: SCHEMA } },
-      messages: [
-        {
-          role: "user",
-          content:
-            "Below is one month of email marketing performance for Mahjong Tarot. Write a short readout of how the month went, then propose 3-5 content types or topics to produce next month. Ground every suggestion in what actually earned opens and clicks this month (lean into topics that pulled, and name what to drop or change if something underperformed). Do not invent metrics that are not given.\n\n" +
-            material,
-        },
-      ],
+      messages: [{ role: "user", content }],
     });
     const out = readStructuredOutput("marketing-recap", MODEL, response, marketingRecapOutput);
     if (!out.ok) {

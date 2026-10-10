@@ -1,9 +1,7 @@
 import { selectBrands } from "@/entities/contacts";
 import { listBroadcasts, type BroadcastRow } from "./broadcasts";
 import { listSeries } from "./series";
-import { dayAndTime, personalItems, projectSeriesSends, type ScheduleItem, type SeriesMoments } from "./email-schedule-shared";
-import { listAgents } from "./personal/data";
-import { companyOs } from "@/kernel/data/supabase";
+import { dayAndTime, projectSeriesSends, type ScheduleItem, type SeriesMoments } from "./email-schedule-shared";
 
 // The reads behind the Schedule page: every broadcast with a moment on the
 // calendar, plus each active series' sends projected forward. A draft with no
@@ -40,20 +38,10 @@ function broadcastItem(b: BroadcastRow, at: string): ScheduleItem {
 }
 
 export async function getEmailSchedule(now: Date = new Date(), weeks = 8): Promise<EmailSchedule> {
-  const [broadcasts, series, brands, agents, messages] = await Promise.all([
-    listBroadcasts(),
-    listSeries(),
-    selectBrands("id, name"),
-    listAgents(),
-    // Personal messages with a moment on the calendar: sent ones and the
-    // approved ones waiting for their send hour.
-    companyOs.from("email_messages").select("agent_id, status, send_after, sent_at").in("status", ["approved", "sent"]).limit(5000),
-  ]);
+  const [broadcasts, series, brands] = await Promise.all([listBroadcasts(), listSeries(), selectBrands("id, name")]);
   if (broadcasts.error) return { items: [], unscheduled: [], error: broadcasts.error };
   if (series.error) return { items: [], unscheduled: [], error: series.error };
   if (brands.error) return { items: [], unscheduled: [], error: brands.error.message };
-  if (agents.error) return { items: [], unscheduled: [], error: agents.error };
-  if (messages.error) return { items: [], unscheduled: [], error: messages.error.message };
   const brandName = new Map(((brands.data ?? []) as { id: string; name: string }[]).map((b) => [b.id, b.name]));
 
   const items: ScheduleItem[] = [];
@@ -86,17 +74,6 @@ export async function getEmailSchedule(now: Date = new Date(), weeks = 8): Promi
     };
     items.push(...projectSeriesSends(moments, issueSendAts.get(s.id) ?? new Set(), now, weeks));
   }
-
-  const agentById = new Map(agents.rows.map((a) => [a.id, a]));
-  items.push(
-    ...personalItems(
-      ((messages.data ?? []) as { agent_id: string; status: "approved" | "sent"; send_after: string | null; sent_at: string | null }[]).flatMap((m) => {
-        const agent = agentById.get(m.agent_id);
-        const at = m.status === "sent" ? m.sent_at : m.send_after;
-        return agent && at ? [{ agentId: agent.id, agentName: agent.name, brandName: agent.brandName, status: m.status, at }] : [];
-      }),
-    ),
-  );
 
   items.sort((a, b) => a.at.localeCompare(b.at));
   return { items, unscheduled };

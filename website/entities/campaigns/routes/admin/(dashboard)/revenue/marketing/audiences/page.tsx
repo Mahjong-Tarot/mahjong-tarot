@@ -1,7 +1,7 @@
 import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { selectCompanies } from "@/kernel/identity/reads";
 import { selectTags } from "@/entities/contacts";
 import { formatDate } from "@/kernel/ui/format";
@@ -23,7 +23,7 @@ function describeRules(rules: AudienceRules, companyNames: Map<string, string>, 
 }
 
 export default async function AudiencesPage() {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const [{ rows, error }, companies, tags] = await Promise.all([
     listAudiences(),
     selectCompanies("id, name"),

@@ -8,6 +8,7 @@ import { companyOs, type CompanyOsUpdate } from "@/kernel/data/supabase";
 import { addDays, saigonToday } from "@/kernel/config/dates";
 import type { WriterOutput } from "@/entities/campaigns/lib/ai/brand-writer";
 import { createDraftBroadcastForEntry, noteWriteFailure, type CalendarChannel } from "./marketing-calendar";
+import { updateContentUnlessLive } from "./blog-live-edit";
 
 // Blog anchors the publishing window; social and email stagger after it.
 export const DERIVATIVES: { channel: CalendarChannel; offsetDays: number }[] = [
@@ -106,7 +107,8 @@ export async function storeCampaignOutputs(input: {
     let targetBroadcastId: string | null;
     const existing = existingByChannel.get(out.channel);
     if (existing) {
-      const { error: e } = await companyOs.from("marketing_content").update({ title, ...fields }).eq("id", existing.id);
+      // A live post on a gated campaign keeps its version (Y.91): the refusal says how to change it.
+      const { error: e } = await updateContentUnlessLive(existing.id, { title, ...fields }, existing.channel);
       if (noteWriteFailure(failed, out.channel, `asset ${existing.id}`, e)) continue;
       targetId = existing.id;
       targetBroadcastId = existing.broadcast_id;

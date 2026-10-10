@@ -2,7 +2,7 @@
 
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { getBroadcast } from "@/entities/campaigns/lib/broadcasts";
 
@@ -13,7 +13,7 @@ type ActionResult = { ok: true } | { ok: false; error: string };
 // Draft or approved -> missed: the moment passed and it never went out. Not a
 // cancellation, because nobody decided against it.
 export async function markBroadcastMissed(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
   if (campaign.status !== "draft" && campaign.status !== "approved") {

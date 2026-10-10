@@ -39,6 +39,9 @@ export const EVENTS = {
     boardSlug: z.string().min(1),
     subjectType: z.string().nullable(),
     subjectId: z.string().nullable(),
+    // The spark the card was picked up from (metadata.idea_id), when there is
+    // one: ideas listens and tells the spark's author it shipped (W.192).
+    ideaId: z.string().min(1).optional(),
     ...addressedTo,
   }),
 
@@ -54,6 +57,18 @@ export const EVENTS = {
     subjectType: z.string().nullable(),
     subjectId: z.string().nullable(),
     ...addressedTo,
+  }),
+
+  // A card's PR link was set or changed to a GitHub pull request. HTT listens:
+  // it looks the PR up in what it has already stored and, when it has it,
+  // states `pull_requests.synced` with that one PR, so the card is stamped now
+  // rather than only when the PR next changes on GitHub (F8: a merged PR rarely
+  // changes again, so a card linked after its last sync stayed "PR #N" for
+  // good). Boards is portable and HTT internal, so Boards asks through this
+  // fact and HTT answers through the other; Boards works with no listener.
+  "board.card.pr_linked": z.object({
+    taskId: z.string().min(1),
+    prUrl: z.string().url(),
   }),
 
   // A subtask was ticked or unticked by a person. Campaigns listens: a subtask
@@ -169,6 +184,146 @@ export const EVENTS = {
     paidOn: calendarDate,
     // The ledger's invoice number, so the inbox (S.3) can name the invoice.
     docNumber: z.string().min(1).nullable().optional(),
+  }),
+
+  // A reimbursement claim was submitted, or resubmitted after being sent back.
+  // Nobody needs to listen: its checkers see it in To check and Waiting on
+  // you, and the Operations chat and accounting@ are told by the entity
+  // itself. Stated so a deployment can add a listener without reimbursements
+  // naming it (design §1.8).
+  "claim.submitted": z.object({
+    claimId: z.string().min(1),
+    ownerPersonId: z.string().min(1),
+    title: z.string().min(1),
+    receipts: z.number().int().nonnegative(),
+    resubmitted: z.boolean(),
+    actorPersonId: addressedTo.actorPersonId,
+  }),
+
+  // A claim was decided at its check or its approval, or its payment was
+  // returned to approved because the transfer failed. The inbox listens: the
+  // owner reads a send back, a rejection or a return with its reason, and an
+  // approval with the run that will pay it. A check is the approver's news,
+  // not the owner's, so the inbox writes nothing for it. Money is whole dong
+  // (VND has no minor unit), the total frozen at approval.
+  "claim.decided": z.object({
+    claimId: z.string().min(1),
+    ownerPersonId: z.string().min(1),
+    title: z.string().min(1),
+    became: z.enum(["checked", "sent_back", "rejected", "approved", "returned"]),
+    reason: z.string().min(1).nullable(),
+    approvedTotalVnd: z.number().int().nonnegative().nullable(),
+    /** For an approval or a return: the run that will pay it, by the cut-off rule. */
+    runDate: calendarDate.nullable(),
+    /** The claim's history row for the move, so a repeat of the same fact lands once. */
+    eventId: z.string().min(1).nullable(),
+    actorPersonId: addressedTo.actorPersonId,
+  }),
+
+  // A claim entered a payment run. Nobody needs to listen; stated for the
+  // record and for a deployment that wants it.
+  "claim.in_run": z.object({
+    claimId: z.string().min(1),
+    ownerPersonId: z.string().min(1),
+    title: z.string().min(1),
+    runId: z.string().min(1),
+    eventId: z.string().min(1).nullable(),
+  }),
+
+  // A claim was paid: its payment was recorded with the bank's receipt. The
+  // inbox listens and tells the owner; the email with the link to the receipt
+  // is the entity's own.
+  "claim.paid": z.object({
+    claimId: z.string().min(1),
+    ownerPersonId: z.string().min(1),
+    title: z.string().min(1),
+    paymentId: z.string().min(1),
+    eventId: z.string().min(1).nullable(),
+    actorPersonId: addressedTo.actorPersonId,
+  }),
+
+  // A payment run was built (the cron on the 1st and the 15th, or the payer's
+  // button), or its last payment was recorded. Nobody needs to listen: the
+  // entity tells accounting@ and the Operations chat itself. The total is the
+  // run's, the one amount a channel may see (design §1.8).
+  "payment-run.built": z.object({
+    runId: z.string().min(1),
+    runDate: calendarDate,
+    people: z.number().int().nonnegative(),
+    claims: z.number().int().nonnegative(),
+    totalVnd: z.number().int().nonnegative(),
+  }),
+  "payment-run.paid": z.object({
+    runId: z.string().min(1),
+    runDate: calendarDate,
+    people: z.number().int().nonnegative(),
+    totalVnd: z.number().int().nonnegative(),
+    actorPersonId: addressedTo.actorPersonId,
+  }),
+
+  // HTT holds these pull requests, as GitHub had them at its last sync. A sync
+  // states the ones that changed, so a nightly run states a few and a backfill
+  // states many; HTT also states a stored PR, changed or not, when a card asks
+  // for it (board.card.pr_linked, W.163). So a listener must read this as "here
+  // is the PR as stored", never as "this PR just changed". Boards listens: a card whose PR link points at one of
+  // them shows its title and state (W.161). Boards is portable and HTT internal,
+  // so this fact is the only way that title reaches a card; HTT works with no
+  // listener, and a deployment without HTT never states it, so its cards show
+  // the PR's number alone.
+  // A teammate added a line of their own to a spark on /team/ideas (ID.2.7).
+  // The inbox listens and tells the spark's author, by name, with the words;
+  // the ideas page works with no listener. Admires and me-toos are deliberately
+  // not facts here: they show on the page, and only a build or a pick-up is
+  // worth a line in somebody's inbox (Khoa, 2026-10-07).
+  "idea.built": z.object({
+    ideaId: z.string().min(1),
+    buildId: z.string().min(1),
+    body: z.string().min(1),
+    actorName: z.string().min(1).optional(),
+    ...addressedTo,
+  }),
+
+  // A teammate picked a spark up as a Workboard card (ID.2.8). The inbox tells
+  // the spark's author who took it on and where the card is.
+  "idea.picked_up": z.object({
+    ideaId: z.string().min(1),
+    taskId: z.string().min(1),
+    boardSlug: z.string().min(1),
+    actorName: z.string().min(1).optional(),
+    ...addressedTo,
+  }),
+
+  // A card picked up from a spark reached Done (W.192). Ideas states it, having
+  // read who wrote the spark; the inbox tells that author. The addressee here
+  // is the spark's author, not the card's owner.
+  "idea.shipped": z.object({
+    ideaId: z.string().min(1),
+    taskId: z.string().min(1),
+    boardSlug: z.string().min(1),
+    actorName: z.string().min(1).optional(),
+    ...addressedTo,
+  }),
+
+  // A teammate thanked another on the Kudos board (TH.1.8). The inbox tells the
+  // person thanked; the addressee is them, the actor the person who gave it.
+  "kudos.given": z.object({
+    kudosId: z.string().min(1),
+    body: z.string().min(1),
+    actorName: z.string().min(1).optional(),
+    ...addressedTo,
+  }),
+
+  "pull_requests.synced": z.object({
+    pullRequests: z
+      .array(
+        z.object({
+          url: z.string().url(),
+          number: z.number().int().positive(),
+          title: z.string(),
+          state: z.enum(["open", "merged", "closed"]),
+        }),
+      )
+      .min(1),
   }),
 } as const;
 

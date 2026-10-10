@@ -5,15 +5,26 @@ import { Badge, type BadgeTone } from "@/kernel/ui/Badge";
 import { ConfirmButton } from "@/kernel/ui/ConfirmButton";
 import { formatDate } from "@/kernel/ui/format";
 import { useActionRunner } from "@/kernel/ui/useActionRunner";
-import { describeLetterState, isLetterStep, LETTER_READY, LETTER_STEPS, type LetterState } from "@/entities/campaigns/lib/letter/steps";
-import { continueLetter, retryLetterStep, startLetter, stopLetter } from "@/entities/campaigns/lib/letter/actions";
+import {
+  describeLetterState,
+  isLetterStep,
+  LETTER_CANCELLED,
+  LETTER_READY,
+  LETTER_REJECTED,
+  LETTER_RELEASED,
+  LETTER_SCHEDULED,
+  LETTER_STEPS,
+  type LetterState,
+} from "@/entities/campaigns/lib/letter/steps";
+import { approveLetterSend, continueLetter, rejectLetterSend, retryLetterStep, startLetter, stopLetter } from "@/entities/campaigns/lib/letter/actions";
 
 // The letter agent's corner of the broadcast page: start, the steps as badges
 // while it runs, what the last step reported, the verbs. It refreshes while a
-// run is in flight. The agent prepares the letter and a run that passes every
-// check stops at ready: it never approves or sends (Y.66). A person builds the
-// recipient list, approves and starts the send with the broadcast's own
-// buttons below.
+// run is in flight. A run that passes every check builds the list and asks for
+// its send approval, then stops at ready (decision Y.54): nothing sends until a
+// person approves the version this page shows. Approve schedules the send for
+// the window; the agent driver releases it once it is due, and the broadcast's
+// Cancel below stops it until then (Y.17).
 
 const POLL_MS = 15_000;
 
@@ -26,12 +37,41 @@ export type LetterAgentState = {
   gathered: number;
 };
 
-export function LetterAgentPanel({ campaignId, status, brandId, agent }: { campaignId: string; status: string; brandId: string | null; agent: LetterAgentState }) {
+/** The send approval a letter at ready waits on, as the page read it. */
+export type LetterApproval = {
+  pendingVersion: string | null;
+  currentVersion: string | null;
+  recipients: number | null;
+  sendWindow: string | null;
+  /** Set when the approval could not be read. */
+  unread?: string;
+};
+
+export function LetterAgentPanel({
+  campaignId,
+  status,
+  brandId,
+  agent,
+  approval = null,
+  scheduledAt = null,
+}: {
+  campaignId: string;
+  status: string;
+  brandId: string | null;
+  agent: LetterAgentState;
+  approval?: LetterApproval | null;
+  scheduledAt?: string | null;
+}) {
   const { note, pending, run, router } = useActionRunner();
   const step = agent.step;
   const running = isLetterStep(step) && !agent.error;
-  const stopped = isLetterStep(step) && Boolean(agent.error);
+  const scheduled = step === LETTER_SCHEDULED;
+  const stopped = (isLetterStep(step) || scheduled) && Boolean(agent.error);
   const ready = step === LETTER_READY;
+  // Approve approves the version on this page, so it needs one; a pending
+  // approval for another version means the letter changed after it was asked for.
+  const seen = approval?.currentVersion ?? null;
+  const current = Boolean(approval?.pendingVersion) && approval?.pendingVersion === seen;
   const canStart = Boolean(brandId) && status === "draft" && !running;
 
   useEffect(() => {
@@ -40,8 +80,8 @@ export function LetterAgentPanel({ campaignId, status, brandId, agent }: { campa
     return () => clearInterval(t);
   }, [running, router]);
 
-  const current = isLetterStep(step) ? LETTER_STEPS.findIndex((s) => s.id === step) : ready ? LETTER_STEPS.length : -1;
-  const toneFor = (i: number): BadgeTone => (i < current ? "ok" : i === current ? (stopped ? "err" : "info") : "neutral");
+  const at = isLetterStep(step) ? LETTER_STEPS.findIndex((s) => s.id === step) : step ? LETTER_STEPS.length : -1;
+  const toneFor = (i: number): BadgeTone => (i < at ? "ok" : i === at ? (stopped ? "err" : "info") : "neutral");
 
   return (
     <section className="admin-card admin-section-card">
@@ -57,25 +97,41 @@ export function LetterAgentPanel({ campaignId, status, brandId, agent }: { campa
       {step && (
         <p>
           {LETTER_STEPS.map((s, i) => (
-            <Badge key={s.id} tone={toneFor(i)} dot={i === current && running}>
+            <Badge key={s.id} tone={toneFor(i)} dot={i === at && running}>
               {i + 1}. {s.label}
             </Badge>
           ))}{" "}
-          <Badge tone={ready ? "ok" : "neutral"}>Ready</Badge>
+          <Badge tone={ready || scheduled || step === LETTER_RELEASED ? "ok" : step === LETTER_REJECTED || step === LETTER_CANCELLED ? "err" : "neutral"}>
+            {isLetterStep(step) || ready ? "Ready" : describeLetterState(step as LetterState)}
+          </Badge>
         </p>
       )}
 
       {!step && !brandId && <p className="admin-hint">Set the brand first; the agent reads its voice and posts from it.</p>}
-      {ready && status === "draft" && (
+      {ready && status === "draft" && current && (
         <p className="admin-alert admin-alert--ok">
-          Ready for review: every check passed and the test is in {agent.testSentTo ?? "your"} inbox. Nothing sends until you do it below: Build recipient list, then Approve, then Start sending.
+          Every check passed and the test is in {agent.testSentTo ?? "your"} inbox. The letter waits on a send approval for version <code>{approval?.pendingVersion}</code>
+          {approval?.recipients !== null && approval?.recipients !== undefined ? <>: {approval.recipients.toLocaleString()} recipients</> : null}
+          {approval?.sendWindow ? <>, {approval.sendWindow}</> : null}. Nothing sends until you approve it here.
         </p>
       )}
-      {ready && status !== "draft" && (
-        <p className="admin-alert admin-alert--ok">
-          Approved. The Send section below shows where it stands. Cancel there to stop it.
+      {ready && status === "draft" && !current && (
+        <p className="admin-alert admin-alert--err">
+          {approval?.unread
+            ? `The send approval could not be read: ${approval.unread}`
+            : approval?.pendingVersion
+              ? "The letter changed after approval was asked for. Approve asks again for the letter as it is now; read it, then approve once more."
+              : "No send approval is open for this letter. Approve asks for one for the version on this page; then approve once more to schedule it."}
         </p>
       )}
+      {scheduled && !agent.error && (
+        <p className="admin-alert admin-alert--ok">
+          Approved and scheduled: it goes to the send {scheduledAt ? `from ${formatDate(scheduledAt)}` : "at its window"}, each person at the window in their own zone. Cancel the broadcast below to stop it before then.
+        </p>
+      )}
+      {step === LETTER_RELEASED && <p className="admin-alert admin-alert--ok">Released to the send. The Send section below shows where it stands.</p>}
+      {step === LETTER_REJECTED && <p className="admin-alert admin-alert--err">Rejected: nothing was sent and the broadcast is cancelled.</p>}
+      {step === LETTER_CANCELLED && <p className="admin-alert admin-alert--err">Cancelled before it sent: nothing went to the list.</p>}
       {agent.error && (
         <p className="admin-alert admin-alert--err">
           <strong>Stopped at {isLetterStep(step) ? describeLetterState(step) : "the run"}.</strong> {agent.error}
@@ -109,7 +165,35 @@ export function LetterAgentPanel({ campaignId, status, brandId, agent }: { campa
             Continue
           </button>
         )}
-        {(running || stopped || ready) && (
+        {ready && status === "draft" && (
+          <button
+            type="button"
+            className="admin-btn admin-btn--primary"
+            disabled={pending || !seen}
+            onClick={() =>
+              run(async () => {
+                const res = await approveLetterSend(campaignId, seen ?? "");
+                // A refused click may have asked again for a new version: show it.
+                if (!res.ok) router.refresh();
+                return res;
+              }, "Approved. The send is scheduled for its window.")
+            }
+          >
+            Approve and schedule
+          </button>
+        )}
+        {ready && status === "draft" && current && (
+          <ConfirmButton
+            label="Reject"
+            title="Reject this letter?"
+            body="Nothing is sent, the broadcast is cancelled and the run closes. The next letter opens on its day."
+            confirmLabel="Reject the letter"
+            disabled={pending}
+            onConfirm={() => rejectLetterSend(campaignId)}
+            onDone={() => router.refresh()}
+          />
+        )}
+        {(running || (stopped && !scheduled) || ready) && (
           <ConfirmButton
             label="Stop"
             title="Stop the letter agent?"

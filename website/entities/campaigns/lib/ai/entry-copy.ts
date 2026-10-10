@@ -2,7 +2,10 @@ import { aiSite } from "@/kernel/ai/gateway";
 import type { AiDataClass } from "@/kernel/ai/routing";
 import { companyOs } from "@/kernel/data/supabase";
 import { getBrandProfile } from "@/entities/campaigns/lib/brand-profiles";
+import { liveEditRefusal, updateContentUnlessLive } from "@/entities/campaigns/lib/blog-live-edit";
 import { systemPrompt } from "@/entities/campaigns/lib/ai/brand-writer";
+import { ENTRY_COPY_PROMPT } from "@/entities/campaigns/lib/ai/brand-writer.prompt";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { blogTypeLabel, socialStyleLabel } from "@/entities/campaigns/lib/style-catalogues";
 import { jsonSchemaFor, readStructuredOutput } from "@/kernel/ai/response";
 import { z } from "zod/v4";
@@ -56,12 +59,13 @@ function buildUserMessage(entry: EntryRow): string {
         : null;
   const source = entry.posted_url || entry.asset_url || null;
 
-  const parts: string[] = [`Write the ${channel} for a piece titled "${entry.title}".`];
-  if (style) parts.push(`Preferred style: ${style}.`);
-  if (entry.copy_md) parts.push(`Current draft to improve on (keep what works, tighten the rest):\n\n${entry.copy_md}`);
-  if (entry.notes) parts.push(`Notes / direction: ${entry.notes}`);
-  if (source) parts.push(`Reference URL: ${source}`);
-  parts.push(`Return only the ${channel} copy in Markdown, in this brand's voice and channel rules. No preamble. Do not open with a heading that repeats the title; the page renders the title above the body.`);
+  const P = ENTRY_COPY_PROMPT.parts;
+  const parts: string[] = [fillPrompt(P.write, { channel, title: entry.title })];
+  if (style) parts.push(fillPrompt(P.style, { style }));
+  if (entry.copy_md) parts.push(fillPrompt(P.draft, { draft: entry.copy_md }));
+  if (entry.notes) parts.push(fillPrompt(P.notes, { notes: entry.notes }));
+  if (source) parts.push(fillPrompt(P.reference, { url: source }));
+  parts.push(fillPrompt(P.close, { channel }));
   return parts.join("\n\n");
 }
 
@@ -108,13 +112,20 @@ export async function generateEntryCopy(
     }
     const profile = await getBrandProfile(entry.brand_id);
     if (!profile) return { ok: false, error: "Brand not found." };
+    // Asked before the model call, so a live post on a gated campaign (Y.91)
+    // costs no draft; the write below asks again with the text it would save.
+    const live = await liveEditRefusal(entryId);
+    if (live) return { ok: false, error: live };
 
     const userMsg = opts?.prompt?.trim() || buildUserMessage(entry);
 
+    // An operator-edited message still goes out under this prompt's version:
+    // the version names the system text and the seed the edit started from.
     const response = await llm.messages.create({
+      prompt: ENTRY_COPY_PROMPT,
       model: MODEL,
       max_tokens: 4000,
-      system: systemPrompt(profile),
+      system: systemPrompt(profile, ENTRY_COPY_PROMPT),
       output_config: { effort: "medium", format: { type: "json_schema", schema: COPY_SCHEMA } },
       messages: [{ role: "user", content: userMsg }],
     });
@@ -126,7 +137,7 @@ export async function generateEntryCopy(
     const bodyMd = stripLeadingTitleHeading((parsed.body_md ?? "").trim(), entry.title);
     if (!bodyMd) return { ok: false, error: "The writer produced nothing usable." };
 
-    const { error } = await companyOs.from("marketing_content").update({ copy_md: bodyMd }).eq("id", entryId);
+    const { error } = await updateContentUnlessLive(entryId, { copy_md: bodyMd });
     if (error) return { ok: false, error: error.message };
     return { ok: true, bodyMd };
   } catch (err) {

@@ -1,7 +1,7 @@
 import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { listCampaigns } from "@/entities/campaigns/lib/marketing-campaigns";
 import { listCampaignLedger } from "@/entities/campaigns/lib/campaign-ledger";
 import { listBrands, listPillars, listEntries } from "@/entities/campaigns/lib/marketing-calendar";
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CampaignsPage() {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const [{ rows, error }, brands, pillars, { rows: allEntries }, { rows: ledger, error: ledgerError }] = await Promise.all([
     listCampaigns(),
     listBrands(),

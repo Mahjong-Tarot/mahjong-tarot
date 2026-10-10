@@ -1,7 +1,18 @@
 import { getBrandProfile } from "@/entities/campaigns/lib/brand-profiles";
 import type { StepResult } from "../run-loop";
 import { loadLetter, setAgentState } from "./data";
-import { describeLetterState, isLetterStep, LETTER_STEPS, nextLetterState, type LetterState, type LetterStepId } from "./steps";
+import { runAsk } from "./send-approval";
+import { runSend } from "./send-step";
+import {
+  describeLetterState,
+  isLetterStep,
+  LETTER_SCHEDULED,
+  LETTER_STEPS,
+  nextLetterState,
+  type LetterDrivenStep,
+  type LetterState,
+  type LetterStepId,
+} from "./steps";
 import { runAssemble } from "./step-assemble";
 import { runGather } from "./step-gather";
 import { runPick } from "./step-pick";
@@ -13,7 +24,9 @@ import type { StepRunner } from "./types";
 // The state machine. `advance` reads the broadcast's agent_step, runs that one
 // step, and writes either the next state or the error back. One step per
 // call, so every step fits the platform's request limit and has its own
-// routine_runs row. The last state is always ready: a person approves.
+// routine_runs row. The writing steps end at ready, where the run waits on its
+// send approval; once approved it is scheduled, and the one step after that is
+// the send, which the driver runs when it is due (./send-approval).
 
 const RUNNERS: Record<LetterStepId, StepRunner> = {
   gather: runGather,
@@ -22,15 +35,28 @@ const RUNNERS: Record<LetterStepId, StepRunner> = {
   rotate: runRotate,
   assemble: runAssemble,
   validate: runValidate,
+  ask: runAsk,
 };
 
 // The step-result shape every agent shares (lib/run-loop.ts), with this agent's ids.
-export type AdvanceResult = StepResult<LetterStepId, LetterState>;
+export type AdvanceResult = StepResult<LetterDrivenStep, LetterState>;
 
 export async function advanceLetter(campaignId: string): Promise<AdvanceResult> {
   const loaded = await loadLetter(campaignId);
   if (!loaded.ok) return { skipped: loaded.error, campaignId };
   const letter = loaded.data;
+  if (letter.agentStep === LETTER_SCHEDULED && !letter.agentError) {
+    const step = LETTER_SCHEDULED;
+    const sent = await runSend(letter);
+    if (!sent.ok) {
+      const saved = await setAgentState(campaignId, { step, error: sent.error });
+      if (!saved.ok) console.error("[letter] could not record the send error:", saved.error);
+      return { ok: false, campaignId, step, error: sent.error };
+    }
+    const saved = await setAgentState(campaignId, { step: sent.next, error: null });
+    if (!saved.ok) return { ok: false, campaignId, step, error: `The send step passed but the state did not save: ${saved.error}` };
+    return { ok: true, campaignId, step, next: sent.next, summary: sent.summary };
+  }
   if (!isLetterStep(letter.agentStep)) {
     return { skipped: letter.agentStep ? describeLetterState(letter.agentStep as LetterState) : "No letter agent run on this broadcast.", campaignId };
   }

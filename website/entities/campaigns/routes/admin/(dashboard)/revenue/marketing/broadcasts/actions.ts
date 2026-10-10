@@ -2,7 +2,7 @@
 
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs, type CompanyOsUpdate } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { z } from "zod";
 import { zodIssuesToMessage } from "@/kernel/config/schemas";
@@ -18,6 +18,7 @@ import { INTRO_MARKER } from "@/entities/campaigns/lib/series-template";
 import { resolveBroadcastBlocks } from "@/entities/campaigns/lib/broadcast-blocks";
 import { stampSendWindow } from "@/entities/campaigns/lib/send-window-stamp";
 import { type GreetedPerson, GREETING_COLUMNS, greetingName } from "@/kernel/config/people-name";
+import { letterAwaitsApproval, withdrawLetterSend } from "@/entities/campaigns/lib/letter/send-step";
 
 type ActionResult = { ok: true } | { ok: false; error: string };
 type CreateResult = { ok: true; id: string } | { ok: false; error: string };
@@ -29,7 +30,7 @@ function refresh(id?: string) {
 }
 
 export async function createBroadcast(input: { name: string; subject: string }): Promise<CreateResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const name = input.name.trim();
   const subject = input.subject.trim();
   if (!name) return { ok: false, error: "Give the broadcast a name." };
@@ -71,7 +72,7 @@ export async function updateBroadcast(
     blocks?: unknown;
   },
 ): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
 
@@ -111,8 +112,12 @@ export async function updateBroadcast(
   if (update.name === "") return { ok: false, error: "Name cannot be empty." };
   if (update.subject === "") return { ok: false, error: "Subject cannot be empty." };
 
-  const { error } = await companyOs.from("email_campaigns").update(update).eq("id", id);
+  // Conditional on still being a draft: the draft check above was read before
+  // the audience lookup, and an approval may freeze the copy in between (Y.17).
+  // The copy, the segment and the send window all go through here.
+  const { data: written, error } = await companyOs.from("email_campaigns").update(update).eq("id", id).eq("status", "draft").select("id");
   if (error) return { ok: false, error: error.message };
+  if (!written || written.length === 0) return { ok: false, error: "This broadcast was approved since this page loaded, so its copy is frozen. Reload to see it." };
 
   await recordAudit({
     table: "email_campaigns",
@@ -128,7 +133,7 @@ export async function updateBroadcast(
 // Materialises the audience into email_campaign_recipients (lib/recipients.ts).
 // Re-runnable while the campaign is a draft: it only ever adds newcomers.
 export async function buildRecipients(id: string): Promise<{ ok: true; added: number } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
   if (campaign.status !== "draft") {
@@ -151,7 +156,7 @@ export async function buildRecipients(id: string): Promise<{ ok: true; added: nu
 }
 
 export async function clearRecipients(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
   if (campaign.status !== "draft") {
@@ -179,7 +184,7 @@ const testAddressSchema = z.string().trim().email("Enter a full email address fo
 // contact matching the address, else the admin's own contact, so a test to a
 // personal inbox still renders a working footer.
 export async function sendTest(id: string, to?: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
 
@@ -225,11 +230,13 @@ export async function sendTest(id: string, to?: string): Promise<ActionResult> {
   return { ok: true };
 }
 
-// The approval gate. Nothing reaches a recipient without passing through here.
+// The approval gate. Nothing reaches a recipient without it (or a letter's own, Y.17).
 export async function approveBroadcast(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
+  const awaiting = await letterAwaitsApproval(id);
+  if (awaiting) return { ok: false, error: awaiting };
   if (campaign.status !== "draft") {
     return { ok: false, error: `Broadcast is already ${campaign.status}.` };
   }
@@ -288,7 +295,7 @@ export async function approveBroadcast(id: string): Promise<ActionResult> {
 }
 
 export async function cancelBroadcast(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin, personId } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
   if (campaign.status === "sent") {
@@ -299,6 +306,8 @@ export async function cancelBroadcast(id: string): Promise<ActionResult> {
   const { error } = await companyOs.from("email_campaigns").update({ status: "cancelled", updated_at: now })
     .eq("id", id);
   if (error) return { ok: false, error: error.message };
+  const withdrawn = await withdrawLetterSend(id, { personId, email: admin.email }, "the broadcast was cancelled");
+  if (withdrawn) return { ok: false, error: withdrawn };
 
   await recordAudit({
     table: "email_campaigns",
@@ -311,53 +320,14 @@ export async function cancelBroadcast(id: string): Promise<ActionResult> {
   return { ok: true };
 }
 
-// Approved -> sending. Separate from approve so the send is a second, deliberate
-// press: approving says "this copy is right", starting says "go now".
-export async function startSending(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
-  const campaign = await getBroadcast(id);
-  if (!campaign) return { ok: false, error: "Broadcast not found." };
-  if (campaign.status !== "approved") {
-    return { ok: false, error: "Only an approved broadcast can start sending." };
-  }
-
-  const now = new Date().toISOString();
-  const { error } = await companyOs.from("email_campaigns").update({ status: "sending", updated_at: now })
-    .eq("id", id)
-    .eq("status", "approved");
-  if (error) return { ok: false, error: error.message };
-
-  await recordAudit({
-    table: "email_campaigns",
-    recordId: id,
-    operation: "update",
-    actor: admin.email,
-    context: { sending: true },
-  });
-  refresh(id);
-  return { ok: true };
-}
-
-// Sending -> approved. The send cron only works on a sending broadcast, so
-// this stops the next batch; Start sending resumes it where it left off.
-export async function pauseBroadcast(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
-  const campaign = await getBroadcast(id);
-  if (!campaign) return { ok: false, error: "Broadcast not found." };
-  if (campaign.status !== "sending") return { ok: false, error: "Only a broadcast that is sending can be paused." };
-  const now = new Date().toISOString();
-  const { error } = await companyOs.from("email_campaigns").update({ status: "approved", updated_at: now }).eq("id", id).eq("status", "sending");
-  if (error) return { ok: false, error: error.message };
-  await recordAudit({ table: "email_campaigns", recordId: id, operation: "update", actor: admin.email, context: { paused: true } });
-  refresh(id);
-  return { ok: true };
-}
+// Start sending and Pause live in ./send-actions (split at the file-size cap
+// when they learned the letter's approval, Y.17).
 
 // The soft delete: the row keeps its recipients and events and leaves every
 // list and the calendar. A broadcast mid-send is paused first, never deleted
 // under a running batch.
 export async function deleteBroadcast(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin, personId } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
   if (campaign.status === "sending") return { ok: false, error: "Pause the broadcast before deleting it." };
@@ -371,6 +341,8 @@ export async function deleteBroadcast(id: string): Promise<ActionResult> {
     .eq("id", id);
   if (error) return { ok: false, error: error.message };
   await recordAudit({ table: "email_campaigns", recordId: id, operation: "update", actor: admin.email, context: { deleted: true, from: campaign.status } });
+  const withdrawn = campaign.status === "sent" ? null : await withdrawLetterSend(id, { personId, email: admin.email }, "the broadcast was deleted");
+  if (withdrawn) return { ok: false, error: withdrawn };
   refresh();
   return { ok: true };
 }
@@ -379,7 +351,7 @@ export async function deleteBroadcast(id: string): Promise<ActionResult> {
 // reader received, so they stay editable in every status: a sent broadcast
 // filed under the wrong name or brand is a wrong report, not a wrong email.
 export async function renameBroadcast(id: string, patch: { name: string; brandId: string | null }): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(id);
   if (!campaign) return { ok: false, error: "Broadcast not found." };
   const name = patch.name.trim();

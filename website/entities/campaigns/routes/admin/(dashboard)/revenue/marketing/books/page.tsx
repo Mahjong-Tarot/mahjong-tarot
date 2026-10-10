@@ -2,7 +2,7 @@ import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
 import { Badge } from "@/kernel/ui/Badge";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { listBooks } from "@/entities/campaigns/lib/books";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 export default async function BooksPage() {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const books = await listBooks();
 
   return (

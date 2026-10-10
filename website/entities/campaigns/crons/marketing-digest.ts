@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { withRoutineRun } from "@/kernel/audit/routine-runs";
+import { routineResult, withRoutineRun } from "@/kernel/audit/routine-runs";
 import { companyOs } from "@/kernel/data/supabase";
 import { sendTransactionalEmail } from "@/kernel/messaging/email";
-import { notifyMarketing } from "@/kernel/messaging/lark";
+import { failureOf, notify } from "@/kernel/messaging/router";
 import { escapeHtml } from "@/kernel/config/html";
 import { one } from "@/kernel/config/embedded";
 import { OPS_EMAIL } from "@/kernel/config/contacts";
@@ -15,14 +15,30 @@ import { saigonToday } from "@/kernel/config/dates";
  * Read as text by the generator, so nothing imports it.
  * @generator
  */
-export const schedule = "0 2 * * *";
+export const schedule = "0 2 * * 1-5";
+
+/**
+ * What Settings -> Agents says about this routine (Y.14). Read as text by
+ * scripts/gen-deployment.mjs into kernel/audit/automations.json, so it keeps
+ * one literal shape: double-quoted strings and arrays of them, nothing computed.
+ * @generator
+ */
+export const automation = {
+  name: "Marketing digest",
+  description: "Weekdays at 09:00 Vietnam time. Reminds the founder and the Revenue chat of manual-post content (blog, LinkedIn, Facebook) due today or overdue and not yet posted. Monday's reminder covers anything that fell due over the weekend.",
+  content: ["Marketing calendar"],
+  apps: ["Supabase", "Lark"],
+};
 
 // Route-handler Supabase reads get frozen by Next's data cache despite
 // force-dynamic; opt the whole handler out so each run sees fresh rows.
-// Vercel cron (see vercel.json): daily. Reminds the founder of manual-post
-// content (blog, LinkedIn, Facebook) whose publish date fell in the last seven
-// days and that is not yet posted. Email is excluded: it sends itself via the
-// campaign engine. Sends nothing when nothing is due.
+// Vercel cron (see vercel.json): weekdays, 02:00 UTC (09:00 Asia/Ho_Chi_Minh).
+// Reminds the founder of manual-post content (blog, LinkedIn, Facebook) whose
+// publish date fell in the last seven days and that is not yet posted. Email is
+// excluded: it sends itself via the campaign engine. Sends nothing when nothing
+// is due. It does not run at the weekend (Z.7.1): the reminder already lists
+// everything due or overdue, so Monday's run covers what a Saturday or Sunday
+// run would have said, and held weekend reminders cannot stack up on Monday.
 const FOUNDER_EMAIL = OPS_EMAIL;
 const CALENDAR_URL = `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/team/revenue/marketing/calendar`;
 const MANUAL_CHANNELS = ["blog", "linkedin", "facebook", "twitter"];
@@ -65,7 +81,7 @@ async function handler(req: Request) {
 
   const rows = (data ?? []) as unknown as DueRow[];
   if (rows.length === 0) {
-    return NextResponse.json({ today, due: 0, sent: false });
+    return routineResult({ status: "skipped", reason: "nothing is due to be posted", today, due: 0, sent: false });
   }
 
   const line = (r: DueRow) => {
@@ -95,9 +111,30 @@ async function handler(req: Request) {
     rows.length > 10 ? `…and ${rows.length - 10} more` : "",
     CALENDAR_URL,
   ].filter(Boolean);
-  await notifyMarketing(larkLines.join("\n"));
+  // Through the notification router (Z.7.1): the cron runs at 09:00 Saigon
+  // time on weekdays, inside working hours, so the reminder goes at once; a
+  // Run-now outside working hours is held to the next working morning. One
+  // chat reminder per Saigon day: a second run on the same day finds the key
+  // claimed (or already queued) and posts nothing more.
+  const posted = await notify({
+    kind: "revenue.marketing-digest",
+    to: { chat: "revenue" },
+    message: larkLines.join("\n"),
+    dedupeKey: `campaigns:marketing-digest:${today}`,
+  });
 
-  return NextResponse.json({ today, due: rows.length, emailSent: emailOk });
+  // A reminder that reached nobody names the channel that did not take it (Y.20).
+  return routineResult({
+    status: "ok",
+    today,
+    due: rows.length,
+    emailSent: emailOk,
+    notice: posted.status,
+    failures: [
+      ...(emailOk ? [] : [{ subject: "founder email", step: "email", error: "the reminder email was not sent" }]),
+      ...failureOf(posted, "Marketing chat", "notify"),
+    ],
+  });
 }
 
 // Every scheduled run is recorded in company_os.routine_runs (Settings -> Agents).

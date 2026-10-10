@@ -1,20 +1,18 @@
 import { checkSendGate } from "./broadcasts";
 import { capLiftsAt, dailySendCap, type SendKind } from "./send-cap";
 
-// Everything both send paths must ask before a marketing email goes out, in
-// one place and in one order (A.15).
+// Everything a send path must ask before a marketing email goes out, in one
+// place and in one order (A.15).
 //
-// The two paths had this sequence written twice, and the copies had drifted:
-// the personal one asked the daily cap and the broadcast one did not, so the
-// cap `email-message-send` advertised "across both kinds" was enforced on one
-// side only. A rule with two homes is changed in one of them — the same cost
+// Two paths, broadcast and personal, had this sequence written twice, and the
+// copies had drifted: the personal one asked the daily cap and the broadcast
+// one did not. A rule with two homes is changed in one of them — the same cost
 // lib/run-loop.ts records for the writer and letter agents (A.2).
 //
-// What stays with each kind is its bookkeeping, because that is what genuinely
-// differs: the two queue tables have different status vocabularies
-// (`pending`/`approved`) and each path keeps its own counters. What moves here
-// is the decision, so a third kind of send cannot be written that forgets a
-// step.
+// The personal email agent was removed (Y.18, decision Y.59); the broadcast
+// send is the only caller. The decision stays here, in one order, so a new kind
+// of send cannot be written that forgets a step. The bookkeeping stays with the
+// caller, because that is what genuinely differs between kinds.
 export type SendDecision =
   // Go ahead.
   | { action: "send" }

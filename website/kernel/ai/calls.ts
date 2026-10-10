@@ -1,8 +1,9 @@
 import { createHash } from "node:crypto";
-import type { AiUsage } from "@/kernel/audit/routine-runs";
+import { currentRunId, type AiUsage } from "@/kernel/audit/routine-runs";
 import { companyOs } from "@/kernel/data/supabase";
 import { log } from "@/kernel/config/log";
 import type { AiDataClass } from "@/kernel/ai/routing";
+import { costOf } from "@/kernel/ai/prices";
 
 /**
  * The one writer of company_os.ai_calls: one row per model call, metadata only.
@@ -34,11 +35,16 @@ export type AiCallRecord = {
   /** Cost as the provider reported it (OpenRouter's usage.cost); null otherwise. */
   costUsd: number | null;
   latencyMs: number;
+  /**
+   * The prompt the call sent, as `name@version` (kernel/ai/prompts.ts): the
+   * version is a hash of the prompt's text, so a row says exactly which text
+   * produced it (Z.6.1). Rows written before Z.6.1 hold a bare number.
+   */
   promptVersion: string;
   inputHash: string;
   ok: boolean;
   errorKind: AiCallErrorKind | null;
-  /** The routine run the call belongs to; null until the run handle lands. */
+  /** The routine run the call belongs to; when omitted, the run on the current async chain. */
   runId?: string | null;
 };
 
@@ -59,11 +65,15 @@ export async function recordAiCall(call: AiCallRecord): Promise<void> {
       output_tokens: call.usage?.output_tokens ?? null,
       cache_read_tokens: call.usage ? (call.usage.cache_read_input_tokens ?? null) : null,
       cache_write_tokens: call.usage ? (call.usage.cache_creation_input_tokens ?? null) : null,
-      cost_usd: call.costUsd,
+      // The provider's own figure where it reports one (OpenRouter), else the
+      // versioned price table (Y.76).
+      cost_usd: call.costUsd ?? costOf(call.model, call.usage),
       latency_ms: Math.max(0, Math.round(call.latencyMs)),
       prompt_version: call.promptVersion,
       input_hash: call.inputHash,
-      run_id: call.runId ?? null,
+      // The routine run this call happened inside, from the run's context
+      // (Y.72.1); null for a call outside any run (a chat turn, a button).
+      run_id: call.runId ?? currentRunId(),
       ok: call.ok,
       error_kind: call.errorKind,
     });

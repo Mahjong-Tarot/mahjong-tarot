@@ -25,7 +25,7 @@ export * from "./lib/marketing-calendar";
 export * from "./lib/marketing-campaigns";
 export * from "./lib/marketing-engine";
 export * from "./lib/marketing-images";
-export * from "./lib/publish-editor/system-prompt";
+export { PUBLISH_EDITOR_PROMPT } from "./lib/publish-editor/publish-editor.prompt";
 export * from "./lib/publish-editor/tools";
 export * from "./lib/seo";
 export * from "./lib/style-catalogues";
@@ -41,3 +41,5 @@ export * from "./lib/marketing-email";
 export * from "./lib/marketing-email-utm";
 export * from "./lib/marketing-email-blocks";
 
+// The automation watchdog's check on the weekly letter (Z.15.6).
+export { letterReachedReady } from "./lib/letter/letter-invariant";

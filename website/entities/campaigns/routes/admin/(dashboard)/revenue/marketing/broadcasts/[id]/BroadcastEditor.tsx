@@ -13,11 +13,10 @@ import {
   buildRecipients,
   cancelBroadcast,
   deleteBroadcast,
-  pauseBroadcast,
   renameBroadcast,
-  startSending,
   updateBroadcast,
 } from "../actions";
+import { pauseBroadcast, startSending } from "../send-actions";
 import { markBroadcastMissed } from "../missed-actions";
 import { BroadcastBlocksEditor, type PostOption } from "./BroadcastBlocksEditor";
 import { SendWindowField } from "./SendWindowField";
@@ -42,6 +41,7 @@ export function BroadcastEditor({
   profiles,
   posts,
   audiences,
+  awaitsLetterApproval = false,
 }: {
   campaign: BroadcastRow;
   pendingCount: number;
@@ -49,6 +49,9 @@ export function BroadcastEditor({
   profiles: BrandProfile[];
   posts: PostOption[];
   audiences: AudienceRow[];
+  // A broadcast the letter agent ran on is approved in the Letter agent panel,
+  // against the version it asked about (Y.17), never with this Approve.
+  awaitsLetterApproval?: boolean;
 }) {
   const router = useRouter();
   const base = useSurfaceBase();
@@ -261,9 +264,11 @@ export function BroadcastEditor({
         <div className="admin-card-title">Send</div>
         <p className="admin-page-sub u-mt-1">
           {campaign.status === "draft" &&
-            (campaign.seriesId
-              ? `${pendingCount} recipient(s) queued. This is a series issue: approving schedules it to send at the time below.`
-              : `${pendingCount} recipient(s) queued. Approving does not send: you start the send separately.`)}
+            (awaitsLetterApproval
+              ? `${pendingCount} recipient(s) queued. The letter agent wrote this letter, so it is approved through its send approval in the Letter agent panel above, and it sends at its window.`
+              : campaign.seriesId
+                ? `${pendingCount} recipient(s) queued. This is a series issue: approving schedules it to send at the time below.`
+                : `${pendingCount} recipient(s) queued. Approving does not send: you start the send separately.`)}
           {campaign.status === "approved" &&
             `Approved by ${campaign.approvedBy ?? "an admin"}. Nothing has been sent yet.`}
           {campaign.status === "sending" &&
@@ -313,7 +318,7 @@ export function BroadcastEditor({
         </div>
 
         <div className="admin-form-actions u-mt-3">
-          {campaign.status === "draft" && (
+          {campaign.status === "draft" && !awaitsLetterApproval && (
             <button
               type="button"
               className="admin-btn admin-btn--primary"

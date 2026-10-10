@@ -16,11 +16,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-export default function UnsubscribePage({
-  searchParams,
-}: {
-  searchParams: { token?: string | string[] }
-}) {
+export default async function UnsubscribePage(
+  props: {
+    searchParams: Promise<{ token?: string | string[] }>
+  }
+) {
+  const searchParams = await props.searchParams;
   const raw = searchParams.token
   const token = Array.isArray(raw) ? raw[0] : raw
   const personId = token ? verifyUnsubscribeToken(token) : null

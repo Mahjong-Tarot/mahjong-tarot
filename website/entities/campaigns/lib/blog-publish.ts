@@ -6,6 +6,8 @@ import { parseSeoMd, isValidSlug, type ParsedSeo } from "@/entities/campaigns/li
 import { BLOG_CACHE_TAG, postTag } from "./blog";
 import { siteForBrandSlug, blogPublishBlocker } from "@/entities/campaigns/lib/brand-sites";
 import { saigonToday } from "@/kernel/config/dates";
+import { approvedToPublish, postVersions } from "./blog-version";
+import { autoPublishes, campaignBrand } from "./blog-live-edit";
 
 // The deterministic publish core, runtime-agnostic so both the admin server
 // action and the Publish Editor agent's publish tool call the same logic. It
@@ -31,11 +33,12 @@ type BlogRow = {
   publish_date: string | null;
   posted_url: string | null;
   brand_id: string | null;
+  campaign_id: string | null;
   brands: { name: string; slug: string } | { name: string; slug: string }[] | null;
 };
 
 const SELECT =
-  "id, channel, title, status, copy_md, seo_md, image_url, publish_date, posted_url, brand_id, brands(name, slug)";
+  "id, channel, title, status, copy_md, seo_md, image_url, publish_date, posted_url, brand_id, campaign_id, brands(name, slug)";
 
 function one<T>(v: T | T[] | null): T | null {
   return Array.isArray(v) ? v[0] ?? null : v;
@@ -114,9 +117,16 @@ async function isSlugTaken(slug: string, selfId: string): Promise<boolean> {
 
 // Revalidate every surface that lists or renders a blog post. Called on publish
 // AND on unpublish so the site reflects the change within one request.
+//
+// Next 16 gave revalidateTag a second argument and made a bare cacheLife
+// profile ("max") serve the stale page while it refreshes in the background.
+// `{ expire: 0 }` keeps what 14 and 15 did: the entry expires at once and the
+// next request renders fresh (B.18.3). updateTag would too, but only inside a
+// server action, and crons and the publish editor's route call this as well.
+const EXPIRE_NOW = { expire: 0 };
 export function revalidateBlog(slug: string): void {
-  revalidateTag(BLOG_CACHE_TAG);
-  revalidateTag(postTag(slug));
+  revalidateTag(BLOG_CACHE_TAG, EXPIRE_NOW);
+  revalidateTag(postTag(slug), EXPIRE_NOW);
   revalidatePath(`/blog/posts/${slug}`);
   revalidatePath("/blog");
   revalidatePath("/sitemap.xml");
@@ -136,11 +146,55 @@ async function verifyLive(url: string): Promise<boolean> {
   return false;
 }
 
+/**
+ * Why a calendar entry may not change channel, or null. A live row keeps its
+ * channel (moving a live blog to a social channel would unlist it by a side
+ * door), and so does a row that belongs to a campaign: a campaign's blog moved
+ * to LinkedIn, marked posted and moved back would be a live blog that no
+ * publish and no approval ever saw (Y.16). A failed read refuses.
+ */
+export async function channelChangeRefusal(id: string, channel: string): Promise<string | null> {
+  const { data, error } = await companyOs.from("marketing_content").select("channel, status, campaign_id").eq("id", id).maybeSingle();
+  if (error) return `The entry could not be read: ${error.message}`;
+  if (!data || data.channel === channel) return null;
+  if (data.status === "published") return "A published entry keeps its channel.";
+  if (data.campaign_id) return "An entry that belongs to a campaign keeps its channel; add a new entry for another channel.";
+  return null;
+}
+
 export async function publishBlogAsset(id: string, actor: string): Promise<PublishResult> {
   const { data, error } = await companyOs.from("marketing_content").select(SELECT).eq("id", id).maybeSingle();
   if (error) return { ok: false, errors: [error.message] };
   if (!data) return { ok: false, errors: ["Asset not found."] };
   const row = data as BlogRow;
+
+  // The Publish approval gate (Y.16), here because every publish comes through
+  // here: the hub, the calendar, the Publish Editor, the revenue board and the
+  // scheduled-publish cron. A writer campaign with an approval on record goes
+  // live only in the version approved; the version is read off the row as
+  // stored, before the date is defaulted below. A post already live also counts
+  // as its version without the date, which its first publish gave it, so a
+  // Re-publish of an unedited post passes. The gate binds the brands that
+  // publish on approval: an auto-publish brand's switch is its approval
+  // (decision Y.53), so its posts skip it whatever their history. A brand whose
+  // profile cannot be read is gated, the stricter answer. The brand that
+  // decides is the campaign's, which the writer and the hub use; a post whose
+  // own brand was moved off its campaign's (onto an auto-publish brand, say) is
+  // refused, so a client campaign's post never reaches another brand's site.
+  let gatedBrand = row.brand_id;
+  if (row.campaign_id) {
+    const owner = await campaignBrand(row.campaign_id, "nothing was published");
+    if (!owner.ok) return { ok: false, errors: [owner.error] };
+    if (owner.brandId && row.brand_id !== owner.brandId) {
+      return { ok: false, errors: ["This post's brand is not its campaign's brand, so it is not published. Set the post back to the campaign's brand."] };
+    }
+    gatedBrand = owner.brandId ?? row.brand_id;
+  }
+  if (row.campaign_id && !(await autoPublishes(gatedBrand))) {
+    const versions = postVersions({ title: row.title, copyMd: row.copy_md, seoMd: row.seo_md, imageUrl: row.image_url, publishDate: row.publish_date, status: row.status });
+    const gate = await approvedToPublish(row.campaign_id, versions);
+    if (!gate.ok) return { ok: false, errors: [gate.reason] };
+  }
 
   // Resolve the destination site from the brand. A brand with no live blog
   // (AIO until its site ships one, or any unconfigured brand) is refused here

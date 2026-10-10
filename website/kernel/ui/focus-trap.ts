@@ -62,3 +62,18 @@ export function inOtherDialog(active: Element | null, own: Element): boolean {
   const dialog = active?.closest('[role="dialog"], [role="alertdialog"]');
   return !!dialog && dialog !== own;
 }
+
+/**
+ * Whether an Escape was already handled by something inside the drawer — a
+ * picker closing itself — so the drawer must not close as well (W.153).
+ *
+ * In the App Router React listens on `document`, the same node the drawer's
+ * own keydown listener is on, so a picker's `stopPropagation()` cannot keep
+ * the key from the drawer: two listeners on one node both run. The picker's
+ * `preventDefault()` survives, though, and React's listener runs first,
+ * because it was attached at hydration. Found in a browser on 2026-10-05,
+ * where Escape in the card's epic picker closed the whole card.
+ */
+export function escapeHandledInside(e: { key: string; defaultPrevented: boolean }): boolean {
+  return e.key === "Escape" && e.defaultPrevented;
+}

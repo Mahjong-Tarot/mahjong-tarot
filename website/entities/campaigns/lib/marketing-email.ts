@@ -1,7 +1,8 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createElement } from "react";
-import { render } from "@react-email/components";
+import { render } from "react-email";
 import { Resend } from "resend";
+import { heldInShadow } from "@/kernel/audit/run-context";
 import { escapeHtml } from "@/kernel/config/html";
 import { optionalEnv } from "@/kernel/config/env";
 import { PALETTE } from "@/kernel/config/palette";
@@ -240,7 +241,15 @@ export async function sendMarketingEmail(opts: {
   replyTo?: string | null;
   campaignId?: string;
   logSource?: string;
+  // Resend's Idempotency-Key: one key per recipient of a send, so a batch
+  // retried after Resend took the message but before the row was marked sent
+  // does not mail that person twice. A test send has none.
+  idempotencyKey?: string;
 }): Promise<MarketingSendResult> {
+  // A routine in shadow mode sends nothing (Z.17); the run's log says what it held back.
+  if (heldInShadow("email", "a marketing email to 1 recipient")) {
+    return { ok: false, error: "Not sent: the routine is in shadow mode." };
+  }
   const resend = getResend();
   if (!resend) {
     return { ok: false, error: "RESEND_API_KEY is not set." };
@@ -269,7 +278,7 @@ export async function sendMarketingEmail(opts: {
   }
 
   try {
-    const { data, error } = await resend.emails.send({
+    const payload = {
       from: opts.from || defaultFrom(),
       to: [opts.to],
       subject: opts.subject,
@@ -277,7 +286,10 @@ export async function sendMarketingEmail(opts: {
       text,
       ...(opts.replyTo ? { replyTo: opts.replyTo } : {}),
       ...(Object.keys(headers).length > 0 ? { headers } : {}),
-    });
+    };
+    const { data, error } = opts.idempotencyKey
+      ? await resend.emails.send(payload, { idempotencyKey: opts.idempotencyKey })
+      : await resend.emails.send(payload);
 
     if (error) return { ok: false, error: error.message };
 

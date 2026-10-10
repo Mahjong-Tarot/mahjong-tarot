@@ -1,8 +1,11 @@
 import { supabase, companyOs } from "@/kernel/data/supabase";
 import { getBrandProfile } from "@/entities/campaigns/lib/brand-profiles";
 import { recordAssetImage } from "@/entities/campaigns/lib/marketing-images";
+import { liveEditRefusal } from "@/entities/campaigns/lib/blog-live-edit";
 import { imageStyleLabel } from "@/entities/campaigns/lib/style-catalogues";
 import { httpErrorKind, otherProviderCall } from "@/kernel/ai/gateway";
+import { fillPrompt } from "@/kernel/ai/prompts";
+import { BRAND_IMAGE_PROMPT } from "./brand-image.prompt";
 import type { AiDataClass } from "@/kernel/ai/routing";
 
 // Generates one image for a calendar entry from its image brief + chosen image
@@ -49,17 +52,14 @@ function buildPrompt(
 ): string {
   const brief = withoutHexCodes(rawBrief);
   const brandGuidance = withoutHexCodes(rawGuidance);
-  return `Create a single marketing image for a post titled "${title}".
-
-Aesthetic style: ${styleLabel || "clean editorial"}.
-
-Brand image guidance (use only these colors and this typeface):
-${brandGuidance || "(none provided)"}
-
-Image brief:
-${brief || "(none provided; work from the title and style)"}
-
-Produce one high-quality image, no borders, composed for a ${aspectRatio} frame with the subject held in the middle third so a wide crop of the top and bottom keeps it whole. Use only the brand's palette. Text is welcome where the brief asks for it: a headline, one figure with a short label, or a few short labels, set large and legible in the brand typeface and spelled exactly as the brief gives them. Keep it to a handful of words and inside the middle of the frame. Never paint hex codes, colour names, typeface names or style instructions, even if the brief or the guidance quotes them; they describe the look, they are not content to render. People: never a photorealistic or rendered human, face or hands; line-art or stick figures are fine when the brief asks for them. Do not add logos, watermarks, or stock-photo captions.`;
+  const P = BRAND_IMAGE_PROMPT;
+  return fillPrompt(P.user, {
+    title,
+    style: styleLabel || P.parts.defaultStyle,
+    guidance: brandGuidance || P.parts.noGuidance,
+    brief: brief || P.parts.noBrief,
+    aspectRatio,
+  });
 }
 
 type ImageInputs = { title: string; brief: string | null; styleLabel: string | null; brandGuidance: string | null };
@@ -111,6 +111,11 @@ export async function generateEntryImage(
     const key = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
     if (!key) return { ok: false, error: "GEMINI_API_KEY is not configured." };
 
+    // Asked before the model call, so a live post on a gated campaign (Y.91)
+    // costs no image; recordAssetImage asks again before it selects one.
+    const live = await liveEditRefusal(entryId);
+    if (live) return { ok: false, error: live };
+
     const aspectRatio = opts?.aspectRatio ?? HERO_ASPECT_RATIO;
 
     // Use the caller's edited prompt verbatim when provided; otherwise assemble
@@ -124,8 +129,10 @@ export async function generateEntryImage(
     }
 
     const contents = [{ parts: [{ text: prompt }] }];
+    // An operator-edited prompt still goes out under this prompt's version:
+    // the version names the template the edit started from.
     const reply = await otherProviderCall<GeminiReply>(
-      { site: "brand-image", dataClass: BRAND_IMAGE_CLASS, provider: "google", model: MODEL, input: contents },
+      { site: "brand-image", dataClass: BRAND_IMAGE_CLASS, provider: "google", model: MODEL, prompt: BRAND_IMAGE_PROMPT, input: contents },
       async () => {
         // The key rides in the x-goog-api-key header: in the query string it
         // lands in every request log between here and Google.

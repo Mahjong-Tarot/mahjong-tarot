@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { zodIssuesToMessage } from "@/kernel/config/schemas";
 
@@ -47,7 +47,7 @@ const seriesSchema = z.object({
 });
 
 export async function createSeries(input: { name: string; audienceId: string }): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const name = input.name.trim();
   if (!name) return { ok: false, error: "Give the series a name." };
   if (!input.audienceId) return { ok: false, error: "Pick a saved audience." };
@@ -63,7 +63,7 @@ export async function createSeries(input: { name: string; audienceId: string }):
 }
 
 export async function updateSeries(id: string, input: unknown): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const parsed = seriesSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: zodIssuesToMessage(parsed.error.issues) };
   const s = parsed.data;
@@ -94,7 +94,7 @@ export async function updateSeries(id: string, input: unknown): Promise<ActionRe
 
 // Paused keeps the series and opens no issues; an issue already open is untouched.
 export async function setSeriesActive(id: string, active: boolean): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const { error } = await companyOs.from("email_series").update({ active, updated_at: new Date().toISOString() }).eq("id", id);
   if (error) return { ok: false, error: error.message };
   await recordAudit({ table: "email_series", recordId: id, operation: "update", actor: admin.email, context: { active } });
@@ -105,7 +105,7 @@ export async function setSeriesActive(id: string, active: boolean): Promise<Acti
 // The soft delete: archived and paused, so it opens nothing and leaves the
 // list; its issues keep pointing at it.
 export async function deleteSeries(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const now = new Date().toISOString();
   const { error } = await companyOs.from("email_series").update({ archived_at: now, active: false, updated_at: now }).eq("id", id);
   if (error) return { ok: false, error: error.message };

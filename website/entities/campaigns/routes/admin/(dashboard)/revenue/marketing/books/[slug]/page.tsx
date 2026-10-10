@@ -2,7 +2,7 @@ import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { getBook } from "@/entities/campaigns/lib/books";
 
 export const metadata: Metadata = {
@@ -14,8 +14,9 @@ function words(md: string): number {
   return md.split(/\s+/).length;
 }
 
-export default async function BookPage({ params }: { params: { slug: string } }) {
-  await requireRevenueAccess();
+export default async function BookPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
+  await requirePermission("campaigns.marketing");
   const result = await getBook(params.slug);
   if (!result) notFound();
   const { book, chapters } = result;

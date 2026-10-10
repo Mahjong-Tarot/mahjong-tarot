@@ -1,7 +1,7 @@
 import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { getEmailSchedule } from "@/entities/campaigns/lib/email-schedule";
 import { formatDate } from "@/kernel/ui/format";
 import { ScheduleCalendar } from "./ScheduleCalendar";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function EmailSchedulePage() {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const { items, unscheduled, error } = await getEmailSchedule();
   const unwritten = items.filter((i) => i.status === "unwritten").length;
 

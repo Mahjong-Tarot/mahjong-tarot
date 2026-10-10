@@ -2,13 +2,17 @@ import { companyOs } from "@/kernel/data/supabase";
 import { dayAndTime } from "./email-schedule-shared";
 
 // One marketing email per person per company day, across broadcasts and
-// personal messages. Both send paths ask this module immediately before a send,
-// and that is the whole point of it being a module: the rule used to live only
-// on the personal side, so `email-message-send` could claim a cap "across both
-// kinds" that the broadcast cron had no code to uphold — a personal message at
+// personal messages. The cap used to be asked by two send paths, broadcast and
+// personal, and it lived only on the personal side, so a personal message at
 // 08:20 did not stop a broadcast batch at 08:30 (A.15).
 //
-// The two kinds yield differently, and that asymmetry is deliberate:
+// The personal email agent was removed (Y.18, decision Y.59), so broadcasts are
+// the only caller now. The "personal" kind and the read of `email_messages` are
+// kept on purpose: the tables stay until a later migration drops them, and
+// leaving this module as it was means a broadcast send decides exactly what it
+// decided before. Retire the kind together with that migration.
+//
+// The two kinds yield differently, and that asymmetry was deliberate:
 //
 //   * What has already been SENT today blocks both kinds. This is the half that
 //     makes the invariant true, because whichever path sends first blocks the

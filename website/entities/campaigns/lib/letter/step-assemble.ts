@@ -1,4 +1,5 @@
 import { resolveBroadcastBlocks } from "@/entities/campaigns/lib/broadcast-blocks";
+import { ctaCatalog } from "./ctas";
 import type { StepRunner } from "./types";
 
 // Step 5: the posts and the button as the email will carry them. Every picked
@@ -23,17 +24,47 @@ async function whyNotAnswering(url: string): Promise<string | null> {
   }
 }
 
+// The site's own pages are checked from data, never fetched (Y.75). The letter
+// reaches assemble by handing itself on over HTTP (run-loop), so a fetch of the
+// site's own domain from here is one more hop through the same deployment, and
+// Vercel answers 508 (loop detected): the letters of 1 Oct and 8 Oct were lost
+// to it. A post on our site is live exactly when resolveBroadcastBlocks found it
+// published with a slug, and a button on our site must be one of the catalogue's
+// pages, which this deployment's own code serves. Another site's page is still
+// fetched, because only a request can say whether it answers.
+function hostOf(url: string): string | null {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return null;
+  }
+}
+
+function isOwnSite(url: string): boolean {
+  const own = hostOf(process.env.NEXT_PUBLIC_SITE_URL ?? "");
+  return own !== null && hostOf(url) === own;
+}
+
+function sameUrl(a: string, b: string): boolean {
+  return a.replace(/\/$/, "") === b.replace(/\/$/, "");
+}
+
 export const runAssemble: StepRunner = async ({ letter }) => {
   const rendered = await resolveBroadcastBlocks(letter.blocks);
   const problems: string[] = [];
   if (rendered.posts.length !== letter.blocks.posts.length) problems.push(`${letter.blocks.posts.length - rendered.posts.length} picked post(s) no longer resolve to a published post with a slug.`);
   for (const p of rendered.posts) if (!p.imageUrl) problems.push(`"${p.title}" has no hero image.`);
   if (!rendered.cta) problems.push("No call to action.");
-  else {
+  else if (isOwnSite(rendered.cta.url)) {
+    const url = rendered.cta.url;
+    const known = ctaCatalog().some((e) => e.cta !== null && sameUrl(e.cta.url, url));
+    if (!known) problems.push(`The call to action is on this site but is not one of the letter's call to action pages: ${url}`);
+  } else {
     const why = await whyNotAnswering(rendered.cta.url);
     if (why) problems.push(`The call to action page did not answer (${why}): ${rendered.cta.url}`);
   }
   for (const p of rendered.posts) {
+    if (isOwnSite(p.url)) continue;
     const why = await whyNotAnswering(p.url);
     if (why) problems.push(`The post page did not answer (${why}): ${p.url}`);
   }

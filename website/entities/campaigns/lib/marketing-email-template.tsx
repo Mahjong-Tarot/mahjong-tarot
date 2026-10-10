@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Body, Button, Column, Container, Head, Hr, Html, Img, Link, Preview, Row, Section, Text } from '@react-email/components'
+import { Body, Button, Column, Container, Head, Hr, Html, Img, Link, Preview, Row, Section, Text } from 'react-email'
 import { PALETTE } from '@/kernel/config/palette'
 import type { RenderedBlocks, RenderedPost } from './marketing-email-blocks'
 

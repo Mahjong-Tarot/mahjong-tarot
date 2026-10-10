@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { withRoutineRun } from "@/kernel/audit/routine-runs";
+import { routineResult, withRoutineRun } from "@/kernel/audit/routine-runs";
 import { companyOs } from "@/kernel/data/supabase";
 import { sendTransactionalEmail } from "@/kernel/messaging/email";
 import { notifyMarketing } from "@/kernel/messaging/lark";
@@ -15,6 +15,19 @@ import { OPS_EMAIL } from "@/kernel/config/contacts";
  * @generator
  */
 export const schedule = "30 0 4 * *";
+
+/**
+ * What Settings -> Agents says about this routine (Y.14). Read as text by
+ * scripts/gen-deployment.mjs into kernel/audit/automations.json, so it keeps
+ * one literal shape: double-quoted strings and arrays of them, nothing computed.
+ * @generator
+ */
+export const automation = {
+  name: "Marketing recap",
+  description: "Monthly, on the 4th. Recaps the prior month's email marketing and asks Claude for content suggestions, then stores it, posts to the Marketing Lark channel, and emails the founder. Runs on the 4th so every send is past its 72h settle window.",
+  content: ["Email campaigns", "Email events", "Marketing recaps"],
+  apps: ["Supabase", "Anthropic", "Resend", "Lark"],
+};
 
 // Vercel cron (see vercel.json): monthly, on the 4th at 07:30 Asia/Ho_Chi_Minh
 // (00:30 UTC). Recaps the PRIOR calendar
@@ -41,7 +54,7 @@ async function handler(_req: Request) {
 
   const recap = await generateMarketingRecap(priorMonth);
   if (!recap) {
-    return NextResponse.json({ status: "skipped", reason: "no broadcasts to recap or AI unavailable", periodMonth });
+    return routineResult({ status: "skipped", reason: "no broadcasts to recap or AI unavailable", periodMonth });
   }
 
   // Store first (upsert on period_month) so the record exists even if delivery
@@ -76,7 +89,7 @@ async function handler(_req: Request) {
     "",
     RECAPS_URL,
   ];
-  await notifyMarketing(larkLines.join("\n"));
+  const larkOk = await notifyMarketing(larkLines.join("\n"));
 
   // Email (founder).
   const html =
@@ -93,7 +106,19 @@ async function handler(_req: Request) {
     html,
   });
 
-  return NextResponse.json({ periodMonth, broadcasts: m.broadcasts, suggestions: recap.suggestions.length, emailSent: emailOk });
+  // The recap is stored by now, so a channel that did not take it loses no
+  // data; the run still names it, so nobody assumes the founder was told (Y.20).
+  return routineResult({
+    status: "ok",
+    periodMonth,
+    broadcasts: m.broadcasts,
+    suggestions: recap.suggestions.length,
+    emailSent: emailOk,
+    failures: [
+      ...(larkOk ? [] : [{ subject: "Marketing chat", step: "notify", error: "Lark did not accept the recap (LARK_MARKETING_WEBHOOK_URL)" }]),
+      ...(emailOk ? [] : [{ subject: "founder email", step: "email", error: "the recap email was not sent" }]),
+    ],
+  });
 }
 
 // Every scheduled run is recorded in company_os.routine_runs (Settings -> Agents).

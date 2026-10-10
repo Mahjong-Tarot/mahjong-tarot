@@ -1,7 +1,9 @@
 import { aiSite } from "@/kernel/ai/gateway";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import type { AiDataClass } from "@/kernel/ai/routing";
 import { jsonSchemaFor, readStructuredOutput } from "@/kernel/ai/response";
 import { z } from "zod/v4";
+import { BROADCAST_TAKEAWAY_PROMPT } from "./broadcast-takeaway.prompt";
 
 // One plain-English takeaway line for a broadcast's settled numbers, posted with
 // its per-broadcast Lark summary 72 hours after send. Same never-throws contract
@@ -43,23 +45,31 @@ export async function generateBroadcastTakeaway(input: BroadcastTakeawayInput): 
       ? input.topTopics.map((t) => `${t.topic} (${t.people} people)`).join(", ")
       : "no clicks tagged to a topic";
 
-  const material =
-    `Broadcast: ${input.name} — subject "${input.subject}"\n` +
-    `Sent ${input.sent}, delivered ${input.delivered}, opened ${input.opened} (${pct(input.opened, input.delivered)} of delivered), ` +
-    `clicked ${input.clicked} (${pct(input.clicked, input.delivered)} of delivered), unsubscribed ${input.unsubscribed}.\n` +
-    `Clicks by topic: ${topics}.`;
+  const material = fillPrompt(BROADCAST_TAKEAWAY_PROMPT.user, {
+    name: input.name,
+    subject: input.subject,
+    sent: input.sent,
+    delivered: input.delivered,
+    opened: input.opened,
+    openedPct: pct(input.opened, input.delivered),
+    clicked: input.clicked,
+    clickedPct: pct(input.clicked, input.delivered),
+    unsubscribed: input.unsubscribed,
+    topics,
+  });
 
   try {
     const response = await anthropic.messages.create({
+      prompt: BROADCAST_TAKEAWAY_PROMPT,
       model: MODEL,
       max_tokens: 300,
       output_config: { format: { type: "json_schema", schema: SCHEMA } },
       messages: [
         {
           role: "user",
-          content:
-            "These are the settled numbers for one marketing email. In one sentence, say the single most useful takeaway an operator should notice (what worked or what fell flat), grounded in these numbers. Do not just restate every metric.\n\n" +
-            material,
+          // The instruction leads the user message; the site sends no system
+          // prompt (see ./broadcast-takeaway.prompt).
+          content: BROADCAST_TAKEAWAY_PROMPT.parts.instruction + "\n\n" + material,
         },
       ],
     });

@@ -2,13 +2,14 @@
 
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { marketingMarkdownToHtml } from "@/entities/campaigns/lib/markdown";
 import { generateEntryImage, buildEntryImagePrompt } from "@/entities/campaigns/lib/ai/brand-image";
 import { generateEntryCopy, buildEntryCopyPrompt } from "@/entities/campaigns/lib/ai/entry-copy";
 import { listAssetImages, setSelectedImage, type AssetImage } from "@/entities/campaigns/lib/marketing-images";
 import { BLOG_TYPES } from "@/entities/campaigns/lib/style-catalogues";
+import { updateContentUnlessLive } from "@/entities/campaigns/lib/blog-live-edit";
 
 type CopyResult = { ok: true; html: string } | { ok: false; error: string };
 type ImagesResult = { ok: true; images: AssetImage[] } | { ok: false; error: string };
@@ -27,9 +28,9 @@ export async function saveAssetCopy(
   assetId: string,
   copyMd: string,
 ): Promise<CopyResult> {
-  const admin = await requireRevenueAccess();
-  const { error } = await companyOs.from("marketing_content").update({ copy_md: copyMd || null })
-    .eq("id", assetId);
+  const { user: admin } = await requirePermission("campaigns.marketing");
+  // A live post on a gated campaign keeps its version (Y.91).
+  const { error } = await updateContentUnlessLive(assetId, { copy_md: copyMd || null });
   if (error) return { ok: false, error: error.message };
 
   await recordAudit({
@@ -50,7 +51,7 @@ export async function saveAssetBlogStyle(
   assetId: string,
   blogStyle: string,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   if (blogStyle && !BLOG_TYPES.some((o) => o.value === blogStyle)) {
     return { ok: false, error: "Unknown blog style." };
   }
@@ -73,12 +74,12 @@ export async function saveAssetBlogStyle(
 // before running. The exact string returned is what the matching regenerate
 // action sends when passed back.
 export async function getImagePrompt(assetId: string): Promise<PromptResult> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   return buildEntryImagePrompt(assetId);
 }
 
 export async function getCopyPrompt(assetId: string): Promise<PromptResult> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   return buildEntryCopyPrompt(assetId);
 }
 
@@ -89,7 +90,7 @@ export async function regenerateAssetImage(
   assetId: string,
   prompt?: string,
 ): Promise<ImagesResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const r = await generateEntryImage(assetId, { createdBy: admin.email, prompt });
   if (!r.ok) return { ok: false, error: r.error };
   refresh(campaignId, assetId);
@@ -104,7 +105,7 @@ export async function regenerateAssetCopy(
   assetId: string,
   prompt?: string,
 ): Promise<{ ok: true; html: string; bodyMd: string } | { ok: false; error: string }> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const r = await generateEntryCopy(assetId, { prompt });
   if (!r.ok) return { ok: false, error: r.error };
   refresh(campaignId, assetId);
@@ -117,7 +118,7 @@ export async function selectAssetImage(
   assetId: string,
   imageId: string,
 ): Promise<ImagesResult> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const r = await setSelectedImage(assetId, imageId);
   if (!r.ok) return { ok: false, error: r.error };
   refresh(campaignId, assetId);

@@ -128,7 +128,29 @@ batch size 150), and check the list-validation reports in `docs/engineering/emai
 
 1. **Weekly letter (Bill's voice)**: decide its sources (edge8's reads a Notion journal, meetings and retreat events)
    and calls to action, adapt `entities/campaigns/lib/letter/*`, then schedule `letter-weekly`.
-2. Personal email agents read edge8's AIOlabz learner progress (`lib/learner-progress.ts`); it no-ops without
-   `AIOLABZ_*` and can be removed or replaced with Mahjong member data.
+2. ~~Personal email agents~~: removed upstream (edge8 Y.18) and in the 2026-10-10 sync.
 3. Instagram and Vietnamese Facebook as calendar channels: content has `language` (en/vi); the channel list and
    writer prompts still offer edge8's set (blog, email, LinkedIn, Facebook, Twitter).
+
+## Sync with edge8-web, 2026-10-10
+
+Brought the port up to edge8-web `59eb2068c` (37 campaigns commits since `471ba7ba`):
+- **Next 16.3 / React 19.3** (edge8 B.18): `next.config.js` uses `serverExternalPackages`; instrumentation runs without a flag.
+- **Three-way merge** of every copied file (base = edge8 at the port, theirs = edge8 now, ours = Mahjong's copy), so
+  Mahjong's adaptations stay. 73 new files: versioned prompts (`*.prompt.ts`, `kernel/ai/prompts.ts`), the approval park
+  for the writer and the letter (`kernel/approvals`), the step driver (`/api/cron/agent-driver`, every 5 minutes, replaces
+  the self-calling writer-agent/letter-agent routes), the effect ledger, run modes (live/shadow/paused), blog versions
+  and live-edit locks.
+- **Removed as upstream did**: personal email agents and their routes/crons (`email-agent`, `email-message-send`).
+- **Mahjong stand-ins for edge8 kernel pieces**: `kernel/identity/access-request.ts` (an admin by `profiles.role` holds
+  every permission), `kernel/messaging/router.ts` (notices emailed once per dedupe key), `kernel/audit/automations.json`
+  (Mahjong's routines only).
+- Migration 061: `approvals`, `automation_effects` + `claim_effect()`, `event_outbox`, `event_deliveries`,
+  `routine_config`, `interactions.category`.
+- Verified: typecheck and build clean; 18 public pages match production text; admin screens render; agent-driver and
+  email-series-draft run.
+
+To sync again: repeat the three-way merge from `59eb2068c` to edge8's new head (the script logic is described above;
+stand-in files under `website/entities/{contacts,site,crm,company-os,library,retreats,boards,billing}/index.ts`,
+`kernel/identity/{admin-auth,access-request,writes}.ts`, `kernel/messaging/{lark,router}.ts`, `kernel/shell/surface.ts`
+and `app/events.ts` are Mahjong's own and must not take upstream's version).

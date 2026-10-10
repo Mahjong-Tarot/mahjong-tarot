@@ -1,7 +1,7 @@
 import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { listBrandProfiles } from "@/entities/campaigns/lib/brand-profiles";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BrandsPage() {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const brands = await listBrandProfiles();
 
   return (

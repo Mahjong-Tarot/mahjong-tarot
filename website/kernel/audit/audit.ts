@@ -17,7 +17,10 @@ export type AuditOp =
   | "delete"
   | "bulk_update"
   | "bulk_archive"
-  | "bulk_delete";
+  | "bulk_delete"
+  // A read of something sensitive (bank details), recorded as what it is.
+  // audit_log.operation's check accepts it since 20261008090000.
+  | "read";
 
 export type AuditInput = {
   table: string;

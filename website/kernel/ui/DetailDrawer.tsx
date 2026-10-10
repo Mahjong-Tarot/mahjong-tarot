@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import { Tabs } from "./Tabs";
-import { escapeLeavesField, FOCUSABLE, inOtherDialog, trapTarget } from "./focus-trap";
+import { escapeHandledInside, escapeLeavesField, FOCUSABLE, inOtherDialog, trapTarget } from "./focus-trap";
 
 export function DetailDrawer({
   open,
@@ -95,6 +95,8 @@ export function DetailDrawer({
     if (!open) return;
     const root = () => panel.current ?? document.body;
     const onKey = (e: KeyboardEvent) => {
+      // A picker inside the drawer that closed itself on this Escape.
+      if (escapeHandledInside(e)) return;
       if (e.key === "Escape") {
         // The first Escape leaves a field holding text; the next one closes
         // (W.141), so a half-written comment is not thrown away with the drawer.

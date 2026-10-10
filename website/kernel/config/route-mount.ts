@@ -32,6 +32,13 @@ export type RouteMount = {
   alias?: Readonly<Record<string, string>>;
   /** The mount carries the directive, because the body is a client component. */
   useClient?: true;
+  /**
+   * Page props filled from app/shell.ts, as `{ prop: "SlotName" }` (W.169.4).
+   * The mount then wraps the page and passes each slot in, so a page can show
+   * what another entity provides without requiring that entity; a deployment
+   * without the provider passes the slot's fallback.
+   */
+  slots?: Readonly<Record<string, string>>;
 };
 
 /** An entity's route config, keyed by the route's path within the entity. */

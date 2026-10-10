@@ -2,9 +2,10 @@
 
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs, type CompanyOsInsert } from "@/kernel/data/supabase";
-import { upsertBrandProfiles } from "@/entities/contacts";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { selectBrands, upsertBrandProfiles } from "@/entities/contacts";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
+import { mayAutoPublish } from "@/entities/campaigns/lib/brand-profiles";
 
 type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -55,7 +56,7 @@ export async function saveBrandProfile(
   brandId: string,
   patch: BrandProfilePatch,
 ): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   if (!brandId) return { ok: false, error: "Missing brand." };
 
   const row: CompanyOsInsert<"brand_profiles"> = {
@@ -93,11 +94,20 @@ export async function saveBrandProfile(
 }
 
 // The writer agent's auto-publish switch. Off by default: a run parks at
-// "ready" and a person publishes. On: the run publishes the post and re-derives
-// the channel assets with no human step.
+// "ready" on a Publish approval and publishes once a person approves it (Y.16).
+// On: the run publishes the post and re-derives the channel assets with no
+// human step.
 export async function setBrandAutoPublish(brandId: string, on: boolean): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   if (!brandId) return { ok: false, error: "Missing brand." };
+  if (on) {
+    const { data: brand, error: brandError } = await selectBrands("slug").eq("id", brandId).maybeSingle();
+    if (brandError) return { ok: false, error: brandError.message };
+    // Decision Y.53: a client brand's post publishes only on a Publish approval.
+    if (!brand || !mayAutoPublish(String(brand.slug))) {
+      return { ok: false, error: "A client brand's posts wait on a Publish approval (decision Y.53), so auto-publish stays off." };
+    }
+  }
   const { error } = await upsertBrandProfiles({ brand_id: brandId, auto_publish: on, updated_by: admin.email, updated_at: new Date().toISOString() }, { onConflict: "brand_id" });
   if (error) return { ok: false, error: error.message };
   await recordAudit({ table: "brand_profiles", recordId: brandId, operation: "update", actor: admin.email, context: { auto_publish: on } });

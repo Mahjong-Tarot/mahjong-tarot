@@ -24,16 +24,29 @@ type LogLine = {
 };
 
 // Vercel stamps every invocation with `x-vercel-id`; a proxy or a test may
-// set `x-request-id` explicitly, and that wins when present. `headers()` throws
-// when called outside a request scope (crons, scripts, tests), so the read is
-// guarded and the field is simply omitted there.
-function currentRequestId(): string | undefined {
+// set `x-request-id` explicitly, and that wins when present.
+//
+// Since Next 15 `headers()` is a promise (B.18.2), but `log` stays synchronous:
+// it has callers everywhere, kernel/ai and the crons among them, and none of
+// them should have to await a log line. So the line is handed to `emit` with
+// the request id once it is known:
+// - Outside a request scope (crons, scripts, tests) `headers()` throws at once,
+//   and the line is written synchronously without the field, as before.
+// - Inside one, the promise is already settled, so the line is written one
+//   microtask later, before any timer or I/O callback and before the function
+//   returns its response. Lines from one request keep their order.
+function withRequestId(emit: (requestId: string | undefined) => void): void {
+  let pending: ReturnType<typeof headers>;
   try {
-    const bag = headers();
-    return bag.get("x-request-id") ?? bag.get("x-vercel-id") ?? undefined;
+    pending = headers();
   } catch {
-    return undefined;
+    emit(undefined);
+    return;
   }
+  pending.then(
+    (bag) => emit(bag.get("x-request-id") ?? bag.get("x-vercel-id") ?? undefined),
+    () => emit(undefined),
+  );
 }
 
 // `JSON.stringify` drops undefined values, turns a bigint into a throw and an
@@ -46,19 +59,22 @@ function replacer(_key: string, value: unknown): unknown {
 }
 
 export function log(level: LogLevel, msg: string, fields: LogFields = {}): void {
-  const requestId = currentRequestId();
-  const line: LogLine = {
-    ...fields,
-    level,
-    msg,
-    ts: new Date().toISOString(),
-    ...(requestId ? { requestId } : {}),
-  };
-  const serialised = JSON.stringify(line, replacer);
-  // warn and error go to stderr so Vercel flags them as errors in the function
-  // log view; everything else stays on stdout.
-  if (level === "error" || level === "warn") console.error(serialised);
-  else console.log(serialised);
+  // Stamped at the call, not when the request id arrives.
+  const ts = new Date().toISOString();
+  withRequestId((requestId) => {
+    const line: LogLine = {
+      ...fields,
+      level,
+      msg,
+      ts,
+      ...(requestId ? { requestId } : {}),
+    };
+    const serialised = JSON.stringify(line, replacer);
+    // warn and error go to stderr so Vercel flags them as errors in the
+    // function log view; everything else stays on stdout.
+    if (level === "error" || level === "warn") console.error(serialised);
+    else console.log(serialised);
+  });
 }
 
 // The single place an error-tracking vendor (Sentry, Axiom, ...) would be

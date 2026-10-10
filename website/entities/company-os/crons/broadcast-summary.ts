@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { withRoutineRun } from "@/kernel/audit/routine-runs";
+import { routineResult, withRoutineRun } from "@/kernel/audit/routine-runs";
+import type { RoutineFailure } from "@/kernel/audit/routine-result";
 import { selectEmailCampaigns, updateEmailCampaigns } from "@/entities/campaigns";
 import { companyOs } from "@/kernel/data/supabase";
 import { notifyMarketing } from "@/kernel/messaging/lark";
@@ -15,6 +16,19 @@ import { generateBroadcastTakeaway } from "@/entities/company-os/lib/ai/broadcas
  * @generator
  */
 export const schedule = "20 3 * * *";
+
+/**
+ * What Settings -> Agents says about this routine (Y.14). Read as text by
+ * scripts/gen-deployment.mjs into kernel/audit/automations.json, so it keeps
+ * one literal shape: double-quoted strings and arrays of them, nothing computed.
+ * @generator
+ */
+export const automation = {
+  name: "Broadcast summary",
+  description: "Daily. Posts one Lark summary to the Marketing channel for each broadcast whose numbers have settled (72h after send), with a one-line Claude takeaway. Latches per broadcast so each is summarised once.",
+  content: ["Email campaigns", "Email events"],
+  apps: ["Supabase", "Anthropic", "Lark"],
+};
 
 // Vercel cron (see vercel.json): daily. Posts one Lark summary to the Marketing
 // channel for each broadcast whose numbers have settled — sent at least 72h ago
@@ -47,10 +61,11 @@ async function handler(_req: Request) {
 
   const due = (data ?? []) as DueRow[];
   if (due.length === 0) {
-    return NextResponse.json({ due: 0, posted: 0 });
+    return routineResult({ status: "skipped", reason: "no broadcast has settled yet", due: 0, posted: 0 });
   }
 
   let posted = 0;
+  const failures: RoutineFailure[] = [];
   for (const b of due) {
     const [stats, links, unsub] = await Promise.all([
       getBroadcastStats(b.id),
@@ -78,19 +93,25 @@ async function handler(_req: Request) {
       takeaway ? `Takeaway: ${takeaway}` : "",
       `${RECAPS_URL}/${b.id}`,
     ].filter(Boolean);
-    await notifyMarketing(lines.join("\n"));
+    // A recap Lark did not take still latches below, as it always has; the run
+    // now names it, so a Marketing chat that never got the recap is not a green run.
+    const sent = await notifyMarketing(lines.join("\n"));
+    if (!sent) {
+      failures.push({ subject: b.name, step: "post the recap", error: "Lark did not accept the Marketing recap (LARK_MARKETING_WEBHOOK_URL)" });
+    }
 
     // Latch only after a successful post so a failed run retries next day.
     const { error: latchError } = await updateEmailCampaigns({ summary_posted_at: new Date().toISOString() })
       .eq("id", b.id);
     if (latchError) {
       console.error("[broadcast-summary] latch failed for", b.id, latchError.message);
+      failures.push({ subject: b.name, step: "latch the recap", error: latchError.message });
       continue;
     }
-    posted += 1;
+    if (sent) posted += 1;
   }
 
-  return NextResponse.json({ due: due.length, posted });
+  return routineResult({ status: "ok", due: due.length, posted, failures });
 }
 
 // Every scheduled run is recorded in company_os.routine_runs (Settings -> Agents).

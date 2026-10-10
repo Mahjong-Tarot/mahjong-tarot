@@ -7,12 +7,12 @@
 // shares no screens with these two, so nothing here has a portal case to
 // answer. ADR 0008 has the reasoning.
 //
-// This file is dependency-free so middleware (edge), server components and
-// client components can all import it.
+// This file is dependency-free so the proxy, server components and client
+// components can all import it.
 
 export type Surface = "admin" | "team";
 
-// Set by middleware on every /admin and /team request; read by surfaceBase().
+// Set by proxy.ts on every /admin and /team request; read by surfaceBase().
 export const SURFACE_HEADER = "x-e8-surface";
 
 export function surfaceOf(pathname: string): Surface {

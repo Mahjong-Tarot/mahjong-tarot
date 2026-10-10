@@ -1,4 +1,6 @@
 import { aiSite } from "@/kernel/ai/gateway";
+import { fillPrompt } from "@/kernel/ai/prompts";
+import { CAMPAIGN_SEO_PROMPT } from "./campaign-seo.prompt";
 import type { AiDataClass } from "@/kernel/ai/routing";
 import { companyOs } from "@/kernel/data/supabase";
 import { getBrandProfile } from "@/entities/campaigns/lib/brand-profiles";
@@ -62,31 +64,24 @@ export async function generateCampaignSeoGeo(campaignId: string): Promise<Result
     if (blogErr) console.error("[company-os/campaigns] marketing_content", blogErr);
     const blogCopy = (blog as { copy_md: string | null } | null)?.copy_md ?? null;
 
-    const system = `You are the search and generative-engine strategist for ${profile.brandName}. Produce a plan that is specific, honest, and immediately usable by a writer.
+    const P = CAMPAIGN_SEO_PROMPT;
+    const system = fillPrompt(P.system, {
+      brandName: profile.brandName,
+      positioning: profile.positioning ?? P.parts.notSet,
+      audience: profile.audience ?? P.parts.notSet,
+      offer: profile.offer ?? P.parts.notSet,
+      seoLens: profile.seoLensMd ?? P.parts.noSeoLens,
+    });
 
-## Brand positioning
-${profile.positioning ?? "(not set)"}
-
-## Audience
-${profile.audience ?? "(not set)"}
-
-## What we sell
-${profile.offer ?? "(not set)"}
-
-## SEO lens (follow this)
-${profile.seoLensMd ?? "(none set; apply sound SEO fundamentals)"}
-
-Never use em dashes. Do not invent facts, metrics, or quotes. Return through the provided schema only.`;
-
-    const userMsg = `# Campaign
-Name: ${campaign.name}
-${campaign.objective ? `Goal: ${campaign.objective}\n` : ""}Idea: ${campaign.idea ?? "(no idea text)"}
-
-${blogCopy ? `# Blog copy (source for keywords and facts)\n\n${blogCopy.slice(0, 6000)}` : "# No blog copy yet\n\nWork from the idea; flag where real data should be gathered."}
-
-Write the Search / FAQ / GEO plan for this campaign.`;
+    const userMsg = fillPrompt(P.user, {
+      name: campaign.name,
+      goalLine: campaign.objective ? fillPrompt(P.parts.goalLine, { objective: campaign.objective }) : "",
+      idea: campaign.idea ?? P.parts.noIdea,
+      blogSection: blogCopy ? fillPrompt(P.parts.blogCopy, { copy: blogCopy.slice(0, 6000) }) : P.parts.noBlogCopy,
+    });
 
     const response = await llm.messages.create({
+      prompt: P,
       model: MODEL,
       max_tokens: 3000,
       system,

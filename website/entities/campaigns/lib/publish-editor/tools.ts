@@ -5,6 +5,7 @@ import { parseSeoMd } from "@/entities/campaigns/lib/seo";
 import { publishBlogAsset, validateBlogForPublish } from "@/entities/campaigns/lib/blog-publish";
 import { siteForBrandSlug, blogPublishBlocker } from "@/entities/campaigns/lib/brand-sites";
 import { getBrandProfile } from "@/entities/campaigns/lib/brand-profiles";
+import { updateContentUnlessLive } from "@/entities/campaigns/lib/blog-live-edit";
 
 // Runtime-agnostic tool layer for the Publish Editor agent. Every tool is bound
 // to ONE asset at construction (no tool takes an assetId), so the agent cannot
@@ -161,7 +162,9 @@ export function makePublishEditorTools(assetId: string, actor: string) {
         if (Object.keys(update).length === 0) {
           return { content: "No content provided to update.", isError: true };
         }
-        const { error } = await companyOs.from("marketing_content").update(update).eq("id", assetId);
+        // A live post on a gated campaign keeps its version (Y.91); the refusal
+        // tells the agent, and through it the person, how to change it.
+        const { error } = await updateContentUnlessLive(assetId, update);
         if (error) return { content: error.message, isError: true };
         await recordAudit({
           table: "marketing_content",

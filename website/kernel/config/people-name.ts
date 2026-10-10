@@ -1,7 +1,7 @@
 // One place that decides how a person's name is written and ordered.
 //
 // company_os.people.full_name is not a consistent shape: it holds Vietnamese
-// order ("Nguyễn Chí Hiếu" = Family Middle Given) for some people and Western
+// order ("Nguyễn Văn Hiếu" = Family Middle Given) for some people and Western
 // order ("An Nguyen" = Given Family) for others, so its first token is a family
 // name for one row and a given name for the next. Sorting or abbreviating it
 // gives a different answer per person.
@@ -135,7 +135,7 @@ export function legalName<P extends string | null = string>(person: NamedPerson 
 // name that person to others — coach notifications ("X is stuck on …"), goal
 // emails, the Workboard's audit label — so it must keep naming them in full
 // where the old order did. S.16.15 made a greeting skip a multi-word
-// preferred_name; that must not turn "Nguyễn Chí Hiếu" into "Hiếu" in an audit
+// preferred_name; that must not turn "Nguyễn Văn Hiếu" into "Hiếu" in an audit
 // row. The actor carries its greeting apart (`greeting`, greetingName over the
 // same row, S.16.17), so this keeps its original order for naming, and a
 // person with nothing but a blank email is UNNAMED.

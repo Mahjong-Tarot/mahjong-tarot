@@ -3,7 +3,7 @@
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { utmSlug } from "@/entities/campaigns/lib/marketing-campaigns";
 import { companyOs, type CompanyOsUpdate } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { generateCampaignSeoGeo } from "@/entities/campaigns/lib/ai/campaign-seo";
 import { planCampaign } from "@/entities/campaigns/lib/ai/campaign-plan";
@@ -50,7 +50,7 @@ export async function createCampaign(input: {
   startsOn?: string | null;
   endsOn?: string | null;
 }): Promise<CreateResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const idea = input.idea.trim();
   if (!idea) return { ok: false, error: "Write the idea first." };
   const name = input.name?.trim() || deriveName(idea);
@@ -101,7 +101,7 @@ export async function updateCampaign(
     status?: string;
   },
 ): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
 
   const update: CompanyOsUpdate<"marketing_campaigns"> = {};
   if (patch.idea !== undefined) {
@@ -153,7 +153,7 @@ export async function addAssetToCampaign(
   campaignId: string,
   input: { title: string; channel: string; publishDate?: string | null },
 ): Promise<CreateResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const title = input.title.trim();
   if (!title) return { ok: false, error: "Give the asset a title." };
   if (!CHANNELS.has(input.channel)) return { ok: false, error: "Pick a channel." };
@@ -198,7 +198,7 @@ export async function addAssetToCampaign(
 export async function planCampaignFromIdea(
   campaignId: string,
 ): Promise<{ ok: true; seoGeoMd: string } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const r = await planCampaign(campaignId);
   if (!r.ok) return r;
   await recordAudit({
@@ -217,7 +217,7 @@ export async function planCampaignFromIdea(
 export async function generateSeoGeoPlan(
   campaignId: string,
 ): Promise<{ ok: true; seoGeoMd: string } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const r = await generateCampaignSeoGeo(campaignId);
   if (!r.ok) return r;
   await recordAudit({

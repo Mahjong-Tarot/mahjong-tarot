@@ -14,6 +14,18 @@ const adminEmails = (process.env.ADMIN_EMAILS ?? "")
 /** Where operational mail goes when nothing more specific is configured. */
 export const OPS_EMAIL = process.env.OPS_EMAIL || adminEmails[0] || "";
 
+/**
+ * The bookkeeper's mailbox (accounting@): told when a reimbursement claim is
+ * submitted, when a payment run is built and when it is paid, each with a
+ * link and never a bank detail. No fallback, for the reason at the top of this
+ * file: unset, those notices are skipped and logged. Read at call time, so an
+ * environment change reaches a warm instance without a redeploy and a test can
+ * set it.
+ */
+export function accountingEmail(): string | null {
+  return (process.env.ACCOUNTING_EMAIL ?? "").trim() || null;
+}
+
 /** Reply-to for event and registration mail. Falls back to the ops address. */
 export const EVENTS_EMAIL = process.env.EVENTS_EMAIL || OPS_EMAIL;
 

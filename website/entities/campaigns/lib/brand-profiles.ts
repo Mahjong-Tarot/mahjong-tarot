@@ -1,5 +1,6 @@
 import { companyOs } from "@/kernel/data/supabase";
 import { selectBrands } from "@/entities/contacts";
+import { SELF_BRAND_SLUG } from "@/kernel/config/brand";
 
 // Brand writing profiles: the voice, channel rules, and full content-studio
 // process the per-brand admin page edits and the AI writer reads. One per brand;
@@ -84,8 +85,21 @@ function map(row: DbRow): BrandProfile {
     preferredBlogTypes: p?.preferred_blog_types ?? [],
     preferredImageStyles: p?.preferred_image_styles ?? [],
     preferredSocialStyles: p?.preferred_social_styles ?? [],
-    autoPublish: p?.auto_publish ?? false,
+    autoPublish: mayAutoPublish(row.slug) && (p?.auto_publish ?? false),
   };
+}
+
+/**
+ * Only our own brand may publish with no click (decision Y.53, Khoa, 25-26 Sep
+ * 2026): a client brand's writer gets a Publish step, whatever its stored switch
+ * says. Since Y.16 that step is a Publish approval its run parks on at ready
+ * (lib/writer/publish-approval.ts); before the approvals inbox it was
+ * draft-only. Read here, where every reader of the profile gets it, so neither
+ * the writer's next step nor its channel step can publish a client's post
+ * without an approval.
+ */
+export function mayAutoPublish(brandSlug: string): boolean {
+  return brandSlug === SELF_BRAND_SLUG;
 }
 
 const SELECT =

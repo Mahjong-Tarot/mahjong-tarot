@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, JSX } from "react";
 
 /**
  * The admin's small monochrome icons (W.103.3).
@@ -58,7 +58,34 @@ export type IconName =
   /** The toolbar's view options. */
   | "sliders"
   /** More actions on one item (a card's menu). */
-  | "more";
+  | "more"
+  /** A due date (the card drawer's pinned line, W.159). */
+  | "calendar"
+  /** A sprint: work that comes round in cycles (W.159). */
+  | "cycle"
+  /** A pull request (W.159). */
+  | "branch"
+  /** A control that opens a list (W.159). */
+  | "caret"
+  /** Change a value in place (W.159). */
+  | "pencil"
+  /** A card's deliverables (W.159, W.160). */
+  | "paperclip"
+  | "close"
+  | "play"
+  /** The Workboard's Board and List views, in its view switcher (W.174). */
+  | "columns"
+  | "rows"
+  /** An idea on /team/ideas: one shared spark (ID.2). */
+  | "spark"
+  /** "I learned" — a learning, as opposed to something to build (ID.2). */
+  | "bulb"
+  /** "We should build" — something to make (ID.2). */
+  | "wrench"
+  /** Seen only by you (ID.2). */
+  | "lock"
+  /** Back to the list a page came from (ID.2). */
+  | "back";
 
 /**
  * The paths, on a 24-box, stroked. `stroke-linecap: round` is set once on the
@@ -117,6 +144,52 @@ const PATHS: Record<IconName, JSX.Element> = {
       <circle cx="19" cy="12" r="1" />
     </>
   ),
+  calendar: (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 10h18M8 3v4M16 3v4" />
+    </>
+  ),
+  cycle: (
+    <>
+      <path d="M21 12a9 9 0 1 1-3-6.7" />
+      <path d="M21 4v5h-5" />
+    </>
+  ),
+  branch: (
+    <>
+      <circle cx="18" cy="18" r="3" />
+      <circle cx="6" cy="6" r="3" />
+      <path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12" />
+    </>
+  ),
+  caret: <path d="M6 9l6 6 6-6" />,
+  pencil: <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" />,
+  paperclip: <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />,
+  close: <path d="M18 6 6 18M6 6l12 12" />,
+  play: <path d="M7 4.5v15l12.5-7.5z" />,
+  columns: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M9 4v16M15 4v16" />
+    </>
+  ),
+  rows: <path d="M4 6h16M4 12h16M4 18h16" />,
+  spark: <path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z" />,
+  bulb: (
+    <>
+      <path d="M9 18h6M10 22h4" />
+      <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" />
+    </>
+  ),
+  wrench: <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z" />,
+  lock: (
+    <>
+      <rect x="3" y="11" width="18" height="11" rx="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </>
+  ),
+  back: <path d="M19 12H5M12 19l-7-7 7-7" />,
   grip: (
     <>
       <circle cx="9" cy="6" r="1" />

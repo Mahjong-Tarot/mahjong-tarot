@@ -35,7 +35,7 @@ async function isAdminUser(userId: string): Promise<boolean> {
 
 // Returns the signed-in admin, or null if not signed in / not an admin.
 export const getAdminUser = perRender(async (): Promise<AdminUser | null> => {
-  const session = createSessionClient();
+  const session = await createSessionClient();
   const {
     data: { user },
   } = await session.auth.getUser();
@@ -44,7 +44,9 @@ export const getAdminUser = perRender(async (): Promise<AdminUser | null> => {
   return { id: user.id, email };
 });
 
-// Server-side gate. Call at the top of the admin layout and every server action.
+// The Admin view's guard: requirePermission("surface.admin"), handing back the
+// signed-in user as it always has. Nobody signed in goes to /admin/login;
+// someone signed in without the atom is recorded and refused like any page.
 export async function requireAdmin(): Promise<AdminUser> {
   const user = await getAdminUser();
   if (!user) redirect("/sign-in");

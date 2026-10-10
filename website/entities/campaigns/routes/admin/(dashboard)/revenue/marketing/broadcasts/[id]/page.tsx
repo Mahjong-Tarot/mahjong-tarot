@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
 import { MetricCard } from "@/kernel/ui/MetricCard";
 import { Badge } from "@/kernel/ui/Badge";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { getBroadcast, getBroadcastStats, listRecipients, type BroadcastStatus } from "@/entities/campaigns/lib/broadcasts";
 import { listBrands, listEntries } from "@/entities/campaigns/lib/marketing-calendar";
 import { featuredPostIds, getBroadcastLinkStats, getBroadcastUnsubscribes } from "@/entities/campaigns/lib/broadcast-report";
@@ -12,7 +12,9 @@ import { loadLetter } from "@/entities/campaigns/lib/letter/data";
 import { resolveBroadcastBlocks } from "@/entities/campaigns/lib/broadcast-blocks";
 import { personaliseBody, renderBroadcast } from "../../../../../../../lib/marketing-email";
 import { utmCampaignFor } from "../../../../../../../lib/marketing-email-utm";
-import { LetterAgentPanel, type LetterAgentState } from "./LetterAgentPanel";
+import { sendApprovalView } from "@/entities/campaigns/lib/letter/send-approval";
+import { LETTER_READY } from "@/entities/campaigns/lib/letter/steps";
+import { LetterAgentPanel, type LetterAgentState, type LetterApproval } from "./LetterAgentPanel";
 import { BroadcastPreview } from "./BroadcastPreview";
 import { listBrandProfiles } from "@/entities/campaigns/lib/brand-profiles";
 import { BroadcastEditor } from "./BroadcastEditor";
@@ -45,8 +47,9 @@ const RECIPIENT_TONE: Record<string, "ok" | "warn" | "err" | "info"> = {
   failed: "err",
 };
 
-export default async function BroadcastDetailPage({ params }: { params: { id: string } }) {
-  await requireRevenueAccess();
+export default async function BroadcastDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  await requirePermission("campaigns.marketing");
   const campaign = await getBroadcast(params.id);
   if (!campaign) notFound();
 
@@ -75,6 +78,16 @@ export default async function BroadcastDetailPage({ params }: { params: { id: st
   const agent: LetterAgentState = letter.ok
     ? { step: letter.data.agentStep, error: letter.data.agentError, startedAt: letter.data.agentStartedAt, checklist: letter.data.notes.checklist ?? [], testSentTo: letter.data.notes.testSentTo ?? null, gathered: letter.data.notes.gathered?.length ?? 0 }
     : { step: null, error: null, startedAt: null, checklist: [], testSentTo: null, gathered: 0 };
+  // A letter at ready waits on its send approval (Y.17). A failed read shows as
+  // unread on the panel, never as "no approval", which would ask again.
+  let approval: LetterApproval | null = null;
+  if (letter.ok && letter.data.agentStep === LETTER_READY) {
+    try {
+      approval = await sendApprovalView(letter.data);
+    } catch (err) {
+      approval = { pendingVersion: null, currentVersion: null, recipients: null, sendWindow: null, unread: err instanceof Error ? err.message : String(err) };
+    }
+  }
 
   // Published blog posts the editor can feature, newest first; scoped to the
   // broadcast's brand when it has one, since a post links to its brand's site.
@@ -149,9 +162,17 @@ export default async function BroadcastDetailPage({ params }: { params: { id: st
 
       <BroadcastPreview html={preview.html} text={preview.text} />
 
-      <LetterAgentPanel campaignId={campaign.id} status={campaign.status} brandId={campaign.brandId} agent={agent} />
+      <LetterAgentPanel campaignId={campaign.id} status={campaign.status} brandId={campaign.brandId} agent={agent} approval={approval} scheduledAt={campaign.scheduledAt} />
 
-      <BroadcastEditor campaign={campaign} pendingCount={stats.pending} brands={brands} profiles={profiles} posts={posts} audiences={audiences.rows} />
+      <BroadcastEditor
+        campaign={campaign}
+        pendingCount={stats.pending}
+        brands={brands}
+        profiles={profiles}
+        posts={posts}
+        audiences={audiences.rows}
+        awaitsLetterApproval={agent.step === LETTER_READY || Boolean(letter.ok && letter.data.agentStartedAt)}
+      />
 
       <section className="admin-card admin-section-card">
         <div className="admin-card-title">Recipients</div>

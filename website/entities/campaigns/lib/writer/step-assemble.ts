@@ -2,7 +2,9 @@ import { renderPostMarkdown } from "@/entities/site";
 import { countBlocks } from "./checks";
 import { appendBlogNotes, loadBlogAsset, updateBlogAsset } from "./data";
 import { faqBlock, ideaInBriefBlock, insertAfterHeading, insertBeforeFirstH2, parseFaqSection, pullQuoteBlock, stripFaq } from "./markup";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./model";
+import { WRITER_ASSEMBLE_PROMPT } from "./step-assemble.prompt";
 import type { StepRunner } from "./types";
 import { z } from "zod/v4";
 
@@ -47,17 +49,11 @@ export const runAssemble: StepRunner = async ({ campaign, profile }) => {
   const base = stripFaq(blog.copyMd.replace(BRIEF_BLOCK, "")).replace(/^>\s.*\n?/gm, "").replace(/\n{3,}/g, "\n\n");
   const idea = campaign.idea ?? "";
 
-  const system = `${brandPreamble(profile)}
+  const P = WRITER_ASSEMBLE_PROMPT;
+  const system = fillPrompt(P.system, { preamble: brandPreamble(profile) });
+  const user = fillPrompt(P.user, { body: base, idea: idea || P.parts.noIdea });
 
-# Task
-Two things for the post you are given. First, the Idea in Brief: the problem, the insight and the way forward, each one or two plain sentences in the brand voice, no Markdown. Second, one to three pull quotes: sentences copied verbatim from the source material in the idea (a named person, publication or document), each placed under the heading where the post discusses it. A quote is verbatim or it is wrong; do not paraphrase and do not quote the post itself.`;
-  const user = `# Post body
-${base}
-
-# Source material (quote only from here)
-${idea || "(none)"}`;
-
-  const r = await callWriterModel({ step: "assemble", system, user, schema: assembleOutput });
+  const r = await callWriterModel({ step: "assemble", prompt: P, system, user, schema: assembleOutput });
   if (!r.ok) return r;
 
   const ideaNorm = normalize(idea);

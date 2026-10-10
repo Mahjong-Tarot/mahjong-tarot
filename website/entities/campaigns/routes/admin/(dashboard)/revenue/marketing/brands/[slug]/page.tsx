@@ -2,7 +2,7 @@ import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { getBrandProfileBySlug } from "@/entities/campaigns/lib/brand-profiles";
 import { BrandProfileTabs } from "./BrandProfileTabs";
 import { AutoPublishToggle } from "./AutoPublishToggle";
@@ -12,8 +12,9 @@ export const metadata: Metadata = {
   description: "Voice, channels, and writing process for a brand.",
 };
 
-export default async function BrandProfilePage({ params }: { params: { slug: string } }) {
-  await requireRevenueAccess();
+export default async function BrandProfilePage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
+  await requirePermission("campaigns.marketing");
   const profile = await getBrandProfileBySlug(params.slug);
   if (!profile) notFound();
 

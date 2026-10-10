@@ -2,13 +2,14 @@
 
 import { revalidateSurfaces } from "@/kernel/shell/surface";
 import { companyOs, type CompanyOsUpdate } from "@/kernel/data/supabase";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { recordAudit } from "@/kernel/audit/audit";
 import { getBroadcastStats } from "@/entities/campaigns/lib/broadcasts";
 import { writeForBrand, fetchSourceText, type WriterOutput } from "@/entities/campaigns/lib/ai/brand-writer";
 import { generateEntryImage } from "@/entities/campaigns/lib/ai/brand-image";
 import { listAssetImages, setSelectedImage, type AssetImage } from "@/entities/campaigns/lib/marketing-images";
-import { publishBlogAsset, revalidateBlog } from "@/entities/campaigns/lib/blog-publish";
+import { channelChangeRefusal, publishBlogAsset, revalidateBlog } from "@/entities/campaigns/lib/blog-publish";
+import { updateContentUnlessLive } from "@/entities/campaigns/lib/blog-live-edit";
 import { createDraftBroadcastForEntry, noteWriteFailure, partialSaveMessage, listEntries, type CalendarChannel, type CalendarEntryRow, type CalendarStatus, type PillarOption } from "@/entities/campaigns/lib/marketing-calendar";
 import { DERIVATIVES, storeCampaignOutputs, styleFieldsFor, syncEmailBroadcast } from "@/entities/campaigns/lib/calendar-drafting";
 import { addDays, saigonToday } from "@/kernel/config/dates";
@@ -43,7 +44,7 @@ export async function createEntry(input: {
   publishDate?: string | null;
   pillarId?: string | null;
 }): Promise<CreateResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const title = input.title.trim();
   if (!title) return { ok: false, error: "Give the entry a title." };
   if (!CHANNELS.has(input.channel as CalendarChannel)) {
@@ -97,7 +98,7 @@ export async function updateEntry(
     bodyHtml?: string | null;
   },
 ): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
 
   const update: CompanyOsUpdate<"marketing_content"> = {};
   if (patch.title !== undefined) {
@@ -108,9 +109,9 @@ export async function updateEntry(
   if (patch.brandId !== undefined) update.brand_id = patch.brandId || null;
   if (patch.pillarId !== undefined) update.pillar_id = patch.pillarId || null;
   if (patch.channel !== undefined) {
-    if (!CHANNELS.has(patch.channel as CalendarChannel)) {
-      return { ok: false, error: "Unknown channel." };
-    }
+    if (!CHANNELS.has(patch.channel as CalendarChannel)) return { ok: false, error: "Unknown channel." };
+    const refused = await channelChangeRefusal(id, patch.channel); // a live or campaign row keeps its channel (Y.16)
+    if (refused) return { ok: false, error: refused };
     update.channel = patch.channel;
   }
   if (patch.publishDate !== undefined) update.publish_date = patch.publishDate || null;
@@ -130,7 +131,7 @@ export async function updateEntry(
   if (patch.bodyHtml !== undefined) update.body_html = patch.bodyHtml || null;
   if (Object.keys(update).length === 0) return { ok: true };
 
-  const { error } = await companyOs.from("marketing_content").update(update).eq("id", id);
+  const { error } = await updateContentUnlessLive(id, update); // a live post on a gated campaign keeps its version (Y.91)
   if (error) return { ok: false, error: error.message };
 
   await recordAudit({
@@ -149,7 +150,7 @@ export async function moveEntry(
   status: string,
   sortOrder?: number,
 ): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   if (!STATUSES.has(status as CalendarStatus)) {
     return { ok: false, error: "Unknown status." };
   }
@@ -160,14 +161,17 @@ export async function moveEntry(
     .eq("id", id)
     .maybeSingle();
   if (beforeError) return { ok: false, error: beforeError.message };
-
+  const prev = before as { channel: string; status: string; slug: string | null } | null;
+  // A blog goes live only through the publish gate (Y.16), never a column move.
+  if (status === "published" && prev?.channel === "blog" && prev.status !== "published") {
+    const r = await publishBlogAsset(id, admin.email);
+    refresh();
+    return r.ok ? { ok: true } : { ok: false, error: r.errors.join(" ") };
+  }
   const update: CompanyOsUpdate<"marketing_content"> = { status };
   if (sortOrder !== undefined && Number.isFinite(sortOrder)) update.sort_order = sortOrder;
-
   const { error } = await companyOs.from("marketing_content").update(update).eq("id", id);
   if (error) return { ok: false, error: error.message };
-
-  const prev = before as { channel: string; status: string; slug: string | null } | null;
   if (prev?.channel === "blog" && prev.slug && prev.status === "published" && status !== "published") {
     revalidateBlog(prev.slug);
   }
@@ -190,7 +194,7 @@ export async function moveEntry(
 export async function publishBlogEntry(
   id: string,
 ): Promise<{ ok: true; slug: string; liveUrl: string; verified: boolean; warning?: string } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const result = await publishBlogAsset(id, admin.email);
   refresh();
   if (!result.ok) return { ok: false, error: result.errors.join(" ") };
@@ -200,12 +204,14 @@ export async function publishBlogEntry(
 // Manual social path: record where a blog/LinkedIn/Facebook entry went live and
 // move it to 'published'. URL is optional (a post may have no shareable link).
 export async function markPosted(id: string, url: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const posted = parseLinkInput(url);
   if (!posted.ok) return { ok: false, error: "The live link isn't a web link. Paste the post's full address." };
-  const { error } = await companyOs.from("marketing_content").update({ status: "published", posted_url: posted.value })
-    .eq("id", id);
+  // Never a blog: one goes live only through Publish to site's gate (Y.16).
+  const { data: marked, error } = await companyOs.from("marketing_content").update({ status: "published", posted_url: posted.value })
+    .eq("id", id).neq("channel", "blog").select("id");
   if (error) return { ok: false, error: error.message };
+  if (!marked?.length) return { ok: false, error: "A blog post goes live only through Publish to site, which checks its approval." };
 
   await recordAudit({
     table: "marketing_content",
@@ -228,7 +234,7 @@ export type EntryPerformance = {
 };
 
 export async function getEntryPerformance(broadcastId: string): Promise<EntryPerformance> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   const s = await getBroadcastStats(broadcastId);
   return { sent: s.sent, delivered: s.delivered, opened: s.opened, clicked: s.clicked };
 }
@@ -239,7 +245,7 @@ type ImagesResult = { ok: true; images: AssetImage[]; url: string } | { ok: fals
 // Kept as a new selected version in the image library (marketing_asset_images);
 // image_url mirrors the selection. Returns the full version list for the drawer.
 export async function generateImage(id: string): Promise<ImagesResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const r = await generateEntryImage(id, { createdBy: admin.email });
   if (!r.ok) return r;
   await recordAudit({
@@ -255,7 +261,7 @@ export async function generateImage(id: string): Promise<ImagesResult> {
 
 // The image library (all kept versions) for one entry, newest first.
 export async function getEntryImages(id: string): Promise<AssetImage[]> {
-  await requireRevenueAccess();
+  await requirePermission("campaigns.marketing");
   return listAssetImages(id);
 }
 
@@ -265,7 +271,7 @@ export async function selectEntryImage(
   id: string,
   imageId: string,
 ): Promise<ImagesResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const r = await setSelectedImage(id, imageId);
   if (!r.ok) return r;
   await recordAudit({
@@ -280,7 +286,7 @@ export async function selectEntryImage(
 }
 
 export async function deleteEntry(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const { error } = await companyOs.from("marketing_content").delete().eq("id", id);
   if (error) return { ok: false, error: error.message };
 
@@ -295,7 +301,7 @@ export async function deleteEntry(id: string): Promise<ActionResult> {
 }
 
 export async function createPillar(brandId: string, name: string): Promise<PillarResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   const trimmed = name.trim();
   if (!brandId) return { ok: false, error: "Pick a brand for the pillar." };
   if (!trimmed) return { ok: false, error: "Give the pillar a name." };
@@ -323,7 +329,7 @@ export async function createPillar(brandId: string, name: string): Promise<Pilla
 }
 
 export async function deactivatePillar(id: string): Promise<ActionResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
   // Soft-remove: entries already tagged with it keep their pillar_id.
   const { error } = await companyOs.from("marketing_pillars").update({ active: false })
     .eq("id", id);
@@ -344,7 +350,7 @@ export async function deactivatePillar(id: string): Promise<ActionResult> {
 // and dated a few days after the parent (the repurposing waterfall). Skips the
 // parent's own channel. Returns the full entry list so the client re-syncs.
 export async function repurposeEntry(id: string): Promise<RepurposeResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
 
   const { data, error } = await companyOs.from("marketing_content").select("id, title, brand_id, channel, pillar_id, publish_date")
     .eq("id", id)
@@ -399,7 +405,7 @@ export async function repurposeEntry(id: string): Promise<RepurposeResult> {
 // own channel, a linked child for the others), and any email output gets a
 // linked draft campaign. Returns the refreshed list. Never sends anything.
 export async function draftWithAI(id: string): Promise<RepurposeResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
 
   const { data: entryData, error: entryError } = await companyOs.from("marketing_content").select("id, title, brand_id, channel, publish_date, asset_url, posted_url, broadcast_id")
     .eq("id", id)
@@ -451,14 +457,14 @@ export async function draftWithAI(id: string): Promise<RepurposeResult> {
     let targetId: string;
     let targetCampaignId: string | null;
     if (out.channel === entry.channel) {
-      const { error: e } = await companyOs.from("marketing_content").update(fields).eq("id", entry.id);
+      const { error: e } = await updateContentUnlessLive(entry.id, fields, entry.channel);
       if (noteWriteFailure(failedChannels, out.channel, `entry ${entry.id}`, e)) continue;
       targetId = entry.id;
       targetCampaignId = entry.broadcast_id;
     } else {
       const existing = childByChannel.get(out.channel);
       if (existing) {
-        const { error: e } = await companyOs.from("marketing_content").update(fields).eq("id", existing.id);
+        const { error: e } = await updateContentUnlessLive(existing.id, fields, existing.channel);
         if (noteWriteFailure(failedChannels, out.channel, `entry ${existing.id}`, e)) continue;
         targetId = existing.id;
         targetCampaignId = existing.broadcast_id;
@@ -526,7 +532,7 @@ export async function draftWithAI(id: string): Promise<RepurposeResult> {
 export async function draftCampaignAssets(
   campaignId: string,
 ): Promise<{ ok: true; channels: string[] } | { ok: false; error: string }> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
 
   const { data: campData, error: campErr } = await companyOs.from("marketing_campaigns").select("id, name, idea, objective, brand_id, pillar_id, starts_on")
     .eq("id", campaignId)
@@ -593,7 +599,7 @@ export async function draftCampaignAssets(
 // entry's brand and publish date carry through; scheduling stays draft-editable
 // on the campaign side.
 export async function createBroadcastFromEntry(id: string): Promise<BroadcastResult> {
-  const admin = await requireRevenueAccess();
+  const { user: admin } = await requirePermission("campaigns.marketing");
 
   const { data: entryData, error: entryError } = await companyOs.from("marketing_content").select("id, title, channel, brand_id, broadcast_id, publish_date")
     .eq("id", id)

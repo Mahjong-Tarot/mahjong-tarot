@@ -5,6 +5,8 @@ import { ledgerLines } from "@/entities/campaigns/lib/campaign-ledger-shared";
 import { planErrors, planMdFrom, withPlanSection, type CampaignPlan } from "@/entities/campaigns/lib/campaign-plan-shared";
 import { activeChannelsFrom } from "@/entities/campaigns/lib/writer/profile-rules";
 import { brandPreamble, callWriterModel } from "@/entities/campaigns/lib/writer/model";
+import { fillPrompt } from "@/kernel/ai/prompts";
+import { WRITER_PLAN_PROMPT } from "./campaign-plan.prompt";
 import { z } from "zod/v4";
 
 // Plans a campaign from its idea before the writer drafts: the primary
@@ -65,25 +67,23 @@ export async function proposeCampaignPlan(campaignId: string): Promise<PlanResul
     const recent = rows.filter((r) => r.campaignId !== campaignId);
     const socialChannels = activeChannelsFrom(profile).filter((c) => c === "linkedin" || c === "facebook" || c === "twitter");
 
-    const system = `${brandPreamble(profile)}
+    const P = WRITER_PLAN_PROMPT;
+    const system = fillPrompt(P.system, {
+      preamble: brandPreamble(profile),
+      brandName: profile.brandName,
+      socialChannels: socialChannels.join(", ") || P.parts.noSocialChannels,
+      blogTypes: profile.preferredBlogTypes.join(", ") || P.parts.anyStyle,
+      imageStyles: profile.preferredImageStyles.join(", ") || P.parts.anyStyle,
+      socialStyles: profile.preferredSocialStyles.join(", ") || P.parts.anyStyle,
+      recentPosts: ledgerLines(recent.slice(0, 12)),
+    });
+    const user = fillPrompt(P.user, {
+      name: data.name,
+      goal: data.objective ? fillPrompt(P.parts.goal, { objective: data.objective }) : "",
+      idea: data.idea,
+    });
 
-# Task
-Plan this campaign from its idea before anything is written. Start from the reader: the primary question is what a founder or manager would actually type into an AI assistant about their own problem ("How do I run better one-on-one meetings with AI?", never "How does AI meeting prep work at ${profile.brandName}?"), and the idea must answer it with a figure. Take the keyword from inside that question. Then choose the blog type, the hero image style and a style for each of these social channels: ${socialChannels.join(", ") || "(none)"}. Choose each from the shape of the content, not by turn, and only from the brand's preferred slugs; a style the recent posts leaned on is the wrong choice unless the idea demands it, and a keyword a recent post owns is never right.
-
-## Preferred styles (choose only from these slugs)
-- Blog types: ${profile.preferredBlogTypes.join(", ") || "(any)"}
-- Image styles: ${profile.preferredImageStyles.join(", ") || "(any)"}
-- Social styles: ${profile.preferredSocialStyles.join(", ") || "(any)"}
-
-## Recent posts (newest first)
-${ledgerLines(recent.slice(0, 12))}`;
-    const user = `# Campaign
-Name: ${data.name}
-${data.objective ? `Goal: ${data.objective}\n` : ""}
-# Idea
-${data.idea}`;
-
-    const r = await callWriterModel({ step: "plan", system, user, schema: campaignPlanOutput });
+    const r = await callWriterModel({ step: "plan", prompt: P, system, user, schema: campaignPlanOutput });
     if (!r.ok) return r;
     const plan: CampaignPlan = {
       angle: r.data.angle ?? "",

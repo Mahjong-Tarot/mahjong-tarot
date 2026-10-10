@@ -2,7 +2,7 @@ import { SurfaceLink as Link } from "@/kernel/shell/SurfaceLink";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PageHead } from "@/kernel/ui/PageHead";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { selectCompanies } from "@/kernel/identity/reads";
 import { selectTags } from "@/entities/contacts";
 import { getAudience } from "@/entities/campaigns/lib/audiences";
@@ -13,8 +13,9 @@ export const metadata: Metadata = {
   description: "Edit a saved email audience and preview who it reaches.",
 };
 
-export default async function AudiencePage({ params }: { params: { id: string } }) {
-  await requireRevenueAccess();
+export default async function AudiencePage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  await requirePermission("campaigns.marketing");
   const [audience, companies, tags] = await Promise.all([
     getAudience(params.id),
     selectCompanies("id, name").is("archived_at", null).order("name"),

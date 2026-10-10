@@ -1,5 +1,6 @@
 import { companyOs } from "@/kernel/data/supabase";
 import { listCampaignLedger, type LedgerRow } from "../campaign-ledger";
+import { updateContentUnlessLive } from "../blog-live-edit";
 import type { WriterState } from "./steps";
 
 // The pipeline's reads and writes, kept in one file so the steps stay pure
@@ -81,6 +82,20 @@ export async function setWriterState(
   return { ok: true };
 }
 
+// The same write, only while the run is still at `from` (null for no run): a
+// caller that decided on the step it read moves nothing a start, a stop or a
+// decision changed in between. Answers whether it moved.
+export async function moveWriterStateFrom(
+  id: string,
+  from: string | null,
+  state: { step: WriterState; error: null; startedAt: string },
+): Promise<{ ok: true; moved: boolean } | { ok: false; error: string }> {
+  const base = companyOs.from("marketing_campaigns").update({ writer_step: state.step, writer_error: state.error, writer_started_at: state.startedAt }).eq("id", id);
+  const { data, error } = await (from === null ? base.is("writer_step", null) : base.eq("writer_step", from)).select("id");
+  if (error) return { ok: false, error: error.message };
+  return { ok: true, moved: Boolean(data && data.length > 0) };
+}
+
 export async function loadBlogAsset(campaignId: string): Promise<Loaded<BlogAsset>> {
   const { data, error } = await companyOs.from("marketing_content").select("id, title, copy_md, seo_md, image_url, image_brief_md, notes, status, posted_url, publish_date")
     .eq("campaign_id", campaignId)
@@ -119,8 +134,10 @@ export async function listCampaignAssets(campaignId: string): Promise<Loaded<Cam
   return { ok: true, data: (data ?? []).map((r) => ({ id: r.id, channel: r.channel, status: r.status, imageUrl: r.image_url })) };
 }
 
+// A step's write to a live post on a gated campaign is refused (Y.91), so a
+// run that reaches one stops on that step with the refusal as its error.
 export async function updateBlogAsset(id: string, fields: BlogAssetFields): Promise<{ ok: true } | { ok: false; error: string }> {
-  const { error } = await companyOs.from("marketing_content").update(fields).eq("id", id);
+  const { error } = await updateContentUnlessLive(id, fields);
   if (error) return { ok: false, error: error.message };
   return { ok: true };
 }

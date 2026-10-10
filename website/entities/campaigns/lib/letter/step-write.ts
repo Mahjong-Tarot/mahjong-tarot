@@ -1,5 +1,7 @@
 import { bannedLanguageError, brandNameError, emDashError, wordCount } from "../writer/checks";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "../writer/model";
+import { WRITER_LETTER_WRITE_PROMPT } from "./step-write.prompt";
 import { recentSentLetters, updateLetter } from "./data";
 import type { StepRunner } from "./types";
 import { z } from "zod/v4";
@@ -24,27 +26,15 @@ export const runWrite: StepRunner = async ({ letter, profile }) => {
   if (picked.length === 0) return { ok: false, error: "Write: no picked posts; run pick first." };
   const previous = await recentSentLetters(4);
 
-  const system = `${brandPreamble(profile)}
+  const P = WRITER_LETTER_WRITE_PROMPT;
+  const system = fillPrompt(P.system, { preamble: brandPreamble(profile), maxWords: MAX_WORDS });
+  const user = fillPrompt(P.user, {
+    points: points.map((p) => `- ${p.date}: ${p.fact} (${p.source})`).join("\n"),
+    posts: picked.map((p, i) => `${i + 1}. ${p.title}${p.pillar ? ` (${p.pillar})` : ""}`).join("\n"),
+    previous: previous.length ? previous.map((l) => `- ${l.subject}`).join("\n") : P.parts.noPrevious,
+  });
 
-# Task
-Write Dave's weekly letter to the people on the Edge8 list: founders and leaders who know him. It is a note from a person, not a newsletter. Rules that hold every week:
-- Open with "Hi {first_name}," exactly, on its own line. The placeholder is filled per reader.
-- Two or three short paragraphs from the data points: where he was, what happened, what it showed. Specific and true; nothing that is not in the data points.
-- Then one line that says what the three posts below have in common, in his words.
-- Sign off with "Dave" on its own line.
-- About 170 words, never more than ${MAX_WORDS}: count them. No headings, no lists, no links, no client names.
-- The subject is the one sentence the letter is about. Do not repeat it inside the body.
-- Do not reuse a subject or an opening from the previous letters listed.`;
-  const user = `# Data points (most recent first)
-${points.map((p) => `- ${p.date}: ${p.fact} (${p.source})`).join("\n")}
-
-# The three posts the letter introduces
-${picked.map((p, i) => `${i + 1}. ${p.title}${p.pillar ? ` (${p.pillar})` : ""}`).join("\n")}
-
-# Previous letters (do not repeat their subject or opening)
-${previous.length ? previous.map((l) => `- ${l.subject}`).join("\n") : "(none yet: this is the first letter)"}`;
-
-  const r = await callWriterModel({ step: "letter-write", system, user, schema: letterWriteOutput });
+  const r = await callWriterModel({ step: "letter-write", prompt: P, system, user, schema: letterWriteOutput });
   if (!r.ok) return r;
   const subject = r.data.subject?.trim() ?? "";
   const preheader = r.data.preheader?.trim() ?? "";

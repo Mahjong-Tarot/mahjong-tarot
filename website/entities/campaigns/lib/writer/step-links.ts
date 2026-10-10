@@ -2,7 +2,9 @@ import { parseSeoMd } from "@/entities/campaigns/lib/seo";
 import { auditLinkError, internalPostLinks, isInternalUrl, readerText } from "./checks";
 import { appendBlogNotes, loadBlogAsset, loadBrandLedger, updateBlogAsset } from "./data";
 import { linkPhrase } from "./markup";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./model";
+import { WRITER_LINKS_PROMPT } from "./step-links.prompt";
 import type { StepRunner } from "./types";
 import { z } from "zod/v4";
 
@@ -42,20 +44,15 @@ export const runLinks: StepRunner = async ({ campaign, profile }) => {
   const bySlug = new Map(posts.map((p) => [p.slug!, p]));
   const sourceUrls = Array.from(new Set(Array.from((campaign.idea ?? "").matchAll(/https?:\/\/[^\s)>\]"']+/g)).map((m) => m[0].replace(/[.,;:]+$/, ""))));
 
-  const system = `${brandPreamble(profile)}
+  const P = WRITER_LINKS_PROMPT;
+  const system = fillPrompt(P.system, { preamble: brandPreamble(profile) });
+  const user = fillPrompt(P.user, {
+    body: blog.copyMd,
+    posts: posts.map((p) => `${p.slug}: ${p.title ?? p.campaignName}. ${p.primaryKeyword ?? "no keyword"}; ${p.primaryQuestion ?? "no question"}`).join("\n"),
+    sourceUrls: sourceUrls.length ? sourceUrls.join("\n") : P.parts.noSourceUrls,
+  });
 
-# Task
-Choose two to four published posts that genuinely relate to this post and, for each, a phrase already in a body paragraph to link from. Then, for each source URL the idea supplies, name the phrase where the body first mentions that source. Copy phrases exactly; never propose new wording.`;
-  const user = `# Post body
-${blog.copyMd}
-
-# Published posts (slug: title. keyword; the question the post answers)
-${posts.map((p) => `${p.slug}: ${p.title ?? p.campaignName}. ${p.primaryKeyword ?? "no keyword"}; ${p.primaryQuestion ?? "no question"}`).join("\n")}
-
-# Source URLs in the idea
-${sourceUrls.length ? sourceUrls.join("\n") : "(none)"}`;
-
-  const r = await callWriterModel({ step: "links", system, user, schema: linksOutput });
+  const r = await callWriterModel({ step: "links", prompt: P, system, user, schema: linksOutput });
   if (!r.ok) return r;
 
   let md = blog.copyMd;

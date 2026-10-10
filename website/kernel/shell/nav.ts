@@ -20,9 +20,6 @@ export type NavItem = {
   href: string;
   ico: string;
   enabled?: boolean;
-  /** Hidden for everyone but super admins. The route is gated server-side
-   *  regardless — this is a nav convenience, never the boundary. */
-  superAdmin?: boolean;
   /** A capability key the viewer must hold for this row to appear: "coach" on
    *  the team hub, an entitlement on the portal. Deployment decides which rows
    *  exist at all; this decides which of them *this* person sees. The route is
@@ -31,7 +28,7 @@ export type NavItem = {
 };
 
 /** A labelled run of rows inside a group, e.g. "CRM" inside Revenue. */
-export type NavSubsection = { subheading: string; items: NavItem[]; superAdmin?: boolean };
+export type NavSubsection = { subheading: string; items: NavItem[] };
 export type NavEntry = NavItem | NavSubsection;
 export type NavGroup = { label: string | null; items: NavEntry[]; collapsible?: boolean };
 export type NavSection = { section: string | null; groups: NavGroup[] };
@@ -49,7 +46,6 @@ export type SlotId = { section: string | null; group: string | null; subheading?
 export type NavSlot = SlotId & {
   /** Rendered even when no installed entity contributes to it. */
   collapsible?: boolean;
-  superAdmin?: boolean;
 };
 
 export type NavContribution = SlotId & { order: number; items: NavItem[] };
@@ -101,13 +97,37 @@ export function composeNav(slots: NavSlot[], contributions: NavContribution[]): 
       group.items.push({
         subheading: slot.subheading,
         items,
-        ...(slot.superAdmin ? { superAdmin: true } : {}),
       });
     } else {
       group.items.push(...items);
     }
   }
   return sections;
+}
+
+/**
+ * Drop the rows whose route this build does not have.
+ *
+ * An installed entity can still leave part of itself out: the public fork
+ * receives campaigns without its marketing screens and org without its surveys
+ * (`internalPaths` in entities.manifest.json), while their nav files ship
+ * whole. The composition root names those routes as URL patterns, the way Next
+ * writes them (`/admin/revenue/marketing`, `/portal/programs/[id]`), and a row
+ * goes when its path is one of them or lies beneath it, because a pocket left
+ * out takes its sub-pages with it. composeNav then collapses whatever that
+ * empties, so a group with nothing left disappears rather than rendering bare.
+ */
+export function withoutRoutes(contributions: NavContribution[], routes: readonly string[]): NavContribution[] {
+  if (routes.length === 0) return contributions;
+  const segments = (p: string) => p.split("/").filter(Boolean);
+  const patterns = routes.map(segments);
+  const gone = (href: string) => {
+    const path = segments(splitHref(href).path);
+    return patterns.some(
+      (pattern) => pattern.length <= path.length && pattern.every((s, i) => /^\[.+\]$/.test(s) || s === path[i]),
+    );
+  };
+  return contributions.map((c) => ({ ...c, items: c.items.filter((item) => !gone(item.href)) }));
 }
 
 // ── Active-link resolution ──────────────────────────────────────────────────
@@ -117,13 +137,12 @@ export function composeNav(slots: NavSlot[], contributions: NavContribution[]): 
 // parent matched by prefix and the child matched exactly.
 
 /**
- * Drop the rows this viewer does not hold the capability for, then the
- * subsections, groups and sections that leaves empty — the same collapse
- * composeNav does for an uninstalled entity, one axis down.
+ * The navigation with only the rows `keep` accepts, and every subsection, group
+ * and section that leaves empty dropped. The composition root uses it to show a
+ * row only to someone who may open the page it links to (ADR 0013), with the
+ * same collapse composeNav does for an uninstalled entity, one axis down.
  */
-export function filterNav(sections: NavSection[], capabilities: Iterable<string>): NavSection[] {
-  const held = new Set(capabilities);
-  const keep = (item: NavItem) => !item.when || held.has(item.when);
+export function keepRows(sections: NavSection[], keep: (item: NavItem) => boolean): NavSection[] {
   const out: NavSection[] = [];
   for (const section of sections) {
     const groups: NavGroup[] = [];
@@ -225,22 +244,3 @@ export function makeIsActive(
   };
 }
 
-/**
- * The admin shell's view of a composed navigation for one viewer. A row or
- * subsection flagged `superAdmin` is removed for a plain admin — it is not
- * muted, because the rows behind it are for people who may not know they
- * exist. Everything else stays exactly as composed, including rows that are
- * `enabled: false`, which the shell renders muted as "soon" rather than
- * dropping, so the sidebar reads as complete before a route ships.
- *
- * Pure, so the C.8 sidebar matrix can be asserted against the real ADMIN_NAV
- * without rendering; AdminNav applies it and renders what comes back.
- */
-export function visibleTo(sections: NavSection[], isSuperAdmin: boolean): NavSection[] {
-  if (isSuperAdmin) return sections;
-  const keep = (e: NavEntry) => !e.superAdmin;
-  return sections.map((section) => ({
-    ...section,
-    groups: section.groups.map((group) => ({ ...group, items: group.items.filter(keep) })),
-  }));
-}

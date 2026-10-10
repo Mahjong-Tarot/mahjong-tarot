@@ -9,38 +9,12 @@ import { nextSendInstant } from "./send-window";
 // sends" means the same thing to everyone reading the page.
 export const SCHEDULE_ZONE = "America/New_York";
 
-export type ScheduleKind = "broadcast" | "series" | "personal";
+export type ScheduleKind = "broadcast" | "series";
 
 // A broadcast carries its own status; a projected series send is either still
 // ahead of its draft moment (projected) or past it with no issue opened
 // (unwritten), which is the gap to see before the send day.
 export type ScheduleStatus = "draft" | "approved" | "sending" | "sent" | "cancelled" | "missed" | "projected" | "unwritten";
-
-// A personal agent's messages on one day, drawn as one chip with the head
-// count: sent ones on the day they went, approved ones on the day they will.
-export function personalItems(rows: { agentId: string; agentName: string; brandName: string | null; status: "approved" | "sent"; at: string }[]): ScheduleItem[] {
-  const byKey = new Map<string, { agentId: string; agentName: string; brandName: string | null; status: "approved" | "sent"; day: string; time: string; at: string; count: number }>();
-  for (const r of rows) {
-    const { day, time } = dayAndTime(new Date(r.at));
-    const key = `${r.agentId}:${day}:${r.status}`;
-    const cur = byKey.get(key);
-    if (cur) {
-      cur.count += 1;
-      if (r.at < cur.at) Object.assign(cur, { at: r.at, time });
-    } else byKey.set(key, { ...r, day, time, count: 1 });
-  }
-  return [...byKey.values()].map((g) => ({
-    key: `personal:${g.agentId}:${g.day}:${g.status}`,
-    kind: "personal",
-    status: g.status,
-    title: `${g.agentName}, ${g.count} ${g.count === 1 ? "person" : "people"}`,
-    brandName: g.brandName,
-    at: g.at,
-    day: g.day,
-    time: g.time,
-    href: `/admin/revenue/marketing/personal/${g.agentId}`,
-  }));
-}
 
 export type ScheduleItem = {
   key: string;

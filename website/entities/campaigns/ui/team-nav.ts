@@ -6,10 +6,10 @@ import type { NavContribution } from "@/kernel/shell/nav";
 
 export const teamNav: NavContribution[] = [
   { section: null, group: "Revenue", subheading: "Marketing", order: 10, items: [
-    { label: "Overview", href: "/team/revenue/marketing", ico: "◑", enabled: true, when: "revenue" },
-    { label: "Campaigns", href: "/team/revenue/marketing/campaigns", ico: "◎", enabled: true, when: "revenue" },
-    { label: "Broadcasts", href: "/team/revenue/marketing/broadcasts", ico: "✉", enabled: true, when: "revenue" },
-    { label: "Brands", href: "/team/revenue/marketing/brands", ico: "◈", enabled: true, when: "revenue" },
-    { label: "Books", href: "/team/revenue/marketing/books", ico: "❒", enabled: true, when: "revenue" },
+    { label: "Overview", href: "/team/revenue/marketing", ico: "◑", enabled: true },
+    { label: "Campaigns", href: "/team/revenue/marketing/campaigns", ico: "◎", enabled: true },
+    { label: "Broadcasts", href: "/team/revenue/marketing/broadcasts", ico: "✉", enabled: true },
+    { label: "Brands", href: "/team/revenue/marketing/brands", ico: "◈", enabled: true },
+    { label: "Books", href: "/team/revenue/marketing/books", ico: "❒", enabled: true },
   ] },
 ];

@@ -20,21 +20,29 @@
 //
 // Delivery is deliberately hidden behind `publish`, so the in-process loop can
 // become a durable queue later without touching a single publisher.
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { recordAudit } from "@/kernel/audit/audit";
+import { heldInShadow } from "@/kernel/audit/run-context";
+import { recordDelivery } from "./deliveries";
 import { EVENTS, type EventName, type EventPayload } from "./catalogue";
 
 type Handler = (payload: unknown) => Promise<void> | void;
+type Registry = Map<EventName, { entity: string; run: Handler }[]>;
 
-/** name -> the handlers registered for it, in registration order.
- *
- * Kept on globalThis: Next compiles instrumentation.ts (which registers) and
- * each route (which publishes) as separate bundles with their own module
- * instances, so a module-level Map filled at boot was empty where a server
- * action published (mahjong-tarot, 2026-09-29). One process, one registry. */
-const REGISTRY = "__companyOsEventHandlers" as const;
-const store = globalThis as typeof globalThis & { [REGISTRY]?: Map<EventName, { entity: string; run: Handler }[]> };
-const handlers = (store[REGISTRY] ??= new Map<EventName, { entity: string; run: Handler }[]>());
+// The registry lives on the process, not on this module (W.170). Next compiles
+// instrumentation.ts, which registers the subscribers, into its own module
+// graph, and every route handler, page and server action into others, so a
+// server holds several copies of this file. A Map at module scope was filled in
+// the instrumentation's copy and read empty by every request's copy: from S.3
+// to W.170 no subscriber ever ran in production, and nothing logged it, because
+// a publish to nobody is a legal state. `Symbol.for` gives every copy the same
+// key, which is how Next keeps its own server-wide singletons.
+const REGISTRY = Symbol.for("edge8.kernel.events.handlers");
+const processGlobal = globalThis as typeof globalThis & { [REGISTRY]?: Registry };
+
+/** name -> the handlers registered for it, in registration order. */
+const handlers: Registry = (processGlobal[REGISTRY] ??= new Map());
 
 /**
  * Register one entity's interest in one event. The composition root calls this
@@ -73,11 +81,21 @@ export async function publish<N extends EventName>(name: N, payload: EventPayloa
   if (!parsed.success) {
     throw new Error(`publish(${name}): invalid payload — ${parsed.error.issues.map((i) => i.message).join("; ")}`);
   }
+  // A fact published inside a shadow run (Z.17) reaches no subscriber: what a
+  // subscriber does (a card, a message, a write in another entity) is an
+  // effect the shadow run must not have. The run's log names the event.
+  if (heldInShadow("event", name)) return;
+  // One id per publish, on every subscriber's delivery row (Y.86), so the
+  // watchdog can tell an event that reached three of its four subscribers.
+  const eventId = randomUUID();
   for (const { entity, run } of handlers.get(name) ?? []) {
+    const started = Date.now();
     try {
       await run(parsed.data);
+      await recordDelivery({ eventName: name, eventId, subscriber: entity, ok: true, error: null, durationMs: Date.now() - started });
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
+      await recordDelivery({ eventName: name, eventId, subscriber: entity, ok: false, error: message, durationMs: Date.now() - started });
       console.error(`[kernel/events] ${entity} failed handling ${name}:`, message);
       // Audited, not just logged: a dropped effect is invisible otherwise, and
       // the trail is what tells someone the follow-up never happened.

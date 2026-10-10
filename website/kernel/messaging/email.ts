@@ -1,5 +1,13 @@
 import { Resend } from "resend";
 import { companyOs } from "@/kernel/data/supabase";
+import { EMAIL_SIGN_OFF, EVENTS_EMAIL, OPS_EMAIL } from "@/kernel/config/contacts";
+import { escapeHtml } from "@/kernel/config/html";
+import { recordAudit } from "@/kernel/audit/audit";
+import { heldInShadow } from "@/kernel/audit/run-context";
+import { redactSignInLinks } from "@/kernel/messaging/sign-in-links";
+import { personIdForEmail } from "@/kernel/identity/person-by-email";
+import { companyIdForEmailDomain } from "@/kernel/identity/company-by-email-domain";
+import { categoryForEmail } from "@/kernel/messaging/message-category";
 
 // Resend wrapper. Silently no-ops if RESEND_API_KEY is absent. Preview
 // environments and local dev should never hard-fail on email send.
@@ -23,6 +31,9 @@ async function logSentEmail(opts: {
   meta?: Record<string, unknown>;
 }): Promise<void> {
   const occurredAt = new Date().toISOString();
+  const body = redactSignInLinks(opts.html);
+  const source = String(opts.meta?.source ?? "system");
+  const category = categoryForEmail(opts.meta, opts.subject);
   for (const recipient of opts.to) {
     const email = recipient.trim().toLowerCase();
     try {
@@ -35,6 +46,7 @@ async function logSentEmail(opts: {
       if (personError) console.error("[kernel] people read failed:", personError.message);
       const { error } = await companyOs.from("interactions").insert({
         kind: "email",
+        category,
         subject: opts.subject,
         body: opts.html,
         person_id: person?.id ?? null,
@@ -65,6 +77,11 @@ export async function sendTransactionalEmail(opts: {
   logMeta?: Record<string, unknown>;
   logBody?: string;
 }): Promise<boolean> {
+  // A routine in shadow mode sends nothing (Z.17): the run's log says what it
+  // held back, and the caller hears "not sent", which is the truth. Every
+  // transactional email, the ticket and bank-change ones included, comes here.
+  const recipients = Array.isArray(opts.to) ? opts.to.length : 1;
+  if (heldInShadow("email", `a transactional email to ${recipients} recipient${recipients === 1 ? "" : "s"}`)) return false;
   if (!resend) {
     console.warn("[email] RESEND_API_KEY not set, skipping send to", opts.to);
     return false;

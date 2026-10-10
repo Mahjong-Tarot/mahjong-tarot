@@ -5,7 +5,7 @@ import { MetricCard } from "@/kernel/ui/MetricCard";
 import { Badge } from "@/kernel/ui/Badge";
 import { BarChart } from "@/kernel/ui/charts/BarChart";
 import { DonutChart } from "@/kernel/ui/charts/DonutChart";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { getAnalyticsOverview, toBars } from "@/entities/company-os";
 import {
   getAudienceBreakdown,
@@ -83,16 +83,16 @@ const BROADCAST_TONE: Record<string, "ok" | "warn" | "err" | "info" | "neutral">
 };
 
 function formatRate(value: number | null): string {
-  if (value === null) return "—";
-  return `${value.toFixed(1)}%`;
+  return value === null ? "—" : `${value.toFixed(1)}%`;
 }
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-export default async function MarketingPage({ searchParams }: { searchParams: SearchParamsObj }) {
-  await requireRevenueAccess();
+export default async function MarketingPage(props: { searchParams: Promise<SearchParamsObj> }) {
+  const searchParams = await props.searchParams;
+  await requirePermission("campaigns.marketing");
   const range = parseRange(firstParam(searchParams.range));
   const emailAudience = parseAudience(firstParam(searchParams.email));
   const active = RANGES.find((r) => r.key === range) ?? RANGES[1];

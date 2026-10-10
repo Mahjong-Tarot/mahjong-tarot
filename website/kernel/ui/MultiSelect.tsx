@@ -24,6 +24,7 @@ export function MultiSelect({
   options,
   value,
   onChange,
+  single = false,
 }: {
   // The aria label and the "All …" wording: label "Filter by client", noun "clients".
   label: string;
@@ -33,6 +34,14 @@ export function MultiSelect({
   options: MultiSelectOption[];
   value: string[];
   onChange: (next: string[]) => void;
+  /**
+   * One choice at a time (the Workboard's week filter, W.176): radios. A
+   * pointer pick closes the menu; arrowing through the radios applies each
+   * one as a native select does and keeps the menu open, so a keyboard reader
+   * can move down the list without it closing under them. The trigger is the same named button, so a filter
+   * of either kind is as wide as its name and not as wide as its value (W.89).
+   */
+  single?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const chosen = options.filter((o) => value.includes(o.value));
@@ -40,6 +49,10 @@ export function MultiSelect({
     chosen.length === 0 ? `All ${noun}` : chosen.length <= 2 ? chosen.map((o) => o.label).join(", ") : `${chosen.length} ${noun}`;
 
   function toggle(v: string) {
+    if (single) {
+      onChange([v]);
+      return;
+    }
     onChange(value.includes(v) ? value.filter((x) => x !== v) : [...value, v]);
   }
 
@@ -66,10 +79,29 @@ export function MultiSelect({
       {open && (
         <>
           <div className="admin-record-menu-backdrop" onClick={() => setOpen(false)} />
-          <div className="admin-record-menu admin-multiselect-menu" role="listbox" aria-label={label} aria-multiselectable>
+          <div className="admin-record-menu admin-multiselect-menu" role="listbox" aria-label={label} aria-multiselectable={!single}>
             {options.map((o) => (
-              <label key={o.value} className="admin-multiselect-item" role="option" aria-selected={value.includes(o.value)}>
-                <input type="checkbox" checked={value.includes(o.value)} onChange={() => toggle(o.value)} />
+              <label
+                key={o.value}
+                className="admin-multiselect-item"
+                role="option"
+                aria-selected={value.includes(o.value)}
+                // A pointer click has a detail of 1 or more; the click an arrow
+                // key or Space synthesises has 0 and leaves the menu open. The
+                // pointer path picks here as well as closing: closing unmounts
+                // the radio before the browser forwards the click to it, so
+                // its change would never arrive.
+                onClick={
+                  single
+                    ? (e) => {
+                        if (e.detail === 0) return;
+                        onChange([o.value]);
+                        setOpen(false);
+                      }
+                    : undefined
+                }
+              >
+                <input type={single ? "radio" : "checkbox"} name={single ? label : undefined} checked={value.includes(o.value)} onChange={() => toggle(o.value)} />
                 {o.label}
               </label>
             ))}

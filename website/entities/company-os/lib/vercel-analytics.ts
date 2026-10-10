@@ -1,6 +1,5 @@
-// Copied from edge8-web entities/company-os. The mahjong-tarot Vercel project.
-const TEAM_ID = process.env.VERCEL_TEAM_ID ?? "";
-const PROJECT_ID = process.env.VERCEL_PROJECT_ID ?? "";
+import { VERCEL_ANALYTICS_PROJECT } from "@/entities/company-os/lib/vercel-analytics-project";
+
 const API_BASE = "https://api.vercel.com/v1/query/web-analytics";
 // The mahjong-tarot Vercel project was created on 2026-04-09; nothing before it.
 const TRACKING_START = "2026-04-09T00:00:00.000Z";
@@ -93,9 +92,12 @@ export function isInternalPath(path: string): boolean {
 }
 
 function buildUrl(path: string, params: Record<string, string>) {
+  // Both exported readers check for a project before querying; this throw is
+  // only reachable if a new caller forgets to.
+  if (!VERCEL_ANALYTICS_PROJECT) throw new Error("No Vercel Analytics project is configured.");
   const url = new URL(`${API_BASE}/${path}`);
-  url.searchParams.set("teamId", TEAM_ID);
-  url.searchParams.set("projectId", PROJECT_ID);
+  url.searchParams.set("teamId", VERCEL_ANALYTICS_PROJECT.teamId);
+  url.searchParams.set("projectId", VERCEL_ANALYTICS_PROJECT.projectId);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
   return url.toString();
 }
@@ -208,7 +210,7 @@ export async function getTrafficCount(
   segment: AnalyticsSegment = "public",
 ): Promise<{ pageviews: number; visitors: number } | null> {
   const token = process.env.VERCEL_ANALYTICS_TOKEN;
-  if (!token) return null;
+  if (!token || !VERCEL_ANALYTICS_PROJECT) return null;
   try {
     const count = await query<CountResponse>("visits/count", { since, until, filter: segmentFilter(segment) }, token);
     return count.data;
@@ -224,6 +226,9 @@ export async function getAnalyticsOverview(
   const token = process.env.VERCEL_ANALYTICS_TOKEN;
   if (!token) {
     return { error: "VERCEL_ANALYTICS_TOKEN is not set. Add it as a project environment variable to enable this page." };
+  }
+  if (!VERCEL_ANALYTICS_PROJECT) {
+    return { error: "No Vercel project is configured for analytics. Set VERCEL_ANALYTICS_TEAM_ID and VERCEL_ANALYTICS_PROJECT_ID to enable this page." };
   }
 
   const sinceStr = sinceFor(range);

@@ -5,9 +5,9 @@ import { requireEnv } from "@/kernel/config/env";
 // SSR Supabase client bound to the request's cookies. Used ONLY to read/refresh
 // the auth session (auth.getUser). All company_os data access goes through
 // the service-role client in kernel/data/supabase — never this one.
-// Next 14: cookies() is synchronous (no await, unlike Next 15+).
-export function createSessionClient() {
-  const cookieStore = cookies();
+// Async because cookies() is a promise since Next 15 (B.18.2).
+export async function createSessionClient() {
+  const cookieStore = await cookies();
   return createServerClient(
     requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
     requireEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
@@ -23,7 +23,7 @@ export function createSessionClient() {
             }
           } catch {
             // Called from a Server Component render, where cookies are read-only.
-            // The middleware refreshes the session cookie, so this is safe to ignore.
+            // proxy.ts refreshes the session cookie, so this is safe to ignore.
           }
         },
       },

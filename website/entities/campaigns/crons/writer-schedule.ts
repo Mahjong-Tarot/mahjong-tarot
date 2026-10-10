@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { withRoutineRun, listRoutineRuns } from "@/kernel/audit/routine-runs";
+import { failuresFrom, routineResult, withRoutineRun } from "@/kernel/audit/routine-runs";
 import { companyOs } from "@/kernel/data/supabase";
 import { notifyMarketing } from "@/kernel/messaging/lark";
 import { startWriterRun } from "@/entities/campaigns/lib/writer/advance";
-import { kickWriterStep, runWriterStep, WRITER_ROUTINE_ID } from "@/entities/campaigns/lib/writer/run-step";
-import { isStale, startsWithinWindow } from "@/entities/campaigns/lib/writer/schedule";
-import { isWriterStep } from "@/entities/campaigns/lib/writer/steps";
+import { runWriterStepNow } from "@/entities/campaigns/lib/writer/run-step";
+import { startsWithinWindow } from "@/entities/campaigns/lib/writer/schedule";
 import { saigonToday } from "@/kernel/config/dates";
 
 /**
@@ -17,22 +16,32 @@ import { saigonToday } from "@/kernel/config/dates";
  */
 export const schedule = "0 0 * * *";
 
+/**
+ * What Settings -> Agents says about this routine (Y.14). Read as text by
+ * scripts/gen-deployment.mjs into kernel/audit/automations.json, so it keeps
+ * one literal shape: double-quoted strings and arrays of them, nothing computed.
+ * @generator
+ */
+export const automation = {
+  name: "Writer schedule",
+  description: "Hourly. Starts the writer on a campaign the day before its date, and re-arms a run that lost its hand-off between steps. Quiet unless it did something.",
+  content: ["Marketing campaigns", "Blog assets"],
+  apps: ["Supabase", "Lark"],
+};
+
 // Vercel cron: daily at 00:00 UTC (07:00 Asia/Ho_Chi_Minh), before blog-publish.
-// Two jobs, both so a campaign can go from idea to live
-// post with nobody pressing a button after the idea is written.
+// It starts writer runs so a campaign can go from idea to live post with
+// nobody pressing a button after the idea is written: a campaign whose start
+// date is tomorrow (or today, if yesterday was missed) and that has a brand, a
+// written idea and no run yet gets its writer started here, the first step run
+// in this request and the rest carried by the agent driver, one step per tick
+// (Y.12). The post lands scheduled for its date, and the daily publish routine
+// puts it live (see step-publish). A campaign whose blog is already scheduled
+// or published is left alone: someone ran it. It used to re-arm runs whose
+// HTTP hand-off had dropped; the driver has no hand-off to drop.
 //
-// 1. Start: a campaign whose start date is tomorrow (or today, if yesterday
-//    was missed) and that has a brand, a written idea and no run yet gets its
-//    writer started here, the first step run in this request, the rest handing
-//    on as they always do. The post lands scheduled for its date, and the
-//    daily publish routine puts it live (see step-publish). A campaign whose
-//    blog is already scheduled or published is left alone: someone ran it.
-// 2. Re-arm: a run parked on a step with no error and no step recorded for
-//    ten minutes has lost its hand-off (it happens about one step in six).
-//    The route is called again for it, which is what Continue on the hub does.
-//
-// Quiet when nothing is due; one ops message when it started or re-armed
-// anything, naming the campaigns.
+// Quiet when nothing is due; one ops message when it started anything, naming
+// the campaigns.
 
 const ROUTINE_ID = "/api/cron/writer-schedule";
 
@@ -57,8 +66,8 @@ async function handler(): Promise<Response> {
 
   const today = saigonToday();
   const started: string[] = [];
-  const rearmed: string[] = [];
   const failed: string[] = [];
+  const noticeFailures: { subject: string; step: string; error: string }[] = [];
 
   // Start runs for campaigns whose date has come round.
   const due = campaigns.filter(
@@ -82,40 +91,36 @@ async function handler(): Promise<Response> {
       failed.push(`${c.name}: ${begun.error}`);
       continue;
     }
-    const first = await runWriterStep(c.id);
+    const first = await runWriterStepNow(c.id);
     if ("skipped" in first) failed.push(`${c.name}: ${first.skipped}`);
     else if (!first.ok) failed.push(`${c.name}: ${first.error}`);
     else started.push(c.name);
   }
 
-  // Re-arm runs whose hand-off was dropped. The last step a run recorded is
-  // the newest writer-agent run row that names its campaign id.
-  const stuck = campaigns.filter((c) => isWriterStep(c.writer_step) && c.writer_error === null);
-  if (stuck.length > 0) {
-    const runs = await listRoutineRuns(WRITER_ROUTINE_ID, 300);
-    const now = Date.now();
-    for (const c of stuck) {
-      const last = runs.find((r) => (r.summary ?? "").includes(c.id))?.started_at ?? c.writer_started_at;
-      if (!isStale(last, now)) continue;
-      await kickWriterStep(c.id);
-      rearmed.push(c.name);
-    }
-  }
-
-  if (started.length || rearmed.length || failed.length) {
+  if (started.length || failed.length) {
     const lines: string[] = [];
     if (started.length) lines.push(`Writer started on schedule: ${started.join(", ")}.`);
-    if (rearmed.length) lines.push(`Writer re-armed after a dropped hand-off: ${rearmed.join(", ")}.`);
     if (failed.length) lines.push(`Writer could not start: ${failed.join("; ")}.`);
     // The chat post is best-effort — the publishing already happened and must
     // not be reported as failed — but a swallowed rejection is how a silent
     // webhook goes unnoticed for weeks, so it is named in the run log.
-    await notifyMarketing(lines.join("\n")).catch((err: unknown) => {
+    const told = await notifyMarketing(lines.join("\n")).catch((err: unknown) => {
       console.error("[writer-schedule] marketing notification failed:", err instanceof Error ? err.message : String(err));
+      return false;
     });
+    if (!told) noticeFailures.push({ subject: "Marketing chat", step: "notify", error: "Lark did not accept the notice (LARK_MARKETING_WEBHOOK_URL)" });
   }
 
-  return NextResponse.json({ ok: true, checked: campaigns.length, started, rearmed, failed });
+  // A campaign whose writer could not start names itself, as does a notice
+  // Lark did not take; the kernel makes the run an error (Y.20).
+  return routineResult({
+    status: "ok",
+    ok: true,
+    checked: campaigns.length,
+    started,
+    failed,
+    failures: [...failuresFrom(failed, "start writer", "writer schedule"), ...noticeFailures],
+  });
 }
 
 export const GET = (req: Request): Promise<Response> => withRoutineRun(ROUTINE_ID, req, handler);

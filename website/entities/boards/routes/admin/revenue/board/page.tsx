@@ -3,7 +3,7 @@
 // post) and one per AI-writer campaign; moving a card or ticking a post here
 // carries back to the calendar (entities/campaigns/lib/revenue-board/writeback.ts).
 import type { Metadata } from "next";
-import { requireRevenueAccess } from "@/kernel/identity/revenue-access";
+import { requirePermission } from "@/kernel/identity/access-request";
 import { PageHead } from "@/kernel/ui/PageHead";
 import { selectBoardColumns, selectBoards, selectTasks } from "../../../../lib/data";
 import { BoardClient, type BoardCard } from "./BoardClient";
@@ -25,7 +25,7 @@ type TaskRow = {
 };
 
 export default async function RevenueBoardPage() {
-  await requireRevenueAccess();
+  await requirePermission("boards.revenue");
   const { data: board, error } = await selectBoards("id, name, description").eq("slug", "revenue").maybeSingle();
   if (error) throw new Error(`[boards] revenue board: ${error.message}`);
   if (!board) {

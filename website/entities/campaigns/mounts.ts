@@ -12,19 +12,10 @@ export const mounts: RouteMounts = {
   "crons/blog-publish": {
     segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
   },
-  "crons/email-agent": {
-    segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
-  },
   "crons/email-campaign-send": {
     segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
   },
-  "crons/email-message-send": {
-    segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
-  },
   "crons/email-series-draft": {
-    segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
-  },
-  "crons/letter-agent": {
     segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
   },
   "crons/letter-weekly": {
@@ -39,7 +30,7 @@ export const mounts: RouteMounts = {
   "crons/marketing-weekly-pulse": {
     segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store" },
   },
-  "crons/writer-agent": {
+  "crons/agent-driver": {
     segment: { runtime: "nodejs", dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
   },
   "crons/revenue-content-sync": {
@@ -82,9 +73,6 @@ export const mounts: RouteMounts = {
     segment: { dynamic: "force-dynamic", fetchCache: "force-no-store", maxDuration: 300 },
   },
   "routes/admin/(dashboard)/revenue/marketing/campaigns/page": {
-    segment: { dynamic: "force-dynamic", fetchCache: "force-no-store" },
-  },
-  "routes/admin/(dashboard)/revenue/marketing/personal/[id]/page": {
     segment: { dynamic: "force-dynamic", fetchCache: "force-no-store" },
   },
   "routes/admin/(dashboard)/revenue/marketing/page": {

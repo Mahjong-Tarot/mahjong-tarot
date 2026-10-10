@@ -4,7 +4,9 @@ import { SELF_BRAND_SLUG } from "@/kernel/config/brand";
 import { selectBrands } from "@/entities/contacts";
 import { siteForBrandSlug } from "./brand-sites";
 import { getBrandProfileBySlug } from "./brand-profiles";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./writer/model";
+import { WRITER_SERIES_INTRO_PROMPT } from "./series-template.prompt";
 import { nextCoaching } from "./learner-progress";
 
 // The weekly issue body, from its series' template, filled once when the draft
@@ -47,10 +49,8 @@ async function draftIntro(context: string): Promise<string | null> {
   if (!profile) return null;
   const result = await callWriterModel({
     step: "series-intro",
-    system: `${brandPreamble(profile)}
-
-# Task
-Write the opening note of a weekly email to learners in an AI certification program, in the author's own voice: two or three short sentences, warm and direct, first person. It invites them to bring a real problem to live coaching. No greeting line (the email adds "Hi {first_name},"), no sign-off, no em dashes, no client or company names.`,
+    prompt: WRITER_SERIES_INTRO_PROMPT,
+    system: fillPrompt(WRITER_SERIES_INTRO_PROMPT.system, { preamble: brandPreamble(profile) }),
     user: context,
     schema: z.object({ intro: z.string().min(1) }),
   });
@@ -67,8 +67,10 @@ export async function fillIssueTemplate(template: string, sendAt: Date, zone: st
   const intro = template.includes("{intro}")
     ? await draftIntro(
         [
-          coaching ? `Next live coaching: ${coachingLine(coaching.at, zone)}.` : "Live coaching runs every week.",
-          post ? `This week's article: "${post.title}". ${post.excerpt}` : "",
+          coaching
+            ? fillPrompt(WRITER_SERIES_INTRO_PROMPT.parts.coaching, { when: coachingLine(coaching.at, zone) })
+            : WRITER_SERIES_INTRO_PROMPT.parts.noCoaching,
+          post ? fillPrompt(WRITER_SERIES_INTRO_PROMPT.parts.article, { title: post.title, excerpt: post.excerpt }) : "",
         ].join("\n"),
       )
     : null;

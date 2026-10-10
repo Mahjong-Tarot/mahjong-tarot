@@ -91,9 +91,9 @@ export function CampaignHub({
   const [status, setStatus] = useState(campaign.status);
   const [seoGeoMd, setSeoGeoMd] = useState(campaign.seoGeoMd ?? "");
 
-  // Follows the server's entries across router.refresh() so a move's server-side
+  // Follows the server's entries across every re-render so a move's server-side
   // effects, and other editors' changes, show without a hard reload.
-  const [entries, setEntries, { begin, end }] = useServerSyncedState(initialEntries);
+  const [entries, setEntries, { run: runSynced }] = useServerSyncedState(initialEntries);
 
   const [addOpen, setAddOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
@@ -182,17 +182,16 @@ export function CampaignHub({
     router.push(`${base}/revenue/marketing/campaigns/${campaign.id}/assets/${id}`);
   }
 
-  // Optimistic status move for the workboard. Either way the outcome, refresh:
-  // on success so the server's view of the entry replaces the guess, on failure
-  // so the hook rolls back to server truth instead of a captured snapshot.
+  // Optimistic status move for the workboard, through the synced `run` (A.33):
+  // released however the request ends, and refreshed only when the server
+  // refused or never answered, so the hook rolls back to server truth instead
+  // of a captured snapshot. A move the server took revalidates, and the action
+  // comes back with this page re-rendered, which replaces the guess.
   function move(id: string, next: string) {
     setEntries((es) => es.map((e) => (e.id === id ? { ...e, status: next as CalendarEntryRow["status"] } : e)));
     setNote(null);
-    begin();
-    moveEntry(id, next).then((r) => {
-      if (!r.ok) setNote({ tone: "err", text: `Couldn't move: ${r.error}` });
-      end();
-      router.refresh();
+    void runSynced(() => moveEntry(id, next), {
+      onError: (message) => setNote({ tone: "err", text: `Couldn't move: ${message}` }),
     });
   }
 

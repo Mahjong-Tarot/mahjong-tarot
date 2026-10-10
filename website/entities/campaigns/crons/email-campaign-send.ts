@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { withRoutineRun } from "@/kernel/audit/routine-runs";
+import { routineResult, withRoutineRun } from "@/kernel/audit/routine-runs";
 import { companyOs } from "@/kernel/data/supabase";
 import type { TablesUpdate } from "@/kernel/data/supabase/database.types";
 import { parseBroadcastBlocks } from "../lib/marketing-email-blocks";
@@ -19,6 +19,19 @@ import { type GreetedPerson, GREETING_COLUMNS, greetingName } from "@/kernel/con
  * @generator
  */
 export const schedule = "*/15 * * * *";
+
+/**
+ * What Settings -> Agents says about this routine (Y.14). Read as text by
+ * scripts/gen-deployment.mjs into kernel/audit/automations.json, so it keeps
+ * one literal shape: double-quoted strings and arrays of them, nothing computed.
+ * @generator
+ */
+export const automation = {
+  name: "Email campaign send",
+  description: "Every 15 minutes. Sends the next batch of a scheduled email campaign sequentially, one Resend call per recipient.",
+  content: ["Email campaigns", "Recipients"],
+  apps: ["Supabase", "Resend"],
+};
 
 // Route-handler Supabase reads get frozen by Next's data cache despite
 // force-dynamic; opt the whole handler out so each run sees fresh rows.
@@ -43,6 +56,8 @@ export const schedule = "*/15 * * * *";
 type RecipientPatch = TablesUpdate<{ schema: "company_os" }, "email_campaign_recipients">;
 
 const LOG = "[cron/email-campaign-send]";
+
+type Failure = { subject: string; step: string; error: string };
 
 async function handler(_req: Request) {
   // Oldest campaign that is actively sending AND whose schedule has arrived. The
@@ -75,7 +90,7 @@ async function handler(_req: Request) {
     | undefined;
 
   if (!campaign) {
-    return NextResponse.json({ sending: 0, message: "No campaign is due." });
+    return routineResult({ status: "skipped", reason: "No campaign is due.", sending: 0 });
   }
 
   // Atomic claim. The rows move to 'claimed' in the same statement that selects
@@ -108,7 +123,7 @@ async function handler(_req: Request) {
     }
 
     if (inFlight && inFlight > 0) {
-      return NextResponse.json({ campaign: campaign.id, in_flight: inFlight });
+      return routineResult({ status: "ok", campaign: campaign.id, in_flight: inFlight });
     }
 
     const { error: completeError } = await companyOs.from("email_campaigns").update({ status: "sent", sent_at: nowIso, updated_at: nowIso })
@@ -116,12 +131,15 @@ async function handler(_req: Request) {
       .eq("status", "sending");
     if (completeError) {
       console.error(`${LOG} marking campaign ${campaign.id} sent failed: ${completeError.message}`);
-      return NextResponse.json(
-        { campaign: campaign.id, completed: false, writeFailures: 1 },
-        { status: 500 },
-      );
+      return routineResult({
+        status: "ok",
+        campaign: campaign.id,
+        completed: false,
+        writeFailures: 1,
+        failures: [{ subject: `campaign ${campaign.id}`, step: "mark sent", error: completeError.message }],
+      });
     }
-    return NextResponse.json({ campaign: campaign.id, completed: true, writeFailures: 0 });
+    return routineResult({ status: "ok", campaign: campaign.id, completed: true, writeFailures: 0 });
   }
 
   // The featured posts and the call to action are the same for every recipient:
@@ -154,7 +172,12 @@ async function handler(_req: Request) {
     const { error: requeueError } = await companyOs.from("email_campaign_recipients").update({ status: "pending", claimed_at: null })
       .in("id", rows.map((r) => r.id));
     if (requeueError) console.error(`${LOG} returning the batch to pending failed: ${requeueError.message}`);
-    return NextResponse.json({ campaign: campaign.id, deferred: rows.length, error: "learning progress unavailable" }, { status: 500 });
+    return routineResult({
+      status: "ok",
+      campaign: campaign.id,
+      deferred: rows.length,
+      failures: [{ subject: `campaign ${campaign.id}`, step: "learning progress", error: "learning progress unavailable" }],
+    });
   }
 
   let sent = 0;
@@ -165,6 +188,8 @@ async function handler(_req: Request) {
   // sent mail but could not record it is not reported as a clean run.
   let writeFailures = 0;
   const sentEmailIds: string[] = [];
+  // What went wrong, by recipient or by write, for the run's error line (Y.20).
+  const failures: Failure[] = [];
 
   // Every bookkeeping write below has the same shape: patch the row, and if the
   // patch fails, count it and say so rather than letting the tick report clean.
@@ -175,25 +200,26 @@ async function handler(_req: Request) {
   //
   // NOTE, and it is the reason this is written here rather than shared with the
   // personal path: `email_campaign_recipients` has NO `updated_at` column.
-  // `email_messages` does, and lib/personal/send.ts's patch() sets it. Lifting
-  // that helper over here verbatim would make every write in this loop fail on
-  // an unknown column while the mail still went out — and because sent rows
-  // would stay `claimed`, claim_campaign_batch would hand them back after
-  // thirty minutes and mail the same people again.
+  // `email_messages` does, and the personal send path's patch() set it before
+  // that path was removed (Y.18). Lifting a helper written for that table over
+  // here verbatim would make every write in this loop fail on an unknown column
+  // while the mail still went out — and because sent rows would stay `claimed`,
+  // claim_campaign_batch would hand them back after thirty minutes and mail the
+  // same people again.
   const patch = async (id: string, row: RecipientPatch, what: string): Promise<void> => {
     const { error } = await companyOs.from("email_campaign_recipients").update(row).eq("id", id);
     if (error) {
       writeFailures += 1;
+      failures.push({ subject: `recipient ${id}`, step: what, error: error.message });
       console.error(`${LOG} ${what} failed: ${error.message}`);
     }
   };
 
   for (const row of rows) {
     // Live consent, do-not-contact, persona, archived, prior hard failures, and
-    // the one-email-a-day cap across both kinds. Asked through the module the
-    // personal path uses, so the two cannot drift again (A.15): this tick never
-    // used to ask about the cap at all, which is how a personal message at
-    // 08:20 failed to stop this batch at 08:30.
+    // the one-email-a-day cap, which also counts any personal message sent
+    // today (A.15): this tick never used to ask about the cap at all, which is
+    // how a personal message at 08:20 failed to stop this batch at 08:30.
     const decision = await decideSend("broadcast", { personId: row.person_id, email: row.email }, new Date(nowIso));
 
     if (decision.action === "defer") {
@@ -242,6 +268,9 @@ async function handler(_req: Request) {
       replyTo: campaign.reply_to,
       campaignId: campaign.id,
       logSource: "marketing_campaign",
+      // One key per recipient row: a batch retried after a crash between
+      // Resend taking the message and the row being marked sent mails no one twice.
+      idempotencyKey: `campaign:${campaign.id}:recipient:${row.id}`,
     });
 
     if (result.ok) {
@@ -256,6 +285,12 @@ async function handler(_req: Request) {
       // Left as failed rather than retried: a retry loop against a permanently
       // bad address burns reputation. Failures are visible on the campaign page.
       await patch(row.id, { status: "failed", error: result.error }, `recording send failure for ${row.id}`);
+      // A recipient Resend refused is counted in `failed` and recorded on its
+      // recipient row, not made a failure of the run: one bad address in a
+      // list of a thousand would otherwise turn every broadcast it is in red,
+      // and the run's error line would carry a person's address into the run
+      // log and the Ops alert (review of #1973). Write failures and failures
+      // of the whole batch still fail the run.
       failed += 1;
       console.error(`${LOG} send failed for ${row.email}: ${result.error}`);
     }
@@ -263,9 +298,10 @@ async function handler(_req: Request) {
 
   // Attribute any events that arrived before the sender stamped the Resend id on
   // the recipient row (the 'sent' webhook can beat that UPDATE by milliseconds).
-  await linkEvents(campaign.id, sentEmailIds);
+  failures.push(...(await linkEvents(campaign.id, sentEmailIds)));
 
-  return NextResponse.json({
+  return routineResult({
+    status: "ok",
     campaign: campaign.id,
     batch: rows.length,
     sent,
@@ -273,6 +309,7 @@ async function handler(_req: Request) {
     failed,
     deferred,
     writeFailures,
+    failures,
   });
 }
 
@@ -284,15 +321,20 @@ async function handler(_req: Request) {
 // fails, leaving the results card permanently reading zero.
 const LINK_CHUNK = 50;
 
-async function linkEvents(campaignId: string, resendEmailIds: string[]): Promise<void> {
+async function linkEvents(campaignId: string, resendEmailIds: string[]): Promise<Failure[]> {
+  const failures: Failure[] = [];
   for (let i = 0; i < resendEmailIds.length; i += LINK_CHUNK) {
     const chunk = resendEmailIds.slice(i, i + LINK_CHUNK);
     const { error } = await companyOs.from("email_events").update({ campaign_id: campaignId })
       .in("resend_email_id", chunk)
       .is("campaign_id", null);
 
-    if (error) console.error(`${LOG} linking events failed: ${error.message}`);
+    if (error) {
+      console.error(`${LOG} linking events failed: ${error.message}`);
+      failures.push({ subject: `campaign ${campaignId}`, step: "link events", error: error.message });
+    }
   }
+  return failures;
 }
 
 // Every scheduled run is recorded in company_os.routine_runs (Settings -> Agents).

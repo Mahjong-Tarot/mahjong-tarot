@@ -1,5 +1,6 @@
 import { companyOs } from "@/kernel/data/supabase";
 import type { Result } from "@/kernel/data/result";
+import { liveEditRefusal } from "./blog-live-edit";
 
 // Image version history for a content asset. Every generated or uploaded image
 // is kept as a row here with the prompt that produced it; exactly one row per
@@ -72,6 +73,10 @@ export async function recordAssetImage(input: {
   model?: string | null;
   createdBy?: string | null;
 }): Promise<Result> {
+  // Before the version history moves, so a refused image leaves the selection
+  // and image_url agreeing: a live post on a gated campaign keeps its hero (Y.91).
+  const live = await liveEditRefusal(input.entryId, { image_url: input.url });
+  if (live) return { ok: false, error: live };
   const { error: unsel } = await companyOs.from("marketing_asset_images").update({ is_selected: false })
     .eq("entry_id", input.entryId)
     .eq("is_selected", true);
@@ -108,6 +113,10 @@ export async function setSelectedImage(
   if (error) return { ok: false, error: error.message };
   if (!data) return { ok: false, error: "Image not found." };
   const url = (data as { url: string }).url;
+  // Re-picking the selected image changes nothing and passes; another one on a
+  // live post of a gated campaign is refused before the selection moves (Y.91).
+  const live = await liveEditRefusal(entryId, { image_url: url });
+  if (live) return { ok: false, error: live };
 
   const r = await selectAndMirror(entryId, imageId, url);
   if (!r.ok) return r;

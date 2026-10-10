@@ -5,7 +5,9 @@ import { parseSeoMd } from "@/entities/campaigns/lib/seo";
 import { siteForBrandSlug } from "@/entities/campaigns/lib/brand-sites";
 import { bannedLanguageError, brandNameError, emDashError } from "./checks";
 import { approveChannelAssets, listCampaignAssets, loadBlogAsset, loadBrandLedger } from "./data";
+import { fillPrompt } from "@/kernel/ai/prompts";
 import { brandPreamble, callWriterModel } from "./model";
+import { WRITER_CHANNELS_PROMPT } from "./step-channels.prompt";
 import { ledgerLines, styleCeilingError } from "@/entities/campaigns/lib/campaign-ledger-shared";
 import { parseCampaignPlan } from "@/entities/campaigns/lib/campaign-plan-shared";
 import { activeChannelsFrom, type WriterChannel } from "./profile-rules";
@@ -52,33 +54,22 @@ export const runChannels: StepRunner = async ({ campaign, profile }) => {
   const plan = parseCampaignPlan(campaign.seoGeoMd);
   const planned = wanted.filter((c) => plan?.social[c]).map((c) => `- ${c}: ${plan!.social[c]}`);
 
-  const system = `${brandPreamble(profile)}
-
-## Channel guidelines
-${profile.channelsMd ?? "(not set)"}
-
-## Preferred styles (choose only from these slugs)
-- Image styles: ${profile.preferredImageStyles.join(", ") || "(none set)"}
-- Social styles: ${profile.preferredSocialStyles.join(", ") || "(none set)"}
-
-# Task
-The blog post below is final; it goes live at the URL given. Write the ${wanted.join(", ")} deliverable(s) from it, each per its channel rules, re-purposing the same core idea without repeating text across channels. Where a channel's rules call for a link, link to the live post. Give each deliverable its own image brief, following the image style, not the blog hero's brief. ${planned.length ? `Write each of these posts in its planned social style, so the copy is that style and not only labelled with it:\n${planned.join("\n")}\nChoose the image style for each, and the social style of any channel not listed; a style the recent posts leaned on for that channel is the wrong choice unless the post demands it.` : "Choose each channel's social style and image style for this post; a style the recent posts leaned on for that channel is the wrong choice unless the post demands it."}
-
-# Recent posts (newest first)
-${ledgerLines(recent.slice(0, 12))}`;
+  const P = WRITER_CHANNELS_PROMPT;
+  const system = fillPrompt(P.system, {
+    preamble: brandPreamble(profile),
+    channels: profile.channelsMd ?? P.parts.notSet,
+    imageStyles: profile.preferredImageStyles.join(", ") || P.parts.noneSet,
+    socialStyles: profile.preferredSocialStyles.join(", ") || P.parts.noneSet,
+    wanted: wanted.join(", "),
+    styleTask: planned.length ? fillPrompt(P.parts.planned, { planned: planned.join("\n") }) : P.parts.unplanned,
+    recentPosts: ledgerLines(recent.slice(0, 12)),
+  });
   const site = siteForBrandSlug(profile.brandSlug);
   const slug = parseSeoMd(blog.seoMd).slug;
-  const liveUrl = blog.postedUrl ?? (site && slug ? `${site.domain}/blog/posts/${slug}` : "(not yet live)");
-  const user = `# Live post
-${liveUrl}
+  const liveUrl = blog.postedUrl ?? (site && slug ? `${site.domain}/blog/posts/${slug}` : P.parts.notLive);
+  const user = fillPrompt(P.user, { liveUrl, title: blog.title, body: blog.copyMd });
 
-# Title
-${blog.title}
-
-# Body
-${blog.copyMd}`;
-
-  const r = await callWriterModel({ step: "channels", system, user, schema: channelsOutput });
+  const r = await callWriterModel({ step: "channels", prompt: P, system, user, schema: channelsOutput });
   if (!r.ok) return r;
 
   const outputs: WriterOutput[] = (r.data.outputs ?? [])

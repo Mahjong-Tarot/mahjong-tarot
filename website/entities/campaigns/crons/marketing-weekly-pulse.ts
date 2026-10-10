@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { withRoutineRun } from "@/kernel/audit/routine-runs";
+import { routineResult, withRoutineRun } from "@/kernel/audit/routine-runs";
+import { isoWeekKey, saigonToday } from "@/kernel/config/dates";
 import { companyOs } from "@/kernel/data/supabase";
-import { notifyMarketing } from "@/kernel/messaging/lark";
+import { failureOf, notify } from "@/kernel/messaging/router";
 import { getAnalyticsOverview, getTrafficCount } from "@/entities/company-os";
 import { getBroadcastStats } from "@/entities/campaigns/lib/broadcasts";
 
@@ -13,6 +13,19 @@ import { getBroadcastStats } from "@/entities/campaigns/lib/broadcasts";
  * @generator
  */
 export const schedule = "0 23 * * 2";
+
+/**
+ * What Settings -> Agents says about this routine (Y.14). Read as text by
+ * scripts/gen-deployment.mjs into kernel/audit/automations.json, so it keeps
+ * one literal shape: double-quoted strings and arrays of them, nothing computed.
+ * @generator
+ */
+export const automation = {
+  name: "Marketing weekly pulse",
+  description: "Weekly, Monday. Posts a facts-only 'Marketing this week' to the Marketing Lark channel: public-site traffic with a week-over-week line, posts published, and the broadcasts that went out. No AI; the monthly recap owns content suggestions.",
+  content: ["Vercel Analytics", "Marketing content", "Email campaigns"],
+  apps: ["Vercel Analytics", "Supabase", "Lark"],
+};
 
 // Vercel cron (see vercel.json): weekly, Wednesday 06:00 Asia/Ho_Chi_Minh
 // (Tue 23:00 UTC) — planning day, when our sprints turn over. Posts a plain "Marketing this
@@ -56,8 +69,12 @@ async function handler(_req: Request) {
     getTrafficCount(priorStart.toISOString(), weekStart.toISOString(), "public"),
   ]);
 
+  const failures: { subject: string; step: string; error: string }[] = [];
   const trafficLines: string[] = [];
   if ("error" in overview) {
+    // The post says "unavailable"; the run says why, so a missing token is not
+    // a quiet week of no traffic (Y.20).
+    failures.push({ subject: "public-site traffic", step: "read", error: overview.error });
     trafficLines.push("Traffic · public site (7d): unavailable");
   } else {
     const { totals, topPages, byChannel } = overview;
@@ -85,8 +102,16 @@ async function handler(_req: Request) {
       .gte("sent_at", weekStart.toISOString())
       .order("sent_at", { ascending: true }),
   ]);
-  if (postsError) console.error("[marketing-weekly-pulse] posts read:", postsError.message);
-  if (sentError) console.error("[marketing-weekly-pulse] broadcasts read:", sentError.message);
+  // A failed read leaves its line at zero in the post, which reads as a quiet
+  // week, so each is named in the run as well as logged.
+  if (postsError) {
+    console.error("[marketing-weekly-pulse] posts read:", postsError.message);
+    failures.push({ subject: "published posts", step: "read", error: postsError.message });
+  }
+  if (sentError) {
+    console.error("[marketing-weekly-pulse] broadcasts read:", sentError.message);
+    failures.push({ subject: "sent broadcasts", step: "read", error: sentError.message });
+  }
 
   const postRows = (posts ?? []) as PostRow[];
   const byChannelCount = new Map<string, number>();
@@ -114,13 +139,25 @@ async function handler(_req: Request) {
     "",
     `${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/team/revenue/marketing`,
   ];
-  await notifyMarketing(lines.join("\n"));
+  // At most once a week (Z.1): a run retried after an error further down
+  // would otherwise post the week's pulse to the chat a second time. The
+  // router claims the same key the ledger has always used, and since it runs
+  // at 06:00 Saigon time the pulse is held to 08:30 the same Wednesday (Z.7).
+  const posted = await notify({
+    kind: "revenue.weekly-pulse",
+    to: { chat: "revenue" },
+    message: lines.join("\n"),
+    dedupeKey: `campaigns:marketing-pulse:${isoWeekKey(saigonToday())}`,
+  });
+  failures.push(...failureOf(posted, "Marketing chat", "notify"));
 
-  return NextResponse.json({
+  return routineResult({
+    status: "ok",
     range: rangeLabel,
     pageviews: "error" in overview ? null : overview.totals.pageviews,
     postsPublished: postRows.length,
     broadcastsSent: sentRows.length,
+    failures,
   });
 }
 

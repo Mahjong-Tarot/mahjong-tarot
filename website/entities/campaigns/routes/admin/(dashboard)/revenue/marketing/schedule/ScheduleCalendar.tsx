@@ -32,8 +32,8 @@ const CHIP_CLASS: Record<ScheduleStatus, string> = {
 };
 
 // What kind of thing a chip is, said in a word, because a recurring series
-// and a personal agent can carry similar names and lead to different pages.
-const KIND_WORD: Record<ScheduleItem["kind"], string> = { broadcast: "Broadcast", series: "Series", personal: "Personal" };
+// and a broadcast can carry similar names and lead to different pages.
+const KIND_WORD: Record<ScheduleItem["kind"], string> = { broadcast: "Broadcast", series: "Series" };
 
 function Chip({ item, withTime }: { item: ScheduleItem; withTime: boolean }) {
   const label = `${KIND_WORD[item.kind]}: ${item.title}${item.brandName ? ` · ${item.brandName}` : ""} · ${STATUS_LABEL[item.status]} · ${item.time}`;
@@ -145,7 +145,6 @@ export function ScheduleCalendar({ items }: { items: ScheduleItem[] }) {
         <span className="admin-cal-chip is-warn">Draft</span>
         <span className="admin-cal-chip is-projected"><span className="admin-cal-chip-kind">Series</span>Projected send</span>
         <span className="admin-cal-chip is-err"><span className="admin-cal-chip-kind">Series</span>Unwritten</span>
-        <span className="admin-cal-chip is-ok"><span className="admin-cal-chip-kind">Personal</span>By agent and day</span>
       </div>
     </div>
   );

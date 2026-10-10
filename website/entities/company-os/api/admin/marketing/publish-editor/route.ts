@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { aiSite } from "@/kernel/ai/gateway";
 import type { AiDataClass } from "@/kernel/ai/routing";
-import { getAdminUser } from "@/kernel/identity/admin-auth";
+import { getAccess } from "@/kernel/identity/access-request";
 import { makePublishEditorTools } from "@/entities/campaigns";
-import { PUBLISH_EDITOR_SYSTEM } from "@/entities/campaigns";
+import { PUBLISH_EDITOR_PROMPT } from "@/entities/campaigns";
 import { withHistoryCache } from "@/kernel/ai/cache";
 import { logAiUsage } from "@/kernel/ai/response";
 
@@ -26,8 +26,11 @@ type SseEvent =
   | { type: "error"; error: string };
 
 export async function POST(request: NextRequest) {
-  const user = await getAdminUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // Its own atom (AE.3), not entering the Admin view.
+  const access = await getAccess();
+  if (!access) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!access.may("company-os.publish-editor")) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const user = access.user;
   const client = AI.clientIfConfigured();
   if (!client) {
     return NextResponse.json({ error: "The publish editor is not configured (missing API key)." }, { status: 503 });
@@ -50,16 +53,17 @@ export async function POST(request: NextRequest) {
       const send = (e: SseEvent) => controller.enqueue(encoder.encode(`data: ${JSON.stringify(e)}\n\n`));
 
       const messages: Anthropic.MessageParam[] = [
-        { role: "user", content: "Review the blog asset your tools are bound to, fix what you may, publish it if it passes, and report." },
+        { role: "user", content: PUBLISH_EDITOR_PROMPT.user },
       ];
 
       try {
         for (let i = 0; i < MAX_ITERATIONS; i++) {
           const msgStream = client.messages.stream({
+            prompt: PUBLISH_EDITOR_PROMPT,
             model: MODEL,
             max_tokens: 4096,
             output_config: { effort: "medium" },
-            system: [{ type: "text", text: PUBLISH_EDITOR_SYSTEM, cache_control: { type: "ephemeral" } }],
+            system: [{ type: "text", text: PUBLISH_EDITOR_PROMPT.system, cache_control: { type: "ephemeral" } }],
             tools,
             messages: withHistoryCache(messages),
           });

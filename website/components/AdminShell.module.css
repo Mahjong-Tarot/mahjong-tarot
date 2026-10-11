@@ -35,7 +35,7 @@
 .brandMark {
   width: 28px;
   height: 28px;
-  border-radius: 6px;
+  border-radius: var(--r-md);
   background: var(--ink);
   flex-shrink: 0;
 }
@@ -51,8 +51,8 @@
 
 .brandSub {
   font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--ink-4);
   font-weight: 400;
@@ -61,7 +61,7 @@
 
 .nav {
   flex: 1;
-  padding: 14px 12px;
+  padding: 14px var(--space-sm2);
   overflow-y: auto;
 }
 
@@ -77,12 +77,12 @@
 .navLink,
 .navLinkActive {
   display: block;
-  padding: 9px 12px;
+  padding: 9px var(--space-sm2);
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--ink-3);
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: var(--r-md);
   transition: background-color 120ms ease, color 120ms ease;
 }
 
@@ -100,10 +100,10 @@
 /* Sub-pages of an active section (the marketing platform's screens). */
 .subNavList {
   list-style: none;
-  margin: 4px 0 6px;
-  padding: 0 0 0 12px;
+  margin: var(--space-xs) 0 6px;
+  padding: 0 0 0 var(--space-sm2);
   border-left: 1px solid var(--rule);
-  margin-left: 12px;
+  margin-left: var(--space-sm2);
 }
 
 .subNavLink,
@@ -111,10 +111,10 @@
   display: block;
   padding: 6px 10px;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ink-3);
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: var(--r-md);
 }
 
 .subNavLink:hover {
@@ -129,7 +129,7 @@
 }
 
 .footer {
-  padding: 14px 16px 18px;
+  padding: 14px var(--space-md) 18px;
   border-top: 1px solid var(--rule);
   display: flex;
   flex-direction: column;
@@ -138,7 +138,7 @@
 
 .portalLink {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-4);
@@ -156,7 +156,7 @@
 
 .whoName {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ink);
   font-weight: 600;
 }
@@ -168,8 +168,8 @@
   font-family: var(--sans);
   font-size: 12px;
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--r-sm);
 }
 
 .signOut:hover {
@@ -202,7 +202,7 @@
   font-size: 22px;
   line-height: 1;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: var(--space-xs) var(--space-sm);
 }
 .backdrop { display: none; }
 
@@ -213,7 +213,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
+    padding: var(--space-sm2) var(--space-md);
     background: var(--paper-pure);
     border-bottom: 1px solid var(--rule);
     position: sticky;
@@ -236,11 +236,20 @@
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: var(--ink-a40);
     z-index: 45;
   }
 
   .contentInner {
     padding: var(--space-lg) var(--space-md) var(--space-2xl);
+  }
+}
+
+/* Touch targets on coarse pointers (MOB-14) */
+@media (pointer: coarse) {
+  .signOut,
+  .menuButton {
+    min-width: 44px;
+    min-height: 44px;
   }
 }

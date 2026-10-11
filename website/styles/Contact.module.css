@@ -28,3 +28,8 @@
   max-width: 56ch;
   margin: 0 auto var(--space-xl);
 }
+
+/* Phone: tighter section rhythm (MOB-23) */
+@media (max-width: 640px) {
+  .formSection { padding: var(--space-xl) 0; }
+}

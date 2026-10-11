@@ -12,12 +12,12 @@
   background-color: var(--paper-pure);
   border: 1px solid var(--rule);
   border-radius: var(--r-md);
-  padding: 24px 24px 20px;
+  padding: var(--space-lg) var(--space-lg) 20px;
   margin: 28px 0;
 }
 .riskCard h3 {
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: var(--text-lg);
   font-weight: 500;
   margin: 0 0 10px;
   color: var(--ink);
@@ -33,11 +33,11 @@
   display: inline-block;
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 10px;
+  font-size: var(--text-2xs);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 3px 10px;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm2);
   background-color: var(--fire-50);
   color: var(--fire-600);
   border-radius: var(--r-pill);
@@ -48,8 +48,8 @@
   background-color: var(--paper-pure);
   border: 1px solid var(--rule);
   border-radius: var(--r-md);
-  padding: 36px 32px;
-  margin: 48px 0;
+  padding: 36px var(--space-lg2);
+  margin: var(--space-xl2) 0;
   text-align: center;
   position: relative;
 }
@@ -74,7 +74,7 @@
 .pivotBanner p {
   font-family: var(--sans);
   color: var(--ink-2);
-  font-size: 16px;
+  font-size: var(--text-base);
   max-width: 540px;
   margin: 0 auto;
   line-height: 1.65;
@@ -100,9 +100,9 @@
 .imagePairCaption {
   grid-column: 1 / -1;
   background-color: var(--paper-pure);
-  padding: 12px 16px;
+  padding: var(--space-sm2) var(--space-md);
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ink-3);
   text-align: center;
   font-style: normal;
@@ -113,7 +113,7 @@
   background-color: var(--paper-pure);
   border: 1px solid var(--rule);
   border-radius: var(--r-md);
-  padding: 36px 32px;
+  padding: 36px var(--space-lg2);
   margin: 36px 0;
   text-align: center;
   position: relative;
@@ -132,11 +132,11 @@
   display: inline-block;
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 12px;
+  color: var(--tone-neutral-ink);
+  margin-bottom: var(--space-sm2);
 }
 .predictionBox p {
   font-family: var(--serif);
@@ -151,7 +151,7 @@
 /* ── Pull Quote ── */
 .pullQuote {
   border-left: 2px solid var(--fire-500);
-  padding: 8px 0 8px 24px;
+  padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
   margin: 36px 0;
 }
 .pullQuote p {
@@ -176,13 +176,13 @@
   background-color: var(--paper-pure);
   border: 1px solid var(--rule);
   border-radius: var(--r-md);
-  padding: 18px 18px 16px;
+  padding: 18px 18px var(--space-md);
 }
 .signCard h4 {
   font-family: var(--serif);
   font-size: 17px;
   font-weight: 500;
-  margin: 0 0 8px;
+  margin: 0 0 var(--space-sm);
   color: var(--ink);
   letter-spacing: -0.005em;
 }
@@ -193,18 +193,18 @@
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 2px var(--space-sm);
   margin-bottom: 10px;
   border-radius: var(--r-pill);
 }
-.badgeExceptional { background-color: var(--gold-soft); color: var(--gold); }
+.badgeExceptional { background-color: var(--gold-soft); color: var(--tone-neutral-ink); }
 .badgeFavorable   { background-color: var(--ink); color: var(--paper); }
 .badgeNeutral     { background-color: var(--rule-2); color: var(--ink-3); }
 .badgeMixed       { background-color: var(--rule-2); color: var(--ink-3); }
 .badgeChallenging { background-color: var(--fire-50); color: var(--fire-600); }
 .badgeHighRisk    { background-color: var(--fire-50); color: var(--fire-700); }
 .signCard p {
-  font-size: 14px;
+  font-size: var(--text-md);
   line-height: 1.55;
   color: var(--ink-2);
   margin: 0;
@@ -214,8 +214,10 @@
   .signGrid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 480px) {
+  .imagePair { grid-template-columns: 1fr; }
+  .signBadge { font-size: var(--text-xs); }
   .signGrid { grid-template-columns: 1fr; }
-  .pivotBanner { padding: 24px 20px; }
-  .predictionBox { padding: 24px 20px; }
+  .pivotBanner { padding: var(--space-lg) 20px; }
+  .predictionBox { padding: var(--space-lg) 20px; }
   .pullQuote p { font-size: 19px; }
 }

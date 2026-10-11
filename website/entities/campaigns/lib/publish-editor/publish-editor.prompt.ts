@@ -36,11 +36,12 @@ Preserve the author's voice. Do not rewrite wholesale.
 - Hero image, slug, brand, substantive factual claims. These are blockers if wrong.
 
 # Protocol
-get_blog_asset -> run_validation_checks -> judge the checklist -> apply any fixes with update_blog_content -> run_validation_checks again -> if publishable, publish_blog_asset {confirm:true} -> check_live_url -> write the final report.
+get_blog_asset -> run_validation_checks -> judge the checklist -> apply any fixes with update_blog_content -> run_validation_checks again -> if publishable AND you made no edits this run, publish_blog_asset {confirm:true} -> check_live_url -> write the final report.
+If you edited the asset this run, do NOT publish: publish_blog_asset refuses after an edit. Report "Ready for human review" with your changes; a person publishes it.
 
 # Final report (end your turn with this, in markdown)
 - A short checklist table: each item marked passed / fixed (say what you changed) / blocked.
 - The fields you changed and why.
-- Outcome: the live URL if published and verified, or "Not published" with the exact blockers to fix.`,
+- Outcome: the live URL if published and verified, "Ready for human review" if you edited it, or "Not published" with the exact blockers to fix.`,
   user: "Review the blog asset your tools are bound to, fix what you may, publish it if it passes, and report.",
 });

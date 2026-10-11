@@ -3,25 +3,26 @@ import BaziChart from './BaziChart';
 import { elementColor } from '../lib/bazi';
 import styles from './CompatibilityReport.module.css';
 
-const TONE_COLORS = {
-  great: '#2c8a4a',
-  good:  '#3a7bb8',
-  mixed: '#b88c4f',
-  rough: '#c0392b',
+// Tier tone → class with the five-step --tone-* tokens (stroke + label ink).
+const TONE_CLASS = {
+  great: styles.toneGreat,
+  good:  styles.toneGood,
+  mixed: styles.toneMixed,
+  rough: styles.toneRough,
 };
 
 function RatingDial({ rating, tier }) {
   const r = Math.max(0, Math.min(100, rating || 0));
-  const color = TONE_COLORS[tier?.tone] || '#444';
+  const toneClass = TONE_CLASS[tier?.tone] || '';
   const circumference = 2 * Math.PI * 56;
   const offset = circumference - (r / 100) * circumference;
   return (
-    <div className={styles.dial}>
+    <div className={`${styles.dial} ${toneClass}`}>
       <svg width="140" height="140" viewBox="0 0 140 140">
-        <circle cx="70" cy="70" r="56" fill="none" stroke="#eee" strokeWidth="10" />
+        <circle cx="70" cy="70" r="56" fill="none" className={styles.dialTrack} strokeWidth="10" />
         <circle
           cx="70" cy="70" r="56"
-          fill="none" stroke={color} strokeWidth="10"
+          fill="none" className={styles.dialArc} strokeWidth="10"
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
@@ -31,7 +32,7 @@ function RatingDial({ rating, tier }) {
         <text x="70" y="92" textAnchor="middle" className={styles.dialPct}>%</text>
       </svg>
       {tier && (
-        <div className={styles.tier} style={{ color }}>{tier.name}</div>
+        <div className={styles.tier}>{tier.name}</div>
       )}
     </div>
   );

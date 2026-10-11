@@ -28,16 +28,18 @@ export const BRANCHES = {
   '亥': { en: 'Hai',  animal: 'Pig',     element: 'Water' },
 };
 
+// CSS custom properties from globals.css (--el-*); used in inline
+// `background` styles, so a var() string resolves at render time.
 const ELEMENT_COLORS = {
-  Wood:  '#3a8a3a',
-  Fire:  '#c0392b',
-  Earth: '#b88c4f',
-  Metal: '#999999',
-  Water: '#2d6cdf',
+  Wood:  'var(--el-wood)',
+  Fire:  'var(--el-fire)',
+  Earth: 'var(--el-earth)',
+  Metal: 'var(--el-metal)',
+  Water: 'var(--el-water)',
 };
 
 export function elementColor(name) {
-  return ELEMENT_COLORS[name] || '#444';
+  return ELEMENT_COLORS[name] || 'var(--ink-3)';
 }
 
 function buildPillar(gan, zhi) {

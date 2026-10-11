@@ -47,7 +47,7 @@
   display: block;
   padding: var(--space-md) var(--space-lg);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   background: var(--paper-pure);
   color: var(--ink);
   text-decoration: none;
@@ -55,7 +55,7 @@
   width: 100%;
   font: inherit;
   cursor: pointer;
-  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+  transition: border-color var(--transition), background-color var(--transition), box-shadow var(--transition);
 }
 
 .statCard:hover {
@@ -63,12 +63,12 @@
 }
 
 .statCardActive {
-  border-color: var(--fire-500, #c1271f);
-  box-shadow: 0 0 0 2px rgba(193, 39, 31, 0.15);
+  border-color: var(--fire-500);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--fire-500) 15%, transparent);
 }
 
 .statCardActive .statLabel {
-  color: var(--fire-500, #c1271f);
+  color: var(--fire-600);
 }
 
 .statLabel {
@@ -106,7 +106,7 @@
 .panel {
   padding: var(--space-lg);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   background: var(--paper-pure);
 }
 
@@ -163,7 +163,7 @@
   flex: 1;
   height: 16px;
   background: var(--paper);
-  border-radius: 3px;
+  border-radius: var(--r-sm);
   overflow: hidden;
 }
 
@@ -173,12 +173,13 @@
   transition: width 360ms ease;
 }
 
-.stage_new_lead       { background: #287BE8; }
-.stage_contacted      { background: #6b7194; }
-.stage_discovery_call { background: #d1458b; }
-.stage_proposal       { background: #1a9e74; }
-.stage_won            { background: #6ff2c1; }
-.stage_lost           { background: #d8dce8; }
+/* Stage colours come from the one definition in PortalAdminKanban.module.css. */
+.stage_new_lead       { composes: stageTokens from './PortalAdminKanban.module.css'; background: var(--stage-new-lead); }
+.stage_contacted      { composes: stageTokens from './PortalAdminKanban.module.css'; background: var(--stage-contacted); }
+.stage_discovery_call { composes: stageTokens from './PortalAdminKanban.module.css'; background: var(--stage-discovery-call); }
+.stage_proposal       { composes: stageTokens from './PortalAdminKanban.module.css'; background: var(--stage-proposal); }
+.stage_won            { composes: stageTokens from './PortalAdminKanban.module.css'; background: var(--stage-won); }
+.stage_lost           { composes: stageTokens from './PortalAdminKanban.module.css'; background: var(--stage-lost); }
 
 .barCount {
   font-family: var(--mono);
@@ -237,5 +238,18 @@
   color: var(--ink-3);
   padding: 3px 8px;
   border: 1px solid var(--rule);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
+}
+
+/* Form grids for the private-reading prep screen; stack on phones (MOB-19). */
+.grid2,
+.grid3 {
+  display: grid;
+  gap: var(--space-md);
+}
+.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) {
+  .grid2,
+  .grid3 { grid-template-columns: minmax(0, 1fr); }
 }

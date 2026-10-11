@@ -11,13 +11,7 @@ import {
   getServiceSupabase,
   priceIdForPlan,
 } from '../../../lib/stripe';
-
-function originFromReq(req) {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
-  return `${proto}://${host}`;
-}
+import { siteOrigin } from '../../../lib/siteOrigin';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -80,7 +74,7 @@ export default async function handler(req, res) {
     );
   }
 
-  const origin = originFromReq(req);
+  const origin = siteOrigin();
   const session = await stripe.checkout.sessions.create({
     mode: 'subscription',
     customer: customerId,

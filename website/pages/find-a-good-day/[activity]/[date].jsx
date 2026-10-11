@@ -14,6 +14,7 @@ import {
 } from '../../../lib/almanac';
 import { explainScore } from '../../../lib/explainScore';
 import { trackResultViewed } from '../../../lib/analytics';
+import styles from '../../../styles/FindAGoodDay.module.css';
 
 const VERDICT_PHRASE = {
   Lucky: 'a favourable day',
@@ -53,44 +54,23 @@ export default function FindAGoodDayResult({ activity, date, almanac, today }) {
       />
       <Nav />
       <main>
-        <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
+        <section className="page-section">
+          <div className="page-intro">
             <span className="overline">Almanac · {activity.label}</span>
-            <h1 style={{ marginTop: 'var(--space-xs)' }}>{humanDate}</h1>
+            <h1>{humanDate}</h1>
             {verdictPhrase && (
-              <p style={{
-                marginTop: 'var(--space-sm)',
-                fontSize: '1rem',
-                color: 'var(--color-text-muted, #555)',
-              }}>
+              <p className={styles.verdict}>
                 The almanac reads this as <strong>{verdictPhrase}</strong> for{' '}
                 <strong>{activity.label.toLowerCase()}</strong>.
               </p>
             )}
           </div>
           {explanation && (
-            <div style={{
-              maxWidth: 720,
-              margin: '0 auto var(--space-xl)',
-              padding: 'var(--space-lg) var(--space-xl)',
-              background: 'var(--color-surface, #f8f6f0)',
-              borderRadius: 14,
-              border: '1px solid rgba(0, 0, 0, 0.05)',
-              fontSize: '1rem',
-              lineHeight: 1.6,
-              color: 'var(--color-text)',
-            }}>
-              <div style={{
-                fontSize: '0.7rem',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: 'var(--color-text-muted, #888)',
-                fontWeight: 600,
-                marginBottom: 'var(--space-sm)',
-              }}>
+            <div className={styles.explain}>
+              <div className="label-mono">
                 Why this date scores the way it does
               </div>
-              <p style={{ margin: 0 }}>{explanation}</p>
+              <p>{explanation}</p>
             </div>
           )}
           {almanac ? (
@@ -102,7 +82,7 @@ export default function FindAGoodDayResult({ activity, date, almanac, today }) {
               searchHref={null}
             />
           ) : (
-            <p style={{ textAlign: 'center', fontStyle: 'italic', color: '#888' }}>
+            <p className="empty-note">
               No almanac record for {humanDate}.
             </p>
           )}
@@ -114,7 +94,7 @@ export default function FindAGoodDayResult({ activity, date, almanac, today }) {
               date={date}
             />
           )}
-          <div style={{ textAlign: 'center', marginTop: 'var(--space-xl)', fontSize: '0.9rem' }}>
+          <div className={styles.backLink}>
             <Link href="/find-a-good-day">← Search for another activity</Link>
           </div>
         </section>

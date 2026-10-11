@@ -33,7 +33,7 @@
 }
 .header .postMeta {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink-4);
   line-height: 1.7;
   letter-spacing: 0.04em;
@@ -42,9 +42,9 @@
 /* ── Breadcrumb ── */
 .breadcrumb {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   margin-bottom: var(--space-lg);
 }
@@ -56,7 +56,7 @@
 .breadcrumb a:hover { color: var(--fire-700); }
 .breadcrumb span {
   color: var(--ink-4);
-  margin: 0 8px;
+  margin: 0 var(--space-sm);
 }
 .breadcrumb span:last-child {
   color: var(--ink-3);
@@ -69,13 +69,13 @@
   font-family: var(--mono);
   font-weight: 500;
   font-size: 10.5px;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-overline);
   text-transform: uppercase;
   color: var(--fire-600);
   background-color: transparent;
   border: 1px solid var(--fire-500);
   border-radius: var(--r-pill);
-  padding: 4px 12px;
+  padding: var(--space-xs) var(--space-sm2);
   margin-bottom: var(--space-md);
 }
 
@@ -101,7 +101,7 @@
   font-family: var(--sans);
   font-size: 17px;
   line-height: 1.7;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-lg);
   color: var(--ink-2);
 }
 .body h2 {
@@ -133,7 +133,7 @@
   line-height: 1.4;
   color: var(--ink);
   border-left: 2px solid var(--fire-500);
-  padding: 8px 0 8px 24px;
+  padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
   letter-spacing: -0.005em;
 }
 .body figure { margin: 36px 0; }
@@ -149,84 +149,12 @@
 }
 .body a {
   color: var(--fire-600);
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
   font-weight: 500;
 }
 .body a:hover { color: var(--fire-700); }
-
-/* ── Risk Cards ── */
-.riskCard {
-  background-color: var(--paper-pure);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 24px 24px 20px;
-  margin: 28px 0;
-}
-.riskCard h3 {
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 500;
-  margin: 0 0 10px;
-  color: var(--ink);
-  letter-spacing: -0.005em;
-}
-.riskCard p {
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 0;
-  color: var(--ink-2);
-}
-.riskLabel {
-  display: inline-block;
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  margin-bottom: 12px;
-  background-color: var(--fire-50);
-  color: var(--fire-600);
-  border-radius: var(--r-pill);
-}
-
-/* ── Pivot Banner ── */
-.pivotBanner {
-  background-color: var(--paper-pure);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 36px 32px;
-  margin: 48px 0;
-  text-align: center;
-  position: relative;
-}
-.pivotBanner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 32px;
-  width: 32px;
-  height: 2px;
-  background: var(--fire-500);
-}
-.pivotBanner h2 {
-  font-family: var(--serif);
-  color: var(--ink);
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0 0 14px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-.pivotBanner p {
-  font-family: var(--sans);
-  color: var(--ink-2);
-  font-size: 16px;
-  max-width: 540px;
-  margin: 0 auto;
-  line-height: 1.65;
-}
 
 /* ── Inline Figure, full width ── */
 .inlineFigure { margin: 36px 0; }
@@ -239,38 +167,10 @@
 }
 .inlineFigure figcaption {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ink-3);
   text-align: center;
   margin-top: 10px;
-  font-style: normal;
-}
-
-/* ── Image Pair ── */
-.imagePair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  margin: 44px 0;
-  background-color: var(--rule);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  overflow: hidden;
-}
-.imagePair img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.imagePairCaption {
-  grid-column: 1 / -1;
-  background-color: var(--paper-pure);
-  padding: 12px 16px;
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--ink-3);
-  text-align: center;
   font-style: normal;
 }
 
@@ -289,68 +189,11 @@
 }
 .inlineSmall figcaption {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ink-3);
   text-align: center;
   margin-top: 10px;
   font-style: normal;
-}
-
-/* ── Prediction Box — gold ritual moment ── */
-.predictionBox {
-  background-color: var(--paper-pure);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 36px 32px;
-  margin: 36px 0;
-  text-align: center;
-  position: relative;
-}
-.predictionBox::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 48px;
-  height: 2px;
-  background: var(--gold);
-}
-.predictionBox .predictionLabel {
-  display: inline-block;
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-.predictionBox p {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
-}
-
-/* ── Pull Quote — fire bar ── */
-.pullQuote {
-  border-left: 2px solid var(--fire-500);
-  padding: 8px 0 8px 24px;
-  margin: 36px 0;
-}
-.pullQuote p {
-  font-family: var(--serif);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin: 0;
-  letter-spacing: -0.005em;
 }
 
 /* ── FAQ ── */
@@ -364,7 +207,7 @@
 }
 .faqQuestion {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: var(--text-base);
   font-weight: 500;
   color: var(--ink);
   margin: 0;
@@ -372,7 +215,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-md);
 }
 .faqIcon {
   font-size: 22px;
@@ -391,7 +234,7 @@
   font-size: 15px;
   line-height: 1.65;
   color: var(--ink-2);
-  margin: 12px 0 4px;
+  margin: var(--space-sm2) 0 var(--space-xs);
   padding-right: 38px;
 }
 
@@ -401,7 +244,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-xl);
-  padding-top: 32px;
+  padding-top: var(--space-lg2);
   margin-top: 56px;
   border-top: 1px solid var(--rule);
 }
@@ -410,8 +253,8 @@
 .navNext {
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ink-2);
@@ -433,7 +276,7 @@
   font-family: var(--serif);
   font-size: 24px;
   font-weight: 500;
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-lg);
   color: var(--ink);
   letter-spacing: -0.01em;
 }
@@ -453,7 +296,7 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm2);
   background-color: var(--rule-2);
   border-radius: var(--r-md);
   border: 1px solid var(--rule);
@@ -463,14 +306,14 @@
   font-size: 17px;
   font-weight: 500;
   line-height: 1.3;
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   color: var(--ink);
   transition: color var(--transition);
   letter-spacing: -0.005em;
 }
 .relatedCard span {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink-4);
   letter-spacing: 0.04em;
 }
@@ -485,12 +328,12 @@
 .ctaSection .ctaOverline {
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-overline);
   text-transform: uppercase;
   color: var(--fire-600);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-sm);
 }
 .ctaSection h2 {
   font-family: var(--serif);
@@ -502,72 +345,45 @@
 }
 .ctaSection p {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: var(--text-base);
   color: var(--ink-3);
   max-width: 480px;
-  margin: 0 auto 24px;
+  margin: 0 auto var(--space-lg);
   line-height: 1.65;
 }
 
-/* ── Sign Cards ── */
-.signGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin: 36px 0;
+/* ── Markdown tables (GFM) — scroll sideways on narrow screens ── */
+.body { overflow-wrap: anywhere; }
+.body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--text-md);
+  margin: 28px 0;
 }
-
-.signCard {
-  background-color: var(--paper-pure);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 18px;
+.body th,
+.body td {
+  padding: var(--space-sm) 10px;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+  min-width: 120px;
+  overflow-wrap: normal;
 }
-
-.signCard h4 {
-  font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0 0 6px;
-  letter-spacing: -0.005em;
+.body th {
+  font-weight: 600;
   color: var(--ink);
-}
-
-.signBadge {
-  display: inline-block;
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  margin-bottom: 12px;
-  border-radius: var(--r-pill);
-}
-
-.badgeExceptional { background-color: var(--gold-soft); color: var(--gold); }
-.badgeFavorable   { background-color: var(--ink); color: var(--paper); }
-.badgeNeutral     { background-color: var(--rule-2); color: var(--ink-3); }
-.badgeMixed       { background-color: var(--rule-2); color: var(--ink-3); }
-.badgeChallenging { background-color: var(--fire-50); color: var(--fire-600); }
-.badgeHighRisk    { background-color: var(--fire-50); color: var(--fire-700); }
-
-.signCard p {
-  font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 0;
-  color: var(--ink-2);
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .header { padding-left: 24px; padding-right: 24px; }
-  .body { padding-left: 24px; padding-right: 24px; }
-  .headerDivider { padding: 0 24px; }
-  .relatedSection { padding-left: 24px; padding-right: 24px; }
-  .ctaSection { padding-left: 24px; padding-right: 24px; }
-  .signGrid { grid-template-columns: repeat(2, 1fr); }
+  .header { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+  .body { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+  .headerDivider { padding: 0 var(--space-lg); }
+  .relatedSection { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+  .ctaSection { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+
   .relatedGrid { grid-template-columns: 1fr; }
   .postNav { flex-direction: column; }
   .navNext { text-align: left; margin-left: 0; }
@@ -575,11 +391,8 @@
 
 @media (max-width: 640px) {
   .header h1 { font-size: 32px; }
-  .body p { font-size: 16px; }
+  .body p { font-size: var(--text-base); }
   .body h2 { font-size: 24px; }
   .body blockquote { font-size: 19px; }
-  .signGrid { grid-template-columns: 1fr; }
-  .pivotBanner { padding: 24px 20px; }
-  .predictionBox { padding: 24px 20px; }
-  .pullQuote p { font-size: 19px; }
 }
+

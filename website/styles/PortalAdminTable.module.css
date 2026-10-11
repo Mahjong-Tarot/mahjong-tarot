@@ -20,12 +20,12 @@
   font-family: var(--sans);
   font-size: 13px;
   padding: 6px 14px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   border: 1px solid var(--rule);
   background: var(--paper-pure);
   color: var(--ink-3);
   cursor: pointer;
-  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .chip:hover {
@@ -49,7 +49,7 @@
 
 .tableWrap {
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   background: var(--paper-pure);
   overflow: hidden;
   overflow-x: auto;
@@ -132,49 +132,51 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   border: 1px solid var(--rule);
   color: var(--ink-3);
   background: var(--paper);
   white-space: nowrap;
 }
 
+/* Tag tones from the site palette (UI-10): member = ink, client/active/opted-in
+   = success, lapsed = fire, legacy = neutral. */
 .tagMember {
-  background: rgba(40, 123, 232, 0.12);
-  color: #287BE8;
-  border-color: rgba(40, 123, 232, 0.3);
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--ink) 25%, transparent);
 }
 
 .tagClient {
-  background: rgba(26, 158, 116, 0.12);
-  color: #1a9e74;
-  border-color: rgba(26, 158, 116, 0.3);
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+  color: var(--luck-lucky-ink);
+  border-color: color-mix(in srgb, var(--success) 30%, transparent);
 }
 
 .tagActive {
-  background: rgba(111, 242, 193, 0.18);
-  color: #1a9e74;
-  border-color: rgba(26, 158, 116, 0.3);
+  background: color-mix(in srgb, var(--success) 18%, transparent);
+  color: var(--luck-lucky-ink);
+  border-color: color-mix(in srgb, var(--success) 30%, transparent);
   font-weight: 600;
 }
 
 .tagLapsed {
-  background: rgba(209, 69, 139, 0.12);
-  color: #d1458b;
-  border-color: rgba(209, 69, 139, 0.3);
+  background: var(--fire-50);
+  color: var(--fire-700);
+  border-color: var(--fire-200);
 }
 
 .tagLegacy {
-  background: rgba(120, 113, 108, 0.10);
+  background: color-mix(in srgb, var(--ink-3) 10%, transparent);
   color: var(--ink-3);
-  border-color: rgba(120, 113, 108, 0.3);
+  border-color: color-mix(in srgb, var(--ink-3) 30%, transparent);
   font-style: italic;
 }
 
 .tagOptedIn {
-  color: #1a9e74;
-  background: rgba(26, 158, 116, 0.08);
-  border-color: rgba(26, 158, 116, 0.25);
+  color: var(--luck-lucky-ink);
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  border-color: color-mix(in srgb, var(--success) 25%, transparent);
 }
 
 .tagOptedOut {
@@ -215,7 +217,7 @@
   font-family: var(--sans);
   font-size: 13px;
   padding: 6px 28px 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--r-md);
   border: 1px solid var(--rule);
   background: var(--paper-pure);
   color: var(--ink);
@@ -230,14 +232,14 @@
 }
 
 .error {
-  color: #b22;
+  color: var(--fire-700);
   font-family: var(--sans);
   font-size: 14px;
   margin: 0 0 var(--space-md);
   padding: var(--space-sm) var(--space-md);
-  background: rgba(178, 34, 34, 0.06);
-  border-radius: 6px;
-  border-left: 3px solid #b22;
+  background: color-mix(in srgb, var(--fire-700) 6%, transparent);
+  border-radius: var(--r-md);
+  border-left: 3px solid var(--fire-700);
 }
 
 .toast {
@@ -246,10 +248,18 @@
   color: var(--ink-2);
   margin: 0 0 var(--space-md);
   padding: var(--space-sm) var(--space-md);
-  background: rgba(42, 138, 72, 0.08);
-  border-radius: 6px;
-  border-left: 3px solid rgba(42, 138, 72, 0.4);
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  border-radius: var(--r-md);
+  border-left: 3px solid color-mix(in srgb, var(--success) 40%, transparent);
 }
+
+/* Horizontal scroll wrapper for .ordersTable on narrow screens. */
+.ordersScroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+.ordersScroll .ordersTable th { white-space: nowrap; }
 
 .ordersTable {
   width: 100%;
@@ -258,7 +268,7 @@
   font-size: 14px;
   background: var(--paper-pure);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   overflow: hidden;
 }
 
@@ -296,4 +306,88 @@
   .sortField {
     justify-content: space-between;
   }
+}
+
+/* ── /admin/people: search, sortable headers, pagination (UI-11) ── */
+.searchInput {
+  flex: 1 1 280px;
+  max-width: 360px;
+  padding: 8px 12px;
+  font-family: var(--sans);
+  font-size: 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper-pure);
+  color: var(--ink);
+}
+
+.sortableTh {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortIndicator {
+  margin-left: var(--space-xs);
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.pagerButtons {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.pagerButton {
+  min-width: 80px;
+}
+
+.pagerStatus {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-4);
+}
+
+.pagerSize {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 12px;
+  color: var(--ink-4);
+}
+
+.pagerSelect {
+  padding: 4px 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  background: var(--paper-pure);
+  color: var(--ink);
+}
+
+.cellRight {
+  text-align: right;
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+@media (pointer: coarse) {
+  .chip,
+  .chipActive,
+  .sortSelect,
+  .pagerSelect { min-height: 44px; }
+}
+
+.chipRowSpaced {
+  margin-bottom: var(--space-md);
 }

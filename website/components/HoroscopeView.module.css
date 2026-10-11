@@ -19,31 +19,31 @@
   justify-content: center;
   width: 44px;
   height: 44px;
-  border-radius: 22px;
-  font-size: 1.5rem;
+  border-radius: var(--r-pill);
+  font-size: 24px;
   text-decoration: none;
   transition: background 0.15s;
 }
 .navArrow {
   color: var(--ink);
-  background: var(--color-surface);
+  background: var(--rule-2);
 }
 .navArrow:hover { background: var(--rule-2); }
-.navArrowDisabled { color: #ccc; cursor: not-allowed; }
+.navArrowDisabled { color: var(--rule); cursor: not-allowed; }
 
 .dateLabel { text-align: center; flex: 1; }
-.dateText { font-size: 1.1rem; font-weight: 600; }
+.dateText { font-size: 17.5px; font-weight: 600; }
 .todayBadge {
   display: inline-block;
-  margin-top: 4px;
+  margin-top: var(--space-xs);
   padding: 2px 10px;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  background: var(--fire-500);
-  color: white;
-  border-radius: 10px;
+  background: var(--fire-600);
+  color: var(--paper);
+  border-radius: var(--r-md);
 }
 
 .pillarStrip {
@@ -51,17 +51,17 @@
   flex-wrap: wrap;
   gap: var(--space-md);
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 13.5px;
   color: var(--ink-4);
   margin-bottom: var(--space-2xl);
   padding: var(--space-sm) var(--space-md);
   background: var(--rule-2);
-  border-radius: 8px;
+  border-radius: var(--r-md);
 }
 .pillarStrip strong { color: var(--ink); font-weight: 600; }
 
 .sectionLabel {
-  font-size: 0.75rem;
+  font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink-4);
@@ -74,49 +74,49 @@
 
 .tabs {
   display: flex;
-  gap: 4px;
+  gap: var(--space-xs);
   margin-bottom: var(--space-md);
   background: var(--rule-2);
-  border-radius: 10px;
-  padding: 4px;
+  border-radius: var(--r-md);
+  padding: var(--space-xs);
 }
 .tab {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--space-sm);
   padding: 10px 14px;
   border: 0;
   background: transparent;
-  border-radius: 8px;
+  border-radius: var(--r-md);
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 500;
   color: var(--ink-4);
   transition: background 0.15s, color 0.15s;
 }
 .tab:hover { color: var(--ink); }
 .tabActive {
-  background: white;
+  background: var(--paper);
   color: var(--ink);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 3px var(--ink-a08);
 }
 .tabScore {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--fire-500);
+  color: var(--fire-600);
 }
 
 .proseCard {
   padding: var(--space-lg) var(--space-xl);
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
 }
 .prose {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 17px;
   line-height: 1.7;
   color: var(--ink);
 }
@@ -130,7 +130,7 @@
 .signGrid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
+  gap: var(--space-sm);
   margin-bottom: var(--space-lg);
 }
 @media (max-width: 600px) {
@@ -142,32 +142,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: var(--space-md) 4px;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-xs);
   border: 2px solid transparent;
   background: var(--rule-2);
-  border-radius: 10px;
+  border-radius: var(--r-md);
   cursor: pointer;
   font-family: inherit;
   transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
-.signTile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.signTile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px var(--ink-a08); }
 .signTileActive { border-color: var(--fire-500); }
 
-.signLabel { font-size: 0.9rem; font-weight: 600; }
-.signScore { font-size: 0.75rem; color: var(--ink-4); font-weight: 600; }
+.signLabel { font-size: 14.5px; font-weight: 600; }
+.signScore { font-size: 12px; color: var(--ink-4); font-weight: 600; }
 
-.tone_auspicious  { background: linear-gradient(180deg, #e8f5e8 0%, var(--rule-2) 100%); }
-.tone_favorable   { background: linear-gradient(180deg, #f0f7e8 0%, var(--rule-2) 100%); }
+.tone_auspicious  { background: linear-gradient(180deg, var(--tone-auspicious-bg) 0%, var(--rule-2) 100%); }
+.tone_favorable   { background: linear-gradient(180deg, var(--tone-favourable-bg) 0%, var(--rule-2) 100%); }
 .tone_neutral     { background: var(--rule-2); }
-.tone_cautionary  { background: linear-gradient(180deg, #faf0e8 0%, var(--rule-2) 100%); }
-.tone_challenging { background: linear-gradient(180deg, #f5e8e8 0%, var(--rule-2) 100%); }
+.tone_cautionary  { background: linear-gradient(180deg, var(--tone-caution-bg) 0%, var(--rule-2) 100%); }
+.tone_challenging { background: linear-gradient(180deg, var(--tone-challenging-bg) 0%, var(--rule-2) 100%); }
 
 .signDetail {
   margin-top: var(--space-lg);
   padding: var(--space-lg);
   background: var(--rule-2);
-  border-radius: 12px;
+  border-radius: var(--r-md);
 }
 .signDetailHeader {
   display: flex;
@@ -175,27 +175,49 @@
   justify-content: space-between;
   margin-bottom: var(--space-md);
 }
-.signDetailHeader h3 { margin: 0; font-size: 1.25rem; }
+.signDetailHeader h3 { margin: 0; font-size: var(--text-lg); }
 .closeButton {
   border: 0;
   background: transparent;
-  font-size: 1.5rem;
+  font-size: 24px;
   line-height: 1;
   color: var(--ink-4);
   cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: var(--space-xs) 10px;
+  border-radius: var(--r-md);
 }
-.closeButton:hover { background: rgba(0,0,0,0.06); color: var(--ink); }
+.closeButton:hover { background: var(--ink-a08); color: var(--ink); }
 
 .forecastLink {
   text-align: center;
   margin-top: var(--space-2xl);
 }
 .forecastLink a {
-  font-size: 0.95rem;
-  color: var(--fire-500);
+  font-size: 15px;
+  color: var(--fire-600);
   text-decoration: none;
   font-weight: 500;
 }
 .forecastLink a:hover { text-decoration: underline; }
+
+/* Phone (MOB-05/08/11/14) */
+@media (pointer: coarse) {
+  .closeButton { min-width: 44px; min-height: 44px; }
+  .tab { min-height: 44px; }
+}
+@media (max-width: 640px) {
+  .container { padding: var(--space-md) var(--space-md) var(--space-lg); }
+  .proseCard { padding: var(--space-lg) var(--space-md); }
+  .signDetail { padding: var(--space-md); }
+  .daySection,
+  .signSection { margin-bottom: var(--space-2xl); }
+}
+@media (max-width: 480px) {
+  .tab {
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-sm) 6px;
+    min-width: 0;
+  }
+  .tabScore { font-size: 12px; }
+}

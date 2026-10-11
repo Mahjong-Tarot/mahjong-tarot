@@ -9,13 +9,7 @@
 
 import { requireApi } from '../../../lib/guards';
 import { getServiceSupabase } from '../../../lib/stripe';
-
-function originFromReq(req) {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const host  = req.headers['x-forwarded-host']  || req.headers.host;
-  return `${proto}://${host}`;
-}
+import { siteOrigin } from '../../../lib/siteOrigin';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -55,7 +49,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: uErr?.message || 'Could not load target email.' });
   }
 
-  const redirectTo = `${originFromReq(req)}/admin/quick-reading`;
+  const redirectTo = `${siteOrigin()}/admin/quick-reading`;
   const { data: linkData, error: lErr } = await service.auth.admin.generateLink({
     type: 'magiclink',
     email: targetUser.user.email,

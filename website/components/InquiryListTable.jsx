@@ -17,7 +17,7 @@ export default function InquiryListTable({ rows, busy, onSelect, onChangeStatus 
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r.id} onClick={() => onSelect(r)} style={{ cursor: 'pointer' }}>
+            <tr key={r.id} onClick={() => onSelect(r)} className="is-clickable">
               <td className={tableStyles.cellMuted}>{relTime(r.created_at)}</td>
               <td>
                 <span className={tableStyles.tag}>{TYPE_LABELS[r.type] || r.type}</span>

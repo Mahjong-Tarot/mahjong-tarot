@@ -4,6 +4,7 @@
 // full-viewport in a sandboxed iframe. noindex so it never gets crawled.
 
 import Head from 'next/head';
+import styles from '../../../styles/ReadingFrame.module.css';
 import { createClient } from '@supabase/supabase-js';
 
 export async function getServerSideProps({ params }) {
@@ -34,7 +35,7 @@ export async function getServerSideProps({ params }) {
 
 export default function PublicQuickReading({ name, html, error }) {
   if (error) {
-    return <p style={{ padding: '3rem 1rem', textAlign: 'center' }}>{error}</p>;
+    return <p className={styles.error}>{error}</p>;
   }
   return (
     <>
@@ -46,7 +47,7 @@ export default function PublicQuickReading({ name, html, error }) {
         srcDoc={html}
         title={`Reading${name ? ` for ${name}` : ''}`}
         sandbox="allow-scripts"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', border: 0, background: '#f7f3ec' }}
+        className={styles.frame}
       />
     </>
   );

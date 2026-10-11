@@ -109,7 +109,7 @@ export default function AdminAstrologers({ profile, astrologers, loadError }) {
                   <tr key={a.user_id}>
                     <td>{a.name || <span className={styles.muted}>(no name)</span>}</td>
                     <td>{a.email || <span className={styles.muted}>—</span>}</td>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className={tableStyles.cellRight}>
                       <button
                         type="button"
                         className="btn-secondary"

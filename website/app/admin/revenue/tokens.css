@@ -1,72 +1,68 @@
-/* Copied from edge8-web app/styles/tokens.css for the marketing platform (loaded only under /admin/revenue). mahjong-tarot changes: --admin-font-sans and --admin-accent. */
+/* Copied from edge8-web app/styles/tokens.css for the marketing platform (loaded only under /admin/revenue).
+   mahjong-tarot: every brand primitive below is ALIASED to a Mahjong token from
+   styles/globals.css (fire scale, ink ramp, rules, gold, --serif/--sans/--mono), so the
+   Revenue admin renders in the same palette and type as the rest of the site. Edge8's
+   blue/mint/Manrope palette is gone (UI-01, UI-02 in docs/reviews). */
 /* ═══════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — the single source of truth for the whole product.
+   DESIGN TOKENS for the Revenue admin (/admin/revenue).
 
-   This is the ONLY file that may contain a raw colour value (hex / rgb / hsl).
-   Everything else — globals.css (public site), admin.css (admin / team /
-   portal), every component — reads a token by name. To change a colour,
-   a radius, a font or a spacing step anywhere in the app, change it here.
+   This file and styles/globals.css are the only files that may contain a raw
+   colour value (hex / rgb / hsl). Everything else reads a token by name.
+   Where possible the primitives here point at globals.css tokens rather than
+   holding a second palette.
 
    Layers, top to bottom:
-     1. Brand primitives   --color-*        the palette itself (raw values)
-     2. Public-site aliases --blue, --mint…  short names the marketing site uses
-     3. App tokens          --admin-*        semantic roles for the operating
-                                             system surfaces (admin, team,
-                                             portal). Components use THESE.
+     1. Brand primitives   --color-*        aliases of the globals.css palette
+     2. Public-site aliases --blue, --mint…  legacy short names (now fire/gold)
+     3. App tokens          --admin-*        semantic roles for the admin
+                                             surfaces. Components use THESE.
 
-   `npm run check:tokens` fails the build if a raw colour appears anywhere else.
-   Pattern library: /admin/patterns renders every token and component.
+   `npm run check:tokens` reports raw colours anywhere else.
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  /* ── 1. Brand primitives ─────────────────────────────────────────────── */
-  --color-primary-dark: #101014;
-  --color-primary-blue: #287BE8;
-  --color-primary-blue-hover: #1D6AD4;
-  --color-primary-blue-bright: #3B8CF5;
-  --color-accent-mint: #6FF2C1;
-  --color-accent-mint-bright: #2EDBBB;
-  --color-accent-mint-hover: #82F5CB;
-  --color-err-on-dark: #FF8A8A;
-  --color-bg-primary: #FFFFFF;
-  --color-bg-secondary: #EAEEF2;
-  --color-text-body: #797c82;
-  --color-card-border: #E6E6E6;
-  --color-input-border: #A8B2BD;
+  /* ── 1. Brand primitives (aliases of globals.css) ────────────────────── */
+  --color-primary-dark: var(--ink);
+  /* The "blue" names are Edge8 legacy; in Mahjong they are the fire scale. */
+  --color-primary-blue: var(--fire-500);
+  --color-primary-blue-hover: var(--fire-600);
+  --color-primary-blue-bright: var(--fire-400);
+  /* The "mint" names are Edge8 legacy; in Mahjong they are gold. */
+  --color-accent-mint: var(--gold);
+  --color-accent-mint-bright: var(--gold);
+  --color-accent-mint-hover: var(--gold-soft);
+  --color-err-on-dark: var(--fire-300);
+  --color-bg-primary: var(--paper-pure);
+  --color-bg-secondary: var(--rule-2);
+  --color-text-body: var(--ink-3);
+  --color-card-border: var(--rule);
+  --color-input-border: var(--ink-4);
 
-  /* Neutral ramp (brand greys, no navy tint) */
-  --color-grey-50: #F5F6F8;
-  --color-grey-75: #F1F3F5;
-  --color-grey-100: #F0F1F3;
-  --color-grey-150: #EEF2F7;
-  --color-grey-200: #D4DAE4;
-  --color-grey-300: #BCC1C7;
-  --color-grey-400: #9CA3AF;
-  --color-grey-500: #6B7280;
-  --color-grey-600: #5C6178;
-  --color-grey-700: #C4C7CC; /* ink on dark chrome */
-  --color-grey-800: #7C8189; /* muted ink on dark chrome */
-  --color-grey-900: #1A1A1F; /* dark card */
+  /* Neutral ramp, re-rooted on the ink/rule scale */
+  --color-grey-50: color-mix(in srgb, var(--rule-2) 60%, var(--paper-pure));
+  --color-grey-75: var(--rule-2);
+  --color-grey-100: var(--rule-2);
+  --color-grey-150: var(--rule-2);
+  --color-grey-200: var(--rule);
+  --color-grey-300: color-mix(in srgb, var(--ink-4) 50%, var(--rule));
+  --color-grey-400: var(--ink-4);
+  --color-grey-500: color-mix(in srgb, var(--ink-3) 60%, var(--ink-4)); /* ~5.2:1 on white */
+  --color-grey-600: var(--ink-3);
+  --color-grey-700: color-mix(in srgb, var(--paper) 75%, var(--ink)); /* ink on dark chrome */
+  --color-grey-800: var(--ink-4); /* muted ink on dark chrome */
+  --color-grey-900: var(--ink-2); /* dark card */
 
   /* Status hues */
-  --color-ok-bg: #D8F3E8;      --color-ok-ink: #157A5A;      --color-ok-strong: #12A06B;   --color-ok-deep: #166534;
+  --color-ok-bg: var(--luck-lucky-bg); --color-ok-ink: var(--luck-lucky-ink); --color-ok-strong: var(--success); --color-ok-deep: var(--luck-lucky-ink);
   --color-warn-bg: #FBF0CF;    --color-warn-ink: #8A6A0F;    --color-warn-strong: #D97706;
-  --color-err-bg: #FDE4E4;     --color-err-ink: #B0332F;     --color-err-strong: #DC2626;  --color-err-deep: #991B1B; --color-err-line: #F4C7C4;
-  --color-info-bg: #E2ECFD;    --color-accent-soft: #EAF2FF; --color-accent-line: #CFE0FB;
-  /* The info badge needs an ink of its OWN, not the link-hover blue it used
-     to borrow: #1D6AD4 on --color-info-bg measures 4.34:1 at 12px and fails
-     the 4.5:1 minimum (W.104.1). This is the same hue two steps darker —
-     5.14:1 on the badge, 6.12:1 on white — and it is separate from
-     --color-primary-blue-hover because that one is also link hover,
-     --admin-accent-strong and --admin-chart-3, none of which may move. */
-  --color-info-ink: #1A5FBF;
+  --color-err-bg: var(--fire-50); --color-err-ink: var(--fire-700); --color-err-strong: var(--fire-500); --color-err-deep: var(--fire-800); --color-err-line: var(--fire-200);
+  /* Info and accent tints: neutral rule / fire tints (were Edge8 blue). */
+  --color-info-bg: var(--rule-2); --color-accent-soft: var(--fire-50); --color-accent-line: var(--fire-200);
+  --color-info-ink: var(--ink-2);
   --color-pink-bg: #FBE6F1;    --color-pink-ink: #B03571;
   --color-amber-bg: #FAEEDA;   --color-amber-ink: #854F0B;
-  /* Growth (K.29, recoloured K.40): the one hue for what the member is building
-     on My Coach — the ladder, the goal fill, the lit FAST checks, the heatmap,
-     the ring and the plant. Shades of the brand mint, so the page stays inside
-     the site's palette (Khoa, 2026-09-17); never reused for warn or err. */
-  --color-growth: #2EDBBB;     --color-growth-soft: #E6FBF5; --color-growth-deep: #0E7C68; --color-growth-line: #BFF1E4;
-  --color-violet: #7A5CFA;     /* innovation / contractor lane on the public workflow library */
+  /* Growth: progress fills; the success family. */
+  --color-growth: var(--success); --color-growth-soft: var(--luck-lucky-bg); --color-growth-deep: var(--luck-lucky-ink); --color-growth-line: color-mix(in srgb, var(--success) 30%, var(--paper-pure));
+  --color-violet: var(--gold);
   /* Client identity on the Workboard: twelve soft chip pairs, handed to clients
      in turn, so a card says whose it is at a glance. The one categorical set
      outside the brand ramp, because eleven clients cannot share the six
@@ -85,27 +81,27 @@
   --color-client-11-bg: #EAEEF3; --color-client-11-ink: #475569; /* slate */
 
   /* Translucent overlays (scrims, on-dark hover states, elevation) */
-  --color-scrim: rgba(4, 16, 45, 0.45);
-  --color-scrim-soft: rgba(4, 16, 45, 0.08);
+  --color-scrim: color-mix(in srgb, var(--ink) 45%, transparent);
+  --color-scrim-soft: color-mix(in srgb, var(--ink) 8%, transparent);
   --color-on-dark-soft: rgba(255, 255, 255, 0.06);
   --color-on-dark-hover: rgba(255, 255, 255, 0.08);
   --color-on-dark-line: rgba(255, 255, 255, 0.10);
   --color-on-dark-active: rgba(255, 255, 255, 0.12);
   --color-on-dark-strong: rgba(255, 255, 255, 0.25);
   --color-on-dark-stronger: rgba(255, 255, 255, 0.5);
-  --color-blue-glow: rgba(40, 123, 232, 0.15);
-  --color-blue-glow-strong: rgba(40, 123, 232, 0.35);
-  --color-focus-ring: rgba(40, 123, 232, 0.25);
-  --color-elevation-1: 0 1px 2px rgba(4, 16, 45, 0.06), 0 1px 3px rgba(4, 16, 45, 0.08);
-  --color-elevation-2: 0 6px 24px rgba(4, 16, 45, 0.10);
-  --color-elevation-3: 0 10px 24px rgba(4, 16, 45, 0.18);
-  --color-elevation-drawer: -24px 0 80px rgba(4, 16, 45, 0.28);
-  --color-elevation-modal: 0 24px 80px rgba(4, 16, 45, 0.32);
+  --color-blue-glow: color-mix(in srgb, var(--fire-500) 15%, transparent);
+  --color-blue-glow-strong: color-mix(in srgb, var(--fire-500) 35%, transparent);
+  --color-focus-ring: var(--fire-500);
+  --color-elevation-1: 0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent), 0 1px 3px color-mix(in srgb, var(--ink) 8%, transparent);
+  --color-elevation-2: 0 6px 24px color-mix(in srgb, var(--ink) 10%, transparent);
+  --color-elevation-3: 0 10px 24px color-mix(in srgb, var(--ink) 18%, transparent);
+  --color-elevation-drawer: -24px 0 80px color-mix(in srgb, var(--ink) 28%, transparent);
+  --color-elevation-modal: 0 24px 80px color-mix(in srgb, var(--ink) 32%, transparent);
   --color-elevation-dark: 0 12px 32px rgba(0, 0, 0, 0.4);
 
-  /* Type */
-  --font-display: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
-  --font-body: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  /* Type: the site's own families (Manrope was never loaded). */
+  --font-display: var(--serif);
+  --font-body: var(--sans);
 
   /* ── 2. Public-site aliases (marketing pages in globals.css) ─────────── */
   --blue: var(--color-primary-blue);
@@ -114,7 +110,7 @@
   --mint: var(--color-accent-mint);
   --dark: var(--color-primary-dark);
   --dark-card: var(--color-grey-900);
-  --dark-border: rgba(234, 238, 242, 0.1);
+  --dark-border: color-mix(in srgb, var(--rule) 10%, transparent);
   --white: var(--color-bg-primary);
   --tint: var(--color-bg-secondary);
   --tint-deep: var(--color-grey-200);
@@ -123,19 +119,18 @@
   --input-border: var(--color-input-border);
   --grey-mid: var(--color-grey-500);
   --grey-light: var(--color-grey-400);
-  --radius: 20px;
-  --radius-sm: 20px;
-  --radius-btn: 40px;
-  --transition: 0.2s ease;
+  --radius: var(--r-lg);
+  --radius-sm: var(--r-md);
+  --radius-btn: var(--r-pill);
   --link: var(--blue);
   --link-hover: var(--color-primary-blue-hover);
   --link-on-dark: var(--white);
   --link-on-dark-hover: var(--mint);
 
   /* ── 3. App tokens — admin / team / portal ───────────────────────────── */
-  /* Type ramp (Manrope only; tabular-nums does numeric alignment) */
-  --admin-font-sans: var(--sans); /* mahjong-tarot: the site's Inter stack */
-  --admin-font-mono: var(--font-body);
+  /* Type ramp: Inter for UI, JetBrains Mono for mono cells */
+  --admin-font-sans: var(--sans);
+  --admin-font-mono: var(--mono);
   --admin-text-xs: 11px;    /* eyebrow labels, lock notes */
   --admin-text-sm: 12px;    /* meta, table labels, notes */
   --admin-text-base: 13px;  /* body */
@@ -159,19 +154,20 @@
   --os-content-max: 1440px;
 
   /* Radii */
-  --admin-radius: 12px;         /* cards / surfaces */
-  --admin-radius-sm: 8px;       /* buttons / inputs */
-  --admin-radius-xs: 6px;       /* chips / small controls */
-  --admin-radius-pill: 9999px;  /* badges / avatars */
+  --admin-radius: var(--r-md);        /* cards / surfaces (guide: cards at --r-md) */
+  --admin-radius-sm: var(--r-md);     /* inputs */
+  --admin-radius-xs: var(--r-sm);     /* chips / small controls */
+  --admin-radius-pill: var(--r-pill); /* buttons, badges, avatars */
 
   /* Accent. Per-section themes override --admin-accent only. */
-  --admin-accent: #E63329; /* mahjong-tarot: Fire red (--fire-500) */
-  --admin-accent-strong: var(--color-primary-blue-hover);
-  --admin-accent-soft: var(--color-accent-soft);
-  --admin-accent-line: var(--color-accent-line);
+  --admin-accent: var(--fire-500);
+  --admin-accent-strong: var(--fire-600);
+  --admin-accent-soft: var(--fire-50);
+  --admin-accent-line: var(--fire-200);
   --admin-accent-on-dark: var(--color-bg-primary);
-  --admin-accent-on-dark-strong: var(--mint);
-  --admin-focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --admin-accent-on-dark-strong: var(--gold);
+  /* The guide's focus ring: 2px fire (drawn as a box-shadow so it follows radii). */
+  --admin-focus-ring: 0 0 0 2px var(--color-focus-ring);
 
   /* Office accents (badges, section themes) — four brand steps */
   --admin-accent-blue: var(--color-primary-blue);
@@ -252,12 +248,12 @@
   --admin-client-11-bg: var(--color-client-11-bg); --admin-client-11-ink: var(--color-client-11-ink);
 
   /* Categorical chart ramp — brand only; legible to ~4 series */
-  --admin-chart-1: var(--color-primary-blue);
-  --admin-chart-2: var(--color-accent-mint);
-  --admin-chart-3: var(--color-primary-blue-hover);
-  --admin-chart-4: var(--color-primary-dark);
-  --admin-chart-5: var(--color-grey-400);
-  --admin-chart-6: var(--color-primary-blue-bright);
-  --admin-chart-7: var(--color-grey-500);
-  --admin-chart-8: var(--color-input-border);
+  --admin-chart-1: var(--fire-500);
+  --admin-chart-2: var(--gold);
+  --admin-chart-3: var(--ink-3);
+  --admin-chart-4: var(--ink);
+  --admin-chart-5: var(--ink-4);
+  --admin-chart-6: var(--fire-300);
+  --admin-chart-7: var(--success);
+  --admin-chart-8: var(--rule);
 }

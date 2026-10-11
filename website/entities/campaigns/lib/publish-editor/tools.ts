@@ -69,7 +69,7 @@ export const PUBLISH_EDITOR_TOOLS: Anthropic.Tool[] = [
   {
     name: "publish_blog_asset",
     description:
-      "Publish the asset live: validates, sets it live on the brand's site, and verifies the URL. The only irreversible action. Refuses (returns errors) if validation fails. Idempotent if already published.",
+      "Publish the asset live: validates, sets it live on the brand's site, and verifies the URL. The only irreversible action. Refuses (returns errors) if validation fails, or if update_blog_content changed the asset earlier in this run (edited posts go to a person for review). Idempotent if already published.",
     input_schema: {
       type: "object",
       properties: { confirm: { type: "boolean", description: "Must be true." } },
@@ -89,6 +89,12 @@ const CONTENT_SELECT =
 
 // Factory: binds the tools to one asset + actor. Returns an exec(name, input).
 export function makePublishEditorTools(assetId: string, actor: string) {
+  // Set once this run has rewritten the asset. Edits come from a model that
+  // read untrusted text (the body, written from fetched sources), so a run
+  // that edited may not also publish: a person reviews the edits and presses
+  // Publish themselves.
+  let editedThisRun = false;
+
   async function load(): Promise<Row | null> {
     const { data, error: loadErr } = await companyOs.from("marketing_content").select(CONTENT_SELECT)
       .eq("id", assetId)
@@ -166,6 +172,7 @@ export function makePublishEditorTools(assetId: string, actor: string) {
         // tells the agent, and through it the person, how to change it.
         const { error } = await updateContentUnlessLive(assetId, update);
         if (error) return { content: error.message, isError: true };
+        editedThisRun = true;
         await recordAudit({
           table: "marketing_content",
           recordId: assetId,
@@ -178,6 +185,14 @@ export function makePublishEditorTools(assetId: string, actor: string) {
 
       case "publish_blog_asset": {
         if (input.confirm !== true) return { content: "confirm must be true.", isError: true };
+        if (editedThisRun) {
+          return {
+            content:
+              "Refused: this run edited the asset, so a person must review the edits and publish it from the admin. Do not retry; report your changes and say the post is ready for human review.",
+            isError: true,
+            chip: "publish needs review",
+          };
+        }
         const r = await publishBlogAsset(assetId, `publish-editor-agent (on behalf of ${actor})`);
         return {
           content: JSON.stringify(r),

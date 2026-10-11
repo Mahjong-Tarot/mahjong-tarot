@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { CARDS, getCard } from '../../lib/cards';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb, faqPage } from '../../lib/schema';
-import styles from '../../styles/Home.module.css';
+import styles from '../../styles/Cards.module.css';
 
 export async function getStaticPaths() {
  return {
@@ -70,56 +70,57 @@ export default function CardPage({ card }) {
  />
  <Nav />
  <main>
- <section style={{ paddingTop: 'var(--space-2xl)', paddingBottom: 'var(--space-md)' }}>
+ <section className={styles.crumbSection}>
  <div className="container">
- <nav aria-label="Breadcrumb" style={{ fontSize: 13, color: 'var(--mid-gray)', marginBottom: 'var(--space-lg)' }}>
- <Link href="/" style={{ color: 'inherit' }}>Home</Link>
+ <nav aria-label="Breadcrumb" className={styles.breadcrumb}>
+ <Link href="/">Home</Link>
  {' / '}
- <Link href="/cards" style={{ color: 'inherit' }}>Card Meanings</Link>
+ <Link href="/cards">Card Meanings</Link>
  {' / '}
  <span>{card.name}</span>
  </nav>
  </div>
  </section>
 
- <section style={{ paddingBottom: 'var(--space-3xl)' }}>
- <div className="container" style={{ display: 'grid', gridTemplateColumns: 'minmax(240px, 340px) 1fr', gap: 'var(--space-2xl)', alignItems: 'start' }}>
- <div className={styles.cardImageWrap} style={{ aspectRatio: '2/3', position: 'relative' }}>
+ <section className={styles.detailSection}>
+ <div className={`container ${styles.detail}`}>
+ <div className={styles.imageWrap}>
  <Image
  src={`/images/cards/${card.slug}.webp`}
  alt={`${card.name}, Mahjong Mirror card illustration`}
  fill
  priority
- style={{ objectFit: 'contain' }}
+ sizes="(max-width: 768px) 240px, 340px"
+ className={styles.image}
  />
  </div>
  <div>
  <span className="overline">{card.category} Card</span>
- <h1 style={{ margin: 'var(--space-sm) 0 var(--space-md)' }}>
+ <h1 className={styles.title}>
  {card.name}
  </h1>
- <p style={{ fontSize: 14, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--mystic-fire)', marginBottom: 'var(--space-lg)' }}>
+ <p className={styles.short}>
  {card.short}
  </p>
- <p style={{ fontSize: 19, lineHeight: 1.7, marginBottom: 'var(--space-lg)', color: '#333' }}>
+ <p className={styles.lede}>
  <strong>In short:</strong> {card.summary}
  </p>
- <h2 style={{ marginBottom: 'var(--space-sm)' }}>What the {card.name} Means</h2>
- <p style={{ marginBottom: 'var(--space-lg)' }}>{card.summary}</p>
- <h2 style={{ marginBottom: 'var(--space-sm)' }}>When the {card.name} Appears in a Reading</h2>
- <p style={{ marginBottom: 'var(--space-lg)' }}>{card.reading}</p>
+ <h2 className={styles.h2}>What the {card.name} Means</h2>
+ <p className={styles.para}>{card.summary}</p>
+ <h2 className={styles.h2}>When the {card.name} Appears in a Reading</h2>
+ <p className={styles.para}>{card.reading}</p>
 
- <h2 style={{ marginBottom: 'var(--space-sm)' }}>Frequently Asked Questions</h2>
- <div style={{ marginBottom: 'var(--space-lg)' }}>
- <h3 style={{ fontSize: 18, marginBottom: 4 }}>What does the {card.name} card mean?</h3>
- <p style={{ marginBottom: 'var(--space-md)' }}>{card.summary}</p>
- <h3 style={{ fontSize: 18, marginBottom: 4 }}>When the {card.name} appears in a reading, what should I do?</h3>
- <p style={{ marginBottom: 'var(--space-md)' }}>{card.reading}</p>
- <h3 style={{ fontSize: 18, marginBottom: 4 }}>What category is the {card.name}?</h3>
+ <h2 className={styles.h2}>Frequently Asked Questions</h2>
+ <div className={styles.faq}>
+ <h3>What does the {card.name} card mean?</h3>
+ <p>{card.summary}</p>
+ <h3>When the {card.name} appears in a reading, what should I do?</h3>
+ <p>{card.reading}</p>
+ <h3>What category is the {card.name}?</h3>
  <p>{card.name} is a {card.category} card in the 42-card Mahjong Mirror deck developed by Bill Hajdu.</p>
  </div>
 
- <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', marginTop: 'var(--space-xl)' }}>
+ <div className={styles.actions}>
  <Link href="/book-a-reading" className="btn-primary">Book a Private Reading with Bill</Link>
  <Link href="/cards" className="btn-secondary">All 42 Cards</Link>
  </div>

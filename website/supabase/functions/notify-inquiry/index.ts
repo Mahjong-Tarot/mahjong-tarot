@@ -1,14 +1,26 @@
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+// Escape every DB value before it goes into email / Telegram HTML: inquiry
+// fields are written by anonymous visitors.
+function esc(v: unknown): string {
+ return String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
+}
+
 serve(async (req: Request) => {
+ // Only the DB webhook may call this: it must send the shared secret in
+ // x-notify-secret. verify_jwt alone accepts the public anon key.
+ const expected = Deno.env.get("NOTIFY_INQUIRY_SECRET");
+ if (!expected || req.headers.get("x-notify-secret") !== expected) {
+ return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+ }
  try {
  const payload = await req.json();
 
  // The webhook sends the full record in payload.record
  const record = payload.record || payload;
  const personId = record.person_id;
- const inquiryType = record.type;
+ const inquiryType = esc(record.type);
  const inquiryId = record.id;
 
  // Fetch person details using service role
@@ -24,13 +36,13 @@ serve(async (req: Request) => {
  return new Response(JSON.stringify({ error: "Inquiry not found" }), { status: 404 });
  }
 
- const name = inq.person_name || "Unknown";
- const email = inq.person_email || ", ";
- const phone = inq.person_phone || ", ";
- const subject = inq.subject || ", ";
- const message = inq.message || ", ";
- const source = inq.source || ", ";
- const readingType = inq.reading_type_name || "";
+ const name = esc(inq.person_name || "Unknown");
+ const email = esc(inq.person_email || ", ");
+ const phone = esc(inq.person_phone || ", ");
+ const subject = esc(inq.subject || ", ");
+ const message = esc(inq.message || ", ");
+ const source = esc(inq.source || ", ");
+ const readingType = esc(inq.reading_type_name || "");
 
  // ── Send Email via Resend ──────────────────────────────
 
@@ -152,7 +164,7 @@ serve(async (req: Request) => {
  });
  } catch (err) {
  console.error("notify-inquiry error:", err);
- return new Response(JSON.stringify({ error: err.message }), {
+ return new Response(JSON.stringify({ error: "notify failed" }), {
  status: 500,
  headers: { "Content-Type": "application/json" },
  });

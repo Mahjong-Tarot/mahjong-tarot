@@ -46,7 +46,7 @@
 
 .featuredExcerpt {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: var(--text-base);
   line-height: 1.65;
   color: var(--ink-2);
   margin: 0;
@@ -64,22 +64,23 @@
 .filterBtn {
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   background: transparent;
   color: var(--ink-3);
   border: 1px solid var(--rule);
-  padding: 8px 14px;
+  padding: var(--space-sm) 14px;
+  min-height: 44px;
   border-radius: var(--r-pill);
   cursor: pointer;
   transition: border-color var(--transition), color var(--transition), background-color var(--transition);
 }
 .filterBtn:hover { border-color: var(--ink); color: var(--ink); }
 .filterActive {
-  background-color: var(--fire-500);
-  color: #fff !important;
-  border-color: var(--fire-500);
+  background-color: var(--fire-600);
+  color: var(--paper);
+  border-color: var(--fire-600);
 }
 
 .grid {
@@ -99,7 +100,7 @@
 }
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(20, 22, 27, 0.08);
+  box-shadow: var(--shadow-lift);
 }
 
 .cardImageLink { display: block; overflow: hidden; }
@@ -117,7 +118,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .cardTitle {
@@ -139,7 +140,7 @@
 
 .cardExcerpt {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   line-height: 1.55;
   color: var(--ink-3);
   margin: 0;
@@ -151,7 +152,7 @@
   align-items: center;
   justify-content: space-between;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   color: var(--ink-4);
   letter-spacing: 0.04em;
   margin-top: var(--space-sm);
@@ -159,7 +160,7 @@
 
 .readMore {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.005em;
   color: var(--fire-600);
@@ -181,3 +182,8 @@
 @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px)  { .featuredInner { grid-template-columns: 1fr; } }
 @media (max-width: 640px)  { .grid { grid-template-columns: 1fr; } }
+
+/* Touch targets on coarse pointers (MOB-14) */
+@media (pointer: coarse) {
+  .filterBtn { min-height: 44px; }
+}

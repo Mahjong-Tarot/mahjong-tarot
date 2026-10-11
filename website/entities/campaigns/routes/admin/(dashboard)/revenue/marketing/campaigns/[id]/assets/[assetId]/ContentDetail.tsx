@@ -191,7 +191,7 @@ export function ContentDetail({
                   version tray. Other channels have no preview cover, so show it. */}
               {!isBlog && (
                 <a href={selected.url} target="_blank" rel="noreferrer" className="admin-campaign-imgbox">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- uploaded file of unknown size; next/image needs fixed dimensions */}
+                  {/* eslint-disable-next-line @next/next/no-img-element -- admin preview exception to the guide's next/image rule (UI-36): Supabase-storage or generated image of unknown size, shown at its own aspect ratio; next/image would need fixed dimensions and a remotePatterns entry */}
                   <img src={selected.url} alt={entry.title} />
                 </a>
               )}
@@ -206,7 +206,7 @@ export function ContentDetail({
                       disabled={pending || img.isSelected}
                       title={img.isSelected ? "Selected" : "Use this version"}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element -- uploaded file of unknown size; next/image needs fixed dimensions */}
+                      {/* eslint-disable-next-line @next/next/no-img-element -- admin preview exception to the guide's next/image rule (UI-36): Supabase-storage or generated image of unknown size, shown at its own aspect ratio; next/image would need fixed dimensions and a remotePatterns entry */}
                       <img src={img.url} alt={`Version ${images.length - i}`} />
                     </button>
                   ))}

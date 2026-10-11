@@ -2,7 +2,7 @@ import { TYPE_LABELS, relTime } from '../lib/admin-people';
 
 export default function PersonRow({ person, tableStyles, onOpen }) {
   return (
-    <tr onClick={() => onOpen(person)} style={{ cursor: 'pointer' }}>
+    <tr onClick={() => onOpen(person)} className="is-clickable">
       <td className={tableStyles.cellPrimary}>{person.name || '—'}</td>
       <td className={tableStyles.cellSecondary}>{person.email}</td>
       <td>

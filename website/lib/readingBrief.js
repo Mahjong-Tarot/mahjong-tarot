@@ -1,16 +1,26 @@
 // Rule-based synthesis for the Reading brief page. Pulls from the
 // Bazi chart + the inquiry context to produce a paragraph Bill can
 // read at the top of the call. Returns a markdown string.
+//
+// The admin page renders this string as HTML (it regex-converts ** and _),
+// so every guest-controlled value interpolated below (names, email, question,
+// inquiry message) is HTML-escaped first. Never interpolate a raw value.
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
 
 export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, dominant, partnerPillars, partnerZodiac, partnerDominant }) {
   if (!pillars) {
     return [
       `Open the reading by collecting birth data — birthday is missing so Bazi can't be computed.`,
-      person?.email ? `Customer: ${person.name || person.email}.` : '',
+      person?.email ? `Customer: ${esc(person.name || person.email)}.` : '',
     ].filter(Boolean).join('\n\n');
   }
 
-  const name      = (person?.name || booking?.full_name || '').split(' ')[0] || 'They';
+  const name      = esc((person?.name || booking?.full_name || '').split(' ')[0] || 'They');
   const dm        = pillars.day?.stem;
   const dmText    = dm ? `${dm.polarity} ${dm.element} day master` : 'day master';
   const animal    = zodiac || pillars.year?.branch?.animal || null;
@@ -24,7 +34,7 @@ export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, d
   const elementLine = dominant ? DOMINANT_LINES[dominant] : '';
   const animalLine  = animal ? ANIMAL_LINES[animal] : '';
 
-  const question   = (booking?.question || '').trim();
+  const question   = esc((booking?.question || '').trim());
   const inquiryMsg = (inquiry?.message || '').trim();
 
   const parts = [];
@@ -41,7 +51,7 @@ export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, d
 
   if (partnerPillars) {
     const pDm = partnerPillars.day?.stem;
-    const pName = (booking?.partner_name || '').trim() || 'The other person';
+    const pName = esc((booking?.partner_name || '').trim()) || 'The other person';
     const pAnimal = partnerZodiac || partnerPillars.year?.branch?.animal || null;
     const pDmText = pDm ? `${pDm.polarity} ${pDm.element} day master` : 'day master';
     parts.push(
@@ -65,7 +75,7 @@ export function buildReadingBrief({ person, booking, inquiry, pillars, zodiac, d
   } else if (inquiryMsg) {
     parts.push(
       `**No reading question on file.** Open with: “What were you hoping to ask about today?”\n\n` +
-      `_Their first contact said:_ “${inquiryMsg.slice(0, 240)}”`,
+      `_Their first contact said:_ “${esc(inquiryMsg.slice(0, 240))}”`,
     );
   } else {
     parts.push(`**No reading question on file** — open by asking what they want to focus on.`);

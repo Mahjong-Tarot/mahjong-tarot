@@ -21,6 +21,7 @@ import { buildFourPillarsChart } from '../../../lib/fp/chart.mjs';
 import { calculatePurpleStar } from '../../../lib/purpleStar';
 import { buildReadingBrief } from '../../../lib/readingBrief';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
+import styles from '../../../styles/PortalPrivateReadings.module.css';
 
 export async function getServerSideProps(ctx) {
   return requirePage('staff')(ctx);
@@ -38,26 +39,6 @@ const STATUS_LABEL = {
   completed:       'Completed',
   cancelled:       'Cancelled',
   refunded:        'Refunded',
-};
-
-const primaryButtonStyle = {
-  display: 'inline-block', padding: '10px 18px', background: '#1a1a1a', color: '#fff',
-  border: 'none', borderRadius: 6, fontSize: 14, fontWeight: 500, cursor: 'pointer',
-};
-
-const secondaryButtonStyle = {
-  display: 'inline-block', padding: '10px 18px', background: '#fff', color: '#1a1a1a',
-  border: '1px solid #d1d5db', borderRadius: 6, fontSize: 14, fontWeight: 500, cursor: 'pointer',
-};
-
-const detailLabelStyle = {
-  fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em',
-  color: '#6b7280', fontWeight: 500, marginBottom: 4,
-};
-
-const inlineInputStyle = {
-  width: '100%', padding: '8px 10px', border: '1px solid #d1d5db',
-  borderRadius: 6, fontSize: 14, fontFamily: 'inherit',
 };
 
 // HTML <input type="time"> wants HH:MM; Postgres time comes back HH:MM:SS.
@@ -391,7 +372,7 @@ export default function ReadingBriefPage({ profile }) {
       </Head>
 
       <AdminShell profile={profile}>
-        <Link href="/admin/private-readings" className={adminStyles.muted} style={{ display: 'inline-block', marginBottom: 16 }}>
+        <Link href="/admin/private-readings" className={`${adminStyles.muted} ${styles.backLink}`}>
           ← Back to readings
         </Link>
 
@@ -425,13 +406,13 @@ export default function ReadingBriefPage({ profile }) {
               <>
                 {/* Contact */}
                 <Section title="Contact">
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+                  <div className={adminStyles.grid2}>
                     <Detail label="Email">{person?.email || booking?.email || <Missing />}</Detail>
                     <Detail label="Phone">{person?.phone || booking?.phone || <Missing />}</Detail>
                   </div>
                   {person?.id && (
-                    <p className={adminStyles.muted} style={{ fontSize: 12, marginTop: 10 }}>
-                      Edit these in the <Link href={`/admin/people?focus=${person.id}`} style={{ textDecoration: 'underline', color: 'inherit' }}>People shelf</Link>.
+                    <p className={`${adminStyles.muted} ${styles.note}`}>
+                      Edit these in the <Link href={`/admin/people?focus=${person.id}`} className={styles.inlineLink}>People shelf</Link>.
                     </p>
                   )}
                 </Section>
@@ -455,28 +436,28 @@ export default function ReadingBriefPage({ profile }) {
 
                 {/* Birth data — editable; saves to this booking */}
                 <Section title="Birth data">
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+                  <div className={adminStyles.grid3}>
                     <div>
-                      <div style={detailLabelStyle}>Birthday</div>
+                      <div className={styles.fieldLabel}>Birthday</div>
                       <input
                         type="date"
                         value={draft.birthday}
                         onChange={(e) => setDraft({ ...draft, birthday: e.target.value })}
                         onBlur={() => (booking.birthday || '') !== draft.birthday && saveField('birthday')}
-                        style={inlineInputStyle}
+                        className={styles.inputCompact}
                       />
                     </div>
                     <div>
-                      <div style={detailLabelStyle}>Birth time</div>
+                      <div className={styles.fieldLabel}>Birth time</div>
                       <input
                         type="time"
                         value={hhmm(draft.birth_time)}
                         onChange={(e) => setDraft({ ...draft, birth_time: e.target.value })}
                         onBlur={() => hhmm(booking.birth_time) !== hhmm(draft.birth_time) && saveField('birth_time')}
-                        style={inlineInputStyle}
+                        className={styles.inputCompact}
                       />
                       {!draft.birth_time && (
-                        <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 4, fontStyle: 'italic' }}>
+                        <div className={styles.missingNote}>
                           missing — Hour Pillar unavailable
                         </div>
                       )}
@@ -486,43 +467,43 @@ export default function ReadingBriefPage({ profile }) {
                   {(savingField === 'birthday' || savingField === 'birth_time') && (
                     <span className={adminStyles.muted}>Saving…</span>
                   )}
-                  <p className={adminStyles.muted} style={{ fontSize: 12, marginTop: 10 }}>
+                  <p className={`${adminStyles.muted} ${styles.note}`}>
                     Editing here saves to this reading — the charts below update on save.
                   </p>
                 </Section>
 
                 {/* Relationship / second person */}
                 <Section title="Relationship / second person">
-                  <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: booking.is_relationship ? 18 : 0 }}>
+                  <label className={`${styles.checkRow} ${booking.is_relationship ? styles.checkRowOpen : ''}`}>
                     <input
                       type="checkbox"
                       checked={!!booking.is_relationship}
                       onChange={(e) => saveRaw('is_relationship', e.target.checked)}
-                      style={{ width: 16, height: 16 }}
+                      className={styles.checkbox}
                     />
-                    <span style={{ fontSize: 14 }}>This reading is about a relationship with another person</span>
+                    <span className={styles.checkLabel}>This reading is about a relationship with another person</span>
                   </label>
 
                   {booking.is_relationship && (
                     <>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+                      <div className={adminStyles.grid2}>
                         <div>
-                          <div style={detailLabelStyle}>Their name</div>
+                          <div className={styles.fieldLabel}>Their name</div>
                           <input
                             type="text"
                             value={draft.partner_name}
                             onChange={(e) => setDraft({ ...draft, partner_name: e.target.value })}
                             onBlur={() => (booking.partner_name || '') !== draft.partner_name && saveField('partner_name')}
                             placeholder="The other person"
-                            style={inlineInputStyle}
+                            className={styles.inputCompact}
                           />
                         </div>
                         <div>
-                          <div style={detailLabelStyle}>Their gender</div>
+                          <div className={styles.fieldLabel}>Their gender</div>
                           <select
                             value={draft.partner_gender || ''}
                             onChange={(e) => saveRaw('partner_gender', e.target.value || null)}
-                            style={inlineInputStyle}
+                            className={styles.inputCompact}
                           >
                             <option value="">—</option>
                             <option value="F">Female</option>
@@ -530,66 +511,66 @@ export default function ReadingBriefPage({ profile }) {
                           </select>
                         </div>
                         <div>
-                          <div style={detailLabelStyle}>Their birthday</div>
+                          <div className={styles.fieldLabel}>Their birthday</div>
                           <input
                             type="date"
                             value={draft.partner_birthday}
                             onChange={(e) => setDraft({ ...draft, partner_birthday: e.target.value })}
                             onBlur={() => (booking.partner_birthday || '') !== draft.partner_birthday && saveField('partner_birthday')}
-                            style={inlineInputStyle}
+                            className={styles.inputCompact}
                           />
                         </div>
                         <div>
-                          <div style={detailLabelStyle}>Their birth time</div>
+                          <div className={styles.fieldLabel}>Their birth time</div>
                           <input
                             type="time"
                             value={hhmm(draft.partner_birth_time)}
                             onChange={(e) => setDraft({ ...draft, partner_birth_time: e.target.value })}
                             onBlur={() => hhmm(booking.partner_birth_time) !== hhmm(draft.partner_birth_time) && saveField('partner_birth_time')}
-                            style={inlineInputStyle}
+                            className={styles.inputCompact}
                           />
                         </div>
                       </div>
                       {savingField.startsWith('partner_') && <span className={adminStyles.muted}>Saving…</span>}
 
                       {partnerPillars ? (
-                        <div style={{ marginTop: 18 }}>
-                          <p className={adminStyles.muted} style={{ marginBottom: 10 }}>
+                        <div className={styles.spaced18}>
+                          <p className={`${adminStyles.muted} ${styles.spacedBelow10}`}>
                             <strong>{draft.partner_name || 'Second person'}:</strong>{' '}
                             Day Master {partnerPillars.day?.stem?.element} {partnerPillars.day?.stem?.polarity} ·{' '}
                             Zodiac {partnerZodiac || '—'} ·{' '}
                             Dominant {partnerDominant || '—'}
                           </p>
-                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                          <table className={styles.table}>
                             <thead>
-                              <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
-                                <th style={{ padding: 8 }}>Pillar</th>
-                                <th style={{ padding: 8 }}>Stem</th>
-                                <th style={{ padding: 8 }}>Branch</th>
-                                <th style={{ padding: 8 }}>Animal</th>
+                              <tr>
+                                <th>Pillar</th>
+                                <th>Stem</th>
+                                <th>Branch</th>
+                                <th>Animal</th>
                               </tr>
                             </thead>
                             <tbody>
                               {[['Year', partnerPillars.year], ['Month', partnerPillars.month], ['Day', partnerPillars.day], ['Hour', partnerPillars.hour]].map(([label, p]) => (
-                                <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
-                                  <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
-                                  <td style={{ padding: 8 }}>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
-                                  <td style={{ padding: 8 }}>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
-                                  <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
+                                <tr key={label}>
+                                  <td className={label === 'Day' ? styles.cellStrong : undefined}>{label}</td>
+                                  <td>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
+                                  <td>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
+                                  <td>{p?.branch?.animal || '—'}</td>
                                 </tr>
                               ))}
                             </tbody>
                           </table>
                           {partnerPurpleStar && (
-                            <p className={adminStyles.muted} style={{ marginTop: 10 }}>
+                            <p className={`${adminStyles.muted} ${styles.spaced10}`}>
                               <strong>Purple Star — Life Palace:</strong>{' '}
                               {partnerPurpleStar.lifePalace?.branchHan || '—'} ({partnerPurpleStar.lifePalace?.animal || '—'})
                             </p>
                           )}
                           {pillars && (
-                            <div style={{ marginTop: 14, padding: 14, background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, fontSize: 14, lineHeight: 1.6 }}>
+                            <div className={`${styles.callout} ${styles.spaced14}`}>
                               <strong>Compatibility at a glance</strong>
-                              <div style={{ marginTop: 6 }}>
+                              <div className={styles.calloutBody}>
                                 {guestFirstName}: {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} day master · {zodiac || '—'}
                                 <br />
                                 {draft.partner_name || 'Second person'}: {partnerPillars.day?.stem?.element} {partnerPillars.day?.stem?.polarity} day master · {partnerZodiac || '—'}
@@ -598,7 +579,7 @@ export default function ReadingBriefPage({ profile }) {
                           )}
                         </div>
                       ) : (
-                        <p className={adminStyles.muted} style={{ marginTop: 14, fontSize: 13 }}>
+                        <p className={`${adminStyles.muted} ${styles.hintTop}`}>
                           Add their birthday to compute their chart.
                         </p>
                       )}
@@ -609,29 +590,29 @@ export default function ReadingBriefPage({ profile }) {
                 {/* Four Pillars */}
                 {pillars && (
                   <Section title="Four Pillars (computed live)">
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+                    <table className={styles.table}>
                       <thead>
-                        <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
-                          <th style={{ padding: 8 }}>Pillar</th>
-                          <th style={{ padding: 8 }}>Stem</th>
-                          <th style={{ padding: 8 }}>Branch</th>
-                          <th style={{ padding: 8 }}>Element</th>
-                          <th style={{ padding: 8 }}>Animal</th>
+                        <tr>
+                          <th>Pillar</th>
+                          <th>Stem</th>
+                          <th>Branch</th>
+                          <th>Element</th>
+                          <th>Animal</th>
                         </tr>
                       </thead>
                       <tbody>
                         {[['Year', pillars.year], ['Month', pillars.month], ['Day', pillars.day], ['Hour', pillars.hour]].map(([label, p]) => (
-                          <tr key={label} style={{ borderTop: '1px solid #e5e7eb' }}>
-                            <td style={{ padding: 8, fontWeight: label === 'Day' ? 600 : 400 }}>{label}</td>
-                            <td style={{ padding: 8 }}>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
-                            <td style={{ padding: 8 }}>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
-                            <td style={{ padding: 8 }}>{p ? p.stem.element : '—'}</td>
-                            <td style={{ padding: 8 }}>{p?.branch?.animal || '—'}</td>
+                          <tr key={label}>
+                            <td className={label === 'Day' ? styles.cellStrong : undefined}>{label}</td>
+                            <td>{p ? `${p.stem.en} ${p.gan} (${p.stem.element} · ${p.stem.polarity})` : '—'}</td>
+                            <td>{p ? `${p.branch.en} ${p.zhi} (${p.branch.element})` : '—'}</td>
+                            <td>{p ? p.stem.element : '—'}</td>
+                            <td>{p?.branch?.animal || '—'}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
-                    <p className={adminStyles.muted} style={{ marginTop: 10 }}>
+                    <p className={`${adminStyles.muted} ${styles.spaced10}`}>
                       <strong>Day Master:</strong> {pillars.day?.stem?.element} {pillars.day?.stem?.polarity} ·{' '}
                       <strong>Zodiac:</strong> {zodiac || '—'} ·{' '}
                       <strong>Dominant element:</strong> {dominant || '—'}
@@ -642,9 +623,9 @@ export default function ReadingBriefPage({ profile }) {
                 {/* Brief — start here (rule-based synthesis from the chart) */}
                 {briefMarkdown && (
                   <Section title="Brief — start here">
-                    <div style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8, padding: 16, lineHeight: 1.6, fontSize: 14 }}>
+                    <div className={styles.brief}>
                       {briefMarkdown.split('\n\n').map((para, i) => (
-                        <p key={i} style={{ margin: i === 0 ? 0 : '10px 0 0' }} dangerouslySetInnerHTML={{
+                        <p key={i} dangerouslySetInnerHTML={{
                           __html: para.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
                                        .replace(/_([^_]+)_/g, '<em>$1</em>')
                                        .replace(/\n/g, '<br/>')
@@ -657,26 +638,26 @@ export default function ReadingBriefPage({ profile }) {
                 {/* Purple Star */}
                 {purpleStar ? (
                   <Section title="Purple Star (Zi Wei Dou Shu)">
-                    <p className={adminStyles.muted} style={{ marginBottom: 10 }}>
+                    <p className={`${adminStyles.muted} ${styles.spacedBelow10}`}>
                       <strong>Life Palace:</strong> {purpleStar.lifePalace?.branchHan || '—'} ({purpleStar.lifePalace?.animal || '—'}) ·{' '}
                       <strong>Body Palace:</strong> {purpleStar.bodyPalace?.branchHan || '—'}
                     </p>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                    <table className={`${styles.table} ${styles.tableCompact}`}>
                       <thead>
-                        <tr style={{ textAlign: 'left', color: '#6b7280', fontSize: 12 }}>
-                          <th style={{ padding: 6 }}>Palace</th>
-                          <th style={{ padding: 6 }}>Branch</th>
-                          <th style={{ padding: 6 }}>Major stars</th>
+                        <tr>
+                          <th>Palace</th>
+                          <th>Branch</th>
+                          <th>Major stars</th>
                         </tr>
                       </thead>
                       <tbody>
                         {(purpleStar.palaces || []).slice(0, 12).map((pl, i) => (
-                          <tr key={i} style={{ borderTop: '1px solid #e5e7eb' }}>
-                            <td style={{ padding: 6, fontWeight: pl.isMing ? 600 : 400 }}>
+                          <tr key={i}>
+                            <td className={pl.isMing ? styles.cellStrong : undefined}>
                               {pl.name}{pl.isMing && ' ★'}
                             </td>
-                            <td style={{ padding: 6 }}>{pl.branchHan} ({pl.animal})</td>
-                            <td style={{ padding: 6 }}>{(pl.majorStars || []).map((s) => s.name).join(', ') || '—'}</td>
+                            <td>{pl.branchHan} ({pl.animal})</td>
+                            <td>{(pl.majorStars || []).map((s) => s.name).join(', ') || '—'}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -693,7 +674,7 @@ export default function ReadingBriefPage({ profile }) {
                 {/* Three Blessings */}
                 {threeBlessings && (
                   <Section title="Three Blessings">
-                    <ul style={{ paddingLeft: 18, lineHeight: 1.7 }}>
+                    <ul className={styles.blessings}>
                       {[
                         ['luck', 'Happiness (Phúc)'],
                         ['prosperity', 'Prosperity (Lộc)'],
@@ -703,7 +684,7 @@ export default function ReadingBriefPage({ profile }) {
                         if (!b) return null;
                         const verdict = { 1: 'Lucky', 2: 'Neutral', 3: 'Unlucky' }[b.verdict] || 'Neutral';
                         return (
-                          <li key={key} style={{ marginBottom: 8 }}>
+                          <li key={key}>
                             <strong>{label}:</strong> {verdict} ({b.tally.L}L / {b.tally.N}N / {b.tally.U}U)
                             {b.conclusion ? <> — {b.conclusion}</> : null}
                           </li>
@@ -711,7 +692,7 @@ export default function ReadingBriefPage({ profile }) {
                       })}
                     </ul>
                     {threeBlessings.grand?.narrative && (
-                      <p style={{ marginTop: 4 }}>
+                      <p className={styles.grand}>
                         <strong>Grand conclusion:</strong> {threeBlessings.grand.narrative}
                       </p>
                     )}
@@ -726,7 +707,7 @@ export default function ReadingBriefPage({ profile }) {
                     onBlur={() => booking.prep_notes !== draft.prep_notes && saveField('prep_notes')}
                     placeholder="What you've gathered before the call. Saves on blur."
                     rows={5}
-                    style={{ width: '100%', padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'inherit', fontSize: 14 }}
+                    className={styles.textarea}
                   />
                   {savingField === 'prep_notes' && <span className={adminStyles.muted}>Saving…</span>}
                 </Section>
@@ -737,7 +718,7 @@ export default function ReadingBriefPage({ profile }) {
               <>
                 {/* Upload Transcript */}
                 <Section title="Upload transcript">
-                  <p className={adminStyles.muted} style={{ fontSize: 13, marginBottom: 10 }}>
+                  <p className={`${adminStyles.muted} ${styles.hint}`}>
                     Plain text, markdown, or VTT. Uploading replaces the saved transcript.
                   </p>
                   <input
@@ -745,19 +726,19 @@ export default function ReadingBriefPage({ profile }) {
                     type="file"
                     accept=".txt,.md,.vtt,text/plain,text/markdown"
                     onChange={handleFileChange}
-                    style={{ display: 'none' }}
+                    className={styles.hidden}
                   />
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={savingField === 'transcript_text'}
-                    style={primaryButtonStyle}
+                    className={styles.btnPrimary}
                   >
                     {savingField === 'transcript_text' ? 'Uploading…' : (draft.transcript_text ? 'Replace transcript file' : 'Upload transcript file')}
                   </button>
                   {draft.transcript_text && (
-                    <div style={{ marginTop: 14 }}>
-                      <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', fontWeight: 500, marginBottom: 4 }}>
+                    <div className={styles.spaced14}>
+                      <div className={styles.fieldLabel}>
                         Current transcript ({draft.transcript_text.length.toLocaleString()} chars)
                       </div>
                       <textarea
@@ -765,7 +746,7 @@ export default function ReadingBriefPage({ profile }) {
                         onChange={(e) => setDraft({ ...draft, transcript_text: e.target.value })}
                         onBlur={() => booking.transcript_text !== draft.transcript_text && saveField('transcript_text')}
                         rows={10}
-                        style={{ width: '100%', padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'ui-monospace, monospace', fontSize: 12 }}
+                        className={styles.textareaMono}
                       />
                       {savingField === 'transcript_text' && <span className={adminStyles.muted}>Saving…</span>}
                     </div>
@@ -780,21 +761,21 @@ export default function ReadingBriefPage({ profile }) {
                     onBlur={() => booking.post_call_notes !== draft.post_call_notes && saveField('post_call_notes')}
                     placeholder="What she actually heard / what was decided. Saves on blur."
                     rows={6}
-                    style={{ width: '100%', padding: 12, border: '1px solid #d1d5db', borderRadius: 8, fontFamily: 'inherit', fontSize: 14 }}
+                    className={styles.textarea}
                   />
                   {savingField === 'post_call_notes' && <span className={adminStyles.muted}>Saving…</span>}
                 </Section>
 
                 {/* Generate */}
                 <Section title="Generate the final reading">
-                  <p className={adminStyles.muted} style={{ fontSize: 13, marginBottom: 10 }}>
+                  <p className={`${adminStyles.muted} ${styles.hint}`}>
                     Sends the prep brief, transcript, and notes to Claude. The result appears in the Final Reading tab.
                   </p>
                   <button
                     type="button"
                     onClick={handleGenerate}
                     disabled={generating || (!draft.transcript_text && !draft.post_call_notes)}
-                    style={primaryButtonStyle}
+                    className={styles.btnPrimary}
                   >
                     {generating
                       ? 'Generating… (10–30 sec)'
@@ -811,8 +792,8 @@ export default function ReadingBriefPage({ profile }) {
                     <GenerationProgress step={generationStep} guestFirstName={guestFirstName} />
                   ) : generateError ? (
                     <>
-                      <p className="error-block" style={{ marginBottom: 14 }}>{generateError}</p>
-                      <button type="button" onClick={handleGenerate} style={primaryButtonStyle}>
+                      <p className={`error-block ${styles.errorSpaced}`}>{generateError}</p>
+                      <button type="button" onClick={handleGenerate} className={styles.btnPrimary}>
                         Try again
                       </button>
                     </>
@@ -822,34 +803,21 @@ export default function ReadingBriefPage({ profile }) {
                     </p>
                   ) : (
                     <>
-                      <div style={{ border: '1px solid #f0e0c8', borderRadius: 8, overflow: 'hidden', background: '#fffaf3' }}>
+                      <div className={styles.editorFrame}>
                         <EditorToolbar editor={editor} />
-                        <div style={{ padding: '20px 24px' }}>
+                        <div className={styles.editorBody}>
                           <EditorContent editor={editor} />
                         </div>
                       </div>
-                      <style jsx global>{`
-                        .reading-editor { outline: none; line-height: 1.65; font-size: 15px; color: #1a1a1a; min-height: 200px; }
-                        .reading-editor h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; margin: 18px 0 10px; font-weight: 600; color: #1a1a1a; }
-                        .reading-editor h2:first-child { margin-top: 0; }
-                        .reading-editor h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 17px; margin: 16px 0 8px; font-weight: 600; color: #1a1a1a; }
-                        .reading-editor p { margin: 0 0 12px; }
-                        .reading-editor ul, .reading-editor ol { padding-left: 22px; margin: 0 0 14px; }
-                        .reading-editor li { margin: 4px 0; }
-                        .reading-editor li p { margin: 0; }
-                        .reading-editor blockquote { border-left: 3px solid #d1c3a5; padding: 2px 0 2px 14px; margin: 12px 0; color: #6b6258; font-style: italic; }
-                        .reading-editor strong { font-weight: 600; }
-                        .reading-editor em { font-style: italic; }
-                      `}</style>
                       {savingField === 'final_reading_html' && (
-                        <span className={adminStyles.muted} style={{ display: 'inline-block', marginTop: 8 }}>Saving…</span>
+                        <span className={`${adminStyles.muted} ${styles.savingBlock}`}>Saving…</span>
                       )}
-                      <div style={{ marginTop: 18, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                      <div className={styles.actions}>
                         <button
                           type="button"
                           onClick={handleSendEmail}
                           disabled={sending || !booking?.email}
-                          style={primaryButtonStyle}
+                          className={styles.btnPrimary}
                           title={!booking?.email ? 'No guest email on file' : undefined}
                         >
                           {sending
@@ -860,7 +828,7 @@ export default function ReadingBriefPage({ profile }) {
                           type="button"
                           onClick={handleGenerate}
                           disabled={generating}
-                          style={secondaryButtonStyle}
+                          className={styles.btnSecondary}
                         >
                           Regenerate
                         </button>
@@ -873,7 +841,7 @@ export default function ReadingBriefPage({ profile }) {
                         error={sendError}
                       />
                       {!booking?.email && (
-                        <p className={adminStyles.muted} style={{ marginTop: 8, fontSize: 12 }}>
+                        <p className={`${adminStyles.muted} ${styles.noEmail}`}>
                           No guest email on file — add one to the booking first.
                         </p>
                       )}
@@ -896,64 +864,40 @@ function GenerationProgress({ step, guestFirstName }) {
     { id: 3, label: 'Preparing the report' },
   ];
   return (
-    <div style={{ padding: '32px 24px', background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 8 }}>
-      <p style={{ margin: '0 0 24px', color: '#6b7280', fontSize: 13 }}>
+    <div className={styles.progress}>
+      <p className={styles.progressNote}>
         Sit tight — this usually takes 20–30 seconds.
       </p>
-      <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+      <ol className={styles.progressList}>
         {steps.map((s) => {
           const isDone   = step > s.id;
           const isActive = step === s.id;
           return (
-            <li key={s.id} style={{
-              display:      'flex',
-              alignItems:   'center',
-              gap:          14,
-              padding:      '12px 0',
-              fontSize:     15,
-              color:        isDone || isActive ? '#1a1a1a' : '#9ca3af',
-              opacity:      isDone || isActive ? 1 : 0.6,
-              transition:   'opacity 0.4s ease, color 0.4s ease',
-            }}>
-              <span style={{ width: 22, display: 'inline-flex', justifyContent: 'center' }}>
+            <li key={s.id} className={isDone || isActive ? styles.stepLive : styles.step}>
+              <span className={styles.stepIcon}>
                 {isDone ? (
-                  <span style={{ color: '#2a8a48', fontSize: 18, fontWeight: 600 }}>✓</span>
+                  <span className={styles.stepDone}>✓</span>
                 ) : isActive ? (
-                  <span className="rprog-spinner" aria-hidden="true" />
+                  <span className={styles.spinner} aria-hidden="true" />
                 ) : (
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#d1d5db', display: 'inline-block' }} />
+                  <span className={styles.stepDot} />
                 )}
               </span>
-              <span style={{ fontWeight: isActive ? 600 : 500 }}>{s.label}</span>
+              <span className={isActive ? styles.stepLabelActive : styles.stepLabel}>{s.label}</span>
             </li>
           );
         })}
       </ol>
-
-      <style jsx>{`
-        .rprog-spinner {
-          width: 16px;
-          height: 16px;
-          border: 2px solid #e7d8c0;
-          border-top-color: #1a1a1a;
-          border-radius: 50%;
-          display: inline-block;
-          animation: rprog-spin 0.8s linear infinite;
-        }
-        @keyframes rprog-spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }
 
 function SendStatus({ sending, sentAt, sentTo, publicToken, error }) {
   if (sending) {
-    return <p style={{ marginTop: 12, fontSize: 13, color: '#6b7280' }}>Sending email…</p>;
+    return <p className={styles.sending}>Sending email…</p>;
   }
   if (error) {
-    return <p className="error-block" style={{ marginTop: 12 }}>{error}</p>;
+    return <p className={`error-block ${styles.errorTop}`}>{error}</p>;
   }
   if (!sentAt) return null;
   const when = new Date(sentAt).toLocaleString('en-US', {
@@ -964,21 +908,13 @@ function SendStatus({ sending, sentAt, sentTo, publicToken, error }) {
     ? (typeof window !== 'undefined' ? `${window.location.origin}/reading/${publicToken}` : `/reading/${publicToken}`)
     : null;
   return (
-    <div style={{ marginTop: 12, padding: '10px 14px', background: '#f0f9f3', border: '1px solid #c8e6c9', borderRadius: 6, fontSize: 13, color: '#1a3a22' }}>
-      <span style={{ marginRight: 8 }}>✓ Sent to <strong>{sentTo}</strong> on {when}.</span>
+    <div className={styles.sent}>
+      <span className={styles.sentText}>✓ Sent to <strong>{sentTo}</strong> on {when}.</span>
       {link && (
         <button
           type="button"
           onClick={() => navigator.clipboard?.writeText(link)}
-          style={{
-            background: 'transparent',
-            border:     'none',
-            color:      '#1a3a22',
-            textDecoration: 'underline',
-            cursor:     'pointer',
-            fontSize:   13,
-            padding:    0,
-          }}
+          className={styles.copyLink}
         >
           Copy link
         </button>
@@ -997,37 +933,17 @@ function EditorToolbar({ editor }) {
       disabled={disabled}
       title={title}
       aria-pressed={!!isActive}
-      style={{
-        padding:      '4px 10px',
-        minWidth:     30,
-        height:       28,
-        fontSize:     13,
-        fontWeight:   500,
-        border:       '1px solid ' + (isActive ? '#1a1a1a' : '#d1d5db'),
-        background:   isActive ? '#1a1a1a' : '#fff',
-        color:        isActive ? '#fff' : '#1a1a1a',
-        borderRadius: 4,
-        cursor:       disabled ? 'not-allowed' : 'pointer',
-        opacity:      disabled ? 0.4 : 1,
-      }}
+      className={isActive ? styles.toolButtonActive : styles.toolButton}
     >
       {label}
     </button>
   );
   const divider = (key) => (
-    <span key={key} style={{ width: 1, background: '#e5e7eb', margin: '0 4px', alignSelf: 'stretch' }} />
+    <span key={key} className={styles.toolDivider} />
   );
 
   return (
-    <div style={{
-      display:       'flex',
-      gap:           4,
-      padding:       '8px 12px',
-      borderBottom:  '1px solid #f0e0c8',
-      background:    '#fffaf3',
-      flexWrap:      'wrap',
-      alignItems:    'center',
-    }}>
+    <div className={styles.toolbar}>
       {btn(() => editor.chain().focus().toggleBold().run(),                editor.isActive('bold'),                  'Bold (⌘B)',          <strong>B</strong>)}
       {btn(() => editor.chain().focus().toggleItalic().run(),              editor.isActive('italic'),                'Italic (⌘I)',        <em>I</em>)}
       {divider('d1')}
@@ -1047,38 +963,25 @@ function EditorToolbar({ editor }) {
 
 function TabBar({ active, onChange, tabs }) {
   return (
-    <div style={{ display: 'flex', gap: 4, marginTop: 24, borderBottom: '1px solid #e5e7eb' }}>
-      {tabs.map((t) => {
-        const isActive = t.id === active;
-        return (
-          <button
-            key={t.id}
-            type="button"
-            onClick={() => onChange(t.id)}
-            style={{
-              padding: '10px 18px',
-              border: 'none',
-              background: 'transparent',
-              color: isActive ? '#1a1a1a' : '#6b7280',
-              fontSize: 14,
-              fontWeight: isActive ? 600 : 500,
-              cursor: 'pointer',
-              borderBottom: isActive ? '2px solid #1a1a1a' : '2px solid transparent',
-              marginBottom: -1,
-            }}
-          >
-            {t.label}
-          </button>
-        );
-      })}
+    <div className={styles.tabBar}>
+      {tabs.map((t) => (
+        <button
+          key={t.id}
+          type="button"
+          onClick={() => onChange(t.id)}
+          className={t.id === active ? styles.tabActive : styles.tab}
+        >
+          {t.label}
+        </button>
+      ))}
     </div>
   );
 }
 
 function Section({ title, children }) {
   return (
-    <section style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid #e5e7eb' }}>
-      <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 14 }}>{title}</h2>
+    <section className={styles.section}>
+      <h2 className={styles.sectionTitle}>{title}</h2>
       {children}
     </section>
   );
@@ -1087,29 +990,29 @@ function Section({ title, children }) {
 function Detail({ label, children }) {
   return (
     <div>
-      <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', fontWeight: 500, marginBottom: 4 }}>{label}</div>
-      <div style={{ fontSize: 14, lineHeight: 1.5 }}>{children}</div>
+      <div className={styles.fieldLabel}>{label}</div>
+      <div className={styles.fieldValue}>{children}</div>
     </div>
   );
 }
 
 function Missing({ label = 'missing' }) {
-  return <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>⚠ {label}</span>;
+  return <span className={styles.missing}>⚠ {label}</span>;
 }
 
 function EditableField({ label, value, onChange, onBlur, placeholder, saving }) {
   return (
-    <div style={{ marginTop: 12 }}>
-      <div style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', fontWeight: 500, marginBottom: 4 }}>{label}</div>
+    <div className={styles.field}>
+      <div className={styles.fieldLabel}>{label}</div>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
         placeholder={placeholder}
-        style={{ width: '100%', padding: '10px 12px', border: '1px solid #d1d5db', borderRadius: 8, fontSize: 14, fontFamily: 'inherit' }}
+        className={styles.input}
       />
-      {saving && <span style={{ fontSize: 11, color: '#6b7280', marginLeft: 4 }}>Saving…</span>}
+      {saving && <span className={styles.saving}>Saving…</span>}
     </div>
   );
 }

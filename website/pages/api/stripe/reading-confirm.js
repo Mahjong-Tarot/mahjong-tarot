@@ -2,6 +2,17 @@
 // Lightweight read for the /book-a-reading/confirm page so we can
 // show the customer their booking without exposing raw Stripe data.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
+import { rateLimit } from '../../../lib/rateLimit';
+
+// Unauthenticated: the session id leaks via history, screenshots and
+// analytics, so return no full PII. The email is masked (jo***@example.com)
+// so the guest can still recognise it.
+function maskEmail(email) {
+  if (!email) return null;
+  const [local, domain] = String(email).split('@');
+  if (!domain) return null;
+  return `${local.slice(0, 2)}***@${domain}`;
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -9,8 +20,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  if (!rateLimit(req, res, { name: 'checkout-confirm', limit: 30, windowMs: 60_000 })) return;
+
   const { session_id } = req.query;
-  if (!session_id) return res.status(400).json({ error: 'session_id required' });
+  if (typeof session_id !== 'string' || !/^cs_[A-Za-z0-9_]+$/.test(session_id)) {
+    return res.status(400).json({ error: 'session_id required' });
+  }
 
   const stripe = getStripe();
   const service = getServiceSupabase();
@@ -24,7 +39,7 @@ export default async function handler(req, res) {
 
   const { data: booking } = await service
     .from('bookings')
-    .select('full_name, email, duration_minutes, scheduled_at, status')
+    .select('duration_minutes, scheduled_at, status')
     .eq('stripe_session_id', session_id)
     .maybeSingle();
 
@@ -32,8 +47,8 @@ export default async function handler(req, res) {
     paid: session.payment_status === 'paid',
     amount_total: session.amount_total,
     currency: session.currency,
-    customer_email: session.customer_details?.email || session.customer_email,
-    booking: booking || null,
+    customer_email: maskEmail(session.customer_details?.email || session.customer_email),
+    booking: booking ? { status: booking.status } : null,
     scheduled_at: booking?.scheduled_at || session.metadata?.slot_start || null,
     duration: booking?.duration_minutes || parseInt(session.metadata?.duration, 10) || null,
   });

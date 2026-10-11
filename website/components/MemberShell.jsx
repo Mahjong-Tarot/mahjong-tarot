@@ -5,6 +5,7 @@ import { useAuth } from '../lib/auth';
 import PortalSwitcher from './PortalSwitcher';
 import { MEMBER_NAV } from '../lib/nav';
 import styles from './MemberShell.module.css';
+import Icon from './Icon';
 
 export default function MemberShell({ children }) {
   const router = useRouter();
@@ -31,15 +32,20 @@ export default function MemberShell({ children }) {
 
   return (
     <div className={styles.shell}>
-      <button
-        type="button"
-        className={styles.hamburger}
-        aria-label="Open navigation"
-        aria-expanded={drawerOpen}
-        onClick={() => setDrawerOpen(true)}
-      >
-        <span aria-hidden="true">☰</span>
-      </button>
+      <div className={styles.mobileBar}>
+        <button
+          type="button"
+          className={styles.hamburger}
+          aria-label="Open navigation"
+          aria-expanded={drawerOpen}
+          onClick={() => setDrawerOpen(true)}
+        >
+          <Icon name="menu" />
+        </button>
+        <Link href="/member/dashboard" className={styles.logo}>
+          Mahjong Tarot
+        </Link>
+      </div>
 
       {drawerOpen && (
         <div
@@ -63,7 +69,7 @@ export default function MemberShell({ children }) {
             aria-label="Close navigation"
             onClick={() => setDrawerOpen(false)}
           >
-            <span aria-hidden="true">×</span>
+            <Icon name="close" />
           </button>
         </div>
 

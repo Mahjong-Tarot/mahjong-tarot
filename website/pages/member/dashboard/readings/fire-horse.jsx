@@ -78,8 +78,8 @@ export default function FireHorseReading() {
             </p>
 
             {profileLoaded && !profile?.birthday && (
-              <div className={account.placeholder} style={{ marginTop: '1.5rem' }}>
-                <p style={{ margin: 0 }}>
+              <div className={`${account.placeholder} ${account.sectionGap}`}>
+                <p>
                   Add your birth data on your <Link href="/member/profile">profile</Link> to see your forecast.
                 </p>
               </div>
@@ -97,8 +97,8 @@ export default function FireHorseReading() {
             />
           )}
 
-          <div className="container" style={{ paddingBottom: '2rem' }}>
-            <p className={account.authFootnote} style={{ marginTop: '2rem' }}>
+          <div className={`container ${account.footPad}`}>
+            <p className={`${account.authFootnote} ${account.footGap}`}>
               <Link href="/year-of-the-fire-horse">Read the full Fire Horse story →</Link>
               {' '}· <Link href="/member/dashboard">← Back to dashboard</Link>
             </p>

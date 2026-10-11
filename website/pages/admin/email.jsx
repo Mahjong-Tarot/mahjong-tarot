@@ -208,7 +208,7 @@ export default function EmailDashboard({ profile }) {
 
         {!loading && !error && campaigns.length > 0 && (
           <>
-            <div className={tableStyles.chipRow} style={{ marginBottom: 16 }}>
+            <div className={`${tableStyles.chipRow} ${tableStyles.chipRowSpaced}`}>
               {campaigns.map((c) => (
                 <button
                   key={c.campaign_id ?? 'none'}
@@ -360,6 +360,7 @@ export default function EmailDashboard({ profile }) {
                 </div>
                 {!domains.length && <p className={adminStyles.muted}>No data yet.</p>}
                 {domains.length > 0 && (
+                  <div className={tableStyles.ordersScroll}>
                   <table className={tableStyles.ordersTable}>
                     <thead>
                       <tr>
@@ -382,6 +383,7 @@ export default function EmailDashboard({ profile }) {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 )}
               </div>
             </div>
@@ -393,6 +395,7 @@ export default function EmailDashboard({ profile }) {
                 </div>
                 {!suppressed.length && <p className={adminStyles.muted}>Nobody suppressed. Clean list.</p>}
                 {suppressed.length > 0 && (
+                  <div className={tableStyles.ordersScroll}>
                   <table className={tableStyles.ordersTable}>
                     <thead>
                       <tr>
@@ -413,6 +416,7 @@ export default function EmailDashboard({ profile }) {
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 )}
               </div>
 

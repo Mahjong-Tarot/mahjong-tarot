@@ -40,7 +40,7 @@ export default function About() {
  <div className="container">
  <span className="overline">Meet the Firepig</span>
  <h1>Bill Hajdu, Mahjong Tarot Reader &amp; Chinese Astrologer</h1>
- <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+ <div className="cta-row cta-row-spaced">
  <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  <Link href="/the-mahjong-mirror/order" className="btn-secondary">Pre-Order the Book</Link>
  </div>
@@ -56,6 +56,7 @@ export default function About() {
  alt="Bill Hajdu with Mahjong tiles"
  width={480}
  height={580}
+ sizes="(max-width: 768px) 240px, 480px"
  style={{ objectFit: 'cover' }}
  priority
  />
@@ -100,10 +101,10 @@ export default function About() {
 
  {/* ── Mid-page CTA ── */}
  <section className="section-stone">
- <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+ <div className={`container ${styles.midCta}`}>
  <span className="overline">Experience It Yourself</span>
- <h2 style={{ margin: 'var(--space-md) 0' }}>Ready for a Reading with Bill?</h2>
- <p style={{ maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+ <h2>Ready for a Reading with Bill?</h2>
+ <p>
  35+ years of practice. Sessions conducted online with flexible scheduling.
  </p>
  <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
@@ -178,7 +179,7 @@ export default function About() {
  {/* ── CTA ── */}
  <section className="section-dark">
  <div className={`container ${styles.cta}`}>
- <span className="overline" style={{ color: 'var(--celestial-gold)' }}>Work with Bill</span>
+ <span className="overline is-gold">Work with Bill</span>
  <h2>Ready to Begin Your Reading?</h2>
  <p>All sessions are conducted online, with flexible scheduling and clear follow-up notes.</p>
  <div className={styles.ctaBtns}>

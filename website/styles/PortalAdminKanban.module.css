@@ -1,11 +1,27 @@
-/* /portal/admin/inquiries — kanban + drawer + stage selectors */
+/* /admin/inquiries — kanban + drawer + stage selectors */
+
+/* Pipeline stage colours, defined once (UI-10). CSS modules cannot declare
+   :root, so the tokens live on .stageTokens; every stage-coloured element
+   carries them, either here or via `composes: stageTokens from
+   './PortalAdminKanban.module.css'` (PortalAdmin, PortalAdminTable).
+   Read them as var(--stage-…), from CSS or from JS style strings. */
+.stageTokens,
+.column,
+.stageSelect {
+  --stage-new-lead: var(--ink);
+  --stage-contacted: var(--ink-3);
+  --stage-discovery-call: var(--gold);
+  --stage-proposal: var(--fire-600);
+  --stage-won: var(--success);
+  --stage-lost: var(--rule);
+}
 
 .select,
 .stageSelect {
   font-family: var(--sans);
   font-size: 13px;
   padding: 6px 28px 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--r-md);
   border: 1px solid var(--rule);
   background: var(--paper-pure);
   color: var(--ink);
@@ -13,13 +29,14 @@
 }
 
 /* Stage-aware coloring on the per-row select */
-.stageSelect[data-stage='new_lead']       { border-color: #287BE8; color: #287BE8; }
-.stageSelect[data-stage='contacted']      { border-color: #6b7194; color: #6b7194; }
-.stageSelect[data-stage='discovery_call'] { border-color: #d1458b; color: #d1458b; }
-.stageSelect[data-stage='proposal']       { border-color: #1a9e74; color: #1a9e74; }
-.stageSelect[data-stage='won']            { border-color: #1a9e74; color: #1a9e74; background: rgba(111, 242, 193, 0.12); }
-.stageSelect[data-stage='lost']           { border-color: #d8dce8; color: var(--ink-4); }
-.stageSelect[data-stage='archived']       { border-color: var(--rule); color: var(--ink-4); }
+.stageSelect[data-stage='new_lead']       { border-color: var(--stage-new-lead); color: var(--stage-new-lead); }
+.stageSelect[data-stage='contacted']      { border-color: var(--stage-contacted); color: var(--stage-contacted); }
+/* Gold fails AA as small text, so the discovery label stays ink with a gold border. */
+.stageSelect[data-stage='discovery_call'] { border-color: var(--stage-discovery-call); color: var(--ink-2); }
+.stageSelect[data-stage='proposal']       { border-color: var(--stage-proposal); color: var(--stage-proposal); }
+.stageSelect[data-stage='won']            { border-color: var(--stage-won); color: var(--stage-won); background: var(--luck-lucky-bg); }
+.stageSelect[data-stage='lost']           { border-color: var(--stage-lost); color: var(--ink-3); }
+.stageSelect[data-stage='archived']       { border-color: var(--rule); color: var(--ink-3); }
 
 .subtle {
   color: var(--ink-4);
@@ -35,9 +52,9 @@
   border: 1px solid var(--rule);
   color: var(--ink-3);
   padding: 5px 10px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   cursor: pointer;
-  transition: border-color 120ms ease, color 120ms ease;
+  transition: border-color var(--transition), color var(--transition);
 }
 
 .openButton:hover {
@@ -56,17 +73,17 @@
 .column {
   background: var(--paper);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   padding: var(--space-sm);
   min-height: 200px;
 }
 
-.column[data-stage='new_lead']       { border-top: 3px solid #287BE8; }
-.column[data-stage='contacted']      { border-top: 3px solid #6b7194; }
-.column[data-stage='discovery_call'] { border-top: 3px solid #d1458b; }
-.column[data-stage='proposal']       { border-top: 3px solid #1a9e74; }
-.column[data-stage='won']            { border-top: 3px solid #6ff2c1; }
-.column[data-stage='lost']           { border-top: 3px solid #d8dce8; }
+.column[data-stage='new_lead']       { border-top: 3px solid var(--stage-new-lead); }
+.column[data-stage='contacted']      { border-top: 3px solid var(--stage-contacted); }
+.column[data-stage='discovery_call'] { border-top: 3px solid var(--stage-discovery-call); }
+.column[data-stage='proposal']       { border-top: 3px solid var(--stage-proposal); }
+.column[data-stage='won']            { border-top: 3px solid var(--stage-won); }
+.column[data-stage='lost']           { border-top: 3px solid var(--stage-lost); }
 
 .colHeader {
   display: flex;
@@ -90,7 +107,7 @@
   color: var(--ink-4);
   background: var(--paper-pure);
   border: 1px solid var(--rule);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   padding: 1px 7px;
 }
 
@@ -113,10 +130,10 @@
   text-align: left;
   background: var(--paper-pure);
   border: 1px solid var(--rule);
-  border-radius: 6px;
+  border-radius: var(--r-md);
   padding: 10px 12px;
   cursor: pointer;
-  transition: border-color 120ms ease, background-color 120ms ease;
+  transition: border-color var(--transition), background-color var(--transition);
 }
 
 .cardButton:hover {
@@ -162,7 +179,7 @@
 .drawerBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
   display: flex;
   justify-content: flex-end;
   z-index: 50;
@@ -258,7 +275,7 @@
   background: var(--paper);
   border-left: 3px solid var(--rule);
   padding: 10px 12px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
 }
 
 /* ── toast ──────────────────────────────────────────────── */
@@ -272,16 +289,16 @@
   font-family: var(--sans);
   font-size: 13px;
   padding: 8px 16px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   z-index: 60;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--ink) 18%, transparent);
 }
 
 /* ── Mark-Won modal ── */
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,12 +306,12 @@
   padding: 24px;
 }
 .modal {
-  background: #fff;
-  border-radius: 12px;
+  background: var(--paper-pure);
+  border-radius: var(--r-lg);
   padding: 24px;
   width: 100%;
   max-width: 460px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--ink) 18%, transparent);
 }
 .modalTitle {
   margin: 0 0 6px;
@@ -303,7 +320,7 @@
 }
 .modalSub {
   margin: 0 0 18px;
-  color: #6b7280;
+  color: var(--ink-3);
   font-size: 13px;
 }
 .modalLabel {
@@ -311,7 +328,7 @@
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--ink-3);
   margin-bottom: 14px;
   font-weight: 500;
 }
@@ -320,18 +337,20 @@
   margin-top: 6px;
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
   font-size: 14px;
   font-family: inherit;
-  background: #fff;
-  color: #111827;
+  background: var(--paper-pure);
+  color: var(--ink);
   letter-spacing: normal;
   text-transform: none;
 }
+/* The guide's input focus: fire border plus a 3px fire ring (UI-13). */
 .modalInput:focus {
   outline: none;
-  border-color: #4b5563;
+  border-color: var(--fire-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fire-500) 12%, transparent);
 }
 .modalActions {
   display: flex;
@@ -342,22 +361,47 @@
 .modalCancel,
 .modalSubmit {
   padding: 9px 16px;
-  border-radius: 8px;
+  min-height: 44px;
+  border-radius: var(--r-pill);
   font-size: 14px;
   font-weight: 500;
   border: 1px solid transparent;
   cursor: pointer;
+  transition: background-color var(--transition), border-color var(--transition);
 }
 .modalCancel {
-  background: #fff;
-  color: #374151;
-  border-color: #d1d5db;
+  background: var(--paper-pure);
+  color: var(--ink-2);
+  border-color: var(--rule);
 }
-.modalCancel:hover:not(:disabled) { background: #f3f4f6; }
+.modalCancel:hover:not(:disabled) { border-color: var(--ink); }
 .modalSubmit {
-  background: #111827;
-  color: #fff;
+  background: var(--ink);
+  color: var(--paper);
 }
-.modalSubmit:hover:not(:disabled) { background: #1f2937; }
+.modalSubmit:hover:not(:disabled) { background: var(--ink-2); }
 .modalSubmit:disabled,
 .modalCancel:disabled { opacity: 0.5; cursor: wait; }
+
+/* Phone: horizontally scrolling lanes instead of six stacked columns (MOB-20). */
+@media (max-width: 640px) {
+  .board {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+  }
+  .column {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+    min-height: 0;
+  }
+}
+
+@media (pointer: coarse) {
+  .drawerClose { min-width: 44px; min-height: 44px; top: 4px; right: 4px; }
+  .openButton,
+  .select,
+  .stageSelect { min-height: 44px; }
+}

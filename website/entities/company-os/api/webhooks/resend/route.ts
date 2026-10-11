@@ -6,10 +6,10 @@ import { readSvixHeaders, verifySvixSignature } from "@/entities/billing";
 // Resend delivery webhooks -> company_os.email_events.
 //
 // Register this in the Resend dashboard as:
-//   https://<your-domain>/api/webhooks/resend/
-// The TRAILING SLASH is required. next.config sets trailingSlash: true, so the
-// slashless URL answers 308 and Resend does not follow redirects — every event
-// would be silently dropped, the same failure mode that killed the crons.
+//   https://<your-domain>/api/webhooks/resend
+// No trailing slash: this repo does not set trailingSlash in next.config, so the
+// slashed URL answers 308 and Resend does not follow redirects — every event
+// would be silently dropped.
 
 const LOG = "[webhooks/resend]";
 

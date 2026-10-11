@@ -4,9 +4,14 @@ import { buildFourPillarsReading } from '../../lib/fp/engine.mjs';
 import { content as fpContent } from '../../lib/fp/content.mjs';
 import { computeFireHorseForecast } from '../../lib/fire-horse-forecast';
 import secrets from '../../data/love-secrets.json';
+import { rateLimit } from '../../lib/rateLimit';
+
+// Inner-circle members rated per request; bounds the CPU one call can burn.
+const MAX_MEMBERS = 100;
 
 export default function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+  if (!rateLimit(req, res, { name: 'dashboard', limit: 30, windowMs: 60_000 })) return;
   const { user, members } = req.body || {};
 
   try {
@@ -48,7 +53,7 @@ export default function handler(req, res) {
       }
     }
 
-    const memberRatings = (members || []).map((m) => {
+    const memberRatings = (Array.isArray(members) ? members.slice(0, MAX_MEMBERS) : []).map((m) => {
       if (!m.birthday || !user?.birthday) {
         return { id: m.id, name: m.name, relationship: m.relationship, rating: null };
       }
@@ -75,6 +80,7 @@ export default function handler(req, res) {
       memberRatings,
     });
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    console.error('[dashboard] failed', e);
+    res.status(500).json({ error: 'Could not load dashboard' });
   }
 }

@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className={styles.colTitle}>Navigate</h4>
+            <h2 className={styles.colTitle}>Navigate</h2>
             <ul className={styles.links}>
               <li><Link href="/">Home</Link></li>
               <li><Link href="/about">About Bill</Link></li>
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className={styles.colTitle}>Live Readings</h4>
+            <h2 className={styles.colTitle}>Live Readings</h2>
             <ul className={styles.links}>
               <li><Link href="/book-a-reading?duration=30">30 min · $48</Link></li>
               <li><Link href="/book-a-reading?duration=60">60 min · $88</Link></li>
@@ -37,7 +37,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className={styles.colTitle}>Connect</h4>
+            <h2 className={styles.colTitle}>Connect</h2>
             <ul className={styles.links}>
               <li><Link href="/contact">Contact</Link></li>
               <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></li>

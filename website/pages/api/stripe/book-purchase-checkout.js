@@ -5,19 +5,15 @@
 // collects the shipping address for the physical SKUs.
 import { getStripe } from '../../../lib/stripe';
 import { bookFor, bookPriceId } from '../../../lib/books';
-
-function originFromReq(req) {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
-  return `${proto}://${host}`;
-}
+import { rateLimit } from '../../../lib/rateLimit';
+import { siteOrigin } from '../../../lib/siteOrigin';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (!rateLimit(req, res, { name: 'book-checkout', limit: 10, windowMs: 10 * 60_000 })) return;
 
   const { sku, email } = req.body || {};
 
@@ -32,7 +28,7 @@ export default async function handler(req, res) {
   }
 
   const stripe = getStripe();
-  const origin = originFromReq(req);
+  const origin = siteOrigin();
 
   const params = {
     mode: 'payment',

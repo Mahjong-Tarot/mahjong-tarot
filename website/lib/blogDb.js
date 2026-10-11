@@ -9,7 +9,7 @@
 // service-role key, which bypasses RLS.
 
 import { createClient } from '@supabase/supabase-js';
-import { marked } from 'marked';
+import { renderBlogMarkdown, toPlainText } from './sanitizeHtml';
 
 const SITE = 'https://www.mahjongtarot.com';
 const BRAND_SLUG = 'mahjong-tarot';
@@ -17,14 +17,8 @@ const BRAND_SLUG = 'mahjong-tarot';
 // A post goes live on its publish date in US Eastern, the business time zone.
 export const PUBLISH_TZ = 'America/New_York';
 
-export const TOPICS = [
-  'Love & Relationships',
-  'Money & Career',
-  'Forecasts & Timing',
-  'The Mahjong Mirror',
-];
-
-marked.setOptions({ gfm: true, breaks: false });
+// The blog's topics live in one place, shared with the App Router.
+export { TOPICS } from '../entities/site/lib/topics';
 
 // Vercel preview builds carry no service-role key. There the blog renders
 // empty rather than failing the build; production has the key and a failed
@@ -93,8 +87,9 @@ function splitFaq(markdown) {
   const block = /<details[^>]*class="faq-item"[^>]*>\s*<summary>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/gi;
   let hit;
   while ((hit = block.exec(m ? markdown.slice(m.index) : '')) !== null) {
-    const q = hit[1].replace(/<[^>]+>/g, '').trim();
-    const a = hit[2].trim();
+    // Both render as text and go into JSON-LD: no markup survives.
+    const q = toPlainText(hit[1]);
+    const a = toPlainText(hit[2]);
     if (q && a) faqs.push({ q, a });
   }
   return { body: body.trim(), faqs };
@@ -186,5 +181,5 @@ export async function loadPublishedPost(slug, todayIso = todayIsoInTz()) {
     cta: meta.cta || DEFAULT_CTA,
   };
 
-  return { slug, frontmatter: JSON.parse(JSON.stringify(frontmatter)), html: marked.parse(body) };
+  return { slug, frontmatter: JSON.parse(JSON.stringify(frontmatter)), html: renderBlogMarkdown(body) };
 }

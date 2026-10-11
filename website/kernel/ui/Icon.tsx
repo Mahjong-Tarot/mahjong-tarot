@@ -88,8 +88,9 @@ export type IconName =
   | "back";
 
 /**
- * The paths, on a 24-box, stroked. `stroke-linecap: round` is set once on the
- * <svg> rather than per path, so a new icon only has to supply geometry.
+ * The paths, on a 24-box, stroked. The style guide's line weight (1.5px stroke,
+ * square caps, miter joins: geometric, not rounded) is set once on the <svg>
+ * rather than per path, so a new icon only has to supply geometry.
  */
 const PATHS: Record<IconName, JSX.Element> = {
   bolt: <path d="M13 2 4 14h7l-1 8 9-12h-7z" />,
@@ -209,9 +210,9 @@ export function Icon({ name, style }: { name: IconName; style?: CSSProperties })
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="square"
+      strokeLinejoin="miter"
       aria-hidden="true"
       focusable="false"
       style={style}

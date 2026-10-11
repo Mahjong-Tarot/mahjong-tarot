@@ -11,6 +11,7 @@
 // It revalidates the JWT against GoTrue on every call (auth.getUser), wrapped
 // in perRender() so one render resolves it once.
 
+import "server-only";
 import { perRender } from "./per-render";
 import { redirect } from "next/navigation";
 import { createSessionClient } from "@/kernel/data/supabase/server";

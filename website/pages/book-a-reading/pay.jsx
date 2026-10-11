@@ -117,7 +117,7 @@ export default function BookingPay() {
           </header>
 
           <div className={styles.formCard}>
-            <div style={{ marginBottom: 'var(--d-3)' }}>
+            <div className={styles.summaryBlock}>
               <div className={styles.summaryMini}>
                 <span>Private Reading · <b>{tier.label}</b> · {tier.title}</span>
                 <b>${tier.price}</b>
@@ -143,7 +143,7 @@ export default function BookingPay() {
               {submitting ? 'Sending you to Stripe…' : <>Pay ${tier.price} <span aria-hidden="true">→</span></>}
             </button>
 
-            <p className={styles.fieldHint} style={{ marginTop: '10px', textAlign: 'center' }}>
+            <p className={`${styles.fieldHint} ${styles.fieldHintCentered}`}>
               // Secured by Stripe · Cancel and your slot is released automatically.
             </p>
           </div>

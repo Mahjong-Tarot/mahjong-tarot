@@ -4,13 +4,20 @@
 // this user is on the way to Stripe. Returns the slot details so
 // the pay step can show a summary.
 import { getServiceSupabase } from '../../../lib/stripe';
+import { randomUUID } from 'crypto';
 import { tierFor, HOLD_TTL_MINUTES } from '../../../lib/bookings';
+import { rateLimit, ipHash } from '../../../lib/rateLimit';
+
+// Active (unexpired, pre-checkout) holds one IP may have at once. The hold
+// token carries a hash of the IP, so they can be counted without a column.
+const MAX_ACTIVE_HOLDS_PER_IP = 2;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (!rateLimit(req, res, { name: 'bookings-hold', limit: 10, windowMs: 10 * 60_000 })) return;
 
   const { slot_id, duration } = req.body || {};
   if (!slot_id || !tierFor(duration)) {
@@ -22,8 +29,23 @@ export default async function handler(req, res) {
   // Release expired holds before we try to claim.
   await service.rpc('release_expired_holds');
 
+  const ipKey = ipHash(req);
+  const { count: activeHolds, error: countErr } = await service
+    .from('reading_availability')
+    .select('id', { count: 'exact', head: true })
+    .eq('status', 'held')
+    .like('held_for_session', `pending_${ipKey}_%`)
+    .gt('held_until', new Date().toISOString());
+  if (countErr) {
+    console.error('[bookings/hold] active-hold count failed', countErr);
+    return res.status(500).json({ error: 'Hold failed' });
+  }
+  if ((activeHolds ?? 0) >= MAX_ACTIVE_HOLDS_PER_IP) {
+    return res.status(429).json({ error: 'You already have a time on hold. Finish that booking or wait a few minutes.' });
+  }
+
   const heldUntil = new Date(Date.now() + HOLD_TTL_MINUTES * 60_000).toISOString();
-  const holdToken = `pending_${Math.random().toString(36).slice(2)}_${Date.now()}`;
+  const holdToken = `pending_${ipKey}_${randomUUID()}`;
 
   // Conditional update: only move 'open' rows for this duration.
   const { data, error } = await service
@@ -40,7 +62,8 @@ export default async function handler(req, res) {
     .maybeSingle();
 
   if (error) {
-    return res.status(500).json({ error: 'Hold failed', detail: error.message });
+    console.error('[bookings/hold] update failed', error);
+    return res.status(500).json({ error: 'Hold failed' });
   }
   if (!data) {
     return res.status(409).json({ error: 'Slot is no longer available. Pick another time.' });

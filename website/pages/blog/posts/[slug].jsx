@@ -12,9 +12,9 @@
 // Per-post knobs come from the row's columns and page_meta (lib/blogDb.js
 // builds the frontmatter-shaped object this page renders). Anything that isn't expressible in standard markdown
 // (Swift/Kelce's risk cards, the love post's sign grid, mid-body figures
-// with figcaptions) goes in as raw HTML in the body — `marked` passes
-// inline HTML through unchanged, so those blocks render exactly as the
-// hand-written JSX did.
+// with figcaptions) goes in as raw HTML in the body. lib/blogDb.js renders it
+// through an allow-list sanitizer (lib/sanitizeHtml.js), so only the house
+// post markup survives: no scripts, no event handlers.
 
 import Head from 'next/head';
 import Image from 'next/image';
@@ -24,8 +24,12 @@ import Footer from '../../../components/Footer';
 import FaqItem from '../../../components/FaqItem';
 import styles from '../../../styles/BlogPost.module.css';
 import { listPublishedPosts, loadPublishedPost } from '../../../lib/blogDb';
+import { jsonLdString } from '../../../lib/jsonLd';
 
-export default function BlogPost({ frontmatter, html }) {
+const SITE = 'https://www.mahjongtarot.com';
+const DEFAULT_IMAGE = `${SITE}/images/about-portrait.webp`;
+
+export default function BlogPost({ slug, frontmatter, html }) {
   const {
     title,
     date,
@@ -72,21 +76,33 @@ export default function BlogPost({ frontmatter, html }) {
 
   const breadcrumb = breadcrumbLabel || categoryPill;
 
+  // Social meta always renders, falling back to the page's own title,
+  // description and canonical when page_meta.og leaves a field out.
+  const pageUrl = seo.canonical || `${SITE}/blog/posts/${slug}`;
+  const metaTitle = og.title || title;
+  const metaDescription = og.description || seo.description || '';
+  const metaImage = og.image || DEFAULT_IMAGE;
+
   return (
     <>
       <Head>
         <title>{seo.title || title}</title>
         {seo.description && <meta name="description" content={seo.description} />}
-        {og.title && <meta property="og:title" content={og.title} />}
-        {og.description && <meta property="og:description" content={og.description} />}
-        {og.image && <meta property="og:image" content={og.image} />}
-        {og.siteName && <meta property="og:site_name" content={og.siteName} />}
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={metaImage} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content={og.siteName || 'The Mahjong Tarot'} />
         <meta name="twitter:card" content="summary_large_image" />
-        {seo.canonical && <link rel="canonical" href={seo.canonical} />}
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={metaImage} />
+        <link rel="canonical" href={pageUrl} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemas.length === 1 ? schemas[0] : schemas),
+            __html: jsonLdString(schemas.length === 1 ? schemas[0] : schemas),
           }}
         />
       </Head>
@@ -187,6 +203,7 @@ export default function BlogPost({ frontmatter, html }) {
                       src={r.image || `/images/blog/${r.slug}.webp`}
                       alt={r.alt || r.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 380px"
                       style={{ objectFit: 'cover' }}
                     />
                   </div>

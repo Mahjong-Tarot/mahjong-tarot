@@ -32,10 +32,10 @@ export default function HoroscopeDate({ date, horoscopes, today }) {
       />
       <Nav />
       <main>
-        <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
+        <section className="page-section">
+          <div className="page-intro">
             <span className="overline">Daily</span>
-            <h1 style={{ marginTop: 'var(--space-xs)' }}>Horoscopes</h1>
+            <h1>Horoscopes</h1>
           </div>
           <HoroscopeView date={date} horoscopes={horoscopes} today={today} />
         </section>

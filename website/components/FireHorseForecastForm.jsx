@@ -39,12 +39,13 @@ export default function FireHorseForecastForm({
 
         <div className={styles.formGrid}>
           <div className={styles.field}>
-            <label>Your zodiac sign</label>
-            <div className={styles.signGrid}>
+            <label id="fh-sign-label">Your zodiac sign</label>
+            <div className={styles.signGrid} role="group" aria-labelledby="fh-sign-label">
               {SIGNS.map((s) => (
                 <button
                   key={s}
                   type="button"
+                  aria-pressed={sign === s}
                   className={`${styles.signBtn} ${sign === s ? styles.signBtnActive : ''}`}
                   onClick={() => setSign(s)}
                 >
@@ -55,10 +56,11 @@ export default function FireHorseForecastForm({
           </div>
 
           <div className={styles.field}>
-            <label>Your birth element <span className={styles.opt}>(optional)</span></label>
-            <div className={styles.elementGrid}>
+            <label id="fh-element-label">Your birth element <span className={styles.opt}>(optional)</span></label>
+            <div className={styles.elementGrid} role="group" aria-labelledby="fh-element-label">
               <button
                 type="button"
+                aria-pressed={!element}
                 className={`${styles.elemBtn} ${!element ? styles.elemBtnActive : ''}`}
                 onClick={() => setElement('')}
               >
@@ -68,6 +70,7 @@ export default function FireHorseForecastForm({
                 <button
                   key={e}
                   type="button"
+                  aria-pressed={element === e}
                   className={`${styles.elemBtn} ${element === e ? styles.elemBtnActive : ''}`}
                   onClick={() => setElement(e)}
                 >
@@ -82,9 +85,10 @@ export default function FireHorseForecastForm({
           </div>
 
           <div className={styles.field}>
-            <label>Birth date <span className={styles.opt}>(optional, unlocks Day Master)</span></label>
+            <label htmlFor="fh-birth-date">Birth date <span className={styles.opt}>(optional, unlocks Day Master)</span></label>
             <div className={styles.dateRow}>
               <input
+                id="fh-birth-date"
                 type="date"
                 value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value)}
@@ -92,6 +96,7 @@ export default function FireHorseForecastForm({
               />
               <input
                 type="time"
+                aria-label="Birth time (optional)"
                 value={birthTime}
                 onChange={(e) => setBirthTime(e.target.value)}
                 className={styles.input}

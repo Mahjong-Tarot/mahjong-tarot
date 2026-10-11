@@ -64,7 +64,7 @@ export default function BlogIndex({ posts }) {
               Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
               hidden inside ancient symbols.
             </p>
-            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+            <div className="cta-row cta-row-spaced">
               <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
               <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
             </div>
@@ -83,6 +83,7 @@ export default function BlogIndex({ posts }) {
                   src={featured.image}
                   alt={featured.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover' }}
                 />
               </Link>
@@ -137,6 +138,7 @@ export default function BlogIndex({ posts }) {
                           src={post.image}
                           alt={post.title}
                           fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           style={{ objectFit: 'cover' }}
                         />
                       </div>

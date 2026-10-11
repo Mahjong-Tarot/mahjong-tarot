@@ -2,6 +2,7 @@ import { revalidateTag, revalidatePath } from "next/cache";
 import { companyOs } from "@/kernel/data/supabase";
 import { recordAudit } from "@/kernel/audit/audit";
 import { categories } from "@/entities/site";
+import { DEFAULT_TOPIC, topicSlug } from "@/entities/site/lib/topics";
 import { parseSeoMd, isValidSlug, type ParsedSeo } from "@/entities/campaigns/lib/seo";
 import { BLOG_CACHE_TAG, postTag } from "./blog";
 import { siteForBrandSlug, blogPublishBlocker } from "@/entities/campaigns/lib/brand-sites";
@@ -57,7 +58,7 @@ function bodyWordCount(copyMd: string): number {
 function resolveCategory(parsedCategory: string | null): { category: string; categorySlug: string } {
   const wanted = (parsedCategory ?? "").trim().toLowerCase();
   const hit = categories.find((c) => c.slug === wanted || c.label.toLowerCase() === wanted);
-  return hit ? { category: hit.label, categorySlug: hit.slug } : { category: "Innovation", categorySlug: "innovation" };
+  return hit ? { category: hit.label, categorySlug: hit.slug } : { category: DEFAULT_TOPIC, categorySlug: topicSlug(DEFAULT_TOPIC) };
 }
 
 // Pure validation, shared by the publish action and the agent's read-only

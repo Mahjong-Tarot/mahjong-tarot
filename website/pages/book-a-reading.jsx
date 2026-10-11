@@ -128,7 +128,7 @@ export default function BookAReading() {
                   {t.mark}
                   <small>min</small>
                 </div>
-                <h3 className={styles.tierTitle}>{t.title}</h3>
+                <h2 className={styles.tierTitle}>{t.title}</h2>
                 <p className={styles.tierDesc}>{t.desc}</p>
                 <ul className={styles.tierBullets}>
                   {t.bullets.map((b) => (

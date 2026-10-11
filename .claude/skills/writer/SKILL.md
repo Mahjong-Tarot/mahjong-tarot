@@ -133,7 +133,7 @@ Write the full blog post as a markdown file following:
 ### Required elements
 
 - **Title:** Provocative and specific. No generic titles. Should work as a social media headline on its own.
-- **Category:** Must match one of: Mahjong and Tarot, Tarot, Mahjong Readings, Year of the Snake, Year of the Fire Horse, Blood Moon.
+- **Category:** Must match one of the four blog topics, exactly as written: Love & Relationships, Money & Career, Forecasts & Timing, The Mahjong Mirror. These are the `/blog` filters; the list lives in `website/entities/site/lib/topics.ts`. Anything else is filed under Forecasts & Timing.
 - **Author:** Bill Hajdu
 - **Date:** The target publish date (provided or use today's date)
 - **Read time:** Calculate at ~250 words per minute, round to nearest minute.

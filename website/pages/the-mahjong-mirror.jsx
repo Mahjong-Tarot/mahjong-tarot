@@ -55,7 +55,7 @@ export default function TheMahjongMirror() {
  A modern divination system inspired by ancient Mahjong symbolism, 
  guiding you toward clarity, intuition, and deeper self-discovery.
  </p>
- <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+ <div className="cta-row">
  <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
  <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
  </div>
@@ -66,6 +66,7 @@ export default function TheMahjongMirror() {
  alt="The Mahjong Mirror, Your Path to Wiser Decisions by Bill Hajdu"
  width={360}
  height={490}
+ sizes="(max-width: 1024px) 220px, 360px"
  style={{ objectFit: 'contain' }}
  priority
  />
@@ -104,7 +105,7 @@ export default function TheMahjongMirror() {
  { title: 'Tile Patterns', body: 'Combinations function like tarot spreads, uncovering dynamics and life lessons.' },
  { title: 'Intuitive Reading', body: 'Teaches you to recognize patterns, themes, and synchronicities.' },
  ].map((item) => (
- <div key={item.title} className="card">
+ <div key={item.title} className={styles.card}>
  <h3>{item.title}</h3>
  <p>{item.body}</p>
  </div>
@@ -229,7 +230,7 @@ export default function TheMahjongMirror() {
  with the Mahjong Mirror Card Set. Or join the waitlist and Bill will
  follow up with you directly.
  </p>
- <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', justifyContent: 'center', marginTop: 'var(--space-lg)' }}>
+ <div className="cta-row cta-row-spaced cta-row-center">
  <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
  <Link href="/contact?subject=Mahjong+Mirror+Waitlist" className="btn-secondary">Join the Waitlist</Link>
  </div>

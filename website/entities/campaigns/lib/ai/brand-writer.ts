@@ -170,11 +170,93 @@ export async function writeForBrand(input: {
 // Fetches a public URL and reduces it to plain text for use as source material.
 // Best-effort: returns empty string on any failure so the caller can fall back
 // to a brief.
+//
+// The URL is admin-supplied but fetched server-side, so it is SSRF-hardened:
+// https only, every hop's host must resolve to public addresses (no loopback,
+// private, link-local or metadata ranges), redirects are followed by hand (and
+// re-checked) at most 3 times, 10 s timeout, 2 MB body cap. A DNS answer that
+// changes between the check and the fetch (rebinding) is not covered.
+const SOURCE_FETCH_TIMEOUT_MS = 10_000;
+const SOURCE_FETCH_MAX_BYTES = 2 * 1024 * 1024;
+const SOURCE_FETCH_MAX_REDIRECTS = 3;
+
+function isPrivateIPv4(ip: string): boolean {
+  const [a, b] = ip.split(".").map(Number);
+  return (
+    a === 0 || a === 10 || a === 127 || a >= 224 ||
+    (a === 100 && b >= 64 && b <= 127) ||
+    (a === 169 && b === 254) ||
+    (a === 172 && b >= 16 && b <= 31) ||
+    (a === 192 && b === 168) ||
+    (a === 192 && b === 0) ||
+    (a === 198 && (b === 18 || b === 19))
+  );
+}
+
+function isPrivateAddress(ip: string, family: number): boolean {
+  if (family === 4) return isPrivateIPv4(ip);
+  const v6 = ip.toLowerCase();
+  const mapped = v6.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
+  if (mapped) return isPrivateIPv4(mapped[1]);
+  if (v6.startsWith("::ffff:")) return true; // hex-form v4-mapped: refuse
+  return (
+    v6 === "::" || v6 === "::1" ||
+    v6.startsWith("fc") || v6.startsWith("fd") || // fc00::/7 unique local
+    /^fe[89ab]/.test(v6) || // fe80::/10 link-local
+    v6.startsWith("ff") || // multicast
+    v6.startsWith("64:ff9b:") // NAT64 can reach v4 internals
+  );
+}
+
+async function assertPublicHttpsUrl(raw: string): Promise<URL> {
+  const url = new URL(raw);
+  if (url.protocol !== "https:") throw new Error("only https URLs are fetched");
+  if (url.username || url.password) throw new Error("credentials in URL");
+  const host = url.hostname.replace(/^\[|\]$/g, "");
+  const { lookup } = await import("node:dns/promises");
+  const addrs = await lookup(host, { all: true, verbatim: true });
+  if (addrs.length === 0 || addrs.some((a) => isPrivateAddress(a.address, a.family))) {
+    throw new Error("host resolves to a non-public address");
+  }
+  return url;
+}
+
+async function readCapped(res: Response, maxBytes: number): Promise<string> {
+  if (!res.body) return "";
+  const reader = res.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > maxBytes) {
+      await reader.cancel();
+      break;
+    }
+    chunks.push(value);
+  }
+  return new TextDecoder().decode(Buffer.concat(chunks));
+}
+
 export async function fetchSourceText(url: string, maxChars = 6000): Promise<string> {
   try {
-    const res = await fetch(url, { headers: { "user-agent": "MahjongTarot-Writer/1.0" } });
-    if (!res.ok) return "";
-    const html = await res.text();
+    const signal = AbortSignal.timeout(SOURCE_FETCH_TIMEOUT_MS);
+    let target = await assertPublicHttpsUrl(url);
+    let res: Response | null = null;
+    for (let hop = 0; hop <= SOURCE_FETCH_MAX_REDIRECTS; hop++) {
+      res = await fetch(target, {
+        headers: { "user-agent": "MahjongTarot-Writer/1.0" },
+        redirect: "manual",
+        signal,
+      });
+      const location = res.status >= 300 && res.status < 400 ? res.headers.get("location") : null;
+      if (!location) break;
+      target = await assertPublicHttpsUrl(new URL(location, target).toString());
+      res = null;
+    }
+    if (!res || !res.ok) return "";
+    const html = await readCapped(res, SOURCE_FETCH_MAX_BYTES);
     const text = html
       .replace(/<script[\s\S]*?<\/script>/gi, " ")
       .replace(/<style[\s\S]*?<\/style>/gi, " ")

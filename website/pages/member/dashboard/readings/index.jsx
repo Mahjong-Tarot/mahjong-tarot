@@ -64,12 +64,12 @@ export default function ReadingsList() {
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Your readings</h1>
 
-        <section style={{ marginTop: '1.5rem' }}>
+        <section className={styles.sectionGap}>
           <h2 className={styles.subTitle}>Personal readings</h2>
 
           {loaded && !hasBirthday && (
-            <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
-              <p style={{ margin: 0 }}>
+            <div className={`${styles.placeholder} ${styles.blockGap}`}>
+              <p>
                 Add your birthday to your <Link href="/member/profile">profile</Link> to unlock your personal readings.
               </p>
             </div>
@@ -87,39 +87,39 @@ export default function ReadingsList() {
           )}
         </section>
 
-        <section style={{ marginTop: '2.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-            <h2 className={styles.subTitle} style={{ margin: 0 }}>Compatibility readings</h2>
-            <Link href="/member/dashboard/readings/compatibility" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
+        <section className={styles.footGap}>
+          <div className={styles.headRow}>
+            <h2 className={styles.subTitle}>Compatibility readings</h2>
+            <Link href="/member/dashboard/readings/compatibility" className={styles.authSubmit}>
               + New reading
             </Link>
           </div>
 
           {loaded && readings.length === 0 && (
-            <div className={styles.placeholder} style={{ marginTop: '1rem' }}>
-              <p style={{ margin: 0 }}>
+            <div className={`${styles.placeholder} ${styles.blockGap}`}>
+              <p>
                 No readings yet. <Link href="/member/dashboard/readings/compatibility">Generate your first one</Link>.
               </p>
             </div>
           )}
 
-          <div style={{ marginTop: '1rem' }}>
+          <div className={styles.blockGap}>
             {readings.map((r) => {
               const date = new Date(r.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
               return (
-                <Link key={r.id} href={`/member/dashboard/readings/${r.slug}`} className={styles.icMember} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
+                <Link key={r.id} href={`/member/dashboard/readings/${r.slug}`} className={`${styles.icMember} ${styles.icMemberLink}`}>
                   <div className={styles.icMemberInfo}>
                     <h3>{r.person1_name || 'You'} × {r.person2_name || 'Partner'}</h3>
                     <span>{date}{r.rating != null ? ` · ${Math.round(r.rating)}% match` : ''}</span>
                   </div>
-                  <span className={styles.btnGhost} style={{ textDecoration: 'none' }}>View →</span>
+                  <span className={styles.btnGhost}>View →</span>
                 </Link>
               );
             })}
           </div>
         </section>
 
-        <p className={styles.authFootnote} style={{ marginTop: '2rem' }}>
+        <p className={`${styles.authFootnote} ${styles.footGap}`}>
           <Link href="/member/dashboard">← Back to dashboard</Link>
         </p>
       </main>

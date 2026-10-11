@@ -5,7 +5,6 @@ import dmNarrative from '../data/fire-horse/day-master-narrative.json';
 import FireHorseMonthlyBars from './FireHorseMonthlyBars';
 import {
   BAND_FOR,
-  BAND_COLOR,
   ELEMENT_LABEL,
   SIGN_LABEL,
   topMonths,
@@ -32,7 +31,7 @@ export default function FireHorseResult({
           </p>
           <div className={styles.scoreBlock}>
             <div className={styles.scoreNum}>{composed.yearScore.toFixed(2)}</div>
-            <div className={styles.scoreBand} style={{ color: BAND_COLOR[yearBand.tone] }}>
+            <div className={`${styles.scoreBand} ${styles[`bandInk_${yearBand.tone}`]}`}>
               {yearBand.label}
             </div>
           </div>

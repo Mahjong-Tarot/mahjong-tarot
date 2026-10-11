@@ -13,7 +13,7 @@ import {
   LNY_2026,
   ALMANAC_RANGE_END_EXCLUSIVE,
 } from '../../../../../lib/almanac';
-import styles from './AlmanacCalendar.module.css';
+import styles from '../../../../../components/MonthCalendar.module.css';
 
 function buildCalendar(yyyymm, summaries) {
   const [y, m] = yyyymm.split('-').map(Number);
@@ -78,10 +78,10 @@ export default function AlmanacCalendar() {
       </Head>
       <MemberShell>
       <main>
-        <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
+        <section className="page-section">
+          <div className="page-intro">
             <span className="overline">Almanac Calendar</span>
-            <h1 style={{ marginTop: 'var(--space-xs)' }}>{human}</h1>
+            <h1>{human}</h1>
           </div>
 
           <div className={styles.container}>
@@ -129,7 +129,7 @@ export default function AlmanacCalendar() {
             </div>
 
             {loaded && summaries.length === 0 && (
-              <p style={{ textAlign: 'center', fontStyle: 'italic', color: '#888', marginTop: 'var(--space-lg)' }}>
+              <p className="empty-note empty-note-spaced">
                 No almanac records for this month yet.
               </p>
             )}

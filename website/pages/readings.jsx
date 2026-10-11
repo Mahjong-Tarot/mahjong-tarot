@@ -51,7 +51,7 @@ export default function Readings() {
               to illuminate your path, clarify your choices, and connect you with
               deeper intuition.
             </p>
-            <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+            <div className="cta-row cta-row-spaced">
               <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
               <Link href="/the-mahjong-mirror/order" className="btn-secondary">Pre-Order the Book</Link>
             </div>
@@ -67,6 +67,7 @@ export default function Readings() {
                 alt="Bill Hajdu conducting a Mahjong Tarot reading with a client"
                 width={560}
                 height={420}
+                sizes="(max-width: 768px) 360px, 560px"
                 style={{ objectFit: 'cover' }}
                 priority
               />
@@ -184,10 +185,10 @@ export default function Readings() {
 
         {/* ── Mid-page CTA ── */}
         <section className="section-stone">
-          <div className="container" style={{ textAlign: 'center', padding: 'var(--space-2xl) 0' }}>
+          <div className={`container ${styles.midCta}`}>
             <span className="overline">Don't Wait -- The Tiles Are Ready</span>
-            <h2 style={{ margin: 'var(--space-md) 0' }}>Book Your Reading Today</h2>
-            <p style={{ maxWidth: 480, margin: '0 auto var(--space-xl)' }}>
+            <h2>Book Your Reading Today</h2>
+            <p>
               Sessions are conducted online with flexible scheduling. Bill follows up personally within 24 hours.
             </p>
             <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>

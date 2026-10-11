@@ -48,7 +48,7 @@ export default function MemberForm({ userId, initial }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.profileForm} style={{ maxWidth: 480 }}>
+    <form onSubmit={handleSubmit} className={`${styles.profileForm} ${styles.profileFormNarrow}`}>
       <label className={styles.authLabel}>
         Name
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className={styles.authInput} />
@@ -86,7 +86,7 @@ export default function MemberForm({ userId, initial }) {
         <button type="submit" disabled={saving} className={styles.authSubmit}>
           {saving ? 'Saving…' : (initial?.id ? 'Save changes' : 'Add to circle')}
         </button>
-        <Link href="/member/dashboard/inner-circle" className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+        <Link href="/member/dashboard/inner-circle" className={styles.btnGhost}>
           Cancel
         </Link>
       </div>

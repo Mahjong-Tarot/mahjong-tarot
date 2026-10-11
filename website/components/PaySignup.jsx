@@ -220,7 +220,7 @@ export default function PaySignup() {
                 <span>Total today</span>
                 <span>$49.50</span>
               </div>
-              <div className={`${styles.orderRow} ${styles.orderMeta}`} style={{ marginTop: '8px' }}>
+              <div className={`${styles.orderRow} ${styles.orderMeta} ${styles.orderMetaSpaced}`}>
                 <span>You&apos;ll enter card details on Stripe&apos;s secure checkout.</span>
               </div>
             </div>

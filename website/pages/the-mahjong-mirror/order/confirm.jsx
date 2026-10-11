@@ -91,7 +91,7 @@ export default function BookOrderConfirm() {
                 </div>
               )}
 
-              <Link href="/the-mahjong-mirror" className={styles.submitBtn} style={{ textDecoration: 'none' }}>
+              <Link href="/the-mahjong-mirror" className={styles.submitBtn}>
                 Back to the book <span aria-hidden="true">→</span>
               </Link>
             </div>

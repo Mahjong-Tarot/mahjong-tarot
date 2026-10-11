@@ -7,7 +7,7 @@
   padding: var(--space-lg);
   background: var(--paper-pure);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
 }
 
 .row {
@@ -36,7 +36,7 @@
   color: var(--ink);
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--rule);
-  border-radius: 6px;
+  border-radius: var(--r-md);
   background: var(--paper);
   width: 100%;
   box-sizing: border-box;
@@ -83,10 +83,10 @@
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--rule);
-  border-radius: 6px;
+  border-radius: var(--r-md);
   background: var(--paper);
   cursor: pointer;
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: background-color var(--transition), border-color var(--transition);
 }
 
 .check:hover {
@@ -127,9 +127,9 @@
   flex-direction: column;
   gap: var(--space-md);
   padding: var(--space-md);
-  background: rgba(200, 68, 46, 0.04);
+  background: color-mix(in srgb, var(--fire-500) 4%, transparent);
   border: 1px dashed var(--fire-500);
-  border-radius: 6px;
+  border-radius: var(--r-md);
 }
 
 .actions {
@@ -144,12 +144,13 @@
   font-size: 14px;
   font-weight: 600;
   padding: 10px 22px;
-  border-radius: 6px;
+  min-height: 44px;
+  border-radius: var(--r-pill);
   border: 1px solid var(--fire-500);
   background: var(--fire-500);
   color: var(--paper);
   cursor: pointer;
-  transition: background-color 120ms ease;
+  transition: background-color var(--transition);
 }
 
 .btnPrimary:hover {
@@ -167,7 +168,8 @@
   font-size: 14px;
   font-weight: 500;
   padding: 10px 22px;
-  border-radius: 6px;
+  min-height: 44px;
+  border-radius: var(--r-pill);
   border: 1px solid var(--rule);
   background: var(--paper-pure);
   color: var(--ink-3);
@@ -198,9 +200,9 @@
   color: var(--ink-2);
   margin: 0;
   padding: var(--space-sm) var(--space-md);
-  background: rgba(42, 138, 72, 0.08);
-  border-left: 3px solid rgba(42, 138, 72, 0.4);
-  border-radius: 6px;
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  border-left: 3px solid color-mix(in srgb, var(--success) 40%, transparent);
+  border-radius: var(--r-md);
 }
 
 .typesCell {
@@ -216,7 +218,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: var(--paper);
   border: 1px solid var(--rule);
   color: var(--ink-3);
@@ -229,7 +231,7 @@
 .drawerBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: color-mix(in srgb, var(--ink) 35%, transparent);
   z-index: 60;
 }
 
@@ -240,7 +242,7 @@
   bottom: 0;
   width: min(840px, 96vw);
   background: var(--paper-pure);
-  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.15);
+  box-shadow: -12px 0 32px color-mix(in srgb, var(--ink) 15%, transparent);
   display: flex;
   flex-direction: column;
   z-index: 61;
@@ -259,7 +261,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
-  padding: var(--space-sm, 0.6rem) var(--space-lg);
+  padding: var(--space-sm) var(--space-lg);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -283,14 +285,14 @@
 .drawerBody {
   flex: 1;
   overflow: hidden;
-  background: #f7f3ec;
+  background: var(--rule-2);
 }
 
 .drawerFrame {
   width: 100%;
   height: 100%;
   border: 0;
-  background: #f7f3ec;
+  background: var(--rule-2);
 }
 
 .fullPage {
@@ -390,7 +392,7 @@
   padding: 9px 14px;
   border: 1px solid var(--rule);
   border-right: 0;
-  border-radius: 6px 0 0 6px;
+  border-radius: var(--r-md) 0 0 var(--r-md);
   background: var(--paper-pure);
 }
 
@@ -408,7 +410,7 @@
 
 .emailGroup .btnPrimary {
   flex: 0 0 auto;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 var(--r-md) var(--r-md) 0;
 }
 
 .actionMsg {
@@ -420,13 +422,13 @@
 }
 
 .actionMsgError {
-  color: #b22;
+  color: var(--fire-700);
 }
 
 .fullBody {
   flex: 1;
   overflow: hidden;
-  background: #f7f3ec;
+  background: var(--rule-2);
 }
 
 .emptyState {
@@ -437,7 +439,7 @@
   text-align: center;
   background: var(--paper-pure);
   border: 1px dashed var(--rule);
-  border-radius: 6px;
+  border-radius: var(--r-md);
   margin: var(--space-md) 0 0;
 }
 
@@ -446,4 +448,17 @@
   .checkGroup {
     grid-template-columns: 1fr;
   }
+}
+
+@media (pointer: coarse) {
+  .drawerClose { min-width: 44px; min-height: 44px; }
+}
+
+/* Status messages inside .fullBody (UI-11). */
+.fullBodyNote {
+  padding: 20px;
+}
+
+.fullBodyError {
+  margin: 20px;
 }

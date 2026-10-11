@@ -50,25 +50,25 @@ export default function InnerCircleList() {
       </Head>
       <MemberShell>
       <main className={`container ${styles.wrap}`}>
-        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className={styles.headRow}>
           <div>
             <h1 className={styles.title}>Inner circle</h1>
             <p className={styles.lede}>Wife, partners, parents, kids, anyone whose chart you want to keep close.</p>
           </div>
-          <Link href="/member/dashboard/inner-circle/new" className={styles.authSubmit} style={{ textDecoration: 'none', display: 'inline-block' }}>
+          <Link href="/member/dashboard/inner-circle/new" className={styles.authSubmit}>
             + Add person
           </Link>
         </div>
 
         {loaded && members.length === 0 && (
-          <div className={styles.placeholder} style={{ marginTop: '1.5rem' }}>
-            <p style={{ margin: 0 }}>
+          <div className={`${styles.placeholder} ${styles.sectionGap}`}>
+            <p>
               No one in your inner circle yet. <Link href="/member/dashboard/inner-circle/new">Add your first person</Link>.
             </p>
           </div>
         )}
 
-        <div style={{ marginTop: '1.5rem' }}>
+        <div className={styles.sectionGap}>
           {members.map((m) => (
             <div key={m.id} className={styles.icMember}>
               <div className={styles.icMemberInfo}>
@@ -76,10 +76,10 @@ export default function InnerCircleList() {
                 <span>{m.relationship}{m.birthday ? ` · ${m.birthday}` : ''}</span>
               </div>
               <div className={styles.icActions}>
-                <Link href={`/member/dashboard/inner-circle/${m.id}`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+                <Link href={`/member/dashboard/inner-circle/${m.id}`} className={styles.btnGhost}>
                   View
                 </Link>
-                <Link href={`/member/dashboard/inner-circle/${m.id}/edit`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+                <Link href={`/member/dashboard/inner-circle/${m.id}/edit`} className={styles.btnGhost}>
                   Edit
                 </Link>
                 <button type="button" onClick={() => handleDelete(m.id, m.name)} className={styles.btnDanger}>
@@ -90,7 +90,7 @@ export default function InnerCircleList() {
           ))}
         </div>
 
-        <p className={styles.authFootnote} style={{ marginTop: '2rem' }}>
+        <p className={`${styles.authFootnote} ${styles.footGap}`}>
           <Link href="/member/dashboard">← Back to dashboard</Link>
         </p>
       </main>

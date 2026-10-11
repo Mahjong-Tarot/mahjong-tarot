@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { companyOs } from "@/kernel/data/supabase";
 import type { TablesUpdate } from "@/kernel/data/supabase/database.types";
 import { declaresShadow } from "./routine-config";
@@ -85,7 +85,10 @@ export function summarizeResult(body: unknown): string | null {
 /** True when the request carries the Vercel Cron bearer (Authorization: Bearer $CRON_SECRET). */
 export function hasCronBearer(req: Request): boolean {
   const secret = process.env.CRON_SECRET;
-  return Boolean(secret) && req.headers.get("authorization") === `Bearer ${secret}`;
+  if (!secret) return false;
+  // Constant-time: compare fixed-length digests so neither content nor length leaks.
+  const digest = (s: string) => createHash("sha256").update(s).digest();
+  return timingSafeEqual(digest(req.headers.get("authorization") ?? ""), digest(`Bearer ${secret}`));
 }
 
 /**

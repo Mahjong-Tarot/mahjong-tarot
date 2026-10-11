@@ -28,15 +28,6 @@ export const BAND_FOR = (s) => {
   return            { label: 'Severe',           tone: 'negative', short: 'Severe' };
 };
 
-// Almanac auspiciousness palette (globals.css --luck-lucky-ink / gold /
-// --luck-unlucky-ink) — the same verdict colors used by the Three
-// Blessings report and the quick-reading document.
-export const BAND_COLOR = {
-  positive: '#1e6334',
-  neutral:  '#B8893A',
-  negative: '#9E1B14',
-};
-
 export function findEntry(sign, element) {
   return signsScores.find((e) => e.sign === sign && e.element === element);
 }

@@ -1,4 +1,6 @@
 // This file contains ONLY the static data - safe to use in client components
+import { TOPICS, topicSlug } from './topics'
+
 export interface PostMeta {
   slug: string
   title: string
@@ -17,11 +19,6 @@ export interface PostMeta {
   pillarSlug?: string
 }
 
-// The blog's topics, as the category labels on the Mahjong Tarot blog.
-
-export const categories = [
-  { slug: 'love-relationships',  label: 'Love & Relationships' },
-  { slug: 'forecasts-timing',    label: 'Forecasts & Timing' },
-  { slug: 'the-mahjong-mirror',  label: 'The Mahjong Mirror' },
-  { slug: 'money-career',        label: 'Money & Career' },
-]
+// The blog's topics, as the category labels on the Mahjong Tarot blog. The
+// list itself lives in ./topics (shared with lib/blogDb.js and the /blog filters).
+export const categories = TOPICS.map((label) => ({ slug: topicSlug(label), label }))

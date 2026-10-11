@@ -6,19 +6,23 @@
 // stamps the booking metadata so the webhook can finalise the row.
 import { getStripe, getServiceSupabase } from '../../../lib/stripe';
 import { readingPriceId, tierFor, DEFAULT_ASTROLOGER_ID } from '../../../lib/bookings';
+import { rateLimit } from '../../../lib/rateLimit';
+import { siteOrigin } from '../../../lib/siteOrigin';
 
-function originFromReq(req) {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
-  return `${proto}://${host}`;
-}
+const EMAIL_RE = /^[^\s@%*,;<>()]+@[^\s@%*,;<>()]+\.[^\s@%*,;<>()]+$/;
+
+// Stripe's minimum Checkout Session lifetime. The slot hold is extended to
+// match (plus webhook slack) so the hold can't lapse while the guest is
+// still able to pay, which would let someone else book the same slot.
+const CHECKOUT_TTL_SECONDS = 31 * 60;
+const HOLD_SLACK_MS = 5 * 60_000;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (!rateLimit(req, res, { name: 'reading-checkout', limit: 10, windowMs: 10 * 60_000 })) return;
 
   const {
     duration,
@@ -42,6 +46,9 @@ export default async function handler(req, res) {
   if (!full_name || !email) {
     return res.status(400).json({ error: 'Name and email are required' });
   }
+  if (typeof email !== 'string' || email.length > 254 || !EMAIL_RE.test(email.trim())) {
+    return res.status(400).json({ error: 'Please enter a valid email address' });
+  }
   if (!slot_id) return res.status(400).json({ error: 'Slot is required' });
 
   let price;
@@ -62,7 +69,7 @@ export default async function handler(req, res) {
     .maybeSingle();
 
   if (slotErr) return res.status(500).json({ error: 'Slot lookup failed' });
-  if (!slot || slot.status !== 'held' || slot.held_for_session !== hold_token) {
+  if (!slot || slot.status !== 'held' || !hold_token || slot.held_for_session !== hold_token) {
     return res.status(409).json({
       error: 'Your slot is no longer reserved. Please pick a new time.',
     });
@@ -72,17 +79,19 @@ export default async function handler(req, res) {
   }
 
   const stripe = getStripe();
-  const origin = originFromReq(req);
+  const origin = siteOrigin();
 
+  const expiresAt = Math.floor(Date.now() / 1000) + CHECKOUT_TTL_SECONDS;
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
-    customer_email: email,
+    expires_at: expiresAt,
+    customer_email: email.trim(),
     line_items: [{ price, quantity: 1 }],
     metadata: {
       booking: 'true',
       duration: String(duration),
       full_name,
-      email,
+      email: email.trim(),
       phone: phone || '',
       birthday: birthday || '',
       birth_time: birth_time || '',
@@ -113,11 +122,15 @@ export default async function handler(req, res) {
   });
 
   // Stamp the held slot with the real Stripe session id so the webhook
-  // can correlate (in case metadata ever fails to round-trip).
+  // can correlate, and keep it held until the session itself expires.
   await service
     .from('reading_availability')
-    .update({ held_for_session: session.id })
-    .eq('id', slot_id);
+    .update({
+      held_for_session: session.id,
+      held_until: new Date(expiresAt * 1000 + HOLD_SLACK_MS).toISOString(),
+    })
+    .eq('id', slot_id)
+    .eq('held_for_session', hold_token);
 
   return res.status(200).json({ url: session.url });
 }

@@ -27,7 +27,7 @@ export default function NewMember() {
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Add to inner circle</h1>
         <p className={styles.lede}>Their chart will be saved so you can compare any time.</p>
-        <div style={{ marginTop: '1.5rem' }}>
+        <div className={styles.sectionGap}>
           <MemberForm userId={user.id} />
         </div>
       </main>

@@ -15,55 +15,33 @@
 }
 
 .label .req {
-  color: var(--fire-500);
+  color: var(--fire-600);
   margin-left: 2px;
 }
 
 .labelLight {
   composes: label;
-  color: rgba(250, 250, 251, 0.85);
+  color: var(--paper-a90);
 }
 
-.input,
-.textarea,
-.select {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 400;
-  background-color: var(--paper-pure);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  padding: 12px 14px;
-  color: var(--ink);
-  line-height: 1.4;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-.input::placeholder,
-.textarea::placeholder { color: var(--ink-4); }
-
-.input:focus,
-.textarea:focus,
-.select:focus {
-  outline: none;
-  border-color: var(--fire-500);
-  box-shadow: 0 0 0 3px rgba(230, 51, 41, 0.12);
-}
+.input    { composes: input from global; line-height: 1.4; }
+.textarea { composes: textarea from global; line-height: 1.4; }
+.select   { composes: select from global; line-height: 1.4; }
 
 .inputDark {
   composes: input;
-  background-color: rgba(250, 250, 251, 0.06);
-  border-color: rgba(250, 250, 251, 0.22);
+  background-color: var(--paper-a06);
+  border-color: var(--paper-a24);
   color: var(--paper);
 }
 
 .inputDark:focus {
   border-color: var(--fire-400);
-  box-shadow: 0 0 0 3px rgba(230, 51, 41, 0.18);
+  box-shadow: 0 0 0 3px var(--fire-a12);
 }
 
 .inputDark::placeholder {
-  color: rgba(250, 250, 251, 0.4);
+  color: var(--paper-a45);
 }
 
 .textarea {
@@ -73,18 +51,18 @@
 
 .textareaDark {
   composes: textarea;
-  background-color: rgba(250, 250, 251, 0.06);
-  border-color: rgba(250, 250, 251, 0.22);
+  background-color: var(--paper-a06);
+  border-color: var(--paper-a24);
   color: var(--paper);
 }
 
 .textareaDark:focus {
   border-color: var(--fire-400);
-  box-shadow: 0 0 0 3px rgba(230, 51, 41, 0.18);
+  box-shadow: 0 0 0 3px var(--fire-a12);
 }
 
 .textareaDark::placeholder {
-  color: rgba(250, 250, 251, 0.4);
+  color: var(--paper-a45);
 }
 
 .select {
@@ -101,7 +79,7 @@
 .errorText {
   font-family: var(--sans);
   font-size: 12px;
-  color: var(--fire-600);
+  color: var(--error-ink);
 }
 
 .successMsg {
@@ -128,7 +106,7 @@
 .newsletterTitle {
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--fire-600);
@@ -205,7 +183,7 @@
 
 .footerNewsletter h2 {
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: var(--text-lg);
   font-weight: 500;
   letter-spacing: -0.005em;
   margin-bottom: var(--space-xs);
@@ -216,7 +194,7 @@
   font-family: var(--sans);
   color: var(--ink-3);
   margin-bottom: var(--space-md);
-  font-size: 14px;
+  font-size: var(--text-md);
   line-height: 1.55;
 }
 
@@ -226,8 +204,8 @@
 }
 
 .footerNewsletter .select {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .blogNewsletter h2 {
@@ -241,7 +219,7 @@
   font-family: var(--sans);
   color: var(--ink-3);
   margin-bottom: var(--space-lg);
-  font-size: 16px;
+  font-size: var(--text-base);
   line-height: 1.6;
 }
 
@@ -255,6 +233,13 @@
 .blogNewsletterInputs .input {
   flex: 1;
 }
+.blogNewsletterSign {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: var(--space-sm) auto 0;
+}
+.blogNewsletterSignStart { margin-left: 0; margin-right: 0; }
 
 /* ─── Responsive ─────────────────────────────────────────────────────── */
 

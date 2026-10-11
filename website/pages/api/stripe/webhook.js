@@ -13,6 +13,7 @@ export const config = {
 
 const HANDLED_EVENTS = new Set([
   'checkout.session.completed',
+  'checkout.session.async_payment_succeeded',
   'customer.subscription.created',
   'customer.subscription.updated',
   'customer.subscription.deleted',
@@ -217,7 +218,8 @@ async function handleBookingCompleted(service, session) {
     .upsert(
       {
         full_name: m.full_name || session.customer_details?.name || '',
-        email: m.email || session.customer_details?.email || session.customer_email || '',
+        // Prefer the Stripe-validated address over guest-typed metadata.
+        email: session.customer_details?.email || session.customer_email || m.email || '',
         phone: m.phone || null,
         birthday: m.birthday || null,
         birth_time: m.birth_time || null,
@@ -247,16 +249,26 @@ async function handleBookingCompleted(service, session) {
 
   if (bookingErr) throw bookingErr;
 
-  // Flip the held slot to booked and link it to the new booking row.
+  // Flip the held slot to booked and link it to the new booking row, but
+  // only while it is still held for this session (or has been released
+  // and nobody else took it): never overwrite another guest's booking.
   if (slotId && booking?.id) {
-    await service
+    const { data: flipped, error: slotErr } = await service
       .from('reading_availability')
       .update({ status: 'booked', booking_id: booking.id, held_until: null })
-      .eq('id', slotId);
+      .eq('id', slotId)
+      .or(`held_for_session.eq.${session.id},status.eq.open`)
+      .select('id');
+    if (slotErr) throw slotErr;
+    if (!flipped?.length) {
+      console.error('[stripe-webhook] slot no longer held for this session; booking needs a new time', {
+        slotId, bookingId: booking.id, sessionId: session.id,
+      });
+    }
   }
 
   // Find or create the person, write the deal, promote lifecycle.
-  const email = m.email || session.customer_details?.email || session.customer_email;
+  const email = session.customer_details?.email || session.customer_email || m.email;
   const fullName = m.full_name || session.customer_details?.name || null;
   if (email && booking?.id) {
     const person = await findOrCreatePersonByEmail(service, { email, name: fullName });
@@ -328,7 +340,7 @@ export default async function handler(req, res) {
     event = stripe.webhooks.constructEvent(raw, signature, secret);
   } catch (err) {
     console.error('[stripe-webhook] signature verification failed', err.message);
-    return res.status(400).json({ error: `Webhook Error: ${err.message}` });
+    return res.status(400).json({ error: 'Webhook signature verification failed' });
   }
 
   if (!HANDLED_EVENTS.has(event.type)) {
@@ -339,8 +351,16 @@ export default async function handler(req, res) {
   const service = getServiceSupabase();
 
   try {
-    if (event.type === 'checkout.session.completed') {
+    if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
       const session = event.data.object;
+
+      // One-time purchases are fulfilled only once the money is in.
+      // A delayed payment method completes the session unpaid and is
+      // fulfilled later by checkout.session.async_payment_succeeded.
+      const paid = session.payment_status === 'paid' || session.payment_status === 'no_payment_required';
+      if (session.mode === 'payment' && !paid) {
+        return res.status(200).json({ received: true, pending: session.payment_status });
+      }
 
       // Two checkout types live on the same endpoint: the
       // recurring Member Area subscription (mode=subscription) and
@@ -351,6 +371,9 @@ export default async function handler(req, res) {
       } else if (session.mode === 'payment' && session.metadata?.book_order === 'true') {
         await handleBookOrderCompleted(service, session);
       } else {
+        if (event.type !== 'checkout.session.completed') {
+          return res.status(200).json({ received: true });
+        }
         const userId = session.client_reference_id || session.metadata?.user_id;
         const subId = session.subscription;
         if (subId) {

@@ -38,7 +38,7 @@ export function BlogPreview({
     <div className={`admin-campaign-blogprev${family ? ` admin-campaign-blogprev--${family}` : ""}`}>
       {coverUrl && (
         <div className="admin-campaign-blogprev-cover">
-          {/* eslint-disable-next-line @next/next/no-img-element -- uploaded file of unknown size; next/image needs fixed dimensions */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- admin preview exception to the guide's next/image rule (UI-36): Supabase-storage or generated image of unknown size, shown at its own aspect ratio; next/image would need fixed dimensions and a remotePatterns entry */}
           <img src={coverUrl} alt={title} />
         </div>
       )}

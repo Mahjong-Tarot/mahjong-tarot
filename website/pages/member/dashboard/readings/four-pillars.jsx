@@ -70,8 +70,8 @@ export default function FourPillarsReading() {
           </p>
 
           {profileLoaded && !profile?.birthday && (
-            <div className={account.placeholder} style={{ marginTop: '1.5rem' }}>
-              <p style={{ margin: 0 }}>
+            <div className={`${account.placeholder} ${account.sectionGap}`}>
+              <p>
                 Add your birth data on your <Link href="/member/profile">profile</Link> to see your reading.
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function FourPillarsReading() {
 
           {readingHtml && <div dangerouslySetInnerHTML={{ __html: readingHtml }} />}
 
-          <p className={account.authFootnote} style={{ marginTop: '2.5rem' }}>
+          <p className={`${account.authFootnote} ${account.footGap}`}>
             <Link href="/member/dashboard">← Back to dashboard</Link>
           </p>
         </main>

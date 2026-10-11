@@ -106,7 +106,7 @@ export default function BookingConfirm() {
                 </div>
               )}
 
-              <Link href="/" className={styles.submitBtn} style={{ textDecoration: 'none' }}>
+              <Link href="/" className={styles.submitBtn}>
                 Back to home <span aria-hidden="true">→</span>
               </Link>
             </div>

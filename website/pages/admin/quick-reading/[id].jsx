@@ -163,10 +163,10 @@ export default function QuickReadingView() {
         </div>
 
         <div className={styles.fullBody}>
-          {!loaded && <p className={adminStyles.muted} style={{ padding: 20 }}>Loading…</p>}
-          {loaded && loadError && <p className="error-block" style={{ margin: 20 }}>{loadError}</p>}
+          {!loaded && <p className={`${adminStyles.muted} ${styles.fullBodyNote}`}>Loading…</p>}
+          {loaded && loadError && <p className={`error-block ${styles.fullBodyError}`}>{loadError}</p>}
           {loaded && !loadError && !reading && (
-            <p className={adminStyles.muted} style={{ padding: 20 }}>Reading not found.</p>
+            <p className={`${adminStyles.muted} ${styles.fullBodyNote}`}>Reading not found.</p>
           )}
           {loaded && reading && (
             <iframe

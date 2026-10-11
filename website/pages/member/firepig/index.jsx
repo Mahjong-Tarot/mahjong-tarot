@@ -28,7 +28,7 @@ export default function FirePig() {
         <p className={styles.lede}>Bill&apos;s AI guide.</p>
 
         <div className={styles.placeholder}>
-          <p style={{ margin: 0 }}>
+          <p>
             FirePig is coming soon. The chat interface will live here.
           </p>
         </div>

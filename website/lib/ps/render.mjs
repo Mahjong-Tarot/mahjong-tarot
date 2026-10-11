@@ -113,6 +113,14 @@ padding:2px 6px;border-radius:99px;font-family:Georgia,serif}
 padding:3px 8px;background:rgba(8,4,18,.5);border-top:1px solid var(--line);font-size:.58rem;z-index:2}
 .psc-chart .pname{font-weight:600;color:var(--paper2)}.psc-chart .pbranch{color:var(--gold);font-family:"Songti SC",serif}
 .psc-chart .chartnote{text-align:center;color:var(--muted);font-size:.72rem;font-style:italic;max-width:560px;margin:0 auto 30px}
+@media (max-width:600px){
+.psc-chart .chart{aspect-ratio:auto;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;
+grid-template-areas:"ctr ctr" "si wu" "wei shen" "you xu" "hai zi" "chou yin" "mao chen"}
+.psc-chart .palace{min-height:112px}
+.psc-chart .sfsz{display:none}
+.psc-chart .star .en{font-size:.72rem}
+.psc-chart .pflag,.psc-chart .bd,.psc-chart .pfoot{font-size:.68rem}
+}
 `;
 
 // Self-contained chart block on its own night-sky backdrop, for embedding
@@ -154,6 +162,7 @@ letter-spacing:.04em;color:#fff;border-radius:99px;padding:.15rem .6rem;vertical
 .palblock h4{margin:0 0 4px;font-size:1.05rem;color:#5b3f7a;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .footnote{max-width:760px;margin:22px auto 0;font-size:.72rem;color:var(--muted);text-align:center}
 .footnote code{color:var(--gold)}
+@media (max-width:600px){body{padding:20px 10px 48px}.reading{padding:22px 18px 26px}h1{font-size:1.7rem}}
 </style></head><body><div class="wrap">
 <div class="topline">Purple Star Astrology · 紫微斗數</div>
 <h1>${title}</h1><p class="ident">${ident}</p>${body}

@@ -61,10 +61,10 @@ export default function AlmanacDate() {
       </Head>
       <MemberShell>
       <main>
-        <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
+        <section className="page-section">
+          <div className="page-intro">
             <span className="overline">Daily</span>
-            <h1 style={{ marginTop: 'var(--space-xs)' }}>Tong Shu Almanac</h1>
+            <h1>Tong Shu Almanac</h1>
           </div>
           {loaded && !notFound && (
             <AlmanacView
@@ -77,7 +77,7 @@ export default function AlmanacDate() {
             />
           )}
           {loaded && notFound && (
-            <p style={{ textAlign: 'center', fontStyle: 'italic', color: '#888' }}>
+            <p className="empty-note">
               Date out of range. The Fire Horse year covers 2026-02-17 through 2027-02-05.
             </p>
           )}

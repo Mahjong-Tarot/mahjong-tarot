@@ -134,6 +134,7 @@ export default function SalesPage({ profile }) {
         )}
 
         {!loading && deals.length > 0 && (
+          <div className={styles.ordersScroll}>
           <table className={styles.ordersTable}>
             <thead>
               <tr>
@@ -152,7 +153,7 @@ export default function SalesPage({ profile }) {
                   <tr
                     key={d.id}
                     onClick={() => setSelectedDeal(d)}
-                    style={{ cursor: 'pointer' }}
+                    className={styles.rowClickable}
                   >
                     <td>{d.won_at ? new Date(d.won_at).toLocaleDateString() : '—'}</td>
                     <td>{customerLabel}</td>
@@ -165,6 +166,7 @@ export default function SalesPage({ profile }) {
               })}
             </tbody>
           </table>
+          </div>
         )}
 
         <SalesDetailDrawer

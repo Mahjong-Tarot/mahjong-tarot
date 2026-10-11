@@ -108,7 +108,7 @@ export default function OrderBook() {
                     {meta.mark}
                     <small>{t.delivery_label.replace('Delivered ', '').replace('Ships ', '')}</small>
                   </div>
-                  <h3 className={styles.tierTitle}>{t.label}</h3>
+                  <h2 className={styles.tierTitle}>{t.label}</h2>
                   <p className={styles.tierDesc}>{t.blurb}</p>
                   <ul className={styles.tierBullets}>
                     {t.bullets.map((b) => <li key={b}>{b}</li>)}
@@ -143,7 +143,7 @@ export default function OrderBook() {
                 <span>{formatBookPrice(total)}</span>
               </div>
 
-              <div className={styles.field} style={{ marginTop: 'var(--d-3)' }}>
+              <div className={`${styles.field} ${styles.fieldSpaced}`}>
                 <label className={styles.fieldLabel} htmlFor="order-email">
                   Email <span className={styles.opt}>(optional, pre-fills checkout)</span>
                 </label>
@@ -168,7 +168,7 @@ export default function OrderBook() {
               >
                 {submitting ? 'Starting checkout…' : (<>Continue to payment <span aria-hidden="true">→</span></>)}
               </button>
-              {error && <div className={styles.formError} style={{ marginTop: 12 }}>{error}</div>}
+              {error && <div className={`${styles.formError} ${styles.formErrorSpaced}`}>{error}</div>}
               <p className={styles.summaryNote}>
                 Secure checkout by Stripe. You&apos;ll be charged today and
                 receive your copy on the delivery date shown above.

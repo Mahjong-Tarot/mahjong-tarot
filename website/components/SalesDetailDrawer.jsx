@@ -1,72 +1,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import shelf from './Shelf.module.css';
 
-// ── Shelf primitives (mirror PersonEditShelf) ──────────────────────
-const shelfBackdrop = {
-  position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.35)', zIndex: 60,
-};
-const shelfPanel = {
-  position: 'fixed', top: 0, right: 0, bottom: 0,
-  width: 'min(440px, 92vw)', background: '#fff', boxShadow: '-12px 0 32px rgba(0,0,0,0.15)',
-  padding: 20, overflowY: 'auto', zIndex: 61,
-};
-const shelfHeader = {
-  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-  marginBottom: 18, paddingBottom: 12, borderBottom: '1px solid #e5e7eb',
-};
-const shelfClose = {
-  background: 'transparent', border: 'none', fontSize: 28, cursor: 'pointer',
-  lineHeight: 1, color: '#6b7280', padding: '0 4px',
-};
-const shelfErr = {
-  background: '#fef2f2', color: '#991b1b', padding: '8px 12px', borderRadius: 6,
-  fontSize: 13, marginBottom: 12,
-};
-const shelfOk = {
-  background: '#ecfdf5', color: '#065f46', padding: '8px 12px', borderRadius: 6,
-  fontSize: 13, marginBottom: 12,
-};
-
-const eyebrow = {
-  fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em',
-  color: '#6b7280', fontWeight: 500, margin: 0,
-};
-const sectionTitle = {
-  fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.06em',
-  color: '#6b7280', fontWeight: 600, margin: '20px 0 8px',
-};
-const rowGrid = {
-  display: 'grid', gridTemplateColumns: '110px 1fr', rowGap: 8, columnGap: 12,
-  fontSize: 14, alignItems: 'baseline',
-};
-const labelCell = { color: '#6b7280', fontSize: 12 };
-const valueCell = { color: '#111827', wordBreak: 'break-word' };
-const monoValue = {
-  ...valueCell, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-  fontSize: 12,
-};
-const badgeWon = {
-  display: 'inline-block', background: '#ecfdf5', color: '#065f46',
-  padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 600,
-  textTransform: 'uppercase', letterSpacing: '0.04em',
-};
-const badgeRefunded = {
-  display: 'inline-block', background: '#f3f4f6', color: '#4b5563',
-  padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 600,
-  textTransform: 'uppercase', letterSpacing: '0.04em',
-};
-const linkBtn = {
-  display: 'inline-block', padding: '8px 12px', borderRadius: 6,
-  border: '1px solid #d1d5db', background: '#fff', color: '#111827',
-  textDecoration: 'none', fontSize: 13, fontWeight: 500, marginRight: 8,
-  marginTop: 6,
-};
-const refundBtn = {
-  display: 'block', width: '100%', padding: '10px 14px', borderRadius: 6,
-  border: '1px solid #b91c1c', background: '#b91c1c', color: '#fff',
-  fontSize: 14, fontWeight: 600, cursor: 'pointer', marginTop: 12,
-};
-const refundBtnBusy = { ...refundBtn, opacity: 0.7, cursor: 'wait' };
+// Shelf styles: Shelf.module.css (shared with PersonEditShelf).
 
 function fmtCurrency(cents, currency) {
   const amount = (cents ?? 0) / 100;
@@ -147,16 +83,16 @@ export default function SalesDetailDrawer({ deal, onClose, onRefunded }) {
 
   return (
     <>
-      <div onClick={() => !busy && onClose?.()} style={shelfBackdrop} />
-      <aside style={shelfPanel} onClick={(e) => e.stopPropagation()}>
-        <header style={shelfHeader}>
+      <div onClick={() => !busy && onClose?.()} className={shelf.backdrop} />
+      <aside className={shelf.panel} onClick={(e) => e.stopPropagation()}>
+        <header className={`${shelf.header} ${shelf.headerLoose}`}>
           <div>
-            <p style={eyebrow}>Sale details</p>
-            <h2 style={{ margin: '4px 0 0', fontSize: 18, fontWeight: 600 }}>
+            <p className={shelf.eyebrow}>Sale details</p>
+            <h2 className={`${shelf.title} ${shelf.titleSpaced}`}>
               {deal.person_id ? (
                 <Link
                   href={`/admin/people?focus=${deal.person_id}`}
-                  style={{ color: '#111827', textDecoration: 'none' }}
+                  className={shelf.titleLink}
                 >
                   {customerLabel}
                 </Link>
@@ -164,7 +100,7 @@ export default function SalesDetailDrawer({ deal, onClose, onRefunded }) {
                 customerLabel
               )}
             </h2>
-            <p style={{ margin: '4px 0 0', fontSize: 13, color: '#6b7280' }}>
+            <p className={shelf.subline}>
               Won {fmtDate(deal.won_at)}
             </p>
           </div>
@@ -172,50 +108,50 @@ export default function SalesDetailDrawer({ deal, onClose, onRefunded }) {
             type="button"
             onClick={() => !busy && onClose?.()}
             aria-label="Close"
-            style={shelfClose}
+            className={shelf.close}
             disabled={busy}
           >
             ×
           </button>
         </header>
 
-        {err && <p style={shelfErr}>{err}</p>}
-        {okMsg && <p style={shelfOk}>{okMsg}</p>}
+        {err && <p className={shelf.err}>{err}</p>}
+        {okMsg && <p className={shelf.ok}>{okMsg}</p>}
 
-        <h3 style={sectionTitle}>Transaction</h3>
-        <div style={rowGrid}>
-          <span style={labelCell}>Amount</span>
-          <span style={valueCell}>{fmtCurrency(deal.amount_cents, deal.currency)}</span>
-          <span style={labelCell}>Source</span>
-          <span style={valueCell}>{deal.source || '—'}</span>
-          <span style={labelCell}>Status</span>
-          <span style={valueCell}>
-            <span style={isRefunded ? badgeRefunded : badgeWon}>
+        <h3 className={`${shelf.sectionTitle} ${shelf.sectionTitleLoose}`}>Transaction</h3>
+        <div className={shelf.rowGrid}>
+          <span className={shelf.labelCell}>Amount</span>
+          <span className={shelf.valueCell}>{fmtCurrency(deal.amount_cents, deal.currency)}</span>
+          <span className={shelf.labelCell}>Source</span>
+          <span className={shelf.valueCell}>{deal.source || '—'}</span>
+          <span className={shelf.labelCell}>Status</span>
+          <span className={shelf.valueCell}>
+            <span className={`${shelf.badge} ${isRefunded ? shelf.badgeRefunded : shelf.badgeWon}`}>
               {deal.status}
             </span>
           </span>
-          <span style={labelCell}>Payment intent</span>
-          <span style={monoValue} title={deal.stripe_payment_intent_id || ''}>
+          <span className={shelf.labelCell}>Payment intent</span>
+          <span className={shelf.monoValue} title={deal.stripe_payment_intent_id || ''}>
             {truncateMiddle(deal.stripe_payment_intent_id)}
           </span>
           {deal.stripe_session_id && (
             <>
-              <span style={labelCell}>Session</span>
-              <span style={monoValue} title={deal.stripe_session_id}>
+              <span className={shelf.labelCell}>Session</span>
+              <span className={shelf.monoValue} title={deal.stripe_session_id}>
                 {truncateMiddle(deal.stripe_session_id)}
               </span>
             </>
           )}
-          <span style={labelCell}>Notes</span>
-          <span style={valueCell}>{deal.notes || '—'}</span>
+          <span className={shelf.labelCell}>Notes</span>
+          <span className={shelf.valueCell}>{deal.notes || '—'}</span>
         </div>
 
         {deal.booking_id && (
           <>
-            <h3 style={sectionTitle}>Linked records</h3>
+            <h3 className={`${shelf.sectionTitle} ${shelf.sectionTitleLoose}`}>Linked records</h3>
             <Link
               href={`/admin/private-readings/${deal.booking_id}`}
-              style={linkBtn}
+              className={shelf.linkBtn}
             >
               View private reading →
             </Link>
@@ -224,16 +160,16 @@ export default function SalesDetailDrawer({ deal, onClose, onRefunded }) {
 
         {canRefund && (
           <>
-            <h3 style={sectionTitle}>Actions</h3>
+            <h3 className={`${shelf.sectionTitle} ${shelf.sectionTitleLoose}`}>Actions</h3>
             <button
               type="button"
               onClick={handleRefund}
               disabled={busy}
-              style={busy ? refundBtnBusy : refundBtn}
+              className={shelf.dangerBtn}
             >
               {busy ? 'Refunding…' : 'Refund via Stripe'}
             </button>
-            <p style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>
+            <p className={shelf.hint}>
               Full refund only. Cannot be undone.
             </p>
           </>

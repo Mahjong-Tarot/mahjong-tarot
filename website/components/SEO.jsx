@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { jsonLdString } from '../lib/jsonLd';
 
 const SITE = 'https://www.mahjongtarot.com';
 const DEFAULT_IMAGE = `${SITE}/images/about-portrait.webp`;
@@ -32,7 +33,7 @@ export default function SEO({
       {jsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
         />
       )}
     </Head>

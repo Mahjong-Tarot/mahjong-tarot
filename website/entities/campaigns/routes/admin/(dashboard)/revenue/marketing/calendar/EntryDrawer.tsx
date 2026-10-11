@@ -451,8 +451,8 @@ export function EntryDrawer({
 
           {selectedImage && (
             <a href={selectedImage.url} target="_blank" rel="noreferrer" className="u-block u-mt-3">
-              {/* eslint-disable-next-line @next/next/no-img-element -- uploaded file of unknown size; next/image needs fixed dimensions */}
-              <img src={selectedImage.url} alt="Selected" className="admin-box" />
+              {/* eslint-disable-next-line @next/next/no-img-element -- admin preview exception to the guide's next/image rule (UI-36): Supabase-storage or generated image of unknown size, shown at its own aspect ratio; next/image would need fixed dimensions and a remotePatterns entry */}
+              <img src={selectedImage.url} alt={`Selected image for ${title || "this entry"}`} className="admin-box" />
             </a>
           )}
 
@@ -467,7 +467,7 @@ export function EntryDrawer({
                   onClick={() => selectImage(img.id)}
                   title={img.isSelected ? "Selected" : `Use version ${images.length - i}`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- uploaded file of unknown size; next/image needs fixed dimensions */}
+                  {/* eslint-disable-next-line @next/next/no-img-element -- admin preview exception to the guide's next/image rule (UI-36): Supabase-storage or generated image of unknown size, shown at its own aspect ratio; next/image would need fixed dimensions and a remotePatterns entry */}
                   <img src={img.url} alt={`Version ${images.length - i}`} />
                 </button>
               ))}

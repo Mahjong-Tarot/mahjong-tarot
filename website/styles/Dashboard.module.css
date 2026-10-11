@@ -25,9 +25,9 @@
 
 .greetingDate {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--ink-4);
   margin: 0;
@@ -69,7 +69,7 @@
 .heroLabel {
   margin: 0 0 var(--space-sm);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -89,7 +89,7 @@
 .heroSub {
   margin: 0;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -117,14 +117,14 @@
 .heroMuted {
   margin: 0;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--ink-4);
 }
 
 .heroLink {
   display: inline-block;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--fire-600);
   text-decoration: none;
@@ -171,15 +171,15 @@
 .periodLabel {
   margin: 0 0 var(--space-sm);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-overline);
   text-transform: uppercase;
   color: var(--ink-4);
 }
 
 .periodChinese {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   font-family: var(--serif);
   font-size: 44px;
   font-weight: 400;
@@ -191,7 +191,7 @@
 .periodName {
   margin: 0 0 var(--space-md);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -208,7 +208,7 @@
 }
 
 .periodScore {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   font-family: var(--serif);
   font-size: 60px;
   font-weight: 400;
@@ -219,18 +219,18 @@
 
 .periodScore span {
   font-family: var(--mono);
-  font-size: 16px;
+  font-size: var(--text-base);
   color: var(--ink-4);
-  margin-left: 4px;
+  margin-left: var(--space-xs);
   font-weight: 500;
 }
 
 .periodFav {
   margin: 0 0 var(--space-md);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--ink-4);
 }
@@ -238,7 +238,7 @@
 .periodMuted {
   margin: 0;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--ink-4);
   line-height: 1.5;
 }
@@ -246,7 +246,7 @@
 .periodLink {
   display: inline-block;
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--fire-600);
   text-decoration: none;
@@ -283,7 +283,7 @@
 .sectionTitle {
   margin: 0;
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: var(--text-lg);
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -291,7 +291,7 @@
 
 .sectionLink {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--fire-600);
   text-decoration: none;
@@ -323,17 +323,17 @@
 }
 
 .decadeLabel {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-overline);
   text-transform: uppercase;
   color: var(--ink-4);
 }
 
 .decadeName {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   font-family: var(--serif);
   font-size: 28px;
   font-weight: 500;
@@ -352,7 +352,7 @@
 .decadeRange {
   margin: 0;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -360,9 +360,9 @@
 }
 
 .decadeStarsLabel {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-xs);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -372,7 +372,7 @@
 .decadeStars {
   margin: 0;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--ink-2);
   line-height: 1.5;
 }
@@ -403,7 +403,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-xs);
 }
 
 .gridList li a {
@@ -425,7 +425,7 @@
 
 .gridName {
   font-weight: 500;
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--ink);
 }
 
@@ -434,7 +434,7 @@
   color: var(--ink-4);
   font-weight: 400;
   margin-left: 6px;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.04em;
 }
 
@@ -445,10 +445,10 @@
   min-width: 52px;
   padding: 3px 10px;
   border-radius: var(--r-pill);
-  color: #fff;
+  color: var(--paper);
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.06em;
   flex-shrink: 0;
 }
@@ -472,7 +472,7 @@
   text-decoration: none;
   color: inherit;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   transition: color var(--transition);
 }
 
@@ -482,7 +482,7 @@
 .bdayMeta {
   font-family: var(--mono);
   color: var(--ink-4);
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.04em;
 }
 
@@ -491,7 +491,7 @@
   color: var(--fire-600);
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -503,7 +503,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-xs);
 }
 
 .recentList li a {
@@ -518,7 +518,7 @@
   color: inherit;
   flex-wrap: wrap;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-md);
   transition: border-color var(--transition);
 }
 
@@ -529,7 +529,7 @@
   font-family: var(--mono);
   color: var(--ink-3);
   font-weight: 500;
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -537,7 +537,7 @@
 .recentDate {
   font-family: var(--mono);
   color: var(--ink-4);
-  font-size: 11px;
+  font-size: var(--text-xs);
   letter-spacing: 0.04em;
 }
 
@@ -566,7 +566,7 @@
 .teaserSub {
   margin: 0;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -576,3 +576,14 @@
 @media (max-width: 600px) {
   .almanacTeaser { flex-direction: column; align-items: flex-start; padding: var(--space-md); }
 }
+
+/* Inner-circle rating chips: five-step tone scale (the -ink steps keep
+   white chip text at AA). */
+.toneNone        { background: var(--tone-none); }
+.toneAuspicious  { background: var(--tone-auspicious-ink); }
+.toneFavourable  { background: var(--tone-favourable-ink); }
+.toneNeutral     { background: var(--tone-neutral-ink); }
+.toneCaution     { background: var(--tone-caution-ink); }
+.toneChallenging { background: var(--tone-challenging-ink); }
+
+.sectionTitleTight { margin-bottom: var(--space-md); }

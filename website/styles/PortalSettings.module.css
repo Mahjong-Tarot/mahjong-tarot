@@ -29,7 +29,7 @@
   background: var(--fire-50);
   border: 1px solid var(--fire-100);
   border-left: 3px solid var(--fire-500);
-  border-radius: 6px;
+  border-radius: var(--r-md);
   margin: 0 0 var(--space-xl);
 }
 
@@ -51,7 +51,7 @@
 
 .card {
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   background: var(--paper-pure);
   padding: var(--space-lg);
   display: flex;
@@ -94,7 +94,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   border: 1px solid var(--rule);
   white-space: nowrap;
   flex-shrink: 0;
@@ -102,8 +102,8 @@
 
 .statusConnected {
   color: var(--success);
-  background: rgba(42, 138, 72, 0.08);
-  border-color: rgba(42, 138, 72, 0.3);
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  border-color: color-mix(in srgb, var(--success) 30%, transparent);
 }
 
 .statusReady {
@@ -125,7 +125,7 @@
   margin: 0;
   padding: var(--space-md);
   background: var(--rule-2);
-  border-radius: 6px;
+  border-radius: var(--r-md);
 }
 
 .detail {
@@ -162,13 +162,14 @@
   font-size: 14px;
   font-weight: 600;
   padding: 8px 16px;
-  border-radius: 6px;
+  min-height: 44px;
+  border-radius: var(--r-pill);
   cursor: pointer;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   border: 1px solid transparent;
-  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .btnPrimary {
@@ -208,7 +209,7 @@
   margin-top: var(--space-lg);
   padding: var(--space-xl) var(--space-lg);
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: var(--r-md);
   background: var(--paper-pure);
   text-align: center;
 }
@@ -219,12 +220,12 @@
 
 .callback_ok {
   border-left: 4px solid var(--success);
-  background: rgba(42, 138, 72, 0.04);
+  background: color-mix(in srgb, var(--success) 4%, transparent);
 }
 
 .callback_error {
-  border-left: 4px solid #b22;
-  background: rgba(178, 34, 34, 0.04);
+  border-left: 4px solid var(--fire-700);
+  background: color-mix(in srgb, var(--fire-700) 4%, transparent);
 }
 
 .callbackMessage {

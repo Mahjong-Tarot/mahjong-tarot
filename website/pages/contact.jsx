@@ -83,7 +83,7 @@ export default function Contact() {
  Have a question about readings, the book, or a speaking engagement?
  We&rsquo;d love to hear from you.
  </p>
- <div style={{ marginTop: 'var(--space-lg)', display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
+ <div className="cta-row cta-row-spaced">
  <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
  <Link href="/the-mahjong-mirror/order" className="btn-secondary">Pre-Order the Book</Link>
  </div>

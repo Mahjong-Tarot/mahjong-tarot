@@ -1,0 +1,13 @@
+/* Public quick-reading viewer (/reading/q/[token]): full-viewport iframe */
+.frame {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--paper);
+}
+.error {
+  padding: var(--space-xl2) var(--space-md);
+  text-align: center;
+}

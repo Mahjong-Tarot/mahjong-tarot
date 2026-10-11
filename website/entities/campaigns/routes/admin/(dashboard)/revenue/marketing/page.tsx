@@ -476,7 +476,7 @@ export default async function MarketingPage(props: { searchParams: Promise<Searc
             ) : !delivery.hasData ? (
               <div className="admin-empty u-mt-3">
                 No delivery data yet. Register the Resend webhook at{" "}
-                <code>${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/api/webhooks/resend/</code> (trailing slash required) and
+                <code>${process.env.NEXT_PUBLIC_SITE_URL ?? ""}/api/webhooks/resend</code> (no trailing slash) and
                 set <code>RESEND_WEBHOOK_SECRET</code>. Events accrue from that point forward.
               </div>
             ) : (

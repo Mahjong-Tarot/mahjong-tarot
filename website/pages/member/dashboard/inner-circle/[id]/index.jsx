@@ -121,18 +121,18 @@ export default function MemberDetail() {
             <h1 className={styles.title}>{member?.name}</h1>
             <p className={styles.lede}>{member?.relationship} · {member?.birthday}</p>
 
-            <div style={{ display: 'flex', gap: '0.75rem', margin: '1rem 0' }}>
-              <Link href={`/member/dashboard/inner-circle/${id}/edit`} className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+            <div className={styles.actionRow}>
+              <Link href={`/member/dashboard/inner-circle/${id}/edit`} className={styles.btnGhost}>
                 Edit
               </Link>
-              <Link href="/member/dashboard/inner-circle" className={styles.btnGhost} style={{ textDecoration: 'none' }}>
+              <Link href="/member/dashboard/inner-circle" className={styles.btnGhost}>
                 Back to circle
               </Link>
             </div>
 
             {!profile?.birthday && (
               <div className={styles.placeholder}>
-                <p style={{ margin: 0 }}>
+                <p>
                   Add your own birth data on <Link href="/member/profile">your profile</Link> to see a compatibility report.
                 </p>
               </div>
@@ -142,9 +142,9 @@ export default function MemberDetail() {
             {error && <p className={styles.authError}>{error}</p>}
 
             {report && (
-              <section style={{ marginTop: '1.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '1rem', marginBottom: '0.75rem' }}>
-                  <h2 className={styles.subTitle} style={{ margin: 0 }}>Your compatibility</h2>
+              <section className={styles.sectionGap}>
+                <div className={`${styles.headRow} ${styles.headRowTight}`}>
+                  <h2 className={styles.subTitle}>Your compatibility</h2>
                   <button type="button" onClick={handleSaveReading} disabled={savingReading} className={styles.authSubmit}>
                     {savingReading ? 'Saving…' : 'Save as reading'}
                   </button>

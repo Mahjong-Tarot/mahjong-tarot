@@ -65,6 +65,8 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
           <div className={styles.blogNewsletterInputs}>
             <input
               type="email"
+              aria-label="Email address"
+              autoComplete="email"
               className={styles.input}
               placeholder="Your email"
               value={email}
@@ -76,10 +78,10 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
             </button>
           </div>
           <select
-            className={styles.select}
+            aria-label="Your Chinese sign (optional)"
+            className={`${styles.select} ${styles.blogNewsletterSign} ${isFooter ? styles.blogNewsletterSignStart : ''}`}
             value={sign}
             onChange={(e) => setSign(e.target.value)}
-            style={{ marginTop: 'var(--space-sm)', maxWidth: 480, width: '100%', marginLeft: isFooter ? 0 : 'auto', marginRight: isFooter ? 0 : 'auto', display: 'block' }}
           >
             <option value="">Your Chinese sign (optional)</option>
             {CHINESE_SIGNS.map((s) => (
@@ -100,6 +102,8 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
         <div className={styles.newsletterRow}>
           <input
             type="email"
+            aria-label="Email address"
+            autoComplete="email"
             className={styles.inputDark}
             placeholder="Your email"
             value={email}
@@ -112,6 +116,7 @@ export default function NewsletterSignup({ source = 'footer', variant = 'dark' }
         </div>
         <div className={styles.newsletterSign}>
           <select
+            aria-label="Your Chinese sign (optional)"
             className={styles.select}
             value={sign}
             onChange={(e) => setSign(e.target.value)}

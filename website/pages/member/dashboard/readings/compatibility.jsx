@@ -73,7 +73,7 @@ export default function CompatibilityPage() {
   const personForm = (label, person, setter) => (
     <div className={styles.compatCard}>
       <h3>{label}</h3>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.75rem' }}>
+      <div className={styles.fieldStack}>
         <label className={styles.authLabel}>
           Name
           <input type="text" value={person.name} onChange={(e) => setter({ ...person, name: e.target.value })} className={styles.authInput} />
@@ -120,16 +120,16 @@ export default function CompatibilityPage() {
             {personForm('Person 2', p2, setP2)}
           </div>
 
-          {error && <p className={styles.authError} style={{ marginTop: '1rem' }}>{error}</p>}
+          {error && <p className={`${styles.authError} ${styles.blockGap}`}>{error}</p>}
 
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className={styles.sectionGap}>
             <button type="submit" disabled={submitting} className={styles.authSubmit}>
               {submitting ? 'Calculating & saving…' : 'Generate reading'}
             </button>
           </div>
         </form>
 
-        <p className={styles.authFootnote} style={{ marginTop: '2.5rem' }}>
+        <p className={`${styles.authFootnote} ${styles.footGap}`}>
           <Link href="/member/dashboard/readings">View saved readings</Link> · <Link href="/member/dashboard">← Dashboard</Link>
         </p>
       </main>

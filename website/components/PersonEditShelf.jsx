@@ -3,86 +3,24 @@ import Link from 'next/link';
 import { supabase } from '../lib/supabase';
 import { LIFECYCLE_STAGES, formatDate } from '../lib/admin-people';
 import tableStyles from '../styles/PortalAdminTable.module.css';
+import shelf from './Shelf.module.css';
 
-// ── Shelf primitives ────────────────────────────────────────────────
-const shelfBackdrop = {
-  position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.35)', zIndex: 60,
-};
-const shelfPanel = {
-  position: 'fixed', top: 0, right: 0, bottom: 0,
-  width: 'min(440px, 92vw)', background: '#fff', boxShadow: '-12px 0 32px rgba(0,0,0,0.15)',
-  padding: 20, overflowY: 'auto', zIndex: 61,
-};
-const shelfHeader = {
-  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-  marginBottom: 12, paddingBottom: 12, borderBottom: '1px solid #e5e7eb',
-};
-const shelfClose = {
-  background: 'transparent', border: 'none', fontSize: 28, cursor: 'pointer',
-  lineHeight: 1, color: '#6b7280', padding: '0 4px',
-};
-const shelfErr = {
-  background: '#fef2f2', color: '#991b1b', padding: '8px 12px', borderRadius: 6,
-  fontSize: 13, marginBottom: 12,
-};
-const fieldWrap = { marginBottom: 14 };
-const fieldLabel = {
-  display: 'block', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em',
-  color: '#6b7280', fontWeight: 500, marginBottom: 4,
-};
-const fieldInput = {
-  display: 'block', width: '100%', padding: '8px 10px',
-  border: '1px solid #d1d5db', borderRadius: 6, fontSize: 14, fontFamily: 'inherit',
-  background: '#fff',
-};
-const fieldSaving = {
-  display: 'inline-block', fontSize: 11, color: '#6b7280', marginLeft: 6,
-};
-
-// ── Tab strip ───────────────────────────────────────────────────────
-const tabRow = {
-  display: 'flex', gap: 4, marginBottom: 16, borderBottom: '1px solid #e5e7eb',
-};
-const tabBase = {
-  background: 'transparent', border: 'none', padding: '8px 14px',
-  fontSize: 13, fontFamily: 'inherit', cursor: 'pointer', color: '#6b7280',
-  borderBottom: '2px solid transparent', marginBottom: -1,
-};
-const tabActive = {
-  ...tabBase, color: '#111827', fontWeight: 600, borderBottomColor: '#111827',
-};
-
-// ── Activity section primitives ─────────────────────────────────────
-const sectionWrap   = { marginBottom: 22 };
-const sectionTitle  = {
-  fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.06em',
-  color: '#6b7280', fontWeight: 600, marginBottom: 8,
-};
-const muted         = { fontSize: 13, color: '#9ca3af', fontStyle: 'italic' };
-const errMuted      = { fontSize: 13, color: '#991b1b' };
-const itemRow       = {
-  display: 'flex', flexDirection: 'column', gap: 4,
-  padding: '10px 0', borderTop: '1px solid #f1f5f9',
-};
-const itemMeta      = {
-  display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
-  fontSize: 13, color: '#374151',
-};
-const itemNote      = { fontSize: 12, color: '#6b7280' };
-const itemLink      = { fontSize: 12, color: '#287BE8', textDecoration: 'none' };
+// Shelf layout and field styles live in Shelf.module.css (shared with
+// SalesDetailDrawer).
 
 function Field({ label, name, type = 'text', draft, setDraft, onSave, saving, readOnly = false }) {
   const initial = draft[name];
   return (
-    <div style={fieldWrap}>
-      <label style={fieldLabel}>{label}{saving && <span style={fieldSaving}>Saving…</span>}</label>
+    <div className={shelf.field}>
+      <label htmlFor={`f-${name}`} className={shelf.label}>{label}{saving && <span className={shelf.saving}>Saving…</span>}</label>
       <input
+        id={`f-${name}`}
         type={type}
         readOnly={readOnly}
         value={draft[name] ?? ''}
         onChange={(e) => setDraft({ ...draft, [name]: e.target.value })}
         onBlur={() => !readOnly && draft[name] !== initial && onSave?.(name, draft[name])}
-        style={{ ...fieldInput, background: readOnly ? '#f9fafb' : '#fff' }}
+        className={shelf.input}
       />
     </div>
   );
@@ -91,16 +29,17 @@ function Field({ label, name, type = 'text', draft, setDraft, onSave, saving, re
 function SelectField({ label, name, draft, setDraft, options, optionLabels, onSave, saving }) {
   const initial = draft[name];
   return (
-    <div style={fieldWrap}>
-      <label style={fieldLabel}>{label}{saving && <span style={fieldSaving}>Saving…</span>}</label>
+    <div className={shelf.field}>
+      <label htmlFor={`f-${name}`} className={shelf.label}>{label}{saving && <span className={shelf.saving}>Saving…</span>}</label>
       <select
+        id={`f-${name}`}
         value={draft[name] ?? ''}
         onChange={(e) => {
           const next = e.target.value;
           setDraft({ ...draft, [name]: next });
           if (next !== initial) onSave?.(name, next);
         }}
-        style={fieldInput}
+        className={shelf.input}
       >
         {options.map((o) => <option key={o || '_blank'} value={o}>{(optionLabels && optionLabels[o]) || o}</option>)}
       </select>
@@ -110,7 +49,7 @@ function SelectField({ label, name, draft, setDraft, options, optionLabels, onSa
 
 function CheckField({ label, name, draft, setDraft, onSave, saving }) {
   return (
-    <div style={{ ...fieldWrap, display: 'flex', alignItems: 'center', gap: 10 }}>
+    <div className={`${shelf.field} ${shelf.fieldCheck}`}>
       <input
         id={`f-${name}`}
         type="checkbox"
@@ -121,8 +60,8 @@ function CheckField({ label, name, draft, setDraft, onSave, saving }) {
           onSave?.(name, next);
         }}
       />
-      <label htmlFor={`f-${name}`} style={{ ...fieldLabel, marginBottom: 0 }}>
-        {label}{saving && <span style={fieldSaving}>Saving…</span>}
+      <label htmlFor={`f-${name}`} className={shelf.label}>
+        {label}{saving && <span className={shelf.saving}>Saving…</span>}
       </label>
     </div>
   );
@@ -158,32 +97,32 @@ function statusTagClass(status) {
 }
 
 function DealsSection({ items }) {
-  if (!items.length) return <p style={muted}>No deals yet</p>;
+  if (!items.length) return <p className={shelf.muted}>No deals yet</p>;
   return (
     <div>
       {items.map((d) => {
         const isBookOrder = (d.notes || '').startsWith('Book order');
         const dateValue   = d.won_at || d.created_at;
         return (
-          <div key={d.id} style={itemRow}>
-            <div style={itemMeta}>
+          <div key={d.id} className={shelf.itemRow}>
+            <div className={shelf.itemMeta}>
               <span>{formatDate(dateValue)}</span>
               <span>{formatMoney(d.amount_cents, d.currency)}</span>
               <span className={statusTagClass(d.status)}>{d.status}</span>
-              {d.source && <span style={itemNote}>via {d.source}</span>}
+              {d.source && <span className={shelf.itemNote}>via {d.source}</span>}
             </div>
             {d.notes && (
-              <p style={itemNote}>
+              <p className={shelf.itemNote}>
                 {d.notes.length > 90 ? `${d.notes.slice(0, 90)}…` : d.notes}
               </p>
             )}
             {d.booking_id && (
-              <Link href={`/admin/private-readings/${d.booking_id}`} style={itemLink}>
+              <Link href={`/admin/private-readings/${d.booking_id}`} className={shelf.itemLink}>
                 → Reading details
               </Link>
             )}
             {!d.booking_id && isBookOrder && (
-              <span style={itemNote}>→ Book order</span>
+              <span className={shelf.itemNote}>→ Book order</span>
             )}
           </div>
         );
@@ -193,18 +132,18 @@ function DealsSection({ items }) {
 }
 
 function BookingsSection({ items }) {
-  if (!items.length) return <p style={muted}>No private readings yet</p>;
+  if (!items.length) return <p className={shelf.muted}>No private readings yet</p>;
   return (
     <div>
       {items.map((b) => (
-        <div key={b.id} style={itemRow}>
-          <div style={itemMeta}>
+        <div key={b.id} className={shelf.itemRow}>
+          <div className={shelf.itemMeta}>
             <span>{b.scheduled_at ? formatDate(b.scheduled_at) : formatDate(b.created_at)}</span>
             <span>{b.duration_minutes} min</span>
             <span>{formatMoney(b.amount_cents, b.currency)}</span>
             <span className={statusTagClass(b.status)}>{b.status}</span>
           </div>
-          <Link href={`/admin/private-readings/${b.id}`} style={itemLink}>
+          <Link href={`/admin/private-readings/${b.id}`} className={shelf.itemLink}>
             → Booking details
           </Link>
         </div>
@@ -214,12 +153,12 @@ function BookingsSection({ items }) {
 }
 
 function BookOrdersSection({ items }) {
-  if (!items.length) return <p style={muted}>No book orders yet</p>;
+  if (!items.length) return <p className={shelf.muted}>No book orders yet</p>;
   return (
     <div>
       {items.map((o) => (
-        <div key={o.id} style={itemRow}>
-          <div style={itemMeta}>
+        <div key={o.id} className={shelf.itemRow}>
+          <div className={shelf.itemMeta}>
             <span>{formatDate(o.created_at)}</span>
             <span>{o.sku}</span>
             <span>{formatMoney(o.amount_cents, o.currency)}</span>
@@ -295,24 +234,24 @@ function ActivityTab({ personId, personEmail }) {
 
   return (
     <div>
-      <section style={sectionWrap}>
-        <h3 style={sectionTitle}>Deals</h3>
-        {deals.loading && <p style={muted}>Loading…</p>}
-        {!deals.loading && deals.error && <p style={errMuted}>{deals.error}</p>}
+      <section className={shelf.section}>
+        <h3 className={shelf.sectionTitle}>Deals</h3>
+        {deals.loading && <p className={shelf.muted}>Loading…</p>}
+        {!deals.loading && deals.error && <p className={shelf.errMuted}>{deals.error}</p>}
         {!deals.loading && !deals.error && <DealsSection items={deals.items} />}
       </section>
 
-      <section style={sectionWrap}>
-        <h3 style={sectionTitle}>Private readings</h3>
-        {bookings.loading && <p style={muted}>Loading…</p>}
-        {!bookings.loading && bookings.error && <p style={errMuted}>{bookings.error}</p>}
+      <section className={shelf.section}>
+        <h3 className={shelf.sectionTitle}>Private readings</h3>
+        {bookings.loading && <p className={shelf.muted}>Loading…</p>}
+        {!bookings.loading && bookings.error && <p className={shelf.errMuted}>{bookings.error}</p>}
         {!bookings.loading && !bookings.error && <BookingsSection items={bookings.items} />}
       </section>
 
-      <section style={sectionWrap}>
-        <h3 style={sectionTitle}>Book orders</h3>
-        {bookOrders.loading && <p style={muted}>Loading…</p>}
-        {!bookOrders.loading && bookOrders.error && <p style={errMuted}>{bookOrders.error}</p>}
+      <section className={shelf.section}>
+        <h3 className={shelf.sectionTitle}>Book orders</h3>
+        {bookOrders.loading && <p className={shelf.muted}>Loading…</p>}
+        {!bookOrders.loading && bookOrders.error && <p className={shelf.errMuted}>{bookOrders.error}</p>}
         {!bookOrders.loading && !bookOrders.error && <BookOrdersSection items={bookOrders.items} />}
       </section>
     </div>
@@ -332,21 +271,21 @@ export default function PersonEditShelf({
 
   return (
     <>
-      <div onClick={onClose} style={shelfBackdrop} />
-      <aside style={shelfPanel} onClick={(e) => e.stopPropagation()}>
-        <header style={shelfHeader}>
-          <h2 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>
+      <div onClick={onClose} className={shelf.backdrop} />
+      <aside className={shelf.panel} onClick={(e) => e.stopPropagation()}>
+        <header className={shelf.header}>
+          <h2 className={shelf.title}>
             {draft.name || draft.email || 'Untitled person'}
           </h2>
-          <button type="button" onClick={onClose} aria-label="Close" style={shelfClose}>×</button>
+          <button type="button" onClick={onClose} aria-label="Close" className={shelf.close}>×</button>
         </header>
 
-        <div role="tablist" style={tabRow}>
+        <div role="tablist" className={shelf.tabs}>
           <button
             type="button"
             role="tab"
             aria-selected={tab === 'details'}
-            style={tab === 'details' ? tabActive : tabBase}
+            className={tab === 'details' ? `${shelf.tab} ${shelf.tabActive}` : shelf.tab}
             onClick={() => switchTab('details')}
           >
             Details
@@ -355,14 +294,14 @@ export default function PersonEditShelf({
             type="button"
             role="tab"
             aria-selected={tab === 'activity'}
-            style={tab === 'activity' ? tabActive : tabBase}
+            className={tab === 'activity' ? `${shelf.tab} ${shelf.tabActive}` : shelf.tab}
             onClick={() => switchTab('activity')}
           >
             Activity
           </button>
         </div>
 
-        {shelfError && tab === 'details' && <p style={shelfErr}>{shelfError}</p>}
+        {shelfError && tab === 'details' && <p className={shelf.err}>{shelfError}</p>}
 
         {tab === 'details' && (
           <>
@@ -410,7 +349,7 @@ export default function PersonEditShelf({
             then keep it mounted so its query results aren't thrown away on tab
             flips back. Refetch on personId change is handled by the effect. */}
         {activityLoaded && (
-          <div style={{ display: tab === 'activity' ? 'block' : 'none' }}>
+          <div className={tab === 'activity' ? undefined : shelf.hidden}>
             <ActivityTab personId={personId} personEmail={personEmail} />
           </div>
         )}

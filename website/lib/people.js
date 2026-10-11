@@ -5,6 +5,13 @@
 // Stripe webhook fires, we use these helpers to find an existing
 // person or create one so deals can be attributed.
 
+// ILIKE treats % and _ as wildcards; escape them (backslash first) so a
+// guest-typed address only ever matches itself. Same as
+// kernel/data/postgrest-filter.ts escapeLikeLiteral.
+export function escapeLike(value) {
+  return String(value).replace(/([%_\\])/g, '\\$1');
+}
+
 const PROMOTABLE_FROM = new Set([
   'subscriber', 'lead', 'mql', 'sql', 'opportunity',
 ]);
@@ -29,7 +36,7 @@ export async function findOrCreatePersonByEmail(serviceSupabase, {
   const { data: existing, error: findErr } = await serviceSupabase
     .from('people')
     .select('id, email, name, lifecycle_stage')
-    .ilike('email', normalised)
+    .ilike('email', escapeLike(normalised))
     .limit(1)
     .maybeSingle();
 

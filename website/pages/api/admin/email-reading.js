@@ -9,17 +9,13 @@
 import { randomUUID } from 'crypto';
 import { requireApi } from '../../../lib/guards';
 import { getServiceSupabase } from '../../../lib/stripe';
+import { siteOrigin } from '../../../lib/siteOrigin';
+import PALETTE from '../../../kernel/config/palette.json';
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Mahjong Tarot <notifications@mahjongtarot.com>';
 const REPLY_TO   = 'firepig@onlinechineseastrology.com';
 const BCC        = 'firepig@onlinechineseastrology.com';
-
-function originFromReq(req) {
-  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const host  = req.headers['x-forwarded-host']  || req.headers.host;
-  return `${proto}://${host}`;
-}
+const SERIF      = "'Fraunces','Iowan Old Style',Georgia,serif";
 
 function escapeHtml(s) {
   return String(s ?? '')
@@ -49,15 +45,15 @@ function buildEmailHtml({ firstName, callDate, readingUrl }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Your Mahjong Tarot reading</title>
 </head>
-<body style="margin:0; padding:0; background:#f7f3ec; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#1a1a1a;">
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f7f3ec;">
+<body style="margin:0; padding:0; background:${PALETTE.canvas}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:${PALETTE.dark};">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${PALETTE.canvas};">
     <tr>
       <td align="center" style="padding:32px 16px;">
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px; background:#ffffff; border-radius:10px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px; background:${PALETTE.white}; border-radius:10px; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <tr>
             <td style="padding:32px 36px 28px;">
-              <p style="margin:0 0 18px; font-family: Georgia, 'Times New Roman', serif; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#6b6258;">Mahjong Tarot</p>
-              <h1 style="margin:0 0 18px; font-family: Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; color:#1a1a1a; line-height:1.3;">
+              <p style="margin:0 0 18px; font-family: ${SERIF}; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:${PALETTE.inkBody};">Mahjong Tarot</p>
+              <h1 style="margin:0 0 18px; font-family: ${SERIF}; font-size:26px; font-weight:600; color:${PALETTE.dark}; line-height:1.3;">
                 Your reading is ready, ${escapeHtml(firstName)}.
               </h1>
               <p style="margin:0 0 16px; font-size:15px; line-height:1.6;">
@@ -65,23 +61,23 @@ function buildEmailHtml({ firstName, callDate, readingUrl }) {
               </p>
               <p style="margin:28px 0; text-align:center;">
                 <a href="${escapeHtml(readingUrl)}"
-                   style="display:inline-block; padding:14px 32px; background:#1a1a1a; color:#ffffff; text-decoration:none; border-radius:6px; font-size:15px; font-weight:500;">
+                   style="display:inline-block; padding:14px 32px; background:${PALETTE.dark}; color:${PALETTE.white}; text-decoration:none; border-radius:6px; font-size:15px; font-weight:500;">
                   Read your reading
                 </a>
               </p>
-              <p style="margin:0 0 14px; font-size:14px; line-height:1.6; color:#3a3a3a;">
+              <p style="margin:0 0 14px; font-size:14px; line-height:1.6; color:${PALETTE.ink2};">
                 The link is private to you, so you can come back to it any time.
                 If anything in there sparks more questions, just hit reply &mdash; I read every message.
               </p>
               <p style="margin:22px 0 0; font-size:15px; line-height:1.5;">
                 With warmth,<br>
-                <span style="font-family: Georgia, 'Times New Roman', serif; font-size:17px;">Bill</span>
+                <span style="font-family: ${SERIF}; font-size:17px;">Bill</span>
               </p>
             </td>
           </tr>
           <tr>
-            <td align="center" style="padding:14px 28px 20px; font-size:11px; color:#9a8f81; border-top:1px solid #ece6da;">
-              <a href="${escapeHtml(readingUrl)}" style="color:#9a8f81; word-break:break-all;">${escapeHtml(readingUrl)}</a>
+            <td align="center" style="padding:14px 28px 20px; font-size:11px; color:${PALETTE.muted}; border-top:1px solid ${PALETTE.line};">
+              <a href="${escapeHtml(readingUrl)}" style="color:${PALETTE.muted}; word-break:break-all;">${escapeHtml(readingUrl)}</a>
             </td>
           </tr>
         </table>
@@ -119,11 +115,16 @@ export default async function handler(req, res) {
 
   const { data: booking, error: bErr } = await svc
     .from('bookings')
-    .select('id, full_name, email, scheduled_at, final_reading_html, public_token')
+    .select('id, astrologer_id, full_name, email, scheduled_at, final_reading_html, public_token')
     .eq('id', bookingId)
     .maybeSingle();
   if (bErr) return res.status(500).json({ error: bErr.message });
   if (!booking) return res.status(404).json({ error: 'Booking not found.' });
+  // The service-role client bypasses the per-astrologer RLS scoping, so
+  // enforce it here: an astrologer only touches their own bookings.
+  if (auth.profile.role !== 'admin' && booking.astrologer_id !== auth.user.id) {
+    return res.status(404).json({ error: 'Booking not found.' });
+  }
 
   if (!booking.email) {
     return res.status(400).json({ error: 'This booking has no guest email on file.' });
@@ -143,7 +144,7 @@ export default async function handler(req, res) {
     if (tErr) return res.status(500).json({ error: `Failed to mint link: ${tErr.message}` });
   }
 
-  const origin = originFromReq(req);
+  const origin = siteOrigin();
   const readingUrl = `${origin}/reading/${token}`;
   const guestName  = (booking.full_name || '').trim() || 'friend';
   const firstName  = guestName.split(/\s+/)[0] || guestName;

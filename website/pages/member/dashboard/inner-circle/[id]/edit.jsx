@@ -47,7 +47,7 @@ export default function EditMember() {
       <MemberShell>
       <main className={`container ${styles.wrap}`}>
         <h1 className={styles.title}>Edit {member?.name || 'member'}</h1>
-        <div style={{ marginTop: '1.5rem' }}>
+        <div className={styles.sectionGap}>
           {loaded && !member ? (
             <p className={styles.muted}>Not found.</p>
           ) : (

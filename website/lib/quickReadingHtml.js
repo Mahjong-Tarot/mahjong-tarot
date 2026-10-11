@@ -2,21 +2,33 @@
 // included only when the astrologer ticked its checkbox on the
 // /admin/quick-reading page.
 
-import { SIGN_LABEL, ELEMENT_LABEL, BAND_FOR, BAND_COLOR } from './fire-horse';
+import { SIGN_LABEL, ELEMENT_LABEL, BAND_FOR } from './fire-horse';
 import { CHART_CSS, renderChartEmbed } from './ps/render.mjs';
 import { renderFourPillarsReading } from './fp/render.mjs';
 import { readingByKey } from './reading-meta';
+import PALETTE from '../kernel/config/palette.json';
+
+// Brand colours come from kernel/config/palette.json (the site tokens as
+// inline-safe hex); the one-offs below have no token.
+const SERIF = "'Fraunces','Iowan Old Style',Georgia,serif";
 
 // One verdict color system for the whole document: the almanac
 // auspiciousness palette (globals.css --luck-* tokens) plus the brand
 // gold for mixed states. Every section grades outcomes with these.
 const LUCK_GREEN    = '#1e6334';
-const LUCK_GREEN_2  = '#2A8A48'; // softer step for "good but not great"
+const LUCK_GREEN_2  = PALETTE.success; // softer step for "good but not great"
 const LUCK_GREEN_BG = '#e8f5e8';
-const LUCK_GOLD     = '#B8893A';
-const LUCK_RED      = '#9E1B14';
+const LUCK_GOLD     = PALETTE.gold;
+const LUCK_RED      = PALETTE.errInk;
 const LUCK_RED_2    = '#C2693F'; // softer step for "challenging but not dire"
 const LUCK_RED_BG   = '#fbe9e7';
+
+// Fire Horse year-band colours (was BAND_COLOR in lib/fire-horse.js).
+const BAND_COLOR = {
+  positive: LUCK_GREEN,
+  neutral:  LUCK_GOLD,
+  negative: LUCK_RED,
+};
 
 const TONE_COLORS = {
   great: LUCK_GREEN,
@@ -38,7 +50,7 @@ function escapeHtml(s) {
 // Wu Xing colours mapped onto the site design system (globals.css):
 // Fire = brand fire-500, Earth = gold, Wood = success green, Metal = slate
 // ink-4, Water = a harmonising slate-blue. Email-safe inline hex.
-const ELEMENT_HEX = { Wood: '#2A8A48', Fire: '#E63329', Earth: '#B8893A', Metal: '#8A8E98', Water: '#3F6FA3' };
+const ELEMENT_HEX = { Wood: PALETTE.success, Fire: PALETTE.fire, Earth: PALETTE.gold, Metal: PALETTE.muted, Water: '#3F6FA3' };
 const ELEMENT_ORDER = ['Wood', 'Fire', 'Earth', 'Metal', 'Water'];
 const ANIMAL_EMOJI = {
   Rat: '🐀', Ox: '🐂', Tiger: '🐅', Rabbit: '🐇', Dragon: '🐉', Snake: '🐍',
@@ -71,18 +83,18 @@ function elementBarsPanel(title, counts, max) {
     const v = counts?.[el] || 0;
     const pct = Math.round((v / scale) * 100);
     return `<tr>
-      <td style="width:42px; font-size:11px; color:#50545E; padding:3px 6px 3px 0; white-space:nowrap;">${el}</td>
+      <td style="width:42px; font-size:11px; color:${PALETTE.inkBody}; padding:3px 6px 3px 0; white-space:nowrap;">${el}</td>
       <td style="padding:3px 0;">
-        <div style="background:#EFEFF2; border-radius:3px; height:11px;">
+        <div style="background:${PALETTE.rule2}; border-radius:3px; height:11px;">
           <div style="width:${pct}%; height:11px; background:${ELEMENT_HEX[el]}; border-radius:3px;${v === 0 ? ' opacity:0.25;' : ''}"></div>
         </div>
       </td>
-      <td style="width:16px; text-align:right; font-size:11px; color:#50545E; padding:3px 0 3px 6px;">${v}</td>
+      <td style="width:16px; text-align:right; font-size:11px; color:${PALETTE.inkBody}; padding:3px 0 3px 6px;">${v}</td>
     </tr>`;
   }).join('');
   return `
-    <div style="background:#FAFAFB; border:1px solid #E4E5EA; border-radius:8px; padding:10px 12px;">
-      <div style="font-size:12px; color:#14161B; margin:0 0 6px; text-align:center;"><strong>${escapeHtml(title)}</strong></div>
+    <div style="background:#FAFAFB; border:1px solid ${PALETTE.line}; border-radius:8px; padding:10px 12px;">
+      <div style="font-size:12px; color:${PALETTE.dark}; margin:0 0 6px; text-align:center;"><strong>${escapeHtml(title)}</strong></div>
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">${rows}</table>
     </div>`;
 }
@@ -100,39 +112,39 @@ const ratingColor = (r) => (/Unfav|Unlucky/.test(r) ? LUCK_RED : r === 'Neutral'
 // rendered with email-safe inline styles.
 function renderZiweiFullReport(full) {
   if (!full) return '';
-  const h3 = (t) => `<h3 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:15px; margin:18px 0 4px; color:#14161B;">${t}</h3>`;
-  const para = (t) => `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2A2D35;">${escapeHtml(t)}</p>`;
+  const h3 = (t) => `<h3 style="font-family: ${SERIF}; font-size:15px; margin:18px 0 4px; color:${PALETTE.dark};">${t}</h3>`;
+  const para = (t) => `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(t)}</p>`;
 
   const decadeBlock = (d) => `
-    <div style="margin:10px 0; padding:10px 14px; background:#EFEFF2; border-left:3px solid ${ratingColor(d.rating)}; border-radius:4px;">
-      <div style="font-size:12px; color:#14161B;"><strong>Decade ${escapeHtml(d.index)} — ages ${d.ages[0]}–${d.ages[1]} · ${escapeHtml(d.palace)}</strong>
+    <div style="margin:10px 0; padding:10px 14px; background:${PALETTE.rule2}; border-left:3px solid ${ratingColor(d.rating)}; border-radius:4px;">
+      <div style="font-size:12px; color:${PALETTE.dark};"><strong>Decade ${escapeHtml(d.index)} — ages ${d.ages[0]}–${d.ages[1]} · ${escapeHtml(d.palace)}</strong>
         <span style="color:${ratingColor(d.rating)}; font-weight:600; margin-left:6px;">${escapeHtml(d.rating)}</span></div>
       ${d.yun ? para(d.yun) : ''}
-      ${d.major ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2A2D35;"><em>Major stars:</em> ${escapeHtml(d.major)}</p>` : ''}
-      ${d.period ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2A2D35;"><em>${d === full.luckiestDecade ? '★ Luckiest decade' : '△ Most challenging decade'}:</em> ${escapeHtml(d.period)}</p>` : ''}
+      ${d.major ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:${PALETTE.ink2};"><em>Major stars:</em> ${escapeHtml(d.major)}</p>` : ''}
+      ${d.period ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:${PALETTE.ink2};"><em>${d === full.luckiestDecade ? '★ Luckiest decade' : '△ Most challenging decade'}:</em> ${escapeHtml(d.period)}</p>` : ''}
     </div>`;
 
-  const ageItem = (y) => `<li style="margin:0 0 5px; font-size:12px; line-height:1.5; color:#2A2D35;"><strong>Age ${y.age}</strong> (${escapeHtml(y.palace)}) — ${escapeHtml(y.text || '')}</li>`;
+  const ageItem = (y) => `<li style="margin:0 0 5px; font-size:12px; line-height:1.5; color:${PALETTE.ink2};"><strong>Age ${y.age}</strong> (${escapeHtml(y.palace)}) — ${escapeHtml(y.text || '')}</li>`;
   const ageList = (label, arr) => `
-    <div style="margin:10px 0; padding:10px 14px; background:#EFEFF2; border-radius:4px;">
-      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin-bottom:6px;">${label}</div>
+    <div style="margin:10px 0; padding:10px 14px; background:${PALETTE.rule2}; border-radius:4px;">
+      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin-bottom:6px;">${label}</div>
       <ul style="margin:0; padding-left:18px;">${arr.map(ageItem).join('')}</ul>
     </div>`;
   const ny = full.years?.nextYear;
 
   const palaceBlock = (p) => `
-    <div style="margin:10px 0; padding:10px 14px; border:1px solid #E4E5EA; border-radius:4px;">
-      <div style="font-size:12px; color:#14161B;"><strong>${escapeHtml(p.label)} Palace</strong>
-        <span style="color:#8A8E98;"> ${escapeHtml(p.branch)}</span>
+    <div style="margin:10px 0; padding:10px 14px; border:1px solid ${PALETTE.line}; border-radius:4px;">
+      <div style="font-size:12px; color:${PALETTE.dark};"><strong>${escapeHtml(p.label)} Palace</strong>
+        <span style="color:${PALETTE.muted};"> ${escapeHtml(p.branch)}</span>
         <span style="color:${LUCK_COLOR[p.luck] || '#444'}; font-weight:600; margin-left:6px;">${escapeHtml(LUCK_LABEL[p.luck] || '')}</span></div>
       ${p.conclusion ? para(p.conclusion) : ''}
-      ${p.extreme ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2A2D35;"><em>${escapeHtml(p.extreme)}</em></p>` : ''}
-      ${p.fate?.length ? `<ul style="margin:6px 0 0; padding-left:18px;">${p.fate.map((t) => `<li style="margin:0 0 4px; font-size:12px; line-height:1.5; color:#2A2D35;">${escapeHtml(t)}</li>`).join('')}</ul>` : ''}
+      ${p.extreme ? `<p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:${PALETTE.ink2};"><em>${escapeHtml(p.extreme)}</em></p>` : ''}
+      ${p.fate?.length ? `<ul style="margin:6px 0 0; padding-left:18px;">${p.fate.map((t) => `<li style="margin:0 0 4px; font-size:12px; line-height:1.5; color:${PALETTE.ink2};">${escapeHtml(t)}</li>`).join('')}</ul>` : ''}
     </div>`;
 
   return `
-    <p style="margin:14px 0 0; font-size:13px; color:#2A2D35;">Your luckiest area of life is your <strong>${escapeHtml(full.luckiestPalace)}</strong> palace; your most challenging is <strong>${escapeHtml(full.unluckiestPalace)}</strong>.</p>
-    ${full.genderAssumed ? `<p style="margin:6px 0 0; font-size:11px; color:#8A8E98; font-style:italic;">Gender was not provided — the decade luck cycle assumes male. Set the gender for an exact reading.</p>` : ''}
+    <p style="margin:14px 0 0; font-size:13px; color:${PALETTE.ink2};">Your luckiest area of life is your <strong>${escapeHtml(full.luckiestPalace)}</strong> palace; your most challenging is <strong>${escapeHtml(full.unluckiestPalace)}</strong>.</p>
+    ${full.genderAssumed ? `<p style="margin:6px 0 0; font-size:11px; color:${PALETTE.muted}; font-style:italic;">Gender was not provided — the decade luck cycle assumes male. Set the gender for an exact reading.</p>` : ''}
     ${h3('Part 1 — The decades of your life')}
     ${full.decades.map(decadeBlock).join('')}
     ${full.years ? `
@@ -140,8 +152,8 @@ function renderZiweiFullReport(full) {
       ${ageList('★ Your 10 luckiest ages', full.years.mostLucky)}
       ${ageList('△ Your 10 most challenging ages', full.years.leastLucky)}
       ${ny ? `
-        <div style="margin:10px 0; padding:10px 14px; border:1px solid #E4E5EA; border-radius:4px;">
-          <div style="font-size:12px; color:#14161B;"><strong>The next 12 months — age ${ny.age} (${escapeHtml(ny.palace)})</strong>
+        <div style="margin:10px 0; padding:10px 14px; border:1px solid ${PALETTE.line}; border-radius:4px;">
+          <div style="font-size:12px; color:${PALETTE.dark};"><strong>The next 12 months — age ${ny.age} (${escapeHtml(ny.palace)})</strong>
             <span style="color:${ratingColor(ny.rating)}; font-weight:600; margin-left:6px;">${escapeHtml(ny.rating)}</span></div>
           ${ny.firstMonths ? para(ny.firstMonths) : ''}
           ${ny.secondMonths ? para(ny.secondMonths) : ''}
@@ -155,19 +167,19 @@ function renderZiweiSection(chart, ziweiFull) {
   if (!chart) {
     return `
       <div style="margin: 0 0 28px;">
-        <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Purple Star (Zi Wei Dou Shu)</h2>
-        <p style="margin:0; font-size:13px; color:#50545E; font-style:italic;">Birth time not provided — Zi Wei chart skipped. Add the birth time to compute.</p>
+        <h2 style="font-family: ${SERIF}; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:${PALETTE.dark};">Purple Star (Zi Wei Dou Shu)</h2>
+        <p style="margin:0; font-size:13px; color:${PALETTE.inkBody}; font-style:italic;">Birth time not provided — Zi Wei chart skipped. Add the birth time to compute.</p>
       </div>`;
   }
   const m = chart.meta;
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Purple Star (Zi Wei Dou Shu)</h2>
-      <p style="margin:0 0 8px; font-size:12px; color:#50545E;">
+      <h2 style="font-family: ${SERIF}; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:${PALETTE.dark};">Purple Star (Zi Wei Dou Shu)</h2>
+      <p style="margin:0 0 8px; font-size:12px; color:${PALETTE.inkBody};">
         ${escapeHtml(m.chinese || '')} · Soul: <strong>${escapeHtml(m.soul || '—')}</strong> · Body: <strong>${escapeHtml(m.body || '—')}</strong> · Five Elements: <strong>${escapeHtml(m.fiveElements || '—')}</strong>
       </p>
       ${renderChartEmbed(chart, 'Ming')}
-      <p style="margin:0 0 8px; font-size:11px; color:#8A8E98;">
+      <p style="margin:0 0 8px; font-size:11px; color:${PALETTE.muted};">
         The chart shows the twelve palaces on the classical board. The Fate palace is highlighted with its
         三方四正 influences: the mirror palace directly opposite (6 branches across) and the two trine palaces (4 apart).
       </p>
@@ -187,7 +199,7 @@ const TB_SECTIONS = [
 ];
 const TB_VERDICT = {
   1: { label: 'Lucky',   bg: LUCK_GREEN_BG, ink: LUCK_GREEN, border: LUCK_GREEN_BG },
-  2: { label: 'Neutral', bg: '#f8f6f0',     ink: '#50545E',  border: '#E4E5EA' },
+  2: { label: 'Neutral', bg: '#f8f6f0',     ink: PALETTE.inkBody,  border: PALETTE.line },
   3: { label: 'Unlucky', bg: LUCK_RED_BG,   ink: LUCK_RED,   border: LUCK_RED_BG },
 };
 const tbVerdict = (lv) => TB_VERDICT[lv] || TB_VERDICT[2];
@@ -203,12 +215,12 @@ function renderThreeBlessingsSection(tb) {
     const s = tb[key];
     const v = tbVerdict(s.verdict);
     return `
-      <td style="vertical-align:top; padding:14px 12px; border:1px solid #E4E5EA; border-radius:10px; width:33%; background:${v.bg}; text-align:center;">
-        <div style="font-family: 'Fraunces', Georgia, serif; font-size:22px; color:${v.ink};">${ornament}</div>
-        <div style="font-family: 'Fraunces', Georgia, serif; font-size:15px; color:#14161B; margin-top:4px;">${name}</div>
-        <div style="font-size:11px; color:#8A8E98; margin:2px 0 8px;">${vi}</div>
+      <td style="vertical-align:top; padding:14px 12px; border:1px solid ${PALETTE.line}; border-radius:10px; width:33%; background:${v.bg}; text-align:center;">
+        <div style="font-family: ${SERIF}; font-size:22px; color:${v.ink};">${ornament}</div>
+        <div style="font-family: ${SERIF}; font-size:15px; color:${PALETTE.dark}; margin-top:4px;">${name}</div>
+        <div style="font-size:11px; color:${PALETTE.muted}; margin:2px 0 8px;">${vi}</div>
         ${tbChip(s.verdict)}
-        <div style="font-size:10.5px; color:#50545E; margin-top:8px;">${s.tally.L} lucky · ${s.tally.N} neutral · ${s.tally.U} unlucky</div>
+        <div style="font-size:10.5px; color:${PALETTE.inkBody}; margin-top:8px;">${s.tally.L} lucky · ${s.tally.N} neutral · ${s.tally.U} unlucky</div>
       </td>`;
   };
 
@@ -217,11 +229,11 @@ function renderThreeBlessingsSection(tb) {
 
   const indicatorRow = (ind) => `
     <tr>
-      <td style="padding:8px 0 8px; border-bottom:1px solid #EFEFF2; vertical-align:top;">
-        <div style="font-size:12px; font-weight:600; color:#2A2D35;">${escapeHtml(ind.label)}${ind.provisional ? ' <span style="font-size:10px; font-weight:400; font-style:italic; color:#8A8E98;">estimated</span>' : ''}</div>
-        ${ind.narrative || ind.crossRef ? `<p style="margin:4px 0 0; font-size:12px; line-height:1.55; color:#50545E;">${escapeHtml(ind.narrative || crossRefLine(ind.lv))}</p>` : ''}
+      <td style="padding:8px 0 8px; border-bottom:1px solid ${PALETTE.rule2}; vertical-align:top;">
+        <div style="font-size:12px; font-weight:600; color:${PALETTE.ink2};">${escapeHtml(ind.label)}${ind.provisional ? ` <span style="font-size:10px; font-weight:400; font-style:italic; color:${PALETTE.muted};">estimated</span>` : ''}</div>
+        ${ind.narrative || ind.crossRef ? `<p style="margin:4px 0 0; font-size:12px; line-height:1.55; color:${PALETTE.inkBody};">${escapeHtml(ind.narrative || crossRefLine(ind.lv))}</p>` : ''}
       </td>
-      <td style="padding:8px 0 8px 12px; border-bottom:1px solid #EFEFF2; vertical-align:top; text-align:right; white-space:nowrap;">${tbChip(ind.lv)}</td>
+      <td style="padding:8px 0 8px 12px; border-bottom:1px solid ${PALETTE.rule2}; vertical-align:top; text-align:right; white-space:nowrap;">${tbChip(ind.lv)}</td>
     </tr>`;
 
   const section = ({ key, ornament, name, vi, sub }) => {
@@ -231,10 +243,10 @@ function renderThreeBlessingsSection(tb) {
       <div style="margin:0 0 22px;">
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 6px;">
           <tr>
-            <td style="width:34px; vertical-align:middle;"><span style="font-family: 'Fraunces', Georgia, serif; font-size:22px; color:${v.ink};">${ornament}</span></td>
+            <td style="width:34px; vertical-align:middle;"><span style="font-family: ${SERIF}; font-size:22px; color:${v.ink};">${ornament}</span></td>
             <td style="vertical-align:middle;">
-              <div style="font-family: 'Fraunces', Georgia, serif; font-size:17px; color:#14161B;">${name}</div>
-              <div style="font-size:11px; color:#8A8E98;">${vi} · ${sub}</div>
+              <div style="font-family: ${SERIF}; font-size:17px; color:${PALETTE.dark};">${name}</div>
+              <div style="font-size:11px; color:${PALETTE.muted};">${vi} · ${sub}</div>
             </td>
             <td style="vertical-align:middle; text-align:right;">${tbChip(s.verdict)}</td>
           </tr>
@@ -242,23 +254,23 @@ function renderThreeBlessingsSection(tb) {
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
           ${s.indicators.map(indicatorRow).join('')}
         </table>
-        ${s.conclusion ? `<div style="margin:12px 0 0; padding:10px 14px; background:${v.bg}; border-left:3px solid ${v.ink}; border-radius:4px; font-size:12.5px; line-height:1.55; color:#2A2D35;">${escapeHtml(s.conclusion)}</div>` : ''}
+        ${s.conclusion ? `<div style="margin:12px 0 0; padding:10px 14px; background:${v.bg}; border-left:3px solid ${v.ink}; border-radius:4px; font-size:12.5px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(s.conclusion)}</div>` : ''}
       </div>`;
   };
 
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Three Blessings</h2>
+      <h2 style="font-family: ${SERIF}; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:${PALETTE.dark};">Three Blessings</h2>
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:separate; border-spacing:8px 0; margin:0 -8px 18px;">
         <tr>${TB_SECTIONS.map(tile).join('')}</tr>
       </table>
       ${TB_SECTIONS.map(section).join('')}
       ${tb.grand?.narrative ? `
-        <div style="margin:4px 0 0; padding:14px 16px; background:#F8F6F0; border:1px solid #E4E5EA; border-radius:10px;">
-          <div style="font-family: 'Fraunces', Georgia, serif; font-size:15px; color:#14161B; margin:0 0 6px;">The whole of your fortune</div>
-          <p style="margin:0; font-size:12.5px; line-height:1.6; color:#2A2D35;">${escapeHtml(tb.grand.narrative)}</p>
+        <div style="margin:4px 0 0; padding:14px 16px; background:#F8F6F0; border:1px solid ${PALETTE.line}; border-radius:10px;">
+          <div style="font-family: ${SERIF}; font-size:15px; color:${PALETTE.dark}; margin:0 0 6px;">The whole of your fortune</div>
+          <p style="margin:0; font-size:12.5px; line-height:1.6; color:${PALETTE.ink2};">${escapeHtml(tb.grand.narrative)}</p>
         </div>` : ''}
-      <p style="margin:12px 0 0; font-size:10.5px; font-style:italic; color:#8A8E98;">Ten indicators weigh each blessing; a blessing is granted when its lucky indicators outnumber the unlucky.</p>
+      <p style="margin:12px 0 0; font-size:10.5px; font-style:italic; color:${PALETTE.muted};">Ten indicators weigh each blessing; a blessing is granted when its lucky indicators outnumber the unlucky.</p>
     </div>`;
 }
 
@@ -268,8 +280,8 @@ function renderFireHorseSection(fh) {
   if (!fh) {
     return `
       <div style="margin: 0 0 28px;">
-        <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Year of the Fire Horse</h2>
-        <p style="margin:0; font-size:13px; color:#50545E; font-style:italic;">Forecast unavailable — sign / element could not be resolved from the birthday provided.</p>
+        <h2 style="font-family: ${SERIF}; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:${PALETTE.dark};">Year of the Fire Horse</h2>
+        <p style="margin:0; font-size:13px; color:${PALETTE.inkBody}; font-style:italic;">Forecast unavailable — sign / element could not be resolved from the birthday provided.</p>
       </div>`;
   }
   const yearColor = BAND_COLOR[fh.yearBand?.tone] || '#444';
@@ -279,64 +291,64 @@ function renderFireHorseSection(fh) {
     const lm = fh.lunarMonths.find((x) => x.index === m.month);
     const band = BAND_FOR(m.score);
     return `
-      <li style="margin:0 0 6px; font-size:12px; color:#2A2D35;">
+      <li style="margin:0 0 6px; font-size:12px; color:${PALETTE.ink2};">
         <strong>${escapeHtml(lm?.stem_branch || '')}</strong>
-        ${lm ? `<span style="color:#8A8E98;"> · ${escapeHtml(lm.begin)} → ${escapeHtml(lm.end)}</span>` : ''}
-        <span style="color:#50545E;"> · ${m.score.toFixed(2)} · ${escapeHtml(band.short)}</span>
+        ${lm ? `<span style="color:${PALETTE.muted};"> · ${escapeHtml(lm.begin)} → ${escapeHtml(lm.end)}</span>` : ''}
+        <span style="color:${PALETTE.inkBody};"> · ${m.score.toFixed(2)} · ${escapeHtml(band.short)}</span>
       </li>`;
   };
 
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Year of the Fire Horse</h2>
-      <p style="margin:0 0 10px; font-size:12px; letter-spacing:0.04em; text-transform:uppercase; color:#8A8E98;">
+      <h2 style="font-family: ${SERIF}; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:${PALETTE.dark};">Year of the Fire Horse</h2>
+      <p style="margin:0 0 10px; font-size:12px; letter-spacing:0.04em; text-transform:uppercase; color:${PALETTE.muted};">
         2026 Forecast · ${escapeHtml(SIGN_LABEL[fh.sign])} · ${escapeHtml(ELEMENT_LABEL[fh.effectiveElement])}${dm ? ` · Day Master ${escapeHtml(dm.en)}` : ''}
       </p>
 
-      <div style="display:inline-block; padding:8px 12px; background:#EFEFF2; border-left:3px solid ${yearColor}; border-radius:4px; margin: 0 0 12px;">
-        <span style="font-family: 'Fraunces', Georgia, serif; font-size:20px; color:#14161B;">${fh.yearScore.toFixed(2)}</span>
+      <div style="display:inline-block; padding:8px 12px; background:${PALETTE.rule2}; border-left:3px solid ${yearColor}; border-radius:4px; margin: 0 0 12px;">
+        <span style="font-family: ${SERIF}; font-size:20px; color:${PALETTE.dark};">${fh.yearScore.toFixed(2)}</span>
         <span style="font-size:12px; color:${yearColor}; margin-left:8px; font-weight:600;">${escapeHtml(fh.yearBand?.label || '')}</span>
       </div>
 
       ${sn ? `
-        <p style="margin:6px 0; font-family: 'Fraunces', Georgia, serif; font-style:italic; font-size:14px; color:#14161B;">&ldquo;${escapeHtml(sn.headline)}&rdquo;</p>
-        <p style="margin:6px 0 12px; font-size:13px; line-height:1.55; color:#2A2D35;">${escapeHtml(sn.lead)}</p>
+        <p style="margin:6px 0; font-family: ${SERIF}; font-style:italic; font-size:14px; color:${PALETTE.dark};">&ldquo;${escapeHtml(sn.headline)}&rdquo;</p>
+        <p style="margin:6px 0 12px; font-size:13px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(sn.lead)}</p>
         <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin: 0 0 12px;">
           <tr>
-            <td style="vertical-align:top; padding:8px 10px; border:1px solid #E4E5EA; width:33%;">
-              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98;">Career</div>
-              <p style="margin:6px 0 0; font-size:12px; line-height:1.5; color:#2A2D35;">${escapeHtml(sn.career)}</p>
+            <td style="vertical-align:top; padding:8px 10px; border:1px solid ${PALETTE.line}; width:33%;">
+              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted};">Career</div>
+              <p style="margin:6px 0 0; font-size:12px; line-height:1.5; color:${PALETTE.ink2};">${escapeHtml(sn.career)}</p>
             </td>
-            <td style="vertical-align:top; padding:8px 10px; border:1px solid #E4E5EA; width:33%;">
-              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98;">Money</div>
-              <p style="margin:6px 0 0; font-size:12px; line-height:1.5; color:#2A2D35;">${escapeHtml(sn.money)}</p>
+            <td style="vertical-align:top; padding:8px 10px; border:1px solid ${PALETTE.line}; width:33%;">
+              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted};">Money</div>
+              <p style="margin:6px 0 0; font-size:12px; line-height:1.5; color:${PALETTE.ink2};">${escapeHtml(sn.money)}</p>
             </td>
-            <td style="vertical-align:top; padding:8px 10px; border:1px solid #E4E5EA; width:33%;">
-              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98;">Love</div>
-              <p style="margin:6px 0 0; font-size:12px; line-height:1.5; color:#2A2D35;">${escapeHtml(sn.love)}</p>
+            <td style="vertical-align:top; padding:8px 10px; border:1px solid ${PALETTE.line}; width:33%;">
+              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted};">Love</div>
+              <p style="margin:6px 0 0; font-size:12px; line-height:1.5; color:${PALETTE.ink2};">${escapeHtml(sn.love)}</p>
             </td>
           </tr>
         </table>
-        <p style="margin:6px 0 12px; font-size:13px; color:#2A2D35;"><strong>This year's advice:</strong> ${escapeHtml(sn.advice)}</p>
+        <p style="margin:6px 0 12px; font-size:13px; color:${PALETTE.ink2};"><strong>This year's advice:</strong> ${escapeHtml(sn.advice)}</p>
       ` : ''}
 
       ${dm?.narrative ? `
-        <div style="margin: 12px 0; padding: 10px 12px; background:#F1F1F4; border-left:3px solid #50545E; border-radius:4px;">
-          <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin-bottom:4px;">Day Master overlay · ${escapeHtml(dm.narrative.ten_gods)}</div>
-          <p style="margin:0 0 6px; font-family: 'Fraunces', Georgia, serif; font-size:14px; color:#14161B;">${escapeHtml(dm.narrative.headline)}</p>
-          <p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:#2A2D35;">${escapeHtml(dm.narrative.extended)}</p>
-          <p style="margin:8px 0 0; font-size:12px; color:#2A2D35;"><strong>Day Master advice:</strong> ${escapeHtml(dm.narrative.advice)}</p>
+        <div style="margin: 12px 0; padding: 10px 12px; background:#F1F1F4; border-left:3px solid ${PALETTE.inkBody}; border-radius:4px;">
+          <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin-bottom:4px;">Day Master overlay · ${escapeHtml(dm.narrative.ten_gods)}</div>
+          <p style="margin:0 0 6px; font-family: ${SERIF}; font-size:14px; color:${PALETTE.dark};">${escapeHtml(dm.narrative.headline)}</p>
+          <p style="margin:6px 0 0; font-size:12px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(dm.narrative.extended)}</p>
+          <p style="margin:8px 0 0; font-size:12px; color:${PALETTE.ink2};"><strong>Day Master advice:</strong> ${escapeHtml(dm.narrative.advice)}</p>
         </div>
       ` : ''}
 
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin: 8px 0 0;">
         <tr>
-          <td style="vertical-align:top; padding:10px 12px; border:1px solid #E4E5EA; width:50%;">
-            <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin-bottom:6px;">Best windows</div>
+          <td style="vertical-align:top; padding:10px 12px; border:1px solid ${PALETTE.line}; width:50%;">
+            <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin-bottom:6px;">Best windows</div>
             <ul style="margin:0; padding-left:18px;">${fh.bestMonths.map(monthRow).join('')}</ul>
           </td>
-          <td style="vertical-align:top; padding:10px 12px; border:1px solid #E4E5EA; width:50%;">
-            <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin-bottom:6px;">Hardest windows</div>
+          <td style="vertical-align:top; padding:10px 12px; border:1px solid ${PALETTE.line}; width:50%;">
+            <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin-bottom:6px;">Hardest windows</div>
             <ul style="margin:0; padding-left:18px;">${fh.worstMonths.map(monthRow).join('')}</ul>
           </td>
         </tr>
@@ -350,7 +362,7 @@ function renderFireHorseSection(fh) {
 const INDICATOR = {
   Constructive: { color: LUCK_GREEN, bg: LUCK_GREEN_BG },
   Destructive:  { color: LUCK_RED,   bg: LUCK_RED_BG },
-  Neutral:      { color: LUCK_GOLD,  bg: '#EFEFF2' },
+  Neutral:      { color: LUCK_GOLD,  bg: PALETTE.rule2 },
 };
 
 function ratingMeter(compat, color) {
@@ -358,10 +370,10 @@ function ratingMeter(compat, color) {
   return `
     <div style="margin:0 0 18px;">
       <div style="margin:0 0 6px;">
-        <span style="font-family: 'Fraunces', Georgia, serif; font-size:30px; color:#14161B;">${pct != null ? pct + '%' : '—'}</span>
-        ${compat.tier ? `<span style="font-size:12px; color:#fff; background:${color}; margin-left:8px; padding:2px 10px; border-radius:999px;">${escapeHtml(compat.tier.name)}</span>` : ''}
+        <span style="font-family: ${SERIF}; font-size:30px; color:${PALETTE.dark};">${pct != null ? pct + '%' : '—'}</span>
+        ${compat.tier ? `<span style="font-size:12px; color:${PALETTE.white}; background:${color}; margin-left:8px; padding:2px 10px; border-radius:999px;">${escapeHtml(compat.tier.name)}</span>` : ''}
       </div>
-      <div style="background:#EFEFF2; border-radius:999px; height:10px; overflow:hidden;">
+      <div style="background:${PALETTE.rule2}; border-radius:999px; height:10px; overflow:hidden;">
         <div style="width:${pct != null ? pct : 0}%; height:10px; background:${color}; border-radius:999px;"></div>
       </div>
     </div>`;
@@ -385,7 +397,7 @@ function elementCycleSvg(primary, partner, rel, toneColor) {
     const n = WUXING_NODES[e];
     const hot = on.has(e);
     return `<circle cx="${n.x}" cy="${n.y}" r="${R}" fill="${hot ? ELEMENT_HEX[e] : '#efe9df'}" stroke="${hot ? ELEMENT_HEX[e] : '#e0d8ca'}" stroke-width="${hot ? 2 : 1}"/>`
-      + `<text x="${n.x}" y="${n.y + 3}" text-anchor="middle" font-size="8.5" font-family="Helvetica,Arial,sans-serif" fill="${hot ? '#ffffff' : '#8A8E98'}">${e}</text>`;
+      + `<text x="${n.x}" y="${n.y + 3}" text-anchor="middle" font-size="8.5" font-family="Helvetica,Arial,sans-serif" fill="${hot ? PALETTE.white : PALETTE.muted}">${e}</text>`;
   }).join('');
   let arrow = '';
   if (rel && rel.from !== rel.to && WUXING_NODES[rel.from] && WUXING_NODES[rel.to]) {
@@ -410,10 +422,10 @@ function elementDynamicBlock(dyn) {
   const label = rel
     ? `${dyn.indicator} · ${rel.from} ${rel.verb} ${rel.to}`
     : dyn.indicator;
-  const chip = (el) => `<span style="display:inline-block; padding:3px 12px; border-radius:999px; background:${ELEMENT_HEX[el] || '#9a9990'}; color:#fff; font-size:12px;">${escapeHtml(el)}</span>`;
+  const chip = (el) => `<span style="display:inline-block; padding:3px 12px; border-radius:999px; background:${ELEMENT_HEX[el] || '#9a9990'}; color:${PALETTE.white}; font-size:12px;">${escapeHtml(el)}</span>`;
   return `
-    <div style="margin:0 0 16px; padding:12px 14px; background:${ind.bg}; border:1px solid #E4E5EA; border-left:3px solid ${ind.color}; border-radius:6px;">
-      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin:0 0 10px;">The elemental dynamic</div>
+    <div style="margin:0 0 16px; padding:12px 14px; background:${ind.bg}; border:1px solid ${PALETTE.line}; border-left:3px solid ${ind.color}; border-radius:6px;">
+      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin:0 0 10px;">The elemental dynamic</div>
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">
         <tr>
           <td width="190" style="vertical-align:middle; padding:0 14px 0 0;">${elementCycleSvg(dyn.primary, dyn.partner, rel, ind.color)}</td>
@@ -423,7 +435,7 @@ function elementDynamicBlock(dyn) {
               <span style="font-size:12px; color:${ind.color}; margin:0 8px; white-space:nowrap;">${escapeHtml(label)}</span>
               ${chip(dyn.partner)}
             </div>
-            <p style="margin:0; font-size:13px; line-height:1.55; color:#2A2D35;">${escapeHtml(dyn.description || '')}</p>
+            <p style="margin:0; font-size:13px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(dyn.description || '')}</p>
           </td>
         </tr>
       </table>
@@ -436,11 +448,11 @@ function yinYangBar(yin, yang) {
   const yinPct = Math.round(((yin || 0) / total) * 100);
   return `
     <div style="margin:0 0 16px;">
-      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin:0 0 6px;">Yin &amp; Yang balance</div>
+      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin:0 0 6px;">Yin &amp; Yang balance</div>
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; border-radius:6px; overflow:hidden;">
         <tr>
-          <td style="width:${yinPct}%; background:#2A2D35; color:#fff; font-size:11px; padding:5px 8px;">Yin · ${yin ?? 0}</td>
-          <td style="width:${100 - yinPct}%; background:#E4E5EA; color:#2A2D35; font-size:11px; padding:5px 8px; text-align:right;">Yang · ${yang ?? 0}</td>
+          <td style="width:${yinPct}%; background:${PALETTE.ink2}; color:${PALETTE.white}; font-size:11px; padding:5px 8px;">Yin · ${yin ?? 0}</td>
+          <td style="width:${100 - yinPct}%; background:${PALETTE.line}; color:${PALETTE.ink2}; font-size:11px; padding:5px 8px; text-align:right;">Yang · ${yang ?? 0}</td>
         </tr>
       </table>
     </div>`;
@@ -454,15 +466,15 @@ function renderCompatibilitySection(compat, subjectName, partnerName, relationsh
 
   const block = (label, body) => body ? `
     <div style="margin: 0 0 12px;">
-      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98;">${escapeHtml(label)}</div>
-      <p style="margin:4px 0 0; font-size:13px; line-height:1.55; color:#2A2D35;">${escapeHtml(body)}</p>
+      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted};">${escapeHtml(label)}</div>
+      <p style="margin:4px 0 0; font-size:13px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(body)}</p>
     </div>` : '';
 
   const toneCard = (label, body, tone) => body ? `
     <td width="50%" style="vertical-align:top; padding:0 6px;">
       <div style="background:${tone === 'good' ? LUCK_GREEN_BG : LUCK_RED_BG}; border-radius:8px; padding:12px 14px;">
         <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${tone === 'good' ? LUCK_GREEN : LUCK_RED}; margin:0 0 5px;">${escapeHtml(label)}</div>
-        <p style="margin:0; font-size:13px; line-height:1.55; color:#2A2D35;">${escapeHtml(body)}</p>
+        <p style="margin:0; font-size:13px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(body)}</p>
       </div>
     </td>` : '<td width="50%"></td>';
 
@@ -475,12 +487,12 @@ function renderCompatibilitySection(compat, subjectName, partnerName, relationsh
 
   return `
     <div style="margin: 0 0 28px;">
-      <h2 style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:#14161B;">Compatibility Reading</h2>
+      <h2 style="font-family: ${SERIF}; font-size:26px; font-weight:600; letter-spacing:-0.01em; margin:0 0 14px; color:${PALETTE.dark};">Compatibility Reading</h2>
       ${relationshipHeader || ''}
       ${ratingMeter(compat, color)}
 
-      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin:0 0 8px;">Five-element balance</div>
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 16px;">
+      <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin:0 0 8px;">Five-element balance</div>
+      <table class="el3" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 16px;">
         <tr>
           <td width="33%" style="vertical-align:top; padding:0 5px 0 0;">${elementBarsPanel(n1, compat.person1?.elements, sharedMax)}</td>
           <td width="34%" style="vertical-align:top; padding:0 5px;">${elementBarsPanel(n2, compat.person2?.elements, sharedMax)}</td>
@@ -494,7 +506,7 @@ function renderCompatibilitySection(compat, subjectName, partnerName, relationsh
       ${block('General match',  compat.generalMatchDescription)}
       ${block('Yin & Yang',     compat.yinYangDescription)}
 
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 -6px 12px;">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 12px;">
         <tr>
           ${toneCard('The Good', compat.theGood, 'good')}
           ${toneCard('The Not-So-Good', compat.theNotSoGood, 'bad')}
@@ -505,12 +517,12 @@ function renderCompatibilitySection(compat, subjectName, partnerName, relationsh
       ${block('In Bed',  compat.sex)}
 
       ${compat.soulMate ? `
-        <div style="margin: 0 0 12px; padding: 10px 12px; background:#F1F1F4; border-left:3px solid #E63329; border-radius:4px;">
-          <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#8A8E98; margin-bottom:4px;">Soul mate · ${compat.soulMate.isMatch ? 'Match' : 'Not the listed match'}</div>
-          <p style="margin:0; font-size:13px; line-height:1.55; color:#2A2D35;">${escapeHtml(compat.soulMate.description || '')}</p>
+        <div style="margin: 0 0 12px; padding: 10px 12px; background:#F1F1F4; border-left:3px solid ${PALETTE.fire}; border-radius:4px;">
+          <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.muted}; margin-bottom:4px;">Soul mate · ${compat.soulMate.isMatch ? 'Match' : 'Not the listed match'}</div>
+          <p style="margin:0; font-size:13px; line-height:1.55; color:${PALETTE.ink2};">${escapeHtml(compat.soulMate.description || '')}</p>
         </div>` : ''}
       ${compat.elementStrength?.conclusion ? `
-        <p style="margin:0; font-size:13px; color:#2A2D35;"><strong>Combined element strength (${escapeHtml(compat.elementStrength.element)}):</strong> ${escapeHtml(compat.elementStrength.conclusion)}</p>` : ''}
+        <p style="margin:0; font-size:13px; color:${PALETTE.ink2};"><strong>Combined element strength (${escapeHtml(compat.elementStrength.element)}):</strong> ${escapeHtml(compat.elementStrength.conclusion)}</p>` : ''}
     </div>`;
 }
 
@@ -537,22 +549,22 @@ export function buildQuickReadingHtml(reading) {
   // so this never sits on their headers.
   const compat = reading.compatibility;
   const personCard = (name, sign, element, gender, birthday, birthTime) => {
-    const el = element ? `<span style="color:${ELEMENT_HEX[element] || '#50545E'};">${escapeHtml(element)}</span>` : '';
+    const el = element ? `<span style="color:${ELEMENT_HEX[element] || PALETTE.inkBody};">${escapeHtml(element)}</span>` : '';
     const meta = [sign ? escapeHtml(sign) : null, el || null, gender ? escapeHtml(GENDER_GLYPH[gender] || gender) : null].filter(Boolean).join(' · ');
     const birth = [birthday, birthTime].filter(Boolean).join(' · ');
     return `
       <td width="42%" style="vertical-align:top; text-align:center; padding:4px 8px;">
         <div style="font-size:30px; line-height:1;">${ANIMAL_EMOJI[sign] || '✦'}</div>
-        <div style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:16px; color:#14161B; margin-top:4px;">${escapeHtml(name || 'Unnamed')}</div>
-        <div style="font-size:12px; color:#50545E; margin-top:1px;">${meta}</div>
-        ${birth ? `<div style="font-size:11px; color:#8A8E98;">${escapeHtml(birth)}</div>` : ''}
+        <div style="font-family: ${SERIF}; font-size:16px; color:${PALETTE.dark}; margin-top:4px;">${escapeHtml(name || 'Unnamed')}</div>
+        <div style="font-size:12px; color:${PALETTE.inkBody}; margin-top:1px;">${meta}</div>
+        ${birth ? `<div style="font-size:11px; color:${PALETTE.muted};">${escapeHtml(birth)}</div>` : ''}
       </td>`;
   };
   const relationshipCards = compat ? `
     <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; margin:0 0 18px;">
       <tr>
         ${personCard(subject.name, compat.person1?.sign || subject.zodiacAnimal, compat.person1?.signElement, subject.gender, subject.birthday, subject.birthTime)}
-        <td width="16%" style="text-align:center; vertical-align:middle;"><span style="font-family: 'Fraunces', Georgia, serif; font-size:22px; color:#E63329;">&times;</span></td>
+        <td width="16%" style="text-align:center; vertical-align:middle;"><span style="font-family: ${SERIF}; font-size:22px; color:${PALETTE.fire};">&times;</span></td>
         ${personCard(partner?.name, compat.person2?.sign, compat.person2?.signElement, partner?.gender, partner?.birthday, partner?.birthTime)}
       </tr>
     </table>` : '';
@@ -584,23 +596,24 @@ export function buildQuickReadingHtml(reading) {
   <title>Quick reading — ${escapeHtml(subjectName)}</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
-    #qr-tabs{display:none;position:sticky;top:0;z-index:30;justify-content:flex-end;flex-wrap:wrap;gap:6px;padding:10px 16px;background:rgba(255,255,255,0.97);border-bottom:1px solid #E4E5EA}
-    #qr-tabs button{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid #E4E5EA;background:#fff;color:#2A2D35;cursor:pointer}
-    #qr-tabs button.on{background:#14161B;color:#fff;border-color:#14161B}
+    #qr-tabs{display:none;position:sticky;top:0;z-index:30;justify-content:flex-end;flex-wrap:wrap;gap:6px;padding:10px 16px;background:rgba(255,255,255,0.97);border-bottom:1px solid ${PALETTE.line}}
+    #qr-tabs button{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;font-weight:600;padding:6px 14px;border-radius:999px;border:1px solid ${PALETTE.line};background:${PALETTE.white};color:${PALETTE.ink2};cursor:pointer}
+    #qr-tabs button.on{background:${PALETTE.dark};color:${PALETTE.white};border-color:${PALETTE.dark}}
+    @media (max-width:480px){.el3 td{display:block;width:100%!important;padding:0 0 10px!important}}
   </style>
   ${reading.ziwei ? `<style>${CHART_CSS}.psc-chart .chart{max-width:900px}</style>` : ''}
 </head>
-<body style="margin:0; padding:0; background:#F1F1F4; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#14161B;">
+<body style="margin:0; padding:0; background:#F1F1F4; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:${PALETTE.dark};">
   ${tabBar}
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#F1F1F4;">
     <tr>
       <td align="center" style="padding:24px 16px;">
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:1000px; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:1000px; background:${PALETTE.white}; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <tr>
-            <td style="padding:24px 28px 18px; border-bottom:1px solid #E4E5EA;">
-              <p style="margin:0 0 6px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#50545E;">Mahjong Tarot · Quick reading</p>
-              <h1 style="margin:0; font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:22px; line-height:1.3; color:#14161B;">Reading for ${escapeHtml(subjectName)}</h1>
-              <p style="margin:6px 0 0; font-size:12px; color:#50545E;">${escapeHtml(birthLine)}</p>
+            <td style="padding:24px 28px 18px; border-bottom:1px solid ${PALETTE.line};">
+              <p style="margin:0 0 6px; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:${PALETTE.inkBody};">Mahjong Tarot · Quick reading</p>
+              <h1 style="margin:0; font-family: ${SERIF}; font-size:22px; line-height:1.3; color:${PALETTE.dark};">Reading for ${escapeHtml(subjectName)}</h1>
+              <p style="margin:6px 0 0; font-size:12px; color:${PALETTE.inkBody};">${escapeHtml(birthLine)}</p>
             </td>
           </tr>
           <tr>
@@ -610,20 +623,20 @@ export function buildQuickReadingHtml(reading) {
           </tr>
           <tr>
             <td style="padding:8px 28px 24px;">
-              <div style="background:#14161B; border-radius:12px; padding:24px 26px; text-align:center;">
-                <div style="font-family: 'Fraunces', Georgia, 'Times New Roman', serif; font-size:19px; color:#ffffff; margin:0 0 8px;">This reading is only the beginning</div>
+              <div style="background:${PALETTE.dark}; border-radius:12px; padding:24px 26px; text-align:center;">
+                <div style="font-family: ${SERIF}; font-size:19px; color:${PALETTE.white}; margin:0 0 8px;">This reading is only the beginning</div>
                 <p style="margin:0 auto 16px; max-width:520px; font-size:12.5px; line-height:1.6; color:#B9BCC4;">
                   Members get all five readings on a personal dashboard — the daily Tong Shu almanac,
                   your Four Pillars life cycle, Purple Star palaces, your Three Blessings, the Year of
                   the Fire Horse, and compatibility readings for the people around you.
                 </p>
-                <a href="https://www.mahjongtarot.com/signup" style="display:inline-block; background:#E63329; color:#ffffff; font-size:13px; font-weight:600; padding:11px 24px; border-radius:999px; text-decoration:none;">Become a member &rarr;</a>
+                <a href="https://www.mahjongtarot.com/signup" style="display:inline-block; background:${PALETTE.fire}; color:${PALETTE.white}; font-size:13px; font-weight:600; padding:11px 24px; border-radius:999px; text-decoration:none;">Become a member &rarr;</a>
               </div>
             </td>
           </tr>
           <tr>
-            <td align="center" style="padding:14px 28px 22px; font-size:11px; color:#8A8E98; border-top:1px solid #E4E5EA;">
-              Prepared for ${escapeHtml(subjectName)} by The Mahjong Tarot · <a href="https://www.mahjongtarot.com" style="color:#8A8E98; text-decoration:none;">mahjongtarot.com</a>
+            <td align="center" style="padding:14px 28px 22px; font-size:11px; color:${PALETTE.muted}; border-top:1px solid ${PALETTE.line};">
+              Prepared for ${escapeHtml(subjectName)} by The Mahjong Tarot · <a href="https://www.mahjongtarot.com" style="color:${PALETTE.muted}; text-decoration:none;">mahjongtarot.com</a>
             </td>
           </tr>
         </table>

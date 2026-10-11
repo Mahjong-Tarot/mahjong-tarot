@@ -77,7 +77,7 @@ export default function ReadingPage() {
         <p className={styles.breadcrumb}>
           <Link href="/member/dashboard/readings">← Readings</Link>
         </p>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className={styles.headRow}>
           <div>
             <h1 className={styles.title}>{title}</h1>
             <p className={styles.lede}>Saved {dateLabel}</p>
@@ -88,7 +88,7 @@ export default function ReadingPage() {
         </div>
 
         {reading?.report && (
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className={styles.sectionGap}>
             <CompatibilityReport
               result={reading.report}
               person1Label={reading.person1_name || 'You'}

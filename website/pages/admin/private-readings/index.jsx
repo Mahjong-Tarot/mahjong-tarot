@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AdminShell from '../../../components/AdminShell';
 import { requirePage, serverSupabase } from '../../../lib/guards';
 import adminStyles from '../../../styles/PortalAdmin.module.css';
+import styles from '../../../styles/PortalPrivateReadings.module.css';
 
 export async function getServerSideProps(ctx) {
   const guard = await requirePage('staff')(ctx);
@@ -98,8 +99,8 @@ export default function PrivateReadingsListPage({ profile, bookings, bookingsErr
           <>
             {next ? <NextConsultationCard booking={next} /> : <EmptyNext />}
 
-            <div style={{ marginTop: 40 }}>
-              <div style={{ display: 'flex', gap: 10, marginBottom: 18 }}>
+            <div className={styles.listSection}>
+              <div className={styles.listTabs}>
                 <TabButton active={tab === 'upcoming'} onClick={() => setTab('upcoming')}>
                   Coming up ({restUpcoming.length})
                 </TabButton>
@@ -109,7 +110,7 @@ export default function PrivateReadingsListPage({ profile, bookings, bookingsErr
               </div>
 
               {list.length === 0 ? (
-                <p style={{ fontSize: 16, color: '#6b7280', padding: '8px 2px' }}>
+                <p className={styles.listEmpty}>
                   {tab === 'upcoming'
                     ? 'Nothing else on the calendar.'
                     : 'No past consultations yet.'}
@@ -136,29 +137,16 @@ function NextConsultationCard({ booking }) {
   ].filter(Boolean).join(' · ');
 
   return (
-    <Link
-      href={`/admin/private-readings/${booking.id}`}
-      style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
-    >
-      <div style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 14, padding: '28px 30px' }}>
-        <p style={{ textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: 13, color: '#9a7b3f', fontWeight: 600, margin: 0 }}>
-          Your next consultation
-        </p>
-        <h2 style={{ fontSize: 32, fontWeight: 700, margin: '8px 0 6px', color: '#1a1a1a', lineHeight: 1.15 }}>
-          {booking.full_name || 'Guest'}
-        </h2>
-        <p style={{ fontSize: 21, color: '#1a1a1a', margin: '0 0 4px', fontWeight: 500 }}>
-          {friendlyWhen(booking.scheduled_at)}
-        </p>
-        {meta && <p style={{ fontSize: 15, color: '#6b7280', margin: 0 }}>{meta}</p>}
+    <Link href={`/admin/private-readings/${booking.id}`} className={styles.cardLink}>
+      <div className={styles.nextCard}>
+        <p className={styles.nextEyebrow}>Your next consultation</p>
+        <h2 className={styles.nextName}>{booking.full_name || 'Guest'}</h2>
+        <p className={styles.nextWhen}>{friendlyWhen(booking.scheduled_at)}</p>
+        {meta && <p className={styles.nextMeta}>{meta}</p>}
         {booking.question && (
-          <p style={{ fontSize: 17, lineHeight: 1.5, color: '#1a1a1a', margin: '18px 0 0', fontStyle: 'italic' }}>
-            “{booking.question}”
-          </p>
+          <p className={styles.nextQuestion}>“{booking.question}”</p>
         )}
-        <span style={{ display: 'inline-block', marginTop: 24, background: '#1a1a1a', color: '#fff', padding: '14px 26px', borderRadius: 10, fontSize: 17, fontWeight: 600 }}>
-          Prepare for this consultation →
-        </span>
+        <span className={styles.nextCta}>Prepare for this consultation →</span>
       </div>
     </Link>
   );
@@ -166,39 +154,28 @@ function NextConsultationCard({ booking }) {
 
 function EmptyNext() {
   return (
-    <div style={{ background: '#fffaf3', border: '1px solid #f0e0c8', borderRadius: 14, padding: '28px 30px' }}>
-      <p style={{ textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: 13, color: '#9a7b3f', fontWeight: 600, margin: 0 }}>
-        Your next consultation
-      </p>
-      <p style={{ fontSize: 21, color: '#1a1a1a', margin: '10px 0 0', fontWeight: 500 }}>
-        Nothing scheduled right now.
-      </p>
-      <p style={{ fontSize: 15, color: '#6b7280', margin: '4px 0 0' }}>
-        When a guest books, it will appear here.
-      </p>
+    <div className={styles.nextCard}>
+      <p className={styles.nextEyebrow}>Your next consultation</p>
+      <p className={styles.nextWhenEmpty}>Nothing scheduled right now.</p>
+      <p className={styles.nextMetaEmpty}>When a guest books, it will appear here.</p>
     </div>
   );
 }
 
 function ConsultRow({ booking }) {
   return (
-    <Link
-      href={`/admin/private-readings/${booking.id}`}
-      style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '18px 20px', border: '1px solid #e5e7eb', borderRadius: 10, marginBottom: 10 }}>
+    <Link href={`/admin/private-readings/${booking.id}`} className={styles.cardLink}>
+      <div className={styles.row}>
         <div>
-          <div style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>
-            {booking.full_name || 'Guest'}
-          </div>
-          <div style={{ fontSize: 15, color: '#6b7280', marginTop: 2 }}>
+          <div className={styles.rowName}>{booking.full_name || 'Guest'}</div>
+          <div className={styles.rowWhen}>
             {friendlyWhen(booking.scheduled_at)}
             {booking.duration_minutes ? ` · ${booking.duration_minutes} min` : ''}
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexShrink: 0 }}>
-          <span style={{ fontSize: 13, color: '#6b7280' }}>{STATUS_LABEL[booking.status] || booking.status}</span>
-          <span aria-hidden="true" style={{ fontSize: 22, color: '#9ca3af' }}>›</span>
+        <div className={styles.rowSide}>
+          <span className={styles.rowStatus}>{STATUS_LABEL[booking.status] || booking.status}</span>
+          <span aria-hidden="true" className={styles.rowChevron}>›</span>
         </div>
       </div>
     </Link>
@@ -210,16 +187,7 @@ function TabButton({ active, onClick, children }) {
     <button
       type="button"
       onClick={onClick}
-      style={{
-        padding: '10px 18px',
-        borderRadius: 999,
-        border: '1px solid ' + (active ? '#1a1a1a' : '#d1d5db'),
-        background: active ? '#1a1a1a' : '#fff',
-        color: active ? '#fff' : '#1a1a1a',
-        fontSize: 15,
-        fontWeight: 600,
-        cursor: 'pointer',
-      }}
+      className={active ? styles.listTabActive : styles.listTab}
     >
       {children}
     </button>

@@ -3,12 +3,14 @@
 // 30 days. Lazily releases expired holds first.
 import { getServiceSupabase } from '../../../lib/stripe';
 import { tierFor } from '../../../lib/bookings';
+import { rateLimit } from '../../../lib/rateLimit';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (!rateLimit(req, res, { name: 'bookings-slots', limit: 60, windowMs: 60_000 })) return;
 
   const duration = parseInt(req.query.duration, 10) || 60;
   const tier = tierFor(duration);
@@ -33,7 +35,8 @@ export default async function handler(req, res) {
     .limit(200);
 
   if (error) {
-    return res.status(500).json({ error: 'Could not load slots', detail: error.message });
+    console.error('[bookings/slots] query failed', error);
+    return res.status(500).json({ error: 'Could not load slots' });
   }
 
   return res.status(200).json({ slots: data || [] });

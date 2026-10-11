@@ -6,6 +6,7 @@ import SEO from '../../components/SEO';
 import { CARDS } from '../../lib/cards';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb } from '../../lib/schema';
 import styles from '../../styles/Home.module.css';
+import cardStyles from '../../styles/Cards.module.css';
 
 const CATEGORIES = ['Honor', 'Suit', 'Guardian'];
 
@@ -39,7 +40,7 @@ export default function CardsIndex() {
  />
  <Nav />
  <main>
- <section style={{ paddingTop: 'var(--space-4xl)', paddingBottom: 'var(--space-2xl)' }}>
+ <section className={cardStyles.indexHero}>
  <div className="container">
  <div className={styles.sectionHeader}>
  <span className="overline">The Deck</span>
@@ -54,18 +55,19 @@ export default function CardsIndex() {
  </section>
 
  {CATEGORIES.map((cat) => (
- <section key={cat} style={{ paddingTop: 'var(--space-lg)', paddingBottom: 'var(--space-3xl)' }}>
+ <section key={cat} className={cardStyles.indexCategory}>
  <div className="container">
- <h2 style={{ marginBottom: 'var(--space-lg)' }}>{cat} Cards</h2>
+ <h2 className={cardStyles.indexCategoryTitle}>{cat} Cards</h2>
  <div className={styles.cardGallery}>
  {CARDS.filter((c) => c.category === cat).map((card) => (
- <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.cardItem} style={{ textDecoration: 'none' }}>
- <figure style={{ margin: 0 }}>
+ <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.cardItem}>
+ <figure className={cardStyles.indexFigure}>
  <div className={styles.cardImageWrap}>
  <Image
  src={`/images/cards/${card.slug}.webp`}
  alt={`${card.name}, Mahjong Mirror card`}
  fill
+ sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
  style={{ objectFit: 'contain' }}
  />
  </div>

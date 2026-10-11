@@ -1,0 +1,104 @@
+/* /cards/[slug] — card meaning detail page. */
+
+.crumbSection {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-md);
+}
+
+.breadcrumb {
+  font-size: var(--text-sm);
+  color: var(--ink-4);
+  margin-bottom: var(--space-lg);
+}
+.breadcrumb a { color: inherit; }
+
+.detailSection {
+  padding-top: 0;
+  padding-bottom: var(--space-3xl);
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: var(--paper-pure);
+  border: 1px solid var(--ink);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  padding: 14px;
+}
+.image { object-fit: contain; }
+
+.title { margin: var(--space-sm) 0 var(--space-md); }
+
+.short {
+  font-size: var(--text-md);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fire-600);
+  margin-bottom: var(--space-lg);
+}
+
+.lede {
+  font-size: 19px;
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+  color: var(--ink-2);
+}
+
+.h2 { margin-bottom: var(--space-sm); }
+.para { margin-bottom: var(--space-lg); }
+
+.faq { margin-bottom: var(--space-lg); }
+.faq h3 { font-size: 18px; margin-bottom: var(--space-xs); }
+.faq p { margin-bottom: var(--space-md); }
+.faq p:last-child { margin-bottom: 0; }
+
+.actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+  .detail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+  .imageWrap {
+    width: 100%;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .crumbSection { padding-top: var(--space-lg); padding-bottom: 0; }
+  .detailSection { padding-bottom: var(--space-2xl); }
+  .lede { font-size: 17px; }
+}
+
+/* /cards index */
+.indexHero {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-2xl);
+}
+.indexCategory {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-3xl);
+}
+
+@media (max-width: 640px) {
+  .indexHero { padding-top: var(--space-xl); padding-bottom: var(--space-lg); }
+  .indexCategory { padding-top: 0; padding-bottom: var(--space-xl); }
+}
+
+.indexCategoryTitle { margin-bottom: var(--space-lg); }
+.indexFigure { margin: 0; }

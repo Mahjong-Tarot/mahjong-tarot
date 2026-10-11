@@ -17,6 +17,8 @@ import {
   dominantElement,
 } from '../../../lib/bazi';
 import { buildReadingBrief } from '../../../lib/readingBrief';
+import { sanitizeReadingHtml } from '../../../lib/sanitizeHtml';
+import { escapeLike } from '../../../lib/people';
 import { buildFourPillarsChart } from '../../../lib/fp/chart.mjs';
 import { buildFourPillarsReading } from '../../../lib/fp/engine.mjs';
 import { content as fpContent } from '../../../lib/fp/content.mjs';
@@ -79,11 +81,16 @@ export default async function handler(req, res) {
   // Load booking
   const { data: booking, error: bErr } = await svc
     .from('bookings')
-    .select('id, full_name, email, scheduled_at, duration_minutes, question, birthday, birth_time, prep_notes, post_call_notes, transcript_text, is_relationship, partner_name, partner_birthday, partner_birth_time, partner_gender')
+    .select('id, astrologer_id, full_name, email, scheduled_at, duration_minutes, question, birthday, birth_time, prep_notes, post_call_notes, transcript_text, is_relationship, partner_name, partner_birthday, partner_birth_time, partner_gender')
     .eq('id', bookingId)
     .maybeSingle();
   if (bErr) return res.status(500).json({ error: bErr.message });
   if (!booking) return res.status(404).json({ error: 'Booking not found.' });
+  // The service-role client bypasses the per-astrologer RLS scoping, so
+  // enforce it here: an astrologer only touches their own bookings.
+  if (auth.profile.role !== 'admin' && booking.astrologer_id !== auth.user.id) {
+    return res.status(404).json({ error: 'Booking not found.' });
+  }
 
   // Require at least a transcript OR post-call notes — otherwise there's
   // nothing for Claude to synthesise.
@@ -101,7 +108,7 @@ export default async function handler(req, res) {
     const { data: p } = await svc
       .from('people')
       .select('id, name, email, birthday, birth_time, birth_place, gender')
-      .ilike('email', booking.email)
+      .ilike('email', escapeLike(booking.email.trim()))
       .maybeSingle();
     person = p || null;
   }
@@ -232,11 +239,15 @@ export default async function handler(req, res) {
       ?.join('\n')
       ?.trim() || '';
 
-    // Strip a stray code fence if Claude wrapped the output anyway.
-    const html = raw
-      .replace(/^```(?:html)?\s*/i, '')
-      .replace(/\s*```$/i, '')
-      .trim();
+    // Strip a stray code fence if Claude wrapped the output anyway, then
+    // sanitize: the prompt carries guest-controlled text, so the model can be
+    // talked into emitting script/handlers. Only the allowed tags survive.
+    const html = sanitizeReadingHtml(
+      raw
+        .replace(/^```(?:html)?\s*/i, '')
+        .replace(/\s*```$/i, '')
+        .trim(),
+    ).trim();
 
     if (!html) {
       return res.status(502).json({ error: 'Claude returned an empty response.' });

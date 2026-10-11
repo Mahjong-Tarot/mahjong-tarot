@@ -2,20 +2,20 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px;
-  padding: 10px 20px 12px;
+  gap: var(--space-xs);
+  padding: 10px 20px var(--space-sm2);
   border-bottom: 1px solid var(--rule);
 }
 
 .link,
 .linkActive {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 4px 6px;
-  border-radius: 4px;
+  padding: var(--space-xs) 6px;
+  border-radius: var(--r-sm);
   transition: color 120ms ease, background 120ms ease;
 }
 
@@ -32,4 +32,19 @@
   color: var(--fire-600);
   font-weight: 600;
   background: var(--paper);
+}
+
+/* Touch targets and legible text on phones (MOB-14/22) */
+@media (pointer: coarse) {
+  .link,
+  .linkActive {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: var(--space-xs) 10px;
+  }
+}
+@media (max-width: 640px) {
+  .link,
+  .linkActive { font-size: 12px; }
 }

@@ -65,7 +65,7 @@ function CenterPanel({ chart, name }) {
     wu: 'Horse', wei: 'Sheep', shen: 'Monkey', you: 'Rooster', xu: 'Dog', hai: 'Pig',
   };
   return (
-    <div className={styles.center} style={{ gridArea: 'center' }}>
+    <div className={styles.center}>
       <div className={styles.centerTitle}>Purple Star Chart</div>
       {name && <div className={styles.centerName}>{name}</div>}
       <dl className={styles.centerInfo}>

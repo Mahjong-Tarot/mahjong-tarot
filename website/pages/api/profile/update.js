@@ -51,11 +51,11 @@ export default async function handler(req, res) {
       .single();
     if (error) {
       console.error('profile upsert error:', error);
-      return res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: 'Could not save your profile.' });
     }
     return res.status(200).json({ profile: data });
   } catch (err) {
     console.error('profile upsert threw:', err);
-    return res.status(500).json({ error: err.message || 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }

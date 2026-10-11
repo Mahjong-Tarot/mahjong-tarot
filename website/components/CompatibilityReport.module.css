@@ -1,17 +1,17 @@
 .wrap {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-lg);
 }
 
 .hero {
   display: flex;
-  gap: 2rem;
+  gap: var(--space-lg2);
   align-items: center;
-  padding: 1.5rem;
+  padding: var(--space-lg);
   border: 1px solid var(--rule);
-  border-radius: 12px;
-  background: linear-gradient(180deg, #ffffff 0%, var(--paper-pure) 100%);
+  border-radius: var(--r-md);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-pure) 100%);
 }
 
 @media (max-width: 600px) {
@@ -27,7 +27,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-sm);
 }
 
 .dialNum {
@@ -39,12 +39,12 @@
 
 .dialPct {
   font-size: 12px;
-  fill: #888;
+  fill: var(--ink-3);
   letter-spacing: 0.08em;
 }
 
 .tier {
-  font-size: 0.85rem;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -56,69 +56,69 @@
 }
 
 .matchTitle {
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 var(--space-xs) 0;
   font-family: var(--serif);
-  font-size: 1.75rem;
+  font-size: 28px;
 }
 
 .amp {
-  color: #b88c4f;
+  color: var(--gold);
   font-style: italic;
-  margin: 0 0.25rem;
+  margin: 0 var(--space-xs);
 }
 
 .matchSubtitle {
-  margin: 0 0 1rem 0;
-  color: #666;
-  font-size: 0.95rem;
+  margin: 0 0 var(--space-md) 0;
+  color: var(--ink-3);
+  font-size: 15px;
 }
 
 .yinyang {
-  color: #999;
+  color: var(--ink-3);
 }
 
 .generalNarrative {
-  margin: 0 0 1rem 0;
+  margin: 0 0 var(--space-md) 0;
   line-height: 1.55;
-  color: #333;
+  color: var(--ink-2);
 }
 
 .badge {
   display: inline-block;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
 }
 
 .badgeYes {
   background: var(--gold-soft);
-  color: #8a6d1d;
-  border: 1px solid #e0c97c;
+  color: var(--tone-neutral-ink);
+  border: 1px solid var(--gold-soft);
 }
 
 .badgeNo {
   background: var(--rule-2);
-  color: #777;
-  border: 1px solid #ddd;
+  color: var(--ink-3);
+  border: 1px solid var(--rule);
 }
 
 .tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: var(--space-xs);
   border-bottom: 1px solid var(--rule);
 }
 
 .tab {
   background: none;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 9.5px var(--space-md);
   font-family: var(--sans);
-  font-size: 0.9rem;
+  font-size: 14.5px;
   font-weight: 600;
-  color: #666;
+  color: var(--ink-3);
   cursor: pointer;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
@@ -136,52 +136,52 @@
 
 .tabActive {
   color: var(--ink);
-  border-bottom-color: #b88c4f;
+  border-bottom-color: var(--gold);
 }
 
 .tabPanel {
-  padding: 1rem 0.25rem;
+  padding: var(--space-md) var(--space-xs);
   line-height: 1.65;
-  color: #222;
-  min-height: 4rem;
+  color: var(--ink);
+  min-height: 64px;
 }
 
 .muted {
-  color: #999;
+  color: var(--ink-3);
   font-style: italic;
 }
 
 .sectionCard {
-  padding: 1.25rem;
+  padding: 20px;
   border: 1px solid var(--rule);
-  border-radius: 8px;
-  background: white;
+  border-radius: var(--r-md);
+  background: var(--paper);
 }
 
 .sectionTitle {
-  margin: 0 0 0.75rem 0;
-  font-size: 0.85rem;
+  margin: 0 0 var(--space-sm2) 0;
+  font-size: 13.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #888;
+  color: var(--ink-3);
 }
 
 .elementBar {
   display: flex;
   height: 32px;
-  border-radius: 6px;
+  border-radius: var(--r-md);
   overflow: hidden;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm2);
 }
 
 .elementSegment {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 0.75rem;
+  color: var(--paper);
+  font-size: 12px;
   font-weight: 600;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.25);
+  text-shadow: 0 1px 1px var(--ink-a20);
   transition: width 0.3s;
   min-width: 0;
   overflow: hidden;
@@ -189,27 +189,27 @@
 }
 
 .elementLabel {
-  padding: 0 0.4rem;
+  padding: 0 6.5px;
 }
 
 .elementConclusion {
   margin: 0;
   line-height: 1.6;
-  color: #333;
+  color: var(--ink-2);
 }
 
 .chartsDetail summary {
   cursor: pointer;
-  color: #555;
-  font-size: 0.9rem;
-  padding: 0.5rem 0;
+  color: var(--ink-3);
+  font-size: 14.5px;
+  padding: var(--space-sm) 0;
 }
 
 .chartsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
 }
 
 @media (max-width: 720px) {
@@ -217,6 +217,17 @@
 }
 
 .chartTitle {
-  margin: 0 0 0.75rem 0;
-  font-size: 1rem;
+  margin: 0 0 var(--space-sm2) 0;
+  font-size: var(--text-base);
 }
+
+.dialTrack { stroke: var(--rule-2); }
+.dialArc { stroke: var(--ink-2); }
+.toneGreat .dialArc { stroke: var(--tone-auspicious); }
+.toneGood  .dialArc { stroke: var(--tone-favourable); }
+.toneMixed .dialArc { stroke: var(--tone-neutral); }
+.toneRough .dialArc { stroke: var(--tone-challenging); }
+.toneGreat .tier { color: var(--tone-auspicious-ink); }
+.toneGood  .tier { color: var(--tone-favourable-ink); }
+.toneMixed .tier { color: var(--tone-neutral-ink); }
+.toneRough .tier { color: var(--tone-challenging-ink); }

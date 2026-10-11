@@ -17,7 +17,6 @@ export async function getServerSideProps(ctx) {
 const PAGE_SIZES = [25, 50, 100, 200];
 const DEFAULT_PAGE_SIZE = 50;
 const SEARCH_DEBOUNCE_MS = 300;
-const sortableTh = { cursor: 'pointer', userSelect: 'none' };
 
 // Map UI sort key → people_admin_list column. `tags` is dropped in v1
 // because PostgREST can't .order() by array length without a generated
@@ -236,7 +235,7 @@ export default function AdminPeople({ profile }) {
   }
   function sortIndicator(key) {
     if (sortKey !== key) return null;
-    return <span style={{ marginLeft: 4 }}>{sortDir === 'asc' ? '▲' : '▼'}</span>;
+    return <span className={tableStyles.sortIndicator}>{sortDir === 'asc' ? '▲' : '▼'}</span>;
   }
 
   // ── Pagination math ──────────────────────────────────────────
@@ -292,17 +291,7 @@ export default function AdminPeople({ profile }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             aria-label="Search people"
-            style={{
-              flex: '1 1 280px',
-              maxWidth: 360,
-              padding: '8px 12px',
-              fontFamily: 'var(--sans)',
-              fontSize: 14,
-              border: '1px solid var(--rule)',
-              borderRadius: 6,
-              background: 'var(--paper-pure)',
-              color: 'var(--ink)',
-            }}
+            className={tableStyles.searchInput}
           />
           <p className={tableStyles.count}>
             {rowsLoading
@@ -322,12 +311,12 @@ export default function AdminPeople({ profile }) {
             <table className={tableStyles.table}>
               <thead>
                 <tr>
-                  <th onClick={() => toggleSort('name')}          style={sortableTh}>Name{sortIndicator('name')}</th>
-                  <th onClick={() => toggleSort('email')}         style={sortableTh}>Email{sortIndicator('email')}</th>
+                  <th onClick={() => toggleSort('name')}          className={tableStyles.sortableTh}>Name{sortIndicator('name')}</th>
+                  <th onClick={() => toggleSort('email')}         className={tableStyles.sortableTh}>Email{sortIndicator('email')}</th>
                   <th>Tags</th>
-                  <th onClick={() => toggleSort('inquiry_count')} style={sortableTh}>Inquiries{sortIndicator('inquiry_count')}</th>
-                  <th onClick={() => toggleSort('order_count')}   style={sortableTh}>Orders{sortIndicator('order_count')}</th>
-                  <th onClick={() => toggleSort('last_activity')} style={sortableTh}>Last activity{sortIndicator('last_activity')}</th>
+                  <th onClick={() => toggleSort('inquiry_count')} className={tableStyles.sortableTh}>Inquiries{sortIndicator('inquiry_count')}</th>
+                  <th onClick={() => toggleSort('order_count')}   className={tableStyles.sortableTh}>Orders{sortIndicator('order_count')}</th>
+                  <th onClick={() => toggleSort('last_activity')} className={tableStyles.sortableTh}>Last activity{sortIndicator('last_activity')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -346,53 +335,34 @@ export default function AdminPeople({ profile }) {
 
         {/* Pagination bar */}
         {pagedCount > pageSize && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: 'var(--space-md)',
-              marginTop: 'var(--space-md)',
-              flexWrap: 'wrap',
-            }}
-          >
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <div className={tableStyles.pager}>
+            <div className={tableStyles.pagerButtons}>
               <button
                 type="button"
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1 || rowsLoading}
-                className={tableStyles.chip}
-                style={{ minWidth: 80 }}
+                className={`${tableStyles.chip} ${tableStyles.pagerButton}`}
               >
                 ← Prev
               </button>
-              <span style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--ink-4)' }}>
+              <span className={tableStyles.pagerStatus}>
                 Page {page.toLocaleString()} of {pageCount.toLocaleString()}
               </span>
               <button
                 type="button"
                 onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
                 disabled={page >= pageCount || rowsLoading}
-                className={tableStyles.chip}
-                style={{ minWidth: 80 }}
+                className={`${tableStyles.chip} ${tableStyles.pagerButton}`}
               >
                 Next →
               </button>
             </div>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--ink-4)' }}>
+            <label className={tableStyles.pagerSize}>
               <span>Per page:</span>
               <select
                 value={pageSize}
                 onChange={(e) => setPageSize(Number(e.target.value))}
-                style={{
-                  padding: '4px 8px',
-                  fontFamily: 'var(--sans)',
-                  fontSize: 13,
-                  border: '1px solid var(--rule)',
-                  borderRadius: 4,
-                  background: 'var(--paper-pure)',
-                  color: 'var(--ink)',
-                }}
+                className={tableStyles.pagerSelect}
               >
                 {PAGE_SIZES.map((n) => <option key={n} value={n}>{n}</option>)}
               </select>

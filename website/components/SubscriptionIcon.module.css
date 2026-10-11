@@ -12,7 +12,7 @@
   line-height: 1;
 }
 
-.sm .glyph { font-size: 14px; }
+.sm .glyph { font-size: var(--text-md); }
 .md .glyph { font-size: 18px; }
 
 .label {
@@ -22,11 +22,11 @@
 }
 
 .none .glyph     { color: var(--ink-4); }
-.active .glyph   { color: var(--success, #2a8a48); }
+.active .glyph   { color: var(--success); }
 .lapsed .glyph   { color: var(--fire-600); }
 .cancelled .glyph { color: var(--ink-4); opacity: 0.5; }
 
 .none .label,
 .cancelled .label { color: var(--ink-4); }
-.active .label   { color: var(--success, #2a8a48); }
+.active .label   { color: var(--success); }
 .lapsed .label   { color: var(--fire-600); }

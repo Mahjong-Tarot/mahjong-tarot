@@ -3,10 +3,12 @@
 // first time a book_orders row is written. Never throws — a failed
 // notice must not make Stripe retry the webhook.
 import { bookFor } from './books';
+import PALETTE from '../kernel/config/palette.json';
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Mahjong Tarot <notifications@mahjongtarot.com>';
 const NOTIFY_TO  = ['firepig01@gmail.com', 'dave@edge8.ai'];
 const SITE_URL   = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mahjongtarot.com';
+const SERIF      = "'Fraunces','Iowan Old Style',Georgia,serif";
 
 function escapeHtml(s) {
   return String(s ?? '')
@@ -51,10 +53,10 @@ async function sendEmail(order, d) {
   if (!apiKey) throw new Error('RESEND_API_KEY is not set');
 
   const rowsHtml = d.rows
-    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0; color:#6b6258; vertical-align:top;">${escapeHtml(k)}</td><td style="padding:6px 0;">${escapeHtml(v)}</td></tr>`)
+    .map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0; color:${PALETTE.inkBody}; vertical-align:top;">${escapeHtml(k)}</td><td style="padding:6px 0;">${escapeHtml(v)}</td></tr>`)
     .join('');
-  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:15px; color:#1a1a1a;">
-  <h2 style="font-family:Georgia,serif; margin:0 0 16px;">New book order</h2>
+  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:15px; color:${PALETTE.dark};">
+  <h2 style="font-family:${SERIF}; margin:0 0 16px;">New book order</h2>
   <table cellpadding="0" cellspacing="0" border="0">${rowsHtml}</table>
   <p style="margin:20px 0 0;"><a href="${SITE_URL}/admin">Open admin</a></p>
 </div>`;

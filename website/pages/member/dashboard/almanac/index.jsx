@@ -54,10 +54,10 @@ export default function AlmanacToday() {
       </Head>
       <MemberShell>
       <main>
-        <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
+        <section className="page-section">
+          <div className="page-intro">
             <span className="overline">Daily</span>
-            <h1 style={{ marginTop: 'var(--space-xs)' }}>Tong Shu Almanac</h1>
+            <h1>Tong Shu Almanac</h1>
           </div>
           {loaded && date && (
             <AlmanacView date={date} almanac={almanac} today={date} />

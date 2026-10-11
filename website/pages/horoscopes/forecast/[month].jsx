@@ -3,7 +3,7 @@ import Nav from '../../../components/Nav';
 import Footer from '../../../components/Footer';
 import SEO from '../../../components/SEO';
 import { fetchDaySummariesForMonth, todayInLA, LNY_2026 } from '../../../lib/horoscopes';
-import styles from './Forecast.module.css';
+import styles from '../../../components/MonthCalendar.module.css';
 
 function shiftMonth(yyyymm, delta) {
   const [y, m] = yyyymm.split('-').map(Number);
@@ -53,10 +53,10 @@ export default function MonthlyForecast({ month, summaries, today }) {
       />
       <Nav />
       <main>
-        <section style={{ paddingTop: 'var(--space-3xl)', paddingBottom: 'var(--space-3xl)' }}>
-          <div style={{ textAlign: 'center', marginBottom: 'var(--space-xl)' }}>
+        <section className="page-section">
+          <div className="page-intro">
             <span className="overline">Monthly Forecast</span>
-            <h1 style={{ marginTop: 'var(--space-xs)' }}>{human}</h1>
+            <h1>{human}</h1>
           </div>
 
           <div className={styles.container}>

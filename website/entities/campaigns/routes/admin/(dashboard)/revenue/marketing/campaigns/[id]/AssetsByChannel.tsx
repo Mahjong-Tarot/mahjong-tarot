@@ -136,8 +136,8 @@ export function AssetsByChannel({
                     >
                       {a.imageUrl ? (
                         <span className="admin-campaign-asset-cover">
-                          {/* eslint-disable-next-line @next/next/no-img-element -- uploaded file of unknown size; next/image needs fixed dimensions */}
-                          <img src={a.imageUrl} alt="" loading="lazy" />
+                          {/* eslint-disable-next-line @next/next/no-img-element -- admin preview exception to the guide's next/image rule (UI-36): Supabase-storage or generated image of unknown size, shown at its own aspect ratio; next/image would need fixed dimensions and a remotePatterns entry */}
+                          <img src={a.imageUrl} alt={`Image for ${a.title}`} loading="lazy" />
                         </span>
                       ) : (
                         <span className="admin-campaign-asset-cover admin-campaign-asset-cover--empty">No image</span>

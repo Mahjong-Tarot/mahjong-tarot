@@ -240,12 +240,11 @@ export default function BookingDetails() {
             </div>
 
             <div className={`${styles.field} ${styles.fieldFull}`}>
-              <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer' }}>
+              <label className={styles.checkRow}>
                 <input
                   type="checkbox"
                   checked={isRelationship}
                   onChange={(e) => setIsRelationship(e.target.checked)}
-                  style={{ width: 18, height: 18, marginTop: 2, flexShrink: 0 }}
                 />
                 <span>This reading is about a relationship with another person</span>
               </label>

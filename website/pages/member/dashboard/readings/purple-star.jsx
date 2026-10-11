@@ -102,8 +102,8 @@ export default function PurpleStarReading() {
           {!loaded && <p className={accountStyles.muted}>Loading your chart…</p>}
 
           {loaded && !hasBirth && (
-            <div className={accountStyles.compatCard} style={{ marginTop: 16 }}>
-              <h3 style={{ marginTop: 0 }}>We need your birth details</h3>
+            <div className={`${accountStyles.compatCard} ${accountStyles.blockGap}`}>
+              <h3 className={accountStyles.cardHeadFlush}>We need your birth details</h3>
               <p>Purple Star needs your <strong>date, time, and place of birth</strong> — the hour is essential,
                  because the chart shifts completely from one two-hour period to the next.</p>
               <p><Link href="/member/profile">Add your birth details →</Link></p>
@@ -111,21 +111,22 @@ export default function PurpleStarReading() {
           )}
 
           {reports && reports.error && (
-            <div className={accountStyles.compatCard} style={{ marginTop: 16 }}>
+            <div className={`${accountStyles.compatCard} ${accountStyles.blockGap}`}>
               <p>Sorry — we couldn’t generate your chart ({reports.error}). Please double-check your birth details.</p>
             </div>
           )}
 
           {reports && !reports.error && (
             <>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, margin: '18px 0 14px' }}>
-                <button onClick={() => setView('full')} style={tabStyle(view === 'full')}>
+              <div className={accountStyles.psTabs}>
+                <button type="button" onClick={() => setView('full')} className={tabClass(view === 'full')}>
                   Full Fate &amp; Luck Report
                 </button>
                 <select
                   value={PALACE_KEYS.includes(view) ? view : ''}
                   onChange={(e) => e.target.value && setView(e.target.value)}
-                  style={{ ...tabStyle(PALACE_KEYS.includes(view)), padding: '8px 12px' }}
+                  aria-label="Single palace reading"
+                  className={`${tabClass(PALACE_KEYS.includes(view))} ${accountStyles.psTabSelect}`}
                 >
                   <option value="">Single Palace Reading…</option>
                   {PALACE_KEYS.map((k) => <option key={k} value={k}>{PALACE_LABEL[k]} Palace</option>)}
@@ -136,8 +137,8 @@ export default function PurpleStarReading() {
                 ref={frameRef}
                 title="Purple Star report"
                 srcDoc={srcDoc}
-                style={{ width: '100%', height: frameHeight, border: '1px solid rgba(216,178,95,0.3)',
-                         borderRadius: 14, background: '#140b29' }}
+                className={accountStyles.psFrame}
+                style={{ height: frameHeight }}
               />
             </>
           )}
@@ -148,12 +149,6 @@ export default function PurpleStarReading() {
   );
 }
 
-function tabStyle(active) {
-  return {
-    fontFamily: 'Georgia, serif', fontSize: '0.92rem', cursor: 'pointer',
-    padding: '8px 16px', borderRadius: 999,
-    border: active ? '1px solid #b8924a' : '1px solid rgba(0,0,0,0.15)',
-    background: active ? '#d8b25f' : '#fff', color: active ? '#2a1d05' : '#444',
-    fontWeight: active ? 700 : 500,
-  };
+function tabClass(active) {
+  return active ? `${accountStyles.psTab} ${accountStyles.psTabActive}` : accountStyles.psTab;
 }

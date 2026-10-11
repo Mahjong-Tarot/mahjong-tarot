@@ -12,5 +12,10 @@
   "muted": "#8A8E98",
   "greyMid": "#8A8E98",
   "violet": "#B8893A",
-  "errInk": "#9E1B14"
+  "errInk": "#9E1B14",
+  "fire": "#E63329",
+  "gold": "#B8893A",
+  "ink2": "#2A2D35",
+  "rule2": "#EFEFF2",
+  "success": "#2A8A48"
 }

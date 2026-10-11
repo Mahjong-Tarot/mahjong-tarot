@@ -21,13 +21,14 @@ const PALACE_ROLE = {
   Wealth: 'Money & Resources', Children: 'Creativity & Children', Marriage: 'Partnership', Siblings: 'Peers',
 };
 
-function ratingColor(rating) {
-  if (rating == null) return '#b0b0b0';
-  if (rating >= 80) return '#2A8A48';
-  if (rating >= 70) return '#3a7bb8';
-  if (rating >= 60) return '#b88c4f';
-  if (rating >= 50) return '#cc7a3a';
-  return '#c0392b';
+// Five-step tone classes (Dashboard.module.css → globals.css --tone-*).
+function ratingTone(rating) {
+  if (rating == null) return styles.toneNone;
+  if (rating >= 80) return styles.toneAuspicious;
+  if (rating >= 70) return styles.toneFavourable;
+  if (rating >= 60) return styles.toneNeutral;
+  if (rating >= 50) return styles.toneCaution;
+  return styles.toneChallenging;
 }
 
 function daysUntilBirthday(birthday) {
@@ -322,7 +323,7 @@ export default function Dashboard() {
                           {m.relationship && <small>· {m.relationship}</small>}
                         </span>
                         {m.rating != null ? (
-                          <span className={styles.gridRating} style={{ background: ratingColor(m.rating) }}>
+                          <span className={`${styles.gridRating} ${ratingTone(m.rating)}`}>
                             {Math.round(m.rating)}%
                           </span>
                         ) : (
@@ -337,7 +338,7 @@ export default function Dashboard() {
 
             {upcomingBirthdays.length > 0 && (
               <div className={styles.circleCol}>
-                <h2 className={styles.sectionTitle} style={{ marginBottom: 'var(--space-md)' }}>
+                <h2 className={`${styles.sectionTitle} ${styles.sectionTitleTight}`}>
                   Upcoming birthdays
                 </h2>
                 <ul className={styles.bdayList}>

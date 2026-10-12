@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tao Te Ching Editing Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #04102D; --gray: #EAEEF2; --white: #FFFFFF;
+    --blue: #287BE8; --magenta: #D1458B; --mint: #6FF2C1;
+    --text: #04102D; --muted: #4A5670; --bg: #FFFFFF; --card: #EAEEF2; --line: #D3DAE3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; }
+  header { background: var(--navy); color: var(--white); padding: 48px 16px 40px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  header .wrap { padding: 0; }
+  .eyebrow { color: var(--mint); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 8px 0 12px; }
+  header p { color: #C9D2E0; margin: 0; max-width: 640px; }
+  .meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+  main { padding: 40px 0 64px; }
+  h2 { font-size: 22px; margin: 44px 0 12px; }
+  h3 { font-size: 17px; margin: 22px 0 6px; }
+  .d { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding: 24px 0; border-top: 1px solid var(--line); }
+  .d:first-of-type { border-top: 0; }
+  .num { width: 48px; height: 48px; border-radius: 12px; background: var(--navy); color: var(--mint); display: grid; place-items: center; font-weight: 700; font-size: 20px; }
+  .d h2 { margin: 4px 0 4px; }
+  .q { color: var(--muted); margin: 0 0 12px; font-style: italic; }
+  .card { background: var(--card); border-radius: 12px; padding: 16px 20px; margin: 12px 0; }
+  .card.accent { border-left: 4px solid var(--magenta); }
+  .card.mint { border-left: 4px solid var(--mint); background: #F3FBF8; }
+  ol, ul { padding-left: 22px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--navy); color: var(--white); font-weight: 600; }
+  code, .mono { font-family: ui-monospace, Menlo, monospace; font-size: 14px; }
+  .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0; }
+  .chain span { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-size: 14px; font-weight: 500; }
+  .chain i { color: var(--blue); font-style: normal; font-weight: 700; }
+  .tag { display: inline-block; border-radius: 6px; padding: 1px 8px; font-size: 13px; font-weight: 600; }
+  .ok { background: #DDF8EC; color: #0B5C3F; }
+  .ed { background: #DCE9FB; color: #174E9A; }
+  .fl { background: #F8DDEA; color: #8A1F55; }
+  blockquote { margin: 12px 0; padding: 16px 20px; background: var(--navy); color: #E6ECF5; border-radius: 12px; font-size: 15px; }
+  blockquote strong { color: var(--mint); }
+  footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 48px; }
+  @media (max-width: 600px) { h1 { font-size: 27px; } .d { grid-template-columns: 1fr; } table { font-size: 14px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">5Ds Plan · Editing Pass</div>
+    <h1>Editing Bill's Tao Te Ching</h1>
+    <p>A complete, self-contained plan for an AI editor to review the book couplet by couplet, using Bill's own human-editor process from our October 12 call.</p>
+    <div class="meta">
+      <span class="pill">Chapters 1–16 hand-edited by Bill</span>
+      <span class="pill">Source: markdown export of the book Doc</span>
+      <span class="pill">Scope: all 81 chapters</span>
+      <span class="pill">Standard: accuracy · brevity · clarity</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="d">
+    <div class="num">1</div>
+    <div>
+      <h2>Define</h2>
+      <p class="q">What exactly are we fixing?</p>
+      <p>Every section of every chapter must be <strong>accurate to Taoism</strong>, <strong>brief</strong>, and <strong>clear enough to survive machine translation</strong>. The applications that follow each chapter must meet the same standard and stay true to Taoist principles.</p>
+      <div class="card">
+        <h3>Key terms</h3>
+        <ul>
+          <li><strong>Couplet:</strong> Bill's shorthand for each section of a chapter, whether it's 1, 2, or 3 lines.</li>
+          <li><strong>Accuracy:</strong> Taoist and simple. Every line aligns with the three core principles: <em>wuwei</em> (effortless action), <em>ziran</em> (spontaneous naturalness), <em>wuzhi</em> (direct, non-conceptual knowing). No Confucian drift, no modern self-help language. Correct grammar and spelling.</li>
+          <li><strong>Brevity:</strong> Same length or shorter than a standard version (e.g., Legge). Never rambling.</li>
+          <li><strong>Clarity:</strong> Clear, modern prose with no logic errors, and the meaning survives a multi-language round-trip translation.</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h3>Structural decisions already made</h3>
+        <ul>
+          <li>Keep chapter titles. No section headers (e.g., "The Nature of Dao" is removed).</li>
+          <li>Keep the <strong>Background</strong> paragraph that follows each chapter's applications.</li>
+          <li>Keep the <strong>thematic groupings</strong>; chapters are not in traditional order.</li>
+          <li>Move the table of contents to the <strong>end of the book</strong>, with a note that classifying the chapters is un-Taoist, offered only for readers who want it.</li>
+          <li>Redraft the front matter ("About this rendering") to match these changes.</li>
+          <li>Fix the "te → De" find-and-replace corruption (e.g., "compleDe", "staDe") as a silent pre-pass.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="d">
+    <div class="num">2</div>
+    <div>
+      <h2>Discover</h2>
+      <p class="q">What data does the AI use, and only that?</p>
+      <table>
+        <tr><th>Source</th><th>Used for</th></tr>
+        <tr><td>Markdown export of the book Google Doc (<code>Tao-Te-Ching-Working-Draft.md</code>, updated through Ch. 16)</td><td>The text being edited. Single source of truth.</td></tr>
+        <tr><td>Standard version (Legge)</td><td>Brevity benchmark: length comparison only.</td></tr>
+        <tr><td>Chinese Text Project, Dao De Jing: the original characters with literal and figurative meanings</td><td>Accuracy test when there is any doubt. Source 1 of 3.</td></tr>
+        <tr><td>Stanford Encyclopedia of Philosophy, "Daoism" entry</td><td>Accuracy cross-check on philosophical Daoism (naturalistic, self-realizing order; not a creator god or rulebook). Source 2 of 3.</td></tr>
+        <tr><td>Bill's chapters 1–10</td><td>His take as a lived Taoist. Source 3 of 3. Not automatically superior to the other two.</td></tr>
+      </table>
+      <p>No other sources. The AI does not survey the internet's 100+ conflicting translations.</p>
+    </div>
+  </section>
+
+  <section class="d">
+    <div class="num">3</div>
+    <div>
+      <h2>Design</h2>
+      <p class="q">What steps does the editor follow, in order?</p>
+
+      <h3>A. Couplet loop (for each couplet in the chapter)</h3>
+      <ol>
+        <li><strong>Read</strong> the couplet.</li>
+        <li><strong>Accuracy:</strong> Is it Taoist and simple? If there is the slightest doubt, pull the original characters with literal and figurative definitions and work out a better phrasing from them.</li>
+        <li><strong>Brevity:</strong> Is it the same length or shorter than Legge? If longer, tighten it.</li>
+        <li><strong>Clarity:</strong> If there is any doubt, run the round-trip test:
+          <div class="chain"><span>English</span><i>→</i><span>Russian</span><i>→</i><span>Thai</span><i>→</i><span>Swahili</span><i>→</i><span>English</span></div>
+          Run live through Google Translate (scripted). Pass = the final English faithfully means the same thing (not word for word). Fail = rewrite and test again.</li>
+        <li><strong>Log</strong> the result, highlight any change in the text, and move to the next couplet.</li>
+      </ol>
+
+      <h3>B. Chapter check (after all couplets)</h3>
+      <ol>
+        <li>Re-read the whole chapter. Confirm the changes don't break the flow and the logic holds together.</li>
+        <li>Check the <strong>2–5 applications</strong> against accuracy, brevity, and clarity, and confirm each one aligns with Taoist principles. Follow Bill's format: a bold lead phrase, then direct advice.</li>
+        <li>Check the <strong>Background</strong> paragraph against the same three standards.</li>
+        <li><strong>Placement:</strong> Does this chapter belong in its current thematic group? If not, recommend where it should move (don't move it; Bill decides). Flag numbering errors the same way.</li>
+      </ol>
+
+      <h3>C. Then</h3>
+      <p>Move to the next chapter. Repeat until every chapter in scope is done.</p>
+    </div>
+  </section>
+
+  <section class="d">
+    <div class="num">4</div>
+    <div>
+      <h2>Deliver</h2>
+      <p class="q">How do we run it?</p>
+      <ol>
+        <li><strong>Lock the file.</strong> Dave exported the current Google Doc to markdown on October 12. That export is the locked source.</li>
+        <li><strong>Work on a copy.</strong> The AI writes an edited copy plus a review log to <code>context/source-material/tao-te-ching/edited/</code>, one commit per chapter so each change can be diffed. Changes are marked with <code>&lt;mark&gt;</code> in the edited copy. The original stays untouched.</li>
+        <li><strong>Plan check first.</strong> Paste this plan and ask: <em>"Review this plan. Tell me anything unclear or missing before we start."</em></li>
+        <li><strong>Run one chapter as a pilot</strong> (Ch. 17). Bill reviews it against his own standard before the rest runs.</li>
+        <li><strong>Execute:</strong> <em>"Execute this plan until it's done."</em> High effort setting.</li>
+        <li><strong>Bill reviews the flagged items</strong> in the log. That's where his judgment matters most.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="d">
+    <div class="num">5</div>
+    <div>
+      <h2>Done</h2>
+      <p class="q">How does the AI know it's finished?</p>
+      <p>Every couplet and every application is marked one of:</p>
+      <p>
+        <span class="tag ok">✅ Passes, no change</span>&nbsp;
+        <span class="tag ed">✏️ Changed with confidence</span>&nbsp;
+        <span class="tag fl">⚠️ Changed, needs Bill's review</span>
+      </p>
+      <div class="card mint">
+        <h3>Final deliverables</h3>
+        <ul>
+          <li>Edited copy of the book, with structural changes applied (titles kept, no section headers, TOC at the end, front matter redrafted) and every change highlighted.</li>
+          <li>Review log: every couplet, application, and background marked ✅ / ✏️ / ⚠️; every ⚠️ item with original text, new text, which test failed, and why.</li>
+          <li>Placement recommendations: any chapter that should move to a different thematic group, plus numbering errors.</li>
+          <li>A one-line confirmation that every chapter in scope was reviewed.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <h2>Copy-paste version for the AI</h2>
+  <blockquote>
+    <strong>Problem:</strong> Review my Tao Te Ching translation chapter by chapter. Each couplet (1–3 line section) must be accurate to Taoism, brief, and clear.<br><br>
+    <strong>Data:</strong> Use only the book file (<code>Tao-Te-Ching-Working-Draft.md</code>), Legge's version (length benchmark only), the Chinese Text Project Dao De Jing (original characters with literal and figurative meanings), the Stanford Encyclopedia of Philosophy "Daoism" entry, and my chapters 1–10.<br><br>
+    <strong>Workflow:</strong> For each couplet: (1) Accuracy: Taoist and simple; if in doubt, check the original characters and rephrase. (2) Brevity: same length or shorter than Legge. (3) Clarity: if in doubt, translate English → Russian → Thai → Swahili → English; if the meaning doesn't survive, rewrite. After all couplets, re-read the chapter for flow and logic, check the 2–5 applications against the same three standards and Taoist principles, and recommend any change to the chapter's thematic placement. Then go to the next chapter.<br><br>
+    <strong>Rules:</strong> Keep chapter titles and background paragraphs, no section headers, keep thematic groupings, table of contents goes at the end, highlight every change.<br><br>
+    <strong>Done:</strong> Every couplet and application is marked ✅, ✏️, or ⚠️. Give me the edited copy, a log of every ⚠️ item (original, change, failed test, reason), and placement recommendations. Then confirm you're finished.
+  </blockquote>
+
+  <h2>Resolved October 12</h2>
+  <ul>
+    <li>Sources: Chinese Text Project Dao De Jing, Stanford Encyclopedia of Philosophy "Daoism", Bill's chapters 1–10.</li>
+    <li>Scope: all 81 chapters, including a re-check of 1–16.</li>
+    <li>Round-trip test runs live through Google Translate, scripted, not simulated.</li>
+    <li>Pilot: Chapter 17 (original 33).</li>
+  </ul>
+
+  <footer>From the October 12, 2026 call with Bill. Updated the same day with Dave's answers.</footer>
+</main>
+</body>
+</html>

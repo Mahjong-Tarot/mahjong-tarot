@@ -137,10 +137,10 @@ def full_spread_svg():
 # The author's own cards, shown in the arm each Angle unlocks (Ch.2: Water/Ducks/Lotus)
 STAGE_CARDS={2:{"east":["water","ducks","lotus"]}}
 CAPTIONS={
- 1:"The spread begins at the centre: one card names the heart of it.",
+ 1:"The spread begins at the center: one card names the heart of it.",
  2:"From my own reading: Water, Ducks, and Lotus, the three cards of my essential nature.",
- 3:"The spread so far — this Angle turns to what stands in the way.",
- 4:"The spread complete — both futures open at once.",
+ 3:"The spread so far: this Angle turns to what stands in the way.",
+ 4:"The spread complete: both futures open at once.",
 }
 REVEAL={1:["center"],2:["center","east"],3:["center","east","west"],4:["center","east","west","north","south"]}
 NEW={1:"center",2:"east",3:"west",4:"north"}   # arm highlighted as newly-unlocked (4 unlocks both futures)
@@ -210,7 +210,7 @@ def blessings_svg():
     n=13; w=24; h=35; gap=6
     total=n*w+(n-1)*gap
     parts=[f'<svg viewBox="0 0 {total} 78" xmlns="http://www.w3.org/2000/svg" role="img">',
-           '<title>The Three Blessings pattern: Green Dragon in the first position, Red Dragon in the centre, White Dragon in the final position</title>']
+           '<title>The Three Blessings pattern: Green Dragon in the first position, Red Dragon in the center, White Dragon in the final position</title>']
     special={0:("#2A8A48","GREEN"),6:("#E63329","RED"),12:("#9AA0AA","WHITE")}
     for k in range(n):
         x=k*(w+gap)
@@ -222,7 +222,7 @@ def blessings_svg():
                          f'<text x="{w/2}" y="{h+21}" text-anchor="middle" font-size="6" letter-spacing="0.5" fill="#50545E">DRAGON</text></g>')
         else:
             parts.append(f'<rect x="{x+0.8}" y="0.8" width="{w-1.6}" height="{h-1.6}" rx="3" fill="none" stroke="#C9CCD4" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>')
-    for pos,lab in ((0,"FIRST"),(6,"CENTRE"),(12,"FINAL")):
+    for pos,lab in ((0,"FIRST"),(6,"CENTER"),(12,"FINAL")):
         parts.append(f'<text x="{pos*(w+gap)+w/2}" y="{h+33}" text-anchor="middle" font-size="6" letter-spacing="1" fill="#9E1B14" font-weight="600">{lab}</text>')
     parts.append('</svg>')
     return "".join(parts)
@@ -230,21 +230,21 @@ def blessings_svg():
 # subhead prefix -> single real-card line-art figure (file, label)
 CARD_FIGS={
  "The Enlightening Mushroom":("mushroom","Mushroom"),
- "Green Dragon - New Beginnings":("green-dragon","Green Dragon"),
- "Red Dragon - Prosperity":("red-dragon","Red Dragon"),
- "White Dragon - Spirituality":("white-dragon","White Dragon"),
- "South - General Success":("south","South"),
- "Phoenix - Joy":("phoenix","Phoenix"),
- "Pearl - Hidden Treasures":("pearl","Pearl"),
- "The North - The Void":("north","North"),
- "Fire - The Consuming Flame":("fire","Fire"),
- "The Knot - The Web":("knot","Knot"),
- "The Willow - The Collapse":("willow","Willow"),
- "The Ducks - True Partnership":("ducks","Ducks"),
- "The Phoenix - Passionate Joy":("phoenix","Phoenix"),
- "The Peach - Complications":("peach","Peach"),
- "The Earth Card - Stability":("earth","Earth"),
- "The Red Dragon - Abundant Prosperity":("red-dragon","Red Dragon"),
+ "Green Dragon: New Beginnings":("green-dragon","Green Dragon"),
+ "Red Dragon: Prosperity":("red-dragon","Red Dragon"),
+ "White Dragon: Spirituality":("white-dragon","White Dragon"),
+ "South: General Success":("south","South"),
+ "Phoenix: Joy":("phoenix","Phoenix"),
+ "Pearl: Hidden Treasures":("pearl","Pearl"),
+ "The North: The Void":("north","North"),
+ "Fire: The Consuming Flame":("fire","Fire"),
+ "The Knot: The Web":("knot","Knot"),
+ "The Willow: The Collapse":("willow","Willow"),
+ "The Ducks: True Partnership":("ducks","Ducks"),
+ "The Phoenix: Passionate Joy":("phoenix","Phoenix"),
+ "The Peach: Complications":("peach","Peach"),
+ "The Earth Card: Stability":("earth","Earth"),
+ "The Red Dragon: Abundant Prosperity":("red-dragon","Red Dragon"),
 }
 # subhead prefix -> the Three Blessings diagram
 BLESSINGS_AFTER="The Sacred Triangle of Fortune"
@@ -391,14 +391,24 @@ while i<N:
     if t=="subhead":
         bodyht.append(f'<h4 class="subhead">{esc(tx)}</h4>')
         if tx.startswith(BLESSINGS_AFTER):
-            bodyht.append(f'<figure class="blessings">{blessings_svg()}<figcaption class="reveal-cap">The Three Blessings: Green Dragon first, Red Dragon centre, White Dragon final, the rarest and most auspicious pattern.</figcaption></figure>')
+            bodyht.append(f'<figure class="blessings">{blessings_svg()}<figcaption class="reveal-cap">The Three Blessings: Green Dragon first, Red Dragon center, White Dragon final, the rarest and most auspicious pattern.</figcaption></figure>')
             cards_shown.update({"green-dragon","red-dragon","white-dragon"})   # shown in the pattern; don't auto-repeat
         for pref,(cfile,label) in CARD_FIGS.items():
             if tx.startswith(pref):
                 bodyht.append(card_fig(cfile,label)); cards_shown.add(cfile); break
         i+=1; continue
     if t=="epigraph":
-        bodyht.append(f'<blockquote class="epigraph">{esc(tx)}</blockquote>'); i+=1; continue
+        cite=f'<cite class="ep-cite">{esc(b["cite"])}</cite>' if b.get("cite") else ""
+        bodyht.append(f'<blockquote class="epigraph">{esc(tx)}{cite}</blockquote>'); i+=1; continue
+    if t=="chsub":
+        bodyht.append(f'<p class="ch-sub">{esc(tx)}</p>'); i+=1; continue
+    if t=="li":
+        run=[]
+        while i<N and BLOCKS[i]["type"]=="li": run.append(BLOCKS[i]["text"]); i+=1
+        num=re.match(r"(\d+)\.\s",run[0])
+        items="".join("<li>"+esc(re.sub(r"^(•|\d+\.)\s*","",x))+"</li>" for x in run)
+        bodyht.append(f'<ol class="list" start="{num.group(1)}">{items}</ol>' if num else f'<ul class="list">{items}</ul>')
+        continue
     if t=="numbered_angles":
         items="".join(f"<li>{esc(x)}</li>" for x in b["items"])
         tail=f'<p>{esc(b["tail"])}</p>' if b.get("tail") else ""
@@ -479,6 +489,9 @@ text-align:center;border-bottom:1px solid var(--rule)}
 .subhead::before{content:"";display:block;width:2.2rem;height:2px;background:var(--red);margin:0 0 .9rem;opacity:.7}
 .epigraph{margin:1.4rem auto 2.2rem;max-width:27rem;text-align:center;font-style:italic;color:var(--ink-soft);border:none;padding:0}
 .epigraph::before{content:"\201C";font-size:2.6rem;color:var(--red);opacity:.5;display:block;line-height:.6;margin-bottom:.3rem}
+.ep-cite{display:block;font-style:normal;font-family:var(--sans);font-size:.8rem;letter-spacing:.08em;margin-top:.5rem;color:var(--ink-soft)}
+.ch-sub{text-align:center;font-style:italic;color:var(--ink-soft);font-size:1.2rem;margin:-1rem 0 2rem}
+.list{margin:0 0 1.15rem;padding-left:1.6rem}.list li{margin:.35rem 0}
 .angles-num{margin:1rem 0 1.4rem;padding-left:0;list-style:none;counter-reset:a}
 .angles-num li{counter-increment:a;position:relative;padding-left:2.6rem;margin:.7rem 0}
 .angles-num li::before{content:counter(a);position:absolute;left:0;top:-.1rem;width:1.7rem;height:1.7rem;

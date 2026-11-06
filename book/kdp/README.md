@@ -57,7 +57,7 @@ Requires Chrome, poppler (`pdftotext`, `pdfinfo`), `dwebp`, `ffmpeg`. Fonts are 
 ## Before you publish
 
 - **Back-cover copy and the description above were drafted from the book.** Bill should approve them.
-- **AI disclosure**: KDP asks whether text, images, or translations are AI-generated. Answer for the section art, the card line art, and the passages that aren't in Bill's manuscript (the "Whole Picture" close to the Prologue is written into `build.py`, not the manuscript).
+- **AI disclosure**: answer **No** for texts, images and translations. The book used AI for editing only, and KDP only asks about AI-generated content, not AI-assisted editing.
 - **Order a proof copy** before going live; check the red/grey contrast on paper if you choose B&W.
 
 ## What the build fixed in the source text

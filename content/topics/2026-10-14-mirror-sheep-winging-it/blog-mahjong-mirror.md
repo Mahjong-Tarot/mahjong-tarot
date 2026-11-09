@@ -9,7 +9,7 @@ reason: Monday's Provocation named the Sheep's flaws. Wednesday answers the most
 title: "The Sheep Doesn't Plan. That's Why You Have To."
 slug: sheep-year-2027-reckless-no-plan-mahjong-mirror
 author: Bill Hajdu
-date: 2026-11-18
+date: 2026-10-14
 category: Money & Career
 read_time: 5 min
 excerpt: "The Fire Sheep isn't interested in your budget, your spreadsheet or your five-year plan. It wings it. Here's why that's so dangerous for your money, and the kind of plan that survives it."

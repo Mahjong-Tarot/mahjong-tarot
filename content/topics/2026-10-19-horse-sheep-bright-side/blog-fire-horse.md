@@ -9,7 +9,7 @@ reason: Last week's Provocation, Explainer and Listicle took the Sheep apart. Th
 title: "Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight."
 slug: bright-side-sheep-year-2027-prosperity
 author: Bill Hajdu
-date: 2026-11-23
+date: 2026-10-19
 category: Forecasts & Timing
 read_time: 5 min
 excerpt: "After last week's dark side, here's the case for the Sheep. It's the eighth sign, the strongest Yin sign, and in 2027 it will reward a very different kind of person than the Horse did."
@@ -70,7 +70,7 @@ The Sheep year is normally a great year for romance. This one has fire in it.
 
 But this is a different fire from the one we've been living in. The Horse carries Yang fire, which is fire out of control. The Sheep carries Yin fire. Controlled fire. That means a lot of passion in relationships, and a better chance of doing something good with it.
 
-I [wrote about this in October](/blog/posts/fire-sheep-2027-love-passion-builds), so I'll keep it short. If you're in a relationship and you've been thinking about taking it to the next level, 2027 is a great time. If you're not in one, you should be out there working on it. It's one of the good years for romance to flare up.
+I [wrote about this earlier this month](/blog/posts/fire-sheep-2027-love-passion-builds), so I'll keep it short. If you're in a relationship and you've been thinking about taking it to the next level, 2027 is a great time. If you're not in one, you should be out there working on it. It's one of the good years for romance to flare up.
 
 ## The Best Signs of the Fire Sheep Year
 
@@ -99,7 +99,7 @@ If you were born in January or early February, your Chinese year may be the one 
 
 I said I'd accentuate the positive, and I have. But I wouldn't be doing my job if I let you walk off thinking the Sheep has changed its nature.
 
-Sheep are cautious, and that's one of their virtues. In love, it may be all right to throw caution to the wind every now and then. In money, follow the Sheep's inclination. Take it easy. Go slow. Make sure you know what you're doing. Aim for stability and conservative investments, [as I said in October](/blog/posts/fire-sheep-2027-money-career-caution).
+Sheep are cautious, and that's one of their virtues. In love, it may be all right to throw caution to the wind every now and then. In money, follow the Sheep's inclination. Take it easy. Go slow. Make sure you know what you're doing. Aim for stability and conservative investments, [as I said earlier this month](/blog/posts/fire-sheep-2027-money-career-caution).
 
 And it's still a fire year. There will be flare-ups when emotions get out of control, and maybe a little more risk-taking than a Sheep would normally allow. More passion, for good and for difficulties.
 

@@ -2,10 +2,10 @@
 title: "Lose, Lose, Lose, Win: The Sheep's Way of Getting What It Wants"
 topic: "The Mahjong Mirror"
 excerpt: "In 2027 you succeed by yielding. But yielding and giving up look identical from the outside. Here's how to use the four angles of the Mahjong Mirror to tell them apart."
-isoDate: "2026-11-25"
-cardDate: "Nov 25, 2026"
+isoDate: "2026-10-21"
+cardDate: "Oct 21, 2026"
 author: "Bill Hajdu"
-date: "Nov 25, 2026"
+date: "Oct 21, 2026"
 readTime: "5 min read"
 categoryPill: "The Mahjong Mirror"
 breadcrumbLabel: "The Mahjong Mirror"
@@ -22,7 +22,7 @@ seo:
     image: "https://mahjongtarot.com/images/blog/sheep-year-2027-win-by-yielding-mahjong-mirror.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
-  datePublished: "2026-11-25"
+  datePublished: "2026-10-21"
   image: "https://mahjongtarot.com/images/blog/sheep-year-2027-win-by-yielding-mahjong-mirror.webp"
 faqs:
   - q: "How do you succeed in the Year of the Sheep?"
@@ -38,7 +38,7 @@ faqs:
 related:
   - slug: "bright-side-sheep-year-2027-prosperity"
     title: "Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight."
-    dateLabel: "Nov 23, 2026"
+    dateLabel: "Oct 19, 2026"
   - slug: "fire-sheep-2027-love-passion-builds"
     title: "This Year's Passion Breaks Couples Up. Next Year's Builds Them."
     dateLabel: "Oct 5, 2026"

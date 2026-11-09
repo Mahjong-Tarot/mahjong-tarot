@@ -9,7 +9,7 @@ reason: Monday named the Sheep's dark side (Provocation) and Wednesday handled t
 title: "Feel Good Friday: How to Love a Sheep Without Going Up the Wall"
 slug: feel-good-friday-how-to-love-a-sheep
 author: Bill Hajdu
-date: 2026-11-20
+date: 2026-10-16
 category: Love & Relationships
 read_time: 4 min
 excerpt: "Sheep people are darling, sweet, and capable of draining the life right out of you. Here are five ways to love one anyway, and a small challenge for this weekend."

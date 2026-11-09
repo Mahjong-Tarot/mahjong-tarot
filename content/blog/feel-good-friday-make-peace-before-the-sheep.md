@@ -2,10 +2,10 @@
 title: "Feel Good Friday: Make Peace With One Person Before the Sheep Arrives"
 topic: "Love & Relationships"
 excerpt: "The Sheep is a peaceful sign, and next year the odds of mending things are in your favor. So why wait for February? One person. One message. This weekend."
-isoDate: "2026-11-27"
-cardDate: "Nov 27, 2026"
+isoDate: "2026-10-23"
+cardDate: "Oct 23, 2026"
 author: "Bill Hajdu"
-date: "Nov 27, 2026"
+date: "Oct 23, 2026"
 readTime: "3 min read"
 categoryPill: "Love & Relationships"
 breadcrumbLabel: "Love & Relationships"
@@ -22,7 +22,7 @@ seo:
     image: "https://mahjongtarot.com/images/blog/feel-good-friday-make-peace-before-the-sheep.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
-  datePublished: "2026-11-27"
+  datePublished: "2026-10-23"
   image: "https://mahjongtarot.com/images/blog/feel-good-friday-make-peace-before-the-sheep.webp"
 faqs:
   - q: "Is the Year of the Sheep good for resolving conflict?"
@@ -36,10 +36,10 @@ faqs:
 related:
   - slug: "bright-side-sheep-year-2027-prosperity"
     title: "Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight."
-    dateLabel: "Nov 23, 2026"
+    dateLabel: "Oct 19, 2026"
   - slug: "sheep-year-2027-win-by-yielding-mahjong-mirror"
     title: "Lose, Lose, Lose, Win: The Sheep's Way of Getting What It Wants"
-    dateLabel: "Nov 25, 2026"
+    dateLabel: "Oct 21, 2026"
 cta:
   overline: "Start the Sheep Year Clean."
   heading: "Book a Reading with Bill"
@@ -59,7 +59,7 @@ So here's what I believe, and why I'm telling you today.
 
 ## I Believe This Year Started Some Fights It Had No Right to Start
 
-The Fire Horse is a hard year on relationships. Too much passion, too much independence, too much walking out of the room. [I told you that in October](/blog/posts/fire-sheep-2027-love-passion-builds). Some of what went wrong in your life this year was you. Some of it was them. And some of it was just the Horse.
+The Fire Horse is a hard year on relationships. Too much passion, too much independence, too much walking out of the room. [I told you that earlier this month](/blog/posts/fire-sheep-2027-love-passion-builds). Some of what went wrong in your life this year was you. Some of it was them. And some of it was just the Horse.
 
 You don't have to sort out which was which. You just have to notice that the year is ending.
 

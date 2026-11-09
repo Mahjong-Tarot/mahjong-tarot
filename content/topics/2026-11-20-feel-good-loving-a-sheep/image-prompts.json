@@ -1,0 +1,84 @@
+{
+  "topic": "Sheep people are darling, sweet and draining. Five warm ways to love one, and a weekend challenge to do one of them.",
+  "phrases": [
+    "Give a push, not a shove.",
+    "Don't preach.",
+    "They don't need you for this. They want you anyway.",
+    "Who's your Sheep?"
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "blog-feel-good-friday",
+      "concept": "The shoulder to lean on, seen from behind in warm autumn light.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic film still of two people seen from behind sitting close on a weathered wooden park bench in soft autumn light, a woman in a dusty rose coat resting her head on the other person's shoulder. Faces not visible. Antique gold light through turning leaves, a path fading into soft focus. Tender and unhurried. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "fri-facebook-en",
+      "concept": "A match being struck beside an unlit lantern: lighting someone else's fire.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic close-up of a single match just catching flame, held near the wick of an old brass lantern on a wooden table. Hands at the edge of the frame only, no face. Antique gold glow against midnight jade shadow. Warm and hopeful. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "fri-instagram",
+      "concept": "Card-style text image of the post's playful question.",
+      "image_style": "TEXT",
+      "text": "Who's your Sheep?",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Who's your Sheep?\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "sat-facebook-en.md",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "sat-facebook-en",
+      "concept": "Two teacups on a porch rail during a long talk that didn't need solving.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of two steaming teacups side by side on a wooden porch rail in late afternoon, a soft blanket folded beside them and a garden out of focus beyond. Antique gold light, sage green and dusty rose tones. The feeling is a long, patient conversation. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "sat-instagram.md",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "sat-instagram",
+      "concept": "A small handwritten note left for someone: praise in plain words.",
+      "image_style": "SCENE",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An overhead photograph of two mugs and a small folded note on a sunlit kitchen table with warm ivory linen, the note's handwriting too soft and out of focus to read. Antique gold morning light, a sprig of dried flowers nearby. Quiet kindness. No people. No readable text. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "card",
+      "concept": "Feel Good Friday affirmation card.",
+      "image_style": "TEXT",
+      "text": "Light their fire. Lend your shoulder.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Light their fire. Lend your shoulder.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-how-to-love-a-sheep",
+      "content_type": "card-vn",
+      "concept": "Feel Good Friday affirmation card.",
+      "image_style": "TEXT",
+      "text": "Thắp lửa cho họ. Cho họ một bờ vai.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Thắp lửa cho họ. Cho họ một bờ vai.\" Spell every word perfectly, keeping every Vietnamese diacritic exactly as written. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

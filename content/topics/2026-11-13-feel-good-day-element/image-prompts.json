@@ -1,0 +1,84 @@
+{
+  "topic": "Feel Good Friday: no element is shut out of money. Every Day Master gets its turn. The weekend challenge is to find your day element, your wealth element and your next wealth month.",
+  "phrases": [
+    "Luck isn't a club. It's a schedule.",
+    "Every element gets its turn.",
+    "Your turn is on the calendar.",
+    "Nobody is shut out of the money."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A calendar with one date circled: your turn has a date.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm cinematic still life of a paper wall calendar page lying on a wooden desk, one square circled by hand in antique gold ink, no legible numbers or words. Soft morning light, a sprig of green leaves and a cup of tea at the edge of the frame. Hopeful and unhurried. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "fri-facebook-en",
+      "concept": "Five small natural objects, one for each element, side by side and equal.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic overhead still life on warm ivory linen: five small objects laid out evenly in a row, a twig of green wood, a lit candle, a small bowl of earth, a brass coin, and a shallow dish of water. Antique gold light, soft shadows, perfect calm balance. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "fri-instagram",
+      "concept": "Card-style text image of the week's closing line.",
+      "image_style": "TEXT",
+      "text": "Luck isn't a club. It's a schedule.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Luck isn't a club. It's a schedule.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "sat-facebook-en.md",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "sat-facebook-en",
+      "concept": "A sunrise over layered fields: the turn is coming round.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic landscape photograph of terraced rice fields at sunrise, antique gold light moving slowly across the terraces from one side to the other, soft mist in the low places, midnight jade hills beyond. Peaceful and patient, the feeling of a turn coming round. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "sat-instagram.md",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "sat-instagram",
+      "concept": "A woman marking her planner on a Saturday morning.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A cinematic photograph of a woman seen from behind at a cafe window on a Saturday morning, writing in a small planner, a coffee beside her. Her face is not visible. Warm antique gold light, dusty rose scarf, a soft blur of street beyond the glass. Content and purposeful. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "card",
+      "concept": "Feel Good Friday affirmation card.",
+      "image_style": "TEXT",
+      "text": "Every element gets its turn.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Every element gets its turn.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-find-your-day-element",
+      "content_type": "card-vn",
+      "concept": "Feel Good Friday affirmation card.",
+      "image_style": "TEXT",
+      "text": "Mỗi hành đều có lượt của mình.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Mỗi hành đều có lượt của mình.\" Spell every word perfectly, keeping every Vietnamese diacritic exactly as written. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

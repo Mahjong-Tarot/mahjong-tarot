@@ -1,0 +1,62 @@
+{
+  "topic": "The dark side of the 2027 Fire Sheep year: emotional, whiny, clingy, needy, reckless with money, and what the people selling a gentle year leave out.",
+  "phrases": [
+    "Emotional. Whiny. Clingy. Needy.",
+    "It looks soft. It isn't.",
+    "Nobody ever got hurt by the part of a year they saw coming.",
+    "Self-control. Over your temper, your feelings and your wallet."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "dark-side-of-the-sheep-year-2027",
+      "content_type": "blog-fire-horse",
+      "concept": "Something soft and beautiful with a storm behind it: the sweet year and what it leaves out.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic still life on a dark weathered wooden table. A single wilted dusty rose lies beside an unlit candle. Behind it, through an old window, a bank of storm cloud gathers over a pale field, antique gold light breaking low across the horizon. Deep midnight jade shadows in the room. The mood is beauty with something troubling behind it. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "dark-side-of-the-sheep-year-2027",
+      "content_type": "mon-facebook-en",
+      "concept": "A phone lighting up again and again on a nightstand: everyone around you needing more.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of a smartphone face-down on a wooden nightstand at night, a soft glow escaping around its edges, a half-finished cup of tea and a pair of reading glasses beside it. Warm antique gold lamplight against midnight jade shadow. No readable text or screen content. The feeling is quiet, persistent demand. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "dark-side-of-the-sheep-year-2027",
+      "content_type": "mon-instagram",
+      "concept": "Card-style text image of the week's core line.",
+      "image_style": "TEXT",
+      "text": "It looks soft. It isn't.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"It looks soft. It isn't.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "dark-side-of-the-sheep-year-2027",
+      "content_type": "tue-facebook-en",
+      "concept": "A neat, orderly desk with one spilled cup: the rational person losing their grip.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic overhead photograph of an immaculately organized wooden desk, pens squared, a closed notebook aligned to the edge, and one teacup knocked over with tea spreading slowly across the surface toward the notebook. Warm antique gold side light, deep shadow at the edges. The feeling is composure beginning to slip. No people. No readable text. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "dark-side-of-the-sheep-year-2027",
+      "content_type": "tue-instagram",
+      "concept": "A woman seen from behind at a rain-streaked window, feeling more than she expected to.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A film still of a woman seen from behind standing at a tall rain-streaked window, one hand resting on the glass, her face not visible. Soft grey daylight, a warm antique gold lamp glowing in the room behind her, dusty rose cardigan. Quiet and introspective. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

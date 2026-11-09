@@ -1,0 +1,62 @@
+{
+  "topic": "The Fire Sheep wings it, money is where that hurts, and the Mahjong Mirror is the plan that survives a year that hates plans.",
+  "phrases": [
+    "The Sheep doesn't plan. That's why you have to.",
+    "In a Sheep year, recklessness feels like a nice afternoon.",
+    "Caution is an attitude. Attitudes don't survive a good mood.",
+    "Wing it on dinner. Don't wing it on the money."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "sheep-year-2027-reckless-no-plan-mahjong-mirror",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "A blank plan with the outside drifting in: the notebook nobody has written in yet.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of an open leather notebook with blank cream pages on a weathered wooden table, a brass pen laid across it and a warm cup of tea beside it. A door stands open in the background and a loose scatter of autumn leaves has blown in across the floor and onto the table. Antique gold afternoon light, midnight jade shadows. The feeling is pleasant distraction with something left undone. No people. No readable text. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "sheep-year-2027-reckless-no-plan-mahjong-mirror",
+      "content_type": "wed-facebook-en",
+      "concept": "An unplanned road: a dirt path forking through a soft meadow with no signpost.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic landscape photograph of a narrow dirt path winding through a soft sage-green meadow at golden hour and splitting into two with no signpost. Dusty rose wildflowers at the edges, antique gold light, a low band of cloud on the horizon. Carefree and slightly uneasy at once. No people or animals. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "sheep-year-2027-reckless-no-plan-mahjong-mirror",
+      "content_type": "wed-instagram",
+      "concept": "Card-style text image of the post's core line.",
+      "image_style": "TEXT",
+      "text": "The Sheep doesn't plan. So you have to.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"The Sheep doesn't plan. So you have to.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "sheep-year-2027-reckless-no-plan-mahjong-mirror",
+      "content_type": "thu-facebook-en",
+      "concept": "Four Mahjong cards laid out on a dark table: the four angles of the Mirror.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic close-up of four aged Mahjong cards laid face-down in a simple cross on a dark wooden table, their paper edges worn with history, warm antique gold candlelight falling across them and deep midnight jade shadow beyond. No readable text or symbols on the card backs. Quiet, deliberate and thoughtful. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "sheep-year-2027-reckless-no-plan-mahjong-mirror",
+      "content_type": "thu-instagram",
+      "concept": "A moment of pause before spending: hands stopped over a small box of coins.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An overhead photograph of a woman's hands pausing above a small open wooden box of old brass coins on warm ivory linen, face out of frame. Soft antique gold morning light, a sprig of dried flowers at the edge of the frame. The feeling is a deliberate pause. No readable text. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

@@ -17,6 +17,9 @@ Each week follows a five-day publishing cycle across three channels.
 | Wednesday | Blog + Social | **Mahjong Mirror — the answer.** Directly responds to Monday's topic. Shows how the decision-making framework, the tiles, and the book address the problem Monday raised. |
 | Thursday | Social only | **Continues Wednesday's topic.** Reinforces the Mahjong Mirror angle, builds toward the weekend challenge. |
 | Friday | Blog + Social | **Feel Good Friday — positive and actionable.** Ties Monday and Wednesday together. Prompts the audience to do something constructive over the weekend. Uplifting, empowering tone. |
+| Saturday | Social only | **Continues Friday's topic.** Keeps the weekend challenge going. |
+
+**A campaign is one week: three blogs (Mon, Wed, Fri). Every blog gets two days of social media: its own day and the day after (Mon/Tue, Wed/Thu, Fri/Sat).**
 
 ## Channels
 
@@ -77,6 +80,9 @@ content/topics/<YYYY-MM-DD>-<type>-<topic>/
 ├── fri-facebook-en.md          # Friday social
 ├── fri-facebook-vn.md
 ├── fri-instagram.md
+├── sat-facebook-en.md          # Saturday social
+├── sat-facebook-vn.md
+├── sat-instagram.md
 ```
 
 Not every topic will have all files. A Fire Horse topic won't have `blog-mahjong-mirror.md`. The topic folder contains only the deliverables the content calendar assigns to it.

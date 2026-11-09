@@ -25,3 +25,12 @@ Source of truth for all published blog posts. Used by the writer agent (topic pl
 | 8 | soulmate-month-baby-isnt-the-easy-one | soulmate month baby chinese astrology 2026 | The Myth Buster | Year of the Fire Horse | 2026-07-20 |
 | 9 | you-cant-pick-the-month-you-can-read-it | metal dog month firehorse baby chinese astrology | The Prediction | Year of the Fire Horse | 2026-07-22 |
 | 10 | feel-good-friday-the-month-of-emotions-wants-your-attention | feel good friday sheep month attention challenge | The How-To/Practical Guide | Year of the Fire Horse | 2026-07-24 |
+| 11 | earth-pig-month-2026-who-gets-the-money | Earth Pig month 2026 wealth luck | The Myth Buster | Money & Career | 2026-11-09 |
+| 12 | when-will-i-make-money-day-master-wealth-luck | when will I make money Chinese astrology | The How-To/Practical Guide | The Mahjong Mirror | 2026-11-11 |
+| 13 | feel-good-friday-find-your-day-element | find your Day Master element | The Manifesto | Forecasts & Timing | 2026-11-13 |
+| 14 | dark-side-of-the-sheep-year-2027 | dark side of the Sheep year 2027 | The Provocation | Forecasts & Timing | 2026-11-16 |
+| 15 | sheep-year-2027-reckless-no-plan-mahjong-mirror | Sheep year 2027 money planning | The Explainer | Money & Career | 2026-11-18 |
+| 16 | feel-good-friday-how-to-love-a-sheep | how to deal with a Sheep person Chinese zodiac | The Listicle | Love & Relationships | 2026-11-20 |
+| 17 | bright-side-sheep-year-2027-prosperity | Year of the Sheep 2027 prosperity | The Prediction | Forecasts & Timing | 2026-11-23 |
+| 18 | sheep-year-2027-win-by-yielding-mahjong-mirror | how to succeed in the Year of the Sheep | The How-To/Practical Guide | The Mahjong Mirror | 2026-11-25 |
+| 19 | feel-good-friday-make-peace-before-the-sheep | conflict resolution in the Year of the Sheep | The Manifesto | Love & Relationships | 2026-11-27 |

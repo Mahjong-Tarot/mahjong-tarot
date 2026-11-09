@@ -45,3 +45,12 @@
 | 2026-10-05 | This Year's Passion Breaks Couples Up. Next Year's Builds Them. | fire-sheep-2027-love-passion-builds.md | Love & Relationships |
 | 2026-10-07 | One Word for Your Money Next Year: Caution | fire-sheep-2027-money-career-caution.md | Money & Career |
 | 2026-10-09 | Feel Good Friday: Walk Away First, Answer Later | feel-good-friday-walk-away-first-answer-later.md | The Mahjong Mirror |
+| 2026-11-09 | The Golden Pig Month Is Here. It's Only Golden for Some of You. | earth-pig-month-2026-who-gets-the-money.md | Money & Career |
+| 2026-11-11 | When Am I Going to Make Money? Here's How to Time It Yourself. | when-will-i-make-money-day-master-wealth-luck.md | The Mahjong Mirror |
+| 2026-11-13 | Feel Good Friday: Find Your Day Element This Weekend | feel-good-friday-find-your-day-element.md | Forecasts & Timing |
+| 2026-11-16 | The Dark Side of the Sheep Year Nobody Wants to Sell You | dark-side-of-the-sheep-year-2027.md | Forecasts & Timing |
+| 2026-11-18 | The Sheep Doesn't Plan. That's Why You Have To. | sheep-year-2027-reckless-no-plan-mahjong-mirror.md | Money & Career |
+| 2026-11-20 | Feel Good Friday: How to Love a Sheep Without Going Up the Wall | feel-good-friday-how-to-love-a-sheep.md | Love & Relationships |
+| 2026-11-23 | Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight. | bright-side-sheep-year-2027-prosperity.md | Forecasts & Timing |
+| 2026-11-25 | Lose, Lose, Lose, Win: The Sheep's Way of Getting What It Wants | sheep-year-2027-win-by-yielding-mahjong-mirror.md | The Mahjong Mirror |
+| 2026-11-27 | Feel Good Friday: Make Peace With One Person Before the Sheep Arrives | feel-good-friday-make-peace-before-the-sheep.md | Love & Relationships |

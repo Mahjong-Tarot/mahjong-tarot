@@ -1,0 +1,62 @@
+{
+  "topic": "The Sheep's Yin method for 2027: yielding is not giving up, and the Mahjong Mirror's four angles tell you which one you are doing.",
+  "phrases": [
+    "Lose, lose, lose, win.",
+    "The Sheep gives up the point. It doesn't give up the goal.",
+    "Patience knows what it wants.",
+    "Soft is not the same as absent."
+  ],
+  "images": [
+    {
+      "file": "blog-mahjong-mirror.md",
+      "slug": "sheep-year-2027-win-by-yielding-mahjong-mirror",
+      "content_type": "blog-mahjong-mirror",
+      "concept": "The long way around: a woman on a path that curves around the water instead of crossing it.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic film-still photograph of a woman seen from behind, walking a stone path that curves gently around a still pond at first light. Soft mist on the water, sage and midnight jade tones, a thread of antique gold on the horizon. Her face is not visible. The mood is patient and purposeful, not lost. No words or lettering. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-facebook-en.md",
+      "slug": "sheep-year-2027-win-by-yielding-mahjong-mirror",
+      "content_type": "wed-facebook-en",
+      "concept": "Water finding its way around stone.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic close photograph of clear water flowing around a large dark river stone, smooth and unhurried, warm late light catching the current in antique gold. Deep jade shadows along the bank. No people. Nature as a metaphor for winning by yielding. No words or lettering. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "wed-instagram.md",
+      "slug": "sheep-year-2027-win-by-yielding-mahjong-mirror",
+      "content_type": "wed-instagram",
+      "concept": "Card-style text image of the post's core line.",
+      "image_style": "TEXT",
+      "text": "Give up the point. Keep the goal.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Give up the point. Keep the goal.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-facebook-en.md",
+      "slug": "sheep-year-2027-win-by-yielding-mahjong-mirror",
+      "content_type": "thu-facebook-en",
+      "concept": "A banked fire: controlled heat, glowing low.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of a banked hearth fire in an old stone fireplace, embers glowing deep orange and antique gold beneath soft grey ash, no leaping flames. Warm shadow fills the room around it. Controlled, patient heat. No people. No words or lettering. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "thu-instagram.md",
+      "slug": "sheep-year-2027-win-by-yielding-mahjong-mirror",
+      "content_type": "thu-instagram",
+      "concept": "A woman's hand pausing over a notebook with a pen set down: the ten-minute check.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An overhead photograph of an open blank notebook on dark wood, a brass pen set down beside it and a small cup of tea steaming. A woman's hand rests on the page, paused in thought; no face visible. Antique gold and deep plum tones, soft window light. No words or writing visible on the page. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

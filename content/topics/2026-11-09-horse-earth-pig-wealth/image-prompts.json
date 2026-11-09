@@ -1,0 +1,62 @@
+{
+  "topic": "The Golden Pig month (Earth Pig, Nov 7 to Dec 7, 2026) is sold as a wealth month for everyone. It is really the wealth month for Wood Day Masters; the Pig's abundance helps those in harmony with it.",
+  "phrases": [
+    "It's only golden for some of you.",
+    "The gold means earth.",
+    "Good for whom?",
+    "Know your month before you spend like it's golden."
+  ],
+  "images": [
+    {
+      "file": "blog-fire-horse.md",
+      "slug": "earth-pig-month-2026-who-gets-the-money",
+      "content_type": "blog-fire-horse",
+      "concept": "Gold that turns out to be earth: a small brass bowl of golden-yellow soil, treated as something precious.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm cinematic still life. A small aged brass bowl filled with fine golden-yellow earth sits on a dark weathered wooden table. A single green seedling rises from the soil. Antique gold light falls from one side; the background drops into midnight jade shadow. Quiet, weighty, slightly surprising. No people. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-facebook-en.md",
+      "slug": "earth-pig-month-2026-who-gets-the-money",
+      "content_type": "mon-facebook-en",
+      "concept": "A woman weighing a decision over a household ledger: good for whom?",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of a woman seen from behind and slightly to the side, seated at a wooden desk by a window at dusk, a paper ledger and a pen before her, her face turned away from the camera toward the window. Antique gold lamplight, midnight jade walls, a calm and thoughtful mood. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "mon-instagram.md",
+      "slug": "earth-pig-month-2026-who-gets-the-money",
+      "content_type": "mon-instagram",
+      "concept": "Card-style text image of the week's core line.",
+      "image_style": "TEXT",
+      "text": "It's only golden for some of you.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"It's only golden for some of you.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-facebook-en.md",
+      "slug": "earth-pig-month-2026-who-gets-the-money",
+      "content_type": "tue-facebook-en",
+      "concept": "A harvest table: abundance is still real, even when it is not your wealth month.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of a long rustic wooden table at golden hour, laid with bowls of persimmons, pomelos and steamed buns, soft linen napkins in dusty rose. No people. Rich, generous, unhurried abundance in antique gold light with deep midnight jade shadow beyond. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "tue-instagram.md",
+      "slug": "earth-pig-month-2026-who-gets-the-money",
+      "content_type": "tue-instagram",
+      "concept": "A woman choosing ripe fruit at a market, abundance within reach.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A cinematic photograph of a woman seen from behind at a sunlit market stall, her hands choosing ripe persimmons from a woven basket. Her face is not visible. Warm antique gold tones, soft dusty rose scarf, shallow depth of field. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

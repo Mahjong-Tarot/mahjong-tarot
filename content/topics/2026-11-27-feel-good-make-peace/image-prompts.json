@@ -1,0 +1,84 @@
+{
+  "topic": "Feel Good Friday: the Sheep is a peaceful sign, so reach out to one person you are at odds with before the Sheep year begins.",
+  "phrases": [
+    "Somebody has to go first.",
+    "Give up the point. Keep the person.",
+    "A door only has to come off the latch.",
+    "One person. One message. This weekend."
+  ],
+  "images": [
+    {
+      "file": "blog-feel-good-friday.md",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "blog-feel-good-friday",
+      "concept": "A letter about to be sent: the small first step.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A warm cinematic close photograph of a woman's hands holding a sealed cream envelope by a window in soft morning light, a cup of tea on the sill beside it. Antique gold and dusty rose tones, shallow depth of field. Her face is out of frame. Tender and hopeful. No words or writing visible on the envelope. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-facebook-en.md",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "fri-facebook-en",
+      "concept": "A door just off the latch, with warm light behind it.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of an old wooden door standing slightly ajar in a quiet hallway, warm antique gold light spilling through the narrow gap onto worn floorboards. Midnight jade shadow around it. No people. Invitation without pressure. No words or lettering. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "fri-instagram.md",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "fri-instagram",
+      "concept": "Card-style text image of the weekend challenge.",
+      "image_style": "TEXT",
+      "text": "One person. One message. This weekend.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"One person. One message. This weekend.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "sat-facebook-en.md",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "sat-facebook-en",
+      "concept": "Two cups of tea poured and waiting on a garden table.",
+      "image_style": "SCENE",
+      "aspect_ratio": "16:9",
+      "dimensions": "1200x630",
+      "prompt": "A cinematic photograph of two cups of tea set across from each other on a small weathered table in a winter garden, steam rising in low golden light, two empty chairs. Sage and antique gold tones, soft blur of bare branches beyond. No people. Quiet readiness. No words or lettering. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "sat-instagram.md",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "sat-instagram",
+      "concept": "A woman seen from behind with a phone held low, looking out at the morning.",
+      "image_style": "HUMAN",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "A cinematic photograph of a woman seen from behind, sitting on a window seat in soft morning light with a phone held loosely in her lap, looking out at a quiet garden. Dusty rose blanket, antique gold light. Her face is not visible and the phone screen is dark. Calm, about to act. No words or lettering. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "card",
+      "concept": "Feel Good Friday affirmation card.",
+      "image_style": "TEXT",
+      "text": "Make peace with one person.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Make peace with one person.\" Spell every word perfectly. No watermarks or Western zodiac imagery anywhere in the image."
+    },
+    {
+      "file": "card-vn",
+      "slug": "feel-good-friday-make-peace-before-the-sheep",
+      "content_type": "card-vn",
+      "concept": "Feel Good Friday affirmation card.",
+      "image_style": "TEXT",
+      "text": "Làm hòa với một người.",
+      "aspect_ratio": "1:1",
+      "dimensions": "1080x1080",
+      "prompt": "An elegant typographic image on a warm ivory background with a faint parchment texture and thin antique gold filigree at the corners. Centered text in refined serif lettering, deep plum ink: \"Làm hòa với một người.\" Spell every word perfectly, keeping every Vietnamese diacritic exactly as written. No watermarks or Western zodiac imagery anywhere in the image."
+    }
+  ]
+}

@@ -9,7 +9,7 @@ reason: The source opens as a direct challenge to the way astrology gets sold: e
 title: "The Dark Side of the Sheep Year Nobody Wants to Sell You"
 slug: dark-side-of-the-sheep-year-2027
 author: Bill Hajdu
-date: 2026-11-16
+date: 2026-10-12
 category: Forecasts & Timing
 read_time: 5 min
 excerpt: "2027 is about to be sold to you as sweet, gentle and romantic. Nobody selling it will mention whiny, clingy, needy or reckless. So I will."
@@ -85,7 +85,7 @@ They can also be some of the sweetest people you'll ever meet, which is why you 
 
 ## What to Do With This Before February
 
-You have a little under three months left before the Sheep takes over. Use them to get honest.
+You have a little under four months left before the Sheep takes over. Use them to get honest.
 
 Ask yourself who in your life is about to get harder to deal with, and decide now how much patience you're willing to spend. Ask yourself whether you're the one who thinks this doesn't apply to you. If so, it applies to you.
 

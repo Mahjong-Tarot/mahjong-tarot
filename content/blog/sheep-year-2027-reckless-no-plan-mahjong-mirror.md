@@ -2,10 +2,10 @@
 title: "The Sheep Doesn't Plan. That's Why You Have To."
 topic: "Money & Career"
 excerpt: "The Fire Sheep isn't interested in your budget, your spreadsheet or your five-year plan. It wings it. Here's why that's so dangerous for your money, and the kind of plan that survives it."
-isoDate: "2026-11-18"
-cardDate: "Nov 18, 2026"
+isoDate: "2026-10-14"
+cardDate: "Oct 14, 2026"
 author: "Bill Hajdu"
-date: "Nov 18, 2026"
+date: "Oct 14, 2026"
 readTime: "5 min read"
 categoryPill: "Money & Career"
 breadcrumbLabel: "Money & Career"
@@ -22,7 +22,7 @@ seo:
     image: "https://mahjongtarot.com/images/blog/sheep-year-2027-reckless-no-plan-mahjong-mirror.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
-  datePublished: "2026-11-18"
+  datePublished: "2026-10-14"
   image: "https://mahjongtarot.com/images/blog/sheep-year-2027-reckless-no-plan-mahjong-mirror.webp"
 faqs:
   - q: "Why is the Sheep year risky for money?"
@@ -38,7 +38,7 @@ faqs:
 related:
   - slug: "dark-side-of-the-sheep-year-2027"
     title: "The Dark Side of the Sheep Year Nobody Wants to Sell You"
-    dateLabel: "Nov 16, 2026"
+    dateLabel: "Oct 12, 2026"
   - slug: "fire-sheep-2027-money-career-caution"
     title: "One Word for Your Money Next Year: Caution"
     dateLabel: "Oct 7, 2026"

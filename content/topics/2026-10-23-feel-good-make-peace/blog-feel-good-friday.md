@@ -9,7 +9,7 @@ reason: Monday made the case for the Sheep's prosperity (Prediction); Wednesday 
 title: "Feel Good Friday: Make Peace With One Person Before the Sheep Arrives"
 slug: feel-good-friday-make-peace-before-the-sheep
 author: Bill Hajdu
-date: 2026-11-27
+date: 2026-10-23
 category: Love & Relationships
 read_time: 3 min
 excerpt: "The Sheep is a peaceful sign, and next year the odds of mending things are in your favor. So why wait for February? One person. One message. This weekend."
@@ -27,7 +27,7 @@ So here's what I believe, and why I'm telling you today.
 
 ## I Believe This Year Started Some Fights It Had No Right to Start
 
-The Fire Horse is a hard year on relationships. Too much passion, too much independence, too much walking out of the room. [I told you that in October](/blog/posts/fire-sheep-2027-love-passion-builds). Some of what went wrong in your life this year was you. Some of it was them. And some of it was just the Horse.
+The Fire Horse is a hard year on relationships. Too much passion, too much independence, too much walking out of the room. [I told you that earlier this month](/blog/posts/fire-sheep-2027-love-passion-builds). Some of what went wrong in your life this year was you. Some of it was them. And some of it was just the Horse.
 
 You don't have to sort out which was which. You just have to notice that the year is ending.
 

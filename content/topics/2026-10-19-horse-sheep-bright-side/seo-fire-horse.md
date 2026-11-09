@@ -32,8 +32,8 @@ bright-side-sheep-year-2027-prosperity
 - /readings: "Book a reading with Bill"
 - /the-mahjong-mirror: "The Mahjong Mirror"
 - /blog/posts/dark-side-of-the-sheep-year-2027: "the dark side of the Sheep"
-- /blog/posts/fire-sheep-2027-love-passion-builds: "wrote about this in October"
-- /blog/posts/fire-sheep-2027-money-career-caution: "as I said in October"
+- /blog/posts/fire-sheep-2027-love-passion-builds: "wrote about this earlier this month"
+- /blog/posts/fire-sheep-2027-money-career-caution: "as I said earlier this month"
 
 ## External Links
 - Wikipedia: Goat (zodiac), https://en.wikipedia.org/wiki/Goat_(zodiac)

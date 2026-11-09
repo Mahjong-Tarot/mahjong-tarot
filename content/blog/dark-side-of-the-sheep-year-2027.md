@@ -2,10 +2,10 @@
 title: "The Dark Side of the Sheep Year Nobody Wants to Sell You"
 topic: "Forecasts & Timing"
 excerpt: "2027 is about to be sold to you as sweet, gentle and romantic. Nobody selling it will mention whiny, clingy, needy or reckless. So I will."
-isoDate: "2026-11-16"
-cardDate: "Nov 16, 2026"
+isoDate: "2026-10-12"
+cardDate: "Oct 12, 2026"
 author: "Bill Hajdu"
-date: "Nov 16, 2026"
+date: "Oct 12, 2026"
 readTime: "5 min read"
 categoryPill: "Forecasts & Timing"
 breadcrumbLabel: "Forecasts & Timing"
@@ -22,7 +22,7 @@ seo:
     image: "https://mahjongtarot.com/images/blog/dark-side-of-the-sheep-year-2027.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
-  datePublished: "2026-11-16"
+  datePublished: "2026-10-12"
   image: "https://mahjongtarot.com/images/blog/dark-side-of-the-sheep-year-2027.webp"
 faqs:
   - q: "What is the dark side of the Sheep year?"
@@ -119,7 +119,7 @@ They can also be some of the sweetest people you'll ever meet, which is why you 
 
 ## What to Do With This Before February
 
-You have a little under three months left before the Sheep takes over. Use them to get honest.
+You have a little under four months left before the Sheep takes over. Use them to get honest.
 
 Ask yourself who in your life is about to get harder to deal with, and decide now how much patience you're willing to spend. Ask yourself whether you're the one who thinks this doesn't apply to you. If so, it applies to you.
 

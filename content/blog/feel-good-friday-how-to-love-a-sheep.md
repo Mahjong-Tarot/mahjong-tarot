@@ -2,10 +2,10 @@
 title: "Feel Good Friday: How to Love a Sheep Without Going Up the Wall"
 topic: "Love & Relationships"
 excerpt: "Sheep people are darling, sweet, and capable of draining the life right out of you. Here are five ways to love one anyway, and a small challenge for this weekend."
-isoDate: "2026-11-20"
-cardDate: "Nov 20, 2026"
+isoDate: "2026-10-16"
+cardDate: "Oct 16, 2026"
 author: "Bill Hajdu"
-date: "Nov 20, 2026"
+date: "Oct 16, 2026"
 readTime: "4 min read"
 categoryPill: "Love & Relationships"
 breadcrumbLabel: "Love & Relationships"
@@ -22,7 +22,7 @@ seo:
     image: "https://mahjongtarot.com/images/blog/feel-good-friday-how-to-love-a-sheep.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
-  datePublished: "2026-11-20"
+  datePublished: "2026-10-16"
   image: "https://mahjongtarot.com/images/blog/feel-good-friday-how-to-love-a-sheep.webp"
 faqs:
   - q: "What are Sheep people like in Chinese astrology?"
@@ -38,10 +38,10 @@ faqs:
 related:
   - slug: "dark-side-of-the-sheep-year-2027"
     title: "The Dark Side of the Sheep Year Nobody Wants to Sell You"
-    dateLabel: "Nov 16, 2026"
+    dateLabel: "Oct 12, 2026"
   - slug: "sheep-year-2027-reckless-no-plan-mahjong-mirror"
     title: "The Sheep Doesn't Plan. That's Why You Have To."
-    dateLabel: "Nov 18, 2026"
+    dateLabel: "Oct 14, 2026"
 cta:
   overline: "Know the Sheep in Your Life."
   heading: "Book a Reading with Bill"

@@ -633,84 +633,84 @@ Publishes: Friday (blog + social), Saturday (social)
 
 ---
 
-## Week of November 16: The Dark Side of the Sheep
+## Week of October 12: The Dark Side of the Sheep
 
 > One interview, one campaign. Source brief: `content/source-material/sheep-2027-dark-side.md`, the 2026-10-05 Mahjong Mirror interview with Bill. Every sign has a dark side, and the Sheep year starts Feb 6, 2027. New ground beyond the Oct 5 week: the Sheep's flaws by name, the no-planning problem, and how to live with a Sheep person. Monday's blog is the primary; Wednesday's and Friday's are channels of it and each publishes on its own date.
 
-**Topic: 2026-11-16-horse-sheep-dark-side** — STATUS: PUBLISHED
+**Topic: 2026-10-12-horse-sheep-dark-side** — STATUS: PUBLISHED
 Angle: Fire Horse, shock & awe. Emotional, whiny, clingy, needy: the part of 2027 nobody selling you the year will mention. The Rat and the rational types feel it most, and you may catch yourself doing it too.
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-11-18-mirror-sheep-winging-it** — STATUS: PUBLISHED
+**Topic: 2026-10-14-mirror-sheep-winging-it** — STATUS: PUBLISHED
 Angle: Mahjong Mirror, the answer. The Sheep wings it. Spontaneity bordering on recklessness does the most damage with money, so the Mirror becomes the plan that survives a year that hates plans.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-11-20-feel-good-loving-a-sheep** — STATUS: PUBLISHED
+**Topic: 2026-10-16-feel-good-loving-a-sheep** — STATUS: PUBLISHED
 Angle: Feel Good Friday. Darling, sweet and draining. How to light their fire, lend a shoulder and build their confidence without preaching. The weekend challenge: do one of these for one person.
 Publishes: Friday (blog + social), Saturday (social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| Nov 16 | Mon | Blog | "The Dark Side of the Sheep Year Nobody Wants to Sell You." Every sign has a good side and a dark side, and everybody sells the good one. The Sheep's dark side is emotional, whiny, clingy and needy, and from February 6 that is the flow of the whole year. Rat people will have a hard time, rational types may catch themselves doing it too, and a passive Yin sign can still be reckless on that much fire. The one skill that covers it all: self-control. |
-| Nov 16 | Mon | Facebook EN | Somebody is going to sell you 2027 as a sweet, gentle, romantic year. They'll be leaving out the half that costs you something: emotional, whiny, clingy, needy. It looks soft, but the Sheep is a fire sign. |
-| Nov 16 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| Nov 16 | Mon | Instagram | Emotional. Whiny. Clingy. Needy. Nobody selling you 2027 is going to say those four words. So I will. |
+| Oct 12 | Mon | Blog | "The Dark Side of the Sheep Year Nobody Wants to Sell You." Every sign has a good side and a dark side, and everybody sells the good one. The Sheep's dark side is emotional, whiny, clingy and needy, and from February 6 that is the flow of the whole year. Rat people will have a hard time, rational types may catch themselves doing it too, and a passive Yin sign can still be reckless on that much fire. The one skill that covers it all: self-control. |
+| Oct 12 | Mon | Facebook EN | Somebody is going to sell you 2027 as a sweet, gentle, romantic year. They'll be leaving out the half that costs you something: emotional, whiny, clingy, needy. It looks soft, but the Sheep is a fire sign. |
+| Oct 12 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 12 | Mon | Instagram | Emotional. Whiny. Clingy. Needy. Nobody selling you 2027 is going to say those four words. So I will. |
 | Nov 17 | Tue | Facebook EN | If you were born in a Rat year, I'm sorry. Next year is going to aggravate you. And if you're the logical one in the family, you may be the rational type and still catch yourself getting too emotional. |
 | Nov 17 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
 | Nov 17 | Tue | Instagram | Think you're too rational for the Sheep year? That's what the rational people always think. |
-| Nov 18 | Wed | Blog | "The Sheep Doesn't Plan. That's Why You Have To." The Sheep isn't into the logic that goes into planning: spontaneity bordering on recklessness, and in a passive fire sign it feels like a nice afternoon. Money is where it could be most disastrous, so the budget and cash flow go on paper now. The Mahjong Mirror's four angles (Central Theme, Know Thyself, the Opposition, the Future) are the plan that survives a year that hates plans. |
-| Nov 18 | Wed | Facebook EN | The Sheep doesn't plan. That's why you have to. Money is where winging it could be most disastrous. Two boring things matter a lot next year: balancing the budget and watching your cash flow. |
-| Nov 18 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
-| Nov 18 | Wed | Instagram | In a Horse year, recklessness feels like recklessness. In a Sheep year, it feels like a nice afternoon. Wing it on dinner. Don't wing it on the money. |
+| Oct 14 | Wed | Blog | "The Sheep Doesn't Plan. That's Why You Have To." The Sheep isn't into the logic that goes into planning: spontaneity bordering on recklessness, and in a passive fire sign it feels like a nice afternoon. Money is where it could be most disastrous, so the budget and cash flow go on paper now. The Mahjong Mirror's four angles (Central Theme, Know Thyself, the Opposition, the Future) are the plan that survives a year that hates plans. |
+| Oct 14 | Wed | Facebook EN | The Sheep doesn't plan. That's why you have to. Money is where winging it could be most disastrous. Two boring things matter a lot next year: balancing the budget and watching your cash flow. |
+| Oct 14 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 14 | Wed | Instagram | In a Horse year, recklessness feels like recklessness. In a Sheep year, it feels like a nice afternoon. Wing it on dinner. Don't wing it on the money. |
 | Nov 19 | Thu | Facebook EN | You can hand someone a perfect spreadsheet in a Sheep year and it will just sit there. So here's a plan that doesn't feel like one: the four questions of the Mahjong Mirror. |
 | Nov 19 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
 | Nov 19 | Thu | Instagram | Caution is an attitude. Attitudes don't survive a good mood. Stop for a minute and ask: what's actually at stake, and who am I right now? |
-| Nov 20 | Fri | Blog | "Feel Good Friday: How to Love a Sheep Without Going Up the Wall." Sheep people are darling, sweet and sometimes draining. Five ways to love one: find what lights their fire, give a push not a shove, don't preach, lend the shoulder, work out what they actually need. The weekend challenge: pick one person and do one of these once before Monday. |
-| Nov 20 | Fri | Facebook EN | Feel Good Friday: I've been hard on the Sheep all week. Sheep people can be really darling, sweet people. They can also drive you up the wall. Pick one person this weekend and do one of these five things. Who's your Sheep? |
-| Nov 20 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
-| Nov 20 | Fri | Instagram | Feel Good Friday: how to love a Sheep without going up the wall. Pick one person. Do one of these once before Monday. |
+| Oct 16 | Fri | Blog | "Feel Good Friday: How to Love a Sheep Without Going Up the Wall." Sheep people are darling, sweet and sometimes draining. Five ways to love one: find what lights their fire, give a push not a shove, don't preach, lend the shoulder, work out what they actually need. The weekend challenge: pick one person and do one of these once before Monday. |
+| Oct 16 | Fri | Facebook EN | Feel Good Friday: I've been hard on the Sheep all week. Sheep people can be really darling, sweet people. They can also drive you up the wall. Pick one person this weekend and do one of these five things. Who's your Sheep? |
+| Oct 16 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 16 | Fri | Instagram | Feel Good Friday: how to love a Sheep without going up the wall. Pick one person. Do one of these once before Monday. |
 | Nov 21 | Sat | Facebook EN | Even when they know exactly what they're doing, Sheep people still want to lean on you. They don't need you for this. They want you anyway. Lend the shoulder. It costs you five minutes. |
 | Nov 21 | Sat | Facebook VN | Vietnamese translation of Facebook EN |
 | Nov 21 | Sat | Instagram | Don't preach. Notice one thing they did well, say so in plain words, then let them have the credit. |
 
 ---
 
-## Week of November 23: The Bright Side of the Sheep
+## Week of October 19: The Bright Side of the Sheep
 
 > One interview, one campaign. Source brief: `content/source-material/sheep-2027-bright-side.md`, the 2026-10-12 Mahjong Mirror interview with Bill. The counterweight to the dark-side week: the Sheep is the eighth sign and the strongest Yin sign, and next year you win by yielding. Monday's blog is the primary; Wednesday's and Friday's are channels of it and each publishes on its own date.
 
-**Topic: 2026-11-23-horse-sheep-bright-side** — STATUS: PUBLISHED
+**Topic: 2026-10-19-horse-sheep-bright-side** — STATUS: PUBLISHED
 Angle: Fire Horse, shock & awe. Eight is the luckiest number, and the Sheep is sign number eight. Beauty, romance, creativity and the arts do well. The best signs: Rabbit, Pig and Horse with Earth or Wood birth elements, never the Fire Horse.
 Publishes: Monday (blog + social), Tuesday (social)
 
-**Topic: 2026-11-25-mirror-win-by-yielding** — STATUS: PUBLISHED
+**Topic: 2026-10-21-mirror-win-by-yielding** — STATUS: PUBLISHED
 Angle: Mahjong Mirror, the answer. Lose, lose, lose, win. Yin fire is controlled fire, and the Mirror's four angles tell you when yielding is the winning move.
 Publishes: Wednesday (blog + social), Thursday (social)
 
-**Topic: 2026-11-27-feel-good-make-peace** — STATUS: PUBLISHED
+**Topic: 2026-10-23-feel-good-make-peace** — STATUS: PUBLISHED
 Angle: Feel Good Friday. The Sheep is a peaceful sign and the odds favor conflict resolution. The weekend challenge: reach out to one person you are at odds with.
 Publishes: Friday (blog + social), Saturday (social)
 
 | Date | Day | Channel | Hook |
 |------|-----|---------|------|
-| Nov 23 | Mon | Blog | "Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight." After last week's dark side, the case for the Sheep. It's the eighth sign (8 is prosperity) and the strongest Yin sign, so 2027 rewards patience over charging in. Beauty, romance, creativity and the arts do well. Best signs: Rabbit (Cat in Vietnam), Pig and Horse with Earth or Wood birth elements; Earth Pig and Earth Rabbit for money; never the Fire Horse. |
-| Nov 23 | Mon | Facebook EN | Last week I told you everything wrong with the Sheep. Here's the other side: it's the eighth sign, 8 is the number of prosperity, and it's the strongest Yin sign there is. The quiet person in the room is about to have a very good year. |
-| Nov 23 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
-| Nov 23 | Mon | Instagram | The Sheep is sign number eight. And 8 is the number of prosperity. The quiet one is about to have a very good year. |
+| Oct 19 | Mon | Blog | "Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight." After last week's dark side, the case for the Sheep. It's the eighth sign (8 is prosperity) and the strongest Yin sign, so 2027 rewards patience over charging in. Beauty, romance, creativity and the arts do well. Best signs: Rabbit (Cat in Vietnam), Pig and Horse with Earth or Wood birth elements; Earth Pig and Earth Rabbit for money; never the Fire Horse. |
+| Oct 19 | Mon | Facebook EN | Last week I told you everything wrong with the Sheep. Here's the other side: it's the eighth sign, 8 is the number of prosperity, and it's the strongest Yin sign there is. The quiet person in the room is about to have a very good year. |
+| Oct 19 | Mon | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 19 | Mon | Instagram | The Sheep is sign number eight. And 8 is the number of prosperity. The quiet one is about to have a very good year. |
 | Nov 24 | Tue | Facebook EN | Who has the best 2027? Rabbit, Pig and Horse, ideally with an Earth or Wood birth element. Earth Pig and Earth Rabbit could do really well financially. One warning: not the Fire Horse. Fire on top of the Fire Sheep is too much. |
 | Nov 24 | Tue | Facebook VN | Vietnamese translation of Facebook EN |
 | Nov 24 | Tue | Instagram | Beauty. Romance. Creativity. The arts. In a Horse year, gentle people get run over. In a Sheep year, they get listened to. |
-| Nov 25 | Wed | Blog | "Lose, Lose, Lose, Win: The Sheep's Way of Getting What It Wants." In 2027 you succeed by yielding, but yielding and giving up look identical from the outside. The Mirror's four angles (central theme, know thyself, the opposition, the future) become four questions that tell them apart. In conflict seek resolution, in money go slow, in love loosen up now and then. |
-| Nov 25 | Wed | Facebook EN | The Sheep can lose and lose and lose an argument, and all of a sudden the Sheep wins. But yielding and giving up look exactly the same. The difference: the Sheep gives up the point. It doesn't give up the goal. |
-| Nov 25 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
-| Nov 25 | Wed | Instagram | Lose. Lose. Lose. Win. Give up the point. Keep the goal. |
+| Oct 21 | Wed | Blog | "Lose, Lose, Lose, Win: The Sheep's Way of Getting What It Wants." In 2027 you succeed by yielding, but yielding and giving up look identical from the outside. The Mirror's four angles (central theme, know thyself, the opposition, the future) become four questions that tell them apart. In conflict seek resolution, in money go slow, in love loosen up now and then. |
+| Oct 21 | Wed | Facebook EN | The Sheep can lose and lose and lose an argument, and all of a sudden the Sheep wins. But yielding and giving up look exactly the same. The difference: the Sheep gives up the point. It doesn't give up the goal. |
+| Oct 21 | Wed | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 21 | Wed | Instagram | Lose. Lose. Lose. Win. Give up the point. Keep the goal. |
 | Nov 26 | Thu | Facebook EN | Next year's fire is a different fire. The Horse is Yang fire, out of control. The Sheep is Yin fire, controlled. In conflict, seek resolution. In money, go slow. In love, throw caution to the wind now and then. Three parts of your life, three different speeds. |
 | Nov 26 | Thu | Facebook VN | Vietnamese translation of Facebook EN |
 | Nov 26 | Thu | Instagram | Before you give in or dig in, ask four questions. Ten minutes and a notebook. That's the Mirror, ready for the Sheep year. |
-| Nov 27 | Fri | Blog | "Feel Good Friday: Make Peace With One Person Before the Sheep Arrives." The Sheep is a peaceful sign and next year favors conflict resolution, so don't wait for February. The weekend challenge: pick one person you're at odds with and go first, with one small, gentle message. |
-| Nov 27 | Fri | Facebook EN | Feel Good Friday: you already know who it is. The Sheep is a peaceful sign and the odds are in your favor. This weekend, pick one person and go first. One small sentence is enough: "I was thinking about you." |
-| Nov 27 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
-| Nov 27 | Fri | Instagram | Feel Good Friday: one person, one message, this weekend. You go first. |
+| Oct 23 | Fri | Blog | "Feel Good Friday: Make Peace With One Person Before the Sheep Arrives." The Sheep is a peaceful sign and next year favors conflict resolution, so don't wait for February. The weekend challenge: pick one person you're at odds with and go first, with one small, gentle message. |
+| Oct 23 | Fri | Facebook EN | Feel Good Friday: you already know who it is. The Sheep is a peaceful sign and the odds are in your favor. This weekend, pick one person and go first. One small sentence is enough: "I was thinking about you." |
+| Oct 23 | Fri | Facebook VN | Vietnamese translation of Facebook EN |
+| Oct 23 | Fri | Instagram | Feel Good Friday: one person, one message, this weekend. You go first. |
 | Nov 28 | Sat | Facebook EN | Still haven't sent it? You've got until Monday. Going first doesn't mean you were wrong. Open the door a crack and let it be. They may answer tomorrow, or in March. Sheep energy isn't in a hurry. |
 | Nov 28 | Sat | Facebook VN | Vietnamese translation of Facebook EN |
 | Nov 28 | Sat | Instagram | "I was thinking about you." Pick one line. Send it before Monday. A door only has to come off the latch. |

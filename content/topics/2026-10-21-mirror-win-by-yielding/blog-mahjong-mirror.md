@@ -9,7 +9,7 @@ reason: Monday's Prediction said the Yin approach wins in 2027. That leaves the 
 title: "Lose, Lose, Lose, Win: The Sheep's Way of Getting What It Wants"
 slug: sheep-year-2027-win-by-yielding-mahjong-mirror
 author: Bill Hajdu
-date: 2026-11-25
+date: 2026-10-21
 category: The Mahjong Mirror
 read_time: 5 min
 excerpt: "In 2027 you succeed by yielding. But yielding and giving up look identical from the outside. Here's how to use the four angles of the Mahjong Mirror to tell them apart."

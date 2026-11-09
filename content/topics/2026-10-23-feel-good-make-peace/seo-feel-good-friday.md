@@ -32,7 +32,7 @@ feel-good-friday-make-peace-before-the-sheep
 - /the-mahjong-mirror: "The Mahjong Mirror"
 - /blog/posts/bright-side-sheep-year-2027-prosperity: "the good news about 2027"
 - /blog/posts/sheep-year-2027-win-by-yielding-mahjong-mirror: "The Sheep can lose an argument five times over"
-- /blog/posts/fire-sheep-2027-love-passion-builds: "I told you that in October"
+- /blog/posts/fire-sheep-2027-love-passion-builds: "I told you that earlier this month"
 
 ## External Links
 - Wikipedia: Goat (zodiac), https://en.wikipedia.org/wiki/Goat_(zodiac)

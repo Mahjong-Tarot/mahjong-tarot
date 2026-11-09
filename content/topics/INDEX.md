@@ -126,7 +126,7 @@ SEO reference for all written blog posts. Updated by the writer agent after each
 | When Am I Going to Make Money? Here's How to Time It Yourself. | when will I make money Chinese astrology | One of the most asked questions in 40 years of readings. Bill Hajdu's five-step method for timing wealth luck by Day Master, for any year, month or day. | /the-mahjong-mirror, /readings, /blog/posts/earth-pig-month-2026-who-gets-the-money, /blog/posts/fire-sheep-2027-money-career-caution | https://en.wikipedia.org/wiki/Four_Pillars_of_Destiny, https://en.wikipedia.org/wiki/Wuxing_(Chinese_philosophy) |
 | Feel Good Friday: Find Your Day Element This Weekend | find your Day Master element | Every element gets its turn at money. This weekend, find your Day Master element, find your wealth element, and put your next wealth month on the calendar. | /blog/posts/earth-pig-month-2026-who-gets-the-money, /blog/posts/when-will-i-make-money-day-master-wealth-luck, /readings, /the-mahjong-mirror | https://en.wikipedia.org/wiki/Four_Pillars_of_Destiny, https://en.wikipedia.org/wiki/Wuxing_(Chinese_philosophy) |
 
-## Week of November 16: The Dark Side of the Sheep
+## Week of October 12: The Dark Side of the Sheep
 
 | Title | Primary Keyword | SEO Description | Internal Links | External Links |
 |-------|----------------|-----------------|----------------|----------------|
@@ -134,7 +134,7 @@ SEO reference for all written blog posts. Updated by the writer agent after each
 | The Sheep Doesn't Plan. That's Why You Have To. | Sheep year 2027 money planning | The Fire Sheep wings it, and money is where that hurts most. Protect your budget and cash flow in 2027 with the four angles of the Mahjong Mirror. | /the-mahjong-mirror, /readings, /blog/posts/dark-side-of-the-sheep-year-2027, /blog/posts/fire-sheep-2027-money-career-caution | https://en.wikipedia.org/wiki/Goat_(zodiac), https://en.wikipedia.org/wiki/Yin_and_yang |
 | Feel Good Friday: How to Love a Sheep Without Going Up the Wall | how to deal with a Sheep person Chinese zodiac | Sheep people are darling, sweet and sometimes draining. Five ways to light their fire, build their confidence and keep your sanity this weekend. | /readings, /the-mahjong-mirror, /blog/posts/dark-side-of-the-sheep-year-2027, /blog/posts/sheep-year-2027-reckless-no-plan-mahjong-mirror | https://en.wikipedia.org/wiki/Goat_(zodiac) |
 
-## Week of November 23: The Bright Side of the Sheep
+## Week of October 19: The Bright Side of the Sheep
 
 | Title | Primary Keyword | SEO Description | Internal Links | External Links |
 |-------|----------------|-----------------|----------------|----------------|

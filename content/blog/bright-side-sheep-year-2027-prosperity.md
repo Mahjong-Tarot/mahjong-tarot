@@ -2,10 +2,10 @@
 title: "Eight Is the Luckiest Number in China. The Sheep Is Sign Number Eight."
 topic: "Forecasts & Timing"
 excerpt: "After last week's dark side, here's the case for the Sheep. It's the eighth sign, the strongest Yin sign, and in 2027 it will reward a very different kind of person than the Horse did."
-isoDate: "2026-11-23"
-cardDate: "Nov 23, 2026"
+isoDate: "2026-10-19"
+cardDate: "Oct 19, 2026"
 author: "Bill Hajdu"
-date: "Nov 23, 2026"
+date: "Oct 19, 2026"
 readTime: "5 min read"
 categoryPill: "Forecasts & Timing"
 breadcrumbLabel: "Forecasts & Timing"
@@ -22,7 +22,7 @@ seo:
     image: "https://mahjongtarot.com/images/blog/bright-side-sheep-year-2027-prosperity.webp"
     siteName: "The Mahjong Mirror"
 jsonLd:
-  datePublished: "2026-11-23"
+  datePublished: "2026-10-19"
   image: "https://mahjongtarot.com/images/blog/bright-side-sheep-year-2027-prosperity.webp"
 faqs:
   - q: "Why is the Sheep considered a lucky sign?"
@@ -40,7 +40,7 @@ faqs:
 related:
   - slug: "dark-side-of-the-sheep-year-2027"
     title: "The Dark Side of the Sheep Year Nobody Wants to Sell You"
-    dateLabel: "Nov 16, 2026"
+    dateLabel: "Oct 12, 2026"
   - slug: "fire-sheep-year-2027-preview-what-changes"
     title: "The Fire Burns Out Next Year. Here Is What Replaces It."
     dateLabel: "Jun 15, 2026"
@@ -106,7 +106,7 @@ The Sheep year is normally a great year for romance. This one has fire in it.
 
 But this is a different fire from the one we've been living in. The Horse carries Yang fire, which is fire out of control. The Sheep carries Yin fire. Controlled fire. That means a lot of passion in relationships, and a better chance of doing something good with it.
 
-I [wrote about this in October](/blog/posts/fire-sheep-2027-love-passion-builds), so I'll keep it short. If you're in a relationship and you've been thinking about taking it to the next level, 2027 is a great time. If you're not in one, you should be out there working on it. It's one of the good years for romance to flare up.
+I [wrote about this earlier this month](/blog/posts/fire-sheep-2027-love-passion-builds), so I'll keep it short. If you're in a relationship and you've been thinking about taking it to the next level, 2027 is a great time. If you're not in one, you should be out there working on it. It's one of the good years for romance to flare up.
 
 ## The Best Signs of the Fire Sheep Year
 
@@ -135,7 +135,7 @@ If you were born in January or early February, your Chinese year may be the one 
 
 I said I'd accentuate the positive, and I have. But I wouldn't be doing my job if I let you walk off thinking the Sheep has changed its nature.
 
-Sheep are cautious, and that's one of their virtues. In love, it may be all right to throw caution to the wind every now and then. In money, follow the Sheep's inclination. Take it easy. Go slow. Make sure you know what you're doing. Aim for stability and conservative investments, [as I said in October](/blog/posts/fire-sheep-2027-money-career-caution).
+Sheep are cautious, and that's one of their virtues. In love, it may be all right to throw caution to the wind every now and then. In money, follow the Sheep's inclination. Take it easy. Go slow. Make sure you know what you're doing. Aim for stability and conservative investments, [as I said earlier this month](/blog/posts/fire-sheep-2027-money-career-caution).
 
 And it's still a fire year. There will be flare-ups when emotions get out of control, and maybe a little more risk-taking than a Sheep would normally allow. More passion, for good and for difficulties.
 

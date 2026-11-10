@@ -17,4 +17,4 @@ Bill Hajdu's practice and book website (The Mahjong Tarot). Dave is owner/operat
 - `working_files/` is git-ignored scratch: never commit from it; promote only optimized `.webp`.
 - Almanac gotcha: "No almanac record for this date" means a stale auth token, not missing data (`fetchAlmanacForDate` in `website/lib/almanac.js` swallows 401s).
 - `book/` builds The Mahjong Mirror (`manuscript.txt` + `blocks.json` → `build.py` → `book.html`); published output is copied to `website/public/book/` and served as an unlisted static page.
-- Docs index: `docs/README.md`. Skills: 11 in `.claude/skills/` (mahjong-studio pipeline, writer, build-page, generate-image, notify-social-media, lark-send, resend-email).
+- Docs index: `docs/README.md`. Skills: 12 in `.claude/skills/` (campaign: idea → platform campaign → server writer agent; mahjong-studio pipeline, writer, build-page, generate-image, notify-social-media, lark-send, resend-email).

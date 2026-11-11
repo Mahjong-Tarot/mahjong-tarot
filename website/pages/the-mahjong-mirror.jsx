@@ -57,7 +57,7 @@ export default function TheMahjongMirror() {
  </p>
  <div className="cta-row">
  <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
- <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
+ <Link href="/the-mahjong-mirror/sample" className="btn-secondary">Read a Sample</Link>
  </div>
  </div>
  <div className={styles.heroCover}>

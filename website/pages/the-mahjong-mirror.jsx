@@ -31,13 +31,13 @@ export default function TheMahjongMirror() {
  description:
  'A modern divination system inspired by ancient Mahjong symbolism, guiding you toward clarity, intuition, and deeper self-discovery. 42 cards, grounded in Chinese tradition.',
  url: 'https://www.mahjongtarot.com/the-mahjong-mirror',
- bookFormat: 'https://schema.org/Hardcover',
+ bookFormat: 'https://schema.org/EBook',
  inLanguage: 'en',
  },
  faqPage([
  { q: 'What is The Mahjong Mirror?', a: 'The Mahjong Mirror is a 42-card divination system created by Bill Hajdu, drawing on traditional Chinese Mahjong symbolism to support self-reflection, decision-making, and spiritual clarity.' },
  { q: 'Do I need to know Mahjong to use it?', a: 'No. The Mahjong Mirror is designed to be used without any prior knowledge of Mahjong. Each card carries a symbolic meaning explained in the accompanying book.' },
- { q: 'When is the book available?', a: 'The Kindle edition of The Mahjong Mirror is available now on Amazon. The hardcopy and the signed bundle with the Mahjong Mirror Card Set can be ordered on this site.' },
+ { q: 'When is the book available?', a: 'The Kindle edition of The Mahjong Mirror is available now on Amazon.' },
  ]),
  ])}
  />
@@ -57,7 +57,7 @@ export default function TheMahjongMirror() {
  </p>
  <div className="cta-row">
  <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
- <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
+ <Link href="/the-mahjong-mirror/sample" className="btn-secondary">Read a Sample</Link>
  </div>
  </div>
  <div className={styles.heroCover}>
@@ -226,13 +226,12 @@ export default function TheMahjongMirror() {
  <span className="overline">Begin Your Journey Through the Tiles</span>
  <h2>Ready for Your Copy?</h2>
  <p>
- The Kindle edition is available now on Amazon. Prefer print? Order
- the hardcopy or the signed bundle with the Mahjong Mirror Card Set
- here.
+ The Kindle edition of The Mahjong Mirror is available now on
+ Amazon.
  </p>
  <div className="cta-row cta-row-spaced cta-row-center">
  <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
- <Link href="/the-mahjong-mirror/order" className="btn-secondary">Order the Hardcopy</Link>
+ <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
  </div>
  </div>
  </section>

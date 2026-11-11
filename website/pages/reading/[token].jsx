@@ -243,7 +243,7 @@ function UpsellPS({ hasPremium, hasBook }) {
       </div>
       <div className={styles.psCtas}>
         <Link href="/signup" className={styles.psBtnPrimary}>Join the Inner Circle — $49.50/yr</Link>
-        <Link href="/the-mahjong-mirror/order?sku=digital" className={styles.psBtnSecondary}>I just want the book — $18.88</Link>
+        <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className={styles.psBtnSecondary}>I just want the book</a>
       </div>
       <p className={styles.psSig}>— Bill</p>
     </section>

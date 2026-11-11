@@ -65,7 +65,7 @@ export default function BlogIndex({ posts }) {
               hidden inside ancient symbols.
             </p>
             <div className="cta-row cta-row-spaced">
-              <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
+              <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
               <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
             </div>
           </div>

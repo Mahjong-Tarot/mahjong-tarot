@@ -140,8 +140,8 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
                   >
                     Buy on Amazon
                   </a>
-                  <Link href="/the-mahjong-mirror" className={styles.bookGhost}>
-                    Read a chapter <span aria-hidden="true">→</span>
+                  <Link href="/the-mahjong-mirror/sample" className={styles.bookGhost}>
+                    Read a sample <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               </div>

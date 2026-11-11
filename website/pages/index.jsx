@@ -141,7 +141,7 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
                     Buy on Amazon
                   </a>
                   <Link href="/the-mahjong-mirror" className={styles.bookGhost}>
-                    Read a chapter <span aria-hidden="true">→</span>
+                    About the book <span aria-hidden="true">→</span>
                   </Link>
                 </div>
               </div>

@@ -85,7 +85,7 @@ export default function Contact() {
  </p>
  <div className="cta-row cta-row-spaced">
  <Link href="/book-a-reading" className="btn-primary">Book a Private Reading</Link>
- <Link href="/the-mahjong-mirror/order" className="btn-secondary">Pre-Order the Book</Link>
+ <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-secondary">Buy on Amazon</a>
  </div>
  </div>
  </section>

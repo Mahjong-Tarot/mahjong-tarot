@@ -123,18 +123,23 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
           <div className="container">
             <div className={styles.book}>
               <div>
-                <span className={styles.bookEyebrow}>Coming Soon</span>
+                <span className={styles.bookEyebrow}>Now on Amazon</span>
                 <h2>Your path to <em>wiser decisions</em></h2>
                 <p>
                   A modern divination system inspired by ancient Mahjong symbolism,
                   guiding you toward clarity, intuition, and deeper self-discovery.
                   No prior knowledge of Mahjong required.
                 </p>
-                <p className={styles.bookSpec}>Digital July 2026 · Print August 2026 · From $18.88</p>
+                <p className={styles.bookSpec}>The Mahjong Mirror · Kindle edition · Available now</p>
                 <div className={styles.bookCtas}>
-                  <Link href="/the-mahjong-mirror/order" className={styles.heroPrimary}>
-                    Pre-Order the Book
-                  </Link>
+                  <a
+                    href="https://www.amazon.com/dp/B0HQZZXXLC"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.heroPrimary}
+                  >
+                    Buy on Amazon
+                  </a>
                   <Link href="/the-mahjong-mirror" className={styles.bookGhost}>
                     Read a chapter <span aria-hidden="true">→</span>
                   </Link>

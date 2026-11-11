@@ -11,7 +11,7 @@ export default function TheMahjongMirror() {
  <>
  <SEO
  title="The Mahjong Mirror Book & Deck by Bill Hajdu, Modern Divination System"
- description="The Mahjong Mirror by Bill Hajdu, a 42-card divination system grounded in traditional Chinese Mahjong symbolism. Book and deck coming soon. Preorder your copy."
+ description="The Mahjong Mirror by Bill Hajdu, a 42-card divination system grounded in traditional Chinese Mahjong symbolism. Kindle edition available now on Amazon."
  path="/the-mahjong-mirror"
  image="/images/book-cover.webp"
  type="book"
@@ -37,7 +37,7 @@ export default function TheMahjongMirror() {
  faqPage([
  { q: 'What is The Mahjong Mirror?', a: 'The Mahjong Mirror is a 42-card divination system created by Bill Hajdu, drawing on traditional Chinese Mahjong symbolism to support self-reflection, decision-making, and spiritual clarity.' },
  { q: 'Do I need to know Mahjong to use it?', a: 'No. The Mahjong Mirror is designed to be used without any prior knowledge of Mahjong. Each card carries a symbolic meaning explained in the accompanying book.' },
- { q: 'When is the book available?', a: 'The Mahjong Mirror is coming soon. Join the preorder list to be notified when it ships.' },
+ { q: 'When is the book available?', a: 'The Kindle edition of The Mahjong Mirror is available now on Amazon. The hardcopy and the signed bundle with the Mahjong Mirror Card Set can be ordered on this site.' },
  ]),
  ])}
  />
@@ -49,14 +49,14 @@ export default function TheMahjongMirror() {
  <section className={styles.hero}>
  <div className={`container ${styles.heroInner}`}>
  <div className={styles.heroText}>
- <span className="overline">Coming Soon</span>
+ <span className="overline">Now on Amazon</span>
  <h1>Unlock Your Destiny<br />Through the<br /><em>Mahjong Mirror</em></h1>
  <p className={styles.heroLead}>
  A modern divination system inspired by ancient Mahjong symbolism, 
  guiding you toward clarity, intuition, and deeper self-discovery.
  </p>
  <div className="cta-row">
- <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
+ <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
  <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
  </div>
  </div>
@@ -224,15 +224,15 @@ export default function TheMahjongMirror() {
  <section id="preorder" className="section-stone">
  <div className={`container ${styles.preorder}`}>
  <span className="overline">Begin Your Journey Through the Tiles</span>
- <h2>Ready to Reserve Your Copy?</h2>
+ <h2>Ready for Your Copy?</h2>
  <p>
- Pre-order the digital edition, the hardcopy, or the signed bundle
- with the Mahjong Mirror Card Set. Or join the waitlist and Bill will
- follow up with you directly.
+ The Kindle edition is available now on Amazon. Prefer print? Order
+ the hardcopy or the signed bundle with the Mahjong Mirror Card Set
+ here.
  </p>
  <div className="cta-row cta-row-spaced cta-row-center">
- <Link href="/the-mahjong-mirror/order" className="btn-primary">Pre-Order the Book</Link>
- <Link href="/contact?subject=Mahjong+Mirror+Waitlist" className="btn-secondary">Join the Waitlist</Link>
+ <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
+ <Link href="/the-mahjong-mirror/order" className="btn-secondary">Order the Hardcopy</Link>
  </div>
  </div>
  </section>

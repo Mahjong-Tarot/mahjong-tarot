@@ -53,8 +53,8 @@ export default function OrderBook() {
   return (
     <>
       <SEO
-        title="Pre-Order The Mahjong Mirror by Bill Hajdu"
-        description="Pre-order The Mahjong Mirror — digital edition, hardcopy, or signed hardcopy with the Mahjong Mirror Card Set."
+        title="Order The Mahjong Mirror by Bill Hajdu"
+        description="Order The Mahjong Mirror: digital edition, hardcopy, or signed hardcopy with the Mahjong Mirror Card Set. Kindle edition available now on Amazon."
         path="/the-mahjong-mirror/order"
         image="/images/book-cover.webp"
         type="book"
@@ -79,14 +79,17 @@ export default function OrderBook() {
           </div>
 
           <header className={styles.header}>
-            <span className={styles.eyebrow}>Pre-order</span>
+            <span className={styles.eyebrow}>Order</span>
             <h1 className={styles.title}>
               The <em>Mahjong Mirror</em>,<br />your way
             </h1>
             <p className={styles.lede}>
-              Three ways to receive the book. Choose digital for an instant
-              copy when the book launches, hardcopy to hold the printed
-              edition, or the signed bundle with the Mahjong Mirror Card Set.
+              Three ways to receive the book. Choose digital for a PDF and
+              ePub copy, hardcopy to hold the printed edition, or the signed
+              bundle with the Mahjong Mirror Card Set. Reading on Kindle?{' '}
+              <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer">
+                Buy the Kindle edition on Amazon
+              </a>.
             </p>
           </header>
 

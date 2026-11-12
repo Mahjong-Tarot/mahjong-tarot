@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import PasswordInput from './PasswordInput';
 import { supabase } from '../lib/supabase';
 import { PAID_PLANS } from '../lib/signup';
@@ -26,9 +25,8 @@ const REASSURE_ICONS = [
   ),
 ];
 
-export default function PaySignup({ plan = 'founders' }) {
-  const router = useRouter();
-  const copy = PAID_PLANS[plan] || PAID_PLANS.founders;
+export default function PaySignup({ plan = 'yearly' }) {
+  const copy = PAID_PLANS[plan] || PAID_PLANS.yearly;
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -105,19 +103,9 @@ export default function PaySignup({ plan = 'founders' }) {
           <div className={styles.modeBannerEyebrow}>{copy.eyebrow}</div>
           <div className={styles.modeBannerTitle}>{copy.banner}</div>
         </div>
-        {plan === 'founders' ? (
-          <button
-            type="button"
-            onClick={() => router.push('/signup', undefined, { shallow: true })}
-            className={styles.modeBannerBack}
-          >
-            Use free trial instead
-          </button>
-        ) : (
-          <Link href="/membership" className={styles.modeBannerBack}>
-            Compare plans
-          </Link>
-        )}
+        <Link href="/membership" className={styles.modeBannerBack}>
+          Compare plans
+        </Link>
       </div>
 
       <h2 className={styles.formH}>

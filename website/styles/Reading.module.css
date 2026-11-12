@@ -183,13 +183,6 @@
 .psStackList li { margin: 4px 0; }
 .psStackList strong { color: var(--ink); font-weight: 600; }
 .psStackList em { font-style: normal; color: var(--ink-4); }
-.psStackUrgency {
-  margin: 12px 0 0;
-  font-size: 12px;
-  color: var(--ink-3);
-  font-style: italic;
-}
-.psStackUrgency strong { font-style: normal; color: var(--ink-2); font-weight: 600; }
 .psCtas {
   display: flex;
   flex-wrap: wrap;

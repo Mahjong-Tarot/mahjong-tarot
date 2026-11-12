@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import SEO from '../components/SEO';
 import TrialSignup from '../components/TrialSignup';
@@ -9,10 +10,10 @@ import styles from '../styles/Signup.module.css';
 export default function Signup() {
   const router = useRouter();
   const [mode, setMode] = useState('trial');
-  const [plan, setPlan] = useState('founders');
+  const [plan, setPlan] = useState('yearly');
 
-  // ?plan=yearly | lifetime | founders opens the paid checkout for that
-  // plan; ?mode=pay and ?founder keep their founders meaning.
+  // ?plan=yearly | lifetime opens the paid checkout for that plan. Old
+  // ?mode=pay and ?founder links open the yearly checkout.
   useEffect(() => {
     if (!router.isReady) return;
     const q = router.query;
@@ -20,16 +21,16 @@ export default function Signup() {
     if (PAID_PLANS[queryPlan]) {
       setMode('pay');
       setPlan(queryPlan);
-    } else if (q.mode === 'pay' || 'founder' in q) {
+    } else if (q.mode === 'pay' || 'founder' in q || q.plan === 'founders') {
       setMode('pay');
-      setPlan('founders');
+      setPlan('yearly');
     } else {
       setMode('trial');
-      setPlan('founders');
+      setPlan('yearly');
     }
   }, [router.isReady, router.query]);
 
-  const membershipPlan = mode === 'pay' && plan !== 'founders';
+  const membershipPlan = mode === 'pay';
 
   return (
     <>
@@ -144,49 +145,9 @@ export default function Signup() {
                     </div>
                   </div>
 
-                  <div className={styles.foundersCard}>
-                    <div className={styles.foundersHead}>
-                      <div>
-                        <div className={styles.foundersEyebrow}>◆ Founders offer</div>
-                        <div className={styles.foundersTitle}>
-                          Pay today, lock in <em>50% off</em> for life
-                        </div>
-                        <div className={styles.foundersBlurb}>
-                          Skip the trial, support the work, keep the founder rate every renewal,
-                          and receive a <b>free digital copy of <i>The Mahjong Mirror</i></b> the
-                          day it ships.
-                        </div>
-                      </div>
-                      <div className={styles.foundersPriceWrap}>
-                        <div className={styles.foundersPrice}>
-                          $49.50<span className={styles.foundersStrike}>$99</span>
-                        </div>
-                        <div className={styles.foundersPriceLab}>Per year, locked in</div>
-                      </div>
-                    </div>
-                    <div className={styles.foundersBonus}>
-                      <div className={styles.miniCover} aria-hidden="true">
-                        <div className={styles.miniCoverGlyph}>鏡</div>
-                        <div className={styles.miniCoverEyebrow}>A Divination System</div>
-                        <div className={styles.miniCoverTitle}>
-                          The Mahjong<br /><em>Mirror</em>
-                        </div>
-                        <div className={styles.miniCoverAuthor}>Bill Hajdu · 2026</div>
-                      </div>
-                      <div className={styles.bonusText}>
-                        Bonus: a free <b>digital copy</b> of <i>The Mahjong Mirror</i> sent to
-                        founders the day it ships.
-                        <span className={styles.bonusMeta}>DRM-free PDF + EPUB · yours to keep</span>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className={styles.foundersBtn}
-                      onClick={() => router.push('/signup?mode=pay', undefined, { shallow: true })}
-                    >
-                      Claim founder rate <span aria-hidden="true">→</span>
-                    </button>
-                  </div>
+                  <Link href="/membership" className={styles.compareLink}>
+                    See membership: $99 a year or $299 for life <span aria-hidden="true">→</span>
+                  </Link>
                 </>
               )}
 

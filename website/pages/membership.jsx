@@ -108,6 +108,10 @@ const FAQ = [
     a: 'Your birth date. Add your birth time as well and you also get your Purple Star chart, which needs it.',
   },
   {
+    q: 'What if it is not for me?',
+    a: 'Every membership comes with a 30-day money-back guarantee. Email us within 30 days of joining and we refund you in full.',
+  },
+  {
     q: 'Can I move from yearly to lifetime later?',
     a: 'No. Lifetime is a one-time offer, available only when you join.',
   },
@@ -263,10 +267,32 @@ export default function Membership() {
                   <div className={styles.payPrice}>
                     $99 <span className={styles.payPer}>a year</span>
                   </div>
+                  <div className={styles.payNote}>30-day money-back guarantee</div>
                 </div>
                 <Link href={YEARLY_HREF} className={styles.btnPrimary}>
                   Join for $99 a year <span aria-hidden="true">→</span>
                 </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Guarantee */}
+        <section className={styles.section}>
+          <div className={styles.wrap}>
+            <div className={styles.guarantee}>
+              <div className={styles.guaranteeSeal} aria-hidden="true">
+                <span className={styles.guaranteeDays}>30</span>
+                <span className={styles.guaranteeUnit}>days</span>
+              </div>
+              <div>
+                <div className={styles.eyebrowLeft}>30-day money-back guarantee</div>
+                <h2 className={styles.guaranteeTitle}>Try it for 30 days. If it is not for you, get every penny back.</h2>
+                <p className={styles.guaranteeText}>
+                  Join, run your readings, read the book. If within 30 days you decide
+                  membership is not for you, email us and we refund you in full. No
+                  questions, no forms.
+                </p>
               </div>
             </div>
           </div>
@@ -317,6 +343,7 @@ export default function Membership() {
               </Link>
               <div className={styles.lifetimeNote}>
                 Plus half off every further reading with Bill, for life.
+                Covered by the 30-day money-back guarantee.
               </div>
             </div>
           </div>

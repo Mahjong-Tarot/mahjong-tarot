@@ -206,12 +206,11 @@ function UpsellPS({ hasPremium, hasBook }) {
           look at every morning. That&apos;s what the Inner Circle is.
         </p>
         <p className={styles.psBody}>
-          <strong>$49.50 for the year</strong>, locked in at Founders pricing
-          (it goes to $99 in 2027). Cancel anytime. Your book stays yours
-          either way.
+          <strong>$99 a year</strong>, with a 30-day money-back guarantee.
+          Cancel anytime. Your book stays yours either way.
         </p>
         <div className={styles.psCtas}>
-          <Link href="/signup" className={styles.psBtnPrimary}>Add the Inner Circle — $49.50/yr</Link>
+          <Link href="/membership" className={styles.psBtnPrimary}>Add the Inner Circle, $99/yr</Link>
         </div>
         <p className={styles.psSig}>— Bill</p>
       </section>
@@ -229,20 +228,17 @@ function UpsellPS({ hasPremium, hasBook }) {
         Star charts, in one place every morning.
       </p>
       <div className={styles.psStack}>
-        <p className={styles.psStackTitle}>What&apos;s included <span className={styles.psStackPrice}>— $49.50/yr</span></p>
+        <p className={styles.psStackTitle}>What&apos;s included <span className={styles.psStackPrice}>$99/yr</span></p>
         <ul className={styles.psStackList}>
           <li><strong>The Mahjong Mirror</strong> — digital edition, included <em>($18.88 value)</em></li>
           <li><strong>Daily horoscope</strong> for your Chinese zodiac sign</li>
           <li><strong>Daily almanac</strong> — lucky &amp; unlucky activities for the day</li>
           <li><strong>Your Bazi &amp; Purple Star charts</strong>, computed and ready</li>
-          <li><strong>Founders pricing locked in for life</strong> <em>(renews at $99 from 2027)</em></li>
+          <li><strong>30-day money-back guarantee</strong></li>
         </ul>
-        <p className={styles.psStackUrgency}>
-          Founders pricing closes when the <strong>Year of the Fire Horse</strong> does — May 2026.
-        </p>
       </div>
       <div className={styles.psCtas}>
-        <Link href="/signup" className={styles.psBtnPrimary}>Join the Inner Circle — $49.50/yr</Link>
+        <Link href="/membership" className={styles.psBtnPrimary}>Join the Inner Circle, $99/yr</Link>
         <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className={styles.psBtnSecondary}>I just want the book</a>
       </div>
       <p className={styles.psSig}>— Bill</p>

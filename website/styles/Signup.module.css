@@ -237,175 +237,6 @@
   text-transform: uppercase;
 }
 
-/* Founders offer card */
-.foundersCard {
-  background: var(--fire-50);
-  border: 2px solid var(--fire-500);
-  border-radius: var(--r-md);
-  padding: var(--space-lg2);
-  margin-bottom: var(--space-lg2);
-  color: var(--ink-2);
-}
-.foundersHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-}
-.foundersEyebrow {
-  font-family: var(--mono);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-overline);
-  text-transform: uppercase;
-  color: var(--fire-700);
-  margin-bottom: 6px;
-}
-.foundersTitle {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-.foundersTitle em {
-  font-style: normal;
-  color: var(--fire-600);
-  font-weight: inherit;
-}
-.foundersBlurb {
-  font-family: var(--sans);
-  font-size: var(--text-sm);
-  color: var(--ink-3);
-  margin-top: 6px;
-  line-height: 1.5;
-  max-width: 50ch;
-}
-.foundersBlurb b { color: var(--ink); font-weight: 600; }
-.foundersBlurb i,
-.bonusText i { font-style: normal; }
-.foundersPriceWrap { text-align: right; }
-.foundersPrice {
-  font-family: var(--serif);
-  font-size: 38px;
-  font-weight: 600;
-  color: var(--fire-600);
-  line-height: 1;
-}
-.foundersStrike {
-  font-family: var(--sans);
-  font-size: var(--text-md);
-  color: var(--ink-4);
-  text-decoration: line-through;
-  margin-left: var(--space-sm);
-  font-weight: 400;
-}
-.foundersPriceLab {
-  font-family: var(--mono);
-  font-size: var(--text-sm);
-  color: var(--ink-4);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-top: 6px;
-}
-.foundersBonus {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--fire-100);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.bonusText {
-  font-family: var(--serif);
-  font-size: var(--text-md);
-  color: var(--ink-2);
-  line-height: 1.35;
-}
-.bonusText b { color: var(--ink); font-weight: 600; }
-.bonusMeta {
-  display: block;
-  font-family: var(--mono);
-  font-size: var(--text-sm);
-  color: var(--ink-4);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-top: 6px;
-}
-
-/* Mini book cover, matches home page book-cover */
-.miniCover {
-  width: 64px;
-  aspect-ratio: 2 / 3;
-  background: var(--paper-pure);
-  border: 1px solid var(--fire-500);
-  flex-shrink: 0;
-  position: relative;
-  padding: 7px 6px 6px;
-  display: flex;
-  flex-direction: column;
-  transform: rotate(-2deg);
-  box-shadow: 0 8px 18px -10px var(--ink-a50);
-}
-.miniCover::before {
-  content: '';
-  position: absolute;
-  inset: 3px;
-  border: 1px solid var(--fire-500);
-  pointer-events: none;
-}
-.miniCoverGlyph {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--serif);
-  font-size: 38px;
-  color: var(--fire-600);
-  opacity: 0.18;
-  pointer-events: none;
-}
-.miniCoverEyebrow {
-  font-family: var(--mono);
-  font-size: 5.5px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--fire-600);
-  position: relative;
-  line-height: 1;
-}
-.miniCoverTitle {
-  font-family: var(--serif);
-  font-size: var(--text-sm);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1;
-  color: var(--ink);
-  margin-top: auto;
-  position: relative;
-}
-.miniCoverTitle em {
-  font-style: normal;
-  color: var(--fire-600);
-  font-weight: 400;
-}
-.miniCoverAuthor {
-  font-family: var(--mono);
-  font-size: 5px;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-top: var(--space-xs);
-  position: relative;
-}
-
-.foundersBtn {
-  composes: btn-primary from global;
-  margin-top: var(--space-md);
-}
-
 /* Reports */
 .reportsHead {
   font-family: var(--mono);
@@ -838,3 +669,13 @@
 }
 
 .orderMetaSpaced { margin-top: var(--space-sm); }
+
+.compareLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 48px;
+  margin: var(--space-lg) 0;
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -1,15 +1,17 @@
 // POST /api/stripe/checkout
-// Body: { plan: 'founders' }
+// Body: { plan: 'founders' | 'yearly' | 'lifetime' }
 // Creates (or reuses) a Stripe customer for the signed-in user, then
 // creates a hosted Checkout Session and returns its URL. The client
 // redirects window.location to that URL. The webhook at
 // /api/stripe/webhook flips member_subscriptions.status to 'active'
-// once Stripe confirms the payment.
+// once Stripe confirms the payment. 'lifetime' is a one-time payment
+// (mode=payment); the other plans are subscriptions.
 import { requireApi } from '../../../lib/guards';
 import {
   getStripe,
   getServiceSupabase,
-  priceIdForPlan,
+  lineItemForPlan,
+  PLANS,
 } from '../../../lib/stripe';
 import { siteOrigin } from '../../../lib/siteOrigin';
 
@@ -24,9 +26,9 @@ export default async function handler(req, res) {
   const { user } = auth;
 
   const plan = (req.body && req.body.plan) || 'founders';
-  let price;
+  let lineItem;
   try {
-    price = priceIdForPlan(plan);
+    lineItem = lineItemForPlan(plan);
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
@@ -75,20 +77,27 @@ export default async function handler(req, res) {
   }
 
   const origin = siteOrigin();
+  const mode = PLANS[plan].mode;
   const session = await stripe.checkout.sessions.create({
-    mode: 'subscription',
+    mode,
     customer: customerId,
-    line_items: [{ price, quantity: 1 }],
+    line_items: [lineItem],
     client_reference_id: user.id,
     metadata: { user_id: user.id, plan },
-    subscription_data: {
-      metadata: { user_id: user.id, plan },
-    },
+    ...(mode === 'subscription'
+      ? { subscription_data: { metadata: { user_id: user.id, plan } } }
+      : {
+          payment_intent_data: { metadata: { user_id: user.id, plan } },
+          // Lifetime includes a signed paperback, so collect where to post it.
+          shipping_address_collection: {
+            allowed_countries: ['US', 'CA', 'GB', 'IE', 'AU', 'NZ', 'SG', 'HK', 'VN', 'TH', 'MY', 'PH', 'JP', 'DE', 'FR', 'NL', 'ES', 'IT'],
+          },
+        }),
     allow_promotion_codes: true,
     automatic_tax: { enabled: false },
     billing_address_collection: 'auto',
     success_url: `${origin}/member/dashboard?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/signup?checkout=cancel`,
+    cancel_url: `${origin}/signup?plan=${encodeURIComponent(plan)}&checkout=cancel`,
   });
 
   return res.status(200).json({ url: session.url });

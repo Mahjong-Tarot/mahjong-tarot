@@ -6,8 +6,8 @@
 }
 
 .breadcrumb {
-  font-size: var(--text-sm);
-  color: var(--ink-4);
+  font-size: 16px;
+  color: var(--ink-3);
   margin-bottom: var(--space-lg);
 }
 .breadcrumb a { color: inherit; }
@@ -38,7 +38,8 @@
 .title { margin: var(--space-sm) 0 var(--space-md); }
 
 .short {
-  font-size: var(--text-md);
+  font-size: 15px;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fire-600);
@@ -56,7 +57,7 @@
 .para { margin-bottom: var(--space-lg); }
 
 .faq { margin-bottom: var(--space-lg); }
-.faq h3 { font-size: 18px; margin-bottom: var(--space-xs); }
+.faq h3 { font-size: 20px; margin-bottom: var(--space-xs); }
 .faq p { margin-bottom: var(--space-md); }
 .faq p:last-child { margin-bottom: 0; }
 
@@ -82,7 +83,7 @@
 @media (max-width: 640px) {
   .crumbSection { padding-top: var(--space-lg); padding-bottom: 0; }
   .detailSection { padding-bottom: var(--space-2xl); }
-  .lede { font-size: 17px; }
+  .lede { font-size: 18px; }
 }
 
 /* /cards index */

@@ -1,7 +1,6 @@
 .byline {
   margin-top: var(--space-sm);
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--sans);
   font-size: var(--text-lg);
   color: var(--ink-3);
 }
@@ -9,18 +8,17 @@
 .article { max-width: 720px; }
 .article p,
 .article li {
-  font-family: var(--serif);
-  font-size: 19px;
+  font-family: var(--sans);
+  font-size: var(--text-base);
   line-height: 1.7;
   color: var(--ink-2);
 }
 .article p { margin-bottom: var(--space-md); }
 .article h2 {
   margin: var(--space-xl) 0 var(--space-md);
-  font-family: var(--serif);
-  font-size: 26px;
-  font-weight: 400;
-  line-height: 1.3;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
@@ -33,21 +31,28 @@
 .cta { text-align: center; }
 .cta h2 {
   margin: var(--space-lg) 0;
-  font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 .cta p {
   color: var(--ink-3);
-  font-family: var(--serif);
-  font-size: 19px;
-  line-height: 1.5;
+  font-size: var(--text-base);
+  line-height: 1.6;
   max-width: 56ch;
   margin: 0 auto var(--space-xl);
 }
+/* No dark buttons: the secondary CTA reads as an outline. */
+.cta :global(.btn-secondary) {
+  background-color: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.cta :global(.btn-secondary):hover:not(:disabled) {
+  background-color: var(--rule-2);
+  color: var(--ink);
+  border-color: var(--ink);
+}
 
 @media (max-width: 640px) {
-  .article p,
-  .article li { font-size: 17px; }
-  .article h2 { font-size: 22px; }
+  .article h2 { font-size: 24px; }
 }

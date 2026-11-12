@@ -179,7 +179,7 @@ export default function BookingDetails() {
                 autoComplete="email"
                 required
               />
-              <div className={styles.fieldHint}>// We&apos;ll send your call link and recording here.</div>
+              <div className={styles.fieldHint}>We&apos;ll send your call link and recording here.</div>
             </div>
 
             <div className={`${styles.field} ${styles.fieldFull}`}>
@@ -236,7 +236,7 @@ export default function BookingDetails() {
                 onChange={(e) => setQuestion(e.target.value)}
                 maxLength={500}
               />
-              <div className={styles.fieldHint}>// Up to 500 characters. You can also leave this for the call.</div>
+              <div className={styles.fieldHint}>Up to 500 characters. You can also leave this for the call.</div>
             </div>
 
             <div className={`${styles.field} ${styles.fieldFull}`}>
@@ -248,7 +248,7 @@ export default function BookingDetails() {
                 />
                 <span>This reading is about a relationship with another person</span>
               </label>
-              <div className={styles.fieldHint}>// Most readings are. Add their birth details so Bill can read both charts.</div>
+              <div className={styles.fieldHint}>Most readings are. Add their birth details so Bill can read both charts.</div>
             </div>
 
             {isRelationship && (

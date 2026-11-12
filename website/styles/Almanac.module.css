@@ -1,0 +1,157 @@
+/* Public almanac page (/almanac/[date]): the day view, then the week
+   strip, find-a-good-day links and the membership prompt. */
+
+.day { padding: clamp(40px, 6vw, 80px) 0 0; }
+
+/* ─── Buttons (square-cornered, as on the book page) ──────────────────── */
+.btnPrimary,
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 20px;
+  border-radius: var(--r-sm);
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+.btnPrimary {
+  background: var(--fire-600);
+  border: 1px solid var(--fire-600);
+  color: var(--paper);
+}
+.btnPrimary:hover { background: var(--fire-700); border-color: var(--fire-700); color: var(--paper); }
+.btnOutline {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.btnOutline:hover { background: var(--rule-2); color: var(--ink); }
+
+/* ─── Bands ───────────────────────────────────────────────────────────── */
+.band {
+  padding: 0 0 clamp(48px, 7vw, 88px);
+  border-top: 1px solid var(--ink);
+}
+.tint { background: color-mix(in srgb, var(--rule-2) 60%, var(--paper)); }
+.bandLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-lg);
+  padding: 20px 0 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-overline);
+  text-transform: uppercase;
+  color: var(--fire-600);
+}
+.bandLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ─── Week strip ──────────────────────────────────────────────────────── */
+.week {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-sm2);
+}
+.weekDay {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-md);
+  border: 1px solid var(--ink-a20);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-weight: 400;
+  text-decoration: none;
+  transition: border-color var(--transition);
+}
+.weekDay:hover { border-color: var(--ink); color: var(--ink-2); }
+.weekDayCurrent {
+  padding: 14px;
+  border: 3px solid var(--ink);
+}
+.weekDate {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.weekDateCurrent { color: var(--fire-600); }
+.weekScore {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.weekOfficer { color: var(--ink); }
+.weekTone { font-size: 16px; font-weight: 600; color: var(--ink-3); }
+.tone_auspicious  { color: var(--tone-auspicious-ink); }
+.tone_favorable   { color: var(--tone-favourable-ink); }
+.tone_neutral     { color: var(--tone-neutral-ink); }
+.tone_cautionary  { color: var(--tone-caution-ink); }
+.tone_challenging { color: var(--tone-challenging-ink); }
+
+/* ─── Find a good day ─────────────────────────────────────────────────── */
+.find {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg) var(--space-2xl);
+}
+.findTitle {
+  flex: 1 1 360px;
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+.findLinks {
+  flex: 1.4 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm2);
+}
+
+/* ─── Membership prompt ───────────────────────────────────────────────── */
+.member {
+  padding: clamp(48px, 7vw, 88px) 0;
+  background: var(--fire-50);
+  border-top: 1px solid var(--ink);
+}
+.memberInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg) var(--space-2xl);
+}
+.memberText { flex: 1 1 460px; min-width: 0; }
+.memberTitle {
+  margin: 0 0 var(--space-sm2);
+  font-size: clamp(26px, 2.8vw, 36px);
+  line-height: 1.2;
+}
+.memberBody { margin: 0; max-width: 54ch; color: var(--ink-3); }
+.member .btnPrimary { min-height: 56px; padding: 0 var(--space-lg2); font-size: 18px; }
+
+@media (max-width: 640px) {
+  .findTitle,
+  .findLinks,
+  .memberText { flex-basis: 100%; }
+  .week { grid-template-columns: repeat(2, 1fr); }
+  .member .btnPrimary { width: 100%; }
+}

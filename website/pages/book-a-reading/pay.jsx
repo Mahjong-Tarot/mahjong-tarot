@@ -144,7 +144,7 @@ export default function BookingPay() {
             </button>
 
             <p className={`${styles.fieldHint} ${styles.fieldHintCentered}`}>
-              // Secured by Stripe · Cancel and your slot is released automatically.
+              Secured by Stripe · Cancel and your slot is released automatically.
             </p>
           </div>
 

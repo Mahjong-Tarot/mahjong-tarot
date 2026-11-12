@@ -57,7 +57,7 @@ export default function About() {
  width={480}
  height={580}
  sizes="(max-width: 768px) 240px, 480px"
- style={{ objectFit: 'cover' }}
+ className={styles.portraitImg}
  priority
  />
  </div>
@@ -179,7 +179,7 @@ export default function About() {
  {/* ── CTA ── */}
  <section className="section-dark">
  <div className={`container ${styles.cta}`}>
- <span className="overline is-gold">Work with Bill</span>
+ <span className="overline">Work with Bill</span>
  <h2>Ready to Begin Your Reading?</h2>
  <p>All sessions are conducted online, with flexible scheduling and clear follow-up notes.</p>
  <div className={styles.ctaBtns}>

@@ -1,8 +1,8 @@
 /* .page-header lives in globals.css (use .page-header.is-bounded for max-width 720px h1) */
 
 .headerLead {
-  font-family: var(--serif);
-  font-size: 19px;
+  font-family: var(--sans);
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--ink-3);
@@ -15,12 +15,12 @@
   text-align: center;
   margin-bottom: var(--space-sm);
   font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 .formIntro {
   text-align: center;
-  font-family: var(--serif);
+  font-family: var(--sans);
   color: var(--ink-3);
   font-size: 19px;
   font-weight: 400;

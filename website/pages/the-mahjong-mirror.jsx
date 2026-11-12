@@ -6,6 +6,32 @@ import SEO from '../components/SEO';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph, breadcrumb, faqPage } from '../lib/schema';
 import styles from '../styles/MahjongMirror.module.css';
 
+const AMAZON_URL = 'https://www.amazon.com/dp/B0HQZZXXLC';
+
+const ANGLES = [
+  { title: 'Your central theme', body: 'The gravitational force shaping your situation, the one thing that influences everything else in your life right now.' },
+  { title: 'Looking at yourself', body: 'Understanding who you are, who you need to become, what you truly want, and what\u2019s happening in your life at this moment.' },
+  { title: 'Examining your opposition', body: 'The obstacles, challenges, and resistance you must navigate to reach your goals.' },
+  { title: 'Exploring your future', body: 'The probabilities and possibilities that await, both in the near term and beyond.' },
+];
+
+const LEARN = [
+  'Decode the symbolism behind all Mahjong suits and special tiles',
+  'Perform self-readings with step-by-step guidance',
+  'Interpret emotions, decisions, relationships, and personal cycles',
+  'Understand tile patterns as messages',
+  'Practice with sample spreads and real-life examples',
+  'Strengthen intuition using a familiar, visual system',
+];
+
+const AUDIENCE = [
+  'Tarot and oracle readers wanting a fresh symbolic tool',
+  'Anyone drawn to Asian-inspired spirituality',
+  'Beginners seeking simple, visual divination',
+  'People exploring clarity in love, purpose, or emotional growth',
+  'Creatives, intuitives, and self-discovery seekers',
+];
+
 export default function TheMahjongMirror() {
  return (
  <>
@@ -42,203 +68,154 @@ export default function TheMahjongMirror() {
  ])}
  />
 
- <Nav />
+      <Nav />
 
- <main>
- {/* ── Hero ── */}
- <section className={styles.hero}>
- <div className={`container ${styles.heroInner}`}>
- <div className={styles.heroText}>
- <span className="overline">Now on Amazon</span>
- <h1>Unlock Your Destiny<br />Through the<br /><em>Mahjong Mirror</em></h1>
- <p className={styles.heroLead}>
- A modern divination system inspired by ancient Mahjong symbolism, 
- guiding you toward clarity, intuition, and deeper self-discovery.
- </p>
- <div className="cta-row">
- <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
- <Link href="/the-mahjong-mirror/sample" className="btn-secondary">Read a Sample</Link>
- </div>
- </div>
- <div className={styles.heroCover}>
- <Image
- src="/images/book-cover.webp"
- alt="The Mahjong Mirror, Your Path to Wiser Decisions by Bill Hajdu"
- width={360}
- height={490}
- sizes="(max-width: 1024px) 220px, 360px"
- style={{ objectFit: 'contain' }}
- priority
- />
- </div>
- </div>
- </section>
+      <main>
+        {/* ── Hero ── */}
+        <section className={styles.hero}>
+          <div className={`container ${styles.heroInner}`}>
+            <div className={styles.heroText}>
+              <span className="overline">Now on Amazon</span>
+              <h1 className={styles.heroTitle}>
+                The Mahjong Mirror: <em>your path to wiser decisions</em>
+              </h1>
+              <p className={styles.heroLead}>
+                A modern divination system inspired by ancient Mahjong symbolism,
+                guiding you toward clarity, intuition, and deeper self-discovery.
+              </p>
+              <div className={styles.ctaRow}>
+                <a href={AMAZON_URL} target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>Buy on Amazon · $12.95</a>
+                <Link href="/the-mahjong-mirror/sample" className={styles.btnOutline}>Read the introduction</Link>
+              </div>
+              <p className={styles.heroNote}>
+                Kindle edition, by Bill Hajdu. Members get a copy free.{' '}
+                <Link href="/membership">See membership</Link>
+              </p>
+            </div>
+            <div className={styles.heroCover}>
+              <Image
+                src="/images/book-cover.webp"
+                alt="Cover of The Mahjong Mirror, Your Path to Wiser Decisions, by Bill Hajdu"
+                width={360}
+                height={490}
+                sizes="(max-width: 640px) 80vw, 360px"
+                className={styles.coverImg}
+                priority
+              />
+            </div>
+          </div>
+        </section>
 
- {/* ── What Is It ── */}
- <section>
- <div className={`container ${styles.whatIs}`}>
- <span className="overline">The System</span>
- <h2>What Is The Mahjong Mirror?</h2>
- <div className="divider-gold" />
- <p className={styles.lead}>
- The Mahjong Mirror is a divination method that transforms traditional
- Mahjong tiles into a symbolic language for self-reflection, where each
- tile becomes a portal representing energies, archetypes, situations,
- and life cycles, guiding you with clarity and intuition even if
- you've never played Mahjong before.
- </p>
- </div>
- </section>
+        {/* ── 01 What it is ── */}
+        <section className={`${styles.band} ${styles.tint}`}>
+          <div className="container">
+            <div className={styles.bandLabel}>01 · What it is</div>
+            <div className={styles.split}>
+              <h2 className={styles.splitTitle}>What is the Mahjong Mirror?</h2>
+              <p className={styles.splitBody}>
+                The Mahjong Mirror is a divination method that transforms traditional
+                Mahjong tiles into a symbolic language for self-reflection, where each
+                tile becomes a portal representing energies, archetypes, situations,
+                and life cycles, guiding you with clarity and intuition even if
+                you&rsquo;ve never played Mahjong before.
+              </p>
+            </div>
+          </div>
+        </section>
 
- {/* ── The System ── */}
- <section className="section-stone">
- <div className="container">
- <div className={styles.sectionHeader}>
- <span className="overline">How Mahjong Becomes Divination</span>
- <h2>The System</h2>
- <div className="divider-gold centered" />
- </div>
- <div className={styles.systemGrid}>
- {[
- { title: 'The Three Suits', body: 'Circles, Bamboos, and Characters reveal energy, growth, and identity.' },
- { title: 'Honor Tiles', body: 'Winds and Dragons act as powerful forces shaping your path.' },
- { title: 'Tile Patterns', body: 'Combinations function like tarot spreads, uncovering dynamics and life lessons.' },
- { title: 'Intuitive Reading', body: 'Teaches you to recognize patterns, themes, and synchronicities.' },
- ].map((item) => (
- <div key={item.title} className={styles.card}>
- <h3>{item.title}</h3>
- <p>{item.body}</p>
- </div>
- ))}
- </div>
- </div>
- </section>
+        {/* ── 02 Four angles ── */}
+        <section className={styles.band}>
+          <div className="container">
+            <div className={`${styles.bandLabel} ${styles.bandLabelSplit}`}>
+              <span>02 · A mirror with four angles</span>
+              <span className={styles.bandLabelAside}>From the introduction</span>
+            </div>
+            <div className={styles.angles}>
+              {ANGLES.map((a, i) => (
+                <div key={a.title} className={styles.angle}>
+                  <div className={styles.angleNum}>{i + 1}</div>
+                  <h3 className={styles.angleTitle}>{a.title}</h3>
+                  <p className={styles.angleBody}>{a.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
- {/* ── What You'll Learn ── */}
- <section>
- <div className={`container ${styles.learnLayout}`}>
- <div className={styles.learnImage}>
- <Image
- src="/images/book-tiles.webp"
- alt="Mahjong tiles alongside tarot cards"
- width={520}
- height={420}
- style={{ objectFit: 'cover' }}
- />
- </div>
- <div className={styles.learnText}>
- <span className="overline">Inside the Book</span>
- <h2>What You Will Learn</h2>
- <div className="divider-gold" />
- <ul className={styles.learnList}>
- {[
- 'Decode the symbolism behind all Mahjong suits and special tiles',
- 'Perform self-readings with step-by-step guidance',
- 'Interpret emotions, decisions, relationships, and personal cycles',
- 'Understand tile patterns as messages',
- 'Practice with sample spreads and real-life examples',
- 'Strengthen intuition using a familiar, visual system',
- ].map((item) => (
- <li key={item} className={styles.learnItem}>
- <span className={styles.learnDot} />
- {item}
- </li>
- ))}
- </ul>
- </div>
- </div>
- </section>
+        {/* ── 03 What you will learn ── */}
+        <section className={`${styles.band} ${styles.tint}`}>
+          <div className="container">
+            <div className={styles.bandLabel}>03 · Inside the book</div>
+            <div className={styles.split}>
+              <h2 className={styles.splitTitle}>What you will learn</h2>
+              <ol className={styles.learnList}>
+                {LEARN.map((item) => (
+                  <li key={item} className={styles.learnItem}>{item}</li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
 
- {/* ── Why It Matters ── */}
- <section>
- <div className={`container ${styles.why}`}>
- <span className="overline">Why This System Matters</span>
- <blockquote className={styles.whyQuote}>
- The Mahjong Mirror blends cultural symbolism, intuitive reading,
- and personal insight into one harmonious system, offering depth
- without complexity.
- </blockquote>
- <p>
- Divination made approachable for beginners and enriching for seasoned
- readers, while becoming a mirror that reveals both your inner truth
- and your future pathways.
- </p>
- </div>
- </section>
+        {/* ── 04 Who it is for ── */}
+        <section className={styles.band}>
+          <div className="container">
+            <div className={styles.bandLabel}>04 · Who this book is for</div>
+            <div className={styles.audience}>
+              {AUDIENCE.map((label) => (
+                <p key={label} className={styles.audienceItem}>{label}</p>
+              ))}
+            </div>
+          </div>
+        </section>
 
- {/* ── Who It's For ── */}
- <section className="section-stone">
- <div className="container">
- <div className={styles.sectionHeader}>
- <span className="overline">Is This Book For You?</span>
- <h2>Who This Book Is For</h2>
- <div className="divider-gold centered" />
- </div>
- <div className={styles.audienceGrid}>
- {[
- { n: '01', label: 'Tarot and oracle readers wanting a fresh symbolic tool' },
- { n: '02', label: 'Anyone drawn to Asian-inspired spirituality' },
- { n: '03', label: 'Beginners seeking simple, visual divination' },
- { n: '04', label: 'People exploring clarity in love, purpose, or emotional growth' },
- { n: '05', label: 'Creatives, intuitives, and self-discovery seekers' },
- ].map((a) => (
- <div key={a.n} className={styles.audienceItem}>
- <span className={styles.audienceNum}>{a.n}</span>
- <p>{a.label}</p>
- </div>
- ))}
- </div>
- </div>
- </section>
+        {/* ── 05 Author ── */}
+        <section className={`${styles.band} ${styles.tint}`}>
+          <div className="container">
+            <div className={styles.bandLabel}>05 · The author</div>
+            <div className={styles.author}>
+              <div className={styles.authorImage}>
+                <Image
+                  src="/images/about-portrait.webp"
+                  alt="Bill Hajdu, The Firepig"
+                  fill
+                  sizes="(max-width: 640px) 90vw, 300px"
+                  className={styles.portrait}
+                />
+              </div>
+              <div className={styles.authorText}>
+                <h2 className={styles.authorTitle}>Bill Hajdu, the Firepig</h2>
+                <p className={styles.authorBody}>
+                  Drawing on decades of deep study and a sharp eye for hidden truths,
+                  Bill Hajdu merges ancient Chinese wisdom with modern insight to
+                  guide people toward clarity and balanced living. A former Air Force
+                  Interrogator and seasoned scholar, he empowers clients with empathy,
+                  authenticity, and practical steps for lasting transformation.
+                </p>
+                <Link href="/about" className={styles.textLink}>Learn more about Bill →</Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
- {/* ── Author ── */}
- <section>
- <div className={`container ${styles.authorLayout}`}>
- <div className={styles.authorImage}>
- <Image
- src="/images/about-portrait.webp"
- alt="Bill Hajdu, The Firepig"
- width={320}
- height={380}
- style={{ objectFit: 'cover' }}
- />
- </div>
- <div className={styles.authorText}>
- <span className="overline">The Author</span>
- <h2>Bill Hajdu</h2>
- <p className={styles.authorTitle}><em>The Firepig</em></p>
- <div className="divider-gold" />
- <p>
- Drawing on decades of deep study and a sharp eye for hidden truths,
- Bill Hajdu merges ancient Chinese wisdom with modern insight to
- guide people toward clarity and balanced living. A former Air Force
- Interrogator and seasoned scholar, he empowers clients with empathy,
- authenticity, and practical steps for lasting transformation.
- </p>
- <Link href="/about" className="btn-secondary">Learn more about Bill</Link>
- </div>
- </div>
- </section>
+        {/* ── Closing ── */}
+        <section id="preorder" className={styles.closing}>
+          <div className={`container ${styles.closingInner}`}>
+            <div className={styles.closingText}>
+              <h2 className={styles.closingTitle}>Ready for your copy?</h2>
+              <p className={styles.closingBody}>
+                The Kindle edition is on Amazon now, or free when you join as a member.
+              </p>
+            </div>
+            <div className={styles.ctaRow}>
+              <a href={AMAZON_URL} target="_blank" rel="noopener noreferrer" className={styles.btnPrimary}>Buy on Amazon · $12.95</a>
+              <Link href="/membership" className={styles.btnOutline}>Get it free with membership</Link>
+            </div>
+          </div>
+        </section>
+      </main>
 
- {/* ── Preorder CTA ── */}
- <section id="preorder" className="section-stone">
- <div className={`container ${styles.preorder}`}>
- <span className="overline">Begin Your Journey Through the Tiles</span>
- <h2>Ready for Your Copy?</h2>
- <p>
- The Kindle edition of The Mahjong Mirror is available now on
- Amazon.
- </p>
- <div className="cta-row cta-row-spaced cta-row-center">
- <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
- <Link href="/book-a-reading" className="btn-secondary">Book a Private Reading</Link>
- </div>
- </div>
- </section>
-
- </main>
-
- <Footer />
- </>
- );
+      <Footer />
+    </>
+  );
 }

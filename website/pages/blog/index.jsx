@@ -9,18 +9,25 @@ import { ORGANIZATION, WEBSITE, PERSON_BILL, graph, breadcrumb } from '../../lib
 import { listPublishedPosts, TOPICS } from '../../lib/blogDb';
 import styles from '../../styles/Blog.module.css';
 
-// Filter buttons are derived from the canonical topic list, so every button
-// always has posts and every post always has a matching button.
-const CATEGORIES = ['All Posts', ...TOPICS];
+// Topic tabs are derived from the canonical topic list, so every tab always
+// has posts and every post always has a matching tab.
+const ALL = 'All posts';
+const CATEGORIES = [ALL, ...TOPICS];
+const PAGE_SIZE = 12;
 
 export default function BlogIndex({ posts }) {
-  const [active, setActive] = useState('All Posts');
+  const [active, setActive] = useState(ALL);
+  const [shown, setShown] = useState(PAGE_SIZE);
 
-  const featured = posts[0];
-  const rest = posts.slice(1);
-  const filtered = active === 'All Posts'
-    ? rest
-    : rest.filter((p) => p.topic === active);
+  const list = active === ALL ? posts : posts.filter((p) => p.topic === active);
+  const featured = list[0];
+  const rest = list.slice(1);
+  const visible = rest.slice(0, shown);
+
+  function pick(cat) {
+    setActive(cat);
+    setShown(PAGE_SIZE);
+  }
 
   return (
     <>
@@ -55,64 +62,24 @@ export default function BlogIndex({ posts }) {
       <Nav />
 
       <main>
-        {/* ── Page Header ── */}
-        <section className="page-header is-wide">
+        {/* ── Masthead ── */}
+        <section className={styles.masthead}>
           <div className="container">
-            <span className="overline">Writing & Insight</span>
-            <h1>The Blog</h1>
-            <p className={styles.headerLead}>
-              Reflections on Mahjong, tarot, Chinese astrology, and the wisdom
-              hidden inside ancient symbols.
-            </p>
-            <div className="cta-row cta-row-spaced">
-              <a href="https://www.amazon.com/dp/B0HQZZXXLC" target="_blank" rel="noopener noreferrer" className="btn-primary">Buy on Amazon</a>
-              <Link href="#newsletter" className="btn-secondary">Get Daily Fortune</Link>
+            <div className={styles.mastheadRow}>
+              <h1 className={styles.title}>The blog</h1>
+              <p className={styles.lead}>
+                Notes on the year ahead, the tiles, and the slower kind of
+                wisdom, published whenever the timing feels right.
+              </p>
             </div>
-          </div>
-        </section>
-
-        {/* ── Featured ── (absent only when the blog has no posts, e.g. a
-            preview build with no database key) */}
-        {featured && (
-        <section className={`section-stone ${styles.featured}`}>
-          <div className="container">
-            <span className="overline">Featured</span>
-            <div className={styles.featuredInner}>
-              <Link href={`/blog/posts/${featured.slug}`} className={styles.featuredImage}>
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  style={{ objectFit: 'cover' }}
-                />
-              </Link>
-              <div className={styles.featuredText}>
-                <span className="post-category">{featured.topic}</span>
-                <h2 className={styles.featuredTitle}>
-                  <Link href={`/blog/posts/${featured.slug}`}>
-                    {featured.title}
-                  </Link>
-                </h2>
-                <p className={styles.featuredExcerpt}>
-                  {featured.excerpt}
-                </p>
-                <Link href={`/blog/posts/${featured.slug}`} className="btn-secondary">Read the Article</Link>
-              </div>
-            </div>
-          </div>
-        </section>
-        )}
-
-        {/* ── Filter ── */}
-        <section className={styles.filterSection}>
-          <div className="container">
-            <div className={styles.filters}>
+            <div className={styles.tabs} role="group" aria-label="Topics">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
-                  className={`${styles.filterBtn} ${active === cat ? styles.filterActive : ''}`}
-                  onClick={() => setActive(cat)}
+                  type="button"
+                  className={`${styles.tab} ${active === cat ? styles.tabActive : ''}`}
+                  aria-pressed={active === cat}
+                  onClick={() => pick(cat)}
                 >
                   {cat}
                 </button>
@@ -121,52 +88,95 @@ export default function BlogIndex({ posts }) {
           </div>
         </section>
 
-        {/* ── Post Grid ── */}
-        <section>
-          <div className="container">
-            {filtered.length === 0 ? (
-              <div className={styles.empty}>
-                <p>No posts yet in this category. Check back soon.</p>
-              </div>
-            ) : (
+        {/* ── Featured ── (absent only when there are no posts, e.g. a
+            preview build with no database key) */}
+        {featured ? (
+          <section className={styles.featuredSection}>
+            <div className="container">
+              <Link href={`/blog/posts/${featured.slug}`} className={styles.featured}>
+                <div className={styles.featuredImage}>
+                  <Image
+                    src={featured.image}
+                    alt={featured.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                    className={styles.cover}
+                    priority
+                  />
+                </div>
+                <div className={styles.featuredText}>
+                  <div className={styles.meta}>
+                    Latest{featured.topic ? ` · ${featured.topic}` : ''} · {featured.date}
+                  </div>
+                  <h2 className={styles.featuredTitle}>{featured.title}</h2>
+                  {featured.excerpt && <p className={styles.featuredExcerpt}>{featured.excerpt}</p>}
+                  <span className={styles.readLink}>Read the post →</span>
+                </div>
+              </Link>
+            </div>
+          </section>
+        ) : (
+          <section className={styles.featuredSection}>
+            <div className="container">
+              <p className={styles.empty}>No posts yet in this topic. Check back soon.</p>
+            </div>
+          </section>
+        )}
+
+        {/* ── Post grid ── */}
+        {visible.length > 0 && (
+          <section className={styles.gridSection}>
+            <div className="container">
               <div className={styles.grid}>
-                {filtered.map((post) => (
-                  <article key={post.slug} className={styles.card}>
-                    <Link href={`/blog/posts/${post.slug}`} className={styles.cardImageLink}>
-                      <div className={styles.cardImage}>
-                        <Image
-                          src={post.image}
-                          alt={post.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          style={{ objectFit: 'cover' }}
-                        />
-                      </div>
-                    </Link>
-                    <div className={styles.cardBody}>
-                      <span className="post-category">{post.topic}</span>
-                      <h2 className={styles.cardTitle}>
-                        <Link href={`/blog/posts/${post.slug}`}>{post.title}</Link>
-                      </h2>
-                      <p className={styles.cardExcerpt}>{post.excerpt}</p>
-                      <div className={styles.cardMeta}>
-                        <span className="post-meta">{post.date} · {post.readTime}</span>
-                        <Link href={`/blog/posts/${post.slug}`} className={styles.readMore}>
-                          Read more →
-                        </Link>
-                      </div>
+                {visible.map((post) => (
+                  <Link key={post.slug} href={`/blog/posts/${post.slug}`} className={styles.card}>
+                    <div className={styles.cardImage}>
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        className={styles.cover}
+                      />
                     </div>
-                  </article>
+                    <div className={styles.cardBody}>
+                      <div className={styles.meta}>
+                        {post.topic ? `${post.topic} · ` : ''}{post.date}
+                      </div>
+                      <h3 className={styles.cardTitle}>{post.title}</h3>
+                      {post.excerpt && <p className={styles.cardExcerpt}>{post.excerpt}</p>}
+                    </div>
+                  </Link>
                 ))}
               </div>
-            )}
-          </div>
-        </section>
+              {rest.length > shown && (
+                <div className={styles.more}>
+                  <button
+                    type="button"
+                    className={styles.moreBtn}
+                    onClick={() => setShown((n) => n + PAGE_SIZE)}
+                  >
+                    More posts
+                  </button>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* ── Newsletter ── */}
-        <section className="section-stone">
-          <div className="container">
-            <NewsletterSignup source="blog" variant="light" />
+        <section id="newsletter" className={styles.newsletter}>
+          <div className={`container ${styles.newsletterInner}`}>
+            <div className={styles.newsletterText}>
+              <h2 className={styles.newsletterTitle}>In your inbox, insights for the year ahead</h2>
+              <p className={styles.newsletterLead}>
+                Notes on Mahjong, tarot, and Chinese astrology, sent whenever
+                there&rsquo;s something worth saying. Never more than twice a month.
+              </p>
+            </div>
+            <div className={styles.newsletterForm}>
+              <NewsletterSignup source="blog" variant="footer" />
+            </div>
           </div>
         </section>
       </main>

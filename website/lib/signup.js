@@ -12,6 +12,48 @@ export async function pathForUser(userId) {
   return '/member/dashboard';
 }
 
+// Copy for each paid checkout. Keys match PLANS in lib/stripe.js and the
+// /signup?plan= query value.
+export const PAID_PLANS = {
+  founders: {
+    eyebrow: '◆ Founders checkout',
+    banner: '$49.50 today, locked in for life.',
+    heading: 'Become a',
+    headingEm: 'founder',
+    item: 'Founders Membership',
+    price: '$49.50',
+    meta: 'Annual, locked in for life. Cancel anytime.',
+    strike: '$99.00',
+    submit: 'Pay $49.50 and become a founder',
+    pending: 'lock in your founder rate',
+    reassure: ['Secured by Stripe', 'Locked in for life', 'Cancel anytime'],
+  },
+  yearly: {
+    eyebrow: '◆ Yearly membership',
+    banner: '$99 a year. Cancel any time.',
+    heading: 'Join for',
+    headingEm: '$99 a year',
+    item: 'Yearly Membership',
+    price: '$99.00',
+    meta: 'Renews at $99 each year. Cancel anytime.',
+    submit: 'Pay $99 and join',
+    pending: 'start your membership',
+    reassure: ['Secured by Stripe', '27¢ a day', 'Cancel anytime'],
+  },
+  lifetime: {
+    eyebrow: '◆ Lifetime membership · one-time offer',
+    banner: '$299 once. Yours for life.',
+    heading: 'Join',
+    headingEm: 'for life',
+    item: 'Lifetime Membership',
+    price: '$299.00',
+    meta: 'One payment, never renews. Includes a one-hour consultation with Bill and an autographed copy of The Mahjong Mirror.',
+    submit: 'Pay $299 and join for life',
+    pending: 'complete your lifetime membership',
+    reassure: ['Secured by Stripe', 'One payment', 'Never renews'],
+  },
+};
+
 export const REPORTS = [
   {
     glyph: '日',

@@ -1,8 +1,10 @@
 /* .page-header lives in globals.css (use .page-header.is-bounded for max-width 720px h1) */
 
+.coverImg { object-fit: cover; }
+
 .headerLead {
-  font-family: var(--serif);
-  font-size: 19px;
+  font-family: var(--sans);
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--ink-3);
@@ -14,12 +16,12 @@
 .sectionHeader h2 {
   margin-bottom: var(--space-md);
   font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .whatIs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center; }
-.whatIsText h2 { margin-bottom: var(--space-lg); font-family: var(--serif); font-weight: 400; letter-spacing: -0.02em; }
+.whatIsText h2 { margin-bottom: var(--space-lg); font-family: var(--serif); font-weight: 600; letter-spacing: -0.015em; }
 .whatIsText p  { margin-bottom: var(--space-lg); color: var(--ink-2); font-size: var(--text-base); line-height: 1.65; }
 
 .readingTypes { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
@@ -32,50 +34,41 @@
   display: flex;
   flex-direction: column;
 }
-.readingCard p { flex: 1; color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+.readingCard p { flex: 1; color: var(--ink-2); font-size: 17px; line-height: 1.6; }
 .readingCardFeatured {
-  background-color: var(--ink);
-  border-color: var(--ink);
+  background-color: var(--fire-50);
+  border-color: var(--fire-500);
 }
-.readingCardFeatured h3 { color: var(--paper); }
-.readingCardFeatured p  { color: var(--paper-a78); }
-.readingCardFeatured .readingLabel { color: var(--fire-400); }
+/* Gold overline fails contrast on light; featured card uses the red label. */
+.readingCardFeatured :global(.is-gold) { color: var(--fire-600); }
 
 .readingMeta { display: flex; flex-direction: column; gap: var(--space-xs); margin-bottom: var(--space-lg); }
-.readingLabel {
-  font-family: var(--mono);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fire-600);
-}
+.readingLabel,
 .readingLabelLight {
-  font-family: var(--mono);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--fire-400);
+  color: var(--ink-3);
 }
 .readingCard h3 {
   margin-bottom: var(--space-md);
   font-family: var(--serif);
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1.2;
   color: var(--ink);
 }
-.readingCardFeatured h3 { color: var(--paper); }
 .readingCard p  { margin-bottom: var(--space-xl); }
 
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2xl); }
 .step { display: flex; gap: var(--space-lg); align-items: flex-start; }
 .stepNumber {
-  font-family: var(--serif);
+  font-family: var(--book);
   font-size: 56px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--fire-600);
   line-height: 1;
   flex-shrink: 0;
@@ -86,19 +79,19 @@
   margin-bottom: var(--space-sm);
   font-family: var(--serif);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .gainLayout { display: grid; grid-template-columns: 1fr auto; gap: var(--space-3xl); align-items: start; }
 .gainList   { display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-xl); }
-.gainItem   { display: flex; align-items: flex-start; gap: var(--space-md); font-size: 17px; color: var(--ink-2); }
+.gainItem   { display: flex; align-items: flex-start; gap: var(--space-md); font-size: 18px; color: var(--ink-2); }
 .gainDot    { width: 6px; height: 6px; background-color: var(--fire-500); flex-shrink: 0; margin-top: 10px; }
 .gainQuote  {
   font-family: var(--serif);
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
   color: var(--ink);
   border-left: 2px solid var(--fire-500);
@@ -107,7 +100,7 @@
 
 .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
 .testimonial  {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 19px;
   font-style: normal;
   font-weight: 400;
@@ -119,13 +112,13 @@
 }
 .testimonial p { margin-bottom: var(--space-md); color: var(--ink); }
 .testimonial footer {
-  font-family: var(--mono);
-  font-size: var(--text-xs);
+  font-family: var(--sans);
+  font-size: 13px;
   font-style: normal;
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-4);
+  color: var(--ink-3);
 }
 
 .faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); max-width: 920px; margin: 0 auto; }
@@ -133,23 +126,23 @@
   margin-bottom: var(--space-sm);
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: -0.005em;
 }
-.faqItem p  { color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+.faqItem p  { color: var(--ink-2); font-size: 17px; line-height: 1.6; }
 
 .bookCta { text-align: center; }
 .bookCta h2 {
   margin: var(--space-lg) 0;
   font-family: var(--serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 .bookCta p  {
   color: var(--ink-3);
-  font-family: var(--serif);
-  font-size: 19px;
+  font-family: var(--sans);
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   margin-bottom: var(--space-xl);

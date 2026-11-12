@@ -1,27 +1,6 @@
-.promo {
-  background: var(--ink);
-  color: var(--paper-a78);
-  text-align: center;
-  font-family: var(--mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  padding: 10px var(--space-sm2);
-}
-.promo b { color: var(--paper); font-weight: 500; }
-.promoPip {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background: var(--fire-500);
-  border-radius: 50%;
-  margin: 0 var(--space-sm2);
-  transform: translateY(-2px);
-}
-
 .nav {
   background-color: var(--paper);
-  height: 72px;
+  height: 76px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -40,9 +19,9 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--serif);
+  font-family: var(--book);
   font-weight: 500;
-  font-size: 22px;
+  font-size: 24px;
   color: var(--ink);
   text-decoration: none;
   letter-spacing: -0.015em;
@@ -52,13 +31,13 @@
 
 .logo::before {
   content: '';
-  width: 22px;
-  height: 22px;
-  border: 1px solid var(--ink);
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid var(--ink);
   position: relative;
   display: block;
   background:
-    linear-gradient(var(--fire-500), var(--fire-500)) center/10px 10px no-repeat,
+    linear-gradient(var(--fire-500), var(--fire-500)) center/12px 12px no-repeat,
     var(--paper-pure);
 }
 
@@ -73,8 +52,8 @@
 .links a {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: var(--text-sm);
-  letter-spacing: 0.01em;
+  font-size: 16px;
+  letter-spacing: 0;
   color: var(--ink-2);
   text-decoration: none;
   transition: color var(--transition);
@@ -125,7 +104,7 @@
 
 .navSignin {
   font-family: var(--sans);
-  font-size: var(--text-sm);
+  font-size: 16px;
   font-weight: 400;
   color: var(--ink-3);
   text-decoration: none;
@@ -137,9 +116,9 @@
 /* Header CTA — the global .btn-primary at nav size. */
 .cta {
   composes: btn-primary from global;
-  font-size: var(--text-sm);
-  padding: 9px 18px;
-  min-height: 44px;
+  font-size: 16px;
+  padding: 12px 22px;
+  min-height: 48px;
 }
 .cta::after { display: none !important; }
 
@@ -337,6 +316,4 @@
   .cta { padding: 10px 14px; white-space: nowrap; }
   .ctaLong { display: none; }
   .ctaShort { display: inline; }
-  .promo { font-size: var(--text-2xs); letter-spacing: 0.08em; }
-  .promoPip { margin: 0 6px; }
 }

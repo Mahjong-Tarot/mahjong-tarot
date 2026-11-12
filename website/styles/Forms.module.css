@@ -8,10 +8,11 @@
 
 .label {
   font-family: var(--sans);
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.01em;
-  color: var(--ink-2);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 
 .label .req {
@@ -21,27 +22,15 @@
 
 .labelLight {
   composes: label;
-  color: var(--paper-a90);
 }
 
-.input    { composes: input from global; line-height: 1.4; }
-.textarea { composes: textarea from global; line-height: 1.4; }
-.select   { composes: select from global; line-height: 1.4; }
+.input    { composes: input from global; line-height: 1.4; font-size: 18px; min-height: 52px; border-color: var(--ink-a20); border-radius: var(--r-sm); }
+.textarea { composes: textarea from global; line-height: 1.5; font-size: 18px; border-color: var(--ink-a20); border-radius: var(--r-sm); }
+.select   { composes: select from global; line-height: 1.4; font-size: 18px; min-height: 52px; border-color: var(--ink-a20); border-radius: var(--r-sm); }
 
+/* The "dark" variants are kept for old markup; they now render light. */
 .inputDark {
   composes: input;
-  background-color: var(--paper-a06);
-  border-color: var(--paper-a24);
-  color: var(--paper);
-}
-
-.inputDark:focus {
-  border-color: var(--fire-400);
-  box-shadow: 0 0 0 3px var(--fire-a12);
-}
-
-.inputDark::placeholder {
-  color: var(--paper-a45);
 }
 
 .textarea {
@@ -51,18 +40,6 @@
 
 .textareaDark {
   composes: textarea;
-  background-color: var(--paper-a06);
-  border-color: var(--paper-a24);
-  color: var(--paper);
-}
-
-.textareaDark:focus {
-  border-color: var(--fire-400);
-  box-shadow: 0 0 0 3px var(--fire-a12);
-}
-
-.textareaDark::placeholder {
-  color: var(--paper-a45);
 }
 
 .select {
@@ -78,14 +55,14 @@
 
 .errorText {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 16px;
   color: var(--error-ink);
 }
 
 .successMsg {
-  font-family: var(--serif);
-  font-size: 19px;
-  font-weight: 400;
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 500;
   line-height: 1.5;
   color: var(--ink);
   text-align: center;
@@ -94,7 +71,6 @@
 
 .successMsgLight {
   composes: successMsg;
-  color: var(--paper);
 }
 
 /* ─── Newsletter (Footer / Blog) ─────────────────────────────────────── */
@@ -104,10 +80,10 @@
 }
 
 .newsletterTitle {
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: var(--text-xs);
-  letter-spacing: 0.16em;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fire-600);
   margin-bottom: var(--space-md);
@@ -183,8 +159,8 @@
 
 .footerNewsletter h2 {
   font-family: var(--serif);
-  font-size: var(--text-lg);
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: -0.005em;
   margin-bottom: var(--space-xs);
   color: var(--ink);
@@ -194,7 +170,7 @@
   font-family: var(--sans);
   color: var(--ink-3);
   margin-bottom: var(--space-md);
-  font-size: var(--text-md);
+  font-size: 17px;
   line-height: 1.55;
 }
 
@@ -211,7 +187,7 @@
 .blogNewsletter h2 {
   margin-bottom: var(--space-sm);
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 

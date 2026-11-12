@@ -140,16 +140,16 @@
 .authTitle {
   margin: 0 0 var(--space-lg);
   font-family: var(--serif);
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
   color: var(--ink);
 }
 
 .authLede {
   font-family: var(--sans);
   color: var(--ink-3);
-  font-size: var(--text-md);
+  font-size: 18px;
   line-height: 1.6;
   margin: 0;
 }

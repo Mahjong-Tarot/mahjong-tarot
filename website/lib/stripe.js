@@ -32,17 +32,44 @@ export function getServiceSupabase() {
   return _serviceClient;
 }
 
+// mode: the Stripe Checkout mode. fallback: inline price_data used when
+// the plan's price env var is empty (founders has none, so it must be set).
 export const PLANS = {
   founders: {
     key: 'founders',
+    mode: 'subscription',
     priceEnvVar: 'STRIPE_PRICE_FOUNDERS',
+  },
+  yearly: {
+    key: 'yearly',
+    mode: 'subscription',
+    priceEnvVar: 'STRIPE_PRICE_YEARLY',
+    fallback: {
+      currency: 'usd',
+      unit_amount: 9900,
+      recurring: { interval: 'year' },
+      product_data: { name: 'Mahjong Tarot Yearly Membership' },
+    },
+  },
+  lifetime: {
+    key: 'lifetime',
+    mode: 'payment',
+    priceEnvVar: 'STRIPE_PRICE_LIFETIME',
+    fallback: {
+      currency: 'usd',
+      unit_amount: 29900,
+      product_data: { name: 'Mahjong Tarot Lifetime Membership' },
+    },
   },
 };
 
-export function priceIdForPlan(plan) {
+// Checkout line item for a plan: the configured price id, or the
+// plan's inline price_data when no price id is set.
+export function lineItemForPlan(plan) {
   const entry = PLANS[plan];
   if (!entry) throw new Error(`Unknown plan: ${plan}`);
   const id = process.env[entry.priceEnvVar];
-  if (!id) throw new Error(`${entry.priceEnvVar} is not set.`);
-  return id;
+  if (id) return { price: id, quantity: 1 };
+  if (!entry.fallback) throw new Error(`${entry.priceEnvVar} is not set.`);
+  return { price_data: entry.fallback, quantity: 1 };
 }

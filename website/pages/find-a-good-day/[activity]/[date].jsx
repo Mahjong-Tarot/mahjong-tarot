@@ -54,25 +54,27 @@ export default function FindAGoodDayResult({ activity, date, almanac, today }) {
       />
       <Nav />
       <main>
-        <section className="page-section">
-          <div className="page-intro">
+        <section className={styles.intro}>
+          <div className="container">
             <span className="overline">Almanac · {activity.label}</span>
-            <h1>{humanDate}</h1>
+            <h1 className={styles.title}>{humanDate}</h1>
             {verdictPhrase && (
               <p className={styles.verdict}>
                 The almanac reads this as <strong>{verdictPhrase}</strong> for{' '}
                 <strong>{activity.label.toLowerCase()}</strong>.
               </p>
             )}
-          </div>
-          {explanation && (
-            <div className={styles.explain}>
-              <div className="label-mono">
-                Why this date scores the way it does
+            {explanation && (
+              <div className={styles.explain}>
+                <div className={styles.explainLabel}>
+                  Why this date scores the way it does
+                </div>
+                <p>{explanation}</p>
               </div>
-              <p>{explanation}</p>
-            </div>
-          )}
+            )}
+          </div>
+        </section>
+        <section className={styles.daySection}>
           {almanac ? (
             <AlmanacView
               date={date}

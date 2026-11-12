@@ -3,10 +3,32 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PasswordInput from './PasswordInput';
 import { supabase } from '../lib/supabase';
+import { PAID_PLANS } from '../lib/signup';
 import styles from '../styles/Signup.module.css';
 
-export default function PaySignup() {
+const REASSURE_ICONS = [
+  (
+    <svg key="lock" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="7" width="10" height="7" rx="1" />
+      <path d="M5 7V5a3 3 0 016 0v2" />
+    </svg>
+  ),
+  (
+    <svg key="clock" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="8" cy="8" r="6" />
+      <path d="M8 5v3l2 1.5" />
+    </svg>
+  ),
+  (
+    <svg key="shield" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 4l6-2 6 2v5c0 3-3 5-6 6-3-1-6-3-6-6V4z" />
+    </svg>
+  ),
+];
+
+export default function PaySignup({ plan = 'founders' }) {
   const router = useRouter();
+  const copy = PAID_PLANS[plan] || PAID_PLANS.founders;
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -37,7 +59,7 @@ export default function PaySignup() {
           last_name: lastName,
           birthday: birthday || null,
           birth_time: birthTime || null,
-          signup_source: 'founder-checkout',
+          signup_source: `${plan}-checkout`,
         },
         emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}/member/dashboard` : undefined,
       },
@@ -58,7 +80,7 @@ export default function PaySignup() {
       const r = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: 'founders' }),
+        body: JSON.stringify({ plan }),
       });
       const json = await r.json();
       if (!r.ok || !json.url) {
@@ -80,20 +102,26 @@ export default function PaySignup() {
     >
       <div className={styles.modeBanner}>
         <div>
-          <div className={styles.modeBannerEyebrow}>◆ Founders checkout</div>
-          <div className={styles.modeBannerTitle}>$49.50 today, locked in for life.</div>
+          <div className={styles.modeBannerEyebrow}>{copy.eyebrow}</div>
+          <div className={styles.modeBannerTitle}>{copy.banner}</div>
         </div>
-        <button
-          type="button"
-          onClick={() => router.push('/signup', undefined, { shallow: true })}
-          className={styles.modeBannerBack}
-        >
-          Use free trial instead
-        </button>
+        {plan === 'founders' ? (
+          <button
+            type="button"
+            onClick={() => router.push('/signup', undefined, { shallow: true })}
+            className={styles.modeBannerBack}
+          >
+            Use free trial instead
+          </button>
+        ) : (
+          <Link href="/membership" className={styles.modeBannerBack}>
+            Compare plans
+          </Link>
+        )}
       </div>
 
       <h2 className={styles.formH}>
-        Become a <em>founder</em>
+        {copy.heading} <em>{copy.headingEm}</em>
       </h2>
       <div className={styles.formSub}>
         // Account + payment, takes about two minutes
@@ -105,7 +133,7 @@ export default function PaySignup() {
           <h3>Check your email</h3>
           <p>
             We just sent a confirmation link to <strong>{email}</strong>.
-            Click it to finish setting up your Member Area — once you sign in, we&apos;ll send you to Stripe to lock in your founder rate.
+            Click it to finish setting up your Member Area — once you sign in, we&apos;ll send you to Stripe to {copy.pending}.
           </p>
           <p className={styles.successHint}>
             Don&apos;t see it? Check your spam folder, or wait a minute and try again.
@@ -209,16 +237,16 @@ export default function PaySignup() {
             </div>
             <div className={styles.orderSummary}>
               <div className={styles.orderRow}>
-                <span>Founders Membership</span>
-                <span>$49.50</span>
+                <span>{copy.item}</span>
+                <span>{copy.price}</span>
               </div>
               <div className={`${styles.orderRow} ${styles.orderMeta}`}>
-                <span>Annual, locked in for life. Cancel anytime.</span>
-                <span className={styles.strikePrice}>$99.00</span>
+                <span>{copy.meta}</span>
+                {copy.strike && <span className={styles.strikePrice}>{copy.strike}</span>}
               </div>
               <div className={`${styles.orderRow} ${styles.orderTotal}`}>
                 <span>Total today</span>
-                <span>$49.50</span>
+                <span>{copy.price}</span>
               </div>
               <div className={`${styles.orderRow} ${styles.orderMeta} ${styles.orderMetaSpaced}`}>
                 <span>You&apos;ll enter card details on Stripe&apos;s secure checkout.</span>
@@ -240,30 +268,16 @@ export default function PaySignup() {
           <button className={styles.submitBtn} type="submit" disabled={submitting}>
             {submitting
               ? 'Just a moment...'
-              : <>Pay $49.50 and become a founder <span aria-hidden="true">→</span></>}
+              : <>{copy.submit} <span aria-hidden="true">→</span></>}
           </button>
 
           <div className={styles.reassure}>
-            <span className={styles.reassureItem}>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="7" width="10" height="7" rx="1" />
-                <path d="M5 7V5a3 3 0 016 0v2" />
-              </svg>
-              No credit card
-            </span>
-            <span className={styles.reassureItem}>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="8" cy="8" r="6" />
-                <path d="M8 5v3l2 1.5" />
-              </svg>
-              90 free days
-            </span>
-            <span className={styles.reassureItem}>
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 4l6-2 6 2v5c0 3-3 5-6 6-3-1-6-3-6-6V4z" />
-              </svg>
-              Cancel anytime
-            </span>
+            {copy.reassure.map((label, i) => (
+              <span key={label} className={styles.reassureItem}>
+                {REASSURE_ICONS[i]}
+                {label}
+              </span>
+            ))}
           </div>
 
           <div className={styles.loginLine}>

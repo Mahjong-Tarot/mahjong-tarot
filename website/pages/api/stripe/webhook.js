@@ -288,11 +288,68 @@ async function handleBookingCompleted(service, session) {
   }
 }
 
+// One-time $299 lifetime membership (mode=payment, metadata.plan =
+// 'lifetime'). Active with no period end; access checks key off status.
+async function handleLifetimeCompleted(service, session) {
+  const userId = session.client_reference_id || session.metadata?.user_id;
+  if (!userId) throw new Error('lifetime session missing user_id');
+  const customerId =
+    typeof session.customer === 'string' ? session.customer : session.customer?.id || null;
+
+  const { error } = await service.from('member_subscriptions').upsert(
+    {
+      user_id: userId,
+      ...(customerId ? { stripe_customer_id: customerId } : {}),
+      plan: 'lifetime',
+      status: 'active',
+      current_period_end: null,
+      cancel_at_period_end: false,
+      started_at: new Date().toISOString(),
+      canceled_at: null,
+    },
+    { onConflict: 'user_id' },
+  );
+  if (error) throw error;
+
+  // Record the sale the same way first subscription charges are recorded.
+  const email = session.customer_details?.email || session.customer_email;
+  if (email && (session.amount_total ?? 0) > 0) {
+    const person = await findOrCreatePersonByEmail(service, {
+      email,
+      name: session.customer_details?.name || null,
+    });
+    await insertDealIfNew(service, {
+      person_id: person?.id || null,
+      member_subscription_id: userId,
+      amount_cents: session.amount_total ?? 0,
+      currency: session.currency || 'usd',
+      source: 'stripe',
+      notes: 'lifetime membership · one-time payment',
+      close_date: new Date().toISOString().slice(0, 10),
+      won_at: new Date().toISOString(),
+      status: 'won',
+      stripe_payment_intent_id: paymentIntentId(session),
+    });
+    await promoteToCustomer(service, person?.id, person?.lifecycle_stage);
+  }
+}
+
 async function upsertFromSubscription(service, sub, userIdHint) {
   const userId = userIdHint || sub.metadata?.user_id;
+  const customerId =
+    typeof sub.customer === 'string' ? sub.customer : sub.customer?.id;
+
+  // A lifetime row is final: no subscription event (an old yearly
+  // subscription being canceled, say) may downgrade it.
+  let existingQuery = service.from('member_subscriptions').select('plan');
+  existingQuery = userId
+    ? existingQuery.eq('user_id', userId)
+    : existingQuery.eq('stripe_customer_id', customerId || '');
+  const { data: existing } = await existingQuery.maybeSingle();
+  if (existing?.plan === 'lifetime') return;
+
   const row = {
-    stripe_customer_id:
-      typeof sub.customer === 'string' ? sub.customer : sub.customer?.id,
+    stripe_customer_id: customerId,
     stripe_subscription_id: sub.id,
     plan: sub.metadata?.plan || 'founders',
     status: sub.status,
@@ -370,6 +427,8 @@ export default async function handler(req, res) {
         await handleBookingCompleted(service, session);
       } else if (session.mode === 'payment' && session.metadata?.book_order === 'true') {
         await handleBookOrderCompleted(service, session);
+      } else if (session.mode === 'payment' && session.metadata?.plan === 'lifetime') {
+        await handleLifetimeCompleted(service, session);
       } else {
         if (event.type !== 'checkout.session.completed') {
           return res.status(200).json({ received: true });

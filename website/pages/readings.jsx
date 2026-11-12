@@ -68,7 +68,7 @@ export default function Readings() {
                 width={560}
                 height={420}
                 sizes="(max-width: 768px) 360px, 560px"
-                style={{ objectFit: 'cover' }}
+                className={styles.coverImg}
                 priority
               />
             </div>
@@ -158,7 +158,7 @@ export default function Readings() {
                 alt="Client choosing Mahjong tiles during a reading"
                 width={480}
                 height={560}
-                style={{ objectFit: 'cover' }}
+                className={styles.coverImg}
               />
             </div>
           </div>
@@ -176,7 +176,7 @@ export default function Readings() {
               {TESTIMONIALS.map((t) => (
                 <blockquote key={t.name} className={styles.testimonial}>
                   <p>"{t.quote}"</p>
-                  <footer>, {t.name}, {t.location}</footer>
+                  <footer>{t.name}, {t.location}</footer>
                 </blockquote>
               ))}
             </div>

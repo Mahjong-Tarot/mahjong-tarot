@@ -5,60 +5,61 @@ import { useRouter } from 'next/router';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import NewsletterSignup from '../components/NewsletterSignup';
-import AlmanacToday from '../components/AlmanacToday';
+import ChartForm from '../components/ChartForm';
 import { useAuth } from '../lib/auth';
 import { PERSON_BILL, ORGANIZATION, WEBSITE, graph } from '../lib/schema';
 import { listPublishedPosts } from '../lib/blogDb';
 import { fetchAlmanacForDate, todayInLA } from '../lib/almanac';
+import { CARDS } from '../lib/cards';
 import styles from '../styles/Home.module.css';
 
-const TIERS = [
-  {
-    duration: 30,
-    name: 'A focused look',
-    note: 'One question, one spread',
-    price: '$48',
-    href: '/book-a-reading?duration=30',
-  },
-  {
-    duration: 60,
-    name: 'The full mirror',
-    note: 'Complete reading across all three traditions',
-    price: '$88',
-    href: '/book-a-reading?duration=60',
-    featured: true,
-  },
-  {
-    duration: 90,
-    name: 'Deep counsel',
-    note: 'Multiple questions, full Four Pillars chart',
-    price: '$128',
-    href: '/book-a-reading?duration=90',
-  },
+const AMAZON_URL = 'https://www.amazon.com/dp/B0HQZZXXLC';
+
+const DECK_SLUGS = ['peacock', 'red-dragon', 'phoenix', 'tiger', 'lotus', 'pine'];
+
+const ANGLES = [
+  { n: 'First angle',  title: 'Your central theme', text: 'The one force shaping everything else in your life right now.' },
+  { n: 'Second angle', title: 'Yourself',           text: 'Who you are, who you need to become, and what you truly want.' },
+  { n: 'Third angle',  title: 'Your opposition',    text: 'The obstacles and resistance between you and what you are after.' },
+  { n: 'Fourth angle', title: 'Your future',        text: 'The probabilities and possibilities ahead, near term and beyond.' },
 ];
 
-const DECK = [
-  { slug: 'peacock', rank: '1', name: 'Peacock', suit: 'Bamboo' },
-  { slug: 'ducks',   rank: '2', name: 'Ducks',   suit: 'Bamboo' },
-  { slug: 'toad',    rank: '3', name: 'Toad',    suit: 'Bamboo' },
-  { slug: 'carp',    rank: '4', name: 'Carp',    suit: 'Bamboo' },
-  { slug: 'lotus',   rank: '5', name: 'Lotus',   suit: 'Bamboo' },
-  { slug: 'water',   rank: '6', name: 'Water',   suit: 'Bamboo' },
+const MEMBER_LIST = [
+  { text: 'Unlimited online readings' },
+  { text: 'Unlimited relationship comparisons: romance, business, family' },
+  { text: 'The full almanac and your horoscope' },
+  { text: 'Bonus: a free copy of The Mahjong Mirror', bonus: true },
+  { text: 'Bonus: half off a personal reading with Bill', bonus: true },
 ];
 
 const stripTrailingPeriod = (s) => s.replace(/\.$/, '');
+
+function shortDate(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function SectionHead({ label, aside }) {
+  return (
+    <div className={styles.secLabel}>
+      <span className={styles.secLabelMain}>{label}</span>
+      {aside}
+    </div>
+  );
+}
 
 export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
   const router = useRouter();
   const { user, loading } = useAuth();
 
-  // Signed-in users get the dashboard. Redirect runs client-side only — the
-  // SSR HTML is always the marketing page so the almanac is in the initial
-  // payload (SEO + above-the-fold render).
+  // Signed-in users get the dashboard. Redirect runs client-side only, so the
+  // SSR HTML is always the marketing page.
   useEffect(() => {
     if (!loading && user) router.replace('/member/dashboard');
   }, [loading, user, router]);
+
+  const deck = DECK_SLUGS.map((slug) => CARDS.find((c) => c.slug === slug)).filter(Boolean);
+  const day = todayAlmanac?.pillars?.day;
 
   const jsonLd = graph([
     ORGANIZATION,
@@ -79,7 +80,7 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
     <>
       <SEO
         title="Mahjong Tarot Readings & Chinese Astrology | Bill Hajdu, The Firepig"
-        description="Live 1-on-1 Mahjong tile readings, Four Pillars Chinese astrology, and tarot with Bill Hajdu, 35+ years of divination practice. Book a reading or join the Member Area."
+        description="The year you were born is only one angle. See the first page of Bill Hajdu's Four Pillars, Purple Star, Three Blessings and Fire Horse readings, free, from your birth date and time."
         path="/"
         image="/images/gallery-3.webp"
         jsonLd={jsonLd}
@@ -88,308 +89,243 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
       <Nav />
 
       <main>
+        {/* Today strip */}
+        <div className={styles.today}>
+          <div className={`container ${styles.todayInner}`}>
+            <span>
+              Today · {shortDate(todayDate)}
+              {day ? ` · ${day.element} ${day.sign} day` : ''}
+            </span>
+            <Link href={`/almanac/${todayDate}`} className={styles.todayLink}>
+              Open today&apos;s almanac <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
 
-        {/* ── 1. Hero — Almanac first ── */}
-        <section className={styles.heroSection}>
+        {/* Hero */}
+        <section className={styles.hero}>
           <div className={`container ${styles.heroInner}`}>
-            <div>
-              <span className={styles.heroBadge}>Today · Tong Shu Almanac</span>
-              <h1 className={styles.heroHeadline}>
-                Today,<br />by the<br /><em>almanac</em>
+            <div className={styles.heroText}>
+              <div className={styles.eyebrow}>Chinese astrology · Mahjong · Tarot</div>
+              <h1 className={styles.heroTitle}>
+                The year you were born is only <em>one angle of the mirror.</em>
               </h1>
-              <p className={styles.heroLead}>
-                A daily reading of the calendar from Bill Hajdu&apos;s thirty-five years of
-                practice. Day-officer, score, and the activities the system favors or
-                cautions against. Specific. Verifiable. The same answer if you check
-                tomorrow.
+              <p className={styles.heroLede}>
+                An animal sign tells you very little, and a chart on its own is just a
+                chart. Bill Hajdu has spent thirty-five years reading a life from four
+                angles. Enter your birth date and time and see the first page of his
+                Four Pillars, Purple Star, Three Blessings and Fire Horse readings.
               </p>
-              <div className={styles.heroCtas}>
-                <Link href={`/almanac/${todayDate}`} className={styles.heroPrimary}>
-                  See today&apos;s full reading <span aria-hidden="true">→</span>
-                </Link>
-                <Link href="/signup" className={styles.heroGhost}>
-                  Get Premium Access
-                </Link>
-              </div>
+              <ChartForm />
             </div>
-            <div className={styles.heroAlmanacWrap}>
-              <AlmanacToday almanac={todayAlmanac} href={`/almanac/${todayDate}`} />
+
+            <div className={styles.heroArt}>
+              <div className={styles.fan}>
+                <div className={`${styles.fanCard} ${styles.fanLeft}`}>
+                  <Image src="/images/cards/pine.webp" alt="" width={300} height={450} sizes="240px" />
+                </div>
+                <div className={`${styles.fanCard} ${styles.fanRight}`}>
+                  <Image src="/images/cards/tiger.webp" alt="" width={300} height={450} sizes="240px" />
+                </div>
+                <div className={`${styles.fanCard} ${styles.fanCenter}`}>
+                  <Image
+                    src="/images/cards/phoenix.webp"
+                    alt="The Phoenix card from the Mahjong Mirror deck"
+                    width={300}
+                    height={450}
+                    sizes="280px"
+                    priority
+                  />
+                </div>
+                <div className={styles.sample}>
+                  <div>
+                    <div className={styles.sampleLabel}>Sample · 14 Mar 1984</div>
+                    <div className={styles.sampleText}>Wood Rat. Lucky in all Three Blessings.</div>
+                  </div>
+                  <div className={styles.sampleZh} lang="zh" aria-hidden="true">甲子</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── 2. Book ── */}
-        <section className={styles.bookSection}>
+        {/* The four angles */}
+        <section className={`${styles.band} ${styles.grey}`}>
           <div className="container">
-            <div className={styles.book}>
-              <div>
-                <span className={styles.bookEyebrow}>Now on Amazon</span>
-                <h2>Your path to <em>wiser decisions</em></h2>
-                <p>
-                  A modern divination system inspired by ancient Mahjong symbolism,
-                  guiding you toward clarity, intuition, and deeper self-discovery.
-                  No prior knowledge of Mahjong required.
-                </p>
-                <p className={styles.bookSpec}>The Mahjong Mirror · Kindle edition · Available now</p>
-                <div className={styles.bookCtas}>
-                  <a
-                    href="https://www.amazon.com/dp/B0HQZZXXLC"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.heroPrimary}
-                  >
-                    Buy on Amazon
-                  </a>
-                  <Link href="/the-mahjong-mirror/sample" className={styles.bookGhost}>
-                    Read a sample <span aria-hidden="true">→</span>
-                  </Link>
+            <SectionHead label="A mirror with four angles" aside={<span>From The Mahjong Mirror</span>} />
+            <div className={styles.angles}>
+              {ANGLES.map((a) => (
+                <div key={a.title} className={styles.angle}>
+                  <div className={styles.angleN}>{a.n}</div>
+                  <h3 className={styles.angleTitle}>{a.title}</h3>
+                  <p>{a.text}</p>
                 </div>
-              </div>
-              <div className={styles.bookCoverWrap}>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contents */}
+        <section className={styles.band}>
+          <div className="container">
+            <SectionHead label="Contents" aside={<span>Three ways in</span>} />
+            <Link href="/the-mahjong-mirror/sample" className={styles.row}>
+              <span className={styles.rowNum}>01</span>
+              <span className={styles.rowTitle}>Read the book</span>
+              <span className={styles.rowText}>
+                The Mahjong Mirror, the whole system in Bill&apos;s own words. Kindle
+                edition on Amazon, with the introduction free to read here.
+              </span>
+              <span className={styles.rowLink}>Start the introduction →</span>
+            </Link>
+            <Link href="/membership" className={styles.row}>
+              <span className={styles.rowNum}>02</span>
+              <span className={styles.rowTitle}>Join the community</span>
+              <span className={styles.rowText}>
+                Unlimited online readings for you and your inner circle, a free copy of
+                the book, and half off a personal reading with Bill.
+              </span>
+              <span className={styles.rowLink}>See what members get →</span>
+            </Link>
+            <Link href={`/almanac/${todayDate}`} className={styles.row}>
+              <span className={styles.rowNum}>03</span>
+              <span className={styles.rowTitle}>Follow the days</span>
+              <span className={styles.rowText}>
+                The daily almanac and horoscope: each day&apos;s officer, its score, and
+                what the calendar favors or cautions against.
+              </span>
+              <span className={styles.rowLink}>See today →</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* 01 The book */}
+        <section className={`${styles.band} ${styles.grey}`}>
+          <div className="container">
+            <SectionHead label="01 · The book" aside={<span>Now on Amazon</span>} />
+            <div className={styles.split}>
+              <div className={styles.cover}>
                 <Image
                   src="/images/book-cover.webp"
-                  alt="The Mahjong Mirror by Bill Hajdu"
-                  width={320}
-                  height={480}
-                  className={styles.bookCoverImg}
-                  style={{ objectFit: 'contain' }}
+                  alt="Cover of The Mahjong Mirror by Bill Hajdu"
+                  width={340}
+                  height={510}
+                  sizes="(max-width: 640px) 70vw, 340px"
                 />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 3. Journal ── */}
-        <section className={styles.sec}>
-          <div className="container">
-            <div className={styles.secHead}>
-              <div>
-                <span className={styles.heroBadge}>Writing &amp; Insight</span>
-                <h2>From the <em>journal</em></h2>
-              </div>
-              <p className={styles.secHeadLede}>
-                Notes on the year ahead, the tiles, and the slower kind of wisdom,
-                published whenever the timing feels right.
-              </p>
-            </div>
-
-            <div className={styles.journalGrid}>
-              {featuredPosts.map((post) => (
-                <Link key={post.slug} href={`/blog/posts/${post.slug}`} className={styles.post}>
-                  <div className={styles.postImg}>
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div className={styles.postEyebrow}>{post.topic}</div>
-                  <h3 className={styles.postTitle}>{stripTrailingPeriod(post.title)}</h3>
-                  <div className={styles.postMeta}>{post.date} · {post.readTime}</div>
-                </Link>
-              ))}
-            </div>
-
-            <div className={styles.sessionsFooter}>
-              <Link href="/blog" className={styles.btnLink}>Read the journal <span aria-hidden="true">→</span></Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 4. Live Reading ── */}
-        <section className={styles.sec}>
-          <div className="container">
-            <div className={styles.secHead}>
-              <div>
-                <span className={styles.heroBadge}>Personal Sessions</span>
-                <h2>Receive guidance through the <em>tiles</em></h2>
-              </div>
-              <p className={styles.secHeadLede}>
-                One Live Reading, sized to fit the question. Conducted live online with
-                Bill, the Mahjong Mirror Session looks into your emotional, spiritual,
-                and practical life. Choose thirty, sixty, or ninety minutes, depending on
-                how deep you want to go.
-              </p>
-            </div>
-
-            <article className={`${styles.session} ${styles.mirrorSession}`}>
-              <div className={`${styles.sessionMark} ${styles.sessionMarkFire}`}>鏡</div>
-              <div className={styles.mirrorBody}>
-                <div className={styles.livePill}>Live Reading</div>
-                <h3 className={styles.sessionTitle}>The Mahjong Mirror Session</h3>
-                <p className={styles.sessionDesc}>
-                  A deep, intuitive reading that looks into your emotional, spiritual,
-                  and practical life, revealing hidden influences, current challenges,
-                  and key lessons. Ideal for relationship dynamics, life purpose, or
-                  periods of uncertainty. Conducted live online, one-on-one with Bill.
-                  No prior knowledge of Mahjong required.
+              <div className={styles.splitText}>
+                <h2 className={styles.h2}>
+                  The Mahjong Mirror: your path to <em>wiser decisions</em>
+                </h2>
+                <p className={styles.lede}>
+                  &ldquo;It invites you to examine your situation from multiple angles,
+                  not just the obvious ones, and discover considerations and solutions you
+                  might otherwise miss.&rdquo;
                 </p>
-                <div className={styles.sessionMeta}>
-                  Live online <span className={styles.dot}>·</span> 1-on-1 <span className={styles.dot}>·</span> recording sent after
+                <div className="cta-row">
+                  <a href={AMAZON_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                    Buy on Amazon
+                  </a>
+                  <Link href="/the-mahjong-mirror/sample" className={styles.btnOutline}>
+                    Read the introduction
+                  </Link>
                 </div>
-                <div className={styles.tierRow}>
-                  {TIERS.map((t) => (
-                    <Link
-                      key={t.duration}
-                      href={t.href}
-                      className={`${styles.tier} ${t.featured ? styles.tierFire : ''}`}
-                    >
-                      {t.featured && <span className={styles.tierFlag}>Most chosen</span>}
-                      <div className={styles.tierName}>{t.name}</div>
-                      <div className={styles.tierLen}>{t.duration} min</div>
-                      <div className={styles.tierPrice}>{t.price}</div>
-                      <div className={styles.tierNote}>{t.note}</div>
-                    </Link>
-                  ))}
-                </div>
+                <p className={styles.small}>
+                  Members get a copy free. <Link href="/membership">See membership</Link>
+                </p>
               </div>
-            </article>
-
-            <div className={styles.sessionsFooter}>
-              <Link href="/book-a-reading" className={styles.btnLink}>Book a Private Reading <span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </section>
 
-        {/* ── 5. Testimonials ── */}
-        <section className={styles.sec}>
+        {/* 02 Membership */}
+        <section className={`${styles.band} ${styles.pink}`}>
           <div className="container">
-            <div className={styles.secHead}>
-              <div>
-                <span className={styles.heroBadge}>What Clients Say</span>
-                <h2>Ancient cards, <em>lasting impact</em></h2>
+            <SectionHead label="02 · Membership" aside={<span>$99 a year, or $299 once for life</span>} />
+            <div className={styles.split}>
+              <div className={styles.splitText}>
+                <h2 className={styles.h2}>
+                  Join once. <em>Read as often as you like.</em>
+                </h2>
+                <p className={styles.lede}>
+                  Every reading Bill has written, run from your birth details whenever you
+                  want, for you and the people you care about.
+                </p>
+                <Link href="/membership" className="btn-primary btn-lg">
+                  See what members get <span aria-hidden="true">→</span>
+                </Link>
               </div>
-              <p className={styles.secHeadLede}>
-                Notes from people who came with a question and left with a different
-                one: sharper, kinder, more their own.
-              </p>
-            </div>
-            <div className={styles.quotesGrid}>
-              {[
-                { quote: 'Beautiful, intuitive, and accurate. The tiles described exactly how I felt.', name: 'Saharan Louret', location: 'Cleveland, OH' },
-                { quote: 'A calming, grounding experience. I left feeling lighter and clearer.',         name: 'Fabian Baracca', location: 'Minneapolis, MN' },
-                { quote: 'My relationship reading was spot on. It changed how I approached our conversation.', name: 'Mouna Gonzato',  location: 'Newark, NJ' },
-              ].map((t) => (
-                <blockquote key={t.name} className={styles.quote}>
-                  <p className={styles.quoteText}>&ldquo;{t.quote}&rdquo;</p>
-                  <div className={styles.quoteCite}>
-                    <b>{t.name}</b> · {t.location}
-                  </div>
-                </blockquote>
-              ))}
+              <ul className={styles.list}>
+                {MEMBER_LIST.map((i) => (
+                  <li key={i.text} className={i.bonus ? styles.bonus : ''}>{i.text}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
 
-        {/* ── 6. Deck ── */}
-        <section className={styles.sec}>
+        {/* 03 The deck */}
+        <section className={styles.band}>
           <div className="container">
-            <div className={styles.secHead}>
-              <div>
-                <span className={styles.heroBadge}>The Deck</span>
-                <h2>Meet the <em>cards</em></h2>
-              </div>
-              <p className={styles.secHeadLede}>
+            <SectionHead
+              label="03 · The deck"
+              aside={<Link href="/cards" className={styles.asideLink}>See all 42 cards →</Link>}
+            />
+            <div className={styles.headRow}>
+              <h2 className={styles.h2}>Forty-two cards, <em>each a doorway</em></h2>
+              <p>
                 Forty-two hand-illustrated cards drawn from the ancient Mahjong tradition.
                 Each one a symbol, a story, and a doorway into clearer decisions.
               </p>
             </div>
-
-            <div className={styles.deckStrip}>
-              {DECK.map((card) => (
-                <Link key={card.slug} href={`/cards/${card.slug}`} className={styles.deckCard}>
-                  <div className={styles.deckRank}>{card.rank}</div>
-                  <div className={styles.deckImageWrap}>
-                    <Image
-                      src={`/images/cards/${card.slug}.webp`}
-                      alt={`${card.name}, Mahjong Mirror card`}
-                      fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </div>
-                  <div className={styles.deckName}>{card.name}</div>
-                  <div className={styles.deckSuit}>{card.suit}</div>
+            <div className={styles.deck}>
+              {deck.map((c) => (
+                <Link key={c.slug} href={`/cards/${c.slug}`} className={styles.deckCard}>
+                  <Image
+                    src={`/images/cards/${c.slug}.webp`}
+                    alt={`${c.name} card`}
+                    width={300}
+                    height={450}
+                    sizes="(max-width: 640px) 45vw, 200px"
+                  />
+                  <div className={styles.deckName}>{c.name}</div>
+                  <div className={styles.deckShort}>{c.short}</div>
                 </Link>
               ))}
             </div>
-
-            <div className={styles.deckFooter}>
-              <div className={styles.deckCount}>Showing 6 of 42</div>
-              <Link href="/cards" className={styles.btnLink}>See all 42 cards <span aria-hidden="true">→</span></Link>
-            </div>
           </div>
         </section>
 
-        {/* ── 7. About Bill ── */}
-        <section className={styles.sec}>
-          <div className="container">
-            <div className={styles.about}>
-              <figure className={styles.aboutFigure}>
-                <Image
-                  src="/images/about-portrait.webp"
-                  alt="Bill Hajdu, divination practitioner and author"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  style={{ objectFit: 'cover' }}
-                />
-                <div className={styles.aboutFigureTag}>[ Bill at the table ]</div>
-              </figure>
-              <div className={styles.aboutText}>
-                <span className={styles.heroBadge}>Meet the Firepig</span>
-                <h2>Reader, host, <em>astrologer</em></h2>
-                <p>
-                  For more than thirty-five years, Bill has worked at the intersection of
-                  Four Pillars astrology, Mahjong tile readings, and tarot, building a
-                  system where the three traditions speak to one another.
-                </p>
-                <p>
-                  His readings draw on keen intellect, deep respect for tradition, and a
-                  genuine desire to help others find clarity. No prior knowledge of Mahjong
-                  is required. Just an open mind and a question worth asking.
-                </p>
-                <div className={styles.aboutCred}>
-                  <div className={styles.aboutCredItem}>
-                    <div className={styles.credNum}>35+</div>
-                    <div className={styles.credLab}>Years practicing</div>
-                  </div>
-                  <div className={styles.aboutCredItem}>
-                    <div className={styles.credNum}>2,400+</div>
-                    <div className={styles.credLab}>Sessions read</div>
-                  </div>
-                  <div className={styles.aboutCredItem}>
-                    <div className={styles.credNum}>42</div>
-                    <div className={styles.credLab}>Cards in the deck</div>
-                  </div>
-                </div>
-                <div className={styles.aboutBtns}>
-                  <Link href="/about" className={styles.heroGhost}>About Bill <span aria-hidden="true">→</span></Link>
-                  <Link href="/about#approach" className={styles.btnLink}>Read his approach</Link>
-                </div>
+        {/* 04 The blog */}
+        {featuredPosts.length > 0 && (
+          <section className={styles.band}>
+            <div className="container">
+              <SectionHead
+                label="04 · The blog"
+                aside={<Link href="/blog" className={styles.asideLink}>All writing →</Link>}
+              />
+              <div className={styles.posts}>
+                {featuredPosts.map((post) => (
+                  <Link key={post.slug} href={`/blog/posts/${post.slug}`} className={styles.postRow}>
+                    <span className={styles.postTitle}>{stripTrailingPeriod(post.title)}</span>
+                    <span className={styles.rowLink}>Read →</span>
+                  </Link>
+                ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* ── 8. Stay Connected ── */}
-        <section className={styles.sec}>
-          <div className="container">
-            <div className={styles.cta}>
-              <div>
-                <span className={styles.heroBadge}>Stay Connected</span>
-                <h2>In your inbox, insights for the <em>year ahead</em></h2>
-                <p>
-                  Notes on Mahjong, tarot, and Chinese astrology, sent whenever there&apos;s
-                  something worth saying. Never more than twice a month.
-                </p>
-              </div>
-              <NewsletterSignup source="home" variant="light" />
+        {/* Closing */}
+        <section className={`${styles.band} ${styles.grey}`}>
+          <div className={`container ${styles.closing}`}>
+            <h2 className={styles.h2}>Start with <em>your birth date</em></h2>
+            <div className="cta-row">
+              <Link href="/chart" className="btn-primary btn-lg">Show my chart</Link>
+              <Link href="/membership" className={styles.btnOutline}>See membership</Link>
             </div>
           </div>
         </section>
-
       </main>
 
       <Footer />
@@ -400,10 +336,8 @@ export default function Home({ todayDate, todayAlmanac, featuredPosts }) {
 export async function getStaticProps() {
   const todayDate = todayInLA();
   const { data: todayAlmanac } = await fetchAlmanacForDate(todayDate);
-  // Only feature posts whose publish date has arrived, so the homepage never
-  // links to a date-gated post that 404s. revalidate flips it in on schedule.
-  // Posts come from the blog database; a failed read shows no journal cards
-  // rather than failing the homepage.
+  // Only posts whose publish date has arrived; a failed read shows no blog
+  // rows rather than failing the homepage.
   let featuredPosts = [];
   try {
     featuredPosts = (await listPublishedPosts()).slice(0, 3);

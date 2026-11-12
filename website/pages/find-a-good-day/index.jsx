@@ -3,11 +3,15 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import AlmanacSearch from '../../components/AlmanacSearch';
-import { activityKeyToSlug } from '../../lib/almanac';
+import { activityKeyToSlug, activitySlugToKey } from '../../lib/almanac';
 import { ORGANIZATION, WEBSITE, graph } from '../../lib/schema';
+import styles from '../../styles/FindAGoodDay.module.css';
 
 export default function FindAGoodDay() {
   const router = useRouter();
+  // ?activity=<slug> (from the almanac's quick links) preselects an activity.
+  const slug = router.isReady && typeof router.query.activity === 'string' ? router.query.activity : null;
+  const initialActivityKey = slug ? activitySlugToKey(slug) : null;
 
   function buildResultHref(date, activity) {
     const slug = activityKeyToSlug(activity.key);
@@ -37,16 +41,24 @@ export default function FindAGoodDay() {
       />
       <Nav />
       <main>
-        <section className="page-section">
-          <div className="page-intro">
-            <span className="overline">Almanac Search</span>
-            <h1>Find a Good Day To…</h1>
-            <p className="page-intro-lede">
-              Search auspicious dates for any activity, wedding, move, business launch, and more.
+        <section className={styles.intro}>
+          <div className="container">
+            <span className="overline">Almanac search</span>
+            <h1 className={styles.title}>Find a good day to&hellip;</h1>
+            <p className={styles.lead}>
+              Search auspicious dates for any activity: a wedding, a move, a
+              business launch, and more.
             </p>
           </div>
-
-          <AlmanacSearch buildResultHref={buildResultHref} />
+        </section>
+        <section className={styles.searchSection}>
+          <AlmanacSearch
+            key={initialActivityKey || 'none'}
+            buildResultHref={buildResultHref}
+            initialActivityKey={initialActivityKey}
+            backHref="/almanac"
+            backLabel="← Back to today’s almanac"
+          />
         </section>
       </main>
       <Footer />

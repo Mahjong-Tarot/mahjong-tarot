@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════
-   Blog Post — Editorial restraint, Fraunces voice, Fire stamp
+   Blog Post — Editorial restraint, Libre Franklin headings, Fire stamp
    Anchored on Mahjong Tarot Design System v1.0
    ══════════════════════════════════════════════════════════════════════ */
 
@@ -21,30 +21,29 @@
   color: var(--ink);
   font-family: var(--serif);
   font-size: clamp(36px, 4.5vw, 52px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin: var(--space-sm) 0 var(--space-lg);
 }
 .header h1 em {
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: inherit;
   color: var(--fire-600);
 }
 .header .postMeta {
-  font-family: var(--mono);
-  font-size: var(--text-xs);
-  color: var(--ink-4);
-  line-height: 1.7;
-  letter-spacing: 0.04em;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink-3);
+  line-height: 1.6;
 }
 
 /* ── Breadcrumb ── */
 .breadcrumb {
-  font-family: var(--mono);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   margin-bottom: var(--space-lg);
 }
@@ -63,19 +62,15 @@
   margin: 0;
 }
 
-/* ── Category pill ── */
+/* ── Category label (plain grey uppercase text, as on the blog index) ── */
 .categoryPill {
   display: inline-block;
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 10.5px;
-  letter-spacing: var(--tracking-overline);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fire-600);
-  background-color: transparent;
-  border: 1px solid var(--fire-500);
-  border-radius: var(--r-pill);
-  padding: var(--space-xs) var(--space-sm2);
+  color: var(--ink-3);
   margin-bottom: var(--space-md);
 }
 
@@ -99,7 +94,7 @@
 }
 .body p {
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: var(--text-base);
   line-height: 1.7;
   margin-bottom: var(--space-lg);
   color: var(--ink-2);
@@ -107,7 +102,7 @@
 .body h2 {
   font-family: var(--serif);
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.015em;
   margin-top: 56px;
@@ -117,7 +112,7 @@
 .body h3 {
   font-family: var(--serif);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
   margin-top: 36px;
@@ -141,11 +136,17 @@
   font-weight: 600;
   color: var(--ink);
 }
+/* Prose emphasis: plain italic. Headings inside the body keep the
+   global upright fire-red <em>. */
 .body em {
-  font-family: var(--serif);
   font-style: italic;
+  color: inherit;
+  font-weight: inherit;
+}
+.body h2 em,
+.body h3 em {
+  font-style: normal;
   color: var(--fire-600);
-  font-weight: 400;
 }
 .body a {
   color: var(--fire-600);
@@ -208,7 +209,7 @@
 .faqQuestion {
   font-family: var(--sans);
   font-size: var(--text-base);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ink);
   margin: 0;
   line-height: 1.4;
@@ -231,7 +232,7 @@
 }
 .faqAnswer {
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.65;
   color: var(--ink-2);
   margin: var(--space-sm2) 0 var(--space-xs);
@@ -251,11 +252,9 @@
 
 .navPrev,
 .navNext {
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 16px;
   text-decoration: none;
   color: var(--ink-2);
   max-width: 280px;
@@ -274,8 +273,8 @@
 }
 .relatedSection h2 {
   font-family: var(--serif);
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 600;
   margin: 0 0 var(--space-lg);
   color: var(--ink);
   letter-spacing: -0.01em;
@@ -303,8 +302,8 @@
 }
 .relatedCard h3 {
   font-family: var(--serif);
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 19px;
+  font-weight: 600;
   line-height: 1.3;
   margin: 0 0 var(--space-xs);
   color: var(--ink);
@@ -312,10 +311,12 @@
   letter-spacing: -0.005em;
 }
 .relatedCard span {
-  font-family: var(--mono);
-  font-size: var(--text-xs);
-  color: var(--ink-4);
-  letter-spacing: 0.04em;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
 }
 
 /* ── CTA Section ── */
@@ -326,9 +327,9 @@
   text-align: center;
 }
 .ctaSection .ctaOverline {
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: var(--text-xs);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
   letter-spacing: var(--tracking-overline);
   text-transform: uppercase;
   color: var(--fire-600);
@@ -338,10 +339,21 @@
 .ctaSection h2 {
   font-family: var(--serif);
   font-size: 30px;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--ink);
   margin: 0 0 14px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
+}
+/* No dark buttons: the secondary CTA reads as an outline. */
+.ctaSection :global(.btn-secondary) {
+  background-color: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.ctaSection :global(.btn-secondary):hover:not(:disabled) {
+  background-color: var(--rule-2);
+  color: var(--ink);
+  border-color: var(--ink);
 }
 .ctaSection p {
   font-family: var(--sans);

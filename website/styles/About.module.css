@@ -12,10 +12,11 @@
   overflow: hidden;
   border: 1px solid var(--rule);
 }
+.portraitImg { object-fit: cover; }
 .bioText h2 {
   margin-bottom: var(--space-lg);
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 32px;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -30,8 +31,8 @@
 
 .extended { max-width: 720px; }
 .extended p {
-  font-family: var(--serif);
-  font-size: 19px;
+  font-family: var(--sans);
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   margin-bottom: var(--space-xl);
@@ -46,35 +47,36 @@
 .credentialsLayout h3 {
   margin-top: var(--space-md);
   font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .speakingList { margin-top: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); }
 .speakingItem { display: flex; gap: var(--space-lg); align-items: baseline; }
+.speakingItem { font-size: 18px; }
 .speakingYear {
-  font-family: var(--mono);
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: var(--tracking-label);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.04em;
   color: var(--fire-600);
   min-width: 56px;
-  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
 }
 
 .cta { text-align: center; }
 .cta h2 {
   margin: var(--space-lg) 0;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 .cta p {
-  color: var(--paper-a78);
-  font-family: var(--serif);
-  font-size: 19px;
+  color: var(--ink-3);
+  font-family: var(--sans);
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
   margin-bottom: var(--space-xl);

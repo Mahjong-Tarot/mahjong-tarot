@@ -68,7 +68,7 @@ export default function CardsIndex() {
  alt={`${card.name}, Mahjong Mirror card`}
  fill
  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
- style={{ objectFit: 'contain' }}
+ className={cardStyles.image}
  />
  </div>
  <figcaption>

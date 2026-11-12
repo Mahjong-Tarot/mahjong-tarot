@@ -10,7 +10,7 @@ const PUBLIC_LINKS = [
   { href: '/about',              label: 'About'            },
   { href: '/book-a-reading',     label: 'Private Readings' },
   { href: '/the-mahjong-mirror', label: 'Book'             },
-  { href: '/blog',               label: 'Journal'          },
+  { href: '/blog',               label: 'Blog'             },
   { href: '/contact',            label: 'Contact'          },
 ];
 
@@ -87,13 +87,6 @@ export default function Nav() {
 
   return (
     <>
-      {!inMemberArea && (
-        <div className={styles.promo}>
-          <span className={styles.promoPip} />
-          <b>Year of the Fire Horse</b> · New readings open through May
-          <span className={styles.promoPip} />
-        </div>
-      )}
     <nav className={styles.nav}>
       <div className={`container ${styles.inner}`}>
         <Link href={user ? '/member/dashboard' : '/'} className={styles.logo}>
@@ -159,7 +152,7 @@ export default function Nav() {
             </ul>
             <div className={styles.navRight}>
               <Link href="/sign-in" className={styles.navSignin}>Sign in</Link>
-              <Link href="/signup" className={styles.cta}>
+              <Link href="/membership" className={styles.cta}>
                 <span className={styles.ctaLong}>Get Premium Access</span>
                 <span className={styles.ctaShort}>Go Premium</span>
               </Link>

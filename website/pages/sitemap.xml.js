@@ -8,6 +8,8 @@ function generate(posts) {
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
     { loc: '/about', priority: '0.7', changefreq: 'monthly' },
     { loc: '/readings', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/membership', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/chart', priority: '0.8', changefreq: 'monthly' },
     { loc: '/the-mahjong-mirror', priority: '0.9', changefreq: 'monthly' },
     { loc: '/the-mahjong-mirror/sample', priority: '0.7', changefreq: 'yearly' },
     { loc: '/cards', priority: '0.9', changefreq: 'monthly' },

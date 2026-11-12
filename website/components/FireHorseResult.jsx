@@ -96,7 +96,7 @@ export default function FireHorseResult({
                 return (
                   <li key={m.month}>
                     <strong>{date?.stem_branch} ({SIGN_LABEL[m.sign]} month)</strong>
-                    <span className={styles.monthDate}>{date?.begin}, {date?.end}</span>
+                    <span className={styles.monthDate}>{date?.begin} to {date?.end}</span>
                     <span className={styles.monthScore}>{m.score.toFixed(2)} &middot; {BAND_FOR(m.score).short}</span>
                   </li>
                 );
@@ -111,7 +111,7 @@ export default function FireHorseResult({
                 return (
                   <li key={m.month}>
                     <strong>{date?.stem_branch} ({SIGN_LABEL[m.sign]} month)</strong>
-                    <span className={styles.monthDate}>{date?.begin}, {date?.end}</span>
+                    <span className={styles.monthDate}>{date?.begin} to {date?.end}</span>
                     <span className={styles.monthScore}>{m.score.toFixed(2)} &middot; {BAND_FOR(m.score).short}</span>
                   </li>
                 );

@@ -379,7 +379,7 @@ export default function Membership() {
                 <div className={styles.addOnLabel}>Add at checkout</div>
                 <div className={styles.addOnTitle}>A personal reading with Bill, at the member price</div>
               </div>
-              <div className={styles.addOnPrices}>30 min $24 · 60 min $44 · 90 min $64</div>
+              <div className={styles.addOnPrices}>90 min $64</div>
             </div>
           </div>
         </section>

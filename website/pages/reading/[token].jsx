@@ -206,7 +206,7 @@ function UpsellPS({ hasPremium, hasBook }) {
           look at every morning. That&apos;s what the Inner Circle is.
         </p>
         <p className={styles.psBody}>
-          <strong>$99 a year</strong>, with a 30-day money-back guarantee.
+          <strong>$99 a year</strong>, with a 7-day money-back guarantee.
           Cancel anytime. Your book stays yours either way.
         </p>
         <div className={styles.psCtas}>
@@ -234,7 +234,7 @@ function UpsellPS({ hasPremium, hasBook }) {
           <li><strong>Daily horoscope</strong> for your Chinese zodiac sign</li>
           <li><strong>Daily almanac</strong> — lucky &amp; unlucky activities for the day</li>
           <li><strong>Your Bazi &amp; Purple Star charts</strong>, computed and ready</li>
-          <li><strong>30-day money-back guarantee</strong></li>
+          <li><strong>7-day money-back guarantee</strong></li>
         </ul>
       </div>
       <div className={styles.psCtas}>

@@ -25,7 +25,7 @@ export const PAID_PLANS = {
     meta: 'Renews at $99 each year. Cancel anytime.',
     submit: 'Pay $99 and join',
     pending: 'start your membership',
-    reassure: ['Secured by Stripe', '30-day money-back guarantee', 'Cancel anytime'],
+    reassure: ['Secured by Stripe', '7-day money-back guarantee', 'Cancel anytime'],
   },
   lifetime: {
     eyebrow: '◆ Lifetime membership · one-time offer',
@@ -37,7 +37,7 @@ export const PAID_PLANS = {
     meta: 'One payment, never renews. Includes a one-hour consultation with Bill and an autographed copy of The Mahjong Mirror.',
     submit: 'Pay $299 and join for life',
     pending: 'complete your lifetime membership',
-    reassure: ['Secured by Stripe', 'One payment', '30-day money-back guarantee'],
+    reassure: ['Secured by Stripe', 'One payment', '7-day money-back guarantee'],
   },
 };
 

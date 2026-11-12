@@ -109,7 +109,7 @@ const FAQ = [
   },
   {
     q: 'What if it is not for me?',
-    a: 'Every membership comes with a 30-day money-back guarantee. Email us within 30 days of joining and we refund you in full.',
+    a: 'Every membership comes with a 7-day money-back guarantee. Email us within 7 days of joining and we refund you in full.',
   },
   {
     q: 'Can I move from yearly to lifetime later?',
@@ -267,7 +267,7 @@ export default function Membership() {
                   <div className={styles.payPrice}>
                     $99 <span className={styles.payPer}>a year</span>
                   </div>
-                  <div className={styles.payNote}>30-day money-back guarantee</div>
+                  <div className={styles.payNote}>7-day money-back guarantee</div>
                 </div>
                 <Link href={YEARLY_HREF} className={styles.btnPrimary}>
                   Join for $99 a year <span aria-hidden="true">→</span>
@@ -282,14 +282,14 @@ export default function Membership() {
           <div className={styles.wrap}>
             <div className={styles.guarantee}>
               <div className={styles.guaranteeSeal} aria-hidden="true">
-                <span className={styles.guaranteeDays}>30</span>
+                <span className={styles.guaranteeDays}>7</span>
                 <span className={styles.guaranteeUnit}>days</span>
               </div>
               <div>
-                <div className={styles.eyebrowLeft}>30-day money-back guarantee</div>
-                <h2 className={styles.guaranteeTitle}>Try it for 30 days. If it is not for you, get every penny back.</h2>
+                <div className={styles.eyebrowLeft}>7-day money-back guarantee</div>
+                <h2 className={styles.guaranteeTitle}>Try it for 7 days. If it is not for you, get every penny back.</h2>
                 <p className={styles.guaranteeText}>
-                  Join, run your readings, read the book. If within 30 days you decide
+                  Join, run your readings, read the book. If within 7 days you decide
                   membership is not for you, email us and we refund you in full. No
                   questions, no forms.
                 </p>
@@ -343,7 +343,7 @@ export default function Membership() {
               </Link>
               <div className={styles.lifetimeNote}>
                 Plus half off every further reading with Bill, for life.
-                Covered by the 30-day money-back guarantee.
+                Covered by the 7-day money-back guarantee.
               </div>
             </div>
           </div>

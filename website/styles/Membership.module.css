@@ -504,3 +504,57 @@
   .btnPrimarySm,
   .btnOutline { width: 100%; }
 }
+
+/* ── Guarantee ── */
+.guarantee {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg) var(--space-xl2);
+  padding: clamp(28px, 4vw, 48px);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+}
+.guarantee > div:last-child { flex: 1 1 420px; min-width: 0; }
+.guaranteeSeal {
+  flex: 0 0 auto;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  border: 3px solid var(--fire-500);
+  box-shadow: inset 0 0 0 6px var(--paper), inset 0 0 0 8px var(--fire-100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--fire-600);
+}
+.guaranteeDays {
+  font-family: var(--book);
+  font-size: 56px;
+  line-height: 1;
+}
+.guaranteeUnit {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.guaranteeTitle {
+  font-size: clamp(26px, 2.8vw, 36px);
+  line-height: 1.2;
+  margin: var(--space-sm) 0 var(--space-md);
+}
+.guaranteeText {
+  font-size: 19px;
+  color: var(--ink-3);
+  max-width: 60ch;
+  margin: 0;
+}
+.payNote {
+  margin-top: var(--space-sm);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-2);
+}

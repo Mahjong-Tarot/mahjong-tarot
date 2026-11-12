@@ -32,14 +32,11 @@ export function getServiceSupabase() {
   return _serviceClient;
 }
 
-// mode: the Stripe Checkout mode. fallback: inline price_data used when
-// the plan's price env var is empty (founders has none, so it must be set).
+// Plans on sale. mode: the Stripe Checkout mode. fallback: inline
+// price_data used when the plan's price env var is empty. The old founders
+// plan is no longer sold; existing founders subscriptions keep renewing in
+// Stripe and the webhook still recognises them.
 export const PLANS = {
-  founders: {
-    key: 'founders',
-    mode: 'subscription',
-    priceEnvVar: 'STRIPE_PRICE_FOUNDERS',
-  },
   yearly: {
     key: 'yearly',
     mode: 'subscription',

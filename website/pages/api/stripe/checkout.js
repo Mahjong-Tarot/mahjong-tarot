@@ -1,5 +1,5 @@
 // POST /api/stripe/checkout
-// Body: { plan: 'founders' | 'yearly' | 'lifetime' }
+// Body: { plan: 'yearly' | 'lifetime' }
 // Creates (or reuses) a Stripe customer for the signed-in user, then
 // creates a hosted Checkout Session and returns its URL. The client
 // redirects window.location to that URL. The webhook at
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   if (!auth.ok) return res.status(auth.status).json({ error: auth.error });
   const { user } = auth;
 
-  const plan = (req.body && req.body.plan) || 'founders';
+  const plan = (req.body && req.body.plan) || 'yearly';
   let lineItem;
   try {
     lineItem = lineItemForPlan(plan);

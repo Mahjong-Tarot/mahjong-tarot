@@ -50,14 +50,14 @@
     "experiments": {
       "typedRoutes": false
     },
-    "owner": "edge8ai",
+    "owner": "edge8-ai",
     "extra": {
       "eas": {
-        "projectId": "69fc507a-5bc3-4623-99a1-ef742d0d7105"
+        "projectId": "aecf4b57-1fe8-4b01-ac47-164d9e8dae8a"
       }
     },
     "updates": {
-      "url": "https://u.expo.dev/69fc507a-5bc3-4623-99a1-ef742d0d7105"
+      "url": "https://u.expo.dev/aecf4b57-1fe8-4b01-ac47-164d9e8dae8a"
     }
   }
 }

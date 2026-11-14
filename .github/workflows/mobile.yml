@@ -1,0 +1,82 @@
+# iPhone app (mobile/): every build runs in Expo's cloud (EAS), never on a Mac.
+#
+# - Push to main touching the app or its shared website/lib code → EAS Update
+#   (JavaScript-only fix, reaches installed apps without App Store review).
+# - "Run workflow" with build=true → EAS Build for iOS + auto-submit to
+#   App Store Connect (TestFlight), for native changes or a new version.
+#
+# Needs the EXPO_TOKEN repo secret (an Expo robot token for the Talent Edge
+# Expo organisation). Without it the jobs skip.
+name: iPhone app
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mobile/**'
+      - 'website/lib/bazi.js'
+      - 'website/lib/reading-meta.js'
+  workflow_dispatch:
+    inputs:
+      build:
+        description: 'Build a new iOS binary and submit it to TestFlight'
+        type: boolean
+        default: false
+
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.event_name == 'push' || !inputs.build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - name: Check for EXPO_TOKEN
+        id: token
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          if [ -z "$EXPO_TOKEN" ]; then echo "EXPO_TOKEN is not set; skipping."; echo "ok=false" >> "$GITHUB_OUTPUT"; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.token.outputs.ok == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.token.outputs.ok == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: expo/expo-github-action@v8
+        if: steps.token.outputs.ok == 'true'
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - if: steps.token.outputs.ok == 'true'
+        run: npm ci
+      - name: Publish EAS Update to production
+        if: steps.token.outputs.ok == 'true'
+        run: eas update --channel production --environment production --platform ios --message "${{ github.event.head_commit.message || 'Manual update' }}" --non-interactive
+
+  build:
+    if: github.event_name == 'workflow_dispatch' && inputs.build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: npm ci
+      - name: Build on EAS and submit to App Store Connect
+        run: eas build --platform ios --profile production --auto-submit --non-interactive --no-wait

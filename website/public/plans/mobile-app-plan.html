@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahjong Tarot App Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Libre+Franklin:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Tokens mirror website/styles/globals.css after the 12 Nov 2026 redesign. */
+  :root {
+    --paper: #FFFFFF; --ink: #14161B; --ink-2: #2A2D35; --ink-3: #50545E; --ink-4: #6B6F79;
+    --rule: #E4E5EA; --rule-2: #EFEFF2; --fire-50: #FFF4F2; --fire-100: #FFE2DD; --fire-500: #E63329; --fire-600: #C8261C; --fire-700: #9E1B14;
+    --good-bg: #E8F5E8; --good-ink: #1E6334; --bad-bg: var(--fire-50); --bad-ink: var(--fire-700);
+    --wood: #3E8E5A; --fire: #E63329; --earth: #B8893A; --metal: #8A8F99; --water: #2F5D8C;
+    --serif: 'Libre Franklin', Inter, system-ui, sans-serif; --sans: Inter, system-ui, sans-serif;
+    --book: 'EB Garamond', Georgia, serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink-2); font: 18px/1.6 var(--sans); }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+  header { border-bottom: 1px solid var(--rule); padding: 56px 0 36px; }
+  .eyebrow { color: var(--fire-600); font: 600 13px var(--sans); letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font: 600 44px/1.1 var(--serif); letter-spacing: -0.02em; color: var(--ink); margin: 10px 0 12px; }
+  em { font-style: normal; color: var(--fire-600); }
+  header p { max-width: 700px; margin: 0; color: var(--ink-3); font-size: 20px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .pill { border: 1px solid var(--rule); border-radius: 999px; padding: 3px 12px; font-size: 13px; color: var(--ink-3); }
+  main { padding: 16px 0 72px; }
+  section.d { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 40px 0; border-top: 1px solid var(--rule); }
+  section.d:first-child { border-top: 0; }
+  .num { width: 48px; height: 48px; border: 1.5px solid var(--fire-500); color: var(--fire-600); border-radius: 50%; display: grid; place-items: center; font: 600 20px var(--serif); }
+  h2 { font: 600 30px/1.15 var(--serif); letter-spacing: -0.015em; color: var(--ink); margin: 4px 0 8px; }
+  h3 { font: 600 13px var(--sans); color: var(--fire-600); margin: 28px 0 8px; text-transform: uppercase; letter-spacing: .18em; }
+  .lede { color: var(--ink-3); margin: 0 0 12px; font-size: 20px; }
+  .card { background: var(--rule-2); border-radius: 8px; padding: 16px 20px; margin: 14px 0; font-size: 16px; }
+  .card.fire { background: var(--fire-50); border: 1px solid var(--fire-100); }
+  .card.first { background: var(--fire-50); border: 1.5px solid var(--fire-500); }
+  ul, ol { padding-left: 22px; margin: 8px 0; } li { margin: 5px 0; }
+  p em, li em { font-style: italic; color: inherit; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 16px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { color: var(--ink); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1.5px solid var(--ink); }
+  .tbl { overflow-x: auto; }
+  code { font: 14px var(--mono); background: var(--rule-2); padding: 1px 5px; border-radius: 4px; }
+  .tag { display: inline-block; font-size: 13px; font-weight: 600; padding: 1px 8px; border-radius: 4px; }
+  .free { background: var(--good-bg); color: var(--good-ink); }
+  .mem { background: var(--fire-50); color: var(--fire-700); }
+  .later { background: var(--rule-2); color: var(--ink-3); }
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 10px 0; font-size: 15px; }
+  .flow span { border: 1px solid var(--rule); border-radius: 6px; padding: 4px 10px; background: var(--paper); }
+  .flow i { color: var(--fire-500); font-style: normal; font-weight: 700; }
+
+  /* Wireframes: iPhone frames */
+  .screens { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 28px 20px; margin: 20px 0 8px; }
+  figure { margin: 0; }
+  figcaption { font-size: 14px; color: var(--ink-3); margin-top: 10px; line-height: 1.5; }
+  figcaption b { color: var(--ink); display: block; font: 600 16px var(--serif); margin-bottom: 2px; }
+  .phone { width: 100%; max-width: 260px; aspect-ratio: 9 / 19.5; border: 2px solid var(--ink); border-radius: 34px; padding: 10px; background: var(--paper); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .notch { width: 74px; height: 20px; background: var(--ink); border-radius: 12px; margin: 0 auto 8px; flex: none; }
+  .scr { flex: 1; display: flex; flex-direction: column; gap: 7px; font-size: 11.5px; line-height: 1.4; color: var(--ink-2); overflow: hidden; padding: 0 4px; }
+  .t { font: 600 17px/1.2 var(--serif); letter-spacing: -0.01em; color: var(--ink); }
+  .s { font-size: 10.5px; color: var(--ink-3); }
+  .ey { font: 600 8.5px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--fire-600); }
+  .box { border: 1px solid var(--rule); border-radius: 8px; padding: 7px 8px; }
+  .fill { background: var(--rule-2); border: 0; }
+  .hl { background: var(--fire-50); border: 1px solid var(--fire-100); }
+  .field { border: 1px solid var(--rule); border-radius: 6px; padding: 6px 8px; color: var(--ink-3); font-size: 10.5px; }
+  .btn { background: var(--fire-500); color: #fff; border-radius: 8px; padding: 8px; text-align: center; font-weight: 600; font-size: 11.5px; }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .link { color: var(--fire-600); font-weight: 600; font-size: 10.5px; text-align: center; }
+  .row { display: flex; gap: 6px; align-items: center; }
+  .row > * { flex: 1; }
+  .chip { display: inline-block; border-radius: 99px; padding: 2px 7px; font-size: 9.5px; font-weight: 600; margin: 1px; }
+  .g { background: var(--good-bg); color: var(--good-ink); }
+  .b { background: var(--bad-bg); color: var(--bad-ink); }
+  .n { background: var(--rule-2); color: var(--ink-3); }
+  .score { font: 600 26px/1 var(--serif); color: var(--good-ink); }
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; text-align: center; }
+  .pillars div { border: 1px solid var(--rule); border-radius: 6px; padding: 5px 2px; }
+  .pillars .hz { font: 500 16px/1.2 var(--book); color: var(--ink); display: block; }
+  .pillars .dm { border-color: var(--fire-500); background: var(--fire-50); }
+  .pillars .na { color: var(--ink-4); border-style: dashed; }
+  .bars { display: flex; flex-direction: column; gap: 3px; }
+  .bar { display: flex; align-items: center; gap: 5px; font-size: 9.5px; }
+  .bar span:first-child { width: 34px; }
+  .bar i { height: 6px; border-radius: 3px; display: block; }
+  .stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; text-align: center; font-size: 8px; }
+  .stages div { background: var(--rule-2); border-radius: 4px; padding: 3px 0; }
+  .stages .now { background: var(--fire-500); color: #fff; font-weight: 600; }
+  .line { height: 6px; background: var(--rule-2); border-radius: 3px; }
+  .line.w60 { width: 60%; } .line.w80 { width: 80%; } .line.w40 { width: 40%; }
+  .lock { opacity: .55; }
+  .tabs { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); padding-top: 6px; margin: 6px -4px 4px; font-size: 9px; text-align: center; color: var(--ink-3); }
+  .tabs .on { color: var(--fire-600); font-weight: 700; }
+  .tabs b { display: block; width: 14px; height: 14px; margin: 0 auto 2px; border: 1.5px solid currentColor; border-radius: 4px; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--paper); border-top: 1px solid var(--rule); border-radius: 16px 16px 0 0; padding: 12px 12px 18px; box-shadow: 0 -8px 24px rgba(20,22,27,.12); display: flex; flex-direction: column; gap: 7px; font-size: 11.5px; }
+  .grab { width: 36px; height: 4px; border-radius: 2px; background: var(--rule); margin: 0 auto 4px; }
+  .dim { position: absolute; inset: 0; background: rgba(20,22,27,.25); }
+  .hours { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; text-align: center; font-size: 8.5px; }
+  .hours div { border-radius: 4px; padding: 3px 0; }
+  .radio { display: flex; gap: 10px; font-size: 10.5px; color: var(--ink-3); }
+
+  footer { color: var(--ink-3); font-size: 14px; border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 24px; }
+  @media (max-width: 640px) { h1 { font-size: 32px; } h2 { font-size: 26px; } section.d { grid-template-columns: 1fr; gap: 8px; } .screens { grid-template-columns: 1fr; justify-items: center; } figure { max-width: 260px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">5Ds Plan · iPhone app v1 (slim)</div>
+    <h1>The Mahjong Tarot, <em>on your iPhone</em></h1>
+    <p>A customer-only iPhone app that mirrors the website: a free side where anyone sees their own chart and the daily almanac, and a member side where people start a free trial or sign in to read their reports.</p>
+    <div class="meta">
+      <span class="pill">Customer app only, no admin</span>
+      <span class="pill">iPhone only</span>
+      <span class="pill">Rev 4 · 14 Nov 2026</span>
+      <span class="pill">Owner: Dave</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="d">
+  <div class="num">1</div>
+  <div>
+    <h2>Define the problem</h2>
+    <p class="lede">Bill's readers live on their phones, but everything they get from us lives on a website.</p>
+    <ul>
+      <li><strong>Who feels it:</strong> two groups. Visitors who arrive from social posts and want "what does today mean for me", and members (yearly $99, lifetime $299, or a 90-day free trial) who come back for their reports.</li>
+      <li><strong>What it costs:</strong> the daily almanac is the habit-forming feature, but a website has no home-screen icon and no reminder, so people forget to come back. Members sign in again in a browser to find a report they already have. Every lapsed visit is a lost chance to turn a free chart into a membership.</li>
+      <li><strong>Why now:</strong> the 12 Nov redesign put a free chart on the website (<code>/chart</code>, "one angle of the mirror") and a clear membership offer (<code>/membership</code>). The app puts that same first step on the home screen. 2027 (Fire Sheep year) forecasts are the next reason to come back.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="d">
+  <div class="num">2</div>
+  <div>
+    <h2>Discover the data</h2>
+    <p class="lede">The app reads what the website already reads. The only new table, for v1.1 push, is shared with Forever and PPC.</p>
+    <div class="tbl"><table>
+      <tr><th>Data</th><th>Source today</th><th>App use</th><th>New?</th></tr>
+      <tr><td>Free chart</td><td>Public <code>/api/chart</code> (rate limited, stores nothing): element mix, five life stages, Purple Star (needs time + gender), Three Blessings, Fire Horse best months</td><td>My Chart shows the same slice the website's <code>/chart</code> page shows. Pillars drawn with <code>lib/bazi.js</code> so they show offline.</td><td>Reuse</td></tr>
+      <tr><td>Daily almanac</td><td><code>almanac_days</code>, <code>almanac_day_summary</code> via <code>lib/almanac.js</code></td><td>Today screen + date picker, read with the public anon key.</td><td>Reuse (confirm anon read policy)</td></tr>
+      <tr><td>Birth details (guest)</td><td>Not stored on the website either</td><td>Kept on the phone until the person starts a trial or signs in.</td><td>Device only</td></tr>
+      <tr><td>Free trial sign-up</td><td><code>supabase.auth.signUp</code> in <code>components/TrialSignup.jsx</code> (name, birthday, birth time, <code>signup_source</code>)</td><td>Same call, prefilled from the phone, tagged <code>signup_source: 'app'</code>.</td><td>Reuse (new source value)</td></tr>
+      <tr><td>Member account</td><td>Supabase Auth (password + magic link), <code>profiles</code></td><td>Sign in, profile, birth details from the account.</td><td>Reuse</td></tr>
+      <tr><td>Membership status</td><td><code>profiles</code> (trial / yearly / lifetime) set by the website's Stripe flow</td><td>Decides whether Reports unlock.</td><td>Reuse</td></tr>
+      <tr><td>Reports</td><td><code>readings</code> table, names from <code>lib/reading-meta.js</code>; <code>/api/compatibility</code>; Purple Star HTML from <code>lib/ps/render.mjs</code></td><td>Launch with two: <strong>Purple Star</strong> and <strong>Relationship</strong> (Compatibility). Read saved ones, run a new relationship reading.</td><td>Reuse</td></tr>
+      <tr><td>Signed-in session</td><td>Browser storage on the website</td><td>Kept in <code>expo-secure-store</code> (the iPhone keychain).</td><td>App only</td></tr>
+      <tr><td>Push devices (v1.1)</td><td>n/a</td><td>One row per iPhone for the daily almanac reminder.</td><td><strong>New table</strong> <code>push_devices</code>: <code>platform</code>, <code>expo_token</code> (unique), <code>app_version</code>, <code>last_seen_at</code>, <code>revoked_at</code></td></tr>
+      <tr><td>Env vars</td><td><code>website/.env.local</code> + Vercel</td><td><code>MOBILE_MIN_BUILD</code> tells an old app to update. <code>EXPO_ACCESS_TOKEN</code> (v1.1) sends pushes. The Apple push key lives in Expo, not Vercel.</td><td>New</td></tr>
+    </table></div>
+    <div class="card fire"><strong>To check before build:</strong> the almanac tables must be readable with the anon key (the website's "No almanac record" message means a stale token, so the app needs a clean anon path); RLS on <code>readings</code> must limit each member to their own rows; <code>/api/chart</code>'s rate limit must allow app traffic. Magic-link and email-confirm links must open the app through Universal Links served from <code>website/public/.well-known/</code>.</div>
+  </div>
+</section>
+
+<section class="d">
+  <div class="num">3</div>
+  <div>
+    <h2>Design the <em>workflow</em></h2>
+    <p class="lede">Four tabs: Today, My Chart, Reports, Me. Today and My Chart are free. Reports lead to a free trial or sign-in.</p>
+
+    <h3>Free path</h3>
+    <div class="flow"><span>Open app</span><i>→</i><span>Birth date, birth time (optional), gender (with a time)</span><i>→</i><span>My Chart</span><i>→</i><span>Today's almanac</span><i>→</i><span>Come back daily</span></div>
+    <h3>Not a member yet</h3>
+    <div class="flow"><span>Tap Reports or "There is more to your chart"</span><i>→</i><span>Start 90-day free trial</span><i>→</i><span>Name, email, password (birth details prefilled)</span><i>→</i><span>Confirm email</span><i>→</i><span>Purple Star + Relationship unlocked</span></div>
+    <h3>Member path</h3>
+    <div class="flow"><span>Tap Reports</span><i>→</i><span>Sign in (password or magic link)</span><i>→</i><span>Reports list</span><i>→</i><span>Read or run a reading</span></div>
+
+    <h3>Wireframes</h3>
+    <div class="screens">
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div style="height:12px"></div>
+          <div class="ey">Your free chart</div>
+          <div class="t">See your chart. <em>It takes a minute.</em></div>
+          <div class="s">Free. No account needed to see it.</div>
+          <div class="row"><div class="field">Month</div><div class="field">14</div><div class="field">1988</div></div>
+          <div class="field">Birth time (optional) · 07:30</div>
+          <div class="s">Gender (needed with a birth time)</div>
+          <div class="radio"><span>◉ Female</span><span>○ Male</span></div>
+          <div style="flex:1"></div>
+          <div class="btn">See my chart</div>
+          <div class="link">I'm a member · Sign in</div>
+        </div></div>
+        <figcaption><b>1 · Welcome</b>First launch only, the same form as the website's home page and <code>/chart</code>. Birth time is optional; without it the chart still shows and Purple Star waits for a time.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="row"><div class="ey">Today · Sat 14 Nov</div><div class="s" style="text-align:right">‹ date ›</div></div>
+          <div class="t">A Full day: gather, don't scatter</div>
+          <div class="box fill row"><div><div class="score">78</div><div class="s">Day score</div></div><div class="s">Officer: Full<br>Fire Sheep year<br>Your day: <b style="color:var(--good-ink)">Supports you</b></div></div>
+          <div class="s" style="font-weight:600;color:var(--ink)">Auspicious hours</div>
+          <div class="hours"><div class="g">23–1</div><div class="n">1–3</div><div class="g">3–5</div><div class="b">5–7</div><div class="g">7–9</div><div class="n">9–11</div></div>
+          <div class="s" style="font-weight:600;color:var(--ink)">Good for</div>
+          <div><span class="chip g">Signing</span><span class="chip g">Moving in</span><span class="chip g">Trading</span><span class="chip g">Prayer</span></div>
+          <div class="s" style="font-weight:600;color:var(--ink)">Avoid</div>
+          <div><span class="chip b">Travel</span><span class="chip b">Surgery</span><span class="chip b">Lawsuits</span></div>
+          <div style="flex:1"></div>
+          <div class="tabs"><div class="on"><b></b>Today</div><div><b></b>My Chart</div><div><b></b>Reports</div><div><b></b>Me</div></div>
+        </div></div>
+        <figcaption><b>2 · Today (free)</b>The website's almanac day, condensed, plus one personal line: how today's energy meets your day master. Swipe or tap the date to change day.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="ey">My Chart</div>
+          <div class="t">That is <em>one angle</em>.</div>
+          <div class="pillars">
+            <div><span class="s">Hour</span><span class="hz">丙</span><span class="hz">辰</span></div>
+            <div class="dm"><span class="s">Day</span><span class="hz">庚</span><span class="hz">午</span></div>
+            <div><span class="s">Month</span><span class="hz">乙</span><span class="hz">卯</span></div>
+            <div><span class="s">Year</span><span class="hz">戊</span><span class="hz">辰</span></div>
+          </div>
+          <div class="s" style="font-weight:600;color:var(--ink)">Your element mix</div>
+          <div class="bars">
+            <div class="bar"><span>Wood</span><i style="width:55%;background:var(--wood)"></i></div>
+            <div class="bar"><span>Fire</span><i style="width:30%;background:var(--fire)"></i></div>
+            <div class="bar"><span>Earth</span><i style="width:70%;background:var(--earth)"></i></div>
+            <div class="bar"><span>Metal</span><i style="width:20%;background:var(--metal)"></i></div>
+            <div class="bar"><span>Water</span><i style="width:8%;background:var(--water)"></i></div>
+          </div>
+          <div class="s" style="font-weight:600;color:var(--ink)">The five stages of your life</div>
+          <div class="stages"><div>Birth</div><div>Youth</div><div>Matur.</div><div class="now">Adult</div><div>Retire</div></div>
+          <div class="box hl"><b style="color:var(--ink)">There is more to your chart.</b><div class="s">Purple Star and relationship readings · free trial</div></div>
+          <div class="tabs"><div><b></b>Today</div><div class="on"><b></b>My Chart</div><div><b></b>Reports</div><div><b></b>Me</div></div>
+        </div></div>
+        <figcaption><b>3 · My Chart (free)</b>The website's free chart, from the same <code>/api/chart</code>: pillars, element mix, life stage now, and (with a time) Purple Star and best months. The highlight card leads to the trial.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="ey">Reports</div>
+          <div class="t">Your readings</div>
+          <div class="box lock"><div class="line w80"></div><div style="height:4px"></div><div class="line w60"></div></div>
+          <div class="box lock"><div class="line w60"></div><div style="height:4px"></div><div class="line w40"></div></div>
+          <div class="dim"></div>
+          <div class="sheet">
+            <div class="grab"></div>
+            <div class="t" style="font-size:15px">Unlock your <em>readings</em></div>
+            <div class="s">Your Purple Star map and relationship readings with anyone you care about. Free for 90 days, no card needed.</div>
+            <div class="btn">Start free trial</div>
+            <div class="link">I already have an account · Sign in</div>
+          </div>
+        </div></div>
+        <figcaption><b>4 · Reports, signed out</b>A free user tapping Reports, or the highlight card, gets this sheet. The main action starts the trial inside the app.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="s">‹ Back</div>
+          <div class="ey">Free for 90 days · No card</div>
+          <div class="t">Start your <em>free trial</em></div>
+          <div class="row"><div class="field">First name</div><div class="field">Last name</div></div>
+          <div class="field">Email</div>
+          <div class="field">Choose a password</div>
+          <div class="box fill"><div class="s">Your birth details</div>14 Mar 1988 · 07:30 · Female <span class="s">· edit</span></div>
+          <div class="s">☑ Occasional updates from Bill</div>
+          <div class="s">☐ I agree to the Terms and Privacy Policy</div>
+          <div style="flex:1"></div>
+          <div class="btn">Start free trial</div>
+          <div class="s" style="text-align:center">We'll email you a link to confirm.</div>
+        </div></div>
+        <figcaption><b>5 · Start free trial</b>Same fields and account as the website's trial form, with birth details carried over from Welcome. The account works on the website too.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div style="height:12px"></div>
+          <div class="ey">Member sign in</div>
+          <div class="t">Welcome back</div>
+          <div class="field">Email</div>
+          <div class="field">Password</div>
+          <div class="btn">Sign in</div>
+          <div class="row" style="color:var(--ink-3);font-size:9px"><div style="height:1px;background:var(--rule)"></div><div style="flex:none">or</div><div style="height:1px;background:var(--rule)"></div></div>
+          <div class="btn ghost">Email me a sign-in link</div>
+          <div class="s" style="text-align:center">Same account as the website.</div>
+          <div style="flex:1"></div>
+          <div class="link">Forgot password</div>
+        </div></div>
+        <figcaption><b>6 · Sign in</b>Password or magic link. The emailed link opens the app through a Universal Link. The session is kept in the keychain.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="ey">Reports · Signed in as Lan</div>
+          <div class="t">Your readings</div>
+          <div class="box"><b style="color:var(--ink)">Purple Star</b><div class="s">The 12-palace map of your life themes and seasons</div></div>
+          <div class="s" style="font-weight:600;color:var(--ink);margin-top:2px">Relationships</div>
+          <div class="box"><b style="color:var(--ink)">Lan × Minh</b><div class="s">Partner · saved 2 Oct</div></div>
+          <div class="box"><b style="color:var(--ink)">Lan × Mum</b><div class="s">Family · saved 18 Sep</div></div>
+          <div class="btn ghost">+ New relationship reading</div>
+          <div class="s" style="text-align:center">More reports on the website</div>
+          <div style="flex:1"></div>
+          <div class="tabs"><div><b></b>Today</div><div><b></b>My Chart</div><div class="on"><b></b>Reports</div><div><b></b>Me</div></div>
+        </div></div>
+        <figcaption><b>7 · Reports list (member)</b>Launch set: Purple Star and Relationship. "New relationship reading" asks for the other person's name, birth date and optional time, then runs the website's <code>/api/compatibility</code>.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="s">‹ Reports</div>
+          <div class="ey">Relationship reading</div>
+          <div class="t">Lan × Minh</div>
+          <div class="row" style="text-align:center"><div class="box"><span class="s">Lan</span><br><b>Yang Metal</b></div><div class="s" style="flex:none">×</div><div class="box"><span class="s">Minh</span><br><b>Yin Water</b></div></div>
+          <div class="box fill"><b style="color:var(--good-ink)">Metal feeds Water</b><div class="s">Lan supports; Minh brings flow.</div></div>
+          <div class="line"></div><div class="line w80"></div><div class="line w60"></div>
+          <div class="s" style="font-weight:600;color:var(--ink)">Where you meet, where you clash</div>
+          <div class="line"></div><div class="line w80"></div><div class="line w40"></div>
+          <div style="flex:1"></div>
+          <div class="row"><div class="btn ghost">Share</div><div class="btn ghost">Save PDF</div></div>
+        </div></div>
+        <figcaption><b>8 · Report reader</b>A relationship reading shown; Purple Star uses the same reader with its 12-palace chart. Same content as the website, in the website's type.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone"><div class="notch"></div><div class="scr">
+          <div class="ey">Me</div>
+          <div class="t">Lan Nguyen</div>
+          <div class="box fill"><b style="color:var(--ink)">Free trial</b><div class="s">62 days left · we'll remind you before it ends</div></div>
+          <div class="box"><div class="s">Birth details</div>14 Mar 1988 · 07:30</div>
+          <div class="box"><div class="s">Daily almanac reminder</div>Off <span class="chip n">v1.1</span></div>
+          <div class="box"><div class="s">Book a reading with Bill</div>Opens the website</div>
+          <div style="flex:1"></div>
+          <div class="btn ghost">Sign out</div>
+          <div class="link" style="color:var(--ink-3)">Delete account</div>
+          <div class="tabs"><div><b></b>Today</div><div><b></b>My Chart</div><div><b></b>Reports</div><div class="on"><b></b>Me</div></div>
+        </div></div>
+        <figcaption><b>9 · Me</b>Profile, birth details, trial status, sign out. Paying for yearly or lifetime happens on the website. Account deletion is required by the App Store.</figcaption>
+      </figure>
+
+    </div>
+
+    <h3>Scope: slim v1 vs later</h3>
+    <div class="tbl"><table>
+      <tr><th>Feature</th><th>Website today</th><th>App v1</th></tr>
+      <tr><td>Own free chart (pillars, element mix, life stages)</td><td><code>/chart</code></td><td><span class="tag free">Free</span></td></tr>
+      <tr><td>Daily almanac (any date)</td><td><code>/almanac/[date]</code></td><td><span class="tag free">Free</span></td></tr>
+      <tr><td>Start 90-day free trial</td><td><code>/signup</code></td><td><span class="tag mem">v1, in app</span></td></tr>
+      <tr><td>Sign in (password / magic link)</td><td><code>/sign-in</code></td><td><span class="tag mem">v1</span></td></tr>
+      <tr><td>Purple Star report</td><td>Member readings</td><td><span class="tag mem">Members</span></td></tr>
+      <tr><td>Relationship (Compatibility): read saved + run new</td><td>Member readings</td><td><span class="tag mem">Members</span></td></tr>
+      <tr><td>Four Pillars, Three Blessings, Fire Horse full reports</td><td>Member readings</td><td><span class="tag later">v1.1</span></td></tr>
+      <tr><td>Daily push reminder (lock screen never shows private content)</td><td>Email</td><td><span class="tag later">v1.1</span></td></tr>
+      <tr><td>Horoscopes, Find a Good Day, Cards, Blog, Inner Circle, book</td><td>Public / member pages</td><td><span class="tag later">Later</span></td></tr>
+      <tr><td>Paying $99/year or $299 lifetime</td><td><code>/membership</code>, Stripe</td><td><span class="tag later">Website only</span></td></tr>
+    </table></div>
+    <div class="card fire"><strong>App Store note:</strong> starting a free account inside the app is fine with Apple. Taking payment for membership inside the app would have to use Apple's in-app purchase (15–30% fee). v1 keeps payment on the website: the trial-ending email links to <code>/membership</code>, and the app shows the status the website sets. How the app may mention website pricing differs by country, so we confirm the wording at review.</div>
+
+    <h3>Technology</h3>
+    <p>Follows the one mobile standard Dave set on 14 Nov 2026 for Mahjong Tarot, Forever and PPC.</p>
+    <div class="tbl"><table>
+      <tr><th>Area</th><th>Choice</th></tr>
+      <tr><td>Framework</td><td>Expo (React Native) in plain JavaScript, like the website. <code>expo-router</code> using the website's paths (<code>/chart</code>, <code>/almanac/[date]</code>, <code>/member/dashboard/readings/…</code>). Not Flutter, Capacitor or a web wrapper.</td></tr>
+      <tr><td>Platform</td><td>iPhone only. No Android or Google Play.</td></tr>
+      <tr><td>Where the code lives</td><td>A <code>mobile/</code> folder in the mahjong-tarot repo, importing <code>lib/bazi.js</code> and <code>lib/reading-meta.js</code> from <code>website/</code> instead of copying them. Vercel's ignored-build step is set so commits that only touch <code>mobile/</code> don't rebuild the website.</td></tr>
+      <tr><td>Look and feel</td><td>The website's tokens: Libre Franklin headings, Inter body, EB Garamond only for Chinese characters, upright fire-red emphasis, light surfaces. Fonts loaded with <code>expo-font</code>; colours from <code>website/kernel/config/palette.json</code>.</td></tr>
+      <tr><td>Data and sign-in</td><td><code>@supabase/supabase-js</code> straight to Supabase under RLS, as the website does; <code>/api/chart</code> and <code>/api/compatibility</code> for computed readings. Session in <code>expo-secure-store</code>.</td></tr>
+      <tr><td>Reports</td><td>v1 shows the HTML the website already produces (<code>lib/ps/render.mjs</code> for Purple Star) inside the report screen. Native screens only if that feels clunky.</td></tr>
+      <tr><td>Links</td><td>Universal Links from <code>website/public/.well-known/</code>, so a website link (including magic-link and confirm emails) opens the app when it's installed.</td></tr>
+      <tr><td>Builds and releases</td><td>EAS Build and Submit in the cloud, started from a GitHub workflow. Never a local CLI or Xcode on Dave's Mac. JavaScript-only fixes ship as EAS Updates without review. <code>MOBILE_MIN_BUILD</code> forces an update when a fix needs a new store build.</td></tr>
+      <tr><td>Account</td><td>Published under Dave's Talent Edge Apple developer account. One Expo organisation shared with Forever and PPC.</td></tr>
+      <tr><td>Push (v1.1)</td><td>Expo's push service, the shared <code>push_devices</code> table and <code>EXPO_ACCESS_TOKEN</code>. The Apple push key is kept in Expo.</td></tr>
+    </table></div>
+
+    <h3>How it gets built</h3>
+    <ol>
+      <li><strong>Phase A, free side:</strong> Welcome, Today, My Chart, on TestFlight. Shippable on its own.</li>
+      <li><strong>Phase B, members:</strong> Start free trial, Sign in, Universal Links for magic-link and confirm emails, Purple Star and Relationship reports, Me.</li>
+      <li><strong>Phase C, App Store:</strong> icon, screenshots, privacy labels and review, submitted from the GitHub workflow.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="d">
+  <div class="num">4</div>
+  <div>
+    <h2>Determine the ROI</h2>
+    <div class="card fire"><strong>FAST goal:</strong> within 90 days of launch, 1,000 people have their chart on their iPhone and 15% of them open Today at least 3 days a week.</div>
+    <h3>Success measures</h3>
+    <ul>
+      <li>Installs and charts created (free activation).</li>
+      <li>Weekly returning users on Today (the habit).</li>
+      <li>Free trials started inside the app (<code>signup_source = 'app'</code>), and how many of those join yearly or lifetime when the trial ends (the conversion).</li>
+      <li>Relationship readings run per member (the feature most likely to bring a second person in).</li>
+    </ul>
+    <h3>Return</h3>
+    <p>Membership is $99 a year or $299 for life, after a 90-day free trial. A handful of conversions a month pays for upkeep; the bigger return is a daily touchpoint with Bill's work that the website can't give. Costs: build time for phases A–C. The Talent Edge Apple account ($99/year) already exists and is shared across apps; Expo's cloud builds start free, and any paid plan is shared with Forever and PPC.</p>
+  </div>
+</section>
+
+<section class="d">
+  <div class="num">5</div>
+  <div>
+    <h2>Definition of Done</h2>
+    <ul>
+      <li>A new user enters a birth date, with or without a time, and sees the same chart as the website's <code>/chart</code> for those details (spot-checked on 10 known charts, half without a time).</li>
+      <li>Today matches <code>/almanac/[date]</code> for any date, signed in or not.</li>
+      <li>A free user starts the 90-day trial inside the app, confirms their email, and the same account works on the website.</li>
+      <li>A member signs in with password or magic link, sees only their own reports, reads their Purple Star, and reads and runs relationship readings.</li>
+      <li>No payment happens inside the app; the trial-ending email links to <code>/membership</code>.</li>
+      <li>Account deletion works from the Me tab.</li>
+      <li>Live on the App Store under the Talent Edge Apple account, with the website linking to it.</li>
+      <li>Store builds come from the GitHub workflow on EAS; a JavaScript-only fix reaches phones as an EAS Update; a commit that only touches <code>mobile/</code> doesn't rebuild the website.</li>
+      <li>Tapping a magic-link or confirm email on an iPhone with the app installed opens the app, not Safari.</li>
+      <li>Bill and the team know: the app is a companion to the site, membership is bought on the website, and content updates (almanac, reports) need no app release.</li>
+    </ul>
+    <h3>Decisions (14 Nov)</h3>
+    <ol>
+      <li>Free chart asks for birth date and birth time; time is optional.</li>
+      <li>The 90-day free trial can be started inside the app.</li>
+      <li>Launch reports: Purple Star and Relationship. The others follow in v1.1.</li>
+      <li>Technology: the shared mobile standard. Expo, iPhone only, Talent Edge Apple account, cloud builds.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>Wireframes are low-fidelity: layout and content only, in the website's current type (Libre Franklin, Inter, EB Garamond for Chinese characters) and tokens. Chart and almanac values are placeholders.</footer>
+</main>
+</body>
+</html>

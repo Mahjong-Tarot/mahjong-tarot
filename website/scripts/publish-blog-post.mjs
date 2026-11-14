@@ -17,6 +17,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { createClient } from '@supabase/supabase-js';
+import { syncCampaigns } from './sync-campaigns.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BLOG_DIR = resolve(__dirname, '../../content/blog');
@@ -82,6 +83,7 @@ async function main() {
   const pillarId = (name) => pillars.find((p) => p.name === name)?.id ?? null;
 
   let ok = 0;
+  const published = [];
   for (const slug of slugs) {
     const file = resolve(BLOG_DIR, `${slug}.md`);
     if (!existsSync(file)) {
@@ -166,9 +168,14 @@ async function main() {
       continue;
     }
     ok += 1;
+    published.push(slug);
     console.log(`${existing ? '↻' : '+'} ${slug}`);
   }
   console.log(`${ok}/${slugs.length} published. Live within 5 minutes at https://www.mahjongtarot.com/blog`);
+
+  // Each post joins its week's campaign with its social captions and images
+  // from content/topics/, so the admin (Marketing → Campaigns) shows it.
+  if (published.length) await syncCampaigns({ apply: true, slugs: published });
 }
 
 main().catch((e) => {

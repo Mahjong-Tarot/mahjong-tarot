@@ -36,7 +36,7 @@ All colors are defined as CSS custom properties in `globals.css`. Never hardcode
 |---|---|---|
 | `--fire-50` | `#FFF4F2` | Error and challenging-tone tints |
 | `--fire-100` | `#FFE2DD` | Selection highlight, tinted backgrounds |
-| `--fire-200`–`--fire-400` | `#FFB8AE` `#FF8B7C` `#F45A47` | Accents on dark surfaces (`em` in `.section-dark` uses `--fire-400`) |
+| `--fire-200`–`--fire-400` | `#FFB8AE` `#FF8B7C` `#F45A47` | Light accents and tints (no dark surfaces since the redesign) |
 | `--fire-500` | `#E63329` | Brand stamp — large fills (18.66px bold and up), dots, rules, focus ring |
 | `--fire-600` | `#C8261C` | **Resting CTA fill**, links, small red text, `.overline` (5.6:1 with white) |
 | `--fire-700` | `#9E1B14` | CTA hover / pressed, error text |
@@ -66,7 +66,7 @@ Five elements (BaZi swatches and bars, fills only): `--el-wood`, `--el-fire`, `-
 ### Color Rules
 
 - **Fire is earned.** Use `--fire-500` / `--fire-600` for one CTA per section. Never for decoration, borders, or backgrounds.
-- **Ink anchors.** Dark sections use `--ink` as background with `--paper` text.
+- **No dark backgrounds.** Since the redesign, sections stay light; the legacy `.section-dark` class renders as a soft `--fire-50` band with `--ink-2` text, and the footer is light.
 - **Gold warms, never shouts.** Thin dividers, icon fills. Never as a solid surface. Gold text on paper fails AA: use `--tone-neutral-ink` for small gold-family text, or `.overline.is-gold` on dark surfaces only.
 - **Paper is the page.** White (`#FFFFFF`), not cream. The editorial feel comes from typography and spacing, not tinted paper.
 
@@ -78,50 +78,52 @@ All typefaces are loaded via Google Fonts in `globals.css`. Reference only via C
 
 ### Typeface Stack
 
+Since the 12 Nov 2026 redesign the site uses a clean sans for headings, chosen for older readers. The `--serif` token keeps its name so existing modules pick up the new face; there is no Fraunces anywhere.
+
 | Token | Typeface | Weights | Role |
 |---|---|---|---|
-| `var(--serif)` | **Fraunces** | 300, 400, 500, 600, 700 (+ italic) | Display, headings, pull quotes |
-| `var(--sans)` | **Inter** | 400, 500, 600, 700 | Body, navigation, UI labels |
-| `var(--mono)` | **JetBrains Mono** | 400, 500 | Overlines, meta labels, code |
+| `var(--serif)` | **Libre Franklin** | 400, 500, 600, 700 | Headings, page titles, blockquotes |
+| `var(--sans)` | **Inter** | 400, 500, 600, 700 | Body, navigation, UI, overlines |
+| `var(--book)` | **EB Garamond** | 400, 500 (+ italic) | Logo, numerals and Chinese characters only |
+| `var(--mono)` | **JetBrains Mono** | 400, 500 | Mono labels, meta, code |
 
 ### Type Scale (from globals.css)
 
 ```
-h1   — Fraunces 400  56px / lh 1.05  ls -0.025em
-h2   — Fraunces 400  40px / lh 1.1   ls -0.02em
-h3   — Fraunces 500  26px / lh 1.25  ls -0.01em
-h4   — Fraunces 500  20px / lh 1.3   ls -0.005em
+h1   — Libre Franklin 600  56px / lh 1.1   ls -0.02em
+h2   — Libre Franklin 600  40px / lh 1.15  ls -0.015em
+h3   — Libre Franklin 600  26px / lh 1.25  ls -0.01em
+h4   — Libre Franklin 600  20px / lh 1.3   ls -0.005em
 ```
 
 ```
-Body large   — Inter 300    20px / lh 1.7
-Body         — Inter 400    16px / lh 1.6
+Body         — Inter 400    18px / lh 1.6   color: --ink-2
+Lede         — Inter 400    20px
 Strong       — Inter 600    color: --ink
 Caption      — Inter 400    13px  color: --ink-3
 ```
 
 ```
-Overline     — JetBrains Mono 500  11px  ls 0.18em  UPPERCASE  color: --fire-600
+Overline     — Inter 600           13px  ls 0.18em  UPPERCASE  color: --fire-600
 Label mono   — JetBrains Mono 500  11px  ls 0.12em  UPPERCASE  color: --ink-4
 Post meta    — JetBrains Mono 400  11px  ls 0.04em  color: --ink-4
-(mono labels step up to 12px at ≤640px)
 ```
 
 UI text tokens (use instead of literal px):
 
 ```
 --text-2xs 10px · --text-xs 11px · --text-sm 13px · --text-md 14px
---text-base 16px · --text-lg 20px
+--text-base 18px · --text-lg 20px
 --tracking-label 0.12em · --tracking-overline 0.18em
 ```
 
-Page titles: the global `.page-header` (eyebrow + h1 lede band) sets its h1 at Fraunces 300, `clamp(40px, 5vw, 64px)`, ls -0.035em (`.is-wide` → 72px max, `.is-bounded` → 720px max width). The almanac and horoscope family uses `.page-intro` (centred overline + element h1, optional `.page-intro-lede`). Do not restyle page h1s per module.
+Page titles: the global `.page-header` (eyebrow + h1 lede band) sets its h1 at Libre Franklin 600, `clamp(40px, 5vw, 64px)`, lh 1.08, ls -0.02em (`.is-wide` → 72px max, `.is-bounded` → 720px max width). The almanac and horoscope family uses `.page-intro` (centred overline + element h1, optional `.page-intro-lede`). Do not restyle page h1s per module.
 
 ### Typographic Conventions
 
-- **Overlines precede section headlines.** Use the `.overline` global class (mono, fire-600, wide tracking, uppercase). Do not write new `*Eyebrow` / `sectionLabel` classes; compose `.overline` or `.label-mono`.
-- **Italic Fraunces in fire red** is the signature headline gesture — `<em>` inside a heading renders this automatically via globals.css.
-- **Blockquotes** use Fraunces 400, 22px, with a 2px `--fire-500` left border.
+- **Overlines precede section headlines.** Use the `.overline` global class (Inter 600, fire-600, wide tracking, uppercase). Do not write new `*Eyebrow` / `sectionLabel` classes; compose `.overline` or `.label-mono`.
+- **Upright fire red** is the headline emphasis: `<em>` inside a heading renders as `--fire-600`, not italic (easier to read). `<em>` inside body text (`p`, `li`, `blockquote`) stays a plain italic in the text colour.
+- **Blockquotes** use Libre Franklin 400, 22px, upright, with a 2px `--fire-500` left border.
 - **Never justify body text.** Left-align always.
 - **Paragraph spacing** = `margin-bottom: 1.25em`. Never use blank lines in markup.
 
@@ -191,7 +193,7 @@ The system uses **intentional rounding**, not sharp or fully rounded. Cards sit 
 ```
 Promo bar:     --ink background, JetBrains Mono 11px uppercase, --paper-a78 text, fire pips
 Nav bar:       --paper background, 72px tall (60px ≤768px), sticky, 1px --rule bottom border
-Logo:          Fraunces 500, 22px, --ink, with a 22px square tile mark (fire centre)
+Logo:          EB Garamond (--book) 500, 24px (18px on mobile), --ink, with a square tile mark (fire centre)
 Nav links:     Inter 500, 13px, ls 0.01em, sentence case, --ink-2
 Hover/active:  --fire-600 text; active adds a 1px --fire-500 underline
 Sign in:       Inter 400, 13px, --ink-3
@@ -249,10 +251,11 @@ Border-radius: var(--r-md)         8px
 No box-shadow by default
 ```
 
-**Dark card** `.card-dark`
+**Highlight card** `.card-dark` (name kept for old markup; no longer dark)
 ```
-Background:   var(--ink)   #14161B
-Text:         var(--paper)
+Background:   var(--fire-50)
+Text:         var(--ink-2)
+Border:       1px solid var(--fire-100)
 Border-radius: var(--r-md)
 ```
 
@@ -301,7 +304,7 @@ Has a 5px fire-red dot prefix (::before)
 
 | Class | Description |
 |---|---|
-| `.section-dark` | `--ink` background, `--paper` text, `em` uses `--fire-400` |
+| `.section-dark` | Legacy name: soft `--fire-50` band with `--ink-2` text (no black backgrounds) |
 | `.section-stone` | `--paper-pure` bg with top/bottom `--rule` borders |
 
 ---

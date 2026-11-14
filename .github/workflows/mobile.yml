@@ -37,6 +37,7 @@ jobs:
     steps:
       - name: Check for EXPO_TOKEN
         id: token
+        working-directory: .
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |

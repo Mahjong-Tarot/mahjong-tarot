@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { color, font, radius, space } from '../lib/theme';
 
@@ -53,11 +55,28 @@ export function Button({ title, onPress, variant = 'primary', disabled, loading,
   );
 }
 
-export function Field({ label, hint, style, ...props }) {
+// Every password field (secureTextEntry) gets an eye button to show or hide it.
+export function Field({ label, hint, style, secureTextEntry, ...props }) {
+  const [shown, setShown] = useState(false);
   return (
     <View style={[{ gap: 6 }, style]}>
       {label ? <Text style={s.label}>{label}{hint ? <Text style={s.hint}>  {hint}</Text> : null}</Text> : null}
-      <TextInput placeholderTextColor={color.ink4} style={s.input} {...props} />
+      {secureTextEntry ? (
+        <View style={s.passwordWrap}>
+          <TextInput placeholderTextColor={color.ink4} style={[s.input, s.passwordInput]} secureTextEntry={!shown} autoCapitalize="none" autoCorrect={false} {...props} />
+          <Pressable
+            onPress={() => setShown((v) => !v)}
+            accessibilityRole="button"
+            accessibilityLabel={shown ? 'Hide password' : 'Show password'}
+            hitSlop={8}
+            style={s.eye}
+          >
+            <Ionicons name={shown ? 'eye-off-outline' : 'eye-outline'} size={22} color={color.ink3} />
+          </Pressable>
+        </View>
+      ) : (
+        <TextInput placeholderTextColor={color.ink4} style={s.input} {...props} />
+      )}
     </View>
   );
 }
@@ -112,6 +131,9 @@ const s = StyleSheet.create({
   label: { fontFamily: font.bodyMedium, fontSize: 14, color: color.ink2 },
   hint: { fontFamily: font.body, color: color.ink4 },
   input: { borderWidth: 1, borderColor: color.rule, borderRadius: radius.md, paddingHorizontal: 14, paddingVertical: 13, fontFamily: font.body, fontSize: 16, color: color.ink, backgroundColor: color.paper },
+  passwordWrap: { justifyContent: 'center' },
+  passwordInput: { paddingRight: 52 },
+  eye: { position: 'absolute', right: 4, width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   card: { borderWidth: 1, borderColor: color.rule, borderRadius: radius.md, padding: space.md, gap: 6 },
   cardFill: { backgroundColor: color.rule2, borderColor: color.rule2 },
   cardHighlight: { backgroundColor: color.fire50, borderColor: color.fire100 },

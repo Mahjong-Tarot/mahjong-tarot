@@ -1,6 +1,6 @@
 // Served at /.well-known/apple-app-site-association (rewrite in
 // next.config.js) so links to these paths open the iPhone app when it is
-// installed. APPLE_TEAM_ID is the Talent Edge Apple developer team; the
+// installed. APPLE_TEAM_ID (set in Vercel) is the Talent Edge Apple team; the
 // bundle id matches mobile/app.json.
 const BUNDLE_ID = 'com.talentedge.mahjongtarot';
 const PATHS = ['/app/*', '/almanac/*', '/chart'];

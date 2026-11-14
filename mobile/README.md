@@ -38,7 +38,7 @@ Never build on a Mac. Everything runs on EAS from `.github/workflows/mobile.yml`
 
 ## One-time setup (Dave)
 
-1. **Expo:** done. The app is `@edge8ai/mahjong-tarot` (owner `edge8ai`); `app.json` has its project id
+1. **Expo:** done. The app is `@edge8-ai/mahjong-tarot`, in the Edge8 AI Expo organisation (one org for every app); `app.json` has its project id
    and update URL, and the `EXPO_TOKEN` GitHub secret is set.
 2. **EAS environment variables:** done for production and preview (`EXPO_PUBLIC_SUPABASE_URL`,
    `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `EXPO_PUBLIC_SITE_URL`). Add `EXPO_PUBLIC_APP_STORE_URL` after launch.

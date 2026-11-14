@@ -49,6 +49,15 @@
     ],
     "experiments": {
       "typedRoutes": false
+    },
+    "owner": "edge8ai",
+    "extra": {
+      "eas": {
+        "projectId": "69fc507a-5bc3-4623-99a1-ef742d0d7105"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/69fc507a-5bc3-4623-99a1-ef742d0d7105"
     }
   }
 }

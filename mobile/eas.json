@@ -13,6 +13,13 @@
       "autoIncrement": true,
       "channel": "production",
       "environment": "production"
+    },
+    "simulator": {
+      "extends": "production",
+      "autoIncrement": false,
+      "ios": {
+        "simulator": true
+      }
     }
   },
   "submit": {

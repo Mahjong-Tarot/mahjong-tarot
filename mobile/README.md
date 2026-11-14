@@ -38,11 +38,10 @@ Never build on a Mac. Everything runs on EAS from `.github/workflows/mobile.yml`
 
 ## One-time setup (Dave)
 
-1. **Expo:** create the Talent Edge Expo organisation, then in this folder run `npx eas-cli init`
-   once (adds `extra.eas.projectId` and `updates.url` to `app.json`; commit that). Create a robot
-   token and save it as the `EXPO_TOKEN` GitHub secret.
-2. **EAS environment variables** (production and preview): `EXPO_PUBLIC_SUPABASE_URL`,
-   `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `EXPO_PUBLIC_SITE_URL`, later `EXPO_PUBLIC_APP_STORE_URL`.
+1. **Expo:** done. The app is `@edge8ai/mahjong-tarot` (owner `edge8ai`); `app.json` has its project id
+   and update URL, and the `EXPO_TOKEN` GitHub secret is set.
+2. **EAS environment variables:** done for production and preview (`EXPO_PUBLIC_SUPABASE_URL`,
+   `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `EXPO_PUBLIC_SITE_URL`). Add `EXPO_PUBLIC_APP_STORE_URL` after launch.
 3. **Apple:** in App Store Connect (Talent Edge team) create the app with bundle id
    `com.talentedge.mahjongtarot`. The first `eas build` asks to connect the Apple account and
    creates the certificates; after that builds run unattended.
